@@ -42,7 +42,7 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>Prosesor Intel Core Generasi ke-2 atau yang lebih baru</li><li>Apple Silicon</li></ul></td><td><ul><li>Standalone: 4 inti atau lebih</li><li>Cluster: 8 inti atau lebih</li></ul></td><td></td></tr>
-<tr><td>Set instruksi CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Pencarian kesamaan vektor dan pembuatan indeks di dalam Milvus memerlukan dukungan CPU terhadap set ekstensi single instruction, multiple data (SIMD). Pastikan CPU mendukung setidaknya satu dari ekstensi SIMD yang tercantum. Lihat <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPU dengan AVX</a> untuk informasi lebih lanjut.</td></tr>
+<tr><td>Set instruksi CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Pencarian kesamaan vektor dan pembuatan indeks di Milvus memerlukan dukungan CPU terhadap set ekstensi single instruction, multiple data (SIMD). Pastikan CPU mendukung setidaknya satu dari ekstensi SIMD yang tercantum. Lihat <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPU dengan AVX</a> untuk informasi lebih lanjut.</td></tr>
 <tr><td>RAM</td><td><ul><li>Standalone: 8G</li><li>Cluster: 32G</li></ul></td><td><ul><li>Standalone: 16G</li><li>Cluster: 128G</li></ul></td><td>Ukuran RAM bergantung pada volume data.</td></tr>
 <tr><td>Hard drive</td><td>SSD SATA 3.0 atau CloudStorage</td><td>SSD NVMe atau yang lebih tinggi</td><td>Ukuran hard drive bergantung pada volume data.</td></tr>
 </tbody>
@@ -80,7 +80,7 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Lihat <a href="#Additional-disk-requirements">persyaratan disk tambahan</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Mode layanan didukung mulai dari Woodpecker <code translate="no">v</code> dan seterusnya.</td></tr>
+<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v0.1.36</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Mode layanan didukung mulai dari Woodpecker <code translate="no">v0.1.36</code> dan seterusnya.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Opsional — hanya jika Anda mengalihkan antrian pesan ke Pulsar; tidak diinstal secara default.</td></tr>
 </tbody>
 </table>

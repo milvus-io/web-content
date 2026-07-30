@@ -41,7 +41,7 @@ title: متطلبات تشغيل Milvus على Kubernetes
 <tr><th>المكون</th><th>المتطلب</th><th>التوصية</th><th>ملاحظة</th></tr>
 </thead>
 <tbody>
-<tr><td>وحدة المعالجة المركزية</td><td><ul><li>معالج Intel Core من الجيل الثاني أو أعلى</li><li>Apple Silicon</li></ul></td><td><ul><li>مستقل: 4 نوى أو أكثر</li><li>المجموعة: 8 نوى أو أكثر</li></ul></td><td></td></tr>
+<tr><td>وحدة المعالجة المركزية</td><td><ul><li>معالج Intel Core من الجيل الثاني أو أحدث</li><li>Apple Silicon</li></ul></td><td><ul><li>مستقل: 4 نوى أو أكثر</li><li>المجموعة: 8 نوى أو أكثر</li></ul></td><td></td></tr>
 <tr><td>مجموعة تعليمات وحدة المعالجة المركزية</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>يتطلب البحث عن التشابه بين المتجهات وإنشاء الفهرس داخل Milvus دعم وحدة المعالجة المركزية (CPU) لمجموعات امتدادات التعليمات الفردية والبيانات المتعددة (SIMD). تأكد من أن وحدة المعالجة المركزية تدعم واحدًا على الأقل من امتدادات SIMD المذكورة. راجع <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">وحدات المعالجة المركزية المزودة بـ AVX</a> لمزيد من المعلومات.</td></tr>
 <tr><td>ذاكرة الوصول العشوائي (RAM)</td><td><ul><li>نظام مستقل: 8G</li><li>المجموعة: 32G</li></ul></td><td><ul><li>جهاز مستقل: 16G</li><li>المجموعة: 128G</li></ul></td><td>يعتمد حجم ذاكرة الوصول العشوائي (RAM) على حجم البيانات.</td></tr>
 <tr><td>محرك الأقراص الثابتة</td><td>محرك أقراص SSD SATA 3.0 أو CloudStorage</td><td>محرك أقراص SSD من نوع NVMe أو أعلى</td><td>يعتمد حجم القرص الصلب على حجم البيانات.</td></tr>
@@ -80,7 +80,7 @@ title: متطلبات تشغيل Milvus على Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>انظر <a href="#Additional-disk-requirements">متطلبات القرص الإضافية</a>.</td></tr>
 <tr><td>MinIO</td><td>الإصدار 2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>مُضمّن مع Milvus (وضع الخدمة: <code translate="no">v</code>+)</td><td>قائمة انتظار الرسائل الافتراضية. بالنسبة لعمليات النشر الموزعة، يمكن تشغيل Woodpecker <strong>كخدمة</strong> مخصصة؛ قم بتثبيت إصداره باستخدام <code translate="no">--set woodpecker.image.tag</code>. يتم دعم وضع الخدمة بدءًا من الإصدار <code translate="no">v</code> من Woodpecker فصاعدًا.</td></tr>
+<tr><td>Woodpecker</td><td>مُضمّن مع Milvus (وضع الخدمة: <code translate="no">v0.1.36</code>+)</td><td>قائمة انتظار الرسائل الافتراضية. بالنسبة لعمليات النشر الموزعة، يمكن تشغيل Woodpecker <strong>كخدمة</strong> مخصصة؛ قم بتثبيت إصداره باستخدام <code translate="no">--set woodpecker.image.tag</code>. يتم دعم وضع الخدمة بدءًا من الإصدار <code translate="no">v0.1.36</code> من Woodpecker فصاعدًا.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>اختياري — فقط إذا قمت بتحويل قائمة انتظار الرسائل إلى Pulsar؛ غير مثبت بشكل افتراضي.</td></tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ title: متطلبات تشغيل Milvus على Kubernetes
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>من الناحية المثالية، يجب أن يصل القرص إلى ما يزيد عن 500 IOPS وأن يكون زمن انتقال fsync في المئوية 99 أقل من 10 مللي ثانية. اقرأ <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">وثائق</a> etcd للحصول على متطلبات أكثر تفصيلاً.</p>
+<p>من الناحية المثالية، يجب أن يصل القرص إلى أكثر من 500 IOPS وأن يكون زمن انتقال fsync في المئوية 99 أقل من 10 مللي ثانية. اقرأ <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">وثائق</a> etcd للحصول على متطلبات أكثر تفصيلاً.</p>
 <h2 id="FAQs" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

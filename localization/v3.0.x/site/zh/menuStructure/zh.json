@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改集合 Schema",
+            "label": "修改Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1353,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "衰减排名榜",
+                "label": "衰减排名器",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope 排名工具",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face 排名器",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -1551,7 +1563,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "适用于 AI 代理的 Milvus",
+        "label": "适用于 AI Agents 的 Milvus",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
@@ -1889,13 +1901,13 @@
         "isMenu": true,
         "children": [
           {
-            "label": "规模集群",
+            "label": "扩展集群",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "独立秤",
+            "label": "独立称重台",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -2265,6 +2277,12 @@
             "label": "故障转移",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "CDC 复制中的批量导入",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]

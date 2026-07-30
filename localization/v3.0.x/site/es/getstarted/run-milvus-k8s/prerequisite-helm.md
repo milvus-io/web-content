@@ -63,7 +63,7 @@ title: Requisitos para ejecutar Milvus en Kubernetes
         ></path>
       </svg>
     </button></h2><p>Se recomienda ejecutar el clúster de Kubernetes en plataformas Linux.</p>
-<p>kubectl es la herramienta de línea de comandos de Kubernetes. Utiliza una versión de kubectl que no difiera en más de una versión secundaria de la de tu clúster. Utilizar la última versión de kubectl ayuda a evitar problemas imprevistos.</p>
+<p>kubectl es la herramienta de línea de comandos de Kubernetes. Utiliza una versión de kubectl que no difiera en más de una versión menor de la de tu clúster. Utilizar la última versión de kubectl ayuda a evitar problemas imprevistos.</p>
 <p>Se necesita minikube para ejecutar un clúster de Kubernetes de forma local. minikube requiere Docker como dependencia. Asegúrate de instalar Docker antes de instalar Milvus mediante Helm. Consulta <a href="https://docs.docker.com/get-docker">«Obtener Docker»</a> para obtener más información.</p>
 <table>
 <thead>
@@ -80,8 +80,8 @@ title: Requisitos para ejecutar Milvus en Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Consulta <a href="#Additional-disk-requirements">los requisitos adicionales de disco</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Incluido con Milvus (modo de servicio: <code translate="no">v</code>+)</td><td>Cola de mensajes predeterminada. Para implementaciones distribuidas, Woodpecker puede ejecutarse como un <strong>servicio</strong> dedicado; fija su versión con <code translate="no">--set woodpecker.image.tag</code>. El modo de servicio es compatible a partir de la versión <code translate="no">v</code> de Woodpecker.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional: solo si se cambia la cola de mensajes a Pulsar; no viene instalado por defecto.</td></tr>
+<tr><td>Woodpecker</td><td>Incluido con Milvus (modo de servicio: <code translate="no">v0.1.36</code>+)</td><td>Cola de mensajes predeterminada. Para implementaciones distribuidas, Woodpecker puede ejecutarse como un <strong>servicio</strong> dedicado; fija su versión con <code translate="no">--set woodpecker.image.tag</code>. El modo de servicio es compatible a partir de la versión <code translate="no">v0.1.36</code> de Woodpecker.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional: solo si se cambia la cola de mensajes a Pulsar; no se instala de forma predeterminada.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Requisitos adicionales de disco<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">

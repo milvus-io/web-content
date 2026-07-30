@@ -7,11 +7,11 @@ summary: >-
   di embedding esterni (come OpenAI, AWS Bedrock, Google Vertex AI, ecc.). Con
   il modulo Function, non è più necessario interfacciarsi manualmente con le API
   di embedding: Milvus gestisce l’intero processo di invio delle richieste ai
-  provider, ricezione degli embedding e loro archiviazione nelle collezioni
-  dell’utente. Per la ricerca semantica, è sufficiente fornire i dati grezzi
-  della query, non un vettore di query. Milvus genera il vettore di query
-  utilizzando lo stesso modello impiegato per l’acquisizione, lo confronta con i
-  vettori memorizzati e restituisce i risultati più pertinenti.
+  provider, ricezione degli embedding e archiviazione delle stesse nelle
+  collezioni dell’utente. Per la ricerca semantica, è sufficiente fornire solo i
+  dati grezzi della query, non un vettore di query. Milvus genera il vettore di
+  query utilizzando lo stesso modello impiegato per l’acquisizione, lo confronta
+  con i vettori memorizzati e restituisce i risultati più pertinenti.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">Panoramica sulla funzione di embedding<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -93,6 +93,12 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/it/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Chiave API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/it/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio - Modelli di vettorializzazione del testo</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
@@ -439,7 +445,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> di <code translate="no">milvus.yaml</code>. </p><ul><li><p>Se specificata, Milvus recupera la coppia di chiavi o il token API corrispondente e firma la richiesta sul lato server.</p></li><li><p>Se omessa (<code translate="no">None</code>), Milvus ricorre alle credenziali configurate esplicitamente per il fornitore del modello di destinazione in <code translate="no">milvus.yaml</code>.</p></li><li><p>Se l’etichetta è sconosciuta o la chiave a cui si fa riferimento è mancante, la chiamata fallisce.</p></li></ul></td>
+     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> del sito <code translate="no">milvus.yaml</code>. </p><ul><li><p>Se specificata, Milvus recupera la coppia di chiavi o il token API corrispondente e firma la richiesta sul lato server.</p></li><li><p>Se omessa (<code translate="no">None</code>), Milvus ricorre alle credenziali configurate esplicitamente per il fornitore del modello di destinazione in <code translate="no">milvus.yaml</code>.</p></li><li><p>Se l’etichetta è sconosciuta o la chiave a cui si fa riferimento è mancante, la chiamata fallisce.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
@@ -649,7 +655,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Entrambi i metodi funzionano, ma l’uso di ` <code translate="no">milvus.yaml</code> ` è l’approccio consigliato in quanto garantisce una gestione centralizzata delle credenziali e una denominazione coerente delle stesse per tutti i provider. Quando si utilizzano le variabili d’ambiente, i nomi delle variabili variano a seconda del provider del servizio di embedding; si consiglia quindi di consultare la pagina dedicata di ciascun provider per comprendere i nomi specifici delle variabili d’ambiente richieste (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>Entrambi i metodi funzionano, ma l'uso di ` <code translate="no">milvus.yaml</code> ` è l'approccio consigliato in quanto fornisce una gestione centralizzata delle credenziali e una denominazione coerente delle credenziali per tutti i provider. Quando si utilizzano le variabili d'ambiente, i nomi delle variabili variano a seconda del provider del servizio di embedding, quindi fare riferimento alla pagina dedicata di ciascun provider per comprendere i nomi specifici delle variabili d'ambiente richiesti (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Cosa succede se non si specifica un parametro di credenziale nella definizione della funzione?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -692,7 +698,7 @@ results = client.search(
 <li>Verificando che la lunghezza del campo vettoriale corrisponda alle dimensioni previste</li>
 <li>Eseguendo una semplice ricerca di similarità per verificare che gli embedding producano risultati significativi</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando eseguo una ricerca per similarità, posso utilizzare un vettore di query anziché il testo grezzo?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando eseguo una ricerca di similarità, posso utilizzare un vettore di query anziché il testo grezzo?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -2,7 +2,7 @@
 id: model-ranker-overview.md
 title: 模型排名器概述Compatible with Milvus 2.6.x
 summary: >-
-  傳統的向量搜尋純粹根據數學上的相似度來排序結果——也就是向量在高維空間中的匹配程度。雖然這種方法很有效率，但往往會忽略真正的語義相關性。以搜尋「資料庫優化的最佳實務」為例：您可能會收到向量相似度很高、且頻繁提及這些術語的文件，但這些文件實際上並未提供可付諸實行的優化策略。
+  傳統的向量搜尋純粹根據數學上的相似度來排序結果——也就是向量在高維空間中的匹配程度。雖然這種方法效率很高，但往往會忽略真正的語義相關性。以搜尋「資料庫優化的最佳實踐」為例：您可能會收到向量相似度很高、且頻繁提及這些術語的文件，但這些文件實際上並未提供可付諸實行的優化策略。
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">模型排名器概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -20,8 +20,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>傳統的向量搜尋純粹依據數學上的相似度來排序結果——也就是向量在高維空間中的匹配程度。雖然這種方法效率很高，但往往會忽略真正的語義相關性。以搜尋<strong>「資料庫優化的最佳實踐」</strong>為例<strong>：</strong>您可能會收到向量相似度很高、且頻繁提及這些術語的文件，但這些文件實際上並未提供可執行的優化策略。</p>
-<p>Model Ranker 透過整合能理解查詢與文件之間語義關係的先進語言模型，徹底革新了 Milvus 的搜尋方式。它不再僅依賴向量相似度，而是評估內容的意義與上下文，從而提供更智能、更相關的搜尋結果。</p>
+    </button></h1><p>傳統的向量搜尋純粹依據數學上的相似度來排序結果——也就是向量在高維空間中的匹配程度。雖然這種方法效率很高，但往往會忽略真正的語義相關性。試想搜尋<strong>「資料庫優化的最佳實踐」：</strong>您可能會收到向量相似度很高、且頻繁提及這些術語的文件，但這些文件實際上並未提供可付諸實行的優化策略。</p>
+<p>Model Ranker 透過整合能理解查詢與文件之間語義關係的先進語言模型，徹底革新了 Milvus 的搜尋方式。它不再僅依賴向量相似度，而是評估內容的含義與上下文，從而提供更智能、更相關的搜尋結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
 <li><p>語言模型評估查詢與每份文件之間的語義相關性</p></li>
 <li><p>每份文件會根據語義理解獲得相關性分數</p></li>
 </ul></li>
-<li><p><strong>智慧重新排序</strong>：根據模型產生的相關性分數重新排列文件順序</p></li>
+<li><p><strong>智慧重新排序</strong>：根據模型產生的相關性分數，重新排列文件順序</p></li>
 <li><p><strong>強化搜尋結果</strong>：您的應用程式將收到依語義相關性排序的結果，而非僅基於向量相似性</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">根據您的需求選擇模型供應商<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
@@ -131,10 +131,16 @@ beta: Milvus 2.6.x
      <td><p>技術文件搜尋系統，專門處理需要智慧分割與重疊控制的長篇手冊及論文</p></td>
    </tr>
    <tr>
+     <td><p>DashScope</p></td>
+     <td><p>採用阿里雲或 Qwen 重新排序模型的應用程式</p></td>
+     <td><ul><li><p>託管式 DashScope 重新排序 API</p></li><li><p>支援以下重新排序模型：<code translate="no">gte-rerank-v2</code></p></li><li><p>基於 API 金鑰的驗證</p></li></ul></td>
+     <td><p>希望使用由阿里雲託管的重新排序模型對候選結果進行重新排序的 RAG 應用程式</p></td>
+   </tr>
+   <tr>
      <td><p>Hugging Face</p></td>
-     <td><p>採用 Hugging Face 託管式句子相似度模型的應用程式</p></td>
-     <td><ul><li><p>採用託管式<code translate="no">hf-inference</code> 服務提供者</p></li><li><p>從 Hugging Face Hub 選取模型</p></li><li><p>針對每個候選句計算一個句子相似度分數</p></li><li><p>採用 API 金鑰驗證</p></li></ul></td>
-     <td><p>希望使用 Hugging Face 模型對候選文字進行重新排序，但無需運作獨立推論服務的語義搜尋應用程式</p></td>
+     <td><p>使用託管版 Hugging Face 句子相似度模型的應用程式</p></td>
+     <td><ul><li><p>使用託管的<code translate="no">hf-inference</code> 提供者</p></li><li><p>從 Hugging Face Hub 選取模型</p></li><li><p>針對每個候選句計算一個句子相似度分數</p></li><li><p>採用 API 金鑰驗證</p></li></ul></td>
+     <td><p>希望利用 Hugging Face 模型對候選文字進行重新排序，且無需運作獨立推論服務的語義搜尋應用程式</p></td>
    </tr>
 </table>
 <p>有關各模型服務實作的詳細資訊，請參閱專用文件：</p>
@@ -144,7 +150,8 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/zh-hant/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/zh-hant/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/zh-hant/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
-<li><p><a href="/docs/zh-hant/hugging-face-ranker.md">Hugging Face 排名系統</a></p></li>
+<li><p><a href="/docs/zh-hant/dashscope-ranker.md">DashScope 排名系統</a></p></li>
+<li><p><a href="/docs/zh-hant/hugging-face-ranker.md">Hugging Face 排名器</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">實作<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +171,7 @@ beta: Milvus 2.6.x
     </button></h2><p>在實作 Model Ranker 之前，請確保您已具備：</p>
 <ul>
 <li><p>一個 Milvus 集合，其中包含名為 `<code translate="no">VARCHAR</code> ` 的欄位，該欄位存有待重新排序的文字</p></li>
-<li><p>一個可由您的 Milvus 實例存取且正在運行的外部模型服務</p></li>
+<li><p>一個可被您的 Milvus 實例存取且正在運行的外部模型服務</p></li>
 <li><p>Milvus 與您選用的模型服務之間具備適當的網路連線</p></li>
 </ul>
 <p>模型排序器可與標準向量搜尋及混合搜尋操作無縫整合。實作過程涉及建立一個 Function 物件來定義您的重新排序設定，並將其傳遞給搜尋操作。</p>
@@ -280,7 +287,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>是</p></td>
-     <td><p>重新排序模型用於計算相關性分數的查詢字串清單。</p><p>查詢字串的數量必須與搜尋操作中的查詢數量完全相符（即使使用查詢向量而非文字），否則將報告錯誤。</p></td>
+     <td><p>重新排序模型用於計算相關性分數的查詢字串清單。</p><p>查詢字串的數量必須與搜尋操作中的查詢數量完全相符（即使使用查詢向量而非文字），否則將回報錯誤。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>

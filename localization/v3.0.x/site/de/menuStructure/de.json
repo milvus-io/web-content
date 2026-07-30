@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Abgabestelle",
+            "label": "Abgabe der Abholware",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennung",
+                    "label": "Sprachkennzeichnung",
                     "id": "language-identifier.md",
                     "order": 6,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Schema der Alter-Kollektion ändern",
+            "label": "Schema der „Alter“-Sammlung ändern",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1082,7 +1082,7 @@
             "order": 8,
             "children": [
               {
-                "label": "Erläuterung zur Filterung",
+                "label": "Erläuterungen zur Filterung",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -2266,6 +2278,12 @@
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
+          },
+          {
+            "label": "Massenimport bei der CDC-Replikation",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -2888,7 +2906,7 @@
         ]
       },
       {
-        "label": "Wissensverarbeitung",
+        "label": "Wissensingenieurwesen",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [

@@ -136,12 +136,15 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>注</strong>：スタンドアロンモードでは、デフォルトのメッセージキューとしてWoodpeckerが使用され、Streaming Nodeコンポーネントが有効になります。スタンドアロン展開では、WoodpeckerがMilvusポッド内に<strong>組み込まれて</strong>実行されます。専用の<strong>Woodpeckerサービス</strong>（別個のポッド）は、<strong>分散型／クラスター展開</strong>でのみ使用されます。詳細については、「<a href="/docs/ja/architecture_overview.md">アーキテクチャの概要</a>」および<a href="/docs/ja/woodpecker.md">「Woodpecker</a>」を参照してください。</p>
 </div>
-<p><strong>Milvusクラスタのデプロイ:</strong></p>
-<p>次のコマンドは、v3.0.0向けに最適化された設定で、推奨されるメッセージキューとしてWoodpeckerを使用するMilvusクラスタをデプロイします：</p>
+<p><strong>Milvusクラスタのデプロイ：</strong></p>
+<div class="alert note">
+<p>Woodpecker サービスモードの場合、コンパクションのクリーンアップおよびグループコミットの最適化のため、近日リリース予定の Milvus 3.0.1 以降、および Woodpecker v0.1.36 以降を使用することを推奨します。</p>
+</div>
+<p>次のコマンドは、推奨されるメッセージキューとして Woodpecker を使用し、v3.0.0 向けに最適化された設定で Milvus クラスタをデプロイします:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -149,7 +152,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>このコマンドの機能:</strong></p>
 <ul>
 <li>メッセージキューとして<strong>Woodpecker</strong>を使用します（メンテナンス負担の軽減に推奨）</li>
-<li><strong>Woodpeckerを</strong>ストリーミングノードに組み込まず、<strong>専用サービス</strong>（別のStatefulSet）<strong>として</strong>実行する</li>
+<li><strong>Woodpeckerを</strong>ストリーミングノードに組み込まず、<strong>専用のサービス</strong>（独立したStatefulSet）<strong>として</strong>実行する</li>
 <li>パフォーマンス向上のために、新しい<strong>ストリーミングノード</strong>コンポーネントを有効にします</li>
 <li>従来の<strong>インデックスノード</strong>を無効化します（機能は現在、データノードによって処理されます）</li>
 </ul>
@@ -221,7 +224,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p><code translate="no">streaming.woodpecker.embedded=false</code> を使用する場合、Woodpecker は<strong>専用の StatefulSet</strong>として実行されます（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで 4 つのレプリカ — クォーラム 3 ノードに加え、フォールトトレランス用の予備ノード 1 つ。<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください）として動作し、ヘッドレスサービスによってフロントエンドが構成され、ストレージバックエンドとしてMinIOを使用しています。そのため、クラスタにはストリーミングノードとは別の<code translate="no">woodpecker</code> ポッドセットが存在します。</p>
 </div>
-<p>ポートフォワーディングの設定が完了すれば（次の手順を参照）、<code translate="no">http://127.0.0.1:9091/webui/</code> から<strong>Milvus WebUI</strong>にアクセスすることも可能です。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<p>ポートフォワーディングの設定が完了したら（次の手順を参照）、<code translate="no">http://127.0.0.1:9091/webui/</code> から<strong>Milvus WebUI</strong>にアクセスすることもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvusへの接続<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -312,7 +315,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>Milvus には、ブラウザからアクセスできる「Milvus WebUI」という組み込みの GUI ツールが付属しています。Milvus WebUI は、シンプルで直感的なインターフェースにより、システムの可観測性を向上させます。Milvus WebUI を使用すると、Milvus のコンポーネントや依存関係の統計情報やメトリクスを確認したり、データベースやコレクションの詳細を確認したり、Milvus の詳細な設定を一覧表示したりすることができます。 Milvus WebUIの詳細については、「<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a>」を参照してください。</p>
-<p>Milvus WebUIへのアクセスを有効にするには、プロキシPodをローカルポートにポートフォワードする必要があります。</p>
+<p>Milvus WebUIへのアクセスを有効にするには、プロキシポッドをローカルポートにポートフォワードする必要があります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>

@@ -5,7 +5,7 @@ summary: >-
   Milvus 中的 Function 模块可通过自动调用外部 Embeddings 服务提供商（如 OpenAI、AWS Bedrock、Google
   Vertex AI 等），将原始文本数据转换为向量 Embeddings。
   借助“函数”模块，您无需再手动调用嵌入API——Milvus将全程处理向服务提供商发送请求、接收Embeddings并将其存储到您的Collections中的整个流程。
-  对于语义搜索，您只需提供原始查询数据，无需提供查询向量。Milvus
+  进行语义搜索时，您只需提供原始查询数据，无需提供查询向量。Milvus
   会使用您用于数据摄取的同一模型生成查询向量，将其与存储的向量进行比对，并返回最相关的结果。
 beta: Milvus 2.6.x
 ---
@@ -92,10 +92,16 @@ beta: Milvus 2.6.x
      <td><p>API密钥</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/zh/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio 文本向量模型</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API密钥</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/zh/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>AK/SK 对</p></td>
+     <td><p>API密钥/密钥对</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh/vertex-ai.md">Vertex AI</a></p></td>
@@ -152,8 +158,8 @@ beta: Milvus 2.6.x
     </button></h2><p>下图展示了该函数在 Milvus 中的工作原理。</p>
 <ol>
 <li><p><strong>输入文本</strong>：用户将原始数据（例如文档）导入 Milvus。</p></li>
-<li><p><strong>生成嵌入向量</strong>：Milvus 中的 Function 模块会自动调用已配置的模型提供程序，将原始数据转换为向量嵌入。</p></li>
-<li><p><strong>存储嵌入向量</strong>：生成的嵌入向量存储在 Milvus Collection 中明确定义的向量字段中。</p></li>
+<li><p><strong>生成 Embeddings</strong>：Milvus 中的 Function 模块会自动调用已配置的模型提供程序，将原始数据转换为向量 Embeddings。</p></li>
+<li><p><strong>存储 Embeddings</strong>：生成的 Embeddings 存储在 Milvus Collection 中明确定义的向量字段中。</p></li>
 <li><p><strong>查询文本</strong>：用户向 Milvus 提交文本查询。</p></li>
 <li><p><strong>语义搜索</strong>：Milvus 在内部将查询转换为向量嵌入，针对存储的嵌入进行相似度搜索，并检索相关结果。</p></li>
 <li><p><strong>返回结果</strong>：Milvus 将最匹配的结果返回给应用程序。</p></li>
@@ -179,7 +185,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中使用嵌入函数之前，请配置嵌入服务的凭据以供 Milvus 访问。</p>
+    </button></h2><p>在 Milvus 中使用嵌入函数之前，请配置用于 Milvus 访问的嵌入服务凭据。</p>
 <p>Milvus 支持通过以下两种方式提供嵌入服务凭据：</p>
 <ul>
 <li><p><strong>配置文件</strong>（<code translate="no">milvus.yaml</code> ）：</p>
@@ -296,13 +302,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要使用Embeddings函数，请创建一个具有特定Schema的Collection。该Schema必须包含至少三个必填字段：</p>
+    </button></h3><p>要使用嵌入函数，请创建一个具有特定Schema的Collection。该Schema必须包含至少三个必填字段：</p>
 <ul>
 <li><p><strong>主字段</strong>，用于唯一标识Collection中的每个实体。</p></li>
 <li><p>用于存储待嵌入原始数据的<strong>标量字段</strong>。</p></li>
 <li><p>一个<strong>向量字段</strong>，用于存储该函数将为标量字段生成的向量Embeddings。</p></li>
 </ul>
-<p>以下示例定义了一个包含一个标量字段<code translate="no">&quot;document&quot;</code> （用于存储文本数据）和一个向量字段<code translate="no">&quot;dense&quot;</code> （用于存储由Function模块生成的Embeddings向量）的Schema。请务必将向量维度（<code translate="no">dim</code> ）设置为与所选Embeddings模型的输出相匹配。</p>
+<p>以下示例定义了一个包含一个标量字段<code translate="no">&quot;document&quot;</code> （用于存储文本数据）和一个向量字段<code translate="no">&quot;dense&quot;</code> （用于存储由 Function 模块生成的 Embeddings）的 Schema。请务必将向量维度（<code translate="no">dim</code> ）设置为与所选 Embeddings 模型的输出相匹配。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -414,17 +420,17 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>用于存储生成的Embeddings向量的向量字段。目前，此参数仅接受一个字段名。</p></td>
+     <td><p>用于存储生成的Embeddings向量的向量字段。目前，该参数仅接受一个字段名。</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>包含嵌入配置的字典。注意：<code translate="no">params</code> 中的参数会因嵌入模型提供商的不同而有所差异。</p></td>
+     <td><p>包含Embeddings配置的字典。注意：<code translate="no">params</code> 中的参数会因嵌入模型提供商的不同而有所差异。</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>Embeddings提供商。</p></td>
+     <td><p>嵌入模型提供商。</p></td>
      <td><p><code translate="no">"openai"</code></p></td>
    </tr>
    <tr>
@@ -583,7 +589,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>数据插入完成后，使用原始查询文本执行语义搜索。Milvus 会自动将您的查询转换为 Embeddings 向量，根据相似度检索相关文档，并返回最匹配的结果。</p>
+    </button></h3><p>数据插入完成后，使用原始查询文本执行语义搜索。Milvus 会自动将您的查询转换为嵌入向量，根据相似度检索相关文档，并返回最匹配的结果。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

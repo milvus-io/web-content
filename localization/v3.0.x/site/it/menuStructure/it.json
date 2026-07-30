@@ -1029,7 +1029,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali",
+            "label": "Ricerca di base con reti neurali artificiali (ANN)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1223,7 +1223,7 @@
             "children": []
           },
           {
-            "label": "Usa chiave di partizione",
+            "label": "Utilizza la chiave di partizione",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1329,7 +1335,7 @@
             "children": []
           },
           {
-            "label": "Funzioni di riclassificazione",
+            "label": "Funzioni di riorganizzazione",
             "id": "reranking",
             "order": 3,
             "isMenu": true,
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -1457,7 +1469,7 @@
             "children": []
           },
           {
-            "label": "Compattazione tramite raggruppamento",
+            "label": "Compattazione per raggruppamento",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1601,7 +1613,7 @@
         ]
       },
       {
-        "label": "Abilità di Milvus",
+        "label": "Abilità Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -2180,7 +2192,7 @@
             "children": []
           },
           {
-            "label": "Casi più comuni",
+            "label": "Casi comuni",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2198,7 +2210,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in diversi bucket",
+                "label": "Migrazione tra istanze in bucket diversi",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2265,6 +2277,12 @@
             "label": "Failover",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Importazione in blocco nella replica CDC",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -3022,7 +3040,7 @@
         ]
       },
       {
-        "label": "Altro",
+        "label": "Altri",
         "id": "other-integrations",
         "order": 8,
         "children": [

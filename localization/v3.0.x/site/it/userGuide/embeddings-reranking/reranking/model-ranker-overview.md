@@ -5,8 +5,8 @@ summary: >-
   La ricerca vettoriale tradizionale ordina i risultati esclusivamente in base
   alla somiglianza matematica, ovvero al grado di corrispondenza tra i vettori
   in uno spazio ad alta dimensionalità. Pur essendo efficiente, questo approccio
-  spesso non tiene conto della reale rilevanza semantica. Si pensi, ad esempio,
-  alla ricerca di "migliori pratiche per l'ottimizzazione dei database": si
+  spesso trascura la vera rilevanza semantica. Si pensi, ad esempio, alla
+  ricerca di "migliori pratiche per l'ottimizzazione dei database": si
   potrebbero ottenere documenti con un'elevata somiglianza vettoriale che
   menzionano frequentemente questi termini, ma che in realtà non forniscono
   strategie di ottimizzazione concrete.
@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
      <td><p>vLLM</p></td>
      <td><p>Applicazioni complesse che richiedono una comprensione semantica approfondita e personalizzazione</p></td>
      <td><ul><li><p>Supporta vari modelli linguistici di grandi dimensioni</p></li><li><p>Opzioni di implementazione flessibili</p></li><li><p>Requisiti computazionali più elevati</p></li><li><p>Maggiore potenziale di personalizzazione</p></li></ul></td>
-     <td><p>Piattaforma di ricerca giuridica che impiega modelli specifici di dominio in grado di comprendere la terminologia giuridica e le relazioni tra i precedenti giurisprudenziali</p></td>
+     <td><p>Piattaforma di ricerca giuridica che implementa modelli specifici di settore in grado di comprendere la terminologia giuridica e le relazioni tra i precedenti giurisprudenziali</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
@@ -135,12 +135,18 @@ beta: Milvus 2.6.x
      <td><p>SiliconFlow</p></td>
      <td><p>Applicazioni che elaborano documenti lunghi con priorità di efficienza in termini di costi</p></td>
      <td><ul><li><p>Segmentazione avanzata dei documenti con sovrapposizione configurabile</p></li><li><p>Punteggio basato sui segmenti (il segmento con il punteggio più alto rappresenta il documento)</p></li><li><p>Supporto per diversi modelli di riordino dei risultati</p></li><li><p>Conveniente grazie alle varianti di modello standard e pro</p></li></ul></td>
-     <td><p>Sistema di ricerca nella documentazione tecnica per l’elaborazione di manuali e articoli di grandi dimensioni che richiedono una segmentazione intelligente e il controllo delle sovrapposizioni</p></td>
+     <td><p>Sistema di ricerca di documentazione tecnica per l’elaborazione di manuali e articoli di grandi dimensioni che richiedono una segmentazione intelligente e il controllo delle sovrapposizioni</p></td>
+   </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Applicazioni che utilizzano i modelli di riclassificazione di Alibaba Cloud o Qwen</p></td>
+     <td><ul><li><p>API di riclassificazione gestita da DashScope</p></li><li><p>Supporta modelli di riclassificazione quali <code translate="no">gte-rerank-v2</code></p></li><li><p>Autenticazione basata su chiave API</p></li></ul></td>
+     <td><p>Applicazioni RAG che desiderano riorganizzare i candidati con modelli di riorganizzazione ospitati su Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
-     <td><p>Applicazioni che utilizzano i modelli di similarità delle frasi di Hugging Face in hosting</p></td>
-     <td><ul><li><p>Utilizza il provider ospitato <code translate="no">hf-inference</code> </p></li><li><p>Seleziona i modelli dall'Hugging Face Hub</p></li><li><p>Calcola un punteggio di similarità tra frasi per ciascun candidato</p></li><li><p>Utilizza l’autenticazione tramite chiave API</p></li></ul></td>
+     <td><p>Applicazioni che utilizzano modelli di similarità delle frasi di Hugging Face ospitati</p></td>
+     <td><ul><li><p>Utilizza il provider " <code translate="no">hf-inference</code> " ospitato</p></li><li><p>Seleziona i modelli dall’Hugging Face Hub</p></li><li><p>Calcola un punteggio di similarità tra frasi per ciascun candidato</p></li><li><p>Utilizza l’autenticazione tramite chiave API</p></li></ul></td>
      <td><p>Applicazioni di ricerca semantica che desiderano riorganizzare i testi candidati utilizzando un modello Hugging Face senza dover gestire un servizio di inferenza separato</p></td>
    </tr>
 </table>
@@ -151,7 +157,8 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/it/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/it/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/it/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
-<li><p><a href="/docs/it/hugging-face-ranker.md">Classificatore Hugging Face</a></p></li>
+<li><p><a href="/docs/it/dashscope-ranker.md">Classificatore DashScope</a></p></li>
+<li><p><a href="/docs/it/hugging-face-ranker.md">Hugging Face Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementazione<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,7 +178,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Prima di implementare Model Ranker, assicurati di disporre di:</p>
 <ul>
 <li><p>Una collezione Milvus con un campo " <code translate="no">VARCHAR</code> " contenente il testo da riclassificare</p></li>
-<li><p>Un servizio di modelli esterno in esecuzione accessibile alla propria istanza Milvus</p></li>
+<li><p>Un servizio di modelli esterno in esecuzione accessibile alla propria istanza di Milvus</p></li>
 <li><p>Una connettività di rete adeguata tra Milvus e il servizio di modelli scelto</p></li>
 </ul>
 <p>I Model Ranker si integrano perfettamente sia con le operazioni di ricerca vettoriale standard che con quelle ibride. L’implementazione prevede la creazione di un oggetto Function che definisce la configurazione di riclassificazione e il suo passaggio alle operazioni di ricerca.</p>
@@ -275,7 +282,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Deve essere impostato su <code translate="no">"model"</code> per abilitare il riclassificatore basato su modello.</p></td>
+     <td><p>Deve essere impostato su <code translate="no">"model"</code> per abilitare il riclassamento basato su modello.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -287,7 +294,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Elenco delle stringhe di query utilizzate dal modello di riclassificazione per calcolare i punteggi di rilevanza.</p><p>Il numero di stringhe di query deve corrispondere esattamente al numero di query presenti nell’operazione di ricerca (anche quando si utilizzano vettori di query anziché testo); in caso contrario, verrà segnalato un errore.</p></td>
+     <td><p>Elenco delle stringhe di query utilizzate dal modello di riclassificazione per calcolare i punteggi di rilevanza.</p><p>Il numero di stringhe di query deve corrispondere esattamente al numero di query nell’operazione di ricerca (anche quando si utilizzano vettori di query anziché testo); in caso contrario, verrà segnalato un errore.</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>

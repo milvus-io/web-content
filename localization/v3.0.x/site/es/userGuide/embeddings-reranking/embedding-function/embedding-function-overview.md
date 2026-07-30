@@ -4,7 +4,7 @@ title: Descripción general de la función de incrustaciónCompatible with Milvu
 summary: >-
   El módulo «Function» de Milvus te permite transformar datos de texto sin
   procesar en representaciones vectoriales mediante la llamada automática a
-  proveedores externos de servicios de representaciones (como OpenAI, AWS
+  proveedores de servicios de representaciones externos (como OpenAI, AWS
   Bedrock, Google Vertex AI, etc.). Con el módulo «Function», ya no es necesario
   interactuar manualmente con las API de incrustación: Milvus se encarga de todo
   el proceso de enviar solicitudes a los proveedores, recibir las incrustaciones
@@ -98,6 +98,12 @@ beta: Milvus 2.6.x
      <td><p>Clave de API</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/es/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Modelos de vectorización de texto de Yandex Cloud AI Studio</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Clave de API</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/es/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
@@ -158,7 +164,7 @@ beta: Milvus 2.6.x
     </button></h2><p>El siguiente diagrama muestra cómo funciona la función en Milvus.</p>
 <ol>
 <li><p><strong>Texto de entrada</strong>: los usuarios introducen datos sin procesar (por ejemplo, documentos) en Milvus.</p></li>
-<li><p><strong>Generación de representaciones vectoriales</strong>: El módulo «Function» de Milvus llama automáticamente al proveedor de modelos configurado para convertir los datos sin procesar en representaciones vectoriales.</p></li>
+<li><p><strong>Generación de representaciones vectoriales</strong>: el módulo «Function» de Milvus invoca automáticamente al proveedor de modelos configurado para convertir los datos sin procesar en representaciones vectoriales.</p></li>
 <li><p><strong>Almacenamiento de representaciones</strong>: Las representaciones resultantes se almacenan en campos vectoriales definidos explícitamente dentro de las colecciones de Milvus.</p></li>
 <li><p><strong>Texto de consulta</strong>: Los usuarios envían consultas de texto a Milvus.</p></li>
 <li><p><strong>Búsqueda semántica</strong>: Milvus convierte internamente las consultas en representaciones vectoriales, realiza búsquedas de similitud con las representaciones almacenadas y recupera los resultados relevantes.</p></li>
@@ -186,14 +192,14 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Antes de utilizar una función de representación con Milvus, configura las credenciales del servicio de representación para que Milvus pueda acceder a él.</p>
-<p>Milvus te permite proporcionar las credenciales del servicio de representación de dos formas:</p>
+<p>Milvus te permite proporcionar las credenciales del servicio de incrustación de dos formas:</p>
 <ul>
 <li><p><strong>Archivo de configuración</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>El ejemplo de este tema muestra la <strong>configuración recomendada</strong> utilizando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variables de entorno</strong>:</p>
 <p>Para obtener más información sobre cómo configurar las credenciales mediante variables de entorno, consulta la documentación del proveedor del servicio de integración (por ejemplo, <a href="/docs/es/openai.md">OpenAI</a> o <a href="/docs/es/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
-<p>El siguiente diagrama muestra el proceso de configuración de las credenciales mediante el archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>) y, a continuación, la llamada a la función desde Milvus.</p>
+<p>El siguiente diagrama muestra el proceso de configuración de las credenciales mediante el archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>) y, a continuación, la llamada a la función dentro de Milvus.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
@@ -308,7 +314,7 @@ beta: Milvus 2.6.x
 <li><p>Un <strong>campo escalar</strong> que almacene los datos sin procesar que se van a incrustar.</p></li>
 <li><p>Un <strong>campo vectorial</strong> reservado para almacenar las representaciones vectoriales que la función generará para el campo escalar.</p></li>
 </ul>
-<p>El siguiente ejemplo define un esquema con un campo escalar <code translate="no">&quot;document&quot;</code> para almacenar datos textuales y un campo vectorial <code translate="no">&quot;dense&quot;</code> para almacenar las representaciones que generará el módulo «Function». Recuerda configurar la dimensión del vector (<code translate="no">dim</code>) para que coincida con la salida del modelo de representación que hayas elegido.</p>
+<p>El siguiente ejemplo define un esquema con un campo escalar <code translate="no">&quot;document&quot;</code> para almacenar datos textuales y un campo vectorial <code translate="no">&quot;dense&quot;</code> para almacenar las representaciones que generará el módulo «Function». Recuerda configurar la dimensión del vector (<code translate="no">dim</code>) para que coincida con la salida del modelo de representación elegido.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -455,7 +461,7 @@ schema.add_function(text_embedding_function)
    </tr>
 </table>
 <div class="alert note">
-<p>Para colecciones con varios campos escalares que requieran la conversión de texto a vector, añade funciones independientes al esquema de la colección, asegurándote de que cada función tenga un nombre y un valor « <code translate="no">output_field_names</code> » únicos.</p>
+<p>Para colecciones con varios campos escalares que requieran la conversión de texto a vector, añade funciones independientes al esquema de la colección, asegurándote de que cada función tenga un nombre y un valor de « <code translate="no">output_field_names</code> » únicos.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Paso 3: Configurar el índice<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"

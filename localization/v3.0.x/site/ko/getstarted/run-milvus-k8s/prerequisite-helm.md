@@ -44,7 +44,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 <tr><td>CPU</td><td><ul><li>인텔 2세대 코어 CPU 이상</li><li>Apple Silicon</li></ul></td><td><ul><li>단독 시스템: 4코어 이상</li><li>클러스터: 8코어 이상</li></ul></td><td></td></tr>
 <tr><td>CPU 명령어 세트</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Milvus 내에서 벡터 유사도 검색 및 인덱스 생성을 수행하려면 CPU가 단일 명령어 다중 데이터(SIMD) 확장 세트를 지원해야 합니다. CPU가 나열된 SIMD 확장 중 적어도 하나를 지원하는지 확인하십시오. 자세한 내용은 <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">AVX를 지원하는 CPU를</a> 참조하십시오.</td></tr>
 <tr><td>RAM</td><td><ul><li>단독 시스템: 8G</li><li>클러스터: 32G</li></ul></td><td><ul><li>단독 시스템: 16G</li><li>클러스터: 128G</li></ul></td><td>RAM 용량은 데이터 양에 따라 달라집니다.</td></tr>
-<tr><td>하드 드라이브</td><td>SATA 3.0 SSD 또는 CloudStorage</td><td>NVMe SSD 이상</td><td>하드 드라이브의 용량은 데이터 양에 따라 다릅니다.</td></tr>
+<tr><td>하드 드라이브</td><td>SATA 3.0 SSD 또는 CloudStorage</td><td>NVMe SSD 이상</td><td>하드 드라이브의 용량은 데이터 양에 따라 달라집니다.</td></tr>
 </tbody>
 </table>
 <h2 id="Software-requirements" class="common-anchor-header">소프트웨어 요구 사항<button data-href="#Software-requirements" class="anchor-icon" translate="no">
@@ -64,7 +64,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
       </svg>
     </button></h2><p>Kubernetes 클러스터는 Linux 플랫폼에서 실행하는 것이 권장됩니다.</p>
 <p>kubectl은 쿠버네티스용 명령줄 도구입니다. 클러스터와 마이너 버전 차이가 1 이내인 kubectl 버전을 사용하십시오. 최신 버전의 kubectl을 사용하면 예기치 못한 문제를 방지하는 데 도움이 됩니다.</p>
-<p>Kubernetes 클러스터를 로컬에서 실행할 때는 minikube가 필요합니다. minikube는 Docker를 종속성으로 요구합니다. Helm을 사용하여 Milvus를 설치하기 전에 Docker를 설치했는지 확인하십시오. 자세한 내용은 <a href="https://docs.docker.com/get-docker">Docker 설치하기를</a> 참조하십시오.</p>
+<p>Kubernetes 클러스터를 로컬에서 실행할 때는 minikube가 필요합니다. minikube는 Docker를 종속성으로 요구합니다. Helm을 사용하여 Milvus를 설치하기 전에 Docker가 설치되어 있는지 확인하십시오. 자세한 내용은 <a href="https://docs.docker.com/get-docker">Docker 설치하기를</a> 참조하십시오.</p>
 <table>
 <thead>
 <tr><th>운영 체제</th><th>소프트웨어</th><th>참고</th></tr>
@@ -80,7 +80,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">추가 디스크 요구 사항을</a> 참조하십시오.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Milvus와 번들로 제공됨(서비스 모드: <code translate="no">v</code> 이상)</td><td>기본 메시지 큐입니다. 분산 배포의 경우, Woodpecker는 <strong>전용 서비스로</strong> 실행될 수 있으며, <code translate="no">--set woodpecker.image.tag</code> 을 사용하여 버전을 고정할 수 있습니다. 서비스 모드는 Woodpecker <code translate="no">v</code> 부터 지원됩니다.</td></tr>
+<tr><td>Woodpecker</td><td>Milvus와 번들로 제공됨(서비스 모드: <code translate="no">v0.1.36</code> 이상)</td><td>기본 메시지 큐입니다. 분산 배포의 경우, Woodpecker는 <strong>전용 서비스로</strong> 실행될 수 있으며, <code translate="no">--set woodpecker.image.tag</code> 을 사용하여 버전을 고정할 수 있습니다. 서비스 모드는 Woodpecker <code translate="no">v0.1.36</code> 부터 지원됩니다.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>선택 사항 — 메시지 큐를 Pulsar로 전환하는 경우에만 해당하며, 기본적으로 설치되지 않습니다.</td></tr>
 </tbody>
 </table>

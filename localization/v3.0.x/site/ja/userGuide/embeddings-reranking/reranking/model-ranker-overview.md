@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>従来のベクトル検索は、高次元空間におけるベクトルの一致度、つまり数学的な類似性のみに基づいて検索結果をランク付けします。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば<strong>、「データベース最適化のベストプラクティス」</strong>を検索する場合を考えてみましょう<strong>。</strong>ベクトルの類似度が高く、これらの用語が頻繁に言及されているドキュメントが表示されるかもしれませんが、実際には実行可能な最適化戦略が提供されていない可能性があります。</p>
+    </button></h1><p>従来のベクトル検索は、高次元空間におけるベクトルの一致度、つまり純粋に数学的な類似性に基づいて検索結果をランク付けします。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば<strong>、「データベース最適化のベストプラクティス」を</strong>検索する場合を考えてみましょう<strong>。</strong>ベクトルの類似度が高く、これらの用語が頻繁に言及されているドキュメントが検索結果に表示されるかもしれませんが、実際には実用的な最適化戦略が提供されていない可能性があります。</p>
 <p>Model Rankerは、クエリとドキュメント間の意味的な関係を理解する高度な言語モデルを統合することで、Milvusの検索機能を一新します。ベクトル類似性のみに依存するのではなく、コンテンツの意味や文脈を評価することで、より知的で関連性の高い検索結果を提供します。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -103,7 +103,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>vLLM</p></td>
      <td><p>深い意味理解とカスタマイズを必要とする複雑なアプリケーション</p></td>
-     <td><ul><li><p>様々な大規模言語モデルに対応</p></li><li><p>柔軟な導入オプション</p></li><li><p>より高い計算リソースが必要</p></li><li><p>カスタマイズの可能性がより高い</p></li></ul></td>
+     <td><ul><li><p>様々な大規模言語モデルに対応</p></li><li><p>柔軟な導入オプション</p></li><li><p>より高い計算リソースが必要</p></li><li><p>カスタマイズの可能性がさらに広がる</p></li></ul></td>
      <td><p>法律用語や判例間の関係を理解する、ドメイン特化型モデルを導入した法律研究プラットフォーム</p></td>
    </tr>
    <tr>
@@ -131,9 +131,15 @@ beta: Milvus 2.6.x
      <td><p>インテリジェントなセグメンテーションとオーバーラップ制御を必要とする、長文のマニュアルや論文を処理する技術文書検索システム</p></td>
    </tr>
    <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Alibaba CloudまたはQwenの再ランク付けモデルを利用するアプリケーション</p></td>
+     <td><ul><li><p>マネージド型 DashScope リランキング API</p></li><li><p>次のような再ランク付けモデルをサポート<code translate="no">gte-rerank-v2</code></p></li><li><p>APIキーベースの認証</p></li></ul></td>
+     <td><p>Alibaba Cloudでホストされた再ランク付けモデルを使用して候補を再ランク付けしたいRAGアプリケーション</p></td>
+   </tr>
+   <tr>
      <td><p>Hugging Face</p></td>
-     <td><p>ホスト型Hugging Face文類似度モデルを活用したアプリケーション</p></td>
-     <td><ul><li><p>ホスト型<code translate="no">hf-inference</code> プロバイダーを利用</p></li><li><p>Hugging Face Hubからモデルを選択</p></li><li><p>候補ごとに1つの文類似度スコアを算出</p></li><li><p>APIキーによる認証を使用</p></li></ul></td>
+     <td><p>ホスト型Hugging Face文類似度モデルを利用するアプリケーション</p></td>
+     <td><ul><li><p>ホスト型<code translate="no">hf-inference</code> プロバイダーを使用</p></li><li><p>Hugging Face Hubからモデルを選択</p></li><li><p>候補ごとに1つの文類似度スコアを算出する</p></li><li><p>APIキーによる認証を使用</p></li></ul></td>
      <td><p>別途推論サービスを運用することなく、Hugging Faceモデルを使用して候補テキストの再ランク付けを行いたいセマンティック検索アプリケーション</p></td>
    </tr>
 </table>
@@ -144,6 +150,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/ja/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/ja/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/ja/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/ja/dashscope-ranker.md">DashScope ランカー</a></p></li>
 <li><p><a href="/docs/ja/hugging-face-ranker.md">Hugging Face ランカー</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">実装<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -163,11 +170,11 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Model Ranker を実装する前に、以下の準備が整っていることを確認してください：</p>
 <ul>
-<li><p>再ランク付け対象のテキストを含む「<code translate="no">VARCHAR</code> 」フィールドを持つMilvusコレクション</p></li>
+<li><p>再ランク付けの対象となるテキストを含む「<code translate="no">VARCHAR</code> 」フィールドを持つMilvusコレクション</p></li>
 <li><p>Milvusインスタンスからアクセス可能な、稼働中の外部モデルサービス</p></li>
 <li><p>Milvusと選択したモデルサービス間の適切なネットワーク接続</p></li>
 </ul>
-<p>モデルランカーは、標準のベクトル検索およびハイブリッド検索操作の両方にシームレスに統合されます。実装には、再ランク付けの設定を定義するFunctionオブジェクトを作成し、それを検索操作に渡す必要があります。</p>
+<p>モデルランカーは、標準のベクトル検索およびハイブリッド検索操作の両方にシームレスに統合されます。実装には、再ランク付けの設定を定義するFunctionオブジェクトを作成し、それを検索操作に渡す手順が含まれます。</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">モデルランカーの作成<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

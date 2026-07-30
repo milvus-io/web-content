@@ -4,8 +4,8 @@ title: 嵌入函式概覽Compatible with Milvus 2.6.x
 summary: >-
   Milvus 中的「Function」模組可讓您透過自動呼叫外部嵌入服務供應商（例如 OpenAI、AWS Bedrock、Google Vertex AI
   等），將原始文字資料轉換為向量嵌入。 透過「函式」模組，您無需再手動與嵌入式 API 進行介接——Milvus
-  會全權處理向服務提供商發送請求、接收嵌入向量，並將其儲存至您的集合中的整個流程。 進行語義搜尋時，您只需提供原始查詢資料，無需提供查詢向量。Milvus
-  會使用您用於資料導入的相同模型生成查詢向量，將其與儲存的向量進行比對，並回傳最相關的結果。
+  會處理整個流程，包括向服務供應商發送請求、接收嵌入向量，並將其儲存至您的集合中。 進行語義搜尋時，您只需提供原始查詢資料，無需提供查詢向量。Milvus
+  會使用您用於資料導入的同一模型生成查詢向量，將其與儲存的向量進行比對，並回傳最相關的結果。
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">嵌入函式概覽<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Function 模組進行嵌入的任何輸入欄位必須始終包含值；若提供 null 值，模組將拋出錯誤。</p></li>
+<li><p>Function 模組進行嵌入的任何輸入欄位都必須始終包含值；若提供 null 值，模組將拋出錯誤。</p></li>
 <li><p>Function 模組僅處理在集合模式中明確定義的欄位；它不會為動態欄位產生嵌入向量。</p></li>
 <li><p>待嵌入的輸入欄位必須為<code translate="no">VARCHAR</code> 類型。</p></li>
 <li><p>Function 模組可將輸入欄位嵌入以下類型：</p>
@@ -91,10 +91,16 @@ beta: Milvus 2.6.x
      <td><p>API 金鑰</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/zh-hant/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio 文字向量化模型</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API 金鑰</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/zh-hant/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>AK/SK 配對</p></td>
+     <td><p>API 金鑰／密鑰對</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/vertex-ai.md">Vertex AI</a></p></td>
@@ -128,7 +134,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/hugging-face.md">Hugging Face</a></p></td>
-     <td><p>透過<code translate="no">hf-inference</code> 提供服務的模型，用於特徵提取</p></td>
+     <td><p>透過<code translate="no">hf-inference</code> 提供的用於特徵提取的模型</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API 金鑰</p></td>
    </tr>
@@ -279,7 +285,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 設定檔中完成憑證設定後，請依照以下步驟定義並使用嵌入函式。</p>
+    </button></h2><p>在 Milvus 配置檔案中設定憑證後，請依照以下步驟定義並使用嵌入函式。</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -299,7 +305,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><strong>主欄位</strong>：用於唯一識別集合中每個實體。</p></li>
 <li><p>用於儲存待嵌入原始資料的<strong>標量欄位</strong>。</p></li>
-<li><p>一個<strong>向量欄位</strong>，專門用於儲存該函式針對標量欄位所生成的向量嵌入值。</p></li>
+<li><p>一個<strong>向量欄位</strong>，專門用於儲存該函式將針對標量欄位所產生的向量嵌入值。</p></li>
 </ul>
 <p>以下範例定義了一個包含一個標量欄位 `<code translate="no">&quot;document&quot;</code> `（用於儲存文字資料）以及一個向量欄位 `<code translate="no">&quot;dense&quot;</code> `（用於儲存將由 Function 模組生成的嵌入向量）的資料結構。請記得將向量維度（<code translate="no">dim</code> ）設定為與您所選嵌入模型的輸出相符。</p>
 <div class="multipleCode">
@@ -403,7 +409,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>所使用函式的類型。若為文字嵌入，請將值設定為<code translate="no">FunctionType.TEXTEMBEDDING</code> 。</p><p><strong>注意</strong>：Milvus 接受此參數的值為<code translate="no">FunctionType.BM25</code> （用於稀疏嵌入轉換）及<code translate="no">FunctionType.RERANK</code> （用於重新排序）。詳情請參閱《<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>》與《<a href="/docs/zh-hant/decay-ranker-overview.md">衰減排序器概覽</a>》。</p></td>
+     <td><p>所使用的函式類型。若為文字嵌入，請將值設定為<code translate="no">FunctionType.TEXTEMBEDDING</code> 。</p><p><strong>注意</strong>：Milvus 接受此參數的值為<code translate="no">FunctionType.BM25</code> （用於稀疏嵌入轉換）及<code translate="no">FunctionType.RERANK</code> （用於重新排序）。詳情請參閱《<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>》與《<a href="/docs/zh-hant/decay-ranker-overview.md">衰減排序器概覽</a>》。</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -433,7 +439,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>在<code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 區段中定義的憑證標籤。 </p><ul><li><p>若提供此參數，Milvus 會檢索相應的金鑰對或 API 憑證，並在伺服器端對請求進行簽名。</p></li><li><p>若省略（<code translate="no">None</code> ），Milvus 將回退至在<code translate="no">milvus.yaml</code> 中為目標模型提供者明確配置的憑證。</p></li><li><p>若標籤未知或所引用的金鑰不存在，呼叫將失敗。</p></li></ul></td>
+     <td><p>在<code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 區段中定義的憑證標籤。 </p><ul><li><p>若提供此參數，Milvus 會檢索相應的金鑰對或 API 憑證，並在伺服器端對請求進行簽名。</p></li><li><p>若省略（<code translate="no">None</code> ），Milvus 將回退至在<code translate="no">milvus.yaml</code> 中為目標嵌入模型提供者明確配置的憑證。</p></li><li><p>若標籤未知或所引用的金鑰不存在，呼叫將失敗。</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
@@ -582,7 +588,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>資料插入完成後，請使用原始查詢文字執行語義搜尋。Milvus 會自動將您的查詢轉換為嵌入向量，並根據相似度檢索相關文件，最後回傳最符合的結果。</p>
+    </button></h3><p>資料插入完成後，可使用原始查詢文字執行語義搜尋。Milvus 會自動將您的查詢轉換為嵌入向量，並根據相似度檢索相關文件，最後回傳最符合的結果。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -643,7 +649,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>兩種方法均可行，但建議使用 `<code translate="no">milvus.yaml</code> `，因為它能提供集中式的憑證管理，並確保所有服務供應商的憑證命名一致。若使用環境變數，變數名稱會因嵌入式服務供應商而異，因此請參閱各供應商的專屬頁面，以了解所需的具體環境變數名稱（例如<a href="/docs/zh-hant/openai.md">OpenAI</a>或<a href="/docs/zh-hant/azure-openai.md">Azure OpenAI</a>）。</p>
+    </button></h3><p>兩種方法皆可運作，但建議使用 `<code translate="no">milvus.yaml</code> `，因為它能提供集中式的憑證管理，並確保所有服務供應商的憑證命名方式一致。若使用環境變數，變數名稱會因嵌入式服務供應商而異，因此請參閱各供應商的專屬頁面，以了解所需的具體環境變數名稱（例如<a href="/docs/zh-hant/openai.md">OpenAI</a>或<a href="/docs/zh-hant/azure-openai.md">Azure OpenAI</a>）。</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">若我在函式定義中未指定憑證參數，會發生什麼情況？<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

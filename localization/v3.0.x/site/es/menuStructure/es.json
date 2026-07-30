@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1353,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de decadencia",
+                "label": "Clasificación de la descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Ranker de Hugging Face",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -1857,7 +1869,7 @@
             "children": []
           },
           {
-            "label": "Limitar el número de recopilaciones",
+            "label": "Limitar el número de recogidas",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -2265,6 +2277,12 @@
             "label": "Conmutación por error",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Importación masiva en la replicación de CDC",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -3128,7 +3146,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda en embudo con representaciones «matrioska»",
+        "label": "Búsqueda en embudo con representaciones Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

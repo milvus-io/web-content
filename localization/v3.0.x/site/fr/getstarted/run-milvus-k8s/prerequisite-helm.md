@@ -63,7 +63,7 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
         ></path>
       </svg>
     </button></h2><p>Il est recommandé d'exécuter le cluster Kubernetes sur des plateformes Linux.</p>
-<p>kubectl est l'outil en ligne de commande de Kubernetes. Utilisez une version de kubectl dont la version mineure ne diffère pas de plus d'une version de celle de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
+<p>kubectl est l'outil en ligne de commande de Kubernetes. Utilisez une version de kubectl dont la version mineure ne diffère pas de plus d'une version par rapport à celle de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
 <p>minikube est requis pour exécuter un cluster Kubernetes en local. minikube nécessite Docker comme dépendance. Assurez-vous d’installer Docker avant d’installer Milvus à l’aide de Helm. Consultez la section « <a href="https://docs.docker.com/get-docker">Obtenir Docker</a> » pour plus d’informations.</p>
 <table>
 <thead>
@@ -80,7 +80,7 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Voir <a href="#Additional-disk-requirements">les exigences supplémentaires en matière d'espace disque</a>.</td></tr>
 <tr><td>MinIO</td><td>VERSION.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Le mode service est pris en charge à partir de la version <code translate="no">v</code> de Woodpecker.</td></tr>
+<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v0.1.36</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Le mode service est pris en charge à partir de la version <code translate="no">v0.1.36</code> de Woodpecker.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Facultatif — uniquement si vous basculez la file d'attente de messages vers Pulsar ; non installé par défaut.</td></tr>
 </tbody>
 </table>

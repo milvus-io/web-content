@@ -3,7 +3,7 @@ id: model-ranker-overview.md
 title: Gambaran Umum Model RankerCompatible with Milvus 2.6.x
 summary: >-
   Pencarian vektor tradisional mengurutkan hasil semata-mata berdasarkan
-  kesamaan matematis—seberapa dekat vektor-vektor tersebut cocok di ruang
+  kesamaan matematis—seberapa mirip vektor-vektor tersebut dalam ruang
   berdimensi tinggi. Meskipun efisien, pendekatan ini sering kali mengabaikan
   relevansi semantik yang sesungguhnya. Bayangkan Anda mencari "praktik terbaik
   untuk optimasi basis data": Anda mungkin mendapatkan dokumen dengan kesamaan
@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>Setiap dokumen menerima skor relevansi berdasarkan pemahaman semantik</p></li>
 </ul></li>
 <li><p><strong>Penataan ulang yang cerdas</strong>: Dokumen-dokumen diurutkan ulang berdasarkan skor relevansi yang dihasilkan model</p></li>
-<li><p><strong>Hasil yang ditingkatkan</strong>: Aplikasi Anda menerima hasil yang diurutkan berdasarkan relevansi semantik, bukan hanya kesamaan vektor</p></li>
+<li><p><strong>Hasil yang ditingkatkan</strong>: Aplikasi Anda menerima hasil yang diurutkan berdasarkan relevansi semantik, bukan hanya kemiripan vektor</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">Pilih penyedia model yang sesuai dengan kebutuhan Anda<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,10 +137,16 @@ beta: Milvus 2.6.x
      <td><p>Sistem pencarian dokumentasi teknis yang memproses manual dan makalah panjang yang memerlukan segmentasi cerdas dan kontrol tumpang tindih</p></td>
    </tr>
    <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Aplikasi yang menggunakan model penataan ulang peringkat Alibaba Cloud atau Qwen</p></td>
+     <td><ul><li><p>API penataan ulang DashScope yang dikelola</p></li><li><p>Mendukung model reranking seperti <code translate="no">gte-rerank-v2</code></p></li><li><p>otentikasi berbasis kunci API</p></li></ul></td>
+     <td><p>Aplikasi RAG yang ingin melakukan reranking kandidat dengan model reranking yang dihosting di Alibaba Cloud</p></td>
+   </tr>
+   <tr>
      <td><p>Hugging Face</p></td>
      <td><p>Aplikasi yang menggunakan model kesamaan kalimat Hugging Face yang dihosting</p></td>
      <td><ul><li><p>Menggunakan penyedia " <code translate="no">hf-inference</code> " yang dihosting</p></li><li><p>Memilih model dari Hugging Face Hub</p></li><li><p>Menghitung satu skor kesamaan kalimat per kandidat</p></li><li><p>Menggunakan otentikasi kunci API</p></li></ul></td>
-     <td><p>Aplikasi pencarian semantik yang ingin menyusun ulang peringkat teks kandidat menggunakan model Hugging Face tanpa mengoperasikan layanan inferensi terpisah</p></td>
+     <td><p>Aplikasi pencarian semantik yang ingin menyusun ulang urutan teks kandidat menggunakan model Hugging Face tanpa mengoperasikan layanan inferensi terpisah</p></td>
    </tr>
 </table>
 <p>Untuk informasi terperinci mengenai implementasi setiap layanan model, lihat dokumentasi khusus:</p>
@@ -150,6 +156,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/id/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/id/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/id/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/id/dashscope-ranker.md">Peringkat DashScope</a></p></li>
 <li><p><a href="/docs/id/hugging-face-ranker.md">Peringkat Hugging Face</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Penerapan<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -262,7 +269,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Menentukan jenis fungsi yang sedang dibuat.</p><p>Harus diatur ke " <code translate="no">RERANK</code> " untuk semua pemeringkat model.</p></td>
+     <td><p>Menentukan jenis fungsi yang sedang dibuat.</p><p>Harus diatur ke " <code translate="no">RERANK</code> " untuk semua model ranker.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -298,7 +305,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Jumlah maksimum dokumen yang akan diproses dalam satu batch. Nilai yang lebih besar meningkatkan throughput tetapi membutuhkan lebih banyak memori.</p></td>
+     <td><p>Jumlah maksimum dokumen yang akan diproses dalam satu batch. Nilai yang lebih besar akan meningkatkan throughput tetapi membutuhkan lebih banyak memori.</p></td>
      <td><p><code translate="no">32</code> (default)</p></td>
    </tr>
 </table>

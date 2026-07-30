@@ -54,7 +54,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>Konvertierungen in die Typen „ <code translate="no">BINARY_VECTOR</code> “, „ <code translate="no">FLOAT16_VECTOR</code> “ oder „ <code translate="no">BFLOAT16_VECTOR</code> “ werden nicht unterstützt.</p></li>
+<p>Konvertierungen in „ <code translate="no">BINARY_VECTOR</code> “, „ <code translate="no">FLOAT16_VECTOR</code> “ oder „ <code translate="no">BFLOAT16_VECTOR</code> “ werden nicht unterstützt.</p></li>
 </ul>
 <h2 id="Supported-embedding-service-providers" class="common-anchor-header">Unterstützte Einbettungs-Service-Provider<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,6 +93,12 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/de/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API-Schlüssel</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/de/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio – Modelle zur Textvektorisierung</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API-Schlüssel</p></td>
    </tr>
@@ -188,7 +194,7 @@ beta: Milvus 2.6.x
 <p>Milvus bietet Ihnen zwei Möglichkeiten, die Anmeldedaten für den Einbettungsdienst anzugeben:</p>
 <ul>
 <li><p><strong>Konfigurationsdatei</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>Das Beispiel in diesem Abschnitt veranschaulicht die <strong>empfohlene Konfiguration</strong> unter Verwendung von „ <code translate="no">milvus.yaml</code> “.</p></li>
+<p>Das Beispiel in diesem Abschnitt veranschaulicht die <strong>empfohlene Einrichtung</strong> mithilfe von „ <code translate="no">milvus.yaml</code> “.</p></li>
 <li><p><strong>Umgebungsvariablen</strong>:</p>
 <p>Einzelheiten zur Konfiguration der Anmeldedaten über Umgebungsvariablen finden Sie in der Dokumentation des Embedding-Dienstanbieters (z. B. <a href="/docs/de/openai.md">OpenAI</a> oder <a href="/docs/de/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
@@ -196,7 +202,7 @@ beta: Milvus 2.6.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
-   <span>Konfiguration der Anmeldedaten</span>
+   <span>Konfiguration der Anmeldedaten in Milvus</span>
   
  </span></p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Schritt 1: Anmeldeinformationen zur Milvus-Konfigurationsdatei hinzufügen<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
@@ -307,7 +313,7 @@ beta: Milvus 2.6.x
 <li><p>Ein <strong>Skalarfeld</strong>, in dem die einzubettenden Rohdaten gespeichert werden.</p></li>
 <li><p>Ein <strong>Vektorfeld</strong>, das für die Speicherung von Vektor-Einbettungen reserviert ist, die die Funktion für das Skalarfeld generiert.</p></li>
 </ul>
-<p>Das folgende Beispiel definiert ein Schema mit einem Skalarfeld „ <code translate="no">&quot;document&quot;</code> “ zur Speicherung von Textdaten und einem Vektorfeld „ <code translate="no">&quot;dense&quot;</code> “ zur Speicherung von Einbettungen, die vom Funktionsmodul generiert werden. Denken Sie daran, die Vektordimension (<code translate="no">dim</code>) so einzustellen, dass sie mit der Ausgabe Ihres gewählten Einbettungsmodells übereinstimmt.</p>
+<p>Das folgende Beispiel definiert ein Schema mit einem Skalarfeld „ <code translate="no">&quot;document&quot;</code> “ zur Speicherung von Textdaten und einem Vektorfeld „ <code translate="no">&quot;dense&quot;</code> “ zur Speicherung der vom Funktionsmodul zu generierenden Einbettungen. Denken Sie daran, die Vektordimension (<code translate="no">dim</code>) so festzulegen, dass sie mit der Ausgabe Ihres gewählten Einbettungsmodells übereinstimmt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -634,7 +640,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Was ist der Unterschied zwischen der Konfiguration von Anmeldedaten in der Datei „milvus.yaml“ und über Umgebungsvariablen?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Was ist der Unterschied zwischen der Konfiguration von Anmeldedaten in der Datei „milvus.yaml“ und der Verwendung von Umgebungsvariablen?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

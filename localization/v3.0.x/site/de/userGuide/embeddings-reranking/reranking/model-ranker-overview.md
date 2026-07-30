@@ -8,7 +8,7 @@ summary: >-
   lässt jedoch häufig die tatsächliche semantische Relevanz außer Acht. Nehmen
   wir als Beispiel die Suche nach „Best Practices für die Datenbankoptimierung“:
   Möglicherweise erhalten Sie Dokumente mit hoher Vektorähnlichkeit, in denen
-  diese Begriffe zwar häufig vorkommen, die jedoch keine tatsächlich umsetzbaren
+  diese Begriffe zwar häufig vorkommen, die jedoch keine konkret umsetzbaren
   Optimierungsstrategien bieten.
 beta: Milvus 2.6.x
 ---
@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Modell-Ranker integrieren Funktionen zum Verständnis von Sprachmodellen über einen genau definierten Workflow in den Milvus-Suchprozess:</p>
+    </button></h2><p>Modell-Ranker integrieren Funktionen zum Verständnis von Sprachmodellen über einen klar definierten Workflow in den Milvus-Suchprozess:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
@@ -138,9 +138,15 @@ beta: Milvus 2.6.x
      <td><p>Suchsystem für technische Dokumentation zur Verarbeitung umfangreicher Handbücher und Fachartikel, die eine intelligente Segmentierung und Überlappungssteuerung erfordern</p></td>
    </tr>
    <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Anwendungen, die Reranking-Modelle von Alibaba Cloud oder Qwen nutzen</p></td>
+     <td><ul><li><p>Verwaltete DashScope-Reranking-API</p></li><li><p>Unterstützt Reranking-Modelle wie <code translate="no">gte-rerank-v2</code></p></li><li><p>API-Key-basierte Authentifizierung</p></li></ul></td>
+     <td><p>RAG-Anwendungen, die Kandidaten mit von Alibaba Cloud gehosteten Reranking-Modellen neu bewerten möchten</p></td>
+   </tr>
+   <tr>
      <td><p>Hugging Face</p></td>
      <td><p>Anwendungen, die gehostete Hugging-Face-Modelle zur Satzähnlichkeit nutzen</p></td>
-     <td><ul><li><p>Nutzt den gehosteten „ <code translate="no">hf-inference</code> “-Anbieter</p></li><li><p>Wählt Modelle aus dem Hugging Face Hub aus</p></li><li><p>Berechnet einen Satzähnlichkeitswert pro Kandidat</p></li><li><p>Verwendet die Authentifizierung per API-Schlüssel</p></li></ul></td>
+     <td><ul><li><p>Verwendet den gehosteten „ <code translate="no">hf-inference</code> “-Anbieter</p></li><li><p>Wählt Modelle aus dem Hugging Face Hub aus</p></li><li><p>Berechnet einen Satzähnlichkeitswert pro Kandidaten</p></li><li><p>Verwendet die Authentifizierung per API-Schlüssel</p></li></ul></td>
      <td><p>Anwendungen für die semantische Suche, die Textkandidaten mit einem Hugging-Face-Modell neu bewerten möchten, ohne einen separaten Inferenzdienst zu betreiben</p></td>
    </tr>
 </table>
@@ -151,6 +157,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/de/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/de/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/de/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/de/dashscope-ranker.md">DashScope-Ranker</a></p></li>
 <li><p><a href="/docs/de/hugging-face-ranker.md">Hugging Face-Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementierung<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -287,7 +294,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Liste der Suchbegriffe, die vom Neurangordnungsmodell zur Berechnung der Relevanzwerte verwendet werden.</p><p>Die Anzahl der Suchbegriffe muss genau mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Suchvektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
+     <td><p>Liste der Suchbegriffe, die vom Neurangordnungsmodell zur Berechnung der Relevanzwerte verwendet werden.</p><p>Die Anzahl der Suchbegriffe muss exakt mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Suchvektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>

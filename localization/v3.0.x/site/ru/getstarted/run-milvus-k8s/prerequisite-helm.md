@@ -44,7 +44,7 @@ title: Требования к запуску Milvus в Kubernetes
 </thead>
 <tbody>
 <tr><td>Процессор</td><td><ul><li>Процессор Intel Core 2-го поколения или более поздней версии</li><li>Apple Silicon</li></ul></td><td><ul><li>Автономная конфигурация: 4 ядра или более</li><li>Кластер: 8 ядер или более</li></ul></td><td></td></tr>
-<tr><td>Набор команд процессора</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Для векторного поиска по сходству и построения индекса в Milvus требуется поддержка процессором наборов расширений «одна инструкция — несколько данных» (SIMD). Убедитесь, что процессор поддерживает хотя бы одно из перечисленных расширений SIMD. Дополнительную информацию см. в разделе <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">«Процессоры с AVX</a> ».</td></tr>
+<tr><td>Набор команд процессора</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Для векторного поиска по сходству и построения индексов в Milvus требуется поддержка процессором наборов расширений «одна инструкция — несколько данных» (SIMD). Убедитесь, что процессор поддерживает хотя бы одно из перечисленных расширений SIMD. Дополнительную информацию см. в разделе <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">«Процессоры с AVX</a> ».</td></tr>
 <tr><td>Оперативная память</td><td><ul><li>Автономная система: 8 ГБ</li><li>Кластер: 32 ГБ</li></ul></td><td><ul><li>Автономная система: 16 ГБ</li><li>Кластер: 128 ГБ</li></ul></td><td>Объем оперативной памяти зависит от объема данных.</td></tr>
 <tr><td>Жесткий диск</td><td>SSD с интерфейсом SATA 3.0 или облачное хранилище</td><td>SSD NVMe или выше</td><td>Размер жесткого диска зависит от объема данных.</td></tr>
 </tbody>
@@ -82,7 +82,7 @@ title: Требования к запуску Milvus в Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>См. <a href="#Additional-disk-requirements">дополнительные требования к дисковому пространству</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Входит в состав Milvus (режим службы: <code translate="no">v</code>+)</td><td>Очередь сообщений по умолчанию. Для распределенных развертываний Woodpecker может работать как отдельный <strong>сервис</strong>; зафиксируйте его версию с помощью <code translate="no">--set woodpecker.image.tag</code>. Режим сервиса поддерживается начиная с версии Woodpecker <code translate="no">v</code> и выше.</td></tr>
+<tr><td>Woodpecker</td><td>Входит в состав Milvus (режим службы: <code translate="no">v0.1.36</code>+)</td><td>Очередь сообщений по умолчанию. Для распределенных развертываний Woodpecker может работать как отдельный <strong>сервис</strong>; зафиксируйте его версию с помощью <code translate="no">--set woodpecker.image.tag</code>. Режим службы поддерживается начиная с версии Woodpecker <code translate="no">v0.1.36</code> и выше.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Необязательно — только если вы переключаете очередь сообщений на Pulsar; по умолчанию не устанавливается.</td></tr>
 </tbody>
 </table>

@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ",
+    "label": "ابدأ الآن",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "خدمة التسليم عند نقطة الاستلام",
+            "label": "خدمة التسليم عند الاستلام",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -826,7 +826,7 @@
             "children": []
           },
           {
-            "label": "الفهارس المتجهة العائمة",
+            "label": "مؤشرات المتجهات العائمة",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1211,7 +1211,7 @@
             ]
           },
           {
-            "label": "استعلامات Elasticsearch الموجهة إلى Milvus",
+            "label": "استعلامات Elasticsearch إلى Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1341,7 +1347,7 @@
                 "children": []
               },
               {
-                "label": "تصنيف RRF",
+                "label": "مُصنِّف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -2266,6 +2278,12 @@
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
+          },
+          {
+            "label": "الاستيراد الجماعي في عملية النسخ المتماثل لـ CDC",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -2490,7 +2508,7 @@
     ]
   },
   {
-    "label": "عمليات التكامل",
+    "label": "عمليات الدمج",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
@@ -3239,7 +3257,7 @@
         "children": []
       },
       {
-        "label": "استكشاف الأخطاء وإصلاحها",
+        "label": "استكشاف الأعطال وإصلاحها",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

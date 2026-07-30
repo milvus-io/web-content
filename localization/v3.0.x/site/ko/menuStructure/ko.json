@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "StructArray 필드 생성",
+                "label": "StructArray 필드 생성하기",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -958,7 +958,7 @@
                 "children": []
               },
               {
-                "label": "반전됨",
+                "label": "반전",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "얀덱스 클라우드",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope 랭커",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face 랭커",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -2128,7 +2140,7 @@
             "children": []
           },
           {
-            "label": "펄서 ↔ 우드페커",
+            "label": "펄서 ↔ 딱따구리",
             "id": "switch-pulsar-woodpecker.md",
             "order": 2,
             "children": []
@@ -2265,6 +2277,12 @@
             "label": "페일오버",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "CDC 복제에서의 대량 가져오기",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -3128,7 +3146,7 @@
         "children": []
       },
       {
-        "label": "마트료시카 임베딩을 활용한 퍼널 검색",
+        "label": "마트료시카 임베딩을 활용한 퍼넬 검색",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

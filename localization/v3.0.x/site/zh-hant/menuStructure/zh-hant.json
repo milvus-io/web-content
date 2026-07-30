@@ -247,7 +247,7 @@
             "children": []
           },
           {
-            "label": "諾瓦爾",
+            "label": "諾瓦",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -1029,7 +1029,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路基本搜尋",
+            "label": "人工神經網路的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1179,7 +1179,7 @@
                 "children": []
               },
               {
-                "label": "使用 StructArray 進行區間搜尋",
+                "label": "使用 StructArray 進行範圍搜尋",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope 排名工具",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -2266,6 +2278,12 @@
             "id": "cdc_failover.md",
             "order": 3,
             "children": []
+          },
+          {
+            "label": "CDC 複製中的批次匯入",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -3067,7 +3085,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行全文檢索",
+        "label": "使用 Milvus 進行全文搜尋",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -3128,7 +3146,7 @@
         "children": []
       },
       {
-        "label": "運用「套娃」嵌入法進行漏斗式搜尋",
+        "label": "運用「套娃」嵌入式模型進行漏斗式搜尋",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

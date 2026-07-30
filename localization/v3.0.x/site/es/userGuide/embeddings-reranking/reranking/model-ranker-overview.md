@@ -5,11 +5,11 @@ summary: >-
   La búsqueda vectorial tradicional clasifica los resultados basándose
   únicamente en la similitud matemática, es decir, en el grado de coincidencia
   entre los vectores en un espacio de alta dimensión. Aunque es un método
-  eficaz, este enfoque suele pasar por alto la verdadera relevancia semántica.
-  Imaginemos que buscamos «mejores prácticas para la optimización de bases de
-  datos»: es posible que obtengamos documentos con una alta similitud vectorial
-  que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan
-  estrategias de optimización aplicables.
+  eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos
+  que buscamos «mejores prácticas para la optimización de bases de datos»: es
+  posible que obtengamos documentos con una alta similitud vectorial que
+  mencionen estos términos con frecuencia, pero que en realidad no ofrezcan
+  estrategias de optimización prácticas.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Descripción general de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La búsqueda vectorial tradicional clasifica los resultados basándose exclusivamente en la similitud matemática, es decir, en el grado de coincidencia entre los vectores en un espacio de alta dimensión. Aunque es un método eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos que buscamos <strong>«mejores prácticas para la optimización de bases de datos»:</strong> es posible que obtengamos documentos con una alta similitud vectorial que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan estrategias de optimización aplicables.</p>
+    </button></h1><p>La búsqueda vectorial tradicional clasifica los resultados basándose exclusivamente en la similitud matemática, es decir, en el grado de coincidencia entre los vectores en un espacio de alta dimensión. Aunque es un método eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos que buscamos <strong>«mejores prácticas para la optimización de bases de datos»:</strong> es posible que obtengamos documentos con una alta similitud vectorial que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan estrategias de optimización prácticas.</p>
 <p>Model Ranker transforma la búsqueda de Milvus al integrar modelos lingüísticos avanzados que comprenden las relaciones semánticas entre las consultas y los documentos. En lugar de basarse únicamente en la similitud vectorial, evalúa el significado y el contexto del contenido para ofrecer resultados más inteligentes y relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limitaciones<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,11 +135,17 @@ beta: Milvus 2.6.x
      <td><p>SiliconFlow</p></td>
      <td><p>Aplicaciones que procesan documentos largos con prioridades de rentabilidad</p></td>
      <td><ul><li><p>División avanzada de documentos en fragmentos con solapamiento configurable</p></li><li><p>Puntuación basada en fragmentos (el fragmento con mayor puntuación representa el documento)</p></li><li><p>Compatibilidad con diversos modelos de reordenación</p></li><li><p>Rentable, con variantes de modelo estándar y pro</p></li></ul></td>
-     <td><p>Sistema de búsqueda de documentación técnica que procesa manuales y artículos extensos que requieren una segmentación inteligente y un control de solapamiento</p></td>
+     <td><p>Sistema de búsqueda de documentación técnica que procesa manuales y documentos extensos que requieren una segmentación inteligente y un control de solapamiento</p></td>
+   </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Aplicaciones que utilizan modelos de reordenación de Alibaba Cloud o Qwen</p></td>
+     <td><ul><li><p>API gestionada de reordenación de DashScope</p></li><li><p>Compatible con modelos de reordenación como <code translate="no">gte-rerank-v2</code></p></li><li><p>Autenticación basada en clave de API</p></li></ul></td>
+     <td><p>Aplicaciones RAG que deseen reordenar candidatos con modelos de reordenación alojados en Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
-     <td><p>Aplicaciones que utilizan modelos de similitud entre frases de Hugging Face alojados</p></td>
+     <td><p>Aplicaciones que utilizan modelos de similitud de frases de Hugging Face alojados</p></td>
      <td><ul><li><p>Utiliza el proveedor « <code translate="no">hf-inference</code> » alojado</p></li><li><p>Selecciona modelos del Hugging Face Hub</p></li><li><p>Calcula una puntuación de similitud entre frases por cada candidato</p></li><li><p>Utiliza autenticación mediante clave de API</p></li></ul></td>
      <td><p>Aplicaciones de búsqueda semántica que desean reordenar los textos candidatos con un modelo de Hugging Face sin tener que gestionar un servicio de inferencia independiente</p></td>
    </tr>
@@ -151,6 +157,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/es/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/es/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/es/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/es/dashscope-ranker.md">Ranker de DashScope</a></p></li>
 <li><p><a href="/docs/es/hugging-face-ranker.md">Ranker de Hugging Face</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementación<button data-href="#Implementation" class="anchor-icon" translate="no">

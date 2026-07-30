@@ -80,7 +80,7 @@ title: Requisitos para executar o Milvus no Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">os requisitos adicionais de espaço em disco</a>.</td></tr>
 <tr><td>MinIO</td><td>LANÇAMENTO.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Incluído no Milvus (modo de serviço: <code translate="no">v</code>+)</td><td>Fila de mensagens predefinida. Para implementações distribuídas, o Woodpecker pode ser executado como um <strong>serviço</strong> dedicado; fixe a sua versão com <code translate="no">--set woodpecker.image.tag</code>. O modo de serviço é suportado a partir da versão <code translate="no">v</code> do Woodpecker.</td></tr>
+<tr><td>Woodpecker</td><td>Incluído no Milvus (modo de serviço: <code translate="no">v0.1.36</code>+)</td><td>Fila de mensagens predefinida. Para implementações distribuídas, o Woodpecker pode ser executado como um <strong>serviço</strong> dedicado; fixe a sua versão com <code translate="no">--set woodpecker.image.tag</code>. O modo de serviço é suportado a partir da versão <code translate="no">v0.1.36</code> do Woodpecker.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Opcional — apenas se mudar a fila de mensagens para o Pulsar; não é instalado por predefinição.</td></tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ title: Requisitos para executar o Milvus no Kubernetes
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Idealmente, o seu disco deve atingir mais de 500 IOPS e um tempo de latência fsync no 99.º percentil inferior a 10 ms. Consulte a <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentação</a> do etcd para obter requisitos mais detalhados.</p>
+<p>Idealmente, o seu disco deve atingir mais de 500 IOPS e um tempo de latência fsync inferior a 10 ms no 99.º percentil. Consulte a <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentação</a> do etcd para obter requisitos mais detalhados.</p>
 <h2 id="FAQs" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

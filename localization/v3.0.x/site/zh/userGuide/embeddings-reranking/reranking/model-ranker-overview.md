@@ -2,7 +2,7 @@
 id: model-ranker-overview.md
 title: 模型排名器概述Compatible with Milvus 2.6.x
 summary: >-
-  传统的向量搜索完全根据数学上的相似度——即向量在高维空间中的匹配程度——对结果进行排序。虽然这种方法效率很高，但往往会忽略真正的语义相关性。以搜索“数据库优化的最佳实践”为例：你可能会收到向量相似度很高、频繁提及这些术语的文档，但这些文档实际上并未提供可操作的优化策略。
+  传统的向量搜索完全根据数学上的相似性——即向量在高维空间中的匹配程度——来对结果进行排序。虽然这种方法效率很高，但往往会忽略真正的语义相关性。以搜索“数据库优化的最佳实践”为例：你可能会收到向量相似度很高、且频繁提及这些术语的文档，但这些文档实际上并未提供可操作的优化策略。
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">模型排名器概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -114,7 +114,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>Cohere</p></td>
-     <td><p>优先考虑可靠性和易于集成的企业级应用</p></td>
+     <td><p>优先考虑可靠性和集成便捷性的企业级应用</p></td>
      <td><ul><li><p>企业级可靠性和可扩展性</p></li><li><p>无需基础设施维护的托管服务</p></li><li><p>多语言重新排序功能</p></li><li><p>内置速率限制和错误处理</p></li></ul></td>
      <td><p>需要高可用性搜索、稳定API性能及多语言产品目录的电子商务平台</p></td>
    </tr>
@@ -131,9 +131,15 @@ beta: Milvus 2.6.x
      <td><p>技术文档检索系统，用于处理需要智能分段和重叠控制的长篇手册及论文</p></td>
    </tr>
    <tr>
+     <td><p>DashScope</p></td>
+     <td><p>使用阿里云或Qwen重新排序模型的应用程序</p></td>
+     <td><ul><li><p>托管式 DashScope 重新排序 API</p></li><li><p>支持以下重新排序模型：<code translate="no">gte-rerank-v2</code></p></li><li><p>基于 API 密钥的身份验证</p></li></ul></td>
+     <td><p>希望使用阿里云托管的重新排序模型对候选结果进行重新排序的 RAG 应用</p></td>
+   </tr>
+   <tr>
      <td><p>Hugging Face</p></td>
      <td><p>使用托管版 Hugging Face 句子相似度模型的应用程序</p></td>
-     <td><ul><li><p>使用托管版<code translate="no">hf-inference</code> 提供商</p></li><li><p>从Hugging Face Hub中选择模型</p></li><li><p>针对每个候选项计算一个句子相似度分数</p></li><li><p>使用 API 密钥进行身份验证</p></li></ul></td>
+     <td><ul><li><p>使用托管版<code translate="no">hf-inference</code> 提供商</p></li><li><p>从 Hugging Face Hub 中选择模型</p></li><li><p>为每个候选项计算一个句子相似度分数</p></li><li><p>使用 API 密钥进行身份验证</p></li></ul></td>
      <td><p>希望使用 Hugging Face 模型对候选文本进行重新排序，而无需运行独立推理服务的语义搜索应用程序</p></td>
    </tr>
 </table>
@@ -144,6 +150,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/zh/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/zh/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/zh/siliconflow-ranker.md">SiliconFlow 排名器</a></p></li>
+<li><p><a href="/docs/zh/dashscope-ranker.md">DashScope 排名系统</a></p></li>
 <li><p><a href="/docs/zh/hugging-face-ranker.md">Hugging Face 排名器</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">实现<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -161,13 +168,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在实现模型排序器之前，请确保您已具备以下条件：</p>
+    </button></h2><p>在实现模型排序器之前，请确保您拥有：</p>
 <ul>
-<li><p>一个包含<code translate="no">VARCHAR</code> 字段的Milvus Collection，该字段中包含待重新排序的文本</p></li>
+<li><p>一个 Milvus Collection，其中包含名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段存储待重新排序的文本</p></li>
 <li><p>一个正在运行的外部模型服务，且您的 Milvus 实例可访问该服务</p></li>
 <li><p>Milvus 与您选择的模型服务之间具备适当的网络连接</p></li>
 </ul>
-<p>模型排序器可与标准向量搜索和混合搜索操作无缝集成。实现过程包括创建一个 Function 对象来定义您的重新排序配置，并将该对象传递给搜索操作。</p>
+<p>模型排序器可与标准向量搜索和混合搜索操作无缝集成。实现过程涉及创建一个 Function 对象来定义您的重新排序配置，并将其传递给搜索操作。</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">创建模型排序器<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -311,7 +318,7 @@ model_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义模型排序器后，您可以在搜索操作中通过将其传递给 ranker 参数来应用该排序器：</p>
+    </button></h3><p>定义模型排序器后，您可以在搜索操作中通过将其传递给 `ranker` 参数来应用该排序器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

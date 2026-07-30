@@ -67,7 +67,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><table>
    <tr>
-     <th><p>プロバイダ</p></th>
+     <th><p>プロバイダー</p></th>
      <th><p>代表的なモデル</p></th>
      <th><p>埋め込みタイプ</p></th>
      <th><p>認証方法</p></th>
@@ -87,6 +87,12 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/ja/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>APIキー</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/ja/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studioのテキストベクトル化モデル</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>APIキー</p></td>
    </tr>
@@ -244,7 +250,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>同じ設定ファイル（<code translate="no">milvus.yaml</code> ）内の<code translate="no">function</code> ブロックを編集し、サービス呼び出しの埋め込みに使用するキーをMilvusに指定します：</p>
+    </button></h3><p>同じ設定ファイル（<code translate="no">milvus.yaml</code> ）内で、<code translate="no">function</code> ブロックを編集し、サービス呼び出しの埋め込みに使用するキーをMilvusに指定します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -295,7 +301,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも以下の 3 つの必須フィールドが含まれている必要があります:</p>
+    </button></h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも以下の3つの必須フィールドが含まれている必要があります：</p>
 <ul>
 <li><p>コレクション内の各エンティティを一意に識別する<strong>プライマリフィールド</strong>。</p></li>
 <li><p>埋め込み対象となる生データを格納する<strong>スカラーフィールド</strong>。</p></li>
@@ -354,7 +360,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的にエンベディングに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
+    </button></h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みベクトルに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
 <p>以下の例では、スカラーフィールド `<code translate="no">&quot;document&quot;</code> ` を埋め込みに変換し、その結果として得られたベクトルを、先に定義した `<code translate="no">&quot;dense&quot;</code> ` ベクトルフィールドに格納する Function モジュール（<code translate="no">openai_embedding</code> ）を追加しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -403,7 +409,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用する関数の種類。テキスト埋め込みの場合は、値を<code translate="no">FunctionType.TEXTEMBEDDING</code> に設定します。</p><p><strong>注</strong>：Milvusでは、このパラメータに対して<code translate="no">FunctionType.BM25</code> （スパース埋め込み変換用）および<code translate="no">FunctionType.RERANK</code> （再ランク付け用）を受け付けます。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」および「<a href="/docs/ja/decay-ranker-overview.md">Decay Rankerの概要</a>」を参照してください。</p></td>
+     <td><p>使用する関数の種類。テキスト埋め込みの場合は、値を<code translate="no">FunctionType.TEXTEMBEDDING</code> に設定します。</p><p><strong>注</strong>：Milvus では、このパラメータに対して、<code translate="no">FunctionType.BM25</code> （スパース埋め込み変換用）および<code translate="no">FunctionType.RERANK</code> （再ランク付け用）を受け付けます。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」および「<a href="/docs/ja/decay-ranker-overview.md">Decay Ranker の概要</a>」を参照してください。</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -465,7 +471,7 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>必要なフィールドと組み込み関数を指定してスキーマを定義したら、コレクションのインデックスを設定します。このプロセスを簡略化するには、`<code translate="no">index_type</code>` に `<code translate="no">AUTOINDEX</code> ` を指定してください。このオプションを使用すると、Milvus がデータの構造に基づいて最適なインデックスタイプを選択し、設定します。</p>
+    </button></h3><p>必要なフィールドと組み込み関数を指定してスキーマを定義したら、コレクションのインデックスを設定します。このプロセスを簡略化するには、`<code translate="no">index_type</code>` として `<code translate="no">AUTOINDEX</code> ` を使用してください。このオプションにより、Milvus はデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -643,7 +649,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>どちらの方法も機能しますが、<code translate="no">milvus.yaml</code> を使用することを推奨します。これにより、認証情報の集中管理が可能になり、すべてのプロバイダーで一貫した認証情報の命名規則が保たれるためです。環境変数を使用する場合、変数名は埋め込みサービスプロバイダーによって異なるため、必要な具体的な環境変数名については、各プロバイダーの専用ページ（例：<a href="/docs/ja/openai.md">OpenAI</a>や<a href="/docs/ja/azure-openai.md">Azure OpenAI</a>）を参照してください。</p>
+    </button></h3><p>どちらの方法も機能しますが、<code translate="no">milvus.yaml</code> を使用することを推奨します。これにより、認証情報の集中管理が可能になり、すべてのプロバイダーで一貫した認証情報の命名規則が確保されるためです。環境変数を使用する場合、変数名はエンベディングサービスプロバイダーによって異なるため、必要な具体的な環境変数名については、各プロバイダーの専用ページ（例：<a href="/docs/ja/openai.md">OpenAI</a>や<a href="/docs/ja/azure-openai.md">Azure OpenAI</a>）を参照してください。</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">関数定義で認証情報パラメータを指定しなかった場合はどうなりますか？<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -20,7 +20,7 @@ title: Installer Milvus Cluster avec Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm Milvus</a>.</p>
+    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm de Milvus</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Avant d’installer Milvus, il est recommandé d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction du volume de vos données. Cela permet de garantir des performances optimales et une allocation optimale des ressources pour votre installation Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l’assistance nécessaire.</p>
+<p>Si vous rencontrez des difficultés pour récupérer l'image, contactez-nous à <a href="mailto:community@zilliz.com">l'adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installer le Helm Chart Milvus<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,14 +134,17 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Remarque</strong>: le mode autonome utilise Woodpecker comme file d’attente de messages par défaut et active le composant Streaming Node. Les déploiements autonomes exécutent Woodpecker <strong>intégré</strong> au pod Milvus ; le <strong>service</strong> Woodpecker dédié (pods séparés) est utilisé uniquement pour les déploiements <strong>distribués/en cluster</strong>. Pour plus de détails, reportez-vous à la <a href="/docs/fr/architecture_overview.md">section Présentation de l’architecture</a> et à la section <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
+<p><strong>Remarque</strong>: le mode autonome utilise Woodpecker comme file d’attente de messages par défaut et active le composant Streaming Node. Les déploiements autonomes exécutent Woodpecker <strong>intégré</strong> au pod Milvus ; le <strong>service</strong> Woodpecker dédié (pods séparés) est utilisé uniquement pour les déploiements <strong>distribués/en cluster</strong>. Pour plus de détails, reportez-vous à la <a href="/docs/fr/architecture_overview.md">présentation de l’architecture</a> et à la section consacrée à <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <p><strong>Déployer un cluster Milvus :</strong></p>
+<div class="alert note">
+<p>Pour le mode de service Woodpecker, nous vous recommandons d’utiliser la prochaine version Milvus 3.0.1 ou une version ultérieure avec Woodpecker v0.1.36 ou une version plus récente afin de bénéficier des optimisations relatives au nettoyage par compactage et aux validations groupées.</p>
+</div>
 <p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.0, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -156,7 +159,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>Changements d’architecture dans Milvus 2.6.x :</strong></p>
 <ul>
-<li><strong>File d’attente de messages</strong>: <strong>Woodpecker</strong> est désormais recommandé (réduit la maintenance de l’infrastructure par rapport à Pulsar)</li>
+<li><strong>File d'attente de messages</strong>: <strong>Woodpecker</strong> est désormais recommandé (réduit la maintenance de l'infrastructure par rapport à Pulsar)</li>
 <li><strong>Nouveau composant</strong>: <strong>le nœud de streaming</strong> est introduit et activé par défaut</li>
 <li><strong>Composants fusionnés</strong>: <strong>« Index Node</strong> » et « <strong>Data Node</strong> » sont regroupés en un seul « <strong>Data Node</strong> »</li>
 </ul>
@@ -396,7 +399,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Les images sont récupérées dans un sous-dossier nommé « <code translate="no">images</code> » situé dans le répertoire courant.</p>
+<p>Les images sont extraites dans un sous-dossier nommé « <code translate="no">images</code> » situé dans le répertoire courant.</p>
 <h3 id="4-Load-images" class="common-anchor-header">4. Charger les images<button data-href="#4-Load-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -531,7 +534,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour la surveillance et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open source dédié aux sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et la mise à jour dynamique des configurations.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open source permettant une gestion intuitive de Milvus.</p></li>
 <li><p><a href="/docs/fr/monitor.md">Surveillez Milvus avec Prometheus</a>.</p></li>
 </ul>

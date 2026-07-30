@@ -36,7 +36,7 @@ title: 使用 Helm 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一套图表，以帮助您部署 Milvus 的依赖项和组件。</p>
+    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一组图表，以帮助您部署 Milvus 的依赖项和组件。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 存储库。</p>
+    </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 仓库。</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -137,11 +137,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>注意</strong>：独立模式默认使用 Woodpecker 作为消息队列，并启用流式处理节点（Streaming Node）组件。独立部署中，Woodpecker<strong>嵌入在</strong>Milvus Pod 中运行；而专用 Woodpecker<strong>服务</strong>（独立 Pod）仅用于<strong>分布式/集群部署</strong>。详情请参阅《<a href="/docs/zh/architecture_overview.md">架构概述</a>》和<a href="/docs/zh/woodpecker.md">《Woodpecker》</a>。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
+<div class="alert note">
+<p>对于 Woodpecker 服务模式，我们建议使用即将发布的 Milvus 3.0.1 或更高版本，并搭配 Woodpecker v0.1.36 或更高版本，以获得压缩清理和组提交优化。</p>
+</div>
 <p>以下命令将部署一个针对 v3.0.0 进行过优化的 Milvus 集群，并使用 Woodpecker 作为推荐的消息队列：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -157,7 +160,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Milvus 2.6.x 中的架构变更：</strong></p>
 <ul>
 <li><strong>消息队列</strong>：现推荐使用<strong>Woodpecker</strong>（与 Pulsar 相比可减少基础设施维护工作）</li>
-<li><strong>新组件</strong>：引入了<strong>流式处理节点（Streaming Node</strong>），并默认启用</li>
+<li><strong>新组件</strong>：引入<strong>流式处理节点（Streaming Node</strong>），并默认启用</li>
 <li><strong>组件合并</strong>：<strong>索引节点</strong>和<strong>数据节点</strong>合并为单一<strong>的数据节点</strong></li>
 </ul>
 <p>有关完整的架构详情，请参阅《<a href="/docs/zh/architecture_overview.md">架构概述</a>》。</p>
@@ -172,7 +175,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>重要说明：</strong></p>
 <ul>
-<li><strong>版本命名规则</strong>：仅允许使用字母、数字和连字符（不允许使用句点）</li>
+<li><strong>版本命名</strong>：仅允许使用字母、数字和连字符（不允许使用句点）</li>
 </ul>
 <p>如需更多信息，请参阅<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm 图表</a>和<a href="https://helm.sh/docs/">Helm 文档</a>。</p>
 </div>
@@ -219,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>依赖项</strong>：<code translate="no">etcd</code> （元数据）、<code translate="no">minio</code> （对象存储）、<code translate="no">woodpecker</code> （消息队列）</li>
 </ul>
 <div class="alert note">
-<p>使用<code translate="no">streaming.woodpecker.embedded=false</code> 时，Woodpecker<strong>作为专用的 StatefulSet</strong>运行（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本——3 个节点的法定多数加上一个备用节点以实现容错； 请勿将<code translate="no">woodpecker.replicaCount</code> 设置为低于 3）运行，由一个无头服务作为前端，并使用 MinIO 作为存储后端——因此该集群拥有一个独立的<code translate="no">woodpecker</code> Pod 集，与流式处理节点相互独立。</p>
+<p>使用<code translate="no">streaming.woodpecker.embedded=false</code> 时，Woodpecker<strong>作为专用的 StatefulSet</strong>运行（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本——3 个节点的法定多数加上一个备用节点以实现容错； 请勿将<code translate="no">woodpecker.replicaCount</code> 设置为低于 3）运行，由一个无头服务作为前端，并使用 MinIO 作为存储后端——因此该集群拥有独立于流式处理节点的<code translate="no">woodpecker</code> Pod 集合。</p>
 </div>
 <p>设置好端口转发后（参见下一步），您还可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问<strong>Milvus WebUI</strong>。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. 连接到 Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -311,8 +314,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置图形用户界面工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统的可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计数据与指标，查看数据库和 Collection 的详细信息，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a></p>
-<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 进行端口转发至本地端口。</p>
+    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置图形化用户界面工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统的可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计数据与指标，查看数据库和 Collection 的详细信息，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a></p>
+<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -355,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>若要在独立模式下安装 Milvus 实例（即所有 Milvus 组件均包含在单个 Pod 中），则应运行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false --set standalone.messageQueue=woodpecker --set woodpecker.enabled=true --set streaming.enabled=true zilliztech/milvus &gt; milvus_manifest.yaml</code> ，以生成独立模式下 Milvus 实例的图表模板。</li>
-<li>若要修改 Milvus 配置，请下载 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 模板，在其中填写所需设置，然后使用<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 据此生成相应的清单。</li>
+<li>若要修改 Milvus 配置，请下载 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 模板，在其中填写所需设置，然后使用<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 据此生成相应的清单文件。</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. 下载镜像拉取脚本<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
@@ -488,11 +491,11 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h2><p>此部署使用<strong>Woodpecker</strong>作为消息队列<strong>，etcd</strong>作为元数据存储<strong>，MinIO</strong>作为对象存储。若要使用其他消息队列或连接外部对象存储/元数据存储，请参阅：</p>
 <ul>
 <li>消息队列：<a href="/docs/zh/woodpecker.md">Woodpecker</a>（默认）·<a href="/docs/zh/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh/mq_kafka.md">Kafka</a>·<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></li>
-<li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">兼容 S3</a></li>
+<li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">S3 兼容</a></li>
 <li>元数据：<a href="/docs/zh/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性考虑，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -531,7 +534,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

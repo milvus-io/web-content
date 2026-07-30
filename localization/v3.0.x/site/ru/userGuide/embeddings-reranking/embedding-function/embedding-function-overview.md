@@ -97,6 +97,12 @@ beta: Milvus 2.6.x
      <td><p>Ключ API</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/ru/yandex-cloud.md">«Яндекс.Клауд»</a></p></td>
+     <td><p>Yandex Cloud AI Studio — модели векторизации текста</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Ключ API</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/ru/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
@@ -192,7 +198,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Переменные среды</strong>:</p>
 <p>Подробные сведения о настройке учетных данных с помощью переменных среды см. в документации поставщика службы встраивания (например, <a href="/docs/ru/openai.md">OpenAI</a> или <a href="/docs/ru/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
-<p>На следующей схеме показан процесс настройки учетных данных с помощью конфигурационного файла Milvus (<code translate="no">milvus.yaml</code>) и последующего вызова функции в Milvus.</p>
+<p>На следующей схеме показан процесс настройки учетных данных с помощью конфигурационного файла Milvus (<code translate="no">milvus.yaml</code>) и последующего вызова функции внутри Milvus.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
@@ -307,7 +313,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Скалярное поле</strong>, в котором хранятся исходные данные для встраивания.</p></li>
 <li><p><strong>Векторное поле</strong>, предназначенное для хранения векторных вложений, которые функция будет генерировать для скалярного поля.</p></li>
 </ul>
-<p>В следующем примере определена схема с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вложений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с выходными данными выбранной вами модели вложения.</p>
+<p>В следующем примере определена схема с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вложений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с выходом выбранной вами модели вложения.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -361,7 +367,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Модуль «Функция» в Milvus автоматически преобразует необработанные данные, хранящиеся в скалярном поле, в вложения и сохраняет их в явно определённом векторном поле.</p>
-<p>В приведенном ниже примере добавляется модуль «Функция» (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в вложения, сохраняя полученные векторы в ранее определённом векторном поле <code translate="no">&quot;dense&quot;</code>.</p>
+<p>В приведенном ниже примере добавляется модуль «Функция» (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в вложения, сохраняя результирующие векторы в ранее определённом векторном поле <code translate="no">&quot;dense&quot;</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -404,7 +410,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Уникальный идентификатор функции встраивания в Milvus.</p></td>
+     <td><p>Уникальный идентификатор функции вложения в Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
@@ -439,12 +445,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>Метка учетных данных, определённая в разделе верхнего уровня « <code translate="no">credential:</code> » на странице <code translate="no">milvus.yaml</code>. </p><ul><li><p>Если этот параметр указан, Milvus извлекает соответствующую пару ключей или токен API и подписывает запрос на стороне сервера.</p></li><li><p>Если этот параметр опущен (<code translate="no">None</code>), Milvus использует учетные данные, явно настроенные для целевого поставщика модели в файле <code translate="no">milvus.yaml</code>.</p></li><li><p>Если метка неизвестна или указанный ключ отсутствует, вызов завершается с ошибкой.</p></li></ul></td>
+     <td><p>Метка учетных данных, определённая в разделе верхнего уровня « <code translate="no">credential:</code> » на сайте <code translate="no">milvus.yaml</code>. </p><ul><li><p>Если этот параметр указан, Milvus извлекает соответствующую пару ключей или токен API и подписывает запрос на стороне сервера.</p></li><li><p>Если этот параметр опущен (<code translate="no">None</code>), Milvus использует учетные данные, явно настроенные для целевого поставщика модели в файле <code translate="no">milvus.yaml</code>.</p></li><li><p>Если метка неизвестна или указанный ключ отсутствует, вызов завершается сбоем.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Количество измерений выходных вложений. Для моделей третьего поколения OpenAI можно сократить полный вектор, чтобы снизить затраты и задержку без значительной потери семантической информации. Дополнительную информацию см. в <a href="https://openai.com/blog/new-embedding-models-and-api-updates">сообщении в блоге OpenAI</a>.</p><p><strong>Примечание:</strong> если вы сокращаете размерность вектора, убедитесь, что значение параметра « <code translate="no">dim</code> », указанное в методе <code translate="no">add_field</code> схемы для поля вектора, соответствует окончательной размерности выходных данных вашей функции вложения.</p></td>
+     <td><p>Количество измерений выходных вложений. Для моделей третьего поколения OpenAI можно сократить полный вектор, чтобы снизить затраты и задержку без значительной потери семантической информации. Дополнительную информацию см. <a href="https://openai.com/blog/new-embedding-models-and-api-updates">в блоге с объявлением OpenAI</a>.</p><p><strong>Примечание:</strong> если вы сокращаете размерность вектора, убедитесь, что значение параметра « <code translate="no">dim</code> », указанное в методе <code translate="no">add_field</code> схемы для поля вектора, соответствует окончательной размерности выходных данных вашей функции вложения.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>

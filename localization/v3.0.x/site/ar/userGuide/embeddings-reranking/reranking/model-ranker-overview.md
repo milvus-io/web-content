@@ -131,13 +131,19 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>تطبيقات تعالج المستندات الطويلة مع إعطاء الأولوية للفعالية من حيث التكلفة</p></td>
-     <td><ul><li><p>تقسيم المستندات إلى أجزاء متقدمة مع تداخل قابل للتكوين</p></li><li><p>تقييم قائم على الأجزاء (الجزء الحاصل على أعلى تقييم يمثل المستند)</p></li><li><p>دعم نماذج إعادة الترتيب المتنوعة</p></li><li><p>فعالة من حيث التكلفة مع إصدارات نموذج قياسي ومحترف</p></li></ul></td>
-     <td><p>نظام بحث في الوثائق الفنية يعالج الكتيبات والأوراق الطويلة التي تتطلب تقسيمًا ذكيًا والتحكم في التداخل</p></td>
+     <td><ul><li><p>تقسيم المستندات إلى أجزاء متقدمة مع تداخل قابل للتكوين</p></li><li><p>تقييم قائم على الأجزاء (الجزء الحاصل على أعلى تقييم يمثل المستند)</p></li><li><p>دعم نماذج إعادة الترتيب المتنوعة</p></li><li><p>فعالة من حيث التكلفة مع إصدارات نموذجية ومحترفة</p></li></ul></td>
+     <td><p>نظام بحث في الوثائق الفنية يعالج الكتيبات والورقات الطويلة التي تتطلب تقسيمًا ذكيًّا والتحكم في التداخل</p></td>
+   </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>التطبيقات التي تستخدم نماذج إعادة الترتيب من Alibaba Cloud أو Qwen</p></td>
+     <td><ul><li><p>واجهة برمجة تطبيقات (API) لإعادة الترتيب المدارة من DashScope</p></li><li><p>يدعم نماذج إعادة الترتيب مثل <code translate="no">gte-rerank-v2</code></p></li><li><p>المصادقة القائمة على مفتاح واجهة برمجة التطبيقات</p></li></ul></td>
+     <td><p>تطبيقات RAG التي ترغب في إعادة ترتيب المرشحين باستخدام نماذج إعادة الترتيب المستضافة على Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
-     <td><p>تطبيقات تستخدم نماذج تشابه الجمل المستضافة من Hugging Face</p></td>
-     <td><ul><li><p>يستخدم مزود خدمة " <code translate="no">hf-inference</code> " المستضاف</p></li><li><p>يختار النماذج من Hugging Face Hub</p></li><li><p>يحسب درجة تشابه جملة واحدة لكل مرشح</p></li><li><p>تستخدم مصادقة مفتاح واجهة برمجة التطبيقات (API)</p></li></ul></td>
+     <td><p>التطبيقات التي تستخدم نماذج تشابه الجمل المستضافة من Hugging Face</p></td>
+     <td><ul><li><p>يستخدم مزود « <code translate="no">hf-inference</code> » المستضاف</p></li><li><p>يختار النماذج من Hugging Face Hub</p></li><li><p>يحسب درجة تشابه جملة واحدة لكل مرشح</p></li><li><p>تستخدم مصادقة مفتاح واجهة برمجة التطبيقات (API)</p></li></ul></td>
      <td><p>تطبيقات البحث الدلالي التي ترغب في إعادة ترتيب النصوص المرشحة باستخدام نموذج Hugging Face دون تشغيل خدمة استدلال منفصلة</p></td>
    </tr>
 </table>
@@ -147,7 +153,8 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/ar/tei-ranker.md">TEI Ranker</a></p></li>
 <li><p><a href="/docs/ar/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/ar/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
-<li><p><a href="/docs/ar/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/ar/siliconflow-ranker.md">مصنف SiliconFlow</a></p></li>
+<li><p><a href="/docs/ar/dashscope-ranker.md">مُصنِّف DashScope</a></p></li>
 <li><p><a href="/docs/ar/hugging-face-ranker.md">مُصنِّف Hugging Face</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">التنفيذ<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -167,11 +174,11 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>قبل تنفيذ Model Ranker، تأكد من توفر ما يلي:</p>
 <ul>
-<li><p>مجموعة Milvus تحتوي على حقل " <code translate="no">VARCHAR</code> " الذي يتضمن النص المراد إعادة ترتيبه</p></li>
+<li><p>مجموعة Milvus تحتوي على حقل " <code translate="no">VARCHAR</code> " (التصنيف) الذي يتضمن النص المراد إعادة تصنيفه</p></li>
 <li><p>خدمة نموذج خارجية قيد التشغيل يمكن الوصول إليها من مثيل Milvus الخاص بك</p></li>
 <li><p>اتصال شبكي مناسب بين Milvus وخدمة النموذج التي اخترتها</p></li>
 </ul>
-<p>تتكامل أدوات تصنيف النماذج بسلاسة مع كل من عمليات البحث المتجه القياسية وعمليات البحث الهجينة. يتضمن التنفيذ إنشاء كائن Function يحدد تكوين إعادة الترتيب الخاص بك وتمريره إلى عمليات البحث.</p>
+<p>تتكامل أدوات تصنيف النماذج بسلاسة مع كل من عمليات البحث المتجه القياسية وعمليات البحث المختلطة. يتضمن التنفيذ إنشاء كائن Function يحدد تكوين إعادة الترتيب الخاص بك وتمريره إلى عمليات البحث.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">إنشاء أداة تصنيف النموذج<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Новости",
+        "label": "Пресс-релизы",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Сбор отправлений",
+            "label": "Сбор отходов",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Разделение JSON",
+                "label": "Разбор JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Объекты с операцией «Upsert»",
+            "label": "Обработка записей по принципу «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -958,7 +958,7 @@
                 "children": []
               },
               {
-                "label": "ПЕРЕВЕРНУТО",
+                "label": "ПЕРЕВЕРНУТОЕ",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Агрегирование результатов поиска",
+            "label": "Агрегация результатов поиска",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1082,7 +1082,7 @@
             "order": 8,
             "children": [
               {
-                "label": "Объяснение принципа фильтрации",
+                "label": "Объяснение принципов фильтрации",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "«Яндекс.Клауд»",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1335,7 +1341,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг по взвешенным оценкам",
+                "label": "Рейтинг с учетом весов",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Ranker",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -2097,7 +2109,7 @@
             "children": []
           },
           {
-            "label": "Подключение к Kafka с помощью SASL/SSL",
+            "label": "Подключение к Kafka с использованием SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2265,6 +2277,12 @@
             "label": "Переключение на резервный сервер",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Массовый импорт при репликации CDC",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]

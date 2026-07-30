@@ -4,12 +4,12 @@ title: Visão geral do Model RankerCompatible with Milvus 2.6.x
 summary: >-
   A pesquisa vetorial tradicional classifica os resultados exclusivamente com
   base na semelhança matemática — ou seja, no grau de correspondência entre os
-  vetores num espaço de alta dimensão. Embora seja eficiente, esta abordagem
-  muitas vezes não tem em conta a verdadeira relevância semântica. Considere,
-  por exemplo, uma pesquisa por «melhores práticas para a otimização de bases de
-  dados»: poderá obter documentos com elevada semelhança vetorial que mencionem
-  frequentemente estes termos, mas que, na realidade, não forneçam estratégias
-  de otimização que possam ser postas em prática.
+  vetores num espaço de alta dimensão. Embora eficiente, esta abordagem muitas
+  vezes ignora a verdadeira relevância semântica. Considere, por exemplo, uma
+  pesquisa por «melhores práticas para a otimização de bases de dados»: poderá
+  obter documentos com elevada semelhança vetorial que mencionem frequentemente
+  estes termos, mas que, na realidade, não forneçam estratégias de otimização
+  que possam ser postas em prática.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Visão geral do Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa vetorial tradicional classifica os resultados exclusivamente com base na semelhança matemática — ou seja, no grau de correspondência entre os vetores num espaço de alta dimensão. Embora eficiente, esta abordagem muitas vezes ignora a verdadeira relevância semântica. Considere, por exemplo, uma pesquisa por <strong>«melhores práticas para otimização de bases de dados»:</strong> poderá receber documentos com elevada semelhança vetorial que mencionem frequentemente estes termos, mas que, na realidade, não forneçam estratégias de otimização aplicáveis.</p>
+    </button></h1><p>A pesquisa vetorial tradicional classifica os resultados exclusivamente com base na semelhança matemática — ou seja, na proximidade entre os vetores num espaço de alta dimensão. Embora eficiente, esta abordagem muitas vezes ignora a verdadeira relevância semântica. Considere uma pesquisa por <strong>«melhores práticas para otimização de bases de dados»:</strong> poderá receber documentos com elevada semelhança vetorial que mencionam frequentemente estes termos, mas que, na realidade, não fornecem estratégias de otimização aplicáveis.</p>
 <p>O Model Ranker transforma a pesquisa do Milvus ao integrar modelos linguísticos avançados que compreendem as relações semânticas entre consultas e documentos. Em vez de se basear exclusivamente na semelhança vetorial, avalia o significado e o contexto do conteúdo para apresentar resultados mais inteligentes e relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limitações<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os classificadores de modelos integram capacidades de compreensão de modelos linguísticos no processo de pesquisa do Milvus através de um fluxo de trabalho bem definido:</p>
+    </button></h2><p>Os classificadores de modelos integram capacidades de compreensão de modelos de linguagem no processo de pesquisa do Milvus através de um fluxo de trabalho bem definido:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
@@ -134,8 +134,14 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Aplicações que processam documentos longos com prioridades de rentabilidade</p></td>
-     <td><ul><li><p>Segmentação avançada de documentos com sobreposição configurável</p></li><li><p>Pontuação baseada em fragmentos (o fragmento com a pontuação mais elevada representa o documento)</p></li><li><p>Suporte a diversos modelos de reclassificação</p></li><li><p>Custo-eficaz, com variantes de modelo padrão e profissional</p></li></ul></td>
+     <td><ul><li><p>Segmentação avançada de documentos com sobreposição configurável</p></li><li><p>Pontuação baseada em fragmentos (o fragmento com a pontuação mais elevada representa o documento)</p></li><li><p>Suporte a diversos modelos de reclassificação</p></li><li><p>Económico, com variantes de modelo padrão e profissional</p></li></ul></td>
      <td><p>Sistema de pesquisa de documentação técnica que processa manuais e artigos extensos que requerem segmentação inteligente e controlo de sobreposição</p></td>
+   </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Aplicações que utilizam modelos de reclassificação da Alibaba Cloud ou do Qwen</p></td>
+     <td><ul><li><p>API de reclassificação DashScope gerida</p></li><li><p>Suporta modelos de reclassificação, tais como <code translate="no">gte-rerank-v2</code></p></li><li><p>autenticação baseada em chave API</p></li></ul></td>
+     <td><p>Aplicações RAG que pretendem reclassificar candidatos com modelos de reclassificação alojados na Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
@@ -151,6 +157,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/pt/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/pt/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/pt/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/pt/dashscope-ranker.md">Classificador DashScope</a></p></li>
 <li><p><a href="/docs/pt/hugging-face-ranker.md">Classificador Hugging Face</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementação<button data-href="#Implementation" class="anchor-icon" translate="no">
@@ -269,7 +276,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Um dicionário que contém a configuração para a função de reclassificação baseada em modelo. Os parâmetros (chaves) disponíveis variam consoante o prestador de serviços.</p></td>
+     <td><p>Um dicionário que contém a configuração para a função de reclassificação baseada no modelo. Os parâmetros (chaves) disponíveis variam consoante o prestador de serviços.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -318,7 +325,7 @@ model_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de definir o seu classificador de modelo, pode aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro «ranker»:</p>
+    </button></h3><p>Depois de definir o seu classificador de modelos, pode aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro «ranker»:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

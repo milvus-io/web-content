@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "コレクションの解説",
+            "label": "コレクションについて",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -1100,7 +1100,7 @@
                 "children": []
               },
               {
-                "label": "フィルタリングとテンプレート",
+                "label": "フィルタリングとテンプレート処理",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1211,7 +1211,7 @@
             ]
           },
           {
-            "label": "Elasticsearch クエリを Milvus に送信",
+            "label": "Milvus への Elasticsearch クエリ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1318,6 +1318,12 @@
                 "label": "Google Gemini",
                 "id": "google-gemini.md",
                 "order": 11,
+                "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
                 "children": []
               }
             ]
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope ランカー",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face ランカー",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -1457,7 +1469,7 @@
             "children": []
           },
           {
-            "label": "クラスタリングによる圧縮",
+            "label": "クラスタリング・コンパクテーション",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -2134,7 +2146,7 @@
             "children": []
           },
           {
-            "label": "カフカ ↔ キツツキ",
+            "label": "カフカ ↔ ウッドペッカー",
             "id": "switch-kafka-woodpecker.md",
             "order": 3,
             "children": []
@@ -2265,6 +2277,12 @@
             "label": "フェイルオーバー",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "CDCレプリケーションにおける一括インポート",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]

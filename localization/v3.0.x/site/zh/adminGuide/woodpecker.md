@@ -19,7 +19,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低操作开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
+    </button></h1><p>Woodpecker 是 Milvus 3.x 中的<strong>默认消息队列（预写日志，WAL）</strong>。它是一款专为对象存储设计的云原生 WAL，具有高吞吐量、低运维开销和无缝可扩展性等特点。有关架构和基准测试的详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
       </svg>
     </button></h2><ul>
 <li>在 Milvus 3.x 中，Woodpecker 是<strong>默认的</strong>WAL/消息队列，作为日志服务提供有序写入和恢复功能。无需外部消息队列服务（如 Pulsar 或 Kafka）。</li>
-<li>Woodpecker 可以<strong>嵌入</strong>Milvus/流式处理节点中运行（默认），也可以作为拥有独立 Pod 的<strong>专用服务</strong>运行（仅限分布式/集群环境）。</li>
+<li>Woodpecker 可以<strong>嵌入</strong>Milvus/流式处理节点中运行（默认），也可以作为具有独立 Pod 的<strong>专用服务</strong>运行（仅限分布式/集群环境）。</li>
 <li>它支持三种<code translate="no">storage.type</code> 模式：对象存储（<code translate="no">minio</code> ，默认）、本地文件系统（<code translate="no">local</code> ）以及专用<code translate="no">service</code> 。请参阅<a href="#Deployment-modes">部署模式</a>。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">快速入门<button data-href="#Quick-start" class="anchor-icon" translate="no">
@@ -372,15 +372,18 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker<strong>服务模式是</strong> <strong>Milvus 3.0</strong>的一项功能。对于分布式/集群部署，您可以通过设置 `<code translate="no">streaming.woodpecker.embedded=false</code>`，将 Woodpecker 作为<strong>专用服务</strong>（独立 Pod）运行，而非嵌入流式处理节点中：</p>
+    </button></h3><div class="alert note">
+<p>对于 Woodpecker 服务模式，我们建议使用即将发布的 Milvus 3.0.1 或更高版本，并搭配 Woodpecker v0.1.36 或更高版本，以获得压缩清理和组提交优化。</p>
+</div>
+<p>Woodpecker<strong>服务模式是</strong> <strong>Milvus 3.0</strong>的一项功能。对于分布式/集群部署，您可以通过设置 `<code translate="no">streaming.woodpecker.embedded=false</code>`，将 Woodpecker 作为<strong>专用服务</strong>（独立 Pod）运行，而非嵌入流式处理节点中：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>这将 Woodpecker 作为独立的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本）进行部署，由无头服务作为前端，通过端口<code translate="no">18080</code> （服务）、<code translate="no">17946</code> （闲聊）和<code translate="no">9091</code> （指标）进行闲聊集群通信，并使用 MinIO 作为其存储后端。 该服务需要<strong>3</strong>个节点的法定人数；默认的<strong>4</strong>个副本既能保持法定人数，又能容忍单节点故障，因此请勿将<code translate="no">woodpecker.replicaCount</code> 设置为小于 3。该集群还包含一个独立的<code translate="no">woodpecker</code> Pod 集合：</p>
+<p>这将把 Woodpecker 作为独立的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，默认 4 个副本）进行部署，由无头服务作为前端，通过端口<code translate="no">18080</code> （服务）、<code translate="no">17946</code> （闲聊）和<code translate="no">9091</code> （指标）进行闲聊集群通信，并使用 MinIO 作为其存储后端。 该服务需要<strong>3</strong>个节点的法定人数；默认的<strong>4</strong>个副本既能保持法定人数，又能容忍单节点故障，因此请勿将<code translate="no">woodpecker.replicaCount</code> 设置为小于 3。该集群还包含一个独立的<code translate="no">woodpecker</code> Pod 集合：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -455,7 +458,7 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><p>服务模式在保持基于对象存储的 WAL 高写入吞吐量的同时，还增加了低延迟（参见<a href="#Latency">“延迟”</a>）。 上述存储端和客户端的调优方法仍然适用；此外，由于 Woodpecker 作为独立服务运行，您可以通过增加副本（<code translate="no">woodpecker.replicaCount</code> ，默认 4 个）来水平扩展写入容量，且写入操作可受益于单 RTT 定额复制以及避免经纪人转发的拓扑感知读取。</p>
-<p><strong>批量插入演示</strong>— 使用以下代码测量写入吞吐量：</p>
+<p><strong>批量插入演示</strong>——使用以下代码测量写入吞吐量：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
@@ -529,7 +532,7 @@ batch_count = <span class="hljs-number">2000</span>
         ></path>
       </svg>
     </button></h3><p>Woodpecker 是一款专为对象存储设计的云原生 WAL，在吞吐量、成本和延迟之间实现了权衡。轻量级的嵌入式模式优先考虑成本和吞吐量的优化，因为大多数场景仅要求数据在一定时间内写入，而非对单个写入请求要求低延迟。 因此，Woodpecker 采用批量写入机制，其中本地文件系统存储后端的默认间隔为 10 毫秒，而 MinIO 类存储后端的默认间隔为 200 毫秒。在写入速度较慢的情况下，最大延迟等于间隔时间加上刷新时间之和。</p>
-<p>请注意，批量插入不仅由时间间隔触发，还由批量大小触发，其默认值为 2MB。</p>
+<p>请注意，批量插入不仅由时间间隔触发，还受批量大小影响，其默认值为 2MB。</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">服务模式（Milvus 3.0+）<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

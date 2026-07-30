@@ -137,11 +137,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Nota</strong>: El modo autónomo utiliza Woodpecker como cola de mensajes predeterminada y habilita el componente Streaming Node. Las implementaciones autónomas ejecutan Woodpecker <strong>integrado</strong> en el pod de Milvus; el <strong>servicio</strong> dedicado de Woodpecker (pods separados) se utiliza únicamente para implementaciones <strong>distribuidas o en clúster</strong>. Para obtener más detalles, consulta la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a> y <a href="/docs/es/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <p><strong>Implementar un clúster de Milvus:</strong></p>
-<p>El siguiente comando implementa un clúster de Milvus con una configuración optimizada para la versión 3.0.0, utilizando Woodpecker como cola de mensajes recomendada:</p>
+<div class="alert note">
+<p>Para el modo de servicio de Woodpecker, recomendamos utilizar la próxima versión de Milvus 3.0.1 o una posterior, junto con Woodpecker v0.1.36 o posterior, para beneficiarse de las optimizaciones de limpieza por compactación y de confirmación en grupo.</p>
+</div>
+<p>El siguiente comando implementa un clúster de Milvus con la configuración optimizada para la versión 3.0.0, utilizando Woodpecker como cola de mensajes recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -160,7 +163,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><strong>Nuevo componente</strong>: se introduce <strong>el nodo de streaming</strong>, que viene habilitado por defecto</li>
 <li><strong>Componentes fusionados</strong>: <strong>el nodo de índice</strong> y <strong>el nodo de datos</strong> se combinan en un único <strong>nodo de datos</strong></li>
 </ul>
-<p>Para obtener información detallada sobre la arquitectura, consulta la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a>.</p>
+<p>Para obtener detalles completos sobre la arquitectura, consulta la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a>.</p>
 </div>
 <p><strong>Colas de mensajes alternativas:</strong> para realizar la implementación con Pulsar, Kafka o RocksMQ en lugar de Woodpecker, consulta <a href="#Optional-dependencies">«Dependencias opcionales</a>».</p>
 <p><strong>Próximos pasos:</strong>
@@ -219,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Dependencias</strong>: <code translate="no">etcd</code> (metadatos), <code translate="no">minio</code> (almacenamiento de objetos), <code translate="no">woodpecker</code> (cola de mensajes)</li>
 </ul>
 <div class="alert note">
-<p>Con <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker se ejecuta como un <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto —un quórum de 3 nodos más uno de reserva para la tolerancia a fallos; no establezcas <code translate="no">woodpecker.replicaCount</code> por debajo de 3) respaldado por un servicio sin interfaz gráfica, que utiliza MinIO como backend de almacenamiento; por lo tanto, el clúster cuenta con un conjunto de pods <code translate="no">woodpecker</code> independiente, distinto del nodo de streaming.</p>
+<p>Con <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker se ejecuta como un <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto —un quórum de 3 nodos más uno de reserva para la tolerancia a fallos; no establezcas <code translate="no">woodpecker.replicaCount</code> por debajo de 3) con un servicio sin interfaz de usuario como front-end, que utiliza MinIO como backend de almacenamiento; por lo tanto, el clúster cuenta con un conjunto de pods <code translate="no">woodpecker</code> independiente, distinto del nodo de streaming.</p>
 </div>
 <p>También puedes acceder a la <strong>interfaz web de Milvus</strong> en <code translate="no">http://127.0.0.1:9091/webui/</code> una vez configurado el reenvío de puertos (véase el siguiente paso). Para más detalles, consulta <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Conectarse a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -312,7 +315,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre Milvus WebUI, consulta <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
-<p>Para habilitar el acceso a la interfaz de usuario web de Milvus, es necesario redirigir el puerto del pod proxy a un puerto local.</p>
+<p>Para habilitar el acceso a la interfaz de usuario web de Milvus, es necesario redirigir el puerto del pod del proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -432,7 +435,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Hasta este momento, puede seguir los pasos <a href="#2-Check-Milvus-cluster-status">2</a> y <a href="#3-Connect-to-Milvus">3</a> de la instalación en línea para comprobar el estado del clúster y reenviar un puerto local a Milvus.</p>
+<p>Hasta este momento, puede seguir los pasos <a href="#2-Check-Milvus-cluster-status">2</a> y <a href="#3-Connect-to-Milvus">3</a> de la instalación en línea para comprobar el estado del clúster y redirigir un puerto local a Milvus.</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Actualizar el clúster de Milvus en ejecución<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -531,7 +534,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Descubre <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

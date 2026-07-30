@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Penyedia</p></th>
      <th><p>Model Umum</p></th>
-     <th><p>Jenis Penyisipan</p></th>
+     <th><p>Jenis Penyematan</p></th>
      <th><p>Metode Otentikasi</p></th>
    </tr>
    <tr>
@@ -93,6 +93,12 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/id/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Kunci API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/id/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Model vektorisasi teks Yandex Cloud AI Studio</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Kunci API</p></td>
    </tr>
@@ -250,7 +256,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Di berkas konfigurasi yang sama (<code translate="no">milvus.yaml</code>), edit blok ` <code translate="no">function</code> ` untuk memberitahu Milvus kunci mana yang akan digunakan untuk memanggil layanan embedding:</p>
+    </button></h3><p>Di berkas konfigurasi yang sama (<code translate="no">milvus.yaml</code>), edit blok ` <code translate="no">function</code> ` untuk memberitahu Milvus kunci mana yang akan digunakan untuk menyematkan panggilan layanan:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -305,9 +311,9 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><strong>Bidang utama</strong> yang secara unik mengidentifikasi setiap entitas dalam koleksi.</p></li>
 <li><p><strong>Bidang skalar</strong> yang menyimpan data mentah yang akan di-embed.</p></li>
-<li><p>Sebuah <strong>bidang vektor</strong> yang disediakan untuk menyimpan embedding vektor yang akan dihasilkan oleh fungsi tersebut untuk bidang skalar.</p></li>
+<li><p>Sebuah <strong>bidang vektor</strong> yang disediakan untuk menyimpan embedding vektor yang akan dihasilkan oleh fungsi tersebut untuk bidang skalar tersebut.</p></li>
 </ul>
-<p>Contoh berikut mendefinisikan skema dengan satu bidang skalar <code translate="no">&quot;document&quot;</code> untuk menyimpan data teks dan satu bidang vektor <code translate="no">&quot;dense&quot;</code> untuk menyimpan embedding yang akan dihasilkan oleh modul Function. Pastikan untuk mengatur dimensi vektor (<code translate="no">dim</code>) agar sesuai dengan output model embedding yang Anda pilih.</p>
+<p>Contoh berikut mendefinisikan skema dengan satu bidang skalar <code translate="no">&quot;document&quot;</code> untuk menyimpan data teks dan satu bidang vektor <code translate="no">&quot;dense&quot;</code> untuk menyimpan embedding yang akan dihasilkan oleh modul Function. Ingatlah untuk mengatur dimensi vektor (<code translate="no">dim</code>) agar sesuai dengan output model embedding yang Anda pilih.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

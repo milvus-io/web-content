@@ -6,11 +6,11 @@ summary: >-
   fonction de la similitude mathématique, c'est-à-dire du degré de
   correspondance entre les vecteurs dans un espace à haute dimension. Bien
   qu'efficace, cette approche passe souvent à côté de la véritable pertinence
-  sémantique. Prenons l'exemple d'une recherche sur les « meilleures pratiques
-  d'optimisation des bases de données » : vous pourriez obtenir des documents
-  présentant une forte similitude vectorielle et mentionnant fréquemment ces
-  termes, mais qui ne fournissent pas pour autant de stratégies d'optimisation
-  concrètes.
+  sémantique. Prenons l'exemple d'une recherche sur « les meilleures pratiques
+  en matière d'optimisation des bases de données » : vous pourriez obtenir des
+  documents présentant une forte similitude vectorielle et mentionnant
+  fréquemment ces termes, mais qui ne fournissent pas pour autant de stratégies
+  d'optimisation concrètes.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Présentation de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>vLLM</p></td>
-     <td><p>Applications complexes nécessitant une compréhension sémantique approfondie et une personnalisation</p></td>
+     <td><p>Applications complexes nécessitant une compréhension sémantique approfondie et une personnalisation poussée</p></td>
      <td><ul><li><p>Prend en charge divers modèles linguistiques de grande envergure</p></li><li><p>Options de déploiement flexibles</p></li><li><p>Exigences de calcul plus élevées</p></li><li><p>Potentiel de personnalisation accru</p></li></ul></td>
      <td><p>Plateforme de recherche juridique déployant des modèles spécifiques au domaine qui comprennent la terminologie juridique et les relations entre les jurisprudences</p></td>
    </tr>
@@ -135,8 +135,14 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Applications traitant de longs documents avec des priorités en matière de rentabilité</p></td>
-     <td><ul><li><p>Segmentation avancée des documents avec chevauchement configurable</p></li><li><p>Notation par segment (le segment ayant le score le plus élevé représente le document)</p></li><li><p>Prise en charge de divers modèles de reclassement</p></li><li><p>Rentable grâce à des variantes de modèles standard et pro</p></li></ul></td>
+     <td><ul><li><p>Segmentation avancée des documents avec chevauchement configurable</p></li><li><p>Notation par segments (le segment ayant le score le plus élevé représente le document)</p></li><li><p>Prise en charge de divers modèles de reclassement</p></li><li><p>Rentable grâce à des variantes de modèles standard et pro</p></li></ul></td>
      <td><p>Système de recherche de documentation technique traitant des manuels et des articles volumineux nécessitant une segmentation intelligente et un contrôle des chevauchements</p></td>
+   </tr>
+   <tr>
+     <td><p>DashScope</p></td>
+     <td><p>Applications utilisant les modèles de reclassement d’Alibaba Cloud ou de Qwen</p></td>
+     <td><ul><li><p>API de reclassement DashScope gérée</p></li><li><p>Prend en charge les modèles de reclassement tels que <code translate="no">gte-rerank-v2</code></p></li><li><p>l’authentification par clé API</p></li></ul></td>
+     <td><p>Applications RAG souhaitant reclasser des candidats à l’aide de modèles de reclassement hébergés sur Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
@@ -152,6 +158,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/fr/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/fr/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/fr/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/fr/dashscope-ranker.md">Classement DashScope</a></p></li>
 <li><p><a href="/docs/fr/hugging-face-ranker.md">Classement Hugging Face</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Mise en œuvre<button data-href="#Implementation" class="anchor-icon" translate="no">

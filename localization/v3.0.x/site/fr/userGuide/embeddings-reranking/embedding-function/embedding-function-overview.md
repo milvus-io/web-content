@@ -6,9 +6,9 @@ summary: >-
   textuelles brutes en représentations vectorielles en faisant appel
   automatiquement à des fournisseurs de services d’embedding externes (tels que
   OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function »,
-  vous n’avez plus besoin d’interagir manuellement avec les API de
-  vecteurisation : Milvus gère l’intégralité du processus, depuis l’envoi des
-  requêtes aux fournisseurs jusqu’à la réception des vecteurs de vecteurisation
+  vous n’avez plus besoin d’interagir manuellement avec les API de vecteurs de
+  représentation : Milvus gère l’intégralité du processus, depuis l’envoi des
+  requêtes aux fournisseurs jusqu’à la réception des vecteurs de représentation
   et leur stockage dans vos collections. Pour la recherche sémantique, il vous
   suffit de fournir les données brutes de la requête, et non un vecteur de
   requête. Milvus génère le vecteur de requête à l'aide du même modèle que celui
@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le module « Function » de Milvus vous permet de transformer des données textuelles brutes en représentations vectorielles en appelant automatiquement des fournisseurs de services d’embedding externes (tels que OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function », vous n’avez plus besoin d’interagir manuellement avec les API d’encodage : Milvus gère l’intégralité du processus, depuis l’envoi des requêtes aux fournisseurs jusqu’à la réception des vecteurs d’encodage et leur stockage dans vos collections. Pour la recherche sémantique, il vous suffit de fournir les données brutes de la requête, et non un vecteur de requête. Milvus génère le vecteur de requête à l’aide du même modèle que celui utilisé pour l’ingestion, le compare aux vecteurs stockés et renvoie les résultats les plus pertinents.</p>
+    </button></h1><p>Le module « Function » de Milvus vous permet de transformer des données textuelles brutes en représentations vectorielles en appelant automatiquement des fournisseurs de services d’embedding externes (tels que OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function », vous n’avez plus besoin d’interagir manuellement avec les API d’embedding : Milvus gère l’intégralité du processus, depuis l’envoi des requêtes aux fournisseurs jusqu’à la réception des embeddings et leur stockage dans vos collections. Pour la recherche sémantique, il vous suffit de fournir les données brutes de la requête, et non un vecteur de requête. Milvus génère le vecteur de requête à l’aide du même modèle que celui utilisé pour l’ingestion, le compare aux vecteurs stockés et renvoie les résultats les plus pertinents.</p>
 <h2 id="Limits" class="common-anchor-header">Contraintes<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,6 +95,12 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/fr/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Clé API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/fr/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Modèles de vectorisation de texte de Yandex Cloud AI Studio</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Clé API</p></td>
    </tr>
@@ -187,7 +193,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Avant d'utiliser une fonction d'encodage avec Milvus, configurez les identifiants du service d'encodage pour permettre l'accès à Milvus.</p>
-<p>Milvus vous permet de fournir les identifiants du service de représentation vectorielle de deux manières :</p>
+<p>Milvus vous permet de fournir les identifiants du service de représentation de deux manières :</p>
 <ul>
 <li><p><strong>Fichier de configuration</strong> (<code translate="no">milvus.yaml</code>) :</p>
 <p>L'exemple présenté dans cette rubrique illustre la <strong>configuration recommandée</strong> à l'aide du fichier <code translate="no">milvus.yaml</code>.</p></li>
@@ -363,7 +369,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Le module « Function » de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en représentations et les stocke dans le champ vectoriel explicitement défini.</p>
-<p>L'exemple ci-dessous ajoute un module « Function » (<code translate="no">openai_embedding</code>) qui convertit le champ scalaire « <code translate="no">&quot;document&quot;</code> » en représentations, puis stocke les vecteurs résultants dans le champ vectoriel « <code translate="no">&quot;dense&quot;</code> » défini précédemment.</p>
+<p>L'exemple ci-dessous ajoute un module « Function » (<code translate="no">openai_embedding</code>) qui convertit le champ scalaire « <code translate="no">&quot;document&quot;</code> » en représentations, en stockant les vecteurs résultants dans le champ vectoriel « <code translate="no">&quot;dense&quot;</code> » défini précédemment.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -411,7 +417,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Type de fonction utilisé. Pour l'embedding de texte, définissez la valeur sur <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Remarque</strong>: Milvus accepte les valeurs « <code translate="no">FunctionType.BM25</code> » (pour la transformation par plongement clairsemé) et « <code translate="no">FunctionType.RERANK</code> » (pour le reclassement) pour ce paramètre. Pour plus de détails, consultez les sections « <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a> » et « <a href="/docs/fr/decay-ranker-overview.md">Présentation du Decay Ranker</a> ».</p></td>
+     <td><p>Type de fonction utilisé. Pour l'embedding de texte, définissez la valeur sur <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Remarque</strong>: Milvus accepte les valeurs « <code translate="no">FunctionType.BM25</code> » (pour la transformation par plongement clairsemé) et « <code translate="no">FunctionType.RERANK</code> » (pour le reclassement) pour ce paramètre. Reportez-vous aux sections « <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a> » et « <a href="/docs/fr/decay-ranker-overview.md">Présentation du Decay Ranker</a> » pour plus de détails.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -426,7 +432,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Dictionnaire contenant les configurations d’embedding. Remarque : les paramètres de « <code translate="no">params</code> » varient en fonction des fournisseurs de modèles d’embedding.</p></td>
+     <td><p>Dictionnaire contenant les configurations d’encodage. Remarque : les paramètres de « <code translate="no">params</code> » varient en fonction des fournisseurs de modèles d’encodage.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -446,7 +452,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Nombre de dimensions des représentations de sortie. Pour les modèles de troisième génération d’OpenAI, vous pouvez raccourcir le vecteur complet afin de réduire les coûts et la latence sans perte significative d’informations sémantiques. Pour plus d’informations, consultez <a href="https://openai.com/blog/new-embedding-models-and-api-updates">l’article de blog d’OpenAI annonçant cette fonctionnalité</a>.</p><p><strong>Remarque :</strong> si vous réduisez la dimension du vecteur, assurez-vous que la valeur « <code translate="no">dim</code> » spécifiée dans la méthode ` <code translate="no">add_field</code> ` du schéma pour le champ vectoriel correspond à la dimension de sortie finale de votre fonction d’embeddings.</p></td>
+     <td><p>Nombre de dimensions des représentations de sortie. Pour les modèles de troisième génération d’OpenAI, vous pouvez raccourcir le vecteur complet afin de réduire les coûts et la latence sans perte significative d’informations sémantiques. Pour plus d’informations, consultez <a href="https://openai.com/blog/new-embedding-models-and-api-updates">l’article de blog d’OpenAI annonçant cette fonctionnalité</a>.</p><p><strong>Remarque :</strong> si vous réduisez la dimension du vecteur, assurez-vous que la valeur « <code translate="no">dim</code> » spécifiée dans la méthode ` <code translate="no">add_field</code> ` du schéma pour le champ vectoriel correspond à la dimension de sortie finale de votre fonction d’embedding.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -473,7 +479,7 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l’index de votre collection. Pour simplifier ce processus, utilisez l’ <code translate="no">AUTOINDEX</code> comme <code translate="no">index_type</code>, une option qui permet à Milvus de choisir et de configurer le type d’index le plus adapté en fonction de la structure de vos données.</p>
+    </button></h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l’index de votre collection. Pour simplifier ce processus, utilisez l’option « <code translate="no">AUTOINDEX</code> » comme <code translate="no">index_type</code>, ce qui permet à Milvus de choisir et de configurer le type d’index le plus adapté en fonction de la structure de vos données.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -590,7 +596,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois les données insérées, effectuez une recherche sémantique à l’aide du texte brut de votre requête. Milvus convertit automatiquement votre requête en un vecteur d’encodage, récupère les documents pertinents en fonction de leur similarité et renvoie les résultats les plus pertinents.</p>
+    </button></h3><p>Une fois les données insérées, effectuez une recherche sémantique à l’aide du texte brut de votre requête. Milvus convertit automatiquement votre requête en vecteur d’encodage, récupère les documents pertinents en fonction de leur similarité et renvoie les résultats les plus pertinents.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -694,7 +700,7 @@ results = client.search(
 <li>Vérifier que la longueur du champ vectoriel correspond aux dimensions attendues</li>
 <li>Effectuant une simple recherche de similarité pour vérifier que les représentations produisent des résultats pertinents</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Lorsque j’effectue une recherche de similarité, puis-je utiliser un vecteur de requête plutôt que du texte brut ?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Lorsque j'effectue une recherche par similarité, puis-je utiliser un vecteur de requête plutôt que du texte brut ?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -709,7 +715,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, vous pouvez utiliser des vecteurs de requête précalculés à la place du texte brut pour la recherche de similarité. Bien que le module de fonction convertisse automatiquement les requêtes en texte brut en représentations vectorielles, vous pouvez également fournir directement des données vectorielles au paramètre « <code translate="no">data</code> » de votre opération de recherche. <strong>Remarque</strong>: la taille des dimensions de votre vecteur de requête fourni doit correspondre à celle des vecteurs d’embeddings générés par votre module de fonction.</p>
+    </button></h3><p>Oui, vous pouvez utiliser des vecteurs de requête précalculés à la place du texte brut pour la recherche par similarité. Bien que le module de fonction convertisse automatiquement les requêtes en texte brut en représentations vectorielles, vous pouvez également fournir directement des données vectorielles au paramètre « <code translate="no">data</code> » de votre opération de recherche. <strong>Remarque</strong>: la taille des dimensions de votre vecteur de requête fourni doit correspondre à celle des vecteurs d’embeddings générés par votre module de fonction.</p>
 <p><strong>Exemple</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

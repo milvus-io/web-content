@@ -92,6 +92,12 @@ beta: Milvus 2.6.x
      <td><p>API 키</p></td>
    </tr>
    <tr>
+     <td><p><a href="/docs/ko/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio 텍스트 벡터화 모델</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>API 키</p></td>
+   </tr>
+   <tr>
      <td><p><a href="/docs/ko/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
@@ -280,7 +286,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 구성 파일에서 자격 증명이 설정되면 다음 단계를 따라 임베딩 함수를 정의하고 사용하십시오.</p>
+    </button></h2><p>Milvus 구성 파일에서 자격 증명을 구성한 후, 다음 단계를 따라 임베딩 함수를 정의하고 사용하십시오.</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -356,7 +362,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Milvus의 Function 모듈은 스칼라 필드에 저장된 원시 데이터를 자동으로 임베딩으로 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
-<p>아래 예제에서는 스칼라 필드 ` <code translate="no">&quot;document&quot;</code> `를 임베딩으로 변환하고, 그 결과 벡터를 앞서 정의한 ` <code translate="no">&quot;dense&quot;</code> ` 벡터 필드에 저장하는 함수 모듈(<code translate="no">openai_embedding</code>)을 추가합니다.</p>
+<p>아래 예제에서는 스칼라 필드 <code translate="no">&quot;document&quot;</code> 를 임베딩으로 변환하고, 그 결과 벡터를 앞서 정의한 <code translate="no">&quot;dense&quot;</code> 벡터 필드에 저장하는 Function 모듈(<code translate="no">openai_embedding</code>)을 추가합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

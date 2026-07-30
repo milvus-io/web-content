@@ -2,15 +2,15 @@
 id: embedding-function-overview.md
 title: Visão geral da função de incorporaçãoCompatible with Milvus 2.6.x
 summary: >-
-  O módulo «Function» do Milvus permite-lhe transformar dados de texto brutos em
-  representações vetoriais, recorrendo automaticamente a prestadores de serviços
-  de representação externos (como a OpenAI, o AWS Bedrock, o Google Vertex AI,
-  etc.). Com o módulo «Function», já não é necessário interagir manualmente com
-  as APIs de incorporação — o Milvus trata de todo o processo de envio de
-  pedidos aos fornecedores, receção das incorporações e armazenamento das mesmas
-  nas suas coleções. Para a pesquisa semântica, basta fornecer apenas os dados
-  brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor de
-  consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os
+  O módulo «Function» do Milvus permite-lhe transformar dados de texto em bruto
+  em representações vetoriais, recorrendo automaticamente a prestadores de
+  serviços de representação externos (como a OpenAI, o AWS Bedrock, o Google
+  Vertex AI, etc.). Com o módulo «Function», já não é necessário interagir
+  manualmente com as APIs de incorporação — o Milvus trata de todo o processo de
+  envio de pedidos aos fornecedores, receção das incorporações e armazenamento
+  das mesmas nas suas coleções. Para a pesquisa semântica, basta fornecer apenas
+  os dados brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor
+  de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os
   vetores armazenados e devolve os resultados mais relevantes.
 beta: Milvus 2.6.x
 ---
@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O módulo «Função» do Milvus permite-lhe transformar dados de texto brutos em representações vetoriais, recorrendo automaticamente a prestadores de serviços de incorporação externos (como a OpenAI, a AWS Bedrock, o Google Vertex AI, etc.). Com o módulo «Função», já não é necessário interagir manualmente com as APIs de incorporação — o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção das incorporações e armazenamento das mesmas nas suas coleções. Para a pesquisa semântica, basta fornecer apenas os dados brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vetores armazenados e devolve os resultados mais relevantes.</p>
+    </button></h1><p>O módulo «Função» do Milvus permite-lhe transformar dados de texto brutos em representações vetoriais, recorrendo automaticamente a prestadores de serviços de incorporação externos (como a OpenAI, o AWS Bedrock, o Google Vertex AI, etc.). Com o módulo «Função», já não é necessário interagir manualmente com as APIs de incorporação — o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção das incorporações e armazenamento das mesmas nas suas coleções. Para a pesquisa semântica, basta fornecer apenas os dados brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vetores armazenados e devolve os resultados mais relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ beta: Milvus 2.6.x
 <li><p>Qualquer campo de entrada que o módulo Function incorpore deve conter sempre um valor; se for fornecido um valor nulo, o módulo irá gerar um erro.</p></li>
 <li><p>O módulo «Function» processa apenas os campos explicitamente definidos no esquema da coleção; não gera representações para campos dinâmicos.</p></li>
 <li><p>Os campos de entrada a incorporar devem ser do tipo « <code translate="no">VARCHAR</code> ».</p></li>
-<li><p>O módulo «Função» pode incorporar um campo de entrada para:</p>
+<li><p>O módulo «Function» pode incorporar um campo de entrada para:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
@@ -95,6 +95,12 @@ beta: Milvus 2.6.x
      <td><p>text-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chave API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/pt/yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Modelos de vetorização de texto do Yandex Cloud AI Studio</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Chave da API</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/pt/bedrock.md">Bedrock</a></p></td>
@@ -158,7 +164,7 @@ beta: Milvus 2.6.x
 <ol>
 <li><p><strong>Texto de entrada</strong>: os utilizadores inserem dados brutos (por exemplo, documentos) no Milvus.</p></li>
 <li><p><strong>Gerar embeddings</strong>: O módulo «Função» no Milvus chama automaticamente o fornecedor de modelos configurado para converter os dados brutos em embeddings vetoriais.</p></li>
-<li><p><strong>Armazenamento de representações</strong>: As representações resultantes são armazenadas em campos vetoriais explicitamente definidos nas coleções do Milvus.</p></li>
+<li><p><strong>Armazenar representações</strong>: As representações resultantes são armazenadas em campos vetoriais explicitamente definidos nas coleções do Milvus.</p></li>
 <li><p><strong>Texto da consulta</strong>: Os utilizadores enviam consultas de texto ao Milvus.</p></li>
 <li><p><strong>Pesquisa semântica</strong>: O Milvus converte internamente as consultas em representações vetoriais, realiza pesquisas de similaridade em relação às representações armazenadas e recupera resultados relevantes.</p></li>
 <li><p><strong>Devolução de resultados</strong>: O Milvus devolve os resultados mais relevantes à aplicação.</p></li>
@@ -439,12 +445,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>A etiqueta de uma credencial definida na secção de nível superior « <code translate="no">credential:</code> » em <code translate="no">milvus.yaml</code>. </p><ul><li><p>Quando fornecida, o Milvus recupera o par de chaves ou token de API correspondente e assina o pedido no lado do servidor.</p></li><li><p>Quando omitido (<code translate="no">None</code>), o Milvus recorre à credencial explicitamente configurada para o fornecedor do modelo de destino em <code translate="no">milvus.yaml</code>.</p></li><li><p>Se o rótulo for desconhecido ou se a chave referenciada estiver em falta, a chamada falha.</p></li></ul></td>
+     <td><p>O rótulo de uma credencial definida na secção de nível superior « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>. </p><ul><li><p>Quando fornecida, o Milvus recupera o par de chaves ou token de API correspondente e assina o pedido no lado do servidor.</p></li><li><p>Quando omitido (<code translate="no">None</code>), o Milvus recorre à credencial explicitamente configurada para o fornecedor do modelo de destino em <code translate="no">milvus.yaml</code>.</p></li><li><p>Se o rótulo for desconhecido ou se a chave referenciada estiver em falta, a chamada falha.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>O número de dimensões para as incorporações de saída. Para os modelos de terceira geração da OpenAI, pode encurtar o vetor completo para reduzir o custo e a latência sem uma perda significativa de informação semântica. Para mais informações, consulte <a href="https://openai.com/blog/new-embedding-models-and-api-updates">a publicação no blogue de anúncios da OpenAI</a>.</p><p><strong>Nota:</strong> Se encurtar a dimensão do vetor, certifique-se de que o valor « <code translate="no">dim</code> » especificado no método « <code translate="no">add_field</code> » do esquema para o campo vetorial corresponde à dimensão final de saída da sua função de incorporação.</p></td>
+     <td><p>O número de dimensões para as incorporações de saída. Para os modelos de terceira geração da OpenAI, pode encurtar o vetor completo para reduzir o custo e a latência sem uma perda significativa de informação semântica. Para mais informações, consulte <a href="https://openai.com/blog/new-embedding-models-and-api-updates">a publicação no blogue de anúncios da OpenAI</a>.</p><p><strong>Nota:</strong> Se encurtar a dimensão do vetor, certifique-se de que o valor « <code translate="no">dim</code> » especificado no método « <code translate="no">add_field</code> » do esquema para o campo vetorial corresponde à dimensão de saída final da sua função de incorporação.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -588,7 +594,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Após a inserção dos dados, efetue uma pesquisa semântica utilizando o texto bruto da consulta. O Milvus converte automaticamente a sua consulta num vetor de incorporação, recupera documentos relevantes com base na semelhança e devolve os resultados mais adequados.</p>
+    </button></h3><p>Após a inserção dos dados, efetue uma pesquisa semântica utilizando o texto bruto da consulta. O Milvus converte automaticamente a sua consulta num vetor de incorporação, recupera documentos relevantes com base na semelhança e devolve os resultados mais pertinentes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

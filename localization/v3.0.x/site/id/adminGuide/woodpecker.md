@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpecker adalah <strong>antrian pesan (write-ahead log, WAL) bawaan</strong> di Milvus 3.x. Ini adalah WAL berbasis cloud yang dirancang untuk penyimpanan objek, menawarkan throughput tinggi, beban operasional rendah, dan skalabilitas yang mulus. Untuk detail arsitektur dan benchmark, lihat <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>Woodpecker adalah <strong>antrian pesan bawaan (write-ahead log, WAL)</strong> di Milvus 3.x. Ini adalah WAL berbasis cloud yang dirancang untuk penyimpanan objek, menawarkan throughput tinggi, beban operasional rendah, dan skalabilitas yang mulus. Untuk detail arsitektur dan benchmark, lihat <a href="/docs/id/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>bawaan</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Layanan antrian pesan eksternal (seperti Pulsar atau Kafka) tidak diperlukan.</li>
+<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>bawaan</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
 <li>Woodpecker dapat dijalankan <strong>secara tertanam</strong> di dalam node Milvus/streaming (default), atau sebagai <strong>layanan khusus</strong> dengan pod-nya sendiri (hanya untuk distribusi/kluster).</li>
 <li>Woodpecker mendukung tiga mode penyimpanan ( <code translate="no">storage.type</code> ): penyimpanan objek (<code translate="no">minio</code>, default), sistem file lokal (<code translate="no">local</code>), dan penyimpanan khusus ( <code translate="no">service</code>). Lihat <a href="#Deployment-modes">Mode Deployment</a>.</li>
 </ul>
@@ -127,7 +127,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>Mengontrol kebijakan sinkronisasi/pembersihan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyetelan throughput/latensi.</li>
+<li>Mengontrol kebijakan sinkronisasi/pembersihan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyesuaian throughput dan latensi.</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -201,7 +201,7 @@ summary: >-
 </table>
 <p>Catatan:</p>
 <ul>
-<li>Kompatibilitas bergantung pada dukungan SDK asli atau dukungan untuk semantik S3 Conditional Write.</li>
+<li>Kompatibilitas bergantung pada dukungan SDK asli atau dukungan untuk semantik Penulisan Bersyarat S3.</li>
 <li>Jika Anda menghosting MinIO sendiri untuk Woodpecker, gunakan versi <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> atau yang lebih baru.</li>
 <li>Matriks ini mencerminkan <a href="https://github.com/zilliztech/woodpecker/discussions/150">diskusi saat ini</a> dan dapat berubah seiring dengan validasi dukungan backend lebih lanjut.</li>
 </ul>
@@ -317,7 +317,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk menyesuaikan Woodpecker, edit berkas ` <code translate="no">user.yaml</code> ` yang dihasilkan setelah kali pertama dijalankan, lalu jalankan perintah ` <code translate="no">bash standalone_embed.sh restart</code> ` untuk menerapkan perubahan (perintah ` <code translate="no">start</code> ` yang dijalankan ulang akan menghasilkan berkas ` <code translate="no">user.yaml</code>` baru, jadi terapkan perubahan dengan perintah ` <code translate="no">restart</code>`):</p>
+<p>Untuk menyesuaikan Woodpecker, edit berkas ` <code translate="no">user.yaml</code> ` yang dihasilkan setelah kali pertama dijalankan, lalu jalankan perintah ` <code translate="no">bash standalone_embed.sh restart</code> ` untuk menerapkan perubahan (perintah ` <code translate="no">start</code> ` akan menghasilkan ulang berkas ` <code translate="no">user.yaml</code>`, jadi terapkan perubahan dengan perintah ` <code translate="no">restart</code>`):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -359,7 +359,7 @@ EOF&#x27;</span>
 <span class="hljs-comment"># Restart the container to apply the changes</span>
 docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Aktifkan mode layanan Woodpecker untuk Milvus Cluster (Helm)<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="common-anchor-header">Aktifkan mode layanan Woodpecker untuk Kluster Milvus (Helm)<button data-href="#Enable-Woodpecker-service-mode-for-a-Milvus-Cluster-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,22 +374,25 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Mode layanan</strong> Woodpecker adalah fitur <strong>Milvus 3.0</strong>. Untuk penyebaran terdistribusi/kluster, Anda dapat menjalankan Woodpecker sebagai <strong>layanan khusus</strong> (pod terpisah) alih-alih tertanam di node streaming dengan mengatur <code translate="no">streaming.woodpecker.embedded=false</code>:</p>
+    </button></h3><div class="alert note">
+<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.1 yang akan datang atau rilis yang lebih baru dengan Woodpecker v0.1.36 atau yang lebih baru untuk pembersihan kompaksi dan optimasi komit grup.</p>
+</div>
+<p><strong>Mode layanan</strong> Woodpecker adalah fitur <strong>Milvus 3.0</strong>. Untuk penyebaran terdistribusi/kluster, Anda dapat menjalankan Woodpecker sebagai <strong>layanan khusus</strong> (pod terpisah) alih-alih tertanam di node streaming dengan mengatur ` <code translate="no">streaming.woodpecker.embedded=false</code>`:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan mengimplementasikan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, terkluster melalui gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), dengan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika memastikan kuorum tetap terpenuhi sekaligus menoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup sekumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
+<p>Pengaturan ini akan mengimplementasikan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, dengan kluster gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), serta menggunakan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika memastikan kuorum tetap terpenuhi sekaligus menoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup sekumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Mode layanan Woodpecker ( <code translate="no">service</code> ) hanya untuk deployment <strong>terdistribusi/kluster</strong> — deployment mandiri menjalankan Woodpecker yang tertanam (<code translate="no">minio</code> atau <code translate="no">local</code>). Milvus Operator belum mendukung mode layanan Woodpecker.</p>
+<p>Mode layanan Woodpecker ( <code translate="no">service</code> ) hanya untuk deployment <strong>terdistribusi/kluster</strong> — deployment standalone menjalankan Woodpecker yang tertanam (<code translate="no">minio</code> atau <code translate="no">local</code>). Milvus Operator belum mendukung mode layanan Woodpecker.</p>
 </div>
 <h2 id="Throughput-tuning-tips" class="common-anchor-header">Tips penyesuaian throughput<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -438,7 +441,7 @@ docker restart milvus-standalone
 <li>Sisi klien/aplikasi
 <ul>
 <li>Gunakan ukuran batch yang lebih besar dan lebih banyak penulis/klien yang berjalan secara bersamaan.</li>
-<li>Kontrol waktu penyegaran/pembuatan indeks (lakukan pengelompokan sebelum memicu) untuk menghindari penulisan kecil yang sering.</li>
+<li>Kontrol waktu penyegaran/pembuatan indeks (lakukan pengelompokan sebelum memicu proses) untuk menghindari penulisan kecil yang sering.</li>
 </ul></li>
 </ul>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
@@ -550,7 +553,7 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Mode layanan menghadirkan <strong>latensi penulisan tingkat milidetik</strong> — setara dengan WAL disk lokal tiga replika tradisional — sambil menjaga biaya tetap rendah. Dalam penerapan tiga replika lintas AZ yang umum, latensi penulisan tetap berada dalam rentang milidetik. Hal ini dicapai melalui:</p>
 <ul>
 <li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran perjalanan (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
-<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas AZ acak (≈2/3 lalu lintas pembacaan lintas AZ) yang umum terjadi pada sistem berbasis broker.</li>
+<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas-AZ acak (≈2/3 lalu lintas pembacaan lintas-AZ) yang umum terjadi pada sistem berbasis broker.</li>
 <li><strong>Unggahan langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah digulirkan, sehingga menjaga jejak disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
 <li><strong>Tidak ada replikasi node-ke-node yang berkelanjutan</strong> — log disimpan ke penyimpanan objek yang berfungsi sebagai penyimpanan bersama, sehingga failover hanya mengunggah ulang replika yang masih berfungsi (tanpa menyalin seluruh node), penskalaan tidak dibatasi oleh bandwidth replikasi antar-node, dan penggantian node skala besar tidak menyebabkan badai replikasi.</li>
 </ul>

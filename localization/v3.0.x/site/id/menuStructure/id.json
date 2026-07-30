@@ -643,7 +643,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusunan ASCII",
+                    "label": "Penyusutan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Mengelola Sumber Daya Berkas",
+                "label": "Mengelola Sumber Daya File",
                 "id": "manage-file-resources.md",
                 "order": 6,
                 "children": []
@@ -938,7 +938,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "SPARSE_INVERTED_INDEX",
+                "label": "INDEKS TERBALIK YANG JARANG",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1319,6 +1319,12 @@
                 "id": "google-gemini.md",
                 "order": 11,
                 "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
               }
             ]
           },
@@ -1433,9 +1439,15 @@
                     "children": []
                   },
                   {
+                    "label": "DashScope Peringkat",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
                     "label": "Hugging Face Ranker",
                     "id": "hugging-face-ranker.md",
-                    "order": 6,
+                    "order": 7,
                     "children": []
                   }
                 ]
@@ -1515,7 +1527,7 @@
             "children": []
           },
           {
-            "label": "Contoh Penggunaan",
+            "label": "Kasus Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1901,7 +1913,7 @@
             "children": []
           },
           {
-            "label": "Skalakan dengan HPA",
+            "label": "Skalabilitas dengan HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -2198,7 +2210,7 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Bucket",
+                "label": "Migrasi Antar-Instan di Lintas Bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2265,6 +2277,12 @@
             "label": "Failover",
             "id": "cdc_failover.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Impor Massal dalam Replikasi CDC",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -2567,7 +2585,7 @@
                 "children": []
               },
               {
-                "label": "API Asinkron Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

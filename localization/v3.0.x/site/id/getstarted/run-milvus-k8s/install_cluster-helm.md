@@ -137,11 +137,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Catatan</strong>: Mode mandiri menggunakan Woodpecker sebagai antrian pesan default dan mengaktifkan komponen Streaming Node. Pemasangan mandiri menjalankan Woodpecker <strong>yang tertanam</strong> dalam pod Milvus; <strong>layanan</strong> Woodpecker khusus (pod terpisah) hanya digunakan untuk pemasangan <strong>terdistribusi/kluster</strong>. Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Ikhtisar Arsitektur</a> dan <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <p><strong>Deploy kluster Milvus:</strong></p>
-<p>Perintah berikut ini mengimplementasikan kluster Milvus dengan pengaturan yang dioptimalkan untuk v3.0.0, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
+<div class="alert note">
+<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.1 yang akan datang atau rilis yang lebih baru dengan Woodpecker v0.1.36 atau yang lebih baru untuk pembersihan pemadatan dan optimalisasi komit grup.</p>
+</div>
+<p>Perintah berikut ini menerapkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v3.0.0, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -149,7 +152,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Fungsi perintah ini:</strong></p>
 <ul>
 <li>Menggunakan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk mengurangi beban pemeliharaan)</li>
-<li>Menjalankan <strong>Woodpecker sebagai layanan khusus</strong> (StatefulSet terpisah), bukan yang tertanam di dalam node streaming</li>
+<li>Menjalankan <strong>Woodpecker sebagai layanan khusus</strong> (StatefulSet terpisah), bukan tertanam dalam node streaming</li>
 <li>Mengaktifkan komponen <strong>Streaming Node</strong> baru untuk meningkatkan kinerja</li>
 <li>Menonaktifkan <strong>Index Node</strong> versi lama (fungsionalitasnya kini ditangani oleh Data Node)</li>
 </ul>
@@ -219,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Ketergantungan</strong>: <code translate="no">etcd</code> (metadata), <code translate="no">minio</code> (penyimpanan objek), <code translate="no">woodpecker</code> (antrian pesan)</li>
 </ul>
 <div class="alert note">
-<p>Dengan <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker berjalan sebagai <strong>StatefulSet khusus</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default — kuorum 3 node ditambah satu cadangan untuk toleransi kesalahan; jangan atur <code translate="no">woodpecker.replicaCount</code> di bawah 3) yang didukung oleh layanan headless, menggunakan MinIO sebagai backend penyimpanannya — sehingga klaster memiliki set pod <code translate="no">woodpecker</code> terpisah, berbeda dari node streaming.</p>
+<p>Dengan <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker berjalan sebagai <strong>StatefulSet khusus</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default — kuorum 3 node ditambah satu cadangan untuk toleransi kesalahan; jangan atur <code translate="no">woodpecker.replicaCount</code> di bawah 3) yang didukung oleh layanan headless, menggunakan MinIO sebagai backend penyimpanannya — sehingga klaster memiliki kumpulan pod <code translate="no">woodpecker</code> terpisah, berbeda dari node streaming.</p>
 </div>
 <p>Anda juga dapat mengakses <strong>Milvus WebUI</strong> di <code translate="no">http://127.0.0.1:9091/webui/</code> setelah pengalihan port disiapkan (lihat langkah berikutnya). Untuk detailnya, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Terhubung ke Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -250,7 +253,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Port default Milvus</strong>: <code translate="no">19530</code></li>
 </ul>
 <div class="alert note">
-<p><strong>Opsi untuk pengalihan port:</strong></p>
+<p><strong>Opsi untuk penerusan port:</strong></p>
 <ul>
 <li><strong>Penetapan port lokal otomatis</strong>: Gunakan <code translate="no">:19530</code> alih-alih <code translate="no">27017:19530</code> agar kubectl memilih port yang tersedia</li>
 <li><strong>Mendengarkan di semua antarmuka</strong>: Tambahkan <code translate="no">--address 0.0.0.0</code> untuk mengizinkan koneksi dari mesin lain:
