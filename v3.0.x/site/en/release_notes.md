@@ -18,6 +18,10 @@ Release date: July 29, 2026
 
 Milvus 3.0.0 is officially released! Building on the lake-native architecture introduced in [3.0-beta](https://milvus.io/docs/release_notes.md#v30-beta), this release completes what the beta started: External Collection covers more lakehouse workflows; schema supports online add / backfill / drop; the sparse index is rebuilt around SINDI; StructArray and faceted search round out the retrieval engine; FAISS passthrough, and TEXT extend index and modality choices; and Woodpecker runs as a standalone service.
 
+Watch the video below to learn more about Milvus 3.0 and AMA with core maintainers: 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SAm4YfrO1ok?si=87HTPnuH_xJtZda0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 If you are new to the 3.0 line, the Core 3.0 features recall section below summarizes the capabilities introduced in 3.0-beta; the [3.0-beta release notes](https://milvus.io/docs/release_notes.md#v30-beta) have the full write-ups.
 
 ### What's new in 3.0.0 (since 3.0-beta)
@@ -106,13 +110,6 @@ Release date: May 9, 2026
 | 3.0-beta       | 3.0.0              | 3.0.0               |
 
 Milvus 3.0-beta extends the Milvus vector database with new integration into the open lake ecosystem: External Collection lets Milvus query external lake tables zero-copy, and Spark can read Milvus collections directly through Snapshot. The release also brings richer retrieval, more expressive schema, deeper text search customization, finer data and model lifecycle controls, and more operator-side controls. Milvus 3.0 is the core kernel of Zilliz Lakebase, powering its unified serving, discovery, and batch.
-
-Watch the video below to learn more about Milvus 3.0 and AMA with core maintainers: 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SAm4YfrO1ok?si=87HTPnuH_xJtZda0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-
 
 
 ### Key Features
