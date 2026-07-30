@@ -53,6 +53,12 @@ The Function module in Milvus allows you to transform raw text data into vector 
      <td><p>API key</p></td>
    </tr>
    <tr>
+     <td><p><a href="yandex-cloud.md">Yandex Cloud</a></p></td>
+     <td><p>Yandex Cloud AI Studio text vectorization models</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
+     <td><p>API key</p></td>
+   </tr>
+   <tr>
      <td><p><a href="bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code>FLOAT_VECTOR</code></p></td>
