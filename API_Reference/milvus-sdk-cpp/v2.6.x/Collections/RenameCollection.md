@@ -2,18 +2,7 @@
 
 This operation renames a collection.
 
-```cpp
-Status RenameCollection(const RenameCollectionRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = RenameCollectionRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name1)
-    .WithNewCollectionName(collection_name2);
-```
 
 **REQUEST METHODS:**
 
@@ -43,21 +32,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->RenameCollection(
-    milvus::RenameCollectionRequest()
-        .WithCollectionName("old_collection")
-        .WithNewCollectionName("new_collection"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

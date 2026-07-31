@@ -2,10 +2,6 @@
 
 This class holds one or more query vectors of the same type, used as the target vectors for a `SearchRequest`, `SubSearchRequest`, or struct-field ANN search via `AddEmbeddingList()`. Build an `EmbeddingList` by calling the Add*/Set* methods, then pass it to `SearchRequestBase::AddEmbeddingList()`.
 
-```cpp
-EmbeddingList list;
-```
-
 **METHODS:**
 
 **Read methods:**
@@ -72,25 +68,3 @@ EmbeddingList list;
 
 ## Example
 
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-EmbeddingList dense_list;
-dense_list.AddFloatVector({0.1f, 0.2f, 0.3f /* ... 128 dims */});
-
-EmbeddingList sparse_list;
-sparse_list.AddSparseVector({{0u, 0.4f}, {5u, 0.6f}});
-
-SearchResponse response;
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-client->Search(
-    SearchRequest()
-        .WithCollectionName("my_collection")
-        .WithAnnsField("embeddings")
-        .WithLimit(5)
-        .AddEmbeddingList(std::move(dense_list))
-        .AddEmbeddingList(std::move(sparse_list)),
-    response);
-```

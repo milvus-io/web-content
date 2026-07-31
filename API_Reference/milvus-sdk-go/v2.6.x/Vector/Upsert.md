@@ -15,8 +15,10 @@ option := milvusclient.NewColumnBasedInsertOption(collName).
 	WithFloatVectorColumn(colName, dim, data).
 	WithBinaryVectorColumn(colName, dim, data).
 	WithBoolColumn(colName, data).
+	WithStructArrayColumn(colName, structSchema, rows).
 	WithPartition(partitionName).
-	WithPartialUpdate(partialUpdate)
+	WithPartialUpdate(partialUpdate).
+	WithArrayAppend(arrayFieldName)
 
 // Alternative (row-based):
 // option := milvusclient.NewRowBasedInsertOption(collName, rows...)
@@ -34,59 +36,75 @@ The name of the target collection.
 
 - `WithColumns(columns ...column.Column)`
 
-Inserts arbitrary typed columns.
+    Inserts arbitrary typed columns.
 
 - `WithBoolColumn(colName string, data []bool)`
 
-Inserts a column of boolean values.
+    Inserts a column of boolean values.
 
 - `WithInt8Column(colName string, data []int8)`
 
-Inserts a column of int8 values.
+    Inserts a column of int8 values.
 
 - `WithInt16Column(colName string, data []int16)`
 
-Inserts a column of int16 values.
+    Inserts a column of int16 values.
 
 - `WithInt32Column(colName string, data []int32)`
 
-Inserts a column of int32 values.
+    Inserts a column of int32 values.
 
 - `WithInt64Column(colName string, data []int64)`
 
-Inserts a column of int64 values.
+    Inserts a column of int64 values.
 
 - `WithVarcharColumn(colName string, data []string)`
 
-Inserts a column of string values.
+    Inserts a column of string values.
 
 - `WithFloatVectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float32 dense vectors.
+    Inserts a column of float32 dense vectors.
 
 - `WithFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float16 vectors (converted from float32).
+    Inserts a column of float16 vectors (converted from float32).
 
 - `WithBFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of bfloat16 vectors (converted from float32).
+    Inserts a column of bfloat16 vectors (converted from float32).
 
 - `WithBinaryVectorColumn(colName string, dim int, data [][]byte)`
 
-Inserts a column of binary vectors.
+    Inserts a column of binary vectors.
 
 - `WithInt8VectorColumn(colName string, dim int, data [][]int8)`
 
-Inserts a column of int8 vectors.
+    Inserts a column of int8 vectors.
 
 - `WithPartition(partitionName string)`
 
-Targets a specific partition for the upsert operation.
+    Targets a specific partition for the upsert operation.
 
 - `WithPartialUpdate(partialUpdate bool)`
 
-Enables partial update mode so only provided fields are updated (existing fields not in the payload are preserved).
+    Enables partial update mode so only provided fields are updated (existing fields not in the payload are preserved).
+
+- `WithStructArrayColumn(colName string, structSchema *entity.StructSchema, rows []map[string]any)`
+
+    Upserts a struct-array column built from per-row maps. Each row map is keyed by struct sub-field name. Scalar sub-fields use slices such as []int32 or []string, and vector sub-fields use nested slices such as [][]float32, [][]byte, or [][]int8.
+
+- `WithArrayAppend(fieldName string)`
+
+    Applies ARRAY_APPEND semantics to the specified array field during Upsert. A non-REPLACE field operation automatically enables partial update mode.
+
+- `WithArrayRemove(fieldName string)`
+
+    Applies ARRAY_REMOVE semantics to the specified array field during Upsert. A non-REPLACE field operation automatically enables partial update mode.
+
+- `WithFieldPartialOp(fieldName string, op schemapb.FieldPartialUpdateOp_OpType)`
+
+    Attaches an explicit field-level partial update operation. Use the operation-specific helpers for common array append and remove behavior. Passing REPLACE clears any prior directive for that field.
 
 **RETURN TYPE:**
 

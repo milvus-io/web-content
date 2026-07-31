@@ -47,7 +47,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-dbName := `test_db`
+dbName := \`test_db\`
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 	Address: milvusAddr,
 })

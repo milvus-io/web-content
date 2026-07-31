@@ -6,11 +6,6 @@ This page documents both `SearchResults` and `SingleResult`. `SearchResults` wra
 
 This class is returned by calling `Results()` on a `SearchResponse` or `HybridSearchResponse`.
 
-```cpp
-SearchResults();
-explicit SearchResults(std::vector<SingleResult>&& results);
-```
-
 **Methods:**
 
 - `const std::vector<SingleResult>& Results() const`
@@ -24,16 +19,6 @@ explicit SearchResults(std::vector<SingleResult>&& results);
 ## SingleResult
 
 This struct holds the top-k hits for one query vector.
-
-```cpp
-struct SingleResult {
-    SingleResult(const std::string& pk_name, const std::string& score_name,
-                 std::vector<FieldDataPtr>&& output_fields,
-                 const std::set<std::string>& output_names);
-};
-
-using SingleResultPtr = std::shared_ptr<SingleResult>;
-```
 
 **Methods:**
 
@@ -79,40 +64,3 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
 ## Example
 
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-std::vector<std::vector<float>> queries = {
-    std::vector<float>(128, 0.1f),
-    std::vector<float>(128, 0.2f),
-};
-
-SearchResponse response;
-auto status = client->Search(
-    SearchRequest()
-        .WithCollectionName("my_collection")
-        .WithAnnsField("vec")
-        .WithLimit(5)
-        .AddOutputField("id")
-        .WithFloatVectors(std::move(queries)),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-for (size_t nq = 0; nq < response.Results().Results().size(); ++nq) {
-    const SingleResult& result = response.Results().Results()[nq];
-    std::cout << "Query " << nq << ": " << result.GetRowCount() << " hits\n";
-    const auto& scores = result.Scores();
-    auto id_field = std::dynamic_pointer_cast<Int64FieldData>(
-        result.OutputField(result.PrimaryKeyName()));
-    for (size_t i = 0; i < result.GetRowCount(); ++i) {
-        std::cout << "  id=" << id_field->Value(i)
-                  << " score=" << scores[i] << "\n";
-    }
-}
-```

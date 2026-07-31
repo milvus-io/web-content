@@ -2,17 +2,7 @@
 
 This operation returns the description of a specific role.
 
-```cpp
-Status DescribeRole(const DescribeRoleRequest& request, DescribeRoleResponse& response)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = DescribeRoleRequest()
-    .WithRoleName(name)
-    .WithDatabaseName(db_name);
-```
 
 **REQUEST METHODS:**
 
@@ -38,24 +28,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::DescribeRoleResponse resp_desc_role;
-status = client->DescribeRole(
-    milvus::DescribeRoleRequest()
-        .WithRoleName(role_name), 
-    resp_desc_role
-);
-
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

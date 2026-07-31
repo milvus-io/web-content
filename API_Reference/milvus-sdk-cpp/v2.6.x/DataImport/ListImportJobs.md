@@ -2,23 +2,7 @@
 
 This operation retrieves a list of all bulk import jobs associated with a specific collection. It is useful for auditing past and in-progress import operations.
 
-```cpp
-static nlohmann::json BulkImport::ListImportJobs(
-    const std::string& url,
-    const std::string& collection_name,
-    const std::string& db_name = "default",
-    const std::string& api_key = "")
-```
-
 ## Request Syntax
-
-```cpp
-auto resp = milvus::BulkImport::ListImportJobs(
-    url,
-    collection_name,
-    db_name,
-    api_key);
-```
 
 **PARAMETERS:**
 
@@ -56,29 +40,3 @@ A JSON object containing an array of import job records, or `nullptr` on failure
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-milvus::ConnectParam connect_param{"http://localhost:19530", "root", "Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-// List all import jobs for a collection
-auto resp = milvus::BulkImport::ListImportJobs(
-    "http://localhost:19530",
-    "my_collection",
-    "default",
-    "root:Milvus"
-);
-
-if (!resp.is_null()) {
-    for (auto& job : resp["data"]["records"]) {
-        std::cout << "Job ID: " << job["jobId"]
-                  << "  State: " << job["state"] << std::endl;
-    }
-} else {
-    std::cout << "Failed to list import jobs" << std::endl;
-}
-```

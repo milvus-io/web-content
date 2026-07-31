@@ -2,18 +2,7 @@
 
 This operation alters collection properties.
 
-```cpp
-Status AlterCollectionProperties(const AlterCollectionPropertiesRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = AlterCollectionPropertiesRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithProperties(properties);
-```
 
 **REQUEST METHODS:**
 
@@ -47,23 +36,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->AlterCollectionProperties(
-    milvus::AlterCollectionPropertiesRequest()
-        .WithDatabaseName(db_name)
-        .WithCollectionName(collection_name)
-        .AddProperty(milvus::COLLECTION_TTL_SECONDS, "20")
-);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

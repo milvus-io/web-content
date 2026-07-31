@@ -2,24 +2,7 @@
 
 This operation loads collection data into the query node's CPU and memory. If the request is in sync mode, this operation checks the collection's loading progress and waits until the collection is completely loaded into the query node. Otherwise, it will return immediately.
 
-```cpp
-Status LoadCollection(const LoadCollectionRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = LoadCollectionRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithSync(sync)
-    .WithReplicaNum(replica_num)
-    .WithTimeoutMs(timeout_ms)
-    .WithRefresh(refresh)
-    .WithLoadFields(load_fields)
-    .WithSkipDynamicField(skip_dynamic_field)
-    .WithTargetResourceGroups(target_resource_groups);
-```
 
 **REQUEST METHODS:**
 
@@ -87,21 +70,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->LoadCollection(
-    milvus::LoadCollectionRequest()
-        .WithCollectionName(collection_name)
-);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

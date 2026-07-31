@@ -2,18 +2,7 @@
 
 This operation releases the data of specific partitions from the query nodes.
 
-```cpp
-Status ReleasePartitions(const ReleasePartitionsRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = ReleasePartitionsRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPartitionNames(partition_names);
-```
 
 **REQUEST METHODS:**
 
@@ -47,22 +36,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->ReleasePartitions(
-    milvus::ReleasePartitionsRequest()
-        .WithCollectionName("my_collection")
-        .AddPartitionName("partition_1")
-        .AddPartitionName("partition_2"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

@@ -1,10 +1,6 @@
 # SearchIterator()
 
-This operation returns a SearchIterator object based on scalar field(s) by filtering expression. 
-
-```cpp
-Status SearchIterator(SearchIteratorRequest& request, SearchIteratorPtr& response)
-```
+This operation returns a SearchIterator object based on scalar field(s) by filtering expression.
 
 <div class="alert note">
 
@@ -13,39 +9,6 @@ Do not disconnect the MilvusClientV2 when the iterator is in use. The order of t
 </div>
 
 ## Request Syntax
-
-```cpp
-auto request = SearchIteratorRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name)
-    .WithPartitionNames(partition_names)
-    .WithOutputFields(output_field_names)
-    .WithConsistencyLevel(consistency_level)
-    .WithBinaryVectors(vectors)
-    .WithFloatVectors(vectors)
-    .WithSparseVectors(vectors)
-    .WithFloat16Vectors(vectors)
-    .WithBFloat16Vectors(vectors)
-    .WithEmbeddedTexts(texts)
-    .WithInt8Vectors(vectors)
-    .WithEmbeddingLists(emb_lists)
-    .WithMetricType(metric_type)
-    .WithExtraParams(std)
-    .WithLimit(limit)
-    .WithFilter(filter)
-    .WithAnnsField(ann_field)
-    .WithFilterTemplates(value)
-    .WithOffset(offset)
-    .WithRoundDecimal(round_decimal)
-    .WithIgnoreGrowing(ignore_growing)
-    .WithGroupByField(field_name)
-    .WithGroupSize(group_size)
-    .WithStrictGroupSize(strict_group_size)
-    .WithRadius(radius)
-    .WithRangeFilter(filter)
-    .WithRerank(ranker)
-    .WithTimezone(timezone);
-```
 
 **REQUEST METHODS:**
 
@@ -269,67 +232,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::SearchIteratorRequest request;
-request.SetCollectionName(collection_name);
-request.SetBatchSize(batch);
-request.SetLimit(limit);
-request.SetAnnsField(field_face);
-request.SetFilter(filter);
-request.AddOutputField(field_name);
-request.AddOutputField(field_age);
-request.AddOutputField("b");  // dynamic field
-// SearchIterator only accepts one vector
-std::vector<float> vector(dimension);
-for (auto d = 0; d < dimension; ++d) {
-    vector[d] = 1.0f;
-}
-request.AddFloatVector(vector);
-
-milvus::SearchIteratorPtr iterator;
-status = client->SearchIterator(request, iterator);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-std::set<int64_t> ids;
-int pages = 0;
-uint64_t total_count = 0;
-while (true) {
-    milvus::SingleResult batch_results;
-    status = iterator->Next(batch_results);
-    if (!status.IsOk()) {
-        std::cout << status.Message() << std::endl;
-    }
-    auto batch_count = batch_results.GetRowCount();
-    if (batch_count == 0) {
-        std::cout << "search iteration finished" << std::endl;
-        break;
-    }
-    pages++;
-    total_count += batch_count;
-
-    milvus::EntityRows rows;
-    status = batch_results.OutputRows(rows);
-    if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-    std::cout << "No." << std::to_string(pages) << " page " << std::to_string(rows.size()) << " rows fetched"
-              << std::endl;
-    std::cout << "\tthe first row: " << (*rows.begin()).dump() << std::endl;
-    std::cout << "\tthe last row: " << (*rows.rbegin()).dump() << std::endl;
-    for (const auto& row : rows) {
-        // std::cout << row.dump() << std::endl;
-        ids.insert(row[field_id].get<int64_t>());
-    }
-}
-```

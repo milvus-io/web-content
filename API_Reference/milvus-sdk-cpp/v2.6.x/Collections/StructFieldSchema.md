@@ -2,11 +2,6 @@
 
 This class describes a struct-type field (multi-vector type) in a collection schema. Pass a `StructFieldSchema` instance to `CollectionSchema::AddStructField()` when building a multi-vector schema. `StructFieldSchema` provides a fluent With*/Add* builder API.
 
-```cpp
-StructFieldSchema();
-explicit StructFieldSchema(std::string name, std::string description = "");
-```
-
 **PARAMETERS:**
 
 - **name** (*std::string*)
@@ -18,14 +13,6 @@ explicit StructFieldSchema(std::string name, std::string description = "");
     Optional human-readable description. Default: `""`.
 
 ## Request Syntax
-
-```cpp
-StructFieldSchema(name, description)
-    .WithName(name)
-    .WithDescription(description)
-    .WithMaxCapacity(capacity)
-    .AddField(field_schema);
-```
 
 **REQUEST METHODS:**
 
@@ -51,26 +38,3 @@ StructFieldSchema(name, description)
 
 ## Example
 
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-// Build a schema with a STRUCT field containing two vector sub-fields
-CollectionSchemaPtr schema = std::make_shared<CollectionSchema>();
-schema->AddField(FieldSchema("id", DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
-
-StructFieldSchema struct_field("embeddings", "multi-vector struct field");
-struct_field
-    .WithMaxCapacity(2)
-    .AddField(FieldSchema("dense", DataType::FLOAT_VECTOR).WithDimension(128))
-    .AddField(FieldSchema("sparse", DataType::SPARSE_FLOAT_VECTOR));
-
-schema->AddStructField(struct_field);
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-auto status = client->CreateCollection(
-    CreateCollectionRequest()
-        .WithCollectionName("multi_vec_collection")
-        .WithCollectionSchema(schema));
-```

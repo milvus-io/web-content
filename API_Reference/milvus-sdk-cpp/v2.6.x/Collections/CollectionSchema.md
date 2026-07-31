@@ -2,15 +2,6 @@
 
 This class defines the schema of a collection by specifying its fields and dynamic-field settings. An alias `CollectionSchemaPtr` (a `std::shared_ptr<CollectionSchema>`) is provided for convenience. Pass the pointer to `CreateCollectionRequest::WithCollectionSchema()` when creating a collection.
 
-```cpp
-CollectionSchema();
-explicit CollectionSchema(std::string name, std::string desc = "",
-                          int32_t shard_num = 1,
-                          bool enable_dynamic_field = true);
-
-using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
-```
-
 **PARAMETERS:**
 
 - **name** (*std::string*)
@@ -79,25 +70,3 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-// Build a schema: int64 primary key, varchar, int8, and a 128-dim float vector
-CollectionSchemaPtr schema = std::make_shared<CollectionSchema>();
-schema->AddField(FieldSchema("id",  DataType::INT64,        "primary key").WithPrimaryKey(true));
-schema->AddField(FieldSchema("name",DataType::VARCHAR,      "user name").WithMaxLength(200));
-schema->AddField(FieldSchema("age", DataType::INT8,         "user age"));
-schema->AddField(FieldSchema("vec", DataType::FLOAT_VECTOR, "embedding").WithDimension(128));
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-auto status = client->CreateCollection(
-    CreateCollectionRequest()
-        .WithCollectionName("my_collection")
-        .WithCollectionSchema(schema)
-        .AddIndex(IndexDesc("vec", "", IndexType::HNSW, MetricType::COSINE))
-        .WithConsistencyLevel(ConsistencyLevel::STRONG));
-```

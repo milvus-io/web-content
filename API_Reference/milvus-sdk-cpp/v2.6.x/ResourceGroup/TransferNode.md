@@ -2,18 +2,7 @@
 
 This operation transfers query nodes to another resource group.
 
-```cpp
-Status TransferNode(const TransferNodeRequest& request)
-```
-
 ## Request Syntax
-
-```cpp
-auto request = TransferNodeRequest()
-    .WithSourceGroup(source_group)
-    .WithTargetGroup(target_group)
-    .WithNumNodes(num_nodes);
-```
 
 **REQUEST METHODS:**
 
@@ -43,22 +32,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->TransferNode(
-    milvus::TransferNodeRequest()
-        .WithSourceGroup("source_group")
-        .WithTargetGroup("target_group")
-        .WithNumNodes(1));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

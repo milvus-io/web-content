@@ -1,10 +1,6 @@
 # CreateResourceGroup()
 
-This operation creates a resource group. 
-
-```cpp
-Status CreateResourceGroup(const CreateResourceGroupRequest& request)
-```
+This operation creates a resource group.
 
 <div class="alert note">
 
@@ -13,12 +9,6 @@ A resource group physically isolates certain query nodes from others. For detail
 </div>
 
 ## Request Syntax
-
-```cpp
-auto request = CreateResourceGroupRequest()
-    .WithName(name)
-    .WithConfig(config);
-```
 
 **REQUEST METHODS:**
 
@@ -44,23 +34,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::ResourceGroupConfig rg_config;
-
-status = client->CreateResourceGroup(
-    milvus::CreateResourceGroupRequest()
-        .WithName("my_resource_group")
-        .WithConfig(std::move(rg_config)));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

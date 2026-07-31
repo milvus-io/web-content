@@ -2,14 +2,6 @@
 
 This class describes a single field in a collection schema. Pass `FieldSchema` instances to `CollectionSchema::AddField()` when defining a collection's structure. `FieldSchema` supports a fluent With* builder API so definitions can be chained on a single line.
 
-```cpp
-FieldSchema();
-FieldSchema(std::string name, DataType data_type,
-            std::string description = "",
-            bool is_primary_key = false,
-            bool auto_id = false);
-```
-
 **PARAMETERS:**
 
 - **name** (*std::string*)
@@ -33,24 +25,6 @@ FieldSchema(std::string name, DataType data_type,
     When `true`, the server auto-generates primary key values on insert. Only valid if `is_primary_key` is `true`. Default: `false`.
 
 ## Request Syntax
-
-```cpp
-FieldSchema(name, data_type)
-    .WithPrimaryKey(is_primary_key)
-    .WithAutoID(auto_id)
-    .WithDimension(dimension)
-    .WithMaxLength(max_length)
-    .WithElementType(element_type)
-    .WithMaxCapacity(max_capacity)
-    .WithPartitionKey(partition_key)
-    .WithClusteringKey(clustering_key)
-    .WithNullable(nullable)
-    .WithDefaultValue(default_value)
-    .EnableAnalyzer(enable_analyzer)
-    .EnableMatch(enable_match)
-    .WithAnalyzerParams(params)
-    .WithMultiAnalyzerParams(params);
-```
 
 **REQUEST METHODS:**
 
@@ -112,42 +86,3 @@ FieldSchema(name, data_type)
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-CollectionSchemaPtr schema = std::make_shared<CollectionSchema>();
-
-// INT64 primary key with auto-generated IDs
-schema->AddField(FieldSchema("id", DataType::INT64, "primary key")
-                     .WithPrimaryKey(true).WithAutoID(true));
-
-// VARCHAR field with text search enabled
-schema->AddField(FieldSchema("title", DataType::VARCHAR, "article title")
-                     .WithMaxLength(512)
-                     .EnableAnalyzer(true)
-                     .EnableMatch(true));
-
-// Nullable INT32 field with a default value
-schema->AddField(FieldSchema("views", DataType::INT32, "view count")
-                     .WithNullable(true)
-                     .WithDefaultValue(0));
-
-// ARRAY of up to 5 VARCHAR tags
-schema->AddField(FieldSchema("tags", DataType::ARRAY, "tag list")
-                     .WithElementType(DataType::VARCHAR)
-                     .WithMaxCapacity(5));
-
-// 128-dim float vector
-schema->AddField(FieldSchema("vec", DataType::FLOAT_VECTOR, "embedding")
-                     .WithDimension(128));
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-client->CreateCollection(
-    CreateCollectionRequest()
-        .WithCollectionName("my_collection")
-        .WithCollectionSchema(schema)
-        .AddIndex(IndexDesc("vec", "", IndexType::HNSW, MetricType::COSINE)));
-```

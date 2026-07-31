@@ -1,18 +1,8 @@
 # AlterDatabaseProperties()
 
-This operation alters a database property. 
-
-```cpp
-Status AlterDatabaseProperties(const AlterDatabasePropertiesRequest& request)
-```
+This operation alters a database property.
 
 ## Request Syntax
-
-```cpp
-auto request = AlterDatabasePropertiesRequest()
-    .WithDatabaseName(db_name)
-    .WithProperties(properties);
-```
 
 **REQUEST METHODS:**
 
@@ -42,21 +32,3 @@ Check `status.IsOk()` to confirm success.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-status = client->AlterDatabaseProperties(
-    milvus::AlterDatabasePropertiesRequest()
-        .WithDatabaseName("my_database")
-        .AddProperty("key", "value"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```

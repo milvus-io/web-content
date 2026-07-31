@@ -135,15 +135,17 @@ entity.NewField().
 
     Enables text matching for this field.
 
-- `WithStructSchema(schema *StructSchema)`
-
-    Sets the struct schema for struct-type fields.
-
 **METHODS:**
 
 - `GetDim() int64, error`
 
     Get dim.
+
+## StructSchema Validation
+
+- `StructSchema.Validate(parentName string) error`
+
+    This validates sub-fields used by a struct-array field. Sub-fields must be scalar or supported dense vector types and must not be primary keys, partition keys, clustering keys, nullable fields, dynamic fields, auto ID fields, or fields with default values.
 
 ## Example
 
