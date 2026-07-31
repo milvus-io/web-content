@@ -35,7 +35,7 @@ With `sub_aggregation`, Milvus repeats steps 2 and 3 inside each parent bucket. 
 
 Before using Search Aggregation, note the following limits:
 
-- **Nested aggregations:** A request can contain one root `SearchAggregation` and up to three nested `sub_aggregation` levels, for a maximum of four levels in total.
+- **Nested aggregations:** A request can contain one root `SearchAggregation` and up to three nested `sub_aggregation` levels, for a maximum of four levels in total. Across all levels, at most 10 fields can be used to create bucket keys.
 
 - **Fields used to create bucket keys:** `SearchAggregation.fields` supports Boolean, integer, `VARCHAR`, and `TIMESTAMPTZ` fields. It does not support `FLOAT`, `DOUBLE`, `ARRAY`, `JSON`, `GEOMETRY`, `TEXT`, vector, or dynamic fields.
 
@@ -49,13 +49,15 @@ Before using Search Aggregation, note the following limits:
 
 - **Repeated fields:** The same field cannot appear in more than one `SearchAggregation.fields` list. For example, if the root aggregation uses `fields=["category"]`, a nested `sub_aggregation` cannot also use `fields=["category"]`.
 
-- **Unsupported combinations:** Search Aggregation cannot be combined with `offset`, Search Iterators, Hybrid Search, a Highlighter, or Grouping Search.
+- **Unsupported combinations:** Search Aggregation cannot be combined with a non-zero `offset`, Search Iterators, Hybrid Search, a Highlighter, or Grouping Search. A top-level `offset` value of `0` is equivalent to omitting the parameter. In REST v2 search requests, `searchAggregation` and `ids` cannot be specified together.
 
-- **Returned entries:** Keep the configured maximum number of result entries at or below 10,000. Calculate this maximum as:
+- **Returned entries:** By default, Milvus rejects a Search Aggregation request when the request's calculated maximum number of result entries exceeds 10,000. This threshold is controlled by `proxy.maxSearchAggregationResultEntries`. Set the configuration value to `0` or a negative number to disable this check.
 
-  `number of query vectors × size at every aggregation level × largest TopHits.size at any level`
+  Milvus calculates this maximum as:
 
-  Use `1` for the last factor when no level configures `TopHits`. For example, one query vector, 10 root buckets, five child buckets per root bucket, and two hits per child bucket produce a configured maximum of:
+  `number of query vectors × product of the effective search_size at every aggregation level × largest TopHits.size at any level`
+
+  For this server-side calculation, the effective `search_size` at a level is the explicitly configured `search_size`, or that level's `size` when `search_size` is omitted. The PyMilvus API used in this guide does not currently expose `search_size`, so PyMilvus requests use each level's `size` for this calculation. Use `1` for the last factor when no level configures `TopHits`. For example, one query vector, 10 root buckets, five child buckets per root bucket, and two hits per child bucket produce a calculated maximum of:
 
   `1 × 10 × 5 × 2 = 100`
 
