@@ -1,6 +1,6 @@
 # CreateRole()
 
-This operation creates a role with specific privileges.
+Create a role with specific privileges.
 
 ```cpp
 Status CreateRole(const CreateRoleRequest& request)
@@ -10,45 +10,41 @@ Status CreateRole(const CreateRoleRequest& request)
 
 ```cpp
 auto request = CreateRoleRequest()
-    .WithRoleName(name);
+    .WithRoleName(name)
+    .WithDescription(description);
 ```
 
 **REQUEST METHODS:**
 
 - `WithRoleName(const std::string& name)`
 
-    Sets the role's name.
+    Set name of the role.
+
+- `WithDescription(const std::string& description)`
+
+    Set description of the role.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a status indicating whether the operation succeeded.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
 
 ## Example
 
+Demonstrates CreateRole() with the C++ SDK.
+
 ```cpp
-#include "milvus/MilvusClientV2.h"
 auto client = milvus::MilvusClientV2::Create();
-
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
+util::CheckStatus(client->Connect(connect_param));
 
-status = client->CreateRole(
-    milvus::CreateRoleRequest()
-        .WithRoleName(role_name)
-);
-
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
+auto request = milvus::CreateRoleRequest();
+util::CheckStatus(client->CreateRole(request));
 ```

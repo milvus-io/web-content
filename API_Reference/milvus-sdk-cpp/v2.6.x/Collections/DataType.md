@@ -77,6 +77,10 @@ enum class DataType {
 
 - **UNKNOWN** (0) - Uninitialized or unrecognized type. Do not use directly.
 
+### Schema type and column payloads
+
+`DataType` identifies the logical type stored in a collection schema. It is shared by `Insert()` and `Upsert()`, but it is not the C++ container passed with a DML request. Those methods map each schema type to a concrete `XxxFieldData` container and accept it through `FieldDataPtr`.
+
 ## Example
 
 ```cpp

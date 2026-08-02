@@ -1,6 +1,6 @@
 # CreateUser()
 
-This operation creates a user account with a username and password for logging into Milvus. 
+Create an user with username and password to login milvus.
 
 ```cpp
 Status CreateUser(const CreateUserRequest& request)
@@ -11,50 +11,45 @@ Status CreateUser(const CreateUserRequest& request)
 ```cpp
 auto request = CreateUserRequest()
     .WithUserName(name)
-    .WithPassword(password);
+    .WithPassword(password)
+    .WithDescription(description);
 ```
 
 **REQUEST METHODS:**
 
 - `WithUserName(const std::string& name)`
 
-    Sets the name of the user.
+    Set name of the user.
 
 - `WithPassword(const std::string& password)`
 
-    Sets the password of the user.
+    Set password of the user.
+
+- `WithDescription(const std::string& description)`
+
+    Set description of the user.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a status indicating whether the operation succeeded.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
 
 ## Example
 
+Demonstrates CreateUser() with the C++ SDK.
+
 ```cpp
-#include "milvus/MilvusClientV2.h"
 auto client = milvus::MilvusClientV2::Create();
-
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
+util::CheckStatus(client->Connect(connect_param));
 
-status = client->CreateUser(
-    milvus::CreateUserRequest().
-        WithUserName(user_name).
-        WithPassword("P@ssw0rd!")
-);
-
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
+auto request = milvus::CreateUserRequest();
+util::CheckStatus(client->CreateUser(request));
 ```

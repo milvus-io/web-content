@@ -12,7 +12,8 @@ Status Compact(const CompactRequest& request, CompactResponse& response)
 auto request = CompactRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
-    .WithClusteringCompaction(clustering_compaction);
+    .WithClusteringCompaction(clustering_compaction)
+    .WithTargetSize(target_size);
 ```
 
 **REQUEST METHODS:**
@@ -32,6 +33,10 @@ auto request = CompactRequest()
     - **True**: Conducts clustering compaction and reports an error if there is no clustering key.
 
     - **False**: Conducts normal compaction.
+
+- `WithTargetSize(int64_t target_size)`
+
+    Sets the target segment size in bytes for compaction planning. Use values greater than 0 to guide output segment sizing.
 
 **RETURNS:**
 

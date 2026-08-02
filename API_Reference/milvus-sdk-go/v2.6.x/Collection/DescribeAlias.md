@@ -9,14 +9,14 @@ func (c *Client) DescribeAlias(ctx context.Context, option DescribeAliasOption, 
 ## Request Syntax
 
 ```go
-option := milvusclient.NewDescribeAliasOption(alias)
+option := client.NewDescribeAliasOption(alias)
 
 result, err := client.DescribeAlias(ctx, option)
 ```
 
 **PARAMETERS:**
 
-- **alias** (*string*)
+- **[alias](Alias.md)** (*string*)
 
     The alias name to assign.
 

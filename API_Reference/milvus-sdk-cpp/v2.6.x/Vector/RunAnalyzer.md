@@ -63,11 +63,81 @@ auto request = RunAnalyzerRequest()
 
 Check `status.IsOk()` to confirm success.
 
+### AnalyzerResults
+
+This page documents `AnalyzerResults`, `AnalyzerResult`, and `AnalyzerToken`. `AnalyzerResults` is a type alias for `std::vector<AnalyzerResult>` and is returned via `Results()` on a `RunAnalyzerResponse`. Each `AnalyzerResult` corresponds to one input text string and contains the list of tokens produced by the analyzer.
+
+```cpp
+using AnalyzerResults = std::vector<AnalyzerResult>;
+```
+
+Access the per-text results via the standard vector API:
+
+```cpp
+const AnalyzerResults& results = response.Results();
+for (const auto& result : results) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << "\n";
+    }
+}
+```
+
 **EXCEPTIONS:**
 
 - **StatusCode**
 
     Check `status.Code()` and `status.Message()` for error details.
+
+## AnalyzerResult
+
+One `AnalyzerResult` holds all tokens for a single input text.
+
+```cpp
+explicit AnalyzerResult(std::vector<AnalyzerToken>&& tokens);
+```
+
+- `const std::vector<AnalyzerToken>& Tokens() const`
+
+    Returns the list of tokens produced by the analyzer for this input text.
+
+## AnalyzerToken
+
+`AnalyzerToken` is a plain struct describing a single token.
+
+```cpp
+struct AnalyzerToken {
+    std::string token_;
+    int64_t start_offset_;
+    int64_t end_offset_;
+    int64_t position_;
+    int64_t position_length_;
+    uint32_t hash_;
+};
+```
+
+- `token_`
+
+    The token string, such as a word or sub-word.
+
+- `start_offset_`
+
+    Byte offset in the original text where the token starts.
+
+- `end_offset_`
+
+    Byte offset in the original text where the token ends.
+
+- `position_`
+
+    Position index of the token in the token sequence.
+
+- `position_length_`
+
+    Number of positions the token spans. This is usually 1.
+
+- `hash_`
+
+    32-bit hash of the token string.
 
 ## Example
 

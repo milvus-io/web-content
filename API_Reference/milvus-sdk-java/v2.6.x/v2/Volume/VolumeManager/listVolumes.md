@@ -1,6 +1,6 @@
 # listVolumes()
 
-This operation lists all volumes within a specific project in a paginated manner.
+Lists volumes with optional project, type, and pagination filters.
 
 ```java
 public ListVolumesResponse listVolumes(ListVolumesRequest request)
@@ -9,99 +9,52 @@ public ListVolumesResponse listVolumes(ListVolumesRequest request)
 ## Request Syntax
 
 ```java
-listVolumes(ListVolumesRequest.builder()
-    .projectId(String projectId)
-    .currentPage(Integer currentPage)
-    .pageSize(Integer pageSize)
+ListVolumesRequest.builder()
+    .projectId(projectId)
+    .pageSize(pageSize)
+    .currentPage(currentPage)
+    .type(type)
     .build();
-)
 ```
 
-**PARAMETERS**
+**BUILDER METHODS:**
 
-- **projectId** (*str*) -
+- `projectId(String projectId)`
 
-    **[REQUIRED]**
+    The ID of the Zilliz Cloud project.
 
-    The ID of the project to which the volume to be created belongs.
+- `pageSize(Integer pageSize)`
 
-- **currentPage** (*int*) -
+    The number of volumes to return on each page.
 
-    The current page of the volume lists. When specified, only the volumes on the specified page will be returned.
+- `currentPage(Integer currentPage)`
 
-    This parameter is optional and its value defaults to `1`, indicating that the first page will be returned.
+    The page number to return.
 
-- **pageSize** (*int*) -
+- `type(String type)`
 
-    The current page size of the volume lists. When specified, only the specified number of volumes will be returned.
+    The optional volume type filter: `MANAGED` or `EXTERNAL`.
 
-    This parameter is optional and its value defaults to `10`, indicating that a list of up to 10 volumes will be returned.
-
-**RETURN TYPE**
+**RETURNS:**
 
 *ListVolumesResponse*
 
-**RETURNS**
+**EXCEPTIONS:**
 
-A **ListVolumesResponse** object that contains a list of volumes in a paginated manner.
+- **MilvusClientExceptions**
 
-- **count** (*Integer*) -
-
-    The total number of volumes found.
-
-- **currentPage** (*Integer*) -
-
-    The current page.
-
-- **pageSize** (*Integer*) -
-
-    The maximum number of volumes per page.
-
-- **volumes** (*List<VolumeInfo>*) -
-
-    A list of `VolumeInfo` instances.
-
-    - **volumeName** (*String*) -
-
-        The name of a volume.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Lists volumes with optional project, type, and pagination filters.
+
 ```java
-import com.google.gson.Gson;
-import io.milvus.bulkwriter.VolumeManager;
-import io.milvus.bulkwriter.VolumeManagerParam;
-import io.milvus.bulkwriter.request.volume.ListVolumesRequest;
-import io.milvus.bulkwriter.response.volume.ListVolumesResponse;
-
-VolumeManagerParam volumeManagerParam = VolumeManagerParam.newBuilder()
-    .withCloudEndpoint("https://api.cloud.zilliz.com")
-    .withApiKey("YOUR_API_KEY")
-    .build();
-        
-VolumeManager volumeManager = new VolumeManager(volumeManagerParam);
-
-ListVolumesRequest request = ListVolumesRequest.builder()
-    .projectId("proj-xxxxxxxxxxxxxxxxxxxxxxx")
-    .currentPage(1)
-    .pageSize(10)
-    .build();
-    
-ListVolumesResponse listVolumesResponse = volumeManager.listVolumes(request);
-
-System.out.println("\nlistVolumes results: " + new Gson().toJson(listVolumesResponse));
-
-// listVolumes results: 
-// 
-// {
-//     "count": 1,
-//     "currentPage": 1,
-//     "pageSize": 10,
-//     "volumes": [
-//         {
-//             "volumeName": "my_volume"
-//         }        
-//     ]
-// }
+ListVolumesResponse response = volumeManager.listVolumes(
+    ListVolumesRequest.builder()
+        .projectId(PROJECT_ID)
+        .type("S3")
+        .currentPage(1)
+        .pageSize(20)
+        .build());
 ```
-

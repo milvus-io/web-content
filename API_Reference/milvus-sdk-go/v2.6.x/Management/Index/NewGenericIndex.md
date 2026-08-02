@@ -18,7 +18,7 @@ func NewGenericIndex(name string, params map[string]string) GenericIndex
 
 **RETURNS:**
 
-*Index*
+*[Index](Index.md)*
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 

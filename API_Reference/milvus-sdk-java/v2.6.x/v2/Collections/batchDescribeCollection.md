@@ -1,6 +1,6 @@
 # batchDescribeCollection()
 
-This operation gets the descriptions of multiple collections in a batch.
+Returns metadata for multiple collections selected by name or ID.
 
 ```java
 public List<DescribeCollectionResp> batchDescribeCollection(BatchDescribeCollectionReq request)
@@ -9,19 +9,18 @@ public List<DescribeCollectionResp> batchDescribeCollection(BatchDescribeCollect
 ## Request Syntax
 
 ```java
-batchDescribeCollection(BatchDescribeCollectionReq.builder()
-    .databaseName(String databaseName)
-    .collectionNames(List<String> collectionNames)
-    .collectionIds(List<Long> collectionIds)
+BatchDescribeCollectionReq.builder()
+    .databaseName(databaseName)
+    .collectionNames(collectionNames)
+    .collectionIds(collectionIds)
     .build();
-)
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database to which the target collections belong.
+    The name of the database that contains the target resource.
 
 - `collectionNames(List<String> collectionNames)`
 
@@ -29,15 +28,11 @@ batchDescribeCollection(BatchDescribeCollectionReq.builder()
 
 - `collectionIds(List<Long> collectionIds)`
 
-    The numeric IDs of the collections to describe. Use this when you need to identify collections by ID instead of name.
-
-**RETURN TYPE:**
-
-*List<DescribeCollectionResp>*
+    The IDs of the target collections.
 
 **RETURNS:**
 
-A list of **DescribeCollectionResp** objects.
+*List<DescribeCollectionResp>*
 
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
@@ -111,29 +106,16 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Returns metadata for multiple collections selected by name or ID.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.BatchDescribeCollectionReq;
-import io.milvus.v2.service.collection.response.DescribeCollectionResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Get the collection detail
-BatchDescribeCollectionReq describeCollectionReq = BatchDescribeCollectionReq.builder()
-        .collectionNames(Collections.singletonList("test"))
-        .build();
-List<DescribeCollectionResp> batchResp = client.batchDescribeCollection(describeCollectionReq);
-
+List<DescribeCollectionResp> collections = client.batchDescribeCollection(
+    BatchDescribeCollectionReq.builder()
+        .databaseName("default")
+        .collectionNames(Arrays.asList("books", "articles"))
+        .build());
 ```
-
