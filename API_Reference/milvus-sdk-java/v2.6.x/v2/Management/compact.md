@@ -1,6 +1,6 @@
 # compact()
 
-This operation compacts the collection by merging small segments into larger ones. It is recommended to call this operation after inserting a large amount of data into a collection.
+Starts compaction for a collection, with optional clustering, L0, and target-size controls.
 
 ```java
 public CompactResp compact(CompactReq request)
@@ -9,59 +9,56 @@ public CompactResp compact(CompactReq request)
 ## Request Syntax
 
 ```java
-compact(CompactReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .isClustering(Boolean isClustering)
-    .build()
-);
+CompactReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .isClustering(isClustering)
+    .isL0(isL0)
+    .targetSize(targetSize)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
-    The name of the database. Defaults to the current database if not specified.
+    The name of the database that contains the target resource.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `isClustering(Boolean isClustering)` -
+- `isClustering(Boolean isClustering)`
 
-    Whether to perform clustering compaction. Defaults to `Boolean.FALSE`.
+    Whether to run a clustering compaction. Defaults to `false`.
+
+- `isL0(Boolean isL0)`
+
+    Whether to compact level-zero delete records. Defaults to `false`.
+
+- `targetSize(Long targetSize)`
+
+    The target segment size for the compaction operation.
 
 **RETURNS:**
 
 *CompactResp*
 
-A **CompactResp** object contains a compaction ID.
-
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Starts compaction for a collection, with optional clustering, L0, and target-size controls.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.utility.request.CompactReq;
-import io.milvus.v2.service.utility.response.CompactResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Compact a collection
-client.compact(CompactReq.builder()
-    .collectionName("my_collection")
-    .build();
-);
+CompactResp response = client.compact(CompactReq.builder()
+    .databaseName("default")
+    .collectionName("books")
+    .isClustering(true)
+    .targetSize(512L * 1024 * 1024)
+    .build());
 ```

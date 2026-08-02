@@ -1,48 +1,63 @@
 # describe_user()
 
-This operation returns the roles assigned to a user and the user description.
+Returns the `roles` and `description` associated with a user account. Returns an empty dictionary when the user does not exist.
 
 ## Request Syntax
 
 ```python
 describe_user(
     user_name: str,
-    timeout: Optional[float] = None
+    timeout: Optional[float] = None,
+    **kwargs
 ) -> dict
 ```
 
 **PARAMETERS:**
 
 - **user_name** (*str*) -
+**[REQUIRED]**
+Name of the user account to describe.
 
-    **[REQUIRED]**
+- **timeout** (*Optional[float]*) -
+Default: `None`
+Maximum time, in seconds, to wait for the RPC to complete.
 
-    The name of the user to describe.
-
-- **timeout** (*float*) -
-
-    The timeout duration for this operation.
+- **kwargs** (*Any*) -
+Additional request context options.
 
 **RETURN TYPE:**
 
 *dict*
 
-A dictionary that contains `user_name`, `roles`, and `description`.
+**RETURNS:**
+
+Dictionary with `user_name`, `roles`, and `description`. Returns an empty dictionary when the user is not found.
+
+- **user_name** (*str*) -
+Name of the described user account.
+
+- **roles** (*list[str]*) -
+Roles assigned to the user account.
+
+- **description** (*str*) -
+Description stored for the user account.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    This exception will be raised when any error occurs during this operation.
-
-- **ParamError**
-
-    This exception will be raised when a parameter value is invalid.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
 ```python
-user_info = client.describe_user(user_name="analyst_user")
-print(user_info["roles"])
-print(user_info["description"])
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+user = client.describe_user("analyst")
+print(user)
+# {
+#     "user_name": "analyst",
+#     "roles": ["read_only"],
+#     "description": "Analytics account",
+# }
 ```

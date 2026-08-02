@@ -1,6 +1,6 @@
 # describeCollection()
 
-This operation lists detailed information about a specific collection. You can identify the collection by name or by collection ID.
+Returns metadata for a collection selected by name or ID.
 
 ```java
 public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
@@ -9,29 +9,26 @@ public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
 ## Request Syntax
 
 ```java
-describeCollection(DescribeCollectionReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .collectionId(Long collectionId)
-    .build()
-)
+DescribeCollectionReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .collectionId(collectionId)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database to which the target collection belongs.
+    The name of the database that contains the target resource.
 
 - `collectionName(String collectionName)`
 
-    The name of an existing collection.
-
-    Setting this to a non-existing collection results in **MilvusException**.
+    The name of the target collection.
 
 - `collectionId(Long collectionId)`
 
-    The numeric ID of the collection to describe. Use this when you need to identify the collection by ID instead of name.
+    The ID of the target collection.
 
 **RETURNS:**
 
@@ -107,19 +104,18 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Returns metadata for a collection selected by name or ID.
+
 ```java
-import io.milvus.v2.service.collection.request.DescribeCollectionReq;
-import io.milvus.v2.service.collection.response.DescribeCollectionResp;
-
-DescribeCollectionReq request = DescribeCollectionReq.builder()
-    .collectionName("book_chunks")
-    .build();
-
-DescribeCollectionResp response = client.describeCollection(request);
+DescribeCollectionResp collection = client.describeCollection(
+    DescribeCollectionReq.builder()
+        .databaseName("default")
+        .collectionName("books")
+        .build());
 ```

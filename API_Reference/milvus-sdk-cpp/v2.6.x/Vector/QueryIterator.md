@@ -66,11 +66,11 @@ auto request = QueryIteratorRequest()
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
-    Adds a filter template. This takes effect only if `WithFilter()` is set.  Read this page for more about [filter templating](https://milvus.io/docs/filtering-templating.md).
+    Adds one value for a placeholder in the filter expression. It is used only when the request has a non-empty filter and avoids repeatedly parsing large literal values.
 
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
-    Sets filter templates. This takes effect only if `WithFilter()` is set.  Read this page for more about [filter templating](https://milvus.io/docs/filtering-templating.md).
+    Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
 
 - `WithLimit(int64_t limit)`
 
@@ -101,6 +101,110 @@ auto request = QueryIteratorRequest()
 *Status* with *QueryIteratorPtr*
 
 Check `status.IsOk()` to confirm success.
+
+### FieldData
+
+This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+
+```cpp
+// Base abstract interface (not instantiated directly)
+class Field {
+    const std::string& Name() const;
+    DataType Type() const;
+    DataType ElementType() const;   // for ARRAY fields only
+    virtual size_t Count() const = 0;
+    virtual void Reserve(size_t count) = 0;
+};
+
+using FieldDataPtr = std::shared_ptr<Field>;
+
+// Template class
+template <typename T, DataType Dt>
+class FieldData : public Field {
+    explicit FieldData(std::string name);
+    FieldData(std::string name, const std::vector<T>& data);
+    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+
+    StatusCode Add(const T& element);
+    StatusCode AddNull();
+    StatusCode Append(const std::vector<T>& elements);
+    size_t Count() const;
+    void Reserve(size_t count);
+    virtual const std::vector<T>& Data() const;
+    virtual T Value(size_t i) const;
+    virtual bool IsNull(size_t i) const;
+    virtual const std::vector<bool>& ValidData() const;
+};
+```
+
+### QueryResults
+
+This class holds the column-based result data returned by a `Query()` call. Access it via `Results()` on a `QueryResponse` object.
+
+```cpp
+const QueryResults& results = response.Results();
+```
+
+**METHODS:**
+
+- `FieldDataPtr OutputField(const std::string& name) const`
+
+    Returns the named output field as a `FieldDataPtr`. Cast to the concrete type with `std::dynamic_pointer_cast<Int64FieldData>(results.OutputField("id"))`.
+
+- `const std::vector<FieldDataPtr>& OutputFields() const`
+
+    Returns all output fields in the order they were returned by the server.
+
+- `const std::set<std::string>& OutputFieldNames() const`
+
+    Returns the set of output field names that were requested in the query.
+
+- `Status OutputRows(EntityRows& rows) const`
+
+    Converts all result rows to a vector of JSON-like row maps and stores them in `rows`.
+
+- `Status OutputRow(int i, EntityRow& row) const`
+
+    Converts the row at index `i` to a JSON-like row map.
+
+- `uint64_t GetRowCount() const`
+
+    Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+
+### Iterator
+
+QueryIterator is an alias of Iterator<QueryResults>. Use it to retrieve query rows in batches when the complete result set is larger than a single request limit.
+
+### Output field types
+
+Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
+
+The pointer convention is XxxFieldDataPtr = std::shared_ptr<XxxFieldData>. This result representation is used by query interfaces and does not make the pointer aliases separate API pages.
+
+### Iterator
+
+Abstract base class. Do not instantiate it directly; use the QueryIterator alias below.
+
+```cpp
+template <typename T>
+class Iterator {
+ public:
+    virtual Status Next(T& results) = 0;
+};
+```
+
+- `virtual Status Next(T& results) = 0`
+
+### QueryIterator
+
+Iterates over `QueryResults` batches from a `QueryIterator()` call. Each call to `Next()` fills a `QueryResults` with the next batch of rows.
+
+```cpp
+using QueryIterator    = Iterator<QueryResults>;
+using QueryIteratorPtr = std::shared_ptr<QueryIterator>;
+```
+
+Obtained via `MilvusClientV2::QueryIterator(IteratorArguments, QueryIteratorPtr&)`.
 
 **EXCEPTIONS:**
 

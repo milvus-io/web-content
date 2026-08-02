@@ -1,6 +1,6 @@
 # createRole()
 
-This operation creates a role and optionally stores a description for that role.
+Creates a role with an optional description.
 
 ```java
 public void createRole(CreateRoleReq request)
@@ -9,44 +9,35 @@ public void createRole(CreateRoleReq request)
 ## Request Syntax
 
 ```java
-client.createRole(CreateRoleReq.builder()
-    .roleName(String roleName)
-    .description(String description)
-    .build()
-);
+CreateRoleReq.builder()
+    .roleName(roleName)
+    .description(description)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `roleName(String roleName)`
 
-    **[REQUIRED]**
-
-    The name of the role to create.
+    The name of the role.
 
 - `description(String description)`
 
-    An optional description of the role. Defaults to an empty string.
-
-**RETURNS:**
-
-*void*
-
-This operation returns no value.
+    The human-readable description of the role.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
-```java
-import io.milvus.v2.service.rbac.request.CreateRoleReq;
+Creates a role with an optional description.
 
+```java
 client.createRole(CreateRoleReq.builder()
-    .roleName("analytics_reader")
-    .description("Grants read-only access to analytics collections")
+    .roleName("analyst")
+    .description("Read-only analytics role")
     .build());
 ```

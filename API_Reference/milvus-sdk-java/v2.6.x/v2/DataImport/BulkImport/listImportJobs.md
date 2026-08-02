@@ -1,6 +1,6 @@
 # listImportJobs()
 
-This operation lists all existing import jobs regarding the specified collection.
+Lists bulk import jobs in Milvus or Zilliz Cloud.
 
 ```java
 public static String listImportJobs(String url, BaseListImportJobsRequest request)
@@ -8,52 +8,43 @@ public static String listImportJobs(String url, BaseListImportJobsRequest reques
 
 ## Request Syntax
 
+Use this request to list import jobs in open-source Milvus.
+
 ```java
-bulkImport.listImportJobs(
-    url,
-    request
-)
+MilvusListImportJobsRequest.builder()
+    .apiKey(apiKey)
+    .collectionName(collectionName)
+    .dbName(dbName)
+    .build();
 ```
 
 **PARAMETERS:**
 
-- **url** (*String*) -
+- **apiKey** (*String*) -
+Milvus authentication in `username:password` form.
 
-    The endpoint of the connected Milvus instance.
+- **collectionName** (*String*) -
+Collection whose import jobs should be listed.
 
-- **request** (*[BaseListImportRequest](listImportJobs.md)*) -  
-
-    A **BaseImportRequest** instance.
-
-**RETURN TYPE:**
-
-*String*
+- **dbName** (*String*) -
+Database containing the collection.
 
 **RETURNS:**
 
-A list of import job IDs of the specified collection.
+*String*
 
-## BaseListImportRequest
-
-A **BaseListImportRequest** instance is implemented in **MilvusListImportRequest**.
-
-### MilvusListImportRequest
-
-```java
-MilvusListImportRequest.builder()
-    .collectionName(String collectionName)
-    .build()
-```
-
-**BUILDER METHODS:**
-
-- `collectionName(String collectionName)`
-
-    The name of the target collection of this operation.
+A JSON response containing the matching import jobs and pagination details.
 
 ## Example
 
-```java
+Lists import jobs for a collection in Milvus.
 
+```java
+MilvusListImportJobsRequest request = MilvusListImportJobsRequest.builder()
+    .dbName("default")
+    .collectionName("books")
+    .apiKey("root:Milvus")
+    .build();
+String response = BulkImportUtils.listImportJobs("http://localhost:19530", request);
 ```
 

@@ -1,67 +1,47 @@
 # list_volumes()
 
-This function lists volumes under a project with pagination and optional filtering by volume type.
+Adds project_id and volume_type filtering.
 
 ## Request Syntax
 
 ```python
-volume_manager.list_volumes(
+# include-start zilliz
+list_volumes(
     project_id: str,
     current_page: int = 1,
     page_size: int = 10,
-    volume_type: str | None = None,
-)
+    volume_type: Optional[str] = None,
+) -> requests.Response
+# include-end
 ```
 
 **PARAMETERS:**
 
-- **project_id** (*str*) -
-
-    **[REQUIRED]**
-
-    Project ID to query.
-
-- **current_page** (*int*) -
-
-    Page number to query.
-
-- **page_size** (*int*) -
-
-    Number of records returned per page.
-
-- **volume_type** (*str*) -
-
-    Optional filter for volume type. Supported values are `MANAGED` and `EXTERNAL`.
-
 **RETURN TYPE:**
+
 *requests.Response*
 
-Returns a paginated volume list.
+**RETURNS:**
 
-HTTP response containing volume list results.
+HTTP response containing a page of volumes for the project.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
-
-    Raised when the list request fails.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
 ```python
-from pymilvus.bulk_writer import VolumeManager
+# include-start zilliz
+from pymilvus.bulk_writer import VolumeFileManager, VolumeManager
 
-volume_manager = VolumeManager(
-    cloud_endpoint="https://api.cloud.zilliz.com",
-    api_key="YOUR_API_KEY",
-)
+manager = VolumeManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY")
+manager.create_volume(project_id="proj-xxxx", region_id="aws-us-west-2", volume_name="book-volume", volume_type="EXTERNAL")
+manager.describe_volume("book-volume")
+manager.list_volumes(project_id="proj-xxxx", volume_type="EXTERNAL")
 
-resp = volume_manager.list_volumes(
-    project_id="proj-xxx",
-    current_page=1,
-    page_size=20,
-    volume_type="EXTERNAL",
-)
-
-print(resp.json())
+file_manager = VolumeFileManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY", volume_name="book-volume")
+file_manager.upload_file_to_volume(source_file_path="./data/books.parquet", target_volume_path="datasets/books/books.parquet", upload_concurrency=4)
+# include-end
 ```

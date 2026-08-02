@@ -14,7 +14,7 @@ func NewDiskAnnParam(searchList int) diskANNParam
 
 **RETURNS:**
 
-*AnnParam*
+*[AnnParam](AnnParam.md)*
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 

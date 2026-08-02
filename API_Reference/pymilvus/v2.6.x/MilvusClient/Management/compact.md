@@ -1,6 +1,6 @@
 # compact()
 
-This operation starts a compaction job that merges small segments in a collection to improve storage layout and query efficiency.
+Adds target_size/target_size_unit and positive-size validation. Async variant shares the sync method contract.
 
 ## Request Syntax
 
@@ -19,63 +19,53 @@ compact(
 **PARAMETERS:**
 
 - **collection_name** (*str*) -
+**[REQUIRED]**
+The name of the collection to compact.
 
-    **[REQUIRED]**
+- **is_clustering** (*Optional[bool]*) -
+Default: `False`
+The flag that requests a clustering compaction.
 
-    Name of the collection to compact.
+- **is_l0** (*Optional[bool]*) -
+Default: `False`
+The flag that requests a level-zero compaction.
 
-- **is_clustering** (*bool*) -
-
-    Whether to trigger clustering compaction.
-
-- **is_l0** (*bool*) -
-
-    Whether to trigger L0 compaction.
-
-- **target_size** (*int*) -
-
-    Optional target segment size after compaction. Must be a positive integer.
+- **target_size** (*Optional[int]*) -
+Default: `None`
+The desired segment size after compaction. The value must be a positive integer; the server default is used when omitted.
 
 - **target_size_unit** (*str*) -
+Default: `"mb"`
+The unit for `target_size`. Supported values are `b`, `kb`, `mb`, `gb`, `tb`, and `pb`; the default is `mb`.
 
-    Unit for `target_size`. Supported values are `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, and `"pb"`.
+- **timeout** (*Optional[float]*) -
+Default: `None`
+The maximum time, in seconds, to wait for the RPC. When omitted, the client waits until the server responds or an error occurs.
 
-- **timeout** (*float*) -
-
-    Optional RPC timeout in seconds.
-
-- **kwargs** (*dict*) -
-
-    Optional request context parameters.
+- **kwargs** (*Any*) -
+The additional request context options.
 
 **RETURN TYPE:**
 
 *int*
 
-Compaction job ID for follow-up status queries.
+**RETURNS:**
+
+Compaction job identifier returned by Milvus.
 
 **EXCEPTIONS:**
 
-- **ParamError**
-
-    Raised when `target_size` is not an integer or when `target_size_unit` is invalid.
-
 - **MilvusException**
-
-    Raised when the server rejects the request or the compaction RPC fails.
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
+
+Demonstrates compact usage.
 
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
-job_id = client.compact(
-    collection_name="book_catalog",
-    is_clustering=True,
-    target_size=512,
-    target_size_unit="mb",
-)
-
+client = MilvusClient(uri="http://localhost:19530")
+job_id = client.compact(collection_name="book_chunks", target_size=512, target_size_unit="mb")
 print(job_id)
 ```

@@ -1,93 +1,39 @@
 # CollectionSchema
 
-A **CollectionSchema** instance represents the schema of a collection. A schema sketches the structure of a collection.
+Updates schema constructor and metadata behavior. Class property behavior changed. Class property behavior changed. Class property behavior changed.
 
-```python
-class pymilvus.CollectionSchema
-```
-
-## Constructor
-
-Constructs the schema of a collection by defining fields, data types, and other parameters.
+## Request Syntax
 
 ```python
 CollectionSchema(
-    fields: list,
-    description: str
+    fields: List[FieldSchema],
+    description: str = "",
+    struct_fields: Optional[List[StructFieldSchema]] = None,
+    functions: Optional[List[Function]] = None,
+    **kwargs,
 )
 ```
 
 **PARAMETERS:**
 
-- **fields** (*list*) -
+- **fields** (*List[FieldSchema]*) -
+**[REQUIRED]**
+The field schemas in the collection.
 
-    **[REQUIRED]**
+- **description** (*str*) -
+Default: `""`
+The description of the collection.
 
-    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the collection schema.
+- **struct_fields** (*Optional[List[StructFieldSchema]]*) -
+Default: `None`
+The optional struct-field schemas in the collection.
 
-    <div class="alert note">
-    
-    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
+- **functions** (*Optional[List[Function]]*) -
+Default: `None`
+The optional function definitions attached to the collection schema.
 
-    </div>
-
-- **description** (*string*) -
-
-    The description of the schema.
-
-    If a description is not provided, it will be set to an empty string.
-
-- **kwargs** -
-
-    - **auto_id** (*bool*) -
-
-        Whether allows the primary field to automatically increment.
-
-        Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
-
-    - **enable_dynamic_field** (*bool*) -
-
-        Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
-
-        When you set this to **True**, Milvus and  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
-
-        <div class="alert note">
-        
-        If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a dynamic field as key-value pairs.
-
-        </div>
-
-    - **primary_field** (*str*) -
-
-        The name of the primary field.
-
-        The value should be the name of a field listed in **fields**.
-
-        As an alternative, you can set **is_primary** when creating a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
-
-    - **partition_key_field** (*str*) -
-
-        The name of the field that serves as the partition key.
-
-        The value should be the name of a field listed in **fields**.
-
-        Setting this makes Milvus manage all partitions in the current collection.
-
-        As an alternative, you can set **is_partition_key** when creating a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
-
-        <div class="alert note">
-        
-        Once a field is designated as the partition key, Milvus automatically creates a partition for each unique value in this field and saves entities in these partitions accordingly.
-        
-        This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
-        
-        As an alternative, you can set **partition_key_field** when creating a **CollectionSchema** object.
-
-        </div>
-
-    - **partition_key_isolation** (*bool*) -
-
-        Whether to enable partition key isolation to improve further search performance in scalar filtering on the partition key. For details, refer to [Use Partition Key Isolation](https://milvus.io/docs/use-partition-key.md#Use-Partition-Key-Isolation).
+- **kwargs** (*Any*) -
+The additional collection options, including dynamic-field, namespace, key, auto-ID, and field-validation settings.
 
 **RETURN TYPE:**
 
@@ -95,64 +41,26 @@ CollectionSchema(
 
 **RETURNS:**
 
-A **CollectionSchema** object.
+Collection schema instance containing the configured fields and collection-level properties.
 
 **EXCEPTIONS:**
 
-- **FieldsTypeException**: 
-
-    This exception will be raised when the **fields** parameter is not a list.
-
-- **FieldTypeException**: 
-
-    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
-
-- **PrimaryKeyException:**
-
-    This exception will be raised if
-
-    - The **primary_field** parameter has been set but the value is not a string.
-
-    - The **primary_field** parameter has been set but the value is not the name of any listed fields.
-
-- **PartitionKeyException:**
-
-    This exception will be raised if 
-
-    - The **partition_key_field** parameter has been set but the value is not a string.
-
-    - The **partition_key_field** parameter has been set but the value is not the name of any listed fields.
-
-- **AutoIDException:**
-
-    - This exception will be raised if the **auto_id** parameter has been set but the value is not a boolean.
+- **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples
 
+Demonstrates CollectionSchema usage.
+
 ```python
-from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus import CollectionSchema, DataType, FieldSchema, StructFieldSchema
 
-# Define fields in a schema
-primary_key = FieldSchema(
-    name="id",
-    dtype=DataType.INT64,
-    is_primary=True,
-)
+chunk = StructFieldSchema(nullable=True, description="Optional chunk metadata")
+chunk.add_field("source", DataType.VARCHAR, max_length=128)
 
-vector = FieldSchema(
-    name="vector",
-    dtype=DataType.FLOAT_VECTOR,
-    dim=768
-)
-
-# Construct a schema with the predefined fields
-schema = CollectionSchema(
-    fields=[primary_key, vector],
-    description="example_schema"
-)
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=3),
+])
+print(schema)
 ```
-
-## Methods
-
-The following are the methods of the `CollectionSchema` class:
-
