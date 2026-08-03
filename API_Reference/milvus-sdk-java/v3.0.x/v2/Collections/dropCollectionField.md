@@ -1,18 +1,19 @@
-# dropCollectionFunction()
+# dropCollectionField()
 
-Removes a function definition from an existing collection without removing its output field. Use [`dropFunctionField()`](dropFunctionField.md) to remove both.
+Drops an existing collection field by field name or field ID.
 
 ```java
-public void dropCollectionFunction(DropCollectionFunctionReq request)
+public void dropCollectionField(DropCollectionFieldReq request)
 ```
 
 ## Request Syntax
 
 ```java
-DropCollectionFunctionReq.builder()
+DropCollectionFieldReq.builder()
     .collectionName(collectionName)
     .databaseName(databaseName)
-    .functionName(functionName)
+    .fieldName(fieldName)
+    .fieldId(fieldId)
     .build();
 ```
 
@@ -26,9 +27,13 @@ DropCollectionFunctionReq.builder()
 
     The name of the database. Defaults to the current database when omitted.
 
-- `functionName(String functionName)`
+- `fieldName(String fieldName)`
 
-    The name of the function definition to remove.
+    The name of the field to drop.
+
+- `fieldId(Long fieldId)`
+
+    The numeric ID of the field to drop when identifying it by ID.
 
 **RETURNS:**
 
@@ -45,8 +50,8 @@ This operation does not return a value.
 ## Example
 
 ```java
-client.dropCollectionFunction(DropCollectionFunctionReq.builder()
+client.dropCollectionField(DropCollectionFieldReq.builder()
     .collectionName("books")
-    .functionName("bm25")
+    .fieldName("obsolete_field")
     .build());
 ```

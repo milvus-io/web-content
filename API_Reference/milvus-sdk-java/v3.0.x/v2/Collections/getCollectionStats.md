@@ -1,6 +1,6 @@
 # getCollectionStats()
 
-This operation lists the statistics collected on a specific collection.
+Returns the complete collection statistics map in addition to the entity count.
 
 ```java
 public GetCollectionStatsResp getCollectionStats(GetCollectionStatsReq request)
@@ -9,63 +9,39 @@ public GetCollectionStatsResp getCollectionStats(GetCollectionStatsReq request)
 ## Request Syntax
 
 ```java
-getCollectionStats(GetCollectionStatsReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .build()
-)
+GetCollectionStatsReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database to which the target collection belongs.
+    The name of the database. Defaults to the current database when omitted.
 
 - `collectionName(String collectionName)`
 
-    The name of a collection.
-
-**RETURN TYPE:**
-
-*GetCollectionStatsResp*
+    The name of the target collection.
 
 **RETURNS:**
 
-A **GetCollectionStatsResp** object containing collected statistics on the specified collection.
+*GetCollectionStatsResp*
 
-**PARAMETERS:**
-
-- **numOfEntities** (*long*)
-
-    The count of entities in the collection.
+Contains numOfEntities and the complete stats map returned by Milvus.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.GetCollectionStatsReq;
-import io.milvus.v2.service.collection.response.GetCollectionStatsResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Get collection stats
-GetCollectionStatsReq getCollectionStatsReq = GetCollectionStatsReq.builder()
-        .collectionName("test")
-        .build();
-GetCollectionStatsResp getCollectionStatsResp = client.getCollectionStats(getCollectionStatsReq);
+GetCollectionStatsResp response = client.getCollectionStats(GetCollectionStatsReq.builder()
+    .collectionName("books")
+    .build());
+Map<String, String> stats = response.getStats();
 ```
-

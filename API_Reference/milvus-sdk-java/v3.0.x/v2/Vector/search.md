@@ -1,8 +1,6 @@
 # search()
 
-# search()
-
-This operation conducts a vector similarity search with an optional scalar filtering expression.
+Performs vector search with optional result ordering, aggregation requests and buckets, and execution metrics.
 
 ```java
 public SearchResp search(SearchReq request)
@@ -11,40 +9,74 @@ public SearchResp search(SearchReq request)
 ## Request Syntax
 
 ```java
-search(SearchReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .partitionNames(List<String> partitionNames)
-    .annsField(String annsField)
-    .topK(int topK)
-    .filter(String filter)
-    .outputFields(List<String> outputFields)
-    .data(List<BaseVector> data)
-    .ids(List<Object> ids)
-    .offset(long offset)
-    .limit(long limit)
-    .roundDecimal(int roundDecimal)
-    .searchParams(Map<String, Object> searchParams)
-    .guaranteeTimestamp(long guaranteeTimestamp)
-    .gracefulTime(Long gracefulTime)
-    .consistencyLevel(ConsistencyLevel consistencyLevel)
-    .ignoreGrowing(boolean ignoreGrowing)
-    .timezone(String timezone)
-    .groupByFieldName(String groupByFieldName)
-    .groupSize(Integer groupSize)
-    .strictGroupSize(Boolean strictGroupSize)
-    .functionScore(FunctionScore functionScore)
-    .filterTemplateValues(Map<String, Object> filterTemplateValues)
-    .highlighter(Highlighter highlighter)
-    .build()
-);
+// include-start milvus
+SearchReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .partitionNames(partitionNames)
+    .annsField(annsField)
+    .topK(topK)
+    .filter(filter)
+    .outputFields(outputFields)
+    .data(data)
+    .ids(ids)
+    .offset(offset)
+    .limit(limit)
+    .roundDecimal(roundDecimal)
+    .searchParams(searchParams)
+    .guaranteeTimestamp(guaranteeTimestamp)
+    .gracefulTime(gracefulTime)
+    .consistencyLevel(consistencyLevel)
+    .ignoreGrowing(ignoreGrowing)
+    .timezone(timezone)
+    .orderByFields(orderByFields)
+    .groupByFieldName(groupByFieldName)
+    .groupSize(groupSize)
+    .strictGroupSize(strictGroupSize)
+    .functionScore(functionScore)
+    .filterTemplateValues(filterTemplateValues)
+    .highlighter(highlighter)
+    .searchAggregation(searchAggregation)
+    .build();
+// include-end
+// include-start zilliz
+SearchReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .clusterId(clusterId)
+    .partitionNames(partitionNames)
+    .annsField(annsField)
+    .topK(topK)
+    .filter(filter)
+    .outputFields(outputFields)
+    .data(data)
+    .ids(ids)
+    .offset(offset)
+    .limit(limit)
+    .roundDecimal(roundDecimal)
+    .searchParams(searchParams)
+    .guaranteeTimestamp(guaranteeTimestamp)
+    .gracefulTime(gracefulTime)
+    .consistencyLevel(consistencyLevel)
+    .ignoreGrowing(ignoreGrowing)
+    .timezone(timezone)
+    .orderByFields(orderByFields)
+    .groupByFieldName(groupByFieldName)
+    .groupSize(groupSize)
+    .strictGroupSize(strictGroupSize)
+    .functionScore(functionScore)
+    .filterTemplateValues(filterTemplateValues)
+    .highlighter(highlighter)
+    .searchAggregation(searchAggregation)
+    .build();
+// include-end
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database. Defaults to the current database if not specified.
+    The name of the database. Defaults to the current database when omitted.
 
 - `collectionName(String collectionName)`
 
@@ -52,143 +84,140 @@ search(SearchReq.builder()
 
 - `partitionNames(List<String> partitionNames)`
 
-    A list of partition names to target.
+    The partitions to search.
 
 - `annsField(String annsField)`
 
-    The name of the vector field for approximate nearest neighbor search.
+    The vector field used for approximate nearest-neighbor search.
 
 - `topK(int topK)`
 
-    The number of top results to return.
+    The number of nearest candidates requested from the server.
 
 - `filter(String filter)`
 
-    A boolean expression to filter results.
+    A scalar filtering expression.
 
 - `outputFields(List<String> outputFields)`
 
-    A list of field names to include in the output.
+    The entity fields included with each match.
 
 - `data(List<BaseVector> data)`
 
-    A list of data rows to insert/upsert as JSON objects.
+    The query vectors. Do not use together with ids.
 
 - `ids(List<Object> ids)`
 
-    A list of primary key values to identify specific entities.
+    Primary keys whose stored vectors are used as query vectors. Do not use together with data.
 
 - `offset(long offset)`
 
-    The number of results to skip before returning.
+    The number of matches to skip.
 
 - `limit(long limit)`
 
-    The maximum number of results to return.
+    The maximum number of matches returned for each query.
 
 - `roundDecimal(int roundDecimal)`
 
-    The number of decimal places for distance/score rounding.
+    The number of decimal places used to round scores.
 
 - `searchParams(Map<String, Object> searchParams)`
 
-    Additional search parameters as key-value pairs.
+    Index-specific search parameters.
 
 - `guaranteeTimestamp(long guaranteeTimestamp)`
 
-    A timestamp guaranteeing that all operations before it are visible.
+    Deprecated guarantee timestamp.
 
 - `gracefulTime(Long gracefulTime)`
 
-    The graceful time in milliseconds for consistency.
+    Deprecated graceful consistency window.
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the search.
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
-    Whether to ignore growing segments during the operation.
+    Whether to ignore growing segments.
 
 - `timezone(String timezone)`
 
-    The timezone string for time-related filters.
+    The timezone used to interpret temporal expressions.
+
+- `orderByFields(List<OrderByField> orderByFields)`
+
+    The scalar fields and directions used to order search results.
 
 - `groupByFieldName(String groupByFieldName)`
 
-    The field name to group search results by.
+    The field used to group matching entities.
 
 - `groupSize(Integer groupSize)`
 
-    The number of results to return per group.
+    The maximum number of entities returned per group.
 
 - `strictGroupSize(Boolean strictGroupSize)`
 
-    Whether to strictly enforce the group size.
+    Whether every returned group must contain groupSize entities.
 
 - `functionScore(FunctionScore functionScore)`
 
-    A FunctionScore object for custom scoring.
+    The scoring functions applied to the search results.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
-    A map of template variable values for parameterized filters.
+    Values substituted into placeholders in the filter expression.
 
 - `highlighter(Highlighter highlighter)`
 
-    A Highlighter object for text highlighting in search results.
+    Text-highlighting configuration for returned fields.
+
+- `searchAggregation(SearchAggregation searchAggregation)`
+
+    Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration.
 
 **RETURNS:**
 
 *SearchResp*
 
-*SearchResp*
+Contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
 
 **EXCEPTIONS:**
 
 - **MilvusClientException**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Demonstrates search() against Milvus.
+
 ```java
-import io.milvus.v2.service.vector.request.SearchReq;
-import io.milvus.v2.service.vector.request.FunctionScore;
-import io.milvus.v2.service.vector.request.data.EmbeddedText;
-import io.milvus.v2.service.vector.request.ranker.DecayRanker;
-import io.milvus.v2.service.vector.response.SearchResp;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-// Build a DecayRanker to rerank results by field value proximity
-DecayRanker decay = DecayRanker.builder()
-        .name("birth_year_decay")
-        .inputFieldNames(Collections.singletonList("birth_year"))
-        .function("linear")
-        .origin(1900)
-        .scale(50)
-        .offset(0)
-        .decay(0.1)
-        .build();
-
-// Search with FunctionScore for reranking
-SearchResp searchResp = client.search(SearchReq.builder()
-        .collectionName("my_collection")
-        .data(Collections.singletonList(new EmbeddedText("Albert Darwin")))
-        .limit(100)
-        .outputFields(Arrays.asList("birth_year", "lifespan"))
-        .functionScore(FunctionScore.builder()
-        .addFunction(decay)
+// include-start milvus
+SearchResp response = client.search(SearchReq.builder()
+    .collectionName("books")
+    .data(Collections.singletonList(queryVector))
+    .annsField("embedding")
+    .searchAggregation(SearchAggregation.builder()
+        .fields(Collections.singletonList("category"))
+        .size(10)
         .build())
-        .build());
-
-List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
-for (List<SearchResp.SearchResult> results : searchResults) {
-    for (SearchResp.SearchResult result : results) {
-        System.out.println(result);
-    }
-}
+    .limit(10)
+    .build());
+// include-end
+// include-start zilliz
+SearchResp response = client.search(SearchReq.builder()
+    .collectionName("books")
+    .clusterId(CLUSTER_ID)
+    .data(Collections.singletonList(queryVector))
+    .annsField("embedding")
+    .searchAggregation(SearchAggregation.builder()
+        .fields(Collections.singletonList("category"))
+        .size(10)
+        .build())
+    .limit(10)
+    .build());
+// include-end
 ```

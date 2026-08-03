@@ -1,8 +1,6 @@
 # query()
 
-# query()
-
-This operation conducts a scalar filtering with a specified boolean expression.
+Queries entities by primary key or filter, with optional ordering through `orderByFields`.
 
 ```java
 public QueryResp query(QueryReq request)
@@ -11,29 +9,50 @@ public QueryResp query(QueryReq request)
 ## Request Syntax
 
 ```java
-query(QueryReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .partitionNames(List<String> partitionNames)
-    .outputFields(List<String> outputFields)
-    .ids(List<Object> ids)
-    .filter(String filter)
-    .consistencyLevel(ConsistencyLevel consistencyLevel)
-    .offset(long offset)
-    .limit(long limit)
-    .ignoreGrowing(boolean ignoreGrowing)
-    .timezone(String timezone)
-    .queryParams(Map<String, Object> queryParams)
-    .filterTemplateValues(Map<String, Object> filterTemplateValues)
-    .build()
-);
+// include-start milvus
+QueryReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .partitionNames(partitionNames)
+    .outputFields(outputFields)
+    .ids(ids)
+    .filter(filter)
+    .consistencyLevel(consistencyLevel)
+    .offset(offset)
+    .limit(limit)
+    .ignoreGrowing(ignoreGrowing)
+    .timezone(timezone)
+    .orderByFields(orderByFields)
+    .queryParams(queryParams)
+    .filterTemplateValues(filterTemplateValues)
+    .build();
+// include-end
+// include-start zilliz
+QueryReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .clusterId(clusterId)
+    .partitionNames(partitionNames)
+    .outputFields(outputFields)
+    .ids(ids)
+    .filter(filter)
+    .consistencyLevel(consistencyLevel)
+    .offset(offset)
+    .limit(limit)
+    .ignoreGrowing(ignoreGrowing)
+    .timezone(timezone)
+    .orderByFields(orderByFields)
+    .queryParams(queryParams)
+    .filterTemplateValues(filterTemplateValues)
+    .build();
+// include-end
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database. Defaults to the current database if not specified.
+    The name of the database. Defaults to the current database when omitted.
 
 - `collectionName(String collectionName)`
 
@@ -41,83 +60,88 @@ query(QueryReq.builder()
 
 - `partitionNames(List<String> partitionNames)`
 
-    A list of partition names to target.
+    The partitions to query.
 
 - `outputFields(List<String> outputFields)`
 
-    A list of field names to include in the output.
+    The fields to include in each returned row.
 
 - `ids(List<Object> ids)`
 
-    A list of primary key values to identify specific entities.
+    Primary-key values to query.
 
 - `filter(String filter)`
 
-    A boolean expression to filter results.
+    A scalar filtering expression.
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the query.
 
 - `offset(long offset)`
 
-    The number of results to skip before returning.
+    The number of matching rows to skip.
 
 - `limit(long limit)`
 
-    The maximum number of results to return.
+    The maximum number of rows to return.
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
-    Whether to ignore growing segments during the operation.
+    Whether to ignore growing segments.
 
 - `timezone(String timezone)`
 
-    The timezone string for time-related filters.
+    The timezone used to interpret temporal expressions.
+
+- `orderByFields(List<OrderByField> orderByFields)`
+
+    The scalar fields and directions used to order matching rows.
 
 - `queryParams(Map<String, Object> queryParams)`
 
-    Additional query parameters as key-value pairs. Defaults to `new HashMap<>()`.
+    Additional query parameters.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
-    A map of template variable values for parameterized filters.
+    Values substituted into placeholders in the filter expression.
 
 **RETURNS:**
 
 *QueryResp*
 
-A **QueryResp** object representing specific query results with the specified output fields
+Contains query rows ordered according to orderByFields when provided.
 
 **EXCEPTIONS:**
 
 - **MilvusClientException**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Demonstrates query() against Milvus.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.QueryReq;
-import io.milvus.v2.service.vector.response.QueryResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Query by filter "id < 10"
-QueryReq queryReq = QueryReq.builder()
-        .collectionName("test")
-        .filter("id < 10")
-        .build();
-QueryResp queryResp = client.query(queryReq);
-for (QueryResp.QueryResult result : queryResp.getGetResults()) {
-    System.out.println(result.getEntity());
-}
+// include-start milvus
+QueryResp response = client.query(QueryReq.builder()
+    .collectionName("books")
+    .orderByFields(Collections.singletonList(OrderByField.builder()
+        .fieldName("published_year")
+        .direction(AggDirection.DESC)
+        .build()))
+    .limit(10)
+    .build());
+// include-end
+// include-start zilliz
+QueryResp response = client.query(QueryReq.builder()
+    .collectionName("books")
+    .clusterId(CLUSTER_ID)
+    .orderByFields(Collections.singletonList(OrderByField.builder()
+        .fieldName("published_year")
+        .direction(AggDirection.DESC)
+        .build()))
+    .limit(10)
+    .build());
+// include-end
 ```

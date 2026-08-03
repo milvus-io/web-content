@@ -1,7 +1,5 @@
 # hybridSearch()
 
-# hybridSearch()
-
 This operation performs multi-vector search on a collection and returns search results after reranking.
 
 ```java

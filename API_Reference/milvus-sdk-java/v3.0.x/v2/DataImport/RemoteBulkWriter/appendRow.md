@@ -1,33 +1,30 @@
 # appendRow()
 
-This operation appends a row of data to the RemoteBulkWriter buffer. The data will be uploaded to remote storage when the buffer is full or when `commit()` is called.
+Validates and appends one row to the writer. When buffered data exceeds the configured `chunkSize`, the writer commits the current file automatically.
+
+[`StructFieldSchema`](../../Collections/StructFieldSchema/StructFieldSchema.md) fields can contain binary, float16, bfloat16, and int8 vector values.
 
 ```java
-public void appendRow(JsonObject rowData) throws IOException, InterruptedException
+public void appendRow(JsonObject rowData)
 ```
-
-**PARAMETERS:**
-
-- **rowData** (*JsonObject*) -
-
-    A JSON object representing a single row of data.
 
 **RETURNS:**
 
 *void*
 
+This operation does not return a value.
+
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **Exception**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
 ```java
-RemoteBulkWriter writer = new RemoteBulkWriter(config);
 JsonObject row = new JsonObject();
 row.addProperty("id", 1L);
-row.add("vector", gson.toJsonTree(new float[]{0.1f, 0.2f, 0.3f}));
+row.addProperty("title", "Dune");
 writer.appendRow(row);
 ```

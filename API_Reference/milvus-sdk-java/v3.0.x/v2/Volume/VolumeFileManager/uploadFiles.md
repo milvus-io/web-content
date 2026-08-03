@@ -1,9 +1,9 @@
-# uploadFilesAsync()
+# uploadFiles()
 
-Asynchronously uploads a file or directory to a Zilliz Cloud volume with configurable retry, concurrency, multipart, and progress reporting.
+Synchronously uploads a file or directory to a Zilliz Cloud volume with retry, concurrency, multipart, and progress controls.
 
 ```java
-public CompletableFuture<UploadFilesResult> uploadFilesAsync(UploadFilesRequest request)
+public UploadFilesResult uploadFiles(UploadFilesRequest request)
 ```
 
 ## Request Syntax
@@ -52,7 +52,7 @@ UploadFilesRequest.builder()
 
 **RETURNS:**
 
-*CompletableFuture<UploadFilesResult>*
+*UploadFilesResult*
 
 Identifies the target volume and uploaded path.
 
@@ -65,7 +65,7 @@ Identifies the target volume and uploaded path.
 ## Example
 
 ```java
-CompletableFuture<UploadFilesResult> future = manager.uploadFilesAsync(UploadFilesRequest.builder()
+UploadFilesResult result = manager.uploadFiles(UploadFilesRequest.builder()
     .sourceFilePath("./data")
     .targetVolumePath("imports/")
     .uploadConcurrency(5)

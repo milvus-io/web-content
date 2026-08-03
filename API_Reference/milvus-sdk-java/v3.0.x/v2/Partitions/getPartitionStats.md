@@ -1,6 +1,6 @@
 # getPartitionStats()
 
-This operation lists the statistics collected on a specific partition.
+Returns the complete partition statistics map in addition to the entity count.
 
 ```java
 public GetPartitionStatsResp getPartitionStats(GetPartitionStatsReq request)
@@ -9,69 +9,47 @@ public GetPartitionStatsResp getPartitionStats(GetPartitionStatsReq request)
 ## Request Syntax
 
 ```java
-getPartitionStats(GetPartitionStatsReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .partitionName(String partitionName)
-    .build()
-)
+GetPartitionStatsReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .partitionName(partitionName)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database to which the target collection belongs.
+    The name of the database. Defaults to the current database when omitted.
 
 - `collectionName(String collectionName)`
 
-    The name of a collection.
+    The name of the target collection.
 
 - `partitionName(String partitionName)`
 
-    The name of a partition in the specified collection.
-
-**RETURN TYPE:**
-
-*GetPartitionStatsResp*
+    The name of the target partition.
 
 **RETURNS:**
 
-A **GetPartitionStatsResp** object containing collected statistics on the specified collection.
+*GetPartitionStatsResp*
 
-**PARAMETERS:**
-
-- **numOfEntities** (*long*)
-
-    The count of entities in the partition.
+Contains numOfEntities and the complete stats map returned by Milvus.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Demonstrates getPartitionStats() with the reviewed v3.0.x API.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.partition.request.GetPartitionStatsReq;
-import io.milvus.v2.service.partition.response.GetPartitionStatsResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Get partition stats
-GetPartitionStatsReq getPartitionStatsReq = GetPartitionStatsReq.builder()
-        .collectionName("test")
-        .partitionName("default")
-        .build();
-GetPartitionStatsResp getPartitionStatsResp = client.getPartitionStats(getPartitionStatsReq);
+GetPartitionStatsResp response = client.getPartitionStats(GetPartitionStatsReq.builder()
+    .collectionName("books")
+    .partitionName("history")
+    .build());
+Map<String, String> stats = response.getStats();
 ```
-

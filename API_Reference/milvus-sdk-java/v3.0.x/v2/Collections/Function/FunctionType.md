@@ -1,17 +1,49 @@
 # FunctionType
 
-This is an enumeration that provides the following constants.
+Represents the supported server-side function types and provides conversion by name or numeric code.
+
+```java
+public enum FunctionType
+```
 
 ## Constants
 
-- **BM25** (1)
+### UNKNOWN(0)
 
-    Sets the function type to **BM25**.
+Represents an unknown or unsupported function type. `fromName()` and `fromCode()` return this value when no match is found.
 
-- **TextEmbedding** (2)
+### BM25(1)
 
-    Sets the function type to **TextEmbedding**.
+Represents the BM25 full-text scoring function.
 
-- **Rerank** (3)
+### TEXTEMBEDDING(2)
 
-    Sets the function type to **Rerank**.
+Represents a text-embedding function.
+
+### RERANK(3)
+
+Represents a reranking function.
+
+### MINHASH(4)
+
+Represents a MinHash function.
+
+### MOLFINGERPRINT(5)
+
+Represents a molecular-fingerprint function.
+
+**RETURNS:**
+
+*FunctionType*
+
+An enum value describing the server-side function type.
+
+## Example
+
+```java
+FunctionType byName = FunctionType.fromName("MinHash");
+FunctionType byCode = FunctionType.fromCode(5);
+
+int code = byName.getCode();
+String name = byCode.getName();
+```

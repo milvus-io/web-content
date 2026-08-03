@@ -1,7 +1,5 @@
 # renameCollection()
 
-# renameCollection()
-
 This operation renames an existing collection.
 
 ```java
