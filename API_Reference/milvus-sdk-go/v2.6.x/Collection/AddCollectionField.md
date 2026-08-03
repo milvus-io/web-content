@@ -1,28 +1,24 @@
 # AddCollectionField()
 
-This operation adds a new field to an existing collection schema.
+Adds a nullable field to an existing collection after validating the field option on the client.
 
 ```go
 func (c *Client) AddCollectionField(ctx context.Context, opt AddCollectionFieldOption, callOpts ...grpc.CallOption) error
 ```
 
-## Request Syntax
-
-```go
-option := milvusclient.NewAddCollectionFieldOption(collectionName, field)
-
-err := client.AddCollectionField(ctx, option)
-```
-
 **PARAMETERS:**
 
-- **collectionName** (*string*)
+- **collectionName** (*string*) -
 
-    The name of the target collection.
+    **[REQUIRED]**
 
-- **field** (**[entity.Field](Field.md)*)
+    The name of the collection to which the field is added.
 
-    The field.
+- **field** (**entity.Field*) -
+
+    **[REQUIRED]**
+
+    The field definition to add. Vector fields must be nullable.
 
 **RETURN TYPE:**
 
@@ -30,20 +26,21 @@ err := client.AddCollectionField(ctx, option)
 
 **RETURNS:**
 
-Returns nil on success, or an error describing what went wrong.
+Returns nil after the field is added. Returns an error when client-side validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 
-    Check `err != nil` for failure details.
+    Validation, request construction, or the RPC fails. Check the returned error for failure details.
 
 ## Example
+
+Demonstrates AddCollectionField() usage.
 
 ```go
 import (
 	"context"
-	"log"
 
 	"github.com/milvus-io/milvus/client/v2/entity"
 	"github.com/milvus-io/milvus/client/v2/milvusclient"
@@ -52,22 +49,18 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-	Address: milvusAddr,
-})
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{Address: "127.0.0.1:19530"})
 if err != nil {
-	log.Fatal("failed to connect to milvus server: ", err.Error())
+	// handle error
 }
-
 defer cli.Close(ctx)
 
-// the field to add
-// must be nullable for now
-newField := entity.NewField().WithName("new_field").WithDataType(entity.FieldTypeInt64).WithNullable(true)
+field := entity.NewField().
+	WithName("new_field").
+	WithDataType(entity.FieldTypeInt64).
+	WithNullable(true)
 
-err = cli.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption("customized_setup_2", newField))
+err = cli.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption("books", field))
 if err != nil {
 	// handle error
 }

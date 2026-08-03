@@ -1,142 +1,147 @@
 # Insert()
 
-This operation inserts one or more entities into a collection.
+Inserts rows or columns and supports constructing struct-array columns from row-based sub-field values.
 
 ```go
 func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ...grpc.CallOption) (InsertResult, error)
 ```
 
-## Request Syntax
-
-```go
-option := milvusclient.NewColumnBasedInsertOption(collName).
-	WithInt64Column(colName, data).
-	WithVarcharColumn(colName, data).
-	WithFloatVectorColumn(colName, dim, data).
-	WithBinaryVectorColumn(colName, dim, data).
-	WithBoolColumn(colName, data).
-	WithPartition(partitionName)
-
-// Alternative (row-based):
-// option := milvusclient.NewRowBasedInsertOption(collName, rows...)
-
-result, err := client.Insert(ctx, option)
-```
-
 **PARAMETERS:**
 
-- **collName** (*string*)
+- **collName** (*string*) -
 
-The name of the target collection.
+    **[REQUIRED]**
 
-**OPTION METHODS:**
+    The name of the target collection.
+
+- **rows** (*...any*) -
+
+    **[REQUIRED]**
+
+    One or more row values to insert.
+
+**BUILDER METHODS:**
 
 - `WithColumns(columns ...column.Column)`
 
-Inserts arbitrary typed columns.
+    This appends the supplied columns to the write request.
 
 - `WithBoolColumn(colName string, data []bool)`
 
-Inserts a column of boolean values.
+    This appends a Boolean scalar column with the specified name and values.
 
 - `WithInt8Column(colName string, data []int8)`
 
-Inserts a column of int8 values.
+    This appends an Int8 scalar column with the specified name and values.
 
 - `WithInt16Column(colName string, data []int16)`
 
-Inserts a column of int16 values.
+    This appends an Int16 scalar column with the specified name and values.
 
 - `WithInt32Column(colName string, data []int32)`
 
-Inserts a column of int32 values.
+    This appends an Int32 scalar column with the specified name and values.
 
 - `WithInt64Column(colName string, data []int64)`
 
-Inserts a column of int64 values.
+    This appends an Int64 scalar column with the specified name and values.
 
 - `WithVarcharColumn(colName string, data []string)`
 
-Inserts a column of string values.
+    This appends a VarChar scalar column with the specified name and values.
 
 - `WithFloatVectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float32 dense vectors.
+    This appends a float-vector column with the specified name, dimension, and values.
 
 - `WithFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of float16 vectors (converted from float32).
+    This converts the supplied float32 vectors to Float16 values and appends the resulting vector column.
 
 - `WithBFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-Inserts a column of bfloat16 vectors (converted from float32).
+    This converts the supplied float32 vectors to BFloat16 values and appends the resulting vector column.
 
 - `WithBinaryVectorColumn(colName string, dim int, data [][]byte)`
 
-Inserts a column of binary vectors.
+    This appends a binary-vector column with the specified name, dimension, and values.
 
 - `WithInt8VectorColumn(colName string, dim int, data [][]int8)`
 
-Inserts a column of int8 vectors.
+    This appends an Int8-vector column with the specified name, dimension, and values.
+
+- `WithStructArrayColumn(colName string, structSchema *entity.StructSchema, rows []map[string]any)`
+
+    This appends a struct-array column built from row-based sub-field values. Each row is a map keyed by sub-field name, and each value must match the scalar or vector type declared in structSchema.
 
 - `WithPartition(partitionName string)`
 
-Targets a specific partition for the insert operation.
+    This sets the target partition for the write request.
+
+- `WithPartialUpdate(partialUpdate bool)`
+
+    This enables or disables partial-update behavior for the write request.
+
+- `WithArrayAppend(fieldName string)`
+
+    WithArrayAppend declares that the Array field `fieldName` should be merged with ARRAY_APPEND semantics during an Upsert. The server implicitly enables partial_update when any non-REPLACE op is present, so callers do not need to also invoke WithPartialUpdate(true).
+
+- `WithArrayRemove(fieldName string)`
+
+    WithArrayRemove declares that the Array field `fieldName` should be merged with ARRAY_REMOVE semantics during an Upsert. See WithArrayAppend for the implicit partial_update promotion.
+
+- `WithFieldPartialOp(fieldName string, op schemapb.FieldPartialUpdateOp_OpType)`
+
+    WithFieldPartialOp attaches an explicit FieldPartialUpdateOp to the field with name `fieldName`. Intended for advanced callers; typical users should prefer the op-specific helpers (WithArrayAppend, WithArrayRemove).
+
+- `WithKeepAutoIDPk(keepPk bool)`
+
+    This controls whether row-based writes retain supplied primary-key values when automatic ID generation is enabled.
 
 **RETURN TYPE:**
 
-*[InsertResult](InsertResult.md), error*
+*InsertResult, error*
 
 **RETURNS:**
 
-The insert result containing the IDs of the newly inserted entities. Returns an error if the operation fails.
+Returns the inserted row count and generated or supplied primary keys, plus an error when request construction or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 
-    Check `err != nil` for failure details.
+    Validation, request construction, or the RPC fails. Check the returned error for failure details.
 
 ## Example
+
+Demonstrates Insert() usage.
 
 ```go
 import (
 	"context"
-	"fmt"
 
+	"github.com/milvus-io/milvus/client/v2/entity"
 	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-	Address: milvusAddr,
-})
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{Address: "127.0.0.1:19530"})
 if err != nil {
 	// handle error
 }
-
 defer cli.Close(ctx)
 
-resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setup").
-	WithInt64Column("id", []int64{1, 2, 3, 4, 5, 6, 7, 8, 9}).
-	WithVarcharColumn("color", []string{"pink_8682", "red_7025", "orange_6781", "pink_9298", "red_4794", "yellow_4222", "red_9392", "grey_8510", "white_9381", "purple_4976"}).
-	WithFloatVectorColumn("vector", 5, [][]float32{
-		{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592},
-		{0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104},
-		{0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592},
-		{0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345},
-		{0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106},
-		{0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955},
-		{0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987},
-		{-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052},
-		{0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336},
-		{0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608},
-	}),
-)
+structSchema := entity.NewStructSchema().
+	WithField(entity.NewField().WithName("text").WithDataType(entity.FieldTypeVarChar).WithMaxLength(256))
+rows := []map[string]any{{"text": []string{"first", "second"}}}
+
+result, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("books").
+	WithInt64Column("id", []int64{1}).
+	WithStructArrayColumn("chunks", structSchema, rows))
 if err != nil {
-	// handle err
+	// handle error
 }
-fmt.Println(resp)
+_ = result
 ```

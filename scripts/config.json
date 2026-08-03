@@ -182,6 +182,18 @@
           "alt_texts": []
         }
       },
+      "go-v3.0.x": {
+        "base": "KQT5bV62QaioKisKZT0crwZDnke:tbltgcl1fpw5Mt8E",
+        "sourceType": "drive",
+        "language": "go",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-go/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "cpp-v2.6.x": {
         "base": "XmndbkxkQaigA8soRiCcTT41nMd:tbln9XaZjW6RuEhu",
         "sourceType": "drive",
