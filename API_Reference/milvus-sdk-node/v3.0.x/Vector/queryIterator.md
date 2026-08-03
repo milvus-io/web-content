@@ -147,6 +147,6 @@ const iterator = await milvusClient.searchIterator({
 });
 
 for await (const batch of iterator) {
-    console.log(`Batch of ${batch.length} results:`, batch);
+    console.log(\`Batch of ${batch.length} results:\`, batch);
 }
 ```

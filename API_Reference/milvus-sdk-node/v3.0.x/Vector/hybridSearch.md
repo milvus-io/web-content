@@ -18,7 +18,6 @@ await milvusClient.hybridSearch({
     filter?: string,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     partition_names?: string[],
-    metric_type?: string,
     consistency_level?: ConsistencyLevelEnum,
     ignore_growing?: boolean,
     group_by_field?: string,
@@ -69,10 +68,6 @@ await milvusClient.hybridSearch({
 - **partition_names** (*string[]*) -
 
     The names of the partitions to search.
-
-- **metric_type** (*string*) -
-
-    The metric type used to measure similarity between vectors.
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
