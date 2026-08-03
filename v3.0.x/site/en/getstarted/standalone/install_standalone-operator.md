@@ -277,6 +277,13 @@ $ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator
 
 When you no longer need the K8s cluster in the test environment, you can run `$ minikube delete` to delete it.
 
+<div class="alert note">
+
+Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
+
 ## What's next
 
 Having installed Milvus, you can:

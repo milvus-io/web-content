@@ -63,13 +63,13 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.21<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.22<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.21&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.22&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,5 +96,5 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث عن متجه واحد</a></li>
 <li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
-<li><p>استكشاف <a href="/api-reference/java/v2.6.x/About.md">مرجع واجهة برمجة تطبيقات Milvus لـ Java</a></p></li>
+<li><p>استكشاف <a href="/api-reference/java/v2.6.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Java</a></p></li>
 </ul>

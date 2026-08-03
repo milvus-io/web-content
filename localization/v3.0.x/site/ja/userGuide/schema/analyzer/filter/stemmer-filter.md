@@ -2,9 +2,7 @@
 id: stemmer-filter.md
 title: ステマー
 summary: >-
-  ステマーフィルタは、単語を基本形または語根の形に変換します (ステミングと呼ばれます)。これにより、
-  異なった屈折の間で類似した意味を持つ単語のマッチングが容易になります。ステマーフィルタは複数の言語をサポートするため、さまざまな言語コンテキストで効果的に検索およびイ
-  ンデックスを作成できます。
+  ステマーフィルターは、単語をその基本形または語幹（ステミングと呼ばれる）に還元することで、異なる語形変化を持つ類似の意味を持つ単語の照合を容易にします。このステマーフィルターは複数の言語に対応しており、さまざまな言語的状況において効果的な検索とインデックス作成を可能にします。
 ---
 <h1 id="Stemmer" class="common-anchor-header">ステマー<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">stemmer</code> フィルタは、単語を基本形または語根形に変換し（ステミングとして知られる）、異なる屈折をまたいで類似した意味を持つ単語のマッチングを容易にします。<code translate="no">stemmer</code> フィルタは多言語をサポートし、さまざまな言語的コンテキストでの効果的な検索とインデックス作成を可能にします。</p>
-<h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">stemmer</code> フィルターは、単語をその基本形または語幹（ステミングと呼ばれる）に還元することで、異なる語形変化を持つ類似の意味を持つ単語の照合を容易にします。<code translate="no">stemmer</code> フィルターは複数の言語に対応しており、さまざまな言語的文脈において効果的な検索とインデックス作成を可能にします。</p>
+<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,9 +35,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">stemmer</code> フィルタは Milvus のカスタムフィルタです。このフィルタを使用するには、<code translate="no">language</code> パラメータとともに、フィルタ設定で<code translate="no">&quot;type&quot;: &quot;stemmer&quot;</code> を指定し、ステミングに使用する言語を選択します。</p>
+    </button></h2><p><code translate="no">stemmer</code> フィルターは、Milvusのカスタムフィルターです。これを使用するには、フィルター設定で<code translate="no">&quot;type&quot;: &quot;stemmer&quot;</code> を指定するとともに、ステミングに使用する言語を選択するための<code translate="no">language</code> パラメータを指定します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -85,7 +88,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">stemmer</code> フィルタは、以下の設定可能なパラメータを受け入れます。</p>
+<p><code translate="no">stemmer</code> フィルターでは、以下の設定可能なパラメータを受け付けます。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -93,12 +96,13 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">language</code></p></td>
-     <td><p>ステミング処理の言語を指定します。サポートされる言語は次のとおりです：<code translate="no">"arabic"</code> <code translate="no">"danish"</code>,<code translate="no">"dutch"</code>,<code translate="no">"english"</code>,<code translate="no">"finnish"</code>,<code translate="no">"french"</code>,<code translate="no">"german"</code>,<code translate="no">"greek"</code>,<code translate="no">"hungarian"</code>,<code translate="no">"italian"</code>,<code translate="no">"norwegian"</code>,<code translate="no">"portuguese"</code>,<code translate="no">"romanian"</code>,<code translate="no">"russian"</code>,<code translate="no">"spanish"</code>,<code translate="no">"swedish"</code>,<code translate="no">"tamil"</code> 、<code translate="no">"turkish"</code></p></td>
+     <td><p>ステミング処理に使用する言語を指定します。サポートされている言語は次のとおりです：<code translate="no">"arabic"</code> 、<code translate="no">"danish"</code> 、<code translate="no">"dutch"</code> 、<code translate="no">"english"</code> 、<code translate="no">"finnish"</code> 、<code translate="no">"french"</code> 、<code translate="no">"german"</code> 、<code translate="no">"greek"</code> 、<code translate="no">"hungarian"</code> 、<code translate="no">"italian"</code> 、<code translate="no">"norwegian"</code> 、<code translate="no">"portuguese"</code> 、<code translate="no">"romanian"</code> 、<code translate="no">"russian"</code> 、<code translate="no">"spanish"</code> 、<code translate="no">"swedish"</code> 、<code translate="no">"tamil"</code> 、<code translate="no">"turkish"</code></p></td>
    </tr>
 </table>
-<p><code translate="no">stemmer</code> フィルタは、トークナイザによって生成された用語を処理するため、トークナイザと組み合わせて使用する必要があります。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、それらを<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
-<h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
+<p><code translate="no">stemmer</code> フィルターは、トークナイザーによって生成された用語に対して動作するため、トークナイザーと組み合わせて使用する必要があります。</p>
+<p>アラビア語のテキストについては、ほとんどの場合、組み込みの <a href="/docs/ja/arabic-analyzer.md"><code translate="no">arabic</code></a> アナライザーを使用してください。この組み込みアナライザーには、アラビア語のステミングに加え、アラビア語の正規化、小数点桁の正規化、およびアラビア語のストップワード除去機能が含まれています。<code translate="no">stemmer</code> フィルターを直接使用するのは、カスタムアナライザーパイプラインを構築する必要がある場合に限ってください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、それらを<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusはそのフィールド内のテキストを指定されたアナライザーを使用して処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">「使用例」</a>を参照してください。</p>
+<h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,8 +117,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>アナライザ設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>アナライザー設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +134,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -170,7 +179,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">以下の方法による検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,7 +195,11 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

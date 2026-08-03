@@ -1,9 +1,9 @@
 ---
 id: schema_design.md
-title: 'Aufforderung: Milvus Schema Entwurf'
+title: 'Aufgabe: Entwurf eines Milvus-Schemas'
 summary: >-
-  Regeln für KI-Kodierassistenten zur Erstellung korrekter
-  Milvus-Sammlungsschemata.
+  Regeln für KI-Programmierassistenten zur Erstellung korrekter
+  Milvus-Erfassungsschemata.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">Schema-Entwurf<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Regeln und Entscheidungshilfen für den Entwurf korrekter Milvus-Sammlungsschemata, einschließlich Feldtypen, Primärschlüsseln, BM25-Konfiguration und Schemaunveränderlichkeitsbeschränkungen. Kopieren Sie die vollständige Aufforderung unten in Ihr AI-Tool, um diese Regeln automatisch anzuwenden. Einen Überblick über alle Prompts finden Sie unter <a href="/docs/de/milvus_for_agents.md">AI Prompts</a>.</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">So verwenden Sie diese Eingabeaufforderung<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+    </button></h1><p>Regeln und Leitfäden für die Erstellung korrekter Milvus-Erfassungsschemata, einschließlich Feldtypen, Primärschlüsseln, BM25-Konfiguration und Einschränkungen hinsichtlich der Unveränderlichkeit von Schemata. Kopieren Sie den vollständigen Befehl unten in Ihr KI-Tool, um diese Regeln automatisch anzuwenden. Eine Übersicht über alle Befehle finden Sie unter <a href="/docs/de/milvus_for_agents.md">„KI-Befehle</a>“.</p>
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">So verwenden Sie diesen Befehl<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Kopieren Sie</strong> die vollständige Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> unten.</li>
-<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - Details zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
-<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code erzeugt oder überprüft.</li>
+<li><strong>Kopieren Sie</strong> den vollständigen Befehl aus dem Abschnitt <a href="#full-prompt">„Vollständiger Befehl</a> “ weiter unten.</li>
+<li><strong>Speichern Sie</strong> ihn an dem von Ihrem KI-Tool erwarteten Speicherort – Details zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
+<li>Ihr KI-Assistent wendet diese Regeln automatisch an, wenn er Milvus-Code generiert oder überprüft.</li>
 </ol>
-<p>Für <strong>Cursor-Benutzer</strong>: Kopieren Sie den Prompt aus dem Abschnitt <a href="#full-prompt">Vollständiger Prompt</a> und speichern Sie ihn unter <code translate="no">.cursor/rules/</code> in Ihrem Projekt.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Vollständige Eingabeaufforderung<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Für <strong>Cursor</strong> -Nutzer: Kopieren Sie den Befehl aus dem Abschnitt <a href="#full-prompt">„Vollständiger Befehl</a> “ und speichern Sie ihn in Ihrem Projekt unter „ <code translate="no">.cursor/rules/</code> “.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Vollständiger Prompt<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,7 +59,7 @@ summary: >-
       </svg>
     </button></h2><pre><code translate="no" class="language-text">You are a Milvus schema design expert. You use the `MilvusClient` interface from PyMilvus v2.4+. You NEVER use the legacy ORM API (`connections.connect()`, `Collection()`).
 
-IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
+IMPORTANT: Schema is immutable in Milvus v2.5.x and earlier — you CANNOT add, modify, or delete fields after creation. Milvus v2.6.x supports adding nullable scalar fields with `add_collection_field()`, and Milvus v3.0.x supports dropping scalar fields and non-last vector fields with `drop_collection_field()`. Function-generated output fields are removed by dropping the function. BM25 functions MUST be defined at collection creation time. Always check the user&#x27;s Milvus version before suggesting schema modifications.
 
 ## Rules
 
@@ -84,7 +84,7 @@ schema.add_field(&quot;category&quot;, DataType.VARCHAR, max_length=128)  # new 
 # ... re-insert data after recreation
 ```
 
-2. **Schema modification (v2.6+):** You can add new fields using `client.add_collection_field()`, but you CANNOT modify or delete existing fields. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR) is NOT supported in any version — drop and recreate.
+2. **Schema updates (v2.6.x and later):** In Milvus v2.6.x, you can add new nullable scalar fields using `client.add_collection_field()`. In Milvus v3.0.x, you can also drop scalar fields and non-last vector fields using `client.drop_collection_field()`. Function-generated output fields are removed by dropping the function. Changing a field&#x27;s data type (e.g., INT64 to VARCHAR), renaming fields, changing vector dimensions, adding vector fields, or changing primary/partition/clustering keys is NOT supported in place — drop and recreate or migrate the collection.
 
 ```python
 # ✅ CORRECT in v2.6+ — adding a new field is supported
@@ -96,9 +96,16 @@ client.add_collection_field(
     nullable=True,  # added fields must be nullable
 )
 
-# ❌ STILL WRONG in v2.6+ — cannot modify or delete existing fields
-# Changing INT64 to VARCHAR, renaming fields, or removing fields
-# is not supported. Drop and recreate the collection instead.
+# ❌ STILL WRONG — cannot rewrite existing field meaning or vector layout in place
+# Changing INT64 to VARCHAR, renaming fields, changing vector dimensions,
+# adding vector fields, or changing primary/partition/clustering keys is not supported.
+# Drop and recreate or migrate the collection instead.
+
+# ✅ CORRECT in v3.0.x — dropping a scalar field
+client.drop_collection_field(
+    collection_name=&quot;my_collection&quot;,
+    field_name=&quot;obsolete_field&quot;,
+)
 ```
 
 3. **Primary key types:** Primary keys MUST be `DataType.INT64` or `DataType.VARCHAR`. No other types are supported. Composite primary keys are NOT supported.
@@ -244,7 +251,7 @@ Before finishing, verify:
 - [ ] Field types use `DataType` enum, not strings
 - [ ] Primary key is `DataType.INT64` or `DataType.VARCHAR` — no other types
 - [ ] Only one primary key field per collection — no composite keys
-- [ ] Schema modifications account for version: immutable in v2.5.x, add-only in v2.6+
+- [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
 - [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
 <button class="copy-code-btn"></button></code></pre>

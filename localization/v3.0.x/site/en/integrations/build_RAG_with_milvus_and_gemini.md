@@ -539,7 +539,7 @@ Match: vanilla_rag.png (score: 0.5132)
 </code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_1.png" alt="Vanilla RAG Pipeline" class="doc-image" id="vanilla-rag-pipeline" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="Vanilla RAG Pipeline" class="doc-image" id="vanilla-rag-pipeline" />
     <span>Vanilla RAG Pipeline</span>
   </span>
 </p>
@@ -548,7 +548,7 @@ Match: hyde.png (score: 0.4756)
 </code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_3.png" alt="HyDE" class="doc-image" id="hyde" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="HyDE" class="doc-image" id="hyde" />
     <span>HyDE</span>
   </span>
 </p>
@@ -557,7 +557,7 @@ Match: hybrid_and_rerank.png (score: 0.5271)
 </code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_5.png" alt="Hybrid Retrieval and Reranking" class="doc-image" id="hybrid-retrieval-and-reranking" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="Hybrid Retrieval and Reranking" class="doc-image" id="hybrid-retrieval-and-reranking" />
     <span>Hybrid Retrieval and Reranking</span>
   </span>
 </p>

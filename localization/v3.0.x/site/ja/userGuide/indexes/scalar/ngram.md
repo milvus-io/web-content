@@ -2,9 +2,10 @@
 id: ngram.md
 title: NGRAM
 summary: >-
-  MilvusのNGRAMインデックスは、VARCHARフィールドまたはJSONフィールド内の特定のJSONパスに対するLIKEクエリを高速化するために構築されています。インデックスを構築する前に、Milvusはテキストをn-gramと呼ばれる固定長nの短く重なり合った部分文字列に分割します。例えば、n
-  = 3の場合、"Milvus "という単語は3つのグラムに分割される：「Mil"、"ilv"、"lvu"、"vus
-  "である。これらのn-gramは、各gramとそれが出現する文書IDを対応付ける転置インデックスに格納される。クエリー時、このインデックスにより、Milvusは素早く検索候補を絞り込むことができ、その結果、クエリーの実行が非常に速くなる。
+  Milvus の NGRAM インデックスは、VARCHAR フィールドや JSON フィールド内の特定の JSON パスに対する LIKE
+  クエリおよび対象となる正規表現フィルターの処理を高速化します。インデックスの構築に先立ち、Milvus はテキストを、固定長 n
+  の短い重複する部分文字列（n-gram と呼ばれる）に分割します。
+  クエリ実行時、Milvusはこれらのn-gramを使用して、元のフィルタ条件を検証する前に候補エンティティを絞り込みます。
 ---
 <h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,17 +22,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusの<code translate="no">NGRAM</code> インデックスは、<code translate="no">VARCHAR</code> フィールドまたは<code translate="no">JSON</code> フィールド内の特定のJSONパスに対する<code translate="no">LIKE</code> クエリを高速化するために構築されています。インデックスを構築する前に、Milvusはテキストを<em>n-gramと</em>呼ばれる固定長<em>nの</em>短く重なり合った部分文字列に分割する。例えば、<em>n = 3の</em>場合、<em>"Milvus "という</em>単語は3つのグラムに分割される：<em>「Mil"、</em> <em>"ilv"、</em> <em>"lvu"、</em> <em>"vus "である。</em>これらのn-gramは、各gramとそれが出現する文書IDを対応付ける転置インデックスに格納される。クエリ実行時に、このインデックスによりmilvusは素早く検索候補を絞り込むことができ、その結果、クエリの実行が非常に速くなります。</p>
-<p>などのプレフィックス、サフィックス、インフィックス、ワイルドカードによるフィルタリングを高速に行う必要がある場合に使用します：</p>
+    </button></h1><p>Milvusの<code translate="no">NGRAM</code> インデックスは、<code translate="no">VARCHAR</code> フィールド、または<code translate="no">JSON</code> フィールド内の特定のJSONパスに対する<code translate="no">LIKE</code> クエリや、条件を満たす正規表現フィルターの処理を高速化します。インデックスの構築に先立ち、Milvusはテキストを、<em>固定長nの</em>短い重複する部分文字列（<em>n-gram</em>）に分割します。 たとえば、<em>n = 3</em> の場合、単語<em>「Milvus」</em>は 3-グラム<em>「Mil」</em>、<em>「ilv」</em>、<em>「lvu」</em>、<em>「vus」</em>に分割されます<em>。</em>これらの n-グラムは、各グラムが出現するドキュメント ID にマッピングされる逆引きインデックスに格納されます<em>。</em> クエリ実行時、このインデックスにより、Milvus は元のフィルタ条件を検証する前に、検索対象を少数の候補に素早く絞り込むことができます。</p>
+<p>次のような、高速な接頭辞、接尾辞、中置辞、ワイルドカード、または正規表現によるフィルタリングが必要な場合に使用します。</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
 <li><p><code translate="no">path LIKE &quot;%json&quot;</code></p></li>
+<li><p><code translate="no">message =~ &quot;error.*timeout&quot;</code></p></li>
+<li><p><code translate="no">url =~ &quot;/api/v[0-9]+/users&quot;</code></p></li>
 </ul>
 <div class="alert note">
-<p>フィルタ式の構文の詳細については、「<a href="/docs/ja/basic-operators.md#Range-operators">基本演算子</a>」を参照してください。</p>
+<p><code translate="no">LIKE</code> および正規表現フィルタ式の構文の詳細については、「<a href="/docs/ja/pattern-matching.md">パターンマッチング</a>」を参照してください。</p>
 </div>
-<h2 id="How-it-works" class="common-anchor-header">動作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,10 +49,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>milvusは2段階のプロセスで<code translate="no">NGRAM</code> インデックスを実装します：</p>
+    </button></h2><p>Milvus は、<code translate="no">NGRAM</code> インデックスを 2 段階のプロセスで実装します。</p>
 <ol>
-<li><p><strong>インデックスを構築する</strong>：各文書に対してn-gramを生成し、インジェスト時に転置インデックスを構築する。</p></li>
-<li><p><strong>クエリーの高速化</strong>：インデックスを使用して小さな候補セットにフィルタリングし、完全一致を検証する。</p></li>
+<li><p><strong>インデックスの構築</strong>：各ドキュメントの n-gram を生成し、取り込み中に逆引きインデックスを構築します。</p></li>
+<li><p><strong>クエリの高速化</strong>：インデックスを使用して候補セットを絞り込み、その後、完全一致を検証します。</p></li>
 </ol>
 <h3 id="Phase-1-Build-the-index" class="common-anchor-header">フェーズ1：インデックスの構築<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,19 +69,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvusはデータ取り込み中に、主に2つのステップを実行することによりNGRAMインデックスを構築する：</p>
+    </button></h3><p>データの取り込み中に、Milvusは主に以下の2つのステップを実行してNGRAMインデックスを構築します：</p>
 <ol>
-<li><p><strong>テキストをn-gramに分解</strong>する：Milvusはターゲットフィールドの各文字列を<em>n個の</em>ウィンドウでスライドさせ、重複する部分文字列（<em>n-gram）を</em>抽出します。これらの部分文字列の長さは設定可能な範囲、<code translate="no">[min_gram, max_gram]</code>.</p>
+<li><p><strong>テキストをn-gramに分解</strong>：Milvusは、対象フィールド内の各文字列に対して<em>n長の</em>ウィンドウをスライドさせ、重複する部分文字列（<em>n-gram</em>）を抽出します。これらの部分文字列の長さは、設定可能な範囲内（<code translate="no">[min_gram, max_gram]</code> ）に収まります。</p>
 <ul>
-<li><p><code translate="no">min_gram</code>:生成する最短のn-gram。これは、インデックスの恩恵を受けられる最小のクエリ部分文字列長を定義する。</p></li>
-<li><p><code translate="no">max_gram</code>:生成する最長n-gram。クエリ時に、長いクエリ文字列を分割する際の最大ウィンドウサイズとしても使用される。</p></li>
+<li><p><code translate="no">min_gram</code>: 生成する最短のn-gram。これは、インデックスの恩恵を受けられるクエリ部分文字列の最小長も定義します。</p></li>
+<li><p><code translate="no">max_gram</code>: 生成するn-gramの最大長。クエリ実行時には、長いクエリ文字列を分割する際の最大ウィンドウサイズとしても使用されます。</p></li>
 </ul>
-<p>例えば、<code translate="no">min_gram=2</code> と<code translate="no">max_gram=3</code> の場合、<code translate="no">&quot;AI database&quot;</code> の文字列は以下のように分割されます：</p></li>
+<p>たとえば、<code translate="no">min_gram=2</code> および<code translate="no">max_gram=3</code> を設定した場合、文字列<code translate="no">&quot;AI database&quot;</code> は次のように分割されます:</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
-   </span> <span class="img-wrapper"> <span>Ngramインデックスの構築</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" /> 
+   <span>N-gramインデックスの構築</span>
+  
+ </span></p>
 <pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
 
 - **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
@@ -102,20 +107,22 @@ summary: >-
 &lt;/div&gt;
 </code></pre>
 <ol>
-<li><p><strong>転置インデックスを構築する</strong>：生成された各n-gramを、それを含む文書IDのリストに対応付ける<strong>転置インデックスが</strong>作成される。</p>
-<p>例えば、<code translate="no">&quot;AI&quot;</code> という2-gramがID 1, 5, 6, 8, 9の文書に出現する場合、<code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code> がインデックスに記録される。このインデックスをクエリー時に使用することで、検索範囲を素早く絞り込むことができる。</p></li>
+<li><p><strong>逆引きインデックスの構築</strong>：生成された各n-gramを、それを含むドキュメントIDのリストに<strong>マッピングする逆引きインデックスが</strong>作成されます。</p>
+<p>たとえば、2-gram「<code translate="no">&quot;AI&quot;</code> 」が ID 1、5、6、8、9 のドキュメントに含まれている場合、インデックスには「<code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code> 」が記録されます。このインデックスは、クエリ実行時に検索範囲を迅速に絞り込むために使用されます。</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
-   </span> <span class="img-wrapper"> <span>Ngramインデックス2の構築</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" /> 
+   <span>N-gramインデックスの構築 2</span>
+  
+ </span></p>
 <pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
 
 A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
 
 &lt;/div&gt;
 </code></pre>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">フェーズ2：クエリの高速化<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
+<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">フェーズ 2: クエリの高速化<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,22 +137,24 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">LIKE</code> フィルタが実行されると、MilvusはNGRAMインデックスを使い、以下のステップでクエリを高速化する：</p>
-<p>
+    </button></h3><p><code translate="no">LIKE</code> フィルターまたは対象となる正規表現フィルターが実行されると、Milvus は NGRAM インデックスを使用して、以下の手順でクエリを高速化します：</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
-   </span> <span class="img-wrapper"> <span>クエリの高速化</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" /> 
+   <span>クエリの高速化</span>
+  
+ </span></p>
 <ol>
-<li><p><strong>クエリー用語を抽出する：</strong>ワイルドカードを含まない連続した部分文字列が<code translate="no">LIKE</code> 式から抽出される（例えば、<code translate="no">&quot;%database%&quot;</code> は<code translate="no">&quot;database&quot;</code> になる）。</p></li>
-<li><p><strong>クエリ語の分解：</strong>クエリ語の長さ (<code translate="no">L</code>) と<code translate="no">min_gram</code> および<code translate="no">max_gram</code> の設定に基づいて、クエリ語が<em>n-gram</em>に分解される。</p>
+<li><p><strong>クエリ用語の抽出：</strong> <code translate="no">LIKE</code> 式から、ワイルドカードを含まない連続した部分文字列が抽出されます（例：<code translate="no">&quot;%database%&quot;</code> は<code translate="no">&quot;database&quot;</code> となります）。正規表現フィルターの場合、Milvusは可能な限り正規表現パターンから固定のリテラル部分文字列を抽出します。例えば、<code translate="no">message =~ &quot;error.*timeout&quot;</code> にはリテラル<code translate="no">error</code> および<code translate="no">timeout</code> が含まれます。</p></li>
+<li><p><strong>クエリ用語の分解：</strong>クエリ用語は、その長さ（<code translate="no">L</code> ）および<code translate="no">min_gram</code> と<code translate="no">max_gram</code> の設定に基づいて、<em>n-gram</em>に分解されます。</p>
 <ul>
-<li><p><code translate="no">L &lt; min_gram</code> の場合、インデックスは使用できず、クエリはフルスキャンに戻る。</p></li>
-<li><p><code translate="no">min_gram ≤ L ≤ max_gram</code> の場合、クエリ語全体が1つのn-gramとして扱われ、それ以上の分解は必要ない。</p></li>
-<li><p><code translate="no">L &gt; max_gram</code> の場合、<code translate="no">max_gram</code> に等しいウィンドウ・サイズを使用して、クエリ用語は重複するグラムに分解される。</p></li>
+<li><p><code translate="no">L &lt; min_gram</code> の場合、インデックスは使用できず、クエリはフルスキャンに切り替わります。</p></li>
+<li><p><code translate="no">min_gram ≤ L ≤ max_gram</code> の場合、クエリ用語全体が単一の n-gram として扱われ、それ以上の分解は必要ありません。</p></li>
+<li><p><code translate="no">L &gt; max_gram</code> の場合、クエリ用語は、<code translate="no">max_gram</code> に等しいウィンドウサイズを使用して、重複するグラムに分解されます。</p></li>
 </ul>
-<p>たとえば、<code translate="no">max_gram</code> が<code translate="no">3</code> に設定され、クエリ語の長さが<strong>8</strong> の<code translate="no">&quot;database&quot;</code> の場合、<code translate="no">&quot;dat&quot;</code> 、<code translate="no">&quot;ata&quot;</code> 、<code translate="no">&quot;tab&quot;</code> などの 3-gram の部分文字列に分解される。</p></li>
-<li><p><strong>各グラムの検索と交差</strong>：Milvusは転置インデックスで各クエリーグラムを検索し、その結果の文書IDリストを交差させて、候補文書の小さなセットを見つける。これらの候補にはクエリのグラムがすべて含まれている。</p></li>
-<li><p><strong>検証して結果を返す：</strong>オリジナルの<code translate="no">LIKE</code> フィルタが、完全一致を見つけるために、小さな候補集合のみに最終チェックとして適用される。</p></li>
+<p>たとえば、<code translate="no">max_gram</code> が<code translate="no">3</code> に設定されており、クエリ用語が<code translate="no">&quot;database&quot;</code> （長さ<strong>8</strong>）の場合、これは<code translate="no">&quot;dat&quot;</code> 、<code translate="no">&quot;ata&quot;</code> 、<code translate="no">&quot;tab&quot;</code> などの 3-gram の部分文字列に分解されます。</p></li>
+<li><p><strong>各グラムを検索し、共通部分を抽出</strong>：Milvusは、クエリの各グラムを逆引きインデックスで検索し、その結果得られたドキュメントIDリストの共通部分を抽出することで、候補となるドキュメントの小さな集合を特定します。これらの候補には、クエリに含まれるすべてのグラムが含まれています。</p></li>
+<li><p><strong>結果の検証と返却：</strong>その後、元の<code translate="no">LIKE</code> または正規表現フィルターを、この少数の候補セットに対してのみ最終チェックとして適用し、完全一致を特定します。</p></li>
 </ol>
 <h2 id="Create-an-NGRAM-index" class="common-anchor-header">NGRAMインデックスの作成<button data-href="#Create-an-NGRAM-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,8 +171,8 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">VARCHAR</code> フィールドまたは<code translate="no">JSON</code> フィールド内の特定のパスに NGRAM インデックスを作成できます。</p>
-<h3 id="Example-1-Create-on-a-VARCHAR-field" class="common-anchor-header">例1：VARCHARフィールドへの作成<button data-href="#Example-1-Create-on-a-VARCHAR-field" class="anchor-icon" translate="no">
+    </button></h2><p><code translate="no">VARCHAR</code> フィールド、または<code translate="no">JSON</code> フィールド内の特定のパスに対して、NGRAMインデックスを作成できます。</p>
+<h3 id="Example-1-Create-on-a-VARCHAR-field" class="common-anchor-header">例 1: VARCHAR フィールドに作成する<button data-href="#Example-1-Create-on-a-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,7 +187,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">VARCHAR</code> フィールドの場合、<code translate="no">field_name</code> を指定し、<code translate="no">min_gram</code> と<code translate="no">max_gram</code> を構成するだけです。</p>
+    </button></h3><p><code translate="no">VARCHAR</code> フィールドの場合は、<code translate="no">field_name</code> を指定し、<code translate="no">min_gram</code> および<code translate="no">max_gram</code> を設定するだけで済みます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address</span>
@@ -203,8 +212,8 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この設定により、<code translate="no">text</code> の各文字列に対して 2-gram と 3-gram が生成され、転置インデックスに格納されます。</p>
-<h3 id="Example-2-Create-on-a-JSON-path" class="common-anchor-header">例2：JSONパスでの作成<button data-href="#Example-2-Create-on-a-JSON-path" class="anchor-icon" translate="no">
+<p>この設定により、<code translate="no">text</code> 内の各文字列に対して2-gramおよび3-gramが生成され、それらを逆引きインデックスに格納します。</p>
+<h3 id="Example-2-Create-on-a-JSON-path" class="common-anchor-header">例 2: JSON パスでの作成<button data-href="#Example-2-Create-on-a-JSON-path" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -219,10 +228,10 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">JSON</code> フィールドの場合、グラム設定に加えて、次のように指定する必要があります：</p>
+    </button></h3><p><code translate="no">JSON</code> フィールドの場合、グラムの設定に加えて、以下も指定する必要があります：</p>
 <ul>
-<li><p><code translate="no">params.json_path</code> - インデックスを作成したい値を指すJSONパス。</p></li>
-<li><p><code translate="no">params.json_cast_type</code> - は、<code translate="no">&quot;varchar&quot;</code> （大文字小文字を区別しない）でなければなりません。NGRAMインデックスは文字列に対して動作するからです。</p></li>
+<li><p><code translate="no">params.json_path</code> – インデックス登録対象の値を指す JSON パス。</p></li>
+<li><p><code translate="no">params.json_cast_type</code> – NGRAM インデックス作成は文字列に対して行われるため、<code translate="no">&quot;varchar&quot;</code> （大文字小文字を区別しない）である必要があります。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Assume you have defined a JSON field named &quot;json_field&quot; in your collection schema, with a JSON path named &quot;body&quot;</span>
 
@@ -248,14 +257,14 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では</p>
+<p>この例では：</p>
 <ul>
-<li><p><code translate="no">json_field[&quot;body&quot;]</code> の値のみがインデックス化されます。</p></li>
-<li><p>この値は n-gram トークン化の前に<code translate="no">VARCHAR</code> にキャストされます。</p></li>
-<li><p>milvusは長さ2から4の部分文字列を生成し、それらを転置インデックスに格納します。</p></li>
+<li><p><code translate="no">json_field[&quot;body&quot;]</code> にある値のみがインデックス化されます。</p></li>
+<li><p>この値は、n-gramトークン化の前に<code translate="no">VARCHAR</code> に変換されます。</p></li>
+<li><p>Milvusは長さ2～4の部分文字列を生成し、それらを逆引きインデックスに格納します。</p></li>
 </ul>
-<p>JSONフィールドにインデックスを付ける方法の詳細については、<a href="/docs/ja/json-indexing.md">JSONインデックスを</a>参照してください。</p>
-<h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">NGRAMによって高速化されるクエリー<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
+<p>JSONフィールドのインデックス作成方法の詳細については、「<a href="/docs/ja/json-indexing.md">JSONインデックス作成</a>」を参照してください。</p>
+<h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">NGRAM によるクエリの高速化<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -270,35 +279,43 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NGRAMインデックスを適用するには</p>
+    </button></h2><p>NGRAM インデックスを適用するには、以下の条件を満たす必要があります。</p>
 <ul>
-<li><p>クエリは、<code translate="no">NGRAM</code> インデックスを持つ<code translate="no">VARCHAR</code> フィールド（または JSON パス）をターゲットにする必要があります。</p></li>
-<li><p><code translate="no">LIKE</code> パターンのリテラル部分は、少なくとも<code translate="no">min_gram</code> 文字の長さでなければなりません<em>(例えば、予想される最も短いクエリー項が 2 文字の場合、インデックス作成時に min_gram=2 を設定します)。</em></p></li>
+<li><p>クエリは、<code translate="no">NGRAM</code> インデックスが作成されている<code translate="no">VARCHAR</code> フィールド（またはJSONパス）を対象とする必要があります。</p></li>
+<li><p><code translate="no">LIKE</code> パターンのリテラル部分は、<code translate="no">min_gram</code> 文字以上の長さでなければなりません。
+<em>（たとえば、予想される最短のクエリ用語が 2 文字の場合、インデックス作成時に min_gram=2 を設定します。</em></p></li>
 </ul>
-<p>サポートされるクエリー型</p>
+<p>サポートされているクエリの種類：</p>
 <ul>
-<li><p><strong>接頭辞マッチ</strong></p>
+<li><p><strong>プレフィックス一致</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string that starts with the substring &quot;database&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>接尾辞マッチ</strong></p>
+<li><p><strong>サフィックス一致</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string that ends with the substring &quot;database&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;%database&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>接尾辞マッチ</strong></p>
+<li><p><strong>中置一致</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string that contains the substring &quot;database&quot; anywhere</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>ワイルドカード一致</strong></p>
-<p>Milvus は<code translate="no">%</code> (0文字以上) と<code translate="no">_</code> (正確に1文字) の両方をサポートしています。</p>
+<p>Milvusは、<code translate="no">%</code> （0個以上の文字）と<code translate="no">_</code> （正確に1つの文字）の両方をサポートしています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string where &quot;st&quot; appears first, and &quot;um&quot; appears later in the text </span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;%st%um%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>JSONパスクエリ</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>正規表現フィルター</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Match log messages that contain &quot;error&quot; followed later by &quot;timeout&quot;</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>JSONパスに対する正規表現フィルター</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>フィルタ式の構文の詳細については、<a href="/docs/ja/basic-operators.md">基本演算</a>子を参照してください。</p>
+<p>フィルタ式の構文の詳細については、「<a href="/docs/ja/pattern-matching.md">パターンマッチング</a>」を参照してください。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -314,7 +331,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションから既存のインデックスを削除するには、<code translate="no">drop_index()</code> メソッドを使用します。</p>
+    </button></h2><p><code translate="no">drop_index()</code> メソッドを使用すると、コレクションから既存のインデックスを削除できます。</p>
 <div class="alert note">
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
@@ -338,10 +355,13 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>フィールド・タイプ</strong>：<code translate="no">VARCHAR</code> および<code translate="no">JSON</code> フィールドでサポートされています。JSON の場合は、<code translate="no">params.json_path</code> と<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> の両方を指定してください。</p></li>
-<li><p><strong>Unicode</strong>：NGRAM分解は文字ベースであり、言語にとらわれず、空白と句読点を含む。</p></li>
-<li><p><strong>スペー ス と 時間の ト レー ド オ フ</strong> ： グ ラ ム範囲<code translate="no">[min_gram, max_gram]</code> を広 く す る と 、 グ ラ ム数が増え、 イ ンデ ッ ク ス も 大 き く な り ます。メモリが限られている場合は、大きな投稿リスト用に<code translate="no">mmap</code> モードを検討してください。詳しくは<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmapを使うを</a>参照してください。</p></li>
-<li><p><strong>不変性</strong>:<code translate="no">min_gram</code> と<code translate="no">max_gram</code> は、その場で変更することはできません。</p></li>
+<li><p><strong>フィールドタイプ</strong>：<code translate="no">VARCHAR</code> および<code translate="no">JSON</code> フィールドでサポートされています。JSON の場合、<code translate="no">params.json_path</code> と<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> の両方を指定してください。</p></li>
+<li><p><strong>正規表現の高速化</strong>：<code translate="no">NGRAM</code> は、Milvusが正規表現パターンから固定のリテラル部分文字列を抽出できる場合にのみ、正規表現フィルターを高速化します。<code translate="no">[a-z]+</code> のようなパターンは、固定リテラルを含まないため、スキャン処理に切り替わる場合があります。</p></li>
+<li><p><strong>大文字小文字を区別しない正規表現</strong>：<code translate="no">(?i)</code> を使用した正規表現パターンはサポートされていますが、インデックスでは元の大文字小文字が保持されるため、<code translate="no">NGRAM</code> による最適化がスキップされる場合があります。</p></li>
+<li><p><strong>検証ステップ</strong>：正規表現フィルターの場合、<code translate="no">NGRAM</code> は候補を生成し、Milvusは完全なRE2正規表現パターンでそれらを検証するため、インデックスによる高速化によって一致結果が変わることはありません。</p></li>
+<li><p><strong>Unicode</strong>：NGRAMの分解は文字単位で行われ、言語に依存せず、空白や句読点も含まれます。</p></li>
+<li><p><strong>空間と時間のトレードオフ</strong>：<code translate="no">[min_gram, max_gram]</code> でグラム範囲を広くすると、生成されるグラムの数が増え、インデックスも大きくなります。メモリが逼迫している場合は、大規模なポスティングリストに対して<code translate="no">mmap</code> モードの使用を検討してください。詳細については、「<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmapの使用</a>」を参照してください。</p></li>
+<li><p><strong>不変性</strong>:<code translate="no">min_gram</code> および<code translate="no">max_gram</code> はその場で変更できません。これらを調整するには、インデックスを再構築してください。</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -359,14 +379,14 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>検索動作に合わせてmin_gramとmax_gramを選択する。</strong></p>
+<li><p><strong>検索の挙動に合わせて `min_gram` および `max_gram` を選択してください</strong></p>
 <ul>
-<li><p><code translate="no">min_gram=2</code>,<code translate="no">max_gram=3</code> から始める。</p></li>
-<li><p><code translate="no">min_gram</code> 、ユーザーが入力すると思われる最も短いリテラルに設定する。</p></li>
-<li><p><code translate="no">max_gram</code> 。意味のある部分文字列の典型的な長さの近くに設定します。<code translate="no">max_gram</code> を大きくするとフィルタリングは向上しますが、スペースが増えます。</p></li>
+<li><p>最初は<code translate="no">min_gram=2</code> 、<code translate="no">max_gram=3</code> から始めます。</p></li>
+<li><p><code translate="no">min_gram</code> には、ユーザーが入力すると予想される最短のリテラルを設定します。</p></li>
+<li><p><code translate="no">max_gram</code> は、意味のある部分文字列の一般的な長さに近い値に設定します。<code translate="no">max_gram</code> を大きくするとフィルタリングは向上しますが、スペースも増えます。</p></li>
 </ul></li>
 <li><p><strong>選択性の低いグラムは避ける</strong></p>
-<p>繰り返しの多いパターン（例：<code translate="no">&quot;aaaaaa&quot;</code> ）はフィルタリング効果が弱く、得られる効果も限定的です。</p></li>
-<li><p><strong>一貫した正規化</strong></p>
-<p>取り込まれたテキストとクエリーリテラルに同じ正規化（例えば、小文字化、トリミング）を適用する。</p></li>
+<p>繰り返し率の高いパターン（例：<code translate="no">&quot;aaaaaa&quot;</code> ）はフィルタリング効果が弱く、得られるメリットも限定的になる可能性があります。</p></li>
+<li><p><strong>一貫して正規化を行う</strong></p>
+<p>ユースケースで必要であれば、取り込まれたテキストとクエリリテラルに同じ正規化処理（例：小文字化、先頭・末尾のトリミング）を適用してください。</p></li>
 </ul>

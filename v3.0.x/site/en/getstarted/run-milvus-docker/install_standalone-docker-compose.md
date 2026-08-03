@@ -21,7 +21,7 @@ Milvus provides a Docker Compose configuration file in the Milvus repository. To
 
 ```shell
 # Download the configuration file
-$ wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # Start Milvus
 $ sudo docker compose up -d
@@ -33,12 +33,13 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
-**What's new in v3.0-beta:**
-- **Enhanced Architecture**: Features the new Streaming Node and optimized components
-- **Updated Dependencies**: Includes the latest MinIO and etcd versions
-- **Improved Configuration**: Optimized settings for better performance
+**Default deployment (v3.0.0):** `docker compose up -d` starts three containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, with MinIO / object storage as its WAL backend)**, so no separate message-queue container is required.
 
-Always download the latest Docker Compose configuration to ensure compatibility with v3.0-beta features.
+**Message-queue default by version:**
+- **2.5.x** — default message queue is **RocksMQ**.
+- **2.6.x and later** — default message queue is **Woodpecker (embedded)**.
+
+Always download the latest Docker Compose configuration to ensure compatibility with v3.0.0 features.
 
 - If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
@@ -50,19 +51,18 @@ After starting up Milvus,
 
 - Containers named **milvus-standalone**, **milvus-minio**, and **milvus-etcd** are up.
   - The **milvus-etcd** container does not expose any ports to the host and maps its data to **volumes/etcd** in the current folder.
-  - The **milvus-minio** container serves ports **9090** and **9091** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
+  - The **milvus-minio** container serves ports **9000** and **9001** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
   - The **milvus-standalone** container serves ports **19530** locally with the default settings and maps its data to **volumes/milvus** in the current folder.
 
 You can check if the containers are up and running using the following command:
 
 ```shell
-$ sudo docker-compose ps
+$ docker compose ps
 
-      Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
+NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
+milvus-etcd         …       "etcd -advertise-cli…"   etcd         2 minutes ago   Up 2 minutes (healthy)   2379-2380/tcp
+milvus-minio        …       "/usr/bin/docker-ent…"   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
+milvus-standalone   …       "/tini -- milvus run…"   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091->9091/tcp, 0.0.0.0:19530->19530/tcp
 ```
 
 You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
@@ -105,6 +105,36 @@ $ sudo docker compose down
 # Delete service data
 $ sudo rm -rf volumes
 ```
+
+## Upgrading from Milvus 2.5.x to 2.6.x
+
+**Message Queue limitations**: When upgrading to Milvus v3.0.0, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+
+
+Because 2.6.x changes the default message queue to Woodpecker, an instance running **RocksMQ** on 2.5.x must **explicitly pin RocksMQ before upgrading** — otherwise the upgrade would attempt to change the message queue, which is not supported. After downloading the 2.6.x Docker Compose file, set the message-queue type back to `rocksmq` in your `user.yaml` override, then upgrade:
+
+```yaml
+# user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade
+mq:
+  type: rocksmq
+```
+
+To switch the message queue *after* upgrading, see [Switch Message Queue](switch-mq-type.md).
+
+## Optional dependencies
+
+This deployment runs **Woodpecker** (embedded, MinIO WAL backend) for messaging, **etcd** for metadata, and **MinIO** for object storage. To use a different message queue or connect external object storage / metadata, see:
+
+- Message queue: [Woodpecker](woodpecker.md) (default) · [Pulsar](mq_pulsar.md) · [Kafka](mq_kafka.md) · [RocksMQ](mq_rocksmq.md)
+- Object storage: [MinIO](deploy_s3.md) (default) · [AWS S3](deploy_s3.md) · [Azure Blob](abs.md) · [GCP Cloud Storage](gcs.md) · [Aliyun OSS](deploy_s3.md) · [Tencent COS](deploy_s3.md) · [Huawei OBS](deploy_s3.md) · [S3-compatible](deploy_s3.md)
+- Metadata: [etcd](deploy_etcd.md)
+
+<div class="alert note">
+
+Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
+
+</div>
+
 
 ## What's next
 

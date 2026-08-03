@@ -5,7 +5,7 @@ related_key: Kubernetes
 summary: >-
   Découvrez comment installer un cluster Milvus sur Kubernetes à l'aide de
   Milvus Operator
-title: Installer le cluster Milvus avec Milvus Operator
+title: Installer Milvus Cluster avec Milvus Operator
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Exécuter Milvus dans Kubernetes avec Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator définit des ressources personnalisées pour le cluster Milvus en s’appuyant sur <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">les ressources personnalisées de Kubernetes</a>. Une fois ces ressources personnalisées définies, vous pouvez utiliser les API K8s de manière déclarative et gérer la pile de déploiement Milvus afin de garantir son évolutivité et sa haute disponibilité.</p>
+    </button></h2><p>Milvus Operator définit des ressources personnalisées pour le cluster Milvus en s’appuyant sur <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">les ressources personnalisées de Kubernetes</a>. Une fois ces ressources personnalisées définies, vous pouvez utiliser les API K8s de manière déclarative et gérer la pile de déploiement Milvus afin d’assurer son évolutivité et sa haute disponibilité.</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -121,7 +121,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p>Exécutez la commande suivante pour installer Milvus Operator à l'aide d'<code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois le processus d’installation terminé, vous verrez s’afficher un résultat similaire à celui-ci.</p>
+<p>Une fois le processus d'installation terminé, vous verrez s'afficher un résultat similaire à celui-ci.</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -174,21 +174,21 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois que le pod Milvus Operator est en cours d'exécution, vous pouvez déployer un cluster Milvus comme suit.</p>
+    </button></h3><p>Une fois que le pod Milvus Operator est en cours d’exécution, vous pouvez déployer un cluster Milvus comme suit.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La commande ci-dessus déploie un cluster Milvus utilisant <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 2.6.18) et intégrant tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
-<p><strong>Points forts de l'architecture dans ce déploiement :</strong></p>
+<p>La commande ci-dessus déploie un cluster Milvus utilisant <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 2.6.21) et intégrant tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
+<p><strong>Points forts de l’architecture dans ce déploiement :</strong></p>
 <ul>
 <li><strong>File d’attente de messages</strong>: <a href="/docs/fr/v2.6.x/use-woodpecker.md">utilise Woodpecker</a> (réduit la maintenance de l’infrastructure)</li>
 <li><strong>Nœud de streaming</strong>: activé pour un traitement amélioré des données</li>
 <li><strong>Coordinateur Mix</strong>: composants de coordination consolidés pour une efficacité accrue</li>
 </ul>
-<p>Pour personnaliser ces paramètres, nous vous recommandons d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> afin d’ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système de Milvus</a>.</p>
+<p>Pour personnaliser ces paramètres, nous vous recommandons d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> afin d’ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>Le nom de la version ne doit contenir que des lettres, des chiffres et des tirets. Les points ne sont pas autorisés dans le nom de la version.</li>
-<li>Vous pouvez également déployer une instance Milvus en mode autonome, où tous ses composants sont regroupés dans un seul pod. Pour ce faire, remplacez l’URL du fichier de configuration dans la commande ci-dessus par <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>Vous pouvez également déployer une instance Milvus en mode autonome, dans lequel tous ses composants sont regroupés au sein d’un seul pod. Pour ce faire, remplacez l’URL du fichier de configuration dans la commande ci-dessus par <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Vérifier l’état du cluster Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">

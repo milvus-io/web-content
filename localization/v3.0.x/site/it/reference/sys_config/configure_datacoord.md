@@ -2,9 +2,9 @@
 id: configure_datacoord.md
 related_key: configure
 group: system_configuration.md
-summary: Imparare a configurare dataCoord per Milvus.
+summary: Scopri come configurare dataCoord per Milvus.
 ---
-<h1 id="dataCoord-related-Configurations" class="common-anchor-header">Configurazioni relative ai datiCorda<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataCoord-related-Configurations" class="common-anchor-header">Configurazioni relative a dataCoord<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout per la visione dei canali (in secondi). L'avanzamento dell'orologio di aggiornamento del datanode azzera il timer di timeout.      </td>
+      <td>        Timeout per il monitoraggio dei canali (in secondi). L'aggiornamento dello stato di monitoraggio da parte del tickler di Datanode azzererà il timer di timeout.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        I datanode &lt;= questa versione sono considerati nodi legacy, che non hanno watch() basato su rpc. Questo valore viene utilizzato solo durante l'aggiornamento continuo, quando i nodi legacy non riceveranno nuovi canali.      </td>
+      <td>        I Datanode di versione &lt;= questa sono considerati nodi legacy, che non dispongono della funzione watch() basata su RPC. Questo parametro viene utilizzato solo durante gli aggiornamenti graduali, in cui i nodi legacy non riceveranno i nuovi canali      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Durata dopo la quale il channel manager avvia il bilanciamento dei canali in background      </td>
+      <td>        Il tempo trascorso dopo il quale il gestore dei canali avvia il bilanciamento dei canali in background      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo con cui il channel manager controlla lo stato di bilanciamento dei canali dml   </td>
+      <td>        L'intervallo con cui il channel manager verifica lo stato di bilanciamento dei canali DML      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo in secondi con cui il channel manager avanza gli stati dei canali      </td>
+      <td>        L'intervallo, espresso in secondi, con cui il channel manager aggiorna gli stati dei canali      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout di notifica delle operazioni di canale (in secondi).      </td>
+      <td>        Timeout per la notifica delle operazioni sul canale (in secondi).      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima di un segmento, unità: MB. datacoord.segment.maxSize e datacoord.segment.sealProportion determinano insieme se un segmento può essere sigillato.      </td>
+      <td>        Dimensione massima di un segmento, unità: MB. I parametri datacoord.segment.maxSize e datacoord.segment.sealProportion determinano insieme se un segmento può essere sigillato.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di un segmento in MB per l'insieme che ha un indice di disco.      </td>
+      <td>        Dimensione massima di un segmento in MB per una raccolta con indice su disco      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -275,8 +275,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La proporzione minima rispetto a datacoord.segment.maxSize per sigillare un segmento. datacoord.segment.maxSize e datacoord.segment.sealProportion determinano insieme se un segmento può essere sigillato.      </td>
-      <td>0.12</td>
+      <td>        La proporzione minima rispetto a datacoord.segment.maxSize necessaria per sigillare un segmento. datacoord.segment.maxSize e datacoord.segment.sealProportion determinano insieme se un segmento può essere sigillato.      </td>
+      <td>0,12</td>
     </tr>
   </tbody>
 </table>
@@ -304,8 +304,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        rapporto di jitter della proporzione di tenuta del segmento, valore predefinito 0,1 (10%), se la proporzione di tenuta è del 12%, con jitter=0,1, il rapporto applicato sarà 10,8~12%.      </td>
-      <td>0.1</td>
+      <td>        rapporto di jitter della proporzione di sigillatura del segmento, valore predefinito 0,1 (10%); se la proporzione di sigillatura è del 12% e jitter=0,1, il rapporto effettivamente applicato sarà compreso tra il 10,8% e il 12%      </td>
+      <td>0,1</td>
     </tr>
   </tbody>
 </table>
@@ -333,7 +333,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tempo di scadenza dell'assegnazione del segmento, unità: ms  </td>
+      <td>        Tempo di scadenza dell'assegnazione del segmento, unità: ms      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -362,7 +362,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tempo di tentativo di assegnazione dell'ultimoExpire da rootCoord dopo il riavvio      </td>
+      <td>        Il tempo durante il quale si tenta di allocare l'ultimo lastExpire da rootCoord dopo il riavvio      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -421,7 +421,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Se un segmento non ha accettato record dml in maxIdleTime e la dimensione del segmento è maggiore di</li>      
+        <li>Se un segmento non ha accettato record DML entro il tempo massimo di inattività (maxIdleTime) e la dimensione del segmento è superiore a</li>      
         <li>minSizeFromIdleToSealed, Milvus lo sigillerà automaticamente.</li>      
         <li>Il tempo massimo di inattività del segmento in secondi, 10*60.</li>      </td>
       <td>600</td>
@@ -452,7 +452,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione minima in MB del segmento che può essere inattivo da sigillato.      </td>
+      <td>        Dimensione minima in MB del segmento che può rimanere inattivo prima di essere sigillato.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -482,8 +482,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Il numero massimo di file binlog (che è uguale al numero di file binlog della chiave primaria) per un segmento, </li>      
-        <li>il segmento verrà chiuso se il numero di file binlog raggiunge il valore massimo.</li>      </td>
+        <li>Il numero massimo di file binlog (pari al numero di file binlog della chiave primaria) per un segmento; </li>      
+        <li>il segmento verrà sigillato se il numero di file binlog raggiunge il valore massimo.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -512,8 +512,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il segmento è considerato "segmento piccolo" quando il suo numero di righe è inferiore a </td>
-      <td>0.5</td>
+      <td>        Il segmento è considerato un "segmento piccolo" quando il numero delle sue righe è inferiore a      </td>
+      <td>0,5</td>
     </tr>
   </tbody>
 </table>
@@ -542,9 +542,9 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>(smallProportion * segmento max # di righe).</li>      
-        <li>Una compattazione avverrà su segmenti piccoli se il segmento dopo la compattazione avrà</li>      </td>
-      <td>0.85</td>
+        <li>(smallProportion * numero massimo di righe del segmento).</li>      
+        <li>Si verificherà una compattazione sui segmenti piccoli se il segmento, dopo la compattazione, avrà</li>      </td>
+      <td>0,85</td>
     </tr>
   </tbody>
 </table>
@@ -573,10 +573,10 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>oltre (proporzione compattabile * segmento max # di righe) righe.</li>      
+        <li>più di (proporzione compattabile * numero massimo di righe del segmento) righe.</li>      
         <li>DEVE ESSERE MAGGIORE O UGUALE A <smallProportion>!!!</li>      
-        <li>Durante la compattazione, la dimensione del segmento # di righe può superare il segmento max # di righe di (expansionRate-1) * 100%. </li>      </td>
-      <td>1.25</td>
+        <li>Durante la compattazione, la dimensione del numero di righe del segmento può superare il numero massimo di righe del segmento di (expansionRate-1) * 100%. </li>      </td>
+      <td>1,25</td>
     </tr>
   </tbody>
 </table>
@@ -605,8 +605,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>La soglia di dimensione in MB, se la dimensione totale dei segmenti in crescita di ogni shard </li>      
-        <li>supera questa soglia, il segmento in crescita più grande verrà sigillato.</li>      </td>
+        <li>Soglia di dimensione in MB; se la dimensione totale dei segmenti in crescita di ciascun shard </li>      
+        <li>supera tale soglia, il segmento in crescita più grande verrà sigillato.</li>      </td>
       <td>4096</td>
     </tr>
   </tbody>
@@ -635,8 +635,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        se aggiornare automaticamente l'indice del segmento alla versione del motore di indicizzazione      </td>
-      <td>falso</td>
+      <td>        se aggiornare automaticamente l’indice del segmento alla versione del motore di indicizzazione      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -664,7 +664,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        la durata minima dell'intervallo (unità: secondi) tra le operazioni di flusing sullo stesso segmento      </td>
+      <td>        durata minima dell'intervallo (unità: secondi) tra un'operazione di flushing e l'altra sullo stesso segmento      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -694,9 +694,9 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Valore dell'interruttore per controllare se abilitare la compattazione dei segmenti. </li>      
-        <li>La compattazione unisce segmenti di piccole dimensioni in un segmento grande e cancella le entità cancellate oltre la durata di permanenza di Viaggio nel tempo.</li>      </td>
-      <td>vero</td>
+        <li>Valore dell'opzione per controllare se abilitare la compattazione dei segmenti. </li>      
+        <li>La compattazione unisce segmenti di piccole dimensioni in un unico segmento di grandi dimensioni ed elimina le entità cancellate oltre il periodo di conservazione di Time Travel.</li>      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -725,9 +725,67 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Valore dell'interruttore per controllare se abilitare la compattazione automatica dei segmenti, durante la quale dataCoord individua e unisce i segmenti compattabili in background.</li>      
-        <li>Questa configurazione ha effetto solo quando dataCoord.enableCompaction è impostato come true.</li>      </td>
-      <td>vero</td>
+        <li>Valore dell'opzione per controllare se abilitare la compattazione automatica dei segmenti, durante la quale data coord individua e unisce in background i segmenti compattabili.</li>      
+        <li>Questa configurazione ha effetto solo quando dataCoord.enableCompaction è impostato su true.</li>      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionstorageVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.storageVersion.enabled</code><button data-href="#dataCoordcompactionstorageVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.storageVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Se la compattazione può riscrivere i dati esistenti idonei nella versione di archiviazione corrente. Questo parametro è aggiornabile.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionbumpSchemaVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code><button data-href="#dataCoordcompactionbumpSchemaVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.bumpSchemaVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Se la compattazione può applicare le modifiche alla versione dello schema ai dati esistenti, incluso il backfill per i campi generati da una funzione appena aggiunta. Questo parametro è aggiornabile.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -756,10 +814,10 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>compaction task prioritizer, opzioni: [default, level, mix]. </li>      
-        <li>L'impostazione predefinita è FIFO.</li>      
-        <li>level è prioritizzato in base al livello: Prima le compattazioni L0, poi le compattazioni mix, poi le compattazioni clustering.</li>      
-        <li>mix è prioritario per livello: prima le composizioni di mix, poi quelle di L0, poi quelle di clustering.</li>      </td>
+        <li>Priorità dell'attività di compattazione, opzioni: [default, level, mix]. </li>      
+        <li>Il valore predefinito è FIFO.</li>      
+        <li>"level" assegna la priorità in base al livello: prima le compattazioni L0, poi quelle "mix", infine quelle di clustering.</li>      
+        <li>"mix" assegna la priorità in base al livello: prima le compattazioni "mix", poi quelle di livello L0, infine quelle di clustering.</li>      </td>
       <td>predefinito</td>
     </tr>
   </tbody>
@@ -788,7 +846,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione della coda delle attività di compattazione      </td>
+      <td>        dimensione della coda delle attività di compattazione      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -817,8 +875,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'attività di compattazione verrà pulita dopo aver terminato un tempo superiore a questo (in secondi).      </td>
-      <td>86400</td>
+      <td>        L'attività di compattazione verrà eliminata al termine se il tempo trascorso supera questo valore (in secondi)      </td>
+      <td>86.400</td>
     </tr>
   </tbody>
 </table>
@@ -846,7 +904,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervallo di tempo in secondi per la compattazione gc  </td>
+      <td>        Intervallo di tempo in secondi per il GC di compattazione      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -875,7 +933,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervallo di tempo in secondi per attivare la compattazione dell'impasto      </td>
+      <td>        Intervallo di tempo in secondi per l'attivazione della compattazione mista      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -904,7 +962,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervallo di tempo in secondi per l'attivazione della compattazione L0  </td>
+      <td>        Intervallo di tempo in secondi per l'attivazione della compattazione L0      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -933,7 +991,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione minima in byte per forzare l'attivazione di una compattazione di livello zero, predefinita come 8MB   </td>
+      <td>        La dimensione minima in byte per forzare l'avvio di una compattazione LevelZero; il valore predefinito è 8 MB      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -962,7 +1020,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima in byte per forzare l'attivazione di una Compattazione LevelZero, predefinita come 64MB    </td>
+      <td>        La dimensione massima in byte per forzare l'avvio di una compattazione LevelZero; il valore predefinito è 64 MB      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -991,7 +1049,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Numero minimo di file deltalogici per forzare l'attivazione della Compattazione LevelZero      </td>
+      <td>        Il numero minimo di file deltalog per forzare l'avvio di una compattazione LevelZero      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1020,7 +1078,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il numero massimo di file deltalogici per forzare l'attivazione di una Compattazione LevelZero, predefinito come 30  </td>
+      <td>        Il numero massimo di file deltalog per forzare l'avvio di una compattazione LevelZero; il valore predefinito è 30      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1049,8 +1107,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La soglia di rapporto di un segmento per attivare una singola compattazione, predefinita come 0,2   </td>
-      <td>0.2</td>
+      <td>        Soglia di rapporto di un segmento per attivare una singola compattazione; il valore predefinito è 0,2      </td>
+      <td>0,2</td>
     </tr>
   </tbody>
 </table>
@@ -1078,7 +1136,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione deltalogo di un segmento per attivare una singola compattazione, predefinita come 16MB    </td>
+      <td>        Dimensione del deltalog di un segmento necessaria per attivare una singola compattazione; il valore predefinito è 16 MB      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -1107,7 +1165,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il conteggio deltalogico di un segmento per attivare una compattazione, predefinito come 200   </td>
+      <td>        Numero di deltalog di un segmento necessario per attivare una compattazione; valore predefinito: 200      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1136,7 +1194,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione del log scaduto di un segmento per attivare la compattazione, per impostazione predefinita 10MB.     </td>
+      <td>        Dimensione del log scaduto di un segmento che determina l'avvio di una compattazione; il valore predefinito è 10 MB      </td>
       <td>10485760</td>
     </tr>
   </tbody>
@@ -1165,8 +1223,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita la compattazione del clustering      </td>
-      <td>vero</td>
+      <td>        Abilita la compattazione del cluster      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1194,8 +1252,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita la compattazione del clustering automatico      </td>
-      <td>falso</td>
+      <td>        Abilita la compattazione automatica del clustering      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1252,7 +1310,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo minimo tra le esecuzioni di compattazione del clustering di una raccolta, per evitare compattazioni ridondanti.      </td>
+      <td>        Intervallo minimo tra le esecuzioni della compattazione del clustering di una raccolta, per evitare compattazioni ridondanti      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1281,7 +1339,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se una raccolta non è stata compattata in clustering per un periodo superiore a maxInterval, forzare la compattazione      </td>
+      <td>        Se una raccolta non è stata sottoposta a compattazione in cluster da più di maxInterval, forzare la compattazione      </td>
       <td>259200</td>
     </tr>
   </tbody>
@@ -1310,7 +1368,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se la dimensione dei nuovi dati è maggiore di newDataSizeThreshold, eseguire la compattazione con clustering      </td>
+      <td>        Se la dimensione dei nuovi dati è superiore a newDataSizeThreshold, eseguire la compattazione del clustering      </td>
       <td>512m</td>
     </tr>
   </tbody>
@@ -1339,8 +1397,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        rapporto massimo di dimensione dei dati nell'addestramento Kmeans, se maggiore di esso, verrà ridotto il campionamento per soddisfare questo limite      </td>
-      <td>0.8</td>
+      <td>        rapporto massimo delle dimensioni dei dati nell'addestramento K-means; se superiore a tale valore, verrà eseguito un downsampling per rispettare questo limite      </td>
+      <td>0,8</td>
     </tr>
   </tbody>
 </table>
@@ -1368,7 +1426,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        numero massimo di centroidi nel treno Kmeans      </td>
+      <td>        Numero massimo di centroidi nell'addestramento K-means      </td>
       <td>10240</td>
     </tr>
   </tbody>
@@ -1397,7 +1455,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        numero minimo di centroidi nel treno Kmeans      </td>
+      <td>        Numero minimo di centroidi nell'addestramento K-means      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1426,8 +1484,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione minima del cluster / dimensione media nel treno Kmeans      </td>
-      <td>0.01</td>
+      <td>        Dimensione minima / media dei cluster nell'addestramento K-means      </td>
+      <td>0,01</td>
     </tr>
   </tbody>
 </table>
@@ -1455,7 +1513,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione massima del cluster / dimensione media nel treno Kmeans      </td>
+      <td>        dimensione massima del cluster / dimensione media nell'addestramento K-means      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1484,7 +1542,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione massima del cluster nel treno Kmeans      </td>
+      <td>        dimensione massima del cluster nell'addestramento K-means      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -1513,7 +1571,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervallo di tempo per la sincronizzazione regolare dei segmenti      </td>
+      <td>        Intervallo di tempo per la sincronizzazione periodica dei segmenti      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1542,7 +1600,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Quando la dimensione della memoria non è impostata dalla procedura di indice, moltiplicatore per stimare la dimensione della memoria dei dati di indice      </td>
+      <td>        Quando la dimensione della memoria non è configurata dalla procedura di indicizzazione, moltiplicatore utilizzato per stimare la dimensione della memoria dei dati dell'indice      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1571,8 +1629,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valore dell'interruttore per controllare se abilitare la garbage collection per cancellare i dati scartati nel servizio MinIO o S3.      </td>
-      <td>vero</td>
+      <td>        Valore dell'opzione per controllare se abilitare la garbage collection per cancellare i dati scartati nel servizio MinIO o S3.      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1600,7 +1658,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo in cui Data Coord esegue la garbage collection, unità: secondo.      </td>
+      <td>        Intervallo con cui data coord esegue la garbage collection, unità: secondi.      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1629,7 +1687,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Durata di conservazione dei file di log binari non registrati (binlog). Impostando un valore ragionevolmente grande per questo parametro, si evita di cancellare erroneamente i file binlog appena creati e privi di metadati. Unità: secondo.      </td>
+      <td>        Durata di conservazione dei file di log binario (binlog) non registrati. Impostando un valore ragionevolmente elevato per questo parametro si evita la cancellazione errata dei file binlog appena creati privi di metadati. Unità: secondi.      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -1658,7 +1716,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La durata di conservazione dei file binlog dei segmenti eliminati prima che vengano cancellati, unità: secondo.      </td>
+      <td>        Durata di conservazione dei file binlog dei segmenti eliminati prima che vengano cancellati; unità: secondi.      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1687,7 +1745,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        numero di goroutine contemporanee per rimuovere gli oggetti s3 eliminati      </td>
+      <td>        numero di goroutine simultanee per la rimozione degli oggetti S3 eliminati      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1716,8 +1774,95 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        file orfano (file su oss ma non registrato su meta) su object storage intervallo di scansione della garbage collection in ore   </td>
+      <td>        Intervallo di scansione (in ore) per la raccolta dei file orfani (file presenti su OSS ma non registrati nel meta) nell'object storage      </td>
       <td>168</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobenabled" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.enabled</code><button data-href="#dataCoordgclobenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Se abilitare la garbage collection per i file LOB non referenziati creati per i valori dei campi TEXT.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobsafetyWindow" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.safetyWindow</code><button data-href="#dataCoordgclobsafetyWindow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.safetyWindow">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        L'età minima, in secondi, che un file LOB TEXT non referenziato deve raggiungere prima che la garbage collection possa eliminarlo.      </td>
+      <td>3600</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobcheckInterval" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.checkInterval</code><button data-href="#dataCoordgclobcheckInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.checkInterval">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        L'intervallo, in secondi, con cui Milvus esegue la scansione dell'archivio alla ricerca di file LOB non referenziati creati per i valori dei campi TEXT.      </td>
+      <td>1800</td>
     </tr>
   </tbody>
 </table>
@@ -1745,7 +1890,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, dataCoord broker rpc timeout      </td>
+      <td>        5000 ms, timeout RPC del broker dataCoord      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1774,8 +1919,8 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita il bilanciamento automatico      </td>
-      <td>vero</td>
+      <td>        Abilita bilanciamento automatico      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1803,7 +1948,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l'intervallo di controllo della configurazione del bilanciamento automatico      </td>
+      <td>        Intervallo di controllo della configurazione del bilanciamento automatico      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1832,7 +1977,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il numero massimo di file consentiti per attività di pre-importazione.      </td>
+      <td>        Il numero massimo di file consentiti per ogni attività di pre-importazione.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1861,7 +2006,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il periodo di conservazione in secondi per le attività nello stato Completato o Fallito.      </td>
+      <td>        Il periodo di conservazione, espresso in secondi, per le attività con stato "Completato" o "Non riuscito".      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1890,7 +2035,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Per evitare la generazione di piccoli segmenti, i file importati vengono raggruppati. Questo parametro rappresenta la somma delle dimensioni dei file in ogni gruppo (ogni ImportTask).      </td>
+      <td>        Per evitare la generazione di segmenti di piccole dimensioni, raggrupperemo i file importati. Questo parametro rappresenta la somma delle dimensioni dei file in ciascun gruppo (ogni ImportTask).      </td>
       <td>6144</td>
     </tr>
   </tbody>
@@ -1948,7 +2093,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo per il controllo dell'importazione, misurato in secondi, è impostato su una frequenza elevata per il controllore dell'importazione.      </td>
+      <td>        L'intervallo per il controllo dell'importazione, misurato in secondi, è impostato su una frequenza elevata per il controllo dell'importazione.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1977,7 +2122,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo di controllo dell'importazione, misurato in secondi, è impostato su una frequenza bassa per il verificatore di importazione.      </td>
+      <td>        L'intervallo di controllo dell'importazione, espresso in secondi, è impostato su una frequenza bassa per il controllo delle importazioni.      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -2006,7 +2151,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il numero massimo di file consentito per ogni singola richiesta di importazione.      </td>
+      <td>        Il numero massimo di file consentiti per ogni singola richiesta di importazione.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2035,7 +2180,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Numero massimo di lavori di importazione in esecuzione o in attesa.      </td>
+      <td>        Numero massimo di processi di importazione in esecuzione o in attesa.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2065,7 +2210,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   <tbody>
     <tr>
       <td>        Indica se l'operazione di importazione attende il completamento della creazione dell'indice.      </td>
-      <td>vero</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -2093,7 +2238,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        secondi. forzare l'arresto del nodo senza l'arresto graduale      </td>
+      <td>        secondi. Forza l'arresto del nodo senza arresto graduale      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -2122,7 +2267,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        utilizzo dello slot del lavoro di compattazione del clustering.      </td>
+      <td>        Utilizzo degli slot da parte del processo di compattazione del cluster.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -2151,7 +2296,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        utilizzo dello slot del lavoro di compattazione della miscela.      </td>
+      <td>        Utilizzo degli slot del processo di compattazione mista.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2180,7 +2325,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        utilizzo dello slot del lavoro di compattazione l0.      </td>
+      <td>        Utilizzo degli slot del processo di compattazione l0.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2209,7 +2354,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indirizzo TCP/IP di dataCoord. Se non viene specificato, viene utilizzato il primo indirizzo non ciclabile.      </td>
+      <td>        Indirizzo TCP/IP di dataCoord. Se non specificato, utilizzare il primo indirizzo unicastabile      </td>
       <td></td>
     </tr>
   </tbody>
@@ -2267,7 +2412,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di ciascuna richiesta RPC che il dataCoord può inviare, unità: byte    </td>
+      <td>        Dimensione massima di ciascuna richiesta RPC che dataCoord può inviare, unità: byte      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -2296,7 +2441,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima di ogni richiesta RPC che il dataCoord può ricevere, unità: byte    </td>
+      <td>        Dimensione massima di ciascuna richiesta RPC che dataCoord può ricevere, unità: byte      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2325,7 +2470,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima di ogni richiesta RPC che i client su dataCoord possono inviare, unità: byte    </td>
+      <td>        La dimensione massima di ciascuna richiesta RPC che i client su dataCoord possono inviare, unità: byte      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2354,7 +2499,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La dimensione massima di ogni richiesta RPC che i client su dataCoord possono ricevere, unità: byte    </td>
+      <td>        Dimensione massima di ciascuna richiesta RPC che i client su dataCoord possono ricevere, unità: byte      </td>
       <td>536870912</td>
     </tr>
   </tbody>

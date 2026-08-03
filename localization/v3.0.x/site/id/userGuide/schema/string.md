@@ -1,11 +1,11 @@
 ---
 id: string.md
-title: Bidang String
+title: Bidang VarChar
 summary: >-
-  Di Milvus, VARCHAR adalah tipe data yang digunakan untuk menyimpan data
-  string.
+  VARCHAR adalah tipe bidang skalar untuk menyimpan metadata string pendek dan
+  terbatas di Milvus.
 ---
-<h1 id="String-Field" class="common-anchor-header">Bidang String<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="VarChar-Field" class="common-anchor-header">Bidang VarChar<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +20,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Di Milvus, <code translate="no">VARCHAR</code> adalah tipe data yang digunakan untuk menyimpan data string.</p>
-<p>Ketika Anda mendefinisikan bidang <code translate="no">VARCHAR</code>, dua parameter wajib dimasukkan:</p>
+    </button></h1><p>Milvus mendukung data skalar teks melalui bidang ` <code translate="no">VARCHAR</code> ` dan ` <code translate="no">TEXT</code> `. Halaman ini menjelaskan ` <code translate="no">VARCHAR</code>`, yang dirancang untuk metadata string pendek dan terbatas, seperti nama, tag, kategori, dan ID eksternal.</p>
+<p>Untuk teks sumber yang lebih panjang, bagian dokumen, isi artikel, tiket, atau log yang harus disimpan dan dikembalikan bersama entitas, gunakan bidang ` <code translate="no">TEXT</code> `. Gunakan ` <code translate="no">TEXT</code> ` jika nilai mungkin melebihi batas ` <code translate="no">65,535</code> ` byte atau jika Anda tidak ingin menetapkan ` <code translate="no">max_length</code> ` tetap dalam skema koleksi. Untuk detailnya, lihat <a href="/docs/id/text.md">Bidang Teks</a>.</p>
+<p>Saat Anda mendefinisikan bidang ` <code translate="no">VARCHAR</code> `, ada dua parameter yang wajib diisi:</p>
 <ul>
-<li><p>Tetapkan <code translate="no">datatype</code> ke <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Tentukan <code translate="no">max_length</code>, yang mendefinisikan jumlah maksimum byte yang dapat disimpan oleh field <code translate="no">VARCHAR</code>. Kisaran yang valid untuk <code translate="no">max_length</code> adalah dari 1 hingga 65.535.</p></li>
+<li><p>Tetapkan " <code translate="no">datatype</code> " ke " <code translate="no">DataType.VARCHAR</code>".</p></li>
+<li><p>Tentukan ` <code translate="no">max_length</code>`, yang menentukan jumlah byte maksimum yang dapat disimpan oleh bidang ` <code translate="no">VARCHAR</code> `. Rentang nilai yang valid untuk ` <code translate="no">max_length</code> ` adalah dari 1 hingga 65.535.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus mendukung nilai nol dan nilai default untuk bidang <code translate="no">VARCHAR</code>. Untuk mengaktifkan fitur ini, setel <code translate="no">nullable</code> ke <code translate="no">True</code> dan <code translate="no">default_value</code> ke nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Milvus mendukung nilai null dan nilai default untuk bidang ` <code translate="no">VARCHAR</code> `. Untuk mengaktifkan fitur ini, atur ` <code translate="no">nullable</code> ` ke ` <code translate="no">True</code> ` dan ` <code translate="no">default_value</code> ` ke nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Menambahkan bidang VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,16 +45,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menyimpan data string di Milvus, tentukan bidang <code translate="no">VARCHAR</code> di skema koleksi Anda. Di bawah ini adalah contoh pendefinisian skema koleksi dengan dua field <code translate="no">VARCHAR</code>:</p>
+    </button></h2><p>Untuk menyimpan metadata string pendek dan terbatas di Milvus, tentukan bidang ` <code translate="no">VARCHAR</code> ` dalam skema koleksi Anda. Berikut adalah contoh mendefinisikan skema koleksi dengan dua bidang ` <code translate="no">VARCHAR</code> `:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: menyimpan hingga 100 byte, mengizinkan nilai nol, dan memiliki nilai default <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 byte, mengizinkan nilai nol, tetapi tidak memiliki nilai default.</p></li>
+<li><p><code translate="no">varchar_field1</code>: menyimpan hingga 100 byte, mengizinkan nilai null, dan memiliki nilai default <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 byte, mengizinkan nilai null, tetapi tidak memiliki nilai default.</p></li>
 </ul>
 <div class="alert note">
-<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi mempengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Jika Anda menetapkan ` <code translate="no">enable_dynamic_fields=True</code> ` saat mendefinisikan skema, Milvus memungkinkan Anda menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan pengelolaan, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -233,7 +239,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Mengatur parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Tentukan parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -248,13 +254,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan adalah wajib untuk bidang vektor, tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang skalar <code translate="no">varchar_field1</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+    </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan wajib untuk bidang vektor tetapi opsional untuk bidang skalar.</p>
+<p>Contoh berikut membuat indeks pada bidang vektor ` <code translate="no">embedding</code> ` dan bidang skalar ` <code translate="no">varchar_field1</code>`, keduanya menggunakan tipe indeks ` <code translate="no">AUTOINDEX</code> `. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan tipe indeks dan parameternya untuk setiap bidang. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="alert note">
-<p>Anda juga dapat membuat indeks <code translate="no">NGRAM</code> untuk mempercepat pemfilteran <code translate="no">LIKE</code> pada bidang <code translate="no">VARCHAR</code>. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</p>
+<p>Anda juga dapat membuat indeks " <code translate="no">NGRAM</code> " untuk mempercepat penyaringan <code translate="no">LIKE</code> pada bidang <code translate="no">VARCHAR</code>. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -328,7 +339,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,9 +354,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks didefinisikan, buatlah koleksi yang menyertakan bidang-bidang string.</p>
+    </button></h2><p>Setelah skema dan indeks ditentukan, buat koleksi yang mencakup bidang string.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -386,7 +402,7 @@ client.createCollection(requestCreate);
 }&quot;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Sisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -403,7 +419,12 @@ client.createCollection(requestCreate);
       </svg>
     </button></h2><p>Setelah membuat koleksi, masukkan entitas yang sesuai dengan skema.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -513,7 +534,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Kueri dengan ekspresi filter<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">Lakukan kueri dengan ekspresi filter<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -528,10 +549,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menyisipkan entitas, gunakan metode <code translate="no">query</code> untuk mengambil entitas yang cocok dengan ekspresi filter yang ditentukan.</p>
-<p>Untuk mengambil entitas di mana <code translate="no">varchar_field1</code> cocok dengan string <code translate="no">&quot;Product A&quot;</code>:</p>
+    </button></h2><p>Setelah menyisipkan entitas, gunakan metode ` <code translate="no">query</code> ` untuk mengambil entitas yang sesuai dengan ekspresi filter yang ditentukan.</p>
+<p>Untuk mengambil entitas di mana ` <code translate="no">varchar_field1</code> ` cocok dengan string ` <code translate="no">&quot;Product A&quot;</code>`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -598,9 +624,14 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengambil entitas di mana <code translate="no">varchar_field2</code> adalah null:</p>
+<p>Untuk mengambil entitas di mana ` <code translate="no">varchar_field2</code> ` bernilai null:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -667,9 +698,14 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengambil entitas di mana <code translate="no">varchar_field1</code> memiliki nilai <code translate="no">&quot;Unknown&quot;</code>, gunakan ekspresi berikut di bawah ini. Karena nilai default dari <code translate="no">varchar_field1</code> adalah <code translate="no">&quot;Unknown&quot;</code>, hasil yang diharapkan adalah entitas dengan <code translate="no">varchar_field1</code> yang secara eksplisit disetel ke <code translate="no">&quot;Unknown&quot;</code> atau dengan <code translate="no">varchar_field1</code> yang disetel ke nilai nol.</p>
+<p>Untuk mengambil entitas di mana <code translate="no">varchar_field1</code> memiliki nilai <code translate="no">&quot;Unknown&quot;</code>, gunakan ekspresi berikut di bawah ini. Karena nilai default <code translate="no">varchar_field1</code> adalah <code translate="no">&quot;Unknown&quot;</code>, hasil yang diharapkan harus mencakup entitas dengan <code translate="no">varchar_field1</code> yang secara eksplisit ditetapkan ke <code translate="no">&quot;Unknown&quot;</code> atau dengan <code translate="no">varchar_field1</code> yang ditetapkan ke null.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -750,9 +786,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Selain pemfilteran bidang skalar dasar, Anda dapat menggabungkan pencarian kemiripan vektor dengan filter bidang skalar. Sebagai contoh, kode berikut ini menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
+    </button></h2><p>Selain penyaringan bidang skalar dasar, Anda dapat menggabungkan pencarian kesamaan vektor dengan filter bidang skalar. Misalnya, kode berikut menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>

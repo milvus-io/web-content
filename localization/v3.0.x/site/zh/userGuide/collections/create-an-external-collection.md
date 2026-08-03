@@ -1,12 +1,12 @@
 ---
 id: create-an-external-collection.md
-title: 创建外部 CollectionsCompatible with Milvus 3.0.x
+title: 创建外部CollectionCompatible with Milvus 3.0.x
 summary: >-
-  外部 Collections 是 Milvus 中的一种数据采集类型，可访问 AWS S3 和 Iceberg
-  等外部存储系统或数据库表中的数据，而无需将其复制到 Milvus 中。它充当数据湖之上的查询层，同时保持与 Milvus 查询接口的兼容性。
+  外部数据集是 Milvus 中的 Collection 类型之一，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和
+  Iceberg）的数据，而无需将数据复制到 Milvus 中。它作为数据湖之上的查询层，同时保持与 Milvus 查询接口的兼容性。
 beta: Milvus 3.0.x
 ---
-<h1 id="Create-an-External-Collection" class="common-anchor-header">创建外部 Collections<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
+<h1 id="Create-an-External-Collection" class="common-anchor-header">创建外部Collection<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,10 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>外部 Collections 是 Milvus 中的一种数据收集类型，可访问外部存储系统或数据库表（如 AWS S3 和 Iceberg）中的数据，而无需将其复制到 Milvus 中。它充当数据湖的查询层，同时保持与 Milvus 查询接口的兼容性。</p>
+    </button></h1><p>外部 Collection 是 Milvus 中的一种数据 Collection，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和 Iceberg）的数据，而无需将数据复制到 Milvus 中。它作为数据湖上的查询层，同时保持与 Milvus 查询接口的兼容性。</p>
+<div class="alert note">
+<p>此功能需要 Storage V3 支持。有关启用说明和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,20 +40,24 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在典型的人工智能数据管道中，用户可能已经在 AWS S3 等存储系统上以 Parquet 或其他格式存储了数据。要让 Milvus 使用这些外部存储的数据，用户通常需要使用提取-转换-加载（ETL）管道将其导入 Milvus 自己的存储系统。</p>
-<p>这种将数据导入 Milvus 的工作流程会产生难以同步的冗余数据，并增加确保数据一致性的工程维护负担。</p>
-<p>
+    </button></h2><p>在典型的 AI 数据管道中，用户可能已将数据以 Parquet 或其他格式存储在存储系统（如 AWS S3）中。为了让 Milvus 能够使用这些外部存储的数据，用户通常需要通过提取-转换-加载（ETL）管道将其导入 Milvus 的自有存储中。</p>
+<p>这种“将数据带入 Milvus”的工作流会产生难以同步的冗余数据，并增加了确保数据一致性所需的工程维护负担。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
-   </span> <span class="img-wrapper"> <span>将数据引入计算工作流程</span> </span></p>
-<p>为了解决这些问题，Milvus 提供外部 Collections，让您从 Milvus 访问外部存储的数据，而无需担心数据同步和 ETL 管道。</p>
-<p>
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
+   <span>将数据引入计算工作流</span>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
-   </span> <span class="img-wrapper"> <span>将计算带入数据工作流</span> </span></p>
-<p>外部 Collections 创建后，可直接访问您的数据，并将其保存在您存储数据的相同位置。在后台，Milvus 会创建清单文件，记录 Milvus 元数据与外部数据文件中的行之间的映射关系。清单文件准备就绪后，你可以像在任何管理 Collections 中一样，在外部 Collections 中创建索引。</p>
-<p>当数据发生变化时，手动触发次秒级刷新即可更新元数据，使 Milvus 始终保持最新状态。</p>
-<h2 id="Step-1-Create-schema" class="common-anchor-header">第 1 步：创建 Schema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
+ </span></p>
+<p>为解决这些问题，Milvus 提供了外部 Collections 功能，让您能够直接从 Milvus 访问外部存储的数据，无需担心数据同步和 ETL 管道的问题。</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
+   <span>“将计算带到数据”工作流</span>
+  
+ </span></p>
+<p>外部 Collection 创建后，即可直接访问您的数据，并将数据保留在您存储的原始位置。在后台，Milvus 会生成清单文件，用于记录 Milvus 元数据与外部数据文件中各行之间的映射关系。清单文件准备就绪后，您就可以像在任何托管 Collection 中一样，在外部 Collection 中创建索引。</p>
+<p>当数据发生变化时，手动触发亚秒级刷新即可更新元数据，确保 Milvus 始终保持最新状态。</p>
+<h2 id="Step-1-Create-schema" class="common-anchor-header">步骤 1：创建 Schema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,9 +72,14 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>与创建管理 Collections 一样，在创建外部 Collections 之前也需要创建模式。不过，模式与管理 Collections 略有不同。</p>
+    </button></h2><p>与创建托管 Collection 一样，在创建外部 Collection 之前，您也需要先创建 Schema。不过，该 Schema 与托管 Collection 的 Schema 略有不同。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(
@@ -126,7 +138,7 @@ schema := entity.NewSchema().
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>要为外部 Collections 创建模式，需要指定源数据 URI、数据格式和身份验证设置。</p>
+<p>要为外部Collection创建Schema，您需要指定源数据 URI、数据格式以及身份验证设置。</p>
 <table>
    <tr>
      <th><p>参数名称</p></th>
@@ -140,18 +152,18 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>有效的 Iceberg 表快照 ID。只有将<code translate="no">format</code> 设置为<code translate="no">iceberg_table</code> 时，此参数才适用。</p></td>
+     <td><p>一个有效的 Iceberg 表快照 ID。此参数仅在将 `<code translate="no">format</code> ` 设置为 `<code translate="no">iceberg_table</code>` 时适用。</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>以字符串化 JSON 结构表示的外部文件系统设置。</p></td>
+     <td><p>以字符串形式的 JSON 结构表示的外部文件系统设置。</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
 <p><details summary="Authentication Options"></p>
-<p>您可以使用以下选项设置身份验证设置：</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<p>您可以通过以下选项设置身份验证设置：</p>
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS 访问密钥/安全密钥<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +178,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此选项适用于自托管 MinIO 或使用 AK/SK 工作的情况。</p>
+    </button></h3><p>此选项适用于自托管的 MinIO，或您已拥有用于工作的 AK/SK 的场景。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -182,8 +194,8 @@ schema := entity.NewSchema().
 <table>
    <tr>
      <th><p>参数名称</p></th>
-     <th><p>参数描述</p></th>
-     <th><p>示例 值</p></th>
+     <th><p>参数说明</p></th>
+     <th><p>示例值</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
@@ -202,7 +214,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>云提供商 ID</p></td>
+     <td><p>云服务提供商 ID</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
@@ -212,7 +224,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_virtual_host</code></p></td>
-     <td><p>是否使用虚拟主机访问您的存储桶。</p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">本文</a>。</p></td>
+     <td><p>是否使用虚拟托管访问您的存储桶。</p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">这篇文章</a>。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -231,7 +243,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>该选项适用于 Milvus 在 EC2 实例或 EKS 集群上运行的情况。在这种情况下，无需对 AK/SK 进行硬编码。</p>
+    </button></h3><p>此选项适用于 Milvus 在 EC2 实例或 EKS 集群上运行的场景。在此情况下，您无需硬编码 AK/SK。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -246,17 +258,17 @@ schema := entity.NewSchema().
 <table>
    <tr>
      <th><p>参数名称</p></th>
-     <th><p>参数描述</p></th>
-     <th><p>示例 值</p></th>
+     <th><p>参数 描述</p></th>
+     <th><p>示例值</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>为此选项将其设置为<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>对于此选项，请将其设置为<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.iam_endpoint</code></p></td>
-     <td><p>有效的 AWS STS 端点。 </p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">本文</a>。</p></td>
+     <td><p>一个有效的 AWS STS 端点。 </p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_region-endpoints.html">本文</a>。</p></td>
      <td><p><code translate="no">https:&ast;//&ast;sts.&lt;region&gt;.amazonaws.com</code></p></td>
    </tr>
    <tr>
@@ -290,7 +302,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此选项适用于在 Milvus 存储桶中存储外部数据的情况，在<code translate="no">milvus.yaml</code> 中指定的全局 MinIO 设置可直接用于访问数据。</p>
+    </button></h3><p>当您将外部数据存储在 Milvus 存储桶中时，此选项适用，且可直接使用<code translate="no">milvus.yaml</code> 中指定的全局 MinIO 设置来访问数据。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -313,14 +325,14 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当你的组织使用不同的 AWS 账户来管理 Milvus 集群和保存目标数据文件的存储桶时，适用此选项。</p>
-<p>在这种情况下，数据桶所有者应创建一个 IAM 角色，该角色应</p>
+    </button></h3><p>当您的组织使用不同的 AWS 账户来管理 Milvus 集群和存储目标数据文件的存储桶时，应使用此选项。</p>
+<p>在这种情况下，存储桶所有者应创建一个 IAM 角色，该角色</p>
 <ul>
-<li><p>为桶访问附加<code translate="no">AmazonS3FullAccess</code> 或更精细的策略。</p></li>
-<li><p>在角色的信任策略的条件字段中包含一个自定义的<code translate="no">sts:ExternalId</code> 。</p></li>
+<li><p>该角色应绑定<code translate="no">AmazonS3FullAccess</code> 或更精细的存储桶访问策略。</p></li>
+<li><p>在角色的“信任策略”的“条件”字段中包含一个自定义的<code translate="no">sts:ExternalId</code> 。</p></li>
 </ul>
-<p>然后，水桶所有者应向您提供 IAM 角色的 ARN 和外部 ID，这样您就可以使用这些值调用<code translate="no">sts:AssumeRole</code> 来承担 IAM 角色。</p>
-<p>下面是一个权限策略示例，可附加到 IAM 角色并提供允许的权限。你可以根据自己的需要进行调整。</p>
+<p>随后，存储桶所有者应向您提供该 IAM 角色的 ARN 和外部 ID，以便您使用这些值调用 `<code translate="no">sts:AssumeRole</code> ` 来承接该 IAM 角色。</p>
+<p>以下是一个示例权限策略，可附加到 IAM 角色上并包含允许的权限。您可以根据需求进行调整。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -344,7 +356,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>与 IAM 角色相关的信任策略定义了谁可以担任该角色。</p>
+<p>此外，与该 IAM 角色关联的信任策略定义了谁被允许承担该角色。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -363,7 +375,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>获得 IAM 角色 ARN 和外部 ID 后，就可以设置<code translate="no">external_spec</code> 参数，如下所示：</p>
+<p>获取 IAM 角色 ARN 和外部 ID 后，您可以按以下方式设置<code translate="no">external_spec</code> 参数：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -386,7 +398,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>云提供商 ID</p></td>
+     <td><p>云服务提供商 ID</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
@@ -401,27 +413,27 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>将此设置为<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>请将此选项设置为<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>从数据桶所有者处获得的 IAM 角色 ARN。</p></td>
+     <td><p>从存储桶所有者处获取的 IAM 角色 ARN。</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>从数据桶所有者处获得的外部 ID。</p></td>
+     <td><p>从存储桶所有者处获取的外部 ID。</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.load_frequency</code></p></td>
-     <td><p>Milvus 检索临时身份验证凭据的间隔（秒）。</p></td>
+     <td><p>Milvus 获取临时身份验证凭据的间隔（单位：秒）。</p></td>
      <td><p><code translate="no">900</code></p></td>
    </tr>
 </table>
 <p></details></p>
-<h2 id="Step-2-Add-fields" class="common-anchor-header">第 2 步：添加字段<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
+<h2 id="Step-2-Add-fields" class="common-anchor-header">步骤 2：添加字段<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -436,28 +448,30 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Schema 准备就绪后，就可以按如下步骤添加字段：</p>
+    </button></h2><p>准备好Schema后，您可以按以下方式添加字段：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;product_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
     max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;name&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;name&quot;</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
     dim=<span class="hljs-number">768</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;vector&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;vector&quot;</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -516,7 +530,7 @@ schema = schema.
     \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-3-Create-a-collection" class="common-anchor-header">第 3 步：创建 Collections<button data-href="#Step-3-Create-a-collection" class="anchor-icon" translate="no">
+<h2 id="Step-3-Create-a-collection" class="common-anchor-header">步骤 3：创建 Collection<button data-href="#Step-3-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -531,9 +545,14 @@ schema = schema.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>将所有字段添加到 Schema 后，就可以创建外部 Collections 了。</p>
+    </button></h2><p>将所有字段添加到Schema后，即可创建外部Collection。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -596,7 +615,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Create-indexes" class="common-anchor-header">第 4 步：创建索引<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
+<h2 id="Step-4-Create-indexes" class="common-anchor-header">步骤 4：创建索引<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -611,9 +630,14 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以像在管理集合中一样为外部集合列创建索引。</p>
+    </button></h2><p>您可以像在管理 Collections 中一样，为外部 Collection 字段创建索引。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
@@ -712,7 +736,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-5-Refresh-data" class="common-anchor-header">第 5 步：刷新数据<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
+<h2 id="Step-5-Refresh-data" class="common-anchor-header">步骤 5：刷新数据<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -727,9 +751,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>集合准备就绪后，刷新集合，为数据创建元数据和索引。</p>
+    </button></h2><p>Collection准备就绪后，请刷新该Collection以生成数据的元数据和索引。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
     db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
@@ -802,16 +831,16 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>刷新操作是异步的，因此需要设置一个迭代来监控其进度。</p>
+<p>刷新操作是异步的，因此您需要设置一个循环来监控其进度。</p>
 <div class="alert note">
 <ul>
-<li><p>刷新操作会扫描数据文件的元数据并生成相应的清单文件。通常需要 150-250 毫秒。</p></li>
-<li><p>清单文件记录了 Milvus 中的元数据与外部文件中的行之间的映射。</p></li>
-<li><p>如果源数据有更新，就需要再次手动调用刷新，使 Milvus 保持最新。</p></li>
-<li><p>如果刷新需要删除所有活动元数据，而不插入任何内容，则会导致拒绝。</p></li>
+<li><p>刷新操作会扫描数据文件的元数据，并据此生成清单文件。该过程通常需要 150-250 毫秒。</p></li>
+<li><p>清单文件记录了 Milvus 中的元数据与外部文件中行之间的映射关系。</p></li>
+<li><p>如果源数据发生更新，您需要手动再次调用刷新操作，以保持 Milvus 的数据最新。</p></li>
+<li><p>如果刷新操作需要删除所有活跃元数据且不插入任何新数据，则该操作将被拒绝。</p></li>
 </ul>
 </div>
-<h2 id="Follow-ups" class="common-anchor-header">后续操作<button data-href="#Follow-ups" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -826,5 +855,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>刷新外部集合后，您可以加载和释放集合，并像在任何管理集合中一样在外部集合中执行相似性搜索和查询，但用于按需计算的数据库中的集合必须附加到按需集群上才能进行搜索和查询。</p>
-<p>在进行搜索、查询、获取和混合搜索等 DQL 操作前，需要创建会话以附加按需群集的计算资源。</p>
+    </button></h2><p>刷新外部集合后，您可以加载和释放该 Collection，并在外部 Collection 中执行相似度搜索和查询，就像在任何托管 Collection 中一样，但需注意：用于按需计算的数据库中的 Collection 必须附加到按需集群上才能进行搜索和查询。</p>
+<p>在执行 DQL 操作（如搜索、查询、获取和混合搜索）之前，您需要创建一个会话以挂载按需计算集群的计算资源。</p>
+<p>如果外部数据源后续包含另一个您希望在 Milvus 中暴露的字段，请向外部 Collection Schema 添加该字段，并再次刷新外部 Collection。有关详细信息，请参阅《<a href="/docs/zh/alter-external-collection-schema.md">修改外部 Collection Schema</a>》。</p>

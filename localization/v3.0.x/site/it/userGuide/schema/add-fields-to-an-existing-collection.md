@@ -1,14 +1,12 @@
 ---
 id: add-fields-to-an-existing-collection.md
-title: Aggiungere campi a una raccolta esistenteCompatible with Milvus 2.6.x
+title: Modifica dello schema della collezione
 summary: >-
-  Milvus consente di aggiungere dinamicamente nuovi campi alle raccolte
-  esistenti, facilitando l'evoluzione dello schema dei dati in base alle
-  esigenze dell'applicazione. Questa guida mostra come aggiungere campi in
-  diversi scenari utilizzando esempi pratici.
-beta: Milvus 2.6.x
+  Modifica uno schema di raccolta esistente aggiungendo o eliminando campi
+  scalari, campi vettoriali e campi vettoriali generati da funzioni senza
+  ricreare la raccolta.
 ---
-<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">Aggiungere campi a una raccolta esistente<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Schema" class="common-anchor-header">Modifica dello schema della collezione<button data-href="#Alter-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +21,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus consente di aggiungere dinamicamente nuovi campi alle raccolte esistenti, facilitando l'evoluzione dello schema dei dati in base alle esigenze dell'applicazione. Questa guida mostra come aggiungere campi in diversi scenari, utilizzando esempi pratici.</p>
-<h2 id="Considerations" class="common-anchor-header">Considerazioni<button data-href="#Considerations" class="anchor-icon" translate="no">
+    </button></h1><p>Quando una raccolta passa dalla fase di sviluppo a quella di produzione, i campi relativi a ciascuna entità spesso subiscono delle modifiche. È possibile aggiungere campi scalari come <code translate="no">source_uri</code> o <code translate="no">review_status</code> per il filtraggio e la logica applicativa, aggiungere un nuovo campo vettoriale per gli embedding generati dall'applicazione, aggiungere un campo vettoriale sparso generato da BM25 per la ricerca lessicale sul testo esistente oppure rimuovere i campi che non vengono più utilizzati. La funzione "Modifica schema della raccolta" consente di apportare le modifiche supportate ai campi direttamente, senza dover ricreare la raccolta.</p>
+<div class="alert note">
+<p>Questa guida tratta le modifiche allo schema a livello di campo nelle collezioni gestite, inclusi i campi definiti dall’utente e i campi vettoriali generati dalle funzioni. Per aggiungere un campo a una collezione esterna, consultare <a href="/docs/it/alter-external-collection-schema.md">Modifica dello schema della collezione esterna</a>. Per le modifiche alle proprietà dei campi, come la modifica di <code translate="no">max_length</code> su un campo <code translate="no">VARCHAR</code> o di <code translate="no">max_capacity</code> su un campo <code translate="no">ARRAY</code>, consultare <a href="/docs/it/alter-collection-field.md">Modifica del campo della collezione</a>. Per il comportamento dinamico dei campi, consultare " <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a> " e " <a href="/docs/it/modify-collection.md">Modifica della raccolta</a>".</p>
+</div>
+<h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,40 +40,37 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di aggiungere campi alla vostra collezione, tenete a mente questi punti importanti:</p>
+    </button></h2><p><strong>Aggiunta di campi definiti dall’utente</strong></p>
 <ul>
-<li><p>È possibile aggiungere campi scalari (<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, ecc.). I campi vettoriali non possono essere aggiunti a collezioni esistenti.</p></li>
-<li><p>I nuovi campi devono essere nullable (nullable=True), in modo da poter ospitare entità esistenti che non hanno valori per il nuovo campo.</p></li>
-<li><p>L'aggiunta di campi alle raccolte caricate aumenta l'utilizzo della memoria.</p></li>
-<li><p>C'è un limite massimo di campi per collezione. Per maggiori dettagli, consultare <a href="/docs/it/limitations.md#Number-of-resources-in-a-collection">Limiti di Milvus</a>.</p></li>
-<li><p>I nomi dei campi devono essere unici tra i campi statici.</p></li>
-<li><p>Non è possibile aggiungere un campo <code translate="no">$meta</code> per abilitare la funzionalità di campo dinamico per collezioni che non sono state originariamente create con <code translate="no">enable_dynamic_field=True</code>.</p></li>
+<li><p>I campi definiti dall’utente aggiunti devono essere nullabili. Impostare <code translate="no">nullable=True</code> quando si chiama <code translate="no">add_collection_field()</code>. Per le entità esistenti, il campo aggiunto è di tipo <code translate="no">NULL</code> a meno che non si aggiunga un campo scalare con <code translate="no">default_value</code>.</p></li>
+<li><p>L'aggiunta di campi scalari definiti dall'utente è supportata in Milvus 2.6.x e versioni successive. L'aggiunta di campi vettoriali definiti dall'utente è supportata in Milvus 2.6.18 e versioni successive.</p></li>
+<li><p>L'aggiunta di campi StructArray è supportata in Milvus 3.0.0 e versioni successive. I campi StructArray aggiunti devono essere nullabili.</p></li>
+<li><p>I nomi dei campi devono essere univoci all’interno della collezione.</p></li>
 </ul>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Questa guida presuppone che si disponga di:</p>
+<p><strong>Aggiunta di campi vettoriali generati da funzioni</strong></p>
 <ul>
-<li><p>Un'istanza Milvus in esecuzione</p></li>
-<li><p>Milvus SDK installato</p></li>
-<li><p>Una raccolta esistente</p></li>
+<li><p>Ogni aggiornamento dello schema può aggiungere solo una funzione e un campo vettoriale generato.</p></li>
+<li><p>La funzione supportata determina il tipo di campo vettoriale generato: ` <code translate="no">BM25</code> ` genera un campo ` <code translate="no">SPARSE_FLOAT_VECTOR</code> `, mentre ` <code translate="no">MINHASH</code> ` genera un campo ` <code translate="no">BINARY_VECTOR</code> `.</p></li>
+<li><p>Il campo vettoriale generato deve essere un campo nuovo. Non può fare riferimento a un campo già esistente nello schema della collezione.</p></li>
+<li><p>Il campo vettoriale generato non può essere nullabile.</p></li>
+<li><p>I campi di input utilizzati dalla funzione devono già esistere nella collezione.</p></li>
+<li><p>Quando si aggiunge una funzione BM25 o MinHash a una collezione esistente, l’input della funzione deve essere un campo di tipo “ <code translate="no">VARCHAR</code> ”. Un input di tipo “ <code translate="no">TEXT</code> ” non è supportato in questo flusso di lavoro perché Milvus non può compilare retroattivamente l’output generato per le entità esistenti a partire da quel tipo di input.</p></li>
+</ul>
+<p><strong>Eliminazione dei campi definiti dall’utente</strong></p>
+<ul>
+<li><p>Non è possibile eliminare il campo della chiave primaria, il campo della chiave di partizione, il campo della chiave di clustering o l’ultimo campo vettoriale in una collezione.</p></li>
+<li><p>È possibile eliminare un intero campo <code translate="no">ARRAY&lt;STRUCT&gt;</code>, ma non è possibile eliminare un singolo sottocampo all’interno di un campo <code translate="no">ARRAY&lt;STRUCT&gt;</code>.</p></li>
+<li><p>Non è possibile eliminare direttamente un campo utilizzato come campo di input di una funzione o generato come campo di output di una funzione. Per rimuovere un campo di output di una funzione, eliminare la funzione che lo genera.</p></li>
+</ul>
+<p><strong>Eliminazione dei campi vettoriali generati dalle funzioni</strong></p>
+<ul>
+<li><p>In questo flusso di lavoro di modifica dello schema, l'eliminazione di una funzione rimuove la funzione stessa e i campi di output da essa generati. I campi di input della funzione rimangono nello schema della raccolta.</p></li>
+<li><p>L'eliminazione di una funzione viene rifiutata se la rimozione dei suoi campi di output lascerebbe la raccolta senza alcun campo vettoriale.</p></li>
 </ul>
 <div class="alert note">
-<p>Per la creazione della collezione e le operazioni di base, consultare la sezione <a href="/docs/it/create-collection.md">Crea collezione</a>.</p>
+<p>Per le modifiche allo schema che esulano dalle operazioni di aggiunta ed eliminazione supportate, ricreare o migrare la raccolta.</p>
 </div>
-<h2 id="Basic-usage" class="common-anchor-header">Utilizzo di base<button data-href="#Basic-usage" class="anchor-icon" translate="no">
+<h2 id="Add-fields-to-an-existing-collection" class="common-anchor-header">Aggiungere campi a una raccolta esistente<button data-href="#Add-fields-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,132 +85,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-<span class="hljs-comment"># Connect to your Milvus server</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>  <span class="hljs-comment"># Replace with your Milvus server URI</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-
-<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build();
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
-
-<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">Scenario 1: Aggiungere rapidamente campi nullable<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Il modo più semplice per estendere la propria collezione è aggiungere campi nullable. Questo è perfetto quando si ha bisogno di aggiungere rapidamente nuovi attributi ai dati.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
-<span class="hljs-comment"># - Makes the field available for use with minimal delay</span>
-<span class="hljs-comment"># - Sets NULL for all existing entities</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;created_timestamp&quot;</span>,  <span class="hljs-comment"># Name of the new field to add</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type must be a scalar type</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-    <span class="hljs-comment"># Allows NULL values for existing entities</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionFieldReq;
-
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;created_timestamp&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;created_timestamp&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;Int64&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;created_timestamp&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Comportamento previsto:</p>
+    </button></h2><p>Scegliere il percorso di aggiunta del campo in base alle modalità di generazione dei valori del campo:</p>
 <ul>
-<li><p>Le<strong>entità esistenti</strong> avranno NULL per il nuovo campo.</p></li>
-<li><p>Le<strong>nuove entità</strong> possono avere NULL o valori reali</p></li>
-<li><p><strong>La disponibilità del campo</strong> avviene quasi immediatamente, con un ritardo minimo dovuto alla sincronizzazione interna dello schema.</p></li>
-<li><p><strong>Interrogabile immediatamente</strong> dopo il breve periodo di sincronizzazione</p></li>
+<li><p><a href="#add-user-defined-scalar-fields--milvus-26x">Aggiungere campi scalari definiti dall'utente</a> quando sono necessari nuovi metadati per il filtraggio, l'output delle query o la logica dell'applicazione.</p></li>
+<li><p><a href="#add-structarray-fields--milvus-300">Aggiungere campi StructArray</a> quando è necessario un campo array i cui elementi condividono lo stesso schema Struct.</p></li>
+<li><p><a href="#add-user-defined-vector-fields--milvus-2618">Aggiungere campi vettoriali definiti dall'utente</a> quando l'applicazione genera embedding e scrive valori vettoriali in Milvus.</p></li>
+<li><p><a href="#add-vector-fields-generated-by-functions--milvus-30x">Aggiungere campi vettoriali generati da funzioni</a> quando Milvus deve generare valori vettoriali da campi esistenti, come i vettori sparsi BM25 o le firme MinHash da testo.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-literal">None</span>  <span class="hljs-comment"># New field shows NULL for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-title class_">None</span>  # <span class="hljs-title class_">New</span> field shows <span class="hljs-variable constant_">NULL</span> <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-  <span class="hljs-string">&quot;code&quot;</span>: 0,
-  <span class="hljs-string">&quot;data&quot;</span>: {},
-  <span class="hljs-string">&quot;cost&quot;</span>: 0
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">Scenario 2: Aggiungere campi con valori predefiniti<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
+<p>In tutti i casi, il nome del nuovo campo non deve già esistere nella raccolta e il numero totale di campi non può superare il limite di conteggio dei campi di Milvus. Per ulteriori dettagli, consultare <a href="/docs/it/limitations.md#number-of-resources-in-a-collection">Limiti</a> di <a href="/docs/it/limitations.md#number-of-resources-in-a-collection">Milvus</a>.</p>
+<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">Aggiungere campi scalari definiti dall’utente<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,93 +108,46 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si desidera che le entità esistenti abbiano un valore iniziale significativo invece di NULL, specificare i valori predefiniti.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a field with default value</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Sets the default value for all existing entities</span>
-<span class="hljs-comment"># - Makes the field available with minimal delay</span>
-<span class="hljs-comment"># - Maintains data consistency with the default value</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;priority_level&quot;</span>,     <span class="hljs-comment"># Name of the new field</span>
-    data_type=DataType.VARCHAR,      <span class="hljs-comment"># String type field</span>
-    max_length=<span class="hljs-number">20</span>,                   <span class="hljs-comment"># Maximum string length</span>
-    nullable=<span class="hljs-literal">True</span>,                   <span class="hljs-comment"># Required for added fields</span>
-    default_value=<span class="hljs-string">&quot;standard&quot;</span>         <span class="hljs-comment"># Value assigned to existing entities</span>
-    <span class="hljs-comment"># Also used for new entities if no value provided</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;priority_level&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">20</span>)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;priority_level&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;VarChar&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">default_value</span>: <span class="hljs-string">&#x27;standard&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;priority_level&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;nullable&quot;: true,
-      &quot;defaultValue&quot;: &quot;standard&quot;,
-      &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: &quot;20&quot;
-      }
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Comportamento previsto:</p>
+    </button></h3><p>Utilizza ` <code translate="no">add_collection_field()</code> ` per aggiungere un campo scalare definito dall'utente a una collezione esistente.</p>
+<p>Ciò differisce dall’archiviazione di chiavi arbitrarie nel campo dinamico: una volta reso disponibile l’aggiornamento dello schema, il nuovo campo scalare diventa parte integrante dello schema della collezione. È possibile inserirvi o aggiornare valori, creare indici su di esso dove supportato, utilizzarlo nelle query e nei filtri di ricerca e restituirlo nell’output delle query o delle ricerche.</p>
+<p>Poiché le entità esistenti sono state inserite prima che il nuovo campo fosse disponibile, ogni campo scalare definito dall’utente aggiunto deve essere nullable:</p>
 <ul>
-<li><p>Le<strong>entità esistenti</strong> avranno il valore predefinito (<code translate="no">&quot;standard&quot;</code>) per il campo appena aggiunto.</p></li>
-<li><p>Le<strong>nuove entità</strong> possono sovrascrivere il valore predefinito o utilizzarlo se non viene fornito alcun valore.</p></li>
-<li><p><strong>La disponibilità del campo</strong> avviene quasi immediatamente con un ritardo minimo</p></li>
-<li><p><strong>Interrogabile immediatamente</strong> dopo il breve periodo di sincronizzazione</p></li>
+<li><p>Se si aggiunge un campo scalare con ` <code translate="no">nullable=True</code> ` e senza ` <code translate="no">default_value</code>`, le entità esistenti restituiscono ` <code translate="no">NULL</code> ` per il nuovo campo.</p></li>
+<li><p>Se si aggiunge un campo scalare con l'attributo ` <code translate="no">nullable=True</code> ` e l'attributo ` <code translate="no">default_value</code>`, le entità esistenti restituiscono il valore predefinito anziché ` <code translate="no">NULL</code>`.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>Le espressioni di filtro scalari non corrispondono ai valori scalari di tipo <code translate="no">NULL</code>. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/nullable-and-default.md">Campi nullabili</a>.</p>
+<p><strong>Esempio: Aggiunta di un campo scalare nullabile</strong></p>
+<p>L'esempio seguente aggiunge un campo scalare nullable <code translate="no">source</code> a una raccolta esistente denominata <code translate="no">product_catalog</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;source&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">128</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>Dopo l’aggiunta del campo, le entità già presenti nella raccolta restituiscono il valore “ <code translate="no">NULL</code> ” per “ <code translate="no">source</code> ”. Le nuove entità possono impostare “ <code translate="no">source</code> ” durante l’inserimento o l’aggiornamento.</p>
+<p><strong>Esempio: aggiungere un campo scalare con un valore predefinito</strong></p>
+<p>Se le entità esistenti devono restituire un valore concreto anziché <code translate="no">NULL</code>, specificare <code translate="no">default_value</code> quando si aggiunge un campo scalare. L’esempio seguente aggiunge un campo <code translate="no">review_status</code> e utilizza <code translate="no">&quot;unreviewed&quot;</code> come valore predefinito.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;review_status&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">32</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    default_value=<span class="hljs-string">&quot;unreviewed&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  # <span class="hljs-title class_">Shows</span> <span class="hljs-keyword">default</span> value <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: 1,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Una volta aggiunto il campo, le entità già presenti nella collezione restituiscono <code translate="no">&quot;unreviewed&quot;</code> per <code translate="no">review_status</code>. Le nuove entità possono impostare un valore diverso oppure utilizzare il valore predefinito quando non viene fornito alcun valore.</p>
+<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">Aggiunta di campi StructArray<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -328,7 +162,38 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">Posso abilitare la funzionalità di schema dinamico aggiungendo un campo <code translate="no">$meta</code>?<button data-href="#Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="anchor-icon" translate="no">
+    </button></h3><p>Utilizzare ` <code translate="no">add_collection_struct_field()</code> ` per aggiungere un campo `StructArray` che accetta array di elementi `Struct`. Per aggiungere un campo `StructArray`, procedere come segue:</p>
+<ol>
+<li><p>Creare uno schema Struct contenente i sottocampi necessari dei tipi di dati supportati. Per i tipi di dati applicabili, fare riferimento a <a href="/docs/it/structarray-limits.md#Supported-subfield-data-types">Limiti di StructArray</a>.</p></li>
+<li><p>Fare riferimento allo schema Struct creato in precedenza e impostare la capacità massima del campo in <code translate="no">add_collection_struct_field()</code>.</p></li>
+<li><p>Impostare ` <code translate="no">nullable=True</code> ` nella richiesta.</p></li>
+</ol>
+<p><strong>Esempio: aggiungere un campo StructArray nullable</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Create a Struct schema.</span>
+struct_schema = client.create_struct_field_schema()
+
+<span class="hljs-comment"># Add scalar fields to the Struct.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
+
+<span class="hljs-comment"># Add vector fields to the Struct with mmap enabled.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+
+<span class="highlighted-comment-line">client.add_collection_struct_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;books&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">    struct_schema=struct_schema,</span>
+<span class="highlighted-comment-line">    max_capacity=<span class="hljs-number">1024</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dopo l’aggiunta del campo StructArray, le entità già presenti nella raccolta restituiscono il valore “ <code translate="no">NULL</code> ” per “ <code translate="no">chunks</code> ” in tutti i suoi sottocampi. Quando si inserisce una nuova entità, assicurarsi che tutti i sottocampi siano “ <code translate="no">NULL</code> ” o abbiano valori validi. L’inserimento di un’entità con alcuni sottocampi impostati su “ <code translate="no">NULL</code> ” e altri su valori validi genera errori.</p>
+<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">Aggiunta di campi vettoriali definiti dall’utente<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,55 +208,133 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No, non è possibile utilizzare <code translate="no">add_collection_field</code> per aggiungere un campo <code translate="no">$meta</code> per abilitare la funzionalità di campo dinamico. Ad esempio, il codice seguente non funziona:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This is NOT supported</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;existing_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;$meta&quot;</span>,
-    data_type=DataType.JSON  <span class="hljs-comment"># This operation will fail</span>
+    </button></h3><p>Utilizzare <code translate="no">add_collection_field()</code> per aggiungere un campo vettoriale definito dall’utente quando l’applicazione genera embedding e scrive valori vettoriali in Milvus.</p>
+<p>Ogni campo vettoriale definito dall’utente aggiunto deve essere nullable. Le entità esistenti dispongono di un valore " <code translate="no">NULL</code> " per il nuovo campo vettoriale fino a quando non si scrivono i valori vettoriali tramite upsert o un flusso di lavoro di backfill. Le nuove entità possono includere il campo vettoriale durante l’inserimento. La ricerca vettoriale ignora le entità il cui valore vettoriale è " <code translate="no">NULL</code>". Per ulteriori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Campi nullable</a>.</p>
+<p><strong>Esempio: Aggiunta di un campo vettoriale nullabile</strong></p>
+<p>L'esempio seguente aggiunge un campo vettoriale denso nullabile denominato <code translate="no">embedding_v2</code> a una raccolta esistente. Impostare <code translate="no">dim</code> in base alla dimensionalità degli embedding generati dall'applicazione.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.FLOAT_VECTOR,</span>
+<span class="highlighted-comment-line">    dim=<span class="hljs-number">768</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dopo aver aggiunto il campo, creare un indice sul nuovo campo vettoriale prima di effettuare ricerche su di esso:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// ❌ This is NOT supported</span>
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;existing_collection&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;$meta&quot;</span>)
-        .dataType(DataType.JSON)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// ❌ This is NOT supported</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;$meta&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;JSON&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment"># ❌ This is NOT supported</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;existing_collection&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;$meta&quot;,
-      &quot;dataType&quot;: &quot;JSON&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Per abilitare la funzionalità di schema dinamico:</p>
+<p>Le entità esistenti hanno <code translate="no">NULL</code> per <code translate="no">embedding_v2</code> e vengono ignorate quando si effettua una ricerca su questo campo. Per rendere le entità esistenti ricercabili tramite <code translate="no">embedding_v2</code>, scrivere valori vettoriali non NULL tramite upsert o un flusso di lavoro di backfill. Le nuove entità possono includere <code translate="no">embedding_v2</code> durante l’inserimento.</p>
+<h3 id="Add-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Aggiungi campi vettoriali generati da funzioni<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzare questo flusso di lavoro quando Milvus deve generare un nuovo campo vettoriale a partire da dati già memorizzati in una collezione esistente. L’operazione aggiunge due elementi dello schema correlati:</p>
 <ul>
-<li><p><strong>Nuova collezione</strong>: Impostare <code translate="no">enable_dynamic_field</code> su True quando si crea la collezione. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md#Create-Schema">Creare una raccolta</a></p></li>
-<li><p><strong>Raccolta esistente</strong>: Impostare la proprietà a livello di raccolta <code translate="no">dynamicfield.enabled</code> su True. Per i dettagli, vedere <a href="/docs/it/modify-collection.md#Example-4-Enable-dynamic-field">Modifica della raccolta</a>.</p></li>
+<li><p>Una funzione che legge uno o più campi di input esistenti.</p></li>
+<li><p>Un nuovo campo di output vettoriale che memorizza i valori generati dalla funzione.</p></li>
 </ul>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Cosa succede quando si aggiunge un campo con lo stesso nome di una chiave di campo dinamica?<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+<p>Ad esempio, una funzione BM25 legge un campo esistente <code translate="no">VARCHAR</code> e genera un campo <code translate="no">SPARSE_FLOAT_VECTOR</code> per la ricerca lessicale. Una funzione MinHash genera un campo <code translate="no">BINARY_VECTOR</code> per il rilevamento di quasi-duplicati. Questo flusso di lavoro non aggiunge né sostituisce il campo di input della funzione.</p>
+<div class="alert note">
+<p>Questa funzionalità richiede Storage V3. Per le istruzioni di abilitazione e le considerazioni sulla compatibilità, consultare <a href="/docs/it/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>L’aggiunta di una funzione e del campo vettoriale da essa generato a una raccolta esistente richiede inoltre la compattazione della versione dello schema e la compattazione della versione di archiviazione. Milvus rifiuta la richiesta se una delle due impostazioni è disabilitata. Questi prerequisiti aggiuntivi si applicano solo quando si modifica una raccolta esistente; la definizione della funzione nello schema iniziale della raccolta non utilizza questo flusso di lavoro di backfill dei dati esistenti.</p>
+<p>La funzione supportata determina il tipo di campo vettoriale generato:</p>
+<table>
+<thead>
+<tr><th>Funzione</th><th>Tipo di campo vettoriale generato</th><th>Campo di input tipico</th><th>Caso d’uso tipico</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>Un campo " <code translate="no">VARCHAR</code> " con l'analizzatore abilitato</td><td>Ricerca lessicale e rilevanza delle parole chiave</td></tr>
+<tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td>Un campo " <code translate="no">VARCHAR</code> "</td><td>Rilevamento di quasi-duplicati</td></tr>
+</tbody>
+</table>
+<p>Per i dettagli sul funzionamento di ciascuna funzione, consultare <a href="/docs/it/bm25-function.md">Funzione BM25</a> e <a href="/docs/it/minhash-function.md">Funzione MinHash</a>.</p>
+<p>Il campo vettoriale generato non deve già esistere nella collezione e non può essere impostabile a null. Il campo di input della funzione deve già esistere.</p>
+<p><strong>Esempio: Aggiunta di un campo vettoriale sparso generato da BM25 per la ricerca lessicale</strong></p>
+<p>L'esempio seguente aggiunge una funzione BM25 denominata " <code translate="no">text_bm25</code> " e un campo vettoriale sparso generato denominato " <code translate="no">text_sparse</code> " a una raccolta esistente. La raccolta deve già disporre di un campo " <code translate="no">VARCHAR</code> " denominato " <code translate="no">text</code> " con l'analizzatore abilitato.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+sparse_field = client.create_field_schema(
+    name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    data_type=DataType.SPARSE_FLOAT_VECTOR,
+    desc=<span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>,
+)
+
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    function_type=FunctionType.BM25,
+)
+
+<span class="highlighted-comment-line">client.add_function_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
+<span class="highlighted-comment-line">    func=bm25_function,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Dopo aver aggiunto la funzione BM25 e il campo generato, creare un indice sul campo vettoriale sparso prima di utilizzarlo per la ricerca BM25:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Concettualmente, questa operazione aggiunge le seguenti definizioni di campo e funzione:</p>
+<pre><code translate="no" class="language-plaintext">New generated output field:
+  name: &quot;text_sparse&quot;
+  data_type: SPARSE_FLOAT_VECTOR
+  nullable: false
+
+New function:
+  name: &quot;text_bm25&quot;
+  type: BM25
+  input_field_names: [&quot;text&quot;]
+  output_field_names: [&quot;text_sparse&quot;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Una volta che la richiesta va a buon fine, <code translate="no">describe_collection()</code> restituisce sia il nuovo campo vettoriale <code translate="no">text_sparse</code> sia la funzione <code translate="no">text_bm25</code> nello schema della collezione. Milvus genera l’output della funzione per le nuove entità man mano che vengono scritte. Per le entità esistenti, Milvus popola il campo vettoriale generato in modo asincrono tramite compattazione in background. La visibilità dello schema conferma che l’aggiornamento dello schema è andato a buon fine, ma non indica che il backfill sia stato completato per ogni entità esistente. Per il flusso di lavoro completo della ricerca BM25, fare riferimento a <a href="/docs/it/full-text-search.md">Ricerca full-text</a>.</p>
+<p>Milvus supporta anche i campi vettoriali binari generati da MinHash per il rilevamento dei quasi-duplicati. Una funzione MinHash utilizza <code translate="no">FunctionType.MINHASH</code> e scrive in un nuovo campo di output <code translate="no">BINARY_VECTOR</code>. Per i dettagli sulla configurazione, consultare <a href="/docs/it/minhash-function.md">Funzione MinHash</a>.</p>
+<h2 id="Drop-fields-from-an-existing-collection" class="common-anchor-header">Rimuovere campi da una raccolta esistente<button data-href="#Drop-fields-from-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -406,270 +349,66 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando la collezione ha un campo dinamico abilitato (<code translate="no">$meta</code> esiste), è possibile aggiungere campi statici che hanno lo stesso nome delle chiavi di campo dinamico esistenti. Il nuovo campo statico maschererà la chiave del campo dinamico, ma i dati dinamici originali saranno conservati.</p>
-<p>Per evitare possibili conflitti nei nomi dei campi, prima di aggiungerli si deve considerare il nome del campo da aggiungere facendo riferimento ai campi esistenti e alle chiavi dei campi dinamici.</p>
-<p><strong>Scenario di esempio:</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
-<span class="hljs-comment"># Insert data with dynamic field keys</span>
-data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment"># Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment"># Another dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=data)
-
-<span class="hljs-comment"># Add static field with same name as existing dynamic field key</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment"># Same name as dynamic field key</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type can differ from dynamic field key</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-)
-
-<span class="hljs-comment"># Insert new data after adding static field</span>
-new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               <span class="hljs-comment"># Now must use INT64 type (static field)</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    <span class="hljs-comment"># Still a dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=new_data)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
-row.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, ...}));
-row.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>);
-row.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">99.5</span>);
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(row))
-        .build());
-        
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;extra_info&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-        
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">newRow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-newRow.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
-newRow.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, ...}));
-newRow.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-number">100</span>);
-newRow.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">88.0</span>);
-
-insertR = client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(newRow))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Original collection with dynamic field enabled</span>
-<span class="hljs-comment">// Insert data with dynamic field keys</span>
-<span class="hljs-keyword">const</span> data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment">// Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment">// Another dynamic field key</span>
-}]
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: data
-});
-
-<span class="hljs-comment">// Add static field with same name as existing dynamic field key</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">add_collection_field</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment">// Same name as dynamic field key</span>
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,        <span class="hljs-comment">// Data type can differ from dynamic field key</span>
-    <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>                   <span class="hljs-comment">// Must be True for added fields</span>
-});
-
-<span class="hljs-comment">// Insert new data after adding static field</span>
-<span class="hljs-keyword">const</span> new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               # <span class="hljs-title class_">Now</span> must use <span class="hljs-title class_">INT64</span> <span class="hljs-title function_">type</span> (<span class="hljs-keyword">static</span> field)
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    # <span class="hljs-title class_">Still</span> a dynamic field key
-}];
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: new_data
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 1,
-      \&quot;my_vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5],
-      \&quot;extra_info\&quot;: \&quot;this is a dynamic field key\&quot;,
-      \&quot;score\&quot;: 99.5
-    }]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;schema\&quot;: {
-      \&quot;fieldName\&quot;: \&quot;extra_info\&quot;,
-      \&quot;dataType\&quot;: \&quot;Int64\&quot;,
-      \&quot;nullable\&quot;: true
-    }
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 2,
-      \&quot;my_vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7],
-      \&quot;extra_info\&quot;: 100,
-      \&quot;score\&quot;: 88.0
-    }]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Comportamento previsto:</p>
+    </button></h2><p>È possibile rimuovere campi da una raccolta esistente in due modi. Eliminare direttamente i campi scalari o vettoriali definiti dall’utente quando non fanno più parte del modello della raccolta. Eliminare i campi vettoriali generati dalle funzioni eliminando la funzione che li genera.</p>
+<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">Eliminazione di campi definiti dall’utente<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzare l'opzione " <code translate="no">drop_collection_field()</code> " per rimuovere un campo scalare, vettoriale o StructArray definito dall'utente che non fa più parte del modello della collezione.</p>
+<p>L'eliminazione di un campo modifica innanzitutto lo schema della collezione e la visibilità del campo:</p>
 <ul>
-<li><p>Le<strong>entità esistenti</strong> avranno NULL per il nuovo campo statico. <code translate="no">extra_info</code></p></li>
-<li><p>Le<strong>nuove entità</strong> devono utilizzare il tipo di dati del campo statico (<code translate="no">INT64</code>).</p></li>
-<li><p>I<strong>valori originali delle chiavi dei campi dinamici</strong> sono conservati e accessibili tramite la sintassi di <code translate="no">$meta</code>.</p></li>
-<li><p><strong>Il campo statico maschera la chiave del campo dinamico</strong> nelle normali interrogazioni.</p></li>
+<li><p>Una volta completata con successo l'operazione ` <code translate="no">drop_collection_field()</code> `, lo schema della collezione viene aggiornato: ` <code translate="no">describe_collection()</code> ` non restituisce più il campo eliminato e le query o le ricerche non possono più restituire il campo in ` <code translate="no">output_fields</code> ` né utilizzarlo nelle espressioni.</p></li>
+<li><p>Gli indici creati sul campo eliminato vengono rimossi nell’ambito dell’aggiornamento dello schema.</p></li>
 </ul>
-<p><strong>Accesso ai valori statici e dinamici:</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Query static field only (dynamic field key is masked)</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
+<p>La pulizia dello spazio di archiviazione viene gestita separatamente dalla pulizia dello schema. Per ulteriori dettagli, consultare <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">Quando viene recuperato lo spazio di archiviazione dopo l’eliminazione di un campo?</a></p>
+<p><strong>Esempio: eliminazione di un campo scalare definito dall’utente</strong></p>
+<p>L'esempio seguente presuppone che <code translate="no">experiment_tag</code> sia un campo scalare definito dall'utente in <code translate="no">product_catalog</code> e lo elimina dalla raccolta.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-<span class="hljs-comment"># 2. Query both static and original dynamic values</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {</span>
-<span class="hljs-comment">#     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">#     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment"># }</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment"># 3. Query new entity with static field value</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 2&quot;</span>, 
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;experiment_tag&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>Dopo aver eliminato un campo, è possibile chiamare ` <code translate="no">describe_collection()</code> ` per verificare che il campo non faccia più parte dello schema.</p>
+<p><strong>Esempio: Eliminazione di un campo StructArray</strong></p>
+<p>L'esempio seguente presuppone che ` <code translate="no">chunks</code> ` sia un campo StructArray in ` <code translate="no">my_collection</code>` e lo elimina dalla raccolta.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 1. Query static field only (dynamic field key is masked)</span>
-<span class="hljs-keyword">let</span> results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
+<p><strong>Esempio: eliminare un campo vettoriale definito dall’utente</strong></p>
+<p>È possibile eliminare un campo vettoriale con lo stesso metodo ` <code translate="no">drop_collection_field()</code> `, ma la collezione deve comunque contenere almeno un campo vettoriale dopo l’eliminazione. Ciò è utile per le collezioni che temporaneamente contengono più rappresentazioni vettoriali e successivamente si standardizzano su una di esse.</p>
+<p>L'esempio seguente presuppone che ` <code translate="no">image_vector</code> ` sia un campo vettoriale definito dall'utente in ` <code translate="no">hybrid_catalog</code>` e che la collezione conservi ancora un altro campo vettoriale, ad esempio ` <code translate="no">text_vector</code>`.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-<span class="hljs-comment">// 2. Query both static and original dynamic values</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-});
-<span class="hljs-comment">// Returns: {</span>
-<span class="hljs-comment">//     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">//     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">//     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment">// }</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment">// 3. Query new entity with static field value</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 2&quot;</span>, 
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;hybrid_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;, \&quot;\$meta[&#x27;extra_info&#x27;]\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 2\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">Quanto tempo ci vuole perché un nuovo campo sia disponibile?<button data-href="#How-long-does-it-take-for-a-new-field-to-become-available" class="anchor-icon" translate="no">
+<p>Se <code translate="no">image_vector</code> è l’ultimo campo vettoriale della collezione, l’operazione di rimozione viene rifiutata.</p>
+<h3 id="Drop-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Eliminazione di campi vettoriali generati da funzioni<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -684,4 +423,172 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I campi aggiunti diventano disponibili quasi immediatamente, ma potrebbe esserci un breve ritardo dovuto alla sincronizzazione delle modifiche interne allo schema nel cluster Milvus. Questa sincronizzazione assicura che tutti i nodi siano a conoscenza dell'aggiornamento dello schema prima di elaborare le query che coinvolgono il nuovo campo.</p>
+    </button></h3><p>Utilizzare questa operazione quando non è più necessario un campo vettoriale generato da una funzione, ad esempio un campo vettoriale sparso generato da BM25.</p>
+<p>Per rimuovere un campo vettoriale generato, chiamare <code translate="no">drop_collection_function()</code> sulla funzione che lo genera. In questo flusso di lavoro, Milvus rimuove la funzione dallo schema della collezione e rimuove anche i campi di output vettoriali da essa generati.</p>
+<p>Non richiamare ` <code translate="no">drop_collection_field()</code> ` su un campo di input o di output di una funzione. Se il campo di destinazione è un campo di output di una funzione, richiamare invece ` <code translate="no">drop_collection_function()</code> `. I campi di input della funzione vengono conservati dopo l’eliminazione della funzione.</p>
+<p><strong>Esempio: eliminazione di una funzione BM25 e del campo da essa generato</strong></p>
+<p>L'esempio seguente presuppone che ` <code translate="no">text_bm25</code> ` sia una funzione BM25 contenuta in ` <code translate="no">product_catalog</code> ` e che generi un campo di output vettoriale sparso denominato ` <code translate="no">text_sparse</code>`.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_function(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Una volta completata con successo l’operazione, <code translate="no">describe_collection()</code> non restituisce più la funzione rimossa né i campi di output da essa generati. I campi di input della funzione rimangono nello schema.</p>
+<p>Se la rimozione dei campi di output della funzione lasciasse la raccolta senza alcun campo vettoriale, l’operazione viene rifiutata.</p>
+<h2 id="FAQ" class="common-anchor-header">Domande frequenti<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Which-add-field-method-should-I-use" class="common-anchor-header">Quale metodo add-field dovrei utilizzare?<button data-href="#Which-add-field-method-should-I-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzare ` <code translate="no">add_collection_field()</code> ` per aggiungere un campo scalare definito dall’utente quando l’applicazione fornisce valori scalari per il filtraggio, l’output delle query o la logica applicativa.</p>
+<p>Utilizza ` <code translate="no">add_collection_struct_field()</code> ` per aggiungere un campo `StructArray` quando hai bisogno di un campo array i cui elementi condividono lo stesso schema `Struct`.</p>
+<p>Utilizza <code translate="no">add_collection_field()</code> per aggiungere un campo vettoriale definito dall’utente quando la tua applicazione genera embedding e scrive valori vettoriali su Milvus.</p>
+<p>Utilizza il flusso di lavoro "generated-vector-field" quando Milvus deve produrre valori vettoriali a partire da campi esistenti. Questa guida illustra il percorso BM25 con " <code translate="no">add_function_field()</code> " per la ricerca lessicale. Milvus supporta anche i campi vettoriali binari generati da MinHash per il rilevamento di quasi-duplicati.</p>
+<h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">Perché i campi definiti dall’utente aggiunti devono essere nullabili?<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le entità esistenti sono state inserite prima che il nuovo campo fosse disponibile, pertanto non dispongono di valori per quel campo. Impostando ` <code translate="no">nullable=True</code> `, Milvus rappresenta il valore mancante come ` <code translate="no">NULL</code> ` finché l’applicazione non scrive un valore o, per i campi scalari, finché non viene applicato un valore predefinito.</p>
+<p>Questa regola si applica ai campi scalari definiti dall’utente e ai campi vettoriali definiti dall’utente aggiunti con l’ <code translate="no">add_collection_field()</code>, nonché ai campi StructArray aggiunti con l’ <code translate="no">add_collection_struct_field()</code>. Non si applica ai campi vettoriali generati da funzioni, che non possono essere nullabili.</p>
+<h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">Cosa succede alle entità esistenti dopo l’aggiunta di un campo definito dall’utente?<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per un campo scalare definito dall’utente, le entità esistenti restituiscono <code translate="no">NULL</code> a meno che non si imposti un <code translate="no">default_value</code>. Se si imposta un <code translate="no">default_value</code>, le entità esistenti restituiscono quel valore predefinito.</p>
+<p>Per un campo vettoriale definito dall’utente, le entità esistenti presentano il valore ` <code translate="no">NULL</code> ` per il nuovo campo vettoriale. La ricerca vettoriale sul campo aggiunto ignora le entità il cui valore vettoriale è ` <code translate="no">NULL</code>`. Per rendere le entità esistenti ricercabili tramite il nuovo campo vettoriale, è necessario inserire valori vettoriali non NULL tramite un’operazione di upsert o un flusso di lavoro di backfill. Le nuove entità possono includere il nuovo campo vettoriale durante l’inserimento.</p>
+<p>Per un campo StructArray, le entità esistenti restituiscono <code translate="no">NULL</code> per il nuovo campo StructArray in tutti i suoi sottocampi. Le nuove entità devono fornire <code translate="no">NULL</code> per tutti i sottocampi oppure valori validi per tutti i sottocampi.</p>
+<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">È possibile aggiungere la ricerca lessicale BM25 a una collezione esistente?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sì. Se la collezione dispone già di un campo ` <code translate="no">VARCHAR</code> ` con l’analizzatore abilitato, è possibile aggiungere un campo vettoriale sparso generato da BM25 per la ricerca lessicale. In questo flusso di lavoro, Milvus aggiunge il nuovo campo di output ` <code translate="no">SPARSE_FLOAT_VECTOR</code> ` e la funzione BM25 che ne genera i valori. In questo flusso di lavoro che comporta una modifica dello schema, non è possibile utilizzare un campo <code translate="no">TEXT</code> esistente come input per BM25. Per utilizzare un input <code translate="no">TEXT</code>, definire il campo e la funzione BM25 al momento della creazione della collezione.</p>
+<p>Dopo aver aggiunto il campo vettoriale sparso generato da BM25, creare un indice <code translate="no">SPARSE_INVERTED_INDEX</code> con <code translate="no">metric_type=&quot;BM25&quot;</code> prima di utilizzare il campo per la ricerca BM25.</p>
+<h3 id="Can-I-drop-a-vector-field-generated-by-a-function-directly" class="common-anchor-header">È possibile eliminare direttamente un campo vettoriale generato da una funzione?<button data-href="#Can-I-drop-a-vector-field-generated-by-a-function-directly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>No. Un campo vettoriale generato da una funzione fa parte del contratto dello schema di quella funzione. Utilizza invece l’ <code translate="no">drop_collection_function()</code>. In questo flusso di lavoro di modifica dello schema, Milvus rimuove insieme la funzione e i campi di output vettoriali da essa generati, preservando al contempo i campi di input.</p>
+<h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">Devo attendere dopo aver modificato lo schema di una collezione?<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di norma, non è richiesta alcuna attesa manuale. Se l’operazione successiva dipende dallo schema aggiornato, è possibile chiamare prima ` <code translate="no">describe_collection()</code> ` per verificare lo schema attualmente restituito da Milvus.</p>
+<p>In un'implementazione distribuita, può verificarsi un breve intervallo di propagazione mentre i componenti di Milvus aggiornano i metadati della collezione. Se un'operazione eseguita immediatamente dopo la modifica dello schema fallisce a causa di un errore relativo allo schema, aggiornare lo schema e riprovare l'operazione.</p>
+<h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">Quando viene recuperato lo spazio di archiviazione dopo l’eliminazione di un campo?<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'eliminazione di un campo lo rimuove dallo schema corrente e dalla visibilità nelle normali query/ricerche, ma i dati storici relativi a quel campo non vengono immediatamente eliminati fisicamente dall'object storage.</p>
+<p>Lo spazio di archiviazione può essere recuperato in un secondo momento durante la compattazione. La compattazione è un processo in background che riorganizza i file di dati esistenti in file nuovi e più compatti. Dopo l’eliminazione di un campo, i file appena compattati seguono lo schema corrente e omettono il campo eliminato. Milvus non garantisce una riduzione immediata o in un tempo prestabilito dello spazio di archiviazione dopo l’eliminazione di un campo.</p>
+<h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Cosa succede se aggiungo un campo scalare con lo stesso nome di una chiave di campo dinamico?<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se il campo dinamico è abilitato, è possibile aggiungere un campo scalare con lo stesso nome di una chiave di campo dinamico esistente. Il nuovo campo scalare maschera la chiave del campo dinamico nell’output normale della query, ma i dati dinamici originali vengono conservati in <code translate="no">$meta</code>.</p>
+<p>Ad esempio, se le entità esistenti memorizzano una chiave dinamica denominata <code translate="no">source</code> e in seguito si aggiunge un campo scalare denominato <code translate="no">source</code>, l’output normale per <code translate="no">source</code> fa riferimento al campo scalare. Per accedere al valore dinamico originale, utilizzare la sintassi del percorso <code translate="no">$meta</code>, ad esempio <code translate="no">$meta[&quot;source&quot;]</code>.</p>

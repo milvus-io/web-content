@@ -1,9 +1,11 @@
 ---
 id: string.md
-title: String Field
-summary: 'In Milvus, VARCHAR is the data type used for storing string data.'
+title: VarChar Field
+summary: >-
+  VARCHAR is a scalar field type for storing short, bounded string metadata in
+  Milvus.
 ---
-<h1 id="String-Field" class="common-anchor-header">String Field<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="VarChar-Field" class="common-anchor-header">VarChar Field<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +20,8 @@ summary: 'In Milvus, VARCHAR is the data type used for storing string data.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string data.</p>
+    </button></h1><p>Milvus supports textual scalar data with <code translate="no">VARCHAR</code> and <code translate="no">TEXT</code> fields. This page describes <code translate="no">VARCHAR</code>, which is designed for short, bounded string metadata such as names, tags, categories, and external IDs.</p>
+<p>For longer source text, document passages, article bodies, tickets, or logs that should be stored and returned with entities, use a <code translate="no">TEXT</code> field instead. Use <code translate="no">TEXT</code> when a value may exceed <code translate="no">65,535</code> bytes or when you do not want to set a fixed <code translate="no">max_length</code> in the collection schema. For details, refer to <a href="/docs/text.md">Text Field</a>.</p>
 <p>When you define a <code translate="no">VARCHAR</code> field, two parameters are mandatory:</p>
 <ul>
 <li><p>Set the <code translate="no">datatype</code> to <code translate="no">DataType.VARCHAR</code>.</p></li>
@@ -42,7 +45,7 @@ summary: 'In Milvus, VARCHAR is the data type used for storing string data.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To store string data in Milvus, define a <code translate="no">VARCHAR</code> field in your collection schema. Below is an example of defining a collection schema with two <code translate="no">VARCHAR</code> fields:</p>
+    </button></h2><p>To store short, bounded string metadata in Milvus, define a <code translate="no">VARCHAR</code> field in your collection schema. Below is an example of defining a collection schema with two <code translate="no">VARCHAR</code> fields:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: stores up to 100 bytes, allows null values, and has a default value of <code translate="no">&quot;Unknown&quot;</code>.</p></li>
 <li><p><code translate="no">varchar_field2</code>: stores up to 200 bytes, allows null values, but does not have a default value.</p></li>

@@ -1,13 +1,12 @@
 ---
 id: add-fields-to-an-existing-collection.md
-title: إضافة حقول إلى مجموعة موجودةCompatible with Milvus 2.6.x
+title: تعديل مخطط المجموعة
 summary: >-
-  يسمح لك Milvus بإضافة حقول جديدة ديناميكيًا إلى المجموعات الموجودة، مما يسهل
-  تطوير مخطط بياناتك مع تغير احتياجات تطبيقك. يوضح لك هذا الدليل كيفية إضافة
-  حقول في سيناريوهات مختلفة باستخدام أمثلة عملية.
-beta: Milvus 2.6.x
+  قم بتعديل مخطط مجموعة موجود عن طريق إضافة أو حذف الحقول القياسية، والحقول
+  المتجهة، والحقول المتجهة التي تم إنشاؤها بواسطة الدوال، دون الحاجة إلى إعادة
+  إنشاء المجموعة.
 ---
-<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">إضافة حقول إلى مجموعة موجودة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Schema" class="common-anchor-header">تعديل مخطط المجموعة<button data-href="#Alter-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +21,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسمح لك Milvus بإضافة حقول جديدة ديناميكيًا إلى المجموعات الموجودة، مما يسهل تطوير مخطط بياناتك مع تغير احتياجات تطبيقك. يوضح لك هذا الدليل كيفية إضافة حقول في سيناريوهات مختلفة باستخدام أمثلة عملية.</p>
-<h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">
+    </button></h1><p>عندما تنتقل المجموعة من مرحلة التطوير إلى مرحلة الإنتاج، غالبًا ما تتغير الحقول المرتبطة بكل كيان. قد تضيف حقولًا قياسية مثل <code translate="no">source_uri</code> أو <code translate="no">review_status</code> للتصفية ومنطق التطبيق، أو تضيف حقل متجه جديدًا للتضمينات التي أنشأها تطبيقك، أو تضيف حقل متجه متفرقًا أنشأه BM25 للبحث المعجمي في النص الموجود، أو تزيل الحقول التي لم تعد مستخدمة. تتيح لك ميزة "تعديل مخطط المجموعة" إجراء تغييرات مدعومة على الحقول في مكانها بدلاً من إعادة إنشاء المجموعة.</p>
+<div class="alert note">
+<p>يغطي هذا الدليل تغييرات مخطط البيانات على مستوى الحقول في المجموعات المُدارة، بما في ذلك الحقول المُعرَّفة من قِبل المستخدم والحقول المتجهة التي تم إنشاؤها بواسطة الدوال. لإضافة حقل إلى مجموعة خارجية، راجع <a href="/docs/ar/alter-external-collection-schema.md">«تعديل مخطط المجموعة الخارجية</a>» ( <a href="/docs/ar/alter-external-collection-schema.md">Alter External Collection Schema)</a>. بالنسبة لتغييرات خصائص الحقول، مثل تغيير «التصنيف» ( <code translate="no">max_length</code> ) في حقل «التصنيف» ( <code translate="no">VARCHAR</code> ) أو «التصنيف» ( <code translate="no">max_capacity</code> ) في حقل «التصنيف» ( <code translate="no">ARRAY</code> )، راجع <a href="/docs/ar/alter-collection-field.md">«تعديل حقل المجموعة</a>» ( <a href="/docs/ar/alter-collection-field.md">Alter Collection Field</a>). للحصول على معلومات حول سلوك الحقول الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">«الحقل الديناميكي</a> » و <a href="/docs/ar/modify-collection.md">«تعديل المجموعة</a>».</p>
+</div>
+<h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,40 +40,37 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل إضافة حقول إلى مجموعتك، ضع هذه النقاط المهمة في الاعتبار:</p>
+    </button></h2><p><strong>إضافة حقول محددة من قبل المستخدم</strong></p>
 <ul>
-<li><p>يمكنك إضافة حقول قياسية (<code translate="no">INT64</code> ، <code translate="no">VARCHAR</code> ، ، <code translate="no">FLOAT</code> ، <code translate="no">DOUBLE</code> ، إلخ). لا يمكن إضافة الحقول المتجهة إلى المجموعات الموجودة.</p></li>
-<li><p>يجب أن تكون الحقول الجديدة قابلة للإلغاء (nullable=صحيح) لاستيعاب الكيانات الموجودة التي لا تحتوي على قيم للحقل الجديد.</p></li>
-<li><p>تؤدي إضافة حقول إلى المجموعات المحملة إلى زيادة استخدام الذاكرة.</p></li>
-<li><p>يوجد حد أقصى لإجمالي الحقول لكل مجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/limitations.md#Number-of-resources-in-a-collection">حدود ميلفوس</a>.</p></li>
-<li><p>يجب أن تكون أسماء الحقول فريدة بين الحقول الثابتة.</p></li>
-<li><p>لا يمكنك إضافة حقل <code translate="no">$meta</code> لتمكين وظيفة الحقل الديناميكي للمجموعات التي لم يتم إنشاؤها في الأصل باستخدام <code translate="no">enable_dynamic_field=True</code>.</p></li>
+<li><p>يجب أن تكون الحقول المحددة من قبل المستخدم قابلة للقيمة الفارغة. قم بتعيين <code translate="no">nullable=True</code> عند استدعاء <code translate="no">add_collection_field()</code>. بالنسبة للكيانات الموجودة، يكون الحقل المضاف <code translate="no">NULL</code> ما لم تقم بإضافة حقل قياسي باستخدام <code translate="no">default_value</code>.</p></li>
+<li><p>يتم دعم إضافة الحقول القياسية المحددة من قبل المستخدم في Milvus 2.6.x والإصدارات الأحدث. يتم دعم إضافة الحقول المتجهة المحددة من قبل المستخدم في Milvus 2.6.18 والإصدارات الأحدث.</p></li>
+<li><p>يتم دعم إضافة حقول StructArray في Milvus 3.0.0 والإصدارات الأحدث. يجب أن تكون حقول StructArray المضافة قابلة للقيمة الفارغة.</p></li>
+<li><p>يجب أن تكون أسماء الحقول فريدة بين الحقول الموجودة في المجموعة.</p></li>
 </ul>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يفترض هذا الدليل أن لديك</p>
+<p><strong>إضافة حقول متجهة تم إنشاؤها بواسطة الدوال</strong></p>
 <ul>
-<li><p>مثيل Milvus قيد التشغيل</p></li>
-<li><p>تم تثبيت Milvus SDK</p></li>
-<li><p>مجموعة موجودة</p></li>
+<li><p>يمكن لكل تحديث للمخطط إضافة دالة واحدة وحقل متجه واحد تم إنشاؤه فقط.</p></li>
+<li><p>تحدد الدالة المدعومة نوع الحقل المتجه الذي تم إنشاؤه: تُنشئ الدالة ` <code translate="no">BM25</code> ` حقلًا من نوع ` <code translate="no">SPARSE_FLOAT_VECTOR</code> `، بينما تُنشئ الدالة ` <code translate="no">MINHASH</code> ` حقلًا من نوع ` <code translate="no">BINARY_VECTOR</code> `.</p></li>
+<li><p>يجب أن يكون الحقل المتجه الذي تم إنشاؤه حقلًا جديدًا. ولا يمكن أن يشير إلى حقل موجود بالفعل في مخطط المجموعة.</p></li>
+<li><p>لا يمكن أن يكون حقل المتجه الذي تم إنشاؤه قابلاً للقيمة الفارغة.</p></li>
+<li><p>يجب أن تكون حقول الإدخال التي تستخدمها الدالة موجودة بالفعل في المجموعة.</p></li>
+<li><p>عند إضافة دالة BM25 أو MinHash إلى مجموعة موجودة، يجب أن يكون مدخل الدالة حقلًا من نوع " <code translate="no">VARCHAR</code> ". لا يُدعم مدخل من نوع " <code translate="no">TEXT</code> " في سير العمل هذا لأن Milvus لا يمكنه ملء المخرجات التي تم إنشاؤها للكيانات الموجودة من هذا النوع من المدخلات.</p></li>
+</ul>
+<p><strong>إزالة الحقول المحددة من قبل المستخدم</strong></p>
+<ul>
+<li><p>لا يمكنك حذف حقل المفتاح الأساسي أو حقل مفتاح التقسيم أو حقل مفتاح التجميع أو حقل المتجه الأخير في المجموعة.</p></li>
+<li><p>يمكنك حذف حقل « <code translate="no">ARRAY&lt;STRUCT&gt;</code> » بالكامل، ولكن لا يمكنك حذف حقل فرعي فردي داخل حقل « <code translate="no">ARRAY&lt;STRUCT&gt;</code> ».</p></li>
+<li><p>لا يمكنك حذف حقل يُستخدم كحقل إدخال دالة أو تم إنشاؤه كحقل إخراج دالة بشكل مباشر. لإزالة حقل إخراج دالة، قم بحذف الدالة التي تولده.</p></li>
+</ul>
+<p><strong>إزالة الحقول المتجهة التي تم إنشاؤها بواسطة الدوال</strong></p>
+<ul>
+<li><p>في سير عمل تغيير المخطط هذا، يؤدي حذف دالة إلى إزالة الدالة وحقول الإخراج التي تم إنشاؤها. تظل حقول إدخال الدالة موجودة في مخطط المجموعة.</p></li>
+<li><p>يتم رفض حذف الدالة إذا كانت إزالة حقول الإخراج الخاصة بها ستترك المجموعة بدون أي حقل متجه.</p></li>
 </ul>
 <div class="alert note">
-<p>ارجع إلى <a href="/docs/ar/create-collection.md">إنشاء مجموعة لإنشاء مجموعة</a> والعمليات الأساسية.</p>
+<p>لتغييرات المخطط خارج نطاق عمليات الإضافة والحذف المدعومة، قم بإعادة إنشاء المجموعة أو ترحيلها.</p>
 </div>
-<h2 id="Basic-usage" class="common-anchor-header">الاستخدام الأساسي<button data-href="#Basic-usage" class="anchor-icon" translate="no">
+<h2 id="Add-fields-to-an-existing-collection" class="common-anchor-header">إضافة حقول إلى مجموعة موجودة<button data-href="#Add-fields-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,132 +85,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-<span class="hljs-comment"># Connect to your Milvus server</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>  <span class="hljs-comment"># Replace with your Milvus server URI</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-
-<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build();
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
-
-<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">السيناريو 1: إضافة حقول قابلة للإلغاء بسرعة<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>أبسط طريقة لتوسيع مجموعتك هي إضافة حقول قابلة للإلغاء. هذا مثالي عندما تحتاج إلى إضافة سمات جديدة بسرعة إلى بياناتك.</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
-<span class="hljs-comment"># - Makes the field available for use with minimal delay</span>
-<span class="hljs-comment"># - Sets NULL for all existing entities</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;created_timestamp&quot;</span>,  <span class="hljs-comment"># Name of the new field to add</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type must be a scalar type</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-    <span class="hljs-comment"># Allows NULL values for existing entities</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionFieldReq;
-
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;created_timestamp&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;created_timestamp&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;Int64&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;created_timestamp&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>السلوك المتوقع:</p>
+    </button></h2><p>اختر مسار إضافة الحقل بناءً على كيفية إنتاج قيم الحقل:</p>
 <ul>
-<li><p>ستحتوي<strong>الكيانات الحالية</strong> على NULL للحقل الجديد</p></li>
-<li><p>يمكن أن تحتوي<strong>الكيانات الجديدة</strong> على قيم فارغة أو فعلية</p></li>
-<li><p>يحدث<strong>توافر الحقل</strong> على الفور تقريبًا بأقل تأخير بسبب المزامنة الداخلية للمخطط</p></li>
-<li><p><strong>يمكن الاستعلام عنها مباشرة</strong> بعد فترة المزامنة القصيرة</p></li>
+<li><p><a href="#add-user-defined-scalar-fields--milvus-26x">أضف حقولًا قياسية محددة من قبل المستخدم</a> عندما تحتاج إلى بيانات وصفية جديدة للتصفية أو إخراج الاستعلام أو منطق التطبيق.</p></li>
+<li><p><a href="#add-structarray-fields--milvus-300">أضف حقول StructArray</a> عندما تحتاج إلى حقل مصفوفة تشترك عناصره في نفس مخطط Struct.</p></li>
+<li><p><a href="#add-user-defined-vector-fields--milvus-2618">أضف حقول متجهة محددة من قبل المستخدم</a> عندما يقوم تطبيقك بإنشاء تضمينات وكتابة قيم متجهة إلى Milvus.</p></li>
+<li><p><a href="#add-vector-fields-generated-by-functions--milvus-30x">أضف حقول متجهة تم إنشاؤها بواسطة الدوال</a> عندما يتعين على Milvus إنشاء قيم متجهة من الحقول الموجودة، مثل المتجهات المتفرقة BM25 أو توقيعات MinHash من النص.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-literal">None</span>  <span class="hljs-comment"># New field shows NULL for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-title class_">None</span>  # <span class="hljs-title class_">New</span> field shows <span class="hljs-variable constant_">NULL</span> <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-  <span class="hljs-string">&quot;code&quot;</span>: 0,
-  <span class="hljs-string">&quot;data&quot;</span>: {},
-  <span class="hljs-string">&quot;cost&quot;</span>: 0
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">السيناريو 2: إضافة حقول بقيم افتراضية<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
+<p>في جميع الحالات، يجب ألا يكون اسم الحقل الجديد موجودًا بالفعل في المجموعة، ولا يمكن أن يتجاوز العدد الإجمالي للحقول حد عدد الحقول في Milvus. لمزيد من التفاصيل، راجع <a href="/docs/ar/limitations.md#number-of-resources-in-a-collection">حدود Milvus</a>.</p>
+<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">إضافة حقول قياسية محددة من قبل المستخدم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -226,92 +108,337 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما تريد أن يكون للكيانات الموجودة قيمة أولية ذات معنى بدلاً من NULL، حدد القيم الافتراضية.</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a field with default value</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Sets the default value for all existing entities</span>
-<span class="hljs-comment"># - Makes the field available with minimal delay</span>
-<span class="hljs-comment"># - Maintains data consistency with the default value</span>
-client.add_collection_field(
+    </button></h3><p>استخدم الأمر " <code translate="no">add_collection_field()</code> " لإضافة حقل قياسي محدد من قبل المستخدم إلى مجموعة موجودة.</p>
+<p>ويختلف هذا عن تخزين مفاتيح عشوائية في الحقل الديناميكي: بعد توفر تحديث المخطط، يصبح الحقل القياسي الجديد جزءًا عاديًا من مخطط المجموعة. يمكنك إدراج القيم أو تحديثها فيه، وإنشاء فهارس عليه حيثما كان ذلك مدعومًا، واستخدامه في الاستعلامات وفلاتر البحث، وإرجاعه في ناتج الاستعلام أو البحث.</p>
+<p>نظرًا لأن الكيانات الموجودة تم إدراجها قبل وجود الحقل الجديد، يجب أن يكون كل حقل عددي محدد من قبل المستخدم قابلًا للقيمة الفارغة:</p>
+<ul>
+<li><p>إذا أضفت حقلًا عدديًا باستخدام <code translate="no">nullable=True</code> دون <code translate="no">default_value</code> ، فستُرجع الكيانات الموجودة <code translate="no">NULL</code> للحقل الجديد.</p></li>
+<li><p>إذا أضفت حقلًا عدديًا مع <code translate="no">nullable=True</code> و <code translate="no">default_value</code> ، فستُرجع الكيانات الموجودة القيمة الافتراضية بدلاً من <code translate="no">NULL</code>.</p></li>
+</ul>
+<p>لا تتطابق تعبيرات التصفية العددية مع القيم العددية <code translate="no">NULL</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">الحقول القابلة للقيمة الفارغة</a>.</p>
+<p><strong>مثال: إضافة حقل عددي قابل للقيمة الفارغة</strong></p>
+<p>يضيف المثال التالي حقلًا عدديًا قابلًا للقيمة الفارغة <code translate="no">source</code> إلى مجموعة موجودة باسم <code translate="no">product_catalog</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;source&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">128</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>بعد إضافة الحقل، تُرجع الكيانات الموجودة بالفعل في المجموعة القيمة " <code translate="no">NULL</code> " لـ <code translate="no">source</code>. يمكن للكيانات الجديدة تعيين القيمة " <code translate="no">source</code> " أثناء الإدراج أو التحديث.</p>
+<p><strong>مثال: إضافة حقل قياسي بقيمة افتراضية</strong></p>
+<p>إذا كان من المفترض أن تُرجع الكيانات الموجودة قيمة محددة بدلاً من <code translate="no">NULL</code> ، فحدد <code translate="no">default_value</code> عند إضافة حقل عددي. يضيف المثال التالي حقل <code translate="no">review_status</code> ويستخدم <code translate="no">&quot;unreviewed&quot;</code> كقيمة افتراضية.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;review_status&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">32</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    default_value=<span class="hljs-string">&quot;unreviewed&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>بعد إضافة الحقل، تُرجع الكيانات الموجودة مسبقًا في المجموعة القيمة <code translate="no">&quot;unreviewed&quot;</code> بدلاً من <code translate="no">review_status</code>. يمكن للكيانات الجديدة تعيين قيمة مختلفة أو استخدام القيمة الافتراضية في حالة عدم توفير أي قيمة.</p>
+<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">إضافة حقول StructArray<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">add_collection_struct_field()</code> لإضافة حقل StructArray يقبل مصفوفات من عناصر Struct. لإضافة حقل StructArray، اتبع الخطوات التالية:</p>
+<ol>
+<li><p>قم بإنشاء مخطط Struct يحتوي على الحقول الفرعية الضرورية من أنواع البيانات المدعومة. لمعرفة أنواع البيانات القابلة للتطبيق، راجع <a href="/docs/ar/structarray-limits.md#Supported-subfield-data-types">حدود StructArray</a>.</p></li>
+<li><p>أشر إلى مخطط Struct الذي تم إنشاؤه أعلاه وقم بتعيين السعة القصوى للحقل في <code translate="no">add_collection_struct_field()</code>.</p></li>
+<li><p>اضبط " <code translate="no">nullable=True</code> " في الطلب.</p></li>
+</ol>
+<p><strong>مثال: إضافة حقل StructArray قابل للقيمة الفارغة</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Create a Struct schema.</span>
+struct_schema = client.create_struct_field_schema()
+
+<span class="hljs-comment"># Add scalar fields to the Struct.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
+
+<span class="hljs-comment"># Add vector fields to the Struct with mmap enabled.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+
+<span class="highlighted-comment-line">client.add_collection_struct_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;books&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">    struct_schema=struct_schema,</span>
+<span class="highlighted-comment-line">    max_capacity=<span class="hljs-number">1024</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>بعد إضافة حقل StructArray، تُرجع الكيانات الموجودة بالفعل في المجموعة قيمة " <code translate="no">NULL</code> " لـ " <code translate="no">chunks</code> " عبر جميع حقولها الفرعية. عند إدراج كيان جديد، تأكد من أن جميع الحقول الفرعية إما " <code translate="no">NULL</code> " أو تحتوي على قيم صالحة. يؤدي إدراج كيان تحتوي بعض حقوله الفرعية على قيمة " <code translate="no">NULL</code> " بينما تحتوي حقول أخرى على قيم صالحة إلى حدوث أخطاء.</p>
+<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">إضافة حقول متجهة محددة من قبل المستخدم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">add_collection_field()</code> لإضافة حقل متجه محدد من قبل المستخدم عندما يقوم تطبيقك بإنشاء التضمينات وكتابة قيم المتجهات إلى Milvus.</p>
+<p>يجب أن يكون كل حقل متجه محدد من قبل المستخدم مضافًا قابلاً للقيمة الفارغة. تحتوي الكيانات الموجودة على <code translate="no">NULL</code> للحقل المتجه الجديد حتى تقوم بكتابة قيم متجهة من خلال عملية upsert أو سير عمل backfill. يمكن للكيانات الجديدة تضمين الحقل المتجه أثناء الإدراج. يتخطى البحث المتجه الكيانات التي تكون قيمة متجهها <code translate="no">NULL</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">الحقول القابلة للقيمة الفارغة</a>.</p>
+<p><strong>مثال: إضافة حقل متجه قابل للقيمة الفارغة</strong></p>
+<p>يضيف المثال التالي حقل متجه كثيف قابل للقيمة الفارغة باسم <code translate="no">embedding_v2</code> إلى مجموعة موجودة. اضبط <code translate="no">dim</code> على أبعاد التضمينات التي أنشأها تطبيقك.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.FLOAT_VECTOR,</span>
+<span class="highlighted-comment-line">    dim=<span class="hljs-number">768</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>بعد إضافة الحقل، قم بإنشاء فهرس على حقل المتجه الجديد قبل البحث فيه:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+)
+
+client.create_index(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;priority_level&quot;</span>,     <span class="hljs-comment"># Name of the new field</span>
-    data_type=DataType.VARCHAR,      <span class="hljs-comment"># String type field</span>
-    max_length=<span class="hljs-number">20</span>,                   <span class="hljs-comment"># Maximum string length</span>
-    nullable=<span class="hljs-literal">True</span>,                   <span class="hljs-comment"># Required for added fields</span>
-    default_value=<span class="hljs-string">&quot;standard&quot;</span>         <span class="hljs-comment"># Value assigned to existing entities</span>
-    <span class="hljs-comment"># Also used for new entities if no value provided</span>
+    index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;priority_level&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">20</span>)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;priority_level&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;VarChar&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">default_value</span>: <span class="hljs-string">&#x27;standard&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;priority_level&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;nullable&quot;: true,
-      &quot;defaultValue&quot;: &quot;standard&quot;,
-      &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: &quot;20&quot;
-      }
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>السلوك المتوقع:</p>
+<p>تحتوي الكيانات الموجودة على القيمة « <code translate="no">NULL</code> » لقيمة « <code translate="no">embedding_v2</code> » ويتم تخطيها عند البحث في هذا الحقل. لجعل الكيانات الموجودة قابلة للبحث من خلال « <code translate="no">embedding_v2</code> »، اكتب قيم متجهة غير فارغة (non-NULL) من خلال عملية «upsert» أو سير عمل «backfill». يمكن أن تتضمن الكيانات الجديدة القيمة « <code translate="no">embedding_v2</code> » أثناء الإدراج.</p>
+<h3 id="Add-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">إضافة حقول متجهة تم إنشاؤها بواسطة الدوال<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم سير العمل هذا عندما يتعين على Milvus إنشاء حقل متجه جديد من البيانات المخزنة بالفعل في مجموعة موجودة. تضيف العملية عنصرين مرتبطين من المخطط:</p>
 <ul>
-<li><p>ستحصل<strong>الكيانات الحالية</strong> على القيمة الافتراضية (<code translate="no">&quot;standard&quot;</code>) للحقل المضاف حديثًا</p></li>
-<li><p>يمكن للكيانات<strong>الجديدة</strong> تجاوز القيمة الافتراضية أو استخدامها إذا لم يتم توفير قيمة</p></li>
-<li><p>يحدث<strong>توفر الحقل</strong> على الفور تقريبًا بأقل تأخير</p></li>
-<li><p><strong>يمكن الاستعلام عنه مباشرة</strong> بعد فترة المزامنة القصيرة</p></li>
+<li><p>دالة تقرأ حقل إدخال واحد أو أكثر من الحقول الموجودة.</p></li>
+<li><p>حقل إخراج متجه جديد يخزن القيم التي تم إنشاؤها بواسطة الدالة.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>على سبيل المثال، تقرأ دالة BM25 حقل « <code translate="no">VARCHAR</code> » (التصنيف) الموجود وتُنشئ حقل « <code translate="no">SPARSE_FLOAT_VECTOR</code> » (التصنيف) للبحث المعجمي. تُنشئ دالة MinHash حقل « <code translate="no">BINARY_VECTOR</code> » (التصنيف) للكشف عن التكرارات شبه المتطابقة. لا يضيف سير العمل هذا حقل إدخال الدالة أو يستبدله.</p>
+<div class="alert note">
+<p>تتطلب هذه الميزة Storage V3. للاطلاع على إرشادات التمكين واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>تتطلب إضافة دالة وحقل المتجه الذي تم إنشاؤه إلى مجموعة موجودة أيضًا ضغط إصدار المخطط وضغط إصدار التخزين. يرفض Milvus الطلب إذا تم تعطيل أي من الإعدادين. تنطبق هذه المتطلبات الأساسية الإضافية فقط عند تعديل مجموعة موجودة؛ ولا يستخدم تعريف الدالة في مخطط المجموعة الأولي سير العمل هذا الخاص بملء البيانات الموجودة.</p>
+<p>تحدد الدالة المدعومة نوع حقل المتجهات الذي تم إنشاؤه:</p>
+<table>
+<thead>
+<tr><th>الدالة</th><th>نوع الحقل المتجه الناتج</th><th>حقل الإدخال النموذجي</th><th>حالة الاستخدام النموذجية</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>مجال " <code translate="no">VARCHAR</code> " مع تمكين المحلل</td><td>البحث اللغوي وملاءمة الكلمات المفتاحية</td></tr>
+<tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td>حقل " <code translate="no">VARCHAR</code> "</td><td>الكشف عن التكرارات شبه المتطابقة</td></tr>
+</tbody>
+</table>
+<p>للحصول على تفاصيل حول كيفية عمل كل دالة، راجع <a href="/docs/ar/bm25-function.md">دالة BM25</a> <a href="/docs/ar/minhash-function.md">ودالة MinHash</a>.</p>
+<p>يجب ألا يكون حقل المتجه الذي تم إنشاؤه موجودًا بالفعل في المجموعة، ولا يمكن أن يكون قابلاً للقيمة الفارغة. يجب أن يكون حقل إدخال الوظيفة موجودًا بالفعل.</p>
+<p><strong>مثال: إضافة حقل متجه متفرق تم إنشاؤه بواسطة BM25 للبحث المعجمي</strong></p>
+<p>يضيف المثال التالي دالة BM25 باسم <code translate="no">text_bm25</code> وحقل متجه متفرق تم إنشاؤه باسم <code translate="no">text_sparse</code> إلى مجموعة موجودة بالفعل. يجب أن تحتوي المجموعة بالفعل على حقل <code translate="no">VARCHAR</code> باسم <code translate="no">text</code> مع تمكين المحلل.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+sparse_field = client.create_field_schema(
+    name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    data_type=DataType.SPARSE_FLOAT_VECTOR,
+    desc=<span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>,
+)
+
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    function_type=FunctionType.BM25,
+)
+
+<span class="highlighted-comment-line">client.add_function_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
+<span class="highlighted-comment-line">    func=bm25_function,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>بعد إضافة دالة BM25 والحقل الذي تم إنشاؤه، قم بإنشاء فهرس على حقل المتجهات المتفرقة قبل استخدامه للبحث باستخدام BM25:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
+)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  # <span class="hljs-title class_">Shows</span> <span class="hljs-keyword">default</span> value <span class="hljs-keyword">for</span> existing entities
-}
+<p>من الناحية النظرية، تضيف هذه العملية تعريفات الحقول والدوال التالية:</p>
+<pre><code translate="no" class="language-plaintext">New generated output field:
+  name: &quot;text_sparse&quot;
+  data_type: SPARSE_FLOAT_VECTOR
+  nullable: false
+
+New function:
+  name: &quot;text_bm25&quot;
+  type: BM25
+  input_field_names: [&quot;text&quot;]
+  output_field_names: [&quot;text_sparse&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<p>بعد نجاح الطلب، تُرجع <code translate="no">describe_collection()</code> كلاً من حقل المتجه الجديد <code translate="no">text_sparse</code> ووظيفة <code translate="no">text_bm25</code> في مخطط المجموعة. يقوم Milvus بإنشاء مخرجات الوظيفة للكيانات الجديدة فور كتابتها. بالنسبة للكيانات الموجودة، يقوم Milvus بتعبئة حقل المتجهات الذي تم إنشاؤه بشكل غير متزامن من خلال عملية الضغط في الخلفية. تؤكد رؤية المخطط نجاح تحديث المخطط، ولكنها لا تشير إلى اكتمال عملية التعبئة لكل كيان موجود. للاطلاع على سير عمل البحث BM25 الكامل، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<p>يدعم Milvus أيضًا حقول المتجهات الثنائية التي تم إنشاؤها بواسطة MinHash للكشف عن التكرارات شبه المتطابقة. تستخدم دالة MinHash دالة " <code translate="no">FunctionType.MINHASH</code> " وتكتب إلى حقل إخراج جديد " <code translate="no">BINARY_VECTOR</code> ". للحصول على تفاصيل التكوين، راجع <a href="/docs/ar/minhash-function.md">دالة MinHash</a>.</p>
+<h2 id="Drop-fields-from-an-existing-collection" class="common-anchor-header">إزالة الحقول من مجموعة موجودة<button data-href="#Drop-fields-from-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يمكنك إزالة الحقول من مجموعة موجودة بطريقتين. قم بإزالة الحقول القياسية أو المتجهة المعرفة من قبل المستخدم مباشرةً عندما لا تكون جزءًا من نموذج مجموعتك بعد الآن. قم بإزالة الحقول المتجهة التي تم إنشاؤها بواسطة الدوال عن طريق إزالة الدالة التي أنشأتها.</p>
+<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">إزالة الحقول المعرفة من قبل المستخدم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم الأمر « <code translate="no">drop_collection_field()</code> » لإزالة حقل سكالي أو متجه أو StructArray محدد من قبل المستخدم لم يعد جزءًا من نموذج المجموعة الخاص بك.</p>
+<p>يؤدي حذف الحقل أولاً إلى تغيير مخطط المجموعة ووضوح الحقل:</p>
+<ul>
+<li><p>بعد نجاح الأمر ` <code translate="no">drop_collection_field()</code> `، يتم تحديث مخطط المجموعة: لم يعد الأمر ` <code translate="no">describe_collection()</code> ` يُرجع الحقل الذي تم حذفه، ولم يعد بإمكان الاستعلامات أو عمليات البحث إرجاع الحقل في ` <code translate="no">output_fields</code> ` أو استخدامه في التعبيرات.</p></li>
+<li><p>يتم تنظيف الفهارس التي تم إنشاؤها على الحقل الذي تم حذفه كجزء من تحديث المخطط.</p></li>
+</ul>
+<p>تتم معالجة تنظيف مساحة التخزين بشكل منفصل عن تنظيف المخطط. للحصول على التفاصيل، راجع <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">متى يتم استرداد مساحة التخزين بعد حذف حقل؟</a>.</p>
+<p><strong>مثال: حذف حقل قياسي محدد من قبل المستخدم</strong></p>
+<p>يفترض المثال التالي أن « <code translate="no">experiment_tag</code> » هو حقل سكالي معرّف من قبل المستخدم في « <code translate="no">product_catalog</code> »، ويقوم بإزالته من المجموعة.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;experiment_tag&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: 1,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>بعد حذف الحقل، يمكنك استدعاء <code translate="no">describe_collection()</code> للتحقق من أن الحقل لم يعد جزءًا من المخطط.</p>
+<p><strong>مثال: حذف حقل StructArray</strong></p>
+<p>يفترض المثال التالي أن <code translate="no">chunks</code> هو حقل StructArray في <code translate="no">my_collection</code> ، ويقوم بحذفه من المجموعة.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><strong>مثال: حذف حقل متجه محدد من قبل المستخدم</strong></p>
+<p>يمكنك حذف حقل متجه باستخدام نفس طريقة <code translate="no">drop_collection_field()</code> ، ولكن يجب أن تظل المجموعة تحتوي على حقل متجه واحد على الأقل بعد الحذف. وهذا مفيد للمجموعات التي تحمل مؤقتًا تمثيلات متجهة متعددة ثم يتم توحيدها لاحقًا على أحدها.</p>
+<p>يفترض المثال التالي أن <code translate="no">image_vector</code> هو حقل متجه محدد من قبل المستخدم في <code translate="no">hybrid_catalog</code> ، وأن المجموعة لا تزال تحتفظ بحقل متجه آخر، مثل <code translate="no">text_vector</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;hybrid_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>إذا كان <code translate="no">image_vector</code> هو الحقل المتجه الأخير في المجموعة، فسيتم رفض عملية الحذف.</p>
+<h3 id="Drop-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">إزالة الحقول المتجهة التي تم إنشاؤها بواسطة الدوال<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم هذه العملية عندما لا تعود بحاجة إلى حقل متجه تم إنشاؤه بواسطة دالة، مثل حقل متجه متفرق تم إنشاؤه بواسطة BM25.</p>
+<p>لإزالة حقل متجه تم إنشاؤه، استدعِ <code translate="no">drop_collection_function()</code> على الدالة التي أنشأته. في سير العمل هذا، يقوم Milvus بإزالة الدالة من مخطط المجموعة كما يزيل حقول الإخراج المتجهة التي أنشأتها.</p>
+<p>لا تستدعِ ` <code translate="no">drop_collection_field()</code> ` على حقل إدخال الدالة أو حقل إخراج الدالة. إذا كان الحقل المستهدف هو حقل إخراج الدالة، فاستدعِ ` <code translate="no">drop_collection_function()</code> ` بدلاً من ذلك. يتم الاحتفاظ بحقول إدخال الدالة بعد حذف الدالة.</p>
+<p><strong>مثال: حذف دالة BM25 والحقل الذي أنشأته</strong></p>
+<p>يفترض المثال التالي أن الدالة <code translate="no">text_bm25</code> هي دالة BM25 في <code translate="no">product_catalog</code> وتُنشئ حقل إخراج متجه متفرق يُسمى <code translate="no">text_sparse</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_function(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>بعد نجاح العملية، لا تعود <code translate="no">describe_collection()</code> تُرجع الدالة التي تم حذفها أو حقول الإخراج التي تم إنشاؤها. تظل حقول إدخال الدالة موجودة في المخطط.</p>
+<p>إذا كانت إزالة حقول إخراج الدالة ستؤدي إلى ترك المجموعة بدون أي حقل متجه، فسيتم رفض العملية.</p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -327,7 +454,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">هل يمكنني تمكين وظيفة المخطط الديناميكي عن طريق إضافة حقل <code translate="no">$meta</code> ؟<button data-href="#Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Which-add-field-method-should-I-use" class="common-anchor-header">ما هي طريقة إضافة الحقل التي يجب أن أستخدمها؟<button data-href="#Which-add-field-method-should-I-use" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -342,55 +469,11 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لا، لا يمكنك استخدام <code translate="no">add_collection_field</code> لإضافة حقل <code translate="no">$meta</code> لتمكين وظيفة الحقل الديناميكي. على سبيل المثال، لن يعمل الرمز أدناه:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This is NOT supported</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;existing_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;$meta&quot;</span>,
-    data_type=DataType.JSON  <span class="hljs-comment"># This operation will fail</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// ❌ This is NOT supported</span>
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;existing_collection&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;$meta&quot;</span>)
-        .dataType(DataType.JSON)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// ❌ This is NOT supported</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;$meta&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;JSON&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment"># ❌ This is NOT supported</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;existing_collection&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;$meta&quot;,
-      &quot;dataType&quot;: &quot;JSON&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>لتمكين وظيفة المخطط الديناميكي:</p>
-<ul>
-<li><p><strong>مجموعة جديدة</strong>: اضبط <code translate="no">enable_dynamic_field</code> على True عند إنشاء المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md#Create-Schema">إنشاء مجموعة</a></p></li>
-<li><p><strong>المجموعة الحالية</strong>: قم بتعيين الخاصية على مستوى المجموعة <code translate="no">dynamicfield.enabled</code> إلى صواب. لمزيد من التفاصيل، راجع <a href="/docs/ar/modify-collection.md#Example-4-Enable-dynamic-field">تعديل المجموعة</a>.</p></li>
-</ul>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">ماذا يحدث عند إضافة حقل بنفس اسم مفتاح الحقل الديناميكي؟<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h3><p>استخدم <code translate="no">add_collection_field()</code> لإضافة حقل قياسي محدد من قبل المستخدم عندما يوفر تطبيقك قيمًا قياسية للتصفية أو إخراج الاستعلام أو منطق التطبيق.</p>
+<p>استخدم <code translate="no">add_collection_struct_field()</code> لإضافة حقل StructArray عندما تحتاج إلى حقل مصفوفة تشترك عناصره في نفس مخطط Struct.</p>
+<p>استخدم <code translate="no">add_collection_field()</code> لإضافة حقل متجه محدد من قبل المستخدم عندما يقوم تطبيقك بإنشاء تضمينات وكتابة قيم متجهة إلى Milvus.</p>
+<p>استخدم سير عمل «generated-vector-field» عندما يتعين على Milvus إنتاج قيم متجهة من الحقول الموجودة. يوضح هذا الدليل مسار BM25 باستخدام « <code translate="no">add_function_field()</code> » للبحث اللغوي. يدعم Milvus أيضًا الحقول المتجهة الثنائية التي تم إنشاؤها بواسطة MinHash للكشف عن التكرارات شبه المتطابقة.</p>
+<h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">لماذا يجب أن تكون الحقول المحددة من قبل المستخدم قابلة للقيمة الفارغة؟<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -405,270 +488,9 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك (<code translate="no">$meta</code> موجود)، يمكنك إضافة حقول ثابتة لها نفس اسم مفاتيح الحقول الديناميكية الموجودة. سيخفي الحقل الثابت الجديد مفتاح الحقل الديناميكي، ولكن يتم الاحتفاظ بالبيانات الديناميكية الأصلية.</p>
-<p>لتجنب التعارضات المحتملة في أسماء الحقول، فكر في اسم الحقل المراد إضافته بالرجوع إلى الحقول الموجودة ومفاتيح الحقول الديناميكية قبل إضافته فعليًا.</p>
-<p><strong>سيناريو مثال:</strong></p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
-<span class="hljs-comment"># Insert data with dynamic field keys</span>
-data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment"># Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment"># Another dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=data)
-
-<span class="hljs-comment"># Add static field with same name as existing dynamic field key</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment"># Same name as dynamic field key</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type can differ from dynamic field key</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-)
-
-<span class="hljs-comment"># Insert new data after adding static field</span>
-new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               <span class="hljs-comment"># Now must use INT64 type (static field)</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    <span class="hljs-comment"># Still a dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=new_data)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
-row.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, ...}));
-row.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>);
-row.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">99.5</span>);
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(row))
-        .build());
-        
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;extra_info&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-        
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">newRow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-newRow.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
-newRow.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, ...}));
-newRow.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-number">100</span>);
-newRow.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">88.0</span>);
-
-insertR = client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(newRow))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Original collection with dynamic field enabled</span>
-<span class="hljs-comment">// Insert data with dynamic field keys</span>
-<span class="hljs-keyword">const</span> data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment">// Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment">// Another dynamic field key</span>
-}]
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: data
-});
-
-<span class="hljs-comment">// Add static field with same name as existing dynamic field key</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">add_collection_field</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment">// Same name as dynamic field key</span>
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,        <span class="hljs-comment">// Data type can differ from dynamic field key</span>
-    <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>                   <span class="hljs-comment">// Must be True for added fields</span>
-});
-
-<span class="hljs-comment">// Insert new data after adding static field</span>
-<span class="hljs-keyword">const</span> new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               # <span class="hljs-title class_">Now</span> must use <span class="hljs-title class_">INT64</span> <span class="hljs-title function_">type</span> (<span class="hljs-keyword">static</span> field)
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    # <span class="hljs-title class_">Still</span> a dynamic field key
-}];
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: new_data
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 1,
-      \&quot;my_vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5],
-      \&quot;extra_info\&quot;: \&quot;this is a dynamic field key\&quot;,
-      \&quot;score\&quot;: 99.5
-    }]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;schema\&quot;: {
-      \&quot;fieldName\&quot;: \&quot;extra_info\&quot;,
-      \&quot;dataType\&quot;: \&quot;Int64\&quot;,
-      \&quot;nullable\&quot;: true
-    }
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 2,
-      \&quot;my_vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7],
-      \&quot;extra_info\&quot;: 100,
-      \&quot;score\&quot;: 88.0
-    }]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>السلوك المتوقع:</p>
-<ul>
-<li><p>ستحتوي<strong>الكيانات الحالية</strong> على NULL للحقل الثابت الجديد <code translate="no">extra_info</code></p></li>
-<li><p>يجب أن تستخدم<strong>الكيانات الجديدة</strong> نوع بيانات الحقل الثابت (<code translate="no">INT64</code>)</p></li>
-<li><p>يتم الاحتفاظ<strong>بقيم مفاتيح الحقل الديناميكي الأصلي</strong> ويمكن الوصول إليها عبر بناء الجملة <code translate="no">$meta</code> </p></li>
-<li><p><strong>يخفي الحقل الثابت مفتاح الحقل الديناميكي</strong> في الاستعلامات العادية</p></li>
-</ul>
-<p><strong>الوصول إلى كل من القيم الثابتة والديناميكية</strong></p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Query static field only (dynamic field key is masked)</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
-
-<span class="hljs-comment"># 2. Query both static and original dynamic values</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {</span>
-<span class="hljs-comment">#     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">#     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment"># }</span>
-
-<span class="hljs-comment"># 3. Query new entity with static field value</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 2&quot;</span>, 
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 1. Query static field only (dynamic field key is masked)</span>
-<span class="hljs-keyword">let</span> results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
-
-<span class="hljs-comment">// 2. Query both static and original dynamic values</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-});
-<span class="hljs-comment">// Returns: {</span>
-<span class="hljs-comment">//     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">//     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">//     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment">// }</span>
-
-<span class="hljs-comment">// 3. Query new entity with static field value</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 2&quot;</span>, 
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;, \&quot;\$meta[&#x27;extra_info&#x27;]\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 2\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">كم من الوقت يستغرق الحقل الجديد ليصبح متاحًا؟<button data-href="#How-long-does-it-take-for-a-new-field-to-become-available" class="anchor-icon" translate="no">
+    </button></h3><p>تم إدراج الكيانات الموجودة قبل وجود الحقل الجديد، لذا فهي لا تحتوي على قيم لهذا الحقل. يتيح تعيين <code translate="no">nullable=True</code> لـ Milvus تمثيل القيمة المفقودة على أنها <code translate="no">NULL</code> حتى يقوم تطبيقك بكتابة قيمة أو، بالنسبة للحقول القياسية، حتى يتم تطبيق قيمة افتراضية.</p>
+<p>تنطبق هذه القاعدة على الحقول القياسية المحددة من قبل المستخدم والحقول المتجهة المحددة من قبل المستخدم التي تمت إضافتها باستخدام <code translate="no">add_collection_field()</code> ، وعلى حقول StructArray التي تمت إضافتها باستخدام <code translate="no">add_collection_struct_field()</code>. ولا تنطبق على الحقول المتجهة التي تم إنشاؤها بواسطة الدوال، والتي لا يمكن أن تكون قابلة للقيمة الفارغة.</p>
+<h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">ماذا يحدث للكيانات الموجودة بعد إضافة حقل محدد من قبل المستخدم؟<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -683,4 +505,90 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تصبح الحقول المضافة متاحة على الفور تقريبًا، ولكن قد يكون هناك تأخير قصير بسبب بث تغيير المخطط الداخلي عبر مجموعة Milvus. تضمن هذه المزامنة أن تكون جميع العقد على علم بتحديث المخطط قبل معالجة الاستعلامات التي تتضمن الحقل الجديد.</p>
+    </button></h3><p>بالنسبة للحقل القياسي المحدد من قبل المستخدم، تُرجع الكيانات الموجودة القيمة <code translate="no">NULL</code> ما لم تقم بتعيين <code translate="no">default_value</code>. إذا قمت بتعيين <code translate="no">default_value</code> ، فإن الكيانات الموجودة تُرجع تلك القيمة الافتراضية.</p>
+<p>بالنسبة لحقل متجه محدد من قبل المستخدم، فإن الكيانات الموجودة تحتوي على القيمة " <code translate="no">NULL</code> " للحقل المتجه الجديد. يتخطى البحث المتجه في الحقل المضاف الكيانات التي تكون قيمة متجهها " <code translate="no">NULL</code>". لجعل الكيانات الموجودة قابلة للبحث من خلال الحقل المتجه الجديد، اكتب قيم متجهة غير فارغة (non-NULL) من خلال عملية upsert أو سير عمل backfill. يمكن للكيانات الجديدة تضمين الحقل المتجه الجديد أثناء الإدراج.</p>
+<p>بالنسبة لحقل StructArray، تُرجع الكيانات الموجودة القيمة <code translate="no">NULL</code> للحقل StructArray الجديد عبر جميع حقوله الفرعية. يجب أن توفر الكيانات الجديدة إما القيمة <code translate="no">NULL</code> لجميع الحقول الفرعية أو قيمًا صالحة لجميع الحقول الفرعية.</p>
+<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">هل يمكنني إضافة البحث اللغوي BM25 إلى مجموعة موجودة؟<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نعم. إذا كانت المجموعة تحتوي بالفعل على حقل <code translate="no">VARCHAR</code> مع تمكين المحلل، فيمكنك إضافة حقل متجه متفرق تم إنشاؤه بواسطة BM25 للبحث اللغوي. في سير العمل هذا، يضيف Milvus حقل الإخراج الجديد <code translate="no">SPARSE_FLOAT_VECTOR</code> ووظيفة BM25 التي تولد قيمًا له. لا يمكنك استخدام حقل « <code translate="no">TEXT</code> » موجود مسبقًا كمدخل لـ BM25 في سير العمل هذا الذي يتضمن تغيير المخطط. لاستخدام مدخل « <code translate="no">TEXT</code> »، قم بتعريف الحقل ووظيفة BM25 عند إنشاء المجموعة.</p>
+<p>بعد إضافة حقل المتجه المتفرق الذي تم إنشاؤه بواسطة BM25، قم بإنشاء فهرس <code translate="no">SPARSE_INVERTED_INDEX</code> باستخدام <code translate="no">metric_type=&quot;BM25&quot;</code> قبل استخدام الحقل للبحث باستخدام BM25.</p>
+<h3 id="Can-I-drop-a-vector-field-generated-by-a-function-directly" class="common-anchor-header">هل يمكنني حذف حقل متجه تم إنشاؤه بواسطة دالة مباشرةً؟<button data-href="#Can-I-drop-a-vector-field-generated-by-a-function-directly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لا. يُعد الحقل المتجه الذي تم إنشاؤه بواسطة دالة جزءًا من عقد مخطط تلك الدالة. استخدم " <code translate="no">drop_collection_function()</code> " بدلاً من ذلك. في سير عمل تغيير المخطط هذا، يقوم Milvus بإزالة الدالة وحقول الإخراج المتجهة التي تم إنشاؤها معها، مع الاحتفاظ بحقول الإدخال.</p>
+<h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">هل أحتاج إلى الانتظار بعد تعديل مخطط المجموعة؟<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عادةً، لا يلزم الانتظار يدويًّا. إذا كانت العملية التالية تعتمد على المخطط المحدَّث، فيمكنك استدعاء <code translate="no">describe_collection()</code> أولاً للتأكد من المخطط الذي يعرضه Milvus حاليًّا.</p>
+<p>في النشر الموزع، قد تكون هناك فترة انتشار قصيرة أثناء قيام مكونات Milvus بتحديث بيانات تعريف المجموعة. إذا فشلت عملية تتم مباشرة بعد تغيير المخطط بسبب خطأ متعلق بالمخطط، فقم بتحديث المخطط وأعد محاولة العملية.</p>
+<h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">متى يتم استرداد مساحة التخزين بعد حذف حقل؟<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يؤدي حذف حقل ما إلى إزالته من المخطط الحالي وإخفائه عن الاستعلامات/عمليات البحث العادية، ولكن البيانات التاريخية لهذا الحقل لا تُحذف فعليًّا من تخزين الكائنات على الفور.</p>
+<p>يمكن استعادة مساحة التخزين لاحقًا أثناء عملية الضغط. عملية الضغط هي عملية تتم في الخلفية تعيد تنظيم ملفات البيانات الموجودة إلى ملفات جديدة أكثر إحكامًا. بعد حذف حقل ما، تتبع الملفات المضغوطة حديثًا المخطط الحالي وتستبعد الحقل المحذوف. لا يضمن Milvus تقليل مساحة التخزين فورًا أو في وقت محدد بعد حذف حقل ما.</p>
+<h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">ماذا يحدث إذا أضفت حقلًا عدديًا يحمل نفس اسم مفتاح حقل ديناميكي؟<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا تم تمكين الحقل الديناميكي، فيمكنك إضافة حقل قياسي يحمل نفس اسم مفتاح حقل ديناميكي موجود. يقوم الحقل القياسي الجديد بإخفاء مفتاح الحقل الديناميكي في ناتج الاستعلام العادي، ولكن يتم الاحتفاظ بالبيانات الديناميكية الأصلية في <code translate="no">$meta</code>.</p>
+<p>على سبيل المثال، إذا كانت الكيانات الموجودة تخزن مفتاحًا ديناميكيًا باسم <code translate="no">source</code> ، وقمت لاحقًا بإضافة حقل قياسي باسم <code translate="no">source</code> ، فإن الناتج العادي لـ <code translate="no">source</code> يشير إلى الحقل القياسي. للوصول إلى القيمة الديناميكية الأصلية، استخدم صيغة المسار <code translate="no">$meta</code> ، مثل <code translate="no">$meta[&quot;source&quot;]</code>.</p>

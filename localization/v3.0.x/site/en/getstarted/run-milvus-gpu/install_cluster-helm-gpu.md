@@ -399,6 +399,9 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h2><p>Run the following command to uninstall Milvus.</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see <a href="/docs/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

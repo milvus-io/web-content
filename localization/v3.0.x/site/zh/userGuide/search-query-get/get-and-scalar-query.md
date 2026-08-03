@@ -1,7 +1,7 @@
 ---
 id: get-and-scalar-query.md
 title: 查询
-summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过滤元数据、对查询结果排序以及聚合标量值。
+summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过滤元数据、对查询结果进行排序以及聚合标量值。
 ---
 <h1 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,11 +18,11 @@ summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>除了 ANN 搜索，Milvus 还支持通过查询过滤元数据。本页将介绍如何使用查询、获取和查询迭代器来检索实体、过滤元数据、对查询结果排序以及聚合标量值。</p>
+    </button></h1><p>除了 ANN 搜索外，Milvus 还支持通过查询进行元数据过滤。本页介绍如何使用 Query、Get 和 QueryIterators 来检索实体、过滤元数据、对查询结果进行排序以及聚合标量值。</p>
 <div class="alert note">
-<p>如果在创建 Collections 后动态添加新字段，包含这些字段的查询将返回定义的默认值，对于未显式设置值的实体，则返回 NULL。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
+<p>如果在创建Collection后添加了新字段，包含这些字段的查询对于未显式设置值的实体，将返回定义的默认值或<code translate="no">NULL</code> 。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改Collection Schema”</a>。</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">集合概述<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,47 +37,47 @@ summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Collections 可以存储各种类型的标量字段。你可以让 Milvus 根据一个或多个标量字段过滤实体。Milvus 提供三种类型的查询：查询、获取和查询迭代器。下表比较了这三种查询类型。</p>
+    </button></h2><p>Collection 可存储多种类型的标量字段。您可以让 Milvus 根据一个或多个标量字段对实体进行过滤。Milvus 提供三种查询类型：Query、Get 和 QueryIterator。下表对比了这三种查询类型。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>获取</p></th>
-     <th><p>查询</p></th>
-     <th><p>查询迭代器</p></th>
+     <th><p>Get</p></th>
+     <th><p>Query</p></th>
+     <th><p>QueryIterator</p></th>
    </tr>
    <tr>
-     <td><p>适用情况</p></td>
-     <td><p>查找持有指定主键的实体。</p></td>
-     <td><p>查找符合自定义筛选条件的所有实体或指定数量的实体</p></td>
+     <td><p>适用场景</p></td>
+     <td><p>查找具有指定主键的实体。</p></td>
+     <td><p>查找满足自定义筛选条件的所有实体或指定数量的实体</p></td>
      <td><p>在分页查询中查找满足自定义筛选条件的所有实体。</p></td>
    </tr>
    <tr>
-     <td><p>过滤方法</p></td>
-     <td><p>通过主键</p></td>
-     <td><p>通过过滤表达式</p></td>
-     <td><p>通过过滤表达式</p></td>
+     <td><p>筛选方法</p></td>
+     <td><p>按主键</p></td>
+     <td><p>通过过滤表达式。</p></td>
+     <td><p>通过筛选表达式。</p></td>
    </tr>
    <tr>
      <td><p>必填参数</p></td>
-     <td><ul><li><p>Collections 名称</p></li><li><p>主键</p></li></ul></td>
-     <td><ul><li><p>Collections 名称</p></li><li><p>过滤表达式</p></li></ul></td>
-     <td><ul><li><p>Collections 名称</p></li><li><p>过滤表达式</p></li><li><p>每次查询返回的实体数量</p></li></ul></td>
+     <td><ul><li><p>Collection名称</p></li><li><p>主键</p></li></ul></td>
+     <td><ul><li><p>Collection名称</p></li><li><p>筛选表达式</p></li></ul></td>
+     <td><ul><li><p>Collection名称</p></li><li><p>筛选表达式</p></li><li><p>每次查询要返回的实体数量</p></li></ul></td>
    </tr>
    <tr>
      <td><p>可选参数</p></td>
      <td><ul><li><p>分区名称</p></li><li><p>输出字段</p></li></ul></td>
      <td><ul><li><p>分区名称</p></li><li><p>要返回的实体数量</p></li><li><p>输出字段</p></li></ul></td>
-     <td><ul><li><p>分区名称</p></li><li><p>要返回的实体总数</p></li><li><p>输出字段</p></li></ul></td>
+     <td><ul><li><p>分区名称</p></li><li><p>总共要返回的实体数</p></li><li><p>输出字段</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>返回值</p></td>
-     <td><p>返回指定集合或分区中持有指定主键的实体。</p></td>
-     <td><p>返回指定集合或分区中符合自定义筛选条件的所有实体或指定数量的实体。</p></td>
-     <td><p>通过分页查询返回指定集合或分区中符合自定义过滤条件的所有实体。</p></td>
+     <td><p>返回</p></td>
+     <td><p>返回指定Collection或分区中包含指定主键的实体。</p></td>
+     <td><p>返回在指定Collection或分区中满足自定义筛选条件的所有实体或指定数量的实体。</p></td>
+     <td><p>通过分页查询，返回在指定Collection或分区中满足自定义筛选条件的全部实体。</p></td>
    </tr>
 </table>
-<p>有关元数据过滤的更多信息，请参阅<a href="/docs/zh/basic-operators.md">布尔表达式规则</a>。</p>
-<h2 id="Use-Get" class="common-anchor-header">使用获取<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>有关元数据过滤的更多信息，请参阅<a href="/docs/zh/basic-operators.md">“布尔表达式规则”</a>。</p>
+<h2 id="Use-Get" class="common-anchor-header">使用 Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +92,7 @@ summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当需要通过主键查找实体时，可以使用<strong>Get</strong>方法。以下代码示例假定在 Collections 中有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 。</p>
+    </button></h2><p>当需要根据主键查找实体时，可以使用<strong>Get</strong>方法。以下代码示例假设您的 Collection 中存在三个名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的字段。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -106,9 +106,14 @@ summary: 使用 Query、Get 和 QueryIterator 在 Milvus 中检索实体、过�
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以通过它们的 ID 获取实体，如下所示。</p>
+<p>您可以按 ID 获取实体，具体方法如下。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -247,9 +252,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当您需要通过自定义过滤条件查找实体时，请使用<strong>Query</strong>方法。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并返回从<code translate="no">red</code> 开始持有<code translate="no">color</code> 值的实体的指定数目。</p>
+    </button></h3><p>当需要根据自定义筛选条件查找实体时，请使用<strong>Query</strong>方法。以下代码示例假设集合中存在三个名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的字段，并返回指定数量的、其<code translate="no">color</code> 字段值以<code translate="no">red</code> 开头的实体。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -329,7 +339,7 @@ curl --request POST \
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><a id="Sort-Query-Results"></a></p>
-<h3 id="Sort-Query-Results--Milvus-30x" class="common-anchor-header">对查询结果排序<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Sort-Query-Results--Milvus-30x" class="common-anchor-header">对查询结果进行排序<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -344,15 +354,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>默认情况下，Query 会以未指定的顺序返回结果。使用<code translate="no">order_by</code> 参数可按一个或多个标量字段对结果排序。使用<code translate="no">order_by</code> 时，请注意</p>
+    </button></h3><p>默认情况下，Query 返回的结果顺序未指定。使用<code translate="no">order_by</code> 参数可按一个或多个标量字段对结果进行排序。使用<code translate="no">order_by</code> 时，请注意：</p>
 <ul>
-<li><p><code translate="no">order_by</code> 必须与<code translate="no">limit</code> 一起使用。</p></li>
-<li><p>支持的字段类型<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>, 和<code translate="no">VARCHAR</code> 。不支持按向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 字段排序。</p></li>
-<li><p>按空值字段排序时，NULL 值将放在升序的末尾（NULLS LAST）和降序的开头（NULLS FIRST）。</p></li>
+<li><p><code translate="no">order_by</code> 必须与<code translate="no">limit</code> 配合使用。</p></li>
+<li><p>支持的字段类型：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 和<code translate="no">VARCHAR</code> 。不支持按向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 字段进行排序。</p></li>
+<li><p>按可为空字段排序时，升序（NULLS LAST）中 NULL 值位于末尾，降序（NULLS FIRST）中 NULL 值位于开头。</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">基本排序</h4><p>向<code translate="no">order_by</code> 参数传递<code translate="no">&quot;field_name:direction&quot;</code> 字符串列表，其中<code translate="no">direction</code> 是<code translate="no">asc</code> （升序）或<code translate="no">desc</code> （降序）。注意<code translate="no">asc</code> 和<code translate="no">desc</code> 区分大小写。</p>
+<h4 id="Basic-Sort" class="common-anchor-header">基本排序</h4><p>将<code translate="no">&quot;field_name:direction&quot;</code> 字符串列表传递给<code translate="no">order_by</code> 参数，其中<code translate="no">direction</code> 可以是<code translate="no">asc</code> （升序）或<code translate="no">desc</code> （降序）。请注意，<code translate="no">asc</code> 和<code translate="no">desc</code> 区分大小写。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -377,9 +392,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">多字段排序</h4><p>您可以同时按多个字段排序。排序结果首先按列表中的第一个字段排序。当两个行的该字段值相同时，第二个字段将决定它们的排序，依此类推。</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">多字段排序</h4><p>您可以同时按多个字段进行排序。结果首先按列表中的第一个字段排序。当两行在该字段中的值相同时，则由第二个字段决定其顺序，依此类推。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -397,9 +417,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">分页排序</h4><p>将<code translate="no">order_by</code> 与<code translate="no">limit</code> 和<code translate="no">offset</code> 结合使用，可对排序结果进行分页。例如，在多个页面上显示按价格排序的产品列表，每个页面都会按正确的价格顺序显示下一批项目，不会出现重复或空白。</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">带排序的分页</h4><p>结合使用<code translate="no">order_by</code> 、<code translate="no">limit</code> 和<code translate="no">offset</code> ，即可对排序后的结果进行分页。例如，要按价格排序并分多页显示产品列表时，每页都会按正确的价格顺序显示下一批商品，且不会出现重复或缺漏。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -428,7 +453,7 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">汇总查询结果<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">聚合查询结果<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -443,16 +468,21 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以按一个或多个标量字段对查询结果进行分组，并计算每个分组的聚合结果。支持的聚合操作符有<code translate="no">count</code>,<code translate="no">min</code>,<code translate="no">max</code>,<code translate="no">sum</code> 和<code translate="no">avg</code> 。</p>
-<p>使用<code translate="no">group_by_fields</code> 时，请注意</p>
+    </button></h3><p>您可以按一个或多个标量字段对查询结果进行分组，并按组计算聚合结果。支持的聚合操作符包括<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 和<code translate="no">avg</code> 。</p>
+<p>使用 `<code translate="no">group_by_fields</code>` 时，请注意：</p>
 <ul>
-<li><p><code translate="no">group_by_fields</code> 支持的字段类型<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code>, 和<code translate="no">TIMESTAMPTZ</code> 。按<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 字段分组将返回错误。</p></li>
-<li><p><code translate="no">sum</code> 和<code translate="no">avg</code> 只适用于数值字段。您可以将它们应用到数字字段，包括<code translate="no">FLOAT</code> 和<code translate="no">DOUBLE</code> ，但将它们应用到<code translate="no">VARCHAR</code> 字段会返回错误。</p></li>
+<li><p><code translate="no">group_by_fields</code> 支持的字段类型包括：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> 以及<code translate="no">TIMESTAMPTZ</code> 。若按<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 字段进行分组，将返回错误。</p></li>
+<li><p><code translate="no">sum</code> 以及<code translate="no">avg</code> 仅适用于数值型字段。您可以将其应用于数值型字段（包括<code translate="no">FLOAT</code> 和<code translate="no">DOUBLE</code> ），但若将其应用于<code translate="no">VARCHAR</code> 字段，则会返回错误。</p></li>
 </ul>
-<p>要启用聚合，请将<code translate="no">group_by_fields</code> 传递到<code translate="no">query()</code> ，并将聚合表达式 (<code translate="no">count(*)</code>,<code translate="no">count(&lt;field&gt;)</code>,<code translate="no">min(&lt;field&gt;)</code>,<code translate="no">max(&lt;field&gt;)</code>,<code translate="no">sum(&lt;field&gt;)</code>,<code translate="no">avg(&lt;field&gt;)</code>) 添加到<code translate="no">output_fields</code> 。</p>
-<p>下面的示例按<code translate="no">color</code> 字段对实体进行分组，并返回每个颜色组中实体的数量：</p>
+<p>要启用聚合，请将 `<code translate="no">group_by_fields</code> ` 传递给 `<code translate="no">query()</code> `，并将聚合表达式（`<code translate="no">count(*)</code>`、`<code translate="no">count(&lt;field&gt;)</code>`、`<code translate="no">min(&lt;field&gt;)</code>`、`<code translate="no">max(&lt;field&gt;)</code>`、`<code translate="no">sum(&lt;field&gt;)</code>`、`<code translate="no">avg(&lt;field&gt;)</code>`）添加到 `<code translate="no">output_fields</code>` 中。</p>
+<p>以下示例按<code translate="no">color</code> 字段对实体进行分组，并返回每个颜色组中的实体数量：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -481,9 +511,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以在一次调用中请求多个聚合表达式。下面的示例按<code translate="no">color</code> 进行分组，并返回每个组的实体数、平均价格和最高评级：</p>
+<p>您可以在单次调用中请求多个聚合表达式。以下示例按<code translate="no">color</code> 分组，并返回每个组的实体数量、平均价格和最高评分：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -505,9 +540,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>向<code translate="no">group_by_fields</code> 传递多个字段以计算复合分组。下面的示例按<code translate="no">(color, rating)</code> 分组，并计算每个组的价格范围：</p>
+<p>向 `<code translate="no">group_by_fields</code> ` 传递多个字段以计算复合分组。以下示例按 `<code translate="no">(color, rating)</code> ` 分组，并计算每个分组的价格范围：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -530,9 +570,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以将<code translate="no">group_by_fields</code> 与<code translate="no">limit</code> 结合使用，以限制返回的分组数量。当一个字段的 Cardinal 数量较多，而您只需要一个组的样本时，这很有用：</p>
+<p>您还可以将 `<code translate="no">group_by_fields</code> ` 与 `<code translate="no">limit</code> ` 结合使用，以限制返回的组数。当某个字段具有高Cardinal，而您只需获取部分组样本时，此方法非常有用：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -555,7 +600,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">使用查询迭代器<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">使用 QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -570,9 +615,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当您需要通过分页查询按自定义过滤条件查找实体时，可创建一个<strong>QueryIterator</strong>并使用其<strong>next()</strong>方法遍历所有实体，以查找满足过滤条件的实体。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并从<code translate="no">red</code> 开始返回持有<code translate="no">color</code> 值的所有实体。</p>
+    </button></h2><p>当您需要通过分页查询并使用自定义筛选条件查找实体时，请创建一个<strong>QueryIterator</strong>并使用其<strong>next()</strong>方法遍历所有实体，以找出符合筛选条件的实体。以下代码示例假设存在三个名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的字段，并返回所有<code translate="no">color</code> 字段值以<code translate="no">red</code> 开头的实体。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -640,7 +690,7 @@ results = []
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Not available</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-in-Partitions" class="common-anchor-header">分区中的查询<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
+<h2 id="Queries-in-Partitions" class="common-anchor-header">分区内的查询<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -655,9 +705,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您还可以通过在 Get、Query 或 QueryIterator 请求中包含分区名称，在一个或多个分区中执行查询。以下代码示例假定 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
+    </button></h2><p>您还可以通过在 Get、Query 或 QueryIterator 请求中包含分区名称，在单个或多个分区内执行查询。以下代码示例假设 Collection 中存在一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -811,7 +866,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">使用查询进行随机抽样<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">使用 Query 进行随机采样<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -826,12 +881,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要从 Collections 中提取具有代表性的数据子集用于数据探索或开发测试，请使用<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 表达式，其中<code translate="no">sampling_factor</code> 是介于 0 和 1 之间的浮点数，代表要采样的数据百分比。</p>
+    </button></h2><p>若要从Collection中提取具有代表性的数据子集以进行数据探索或开发测试，请使用<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 表达式，其中<code translate="no">sampling_factor</code> 是一个介于0和1之间的浮点数，表示要采样的数据百分比。</p>
 <div class="alert note">
-<p>有关详细用法、高级示例和最佳实践，请参阅<a href="/docs/zh/random-sampling.md">随机抽样</a>。</p>
+<p>有关详细用法、高级示例和最佳实践，请参阅<a href="/docs/zh/random-sampling.md">“随机采样”</a>。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -923,11 +983,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您的 Collections 有<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在查询调用中设置<code translate="no">timezone</code> 参数，为单次操作临时覆盖数据库或 Collections 的默认时区。这将控制<code translate="no">TIMESTAMPTZ</code> 值在操作过程中的显示和比较方式。</p>
-<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
-<p>下面的示例展示了如何为查询操作临时设置时区：</p>
+    </button></h2><p>如果您的 Collection 包含<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在查询调用中设置<code translate="no">timezone</code> 参数，针对单次操作临时覆盖数据库或 Collection 的默认时区。这将控制操作过程中<code translate="no">TIMESTAMPTZ</code> 值的显示和比较方式。</p>
+<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA时区标识符</a>（例如，<strong>Asia/Shanghai</strong>、<strong>America/Chicago或UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">“TIMESTAMPTZ字段”</a>。</p>
+<p>以下示例演示了如何为查询操作临时设置时区：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

@@ -1,13 +1,12 @@
 ---
 id: regex-filter.md
-title: Regex
+title: Regex Analyzer Filter
 summary: >-
-  The regex filter is a regular expression filter: any token produced by the
-  tokenizer is kept only if it matches the expression you provide; everything
-  else is discarded.
+  The regex analyzer filter keeps tokens that match a regular expression and
+  discards the rest.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex-Analyzer-Filter" class="common-anchor-header">Regex Analyzer Filter<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex-Analyzer-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,6 +22,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>The <code translate="no">regex</code> filter is a regular expression filter: any token produced by the tokenizer is kept only if it matches the expression you provide; everything else is discarded.</p>
+<div class="alert note">
+<p>This page describes the <code translate="no">regex</code> filter in the analyzer pipeline. It filters tokens produced by a tokenizer and affects the terms generated during text analysis. To filter entities with scalar expressions such as <code translate="no">field =~ &quot;pattern&quot;</code> or <code translate="no">field !~ &quot;pattern&quot;</code> in <code translate="no">query</code>, <code translate="no">search</code>, or hybrid search, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

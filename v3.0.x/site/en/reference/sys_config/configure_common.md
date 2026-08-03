@@ -189,6 +189,24 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
+## `common.storage.useLoonFFI`
+
+<table id="common.storage.useLoonFFI">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to use Storage V3 for new writes and compaction output. This parameter is refreshable.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `common.simdType`
 
 <table id="common.simdType">

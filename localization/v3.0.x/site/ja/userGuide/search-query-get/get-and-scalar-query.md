@@ -1,10 +1,11 @@
 ---
 id: get-and-scalar-query.md
-title: クエリー
+title: クエリ
 summary: >-
-  Milvusでは、Query、Get、QueryIteratorを使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、スカラー値の集約を行います。
+  Milvus では、Query、Get、QueryIterator
+  を使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、スカラー値の集計を行います。
 ---
-<h1 id="Query" class="common-anchor-header">クエリー<button data-href="#Query" class="anchor-icon" translate="no">
+<h1 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、ANN検索に加えて、クエリーによるメタデータのフィルタリングもサポートしています。このページでは、Query、Get、QueryIteratorを使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、スカラー値の集約を行う方法を紹介します。</p>
+    </button></h1><p>Milvusでは、ANN検索に加え、クエリによるメタデータフィルタリングもサポートしています。このページでは、Query、Get、およびQueryIteratorsを使用してエンティティを取得し、メタデータをフィルタリングし、クエリ結果をソートし、スカラー値を集計する方法について説明します。</p>
 <div class="alert note">
-<p>コレクション作成後に新しいフィールドを動的に追加した場合、これらのフィールドを含むクエリは、定義された既定 値を返すか、明示的に値を設定していないエンティティの場合は NULL を返します。詳細は、"<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
+<p>コレクションの作成後に新しいフィールドを追加した場合、これらのフィールドを含むクエリでは、値が明示的に設定されていないエンティティに対して、定義されたデフォルト値または<code translate="no">NULL</code> が返されます。詳細については、「<a href="/docs/ja/add-fields-to-an-existing-collection.md">コレクションスキーマの変更</a>」を参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,46 +39,46 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションには、さまざまなタイプのスカラ・フィールドを格納できます。Milvusは1つまたは複数のスカラーフィールドに基づいてエンティティをフィルタリングすることができます。Milvusには3種類のクエリがあります：Query、Get、QueryIterator です。下の表はこれら 3 種類のクエリを比較したものです。</p>
+    </button></h2><p>コレクションには、さまざまなタイプのスカラーフィールドを格納できます。Milvus では、1 つまたは複数のスカラーフィールドに基づいてエンティティをフィルタリングできます。Milvus では、Query、Get、QueryIterator の 3 種類のクエリが提供されています。以下の表に、これら 3 種類のクエリを比較しています。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>取得</p></th>
-     <th><p>クエリ</p></th>
+     <th><p>Get</p></th>
+     <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>適用可能なシナリオ</p></td>
-     <td><p>指定された主キーを保持するエンティティを検索する。</p></td>
-     <td><p>カスタム・フィルタリング条件を満たすエンティティのすべてまたは指定数を検索する。</p></td>
-     <td><p>ページ分割されたクエリで、カスタムフィルタリング条件を満たすすべてのエンティティを検索する。</p></td>
+     <td><p>指定された主キーを持つエンティティを検索する場合。</p></td>
+     <td><p>カスタムフィルタリング条件を満たすエンティティをすべて、または指定した数だけ検索する場合</p></td>
+     <td><p>ページネーションされたクエリにおいて、カスタムフィルタリング条件を満たすすべてのエンティティを検索する場合。</p></td>
    </tr>
    <tr>
      <td><p>フィルタリング方法</p></td>
-     <td><p>主キーによる</p></td>
-     <td><p>フィルタリング式</p></td>
-     <td><p>フィルタリング式。</p></td>
+     <td><p>主キーによるフィルタリング</p></td>
+     <td><p>フィルタリング式によるフィルタリング。</p></td>
+     <td><p>フィルタリング式によるフィルタリング。</p></td>
    </tr>
    <tr>
      <td><p>必須パラメータ</p></td>
      <td><ul><li><p>コレクション名</p></li><li><p>主キー</p></li></ul></td>
      <td><ul><li><p>コレクション名</p></li><li><p>フィルタリング式</p></li></ul></td>
-     <td><ul><li><p>コレクション名</p></li><li><p>フィルタリング式</p></li><li><p>クエリごとに返すエンティティの数</p></li></ul></td>
+     <td><ul><li><p>コレクション名</p></li><li><p>フィルタリング式</p></li><li><p>クエリごとに返すエンティティ数</p></li></ul></td>
    </tr>
    <tr>
      <td><p>オプションのパラメータ</p></td>
      <td><ul><li><p>パーティション名</p></li><li><p>出力フィールド</p></li></ul></td>
-     <td><ul><li><p>パーティション名</p></li><li><p>返すエンティティの数</p></li><li><p>出力フィールド</p></li></ul></td>
-     <td><ul><li><p>パーティション名</p></li><li><p>合計で返すエンティティの数</p></li><li><p>出力フィールド</p></li></ul></td>
+     <td><ul><li><p>パーティション名</p></li><li><p>クエリごとに返すエンティティの数</p></li><li><p>出力フィールド</p></li></ul></td>
+     <td><ul><li><p>パーティション名</p></li><li><p>合計で返すエンティティ数</p></li><li><p>出力フィールド</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>返り値</p></td>
-     <td><p>指定されたコレクションまたはパーティション内の指定された主キーを保持するエンティティを返します。</p></td>
-     <td><p>指定されたコレクションまたはパーティションでカスタム・フィルタリング条件を満たすエンティティのすべてまたは指定された数を返します。</p></td>
-     <td><p>ページ分割クエリによって、指定されたコレクションまたはパーティションでカスタム・フィルタリング条件を満たすすべてのエンティティを返します。</p></td>
+     <td><p>返される内容</p></td>
+     <td><p>指定されたコレクションまたはパーティション内で、指定された主キーを持つエンティティを返します。</p></td>
+     <td><p>指定されたコレクションまたはパーティション内で、カスタムフィルタリング条件を満たすすべてのエンティティ、または指定された数のエンティティを返します。</p></td>
+     <td><p>ページネーションされたクエリを通じて、指定されたコレクションまたはパーティション内で、カスタムフィルタリング条件を満たすすべてのエンティティを返します。</p></td>
    </tr>
 </table>
-<p>メタデータのフィルタリングの詳細は、"<a href="/docs/ja/basic-operators.md">Boolean Expression Rules</a>" を参照してください。</p>
+<p>メタデータによるフィルタリングの詳細については、「<a href="/docs/ja/basic-operators.md">ブール式ルール</a>」を参照してください。</p>
 <h2 id="Use-Get" class="common-anchor-header">Get の使用<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>主キーによってエンティティを検索する必要がある場合は、<strong>Get</strong>メソッドを使用できます。以下のコード例は、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがコレクションにあると仮定しています。</p>
+    </button></h2><p>プライマリキーでエンティティを検索する必要がある場合は、<strong>Get</strong>メソッドを使用できます。以下のコード例では、コレクション内に「<code translate="no">id</code> 」、「<code translate="no">vector</code> 」、「<code translate="no">color</code> 」という 3 つのフィールドが存在することを前提としています。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -107,9 +108,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のように、IDによってエンティティを取得できる。</p>
+<p>ID に基づいてエンティティを取得するには、次のようにします。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -218,7 +224,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">クエリーの使用<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">クエリの使用<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +239,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Basic-Query" class="common-anchor-header">基本的なクエリ<button data-href="#Basic-Query" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Basic-Query" class="common-anchor-header">基本クエリ<button data-href="#Basic-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -248,9 +254,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>カスタム・フィルタリング条件でエンティティを検索する必要がある場合は、<strong>Query</strong>メソッドを使用します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> で始まる<code translate="no">color</code> 値を保持するエンティティの指定された数を返します。</p>
+    </button></h3><p>カスタムフィルタリング条件でエンティティを検索する必要がある場合は、<strong>Queryメソッド</strong>を使用します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という3つのフィールドが存在することを前提としており、<code translate="no">red</code> で始まる<code translate="no">color</code> の値を持つエンティティを指定された数だけ返します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -345,15 +356,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>デフォルトでは、Queryは指定されていない順序で結果を返します。1つ以上のスカラー・フィールドで結果をソートするには、<code translate="no">order_by</code> パラメータを使用します。<code translate="no">order_by</code> を使用する場合は、：</p>
+    </button></h3><p>デフォルトでは、Queryは結果を順不同で返します。<code translate="no">order_by</code> パラメータを使用すると、1つ以上のスカラーフィールドに基づいて結果を並べ替えることができます。<code translate="no">order_by</code> を使用する際は、以下の点に注意してください：</p>
 <ul>
-<li><p><code translate="no">order_by</code> は<code translate="no">limit</code> とともに使用する必要があります。</p></li>
-<li><p>サポートされるフィールド・タイプ：<code translate="no">INT8</code> <code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>, および<code translate="no">VARCHAR</code> 。ベクトル、<code translate="no">JSON</code> 、<code translate="no">ARRAY</code> フィールドによるソートはサポートされていません。</p></li>
-<li><p>NULL可能なフィールドでソートする場合、NULL値は昇順（NULLS LAST）では最後に、降順（NULLS FIRST）では先頭に置かれます。</p></li>
+<li><p><code translate="no">order_by</code> <code translate="no">limit</code> と組み合わせて使用する必要があります。</p></li>
+<li><p>サポートされているフィールド型：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、および<code translate="no">VARCHAR</code> 。ベクトル型、<code translate="no">JSON</code> 、または<code translate="no">ARRAY</code> フィールドによるソートはサポートされていません。</p></li>
+<li><p>NULL 許容フィールドでソートする場合、昇順（NULLS LAST）では NULL 値が末尾に、降順（NULLS FIRST）では先頭に配置されます。</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">基本ソート</h4><p><code translate="no">order_by</code> パラメータに<code translate="no">&quot;field_name:direction&quot;</code> 文字列のリストを渡す。<code translate="no">direction</code> は<code translate="no">asc</code> （昇順）または<code translate="no">desc</code> （降順）である。<code translate="no">asc</code> と<code translate="no">desc</code> は大文字と小文字を区別する。</p>
+<h4 id="Basic-Sort" class="common-anchor-header">基本的なソート</h4><p>`<code translate="no">&quot;field_name:direction&quot;</code> ` 形式の文字列のリストを `<code translate="no">order_by</code> ` パラメータに指定します。ここで、<code translate="no">direction</code> は `<code translate="no">asc</code> `（昇順）または `<code translate="no">desc</code> `（降順）のいずれかです。なお、`<code translate="no">asc</code> ` および `<code translate="no">desc</code> ` は大文字と小文字が区別されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -378,9 +394,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">複数フィールドによるソート</h4><p>一度に複数のフィールドでソートすることができる。結果はまず、リストの最初のフィールドで並べ替えられる。2つの行がそのフィールドに同じ値を持つ場合、2番目のフィールドがその順序を決定します。</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">複数フィールドによるソート</h4><p>複数のフィールドを一度に指定して並べ替えることができます。結果はまず、リストの最初のフィールドに基づいて並べ替えられます。そのフィールドの値が同じ行が2つある場合、2番目のフィールドによって順序が決定され、以下同様に処理されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -398,9 +419,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">ソートによるページネーション</h4><p><code translate="no">limit</code> 、<code translate="no">offset</code> とともに<code translate="no">order_by</code> を使用すると、ソートされた結果のページ送りができます。例えば、価格順にソートされた商品リストを複数のページにわたって表示する場合、各ページには、重複やずれのない正しい価格順で次のバッチが表示されます。</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">ソート付きページネーション</h4><p><code translate="no">order_by</code> を、<code translate="no">limit</code> および<code translate="no">offset</code> と組み合わせて使用することで、ソート済みの結果をページ分割できます。たとえば、価格順にソートされた商品リストを複数ページにまたがって表示する場合、各ページには重複や抜けなく、正しい価格順で次の商品群が表示されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -429,7 +455,7 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">クエリー結果の集約<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">クエリ結果の集計<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -444,16 +470,21 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>1つまたは複数のスカラー・フィールドによってクエリ結果をグループ化し、グループごとに集約を計算することができます。サポートされている集約演算子は<code translate="no">count</code>,<code translate="no">min</code>,<code translate="no">max</code>,<code translate="no">sum</code>, および<code translate="no">avg</code> です。</p>
-<p><code translate="no">group_by_fields</code> を使用する場合は、以下の点に注意してください：</p>
+    </button></h3><p>クエリ結果を1つ以上のスカラーフィールドでグループ化し、グループごとの集計を計算できます。サポートされている集計演算子は、<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 、および<code translate="no">avg</code> です。</p>
+<p><code translate="no">group_by_fields</code> を使用する際は、以下の点に注意してください。</p>
 <ul>
-<li><p>サポートされるフィールド・タイプ<code translate="no">group_by_fields</code> ：<code translate="no">INT8</code> <code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code>, および<code translate="no">TIMESTAMPTZ</code> 。<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>, vector,<code translate="no">JSON</code>, または<code translate="no">ARRAY</code> フィールドによるグループ化はエラーを返します。</p></li>
-<li><p><code translate="no">sum</code> および<code translate="no">avg</code> は数値のみです。<code translate="no">FLOAT</code> や<code translate="no">DOUBLE</code> などの数値フィールドに適用できますが、<code translate="no">VARCHAR</code> フィールドに適用するとエラーが返されます。</p></li>
+<li><p><code translate="no">group_by_fields</code> でサポートされているフィールド型は、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> 、および<code translate="no">TIMESTAMPTZ</code> です。<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、vector、<code translate="no">JSON</code> 、または<code translate="no">ARRAY</code> フィールドによるグループ化を行うと、エラーが返されます。</p></li>
+<li><p><code translate="no">sum</code> および<code translate="no">avg</code> は数値型のみです。これらは、<code translate="no">FLOAT</code> や<code translate="no">DOUBLE</code> を含む数値型フィールドに適用できますが、<code translate="no">VARCHAR</code> フィールドに適用するとエラーが返されます。</p></li>
 </ul>
-<p>集約を有効にするには、<code translate="no">group_by_fields</code> を<code translate="no">query()</code> に渡し、集約式 (<code translate="no">count(*)</code>,<code translate="no">count(&lt;field&gt;)</code>,<code translate="no">min(&lt;field&gt;)</code>,<code translate="no">max(&lt;field&gt;)</code>,<code translate="no">sum(&lt;field&gt;)</code>,<code translate="no">avg(&lt;field&gt;)</code>) を<code translate="no">output_fields</code> に追加します。</p>
-<p>次の例では、<code translate="no">color</code> フィールドによってエンティティをグループ化し、各色グループ内のエンティティの数を返す：</p>
+<p>集計を有効にするには、<code translate="no">group_by_fields</code> を<code translate="no">query()</code> に渡し、集計式（<code translate="no">count(*)</code> 、<code translate="no">count(&lt;field&gt;)</code> 、<code translate="no">min(&lt;field&gt;)</code> 、<code translate="no">max(&lt;field&gt;)</code> 、<code translate="no">sum(&lt;field&gt;)</code> 、<code translate="no">avg(&lt;field&gt;)</code> ）を<code translate="no">output_fields</code> に追加します。</p>
+<p>次の例では、<code translate="no">color</code> フィールドに基づいてエンティティをグループ化し、各色グループに含まれるエンティティの数を返します：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -482,9 +513,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>1回の呼び出しで複数の集約式を要求できる。次の例は、<code translate="no">color</code> によってグループ化し、各グループのエンティティ数、平均価格、および最大評価を返します：</p>
+<p>1回の呼び出しで複数の集計式を指定できます。次の例では、<code translate="no">color</code> に基づいてグループ化し、各グループのエンティティ数、平均価格、および最高評価を返します:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -506,9 +542,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">group_by_fields</code> に複数のフィールドを渡して、複合グループを計算します。次の例では、<code translate="no">(color, rating)</code> でグループ化し、各グループの価格帯を計算しています：</p>
+<p><code translate="no">group_by_fields</code> に複数のフィールドを渡して、複合グループを計算できます。次の例では、<code translate="no">(color, rating)</code> でグループ化し、各グループの価格帯を計算しています:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -531,9 +572,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>また、<code translate="no">group_by_fields</code> と<code translate="no">limit</code> を組み合わせて、戻ってくるグループの数に上限を設けることもできる。これは、フィールドのカーディナリティが高く、グループのサンプルだけが必要な場合に便利です：</p>
+<p>また、<code translate="no">group_by_fields</code> と<code translate="no">limit</code> を組み合わせて、返されるグループの数を制限することもできます。これは、フィールドのカーディナリティが高く、グループのサンプルのみが必要な場合に役立ちます：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -571,9 +617,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ページ分割されたクエリを使用して、カスタムのフィルタリング条件でエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用して、フィルタリング条件を満たすエンティティを検索するためにすべてのエンティティを繰り返し処理します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> から始まる<code translate="no">color</code> 値を保持するすべてのエンティティを返します。</p>
+    </button></h2><p>ページネーションされたクエリを通じて、カスタムフィルタリング条件に基づいてエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用してすべてのエンティティを反復処理し、フィルタリング条件を満たすエンティティを見つけます。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドが存在することを前提としており、<code translate="no">red</code> で始まる<code translate="no">color</code> の値を持つすべてのエンティティを返します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -641,7 +692,7 @@ results = []
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Not available</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-in-Partitions" class="common-anchor-header">パーティション内のクエリ<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
+<h2 id="Queries-in-Partitions" class="common-anchor-header">パーティション内でのクエリ<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -656,9 +707,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Get、Query、QueryIteratorリクエストにパーティション名を含めることで、1つまたは複数のパーティション内でクエリを実行することもできます。以下のコード例では、コレクション内に<strong>PartitionA</strong>という名前のパーティションがあると仮定しています。</p>
+    </button></h2><p>Get、Query、またはQueryIteratorリクエストにパーティション名を含めることで、1つまたは複数のパーティション内でクエリを実行することもできます。以下のコード例では、コレクション内に「<strong>PartitionA</strong>」という名前のパーティションが存在することを前提としています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -812,7 +868,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">クエリによるランダム・サンプリング<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Query を使用したランダムサンプリング<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -827,12 +883,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データ探索や開発テストのために、コレクションから代表的なデータのサブセットを抽出するには、<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 式を使用します。<code translate="no">sampling_factor</code> は、サンプリングするデータのパーセンテージを表す 0 ～ 1 の float です。</p>
+    </button></h2><p>データ探索や開発テストのためにコレクションから代表的なデータサブセットを抽出するには、<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 式を使用します。ここで、<code translate="no">sampling_factor</code> は、サンプリングするデータの割合を表す0から1までの浮動小数点数です。</p>
 <div class="alert note">
-<p>詳細な使用方法、高度な例、ベストプラクティスについては、<a href="/docs/ja/random-sampling.md">ランダム・サンプリングを</a>参照してください。</p>
+<p>詳細な使用方法、高度な例、およびベストプラクティスについては、「<a href="/docs/ja/random-sampling.md">ランダムサンプリング</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -924,11 +985,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、クエリコールで<code translate="no">timezone</code> パラメータを設定することで、一時的にデータベースやコレクションのデフォルトタイムゾーンを上書きすることができます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
-<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
-<p>以下の例では、クエリ操作にタイムゾーンを一時的に設定する方法を示します：</p>
+    </button></h2><p>コレクションに `<code translate="no">TIMESTAMPTZ</code> ` フィールドがある場合、クエリ呼び出しで `<code translate="no">timezone</code> ` パラメータを設定することで、単一の操作においてデータベースまたはコレクションのデフォルトタイムゾーンを一時的に上書きできます。これにより、操作中に `<code translate="no">TIMESTAMPTZ</code> ` 値の表示および比較方法が制御されます。</p>
+<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/timestamptz-field.md">「TIMESTAMPTZフィールド</a>」を参照してください。</p>
+<p>以下の例は、クエリ操作に対してタイムゾーンを一時的に設定する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

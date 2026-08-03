@@ -3,9 +3,9 @@ id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
 summary: تعرف على كيفية تثبيت حزمة SDK لـ Milvus بلغة Python.
-title: تثبيت حزمة SDK لـ Milvus بلغة Python
+title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Python
 ---
-<h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">تثبيت حزمة SDK لـ Milvus بلغة Python<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Python<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: تثبيت حزمة SDK لـ Milvus بلغة Python
 <div class="alert note">
 يُنصح بتثبيت إصدار PyMilvus الذي يتوافق مع إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/release_notes.md">ملاحظات الإصدار</a>.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">15</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">17</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">التحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,11 +1,14 @@
 ---
 id: array-of-structs.md
-title: StructArray
+title: Descripción general de StructArray
 summary: >-
-  Utiliza campos StructArray para almacenar elementos Struct ordenados con un
-  esquema compartido de campos vectoriales y escalares.
+  Utiliza StructArray cuando una entidad necesite almacenar una lista ordenada
+  de elementos estructurados, como un documento con muchos fragmentos, una
+  página con muchos elementos visuales o un vídeo con muchos clips. StructArray
+  mantiene estos elementos dentro de la entidad principal, al tiempo que permite
+  la búsqueda vectorial y el filtrado escalar en los campos de cada elemento.
 ---
-<h1 id="StructArray" class="common-anchor-header">StructArray<button data-href="#StructArray" class="anchor-icon" translate="no">
+<h1 id="StructArray-Overview" class="common-anchor-header">Descripción general de StructArray<button data-href="#StructArray-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,31 +23,55 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Un campo Array of Structs, o un campo StructArray, en una entidad almacena un conjunto ordenado de elementos Struct. Cada Struct de la Matriz comparte el mismo esquema predefinido, compuesto por múltiples vectores y campos escalares.</p>
-<p>He aquí un ejemplo de entidad de una colección que contiene un campo StructArray.</p>
+    </button></h1><p>Utiliza StructArray cuando una entidad necesite almacenar una lista ordenada de elementos estructurados, como un documento con muchos fragmentos, una página con muchos elementos visuales o un vídeo con muchos clips. StructArray mantiene estos elementos dentro de la entidad principal, al tiempo que permite la búsqueda vectorial y el filtrado escalar en los campos de cada elemento.</p>
+<h2 id="What-is-StructArray" class="common-anchor-header">¿Qué es StructArray?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Un <strong>StructArray</strong>, también conocido como matriz de estructuras, almacena un conjunto ordenado de elementos Struct en cada entidad. Todos los elementos Struct de la matriz siguen el mismo esquema. Un elemento Struct puede contener subcampos escalares, subcampos vectoriales o ambos.</p>
+<p>Por ejemplo, una colección puede almacenar un artículo como entidad y guardar sus fragmentos en un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento puede incluir texto, metadatos de sección, puntuaciones de calidad y una o más incrustaciones vectoriales.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
-    &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-    &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
-    &#x27;title_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-    &#x27;author&#x27;<span class="hljs-punctuation">:</span> &#x27;Henry David Thoreau&#x27;<span class="hljs-punctuation">,</span>
-    &#x27;year_of_publication&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">1845</span><span class="hljs-punctuation">,</span>
-<span class="highlighted-comment-line">    &#x27;chunks&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></span>
-<span class="highlighted-comment-line">        <span class="hljs-punctuation">{</span></span>
-<span class="highlighted-comment-line">            &#x27;text&#x27;<span class="hljs-punctuation">:</span> &#x27;When I wrote the following pages<span class="hljs-punctuation">,</span> or rather the bulk of them...&#x27;<span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">            &#x27;text_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">            &#x27;chapter&#x27;<span class="hljs-punctuation">:</span> &#x27;Economy&#x27;<span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">        <span class="hljs-punctuation">{</span></span>
-<span class="highlighted-comment-line">            &#x27;text&#x27;<span class="hljs-punctuation">:</span> &#x27;I would fain say something<span class="hljs-punctuation">,</span> not so much concerning the Chinese and...&#x27;<span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">            &#x27;text_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.7</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.7</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.8</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">            &#x27;chapter&#x27;<span class="hljs-punctuation">:</span> &#x27;Economy&#x27;</span>
-<span class="highlighted-comment-line">        <span class="hljs-punctuation">}</span></span>
-<span class="highlighted-comment-line">    <span class="hljs-punctuation">]</span></span>
-<span class="highlighted-comment-line">    <span class="hljs-comment">// hightlight-end</span></span>
-<span class="highlighted-comment-line"><span class="hljs-punctuation">}</span></span>
-<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
-<p>En el ejemplo anterior, el campo <code translate="no">chunks</code> es un campo StructArray, y cada elemento Struct contiene sus propios campos, a saber, <code translate="no">text</code>, <code translate="no">text_vector</code> y <code translate="no">chapter</code>.</p>
-<h2 id="When-to-use" class="common-anchor-header">Cuándo utilizarlo<button data-href="#When-to-use" class="anchor-icon" translate="no">
+  <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;search&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;title_vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.10</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.20</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.30</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.40</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;chunks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Use HNSW efSearch to trade recall for latency.&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;page&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.92</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;emb_list_vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.11</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.21</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.31</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.41</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;emb&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.12</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.20</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.33</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.39</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Range search returns vectors within a distance boundary.&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;search&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;page&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.86</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;emb_list_vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.18</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.23</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.29</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.36</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;emb&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.30</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.37</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Los dos subcampos vectoriales de este ejemplo representan el mismo fragmento desde dos perspectivas de búsqueda. « <code translate="no">chunks[emb_list_vector]</code> » está pensado para la búsqueda en «EmbeddingList» con métricas de « <code translate="no">MAX_SIM*</code> », mientras que « <code translate="no">chunks[emb]</code> » está pensado para la búsqueda a nivel de elemento con métricas vectoriales habituales, como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</p>
+</div>
+<h2 id="When-to-use-StructArray" class="common-anchor-header">Cuándo utilizar StructArray<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,15 +86,112 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las aplicaciones modernas de IA, desde la conducción autónoma hasta la recuperación multimodal, dependen cada vez más de datos anidados y heterogéneos. Los modelos de datos planos tradicionales tienen dificultades para representar relaciones complejas como<strong>"un documento con muchos fragmentos anotados</strong>" o<strong>"una escena de conducción con múltiples maniobras observadas</strong>". Aquí es donde brilla el tipo de datos StructArray de Milvus.</p>
-<p>Para determinar rápidamente si el campo StructArray se adapta a sus escenarios de aplicación, considere si:</p>
-<ul>
-<li><p>Sus datos están en una estructura jerárquica, como un documento con muchos trozos anotados.</p></li>
-<li><p>El resultado de la búsqueda debe ser el documento y no los fragmentos, como en el ejemplo anterior.</p></li>
-<li><p>Los resultados de la búsqueda contienen un gran número de entidades duplicadas, y usted tiene dificultades para recuperar los resultados finales utilizando técnicas como la agrupación, la deduplicación y la reordenación.</p></li>
-</ul>
-<p>Si sus respuestas a las preguntas anteriores son afirmativas, debe utilizar StructArray.</p>
-<h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h2><p>Utiliza StructArray cuando la unidad natural que deseas devolver sea mayor que la unidad natural en la que deseas buscar o filtrar.</p>
+<table>
+<thead>
+<tr><th>Caso de uso</th><th>Por qué resulta útil StructArray</th><th>Campo típico de StructArray</th></tr>
+</thead>
+<tbody>
+<tr><td>Recuperación de documentos</td><td>Almacena un documento como una entidad mientras se realizan búsquedas en sus fragmentos.</td><td><code translate="no">chunks</code></td></tr>
+<tr><td>Recuperación con interacción tardía</td><td>Almacena un documento o una página como una lista de incrustaciones y evalúala con <code translate="no">MAX_SIM*</code>.</td><td><code translate="no">chunks[emb_list_vector]</code> o <code translate="no">patches[emb]</code></td></tr>
+<tr><td>Recuperación a nivel de elemento</td><td>Devuelve el fragmento, clip, parche u observación más relevante, incluyendo su desplazamiento en la matriz.</td><td><code translate="no">chunks[emb]</code></td></tr>
+<tr><td>Filtrado estructurado</td><td>Filtra por subcampos escalares dentro de elementos Struct, como sección, puntuación, página o indicadores.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
+<tr><td>Reducción de resultados duplicados de elementos principales</td><td>Mantener los elementos hijos bajo la misma entidad principal en lugar de almacenar cada elemento hijo como una fila independiente.</td><td><code translate="no">chunks</code>, <code translate="no">clips</code>, <code translate="no">patches</code></td></tr>
+</tbody>
+</table>
+<h2 id="Decision-Matrix" class="common-anchor-header">Matriz de decisión<button data-href="#Decision-Matrix" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utiliza la siguiente matriz para elegir la ruta adecuada de StructArray.</p>
+<table>
+<thead>
+<tr><th>Objetivo</th><th>Ruta recomendada</th><th>Granularidad del resultado</th><th>Empieza aquí</th></tr>
+</thead>
+<tbody>
+<tr><td>Modelar un objeto padre con muchos hijos estructurados.</td><td>Crea un campo StructArray.</td><td>La entidad contiene elementos Struct ordenados.</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td></tr>
+<tr><td>Inserta registros principales con datos secundarios anidados.</td><td>Insertar entidades cuyo campo StructArray sea una lista de objetos Struct.</td><td>Inserción a nivel de entidad.</td><td><a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos «StructArray»</a></td></tr>
+<tr><td>Ejecutar ColBERT, ColPali o la recuperación de interacción tardía a nivel de documento.</td><td>Utilizar la búsqueda EmbeddingList con un índice « <code translate="no">MAX_SIM*</code> ».</td><td>Nivel de entidad.</td><td><a href="/docs/es/search-with-embedding-lists.md">Buscar con listas de incrustación</a></td></tr>
+<tr><td>Busca fragmentos, clips o parches individuales.</td><td>Utiliza la búsqueda a nivel de elemento con una métrica vectorial estándar.</td><td>Nivel de elemento de Struct, con desplazamiento cuando esté disponible.</td><td>Búsqueda vectorial básica con StructArray</td></tr>
+<tr><td>Restringe la búsqueda vectorial a nivel de elemento a aquellos elementos que cumplan condiciones escalares.</td><td>Utiliza ` <code translate="no">element_filter</code>`.</td><td>Filtrado a nivel de elemento; la forma del resultado depende del tipo de búsqueda.</td><td>Búsqueda filtrada con StructArray</td></tr>
+<tr><td>Selecciona entidades en función del número de elementos de Struct que cumplan una condición.</td><td>Utilice <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code>.</td><td>Nivel de entidad.</td><td><a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a></td></tr>
+<tr><td>Utiliza límites de puntuación o distancia en los subcampos vectoriales de StructArray.</td><td>Utilice la búsqueda por rango a nivel de elemento.</td><td>Nivel de elemento de Struct.</td><td>Búsqueda por rango con StructArray</td></tr>
+<tr><td>Devuelve como máximo un resultado por entidad principal tras una búsqueda a nivel de elemento.</td><td>Utiliza la búsqueda por agrupación mediante la clave primaria.</td><td>Nivel de entidad tras la agrupación.</td><td>Búsqueda agrupada con StructArray</td></tr>
+<tr><td>Combina la búsqueda de elementos de StructArray con otro campo vectorial.</td><td>Utiliza una búsqueda híbrida con una solicitud AnnSearchRequest dirigida a un subcampo vectorial de StructArray.</td><td>Subbúsqueda a nivel de elemento, reordenación a nivel de entidad.</td><td>Búsqueda híbrida con StructArray</td></tr>
+</tbody>
+</table>
+<h2 id="Understand-the-two-search-models" class="common-anchor-header">Comprender los dos modelos de búsqueda<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>### Búsqueda en EmbeddingList La búsqueda en EmbeddingList trata los vectores dentro de un subcampo vectorial de StructArray como una lista de incrustaciones para la entidad principal. La consulta también es una lista de incrustaciones. Milvus compara la lista de incrustaciones de la consulta con la lista de incrustaciones almacenada utilizando una métrica de « <code translate="no">MAX_SIM*</code> » y devuelve las entidades coincidentes. - Datos de la consulta: lista de incrustaciones. - Familia de métricas: « <code translate="no">MAX_SIM*</code> ». - Granularidad del resultado: nivel de entidad. - Ideal para: recuperación de interacción tardía a nivel de documento o de página.</th><th>### Búsqueda a nivel de elemento La búsqueda a nivel de elemento trata cada elemento de Struct como un candidato independiente para la búsqueda vectorial. Cada resultado representa un elemento coincidente dentro del campo StructArray, y los resultados desagrupados pueden mostrar la posición del elemento. - Datos de consulta: vector regular. - Familia de métricas: métricas de vector regular. - Granularidad de los resultados: nivel de elemento de Struct. - Ideal para: recuperación a nivel de fragmento, clip o parche.</th></tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div class="alert note">
+<p>Advertencia</p>
+<p>Si tu colección necesita tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, utiliza dos subcampos vectoriales independientes. Un campo vectorial o un subcampo vectorial solo admite un índice, y los dos modos de búsqueda requieren familias de métricas diferentes.</p>
+</div>
+<h2 id="Documentation-map" class="common-anchor-header">Mapa de la documentación<button data-href="#Documentation-map" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La documentación de StructArray se divide en páginas de modelado y páginas de búsqueda. Utiliza las páginas de modelado para definir y preparar los datos. Utiliza las páginas de búsqueda para elegir el comportamiento adecuado de recuperación y filtrado.</p>
+<table>
+<thead>
+<tr><th>Área</th><th>Página</th><th>Úsala para</th></tr>
+</thead>
+<tbody>
+<tr><td>Modelado</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td><td>Definir el esquema de la estructura y añadir un campo StructArray.</td></tr>
+<tr><td>Modelado</td><td><a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos StructArray</a></td><td>Prepara e inserta datos anidados en StructArray.</td></tr>
+<tr><td>Modelado</td><td><a href="/docs/es/index-structarray-fields.md">Indexar campos de StructArray</a></td><td>Crear índices vectoriales y escalares en los subcampos de StructArray.</td></tr>
+<tr><td>Referencia</td><td><a href="/docs/es/structarray-limits.md">Límites de StructArray</a></td><td>Comprueba los límites de esquema, tipo de datos, índice, búsqueda, filtro y versión.</td></tr>
+<tr><td>Búsqueda</td><td>Búsqueda vectorial básica con StructArray</td><td>Compara la búsqueda en EmbeddingList con la búsqueda vectorial a nivel de elemento.</td></tr>
+<tr><td>Búsqueda</td><td>Búsqueda por rango con StructArray</td><td>Utiliza restricciones de rango con los subcampos vectoriales de StructArray.</td></tr>
+<tr><td>Búsqueda</td><td>Búsqueda por agrupación con StructArray</td><td>Agrupa los resultados de la búsqueda a nivel de elemento por clave primaria.</td></tr>
+<tr><td>Búsqueda</td><td>Búsqueda híbrida con StructArray</td><td>Combina la búsqueda a nivel de elemento de StructArray con otras búsquedas vectoriales.</td></tr>
+<tr><td>Búsqueda</td><td>Búsqueda filtrada con StructArray</td><td>Utiliza los filtros de StructArray en la búsqueda, la consulta y la búsqueda híbrida.</td></tr>
+<tr><td>Búsqueda</td><td><a href="/docs/es/search-with-embedding-lists.md">Búsqueda con listas de incrustación</a></td><td>Crea sistemas de recuperación al estilo de ColBERT y ColPali con StructArray.</td></tr>
+<tr><td>Filtro</td><td><a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a></td><td>Sintaxis de referencia para los operadores « <code translate="no">element_filter</code> » y « <code translate="no">MATCH_*</code> ».</td></tr>
+</tbody>
+</table>
+<h2 id="Key-limits-to-check-first" class="common-anchor-header">Límites clave que hay que comprobar primero<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,1044 +207,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipos de datos</strong></p>
-<p>Al crear una colección, puede utilizar el tipo Struct como tipo de datos para los elementos de un campo Array. Sin embargo, no puede añadir un StructArray a una colección existente, y Milvus no admite el uso del tipo Struct como tipo de datos para un campo de colección.</p>
-<p>Los Structs de un campo Matriz comparten el mismo esquema, que debe definirse al crear el campo Matriz.</p>
-<p>Un esquema Struct contiene tanto vectores como campos escalares, como se indica a continuación:</p>
-<ul>
-<li><p>Tipos de datos vectoriales aplicables: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code>, y <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Tipos de datos escalares aplicables: <code translate="no">VARCHAR</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, y <code translate="no">BOOL</code>.</p></li>
-</ul>
-<p>Mantenga el número de campos vectoriales tanto a nivel de colección como en los Structs combinados para que no sea mayor o igual a 10.</p></li>
-<li><p><strong>Valores nulos y por defecto</strong></p>
-<p>Un campo StructArray no es anulable y no acepta ningún valor por defecto.</p></li>
-<li><p><strong>Función</strong></p>
-<p>No se puede utilizar una función para derivar un campo vectorial de un campo escalar dentro de un Struct.</p></li>
-<li><p><strong>Tipo de índice y tipo métrico</strong></p>
-<p>Todos los campos vectoriales de una colección deben estar indexados. Para indexar un campo vectorial dentro de un campo StructArray, Milvus utiliza una lista de incrustación para organizar las incrustaciones vectoriales en cada elemento Struct e indexa toda la lista de incrustación en su conjunto.</p>
-<p>Puede utilizar <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> como tipo de índice y cualquier tipo métrico enumerado a continuación para construir índices para las listas de incrustación en un campo StructArray.</p>
-<p><table>
-<tr>
-<th><p>Tipo de índice</p></th>
-<th><p>Tipo métrico</p></th>
-<th><p>Observaciones</p></th>
-</tr>
-<tr>
-<td rowspan="3"><ul><li><p><code translate="no">AUTOINDEX</code></p></li><li><p><code translate="no">HNSW</code></p></li><li><p><code translate="no">IVF_FLAT</code></p></li><li><p><code translate="no">DISKANN</code></p></li></ul></td>
-<td rowspan="3"><ul><li><p><code translate="no">MAX_SIM_COSINE</code></p></li><li><p><code translate="no">MAX_SIM_IP</code></p></li><li><p><code translate="no">MAX_SIM_L2</code></p></li></ul></td>
-<td rowspan="3"><p>Para listas de incrustación de los siguientes tipos:</p><ul><li><p><code translate="no">FLOAT_VECTOR</code></p></li><li><p><code translate="no">FLOAT16_VECTOR</code></p></li><li><p><code translate="no">BFLOAT16_VECTOR</code></p></li><li><p><code translate="no">INT8_VECTOR</code></p></li><li><p><code translate="no">BINARY_VECTOR</code></p></li></ul></td>
-</tr>
-</table></p>
-<p>Para obtener más información sobre cómo Milvus calcula la similitud entre la consulta y una lista de incrustación, consulte <a href="/docs/es/metric.md#Maximum-similarity">Similitud máxima</a>.</p>
-<p>Los campos escalares del campo StructArray admiten los siguientes tipos de índice:</p>
-<ul>
-<li><p><code translate="no">INVERTED</code></p>
-<p>Esto se aplica normalmente a filtros de tipo cadena o categóricos, como <code translate="no">structA[color]</code> o <code translate="no">structA[str_val]</code>. Para obtener más información, consulte <a href="/docs/es/inverted.md">INVERTED</a>.</p></li>
-<li><p><code translate="no">STL_SORT</code></p>
-<p>Suele aplicarse a la aceleración de rango u orden de valores numéricos, como <code translate="no">strctA[num_val]</code>. Para más detalles, consulte <a href="/docs/es/stl-sort.md">STL_SORT</a>.</p></li>
-</ul></li>
-<li><p><strong>Datos upsert</strong></p>
-<p>Los Structs no soportan upsert en modo merge. Sin embargo, puedes realizar upserts en modo override para actualizar datos en Structs. Para más detalles sobre las diferencias entre upsert en modo merge y en modo override, consulta <a href="/docs/es/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
-<li><p><strong>Filtrado escalar</strong></p>
-<p>Puede utilizar <strong>filtros de elementos</strong> y <strong>operadores de la familia match</strong> para realizar un filtrado escalar en un subcampo escalar de un campo StructArray. Para obtener más información, consulte <a href="/docs/es/array-of-structs.md#Scalar-filtering-in-a-StructArray-field">Filtrado escalar en un campo StructArray</a>.</p></li>
-</ul>
-<h2 id="Add-a-StructArray" class="common-anchor-header">Añadir un campo StructArray<button data-href="#Add-a-StructArray" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Para añadir un campo StructArray en Milvus, debe definir un campo array al crear una colección y establecer el tipo de datos de sus elementos en Struct. El proceso es el siguiente</p>
-<ol>
-<li><p>Establezca el tipo de datos de un campo en <code translate="no">DataType.ARRAY</code> cuando añada el campo como campo Array al esquema de la colección.</p></li>
-<li><p>Establezca el atributo <code translate="no">element_type</code> del campo en <code translate="no">DataType.STRUCT</code> para que el campo sea una matriz Struct.</p></li>
-<li><p>Cree un esquema Struct e incluya los campos necesarios. A continuación, haga referencia al esquema Struct en el atributo <code translate="no">struct_schema</code> del campo.</p></li>
-<li><p>Establezca el atributo <code translate="no">max_capacity</code> del campo en un valor adecuado para especificar el número máximo de Structs que cada entidad puede contener en este campo.</p></li>
-<li><p><strong>(Opcional</strong>) Puedes establecer <code translate="no">mmap.enabled</code> para cualquier campo dentro del elemento Struct para equilibrar los datos calientes y fríos en el Struct.</p></li>
-</ol>
-<p>Así es como puedes definir un esquema de colección que incluya un campo StructArray:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-schema = client.create_schema()
-
-<span class="hljs-comment"># add the primary field to the collection</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
-
-<span class="hljs-comment"># add some scalar fields to the collection</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;title&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;author&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&quot;</span>, datatype=DataType.INT64)
-
-<span class="hljs-comment"># add a vector field to the collection</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
-
-<span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
-<span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
-<span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
-<span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
-<span class="highlighted-comment-line">schema.add_field(<span class="hljs-string">&quot;chunks&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.STRUCT, </span>
-<span class="highlighted-comment-line">                    struct_schema=struct_schema, max_capacity=<span class="hljs-number">1000</span>)</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">collectionSchema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
-        .build();
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-        .dataType(DataType.Int64)
-        .isPrimaryKey(<span class="hljs-literal">true</span>)
-        .autoID(<span class="hljs-literal">true</span>)
-        .build());
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">512</span>)
-        .build());
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;author&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">512</span>)
-        .build());
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;year_of_publication&quot;</span>)
-        .dataType(DataType.Int64)
-        .build());
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;title_vector&quot;</span>)
-        .dataType(DataType.FloatVector)
-        .dimension(<span class="hljs-number">5</span>)
-        .build());
-
-Map&lt;String, String&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-params.put(<span class="hljs-string">&quot;mmap_enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
-collectionSchema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;chunks&quot;</span>)
-        .dataType(DataType.Array)
-        .elementType(DataType.Struct)
-        .maxCapacity(<span class="hljs-number">1000</span>)
-        .addStructField(AddFieldReq.builder()
-                .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
-                .dataType(DataType.VarChar)
-                .maxLength(<span class="hljs-number">65535</span>)
-                .build())
-        .addStructField(AddFieldReq.builder()
-                .fieldName(<span class="hljs-string">&quot;chapter&quot;</span>)
-                .dataType(DataType.VarChar)
-                .maxLength(<span class="hljs-number">512</span>)
-                .build())
-        .addStructField(AddFieldReq.builder()
-                .fieldName(<span class="hljs-string">&quot;text_vector&quot;</span>)
-                .dataType(DataType.FloatVector)
-                .dimension(VECTOR_DIM)
-                .typeParams(params)
-                .build())
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
-
-<span class="hljs-keyword">const</span> schema = [
-  {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">auto_id</span>: <span class="hljs-literal">true</span>,
-  },
-  {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;title&quot;</span>,
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-  },
-  {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;author&quot;</span>,
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-  },
-  {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;year_of_publication&quot;</span>,
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,
-  },
-  {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;title_vector&quot;</span>,
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FLOAT_VECTOR</span>,
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,
-  },
-<span class="highlighted-comment-line">  {</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chunks&quot;</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">ARRAY</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">element_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">STRUCT</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">fields</span>: [</span>
-<span class="highlighted-comment-line">      {</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">max_length</span>: <span class="hljs-number">65535</span>,</span>
-<span class="highlighted-comment-line">      },</span>
-<span class="highlighted-comment-line">      {</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chapter&quot;</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,</span>
-<span class="highlighted-comment-line">      },</span>
-<span class="highlighted-comment-line">      {</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_vector&quot;</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FLOAT_VECTOR</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-attr">mmap_enabled</span>: <span class="hljs-literal">true</span>,</span>
-<span class="highlighted-comment-line">      },</span>
-<span class="highlighted-comment-line">    ],</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">max_capacity</span>: <span class="hljs-number">1000</span>,</span>
-<span class="highlighted-comment-line">  },</span>
-];
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-SCHEMA=<span class="hljs-string">&#x27;{
-  &quot;autoID&quot;: true,
-  &quot;fields&quot;: [
-    {
-      &quot;fieldName&quot;: &quot;id&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;,
-      &quot;isPrimary&quot;: true
-    },
-    {
-      &quot;fieldName&quot;: &quot;title&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;elementTypeParams&quot;: { &quot;max_length&quot;: &quot;512&quot; }
-    },
-    {
-      &quot;fieldName&quot;: &quot;author&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;elementTypeParams&quot;: { &quot;max_length&quot;: &quot;512&quot; }
-    },
-    {
-      &quot;fieldName&quot;: &quot;year_of_publication&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;
-    },
-    {
-      &quot;fieldName&quot;: &quot;title_vector&quot;,
-      &quot;dataType&quot;: &quot;FloatVector&quot;,
-      &quot;elementTypeParams&quot;: { &quot;dim&quot;: &quot;5&quot; }
-    }
-  ],
-  &quot;structArrayFields&quot;: [
-    {
-      &quot;name&quot;: &quot;chunks&quot;,
-      &quot;description&quot;: &quot;Array of document chunks with text and vectors&quot;,
-      &quot;elementTypeParams&quot;:{
-         &quot;max_capacity&quot;: 1000
-      },
-      &quot;fields&quot;: [
-        {
-          &quot;fieldName&quot;: &quot;text&quot;,
-          &quot;dataType&quot;: &quot;VarChar&quot;,
-          &quot;elementTypeParams&quot;: { &quot;max_length&quot;: &quot;65535&quot; }
-        },
-        {
-          &quot;fieldName&quot;: &quot;chapter&quot;,
-          &quot;dataType&quot;: &quot;VarChar&quot;,
-          &quot;elementTypeParams&quot;: { &quot;max_length&quot;: &quot;512&quot; }
-        },
-        {
-          &quot;fieldName&quot;: &quot;text_vector&quot;,
-          &quot;dataType&quot;: &quot;FloatVector&quot;,
-          &quot;elementTypeParams&quot;: {
-            &quot;dim&quot;: &quot;5&quot;,
-            &quot;mmap_enabled&quot;: &quot;true&quot;
-          }
-        }
-      ]
-    }
-  ]
-}&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Las líneas resaltadas en el ejemplo de código anterior ilustran cómo incluir un StructArray en un esquema de colección.</p>
-<h2 id="Set-index-params" class="common-anchor-header">Establecer parámetros de índice<button data-href="#Set-index-params" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>La indexación es obligatoria para todos los campos vectoriales, incluidos tanto los campos vectoriales de la colección como los definidos en el elemento Struct.</p>
-<p>Los parámetros de índice aplicables varían según el tipo de índice. Para obtener más información sobre los parámetros de índice aplicables, consulte <a href="/docs/es/index-explained.md">Explicación del índice</a> y la documentación del tipo de índice seleccionado.</p>
-<h3 id="Index-an-embedding-list" class="common-anchor-header">Indexar una lista de incrustación<button data-href="#Index-an-embedding-list" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Para indexar una lista de incrustación, necesita establecer su tipo de índice a <code translate="no">AUTOINDEX</code> o cualquiera de los tipos de índice aplicables listados anteriormente, y utilizar un tipo de métrica listada para Milvus para medir las similitudes entre listas de incrustación.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = client.prepare_index_params()
-
-<span class="hljs-comment"># Create an index for the vector field in the collection</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;title_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-)
-
-<span class="highlighted-comment-line"><span class="hljs-comment"># Create an index for the vector field in the element Struct</span></span>
-<span class="highlighted-comment-line">index_params.add_index(</span>
-<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,</span>
-<span class="highlighted-comment-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
-<span class="highlighted-comment-line">    metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>,</span>
-<span class="highlighted-comment-line">)</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-
-List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexParams.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;title_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.L2)
-        .build());
-indexParams.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.MAX_SIM_COSINE)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
-  <span class="hljs-attr">fields</span>: schema,
-});
-
-<span class="hljs-keyword">const</span> indexParams = [
-  {
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;title_vector&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;L2&quot;</span>,
-  },
-<span class="highlighted-comment-line">  {</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>,</span>
-<span class="highlighted-comment-line">  },</span>
-];
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-INDEX_PARAMS=<span class="hljs-string">&#x27;[
-  {
-    &quot;fieldName&quot;: &quot;title_vector&quot;,
-    &quot;indexName&quot;: &quot;title_vector_index&quot;,
-    &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
-    &quot;metricType&quot;: &quot;L2&quot;
-  },
-  {
-    &quot;fieldName&quot;: &quot;chunks[text_vector]&quot;,
-    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
-    &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
-    &quot;metricType&quot;: &quot;MAX_SIM_COSINE&quot;
-  }
-]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-struct-sub-field" class="common-anchor-header">Indexar un subcampo de estructura escalar<button data-href="#Index-a-scalar-struct-sub-field" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Cuando crea índices en un subcampo struct escalar, Milvus construye realmente el índice a <strong>nivel de elemento</strong>, no a nivel de fila, para acelerar el filtrado escalar.</p>
-<p>El siguiente fragmento de código crea un índice en un subcampo struct escalar llamado <code translate="no">chunks[text]</code>.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params.add_index(
-    field_name=<span class="hljs-string">&quot;chunks[text]&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">indexParams.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text]&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>
-})
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">INDEX_PARAMS += <span class="hljs-string">&#x27;{
-    &quot;fieldName&quot;: &quot;chunks[text]&quot;,
-    &quot;indexName&quot;: &quot;chunks_text_vector_index&quot;,
-    &quot;indexType&quot;: &quot;INVERTED&quot;
-}&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-collection" class="common-anchor-header">Crear una colección<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Una vez que el esquema y el índice están listos, puedes crear una colección que incluya un campo StructArray.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(collectionSchema)
-        .indexParams(indexParams)
-        .build();
-client.createCollection(requestCreate);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">fields</span>: schema,
-  <span class="hljs-attr">indexes</span>: indexParams,
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
-    \&quot;description\&quot;: \&quot;A collection for storing book information with struct array chunks\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$INDEX_PARAMS</span>
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insertar datos<button data-href="#Insert-data" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Después de crear la colección, puedes insertar datos que incluyan Arrays de Structs de la siguiente manera.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
-data = {
-    <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
-    <span class="hljs-string">&#x27;title_vector&#x27;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
-    <span class="hljs-string">&#x27;author&#x27;</span>: <span class="hljs-string">&#x27;Henry David Thoreau&#x27;</span>,
-    <span class="hljs-string">&#x27;year_of_publication&#x27;</span>: <span class="hljs-number">1845</span>,
-    <span class="hljs-string">&#x27;chunks&#x27;</span>: [
-        {
-            <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;When I wrote the following pages, or rather the bulk of them...&#x27;</span>,
-            <span class="hljs-string">&#x27;text_vector&#x27;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>],
-            <span class="hljs-string">&#x27;chapter&#x27;</span>: <span class="hljs-string">&#x27;Economy&#x27;</span>,
-        },
-        {
-            <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;I would fain say something, not so much concerning the Chinese and...&#x27;</span>,
-            <span class="hljs-string">&#x27;text_vector&#x27;</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>],
-            <span class="hljs-string">&#x27;chapter&#x27;</span>: <span class="hljs-string">&#x27;Economy&#x27;</span>
-        }
-    ]
-}
-
-<span class="hljs-comment"># insert data</span>
-client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[data]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
-<span class="hljs-keyword">import</span> com.google.gson.JsonArray;
-<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
-
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row.addProperty(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;Walden&quot;</span>);
-row.add(<span class="hljs-string">&quot;title_vector&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>)));
-row.addProperty(<span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;Henry David Thoreau&quot;</span>);
-row.addProperty(<span class="hljs-string">&quot;year_of_publication&quot;</span>, <span class="hljs-number">1845</span>);
-
-<span class="hljs-type">JsonArray</span> <span class="hljs-variable">structArr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonArray</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">struct1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-struct1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;When I wrote the following pages, or rather the bulk of them...&quot;</span>);
-struct1.add(<span class="hljs-string">&quot;text_vector&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.5f</span>)));
-struct1.addProperty(<span class="hljs-string">&quot;chapter&quot;</span>, <span class="hljs-string">&quot;Economy&quot;</span>);
-structArr.add(struct1);
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">struct2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-struct2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;I would fain say something, not so much concerning the Chinese and...&quot;</span>);
-struct2.add(<span class="hljs-string">&quot;text_vector&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.7f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.7f</span>, <span class="hljs-number">0.8f</span>)));
-struct2.addProperty(<span class="hljs-string">&quot;chapter&quot;</span>, <span class="hljs-string">&quot;Economy&quot;</span>);
-structArr.add(struct2);
-
-row.add(<span class="hljs-string">&quot;chunks&quot;</span>, structArr);
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(Collections.singletonList(row))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">  {
-    <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Walden&quot;</span>,
-    <span class="hljs-attr">title_vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
-    <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;Henry David Thoreau&quot;</span>,
-    <span class="hljs-string">&quot;year-of-publication&quot;</span>: <span class="hljs-number">1845</span>,
-    <span class="hljs-attr">chunks</span>: [
-      {
-        <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;When I wrote the following pages, or rather the bulk of them...&quot;</span>,
-        <span class="hljs-attr">text_vector</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>],
-        <span class="hljs-attr">chapter</span>: <span class="hljs-string">&quot;Economy&quot;</span>,
-      },
-      {
-        <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I would fain say something, not so much concerning the Chinese and...&quot;</span>,
-        <span class="hljs-attr">text_vector</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>],
-        <span class="hljs-attr">chapter</span>: <span class="hljs-string">&quot;Economy&quot;</span>,
-      },
-    ],
-  },
-];
-
-<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-      {
-        &quot;title&quot;: &quot;Walden&quot;,
-        &quot;title_vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5],
-        &quot;author&quot;: &quot;Henry David Thoreau&quot;,
-        &quot;year_of_publication&quot;: 1845,
-        &quot;chunks&quot;: [
-          {
-            &quot;text&quot;: &quot;When I wrote the following pages, or rather the bulk of them...&quot;,
-            &quot;text_vector&quot;: [0.3, 0.2, 0.3, 0.2, 0.5],
-            &quot;chapter&quot;: &quot;Economy&quot;
-          },
-          {
-            &quot;text&quot;: &quot;I would fain say something, not so much concerning the Chinese and...&quot;,
-            &quot;text_vector&quot;: [0.7, 0.4, 0.2, 0.7, 0.8],
-            &quot;chapter&quot;: &quot;Economy&quot;
-          }
-        ]
-      }
-    ]
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><details></p>
-<p><summary>¿Necesitas más datos?</summary></p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
-<span class="hljs-keyword">import</span> random
-<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>, <span class="hljs-type">Dict</span>, <span class="hljs-type">Any</span>
-
-<span class="hljs-comment"># Real classic books (title, author, year)</span>
-BOOKS = [
-    (<span class="hljs-string">&quot;Pride and Prejudice&quot;</span>, <span class="hljs-string">&quot;Jane Austen&quot;</span>, <span class="hljs-number">1813</span>),
-    (<span class="hljs-string">&quot;Moby Dick&quot;</span>, <span class="hljs-string">&quot;Herman Melville&quot;</span>, <span class="hljs-number">1851</span>),
-    (<span class="hljs-string">&quot;Frankenstein&quot;</span>, <span class="hljs-string">&quot;Mary Shelley&quot;</span>, <span class="hljs-number">1818</span>),
-    (<span class="hljs-string">&quot;The Picture of Dorian Gray&quot;</span>, <span class="hljs-string">&quot;Oscar Wilde&quot;</span>, <span class="hljs-number">1890</span>),
-    (<span class="hljs-string">&quot;Dracula&quot;</span>, <span class="hljs-string">&quot;Bram Stoker&quot;</span>, <span class="hljs-number">1897</span>),
-    (<span class="hljs-string">&quot;The Adventures of Sherlock Holmes&quot;</span>, <span class="hljs-string">&quot;Arthur Conan Doyle&quot;</span>, <span class="hljs-number">1892</span>),
-    (<span class="hljs-string">&quot;Alice&#x27;s Adventures in Wonderland&quot;</span>, <span class="hljs-string">&quot;Lewis Carroll&quot;</span>, <span class="hljs-number">1865</span>),
-    (<span class="hljs-string">&quot;The Time Machine&quot;</span>, <span class="hljs-string">&quot;H.G. Wells&quot;</span>, <span class="hljs-number">1895</span>),
-    (<span class="hljs-string">&quot;The Scarlet Letter&quot;</span>, <span class="hljs-string">&quot;Nathaniel Hawthorne&quot;</span>, <span class="hljs-number">1850</span>),
-    (<span class="hljs-string">&quot;Leaves of Grass&quot;</span>, <span class="hljs-string">&quot;Walt Whitman&quot;</span>, <span class="hljs-number">1855</span>),
-    (<span class="hljs-string">&quot;The Brothers Karamazov&quot;</span>, <span class="hljs-string">&quot;Fyodor Dostoevsky&quot;</span>, <span class="hljs-number">1880</span>),
-    (<span class="hljs-string">&quot;Crime and Punishment&quot;</span>, <span class="hljs-string">&quot;Fyodor Dostoevsky&quot;</span>, <span class="hljs-number">1866</span>),
-    (<span class="hljs-string">&quot;Anna Karenina&quot;</span>, <span class="hljs-string">&quot;Leo Tolstoy&quot;</span>, <span class="hljs-number">1877</span>),
-    (<span class="hljs-string">&quot;War and Peace&quot;</span>, <span class="hljs-string">&quot;Leo Tolstoy&quot;</span>, <span class="hljs-number">1869</span>),
-    (<span class="hljs-string">&quot;Great Expectations&quot;</span>, <span class="hljs-string">&quot;Charles Dickens&quot;</span>, <span class="hljs-number">1861</span>),
-    (<span class="hljs-string">&quot;Oliver Twist&quot;</span>, <span class="hljs-string">&quot;Charles Dickens&quot;</span>, <span class="hljs-number">1837</span>),
-    (<span class="hljs-string">&quot;Wuthering Heights&quot;</span>, <span class="hljs-string">&quot;Emily Brontë&quot;</span>, <span class="hljs-number">1847</span>),
-    (<span class="hljs-string">&quot;Jane Eyre&quot;</span>, <span class="hljs-string">&quot;Charlotte Brontë&quot;</span>, <span class="hljs-number">1847</span>),
-    (<span class="hljs-string">&quot;The Call of the Wild&quot;</span>, <span class="hljs-string">&quot;Jack London&quot;</span>, <span class="hljs-number">1903</span>),
-    (<span class="hljs-string">&quot;The Jungle Book&quot;</span>, <span class="hljs-string">&quot;Rudyard Kipling&quot;</span>, <span class="hljs-number">1894</span>),
-]
-
-<span class="hljs-comment"># Common chapter names for classics</span>
-CHAPTERS = [
-    <span class="hljs-string">&quot;Introduction&quot;</span>, <span class="hljs-string">&quot;Prologue&quot;</span>, <span class="hljs-string">&quot;Chapter I&quot;</span>, <span class="hljs-string">&quot;Chapter II&quot;</span>, <span class="hljs-string">&quot;Chapter III&quot;</span>,
-    <span class="hljs-string">&quot;Chapter IV&quot;</span>, <span class="hljs-string">&quot;Chapter V&quot;</span>, <span class="hljs-string">&quot;Chapter VI&quot;</span>, <span class="hljs-string">&quot;Chapter VII&quot;</span>, <span class="hljs-string">&quot;Chapter VIII&quot;</span>,
-    <span class="hljs-string">&quot;Chapter IX&quot;</span>, <span class="hljs-string">&quot;Chapter X&quot;</span>, <span class="hljs-string">&quot;Epilogue&quot;</span>, <span class="hljs-string">&quot;Conclusion&quot;</span>, <span class="hljs-string">&quot;Afterword&quot;</span>,
-    <span class="hljs-string">&quot;Economy&quot;</span>, <span class="hljs-string">&quot;Where I Lived&quot;</span>, <span class="hljs-string">&quot;Reading&quot;</span>, <span class="hljs-string">&quot;Sounds&quot;</span>, <span class="hljs-string">&quot;Solitude&quot;</span>,
-    <span class="hljs-string">&quot;Visitors&quot;</span>, <span class="hljs-string">&quot;The Bean-Field&quot;</span>, <span class="hljs-string">&quot;The Village&quot;</span>, <span class="hljs-string">&quot;The Ponds&quot;</span>, <span class="hljs-string">&quot;Baker Farm&quot;</span>
-]
-
-<span class="hljs-comment"># Placeholder text snippets (mimicking 19th-century prose)</span>
-TEXT_SNIPPETS = [
-    <span class="hljs-string">&quot;When I wrote the following pages, or rather the bulk of them...&quot;</span>,
-    <span class="hljs-string">&quot;I would fain say something, not so much concerning the Chinese and...&quot;</span>,
-    <span class="hljs-string">&quot;It is a truth universally acknowledged, that a single man in possession...&quot;</span>,
-    <span class="hljs-string">&quot;Call me Ishmael. Some years ago—never mind how long precisely...&quot;</span>,
-    <span class="hljs-string">&quot;It was the best of times, it was the worst of times...&quot;</span>,
-    <span class="hljs-string">&quot;All happy families are alike; each unhappy family is unhappy in its own way.&quot;</span>,
-    <span class="hljs-string">&quot;Whether I shall turn out to be the hero of my own life, or whether that station...&quot;</span>,
-    <span class="hljs-string">&quot;You will rejoice to hear that no disaster has accompanied the commencement...&quot;</span>,
-    <span class="hljs-string">&quot;The world is too much with us; late and soon, getting and spending...&quot;</span>,
-    <span class="hljs-string">&quot;He was an old man who fished alone in a skiff in the Gulf Stream...&quot;</span>
-]
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">random_vector</span>() -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">float</span>]:
-    <span class="hljs-keyword">return</span> [<span class="hljs-built_in">round</span>(random.random(), <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>)]
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_chunk</span>() -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">str</span>, <span class="hljs-type">Any</span>]:
-    <span class="hljs-keyword">return</span> {
-        <span class="hljs-string">&quot;text&quot;</span>: random.choice(TEXT_SNIPPETS),
-        <span class="hljs-string">&quot;text_vector&quot;</span>: random_vector(),
-        <span class="hljs-string">&quot;chapter&quot;</span>: random.choice(CHAPTERS)
-    }
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_record</span>(<span class="hljs-params">record_id: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">str</span>, <span class="hljs-type">Any</span>]:
-    title, author, year = random.choice(BOOKS)
-    num_chunks = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>)  <span class="hljs-comment"># 1 to 5 chunks per book</span>
-    chunks = [generate_chunk() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_chunks)]
-    <span class="hljs-keyword">return</span> {
-        <span class="hljs-string">&quot;title&quot;</span>: title,
-        <span class="hljs-string">&quot;title_vector&quot;</span>: random_vector(),
-        <span class="hljs-string">&quot;author&quot;</span>: author,
-        <span class="hljs-string">&quot;year_of_publication&quot;</span>: year,
-        <span class="hljs-string">&quot;chunks&quot;</span>: chunks
-    }
-
-<span class="hljs-comment"># Generate 1000 records</span>
-data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)]
-
-<span class="hljs-comment"># Insert the generated data</span>
-client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
-<button class="copy-code-btn"></button></code></pre>
-<p></details></p>
-<h2 id="Vector-search-in-a-StructArray-field" class="common-anchor-header">Búsqueda vectorial en un campo StructArray<button data-href="#Vector-search-in-a-StructArray-field" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Puedes realizar búsquedas vectoriales en los campos vectoriales de una colección y en un StructArray.</p>
-<p>En concreto, debe concatenar el nombre del campo StructArray y los de los campos vectoriales de destino dentro de los elementos Struct como valor para el parámetro <code translate="no">anns_field</code> en una petición de búsqueda, y utilizar <code translate="no">EmbeddingList</code> para organizar ordenadamente los vectores de consulta.</p>
-<div class="alert note">
-<p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar de forma más ordenada los vectores de consulta para búsquedas en una lista de incrustación en un StructArray. Cada <code translate="no">EmbeddingList</code> contiene al menos un vector de incrustación y espera un número de entidades topK a cambio.</p>
-<p>Sin embargo, <code translate="no">EmbeddingList</code> sólo puede utilizarse en peticiones <code translate="no">search()</code> sin parámetros de búsqueda por rango o agrupación, y mucho menos en peticiones <code translate="no">search_iterator()</code>.</p>
-</div>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
-
-<span class="hljs-comment"># each query embedding list triggers a single search</span>
-embeddingList1 = EmbeddingList()
-embeddingList1.add([<span class="hljs-number">0.2</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">0.4</span>, -<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>])
-
-embeddingList2 = EmbeddingList()
-embeddingList2.add([-<span class="hljs-number">0.2</span>, -<span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.9</span>])
-embeddingList2.add([-<span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.2</span>])
-
-<span class="hljs-comment"># a search with a single embedding list</span>
-results = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[ embeddingList1 ],
-    anns_field=<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>},
-    limit=<span class="hljs-number">3</span>,
-    output_fields=[<span class="hljs-string">&quot;chunks[text]&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddingList;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-
-<span class="hljs-type">EmbeddingList</span> <span class="hljs-variable">embeddingList1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddingList</span>();
-embeddingList1.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.9f</span>, <span class="hljs-number">0.4f</span>, -<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.2f</span>}));
-
-<span class="hljs-type">EmbeddingList</span> <span class="hljs-variable">embeddingList2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddingList</span>();
-embeddingList2.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.2f</span>, -<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.9f</span>}));
-embeddingList2.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.4f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">0.2f</span>}));
-
-Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-params.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>);
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .annsField(<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>)
-        .data(Collections.singletonList(embeddingList1))
-        .searchParams(params)
-        .limit(<span class="hljs-number">3</span>)
-        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;chunks[text]&quot;</span>))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> embeddingList1 = [[<span class="hljs-number">0.2</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">0.4</span>, -<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>]];
-<span class="hljs-keyword">const</span> embeddingList2 = [
-  [-<span class="hljs-number">0.2</span>, -<span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.9</span>],
-  [-<span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.2</span>],
-];
-<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
-  <span class="hljs-attr">data</span>: embeddingList1,
-  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
-  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span> },
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;chunks[text]&quot;</span>],
-});
-
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-embeddingList1=<span class="hljs-string">&#x27;[[0.2,0.9,0.4,-0.3,0.2]]&#x27;</span>
-embeddingList2=<span class="hljs-string">&#x27;[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]&#x27;</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
-    \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>],
-    \&quot;annsField\&quot;: \&quot;chunks[text_vector]\&quot;,
-    \&quot;searchParams\&quot;: {\&quot;metric_type\&quot;: \&quot;MAX_SIM_COSINE\&quot;},
-    \&quot;limit\&quot;: 3,
-    \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>La petición de búsqueda anterior utiliza <code translate="no">chunks[text_vector]</code> para hacer referencia al campo <code translate="no">text_vector</code> en elementos Struct. Puede utilizar esta sintaxis para establecer los parámetros <code translate="no">anns_field</code> y <code translate="no">output_fields</code>.</p>
-<p>La salida sería una lista de las tres entidades más similares.</p>
-<p><details></p>
-<p><summary>Salida</summary></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &#x27;id&#x27;: 461417939772144945,</span>
-<span class="hljs-comment">#             &#x27;distance&#x27;: 0.9675756096839905,</span>
-<span class="hljs-comment">#             &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#                 &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;All happy families are alike; each unhappy family is unhappy in its own way.&#x27;}</span>
-<span class="hljs-comment">#                 ]</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &#x27;id&#x27;: 461417939772144965,</span>
-<span class="hljs-comment">#             &#x27;distance&#x27;: 0.9555778503417969,</span>
-<span class="hljs-comment">#             &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#                 &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;He was an old man who fished alone in a skiff in the Gulf Stream...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;When I wrote the following pages, or rather the bulk of them...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;It was the best of times, it was the worst of times...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;}</span>
-<span class="hljs-comment">#                 ]</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &#x27;id&#x27;: 461417939772144962,</span>
-<span class="hljs-comment">#             &#x27;distance&#x27;: 0.9469035863876343,</span>
-<span class="hljs-comment">#             &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#                 &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;He was an old man who fished alone in a skiff in the Gulf Stream...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#                     {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;}</span>
-<span class="hljs-comment">#                 ]</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p></details></p>
-<p>También puedes incluir múltiples listas de incrustación en el parámetro <code translate="no">data</code> para recuperar los resultados de búsqueda de cada una de estas listas de incrustación.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>
-results = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[ embeddingList1, embeddingList2 ],
-    anns_field=<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>},
-    limit=<span class="hljs-number">3</span>,
-    output_fields=[<span class="hljs-string">&quot;chunks[text]&quot;</span>]
-)
-
-<span class="hljs-built_in">print</span>(results)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-params.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>);
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .annsField(<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>)
-        .data(Arrays.asList(embeddingList1, embeddingList2))
-        .searchParams(params)
-        .limit(<span class="hljs-number">3</span>)
-        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;chunks[text]&quot;</span>))
-        .build());
-        
-List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
-<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; searchResults.size(); i++) {
-    System.out.println(<span class="hljs-string">&quot;Results of No.&quot;</span> + i + <span class="hljs-string">&quot; embedding list&quot;</span>);
-    List&lt;SearchResp.SearchResult&gt; results = searchResults.get(i);
-    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
-        System.out.println(result);
-    }
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results2 = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
-  <span class="hljs-attr">data</span>: [embeddingList1, embeddingList2],
-  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
-  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span> },
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;chunks[text]&quot;</span>],
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
-    \&quot;data\&quot;: [<span class="hljs-variable">$embeddingList1</span>, <span class="hljs-variable">$embeddingList2</span>],
-    \&quot;annsField\&quot;: \&quot;chunks[text_vector]\&quot;,
-    \&quot;searchParams\&quot;: {\&quot;metric_type\&quot;: \&quot;MAX_SIM_COSINE\&quot;},
-    \&quot;limit\&quot;: 3,
-    \&quot;outputFields\&quot;: [\&quot;chunks[text]\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>La salida sería una lista de las tres entidades más similares para cada lista de incrustación.</p>
-<p><details></p>
-<p><summary>Salida</summary></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
-<span class="hljs-comment">#   [</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144945,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 0.9675756096839905,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;All happy families are alike; each unhappy family is unhappy in its own way.&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     },</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144965,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 0.9555778503417969,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;He was an old man who fished alone in a skiff in the Gulf Stream...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;When I wrote the following pages, or rather the bulk of them...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;It was the best of times, it was the worst of times...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     },</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144962,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 0.9469035863876343,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;He was an old man who fished alone in a skiff in the Gulf Stream...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;The world is too much with us; late and soon, getting and spending...&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment">#   ],</span>
-<span class="hljs-comment">#   [</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144663,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 1.9761409759521484,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;It was the best of times, it was the worst of times...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;It is a truth universally acknowledged, that a single man in possession...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;Whether I shall turn out to be the hero of my own life, or whether that station...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;He was an old man who fished alone in a skiff in the Gulf Stream...&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     },</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144692,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 1.974656581878662,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;It is a truth universally acknowledged, that a single man in possession...&#x27;},</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;Call me Ishmael. Some years ago—never mind how long precisely...&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     },</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#       &#x27;id&#x27;: 461417939772144662,</span>
-<span class="hljs-comment">#       &#x27;distance&#x27;: 1.9406685829162598,</span>
-<span class="hljs-comment">#       &#x27;entity&#x27;: {</span>
-<span class="hljs-comment">#         &#x27;chunks&#x27;: [</span>
-<span class="hljs-comment">#           {&#x27;text&#x27;: &#x27;It is a truth universally acknowledged, that a single man in possession...&#x27;}</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment">#   ]</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p></details></p>
-<p>En el ejemplo de código anterior, <code translate="no">embeddingList1</code> es una lista de incrustación de un vector, mientras que <code translate="no">embeddingList2</code> contiene dos vectores. Cada uno desencadena una petición de búsqueda independiente y espera una lista de las K entidades más similares.</p>
-<h2 id="Scalar-filtering-in-a-StructArray-field" class="common-anchor-header">Filtrado escalar en un campo StructArray<button data-href="#Scalar-filtering-in-a-StructArray-field" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Puede utilizar <strong>filtros de elementos</strong> y <strong>operadores de la familia match</strong> para realizar un filtrado escalar en un subcampo escalar de un StructArray. Para obtener más detalles y ejemplos sobre los dos tipos de operadores anteriores, consulte <a href="/docs/es/struct-array-operators.md">Operadores de matrices StructArray</a>.</p>
-<h3 id="Element-filters" class="common-anchor-header">Filtros de elementos<button data-href="#Element-filters" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Se trata de un filtro a nivel de entidad que comprueba si al menos un elemento del campo StructArray de una entidad satisface el predicado. Por ejemplo, el siguiente filtro de elementos devuelve entidades que contengan al menos un fragmento que empiece por "Rojo" en el subcampo <code translate="no">text</code>.</p>
-<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<p>Puede utilizar casi todos los operadores de comparación, rango y aritméticos en el predicado, que se evalúa por elemento, y los operadores lógicos pueden utilizarse para combinar varias condiciones en el mismo elemento. Para obtener más información, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p>
-<p>Si hay varias expresiones de filtrado escalar en una búsqueda filtrada o en una solicitud de consulta, coloque la expresión de filtrado de elemento después de todas las expresiones de filtrado de nivel de entidad, como se muestra a continuación.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
-<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
-
-<span class="hljs-comment"># incorrect, resulting errors</span>
-element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-family-operators" class="common-anchor-header">Operadores de la familia de coincidencias<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Los operadores de familia de coincidencias también funcionan sobre un campo StructArray. En lugar de comprobar simplemente si existe un elemento, puede determinar cuántos elementos (o qué proporción) deben satisfacer un predicado de elemento.</p>
-<ul>
-<li><p><code translate="no">MATCH_ANY(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
-<p>Esto devuelve entidades que contengan al menos un trozo que empiece por "Rojo" en el subcampo <code translate="no">text</code>; semánticamente, esto es equivalente a <code translate="no">element_filter</code>.</p></li>
-<li><p><code translate="no">MATCH_ALL(chunks, $[text] LIKE &quot;Red%&quot;)</code></p>
-<p>Devuelve entidades cuyos subcampos de texto en todos los trozos empiecen por "Rojo".</p></li>
-<li><p><code translate="no">MATCH_LEAST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Devuelve entidades que contengan al menos <code translate="no">k</code> trozos que empiecen por "Rojo" en el subcampo <code translate="no">text</code>.</p></li>
-<li><p><code translate="no">MATCH_MOST(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Devuelve entidades que contengan como máximo <code translate="no">k</code> trozos que empiecen por "Rojo" en el subcampo <code translate="no">text</code>.</p></li>
-<li><p><code translate="no">MATCH_EXACT(chunks, $[text] LIKE &quot;Red%&quot;, k)</code></p>
-<p>Devuelve entidades que contienen exactamente <code translate="no">k</code> trozos que empiezan por "Rojo" en el subcampo <code translate="no">text</code>.</p></li>
+<li><p>Struct se puede utilizar como tipo de elemento de un campo Array. No se utiliza como campo de colección de nivel superior.</p></li>
+<li><p>Todos los elementos Struct de un mismo campo StructArray comparten un esquema predefinido.</p></li>
+<li><p>Los subcampos de tipo «Vector» requieren índices. La búsqueda en «EmbeddingList» utiliza métricas de « <code translate="no">MAX_SIM*</code> », mientras que la búsqueda a nivel de elemento utiliza métricas vectoriales normales.</p></li>
+<li><p><code translate="no">element_filter</code> y « <code translate="no">MATCH_*</code> » son para subcampos escalares dentro de campos «StructArray». Utiliza « <code translate="no">$[subfield]</code> » únicamente dentro de estos operadores.</p></li>
+<li><p>Algunas combinaciones de búsqueda dependen de la versión o son específicas de un modo. Consulta <a href="/docs/es/structarray-limits.md">los límites de StructArray</a> antes de utilizar la búsqueda por rango, la búsqueda por agrupación, la búsqueda híbrida, los campos nulos o los campos añadidos dinámicamente.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1137,4 +228,10 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El desarrollo de un tipo de datos nativo StructArray representa un gran avance en la capacidad de Milvus para manejar estructuras de datos complejas. Para comprender mejor sus casos de uso y maximizar esta nueva característica, le recomendamos que lea <a href="/docs/es/best-practices-for-array-of-structs.md">Diseño de esquemas utilizando una matriz de estructuras</a>.</p>
+    </button></h2><ol>
+<li><p>Para diseñar un esquema, consulta <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>».</p></li>
+<li><p>Para preparar los datos, consulta <a href="/docs/es/insert-data-into-structarray-fields.md">«Insertar datos en campos StructArray</a>».</p></li>
+<li><p>Para elegir índices, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
+<li><p>Para buscar en subcampos vectoriales de StructArray, empieza por «Búsqueda vectorial básica con StructArray».</p></li>
+<li><p>Para filtrar subcampos escalares de StructArray, consulta <a href="/docs/es/struct-array-operators.md">«Operadores de StructArray</a> » y «Búsqueda filtrada con StructArray».</p></li>
+</ol>

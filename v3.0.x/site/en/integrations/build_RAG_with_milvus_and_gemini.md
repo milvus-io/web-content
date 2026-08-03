@@ -435,7 +435,7 @@ for query in text_queries:
 
 
     
-![Vanilla RAG Pipeline](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_1.png)
+![Vanilla RAG Pipeline](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png)
     
 
 
@@ -446,7 +446,7 @@ for query in text_queries:
 
 
     
-![HyDE](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_3.png)
+![HyDE](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png)
     
 
 
@@ -457,7 +457,7 @@ for query in text_queries:
 
 
     
-![Hybrid Retrieval and Reranking](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build_RAG_with_milvus_and_gemini_38_5.png)
+![Hybrid Retrieval and Reranking](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png)
     
 
 

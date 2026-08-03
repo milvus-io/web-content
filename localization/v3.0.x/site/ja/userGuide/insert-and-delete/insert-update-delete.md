@@ -2,7 +2,7 @@
 id: insert-update-delete.md
 title: エンティティの挿入
 summary: >-
-  コレクション内のエンティティは、同じフィールド・セットを共有するデータ・レコードです。すべてのデータレコードのフィールド値がエンティティを形成します。このページでは、コレクションにエンティティを挿入する方法を紹介します。
+  コレクション内のエンティティとは、同じフィールドセットを持つデータレコードのことです。各データレコードのフィールド値が組み合わさって、1つのエンティティを構成します。このページでは、コレクションにエンティティを挿入する方法について説明します。
 ---
 <h1 id="Insert-Entities" class="common-anchor-header">エンティティの挿入<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,11 +19,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>コレクション内のエンティティは、同じフィールド・セットを共有するデータ・レコードです。すべてのデータレコードのフィールド値がエンティティを形成します。このページでは、コレクションにエンティティを挿入する方法を紹介します。</p>
+    </button></h1><p>コレクション内のエンティティとは、同じフィールドセットを共有するデータレコードのことです。各データレコードのフィールド値が、1つのエンティティを構成します。このページでは、コレクションにエンティティを挿入する方法について説明します。</p>
 <div class="alert note">
 <ul>
-<li><p><strong>コレクション作成後に追加されるフィールド</strong>コレクション作成後に新しいフィールドをコレクションに追加し、挿入時に値を指定しない場合、Milvusは自動的に定義されたデフォルト値またはデフォルトが設定されていない場合はNULLを入力します。詳細については、<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加を</a>参照してください。</p></li>
-<li><p><strong>重複処理</strong>：標準の<code translate="no">insert</code> 操作では、主キーの重複をチェックしません。既存の主キーを持つデータを挿入すると、同じキーを持つ新しいエンティティが作成されるため、データが重複し、アプリケーションで問題が発生する可能性があります。既存のエンティティを更新したり、重複を回避するには、代わりに <strong><code translate="no">upsert</code></strong>操作を使用してください。詳細は、『<a href="/docs/ja/upsert-entities.md">Upsert Entities</a>』を参照してください。</p></li>
+<li><p><strong>コレクション作成後に追加されたフィールド</strong>：コレクション作成後に新しいフィールドを追加し、挿入時に値を指定しない場合、Milvusは定義されたデフォルト値、またはデフォルト値が設定されていない場合は<code translate="no">NULL</code> を自動的に設定します。詳細については、<a href="/docs/ja/add-fields-to-an-existing-collection.md">「コレクションスキーマの変更</a>」を参照してください。</p></li>
+<li><p><strong>重複の処理</strong>：標準の<code translate="no">insert</code> 操作では、主キーの重複チェックは行われません。既存の主キーを持つデータを挿入すると、同じキーを持つ新しいエンティティが作成され、データの重複やアプリケーション上の問題が発生する可能性があります。既存のエンティティを更新したり、重複を回避したりするには、代わりに <strong><code translate="no">upsert</code></strong> 操作を使用してください。詳細については、「<a href="/docs/ja/upsert-entities.md">エンティティのアップサート</a>」を参照してください。</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -41,9 +41,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、<strong>エンティティは</strong>同じ<strong>スキーマを</strong>共有する<strong>コレクション</strong>内のデータレコードを指し、行の各フィールドのデータがエンティティを構成します。したがって、同じコレクション内のエンティティは同じ属性（フィールド名、データ型、その他の制約など）を持ちます。</p>
-<p>エンティティをコレクションに挿入する場合、挿入されるエンティティは、スキーマで定義されたすべてのフィールドを含む場合にのみ、正常に追加されます。挿入されたエンティティは、挿入順に<strong>_default</strong>という名前のパーティションに入ります。特定のパーティションが存在する場合、挿入リクエストでパーティション名を指定することで、そのパーティションにエンティティを挿入することもできます。</p>
-<p>Milvusは、コレクションのスケーラビリティを維持するために、ダイナミックフィールドもサポートしています。ダイナミック・フィールドを有効にすると、スキーマで定義されていないフィールドをコレクションに挿入できます。これらのフィールドと値は、<strong>$meta</strong> という名前の予約フィールドにキーと値のペアとして格納されます。ダイナミック・フィールドの詳細は、"ダイナミック・フィールド" を参照してください。</p>
+    </button></h2><p>Milvus において、<strong>エンティティとは</strong>、同じ<strong>スキーマを</strong> <strong>共有するコレクション内のデータレコード</strong>を指し、行の各フィールドのデータが 1 つのエンティティを構成します。したがって、同じコレクション内のエンティティは、同じ属性（フィールド名、データ型、その他の制約など）を持ちます。</p>
+<p>コレクションにエンティティを挿入する場合、スキーマで定義されたすべてのフィールドが含まれているエンティティのみが正常に追加されます。 挿入されたエンティティは、挿入順に<strong>_default</strong>という名前のパーティションに格納されます。特定のパーティションが存在する場合、挿入リクエストでパーティション名を指定することで、そのパーティションにエンティティを挿入することも可能です。</p>
+<p>Milvus は、コレクションのスケーラビリティを維持するために動的フィールドもサポートしています。動的フィールドを有効にすると、スキーマに定義されていないフィールドをコレクションに挿入できます。これらのフィールドと値は、<strong>$meta</strong> という名前の予約済みフィールドにキーと値のペアとして格納されます。動的フィールドの詳細については、「動的フィールド」を参照してください。</p>
 <h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">コレクションへのエンティティの挿入<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,10 +59,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データを挿入する前に、データをスキーマに従ってディクショナリのリストに整理する必要があります。各ディクショナリ はエンティティを表し、スキーマで定義されたすべてのフィールドを含みます。コレクションでダイナミック・フィールドが有効になっている場合、各ディクショナリには、スキーマで定義されて いないフィールドも含めることができます。</p>
-<p>このセクションでは、クイック・セットアップの方法で作成された Collection にエンティティを挿入します。この方法で作成された Collection には、<strong>id</strong>と<strong>vector</strong> という 2 つのフィールドしかありません。さらに、この Collection では動的フィールドが有効になっているため、サンプルコードのエンティティには、スキーマで定義されていない<strong>color</strong>というフィールドが含まれます。</p>
+    </button></h2><p>データを挿入する前に、スキーマに従ってデータを辞書のリストに整理する必要があります。各辞書は 1 つのエンティティを表し、スキーマで定義されたすべてのフィールドを含んでいる必要があります。コレクションで動的フィールドが有効になっている場合、各辞書にはスキーマで定義されていないフィールドを含めることもできます。</p>
+<p>このセクションでは、クイックセットアップ方式で作成されたコレクションにエンティティを挿入します。この方法で作成されたコレクションには、<strong>id</strong>と<strong>vector</strong> という 2 つのフィールドのみがあります。また、このコレクションでは動的フィールドが有効になっているため、サンプルコードのエンティティには、スキーマで定義されていない<strong>color</strong>というフィールドが含まれています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -219,7 +224,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -270,9 +274,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>指定したパーティションにエンティティを挿入することもできます。以下のコード・スニペットは、コレクションに<strong>PartitionA</strong>という名前のパーティションがあると仮定しています。</p>
+    </button></h2><p>指定したパーティションにエンティティを挿入することもできます。以下のコードスニペットは、コレクション内に「<strong>PartitionA</strong>」という名前のパーティションが存在することを前提としています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -394,7 +403,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

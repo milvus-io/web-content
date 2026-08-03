@@ -2,9 +2,9 @@
 id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
-summary: MilvusのdataNodeの設定方法について説明します。
+summary: Milvus用のdataNodeの設定方法について学びましょう。
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode関連コンフィギュレーション<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode に関連する設定<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        フローグラフタスクキューの最大長      </td>
+      <td>        フローグラフ内のタスクキューの最大長      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        グローバルなデータノード同期mgrの最大同時同期タスク数      </td>
+      <td>        データノード同期マネージャーのグローバルな最大同時同期タスク数      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -130,8 +130,8 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        CPU使用量を減らすためにタイムティック・メッセージをスキップする。      </td>
-      <td>真</td>
+      <td>        CPU 使用率を低減するために、一部のタイムティックメッセージをスキップすることをサポート      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -159,7 +159,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        n個のレコードをスキップするごとに1個消費      </td>
+      <td>        スキップされるレコード n 件ごとに 1 を消費する      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        x 秒間タイムティックの msg だけがあった後、スキップモードをオンにする。      </td>
+      <td>        x 秒間、timetick メッセージのみが送信された後、スキップモードを有効にする      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -218,9 +218,9 @@ summary: MilvusのdataNodeの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>メモリにバッファされたセグメント内の各ビンログファイルの最大サイズ。この値を超えるサイズのbinlogファイルは、MinIOまたはS3サービスにフラッシュされます。</li>      
+        <li>メモリにバッファリングされるセグメント内の各バイナリログファイルの最大サイズ。この値を超えるサイズのバイナリログファイルは、MinIO または S3 サービスにフラッシュされます。</li>      
         <li>単位：バイト</li>      
-        <li>このパラメータを小さく設定しすぎると、システムが少量のデータを頻繁に保存するようになります。このパラメータを大きく設定し過ぎると、システムのメモリ需要が増加します。</li>      </td>
+        <li>このパラメータの値が小さすぎると、システムは少量のデータを頻繁に保存することになります。逆に、値が大きすぎると、システムのメモリ使用量が増加します。</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -249,8 +249,8 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        デフォルトは 16MB である。      </td>
-      <td>16777216</td>
+      <td>        1 つのチャネルに対して del をフラッシュするための最大バッファサイズ（バイト単位）。デフォルトは 16MB です。      </td>
+      <td>16777216説明デフォルト値1 つのチャネルに対して del をフラッシュするための最大バッファサイズ（バイト単位）。デフォルトは 16MB です。</td>
     </tr>
   </tbody>
 </table>
@@ -278,7 +278,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        バッファが空でない場合にセグメントを同期する期間。      </td>
+      <td>        バッファが空でない場合のセグメントの同期間隔。      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -307,7 +307,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        メモリ使用量が多すぎる場合に強制的に同期させるにはtrueを設定する      </td>
+      <td>        メモリ使用量が高すぎる場合に同期を強制するには、true に設定します。      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -336,7 +336,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        同期するセグメント数。      </td>
+      <td>        同期するセグメントの数。バッファサイズが最も大きいセグメントが同期されます。      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -365,7 +365,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        データノードのメモリ使用量をチェックする間隔。      </td>
+      <td>        データノードのメモリ使用量をチェックする間隔（ミリ秒単位）      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -394,7 +394,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        この透かしに達すると、セグメントが同期される。      </td>
+      <td>        スタンドアロン環境におけるメモリのウォーターマーク。このウォーターマークに達すると、セグメントの同期が行われます。      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -424,9 +424,9 @@ summary: MilvusのdataNodeの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>全チャンネルのグローバルワークプールのサイズを指定する。</li>      
-        <li>このパラメータが &lt;= 0 の場合、実行可能なCPUの最大数として設定されます。</li>      
-        <li>ブロッキングを避けるため、コレクション数が多い場合は大きく設定することをお勧めします。</li>      </td>
+        <li>すべてのチャネルのグローバルワークプールのサイズを指定します。</li>      
+        <li>このパラメータが 0 以下の場合、実行可能な CPU の最大数として設定されます</li>      
+        <li>コレクションの数が多い場合は、ブロッキングを回避するために、この値を大きめに設定することを推奨します</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -456,8 +456,8 @@ summary: MilvusのdataNodeの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>チャネルチェックポイント更新用のグローバルワークプールのサイズを指定します。</li>      
-        <li>このパラメータが&lt;= 0の場合、10に設定される</li>      </td>
+        <li>チャネルのチェックポイント更新用のグローバルワークプールのサイズを指定します。</li>      
+        <li>このパラメータが 0 以下の場合、10 に設定されます</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -486,7 +486,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        データノードが各チャネルのチェックポイントを更新する間隔(秒)      </td>
+      <td>        データノードが各チャネルのチェックポイントを更新する間隔（秒単位）      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -515,7 +515,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        UpdateChannelCheckpoint RPC 呼び出しのタイムアウト時間 (秒)     </td>
+      <td>        UpdateChannelCheckpoint RPC 呼び出しのタイムアウト（秒単位）      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -544,7 +544,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        UpdateChannelCheckpoint RPCごとのチャネル・チェックポイントの最大数。      </td>
+      <td>        1回の UpdateChannelCheckpoint RPC につき、チャネルチェックポイントの最大数。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -573,7 +573,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャネル・チェックポイント・アップデータが更新を実行する頻度を秒単位で指定します。      </td>
+      <td>        チャネルチェックポイントアップデータが更新を実行する頻度（秒単位）。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -602,7 +602,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        データノードで同時に実行できるインポート/プレインポート・タスクの最大数。      </td>
+      <td>        データノード上で同時に実行できるインポート／プレインポート・タスクの最大数。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -631,7 +631,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポート・ファイルの最大ファイル・サイズ（GB単位）。インポート・ファイルとは、行ベース・ファイルまたは列ベース・ファイルのセットを指します。      </td>
+      <td>        インポートファイルの最大ファイルサイズ（GB単位）。ここで、インポートファイルとは、行ベースのファイル、または列ベースのファイルのセットのいずれかを指します。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -660,7 +660,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポート中にデータノードがチャンク・マネージャから読み込むデータ・ブロック・サイズ（MB単位）。      </td>
+      <td>        インポート中にデータノードがチャンクマネージャーから読み込むデータブロックのサイズ（MB単位）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -689,7 +689,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        各インポート/プレインポート・タスクが占有するスロットの最大数。      </td>
+      <td>        各インポート／プレインポート・タスクが占有するスロットの最大数。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -718,7 +718,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        バッチ・モードで実行されるレベルゼロ・コンパクションの空きメモリの最小メモリ比率      </td>
+      <td>        バッチモードで実行されるレベル 0 のコンパクションにおける、空きメモリの最小比率。      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -747,7 +747,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        最大バッチサイズ（Max batch size） L0 コンパクションを実行する際の、バッチ内の L1/L2 セグメントの最大数を示す。デフォルトは -1、1 未満の値は制限なしを意味する。有効範囲：&gt;= 1.  </td>
+      <td>        最大バッチサイズは、L0コンパクションを実行する際の、1つのバッチに含まれるL1/L2セグメントの最大数を指します。デフォルトは-1です。1未満の値は制限なしを意味します。有効範囲：1以上。      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -776,7 +776,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        mixCompaction実行時にmergeSortモードを有効にするかどうか。      </td>
+      <td>        mixCompaction 実行時に mergeSort モードを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -810,6 +810,35 @@ summary: MilvusのdataNodeの設定方法について説明します。
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT フィールドの既存の LOB ファイルにおける未使用領域の比率のしきい値。コンパクション中に、この比率がしきい値を下回る場合、Milvus は既存の LOB ファイルを再利用します。この比率がしきい値以上である場合、Milvus は残りの LOB ペイロードを新しい LOB ファイルに書き換えて、領域を解放します。      </td>
+      <td>0.3</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodegracefulStopTimeout" class="common-anchor-header"><code translate="no">dataNode.gracefulStopTimeout</code><button data-href="#dataNodegracefulStopTimeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -834,7 +863,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。グレースフルストップなしでノードを強制停止する。      </td>
+      <td>        秒。グレースフルストップを行わずにノードを強制停止する      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -863,7 +892,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        データノード上で同時に実行できるタスク（コンパクション、インポートなど）の最大数      </td>
+      <td>        データノード上で同時に実行できるタスク（例：コンパクション、インポート）の最大数      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -892,7 +921,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタリング・コンパクションのメモリ・バッファの比率。閾値より大きいデータはストレージにフラッシュされます。      </td>
+      <td>        クラスタリング・コンパクションのメモリバッファの比率。しきい値を超えるデータはストレージにフラッシュされます。      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -921,7 +950,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        1つのクラスタリング圧縮ジョブのワーカープールサイズ。      </td>
+      <td>        1つのクラスタリング・コンパクションのジョブに対するワーカープールのサイズ。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -950,7 +979,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        ブルームフィルタにpkを適用する際の並列係数、デフォルトは4*CPU_CORE_NUM      </td>
+      <td>        ブルームフィルターにプライマリキーを適用する際の並列化係数。デフォルトは 4*CPU_CORE_NUM です。      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -979,8 +1008,95 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        deltalogフォーマット、オプション：[json, parquet］      </td>
+      <td>        デルタログの形式。オプション: [json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXTフィールドの値の保存先を選択するために使用される、サイズの上限（バイト単位）。この上限未満の値は、フィールドデータ内にインラインで格納されます。この上限以上の値は、LOBペイロードとして個別に格納され、フィールドデータには内部参照が格納されます。      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXTペイロードを格納する単一のLOBファイルの最大サイズ（バイト単位）。LOBファイルがこのサイズに達すると、Milvusはそれ以降のTEXT LOBペイロードを別のLOBファイルに書き込みます。      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Milvus が、バッファされた TEXT LOB ペイロードを、成長中のセグメントからストレージへフラッシュするトリガーとなるバッファサイズのしきい値（バイト単位）。      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -1008,7 +1124,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNodeのTCP/IPアドレス。指定されていない場合は、最初のユニキャスト可能なアドレスを使用する。      </td>
+      <td>        dataNode の TCP/IP アドレス。指定されていない場合は、最初のユニキャスト可能なアドレスを使用します。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1066,7 +1182,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNodeが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataNodeが送信できる各RPCリクエストの最大サイズ（単位：バイト）      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1095,7 +1211,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNodeが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataNode が受信できる各 RPC リクエストの最大サイズ。単位: バイト。      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1124,7 +1240,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode上のクライアントが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataNode 上のクライアントが送信できる各 RPC リクエストの最大サイズ。単位: バイト。      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1153,7 +1269,7 @@ summary: MilvusのdataNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode上のクライアントが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataNode 上のクライアントが受信できる各 RPC リクエストの最大サイズ。単位: バイト。      </td>
       <td>536870912</td>
     </tr>
   </tbody>

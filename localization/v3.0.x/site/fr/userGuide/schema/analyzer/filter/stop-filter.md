@@ -1,11 +1,11 @@
 ---
 id: stop-filter.md
-title: Arrêt
+title: Stop
 summary: >-
-  Utilisez le filtre d'arrêt pour supprimer les mots d'arrêt configurés du texte
-  tokenisé lors de l'analyse.
+  Utilisez le filtre d'exclusion pour supprimer les mots vides configurés du
+  texte tokenisé lors de l'analyse.
 ---
-<h1 id="Stop" class="common-anchor-header">Arrêt<button data-href="#Stop" class="anchor-icon" translate="no">
+<h1 id="Stop" class="common-anchor-header">Stop<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le filtre <code translate="no">stop</code> supprime les mots d'arrêt spécifiés du texte tokenisé, ce qui permet d'éliminer les mots courants et moins significatifs. Vous pouvez configurer la liste des mots d'arrêt à l'aide du paramètre <code translate="no">stop_words</code>.</p>
+    </button></h1><p>Le filtre « <code translate="no">stop</code> » supprime les mots vides spécifiés du texte tokenisé, ce qui permet d’éliminer les mots courants et peu significatifs. Vous pouvez configurer la liste des mots vides à l’aide du paramètre « <code translate="no">stop_words</code> ».</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le filtre <code translate="no">stop</code> accepte sa liste de mots d'arrêt soit en ligne via le paramètre <code translate="no">stop_words</code>, soit à partir d'une ressource de fichier enregistrée via le paramètre <code translate="no">stop_words_file</code>.</p>
-<h3 id="Inline-stop-words-list" class="common-anchor-header">Liste de mots vides en ligne<button data-href="#Inline-stop-words-list" class="anchor-icon" translate="no">
+    </button></h2><p>Le filtre « <code translate="no">stop</code> » accepte sa liste de mots vides soit en ligne via le paramètre « <code translate="no">stop_words</code> », soit à partir d’une ressource de fichier enregistrée via le paramètre « <code translate="no">stop_words_file</code> ».</p>
+<h3 id="Inline-stop-words-list" class="common-anchor-header">Liste de mots vides intégrée<button data-href="#Inline-stop-words-list" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,9 +52,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour utiliser le filtre <code translate="no">stop</code> avec une liste en ligne, spécifiez <code translate="no">&quot;type&quot;: &quot;stop&quot;</code> dans la configuration du filtre, avec un paramètre <code translate="no">stop_words</code> qui fournit la liste des mots vides.</p>
+    </button></h3><p>Pour utiliser le filtre <code translate="no">stop</code> avec une liste intégrée, spécifiez <code translate="no">&quot;type&quot;: &quot;stop&quot;</code> dans la configuration du filtre, ainsi qu’un paramètre <code translate="no">stop_words</code> fournissant la liste des mots vides.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -104,7 +109,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Le filtre <code translate="no">stop</code> accepte les paramètres configurables suivants.</p>
+<p>Le filtre « <code translate="no">stop</code> » accepte les paramètres configurables suivants.</p>
 <table>
    <tr>
      <th><p>Paramètre</p></th>
@@ -112,12 +117,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Une liste de mots à supprimer de la tokenisation. Par défaut, le filtre utilise le dictionnaire intégré <code translate="no">_english_</code>. Vous pouvez le remplacer ou l'étendre de trois manières :</p><ul><li><p><strong>Dictionnaires intégrés</strong> - fournissez l'un de ces alias de langue pour utiliser un dictionnaire prédéfini :</p><p><code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li><li><p><strong>Liste personnalisée</strong> - transmettez un tableau de vos propres termes, par exemple <code translate="no">["foo", "bar", "baz"]</code>.</p></li><li><p><strong>Liste mixte</strong> - combine des alias et des termes personnalisés, par exemple <code translate="no">["of", "to", "_english_"]</code>.</p><p>Pour plus de détails sur le contenu exact de chaque dictionnaire prédéfini, reportez-vous à <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>.</p></li></ul></td>
+     <td><p>Liste des mots à exclure de la tokenisation. Par défaut, le filtre utilise le dictionnaire intégré « <code translate="no">_english_</code> ». Vous pouvez le remplacer ou l’étendre de trois façons :</p><ul><li><p><strong>Dictionnaires intégrés</strong> – indiquez l’un de ces alias de langage pour utiliser un dictionnaire prédéfini :</p><p><code translate="no">"_arabic_"</code>, <code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code>, <code translate="no">"_thai_"</code></p></li><li><p><strong>Liste personnalisée</strong> – transmettez un tableau contenant vos propres termes, par exemple <code translate="no">["foo", "bar", "baz"]</code>.</p></li><li><p><strong>Liste mixte</strong> – combinez des alias et des termes personnalisés, par exemple : <code translate="no">["of", "to", "_english_"]</code>.</p><p>Pour plus de détails sur le contenu exact de chaque dictionnaire prédéfini, consultez la section <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>. Pour consulter le dictionnaire arabe ou thaï, reportez-vous à la <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">liste des mots vides en arabe</a> ou à <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">la liste des mots vides en thaï</a>.</p></li></ul></td>
    </tr>
 </table>
-<p>Le filtre <code translate="no">stop</code> opère sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à <a href="/docs/fr/standard-tokenizer.md">Standard Tokenizer</a> et à ses pages apparentées.</p>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
-<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">Charger des mots vides à partir d'un fichier<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
+<p>Le filtre « <code translate="no">stop</code> » agit sur les termes générés par le tokeniseur ; il doit donc être utilisé en combinaison avec un tokeniseur. Pour obtenir la liste des tokeniseurs disponibles dans Milvus, consultez la page « <a href="/docs/fr/standard-tokenizer.md">Standard Tokenizer</a> » et les pages associées.</p>
+<p>Une fois les mots vides définis ( <code translate="no">analyzer_params</code>), vous pouvez les appliquer à un champ « <code translate="no">VARCHAR</code> » lors de la définition d’un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l’aide de l’analyseur spécifié, pour une tokenisation et un filtrage efficaces. Pour plus de détails, consultez la section <a href="/docs/fr/analyzer-overview.md#Example-use">«Exemple d’utilisation</a>».</p>
+<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">Charger des mots vides à partir d’une ressource de fichier<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,13 +137,13 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour les listes de mots d'arrêt personnalisées de grande taille - listes spécifiques à une langue, vocabulaires de domaine ou listes que vous souhaitez partager dans de nombreuses collections - stockez les mots dans un fichier et enregistrez le fichier en tant que ressource de fichier distante, puis faites-y référence à partir du filtre via le paramètre <code translate="no">stop_words_file</code>. Vous pouvez utiliser <code translate="no">stop_words_file</code> seul ou avec <code translate="no">stop_words</code> en ligne ; lorsque les deux sont activés, le filtre fusionne les deux sources en une seule liste de mots vides.</p>
-<p>Le fichier est du texte UTF-8 brut avec <strong>un mot d'arrêt par ligne</strong>. Voici un exemple :</p>
+    </button></h3><p>Pour les listes personnalisées de mots vides volumineuses (listes spécifiques à une langue, vocabulaires de domaine ou listes que vous souhaitez partager entre plusieurs collections), stockez les mots dans un fichier et enregistrez ce dernier en tant que ressource de fichier distant, puis référencez-le depuis le filtre via le paramètre « <code translate="no">stop_words_file</code> ». Vous pouvez utiliser « <code translate="no">stop_words_file</code> » seul ou en complément de « inline <code translate="no">stop_words</code> » ; lorsque les deux sont définis, le filtre fusionne les deux sources en une seule liste de mots vides.</p>
+<p>Le fichier est un texte brut au format UTF-8 contenant <strong>un mot vide par ligne</strong>. Par exemple :</p>
 <pre><code translate="no" class="language-plaintext">the
 of
 for
 <button class="copy-code-btn"></button></code></pre>
-<p>Téléchargez le fichier dans le magasin d'objets que votre cluster Milvus est configuré pour utiliser, puis enregistrez-le :</p>
+<p>Téléchargez le fichier dans le magasin d’objets que votre cluster Milvus est configuré pour utiliser, puis enregistrez-le :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -149,7 +154,7 @@ client.add_file_resource(
     path=<span class="hljs-string">&quot;file/stop_words.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Référencer la ressource enregistrée dans le filtre via <code translate="no">stop_words_file</code>:</p>
+<p>Faites référence à la ressource enregistrée dans le filtre via ` <code translate="no">stop_words_file</code>` :</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [{
@@ -162,7 +167,7 @@ client.add_file_resource(
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Le paramètre <code translate="no">stop_words_file</code> accepte un objet avec les champs suivants :</p>
+<p>Le paramètre ` <code translate="no">stop_words_file</code> ` accepte un objet comportant les champs suivants :</p>
 <table>
    <tr>
      <th><p><strong>Champ</strong></p></th>
@@ -174,11 +179,11 @@ client.add_file_resource(
    </tr>
    <tr>
      <td><p><code translate="no">resource_name</code></p></td>
-     <td><p>Le nom utilisé lorsque le fichier a été enregistré sur <code translate="no">add_file_resource</code>.</p></td>
+     <td><p>Le nom utilisé lors de l'enregistrement du fichier sur <code translate="no">add_file_resource</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">file_name</code></p></td>
-     <td><p>La partie nom de fichier du chemin d'accès au magasin d'objets de la ressource enregistrée (par exemple, <code translate="no">"stop_words.txt"</code> si la ressource a été enregistrée avec <code translate="no">path="file/stop_words.txt"</code>).</p></td>
+     <td><p>La partie « nom de fichier » du chemin d’accès au magasin d’objets de la ressource enregistrée (par exemple, <code translate="no">"stop_words.txt"</code> si la ressource a été enregistrée via <code translate="no">path="file/stop_words.txt"</code>).</p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -196,8 +201,8 @@ client.add_file_resource(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'appliquer la configuration de l'analyseur à votre schéma de collecte, vérifiez son comportement à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Avant d’appliquer la configuration de l’analyseur à votre schéma de collection, vérifiez son comportement à l’aide de la méthode <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l’analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +218,12 @@ client.add_file_resource(
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -243,7 +253,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l’aide de <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,7 +269,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

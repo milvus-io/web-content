@@ -810,6 +810,35 @@ summary: Learn how to configure dataNode for Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The threshold for the ratio of unused space in existing LOB files for TEXT fields. During compaction, if this ratio is lower than the threshold, Milvus reuses the existing LOB files. If this ratio is greater than or equal to the threshold, Milvus rewrites the remaining LOB payloads into new LOB files to reclaim space.      </td>
+      <td>0.3</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodegracefulStopTimeout" class="common-anchor-header"><code translate="no">dataNode.gracefulStopTimeout</code><button data-href="#dataNodegracefulStopTimeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -981,6 +1010,93 @@ summary: Learn how to configure dataNode for Milvus.
     <tr>
       <td>        deltalog format, options: [json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The size threshold, in bytes, used to choose the storage path for a TEXT field value. Values smaller than this threshold are stored inline in field data. Values greater than or equal to this threshold are stored separately as LOB payloads, and field data stores an internal reference.      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum size, in bytes, of a single LOB file that stores TEXT payloads. When a LOB file reaches this size, Milvus writes subsequent TEXT LOB payloads to another LOB file.      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The buffer size threshold, in bytes, that triggers Milvus to flush buffered TEXT LOB payloads from a growing segment to storage.      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>

@@ -3,7 +3,7 @@ id: alter-collection-field.md
 title: Изменение поля коллекции
 summary: >-
   Вы можете изменить свойства поля коллекции, чтобы изменить ограничения
-  столбцов или обеспечить более строгие правила целостности данных.
+  столбцов или обеспечить соблюдение более строгих правил целостности данных.
 ---
 <h1 id="Alter-Collection-Field" class="common-anchor-header">Изменение поля коллекции<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,11 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Вы можете изменить свойства поля коллекции, чтобы изменить ограничения столбцов или применить более строгие правила целостности данных.</p>
+    </button></h1><p>Вы можете изменить свойства поля коллекции, чтобы изменить ограничения столбцов или обеспечить соблюдение более строгих правил целостности данных.</p>
+<p>На этой странице рассматриваются изменения свойств полей, а не изменения структуры схемы, такие как добавление или удаление полей. Для добавления скалярных полей или удаления полей из существующей коллекции см. раздел <a href="/docs/ru/add-fields-to-an-existing-collection.md">«Изменение схемы коллекции</a>».</p>
 <div class="alert note">
 <ul>
-<li><p>Каждая коллекция состоит только из одного первичного поля. Установив его при создании коллекции, вы не сможете изменить первичное поле или его свойства.</p></li>
-<li><p>Каждая коллекция может иметь только один ключ раздела. После установки при создании коллекции ключ раздела изменить нельзя.</p></li>
+<li><p>Каждая коллекция состоит только из одного первичного поля. После его установки при создании коллекции вы не сможете изменить первичное поле или изменить его свойства.</p></li>
+<li><p>Каждая коллекция может иметь только один ключ разбиения. После его установки при создании коллекции ключ разбиения изменить нельзя.</p></li>
 </ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">Изменение поля VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
@@ -42,10 +43,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поле VarChar имеет свойство <code translate="no">max_length</code>, которое ограничивает максимальное количество символов, которые могут содержать значения поля. Вы можете изменить свойство <code translate="no">max_length</code>.</p>
-<p>В следующем примере предполагается, что в коллекции есть поле VarChar с именем <code translate="no">varchar</code>, и устанавливается его свойство <code translate="no">max_length</code>.</p>
+    </button></h2><p>Поле VarChar имеет свойство с именем « <code translate="no">max_length</code> », которое ограничивает максимальное количество символов, которое могут содержать значения поля. Свойство « <code translate="no">max_length</code> » можно изменить.</p>
+<p>В следующем примере предполагается, что коллекция имеет поле VarChar с именем <code translate="no">varchar</code>, и задается его свойство <code translate="no">max_length</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -78,7 +81,10 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-   <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#javascript">NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">LOAD_COLLECTION_NAME</span>,
   <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
@@ -143,10 +149,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поле массива имеет два свойства, а именно <code translate="no">element_type</code> и <code translate="no">max_capacity</code>. Первое определяет тип данных элементов в массиве, а второе ограничивает максимальное количество элементов в массиве. Вы можете изменить только свойство <code translate="no">max_capacity</code>.</p>
-<p>В следующем примере предполагается, что в коллекции есть поле массива с именем <code translate="no">array</code>, и устанавливается его свойство <code translate="no">max_capacity</code>.</p>
+    </button></h2><p>Поле типа «массив» имеет два свойства: <code translate="no">element_type</code> и <code translate="no">max_capacity</code>. Первое определяет тип данных элементов массива, а второе ограничивает максимальное количество элементов в массиве. Можно изменять только свойство <code translate="no">max_capacity</code>.</p>
+<p>В следующем примере предполагается, что коллекция содержит поле типа массива с именем <code translate="no">array</code>, и задается его свойство <code translate="no">max_capacity</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;array&quot;</span>,
@@ -204,10 +215,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Сопоставление памяти (Mmap) обеспечивает прямой доступ из памяти к большим файлам на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать политику размещения данных на основе частоты доступа, увеличивая емкость хранения коллекций без ущерба для производительности поиска.</p>
-<p>В следующем примере предполагается, что в коллекции есть поле с именем <code translate="no">doc_chunk</code>, и устанавливается его свойство <code translate="no">mmap_enabled</code>.</p>
+    </button></h2><p>Отображение в памяти (Mmap) обеспечивает прямой доступ к памяти для больших файлов на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать политику размещения данных на основе частоты доступа, расширяя емкость хранилища для коллекций без ущерба для производительности поиска.</p>
+<p>В следующем примере предполагается, что в коллекции имеется поле с именем « <code translate="no">doc_chunk</code> », и задается его свойство ` <code translate="no">mmap_enabled</code> `.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

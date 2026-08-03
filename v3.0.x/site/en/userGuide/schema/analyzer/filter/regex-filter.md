@@ -1,13 +1,19 @@
 ---
 id: regex-filter.md
-title: "Regex"
-summary: "The regex filter is a regular expression filter: any token produced by the tokenizer is kept only if it matches the expression you provide; everything else is discarded."
+title: "Regex Analyzer Filter"
+summary: "The regex analyzer filter keeps tokens that match a regular expression and discards the rest."
 beta: Milvus 2.5.11+
 ---
 
-# Regex
+# Regex Analyzer Filter
 
 The `regex` filter is a regular expression filter: any token produced by the tokenizer is kept only if it matches the expression you provide; everything else is discarded.
+
+<div class="alert note">
+
+This page describes the `regex` filter in the analyzer pipeline. It filters tokens produced by a tokenizer and affects the terms generated during text analysis. To filter entities with scalar expressions such as `field =~ "pattern"` or `field !~ "pattern"` in `query`, `search`, or hybrid search, refer to [Pattern Matching](pattern-matching.md).
+
+</div>
 
 ## Configuration
 

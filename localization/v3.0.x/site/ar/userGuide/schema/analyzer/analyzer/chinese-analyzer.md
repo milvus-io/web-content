@@ -2,8 +2,8 @@
 id: chinese-analyzer.md
 title: الصينية
 summary: >-
-  تم تصميم مُحلل اللغة الصينية خصيصًا للتعامل مع النص الصيني، مما يوفر تجزئة
-  وترميزًا فعالين.
+  تم تصميم أداة تحليل اللغة الصينية خصيصًا لمعالجة النصوص الصينية، حيث توفر
+  تقسيمًا وتجزئة فعالة.
 ---
 <h1 id="Chinese" class="common-anchor-header">الصينية<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تم تصميم محلل <code translate="no">chinese</code> خصيصًا للتعامل مع النص الصيني، مما يوفر تجزئة وترميزًا فعالين للنصوص الصينية.</p>
+    </button></h1><p>تم تصميم محلل <code translate="no">chinese</code> خصيصًا لمعالجة النصوص الصينية، حيث يوفر تقسيمًا وتجزئة فعالة.</p>
 <h3 id="Definition" class="common-anchor-header">التعريف<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,12 +38,20 @@ summary: >-
       </svg>
     </button></h3><p>يتكون محلل <code translate="no">chinese</code> من:</p>
 <ul>
-<li><p><strong>أداة الترميز</strong>: يستخدم أداة ترميز <code translate="no">jieba</code> لتجزئة النص الصيني إلى رموز بناءً على المفردات والسياق. لمزيد من المعلومات، راجع <a href="/docs/ar/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>عامل التصفية</strong>: يستخدم عامل التصفية <code translate="no">cnalphanumonly</code> لإزالة الرموز التي تحتوي على أي أحرف غير صينية. لمزيد من المعلومات، راجع <a href="/docs/ar/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>أداة الترميز</strong>: تستخدم أداة الترميز <code translate="no">jieba</code> لتقسيم النص الصيني إلى رموز بناءً على المفردات والسياق. لمزيد من المعلومات، راجع <a href="/docs/ar/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>المرشح</strong>: يستخدم مرشح « <code translate="no">cnalphanumonly</code> » لإزالة الرموز التي تحتوي على أي أحرف غير صينية. لمزيد من المعلومات، راجع <a href="/docs/ar/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
-<p>تكافئ وظيفة محلل <code translate="no">chinese</code> تكوين المحلل المخصص التالي:</p>
+<p>تتوافق وظائف محلل <code translate="no">chinese</code> مع التكوين التالي للمحلل المخصص:</p>
+<div class="alert note">
+<p>لا يُصدر محلل « <code translate="no">chinese</code> » المدمج وحدات «Pinyin». لمطابقة النص الصيني مع مصطلحات البحث بالـ«Pinyin»، استخدم محللًا مخصصًا مع أداة تجزئة « <code translate="no">jieba</code> » وفلتر <a href="/docs/ar/pinyin-filter.md"><code translate="no">pinyin</code></a> .</p>
+</div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cnalphanumonly&quot;</span>]
@@ -84,9 +92,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتطبيق محلل <code translate="no">chinese</code> على حقل ما، ما عليك سوى تعيين <code translate="no">type</code> إلى <code translate="no">chinese</code> في <code translate="no">analyzer_params</code>.</p>
+    </button></h3><p>لتطبيق محلل « <code translate="no">chinese</code> » على حقل ما، ما عليك سوى تعيين « <code translate="no">type</code> » إلى « <code translate="no">chinese</code> » في « <code translate="no">analyzer_params</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -106,7 +119,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>لا يقبل محلل <code translate="no">chinese</code> أي معلمات اختيارية.</p>
+<p>لا يقبل محلل " <code translate="no">chinese</code> " أي معلمات اختيارية.</p>
 </div>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +136,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام الطريقة <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +153,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -170,7 +188,12 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -235,7 +258,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">المخرجات المتوقعة<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">الناتج المتوقع<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

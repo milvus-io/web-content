@@ -2,8 +2,8 @@
 id: array_data_type.md
 title: Bidang Array
 summary: >-
-  Bidang ARRAY menyimpan sekumpulan elemen yang diurutkan dengan tipe data yang
-  sama. Berikut adalah contoh bagaimana bidang ARRAY menyimpan data:
+  Bidang ARRAY menyimpan sekumpulan elemen yang terurut dengan tipe data yang
+  sama. Berikut ini adalah contoh cara bidang ARRAY menyimpan data:
 ---
 <h1 id="Array-Field" class="common-anchor-header">Bidang Array<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +20,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bidang ARRAY menyimpan sekumpulan elemen yang diurutkan dengan tipe data yang sama. Berikut adalah contoh bagaimana bidang ARRAY menyimpan data:</p>
+    </button></h1><p>Bidang ARRAY menyimpan sekumpulan elemen yang terurut dengan tipe data yang sama. Berikut adalah contoh cara bidang ARRAY menyimpan data:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,10 +42,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut <code translate="no">nullable</code> ke <code translate="no">True</code> untuk mengizinkan nilai nol. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter <code translate="no">element_type</code>. Bila <code translate="no">element_type</code> disetel ke <code translate="no">VARCHAR</code>, Anda juga harus menentukan <code translate="no">max_length</code> untuk elemen array. <code translate="no">element_type</code> menerima semua tipe data skalar yang didukung oleh Milvus, dengan pengecualian <code translate="no">JSON</code>.</p></li>
-<li><p><strong>Kapasitas Larik</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, seperti yang ditentukan oleh <code translate="no">max_capacity</code>. Nilai harus berupa bilangan bulat dalam kisaran <strong>1</strong> hingga <strong>4096</strong>.</p></li>
-<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian atau konversi semantik. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan seperti yang dimasukkan, sementara <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
+<li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut ` <code translate="no">nullable</code> ` menjadi ` <code translate="no">True</code> ` untuk mengizinkan nilai null. Untuk detailnya, lihat bagian <a href="/docs/id/nullable-and-default.md">"Nullable &amp; Default</a>".</p></li>
+<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code> ` untuk elemen-elemen array. ` <code translate="no">element_type</code> ` menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali ` <code translate="no">JSON</code>`.</p></li>
+<li><p><strong>Kapasitas Array</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, sebagaimana ditentukan oleh <code translate="no">max_capacity</code>. Nilainya harus berupa bilangan bulat dalam rentang <strong>1</strong> hingga <strong>4096</strong>.</p></li>
+<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sesuai yang dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Menambahkan bidang ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,18 +62,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan bidang ARRAY Milvus, tentukan jenis bidang yang relevan saat membuat skema koleksi. Proses ini meliputi:</p>
+    </button></h2><p>Untuk menggunakan bidang ARRAY di Milvus, tentukan tipe bidang yang relevan saat membuat skema koleksi. Proses ini meliputi:</p>
 <ol>
-<li><p>Mengatur <code translate="no">datatype</code> ke tipe data Array yang didukung, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Menggunakan parameter <code translate="no">element_type</code> untuk menentukan tipe data elemen dalam larik. Semua elemen dalam larik yang sama harus memiliki tipe data yang sama.</p></li>
-<li><p>Menggunakan parameter <code translate="no">max_capacity</code> untuk menentukan kapasitas maksimum larik, yaitu jumlah maksimum elemen yang dapat ditampung.</p></li>
+<li><p>Menetapkan ` <code translate="no">datatype</code> ` ke tipe data Array yang didukung, ` <code translate="no">ARRAY</code>`.</p></li>
+<li><p>Gunakan parameter ` <code translate="no">element_type</code> ` untuk menentukan tipe data elemen dalam array. Semua elemen dalam array yang sama harus memiliki tipe data yang sama.</p></li>
+<li><p>Menggunakan parameter ` <code translate="no">max_capacity</code> ` untuk menentukan kapasitas maksimum array, yaitu jumlah elemen maksimum yang dapat ditampungnya.</p></li>
 </ol>
-<p>Berikut ini cara mendefinisikan skema koleksi yang menyertakan bidang ARRAY:</p>
+<p>Berikut cara mendefinisikan skema koleksi yang mencakup bidang ARRAY:</p>
 <div class="alert note">
-<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Jika Anda menetapkan ` <code translate="no">enable_dynamic_fields=True</code> ` saat mendefinisikan skema, Milvus memungkinkan Anda menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan pengelolaan, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -255,7 +260,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Mengatur parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Tentukan parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -270,10 +275,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan adalah wajib untuk bidang vektor, tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang ARRAY <code translate="no">tags</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+    </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan wajib untuk bidang vektor tetapi opsional untuk bidang skalar.</p>
+<p>Contoh berikut membuat indeks pada bidang vektor ` <code translate="no">embedding</code> ` dan bidang ARRAY ` <code translate="no">tags</code>`, keduanya menggunakan tipe indeks ` <code translate="no">AUTOINDEX</code> `. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan tipe indeks dan parameternya untuk setiap bidang. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -336,7 +346,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -351,9 +361,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang menyertakan bidang ARRAY.</p>
+    </button></h2><p>Setelah skema dan indeks ditentukan, buat koleksi yang mencakup bidang ARRAY.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -391,7 +406,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Sisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -406,9 +421,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah membuat koleksi, Anda dapat menyisipkan data yang menyertakan bidang ARRAY.</p>
+    </button></h2><p>Setelah membuat koleksi, Anda dapat menyisipkan data yang mencakup bidang ARRAY.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -526,6 +546,9 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Selain menyisipkan array lengkap, bidang <code translate="no">ARRAY</code> juga mendukung operator pembaruan parsial <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code> pada API <code translate="no">upsert</code> di Milvus v2.6.17 dan versi selanjutnya. Operator ini memungkinkan Anda menambahkan elemen ke atau menghapus elemen yang cocok dari array yang sudah ada tanpa harus mengambil nilai saat ini terlebih dahulu, sehingga menghindari pola baca-modifikasi-tulis di sisi klien. Untuk detailnya, lihat <a href="/docs/id/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert bidang ARRAY dalam mode penggabungan</a>.</p>
+</div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Kueri dengan ekspresi filter<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -541,10 +564,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menyisipkan entitas, gunakan metode <code translate="no">query</code> untuk mengambil entitas yang cocok dengan ekspresi filter yang ditentukan.</p>
-<p>Untuk mengambil entitas di mana <code translate="no">tags</code> tidak nol:</p>
+    </button></h2><p>Setelah menyisipkan entitas, gunakan metode ` <code translate="no">query</code> ` untuk mengambil entitas yang sesuai dengan ekspresi filter yang ditentukan.</p>
+<p>Untuk mengambil entitas di mana nilai ` <code translate="no">tags</code> ` tidak null:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -609,9 +637,14 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengambil entitas yang nilai elemen pertama <code translate="no">ratings</code> lebih besar dari 4:</p>
+<p>Untuk mengambil entitas di mana nilai elemen pertama dari ` <code translate="no">ratings</code> ` lebih besar dari 4:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -701,9 +734,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Selain pemfilteran bidang skalar dasar, Anda dapat menggabungkan pencarian kemiripan vektor dengan pemfilteran bidang skalar. Sebagai contoh, kode berikut ini menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
+    </button></h2><p>Selain penyaringan bidang skalar dasar, Anda dapat menggabungkan pencarian kesamaan vektor dengan filter bidang skalar. Misalnya, kode berikut menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -793,4 +831,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Selain itu, Milvus mendukung operator pemfilteran Array tingkat lanjut seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code> untuk lebih meningkatkan kemampuan kueri. Untuk lebih jelasnya, lihat <a href="/docs/id/array-operators.md">Operator</a> Larik.</p>
+<p>Selain itu, Milvus mendukung operator penyaringan Array tingkat lanjut seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code> untuk lebih meningkatkan kemampuan kueri. Untuk detail lebih lanjut, lihat <a href="/docs/id/array-operators.md">Operator ARRAY</a>.</p>

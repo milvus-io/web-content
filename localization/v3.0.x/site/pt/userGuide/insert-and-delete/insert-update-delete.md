@@ -2,9 +2,9 @@
 id: insert-update-delete.md
 title: Inserir entidades
 summary: >-
-  As entidades de uma coleção são registos de dados que partilham o mesmo
-  conjunto de campos. Os valores de campo em cada registo de dados formam uma
-  entidade. Esta página apresenta a forma de inserir entidades numa coleção.
+  As entidades numa coleção são registos de dados que partilham o mesmo conjunto
+  de campos. Os valores dos campos em cada registo de dados formam uma entidade.
+  Esta página explica como inserir entidades numa coleção.
 ---
 <h1 id="Insert-Entities" class="common-anchor-header">Inserir entidades<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,11 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As entidades de uma coleção são registos de dados que partilham o mesmo conjunto de campos. Os valores de campo em cada registo de dados formam uma entidade. Esta página apresenta a forma de inserir entidades numa coleção.</p>
+    </button></h1><p>As entidades numa coleção são registos de dados que partilham o mesmo conjunto de campos. Os valores dos campos em cada registo de dados formam uma entidade. Esta página explica como inserir entidades numa coleção.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com valores predefinidos definidos ou NULL se não forem definidos valores predefinidos. Para obter detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p></li>
-<li><p><strong>Tratamento de duplicatas</strong>: A operação padrão <code translate="no">insert</code> não verifica se há chaves primárias duplicadas. A inserção de dados com uma chave primária existente cria uma nova entidade com a mesma chave, levando à duplicação de dados e a possíveis problemas de aplicação. Para atualizar entidades existentes ou evitar duplicações, utilize a operação <strong><code translate="no">upsert</code></strong> em vez disso. Para obter mais informações, consulte <a href="/docs/pt/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>Campos adicionados após a criação da coleção</strong>: Se adicionar novos campos a uma coleção após a sua criação e não especificar valores durante a inserção, o Milvus preenche-os automaticamente com valores predefinidos ou com « <code translate="no">NULL</code> » (valor não definido), caso não tenham sido definidos valores predefinidos. Para mais detalhes, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">«Alterar o esquema da coleção</a>».</p></li>
+<li><p><strong>Tratamento de duplicados</strong>: A operação padrão « <code translate="no">insert</code> » não verifica a existência de chaves primárias duplicadas. A inserção de dados com uma chave primária já existente cria uma nova entidade com a mesma chave, o que leva à duplicação de dados e a potenciais problemas na aplicação. Para atualizar entidades existentes ou evitar duplicados, utilize a <strong><code translate="no">upsert</code></strong> . Para mais informações, consulte <a href="/docs/pt/upsert-entities.md">«Inserir</a> ou <a href="/docs/pt/upsert-entities.md">atualizar entidades</a>».</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -43,10 +43,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em Milvus, uma <strong>Entidade</strong> refere-se a registos de dados numa <strong>Coleção</strong> que partilham o mesmo <strong>Esquema</strong>, com os dados em cada campo de uma linha a constituírem uma Entidade. Por conseguinte, as entidades dentro da mesma coleção têm os mesmos atributos (tais como nomes de campos, tipos de dados e outras restrições).</p>
-<p>Ao inserir uma Entidade numa Coleção, a Entidade a ser inserida só pode ser adicionada com êxito se contiver todos os campos definidos no Esquema. A Entidade inserida entrará numa Partição denominada <strong>_default</strong> pela ordem de inserção. Desde que exista uma determinada partição, pode também inserir entidades nessa partição especificando o nome da partição no pedido de inserção.</p>
-<p>O Milvus também suporta campos dinâmicos para manter a escalabilidade da coleção. Quando o campo dinâmico está ativado, pode inserir campos que não estão definidos no esquema na coleção. Estes campos e valores serão armazenados como pares chave-valor num campo reservado chamado <strong>$meta</strong>. Para obter mais informações sobre campos dinâmicos, consulte Campo dinâmico.</p>
-<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Inserir entidades em uma coleção<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>No Milvus, uma <strong>Entidade</strong> refere-se a registos de dados numa <strong>Coleção</strong> que partilham o mesmo <strong>Esquema</strong>, sendo que os dados em cada campo de uma linha constituem uma Entidade. Por conseguinte, as Entidades dentro da mesma Coleção têm os mesmos atributos (tais como nomes de campos, tipos de dados e outras restrições).</p>
+<p>Ao inserir uma Entidade numa Coleção, a Entidade a ser inserida só pode ser adicionada com sucesso se contiver todos os campos definidos no Esquema. A Entidade inserida entrará numa Partição denominada <strong>_default</strong> pela ordem de inserção. Desde que exista uma determinada Partição, também é possível inserir Entidades nessa Partição, especificando o nome da Partição no pedido de inserção.</p>
+<p>O Milvus também suporta campos dinâmicos para manter a escalabilidade da coleção. Quando o campo dinâmico está ativado, é possível inserir campos que não estejam definidos no esquema na coleção. Estes campos e valores serão armazenados como pares chave-valor num campo reservado denominado <strong>$meta</strong>. Para mais informações sobre campos dinâmicos, consulte Campo Dinâmico.</p>
+<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Inserir entidades numa coleção<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,10 +61,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de inserir dados, é necessário organizar seus dados em uma lista de dicionários de acordo com o esquema, com cada dicionário representando uma entidade e contendo todos os campos definidos no esquema. Se a coleção tiver o campo dinâmico ativado, cada dicionário pode também incluir campos que não estão definidos no esquema.</p>
-<p>Nesta secção, irá inserir entidades numa coleção criada da forma de configuração rápida. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as Entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no Esquema.</p>
+    </button></h2><p>Antes de inserir dados, é necessário organizar os seus dados numa lista de dicionários de acordo com o esquema, sendo que cada dicionário representa uma entidade e contém todos os campos definidos no esquema. Se a coleção tiver o campo dinâmico ativado, cada dicionário também pode incluir campos que não estejam definidos no esquema.</p>
+<p>Nesta secção, irá inserir entidades numa coleção criada através da configuração rápida. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vector</strong>. Além disso, esta coleção tem o campo dinâmico ativado, pelo que as entidades no código de exemplo incluem um campo chamado <strong>color</strong> que não está definido no esquema.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +226,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -257,7 +261,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">Inserir entidades em uma partição<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">Inserir entidades numa partição<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,9 +276,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Você também pode inserir entidades em uma partição especificada. Os trechos de código a seguir assumem que você tem uma partição chamada <strong>PartitionA</strong> na sua coleção.</p>
+    </button></h2><p>Também pode inserir entidades numa partição especificada. Os trechos de código seguintes partem do princípio de que tem uma partição denominada <strong>PartitionA</strong> na sua coleção.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -396,7 +405,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

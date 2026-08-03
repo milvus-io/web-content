@@ -1,11 +1,11 @@
 ---
 id: alter-collection-field.md
-title: تغيير حقل المجموعة
+title: تعديل حقل المجموعة
 summary: >-
-  يمكنك تغيير خصائص حقل المجموعة لتغيير قيود الأعمدة أو فرض قواعد تكامل بيانات
-  أكثر صرامة.
+  يمكنك تعديل خصائص حقل المجموعة لتغيير قيود الأعمدة أو فرض قواعد أكثر صرامة
+  لضمان سلامة البيانات.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">تغيير حقل المجموعة<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">تعديل حقل المجموعة<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +20,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يمكنك تغيير خصائص حقل مجموعة لتغيير قيود الأعمدة أو فرض قواعد تكامل بيانات أكثر صرامة.</p>
+    </button></h1><p>يمكنك تعديل خصائص حقل المجموعة لتغيير قيود الأعمدة أو فرض قواعد أكثر صرامة لسلامة البيانات.</p>
+<p>تتناول هذه الصفحة تغييرات خصائص الحقول، وليس تغييرات شكل المخطط مثل إضافة الحقول أو حذفها. لإضافة حقول قياسية أو حذف حقول من مجموعة موجودة، راجع " <a href="/docs/ar/add-fields-to-an-existing-collection.md">تعديل مخطط المجموعة</a>".</p>
 <div class="alert note">
 <ul>
-<li><p>تتكون كل مجموعة من حقل أساسي واحد فقط. بمجرد تعيينه أثناء إنشاء المجموعة، لا يمكنك تغيير الحقل الأساسي أو تغيير خصائصه.</p></li>
+<li><p>تتكون كل مجموعة من حقل أساسي واحد فقط. وبمجرد تعيينه أثناء إنشاء المجموعة، لا يمكنك تغيير الحقل الأساسي أو تعديل خصائصه.</p></li>
 <li><p>يمكن أن تحتوي كل مجموعة على مفتاح تقسيم واحد فقط. بمجرد تعيينه أثناء إنشاء المجموعة، لا يمكنك تغيير مفتاح التقسيم.</p></li>
 </ul>
 </div>
-<h2 id="Alter-VarChar-field" class="common-anchor-header">تغيير حقل VarChar المتغير<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
+<h2 id="Alter-VarChar-field" class="common-anchor-header">تعديل حقل VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,10 +43,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحتوي حقل VarChar المتغير على خاصية تسمى <code translate="no">max_length</code> ، والتي تقيد الحد الأقصى لعدد الأحرف التي يمكن أن تحتويها قيم الحقل. يمكنك تغيير الخاصية <code translate="no">max_length</code>.</p>
-<p>يفترض المثال التالي أن المجموعة تحتوي على حقل VarChar يسمى <code translate="no">varchar</code> ويقوم بتعيين الخاصية <code translate="no">max_length</code> الخاصة به.</p>
+    </button></h2><p>يحتوي حقل VarChar على خاصية تُسمى " <code translate="no">max_length</code>" (الحد الأقصى لعدد الأحرف)، والتي تحدد الحد الأقصى لعدد الأحرف التي يمكن أن تحتوي عليها قيم الحقل. يمكنك تغيير خاصية " <code translate="no">max_length</code> " (الحد الأقصى لعدد الأحرف).</p>
+<p>يفترض المثال التالي أن المجموعة تحتوي على حقل VarChar باسم <code translate="no">varchar</code> ويقوم بتعيين خاصية <code translate="no">max_length</code> الخاصة به.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -78,7 +81,10 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-   <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">CURL</a></div>
+   <a href="#javascript">NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">LOAD_COLLECTION_NAME</span>,
   <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
@@ -128,7 +134,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-ARRAY-field" class="common-anchor-header">تغيير حقل ARRAY<button data-href="#Alter-ARRAY-field" class="anchor-icon" translate="no">
+<h2 id="Alter-ARRAY-field" class="common-anchor-header">تعديل حقل ARRAY<button data-href="#Alter-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,10 +149,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحتوي حقل الصفيف على خاصيتين، وهما <code translate="no">element_type</code> و <code translate="no">max_capacity</code>. تحدد الخاصية الأولى نوع بيانات العناصر في المصفوفة، بينما تقيد الأخيرة الحد الأقصى لعدد العناصر في المصفوفة. يمكنك تغيير الخاصية <code translate="no">max_capacity</code> فقط.</p>
-<p>يفترض المثال التالي أن المجموعة تحتوي على حقل مصفوفة باسم <code translate="no">array</code> ويضبط الخاصية <code translate="no">max_capacity</code>.</p>
+    </button></h2><p>يحتوي حقل المصفوفة على خاصيتين، هما <code translate="no">element_type</code> و <code translate="no">max_capacity</code>. تحدد الأولى نوع بيانات العناصر في المصفوفة، بينما تحدد الثانية الحد الأقصى لعدد العناصر في المصفوفة. يمكنك تغيير الخاصية <code translate="no">max_capacity</code> فقط.</p>
+<p>يفترض المثال التالي أن المجموعة تحتوي على حقل صفيف باسم <code translate="no">array</code> ويقوم بتعيين خاصية <code translate="no">max_capacity</code> الخاصة به.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;array&quot;</span>,
@@ -189,7 +200,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">تغيير إعدادات خريطة الذاكرة على مستوى الحقل<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
+<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">تعديل إعدادات mmap على مستوى الحقل<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,10 +215,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتيح تعيين الذاكرة (Mmap) الوصول المباشر للذاكرة إلى الملفات الكبيرة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول، مما يزيد من سعة التخزين للمجموعات دون التأثير على أداء البحث.</p>
+    </button></h2><p>يتيح تخطيط الذاكرة (Mmap) الوصول المباشر إلى الذاكرة للملفات الكبيرة الموجودة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. تساعد هذه الطريقة في تحسين سياسة وضع البيانات بناءً على تكرار الوصول، مما يوسع سعة التخزين للمجموعات دون التأثير على أداء البحث.</p>
 <p>يفترض المثال التالي أن المجموعة تحتوي على حقل باسم <code translate="no">doc_chunk</code> ويقوم بتعيين خاصية <code translate="no">mmap_enabled</code> الخاصة به.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

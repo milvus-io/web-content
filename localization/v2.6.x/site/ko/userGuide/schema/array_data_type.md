@@ -1,7 +1,9 @@
 ---
 id: array_data_type.md
 title: 배열 필드
-summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합을 저장합니다. 다음은 ARRAY 필드가 데이터를 저장하는 방법의 예입니다:'
+summary: >-
+  ARRAY 필드는 동일한 데이터 유형을 가진 요소들의 정렬된 집합을 저장합니다. 다음은 ARRAY 필드가 데이터를 저장하는 방식에 대한
+  예시입니다:
 ---
 <h1 id="Array-Field" class="common-anchor-header">배열 필드<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,13 +20,13 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>배열 필드는 동일한 데이터 유형의 정렬된 요소 집합을 저장합니다. 다음은 배열 필드가 데이터를 저장하는 방법의 예입니다:</p>
+    </button></h1><p>ARRAY 필드는 동일한 데이터 유형을 가진 요소들의 정렬된 집합을 저장합니다. 다음은 ARRAY 필드가 데이터를 저장하는 방식에 대한 예시입니다:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">제한<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +42,10 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 으로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p></li>
-<li><p><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의되는 동일한 데이터 유형을 공유해야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우 배열 요소에 대해 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">element_type</code> 은 <code translate="no">JSON</code> 을 제외한 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다.</p></li>
-<li><p><strong>배열 용량</strong>: 배열 필드의 요소 수는 <code translate="no">max_capacity</code> 에 지정된 대로 배열을 생성할 때 정의된 최대 용량보다 작거나 같아야 합니다. 값은 <strong>1에서</strong> <strong>4096</strong> 범위 내의 정수여야 합니다.</p></li>
-<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 시맨틱 이스케이프나 변환 없이 있는 그대로 저장됩니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, <code translate="no">&quot;a\&quot;b&quot;</code> 은 입력한 대로 저장되고 <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 은 유효하지 않은 값으로 간주됩니다.</p></li>
+<li><p><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/nullable-and-default.md">‘Nullable 및 기본값’을</a> 참조하십시오.</p></li>
+<li><p><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의된 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우, 배열 요소의 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">element_type</code> 는 <code translate="no">JSON</code> 를 제외하고 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다.</p></li>
+<li><p><strong>배열 용량</strong>: ARRAY 필드의 요소 수는 <code translate="no">max_capacity</code> 에 명시된 대로, 배열 생성 시 정의된 최대 용량 이하여야 합니다. 이 값은 <strong>1에서</strong> <strong>4096</strong> 사이의 정수여야 합니다.</p></li>
+<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미적 이스케이프 처리나 변환 없이 있는 그대로 저장됩니다. 예를 들어, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> 및 <code translate="no">&quot;a\&quot;b&quot;</code> 는 입력된 그대로 저장되는 반면, <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 값으로 간주됩니다.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY 필드 추가<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,18 +62,23 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>배열 필드 Milvus를 사용하려면 컬렉션 스키마를 만들 때 관련 필드 유형을 정의합니다. 이 프로세스에는 다음이 포함됩니다:</p>
+    </button></h2><p>Milvus에서 ARRAY 필드를 사용하려면 컬렉션 스키마를 생성할 때 관련 필드 유형을 정의해야 합니다. 이 과정은 다음을 포함합니다:</p>
 <ol>
-<li><p><code translate="no">datatype</code> 을 지원되는 배열 데이터 유형인 <code translate="no">ARRAY</code> 으로 설정합니다.</p></li>
-<li><p><code translate="no">element_type</code> 매개변수를 사용하여 배열에 있는 요소의 데이터 유형을 지정합니다. 동일한 배열의 모든 요소는 동일한 데이터 유형이어야 합니다.</p></li>
-<li><p><code translate="no">max_capacity</code> 매개변수를 사용하여 배열의 최대 용량, 즉 배열에 포함할 수 있는 최대 요소 수를 정의합니다.</p></li>
+<li><p><code translate="no">datatype</code> 를 지원되는 배열 데이터 유형인 <code translate="no">ARRAY</code> 로 설정합니다.</p></li>
+<li><p><code translate="no">element_type</code> 매개변수를 사용하여 배열 내 요소의 데이터 유형을 지정합니다. 동일한 배열에 포함된 모든 요소는 동일한 데이터 유형이어야 합니다.</p></li>
+<li><p><code translate="no">max_capacity</code> 매개변수를 사용하여 배열의 최대 용량, 즉 배열이 포함할 수 있는 요소의 최대 개수를 정의합니다.</p></li>
 </ol>
-<p>다음은 배열 필드를 포함하는 컬렉션 스키마를 정의하는 방법입니다:</p>
+<p>ARRAY 필드를 포함하는 컬렉션 스키마를 정의하는 방법은 다음과 같습니다:</p>
 <div class="alert note">
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 ` <code translate="no">enable_dynamic_fields=True</code> `를 설정하면, Milvus에서 사전에 정의되지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이로 인해 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/enable-dynamic-field.md">동적 필드(Dynamic Field</a>)를 참조하십시오.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -268,10 +275,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱싱은 검색 및 쿼리 성능을 개선하는 데 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만 스칼라 필드의 경우 선택 사항입니다.</p>
-<p>다음 예제는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 배열 필드 <code translate="no">tags</code> 에 인덱스를 생성합니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+    </button></h2><p>인덱싱은 검색 및 쿼리 성능을 향상시키는 데 도움이 됩니다. Milvus에서 벡터 필드의 경우 인덱싱이 필수이지만, 스칼라 필드의 경우 선택 사항입니다.</p>
+<p>다음 예제는 벡터 필드 ` <code translate="no">embedding</code> `과 ARRAY 필드 ` <code translate="no">tags</code>`에 대해 모두 ` <code translate="no">AUTOINDEX</code> ` 인덱스 유형을 사용하여 인덱스를 생성합니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 또한 각 필드에 대해 인덱스 유형과 매개변수를 사용자 정의할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/index-explained.md">‘인덱스 설명’을</a> 참조하십시오.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -334,7 +346,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,9 +361,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스키마와 인덱스가 정의되면 ARRAY 필드를 포함하는 컬렉션을 만듭니다.</p>
+    </button></h2><p>스키마와 인덱스가 정의되면, ARRAY 필드를 포함하는 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -404,9 +421,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 생성한 후 ARRAY 필드를 포함하는 데이터를 삽입할 수 있습니다.</p>
+    </button></h2><p>컬렉션을 생성한 후, ARRAY 필드가 포함된 데이터를 삽입할 수 있습니다.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -524,6 +546,9 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p><code translate="no">ARRAY</code> 필드는 전체 배열 삽입 외에도, Milvus v2.6.17 이상 버전의 <code translate="no">upsert</code> API에서 <code translate="no">ARRAY_APPEND</code> 및 <code translate="no">ARRAY_REMOVE</code> 부분 업데이트 연산자를 지원합니다. 이를 통해 기존 배열의 현재 값을 먼저 조회하지 않고도 요소를 추가하거나 일치하는 요소를 제거할 수 있어, 클라이언트 측의 읽기-수정-쓰기(read-modify-write) 패턴을 피할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">‘부분 업데이트 연산자를 사용한 ARRAY 필드의 업서트(Upsert</a>)’를 참조하십시오.</p>
+</div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용한 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -539,10 +564,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>엔티티를 삽입한 후 <code translate="no">query</code> 메서드를 사용하여 지정된 필터 표현식과 일치하는 엔티티를 검색합니다.</p>
-<p><code translate="no">tags</code> 이 null이 아닌 엔티티를 검색하려면 다음과 같이 하세요:</p>
+    </button></h2><p>엔티티를 삽입한 후, ` <code translate="no">query</code> ` 메서드를 사용하여 지정된 필터 표현식과 일치하는 엔티티를 검색할 수 있습니다.</p>
+<p><code translate="no">tags</code> 가 null이 아닌 엔티티를 검색하려면:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -607,9 +637,14 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ratings</code> 의 첫 번째 요소 값이 4보다 큰 엔티티를 검색하려면 다음과 같이 하세요:</p>
+<p><code translate="no">ratings</code> 의 첫 번째 요소 값이 4보다 큰 엔티티를 검색하려면:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -699,9 +734,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 스칼라 필드 필터링 외에도 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
+    </button></h2><p>기본 스칼라 필드 필터링 외에도, 벡터 유사도 검색과 스칼라 필드 필터를 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -791,4 +831,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>또한 Milvus는 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 과 같은 고급 배열 필터링 연산자를 지원하여 쿼리 기능을 더욱 향상시킵니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/array-operators.md">배열 연산자를</a> 참조하세요.</p>
+<p>또한 Milvus는 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 고급 배열 필터링 연산자를 지원하여 쿼리 기능을 한층 더 강화합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>

@@ -1,20 +1,20 @@
 ---
 id: embedding-function-overview.md
-title: Descrição geral da função de incorporaçãoCompatible with Milvus 2.6.x
+title: Visão geral da função de incorporaçãoCompatible with Milvus 2.6.x
 summary: >-
-  O módulo Function no Milvus permite-lhe transformar dados de texto em bruto em
-  embeddings vectoriais, chamando automaticamente fornecedores externos de
-  serviços de embedding (como OpenAI, AWS Bedrock, Google Vertex AI, etc.). Com
-  o módulo Function, já não é necessário estabelecer uma interface manual com as
-  APIs de incorporação - o Milvus trata de todo o processo de envio de pedidos
-  aos fornecedores, receção de incorporação e armazenamento nas suas colecções.
-  Para a pesquisa semântica, é necessário fornecer apenas dados de consulta em
-  bruto, não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo
-  modelo que utilizou para a ingestão, compara-o com os vectores armazenados e
-  devolve os resultados mais relevantes.
+  O módulo «Function» do Milvus permite-lhe transformar dados de texto brutos em
+  representações vetoriais, recorrendo automaticamente a prestadores de serviços
+  de representação externos (como a OpenAI, o AWS Bedrock, o Google Vertex AI,
+  etc.). Com o módulo «Function», já não é necessário interagir manualmente com
+  as APIs de incorporação — o Milvus trata de todo o processo de envio de
+  pedidos aos fornecedores, receção das incorporações e armazenamento das mesmas
+  nas suas coleções. Para a pesquisa semântica, basta fornecer apenas os dados
+  brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor de
+  consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os
+  vetores armazenados e devolve os resultados mais relevantes.
 beta: Milvus 2.6.x
 ---
-<h1 id="Embedding-Function-Overview" class="common-anchor-header">Descrição geral da função de incorporação<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
+<h1 id="Embedding-Function-Overview" class="common-anchor-header">Visão geral da função de incorporação<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O módulo Function no Milvus permite-lhe transformar dados de texto em bruto em embeddings vectoriais, chamando automaticamente fornecedores externos de serviços de embedding (como OpenAI, AWS Bedrock, Google Vertex AI, etc.). Com o módulo Function, já não é necessário estabelecer uma interface manual com as APIs de incorporação - o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção de incorporação e armazenamento nas suas colecções. Para a pesquisa semântica, é necessário fornecer apenas dados de consulta em bruto, não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vectores armazenados e devolve os resultados mais relevantes.</p>
+    </button></h1><p>O módulo «Função» do Milvus permite-lhe transformar dados de texto brutos em incorporações vetoriais, recorrendo automaticamente a prestadores de serviços de incorporação externos (como a OpenAI, a AWS Bedrock, o Google Vertex AI, etc.). Com o módulo «Função», já não é necessário interagir manualmente com as APIs de incorporação — o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção das incorporações e armazenamento das mesmas nas suas coleções. Para a pesquisa semântica, basta fornecer apenas os dados brutos da consulta, e não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vetores armazenados e devolve os resultados mais relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,17 +46,17 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Qualquer campo de entrada que o módulo Function incorpore deve sempre conter um valor; se for fornecido um valor nulo, o módulo lançará um erro.</p></li>
-<li><p>O módulo Function processa apenas os campos explicitamente definidos no esquema da coleção; não gera incorporações para campos dinâmicos.</p></li>
-<li><p>Os campos de entrada a serem incorporados devem ser do tipo <code translate="no">VARCHAR</code>.</p></li>
-<li><p>O módulo Function pode incorporar um campo de entrada para:</p>
+<li><p>Qualquer campo de entrada que o módulo Function incorpore deve conter sempre um valor; se for fornecido um valor nulo, o módulo irá gerar um erro.</p></li>
+<li><p>O módulo «Function» processa apenas os campos explicitamente definidos no esquema da coleção; não gera representações para campos dinâmicos.</p></li>
+<li><p>Os campos de entrada a incorporar devem ser do tipo « <code translate="no">VARCHAR</code> ».</p></li>
+<li><p>O módulo «Função» pode incorporar um campo de entrada para:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>As conversões para <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, ou <code translate="no">BFLOAT16_VECTOR</code> não são suportadas.</p></li>
+<p>Não são suportadas conversões para « <code translate="no">BINARY_VECTOR</code> », « <code translate="no">FLOAT16_VECTOR</code> » ou « <code translate="no">BFLOAT16_VECTOR</code> ».</p></li>
 </ul>
-<h2 id="Supported-embedding-service-providers" class="common-anchor-header">Fornecedores de serviços de incorporação suportados<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
+<h2 id="Supported-embedding-service-providers" class="common-anchor-header">Provedores de serviços de incorporação suportados<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,67 +73,73 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><table>
    <tr>
-     <th><p>Fornecedor</p></th>
+     <th><p>Provedor</p></th>
      <th><p>Modelos típicos</p></th>
      <th><p>Tipo de incorporação</p></th>
      <th><p>Método de autenticação</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/openai.md">OpenAI</a></p></td>
-     <td><p>incorporação de texto-3-*</p></td>
+     <td><p><a href="/docs/pt/v2.6.x/openai.md">OpenAI</a></p></td>
+     <td><p>text-embedding-3-*</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Chave API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/pt/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p>Baseada na implementação</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chave da API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/azure-openai.md">OpenAI do Azure</a></p></td>
-     <td><p>Baseado na implementação</p></td>
+     <td><p><a href="/docs/pt/v2.6.x/dashscope.md">DashScope</a></p></td>
+     <td><p>text-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Chave de API</p></td>
+     <td><p>Chave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/dashscope.md">DashScope</a></p></td>
-     <td><p>incorporação de texto-v3</p></td>
-     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Chave de API</p></td>
-   </tr>
-   <tr>
-     <td><p><a href="/docs/pt/bedrock.md">Base de dados</a></p></td>
-     <td><p>amazon.titan-embeded-text-v2</p></td>
+     <td><p><a href="/docs/pt/v2.6.x/bedrock.md">Bedrock</a></p></td>
+     <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Par AK/SK</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/vertex-ai.md">Vértice AI</a></p></td>
-     <td><p>texto-incorporação-005</p></td>
+     <td><p><a href="/docs/pt/v2.6.x/vertex-ai.md">Vertex AI</a></p></td>
+     <td><p>text-embedding-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Credencial JSON da conta de serviço GCP</p></td>
+     <td><p>Conta de serviço GCP Credencial JSON</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/voyage-ai.md">IA do Voyage</a></p></td>
+     <td><p><a href="/docs/pt/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Chave da API</p></td>
+     <td><p>Chave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/cohere.md">Coesão</a></p></td>
+     <td><p><a href="/docs/pt/v2.6.x/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Chave da API</p></td>
+     <td><p>Chave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/siliconflow.md">SiliconFlow</a></p></td>
+     <td><p><a href="/docs/pt/v2.6.x/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/pt/hugging-face-tei.md">Cara de abraço</a></p></td>
-     <td><p>Qualquer modelo servido por TEI</p></td>
+     <td><p><a href="/docs/pt/v2.6.x/hugging-face-tei.md">Hugging Face TEI</a></p></td>
+     <td><p>Qualquer modelo servido pelo TEI</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chave API opcional</p></td>
    </tr>
+   <tr>
+     <td><p><a href="/docs/pt/v2.6.x/hugging-face.md">Hugging Face</a></p></td>
+     <td><p>Modelos disponibilizados através de <code translate="no">hf-inference</code> para extração de características</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Chave de API</p></td>
+   </tr>
 </table>
-<h2 id="How-it-works" class="common-anchor-header">Como é que funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,19 +154,21 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O diagrama seguinte mostra como a Função funciona em Milvus.</p>
+    </button></h2><p>O diagrama seguinte mostra como a Função funciona no Milvus.</p>
 <ol>
-<li><p><strong>Texto de entrada</strong>: Os utilizadores inserem dados em bruto (por exemplo, documentos) no Milvus.</p></li>
-<li><p><strong>Gerar embeddings</strong>: O módulo Function do Milvus chama automaticamente o fornecedor do modelo configurado para converter os dados em bruto em embeddings vectoriais.</p></li>
-<li><p><strong>Armazenar embeddings</strong>: Os embeddings resultantes são armazenados em campos vectoriais explicitamente definidos nas colecções do Milvus.</p></li>
-<li><p><strong>Consultar texto</strong>: Os utilizadores submetem consultas de texto ao Milvus.</p></li>
-<li><p><strong>Pesquisa semântica</strong>: O Milvus converte internamente as consultas em embeddings vectoriais, efectua pesquisas de semelhança com os embeddings armazenados e obtém os resultados relevantes.</p></li>
-<li><p><strong>Devolver resultados</strong>: O Milvus devolve à aplicação os melhores resultados correspondentes.</p></li>
+<li><p><strong>Texto de entrada</strong>: os utilizadores inserem dados brutos (por exemplo, documentos) no Milvus.</p></li>
+<li><p><strong>Gerar embeddings</strong>: O módulo «Função» no Milvus chama automaticamente o fornecedor de modelos configurado para converter os dados brutos em embeddings vetoriais.</p></li>
+<li><p><strong>Armazenamento de representações</strong>: As representações resultantes são armazenadas em campos vetoriais explicitamente definidos nas coleções do Milvus.</p></li>
+<li><p><strong>Texto da consulta</strong>: Os utilizadores enviam consultas de texto ao Milvus.</p></li>
+<li><p><strong>Pesquisa semântica</strong>: O Milvus converte internamente as consultas em representações vetoriais, realiza pesquisas de similaridade em relação às representações armazenadas e recupera resultados relevantes.</p></li>
+<li><p><strong>Devolução de resultados</strong>: O Milvus devolve os resultados mais relevantes à aplicação.</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
-   </span> <span class="img-wrapper"> <span>Visão geral da função de incorporação</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" /> 
+   <span>Visão geral da função de incorporação</span>
+  
+ </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,20 +184,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de utilizar uma função de incorporação com o Milvus, configure as credenciais do serviço de incorporação para aceder ao Milvus.</p>
-<p>O Milvus permite-lhe fornecer credenciais de serviço de incorporação de duas formas:</p>
+    </button></h2><p>Antes de utilizar uma função de representação com o Milvus, configure as credenciais do serviço de representação para o acesso ao Milvus.</p>
+<p>O Milvus permite-lhe fornecer as credenciais do serviço de representação de duas formas:</p>
 <ul>
 <li><p><strong>Ficheiro de configuração</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>O exemplo neste tópico demonstra a <strong>configuração recomendada</strong> usando <code translate="no">milvus.yaml</code>.</p></li>
+<p>O exemplo neste tópico demonstra a <strong>configuração recomendada</strong> utilizando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variáveis de ambiente</strong>:</p>
-<p>Para obter detalhes sobre a configuração de credenciais por meio de variáveis de ambiente, consulte a documentação do provedor de serviços de incorporação (por exemplo, <a href="/docs/pt/openai.md">OpenAI</a> ou <a href="/docs/pt/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Para obter detalhes sobre a configuração de credenciais através de variáveis de ambiente, consulte a documentação do fornecedor do serviço de incorporação (por exemplo, <a href="/docs/pt/v2.6.x/openai.md">OpenAI</a> ou <a href="/docs/pt/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
-<p>O diagrama a seguir mostra o processo de configuração de credenciais por meio do arquivo de configuração do Milvus (<code translate="no">milvus.yaml</code>) e, em seguida, a chamada da Função no Milvus.</p>
-<p>
+<p>O diagrama seguinte ilustra o processo de configuração das credenciais através do ficheiro de configuração do Milvus (<code translate="no">milvus.yaml</code>) e, em seguida, a chamada da Função no Milvus.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
-   </span> <span class="img-wrapper"> <span>Estouro de configuração de credenciais</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Etapa 1: adicionar credenciais ao arquivo de configuração do Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
+   <span>Configuração de credenciais no Overflow</span>
+  
+ </span></p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Passo 1: Adicionar credenciais ao ficheiro de configuração do Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,7 +214,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No seu ficheiro <code translate="no">milvus.yaml</code>, edite o bloco <code translate="no">credential</code> com entradas para cada fornecedor a que precisa de aceder:</p>
+    </button></h3><p>No seu ficheiro <code translate="no">milvus.yaml</code>, edite o bloco <code translate="no">credential</code> com entradas para cada fornecedor ao qual precisa de aceder:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -259,8 +269,8 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre como aplicar a configuração do Milvus, consulte <a href="/docs/pt/dynamic_config.md">Configurar o Milvus em tempo real</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>Para mais informações sobre como aplicar a configuração do Milvus, consulte <a href="/docs/pt/v2.6.x/dynamic_config.md">«Configurar o Milvus em tempo real</a>».</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Utilizar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,8 +285,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assim que as credenciais estiverem configuradas no ficheiro de configuração do Milvus, siga estes passos para definir e utilizar as funções de incorporação.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definir campos de esquema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+    </button></h2><p>Depois de configurar as credenciais no seu ficheiro de configuração do Milvus, siga estes passos para definir e utilizar funções de incorporação.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definir campos do esquema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,15 +301,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para utilizar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
+    </button></h3><p>Para utilizar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir, pelo menos, três campos obrigatórios:</p>
 <ul>
-<li><p>O <strong>campo primário</strong> que identifica de forma exclusiva cada entidade numa coleção.</p></li>
+<li><p>O <strong>campo primário</strong> que identifica de forma única cada entidade numa coleção.</p></li>
 <li><p>Um <strong>campo escalar</strong> que armazena os dados brutos a serem incorporados.</p></li>
-<li><p>Um <strong>campo vetorial</strong> reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
+<li><p>Um <strong>campo vetorial</strong> reservado para armazenar as incorporações vetoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo «Function». Lembre-se de definir a dimensão do vetor (<code translate="no">dim</code>) de forma a corresponder à saída do modelo de incorporação escolhido.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -330,7 +345,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de embedding ao esquema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -345,10 +360,15 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O módulo Function em Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
-<p>O exemplo abaixo adiciona um módulo Function (<code translate="no">openai_embedding</code>) que converte o campo escalar <code translate="no">&quot;document&quot;</code> em embeddings, armazenando os vectores resultantes no campo vetorial <code translate="no">&quot;dense&quot;</code> definido anteriormente.</p>
+    </button></h3><p>O módulo «Function» no Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
+<p>O exemplo abaixo adiciona um módulo «Function» (<code translate="no">openai_embedding</code>) que converte o campo escalar « <code translate="no">&quot;document&quot;</code> » em embeddings, armazenando os vetores resultantes no campo vetorial « <code translate="no">&quot;dense&quot;</code> » definido anteriormente.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -380,16 +400,16 @@ schema.add_function(text_embedding_function)
    <tr>
      <th><p>Parâmetro</p></th>
      <th><p>Descrição</p></th>
-     <th><p>Exemplo Valor</p></th>
+     <th><p>Valor de exemplo</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Identificador único para a função de incorporação no Milvus.</p></td>
+     <td><p>Identificador único da função de embedding no Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Tipo de função utilizada. Para a incorporação de texto, definir o valor para <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Nota</strong>: Milvus aceita <code translate="no">FunctionType.BM25</code> (para transformação de incorporação esparsa) e <code translate="no">FunctionType.RERANK</code> (para reranking) para este parâmetro. Consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a> e <a href="/docs/pt/decay-ranker-overview.md">Visão geral do Decay Ranker</a> para obter detalhes.</p></td>
+     <td><p>Tipo de função utilizada. Para a incorporação de texto, defina o valor como <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Nota</strong>: O Milvus aceita « <code translate="no">FunctionType.BM25</code> » (para transformação de incorporação esparsa) e « <code translate="no">FunctionType.RERANK</code> » (para reclassificação) para este parâmetro. Consulte <a href="/docs/pt/v2.6.x/decay-ranker-overview.md">a Visão Geral</a> <a href="/docs/pt/v2.6.x/full-text-search.md">da Pesquisa de Texto Completo</a> e <a href="/docs/pt/v2.6.x/decay-ranker-overview.md">do Decay Ranker</a> para obter mais detalhes.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -404,7 +424,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Dicionário que contém as configurações de incorporação. Nota: Os parâmetros em <code translate="no">params</code> variam consoante os fornecedores de modelos de incorporação.</p></td>
+     <td><p>Dicionário que contém as configurações de incorporação. Nota: Os parâmetros dentro de « <code translate="no">params</code> » variam consoante os fornecedores de modelos de incorporação.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -419,22 +439,22 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>A etiqueta de uma credencial definida na secção de nível superior <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>. </p><ul><li><p>Quando fornecido, o Milvus recupera o par de chaves correspondente ou o token da API e assina o pedido no lado do servidor.</p></li><li><p>Quando omitido (<code translate="no">None</code>), o Milvus recorre à credencial explicitamente configurada para o fornecedor do modelo de destino em <code translate="no">milvus.yaml</code>.</p></li><li><p>Se a etiqueta for desconhecida ou a chave referenciada estiver em falta, a chamada falha.</p></li></ul></td>
+     <td><p>A etiqueta de uma credencial definida na secção de nível superior « <code translate="no">credential:</code> » em <code translate="no">milvus.yaml</code>. </p><ul><li><p>Quando fornecida, o Milvus recupera o par de chaves ou token de API correspondente e assina o pedido no lado do servidor.</p></li><li><p>Quando omitido (<code translate="no">None</code>), o Milvus recorre à credencial explicitamente configurada para o fornecedor do modelo de destino em <code translate="no">milvus.yaml</code>.</p></li><li><p>Se o rótulo for desconhecido ou se a chave referenciada estiver em falta, a chamada falha.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>O número de dimensões para os embeddings de saída. Para os modelos de terceira geração do OpenAI, é possível encurtar o vetor completo para reduzir o custo e a latência sem uma perda significativa de informações semânticas. Para obter mais informações, consulte a <a href="https://openai.com/blog/new-embedding-models-and-api-updates">publicação do blogue de anúncio da OpenAI</a>.</p><p><strong>Nota:</strong> Se encurtar a dimensão do vetor, certifique-se de que o valor <code translate="no">dim</code> especificado no método <code translate="no">add_field</code> do esquema para o campo do vetor corresponde à dimensão de saída final da sua função de incorporação.</p></td>
+     <td><p>O número de dimensões para as incorporações de saída. Para os modelos de terceira geração da OpenAI, pode encurtar o vetor completo para reduzir o custo e a latência sem uma perda significativa de informação semântica. Para mais informações, consulte <a href="https://openai.com/blog/new-embedding-models-and-api-updates">a publicação no blogue de anúncios da OpenAI</a>.</p><p><strong>Nota:</strong> Se encurtar a dimensão do vetor, certifique-se de que o valor « <code translate="no">dim</code> » especificado no método « <code translate="no">add_field</code> » do esquema para o campo vetorial corresponde à dimensão final de saída da sua função de incorporação.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">user</code></p></td>
-     <td><p>Um identificador de nível de utilizador para acompanhar a utilização da API.</p></td>
+     <td><p>Um identificador ao nível do utilizador para monitorizar a utilização da API.</p></td>
      <td><p><code translate="no">"user123"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Para colecções com vários campos escalares que requerem conversão de texto para vetor, adicione funções separadas ao esquema de coleção, assegurando que cada função tem um nome único e um valor <code translate="no">output_field_names</code>.</p>
+<p>Para coleções com vários campos escalares que requeiram a conversão de texto em vetor, adicione funções separadas ao esquema da coleção, garantindo que cada função tenha um nome e um valor de ` <code translate="no">output_field_names</code> ` únicos.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Passo 3: Configurar o índice<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -451,9 +471,14 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção. Para simplificar este processo, utilize <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, uma opção que permite ao Milvus escolher e configurar o tipo de índice mais adequado com base na estrutura dos seus dados.</p>
+    </button></h3><p>Após definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção. Para simplificar este processo, utilize « <code translate="no">AUTOINDEX</code> » como « <code translate="no">index_type</code> », uma opção que permite ao Milvus escolher e configurar o tipo de índice mais adequado com base na estrutura dos seus dados.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -472,7 +497,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">Passo 4: Criar coleção<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+<h3 id="Step-4-Create-collection" class="common-anchor-header">Passo 4: Criar a coleção<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -487,9 +512,14 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Agora crie a coleção usando o esquema e os parâmetros de índice definidos.</p>
+    </button></h3><p>Agora, crie a coleção utilizando os parâmetros de esquema e de índice definidos.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -505,7 +535,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">Etapa 5: inserir dados<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+<h3 id="Step-5-Insert-data" class="common-anchor-header">Passo 5: Inserir dados<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -520,9 +550,14 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de configurar sua coleção e índice, você está pronto para inserir seus dados brutos. Nesse processo, você só precisa fornecer o texto bruto. O módulo Function que definimos anteriormente gera automaticamente o vetor esparso correspondente para cada entrada de texto.</p>
+    </button></h3><p>Depois de configurar a sua coleção e o seu índice, está pronto para inserir os seus dados brutos. Neste processo, basta fornecer o texto bruto. O módulo «Function» que definimos anteriormente gera automaticamente o vetor esparso correspondente para cada entrada de texto.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -538,7 +573,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Etapa 6: realizar pesquisa de vetor<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Passo 6: Efetuar pesquisa vetorial<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -553,9 +588,14 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Após a inserção dos dados, efectue uma pesquisa semântica utilizando o texto de consulta em bruto. O Milvus converte automaticamente a sua consulta num vetor de incorporação, recupera documentos relevantes com base na semelhança e devolve os melhores resultados correspondentes.</p>
+    </button></h3><p>Após a inserção dos dados, efetue uma pesquisa semântica utilizando o texto bruto da consulta. O Milvus converte automaticamente a sua consulta num vetor de incorporação, recupera documentos relevantes com base na semelhança e devolve os resultados mais adequados.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -578,8 +618,8 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre operações de pesquisa e consulta, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa</a> e <a href="/docs/pt/get-and-scalar-query.md">consulta</a> <a href="/docs/pt/single-vector-search.md">vetorial básica</a>.</p>
-<h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Para mais informações sobre operações de pesquisa e consulta, consulte <a href="/docs/pt/v2.6.x/single-vector-search.md">«Pesquisa</a> e <a href="/docs/pt/v2.6.x/get-and-scalar-query.md">consulta</a> <a href="/docs/pt/v2.6.x/single-vector-search.md">vetoriais básicas</a> ».</p>
+<h2 id="FAQ" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -594,7 +634,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Qual é a diferença entre configurar credenciais em milvus.yaml e variáveis de ambiente?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Qual é a diferença entre configurar credenciais no ficheiro `milvus.yaml` e através de variáveis de ambiente?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,7 +649,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ambos os métodos funcionam, mas usar <code translate="no">milvus.yaml</code> é a abordagem recomendada, pois fornece gerenciamento centralizado de credenciais e nomeação consistente de credenciais em todos os provedores. Ao usar variáveis de ambiente, os nomes das variáveis variam dependendo do provedor de serviços de incorporação, portanto, consulte a página dedicada de cada provedor para entender os nomes específicos de variáveis de ambiente necessários (por exemplo, <a href="/docs/pt/openai.md">OpenAI</a> ou <a href="/docs/pt/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>Ambos os métodos funcionam, mas a utilização de « <code translate="no">milvus.yaml</code> » é a abordagem recomendada, uma vez que proporciona uma gestão centralizada das credenciais e uma nomenclatura consistente das credenciais em todos os fornecedores. Ao utilizar variáveis de ambiente, os nomes das variáveis variam consoante o fornecedor do serviço de incorporação; por isso, consulte a página dedicada de cada fornecedor para compreender os nomes específicos das variáveis de ambiente necessárias (por exemplo, <a href="/docs/pt/v2.6.x/openai.md">OpenAI</a> ou <a href="/docs/pt/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">O que acontece se eu não especificar um parâmetro de credencial na definição da função?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -627,11 +667,11 @@ results = client.search(
       </svg>
     </button></h3><p>O Milvus segue esta ordem de resolução de credenciais:</p>
 <ol>
-<li>Primeiro, ele procura a credencial padrão configurada para esse provedor no arquivo <code translate="no">milvus.yaml</code> </li>
-<li>Se não existir nenhuma credencial padrão em milvus.yaml, ele recorre às variáveis de ambiente (se configuradas)</li>
-<li>Se nem as credenciais <code translate="no">milvus.yaml</code> nem as variáveis de ambiente estiverem configuradas, o Milvus apresentará um erro</li>
+<li>Primeiro, procura a credencial predefinida configurada para esse fornecedor no ficheiro « <code translate="no">milvus.yaml</code> »</li>
+<li>Se não existir nenhuma credencial predefinida no milvus.yaml, recorre às variáveis de ambiente (se estiverem configuradas)</li>
+<li>Se nem as credenciais do ficheiro « <code translate="no">milvus.yaml</code> » nem as variáveis de ambiente estiverem configuradas, o Milvus irá gerar um erro</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Como posso verificar se os embeddings estão a ser gerados corretamente?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Como posso verificar se as representações estão a ser geradas corretamente?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -646,13 +686,13 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pode verificar:</p>
+    </button></h3><p>Pode verificar da seguinte forma:</p>
 <ol>
-<li>Consultando a sua coleção após a inserção para ver se o campo vetorial contém dados</li>
+<li>Consultar a sua coleção após a inserção para verificar se o campo vetorial contém dados</li>
 <li>Verificar se o comprimento do campo vetorial corresponde às dimensões esperadas</li>
-<li>Efectuando uma pesquisa de semelhança simples para verificar se os embeddings produzem resultados significativos</li>
+<li>Realizar uma pesquisa de similaridade simples para verificar se as representações produzem resultados significativos</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando efectuo uma pesquisa por semelhança, posso utilizar um vetor de consulta em vez de texto em bruto?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando realizo uma pesquisa de similaridade, posso utilizar um vetor de consulta em vez de texto bruto?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -667,10 +707,15 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sim, pode utilizar vectores de consulta pré-computados em vez de texto em bruto para a pesquisa de semelhanças. Embora o módulo Function converta automaticamente as consultas de texto bruto em embeddings, também pode fornecer diretamente dados de vetor ao parâmetro <code translate="no">data</code> na sua operação de pesquisa. <strong>Nota</strong>: O tamanho da dimensão do vetor de consulta fornecido deve ser consistente com o tamanho da dimensão dos embeddings de vetor gerados pelo módulo Function.</p>
+    </button></h3><p>Sim, pode utilizar vetores de consulta pré-calculados em vez de texto bruto para a pesquisa de similaridade. Embora o módulo de função converta automaticamente as consultas de texto bruto em representações vetoriais, também pode fornecer diretamente dados vetoriais ao parâmetro « <code translate="no">data</code> » na sua operação de pesquisa. <strong>Nota</strong>: O tamanho da dimensão do vetor de consulta fornecido deve ser consistente com o tamanho da dimensão das representações vetoriais geradas pelo seu módulo «Function».</p>
 <p><strong>Exemplo</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 

@@ -63,7 +63,7 @@ export schema='{​
 
 ## Add Primary Field​
 
-The primary field in a collection uniquely identifies an entity. It only accepts **Int64** or **VarChar** values. The following code snippets demonstrate how to add the primary field.​
+The primary field in a collection uniquely identifies an entity. It only accepts **Int64** or **VARCHAR** values. The following code snippets demonstrate how to add the primary field.​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -127,7 +127,7 @@ export schema='{​
 
 ```
 
-When adding a field, you can explicitly clarify the field as the primary field by setting its `is_primary` property to `True`. A primary field accepts **Int64** values by default. In this case, the primary field value should be integers similar to `12345`. If you choose to use **VarChar** values in the primary field, the value should be strings similar to `my_entity_1234`.​
+When adding a field, you can explicitly clarify the field as the primary field by setting its `is_primary` property to `True`. A primary field accepts **Int64** values by default. In this case, the primary field value should be integers similar to `12345`. If you choose to use **VARCHAR** values in the primary field, the value should be strings similar to `my_entity_1234`.​
 
 You can also set the `autoId` properties to `True` to make Milvus automatically allocate primary field values upon data insertions.​
 
@@ -213,11 +213,11 @@ The `dim` paramter in the above code snippets indicates the dimensionality of th
 
 ## Add Scalar Fields​
 
-In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Milvus supports multiple scalar field types, including **VarChar**, **Boolean**, **Int**, Float, **Double**, **Array**, and JSON.​
+In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Milvus supports multiple scalar field types, including **VARCHAR**, **TEXT**, **Boolean**, **Int**, Float, **Double**, **Array**, and JSON.​
 
-### Add String Fields​
+### Add VARCHAR Fields​
 
-In Milvus, you can use VarChar fields to store strings. For more on the VarChar field, refer to [​String Field](string.md).​
+In Milvus, you can use `VARCHAR` fields to store strings. For more on the `VARCHAR` field, refer to [​VarChar Field](string.md).​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -274,6 +274,17 @@ export schema="{​
     ]​
 }"​
 
+```
+
+### Add TEXT Fields
+
+In Milvus 3.0 and later, you can use `TEXT` fields to store document text, passages, logs, and other long text content. Unlike `VARCHAR`, a `TEXT` field does not require `max_length`. For more on the `TEXT` field, refer to [Text Field](text.md).
+
+```python
+schema.add_field(
+    field_name="my_text",
+    datatype=DataType.TEXT,
+)
 ```
 
 ### Add Number Fields​
@@ -508,4 +519,3 @@ export schema="{​
 ```
 
 ​
-

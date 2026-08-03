@@ -2,8 +2,8 @@
 id: chinese-analyzer.md
 title: Bahasa Mandarin
 summary: >-
-  Penganalisis bahasa Mandarin dirancang khusus untuk menangani teks bahasa
-  Mandarin, memberikan segmentasi dan tokenisasi yang efektif.
+  Alat analisis bahasa Mandarin ini dirancang khusus untuk mengolah teks dalam
+  bahasa Mandarin, serta menyediakan segmentasi dan tokenisasi yang efektif.
 ---
 <h1 id="Chinese" class="common-anchor-header">Bahasa Mandarin<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Penganalisis <code translate="no">chinese</code> dirancang khusus untuk menangani teks bahasa Mandarin, menyediakan segmentasi dan tokenisasi yang efektif.</p>
+    </button></h1><p>Alat analisis <code translate="no">chinese</code> dirancang khusus untuk menangani teks bahasa Mandarin, dengan menyediakan segmentasi dan tokenisasi yang efektif.</p>
 <h3 id="Definition" class="common-anchor-header">Definisi<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,12 +38,20 @@ summary: >-
       </svg>
     </button></h3><p>Penganalisis <code translate="no">chinese</code> terdiri dari:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">jieba</code> untuk menyegmentasikan teks bahasa Mandarin menjadi token berdasarkan kosakata dan konteks. Untuk informasi lebih lanjut, lihat <a href="/docs/id/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Filter</strong>: Menggunakan filter <code translate="no">cnalphanumonly</code> untuk menghapus token yang mengandung karakter non-Cina. Untuk informasi lebih lanjut, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">jieba</code> untuk memotong teks bahasa Mandarin menjadi token berdasarkan kosakata dan konteks. Untuk informasi lebih lanjut, lihat <a href="/docs/id/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Filter</strong>: Menggunakan filter <code translate="no">cnalphanumonly</code> untuk menghapus token yang mengandung karakter non-Mandarin. Untuk informasi lebih lanjut, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
-<p>Fungsionalitas penganalisis <code translate="no">chinese</code> setara dengan konfigurasi penganalisis khusus berikut ini:</p>
+<p>Fungsi penganalisis <code translate="no">chinese</code> setara dengan konfigurasi penganalisis khusus berikut:</p>
+<div class="alert note">
+<p>Penganalisis bawaan ` <code translate="no">chinese</code> ` tidak menghasilkan token Pinyin. Untuk mencocokkan teks bahasa Tionghoa dengan istilah kueri Pinyin, gunakan penganalisis kustom dengan tokenizer ` <code translate="no">jieba</code> ` dan filter <a href="/docs/id/pinyin-filter.md"><code translate="no">pinyin</code></a> filter.</p>
+</div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cnalphanumonly&quot;</span>]
@@ -84,9 +92,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menerapkan penganalisis <code translate="no">chinese</code> ke suatu bidang, cukup setel <code translate="no">type</code> ke <code translate="no">chinese</code> di <code translate="no">analyzer_params</code>.</p>
+    </button></h3><p>Untuk menerapkan penganalisis ` <code translate="no">chinese</code> ` ke suatu bidang, cukup atur ` <code translate="no">type</code> ` menjadi ` <code translate="no">chinese</code> ` di ` <code translate="no">analyzer_params</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -106,7 +119,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Penganalisis <code translate="no">chinese</code> tidak menerima parameter opsional apa pun.</p>
+<p>Penganalisis ` <code translate="no">chinese</code> ` tidak menerima parameter opsional apa pun.</p>
 </div>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +136,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menerapkan konfigurasi penganalisis ke skema koleksi Anda, verifikasi perilakunya menggunakan metode <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>Sebelum menerapkan konfigurasi penganalisis ke skema koleksi Anda, verifikasi perilakunya menggunakan metode ` <code translate="no">run_analyzer</code> `.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Konfigurasi penganalisis<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +153,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -170,7 +188,12 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -235,7 +258,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Keluaran yang diharapkan<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">Hasil yang diharapkan<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,15 +1,12 @@
 ---
 id: add-fields-to-an-existing-collection.md
-title: Menambahkan Field ke Koleksi yang Sudah AdaCompatible with Milvus 2.6.x
+title: Mengubah Skema Koleksi
 summary: >-
-  Milvus memungkinkan Anda untuk menambahkan field baru secara dinamis ke
-  koleksi yang sudah ada, membuatnya mudah untuk mengembangkan skema data Anda
-  seiring dengan perubahan kebutuhan aplikasi Anda. Panduan ini menunjukkan
-  kepada Anda bagaimana cara menambahkan field dalam berbagai skenario dengan
-  menggunakan contoh-contoh praktis.
-beta: Milvus 2.6.x
+  Ubah skema koleksi yang sudah ada dengan menambahkan atau menghapus bidang
+  skalar, bidang vektor, dan bidang vektor yang dihasilkan oleh fungsi tanpa
+  perlu membuat ulang koleksi tersebut.
 ---
-<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">Menambahkan Field ke Koleksi yang Sudah Ada<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Schema" class="common-anchor-header">Mengubah Skema Koleksi<button data-href="#Alter-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +21,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus memungkinkan Anda untuk menambahkan field baru secara dinamis ke koleksi yang sudah ada, sehingga memudahkan untuk mengembangkan skema data Anda seiring dengan perubahan kebutuhan aplikasi Anda. Panduan ini menunjukkan kepada Anda bagaimana cara menambahkan field dalam berbagai skenario dengan menggunakan contoh-contoh praktis.</p>
-<h2 id="Considerations" class="common-anchor-header">Pertimbangan<button data-href="#Considerations" class="anchor-icon" translate="no">
+    </button></h1><p>Saat sebuah koleksi berpindah dari tahap pengembangan ke produksi, bidang-bidang di sekitar setiap entitas sering kali berubah. Anda mungkin menambahkan bidang skalar seperti <code translate="no">source_uri</code> atau <code translate="no">review_status</code> untuk penyaringan dan logika aplikasi, menambahkan bidang vektor baru untuk embedding yang dihasilkan oleh aplikasi Anda, menambahkan bidang vektor langka yang dihasilkan oleh BM25 untuk pencarian leksikal pada teks yang ada, atau menghapus bidang yang tidak lagi digunakan. Mengubah Skema Koleksi memungkinkan Anda melakukan perubahan bidang yang didukung secara langsung tanpa perlu membuat ulang koleksi.</p>
+<div class="alert note">
+<p>Panduan ini membahas perubahan skema tingkat bidang dalam koleksi terkelola, termasuk bidang yang didefinisikan pengguna dan bidang vektor yang dihasilkan oleh fungsi. Untuk menambahkan bidang ke koleksi eksternal, lihat <a href="/docs/id/alter-external-collection-schema.md">"Alter External Collection Schema"</a>. Untuk perubahan properti bidang, seperti mengubah " <code translate="no">max_length</code> " pada bidang " <code translate="no">VARCHAR</code> " atau " <code translate="no">max_capacity</code> " pada bidang " <code translate="no">ARRAY</code> ", lihat " <a href="/docs/id/alter-collection-field.md">Alter Collection Field</a>". Untuk perilaku bidang dinamis, lihat " <a href="/docs/id/enable-dynamic-field.md">Dynamic Field</a> " dan " <a href="/docs/id/modify-collection.md">Modify Collection</a>".</p>
+</div>
+<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,40 +40,37 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menambahkan field ke koleksi Anda, ingatlah beberapa hal penting berikut ini:</p>
+    </button></h2><p><strong>Tambahkan bidang yang didefinisikan pengguna</strong></p>
 <ul>
-<li><p>Anda dapat menambahkan field skalar (<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, dll.). Bidang vektor tidak dapat ditambahkan ke koleksi yang sudah ada.</p></li>
-<li><p>Field baru harus dapat dinullkan (nullable = True) untuk mengakomodasi entitas yang sudah ada yang tidak memiliki nilai untuk field baru.</p></li>
-<li><p>Menambahkan field ke koleksi yang sudah dimuat akan meningkatkan penggunaan memori.</p></li>
-<li><p>Ada batas maksimum pada total field per koleksi. Untuk detailnya, lihat <a href="/docs/id/limitations.md#Number-of-resources-in-a-collection">Batas Milvus</a>.</p></li>
-<li><p>Nama bidang harus unik di antara bidang-bidang statis.</p></li>
-<li><p>Anda tidak dapat menambahkan bidang <code translate="no">$meta</code> untuk mengaktifkan fungsionalitas bidang dinamis untuk koleksi yang awalnya tidak dibuat dengan <code translate="no">enable_dynamic_field=True</code>.</p></li>
+<li><p>Kolom yang didefinisikan pengguna yang ditambahkan harus dapat bernilai null. Tetapkan ` <code translate="no">nullable=True</code> ` saat memanggil ` <code translate="no">add_collection_field()</code>`. Untuk entitas yang sudah ada, kolom yang ditambahkan akan menjadi ` <code translate="no">NULL</code> ` kecuali Anda menambahkan kolom skalar dengan ` <code translate="no">default_value</code>`.</p></li>
+<li><p>Penambahan bidang skalar yang didefinisikan pengguna didukung di Milvus 2.6.x dan versi selanjutnya. Penambahan bidang vektor yang didefinisikan pengguna didukung di Milvus 2.6.18 dan versi selanjutnya.</p></li>
+<li><p>Penambahan bidang StructArray didukung di Milvus 3.0.0 dan versi yang lebih baru. Bidang StructArray yang ditambahkan harus dapat bernilai null.</p></li>
+<li><p>Nama bidang harus unik di antara bidang-bidang dalam koleksi.</p></li>
 </ul>
-<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Panduan ini mengasumsikan bahwa Anda memiliki:</p>
+<p><strong>Menambahkan bidang vektor yang dihasilkan oleh fungsi</strong></p>
 <ul>
-<li><p>Instance Milvus yang sedang berjalan</p></li>
-<li><p>Milvus SDK yang sudah terinstal</p></li>
-<li><p>Koleksi yang sudah ada</p></li>
+<li><p>Setiap pembaruan skema hanya dapat menambahkan satu fungsi dan satu bidang vektor yang dihasilkan.</p></li>
+<li><p>Fungsi yang didukung menentukan tipe bidang vektor yang dihasilkan: ` <code translate="no">BM25</code> ` menghasilkan bidang ` <code translate="no">SPARSE_FLOAT_VECTOR</code> `, dan ` <code translate="no">MINHASH</code> ` menghasilkan bidang ` <code translate="no">BINARY_VECTOR</code> `.</p></li>
+<li><p>Vektor field yang dihasilkan harus merupakan field baru. Field tersebut tidak boleh merujuk ke field yang sudah ada dalam skema koleksi.</p></li>
+<li><p>Bidang vektor yang dihasilkan tidak boleh bersifat nullable.</p></li>
+<li><p>Bidang masukan yang digunakan oleh fungsi tersebut harus sudah ada dalam koleksi.</p></li>
+<li><p>Saat menambahkan fungsi BM25 atau MinHash ke koleksi yang sudah ada, input fungsi harus berupa bidang " <code translate="no">VARCHAR</code> ". Input " <code translate="no">TEXT</code> " tidak didukung dalam alur kerja ini karena Milvus tidak dapat mengisi kembali output yang dihasilkan untuk entitas yang sudah ada dari jenis input tersebut.</p></li>
+</ul>
+<p><strong>Menghapus bidang yang didefinisikan pengguna</strong></p>
+<ul>
+<li><p>Anda tidak dapat menghapus bidang kunci utama, bidang kunci partisi, bidang kunci pengelompokan, atau bidang vektor terakhir dalam sebuah koleksi.</p></li>
+<li><p>Anda dapat menghapus seluruh bidang " <code translate="no">ARRAY&lt;STRUCT&gt;</code> ", tetapi tidak dapat menghapus sub-bidang individu di dalam bidang " <code translate="no">ARRAY&lt;STRUCT&gt;</code> ".</p></li>
+<li><p>Anda tidak dapat secara langsung menghapus bidang yang digunakan sebagai bidang masukan fungsi atau dihasilkan sebagai bidang keluaran fungsi. Untuk menghapus bidang keluaran fungsi, hapus fungsi yang menghasilkannya.</p></li>
+</ul>
+<p><strong>Menghapus bidang vektor yang dihasilkan oleh fungsi</strong></p>
+<ul>
+<li><p>Dalam alur kerja perubahan skema ini, menghapus suatu fungsi akan menghapus fungsi tersebut beserta bidang keluaran yang dihasilkannya. Bidang masukan fungsi tetap ada dalam skema koleksi.</p></li>
+<li><p>Penghapusan fungsi akan ditolak jika menghapus bidang keluaran fungsi tersebut akan membuat koleksi tidak memiliki bidang vektor sama sekali.</p></li>
 </ul>
 <div class="alert note">
-<p>Lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a> untuk mengetahui pembuatan koleksi dan operasi dasar.</p>
+<p>Untuk perubahan skema di luar operasi penambahan dan penghapusan yang didukung, buat ulang atau migrasikan koleksi tersebut.</p>
 </div>
-<h2 id="Basic-usage" class="common-anchor-header">Penggunaan dasar<button data-href="#Basic-usage" class="anchor-icon" translate="no">
+<h2 id="Add-fields-to-an-existing-collection" class="common-anchor-header">Menambahkan bidang ke koleksi yang sudah ada<button data-href="#Add-fields-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,132 +85,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-<span class="hljs-comment"># Connect to your Milvus server</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>  <span class="hljs-comment"># Replace with your Milvus server URI</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-
-<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build();
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
-
-<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">Skenario 1: Menambahkan field yang dapat dinullkan dengan cepat<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Cara paling sederhana untuk memperluas koleksi Anda adalah dengan menambahkan bidang yang dapat dinullkan. Cara ini sangat cocok ketika Anda perlu menambahkan atribut baru dengan cepat ke data Anda.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
-<span class="hljs-comment"># - Makes the field available for use with minimal delay</span>
-<span class="hljs-comment"># - Sets NULL for all existing entities</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;created_timestamp&quot;</span>,  <span class="hljs-comment"># Name of the new field to add</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type must be a scalar type</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-    <span class="hljs-comment"># Allows NULL values for existing entities</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionFieldReq;
-
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;created_timestamp&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;created_timestamp&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;Int64&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;created_timestamp&quot;,
-      &quot;dataType&quot;: &quot;Int64&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Perilaku yang diharapkan:</p>
+    </button></h2><p>Pilih jalur penambahan bidang berdasarkan cara nilai bidang dihasilkan:</p>
 <ul>
-<li><p><strong>Entitas yang sudah ada</strong> akan memiliki NULL untuk bidang baru</p></li>
-<li><p><strong>Entitas baru</strong> dapat memiliki nilai NULL atau nilai aktual</p></li>
-<li><p><strong>Ketersediaan bidang</strong> terjadi hampir seketika dengan penundaan minimal karena sinkronisasi skema internal</p></li>
-<li><p><strong>Dapat ditanyakan segera</strong> setelah periode sinkronisasi singkat</p></li>
+<li><p><a href="#add-user-defined-scalar-fields--milvus-26x">Tambahkan bidang skalar yang didefinisikan pengguna</a> jika Anda memerlukan metadata baru untuk penyaringan, hasil kueri, atau logika aplikasi.</p></li>
+<li><p><a href="#add-structarray-fields--milvus-300">Tambahkan bidang StructArray</a> jika Anda memerlukan bidang array yang elemen-elemennya memiliki skema Struct yang sama.</p></li>
+<li><p><a href="#add-user-defined-vector-fields--milvus-2618">Tambahkan bidang vektor yang didefinisikan pengguna</a> saat aplikasi Anda menghasilkan embedding dan menulis nilai vektor ke Milvus.</p></li>
+<li><p><a href="#add-vector-fields-generated-by-functions--milvus-30x">Tambahkan bidang vektor yang dihasilkan oleh fungsi</a> ketika Milvus harus menghasilkan nilai vektor dari bidang yang sudah ada, seperti vektor jarang BM25 atau tanda tangan MinHash dari teks.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-literal">None</span>  <span class="hljs-comment"># New field shows NULL for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-title class_">None</span>  # <span class="hljs-title class_">New</span> field shows <span class="hljs-variable constant_">NULL</span> <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-  <span class="hljs-string">&quot;code&quot;</span>: 0,
-  <span class="hljs-string">&quot;data&quot;</span>: {},
-  <span class="hljs-string">&quot;cost&quot;</span>: 0
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">Skenario 2: Menambahkan bidang dengan nilai default<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
+<p>Dalam semua kasus, nama bidang baru tidak boleh sudah ada dalam koleksi, dan jumlah total bidang tidak boleh melebihi batas jumlah bidang Milvus. Untuk detailnya, lihat <a href="/docs/id/limitations.md#number-of-resources-in-a-collection">Batas Milvus</a>.</p>
+<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">Tambahkan bidang skalar yang ditentukan pengguna<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,93 +108,46 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda ingin entitas yang ada memiliki nilai awal yang berarti, bukan NULL, tentukan nilai default.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a field with default value</span>
-<span class="hljs-comment"># This operation:</span>
-<span class="hljs-comment"># - Sets the default value for all existing entities</span>
-<span class="hljs-comment"># - Makes the field available with minimal delay</span>
-<span class="hljs-comment"># - Maintains data consistency with the default value</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;priority_level&quot;</span>,     <span class="hljs-comment"># Name of the new field</span>
-    data_type=DataType.VARCHAR,      <span class="hljs-comment"># String type field</span>
-    max_length=<span class="hljs-number">20</span>,                   <span class="hljs-comment"># Maximum string length</span>
-    nullable=<span class="hljs-literal">True</span>,                   <span class="hljs-comment"># Required for added fields</span>
-    default_value=<span class="hljs-string">&quot;standard&quot;</span>         <span class="hljs-comment"># Value assigned to existing entities</span>
-    <span class="hljs-comment"># Also used for new entities if no value provided</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;priority_level&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">20</span>)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;priority_level&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;VarChar&#x27;</span>,
-        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">default_value</span>: <span class="hljs-string">&#x27;standard&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;product_catalog&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;priority_level&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
-      &quot;nullable&quot;: true,
-      &quot;defaultValue&quot;: &quot;standard&quot;,
-      &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: &quot;20&quot;
-      }
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Perilaku yang diharapkan:</p>
+    </button></h3><p>Gunakan perintah ` <code translate="no">add_collection_field()</code> ` untuk menambahkan bidang skalar yang didefinisikan pengguna ke koleksi yang sudah ada.</p>
+<p>Hal ini berbeda dengan menyimpan kunci sembarang di bidang dinamis: setelah pembaruan skema tersedia, bidang skalar baru tersebut menjadi bagian reguler dari skema koleksi. Anda dapat menyisipkan atau memperbarui nilai ke dalamnya, membuat indeks di atasnya jika didukung, menggunakannya dalam kueri dan filter pencarian, serta mengembalikannya dalam hasil kueri atau pencarian.</p>
+<p>Karena entitas yang sudah ada dimasukkan sebelum bidang baru tersebut ada, setiap bidang skalar yang didefinisikan pengguna yang ditambahkan harus dapat bernilai null:</p>
 <ul>
-<li><p><strong>Entitas yang sudah ada</strong> akan memiliki nilai default (<code translate="no">&quot;standard&quot;</code>) untuk bidang yang baru ditambahkan</p></li>
-<li><p><strong>Entitas baru</strong> dapat mengganti nilai default atau menggunakannya jika tidak ada nilai yang disediakan</p></li>
-<li><p><strong>Ketersediaan bidang</strong> terjadi segera dengan penundaan minimal</p></li>
-<li><p><strong>Dapat ditanyakan segera</strong> setelah periode sinkronisasi singkat</p></li>
+<li><p>Jika Anda menambahkan bidang skalar dengan ` <code translate="no">nullable=True</code> ` dan tanpa ` <code translate="no">default_value</code>`, entitas yang sudah ada akan mengembalikan ` <code translate="no">NULL</code> ` untuk bidang baru tersebut.</p></li>
+<li><p>Jika Anda menambahkan bidang skalar dengan ` <code translate="no">nullable=True</code> ` dan ` <code translate="no">default_value</code>`, entitas yang sudah ada akan mengembalikan nilai default alih-alih ` <code translate="no">NULL</code>`.</p></li>
 </ul>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
+<p>Ekspresi filter skalar tidak cocok dengan nilai skalar ` <code translate="no">NULL</code> `. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Nol</a>.</p>
+<p><strong>Contoh: Menambahkan bidang skalar yang dapat bernilai null</strong></p>
+<p>Contoh berikut menambahkan bidang skalar yang dapat bernilai null <code translate="no">source</code> ke koleksi yang sudah ada bernama <code translate="no">product_catalog</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;source&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">128</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>Setelah bidang ditambahkan, entitas yang sudah ada dalam koleksi akan mengembalikan nilai ` <code translate="no">NULL</code> ` untuk ` <code translate="no">source</code>`. Entitas baru dapat menetapkan nilai ` <code translate="no">source</code> ` selama proses penyisipan (insert) atau pembaruan (upsert).</p>
+<p><strong>Contoh: Menambahkan bidang skalar dengan nilai default</strong></p>
+<p>Jika entitas yang sudah ada harus mengembalikan nilai konkret alih-alih ` <code translate="no">NULL</code>`, tentukan ` <code translate="no">default_value</code> ` saat menambahkan bidang skalar. Contoh berikut menambahkan bidang ` <code translate="no">review_status</code> ` dan menggunakan ` <code translate="no">&quot;unreviewed&quot;</code> ` sebagai nilai default.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;review_status&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
+<span class="highlighted-comment-line">    max_length=<span class="hljs-number">32</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    default_value=<span class="hljs-string">&quot;unreviewed&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">{
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  # <span class="hljs-title class_">Shows</span> <span class="hljs-keyword">default</span> value <span class="hljs-keyword">for</span> existing entities
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-{
-    <span class="hljs-string">&#x27;id&#x27;</span>: 1,
-    <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
-}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Setelah bidang ditambahkan, entitas yang sudah ada dalam koleksi akan mengembalikan ` <code translate="no">&quot;unreviewed&quot;</code> ` untuk ` <code translate="no">review_status</code>`. Entitas baru dapat menetapkan nilai yang berbeda atau menggunakan nilai default jika tidak ada nilai yang diberikan.</p>
+<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">Menambahkan bidang StructArray<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -329,7 +162,38 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">Dapatkah saya mengaktifkan fungsionalitas skema dinamis dengan menambahkan bidang <code translate="no">$meta</code>?<button data-href="#Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="anchor-icon" translate="no">
+    </button></h3><p>Gunakan ` <code translate="no">add_collection_struct_field()</code> ` untuk menambahkan bidang `StructArray` yang menerima array elemen `Struct`. Untuk menambahkan bidang `StructArray`, lakukan langkah-langkah berikut:</p>
+<ol>
+<li><p>Buat skema Struct yang berisi sub-bidang yang diperlukan dengan tipe data yang didukung. Untuk tipe data yang berlaku, lihat <a href="/docs/id/structarray-limits.md#Supported-subfield-data-types">Batasan StructArray</a>.</p></li>
+<li><p>Rujuk skema Struct yang dibuat di atas dan tetapkan kapasitas maksimum bidang tersebut di <code translate="no">add_collection_struct_field()</code>.</p></li>
+<li><p>Tetapkan ` <code translate="no">nullable=True</code> ` dalam permintaan.</p></li>
+</ol>
+<p><strong>Contoh: Menambahkan bidang StructArray yang dapat bernilai null</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Create a Struct schema.</span>
+struct_schema = client.create_struct_field_schema()
+
+<span class="hljs-comment"># Add scalar fields to the Struct.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
+
+<span class="hljs-comment"># Add vector fields to the Struct with mmap enabled.</span>
+struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
+
+<span class="highlighted-comment-line">client.add_collection_struct_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;books&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">    struct_schema=struct_schema,</span>
+<span class="highlighted-comment-line">    max_capacity=<span class="hljs-number">1024</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah bidang StructArray ditambahkan, entitas yang sudah ada dalam koleksi akan mengembalikan nilai ` <code translate="no">NULL</code> ` untuk ` <code translate="no">chunks</code> ` di semua sub-bidangnya. Saat Anda menyisipkan entitas baru, pastikan semua sub-bidang memiliki nilai ` <code translate="no">NULL</code> ` atau nilai yang valid. Menyisipkan entitas dengan beberapa sub-bidang yang diatur ke ` <code translate="no">NULL</code> ` dan yang lain ke nilai yang valid akan menyebabkan kesalahan.</p>
+<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">Menambahkan bidang vektor yang didefinisikan pengguna<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -344,55 +208,133 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, Anda tidak dapat menggunakan <code translate="no">add_collection_field</code> untuk menambahkan bidang <code translate="no">$meta</code> untuk mengaktifkan fungsionalitas bidang dinamis. Sebagai contoh, kode di bawah ini tidak akan berfungsi:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This is NOT supported</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;existing_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;$meta&quot;</span>,
-    data_type=DataType.JSON  <span class="hljs-comment"># This operation will fail</span>
+    </button></h3><p>Gunakan <code translate="no">add_collection_field()</code> untuk menambahkan bidang vektor yang didefinisikan pengguna saat aplikasi Anda menghasilkan embedding dan menulis nilai vektor ke Milvus.</p>
+<p>Setiap bidang vektor yang ditentukan pengguna yang ditambahkan harus dapat bernilai null. Entitas yang sudah ada memiliki nilai " <code translate="no">NULL</code> " untuk bidang vektor baru tersebut hingga Anda menulis nilai vektor melalui upsert atau alur kerja backfill. Entitas baru dapat menyertakan bidang vektor tersebut saat penyisipan. Pencarian vektor akan melewati entitas yang nilai vektornya adalah " <code translate="no">NULL</code>". Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
+<p><strong>Contoh: Menambahkan bidang vektor yang dapat bernilai null</strong></p>
+<p>Contoh berikut menambahkan bidang vektor padat yang dapat bernilai null bernama <code translate="no">embedding_v2</code> ke koleksi yang sudah ada. Tetapkan <code translate="no">dim</code> sesuai dengan dimensi embedding yang dihasilkan oleh aplikasi Anda.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.add_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,</span>
+<span class="highlighted-comment-line">    data_type=DataType.FLOAT_VECTOR,</span>
+<span class="highlighted-comment-line">    dim=<span class="hljs-number">768</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah bidang ditambahkan, buat indeks pada bidang vektor baru tersebut sebelum melakukan pencarian:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// ❌ This is NOT supported</span>
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;existing_collection&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;$meta&quot;</span>)
-        .dataType(DataType.JSON)
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// ❌ This is NOT supported</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;product_catalog&#x27;</span>,
-    <span class="hljs-attr">field</span>: {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;$meta&#x27;</span>,
-        <span class="hljs-attr">dataType</span>: <span class="hljs-string">&#x27;JSON&#x27;</span>,
-     }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment"># ❌ This is NOT supported</span>
-curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
-  -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;existing_collection&quot;,
-    &quot;schema&quot;: {
-      &quot;fieldName&quot;: &quot;$meta&quot;,
-      &quot;dataType&quot;: &quot;JSON&quot;,
-      &quot;nullable&quot;: true
-    }
-  }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengaktifkan fungsionalitas skema dinamis:</p>
+<p>Entitas yang sudah ada memiliki nilai ` <code translate="no">NULL</code> ` untuk ` <code translate="no">embedding_v2</code> ` dan akan dilewati saat Anda melakukan pencarian pada bidang ini. Untuk membuat entitas yang sudah ada dapat dicari melalui ` <code translate="no">embedding_v2</code>`, tulis nilai vektor non-NULL melalui `upsert` atau alur kerja `backfill`. Entitas baru dapat menyertakan ` <code translate="no">embedding_v2</code> ` saat penyisipan.</p>
+<h3 id="Add-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Tambahkan bidang vektor yang dihasilkan oleh fungsi<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan alur kerja ini ketika Milvus harus menghasilkan bidang vektor baru dari data yang sudah tersimpan dalam koleksi yang ada. Operasi ini menambahkan dua elemen skema terkait:</p>
 <ul>
-<li><p><strong>Koleksi baru</strong>: Tetapkan <code translate="no">enable_dynamic_field</code> ke True saat membuat koleksi. Untuk detailnya, lihat <a href="/docs/id/create-collection.md#Create-Schema">Membuat Koleksi</a></p></li>
-<li><p><strong>Koleksi yang sudah ada</strong>: Atur properti tingkat koleksi <code translate="no">dynamicfield.enabled</code> ke True. Untuk detailnya, lihat <a href="/docs/id/modify-collection.md#Example-4-Enable-dynamic-field">Memodifikasi Koleksi</a>.</p></li>
+<li><p>Sebuah Fungsi yang membaca satu atau lebih bidang masukan yang sudah ada.</p></li>
+<li><p>Sebuah bidang keluaran vektor baru yang menyimpan nilai yang dihasilkan oleh Fungsi tersebut.</p></li>
 </ul>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Apa yang terjadi jika saya menambahkan bidang dengan nama yang sama dengan kunci bidang dinamis?<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+<p>Misalnya, Fungsi BM25 membaca bidang " <code translate="no">VARCHAR</code> " yang sudah ada dan menghasilkan bidang " <code translate="no">SPARSE_FLOAT_VECTOR</code> " untuk pencarian leksikal. Fungsi MinHash menghasilkan bidang " <code translate="no">BINARY_VECTOR</code> " untuk deteksi duplikat hampir identik. Alur kerja ini tidak menambahkan atau mengganti bidang masukan Fungsi.</p>
+<div class="alert note">
+<p>Fitur ini memerlukan Storage V3. Untuk petunjuk pengaktifan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
+</div>
+<p>Menambahkan Fungsi dan bidang vektor yang dihasilkannya ke koleksi yang sudah ada juga memerlukan pemadatan versi skema dan pemadatan versi penyimpanan. Milvus akan menolak permintaan jika salah satu pengaturan tersebut dinonaktifkan. Prasyarat tambahan ini hanya berlaku saat memodifikasi koleksi yang sudah ada; mendefinisikan Fungsi dalam skema koleksi awal tidak menggunakan alur kerja pengisian data yang sudah ada ini.</p>
+<p>Fungsi yang didukung menentukan tipe bidang vektor yang dihasilkan:</p>
+<table>
+<thead>
+<tr><th>Fungsi</th><th>Jenis bidang vektor yang dihasilkan</th><th>Bidang masukan yang umum</th><th>Kasus penggunaan umum</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>Bidang " <code translate="no">VARCHAR</code> " dengan penganalisis diaktifkan</td><td>Pencarian leksikal dan relevansi kata kunci</td></tr>
+<tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td>Bidang " <code translate="no">VARCHAR</code> "</td><td>Deteksi duplikat hampir identik</td></tr>
+</tbody>
+</table>
+<p>Untuk detail tentang cara kerja masing-masing fungsi, lihat <a href="/docs/id/bm25-function.md">Fungsi BM25</a> dan <a href="/docs/id/minhash-function.md">Fungsi MinHash</a>.</p>
+<p>Bidang vektor yang dihasilkan tidak boleh sudah ada dalam koleksi, dan tidak boleh bersifat nullable. Bidang input fungsi harus sudah ada.</p>
+<p><strong>Contoh: Menambahkan bidang vektor langka yang dihasilkan oleh BM25 untuk pencarian leksikal</strong></p>
+<p>Contoh berikut menambahkan fungsi BM25 bernama <code translate="no">text_bm25</code> dan bidang vektor langka yang dihasilkan bernama <code translate="no">text_sparse</code> ke koleksi yang sudah ada. Koleksi tersebut harus sudah memiliki bidang <code translate="no">VARCHAR</code> bernama <code translate="no">text</code> dengan penganalisis yang diaktifkan.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+sparse_field = client.create_field_schema(
+    name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    data_type=DataType.SPARSE_FLOAT_VECTOR,
+    desc=<span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>,
+)
+
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    function_type=FunctionType.BM25,
+)
+
+<span class="highlighted-comment-line">client.add_function_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
+<span class="highlighted-comment-line">    func=bm25_function,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah menambahkan fungsi BM25 dan bidang yang dihasilkan, buatlah indeks pada bidang vektor langka tersebut sebelum menggunakannya untuk pencarian BM25:</p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Secara konseptual, operasi ini menambahkan definisi bidang dan fungsi berikut:</p>
+<pre><code translate="no" class="language-plaintext">New generated output field:
+  name: &quot;text_sparse&quot;
+  data_type: SPARSE_FLOAT_VECTOR
+  nullable: false
+
+New function:
+  name: &quot;text_bm25&quot;
+  type: BM25
+  input_field_names: [&quot;text&quot;]
+  output_field_names: [&quot;text_sparse&quot;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah permintaan berhasil, ` <code translate="no">describe_collection()</code> ` mengembalikan baik bidang vektor ` <code translate="no">text_sparse</code> ` baru maupun fungsi ` <code translate="no">text_bm25</code> ` dalam skema koleksi. Milvus menghasilkan keluaran fungsi untuk entitas baru saat entitas tersebut ditulis. Untuk entitas yang sudah ada, Milvus mengisi bidang vektor yang dihasilkan secara asinkron melalui kompresi latar belakang. Visibilitas skema mengonfirmasi bahwa pembaruan skema berhasil, tetapi tidak menunjukkan bahwa pengisian ulang telah selesai untuk setiap entitas yang sudah ada. Untuk alur kerja pencarian BM25 yang lengkap, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Penuh</a>.</p>
+<p>Milvus juga mendukung bidang vektor biner yang dihasilkan oleh MinHash untuk deteksi duplikat hampir identik. Fungsi MinHash menggunakan <code translate="no">FunctionType.MINHASH</code> dan menulis ke bidang keluaran baru <code translate="no">BINARY_VECTOR</code>. Untuk detail konfigurasi, lihat <a href="/docs/id/minhash-function.md">Fungsi MinHash</a>.</p>
+<h2 id="Drop-fields-from-an-existing-collection" class="common-anchor-header">Menghapus bidang dari koleksi yang ada<button data-href="#Drop-fields-from-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -407,270 +349,66 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bila koleksi Anda memiliki bidang dinamis yang diaktifkan (<code translate="no">$meta</code> ada), Anda bisa menambahkan bidang statis yang memiliki nama yang sama dengan kunci bidang dinamis yang ada. Bidang statis baru akan menutupi kunci bidang dinamis, namun data dinamis asli tetap dipertahankan.</p>
-<p>Untuk menghindari kemungkinan konflik dalam nama field, pertimbangkan nama untuk field yang akan ditambahkan dengan mengacu pada field yang ada dan kunci field dinamis sebelum benar-benar menambahkannya.</p>
-<p><strong>Contoh skenario:</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
-<span class="hljs-comment"># Insert data with dynamic field keys</span>
-data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment"># Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment"># Another dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=data)
-
-<span class="hljs-comment"># Add static field with same name as existing dynamic field key</span>
-client.add_collection_field(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    field_name=<span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment"># Same name as dynamic field key</span>
-    data_type=DataType.INT64,        <span class="hljs-comment"># Data type can differ from dynamic field key</span>
-    nullable=<span class="hljs-literal">True</span>                    <span class="hljs-comment"># Must be True for added fields</span>
-)
-
-<span class="hljs-comment"># Insert new data after adding static field</span>
-new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               <span class="hljs-comment"># Now must use INT64 type (static field)</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    <span class="hljs-comment"># Still a dynamic field key</span>
-}]
-client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=new_data)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-
-<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
-row.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, ...}));
-row.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>);
-row.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">99.5</span>);
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(row))
-        .build());
-        
-client.addCollectionField(AddCollectionFieldReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .fieldName(<span class="hljs-string">&quot;extra_info&quot;</span>)
-        .dataType(DataType.Int64)
-        .isNullable(<span class="hljs-literal">true</span>)
-        .build());
-        
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">newRow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-newRow.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
-newRow.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, ...}));
-newRow.addProperty(<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-number">100</span>);
-newRow.addProperty(<span class="hljs-string">&quot;score&quot;</span>, <span class="hljs-number">88.0</span>);
-
-insertR = client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
-        .data(Collections.singletonList(newRow))
-        .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Original collection with dynamic field enabled</span>
-<span class="hljs-comment">// Insert data with dynamic field keys</span>
-<span class="hljs-keyword">const</span> data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-string">&quot;this is a dynamic field key&quot;</span>,  <span class="hljs-comment">// Dynamic field key as string</span>
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">99.5</span>                                 <span class="hljs-comment">// Another dynamic field key</span>
-}]
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: data
-});
-
-<span class="hljs-comment">// Add static field with same name as existing dynamic field key</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">add_collection_field</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;extra_info&quot;</span>,         <span class="hljs-comment">// Same name as dynamic field key</span>
-    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,        <span class="hljs-comment">// Data type can differ from dynamic field key</span>
-    <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>                   <span class="hljs-comment">// Must be True for added fields</span>
-});
-
-<span class="hljs-comment">// Insert new data after adding static field</span>
-<span class="hljs-keyword">const</span> new_data = [{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, ...],
-    <span class="hljs-string">&quot;extra_info&quot;</span>: <span class="hljs-number">100</span>,               # <span class="hljs-title class_">Now</span> must use <span class="hljs-title class_">INT64</span> <span class="hljs-title function_">type</span> (<span class="hljs-keyword">static</span> field)
-    <span class="hljs-string">&quot;score&quot;</span>: <span class="hljs-number">88.0</span>                    # <span class="hljs-title class_">Still</span> a dynamic field key
-}];
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">data</span>: new_data
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 1,
-      \&quot;my_vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5],
-      \&quot;extra_info\&quot;: \&quot;this is a dynamic field key\&quot;,
-      \&quot;score\&quot;: 99.5
-    }]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;schema\&quot;: {
-      \&quot;fieldName\&quot;: \&quot;extra_info\&quot;,
-      \&quot;dataType\&quot;: \&quot;Int64\&quot;,
-      \&quot;nullable\&quot;: true
-    }
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;data\&quot;: [{
-      \&quot;id\&quot;: 2,
-      \&quot;my_vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7],
-      \&quot;extra_info\&quot;: 100,
-      \&quot;score\&quot;: 88.0
-    }]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Perilaku yang diharapkan:</p>
+    </button></h2><p>Anda dapat menghapus bidang dari koleksi yang sudah ada dengan dua cara. Hapus bidang skalar atau vektor yang ditentukan pengguna secara langsung jika bidang tersebut tidak lagi menjadi bagian dari model koleksi Anda. Hapus bidang vektor yang dihasilkan oleh fungsi dengan menghapus fungsi yang menghasilkannya.</p>
+<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">Menghapus bidang yang didefinisikan pengguna<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan ` <code translate="no">drop_collection_field()</code> ` untuk menghapus bidang skalar, vektor, atau StructArray yang didefinisikan pengguna yang tidak lagi menjadi bagian dari model koleksi Anda.</p>
+<p>Menghapus bidang terlebih dahulu akan mengubah skema koleksi dan visibilitas bidang:</p>
 <ul>
-<li><p><strong>Entitas yang sudah ada</strong> akan memiliki NULL untuk bidang statis yang baru <code translate="no">extra_info</code></p></li>
-<li><p><strong>Entitas baru</strong> harus menggunakan tipe data bidang statis (<code translate="no">INT64</code>)</p></li>
-<li><p><strong>Nilai kunci bidang dinamis asli</strong> dipertahankan dan dapat diakses melalui sintaks <code translate="no">$meta</code> </p></li>
-<li><p><strong>Bidang statis menutupi kunci bidang dinamis</strong> dalam kueri normal</p></li>
+<li><p>Setelah perintah ` <code translate="no">drop_collection_field()</code> ` berhasil, skema koleksi diperbarui: ` <code translate="no">describe_collection()</code> ` tidak lagi mengembalikan bidang yang dihapus, dan kueri atau pencarian tidak lagi dapat mengembalikan bidang tersebut dalam ` <code translate="no">output_fields</code> ` atau menggunakannya dalam ekspresi.</p></li>
+<li><p>Indeks yang dibangun di atas kolom yang dihapus akan dibersihkan sebagai bagian dari pembaruan skema.</p></li>
 </ul>
-<p><strong>Mengakses nilai statis dan dinamis:</strong></p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Query static field only (dynamic field key is masked)</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
+<p>Pembersihan penyimpanan ditangani secara terpisah dari pembersihan skema. Untuk detailnya, lihat <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">Kapan ruang penyimpanan dapat digunakan kembali setelah menghapus bidang?</a>.</p>
+<p><strong>Contoh: Menghapus bidang skalar yang didefinisikan pengguna</strong></p>
+<p>Contoh berikut mengasumsikan bahwa ` <code translate="no">experiment_tag</code> ` adalah bidang skalar yang didefinisikan pengguna di ` <code translate="no">product_catalog</code>`, dan menghapusnya dari koleksi tersebut.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-<span class="hljs-comment"># 2. Query both static and original dynamic values</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 1&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {</span>
-<span class="hljs-comment">#     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">#     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment"># }</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment"># 3. Query new entity with static field value</span>
-results = client.query(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id == 2&quot;</span>, 
-    output_fields=[<span class="hljs-string">&quot;extra_info&quot;</span>]
-)
-<span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;experiment_tag&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<p>Setelah menghapus sebuah bidang, Anda dapat memanggil ` <code translate="no">describe_collection()</code> ` untuk memverifikasi bahwa bidang tersebut tidak lagi menjadi bagian dari skema.</p>
+<p><strong>Contoh: Menghapus bidang StructArray</strong></p>
+<p>Contoh berikut mengasumsikan bahwa ` <code translate="no">chunks</code> ` adalah bidang StructArray di ` <code translate="no">my_collection</code>`, dan menghapusnya dari koleksi.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 1. Query static field only (dynamic field key is masked)</span>
-<span class="hljs-keyword">let</span> results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 1, &quot;extra_info&quot;: None}  # NULL for existing entity</span>
+<p><strong>Contoh: Menghapus bidang vektor yang didefinisikan pengguna</strong></p>
+<p>Anda dapat menghapus bidang vektor dengan metode <code translate="no">drop_collection_field()</code> yang sama, tetapi koleksi tersebut harus tetap berisi setidaknya satu bidang vektor setelah penghapusan. Hal ini berguna untuk koleksi yang untuk sementara menyimpan beberapa representasi vektor dan kemudian menstandarkannya menjadi salah satunya.</p>
+<p>Contoh berikut mengasumsikan bahwa ` <code translate="no">image_vector</code> ` adalah bidang vektor yang didefinisikan pengguna di ` <code translate="no">hybrid_catalog</code>`, dan bahwa koleksi tersebut masih menyimpan bidang vektor lain, seperti ` <code translate="no">text_vector</code>`.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-<span class="hljs-comment">// 2. Query both static and original dynamic values</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;product_catalog&quot;</span>, 
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 1&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>, <span class="hljs-string">&quot;$meta[&#x27;extra_info&#x27;]&quot;</span>]
-});
-<span class="hljs-comment">// Returns: {</span>
-<span class="hljs-comment">//     &quot;id&quot;: 1,</span>
-<span class="hljs-comment">//     &quot;extra_info&quot;: None,                           # Static field value (NULL)</span>
-<span class="hljs-comment">//     &quot;$meta[&#x27;extra_info&#x27;]&quot;: &quot;this is a dynamic field key&quot;  # Original dynamic value</span>
-<span class="hljs-comment">// }</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment">// 3. Query new entity with static field value</span>
-results = client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;id == 2&quot;</span>, 
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;extra_info&quot;</span>]
-})
-<span class="hljs-comment">// Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
+<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;hybrid_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<span class="hljs-comment">#!/bin/bash</span>
-
-<span class="hljs-built_in">export</span> MILVUS_HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> AUTH_TOKEN=<span class="hljs-string">&quot;your_token_here&quot;</span>
-<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_catalog&quot;</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 1\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;, \&quot;\$meta[&#x27;extra_info&#x27;]\&quot;]
-  }&quot;</span>
-
-<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
-curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
-  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
-  -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
-    \&quot;filter\&quot;: \&quot;id == 2\&quot;,
-    \&quot;outputFields\&quot;: [\&quot;extra_info\&quot;]
-  }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">Berapa lama waktu yang dibutuhkan agar field baru tersedia?<button data-href="#How-long-does-it-take-for-a-new-field-to-become-available" class="anchor-icon" translate="no">
+<p>Jika <code translate="no">image_vector</code> adalah medan vektor terakhir dalam koleksi, operasi penghapusan akan ditolak.</p>
+<h3 id="Drop-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Menghapus medan vektor yang dihasilkan oleh fungsi<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -685,4 +423,172 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Field yang ditambahkan akan segera tersedia, tetapi mungkin ada penundaan singkat karena perubahan skema internal yang disiarkan di seluruh cluster Milvus. Sinkronisasi ini memastikan semua node mengetahui pembaruan skema sebelum memproses kueri yang melibatkan bidang baru.</p>
+    </button></h3><p>Gunakan operasi ini ketika Anda tidak lagi memerlukan bidang vektor yang dihasilkan oleh suatu fungsi, seperti bidang vektor langka yang dihasilkan oleh BM25.</p>
+<p>Untuk menghapus bidang vektor yang dihasilkan, panggil ` <code translate="no">drop_collection_function()</code> ` pada fungsi yang menghasilkannya. Dalam alur kerja ini, Milvus menghapus fungsi tersebut dari skema koleksi dan juga menghapus bidang keluaran vektor yang dihasilkannya.</p>
+<p>Jangan memanggil ` <code translate="no">drop_collection_field()</code> ` pada bidang masukan fungsi atau bidang keluaran fungsi. Jika bidang target adalah bidang keluaran fungsi, panggil ` <code translate="no">drop_collection_function()</code> ` sebagai gantinya. Bidang masukan fungsi tetap dipertahankan setelah fungsi dihapus.</p>
+<p><strong>Contoh: Menghapus fungsi BM25 dan bidang yang dihasilkannya</strong></p>
+<p>Contoh berikut mengasumsikan bahwa ` <code translate="no">text_bm25</code> ` adalah fungsi BM25 di ` <code translate="no">product_catalog</code> ` dan menghasilkan bidang keluaran vektor langka bernama ` <code translate="no">text_sparse</code>`.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="highlighted-comment-line">client.drop_collection_function(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
+<span class="highlighted-comment-line">)</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah operasi berhasil, <code translate="no">describe_collection()</code> tidak lagi mengembalikan fungsi yang dihapus atau bidang keluaran yang dihasilkannya. Bidang masukan fungsi tetap ada dalam skema.</p>
+<p>Jika menghapus bidang keluaran fungsi akan membuat koleksi tersebut tidak memiliki bidang vektor sama sekali, operasi tersebut akan ditolak.</p>
+<h2 id="FAQ" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Which-add-field-method-should-I-use" class="common-anchor-header">Metode add-field mana yang harus saya gunakan?<button data-href="#Which-add-field-method-should-I-use" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan ` <code translate="no">add_collection_field()</code> ` untuk menambahkan bidang skalar yang didefinisikan pengguna ketika aplikasi Anda menyediakan nilai skalar untuk penyaringan, keluaran kueri, atau logika aplikasi.</p>
+<p>Gunakan ` <code translate="no">add_collection_struct_field()</code> ` untuk menambahkan bidang `StructArray` saat Anda memerlukan bidang array yang elemen-elemennya berbagi skema `Struct` yang sama.</p>
+<p>Gunakan ` <code translate="no">add_collection_field()</code> ` untuk menambahkan bidang vektor yang didefinisikan pengguna ketika aplikasi Anda menghasilkan embedding dan menulis nilai vektor ke Milvus.</p>
+<p>Gunakan alur kerja `generated-vector-field` ketika Milvus harus menghasilkan nilai vektor dari bidang yang sudah ada. Panduan ini menunjukkan jalur BM25 dengan ` <code translate="no">add_function_field()</code> ` untuk pencarian leksikal. Milvus juga mendukung bidang vektor biner yang dihasilkan oleh MinHash untuk deteksi duplikat hampir identik.</p>
+<h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">Mengapa bidang yang didefinisikan pengguna yang ditambahkan harus dapat bernilai null?<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Entitas yang sudah ada dimasukkan sebelum bidang baru tersebut ada, sehingga entitas tersebut tidak memiliki nilai untuk bidang tersebut. Dengan mengaktifkan opsi ` <code translate="no">nullable=True</code> `, Milvus akan mewakili nilai yang hilang sebagai ` <code translate="no">NULL</code> ` hingga aplikasi Anda menulis nilai atau, untuk bidang skalar, hingga nilai default berlaku.</p>
+<p>Aturan ini berlaku untuk bidang skalar yang ditentukan pengguna dan bidang vektor yang ditentukan pengguna yang ditambahkan dengan ` <code translate="no">add_collection_field()</code>`, serta untuk bidang `StructArray` yang ditambahkan dengan ` <code translate="no">add_collection_struct_field()</code>`. Aturan ini tidak berlaku untuk bidang vektor yang dihasilkan oleh fungsi, yang tidak dapat bernilai `null`.</p>
+<h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">Apa yang terjadi pada entitas yang sudah ada setelah saya menambahkan bidang yang didefinisikan pengguna?<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk bidang skalar yang didefinisikan pengguna, entitas yang sudah ada mengembalikan ` <code translate="no">NULL</code> ` kecuali Anda menetapkan ` <code translate="no">default_value</code>`. Jika Anda menetapkan ` <code translate="no">default_value</code>`, entitas yang sudah ada mengembalikan nilai default tersebut.</p>
+<p>Untuk bidang vektor yang didefinisikan pengguna, entitas yang sudah ada memiliki nilai ` <code translate="no">NULL</code> ` untuk bidang vektor baru tersebut. Pencarian vektor pada bidang yang ditambahkan akan melewati entitas yang nilai vektornya adalah ` <code translate="no">NULL</code>`. Untuk membuat entitas yang sudah ada dapat dicari melalui bidang vektor baru tersebut, masukkan nilai vektor non-NULL melalui `upsert` atau alur kerja `backfill`. Entitas baru dapat menyertakan bidang vektor baru tersebut saat penyisipan.</p>
+<p>Untuk bidang StructArray, entitas yang sudah ada mengembalikan nilai ` <code translate="no">NULL</code> ` untuk bidang StructArray baru di seluruh sub-bidangnya. Entitas baru harus menyediakan nilai ` <code translate="no">NULL</code> ` untuk semua sub-bidang atau nilai yang valid untuk semua sub-bidang.</p>
+<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">Dapatkah saya menambahkan pencarian leksikal BM25 ke koleksi yang sudah ada?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ya. Jika koleksi tersebut sudah memiliki bidang ` <code translate="no">VARCHAR</code> ` dengan penganalisis yang diaktifkan, Anda dapat menambahkan bidang vektor jarang yang dihasilkan oleh BM25 untuk pencarian leksikal. Dalam alur kerja ini, Milvus menambahkan bidang keluaran ` <code translate="no">SPARSE_FLOAT_VECTOR</code> ` baru dan fungsi BM25 yang menghasilkan nilai-nilai untuknya. Anda tidak dapat menggunakan bidang " <code translate="no">TEXT</code> " yang sudah ada sebagai masukan BM25 dalam alur kerja perubahan skema ini. Untuk menggunakan masukan " <code translate="no">TEXT</code> ", tentukan bidang dan fungsi BM25 saat Anda membuat koleksi.</p>
+<p>Setelah menambahkan bidang vektor spars yang dihasilkan oleh BM25, buat indeks <code translate="no">SPARSE_INVERTED_INDEX</code> dengan <code translate="no">metric_type=&quot;BM25&quot;</code> sebelum menggunakan bidang tersebut untuk pencarian BM25.</p>
+<h3 id="Can-I-drop-a-vector-field-generated-by-a-function-directly" class="common-anchor-header">Apakah saya dapat menghapus bidang vektor yang dihasilkan oleh fungsi secara langsung?<button data-href="#Can-I-drop-a-vector-field-generated-by-a-function-directly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tidak. Bidang vektor yang dihasilkan oleh suatu fungsi merupakan bagian dari kontrak skema fungsi tersebut. Gunakan " <code translate="no">drop_collection_function()</code> " sebagai gantinya. Dalam alur kerja perubahan skema ini, Milvus menghapus fungsi dan bidang keluaran vektor yang dihasilkannya secara bersamaan, sambil mempertahankan bidang masukan.</p>
+<h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">Apakah saya perlu menunggu setelah mengubah skema koleksi?<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Biasanya, tidak diperlukan penundaan manual. Jika operasi Anda berikutnya bergantung pada skema yang diperbarui, Anda dapat memanggil ` <code translate="no">describe_collection()</code> ` terlebih dahulu untuk memastikan skema yang saat ini dikembalikan oleh Milvus.</p>
+<p>Dalam penerapan terdistribusi, mungkin ada jeda penyebaran singkat saat komponen Milvus menyegarkan metadata koleksi. Jika operasi segera setelah perubahan skema gagal karena kesalahan terkait skema, segarkan skema dan coba kembali operasi tersebut.</p>
+<h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">Kapan ruang penyimpanan dikembalikan setelah menghapus sebuah bidang?<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Menghapus bidang akan menghilangkannya dari skema saat ini dan visibilitas kueri/pencarian normal, tetapi data historis untuk bidang tersebut tidak langsung dihapus secara fisik dari penyimpanan objek.</p>
+<p>Ruang penyimpanan dapat dikembalikan kemudian selama proses pemadatan. Pemadatan adalah proses latar belakang yang mengatur ulang file data yang ada menjadi file baru yang lebih ringkas. Setelah bidang dihapus, file yang baru dipadatkan mengikuti skema saat ini dan mengabaikan bidang yang dihapus. Milvus tidak menjamin pengurangan ruang penyimpanan secara langsung atau dalam waktu tertentu setelah menghapus suatu bidang.</p>
+<h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Apa yang terjadi jika saya menambahkan bidang skalar dengan nama yang sama dengan kunci bidang dinamis?<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika bidang dinamis diaktifkan, Anda dapat menambahkan bidang skalar dengan nama yang sama dengan kunci bidang dinamis yang sudah ada. Bidang skalar baru tersebut akan menyembunyikan kunci bidang dinamis dalam hasil kueri normal, tetapi data dinamis aslinya tetap disimpan di <code translate="no">$meta</code>.</p>
+<p>Misalnya, jika entitas yang ada menyimpan kunci dinamis bernama <code translate="no">source</code>, dan Anda kemudian menambahkan bidang skalar bernama <code translate="no">source</code>, hasil normal untuk <code translate="no">source</code> akan merujuk ke bidang skalar tersebut. Untuk mengakses nilai dinamis aslinya, gunakan sintaks jalur <code translate="no">$meta</code>, seperti <code translate="no">$meta[&quot;source&quot;]</code>.</p>

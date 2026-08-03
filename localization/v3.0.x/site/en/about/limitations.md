@@ -40,6 +40,7 @@ summary: Learn about the limits while using Milvus.
 <tr><th>Resource</th><th>Limit</th></tr>
 </thead>
 <tbody>
+<tr><td>Database</td><td>255 characters</td></tr>
 <tr><td>Collection</td><td>255 characters</td></tr>
 <tr><td>Field</td><td>255 characters</td></tr>
 <tr><td>Index</td><td>255 characters</td></tr>

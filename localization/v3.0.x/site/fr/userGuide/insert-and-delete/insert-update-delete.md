@@ -25,11 +25,11 @@ summary: >-
     </button></h1><p>Les entités d'une collection sont des enregistrements de données qui partagent le même ensemble de champs. Les valeurs des champs de chaque enregistrement de données forment une entité. Cette page explique comment insérer des entités dans une collection.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>Champs ajoutés après la création de la collection</strong>: Si vous ajoutez de nouveaux champs à une collection après sa création et que vous ne spécifiez pas de valeurs lors de l'insertion, Milvus les remplit automatiquement avec des valeurs par défaut définies ou NULL si aucune valeur par défaut n'est définie. Pour plus de détails, voir <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p></li>
-<li><p><strong>Gestion des doublons</strong>: L'opération standard <code translate="no">insert</code> ne vérifie pas les doublons de clés primaires. L'insertion de données avec une clé primaire existante crée une nouvelle entité avec la même clé, ce qui entraîne une duplication des données et des problèmes d'application potentiels. Pour mettre à jour des entités existantes ou éviter les doublons, utilisez plutôt l'opération <strong><code translate="no">upsert</code></strong> pour mettre à jour les entités existantes ou éviter les doublons. Pour plus d'informations, reportez-vous à l'<a href="/docs/fr/upsert-entities.md">opération Upsert Entities</a>.</p></li>
+<li><p><strong>Champs ajoutés après la création de la collection</strong>: si vous ajoutez de nouveaux champs à une collection après sa création et que vous ne spécifiez pas de valeurs lors de l’insertion, Milvus les remplit automatiquement avec les valeurs par défaut définies ou avec « <code translate="no">NULL</code> » si aucune valeur par défaut n’est définie. Pour plus de détails, consultez la section <a href="/docs/fr/add-fields-to-an-existing-collection.md">Modifier le schéma d’une collection</a>.</p></li>
+<li><p><strong>Gestion des doublons</strong>: l’opération standard « <code translate="no">insert</code> » ne vérifie pas l’existence de clés primaires en double. L’insertion de données avec une clé primaire existante crée une nouvelle entité portant la même clé, ce qui entraîne une duplication des données et peut causer des problèmes au niveau de l’application. Pour mettre à jour des entités existantes ou éviter les doublons, utilisez plutôt l’ <strong><code translate="no">upsert</code></strong> . Pour plus d’informations, consultez la section « <a href="/docs/fr/upsert-entities.md">Upsert d’entités</a> ».</p></li>
 </ul>
 </div>
-<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,9 +44,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, une <strong>entité</strong> fait référence aux enregistrements de données d'une <strong>collection</strong> qui partagent le même <strong>schéma</strong>, les données de chaque champ d'une ligne constituant une entité. Par conséquent, les entités d'une même collection ont les mêmes attributs (noms de champs, types de données et autres contraintes).</p>
-<p>Lors de l'insertion d'une entité dans une collection, l'entité à insérer ne peut être ajoutée avec succès que si elle contient tous les champs définis dans le schéma. L'entité insérée entrera dans une partition nommée <strong>_default</strong> dans l'ordre d'insertion. Si une certaine partition existe, vous pouvez également insérer des entités dans cette partition en spécifiant le nom de la partition dans la demande d'insertion.</p>
-<p>Milvus prend également en charge les champs dynamiques pour maintenir l'évolutivité de la collection. Lorsque le champ dynamique est activé, vous pouvez insérer dans la collection des champs qui ne sont pas définis dans le schéma. Ces champs et valeurs seront stockés sous forme de paires clé-valeur dans un champ réservé appelé <strong>$meta</strong>. Pour plus d'informations sur les champs dynamiques, veuillez vous référer à Champ dynamique.</p>
+    </button></h2><p>Dans Milvus, une <strong>entité</strong> désigne les enregistrements de données d’une <strong>collection</strong> partageant le même <strong>schéma</strong>, les données de chaque champ d’une ligne constituant une entité. Par conséquent, les entités d’une même collection possèdent les mêmes attributs (tels que les noms de champs, les types de données et d’autres contraintes).</p>
+<p>Lors de l’insertion d’une entité dans une collection, celle-ci ne peut être ajoutée avec succès que si elle contient tous les champs définis dans le schéma. L’entité insérée sera placée dans une partition nommée <strong>_default</strong>, dans l’ordre d’insertion. Si une partition spécifique existe, vous pouvez également y insérer des entités en spécifiant le nom de cette partition dans la requête d’insertion.</p>
+<p>Milvus prend également en charge les champs dynamiques afin de préserver l’évolutivité de la collection. Lorsque les champs dynamiques sont activés, vous pouvez insérer dans la collection des champs qui ne sont pas définis dans le schéma. Ces champs et leurs valeurs seront stockés sous forme de paires clé-valeur dans un champ réservé nommé <strong>$meta</strong>. Pour plus d’informations sur les champs dynamiques, veuillez vous reporter à la section Champs dynamiques.</p>
 <h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Insérer des entités dans une collection<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,10 +62,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'insérer des données, vous devez organiser vos données dans une liste de dictionnaires conformément au schéma, chaque dictionnaire représentant une entité et contenant tous les champs définis dans le schéma. Si le champ dynamique est activé dans la collection, chaque dictionnaire peut également inclure des champs qui ne sont pas définis dans le schéma.</p>
-<p>Dans cette section, vous allez insérer des entités dans une collection créée de manière rapide. Une collection créée de cette manière ne comporte que deux champs, nommés <strong>id</strong> et <strong>vector</strong>. En outre, cette collection a activé le champ dynamique, de sorte que les entités dans le code de l'exemple incluent un champ appelé <strong>color</strong> qui n'est pas défini dans le schéma.</p>
+    </button></h2><p>Avant d’insérer des données, vous devez organiser vos données en une liste de dictionnaires conformément au schéma, chaque dictionnaire représentant une entité et contenant tous les champs définis dans le schéma. Si le champ dynamique est activé pour la collection, chaque dictionnaire peut également inclure des champs qui ne sont pas définis dans le schéma.</p>
+<p>Dans cette section, vous allez insérer des entités dans une collection créée via la configuration rapide. Une collection créée de cette manière ne comporte que deux champs, nommés <strong>id</strong> et <strong>vector</strong>. De plus, le champ dynamique est activé pour cette collection ; les entités du code d’exemple incluent donc un champ appelé <strong>color</strong> qui n’est pas défini dans le schéma.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -222,7 +227,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -273,9 +277,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez également insérer des entités dans une partition spécifiée. Les extraits de code suivants supposent que vous avez une partition nommée <strong>PartitionA</strong> dans votre collection.</p>
+    </button></h2><p>Vous pouvez également insérer des entités dans une partition spécifiée. Les extraits de code suivants partent du principe que votre collection contient une partition nommée <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -397,7 +406,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

@@ -1,10 +1,10 @@
 ---
 id: roadmap.md
-title: Milvus ロードマップ
+title: Milvusのロードマップ
 related_key: Milvus roadmap
-summary: Milvusは、AIアプリケーションを強化するために構築されたオープンソースのベクトルデータベースです。私たちの開発ロードマップは以下の通りです。
+summary: Milvusは、AIアプリケーションを支えるために構築されたオープンソースのベクトルデータベースです。以下に、開発の指針となるロードマップをご紹介します。
 ---
-<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus ロードマップ<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
+<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvusのロードマップ<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="common-anchor-header">🌌 次世代のマルチモーダルデータベースとデータレイクに向けて<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="anchor-icon" translate="no">
+    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="common-anchor-header">🌌 次世代マルチモーダルデータベースおよびベクトル・レイクベースに向けて<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,11 +34,11 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Milvus製品ロードマップ</strong></p>
+    </button></h2><p><strong>Milvus 製品ロードマップ</strong></p>
 <p>Milvusロードマップへようこそ！</p>
-<p><strong>構造化データから非構造化データまで</strong>、<strong>リアルタイム検索からオフライン分析まで</strong>、<strong>シングルクラスタのパフォーマンスからグローバルデータレイクアーキテクチャまで</strong>、Milvusは次世代マルチモーダルデータベースという新たな時代に突入します。</p>
-<p>このロードマップは、<strong>Milvus v2.6（進行中）</strong>、<strong>Milvus v3.0（2026年後半を目標）</strong>、<strong>Milvus v3.1（長期開発</strong>）の中核目標の概要と、<strong>Vector Lake（データレイク／Loon</strong>）の進化計画を示しています。</p>
-<h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (進行中)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
+<p>私たちは、Milvusを新たな時代――次世代マルチモーダルデータベース――へと導いています<strong>。</strong> <strong>その範囲は、構造化データから非構造化データ、リアルタイム検索からオフライン分析、そしてシングルクラスタのパフォーマンスからグローバルな</strong> <strong>Vector Lakebaseアーキテクチャ</strong> <strong>にまで及びます</strong> <strong>。</strong></p>
+<p>このロードマップでは、<strong>Milvus v3.0（パブリックベータ）</strong> <strong>およびMilvus v3.1（長期開発）</strong>の中核となる目標と、<strong>Zilliz Vector Lakebaseの</strong>進化計画について概説します。</p>
+<h2 id="🌠-Milvus-v30-Public-Beta" class="common-anchor-header">🌠 Milvus v3.0（パブリックベータ）<button data-href="#🌠-Milvus-v30-Public-Beta" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,9 +53,9 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>タイムライン2025年半ば～2025年末</strong></p>
-<p>フォーカス<strong>データモデルのアップグレード</strong>、<strong>ストリーミングアーキテクチャのリファクタリング</strong>、<strong>ホット/コールドティアリング機能の構築</strong>、<strong>ベクターレイクプロトタイプ(v0.1)</strong>のローンチ。</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">主なハイライト<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+    </button></h2><p><strong>パブリックベータ：2026年5月</strong></p>
+<p>重点：エンジン内でのソート、集計、マルチベクトル検索を備えた<strong>セマンティックネイティブのクエリエンジンを</strong>構築し、<strong>Zilliz Vector Lakebaseのレイクネイティブ基盤</strong>を確立することで、データの移行なしに演算処理をデータに直接適用できるようにします。</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 主なハイライト<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,25 +70,34 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header"><strong>データモデルのアップグレード</strong></h4><ul>
-<li><p>マルチベクトル埋め込み構造をサポートする統一された<strong>Tensor / StructList</strong>データ型を導入し、<em>ColBERT</em>、<em>CoLQwen</em>、<em>ビデオ</em>、<em>マルチモーダルベクトルとの</em>互換性を実現。</p></li>
-<li><p>ポイント、リージョン、空間インデックス（<em>libspatial</em>ベース）を含む<strong>Geo Data</strong>サポートを追加し、LBSやGISでのユースケースを拡大。</p></li>
-<li><p><strong>Timestamp with Timezone</strong>データ型のサポート。</p></li>
+    </button></h3><h4 id="🔹-Schema--Data-Type-Evolution" class="common-anchor-header">🔹<strong>スキーマおよびデータ型の進化</strong></h4><ul>
+<li>インデックスの再構築やサービスの中断なしに、実行時に `ALTER COLLECTION ADD COLUMN` および `DROP COLUMN` をサポート。</li>
+<li>新しい列に対して、Sparkコネクタを介した外部バックフィルと、書き込み時に自動生成されるBM25スパースベクトルを用いた内部<strong>バックフィルの2つのパスを</strong>提供します。</li>
+<li>BM25およびテキストマッチングをサポートし、ベクトルとともに元のテキストを格納する第一級データ型として<strong>TEXT</strong>を導入しました。</li>
 </ul>
-<h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 S<strong>treamNode アーキテクチャのリファクタリング</strong></h4><ul>
-<li><p>ストリーミング・インジェスト・パイプラインを書き換えて、増分書き込みとリアルタイム計算を最適化。</p></li>
-<li><p>同時実行のパフォーマンスと安定性を大幅に改善し、リアルタイムとオフラインの統合処理の基礎を築く。</p></li>
-<li><p>新しいメッセージキュー・エンジンを導入：<strong>ウッドペッカー</strong></p></li>
+<h4 id="🔹-Query-Execution-Overhaul" class="common-anchor-header">🔹<strong>クエリ</strong> <strong>実行の全面刷新</strong></h4><ul>
+<li>セグメントごとのソートとクエリノード間でのマージソートを用いて、<strong>ORDER BY を</strong>エンジン内に組み込みました。</li>
+<li>カーネル内で計算されるSQLスタイル<strong>のクエリ</strong> <strong>集計</strong>（COUNT、SUM、AVG、MIN、MAXを伴うGROUP BY）を追加。</li>
+<li>バケットごとの統計情報とサーバーサイドでのネストされたサブファセットを備えた、ANN結果に対する<strong>検索ファセット</strong>を導入します。</li>
+<li>クラスタ側で登録された<strong>カスタム辞書</strong>および同義語テーブルをサポートし、CJKおよびドメイン固有のリコール率を向上させました。</li>
 </ul>
-<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header"><strong>ホット/コールド・ティアリングとストレージ・アーキテクチャ (StorageV2)</strong></h4><ul>
-<li><p>デュアル・ストレージ形式をサポート：<strong>Parquet</strong>と<strong>Vortex の</strong> 2 つのストレージ形式をサポートし、同時実行性とメモリ効率を向上。</p></li>
-<li><p>自動ホット/コールドデータ分離とインテリジェントなスケジューリングによる階層化ストレージの実装。</p></li>
+<h4 id="🔹-Multi-Vector--Late-Interaction-Support" class="common-anchor-header">🔹<strong>マルチベクトルおよびレイトインタラクションのサポート</strong></h4><ul>
+<li><strong>StructList</strong>を導入し、1つのエンティティを多数のベクトルを含む単一の行として表現できるようにし、MAX_SIMを介したネイティブなレイトインタラクション（ColBERT、ColPali）をサポートする。</li>
+<li>StructListフィールドに対する<strong>要素レベルおよびエンティティレベルの検索</strong>をサポートし、エンティティレベルの結果に対して設定可能なマッチングポリシーを提供します。</li>
+<li>3つの<strong>マルチベクトル検索戦略</strong>を追加：TokenANN（網羅的）、Muvera（投影ベース、学習不要）、Lemur（学習済み圧縮）。</li>
 </ul>
-<h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header"><strong>Vector Lakeプロトタイプ(v0.1)</strong></h4><ul>
-<li><p>FFIを介して<strong>Spark</strong>/<strong>DuckDB</strong>/<strong>DataFusionと</strong>統合し、オフラインでのスキーマ進化とKNNクエリを実現。</p></li>
-<li><p>マルチモーダルなデータ可視化とSpark ETLデモを提供し、データレイク・アーキテクチャの基礎を確立。</p></li>
+<h4 id="🔹-Retrieval--Index-Overhaul" class="common-anchor-header">🔹<strong>検索およびインデックスの全面見直し</strong></h4><ul>
+<li>ブロック圧縮、重み量子化、および永続化フォーマットを用いて、<strong>スパース逆インデックス</strong>を全面的に刷新しました。また、デフォルトのスパース逆インデックスアルゴリズムとして<strong>SINDI</strong>を導入しました。</li>
+<li><strong>Faissファミリー全種</strong>（SVS、Panorama、PQ、IVFPQ、ScaNN）および近似重複<strong>検出用のMinHash DIDOを導入し</strong>、インデックスのカバレッジを拡大しました。</li>
+<li>非同期埋め込みや欠落したモダリティに対応するため、<strong>NULL 許容のベクトルフィールド</strong>をサポートし、検索時に自動フィルタリングを行う。</li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">↪Milvus v3.0 (2026年初頭目標)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
+<h4 id="🔹-Vector-Lakebase-Storage--Compute-Architecture" class="common-anchor-header">🔹<strong>Vector Lakebaseのストレージおよびコンピューティングアーキテクチャ</strong></h4><ul>
+<li>S3 / GCS / Azure内のデータをその場でインデックス登録およびクエリ実行できる「<strong>External Collection</strong>」を導入し、Lance、Parquet、Iceberg、Vortexの各テーブル形式をサポートします。</li>
+<li>オープンな列指向フォーマットである<strong>Vortexと</strong>、オブジェクトストレージからの効率的なポイント読み取りを実現する混合フォーマットストレージレイヤー<strong>であるLoon（Storage V3）</strong>を追加しました。</li>
+<li>書き込み処理を継続しながらバッチ処理を行うため、MVCC スタイルの分離機能を備えた<strong>ポイント・イン・タイム・スナップショット</strong>をサポートします。</li>
+<li><strong>Spark DataSource v2</strong>として統合され、Spark / Databricks / EMRパイプライン内でMilvusへの直接読み取りおよび書き込みが可能になります。</li>
+</ul>
+<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1（長期ビジョン）<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,9 +112,9 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>タイムライン2025年後半～2026年前半</strong></p>
-<p>フォーカス<strong>Vector Lake (v0.2)の</strong>リリースに伴い、<strong>検索エクスペリエンス</strong>、<strong>スキーマの柔軟性</strong>、<strong>非構造化データのサポートを</strong>包括的に強化。</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">主なハイライト<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+    </button></h2><p><strong>スケジュール：2026年後半以降</strong></p>
+<p>重点：<strong>ストレージインテリジェンス</strong>、<strong>書き込みパスの整合性</strong>、<strong>コンピュート機能の拡張性</strong>、および<strong>Vector Lakebase</strong> <strong>との相互運用性の</strong> <strong>拡大</strong>。</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 主なハイライト<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,36 +129,20 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹<strong>検索エクスペリエンスのオーバーホール</strong></h4><ul>
-<li><p>位置や否定例を含む検索をサポートする<strong>More Like This（MLT）</strong>類似検索を導入。</p></li>
-<li><p><strong>ハイライトや</strong> <strong>ブーストなどの</strong>セマンティック検索機能を追加。</p></li>
-<li><p><strong>カスタム辞書と</strong> <strong>類義語テーブルを</strong>サポートし、アナライザーレイヤーでの語彙的・意味的ルール定義を可能にします。</p></li>
-<li><p>クエリーの<strong>集計</strong>機能を導入。</p></li>
+    </button></h3><h4 id="🔹-Storage--Write-Path" class="common-anchor-header">🔹<strong>ストレージおよび書き込みパス</strong></h4><ul>
+<li>ストレージ層において、ページインデックスおよびブルームフィルターによる剪定機能を備えた<strong>述語プッシュダウン</strong>を追加。</li>
+<li>書き込み時の重複を防止するため、データ取り込み時に<strong>主キーに基づく重複排除</strong>を実装。</li>
 </ul>
-<h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹<strong>マルチテナントとリソース管理</strong></h4><ul>
-<li><p>マルチテナントの削除、統計、ホット/コールド・ティアリングを可能にする。</p></li>
-<li><p>リソースの分離とスケジューリング戦略を改善し、単一クラスタ内の数百万テーブルをサポート。</p></li>
+<h4 id="🔹-Compute--Elasticity" class="common-anchor-header">🔹<strong>演算および伸縮性</strong></h4><ul>
+<li>データプレーン上のエンジン内でカスタムロジックを実行するための<strong>ユーザー定義関数（UDF）</strong>をサポートする。</li>
+<li>データの増加に伴いシャードを再分割するための<strong>シャード分割を</strong>有効化し、カスタムシャードキーをサポートする。</li>
 </ul>
-<h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header"><strong>スキーマと主キーの強化</strong></h4><ul>
-<li><p><strong>グローバル・プライマリ・キー重複排除(Global PK Dedup)</strong>を実装し、データの一貫性と一意性を保証。</p></li>
-<li><p><strong>柔軟なスキーマ管理</strong>（カラムの追加/削除、バックアップフィル）をサポート。</p></li>
-<li><p>ベクトル・フィールドで<strong>NULL 値を</strong>許容。</p></li>
+<h4 id="🔹-Spark--Vector-Lakebase-Expansion" class="common-anchor-header">🔹<strong>Spark および</strong> <strong>Vector Lakebase</strong> <strong>の拡張</strong></h4><ul>
+<li>Sparkコネクタを拡張し、<strong>ネイティブのバッチ演算子</strong>ライブラリを充実させます。</li>
+<li>タイムトラベル、スキーマの進化、スナップショットのロールバックなどの<strong>テーブル形式</strong>機能を追加します。</li>
+<li><strong>CDCで更新された外部インデックス</strong>、Apache Paimonのサポート、および追加のデータ形式により、Vector Lakebaseの相互運用性を拡大します。</li>
 </ul>
-<h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹<strong>拡張された非構造化データ型 (BLOB / テキスト)</strong></h4><ul>
-<li><p><strong>BLOB型の</strong>導入。ファイル、画像、動画などのバイナリ・データのネイティブ・ストレージと参照を提供。</p></li>
-<li><p><strong>TEXT タイプを</strong>導入し、フルテキストおよびコンテンツベースの検索機能を強化。</p></li>
-</ul>
-<h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹<strong>エンタープライズグレードの機能</strong></h4><ul>
-<li><p><strong>スナップショットベースのバックアップとリカバリを</strong>サポート</p></li>
-<li><p><strong>エンドツーエンドのトレースと</strong> <strong>監査ロギングの</strong>提供</p></li>
-<li><p>マルチクラスタ展開における<strong>アクティブスタンバイ高可用性(HA)の</strong>実装。</p></li>
-</ul>
-<h4 id="🔹-Vector-Lake-v02" class="common-anchor-header"><strong>ベクターレイク(v0.2</strong>)</h4><ul>
-<li><p><strong>TEXT / BLOBストレージと</strong> <strong>複数バージョンのスナップショット管理を</strong>サポート。</p></li>
-<li><p>オフラインでのインデックス作成、クラスタリング、重複排除、次元削減タスクにSparkを統合。</p></li>
-<li><p><strong>ChatPDFコールドクエリとオフラインベンチマークデモを</strong>提供。</p></li>
-</ul>
-<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">Milvus v3.1 (長期ビジョン)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Milvusの未来を共に築く<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,75 +157,16 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>スケジュール2026年半ば</strong></p>
-<p>フォーカス<strong>ユーザー定義関数（UDF）</strong>、<strong>分散コンピューティングの統合</strong>、<strong>スカラークエリの最適化</strong>、<strong>ダイナミックシャーディング</strong>、<strong>Vector Lake（v1.0</strong>）の正式リリース。</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">主なハイライト<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹<strong>UDFと分散コンピューティングのエコシステム</strong></h4><ul>
-<li><p><strong>ユーザー定義関数(UDF)の</strong>サポートにより、開発者は検索や計算のワークフローにカスタムロジックを組み込むことができる。</p></li>
-<li><p><strong>Ray Dataset / Daftとの</strong>深い統合により、UDFの分散実行とマルチモーダルなデータ処理を実現。</p></li>
-</ul>
-<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header"><strong>スカラークエリーとローカルフォーマットの進化</strong></h4><ul>
-<li><p>スカラーフィールドのフィルタリングと集計のパフォーマンスを最適化。</p></li>
-<li><p>式の評価とインデックスの高速実行を強化。</p></li>
-<li><p>ローカルファイル形式の<strong>インプレース更新を</strong>サポート。</p></li>
-</ul>
-<h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹<strong>高度な検索機能</strong></h4><ul>
-<li><p>以下の機能を追加：<strong>RankBy</strong>、<strong>OrderBy</strong>、<strong>Facet</strong>、<strong>Fuzzy match</strong>クエリ。</p></li>
-<li><p>テキスト検索の強化</p>
+    </button></h2><p>Milvusは、世界中の開発者コミュニティによって推進されているオープンソースプロジェクトです。次世代のマルチモーダルデータベースの構築に、すべてのコミュニティメンバーの皆様のご協力をお願いいたします：</p>
 <ul>
-<li><p><code translate="no">match_phrase_prefix</code></p></li>
-<li><p><code translate="no">Completion Suggester</code></p></li>
-<li><p><code translate="no">Term Suggester</code></p></li>
-<li><p><code translate="no">Phrase Suggester</code></p></li>
+<li><p>💬<strong>フィードバックの共有</strong>：<a href="https://github.com/milvus-io/milvus/discussions">GitHub Discussions</a>で新機能や最適化のアイデアを提案してください。</p></li>
+<li><p>🐛<strong>問題の報告</strong>：<a href="https://github.com/milvus-io/milvus/issues">GitHub Issues</a>を通じてバグを報告してください。</p></li>
+<li><p>🔧<strong>コードの貢献</strong>：プルリクエスト（PR）を送信し、コア機能の構築にご協力ください。</p>
+<ul>
+<li><strong>プルリクエスト</strong>：<a href="https://github.com/milvus-io/milvus/pulls">コードベース</a>に直接貢献してください。バグの修正、機能の追加、ドキュメントの改善など、どのような貢献でも歓迎します。</li>
+<li><strong>開発ガイド</strong>：コードへの貢献に関するガイドラインについては、<a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">Contributor’s Guide</a>をご確認ください。</li>
 </ul></li>
-</ul>
-<h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header"><strong>動的シャーディングとスケーラビリティ</strong></h4><ul>
-<li><p><strong>自動シャード分割と</strong> <strong>ロードバランシングによる</strong>シームレスな拡張。</p></li>
-<li><p><strong>グローバルインデックスの構築を</strong>改善し、<strong>分散検索のパフォーマンスを</strong>確保します。</p></li>
-</ul>
-<h4 id="🔹-Vector-Lake-V10" class="common-anchor-header"><strong>ベクターレイク V1.0</strong></h4><ul>
-<li><p><strong>Ray / Daft / PyTorchと</strong>深く統合し、分散UDFとコンテキストエンジニアリングのユースケースをサポート。</p></li>
-<li><p><strong>RAG (Retrieval-Augmented Generation)の</strong> <strong>デモとIcebergテーブルからのインポートを</strong>提供。</p></li>
-</ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Milvusの未来の共同構築<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvusはグローバルな開発者コミュニティによって運営されているオープンソースプロジェクトです。</p>
-<p>次世代のマルチモーダルデータベースを形成するために、コミュニティメンバーの皆様のご参加をお待ちしております：</p>
-<ul>
-<li><p>💬<strong>フィードバックを共有</strong>する：新機能や最適化のアイデアを提案する</p></li>
-<li><p>🐛<strong>問題を報告する</strong>：GitHub Issuesでバグを報告</p></li>
-<li><p>🔧<strong>コードに貢献する</strong>：PRを提出し、コア機能の構築を手伝う</p>
-<ul>
-<li><p><strong>プルリクエスト</strong>：<a href="https://github.com/milvus-io/milvus/pulls">コードベースに</a>直接貢献しましょう。バグの修正、機能の追加、ドキュメントの改善など、あなたの貢献を歓迎します。</p></li>
-<li><p><strong>開発ガイド</strong>：コード貢献に関するガイドラインは、<a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">コントリビューターガイドを</a>ご覧ください。</p></li>
-</ul></li>
-<li><p>ベストプラクティスやサクセスストーリーを共有<strong>しましょう</strong>。</p></li>
+<li><p>🗣️<strong>会話に参加</strong>：<a href="https://milvus.io/discord">Discord</a>、<a href="https://meetings.hubspot.com/chloe-williams1/milvus-meeting">Milvus Office Hours</a>、または<a href="https://milvus.io/community">すべてのコミュニティチャンネル</a>で質問をしたり、メンテナーと交流したりしましょう。</p></li>
+<li><p>⭐<strong>情報を広めましょう</strong>：ベストプラクティスや成功事例を共有し、<a href="https://twitter.com/milvusio">X</a>、<a href="https://www.linkedin.com/company/the-milvus-project/">LinkedIn</a>、<a href="https://www.youtube.com/c/MilvusVectorDatabase">YouTube</a>でMilvusをフォローしてください。</p></li>
 </ul>
 <p>👉<strong>GitHub:</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>

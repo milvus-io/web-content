@@ -2,8 +2,9 @@
 id: alter-collection-field.md
 title: Alterar campo de coleção
 summary: >-
-  É possível alterar as propriedades de um campo de coleção para alterar as
-  restrições de coluna ou aplicar regras de integridade de dados mais rigorosas.
+  Pode alterar as propriedades de um campo de coleção para modificar as
+  restrições das colunas ou aplicar regras de integridade de dados mais
+  rigorosas.
 ---
 <h1 id="Alter-Collection-Field" class="common-anchor-header">Alterar campo de coleção<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,10 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>É possível alterar as propriedades de um campo de coleção para modificar as restrições de coluna ou aplicar regras de integridade de dados mais rigorosas.</p>
+    </button></h1><p>Pode alterar as propriedades de um campo de coleção para modificar restrições de coluna ou aplicar regras de integridade de dados mais rigorosas.</p>
+<p>Esta página aborda alterações nas propriedades dos campos, e não alterações na estrutura do esquema, tais como adicionar ou eliminar campos. Para adicionar campos escalares ou eliminar campos de uma coleção existente, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Alterar o esquema da coleção</a>.</p>
 <div class="alert note">
 <ul>
-<li><p>Cada coleção é constituída apenas por um campo primário. Uma vez definido durante a criação da coleção, não é possível modificar o campo primário ou alterar as suas propriedades.</p></li>
+<li><p>Cada coleção é composta por apenas um campo primário. Uma vez definido durante a criação da coleção, não é possível alterar o campo primário nem as suas propriedades.</p></li>
 <li><p>Cada coleção pode ter apenas uma chave de partição. Uma vez definida durante a criação da coleção, não é possível alterar a chave de partição.</p></li>
 </ul>
 </div>
@@ -42,10 +44,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo VarChar tem uma propriedade chamada <code translate="no">max_length</code>, que restringe o número máximo de caracteres que os valores do campo podem conter. É possível alterar a propriedade <code translate="no">max_length</code>.</p>
-<p>O exemplo seguinte assume que a coleção tem um campo VarChar denominado <code translate="no">varchar</code> e define a sua propriedade <code translate="no">max_length</code>.</p>
+    </button></h2><p>Um campo VarChar possui uma propriedade denominada « <code translate="no">max_length</code> », que restringe o número máximo de caracteres que os valores do campo podem conter. É possível alterar a propriedade « <code translate="no">max_length</code> ».</p>
+<p>O exemplo seguinte pressupõe que a coleção tem um campo VarChar denominado « <code translate="no">varchar</code> » e define a sua propriedade « <code translate="no">max_length</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -78,7 +82,10 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-   <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#javascript">NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">LOAD_COLLECTION_NAME</span>,
   <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
@@ -143,10 +150,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo de matriz tem duas propriedades, nomeadamente <code translate="no">element_type</code> e <code translate="no">max_capacity</code>. A primeira determina o tipo de dados dos elementos de uma matriz, enquanto a segunda restringe o número máximo de elementos da matriz. Só é possível alterar a propriedade <code translate="no">max_capacity</code>.</p>
-<p>O exemplo a seguir assume que a coleção tem um campo de matriz chamado <code translate="no">array</code> e define sua propriedade <code translate="no">max_capacity</code>.</p>
+    </button></h2><p>Um campo de matriz tem duas propriedades: « <code translate="no">element_type</code> » e « <code translate="no">max_capacity</code> ». A primeira determina o tipo de dados dos elementos da matriz, enquanto a segunda restringe o número máximo de elementos na matriz. Só é possível alterar a propriedade « <code translate="no">max_capacity</code> ».</p>
+<p>O exemplo seguinte parte do princípio de que a coleção possui um campo de matriz denominado « <code translate="no">array</code> » e define a sua propriedade « <code translate="no">max_capacity</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;array&quot;</span>,
@@ -189,7 +201,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Alterar as configurações de mmap em nível de campo<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
+<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Alterar as definições de mmap ao nível do campo<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,10 +216,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O mapeamento de memória (Mmap) permite o acesso direto à memória de grandes ficheiros no disco, permitindo ao Milvus armazenar índices e dados tanto na memória como nos discos rígidos. Esta abordagem ajuda a otimizar a política de colocação de dados com base na frequência de acesso, expandindo a capacidade de armazenamento das colecções sem afetar o desempenho da pesquisa.</p>
-<p>O exemplo a seguir assume que a coleção tem um campo chamado <code translate="no">doc_chunk</code> e define sua propriedade <code translate="no">mmap_enabled</code>.</p>
+    </button></h2><p>O mapeamento de memória (Mmap) permite o acesso direto à memória de ficheiros de grande dimensão no disco, permitindo que o Milvus armazene índices e dados tanto na memória como nos discos rígidos. Esta abordagem ajuda a otimizar a política de colocação de dados com base na frequência de acesso, expandindo a capacidade de armazenamento das coleções sem afetar o desempenho da pesquisa.</p>
+<p>O exemplo seguinte pressupõe que a coleção tem um campo denominado « <code translate="no">doc_chunk</code> » e define a sua propriedade « <code translate="no">mmap_enabled</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

@@ -99,6 +99,13 @@ summary: Notes
      <td><p><a href="/docs/english-analyzer.md"><code translate="no">english</code></a> analyzer</p></td>
      <td><p>Use a language-specific analyzer, such as <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
+   <tr>
+     <td><p>Input method mismatch</p></td>
+     <td><p>Users type Pinyin, but the indexed text uses Chinese characters.</p></td>
+     <td><p>Chinese text: <code translate="no">"足球"</code>; query text: <code translate="no">"zuqiu"</code></p></td>
+     <td><p>Analyzer that emits only Chinese-character tokens</p></td>
+     <td><p>Use a custom analyzer with the <a href="/docs/jieba-tokenizer.md"><code translate="no">jieba</code></a> tokenizer and <a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a> filter.</p></td>
+   </tr>
 </table>
 <h2 id="First-question-Do-you-need-to-choose-an-analyzer" class="common-anchor-header">First question: Do you need to choose an analyzer?<button data-href="#First-question-Do-you-need-to-choose-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,6 +183,18 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>❌ No</p></td>
      <td><p>Chinese words have no spaces and will be treated as one token.</p></td>
      <td><p>Use a built-in <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
+     <td><p>Arabic documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Arabic text may include letter variants, diacritics, Tatweel, Arabic-Indic digits, and common Arabic stop words that need language-specific handling.</p></td>
+     <td><p>Use a built-in <a href="/docs/arabic-analyzer.md"><code translate="no">arabic</code></a> analyzer.</p></td>
+   </tr>
+   <tr>
+     <td><p>Thai documents</p></td>
+     <td><p>❌ No</p></td>
+     <td><p>Thai text usually does not use spaces between words, so it needs language-specific word segmentation.</p></td>
+     <td><p>Use a built-in <a href="/docs/thai-analyzer.md"><code translate="no">thai</code></a> analyzer.</p></td>
    </tr>
    <tr>
      <td><p>Technical documentation</p></td>
@@ -256,6 +275,18 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>Chinese</p></td>
      <td><ul><li><p>Tokenizer: <code translate="no">jieba</code></p></li><li><p>Filters: <code translate="no">cnalphanumonly</code></p></li></ul></td>
      <td><p>Currently uses Simplified Chinese dictionary by default.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/arabic-analyzer.md"><code translate="no">arabic</code></a></p></td>
+     <td><p>Arabic</p></td>
+     <td><ul><li><p>Tokenizer: <code translate="no">standard</code></p></li><li><p>Filters: <code translate="no">lowercase</code>, <code translate="no">decimaldigit</code>, <code translate="no">arabic_normalization</code>, <code translate="no">stemmer</code>, <code translate="no">stop</code></p></li></ul></td>
+     <td><p>Recommended for Arabic text over <code translate="no">standard</code>.</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/thai-analyzer.md"><code translate="no">thai</code></a></p></td>
+     <td><p>Thai</p></td>
+     <td><ul><li><p>Tokenizer: <code translate="no">thai</code></p></li><li><p>Filters: <code translate="no">lowercase</code>, <code translate="no">decimaldigit</code>, <code translate="no">stop</code></p></li></ul></td>
+     <td><p>Recommended for Thai text over <code translate="no">standard</code> or whitespace-based tokenization.</p></td>
    </tr>
 </table>
 <h3 id="Implementation-example" class="common-anchor-header">Implementation example<button data-href="#Implementation-example" class="anchor-icon" translate="no">
@@ -344,7 +375,7 @@ schema.add_field(
      <td><ul><li><p>Input: <code translate="no">"user_id = get_user_data()"</code></p></li><li><p>Output: <code translate="no">['user_id', '=', 'get_user_data()']</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="East-Asian-languages" class="common-anchor-header">East Asian languages</h4><p>Dictionary-based languages require specialized tokenizers for proper word segmentation:</p>
+<h4 id="East-Asian-languages" class="common-anchor-header">East Asian languages</h4><p>Languages that do not use spaces consistently between words require specialized tokenizers for proper word segmentation:</p>
 <h5 id="Chinese" class="common-anchor-header">Chinese</h5><table>
    <tr>
      <th><p>Tokenizer</p></th>
@@ -363,6 +394,21 @@ schema.add_field(
      <td><p>Pure dictionary-based morphological analysis with Chinese dictionary (<a href="https://cc-cedict.org/wiki/">cc-cedict</a>)</p></td>
      <td><p>Compared to <code translate="no">jieba</code>, processes Chinese text in a more generic manner</p></td>
      <td><ul><li><p>Input: <code translate="no">"机器学习算法"</code></p></li><li><p>Output: <code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
+   </tr>
+</table>
+<h5 id="Thai" class="common-anchor-header">Thai</h5><p>For most Thai text, use the built-in <a href="/docs/thai-analyzer.md"><code translate="no">thai</code></a> analyzer. Use the standalone <a href="/docs/thai-tokenizer.md"><code translate="no">thai</code></a> tokenizer only when you need to build a custom analyzer pipeline.</p>
+<table>
+   <tr>
+     <th><p>Tokenizer</p></th>
+     <th><p>How It Works</p></th>
+     <th><p>Best For</p></th>
+     <th><p>Examples</p></th>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/thai-tokenizer.md"><code translate="no">thai</code></a></p></td>
+     <td><p>Segments Thai text into word tokens and filters out whitespace and punctuation-only segments</p></td>
+     <td><p>Custom analyzer pipelines for Thai or mixed Thai/English text</p></td>
+     <td><ul><li><p>Input: <code translate="no">"สวัสดี! ทดสอบ, ระบบ Milvus"</code></p></li><li><p>Output: <code translate="no">['สวัสดี', 'ทดสอบ', 'ระบบ', 'Milvus']</code></p></li></ul></td>
    </tr>
 </table>
 <h5 id="Japanese-and-Korean" class="common-anchor-header">Japanese and Korean</h5><table>
@@ -529,6 +575,12 @@ schema.add_field(
      <td><p>Chinese</p></td>
      <td><p>Keeps only Chinese characters</p></td>
      <td><ul><li><p>Input: <code translate="no">["Hello", "世界", "123"]</code></p></li><li><p>Output: <code translate="no">[[], ['世界'], []]</code></p></li></ul></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a></p></td>
+     <td><p>Chinese</p></td>
+     <td><p>Emits Pinyin token forms for Chinese tokens</p></td>
+     <td><ul><li><p>Input: <code translate="no">["中文"]</code></p></li><li><p>Output: <code translate="no">[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
    </tr>
 </table>
 <h3 id="Step-3-Combine-and-implement" class="common-anchor-header">Step 3: Combine and implement<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
@@ -714,6 +766,12 @@ analyzer_params = {
 <div class="alert note">
 <p>For Simplified Chinese, <code translate="no">cnalphanumonly</code> removes all tokens except Chinese characters, alphanumeric text, and digits. This prevents punctuation from affecting search quality.</p>
 </div>
+<p>If users may search Chinese text by typing Pinyin, use a custom analyzer with the <code translate="no">jieba</code> tokenizer and the <a href="/docs/pinyin-filter.md"><code translate="no">pinyin</code></a> filter instead of the built-in <code translate="no">chinese</code> analyzer.</p>
+<pre><code translate="no" class="language-python">analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
+}
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Japanese-content" class="common-anchor-header">Japanese content<button data-href="#Japanese-content" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -135,6 +135,12 @@ beta: Milvus 2.6.x
      <td><ul><li><p>Advanced document chunking with configurable overlap</p></li><li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li><li><p>Support for diverse reranking models</p></li><li><p>Cost-effective with standard and pro model variants</p></li></ul></td>
      <td><p>Technical documentation search system processing lengthy manuals and papers that need intelligent segmentation and overlap control</p></td>
    </tr>
+   <tr>
+     <td><p>Hugging Face</p></td>
+     <td><p>Applications using hosted Hugging Face sentence-similarity models</p></td>
+     <td><ul><li><p>Uses the hosted <code translate="no">hf-inference</code> provider</p></li><li><p>Selects models from the Hugging Face Hub</p></li><li><p>Calculates one sentence-similarity score per candidate</p></li><li><p>Uses API-key authentication</p></li></ul></td>
+     <td><p>Semantic search applications that want to rerank candidate text with a Hugging Face model without operating a separate inference service</p></td>
+   </tr>
 </table>
 <p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
 <ul>
@@ -143,6 +149,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/v2.6.x/cohere-ranker.md">Cohere Ranker</a></p></li>
 <li><p><a href="/docs/v2.6.x/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/v2.6.x/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/hugging-face-ranker.md">Hugging Face Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"

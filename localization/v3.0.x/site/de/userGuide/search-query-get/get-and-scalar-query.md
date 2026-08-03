@@ -2,9 +2,9 @@
 id: get-and-scalar-query.md
 title: Abfrage
 summary: >-
-  Verwenden Sie Query, Get und QueryIterator, um Entitäten abzurufen, Metadaten
-  zu filtern, Abfrageergebnisse zu sortieren und skalare Werte in Milvus zu
-  aggregieren.
+  Verwenden Sie „Query“, „Get“ und „QueryIterator“, um Entitäten abzurufen,
+  Metadaten zu filtern, Abfrageergebnisse zu sortieren und skalare Werte in
+  Milvus zu aggregieren.
 ---
 <h1 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Zusätzlich zur ANN-Suche unterstützt Milvus auch die Filterung von Metadaten durch Abfragen. Auf dieser Seite wird die Verwendung von Query, Get und QueryIterators zum Abrufen von Entitäten, Filtern von Metadaten, Sortieren von Abfrageergebnissen und Aggregieren von skalaren Werten vorgestellt.</p>
+    </button></h1><p>Neben der ANN-Suche unterstützt Milvus auch die Filterung von Metadaten mithilfe von Abfragen. Auf dieser Seite wird erläutert, wie Sie mit den Funktionen „Query“, „Get“ und „QueryIterators“ Entitäten abrufen, Metadaten filtern, Abfrageergebnisse sortieren und skalare Werte aggregieren können.</p>
 <div class="alert note">
-<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Abfragen, die diese Felder enthalten, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Details finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
+<p>Wenn Sie nach der Erstellung der Sammlung neue Felder hinzufügen, geben Abfragen, die diese Felder enthalten, für Entitäten, für die keine Werte explizit festgelegt wurden, die definierten Standardwerte oder „ <code translate="no">NULL</code> “ zurück. Weitere Informationen finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">„Alter Collection Schema</a>“.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,47 +40,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine Sammlung kann verschiedene Typen von skalaren Feldern speichern. Sie können Milvus Entitäten basierend auf einem oder mehreren skalaren Feldern filtern lassen. Milvus bietet drei Arten von Abfragen: Query, Get und QueryIterator. Die folgende Tabelle vergleicht diese drei Abfragetypen.</p>
+    </button></h2><p>Eine Sammlung kann verschiedene Arten von Skalarfeldern speichern. Sie können Milvus anweisen, Entitäten anhand eines oder mehrerer Skalarfelder zu filtern. Milvus bietet drei Arten von Abfragen: „Query“, „Get“ und „QueryIterator“. Die folgende Tabelle vergleicht diese drei Abfragetypen.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Abfrage</p></th>
-     <th><p>Abfrage</p></th>
-     <th><p>AbfrageIterator</p></th>
+     <th><p>Get</p></th>
+     <th><p>Query</p></th>
+     <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Anwendbare Szenarien</p></td>
-     <td><p>Um Entitäten zu finden, die die angegebenen Primärschlüssel enthalten.</p></td>
+     <td><p>Zum Auffinden von Entitäten, die die angegebenen Primärschlüssel enthalten.</p></td>
      <td><p>Um alle oder eine bestimmte Anzahl von Entitäten zu finden, die die benutzerdefinierten Filterbedingungen erfüllen</p></td>
-     <td><p>Um alle Entitäten zu finden, die die benutzerdefinierten Filterbedingungen in paginierten Abfragen erfüllen.</p></td>
+     <td><p>Um in paginierten Abfragen alle Entitäten zu finden, die die benutzerdefinierten Filterbedingungen erfüllen.</p></td>
    </tr>
    <tr>
-     <td><p>Methode der Filterung</p></td>
+     <td><p>Filtermethode</p></td>
      <td><p>Nach Primärschlüsseln</p></td>
      <td><p>Nach Filterausdrücken.</p></td>
-     <td><p>Durch Filterausdrücke.</p></td>
+     <td><p>Nach Filterausdrücken.</p></td>
    </tr>
    <tr>
-     <td><p>Obligatorische Parameter</p></td>
-     <td><ul><li><p>Name der Sammlung</p></li><li><p>Primäre Schlüssel</p></li></ul></td>
-     <td><ul><li><p>Name der Sammlung</p></li><li><p>Ausdrücke zum Filtern</p></li></ul></td>
-     <td><ul><li><p>Name der Sammlung</p></li><li><p>Ausdrücke für die Filterung</p></li><li><p>Anzahl der Entitäten, die pro Abfrage zurückgegeben werden sollen</p></li></ul></td>
+     <td><p>Erforderliche Parameter</p></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Primärschlüssel</p></li></ul></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Filterausdrücke</p></li></ul></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Filterausdrücke</p></li><li><p>Anzahl der pro Abfrage zurückzugebenden Entitäten</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Optionale Parameter</p></td>
-     <td><ul><li><p>Name der Partition</p></li><li><p>Ausgabefelder</p></li></ul></td>
-     <td><ul><li><p>Name des Abschnitts</p></li><li><p>Anzahl der zurückzugebenden Entitäten</p></li><li><p>Ausgabefelder</p></li></ul></td>
-     <td><ul><li><p>Name des Bereichs</p></li><li><p>Anzahl der zurückzugebenden Entitäten insgesamt</p></li><li><p>Ausgabe-Felder</p></li></ul></td>
+     <td><ul><li><p>Partitionsname</p></li><li><p>Ausgabefelder</p></li></ul></td>
+     <td><ul><li><p>Partitionsname</p></li><li><p>Anzahl der zurückzugebenden Entitäten</p></li><li><p>Ausgabefelder</p></li></ul></td>
+     <td><ul><li><p>Partitionsname</p></li><li><p>Gesamtzahl der zurückzugebenden Entitäten</p></li><li><p>Ausgabefelder</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>Rückgabe</p></td>
+     <td><p>Gibt zurück</p></td>
      <td><p>Gibt Entitäten zurück, die die angegebenen Primärschlüssel in der angegebenen Sammlung oder Partition enthalten.</p></td>
-     <td><p>Gibt alle oder eine bestimmte Anzahl von Entitäten zurück, die die benutzerdefinierten Filterbedingungen in der angegebenen Sammlung oder Partition erfüllen.</p></td>
-     <td><p>Gibt alle Entitäten zurück, die die benutzerdefinierten Filterbedingungen in der angegebenen Sammlung oder Partition durch paginierte Abfragen erfüllen.</p></td>
+     <td><p>Gibt alle oder eine angegebene Anzahl von Entitäten zurück, die die benutzerdefinierten Filterbedingungen in der angegebenen Sammlung oder Partition erfüllen.</p></td>
+     <td><p>Gibt alle Entitäten zurück, die die benutzerdefinierten Filterbedingungen in der angegebenen Sammlung oder Partition erfüllen, und zwar über paginierte Abfragen.</p></td>
    </tr>
 </table>
-<p>Weitere Informationen zum Filtern von Metadaten finden Sie unter <a href="/docs/de/basic-operators.md">Boolesche Ausdrucksregeln</a>.</p>
-<h2 id="Use-Get" class="common-anchor-header">Verwenden Sie Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Weitere Informationen zur Metadatenfilterung finden Sie unter <a href="/docs/de/basic-operators.md">„Boolesche Ausdrucksregeln</a>“.</p>
+<h2 id="Use-Get" class="common-anchor-header">Verwenden Sie „Get“<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen müssen, können Sie die <strong>Get-Methode</strong> verwenden. In den folgenden Codebeispielen wird davon ausgegangen, dass in Ihrer Sammlung drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> vorhanden sind.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen möchten, können Sie die <strong>„Get“-Methode</strong> verwenden. Die folgenden Codebeispiele gehen davon aus, dass Ihre Sammlung drei Felder namens „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ enthält.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -111,7 +111,12 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können Entitäten anhand ihrer IDs wie folgt abrufen.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -235,7 +240,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Basic-Query" class="common-anchor-header">Grundlegende Abfrage<button data-href="#Basic-Query" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Basic-Query" class="common-anchor-header">Einfache Abfrage<button data-href="#Basic-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,9 +255,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen suchen müssen, verwenden Sie die Methode <strong>Query</strong>. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt und geben die angegebene Anzahl von Entitäten zurück, die einen <code translate="no">color</code> Wert beginnend mit <code translate="no">red</code> enthalten.</p>
+    </button></h3><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterkriterien suchen müssen, verwenden Sie die <strong>„Query“-Methode</strong>. Die folgenden Code-Beispiele gehen davon aus, dass drei Felder mit den Namen „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ vorhanden sind, und geben die angegebene Anzahl von Entitäten zurück, deren Wert für „ <code translate="no">color</code> “ mit „ <code translate="no">red</code> “ beginnt.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -347,15 +357,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Standardmäßig gibt Query die Ergebnisse in einer nicht spezifizierten Reihenfolge zurück. Verwenden Sie den Parameter <code translate="no">order_by</code>, um die Ergebnisse nach einem oder mehreren skalaren Feldern zu sortieren. Wenn Sie <code translate="no">order_by</code> verwenden, beachten Sie, dass:</p>
+    </button></h3><p>Standardmäßig gibt „Query“ die Ergebnisse in einer nicht festgelegten Reihenfolge zurück. Verwenden Sie den Parameter „ <code translate="no">order_by</code> “, um die Ergebnisse nach einem oder mehreren Skalarfeldern zu sortieren. Beachten Sie bei der Verwendung von „ <code translate="no">order_by</code> “ Folgendes:</p>
 <ul>
-<li><p><code translate="no">order_by</code> muss zusammen mit <code translate="no">limit</code> verwendet werden.</p></li>
-<li><p>Unterstützte Feldtypen: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> und <code translate="no">VARCHAR</code>. Die Sortierung nach Vektorfeldern, <code translate="no">JSON</code>, oder <code translate="no">ARRAY</code> wird nicht unterstützt.</p></li>
-<li><p>Bei der Sortierung nach einem löschbaren Feld werden NULL-Werte bei aufsteigender Reihenfolge (NULLS LAST) an das Ende und bei absteigender Reihenfolge (NULLS FIRST) an den Anfang gestellt.</p></li>
+<li><p><code translate="no">order_by</code> muss zusammen mit „ <code translate="no">limit</code> “ verwendet werden.</p></li>
+<li><p>Unterstützte Feldtypen: „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “ und „ <code translate="no">VARCHAR</code> “. Das Sortieren nach Vektor-, „ <code translate="no">JSON</code> “- oder „ <code translate="no">ARRAY</code> “-Feldern wird nicht unterstützt.</p></li>
+<li><p>Beim Sortieren nach einem Feld, das NULL-Werte zulässt, werden NULL-Werte in aufsteigender Reihenfolge am Ende (NULLS LAST) und in absteigender Reihenfolge am Anfang (NULLS FIRST) platziert.</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">Grundlegende Sortierung</h4><p>Übergeben Sie eine Liste von <code translate="no">&quot;field_name:direction&quot;</code> Zeichenfolgen an den Parameter <code translate="no">order_by</code>, wobei <code translate="no">direction</code> entweder <code translate="no">asc</code> (aufsteigend) oder <code translate="no">desc</code> (absteigend) ist. Beachten Sie, dass bei <code translate="no">asc</code> und <code translate="no">desc</code> die Groß- und Kleinschreibung beachtet wird.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">Einfache Sortierung</h4><p>Übergeben Sie eine Liste von Zeichenfolgen im Format „ <code translate="no">&quot;field_name:direction&quot;</code> “ an den Parameter „ <code translate="no">order_by</code> “, wobei „ <code translate="no">direction</code> “ entweder „ <code translate="no">asc</code> “ (aufsteigend) oder „ <code translate="no">desc</code> “ (absteigend) ist. Beachten Sie, dass bei „ <code translate="no">asc</code> “ und „ <code translate="no">desc</code> “ die Groß-/Kleinschreibung beachtet werden muss.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -380,9 +395,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">Sortierung nach mehreren Feldern</h4><p>Sie können nach mehreren Feldern auf einmal sortieren. Die Ergebnisse werden zunächst nach dem ersten Feld in der Liste sortiert. Wenn zwei Zeilen den gleichen Wert in diesem Feld haben, bestimmt das zweite Feld ihre Reihenfolge usw.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">Sortierung nach mehreren Feldern</h4><p>Sie können nach mehreren Feldern gleichzeitig sortieren. Die Ergebnisse werden zunächst nach dem ersten Feld in der Liste sortiert. Wenn zwei Zeilen in diesem Feld denselben Wert aufweisen, bestimmt das zweite Feld ihre Reihenfolge und so weiter.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -400,9 +420,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginierung mit Sortierung</h4><p>Verwenden Sie <code translate="no">order_by</code> zusammen mit <code translate="no">limit</code> und <code translate="no">offset</code>, um durch sortierte Ergebnisse zu paginieren. Wenn Sie beispielsweise eine nach Preis sortierte Produktliste über mehrere Seiten hinweg anzeigen möchten, wird auf jeder Seite der nächste Stapel von Artikeln in der korrekten Preisreihenfolge angezeigt, ohne Duplikate oder Lücken.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginierung mit Sortierung</h4><p>Verwenden Sie „ <code translate="no">order_by</code> “ zusammen mit „ <code translate="no">limit</code> “ und „ <code translate="no">offset</code> “, um sortierte Ergebnisse zu paginieren. Wenn Sie beispielsweise eine nach Preis sortierte Produktliste über mehrere Seiten hinweg anzeigen möchten, zeigt jede Seite die nächste Gruppe von Artikeln in der korrekten Preisreihenfolge an, ohne Duplikate oder Lücken.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -431,7 +456,7 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Aggregieren von Abfrageergebnissen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Aggregation von Abfrageergebnissen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -446,16 +471,21 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können Abfrageergebnisse nach einem oder mehreren skalaren Feldern gruppieren und Aggregationen pro Gruppe berechnen. Die unterstützten Aggregationsoperatoren sind <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code>, und <code translate="no">avg</code>.</p>
-<p>Beachten Sie bei der Verwendung von <code translate="no">group_by_fields</code>, dass:</p>
+    </button></h3><p>Sie können Abfrageergebnisse nach einem oder mehreren skalaren Feldern gruppieren und Aggregationen pro Gruppe berechnen. Die unterstützten Aggregationsoperatoren sind <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> und <code translate="no">avg</code>.</p>
+<p>Bei der Verwendung von „ <code translate="no">group_by_fields</code> “ ist Folgendes zu beachten:</p>
 <ul>
-<li><p>Unterstützte Feldtypen für <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, und <code translate="no">TIMESTAMPTZ</code>. Die Gruppierung nach den Feldern <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code>, oder <code translate="no">ARRAY</code> führt zu einem Fehler.</p></li>
-<li><p><code translate="no">sum</code> und <code translate="no">avg</code> sind nur numerisch. Sie können sie auf numerische Felder anwenden, einschließlich <code translate="no">FLOAT</code> und <code translate="no">DOUBLE</code>, aber die Anwendung auf das Feld <code translate="no">VARCHAR</code> gibt einen Fehler zurück.</p></li>
+<li><p>Unterstützte Feldtypen für „ <code translate="no">group_by_fields</code> “: „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">VARCHAR</code> “ und „ <code translate="no">TIMESTAMPTZ</code> “. Eine Gruppierung nach Feldern vom Typ „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “, „vector“, „ <code translate="no">JSON</code> “ oder „ <code translate="no">ARRAY</code> “ führt zu einem Fehler.</p></li>
+<li><p><code translate="no">sum</code> und <code translate="no">avg</code> sind ausschließlich numerisch. Sie können sie auf numerische Felder anwenden, einschließlich <code translate="no">FLOAT</code> und <code translate="no">DOUBLE</code>, doch die Anwendung auf ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ führt zu einem Fehler.</p></li>
 </ul>
-<p>Um die Aggregation zu aktivieren, übergeben Sie <code translate="no">group_by_fields</code> an <code translate="no">query()</code> und fügen Sie Aggregationsausdrücke (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) an <code translate="no">output_fields</code> hinzu.</p>
-<p>Das folgende Beispiel gruppiert Entitäten nach dem Feld <code translate="no">color</code> und gibt die Anzahl der Entitäten in jeder Farbgruppe zurück:</p>
+<p>Um die Aggregation zu aktivieren, übergeben Sie „ <code translate="no">group_by_fields</code> “ an „ <code translate="no">query()</code> “ und fügen Sie Aggregationsausdrücke (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) zu „ <code translate="no">output_fields</code> “ hinzu.</p>
+<p>Das folgende Beispiel gruppiert Entitäten nach dem Feld „ <code translate="no">color</code> “ und gibt die Anzahl der Entitäten in jeder Farbgruppe zurück:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -484,9 +514,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können mehrere Aggregationsausdrücke in einem einzigen Aufruf anfordern. Das folgende Beispiel gruppiert nach <code translate="no">color</code> und gibt die Anzahl der Entitäten, den Durchschnittspreis und die maximale Bewertung für jede Gruppe zurück:</p>
+<p>Sie können mehrere Aggregationsausdrücke in einem einzigen Aufruf abfragen. Das folgende Beispiel gruppiert nach „ <code translate="no">color</code> “ und gibt die Entitätsanzahl, den Durchschnittspreis und die maximale Bewertung für jede Gruppe zurück:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -508,9 +543,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Übergeben Sie mehr als ein Feld an <code translate="no">group_by_fields</code>, um zusammengesetzte Gruppen zu berechnen. Das folgende Beispiel gruppiert nach <code translate="no">(color, rating)</code> und berechnet die Preisspanne in jeder Gruppe:</p>
+<p>Übergeben Sie mehr als ein Feld an „ <code translate="no">group_by_fields</code> “, um zusammengesetzte Gruppen zu berechnen. Das folgende Beispiel gruppiert nach „ <code translate="no">(color, rating)</code> “ und berechnet die Preisspanne in jeder Gruppe:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -533,9 +573,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch <code translate="no">group_by_fields</code> mit <code translate="no">limit</code> kombinieren, um die Anzahl der zurückgegebenen Gruppen zu begrenzen. Dies ist nützlich, wenn ein Feld eine hohe Kardinalität aufweist und Sie nur eine Stichprobe von Gruppen benötigen:</p>
+<p>Sie können „ <code translate="no">group_by_fields</code> “ auch mit „ <code translate="no">limit</code> “ kombinieren, um die Anzahl der zurückgegebenen Gruppen zu begrenzen. Dies ist nützlich, wenn ein Feld eine hohe Kardinalität aufweist und Sie nur eine Stichprobe von Gruppen benötigen:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -558,7 +603,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">QueryIterator verwenden<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">Verwenden Sie QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -573,9 +618,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen durch paginierte Abfragen finden müssen, erstellen Sie einen <strong>QueryIterator</strong> und verwenden Sie dessen <strong>next()</strong> -Methode, um alle Entitäten zu durchlaufen und diejenigen zu finden, die die Filterbedingungen erfüllen. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt, und geben alle Entitäten zurück, die einen <code translate="no">color</code> -Wert enthalten, beginnend mit <code translate="no">red</code>.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterbedingungen über paginierte Abfragen finden müssen, erstellen Sie einen <strong>`QueryIterator`</strong> und verwenden Sie dessen <strong>`next()`</strong> -Methode, um alle Entitäten zu durchlaufen und diejenigen zu finden, die den Filterbedingungen entsprechen. Die folgenden Codebeispiele gehen davon aus, dass es drei Felder namens ` <code translate="no">id</code>`, ` <code translate="no">vector</code>` und ` <code translate="no">color</code> ` gibt, und geben alle Entitäten zurück, deren ` <code translate="no">color</code> `-Wert mit ` <code translate="no">red</code>` beginnt.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -658,9 +708,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können auch Abfragen innerhalb einer oder mehrerer Partitionen durchführen, indem Sie die Partitionsnamen in die Get-, Query- oder QueryIterator-Anfrage aufnehmen. Die folgenden Code-Beispiele gehen davon aus, dass es eine Partition namens <strong>PartitionA</strong> in der Sammlung gibt.</p>
+    </button></h2><p>Sie können Abfragen auch innerhalb einer oder mehrerer Partitionen durchführen, indem Sie die Partitionsnamen in die Get-, Query- oder QueryIterator-Anfrage aufnehmen. Die folgenden Code-Beispiele gehen davon aus, dass sich in der Sammlung eine Partition namens <strong>„PartitionA“</strong> befindet.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -814,7 +869,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Zufallsstichproben mit Abfrage<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Zufällige Stichproben mit „Query“<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,12 +884,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um eine repräsentative Teilmenge von Daten aus Ihrer Sammlung für die Datenexploration oder Entwicklungstests zu extrahieren, verwenden Sie den Ausdruck <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, wobei <code translate="no">sampling_factor</code> eine Fließkommazahl zwischen 0 und 1 ist, die den Prozentsatz der zu stichprobenartigen Daten darstellt.</p>
+    </button></h2><p>Um eine repräsentative Teilmenge von Daten aus Ihrer Sammlung für die Datenauswertung oder Entwicklungstests zu extrahieren, verwenden Sie den Ausdruck „ <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> “, wobei „ <code translate="no">sampling_factor</code> “ ein Float-Wert zwischen 0 und 1 ist, der den Prozentsatz der zu stichprobenartigen Daten angibt.</p>
 <div class="alert note">
-<p>Ausführliche Informationen zur Verwendung, fortgeschrittene Beispiele und bewährte Verfahren finden Sie unter <a href="/docs/de/random-sampling.md">Zufallsstichproben</a>.</p>
+<p>Ausführliche Informationen zur Verwendung, fortgeschrittene Beispiele und Best Practices finden Sie unter <a href="/docs/de/random-sampling.md">„Zufällige Stichproben</a>“.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -911,7 +971,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Vorübergehendes Festlegen einer Zeitzone für eine Abfrage<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Zeitlich begrenzte Festlegung einer Zeitzone für eine Abfrage<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -926,11 +986,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Ihre Sammlung ein <code translate="no">TIMESTAMPTZ</code> Feld hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den <code translate="no">timezone</code> Parameter im Abfrageaufruf setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
-<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
-<p>Das folgende Beispiel zeigt, wie eine Zeitzone für eine Abfrageoperation vorübergehend festgelegt wird:</p>
+    </button></h2><p>Wenn Ihre Sammlung über ein Feld „ <code translate="no">TIMESTAMPTZ</code> “ verfügt, können Sie die Standardzeitzone der Datenbank oder der Sammlung für einen einzelnen Vorgang vorübergehend überschreiben, indem Sie den Parameter „ <code translate="no">timezone</code> “ im Abfrageaufruf festlegen. Dadurch wird gesteuert, wie „ <code translate="no">TIMESTAMPTZ</code> “-Werte während des Vorgangs angezeigt und verglichen werden.</p>
+<p>Der Wert von „ <code translate="no">timezone</code> “ muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>„Asia/Shanghai“</strong>, <strong>„America/Chicago“</strong> oder <strong>„UTC“</strong>). Weitere Informationen zur Verwendung des Felds „ <code translate="no">TIMESTAMPTZ</code> “ finden Sie unter <a href="/docs/de/timestamptz-field.md">„TIMESTAMPTZ-Feld</a>“.</p>
+<p>Das folgende Beispiel zeigt, wie Sie vorübergehend eine Zeitzone für eine Abfrage festlegen können:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

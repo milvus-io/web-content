@@ -2,7 +2,7 @@
 id: get-and-scalar-query.md
 title: Запрос
 summary: >-
-  Используйте Query, Get и QueryIterator для получения сущностей, фильтрации
+  Используйте Query, Get и QueryIterator для извлечения сущностей, фильтрации
   метаданных, сортировки результатов запросов и агрегирования скалярных значений
   в Milvus.
 ---
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В дополнение к поиску по ANN, Milvus также поддерживает фильтрацию метаданных с помощью запросов. На этой странице описано, как использовать Query, Get и QueryIterators для получения сущностей, фильтрации метаданных, сортировки результатов запросов и агрегирования скалярных значений.</p>
+    </button></h1><p>Помимо поиска с помощью ANN, Milvus также поддерживает фильтрацию метаданных с помощью запросов. На этой странице описано, как использовать Query, Get и QueryIterators для извлечения сущностей, фильтрации метаданных, сортировки результатов запросов и агрегирования скалярных значений.</p>
 <div class="alert note">
-<p>Если вы динамически добавляете новые поля после создания коллекции, запросы, включающие эти поля, будут возвращать определенные значения по умолчанию или NULL для сущностей, у которых значения не заданы явно. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
+<p>Если вы добавите новые поля после создания коллекции, запросы, включающие эти поля, будут возвращать заданные значения по умолчанию или значение « <code translate="no">NULL</code> » для сущностей, для которых значения явно не заданы. Подробности см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">«Изменение схемы коллекции</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,19 +40,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Коллекция может хранить различные типы скалярных полей. Вы можете заставить Milvus фильтровать сущности на основе одного или нескольких скалярных полей. Milvus предлагает три типа запросов: Query, Get и QueryIterator. В таблице ниже приведено сравнение этих трех типов запросов.</p>
+    </button></h2><p>Коллекция может хранить различные типы скалярных полей. Вы можете настроить Milvus на фильтрацию сущностей по одному или нескольким скалярным полям. Milvus предлагает три типа запросов: Query, Get и QueryIterator. В таблице ниже приведено сравнение этих трех типов запросов.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Get</p></th>
-     <th><p>Запрос</p></th>
+     <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Применимые сценарии</p></td>
-     <td><p>Поиск сущностей, содержащих указанные первичные ключи.</p></td>
-     <td><p>Чтобы найти все или определенное количество сущностей, удовлетворяющих пользовательским условиям фильтрации.</p></td>
-     <td><p>Для поиска всех сущностей, удовлетворяющих пользовательским условиям фильтрации, в постраничных запросах.</p></td>
+     <td><p>Для поиска сущностей, имеющих указанные первичные ключи.</p></td>
+     <td><p>Для поиска всех или заданного количества сущностей, удовлетворяющих пользовательским условиям фильтрации</p></td>
+     <td><p>Для поиска всех сущностей, соответствующих пользовательским условиям фильтрации, в запросах с пагинацией.</p></td>
    </tr>
    <tr>
      <td><p>Метод фильтрации</p></td>
@@ -64,23 +64,23 @@ summary: >-
      <td><p>Обязательные параметры</p></td>
      <td><ul><li><p>Имя коллекции</p></li><li><p>Первичные ключи</p></li></ul></td>
      <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li></ul></td>
-     <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li><li><p>Количество сущностей, возвращаемых по запросу</p></li></ul></td>
+     <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li><li><p>Количество сущностей, возвращаемых за один запрос</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Необязательные параметры</p></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Выходные поля</p></li></ul></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Количество возвращаемых сущностей</p></li><li><p>Поля вывода</p></li></ul></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Общее количество возвращаемых сущностей</p></li><li><p>Выходные поля</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Поля вывода</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Количество сущностей для возврата</p></li><li><p>Поля вывода</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Общее количество сущностей для возврата</p></li><li><p>Поля вывода</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Возвращает</p></td>
-     <td><p>Возвращает сущности, содержащие указанные первичные ключи в указанной коллекции или разделе.</p></td>
-     <td><p>Возвращает все или определенное количество сущностей, удовлетворяющих пользовательским условиям фильтрации, в указанной коллекции или разделе.</p></td>
-     <td><p>Возвращает все сущности, удовлетворяющие пользовательским условиям фильтрации, в указанной коллекции или разделе с помощью постраничных запросов.</p></td>
+     <td><p>Возвращает сущности, содержащие указанные первичные ключи в указанной коллекции или разделах.</p></td>
+     <td><p>Возвращает все или указанное количество сущностей, соответствующих пользовательским условиям фильтрации в указанной коллекции или разделах.</p></td>
+     <td><p>Возвращает все сущности, соответствующие пользовательским условиям фильтрации в указанной коллекции или разделах, посредством запросов с пагинацией.</p></td>
    </tr>
 </table>
-<p>Дополнительные сведения о фильтрации метаданных см. в разделе <a href="/docs/ru/basic-operators.md">Правила булевых выражений</a>.</p>
-<h2 id="Use-Get" class="common-anchor-header">Использование Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Дополнительные сведения о фильтрации по метаданным см. в разделе <a href="/docs/ru/basic-operators.md">«Правила булевых выражений</a>».</p>
+<h2 id="Use-Get" class="common-anchor-header">Использование метода Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда вам нужно найти сущности по их первичным ключам, вы можете использовать метод <strong>Get</strong>. В следующих примерах кода предполагается, что в вашей коллекции есть три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по их первичным ключам, можно использовать метод <strong>Get</strong>. В приведенных ниже примерах кода предполагается, что в вашей коллекции имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -109,9 +109,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы можете получить сущности по их идентификаторам следующим образом.</p>
+<p>Получить сущности по их ID можно следующим образом.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -220,7 +225,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Использовать запрос<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Использование запроса<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,9 +255,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Когда вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>Query</strong>. Следующие примеры кода предполагают наличие трех полей с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code> и возвращают указанное количество сущностей, имеющих значение <code translate="no">color</code>, начиная с <code translate="no">red</code>.</p>
+    </button></h3><p>Если вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>Query</strong>. В приведенных ниже примерах кода предполагается, что в коллекции имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращается указанное количество сущностей, содержащих значение <code translate="no">color</code>, начинающееся с <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -347,15 +357,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>По умолчанию Query возвращает результаты в неопределенном порядке. Используйте параметр <code translate="no">order_by</code> для сортировки результатов по одному или нескольким скалярным полям. При использовании <code translate="no">order_by</code> обратите внимание, что:</p>
+    </button></h3><p>По умолчанию Query возвращает результаты в произвольном порядке. Используйте параметр <code translate="no">order_by</code> для сортировки результатов по одному или нескольким скалярным полям. При использовании <code translate="no">order_by</code> обратите внимание на следующее:</p>
 <ul>
-<li><p><code translate="no">order_by</code> необходимо использовать вместе с <code translate="no">limit</code>.</p></li>
-<li><p>Поддерживаемые типы полей: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, и <code translate="no">VARCHAR</code>. Сортировка по полям vector, <code translate="no">JSON</code>, или <code translate="no">ARRAY</code> не поддерживается.</p></li>
-<li><p>При сортировке по нулевому полю NULL-значения помещаются в конец при сортировке по возрастанию (NULLS LAST) и в начало при сортировке по убыванию (NULLS FIRST).</p></li>
+<li><p><code translate="no">order_by</code> должен использоваться вместе с <code translate="no">limit</code>.</p></li>
+<li><p>Поддерживаемые типы полей: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> и <code translate="no">VARCHAR</code>. Сортировка по векторным полям, полям типа <code translate="no">JSON</code> или <code translate="no">ARRAY</code> не поддерживается.</p></li>
+<li><p>При сортировке по полю, допускающему значение NULL, значения NULL помещаются в конец списка при восходящем порядке (NULLS LAST) и в начало списка при нисходящем порядке (NULLS FIRST).</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">Базовая сортировка</h4><p>Передайте список строк <code translate="no">&quot;field_name:direction&quot;</code> в параметр <code translate="no">order_by</code>, где <code translate="no">direction</code> - это либо <code translate="no">asc</code> (по возрастанию), либо <code translate="no">desc</code> (по убыванию). Обратите внимание, что <code translate="no">asc</code> и <code translate="no">desc</code> чувствительны к регистру.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">Базовая сортировка</h4><p>Передайте список строк формата <code translate="no">&quot;field_name:direction&quot;</code> в параметр <code translate="no">order_by</code>, где <code translate="no">direction</code> может принимать значения <code translate="no">asc</code> (по возрастанию) или <code translate="no">desc</code> (по убыванию). Обратите внимание, что в строках <code translate="no">asc</code> и <code translate="no">desc</code> учитывается регистр.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -380,9 +395,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">Сортировка по нескольким полям</h4><p>Вы можете сортировать по нескольким полям одновременно. Результаты сначала упорядочиваются по первому полю в списке. Если два ряда имеют одинаковое значение в этом поле, порядок определяется вторым полем, и так далее.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">Сортировка по нескольким полям</h4><p>Вы можете сортировать по нескольким полям одновременно. Результаты сначала упорядочиваются по первому полю в списке. Если две строки имеют одинаковое значение в этом поле, их порядок определяется вторым полем и так далее.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -400,9 +420,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Пагинация с сортировкой</h4><p>Используйте <code translate="no">order_by</code> вместе с <code translate="no">limit</code> и <code translate="no">offset</code> для постраничного просмотра отсортированных результатов. Например, для отображения списка товаров, отсортированных по цене, на нескольких страницах, каждая страница показывает следующую партию товаров в правильном порядке цен без дубликатов и пробелов.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Пагинация с сортировкой</h4><p>Используйте <code translate="no">order_by</code> вместе с <code translate="no">limit</code> и <code translate="no">offset</code> для пагинации отсортированных результатов. Например, чтобы отобразить список товаров, отсортированный по цене на нескольких страницах, каждая страница показывает следующую партию товаров в правильном порядке по цене без дубликатов и пропусков.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -431,7 +456,7 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Агрегирование результатов запросов<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Агрегирование результатов запроса<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -446,16 +471,21 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Вы можете группировать результаты запроса по одному или нескольким скалярным полям и вычислять агрегаты для каждой группы. Поддерживаются следующие операторы агрегирования: <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> и <code translate="no">avg</code>.</p>
-<p>При использовании <code translate="no">group_by_fields</code> обратите внимание на следующее:</p>
+    </button></h3><p>Вы можете группировать результаты запроса по одному или нескольким скалярным полям и вычислять агрегаты по каждой группе. Поддерживаемые операторы агрегации: <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> и <code translate="no">avg</code>.</p>
+<p>При использовании <code translate="no">group_by_fields</code> следует учитывать следующее:</p>
 <ul>
-<li><p>Поддерживаемые типы полей для <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code> и <code translate="no">TIMESTAMPTZ</code>. Группировка по полям <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector , <code translate="no">JSON</code>, или <code translate="no">ARRAY</code> возвращает ошибку.</p></li>
-<li><p><code translate="no">sum</code> и <code translate="no">avg</code> являются только числовыми. Их можно применять к числовым полям, включая <code translate="no">FLOAT</code> и <code translate="no">DOUBLE</code>, но их применение к полю <code translate="no">VARCHAR</code> приводит к ошибке.</p></li>
+<li><p>Поддерживаемые типы полей для функции <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code> и <code translate="no">TIMESTAMPTZ</code>. Группировка по полям <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code> или <code translate="no">ARRAY</code> приводит к ошибке.</p></li>
+<li><p><code translate="no">sum</code> а <code translate="no">avg</code> — исключительно числовые. Их можно применять к числовым полям, включая <code translate="no">FLOAT</code> и <code translate="no">DOUBLE</code>, но применение их к полю <code translate="no">VARCHAR</code> приводит к ошибке.</p></li>
 </ul>
-<p>Чтобы включить агрегирование, передайте <code translate="no">group_by_fields</code> в <code translate="no">query()</code> и добавьте агрегирующие выражения (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) в <code translate="no">output_fields</code>.</p>
-<p>Следующий пример группирует сущности по полю <code translate="no">color</code> и возвращает количество сущностей в каждой цветовой группе:</p>
+<p>Чтобы включить агрегирование, передайте <code translate="no">group_by_fields</code> в <code translate="no">query()</code> и добавьте выражения агрегирования (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) в <code translate="no">output_fields</code>.</p>
+<p>В следующем примере сущности группируются по полю « <code translate="no">color</code> » и возвращается количество сущностей в каждой цветовой группе:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -484,9 +514,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы можете запросить несколько агрегирующих выражений в одном вызове. Следующий пример группирует сущности по полю <code translate="no">color</code> и возвращает количество сущностей, среднюю цену и максимальный рейтинг для каждой группы:</p>
+<p>Вы можете запросить несколько выражений агрегации в одном вызове. В следующем примере выполняется группировка по полю « <code translate="no">color</code> », и для каждой группы возвращаются количество сущностей, средняя цена и максимальный рейтинг:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -508,9 +543,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Передавайте более одного поля в <code translate="no">group_by_fields</code> для вычисления составных групп. Следующий пример группирует по <code translate="no">(color, rating)</code> и вычисляет диапазон цен в каждой группе:</p>
+<p>Передайте несколько полей в ` <code translate="no">group_by_fields</code> `, чтобы вычислить составные группы. В следующем примере выполняется группировка по ` <code translate="no">(color, rating)</code> ` и вычисляется диапазон цен в каждой группе:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -533,9 +573,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете объединить <code translate="no">group_by_fields</code> с <code translate="no">limit</code>, чтобы ограничить количество групп. Это полезно, когда поле имеет высокую кардинальность и вам нужна только выборка групп:</p>
+<p>Вы также можете совместить <code translate="no">group_by_fields</code> с <code translate="no">limit</code>, чтобы ограничить количество возвращаемых групп. Это полезно, когда поле имеет высокую кардинальность, а вам нужна лишь выборка групп:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
@@ -558,7 +603,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">Использование QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">Используйте QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -573,9 +618,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью постраничных запросов, создайте <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong> для итерации по всем сущностям, чтобы найти те, которые удовлетворяют условиям фильтрации. В следующих примерах кода предполагается, что есть три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, имеющие значение <code translate="no">color</code>, начиная с <code translate="no">red</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью запросов с пагинацией, создайте объект <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong>, чтобы пройти по всем сущностям и найти те, которые соответствуют условиям фильтрации. В приведенных ниже примерах кода предполагается, что имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, в которых значение <code translate="no">color</code> начинается с <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -658,9 +708,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы также можете выполнять запросы в одном или нескольких разделах, включив имена разделов в запрос Get, Query или QueryIterator. В следующих примерах кода предполагается, что в коллекции есть раздел с именем <strong>PartitionA</strong>.</p>
+    </button></h2><p>Вы также можете выполнять запросы в пределах одного или нескольких разделах, указав имена разделов в запросе Get, Query или QueryIterator. В приведенных ниже примерах кода предполагается, что в коллекции имеется раздел с именем <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -814,7 +869,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Случайная выборка с помощью запроса Query<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Случайная выборка с помощью запроса<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,12 +884,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из коллекции для изучения данных или тестирования разработок, используйте выражение <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, где <code translate="no">sampling_factor</code> - это плавающая величина от 0 до 1, представляющая процент данных для выборки.</p>
+    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из вашей коллекции для исследования данных или тестирования разработки, используйте выражение ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, где ` <code translate="no">sampling_factor</code> ` — это число с плавающей запятой от 0 до 1, представляющее процент данных, которые необходимо отобрать.</p>
 <div class="alert note">
-<p>Подробную информацию об использовании, расширенные примеры и лучшие практики см. в разделе <a href="/docs/ru/random-sampling.md">"Случайная выборка</a>".</p>
+<p>Подробные сведения об использовании, примеры для продвинутых пользователей и рекомендации см. в разделе <a href="/docs/ru/random-sampling.md">«Случайная выборка</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -911,7 +971,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Временная установка часового пояса для запроса<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Временная настройка часового пояса для запроса<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -926,11 +986,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно изменить часовой пояс базы данных или коллекции по умолчанию для одной операции, установив параметр <code translate="no">timezone</code> в вызове запроса. Это позволяет контролировать отображение и сравнение значений <code translate="no">TIMESTAMPTZ</code> во время выполнения операции.</p>
-<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
+    </button></h2><p>Если в вашей коллекции есть поле ` <code translate="no">TIMESTAMPTZ</code> `, вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр ` <code translate="no">timezone</code> ` в вызове запроса. Это определяет, как значения ` <code translate="no">TIMESTAMPTZ</code> ` будут отображаться и сравниваться во время операции.</p>
+<p>Значение <code translate="no">timezone</code> должно быть допустимым <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в <a href="/docs/ru/timestamptz-field.md">разделе «Поле TIMESTAMPTZ</a>».</p>
 <p>В примере ниже показано, как временно установить часовой пояс для операции запроса:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

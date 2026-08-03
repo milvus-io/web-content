@@ -23,8 +23,11 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍了如何使用 Milvus Operator 将您的 Milvus Standalone 部署从 v2.5.x 升级至 v3.0-beta。</p>
-<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本指南介绍了如何使用 Milvus Operator 将 Milvus 2.6.x Standalone 部署升级至 v3.0.0。</p>
+<div class="alert note">
+<p>该流程已在 Milvus 2.6.20 至 Milvus v3.0.0 的升级过程中经过验证，测试环境包含 Milvus Operator 1.3.0、Woodpecker、集群内 etcd 以及集群内 MinIO。 如果您使用的是其他 Milvus 2.6.x 补丁版本、Operator 版本、消息队列或依赖项配置，请先在非生产环境中验证升级是否成功。</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,56 +42,17 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">v3.0-beta 的新功能<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>从 Milvus 2.5.x 升级到 3.0-beta 涉及重大的架构变更：</p>
-<ul>
-<li><strong>协调器整合</strong>：旧版中独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单一<code translate="no">mixCoord</code></li>
-<li><strong>新组件</strong>：引入流式处理节点（Streaming Node）以增强数据处理能力</li>
-<li><strong>组件移除</strong>：已移除并整合<code translate="no">indexNode</code> </li>
+    </button></h2><ul>
+<li>一个由 Milvus Operator 管理的、包含 Milvus 2.6.x Standalone 部署的 Kubernetes 集群</li>
+<li><code translate="no">kubectl</code> 对该集群的访问权限</li>
+<li>用于现有部署的完整 Milvus 自定义资源 (CR) 清单</li>
+<li>现有 Milvus Operator 所使用的安装方法和清单</li>
+<li>Milvus 元数据和持久化数据的最新备份</li>
 </ul>
-<p>此升级流程可确保顺利迁移至新架构。有关架构变更的更多信息，请参阅《<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>》。</p>
-<h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>系统要求：</strong></p>
-<ul>
-<li>通过 Milvus Operator 部署了 Milvus Standalone 的 Kubernetes 集群</li>
-<li><code translate="no">kubectl</code> 并已配置为可访问您的集群</li>
-<li>已安装 Helm 3.x</li>
-</ul>
-<p><strong>兼容性要求：</strong></p>
-<ul>
-<li>Milvus v2.6.0-rc1 与 v3.0-beta<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
-<li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
-<li>在升级至 v3.0-beta 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本。</li>
-</ul>
-<p><strong>消息队列限制</strong>：在升级至 Milvus v3.0-beta 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级至 Milvus v3.0.0 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<div class="alert warning">
+<p>本操作流程不支持通过将 Milvus 镜像降级回 2.6.x 版本来执行降级或回滚。 在 v3.0.0 写入数据后，仅回滚镜像的操作可能无法读取更新后的状态。如果升级失败，请停止写入操作，并使用恢复计划来还原升级前的元数据和持久化数据备份。请先在非生产环境中验证该恢复计划。</p>
+</div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +68,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">步骤 1：升级 Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">步骤 1：备份当前的 Milvus CR<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,15 +83,13 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>首先，将您的 Milvus Operator 升级至 v1.3.7：</p>
-<pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
-helm repo update zilliztech-milvus-operator
-helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
+    </button></h3><p>在更改部署之前，请保存当前的 CR：</p>
+<pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>验证操作员升级：</p>
-<pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步骤 2：升级 Milvus Standalone<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<p>请将现有部署的源清单用作升级清单。切勿在未先移除服务器管理的元数据和状态字段的情况下，直接应用导出的备份文件。</p>
+<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">步骤 2：确认 Milvus Operator 版本<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -142,37 +104,39 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 升级至 v2.5.16</h4><div class="alert-note">
-<p>如果您的独立部署已运行 v2.5.16 或更高版本，请跳过此步骤。</p>
-</div>
-<p>创建配置文件<code translate="no">milvusupgrade.yaml</code> 以升级至 v2.5.16：</p>
+    </button></h3><p>检查已安装的 Milvus Operator 所使用的镜像：</p>
+<pre><code translate="no" class="language-bash">kubectl get deployments --all-namespaces \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
+  | grep milvus-operator
+<button class="copy-code-btn"></button></code></pre>
+<p>经过验证的升级方案将 Milvus Operator 版本保持为 1.3.0。除非您的支持政策要求单独升级 Operator，否则请保留当前管理您的 Milvus 2.6.x 部署的 Operator 版本。 请勿将较新版本的 Operator 降级至已测试版本。若需更改 Operator 版本，请使用与现有安装相同的 Helm 或<code translate="no">kubectl</code> 安装方法，并采用相同的发布名称和命名空间，然后在更新 Milvus CR 之前验证 Operator 变更。</p>
+<h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">步骤 3：更新 Milvus 镜像<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在完整的 Milvus CR 清单中，仅修改<code translate="no">spec.components.image</code> 字段。保留现有的模式、组件设置、消息队列、etcd、存储及其他依赖项设置。以下摘录展示了需要修改的字段；请勿用此摘录替换您的完整 CR。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">&lt;instance-name&gt;</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>应用配置：</p>
-<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
-<button class="copy-code-btn"></button></code></pre>
-<p>等待操作完成：</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods
-<button class="copy-code-btn"></button></code></pre>
-<h4 id="22-Upgrade-to-v30-beta" class="common-anchor-header">2.2 升级至 v3.0-beta</h4><p>当 v2.5.16 成功运行后，请升级至 v3.0-beta：</p>
-<p>更新配置文件（本例中为<code translate="no">milvusupgrade.yaml</code> ）：</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0-beta</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>应用最终升级：</p>
-<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
+<p>应用完整的 CR 清单：</p>
+<pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">验证升级<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -189,8 +153,14 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>确认您的独立部署已运行新版本：</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods
+    </button></h2><p>检查 CR 状态、Pod 状态和容器镜像：</p>
+<pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --output jsonpath=<span class="hljs-string">&#x27;{.status.status}{&quot;\t&quot;}{.status.currentImage}{&quot;\n&quot;}&#x27;</span>
+
+kubectl get pods --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt; \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>如需更多支持，请查阅<a href="https://milvus.io/docs">Milvus 文档</a>或<a href="https://github.com/milvus-io/milvus/discussions">社区论坛</a>。</p>
+<p>请确认 Milvus CR 报告的值为<code translate="no">Healthy</code> ，当前镜像为<code translate="no">milvusdb/milvus:v3.0.0</code> ，且现有 Collections 仍可查询和搜索。在启用任何 v3.0.0 专属功能之前，请完成这些检查。</p>

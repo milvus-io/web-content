@@ -1,7 +1,7 @@
 ---
 id: insert-update-delete.md
 title: 插入实体
-summary: Collections 中的实体是共享同一组字段的数据记录。每条数据记录中的字段值构成一个实体。本页介绍如何在 Collections 中插入实体。
+summary: Collection中的实体是指具有相同字段集的数据记录。每条数据记录中的字段值共同构成一个实体。本页介绍如何将实体插入到Collection中。
 ---
 <h1 id="Insert-Entities" class="common-anchor-header">插入实体<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,14 +18,14 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Collections 中的实体是指共享同一组字段的数据记录。每条数据记录中的字段值构成一个实体。本页介绍如何在 Collections 中插入实体。</p>
+    </button></h1><p>Collection中的实体是指具有相同字段集的数据记录。每条数据记录中的字段值共同构成一个实体。本页介绍如何将实体插入到Collection中。</p>
 <div class="alert note">
 <ul>
-<li><p><strong>创建 Collections 后添加的字段</strong>：如果在创建后向 Collections 添加新字段，并且在插入时没有指定值，Milvus 会自动用定义的默认值填充它们，如果没有设置默认值，则填充 NULL。有关详情，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p></li>
-<li><p><strong>重复处理</strong>：标准<code translate="no">insert</code> 操作符不会检查主键是否重复。使用现有主键插入数据会创建具有相同键的新实体，从而导致数据重复和潜在的应用问题。要更新现有实体或避免重复，请使用 <strong><code translate="no">upsert</code></strong>操作符。有关详细信息，请参阅 "<a href="/docs/zh/upsert-entities.md">更新实体</a>"。</p></li>
+<li><p><strong>Collection 创建后添加的字段</strong>：如果在 Collection 创建后向其中添加新字段，且在插入时未指定值，Milvus 会自动为其填充已定义的默认值；若未设置默认值，则填充<code translate="no">NULL</code> 。详情请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改 Collection Schema”</a>。</p></li>
+<li><p><strong>重复项处理</strong>：标准的<code translate="no">insert</code> 操作不会检查主键是否重复。若插入的数据主键与现有主键相同，将创建一个具有相同主键的新实体，从而导致数据重复并可能引发应用程序问题。若要更新现有实体或避免重复，请改用 <strong><code translate="no">upsert</code></strong> 操作。有关更多信息，请参阅<a href="/docs/zh/upsert-entities.md">“插入或更新实体</a>”。</p></li>
 </ul>
 </div>
-<h2 id="Overview" class="common-anchor-header">实体概述<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +40,10 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，<strong>实体</strong>指的是<strong>Collections</strong>中共享相同<strong>Schema</strong> 的数据记录，行中每个字段的数据构成一个实体。因此，同一 Collections 中的实体具有相同的属性（如字段名称、数据类型和其他约束）。</p>
-<p>将实体插入 Collections 时，要插入的实体只有包含 Schema 中定义的所有字段才能成功添加。插入的实体将按插入顺序进入名为<strong>_default</strong>的分区。如果存在某个分区，也可以通过在插入请求中指定分区名称，将实体插入该分区。</p>
-<p>Milvus 还支持动态字段，以保持 Collections 的可扩展性。启用动态字段后，你可以在 Collections 中插入 Schema 中未定义的字段。这些字段和值将作为键值对存储在名为<strong>$meta</strong> 的保留字段中。有关动态字段的更多信息，请参阅动态字段。</p>
-<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">将实体插入 Collections<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus<strong>中，“实体”指</strong> <strong>Collection</strong>中具有相同<strong>Schema</strong> 的数据记录，行中各字段的数据共同构成一个实体。因此，同一 Collection 内的实体具有相同的属性（如字段名、数据类型及其他约束条件）。</p>
+<p>将实体插入Collection时，只有当待插入的实体包含Schema中定义的所有字段时，才能成功添加。 插入的实体将按插入顺序进入名为<strong>_default 的</strong>分区。如果某个分区已存在，您也可以通过在插入请求中指定分区名称，将实体插入到该分区中。</p>
+<p>Milvus 还支持动态字段，以保持 Collections 可扩展性。启用动态字段后，您可以将 Schema 中未定义的字段插入到 Collections 中。这些字段及其值将作为键值对存储在名为<strong>$meta</strong> 的保留字段中。有关动态字段的更多信息，请参阅 Dynamic Field。</p>
+<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">将实体插入Collection<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,10 +58,15 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在插入数据之前，需要根据 Schema 将数据组织到字典列表中，每个字典代表一个实体，并包含 Schema 中定义的所有字段。如果 Collections 启用了动态字段，每个字典还可以包含 Schema 中未定义的字段。</p>
-<p>本节将向以快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
+    </button></h2><p>在插入数据之前，您需要根据Schema将数据组织成一个字典列表，每个字典代表一个实体，并包含Schema中定义的所有字段。如果Collection启用了Dynamic Field，每个字典还可以包含Schema中未定义的字段。</p>
+<p>在本节中，您将向通过快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 仅包含两个字段，分别命名为<strong>id</strong> <strong>和向量</strong>。此外，该 Collection 已启用 Dynamic Field 功能，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段未在 Schema 中定义。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -218,7 +223,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -269,9 +273,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您还可以将实体插入指定的分区。以下代码片段假定您的 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
+    </button></h2><p>您还可以将实体插入到指定的分区中。以下代码片段假设您的 Collection 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -393,7 +402,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
