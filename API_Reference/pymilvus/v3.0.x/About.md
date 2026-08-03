@@ -20,15 +20,15 @@ In this release, you have the flexibility to choose MilvusClient or the original
 | 2.3.x          | 2.3.7                        | 
 | 2.4.x          | 2.4.15                       |
 | 2.5.x          | 2.5.16                       |
-| 2.6.x          | 2.6.12                       |
-| 3.0.x          | 3.0.0                        |
+| 2.6.x          | 2.6.17                       |
+| 3.0.x          | 3.0.1                        |
 
 ## Install & Update
 
 You can run the following command to install the latest PyMilvus or update your PyMilvus to this version.
 
 ```shell
-pip install --upgrade pymilvus==v3.0.0
+pip install --upgrade pymilvus==v3.0.1
 ```
 
 After the installation, you can check the PyMilvus version by running the following
@@ -38,7 +38,7 @@ from pymilvus import __version__
 
 print(__version__)
 
-# v3.0.0
+# v3.0.1
 ```
 
 To install the Model library for embedding operations, run the following command:

@@ -205,6 +205,18 @@
         "images": {
           "alt_texts": []
         }
+      },
+      "cpp-v3.0.x": {
+        "base": "QdLkbfmnFatl4TsThKDc5Dobn5g:tbl3pnlF1gu6KlTY",
+        "sourceType": "drive",
+        "language": "cpp",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-cpp/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
       }
     }
   }
