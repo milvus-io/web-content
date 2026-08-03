@@ -10,7 +10,7 @@ Text match in Milvus enables precise document retrieval based on specific terms.
 
 <div class="alert note">
 
-Text match focuses on finding exact occurrences of the query terms, without scoring the relevance of the matched documents. If you want to retrieve the most relevant documents based on the semantic meaning and importance of the query terms, we recommend you use [Full Text Search](full-text-search.md).
+`TEXT_MATCH` finds exact analyzed terms, while `TEXT_MATCH_FUZZY` can tolerate a small edit distance between query tokens and indexed tokens. Both are Boolean filtering operations and do not score the relevance of matched documents. If you want to retrieve the most relevant documents based on the semantic meaning and importance of the query terms, we recommend you use [Full Text Search](full-text-search.md).
 
 </div>
 
@@ -28,7 +28,7 @@ When a user performs a text match, the inverted index is used to quickly retriev
 
 ## Enable text match
 
-Text match works on the [`VARCHAR`](string.md) field type, which is essentially the string data type in Milvus. To enable text match, set both `enable_analyzer` and `enable_match` to `True` and then optionally configure an [analyzer](analyzer-overview.md) for text analysis when defining your collection schema.
+Text match works on match-enabled string fields. The examples on this page use [`VARCHAR`](string.md), which is supported across client SDKs. In Milvus 3.0.x, [`TEXT`](text.md) fields also support text match when Storage V3 is enabled. For either field type, set both `enable_analyzer` and `enable_match` to `True`, and then optionally configure an [analyzer](analyzer-overview.md) when defining your collection schema.
 
 ### Set `enable_analyzer` and `enable_match`
 
@@ -281,7 +281,7 @@ Milvus also provides various other analyzers suited to different languages and s
 
 ## Use text match
 
-Once you have enabled text match for a VARCHAR field in your collection schema, you can perform text matches using the `TEXT_MATCH` expression.
+Once you have enabled text match for a `VARCHAR` or `TEXT` field in your collection schema, you can perform text matches using the `TEXT_MATCH` expression.
 
 ### TEXT_MATCH expression syntax
 
@@ -291,7 +291,7 @@ The `TEXT_MATCH` expression is used to specify the field and the terms to search
 TEXT_MATCH(field_name, text)
 ```
 
-- `field_name`: The name of the VARCHAR field to search for.
+- `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
 - `text`: The terms to search for. Multiple terms can be separated by spaces or other appropriate delimiters based on the language and configured analyzer.
 
@@ -386,6 +386,54 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     ```bash
     export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
     ```
+
+### TEXT_MATCH_FUZZY expression syntax | Milvus 3.0.0+
+
+Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. Milvus analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
+
+The syntax is as follows:
+
+```python
+TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)
+```
+
+- `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
+
+- `text`: The query text to analyze and match against indexed tokens.
+
+- `max_edit_distance`: The maximum edit distance allowed for each query token. The option name must be exactly `max_edit_distance`, and its value must be `0`, `1`, or `2`. A value of `0` performs exact token matching, equivalent to `TEXT_MATCH`.
+
+For example, the following expression matches tokens within one edit of `machne`, including `machine`:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
+```
+
+```java
+String filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+```go
+filter := "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
+```
+
+```javascript
+const filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+```bash
+export filter="\"TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)\""
+```
+
+`TEXT_MATCH_FUZZY` is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same `filter` parameter used for `TEXT_MATCH` in search or query operations.
 
 ### Search with text match
 
@@ -590,4 +638,3 @@ curl --request POST \
     - If a string constant is enclosed by single quotes, a single quote within the constant should be represented as `\\'` while a double quote can be represented as either `"` or `\\"`. Example: `'It\\'s milvus'`.
 
     - If a string constant is enclosed by double quotes, a double quote within the constant should be represented as `\\"` while a single quote can be represented as either `'` or `\\'`. Example: `"He said \\"Hi\\""`.
-

@@ -20,7 +20,7 @@ This feature requires Storage V3. For enablement instructions and compatibility 
 </div>
 
 
-Milvus rejects a collection schema that contains a `TEXT` field while Storage V3 is disabled.
+[`common.storage.useLoonFFI`](configure_common.md#commonstorageuseLoonFFI) defaults to `false`, which means Storage V3 is disabled by default. Before creating a collection that contains a `TEXT` field, set this parameter to `true`; otherwise, Milvus rejects the collection schema.
 
 ```python
 schema.add_field(
@@ -40,12 +40,14 @@ After the field is defined, each entity can include a string value in that field
 
 ## Limits
 
-- A `TEXT` field cannot be a primary field. Primary fields support `INT64` and `VARCHAR`.
-- In Milvus 3.0.0, `TEXT` fields do not support `PHRASE_MATCH`.
+- A `TEXT` field cannot be a primary field, partition key, or clustering key.
+- `TEXT` cannot be used as the element type of an `ARRAY` field, including a scalar subfield in a `StructArray`.
 - In Milvus 3.0.0, `TEXT` fields do not support default values.
 - In Milvus 3.0.0, `TEXT` fields are not supported in external collections.
-- In Milvus 3.0.0, `TEXT` fields do not support scalar indexes.
-- `TEXT` is not intended for regular metadata filtering. If you need to filter on short string metadata and the field value fits within the `VARCHAR` length limit, use `VARCHAR`.
+- Users cannot create a scalar index on a `TEXT` field. When `enable_match=True`, Milvus builds a system-managed text index for text matching. This internal index is not a user-created scalar index.
+- General scalar filter operators cannot be applied directly to a `TEXT` field. These include comparison operators such as `==` and `!=`, range operators such as `>`, `>=`, `<`, and `<=`, as well as `IN`, `LIKE`, regex operators (`=~` and `!~`), and `IS NULL` or `IS NOT NULL`. To filter by analyzed terms, define the field with `enable_analyzer=True` and `enable_match=True`, and use [`TEXT_MATCH` or `TEXT_MATCH_FUZZY`](keyword-match.md). For relevance-ranked full-text retrieval, use BM25.
+- In Milvus 3.0.0, a BM25 or MinHash Function that uses a `TEXT` field as input must be defined when the collection is created. It cannot be added later through `add_function_field` or `AlterCollectionSchema`, even if the existing collection is empty, because Milvus cannot backfill the Function output from stored `TEXT` values. To add such a Function to an existing collection, use a `VARCHAR` input field, or recreate the collection with the Function included in its schema. For details about adding Function-generated fields, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md#add-vector-fields-generated-by-functions--milvus-30x).
+- Text Embedding Functions also must be defined when the collection is created. Milvus 3.0.0 does not support adding them at runtime.
 
 ## Choose TEXT or VARCHAR
 
@@ -57,7 +59,7 @@ After the field is defined, each entity can include a string value in that field
 | Length setting        | Requires `max_length`, which defines the maximum number of bytes the field can store. The maximum value is `65,535` bytes. If a value may exceed this limit, use `TEXT`. | Does not require `max_length`, so the schema does not need a fixed byte limit for the text value. |
 | Storage behavior      | Stores each value within the field's configured `max_length`.                                                              | Uses automatic storage selection for larger text values. For details, see [How Milvus stores large TEXT values](#how-milvus-stores-large-text-values). |
 | Primary field support | Can be used as a primary field.                                                                                            | Cannot be used as a primary field.                                                                                                                     |
-| Filtering             | Use for short string metadata that needs to appear in filter expressions, such as `category == "news"` or `tag in ["ai", "database"]`. | Not intended for regular metadata filtering.                                                                                                           |
+| Filtering             | Use for short string metadata that needs to appear in filter expressions, such as `category == "news"` or `tag in ["ai", "database"]`. | Does not support general scalar filter operators. Use match-enabled text operators for analyzed-term filtering, or BM25 for relevance-ranked full-text retrieval. |
 
 For details about `VARCHAR` fields, refer to [VarChar Field](string.md).
 
