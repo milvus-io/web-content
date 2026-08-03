@@ -9,13 +9,9 @@ beta: Milvus 3.0.x
 
 A snapshot is a point-in-time image of a Milvus collection, ideal for quick rollbacks, versioning, and testing. It captures the collection's state at a specific timestamp and stores only metadata and manifest files, such as the schema, indexes, and vector data files (binlogs), for efficient storage and restoration.
 
-<div class="alert note">
-
 Snapshots are quick, point-in-time images of data, suitable for fast rollbacks or testing (**days to weeks**). At the same time, backups are independent, complete copies stored separately for long-term disaster recovery (**weeks to years**) and for better protection against total storage failure.
 
 To create backups, refer to [Milvus Backup](milvus_backup_overview.md).
-
-</div>
 
 ## Snapshot anatomy
 
@@ -62,7 +58,8 @@ Once Milvus references a segment or index file in a snapshot, it does not garbag
 - Remove old snapshots regularly to save storage.
 - Use descriptive names and descriptions for future reference.
 - Always verify snapshot creation and restoration results.
-- Track snapshot creation timestamps, storage usage, and restoration job IDs for monitoring and troubleshooting.
+- Track snapshot creation timestamps and storage usage for monitoring and troubleshooting.
+- Store restoration job IDs for monitoring and troubleshooting.
 
 ## Limits and restrictions
 
@@ -70,9 +67,10 @@ Once Milvus references a segment or index file in a snapshot, it does not garbag
 - You can restore a snapshot only to a new collection within the same cluster as the original.
 - Restored collections retain the same schema, number of shards, and partition count.
 - Restored historical data may conflict with TTL policies. You are advised to disable TTL or adjust TTL settings before creating snapshots.
+- To use a snapshot as a `milvus-table` external source, the source snapshot must come from a normal StorageV3 Milvus collection. Snapshots of external collections are not supported as `milvus-table` sources.
 
 ## Further readings
 
-- [Manage Snapshots](manage-snapshots.md) — create, list, restore, and delete snapshots.
+- [Manage Snapshots](manage-snapshots.md) — create, list, describe, pin, restore, and delete snapshots.
 - [Snapshot Use Cases](snapshot-use-cases.md) — common patterns and workflows.
 - [Milvus Backup](milvus_backup_overview.md) — long-term backup and restore across clusters.

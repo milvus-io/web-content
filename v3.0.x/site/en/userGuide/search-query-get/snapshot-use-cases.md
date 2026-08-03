@@ -47,202 +47,72 @@ Creating a snapshot usually takes milliseconds, and restoring it takes seconds t
 
 For more details on snapshot limits, restrictions, and their system impacts, refer to [Snapshots](snapshots.md).
 
-### Create snapshots
+## Data processing with external collections
 
-Before creating a snapshot, you are advised to stop writing data to the target collection and call `flush()` to avoid possible data loss.
+Snapshots can provide stable, point-in-time sources for analytical or validation workloads. For Milvus snapshots, use the `milvus-table` external collection format instead of reading snapshot files directly as generic Spark input. A Milvus snapshot stores collection metadata, segment manifests, delete logs, and primary-key statistics, so Milvus needs the snapshot metadata JSON and the `milvus-table` reader to preserve the correct schema and delete semantics.
 
-<div class="alert note">
+This workflow creates a queryable external collection over the snapshot data. The main column data remains referenced from the snapshot source, and refresh maps the source StorageV3 manifests into target external segments.
 
-</div>
+### Step 1: Get the snapshot metadata path
 
-When naming a snapshot, use clear, descriptive names, such as `"daily_backup_20240101"` or `"v2.1_production_release"` and avoid generic terms, such as `"backup1"` and `"test"`. Use snapshot names wisely to distinguish snapshots across versions, environments, and stages.
-
-The code examples below assume that you already have a collection named `my_collection`.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+Create or choose a snapshot from a normal Milvus collection, and then describe it to get its object-storage location.
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import DataType, MilvusClient
 
 client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"
 )
 
-# Recommended: Flush data before creating snapshot to ensure all data is included
-client.flush(collection_name="my_collection")
-
-# Create snapshot for entire collection
-client.create_snapshot(
-    collection_name="my_collection",
-    snapshot_name="backup_20240101",
-    description="Daily backup for January 1st, 2024"
-)
-```
-
-```java
-// java
-```
-
-```go
-import (
-    "context"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
-
-client, err := milvusclient.New(context.Background(), &milvusclient.ClientConfig{
-    Address: "localhost:19530",
-    Token: "root:Milvus",
-})
-
-// Recommended: Flush data before creating snapshot to ensure all data is included
-err = client.Flush(context.Background(), milvusclient.NewFlushOption("my_collection"))
-if err != nil {
-    log.Fatal(err)
-}
-
-// Create snapshot
-createOpt := milvusclient.NewCreateSnapshotOption("backup_20240101", "my_collection").
-    WithDescription("Daily backup for January 1st, 2024")
-
-err = client.CreateSnapshot(context.Background(), createOpt)
-```
-
-```javascript
-// node.js
-```
-
-```bash
-# restful
-```
-
-### Restore snapshots
-
-You can restore a snapshot to a new collection. This operation is asynchronous and returns a job ID for tracking the restoration progress.
-
-The restoration uses a **copy-segment** mechanism instead of data import, which is more efficient because it
-
-- directly copies segment files (binlogs, deltalogs, index files) from snapshot storage
-
-- preserves field IDs and index IDs to ensure compatibility with existing data files
-
-- avoids data rewriting and index rebuilding, resulting in significantly faster restore times, and
-
-- ensures a 10- to 100-fold performance increase compared with traditional backup and restore methods
-
-To restore a snapshot, do as follows:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# Restore snapshot to new collection
-job_id = client.restore_snapshot(
-    snapshot_name="backup_20240101",
-    collection_name="restored_collection",
-)
-```
-
-```java
-// java
-```
-
-```go
-restoreOpt := milvusclient.NewRestoreSnapshotOption(
-    "backup_20240101",
-    "restored_collection"
-)
-
-jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
-if err != nil {
-    log.Fatal(err)
-}
-```
-
-```javascript
-// node.js
-```
-
-```bash
-# restful
-```
-
-### Drop snapshots
-
-You can drop a snapshot if it is no longer needed. You are advised to remove old snapshots regularly to save storage.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-client.drop_snapshot(
-    snapshot_name="backup_20240101"
-)
-```
-
-```java
-// java
-```
-
-```go
-dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101")
-err := client.DropSnapshot(context.Background(), dropOpt)
-```
-
-```javascript
-// node.js
-```
-
-```bash
-# restful
-```
-
-## Data processing with Spark
-
-Snapshots enable efficient offline data processing by providing stable, consistent data sources for analytical workloads. You can directly access snapshot data stored in object storage with Spark or other big data processing frameworks without impacting the live Milvus cluster.
-
-The following code assumes you have created a snapshot named `"analytics_snapshot_20260321"`, stored it in an object storage bucket, and obtained the object storage access credentials.
-
-### Step 1: Get snapshot metadata
-
-Before using Spark to access snapshot data, get snapshot metadata to locate the data files in object storage.
-
-```python
-# Get snapshot metadata
 snapshot_info = client.describe_snapshot(
-    snapshot_name=s"analytics_snapshot_20260321",
+    snapshot_name="analytics_snapshot_20260321",
+    collection_name="my_collection",
     include_collection_info=True
 )
 
-# Locate data files in S3
-s3_path = f"s3a://{snapshot_info.s3_location}/binlogs/"
+external_source = f"s3://bucket/{snapshot_info.s3_location}"
 ```
 
-### Step2: Initiate a Spark session
+### Step 2: Create and refresh a `milvus-table` external collection
 
-With the data files in object storage, initiate a Spark session and read the data into a dataframe.
+Create an external collection whose schema matches the snapshot source collection. Set `external_spec.format` to `"milvus-table"`, and set each target data field's `external_field` to the corresponding source field name.
 
 ```python
-spark = SparkSession.builder \
-    .appName("VectorAnalytics") \
-    .config("spark.hadoop.fs.s3a.access.key", "YOUR_ACCESS_KEY") \
-    .config("spark.hadoop.fs.s3a.secret.key", "YOUR_SECRET_KEY") \
-    .getOrCreate()
+schema = client.create_schema(
+    external_source=external_source,
+    external_spec="""{
+        "format": "milvus-table",
+        "extfs": {
+            "cloud_provider": "aws",
+            "region": "us-west-2",
+            "access_key_id": "YOUR_ACCESS_KEY",
+            "access_key_value": "YOUR_SECRET_KEY"
+        }
+    }""",
+)
 
+schema.add_field(
+    field_name="id",
+    datatype=DataType.INT64,
+    is_primary=True,
+    external_field="id",
+)
+schema.add_field(
+    field_name="embedding",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=768,
+    external_field="embedding",
+)
+
+client.create_collection(
+    collection_name="snapshot_external_collection",
+    schema=schema,
+)
+
+job_id = client.refresh_external_collection(
+    collection_name="snapshot_external_collection"
+)
 ```
+
+After refresh completes, you can create indexes, load the external collection, and run search or query operations against the snapshot-backed view.
