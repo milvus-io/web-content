@@ -1,7 +1,9 @@
 ---
 id: manage-snapshots.md
 title: Manage Snapshots
-summary: 'In this guide, you will learn how to create and manage snapshots, including'
+summary: >-
+  Learn how to create, list, describe, pin, restore, and drop snapshots and
+  monitor restoration jobs.
 beta: Milvus 3.0.x
 ---
 <h1 id="Manage-Snapshots" class="common-anchor-header">Manage Snapshots<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Manage-Snapshots" class="anchor-icon" translate="no">
@@ -19,8 +21,18 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In this guide, you will learn how to create and manage snapshots.</p>
-<h3 id="Create-snapshot" class="common-anchor-header">Create snapshot<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
+    </button></h1><p>In this guide, you will learn how to create and manage snapshots, including</p>
+<ul>
+<li><a href="#Create-snapshot">Create a snapshot</a>,</li>
+<li><a href="#List-snapshots">List snapshots</a>,</li>
+<li><a href="#Describe-snapshot">Describe a snapshot</a>,</li>
+<li><a href="#Pinunpin-snapshot-data">Pin/unpin snapshot data</a>,</li>
+<li><a href="#Restore-snapshot">Restore a snapshot</a>,</li>
+<li><a href="#Drop-snapshot">Drop a snapshot</a>,</li>
+<li><a href="#List-restoration-jobs">List restoration jobs</a>, and</li>
+<li><a href="#Get-restoration-state">Get restoration state</a>.</li>
+</ul>
+<h2 id="Create-snapshot" class="common-anchor-header">Create snapshot<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +47,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Before creating a snapshot, you are advised to stop writing data to the target collection and call <code translate="no">flush()</code> to avoid possible data loss.</p>
+    </button></h2><p>Before creating a snapshot, you are advised to stop writing data to the target collection and call <code translate="no">flush()</code> to avoid possible data loss.</p>
 <div class="alert note">
 <p>Calling <code translate="no">flush()</code> is not mandatory but highly recommended to avoid data loss. If you skip this, the snapshot contains only the data that has already been flushed.</p>
 </div>
@@ -93,7 +105,7 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-snapshots" class="common-anchor-header">List snapshots<button data-href="#List-snapshots" class="anchor-icon" translate="no">
+<h2 id="List-snapshots" class="common-anchor-header">List snapshots<button data-href="#List-snapshots" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,7 +120,7 @@ err = client.CreateSnapshot(context.Background(), createOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>You can list the names of existing snapshots.</p>
+    </button></h2><p>You can list the names of existing snapshots.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -133,7 +145,7 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># bash</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-snapshot" class="common-anchor-header">Describe snapshot<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
+<h2 id="Describe-snapshot" class="common-anchor-header">Describe snapshot<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,7 +160,7 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>You can get the detailed information about a specific snapshot.</p>
+    </button></h2><p>You can get the detailed information about a specific snapshot.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -178,7 +190,7 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Restore-snapshot" class="common-anchor-header">Restore snapshot<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+<h2 id="Pinunpin-snapshot-data" class="common-anchor-header">Pin/unpin snapshot data<button data-href="#Pinunpin-snapshot-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,13 +205,70 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>You can restore a snapshot to a new collection. This operation is asynchronous and returns a job ID for tracking the restoration progress.</p>
+    </button></h2><p>During restoration, you can pin a snapshot to temporarily protect its underlying data from garbage collection, and unpin it to release the data.</p>
+<p>You can also set a time-to-live (TTL) duration for the pin operation so that the pinned data will be released when the duration expires.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">pin_id = client.pin_snapshot_data(
+    snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    ttl_seconds=<span class="hljs-number">3600</span>,
+)
+
+client.unpin_snapshot_data(
+    pin_id=pin_id
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">pinID, err := client.PinSnapshotData(
+    context.Background(),
+    milvusclient.NewPinSnapshotDataOption(<span class="hljs-string">&quot;backup_20240101&quot;</span>, <span class="hljs-string">&quot;my_collection&quot;</span>).WithTTL(<span class="hljs-number">3600</span>),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> {
+    _ = client.UnpinSnapshotData(
+        context.Background(),
+        milvusclient.NewUnpinSnapshotDataOption(pinID),
+    )
+}()
+
+<span class="hljs-comment">// Do work with pinned snapshot data.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Restore-snapshot" class="common-anchor-header">Restore snapshot<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>You can restore a snapshot to a new collection. This operation is asynchronous and returns a job ID for tracking the restoration progress.</p>
 <p>The restoration uses a <strong>copy-segment</strong> mechanism instead of data import, which is more efficient because it</p>
 <ul>
-<li><p>directly copies segment files (binlogs, deltalogs, index files) from snapshot storage</p></li>
-<li><p>preserves field IDs and index IDs to ensure compatibility with existing data files</p></li>
-<li><p>avoids data rewriting and index rebuilding, resulting in significantly faster restore times, and</p></li>
-<li><p>ensures a 10- to 100-fold performance increase compared with traditional backup and restore methods</p></li>
+<li>directly copies segment files (binlogs, deltalogs, index files) from snapshot storage</li>
+<li>preserves field IDs and index IDs to ensure compatibility with existing data files</li>
+<li>avoids data rewriting and index rebuilding, resulting in significantly faster restore times, and</li>
+<li>ensures a 10- to 100-fold performance increase compared with traditional backup and restore methods</li>
 </ul>
 <p>To restore a snapshot, do as follows:</p>
 <div class="multipleCode">
@@ -231,8 +300,8 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on monitoring the progress of a restoration job, refer to <a href="/docs/snapshots.md#CvhSd7amkog20mxHid6cvTyknVb">Monitor restoration progress</a>.</p>
-<h3 id="Drop-snapshot" class="common-anchor-header">Drop snapshot<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
+<p>For details on monitoring the progress of a restoration job, refer to <a href="#Get-restoration-state">Get restoration state</a>.</p>
+<h2 id="Drop-snapshot" class="common-anchor-header">Drop snapshot<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -247,7 +316,7 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>You can drop a snapshot if it is no longer needed. You are advised to remove old snapshots regularly to save storage.</p>
+    </button></h2><p>You can drop a snapshot if it is no longer needed. You are advised to remove old snapshots regularly to save storage.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -268,7 +337,7 @@ err := client.DropSnapshot(context.Background(), dropOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-restoration-jobs" class="common-anchor-header">List restoration jobs<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
+<h2 id="List-restoration-jobs" class="common-anchor-header">List restoration jobs<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,7 +352,7 @@ err := client.DropSnapshot(context.Background(), dropOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>You can use this API to get a list of snapshots already created for the target collection.</p>
+    </button></h2><p>You can use this API to get a list of snapshots already created for the target collection.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -326,7 +395,7 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-restoration-state" class="common-anchor-header">Get restoration state<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
+<h2 id="Get-restoration-state" class="common-anchor-header">Get restoration state<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,7 +410,7 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Once you have a restoration job ID, you can use it to retrieve restoration progress.</p>
+    </button></h2><p>Once you have a restoration job ID, you can use it to retrieve restoration progress.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
