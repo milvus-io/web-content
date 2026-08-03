@@ -1,16 +1,13 @@
-# list_volumes()
+# describe_volume()
 
-Adds project_id and volume_type filtering.
+New public volume-description method.
 
 ## Request Syntax
 
 ```python
 # include-start zilliz
-list_volumes(
-    project_id: str,
-    current_page: int = 1,
-    page_size: int = 10,
-    volume_type: Optional[str] = None,
+describe_volume(
+    volume_name: str,
 ) -> requests.Response
 # include-end
 ```
@@ -23,7 +20,7 @@ list_volumes(
 
 **RETURNS:**
 
-HTTP response containing a page of volumes for the project.
+HTTP response containing details for the requested volume.
 
 **EXCEPTIONS:**
 

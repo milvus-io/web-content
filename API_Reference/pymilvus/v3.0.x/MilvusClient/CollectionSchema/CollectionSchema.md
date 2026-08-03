@@ -23,7 +23,7 @@ CollectionSchema(
 
     **[REQUIRED]**
 
-    A list of **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** objects that define the fields in the collection schema.
+    A list of **[FieldSchema](../FieldSchema/FieldSchema.md)** objects that define the fields in the collection schema.
 
     <div class="alert note">
     
@@ -145,7 +145,7 @@ CollectionSchema(
 
         The value should be the name of a field listed in **fields**.
 
-        As an alternative, you can set **is_primary** when creating a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
+        As an alternative, you can set **is_primary** when creating a **[FieldSchema](../FieldSchema/FieldSchema.md)** object.
 
         This parameter does not apply to external collections.
 
@@ -157,7 +157,7 @@ CollectionSchema(
 
         Setting this makes Milvus manage all partitions in the current collection.
 
-        As an alternative, you can set **is_partition_key** when creating a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
+        As an alternative, you can set **is_partition_key** when creating a **[FieldSchema](../FieldSchema/FieldSchema.md)** object.
 
         This parameter does not apply to external collections.
 
@@ -193,7 +193,7 @@ A **CollectionSchema** object.
 
 - **FieldTypeException**: 
 
-    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../ORM/FieldSchema/FieldSchema.md)** object.
+    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../FieldSchema/FieldSchema.md)** object.
 
 - **PrimaryKeyException:**
 

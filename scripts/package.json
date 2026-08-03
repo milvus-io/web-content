@@ -20,6 +20,7 @@
     "fetch-sdk-docs:node:v2.6": "node lark-docs/index.js -c config.json -m node-v2.6.x --all",
     "fetch-sdk-docs:go:v2.6": "node lark-docs/index.js -c config.json -m go-v2.6.x --all",
     "fetch-sdk-docs:cpp:v2.6": "node lark-docs/index.js -c config.json -m cpp-v2.6.x --all",
+    "fetch-sdk-docs:cpp:v3.0": "node lark-docs/index.js -c config.json -m cpp-v3.0.x --all",
     "sync:shared-scripts": "node sync-shared-scripts.js",
     "check:shared-scripts": "node sync-shared-scripts.js --check",
     "test:shared-sync": "node --test test/sync-shared-scripts.test.js",
