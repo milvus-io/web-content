@@ -22,10 +22,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>A snapshot is a point-in-time image of a Milvus collection, ideal for quick rollbacks, versioning, and testing. It captures the collection’s state at a specific timestamp and stores only metadata and manifest files, such as the schema, indexes, and vector data files (binlogs), for efficient storage and restoration.</p>
-<div class="alert note">
 <p>Snapshots are quick, point-in-time images of data, suitable for fast rollbacks or testing (<strong>days to weeks</strong>). At the same time, backups are independent, complete copies stored separately for long-term disaster recovery (<strong>weeks to years</strong>) and for better protection against total storage failure.</p>
 <p>To create backups, refer to <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>.</p>
-</div>
 <h2 id="Snapshot-anatomy" class="common-anchor-header">Snapshot anatomy<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +83,8 @@ beta: Milvus 3.0.x
 <li>Remove old snapshots regularly to save storage.</li>
 <li>Use descriptive names and descriptions for future reference.</li>
 <li>Always verify snapshot creation and restoration results.</li>
-<li>Track snapshot creation timestamps, storage usage, and restoration job IDs for monitoring and troubleshooting.</li>
+<li>Track snapshot creation timestamps and storage usage for monitoring and troubleshooting.</li>
+<li>Store restoration job IDs for monitoring and troubleshooting.</li>
 </ul>
 <h2 id="Limits-and-restrictions" class="common-anchor-header">Limits and restrictions<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,6 +106,7 @@ beta: Milvus 3.0.x
 <li>You can restore a snapshot only to a new collection within the same cluster as the original.</li>
 <li>Restored collections retain the same schema, number of shards, and partition count.</li>
 <li>Restored historical data may conflict with TTL policies. You are advised to disable TTL or adjust TTL settings before creating snapshots.</li>
+<li>To use a snapshot as a <code translate="no">milvus-table</code> external source, the source snapshot must come from a normal StorageV3 Milvus collection. Snapshots of external collections are not supported as <code translate="no">milvus-table</code> sources.</li>
 </ul>
 <h2 id="Further-readings" class="common-anchor-header">Further readings<button data-href="#Further-readings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,7 +124,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/manage-snapshots.md">Manage Snapshots</a> — create, list, restore, and delete snapshots.</li>
+<li><a href="/docs/manage-snapshots.md">Manage Snapshots</a> — create, list, describe, pin, restore, and delete snapshots.</li>
 <li><a href="/docs/snapshot-use-cases.md">Snapshot Use Cases</a> — common patterns and workflows.</li>
 <li><a href="/docs/milvus_backup_overview.md">Milvus Backup</a> — long-term backup and restore across clusters.</li>
 </ul>
