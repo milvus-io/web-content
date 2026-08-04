@@ -121,7 +121,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>During search, the query text goes through the same shared pipeline to produce a binary vector. This vector is used to perform an LSH lookup in the <code translate="no">MINHASH_LSH</code> index, which quickly identifies candidate pairs that are likely similar. Candidates are then ranked by estimated Jaccard similarity and the top-K results are returned.</p>
+    </button></h3><p>During search, the query text goes through the same shared pipeline to produce a binary vector. This vector is used to perform an LSH lookup in the <code translate="no">MINHASH_LSH</code> index, which quickly identifies candidate pairs that are likely similar. Without Jaccard refinement, Milvus returns LSH candidates that are not ranked by estimated Jaccard similarity. When Jaccard refinement is enabled, Milvus uses the stored raw MinHash signatures to rank the candidates by estimated Jaccard similarity and return the top-K results.</p>
 <p>Because both paths share the same transformation logic, two documents with highly overlapping content produce similar MinHash signatures. This makes the function effective for finding near-duplicates even when documents differ in word order, formatting, or minor phrasing.</p>
 <p></details></p>
 <h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -339,6 +339,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Set <code translate="no">with_raw_data</code> to <code translate="no">True</code> if searches will use Jaccard refinement. The raw MinHash signatures are required to calculate estimated Jaccard similarity for the candidates returned by the LSH lookup.</p>
 <h3 id="Create-the-collection" class="common-anchor-header">Create the collection<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -431,7 +432,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have inserted data, search for near-duplicate documents by providing raw text queries. Milvus automatically converts your query text into a MinHash binary vector and retrieves the most similar documents using estimated Jaccard similarity.</p>
+    </button></h2><p>Once you have inserted data, search for near-duplicate documents by providing raw text queries. Milvus automatically converts each query into a MinHash binary vector. Enable Jaccard refinement to rank the LSH candidates by estimated Jaccard similarity.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -441,7 +442,10 @@ index_params.add_index(
 </div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>,
-    <span class="hljs-string">&quot;params&quot;</span>: {},
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;mh_search_with_jaccard&quot;</span>: <span class="hljs-literal">True</span>,
+        <span class="hljs-string">&quot;refine_k&quot;</span>: <span class="hljs-number">3</span>,
+    },
 }
 
 results = client.search(
@@ -466,6 +470,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Set <code translate="no">mh_search_with_jaccard</code> to <code translate="no">True</code> to enable Jaccard refinement. <code translate="no">refine_k</code> controls the candidate-pool capacity used for refinement. Milvus uses <code translate="no">max(refine_k, limit)</code> as the capacity, but may refine fewer candidates if the LSH lookup returns fewer matches. Increasing <code translate="no">refine_k</code> can improve result quality at the cost of additional computation.</p>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
