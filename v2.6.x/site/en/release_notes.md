@@ -8,6 +8,34 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.22
+
+Release date: August 4, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.22         | 2.6.17             | 2.6.17              | 2.6.22           | 2.6.22         |
+
+We are excited to announce the release of Milvus v2.6.22! This release improves QueryNode efficiency, coordinator reliability, storage compaction, and GIS query performance. It also fixes GIS and JSON query accuracy issues, encrypted-storage access failures, and monitoring compatibility regressions.
+
+### Improvements
+
+- Reduced redundant bulk-delete replay and timestamp-column pinning during delete application in QueryNode ([#51754](https://github.com/milvus-io/milvus/pull/51754))
+- Improved MixCoord shutdown ordering by retaining its shared etcd session until all child coordinators stopped ([#51771](https://github.com/milvus-io/milvus/pull/51771))
+- Reduced QueryNode distribution report payloads by sending incremental segment and channel updates to QueryCoord ([#51881](https://github.com/milvus-io/milvus/pull/51881))
+- Improved DataNode and QueryNode efficiency by reusing precomputed BM25 function outputs while preserving BM25 statistics collection ([#51927](https://github.com/milvus-io/milvus/pull/51927))
+- Improved DataCoord compaction by enabling storage-version compaction by default ([#51946](https://github.com/milvus-io/milvus/pull/51946))
+- Optimized GIS queries by enabling split and fusion optimization by default, reducing query latency by up to 9.31x in measured cases ([#52009](https://github.com/milvus-io/milvus/pull/52009))
+
+### Bug fixes
+
+- Fixed incorrect GIS filtering and boost rescore results for queries using offset input, large segments, or growing segments ([#50751](https://github.com/milvus-io/milvus/pull/50751), [#51487](https://github.com/milvus-io/milvus/pull/51487))
+- Fixed incorrect JSON query results and integer precision loss in mixed-type IN, NOT IN, and combined filter expressions ([#51556](https://github.com/milvus-io/milvus/pull/51556), [#51627](https://github.com/milvus-io/milvus/pull/51627))
+- Fixed RESTful v2 Function DDL requests continuing to execute after parameter validation failed ([#51699](https://github.com/milvus-io/milvus/pull/51699))
+- Fixed stats and compaction text-index builds failing to access encrypted storage because worker tasks lacked cipher context ([#51759](https://github.com/milvus-io/milvus/pull/51759))
+- Fixed geometry queries on growing segments failing when visible rows spanned multiple chunks ([#51882](https://github.com/milvus-io/milvus/pull/51882))
+- Fixed changed Proxy metric status labels causing existing dashboards and alerts to stop matching failed or rejected requests ([#51909](https://github.com/milvus-io/milvus/pull/51909))
+
 ## v2.6.21
 
 Release date: July 28, 2026
