@@ -15,10 +15,53 @@ Storage V3 provides this model in Milvus 3.0. It uses a versioned storage layout
 
 Storage V3 is disabled by default. After `common.storage.useLoonFFI` takes effect, new writes and compaction output use Storage V3. Existing data remains in its current layout until eligible data is rewritten by background compaction. Milvus can read both layouts during this transition. Enable Storage V3 to use features that depend on it, rather than as a general performance optimization.
 
+## Data formats in Storage V3
+
+Storage V3 uses manifests to describe collection data independently of the underlying data format. This lets the same storage layer work with both data managed by Milvus and data that remains in an external system.
+
+### Managed collection file formats
+
+For managed collections, `dataNode.storage.format` selects the file format for new Storage V3 data. The setting supports the following values:
+
+| Format | Description |
+| --- | --- |
+| `parquet` | The default, widely adopted columnar file format with broad ecosystem compatibility and mature tooling. Parquet organizes data into row groups and supports per-column encoding and compression, allowing Milvus to read only the required columns and efficiently process large sequential scans. |
+| `vortex` | An optional, next-generation columnar file format built around extensible, composable encodings and rich statistics. In Milvus, Vortex supports column projection, range reads, and random-access reads. These capabilities can reduce unnecessary data reads for suitable workloads. |
+
+Changing `dataNode.storage.format` affects new Storage V3 writes. Existing files keep their current format until compaction rewrites the corresponding segments. Most deployments should keep the default `parquet` format unless representative benchmarks show that `vortex` better suits their data and access patterns.
+
+### External collections and supported source formats
+
+External collections allow Milvus to use data stored in external files or tables. Storage V3 supports the following external source formats:
+
+| Format | Category | Expected source | Storage V3 support |
+| --- | --- | --- | --- |
+| `parquet` | File format | A directory or object-storage prefix containing Parquet files. | Discovers the files, reads their metadata and row groups, and records them in a Storage V3 manifest. |
+| `vortex` | File format | A directory or object-storage prefix containing Vortex files. | Discovers the files and uses Vortex layout and statistics for projection, range reads, and random-access reads. |
+| `lance-table` | Table format | A Lance dataset directory. | Reads the dataset metadata and maps its fragments into a Storage V3 manifest. |
+| `iceberg-table` | Table format | An Iceberg metadata JSON file and snapshot ID. | Resolves the specified snapshot, plans its data files, and preserves position-delete metadata. Equality deletes are not supported and must be converted to position deletes before the external collection is refreshed. |
+
+External sources are read-only. Storage V3 creates and refreshes its own manifest without modifying or copying the source data. Milvus can then build indexes and run searches and queries over the data through an external collection.
+
+#### Cloud storage and cross-account authentication
+
+The following table describes only how an external collection accesses source data stored in another cloud account. It does not describe the object storage used for Milvus-managed data.
+
+| Cloud storage | Supported external formats | Cross-account authentication for external collections |
+| --- | --- | --- |
+| Amazon S3 | All four formats listed above. | Specify the customer-owned IAM role ARN. Storage V3 uses AWS STS `AssumeRole` to obtain temporary credentials and refreshes them as needed. You can also provide an external ID when required by the role's trust policy. |
+| Google Cloud Storage (GCS) | All four formats listed above. | Specify the target service account. Storage V3 impersonates that service account, uses its short-lived OAuth access tokens to access the source bucket, and refreshes the tokens before they expire. |
+| Azure Blob Storage | `parquet`, `vortex`, and `lance-table`. `iceberg-table` is not supported. | Milvus requests short-lived SAS credentials through the `milvus-tools` private gRPC service. Storage V3 uses the SAS credentials to access the source container, and the credentials are renewed before they expire. |
+| Azure Data Lake Storage Gen2 (ADLS Gen2) | All four formats listed above. | Milvus requests short-lived SAS credentials through the `milvus-tools` private gRPC service. Storage V3 uses the SAS credentials to access the source container, and the credentials are renewed before they expire. |
+| Alibaba Cloud Object Storage Service (OSS) | All four formats listed above. | Specify the customer-owned RAM role ARN. Storage V3 assumes the role using the runtime's workload identity or ECS RAM role, then uses temporary credentials to access the source bucket. |
+
+For external collection configuration and usage instructions, see [Create an External Collection](create-an-external-collection.md).
+
 ## Features that require Storage V3
 
 | Feature | Description | Required configuration |
 | --- | --- | --- |
+| Vortex file format | Write new managed-collection data in the Vortex file format. | <ul><li><a href="configure_common.md#commonstorageuseLoonFFI"><code>common.storage.useLoonFFI</code></a><code>=true</code></li><li><code>dataNode.storage.format=vortex</code></li></ul> |
 | [`TEXT` field](text.md) | Store long source text, such as passages, documents, tickets, or logs, without setting a fixed maximum length in the collection schema. | [`common.storage.useLoonFFI`](configure_common.md#commonstorageuseLoonFFI)`=true` |
 | [Function-generated vector fields](add-fields-to-an-existing-collection.md) | Add a BM25 or MinHash Function to an existing collection so Milvus generates a new vector field from an existing `VARCHAR` field. Milvus backfills the generated values for existing entities asynchronously through background compaction. | <ul><li><a href="configure_common.md#commonstorageuseLoonFFI"><code>common.storage.useLoonFFI</code></a><code>=true</code></li><li><a href="configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code>dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code>=true</code></li><li><a href="configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code>dataCoord.compaction.storageVersion.enabled</code></a><code>=true</code></li></ul> |
 | [External collections](create-an-external-collection.md) | Query data stored outside Milvus without copying it into a managed collection. Refresh the external collection when the source data changes. To expose additional source fields, see [Alter External Collection Schema](alter-external-collection-schema.md). | [`common.storage.useLoonFFI`](configure_common.md#commonstorageuseLoonFFI)`=true` |
