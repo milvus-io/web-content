@@ -10,7 +10,7 @@
     "dotenv": "^16.4.7",
     "inquirer": "^8.2.4",
     "jimp": "^0.22.12",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "node-fetch": "^2.7.0",
     "showdown": "^2.1.0",
     "slugify": "^1.6.6",
