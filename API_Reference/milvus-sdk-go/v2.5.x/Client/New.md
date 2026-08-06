@@ -124,5 +124,7 @@ import (
 mclient, err := client.NewClient(context.Background(), client.ClientConfig{
    Address: "http://localhost:19530",
 })
+// Don't forget to close the connection:
+defer mclient.Close(ctx)
 ```
 
