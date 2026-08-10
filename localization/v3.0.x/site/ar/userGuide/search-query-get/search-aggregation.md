@@ -23,14 +23,14 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>عندما يبحث المتسوق عن "أحذية جري سوداء للتدريب اليومي"، يقوم البحث عن أقرب الجيران التقريبي (ANN) بترتيب المنتجات حسب تشابه المتجهات ويعرض قائمة مسطحة بأفضل K نتائج. قد تكون النتائج ذات صلة ولكنها متكررة: في المثال أدناه، أربعة من النتائج الست الأولى هي منتجات العلامة التجارية أ، بينما تظهر العلامة التجارية ب والعلامة التجارية ج مرة واحدة لكل منهما.</p>
 <p>لا يمكن للقائمة المسطحة أن توفر مباشرةً ملخصًا موجهًا نحو الفئات. قد يحتاج التطبيق إلى مقارنة العلامات التجارية حسب عدد المرشحين المحتفظ بهم أو متوسط السعر، أو فحص عدد صغير من المنتجات التمثيلية من كل علامة تجارية، أو تنظيم النتائج في مستويات متعددة من الفئات.</p>
-<p>يقوم «تجميع البحث» (Search Aggregation) بتنظيم المرشحين المحتفظ بهم من شبكة الجيران (ANN) في فئات بناءً على الحقول القياسية المحددة. في هذا المثال، تصبح كل علامة تجارية فئة منفصلة. يمكن لـ Milvus حساب الإحصائيات لكل فئة، وترتيب الفئات، وإرفاق المنتجات التمثيلية. يستهلك التطبيق هذا الرد الذي يعطي الأولوية للفئات من خلال «الاستعلام المركب» ( <code translate="no">result.agg_buckets</code>).</p>
+<p>يقوم «تجميع البحث» (Search Aggregation) بتنظيم المرشحين المحتفظ بهم من شبكة الجيران (ANN) في فئات بناءً على الحقول القياسية المحددة. في هذا المثال، تصبح كل علامة تجارية فئة منفصلة. يمكن لـ Milvus حساب الإحصائيات لكل فئة، وترتيب الفئات، وإرفاق المنتجات التمثيلية. يستهلك التطبيق هذا الرد الذي يعطي الأولوية للفئات من خلال «الاستعلام عن الفئات» ( <code translate="no">result.agg_buckets</code>).</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" /> 
    <span>تصبح نتيجة البحث المسطحة عن أحذية الجري مجموعة من فئات العلامات التجارية القابلة للمقارنة</span>
   
  </span></p>
-<p>لا يقوم «تجميع البحث» (Search Aggregation) بتشغيل تجميع دقيق للمجموعة الكاملة. يعتمد وجود المجموعات، وعددها، ومقاييسها، وترتيبها، والنتائج التمثيلية على المرشحات التي احتفظت بها مراحل الشبكة العصبية الاصطناعية (ANN) والتجميع.</p>
+<p>لا يقوم «تجميع البحث» (Search Aggregation) بتشغيل تجميع دقيق للمجموعة الكاملة. يعتمد وجود المجموعات، والأعداد، والمقاييس، والترتيب، والنتائج التمثيلية على المرشحات التي احتفظت بها مراحل الشبكة العصبية الاصطناعية (ANN) والتجميع.</p>
 <h2 id="How-it-works" class="common-anchor-header">كيفية العمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,12 +53,12 @@ beta: Milvus 3.0.x
   
  </span></p>
 <ol>
-<li><p><strong>استرجاع المرشحين.</strong> يقوم Milvus بتشغيل بحث الشبكة العصبية الاصطناعية (ANN) للعثور على الكيانات الأقرب إلى متجه الاستعلام. ثم تحتفظ مرحلة التجميع بعدد محدود من المرشحين لكل مفتاح مركب كامل. يمثل هذا الحد الأقصى لعدد المرشحين لكل مفتاح أكبر قيمة لـ <code translate="no">TopHits.size</code> في أي مكان في شجرة التجميع، أو <code translate="no">1</code> عندما لا يتم تكوين أي مستوى لـ <code translate="no">top_hits</code>.</p></li>
-<li><p><strong>إنشاء المجموعات (buckets).</strong> يحدد <code translate="no">SearchAggregation.fields</code> مفتاح المجموعة (bucket key). كل تركيبة فريدة من قيم الحقول تُنشئ مفتاحًا منفصلاً. في الشكل، يُنشئ <code translate="no">fields=[&quot;brand&quot;]</code> مفاتيح المجموعات التالية: <code translate="no">(Brand A)</code> و <code translate="no">(Brand B)</code> و <code translate="no">(Brand C)</code>. تنتمي المرشحات المحتفظ بها التي تحمل نفس المفتاح إلى نفس المجموعة وتساهم في <code translate="no">count</code> الخاص بها. يحدد <code translate="no">SearchAggregation.size</code> عدد المجموعات التي يعرضها Milvus.</p></li>
+<li><p><strong>استرجاع المرشحين.</strong> يقوم Milvus بتشغيل بحث الشبكة العصبية الاصطناعية (ANN) للعثور على الكيانات الأقرب إلى متجه الاستعلام. ثم تحتفظ مرحلة التجميع بعدد محدود من المرشحين لكل مفتاح مركب كامل. هذه الحصة المخصصة للمرشحين لكل مفتاح هي أكبر قيمة لـ <code translate="no">TopHits.size</code> في أي مكان في شجرة التجميع، أو <code translate="no">1</code> عندما لا يتم تكوين أي مستوى لـ <code translate="no">top_hits</code>.</p></li>
+<li><p><strong>إنشاء المجموعات (buckets).</strong> يحدد <code translate="no">SearchAggregation.fields</code> مفتاح المجموعة (bucket key). كل تركيبة فريدة من قيم الحقول تُنشئ مفتاحًا منفصلاً. في الشكل، يُنشئ <code translate="no">fields=[&quot;brand&quot;]</code> مفاتيح المجموعات التالية: <code translate="no">(Brand A)</code> و <code translate="no">(Brand B)</code> و <code translate="no">(Brand C)</code>. المرشحون المحتفظ بهم الذين يحملون نفس المفتاح ينتمون إلى نفس المجموعة ويساهمون في <code translate="no">count</code> الخاص بها. يحدد <code translate="no">SearchAggregation.size</code> عدد المجموعات التي يعرضها Milvus.</p></li>
 <li><p><strong>حساب النتائج وإرجاعها.</strong> يحتوي كل دلو مُرجع على مفتاحه وعدد المرشحين المحتفظ بهم. يمكن لـ Milvus أيضًا حساب المقاييس المُعدة مسبقًا، وترتيب الدلاء، وإرجاع الكيانات التمثيلية، وإنشاء دلاء فرعية. يعرض كل <code translate="no">AggregationBucket</code> في <code translate="no">result.agg_buckets</code> <code translate="no">key</code> و <code translate="no">count</code> و <code translate="no">metrics</code> و <code translate="no">hits</code> و <code translate="no">sub_groups</code>. عند تمكين «تجميع البحث» (Search Aggregation)، تكون قائمة نتائج البحث العادية فارغة.</p></li>
 </ol>
 <p>في الرسم التخطيطي، توفر <code translate="no">TopHits.size=4</code> ميزانية مرشحين لكل مفتاح تبلغ أربعة، لذا فإن المرشحين الأربعة المحتفظ بهم للعلامة التجارية «A» ينتجون <code translate="no">count: 4</code>. لا تعرض بطاقة العلامة التجارية «A» المكتملة سوى اثنين من النتائج التمثيلية الأربعة التي تم إرجاعها للحفاظ على إيجاز الشكل.</p>
-<p>باستخدام <code translate="no">sub_aggregation</code> ، يكرر Milvus الخطوتين 2 و3 داخل كل مجموعة أصلية. يمكن أن تؤدي التغييرات في معدل الاسترجاع لشبكة ANN أو الميزانية المخصصة للمرشحين لكل مفتاح إلى تغيير عدد المجموعات والمقاييس والترتيب والنتائج والنتائج المتداخلة.</p>
+<p>باستخدام <code translate="no">sub_aggregation</code> ، يكرر Milvus الخطوتين 2 و3 داخل كل مجموعة أصلية. يمكن أن تؤدي التغييرات في معدل الاسترجاع لشبكة ANN أو الميزانية المخصصة للمرشحين لكل مفتاح إلى تغيير أعداد المجموعات والمقاييس والترتيب ونتائج البحث والنتائج المتداخلة.</p>
 <h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,17 +76,18 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p>قبل استخدام تجميع البحث، يرجى ملاحظة الحدود التالية:</p>
 <ul>
-<li><p><strong>التجميعات المتداخلة:</strong> يمكن أن يحتوي الطلب على تجميع جذر واحد لـ <code translate="no">SearchAggregation</code> وما يصل إلى ثلاثة مستويات متداخلة من <code translate="no">sub_aggregation</code> ، بحد أقصى أربعة مستويات إجمالًا.</p></li>
-<li><p><strong>الحقول المستخدمة لإنشاء مفاتيح المجموعات:</strong> يدعم « <code translate="no">SearchAggregation.fields</code> » الحقول المنطقية (Boolean)، والأعداد الصحيحة (integer)، و« <code translate="no">VARCHAR</code> »، و« <code translate="no">TIMESTAMPTZ</code> ». ولا يدعم الحقول « <code translate="no">FLOAT</code> »، و« <code translate="no">DOUBLE</code> »، و« <code translate="no">ARRAY</code> »، و« <code translate="no">JSON</code> »، و« <code translate="no">GEOMETRY</code> »، و« <code translate="no">TEXT</code> »، أو الحقول المتجهة (vector)، أو الحقول الديناميكية.</p></li>
-<li><p><strong>الحقول المترية:</strong> <code translate="no">count</code> تقبل <code translate="no">&quot;*&quot;</code> أو أي حقل غير<code translate="no">JSON</code> وغير ديناميكي، وتتخطى قيم <code translate="no">NULL</code> عند تحديد حقل. <code translate="no">sum</code> و <code translate="no">avg</code> تقبلان الحقول الصحيحة والعائمة. <code translate="no">min</code> و <code translate="no">max</code> تقبلان بالإضافة إلى ذلك الحقول النصية و <code translate="no">TIMESTAMPTZ</code>.</p></li>
+<li><p><strong>التجميعات المتداخلة:</strong> يمكن أن يحتوي الطلب على تجميع بحث واحد ( <code translate="no">SearchAggregation</code> ) جذري وما يصل إلى ثلاثة مستويات متداخلة من التجميعات الفرعية ( <code translate="no">sub_aggregation</code> )، بحد أقصى أربعة مستويات إجمالًا. عبر جميع المستويات، يمكن استخدام 10 حقول كحد أقصى لإنشاء مفاتيح المجموعات.</p></li>
+<li><p><strong>الحقول المستخدمة لإنشاء مفاتيح المجموعات:</strong> يدعم <code translate="no">SearchAggregation.fields</code> الحقول المنطقية (Boolean)، والأعداد الصحيحة (integer)، و <code translate="no">VARCHAR</code> ، و <code translate="no">TIMESTAMPTZ</code>. ولا يدعم الحقول <code translate="no">FLOAT</code> ، و <code translate="no">DOUBLE</code> ، و <code translate="no">ARRAY</code> ، و <code translate="no">JSON</code> ، و <code translate="no">GEOMETRY</code> ، و <code translate="no">TEXT</code> ، أو الحقول المتجهة (vector)، أو الحقول الديناميكية.</p></li>
+<li><p><strong>الحقول المترية:</strong> <code translate="no">count</code> تقبل <code translate="no">&quot;*&quot;</code> أو أي حقل غير<code translate="no">JSON</code> وغير ديناميكي وتتخطى قيم <code translate="no">NULL</code> عند تحديد حقل. <code translate="no">sum</code> و <code translate="no">avg</code> تقبلان الحقول الصحيحة والعائمة. <code translate="no">min</code> و <code translate="no">max</code> تقبلان بالإضافة إلى ذلك الحقول النصية و <code translate="no">TIMESTAMPTZ</code>.</p></li>
 <li><p><strong>حقول فرز «Top Hits»:</strong> تقبل <code translate="no">TopHits.sort</code> الحقول القابلة للمقارنة من نوع «Boolean» و«Integer» و«Floating-point» و«String» و« <code translate="no">TIMESTAMPTZ</code> »، بالإضافة إلى <code translate="no">_score</code>. ولا تدعم <code translate="no">ARRAY</code> أو <code translate="no">JSON</code> أو <code translate="no">GEOMETRY</code> أو الحقول المتجهة أو الديناميكية.</p></li>
-<li><p><strong>الميزانية المرشحة:</strong> أكبر قيمة لـ <code translate="no">TopHits.size</code> في أي مكان في شجرة التجميع هي أيضًا عدد المرشحين المحتفظ بهم لكل مفتاح مركب كامل. إذا لم يتم تكوين <code translate="no">top_hits</code> في أي مستوى، يحتفظ Milvus بمرشح واحد لكل مفتاح. يتم حساب <code translate="no">count</code> والمقاييس الخاصة بالمجموعة من هذه المرشحين المحتفظ بهم، لذا فإن تغيير <code translate="no">TopHits.size</code> يمكن أن يغيرها.</p></li>
+<li><p><strong>الميزانية المرشحة:</strong> أكبر قيمة لـ <code translate="no">TopHits.size</code> في أي مكان في شجرة التجميع هي أيضًا عدد المرشحين المحتفظ بهم لكل مفتاح مركب كامل. إذا لم يتم تكوين <code translate="no">top_hits</code> في أي مستوى، يحتفظ Milvus بمرشح واحد لكل مفتاح. يتم حساب <code translate="no">count</code> والمقاييس الخاصة بالدلو من هذه المرشحين المحتفظ بهم، لذا فإن تغيير <code translate="no">TopHits.size</code> يمكن أن يغيرها.</p></li>
 <li><p><strong>حقول المجموعات القابلة للقيمة الفارغة:</strong> تشكل قيمة <code translate="no">NULL</code> مفتاح المجموعة الخاص بها. لاستبعاد المجموعة الفارغة، أضف مرشحًا مثل <code translate="no">brand is not null</code> إلى طلب البحث.</p></li>
-<li><p><strong>الحقول المتكررة:</strong> لا يمكن أن يظهر الحقل نفسه في أكثر من قائمة واحدة من قوائم « <code translate="no">SearchAggregation.fields</code> ». على سبيل المثال، إذا كان التجميع الجذري يستخدم <code translate="no">fields=[&quot;category&quot;]</code> ، فلا يمكن لـ « <code translate="no">sub_aggregation</code> » المتداخلة أن تستخدم أيضًا <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
-<li><p><strong>التركيبات غير المدعومة:</strong> لا يمكن دمج «تجميع البحث» (Search Aggregation) مع «التجميع المتكرر» ( <code translate="no">offset</code>) أو «مكررات البحث» (Search Iterators) أو «البحث الهجين» (Hybrid Search) أو «أداة التمييز» (Highlighter) أو «البحث التجميعي» (Grouping Search).</p></li>
-<li><p><strong>المدخلات المرجعة:</strong> حافظ على الحد الأقصى المُعد لعدد مدخلات النتائج عند 10,000 أو أقل. احسب هذا الحد الأقصى على النحو التالي:</p>
-<p><code translate="no">number of query vectors × size at every aggregation level × largest TopHits.size at any level</code></p>
-<p>استخدم « <code translate="no">1</code> » كعامل أخير عندما لا يتم تكوين أي مستوى لـ « <code translate="no">TopHits</code> ». على سبيل المثال، متجه استعلام واحد، و10 مجموعات جذرية، وخمس مجموعات فرعية لكل مجموعة جذرية، ونتيجتان لكل مجموعة فرعية، ينتج عنها الحد الأقصى المُكوّن التالي:</p>
+<li><p><strong>الحقول المتكررة:</strong> لا يمكن أن يظهر الحقل نفسه في أكثر من قائمة تجميع واحدة ( <code translate="no">SearchAggregation.fields</code> ). على سبيل المثال، إذا كان التجميع الجذري يستخدم <code translate="no">fields=[&quot;category&quot;]</code> ، فلا يمكن لـ <code translate="no">sub_aggregation</code> المتداخل أن يستخدم أيضًا <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
+<li><p><strong>التركيبات غير المدعومة:</strong> لا يمكن دمج «تجميع البحث» (Search Aggregation) مع «تجميع البحث» ( <code translate="no">offset</code>) غير الصفر، أو «مكررات البحث» (Search Iterators)، أو «البحث الهجين» (Hybrid Search)، أو «أداة التمييز» (Highlighter)، أو «البحث التجميعي» (Grouping Search). إن قيمة «تجميع البحث» ( <code translate="no">offset</code> ) من المستوى الأعلى التي تساوي «تجميع البحث المتكرر» ( <code translate="no">0</code> ) تعادل حذف المعلمة. في طلبات البحث REST v2، لا يمكن تحديد «تجميع البحث» ( <code translate="no">searchAggregation</code> ) و«تجميع البحث المتكرر» ( <code translate="no">ids</code> ) معًا.</p></li>
+<li><p><strong>المدخلات المرجعة:</strong> بشكل افتراضي، يرفض Milvus طلب تجميع البحث (Search Aggregation) عندما يتجاوز العدد الأقصى المحسوب لمدخلات النتائج في الطلب 10,000. يتم التحكم في هذا الحد الأقصى بواسطة <code translate="no">proxy.maxSearchAggregationResultEntries</code>. قم بتعيين قيمة التكوين إلى <code translate="no">0</code> أو رقم سالب لتعطيل هذا الفحص.</p>
+<p>يحسب Milvus هذا الحد الأقصى على النحو التالي:</p>
+<p><code translate="no">number of query vectors × product of the effective search_size at every aggregation level × largest TopHits.size at any level</code></p>
+<p>بالنسبة لهذا الحساب من جانب الخادم، فإن القيمة الفعالة لـ <code translate="no">search_size</code> في مستوى ما هي القيمة المُعدة صراحةً لـ <code translate="no">search_size</code> ، أو القيمة لـ <code translate="no">size</code> في ذلك المستوى عند حذف <code translate="no">search_size</code>. لا تكشف واجهة برمجة تطبيقات PyMilvus المستخدمة في هذا الدليل حاليًا عن <code translate="no">search_size</code> ، لذا تستخدم طلبات PyMilvus القيمة لـ <code translate="no">size</code> في كل مستوى لإجراء هذا الحساب. استخدم <code translate="no">1</code> كعامل أخير عندما لا يتم تكوين <code translate="no">TopHits</code> في أي مستوى. على سبيل المثال، متجه استعلام واحد، و10 دلاء جذرية، وخمسة دلاء فرعية لكل دلو جذري، ونتيجتان لكل دلو فرعي، ينتج عنها الحد الأقصى المحسوب التالي:</p>
 <p><code translate="no">1 × 10 × 5 × 2 = 100</code></p></li>
 </ul>
 <h2 id="Use-Search-Aggregation" class="common-anchor-header">استخدام تجميع البحث<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
@@ -259,7 +260,7 @@ search_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>يُهيئ الإعداد أعلاه <code translate="no">COSINE</code> لكل من الفهرس المتجه ومعلمات البحث. لذلك، تستخدم الأمثلة اللاحقة <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> لوضع تشابه جيب التمام الأعلى أولاً. بالنسبة لمقياس المسافة مثل <code translate="no">L2</code> ، استخدم <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
+<p>يُهيئ الإعداد أعلاه <code translate="no">COSINE</code> لكل من الفهرس المتجه ومعلمات البحث. ولذلك، تستخدم الأمثلة اللاحقة <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> لوضع تشابه جيب التمام الأعلى أولاً. بالنسبة لمقياس المسافة مثل <code translate="no">L2</code> ، استخدم <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
 <h3 id="Compare-and-sort-buckets" class="common-anchor-header">مقارنة المجموعات وفرزها<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -315,10 +316,10 @@ search_params = {
 <span class="highlighted-wrapper-line">    search_aggregation=aggregation,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>عند تعيين المعلمة « <code translate="no">search_aggregation</code> »، لا يُرجع PyMilvus أي نتائج كيانات عادية في « <code translate="no">result[0]</code> ». اقرأ استجابة المجموعة من « <code translate="no">result.agg_buckets[0]</code> » بدلاً من ذلك. تتحكم المعلمة « <code translate="no">output_fields</code> » في الحقول القياسية التي تظهر في كل تعيين « <code translate="no">AggregationHit.fields</code> » مُرجع؛ ولا يزال بإمكان Milvus استخدام حقول «metric-source» و«sort» غير المدرجة في « <code translate="no">output_fields</code> ».</p>
+<p>عند تعيين المعلمة « <code translate="no">search_aggregation</code> »، لا يُرجع PyMilvus أي نتائج كيانات عادية في « <code translate="no">result[0]</code> ». اقرأ استجابة المجموعة من « <code translate="no">result.agg_buckets[0]</code> » بدلاً من ذلك. تتحكم المعلمة « <code translate="no">output_fields</code> » في الحقول القياسية التي تظهر في كل تعيين « <code translate="no">AggregationHit.fields</code> » مُرجع؛ ولا يزال بإمكان Milvus استخدام حقول مصدر المقاييس وحقول الفرز غير المدرجة في « <code translate="no">output_fields</code> ».</p>
 <p><details></p>
 <p><summary>عرض نموذج لإخراج الباكيت</summary></p>
-<p>تم التقاط الناتج التالي من الطلب أعلاه وتم تسلسله بتنسيق JSON لتسهيل القراءة. يُرجع PyMilvus كائنات <code translate="no">AggregationBucket</code> بدلاً من JSON. تكون قيمة <code translate="no">key</code> دائمًا قائمة مرتبة من مكونات المفتاح، حتى عندما يحتوي <code translate="no">fields</code> على حقل واحد فقط. وهذا يحافظ على ترتيب الحقول للمفاتيح المركبة.</p>
+<p>تم التقاط الناتج التالي من الطلب أعلاه وتم تسلسله بتنسيق JSON لتسهيل القراءة. يعرض PyMilvus كائنات <code translate="no">AggregationBucket</code> بدلاً من JSON. تكون قيمة <code translate="no">key</code> دائمًا قائمة مرتبة من مكونات المفتاح، حتى عندما يحتوي <code translate="no">fields</code> على حقل واحد فقط. وهذا يحافظ على ترتيب الحقول للمفاتيح المركبة.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
   <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -383,7 +384,7 @@ search_params = {
 <tbody>
 <tr><td><code translate="no">fields</code></td><td>كيف يقوم Milvus بإنشاء مفاتيح المجموعات</td><td>يُنشئ دلوًا واحدًا لكل قيمة مميزة من قيم <code translate="no">brand</code>.</td></tr>
 <tr><td><code translate="no">size</code></td><td>الحد الأقصى لعدد المجموعات التي يتم إرجاعها</td><td>يُرجع ما يصل إلى ثلاثة باكتات للعلامة التجارية.</td></tr>
-<tr><td><code translate="no">metrics</code></td><td>الإحصائيات المحسوبة لكل مجموعة</td><td>يُحسب عدد المنتجات، ومتوسط السعر، والسعر الأدنى.</td></tr>
+<tr><td><code translate="no">metrics</code></td><td>الإحصائيات المحسوبة لكل مجموعة</td><td>يحسب عدد المنتجات، ومتوسط السعر، والسعر الأدنى.</td></tr>
 <tr><td><code translate="no">order</code></td><td>كيف يقوم Milvus بفرز المجموعات التي يتم إرجاعها</td><td>يُصنف حسب متوسط السعر، ثم يستخدم مفتاح المجموعة (bucket key) لكسر التعادل.</td></tr>
 </tbody>
 </table>
@@ -522,7 +523,7 @@ search_params = {
 <tr><th>المعلمة</th><th>الغرض</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top_hits</code></td><td>اختياري. يقوم بتكوين الكيانات التمثيلية لمستوى التجميع هذا. إذا تم حذفه، فإن " <code translate="no">bucket.hits</code> " يكون فارغًا وتصبح الميزانية المرشحة لكل مفتاح هي "واحد" بشكل افتراضي.</td></tr>
+<tr><td><code translate="no">top_hits</code></td><td>اختياري. يقوم بتكوين الكيانات التمثيلية لمستوى التجميع هذا. إذا تم حذفه، يكون " <code translate="no">bucket.hits</code> " فارغًا وتصبح الميزانية المرشحة لكل مفتاح هي "واحد" بشكل افتراضي.</td></tr>
 <tr><td><code translate="no">TopHits.size</code></td><td>تُرجع ما يصل إلى كيانين تمثيليين من كل مجموعة محددة وتُعيّن الميزانية المرشحة لكل مفتاح على اثنين لشجرة التجميع بأكملها.</td></tr>
 <tr><td><code translate="no">TopHits.sort</code></td><td>ترتيب الكيانات داخل كل مجموعة باستخدام المعايير المذكورة.</td></tr>
 </tbody>
@@ -635,12 +636,12 @@ Child bucket keys:
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>تمثل النتيجة المعروضة مسار المجموعة <code translate="no">(running_shoes) → (Brand B)</code> ، وليس مفتاح مجموعة مركبًا واحدًا <code translate="no">(running_shoes, Brand B)</code>.</p>
+<p>تمثل النتيجة المعروضة مسار المجموعة <code translate="no">(running_shoes) → (Brand B)</code> ، وليس مفتاح مجموعة مركب واحد <code translate="no">(running_shoes, Brand B)</code>.</p>
 <p>يختار Milvus أولاً ما يصل إلى دلاء فئة اثنين، مرتبة حسب <code translate="no">product_count</code>. ثم يقوم بتشغيل <code translate="no">sub_aggregation</code> بشكل مستقل داخل كل فئة مختارة ويعرض ما يصل إلى ثلاثة دلاء للعلامات التجارية، مرتبة حسب <code translate="no">avg_rating</code>.</p>
 <p>في الناتج أعلاه:</p>
 <ul>
 <li>تحتوي فئة الجذر <code translate="no">running_shoes</code> على أربعة مرشحين محتفظ بهم عبر مفاتيحها المركبة الفرعية. وتحتوي فئة <code translate="no">metrics</code> الخاصة بها على قيم المستوى الجذري <code translate="no">avg_price</code> و <code translate="no">product_count</code>.</li>
-<li>تحتوي قائمة <code translate="no">sub_groups</code> الخاصة بالحاوية الجذرية على الحاويات الفرعية للعلامات التجارية. تحتوي الحاوية المعروضة Brand B على مرشح واحد محفوظ وقيمتي <code translate="no">avg_rating</code> و <code translate="no">brand_count</code> الخاصتين بها.</li>
+<li>تحتوي قائمة <code translate="no">sub_groups</code> الخاصة بالحاوية الجذرية على الحاويات الفرعية للعلامات التجارية. تحتوي الحاوية المعروضة للعلامة التجارية B على مرشح واحد محفوظ وقيمتي <code translate="no">avg_rating</code> و <code translate="no">brand_count</code> الخاصتين بها.</li>
 <li>قائمة <code translate="no">hits</code> الخاصة بالحاوية الجذرية فارغة لأن التجميع الجذري لا يقوم بتكوين <code translate="no">top_hits</code>. تحتوي الحاوية الفرعية للعلامة التجارية B على نتيجة مطابقة تمثيلية لأن <code translate="no">top_hits</code> تم تكوينه في <code translate="no">sub_aggregation</code>.</li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -675,7 +676,7 @@ Child bucket keys:
       </svg>
     </button></h3><p>يلخص تجميع البحث المرشحين المحتفظ بهم من شبكة ANN. ولا يقوم بتشغيل تجميع للمجموعة الكاملة.</p>
 <p>يتم الاحتفاظ بالمرشحين عبر مرحلتين تقريبيتين. قد يتجاهل بحث الشبكة العصبية الاصطناعية (ANN) كيانات المجموعة ذات الصلة، وتحتفظ مرحلة التجميع بأكبر عدد من المرشحين <code translate="no">TopHits.size</code> لكل مفتاح مركب كامل. إذا لم يتم تكوين أي مستوى لـ <code translate="no">top_hits</code> ، فإن هذا الحد لكل مفتاح هو واحد.</p>
-<p>على سبيل المثال، لنفترض أن مجموعة تحتوي على 5,000 منتج من العلامة التجارية «A» وأن العديد منها ذو صلة باستعلام المتجه. إذا استخدم التجميع <code translate="no">TopHits(size=4)</code> ، فيمكن لمجموعة العلامة التجارية «A» الاحتفاظ بأربعة مرشحين كحد أقصى لمفتاح مركب كامل. ويصف كل من <code translate="no">count</code> والمقاييس تلك المرشحات المحتفظ بها، وليس جميع منتجات العلامة التجارية «A» ذات الصلة ولا جميع كيانات المجموعة البالغ عددها 5,000.</p>
+<p>على سبيل المثال، لنفترض أن مجموعة تحتوي على 5,000 منتج من العلامة التجارية «A» وأن العديد منها ذو صلة باستعلام المتجه. إذا استخدم التجميع <code translate="no">TopHits(size=4)</code> ، فيمكن لمجموعة العلامة التجارية «A» الاحتفاظ بأربعة مرشحين كحد أقصى لكل مفتاح مركب كامل. ويصف كل من <code translate="no">count</code> والمقاييس تلك المرشحات المحتفظ بها، وليس جميع منتجات العلامة التجارية «A» ذات الصلة ولا جميع كيانات المجموعة البالغ عددها 5,000.</p>
 <p>يكون التقريب أكثر أهمية عندما يستخدم التجميع « <code translate="no">order</code> » اسمًا مستعارًا للمقياس. يمكن أن تؤدي التغييرات في معدل استرجاع البحث إلى تغيير قيم المقاييس، وبالتالي تغيير المجموعات التي تتناسب مع « <code translate="no">SearchAggregation.size</code> ». يمكن أن يؤدي التجميع المتداخل إلى تضخيم هذا التأثير لأن كل مستوى فرعي يعمل على الكيانات المتاحة في المجموعة الأم.</p>
 <p>إذا كنت بحاجة إلى إحصائيات دقيقة عن كل كيان مطابق، فاستخدم سير عمل تجميع الاستعلام الدقيق بدلاً من تجميع البحث.</p>
 <h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">كيف يختلف «تجميع البحث» عن «البحث التجميعي»؟<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
@@ -700,8 +701,8 @@ Child bucket keys:
 </thead>
 <tbody>
 <tr><td>إرجاع قائمة كيانات مرتبة بشكل قياسي مع عدد أقل من القيم المتكررة في حقل التجميع</td><td><a href="/docs/ar/grouping-search.md">البحث المجمّع</a></td><td>نتائج البحث المسطحة لكل متجه استعلام</td></tr>
-<tr><td>فحص المجموعات أو مقارنتها كأوعية، باستخدام المفاتيح، أو الأعداد، أو المقاييس، أو الترتيب، أو النتائج التمثيلية، أو الأوعية الفرعية</td><td>تجميع البحث</td><td><code translate="no">AggregationBucket</code> في <code translate="no">result.agg_buckets</code></td></tr>
+<tr><td>فحص المجموعات أو مقارنتها كأوعية، باستخدام المفاتيح، والأعداد، والمقاييس، والترتيب، والنتائج التمثيلية، أو الأوعية الفرعية</td><td>تجميع البحث</td><td><code translate="no">AggregationBucket</code> في <code translate="no">result.agg_buckets</code></td></tr>
 </tbody>
 </table>
-<p>حتى عندما يقوم تجميع البحث بتكوين <code translate="no">top_hits</code> ، تظل استجابته الأساسية عبارة عن شجرة مجموعات. يظل البحث التجميعي مفيدًا عندما يقوم التطبيق بالفعل بمعالجة نتائج البحث العادية ويريد في المقام الأول تنوع النتائج.</p>
-<p>تتعارض واجهات برمجة التطبيقات (APIs) مع بعضها البعض. يرفع PyMilvus استثناءً من نوع « <code translate="no">ParamError</code> » عندما يتم دمج « <code translate="no">search_aggregation</code> » مع « <code translate="no">group_by_field</code> » أو « <code translate="no">group_by_fields</code> » في نفس الطلب.</p>
+<p>حتى عندما يقوم «تجميع البحث» بتكوين « <code translate="no">top_hits</code> » ، تظل استجابته الأساسية عبارة عن شجرة مجموعات. يظل «البحث التجميعي» مفيدًا عندما يقوم التطبيق بالفعل بمعالجة نتائج البحث العادية ويريد في المقام الأول تنوعًا في النتائج.</p>
+<p>تتعارض واجهات برمجة التطبيقات (APIs) هذه مع بعضها البعض. يثير PyMilvus استثناءً من نوع « <code translate="no">ParamError</code> » عندما يتم دمج « <code translate="no">search_aggregation</code> » مع « <code translate="no">group_by_field</code> » أو « <code translate="no">group_by_fields</code> » في نفس الطلب.</p>

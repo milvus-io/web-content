@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "StructArray 필드 생성하기",
+                "label": "StructArray 필드 생성",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -958,7 +958,7 @@
                 "children": []
               },
               {
-                "label": "반전",
+                "label": "반전됨",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -1217,7 +1217,7 @@
             "children": []
           },
           {
-            "label": "검색 이터레이터",
+            "label": "검색 반복자",
             "id": "with-iterators.md",
             "order": 15,
             "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "데이터 인프라 및 통합",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "개요",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "메타데이터",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "오브젝트 스토리지",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "메시지 큐 (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "개요",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "딱따구리",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "펄서",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Pulsar v3로 업그레이드하기",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Pulsar v2 계속 사용하기",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "카프카",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "관리 가이드",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "배포",
@@ -1895,6 +1810,122 @@
         ]
       },
       {
+        "label": "데이터 인프라",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "개요",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "메타데이터",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "오브젝트 스토리지",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "메시지 큐",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "개요",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "딱따구리",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "펄서",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Pulsar v3로 업그레이드하기",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar v2 계속 사용하기",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "카프카",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "메시지 큐 전환",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "개요",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "펄서 ↔ 딱따구리",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "카프카 ↔ 우드페커",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "label": "확장",
         "id": "scaling",
         "order": 4,
@@ -1990,7 +2021,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "알림 생성",
+                "label": "알림 생성하기",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "MQ 유형 변경",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "개요",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "펄서 ↔ 딱따구리",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "카프카 ↔ 우드페커",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },

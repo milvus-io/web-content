@@ -65,7 +65,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen basierend auf Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Milvus-Helm-Chart installieren<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,19 +127,19 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Benötigen Sie stattdessen eine eigenständige Bereitstellung?</strong></p>
 <p>Wenn Sie Milvus für Entwicklungs- oder Testzwecke lieber im Standalone-Modus (Einzelknoten) bereitstellen möchten, verwenden Sie diesen Befehl:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Komponente „Streaming Node“ aktiviert. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/architecture_overview.md">„Architekturübersicht</a> “ und <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden</a>“.</p>
+<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Streaming-Node-Komponente aktiviert. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/architecture_overview.md">„Architekturübersicht</a> “ und <a href="/docs/de/v2.6.x/use-woodpecker.md">„Verwendung von Woodpecker</a>“.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
-<p>Der folgende Befehl stellt einen Milvus-Cluster mit optimierten Einstellungen für v2.6.21 bereit und verwendet dabei Woodpecker als empfohlene Nachrichtenwarteschlange:</p>
+<p>Der folgende Befehl stellt einen Milvus-Cluster mit optimierten Einstellungen für v2.6.22 bereit und verwendet dabei Woodpecker als empfohlene Nachrichtenwarteschlange:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -156,7 +156,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Architekturänderungen in Milvus 2.6.x:</strong></p>
 <ul>
 <li><strong>Nachrichtenwarteschlange</strong>: <strong>Woodpecker</strong> wird nun empfohlen (reduziert den Wartungsaufwand für die Infrastruktur im Vergleich zu Pulsar)</li>
-<li><strong>Neue Komponente</strong>: <strong>Der „Streaming Node“</strong> wird eingeführt und ist standardmäßig aktiviert</li>
+<li><strong>Neue Komponente</strong>: <strong>„Streaming Node“</strong> wird eingeführt und ist standardmäßig aktiviert</li>
 <li><strong>Zusammengeführte Komponenten</strong>: <strong>Index-Knoten</strong> und <strong>Datenknoten</strong> werden zu einem einzigen <strong>Datenknoten</strong> zusammengefasst</li>
 </ul>
 <p>Ausführliche Informationen zur Architektur finden Sie in der <a href="/docs/de/v2.6.x/architecture_overview.md">Architekturübersicht</a>.</p>
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Alternative Optionen für die Nachrichtenwarteschlange:</strong></p>
 <p>Wenn Sie <strong>Pulsar</strong> (die herkömmliche Wahl) anstelle von Woodpecker verwenden möchten:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ Der obige Befehl stellt Milvus mit den empfohlenen Konfigurationen bereit. Für 
     </button></h3><p>Überprüfen Sie den Pod-Status, um sicherzustellen, dass die Bereitstellung erfolgreich war:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v2.6.21 sollten Sie Pods sehen, die in etwa so aussehen:</p>
+<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v2.6.22 sollten Sie Pods sehen, die in etwa so aussehen:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus wird mit einem integrierten GUI-Tool namens „Milvus WebUI“ ausgeliefert, auf das Sie über Ihren Browser zugreifen können. Die Milvus WebUI verbessert die Beobachtbarkeit des Systems durch eine einfache und intuitive Benutzeroberfläche. Mit der Milvus WebUI können Sie die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus einsehen, Details zu Datenbanken und Sammlungen überprüfen sowie detaillierte Milvus-Konfigurationen auflisten. Weitere Informationen zur Milvus-Web-UI finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus-Web-UI</a></p>
+    </button></h2><p>Milvus verfügt über ein integriertes GUI-Tool namens „Milvus WebUI“, auf das Sie über Ihren Browser zugreifen können. Die Milvus-WebUI verbessert die Beobachtbarkeit des Systems durch eine einfache und intuitive Benutzeroberfläche. Mit der Milvus-WebUI können Sie die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus einsehen, Datenbank- und Erfassungsdetails überprüfen sowie detaillierte Milvus-Konfigurationen auflisten. Weitere Informationen zur Milvus-Web-UI finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus-Web-UI</a></p>
 <p>Um den Zugriff auf die Milvus-Web-UI zu ermöglichen, müssen Sie eine Portweiterleitung vom Proxy-Pod auf einen lokalen Port einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -404,7 +404,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Führen Sie den folgenden Befehl aus, um die benötigten Images abzurufen und zu speichern.</p>
+    </button></h3><p>Führen Sie den folgenden Befehl aus, um die erforderlichen Images abzurufen und zu speichern.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>

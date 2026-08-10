@@ -19,6 +19,77 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2622" class="common-anchor-header">v2.6.22<button data-href="#v2622" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: August 4, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.22</td><td>2.6.17</td><td>2.6.17</td><td>2.6.22</td><td>2.6.22</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.22! This release improves QueryNode efficiency, coordinator reliability, storage compaction, and GIS query performance. It also fixes GIS and JSON query accuracy issues, encrypted-storage access failures, and monitoring compatibility regressions.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Reduced redundant bulk-delete replay and timestamp-column pinning during delete application in QueryNode (<a href="https://github.com/milvus-io/milvus/pull/51754">#51754</a>)</li>
+<li>Improved MixCoord shutdown ordering by retaining its shared etcd session until all child coordinators stopped (<a href="https://github.com/milvus-io/milvus/pull/51771">#51771</a>)</li>
+<li>Reduced QueryNode distribution report payloads by sending incremental segment and channel updates to QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/51881">#51881</a>)</li>
+<li>Improved DataNode and QueryNode efficiency by reusing precomputed BM25 function outputs while preserving BM25 statistics collection (<a href="https://github.com/milvus-io/milvus/pull/51927">#51927</a>)</li>
+<li>Improved DataCoord compaction by enabling storage-version compaction by default (<a href="https://github.com/milvus-io/milvus/pull/51946">#51946</a>)</li>
+<li>Optimized GIS queries by enabling split and fusion optimization by default, reducing query latency by up to 9.31x in measured cases (<a href="https://github.com/milvus-io/milvus/pull/52009">#52009</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed incorrect GIS filtering and boost rescore results for queries using offset input, large segments, or growing segments (<a href="https://github.com/milvus-io/milvus/pull/50751">#50751</a>, <a href="https://github.com/milvus-io/milvus/pull/51487">#51487</a>)</li>
+<li>Fixed incorrect JSON query results and integer precision loss in mixed-type IN, NOT IN, and combined filter expressions (<a href="https://github.com/milvus-io/milvus/pull/51556">#51556</a>, <a href="https://github.com/milvus-io/milvus/pull/51627">#51627</a>)</li>
+<li>Fixed RESTful v2 Function DDL requests continuing to execute after parameter validation failed (<a href="https://github.com/milvus-io/milvus/pull/51699">#51699</a>)</li>
+<li>Fixed stats and compaction text-index builds failing to access encrypted storage because worker tasks lacked cipher context (<a href="https://github.com/milvus-io/milvus/pull/51759">#51759</a>)</li>
+<li>Fixed geometry queries on growing segments failing when visible rows spanned multiple chunks (<a href="https://github.com/milvus-io/milvus/pull/51882">#51882</a>)</li>
+<li>Fixed changed Proxy metric status labels causing existing dashboards and alerts to stop matching failed or rejected requests (<a href="https://github.com/milvus-io/milvus/pull/51909">#51909</a>)</li>
+</ul>
 <h2 id="v2621" class="common-anchor-header">v2.6.21<button data-href="#v2621" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

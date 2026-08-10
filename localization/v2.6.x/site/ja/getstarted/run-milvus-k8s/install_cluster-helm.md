@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">https://github.com/milvus-io/milvus-helm</code> にある Milvus Helm チャートリポジトリはアーカイブされました。現在は、<code translate="no">https://github.com/zilliztech/milvus-helm</code> の新しいリポジトリを使用しています。アーカイブされたリポジトリはバージョン 4.0.31 までのチャートについては引き続き利用可能ですが、それ以降のリリースについては新しいリポジトリをご利用ください。</p>
+<p><code translate="no">https://github.com/milvus-io/milvus-helm</code> にある Milvus Helm チャートリポジトリはアーカイブ化されました。現在は、<code translate="no">https://github.com/zilliztech/milvus-helm</code> の新しいリポジトリを使用しています。アーカイブ化されたリポジトリではバージョン 4.0.31 までのチャートが引き続き利用可能ですが、それ以降のリリースについては新しいリポジトリをご利用ください。</p>
 </div>
 <p>その後、次のようにしてリポジトリからMilvusチャートを取得してください：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -122,12 +122,12 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Helmチャートのインストールが完了したら、Kubernetes上でMilvusを起動できます。このセクションでは、Milvusクラスタのデプロイ手順を説明します。</p>
+    </button></h3><p>Helmチャートのインストールが完了したら、Kubernetes上でMilvusを起動できます。このセクションでは、Milvusクラスタのデプロイ手順について説明します。</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>スタンドアロンでのデプロイをご希望ですか？</strong></p>
 <p>開発やテストのために Milvus をスタンドアロンモード（シングルノード）でデプロイしたい場合は、次のコマンドを使用してください：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>注</strong>：スタンドアロンモードでは、デフォルトのメッセージキューとしてWoodpeckerが使用され、Streaming Nodeコンポーネントが有効になります。詳細については、「<a href="/docs/ja/v2.6.x/architecture_overview.md">アーキテクチャの概要</a>」および「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpeckerの使用</a>」を参照してください。</p>
 </div>
 <p><strong>Milvusクラスタのデプロイ:</strong></p>
-<p>次のコマンドは、v2.6.21向けに最適化された設定で、推奨されるメッセージキューとしてWoodpeckerを使用するMilvusクラスタをデプロイします：</p>
+<p>次のコマンドは、v2.6.22向けに最適化された設定で、推奨されるメッセージキューとしてWoodpeckerを使用するMilvusクラスタをデプロイします：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -148,8 +148,8 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>このコマンドの動作:</strong></p>
 <ul>
 <li>メッセージキューとして<strong>Woodpecker</strong>を使用します（メンテナンス負担の軽減に推奨）</li>
-<li>パフォーマンス向上のために新しい<strong>Streaming Node</strong>コンポーネントを有効化します</li>
-<li>従来の<strong>Index Node</strong>を無効化（機能はData Nodeによって処理されるようになりました）</li>
+<li>パフォーマンス向上のために、新しい<strong>Streaming Node</strong>コンポーネントを有効化します</li>
+<li>従来の<strong>インデックスノード</strong>を無効化（機能は現在、データノードによって処理されます）</li>
 <li>Pulsar を無効化し、代わりに Woodpecker を使用します</li>
 </ul>
 <div class="alert note">
@@ -161,10 +161,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </ul>
 <p>アーキテクチャの詳細については、「<a href="/docs/ja/v2.6.x/architecture_overview.md">アーキテクチャの概要</a>」を参照してください。</p>
 </div>
-<p><strong>代替メッセージキューの選択肢:</strong></p>
+<p><strong>メッセージキューの代替オプション:</strong></p>
 <p>Woodpeckerの<strong>代わりにPulsar</strong>（従来の選択肢）を使用したい場合：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Podのステータスを確認し、デプロイが正常に完了していることを確認してください:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>すべてのポッドのステータスが「Running」になるまで待ちます。</strong>v2.6.21 の構成では、次のようなポッドが表示されるはずです：</p>
+<p><strong>すべてのポッドのステータスが「Running」になるまで待ちます。</strong>v2.6.22 の設定では、次のようなポッド<strong>の状態が表示される</strong>はずです：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -234,7 +234,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>依存関係</strong>：<code translate="no">etcd</code> (メタデータ)、<code translate="no">minio</code> (オブジェクトストレージ)、<code translate="no">pulsar</code> (メッセージキュー)</li>
 </ul>
 <p>ポートフォワーディングの設定が完了したら（次の手順を参照）、<code translate="no">http://127.0.0.1:9091/webui/</code> から<strong>Milvus WebUI</strong>にアクセスすることもできます。詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
-<h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvusへの接続<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
+<h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvus への接続<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -511,7 +511,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスターのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
+<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>

@@ -1359,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de la descomposición",
+                "label": "Clasificación de decadencia",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1605,7 +1605,7 @@
             "children": []
           },
           {
-            "label": "Canalización RAG",
+            "label": "Canal de RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "Infraestructura e integración de datos",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "Resumen",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Metadatos",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Almacenamiento de objetos",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Cola de mensajes (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "Resumen",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Pájaro carpintero",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Púlsar",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Actualizar a Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Seguir utilizando Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Kafka",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "Guía de administración",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "Implementación",
@@ -1891,6 +1806,122 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Infraestructura de datos",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "Resumen",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Metadatos",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Almacenamiento de objetos",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cola de mensajes",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "Resumen",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Pájaro carpintero",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Púlsar",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Actualizar a Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Seguir utilizando Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Kafka",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Cola de mensajes del conmutador",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "Resumen",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar ↔ Pájaro carpintero",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Kafka ↔ Pájaro carpintero",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "Cambiar el tipo de MQ",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "Resumen",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar ↔ Pájaro carpintero",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Kafka ↔ Pájaro carpintero",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },

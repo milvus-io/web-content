@@ -63,7 +63,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.21:</strong></p>
+<p><strong>Apa yang baru di v2.6.22:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
 <li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat " <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> " untuk detailnya</li>
@@ -76,7 +76,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>
 <li>Sebuah kontainer Docker bernama milvus telah dimulai di port <strong>19530</strong>.</li>
-<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan beroperasi di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
+<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
 <li>Untuk mengubah konfigurasi default Milvus, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>

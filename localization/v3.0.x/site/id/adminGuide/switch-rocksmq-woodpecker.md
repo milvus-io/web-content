@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Halaman ini menjelaskan cara mengganti antrian pesan (MQ) pada deployment <strong>Milvus Standalone (Docker Compose)</strong> antara <strong>RocksMQ</strong> dan <strong>Woodpecker</strong> (backend lokal atau MinIO), baik dari satu ke yang lain maupun sebaliknya. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Mengganti Jenis MQ</a>.</p>
+    </button></h1><p>Halaman ini menjelaskan cara beralih antrian pesan (MQ) pada deployment <strong>Milvus Standalone (Docker Compose)</strong> antara <strong>RocksMQ</strong> dan <strong>Woodpecker</strong> (backend lokal atau MinIO), baik ke arah mana pun. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Beralih Antrian Pesan</a>.</p>
 <div class="alert note">
 <ul>
 <li><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</li>

@@ -247,7 +247,7 @@
             "children": []
           },
           {
-            "label": "諾瓦",
+            "label": "諾瓦爾",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "設定集合的 TTL",
+            "label": "集合 TTL",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -1029,7 +1029,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路的基本搜尋",
+            "label": "人工神經網路（ANN）的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "資料基礎架構與整合",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "概覽",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "元資料",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "物件儲存",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "訊息佇列 (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "概覽",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "啄木鳥",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "脈衝星",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "升級至 Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "繼續使用 Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "卡夫卡",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "管理指南",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "部署",
@@ -1891,6 +1806,122 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "資料基礎架構",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "元資料",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "物件儲存",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "訊息佇列",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "概覽",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "啄木鳥",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "脈衝星",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "升級至 Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "繼續使用 Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "卡夫卡",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "切換訊息佇列",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "概覽",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "脈衝星 ↔ 啄木鳥",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "卡夫卡 ↔ 啄木鳥",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "切換 MQ 類型",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "概覽",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "脈衝星 ↔ 啄木鳥",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "卡夫卡 ↔ 啄木鳥",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -3085,7 +3085,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行全文搜尋",
+        "label": "使用 Milvus 進行全文檢索",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []

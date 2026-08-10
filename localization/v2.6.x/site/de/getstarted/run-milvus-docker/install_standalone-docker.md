@@ -63,7 +63,7 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Neuerungen in Version 2.6.21:</strong></p>
+<p><strong>Neuerungen in Version 2.6.22:</strong></p>
 <ul>
 <li><strong>Streaming-Knoten</strong>: Erweiterte Datenverarbeitungsfunktionen</li>
 <li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
@@ -76,7 +76,7 @@ title: Milvus in Docker ausführen (Linux)
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
 <li>Ein Docker-Container namens „milvus“ wurde am Port <strong>19530</strong> gestartet.</li>
-<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner verweist.</li>
+<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.</li>
 </ul>
@@ -96,7 +96,7 @@ title: Milvus in Docker ausführen (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <strong>„user.yaml“</strong> im aktuellen Ordner ändern. Um beispielsweise die Adresse von <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> zu ändern, können Sie die Datei wie folgt anpassen:</p>
+    </button></h2><p>Sie können die Milvus-Konfigurationen in der Datei <strong>„user.yaml“</strong> im aktuellen Ordner ändern. Um beispielsweise die Adresse <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms zu ändern, können Sie die Datei wie folgt anpassen:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu erfahren, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>

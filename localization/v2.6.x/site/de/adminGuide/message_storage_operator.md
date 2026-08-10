@@ -62,7 +62,7 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es werden nur die Versionen Kafka 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.21 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.22 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

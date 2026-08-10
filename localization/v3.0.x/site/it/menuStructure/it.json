@@ -1613,7 +1613,7 @@
         ]
       },
       {
-        "label": "Abilità Milvus",
+        "label": "Abilità di Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1627,7 +1627,7 @@
         "children": []
       },
       {
-        "label": "Server MCP per il codice Claude",
+        "label": "Server MCP per Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "Infrastruttura e integrazione dei dati",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "Panoramica",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Metadati",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Archiviazione a oggetti",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Coda dei messaggi (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "Panoramica",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Picchio",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Passa a Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Continua a utilizzare Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Kafka",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "Guida all'amministrazione",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "Implementazione",
@@ -1891,6 +1806,122 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Infrastruttura dei dati",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Metadati",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Archiviazione a oggetti",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Coda dei messaggi",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "Panoramica",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Picchio",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Pulsar",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Passa a Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Continua a utilizzare Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Kafka",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Coda dei messaggi dello switch",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "Panoramica",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar ↔ Picchio",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Kafka ↔ Picchio",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "Cambia tipo di MQ",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "Panoramica",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar ↔ Picchio",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Kafka ↔ Picchio",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -2192,7 +2192,7 @@
             "children": []
           },
           {
-            "label": "Casi comuni",
+            "label": "Casi più comuni",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -3097,7 +3097,7 @@
         "children": []
       },
       {
-        "label": "Ricerca immagini con Milvus",
+        "label": "Ricerca di immagini con Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []

@@ -63,15 +63,15 @@ title: Eseguire Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.21:</strong></p>
+<p><strong>Novità della versione 2.6.22:</strong></p>
 <ul>
-<li><strong>Nodo di streaming</strong>: funzionalità di elaborazione dei dati migliorate</li>
-<li><strong>Woodpecker MQ</strong>: coda di messaggi migliorata con minori costi di manutenzione; per i dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a> "</li>
+<li><strong>Nodo di streaming</strong>: funzionalità di elaborazione dei dati potenziate</li>
+<li><strong>Woodpecker MQ</strong>: coda dei messaggi migliorata con minori costi di manutenzione; per i dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a> "</li>
 <li><strong>Architettura ottimizzata</strong>: componenti consolidati per prestazioni migliori</li>
 </ul>
-<p>Scarica sempre lo script più recente per assicurarti di ottenere le configurazioni e i miglioramenti dell’architettura più aggiornati.</p>
+<p>Scaricare sempre lo script più recente per assicurarsi di disporre delle configurazioni e dei miglioramenti architetturali più aggiornati.</p>
 <p>Se si desidera utilizzare <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in modalità di distribuzione autonoma, si consiglia di utilizzare il metodo di distribuzione <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo il supporto necessario.</p>
+<p>Se si riscontrano problemi durante il download dell’immagine, contattateci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e vi forniremo l’assistenza necessaria.</p>
 </div>
 <p>Dopo aver eseguito lo script di installazione:</p>
 <ul>
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, è possibile:</p>
 <ul>
-<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire le funzionalità di Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire cosa può fare Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>

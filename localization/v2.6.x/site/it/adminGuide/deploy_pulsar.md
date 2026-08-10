@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus utilizza Pulsar o Kafka per gestire i log delle modifiche recenti, generare log in streaming e fornire sottoscrizioni ai log. Pulsar è il sistema di archiviazione dei messaggi predefinito. Questo argomento illustra come configurare l'archiviazione dei messaggi con Docker Compose o Helm.</p>
 <p>È possibile configurare Pulsar con <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> o su K8s e configurare Kafka su K8s.</p>
 <div class="alert note">
-<p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l’aggiornamento a Milvus v2.6.21, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di coda dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l’aggiornamento a Milvus v2.6.22, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di coda dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurazione di Pulsar con Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per i cluster Milvus su K8s, è possibile configurare Pulsar nello stesso comando che avvia Milvus. In alternativa, è possibile configurare Pulsar utilizzando il file ` <code translate="no">values.yml</code> ` presente nel percorso `/charts/milvus` del repository ` <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> ` prima di avviare Milvus.</p>
+    </button></h2><p>Per i cluster Milvus su K8s, è possibile configurare Pulsar nello stesso comando che avvia Milvus. In alternativa, è possibile configurare Pulsar utilizzando il file ` <code translate="no">values.yml</code> ` presente nel percorso `/charts/milvus` del repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
 <p>Per i dettagli su come configurare Milvus utilizzando Helm, consultare <a href="/docs/it/v2.6.x/configure-helm.md">Configurare Milvus con Helm Charts</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, consultare <a href="/docs/it/v2.6.x/configure_pulsar.md">Configurazioni relative a Pulsar</a>.
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Utilizzo del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
@@ -276,7 +276,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus in modalità standalone utilizza RocksMQ come archivio messaggi predefinito. Per i passaggi dettagliati su come configurare Milvus con Helm, consultare <a href="/docs/it/v2.6.x/configure-helm.md">Configurare Milvus con Helm Charts</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, consultare <a href="/docs/it/v2.6.x/configure_rocksmq.md">Configurazioni relative a RocksMQ</a>.</p>
+    </button></h2><p>Milvus in modalità standalone utilizza RocksMQ come archivio predefinito dei messaggi. Per i passaggi dettagliati su come configurare Milvus con Helm, consultare <a href="/docs/it/v2.6.x/configure-helm.md">Configurare Milvus con Helm Charts</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, consultare <a href="/docs/it/v2.6.x/configure_rocksmq.md">Configurazioni relative a RocksMQ</a>.</p>
 <ul>
 <li><p>Se si avvia Milvus con RocksMQ e si desidera modificarne le impostazioni, è possibile eseguire ` <code translate="no">helm upgrade -f</code> ` con le impostazioni modificate nel seguente file YAML.</p></li>
 <li><p>Se si è installato Milvus in modalità standalone utilizzando Helm con un archivio messaggi diverso da RocksMQ e si desidera tornare a RocksMQ, eseguire il comando ` <code translate="no">helm upgrade -f</code> ` con il seguente file YAML dopo aver svuotato tutte le collezioni e arrestato Milvus.</p></li>

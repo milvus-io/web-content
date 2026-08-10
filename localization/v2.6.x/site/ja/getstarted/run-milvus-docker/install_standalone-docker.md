@@ -63,14 +63,14 @@ title: Docker（Linux）でMilvusを実行する
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.21の新機能:</strong></p>
+<p><strong>v2.6.22の新機能:</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
-<li><strong>Woodpecker MQ</strong>: メンテナンスの負担を軽減したメッセージキューの改善。詳細については「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker の使用</a>」を参照してください</li>
-<li><strong>アーキテクチャの最適化</strong>：パフォーマンス向上のためにコンポーネントを統合しました</li>
+<li><strong>Woodpecker MQ</strong>: メンテナンスのオーバーヘッドを低減したメッセージキューの改善。詳細については「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpeckerの使用</a>」を参照してください</li>
+<li><strong>アーキテクチャの最適化</strong>：パフォーマンス向上のためにコンポーネントを統合</li>
 </ul>
 <p>常に最新のスクリプトをダウンロードし、最新の設定およびアーキテクチャの改善を確実に適用してください。</p>
-<p>スタンドアロン展開モードで<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a>を使用する場合は、<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Composeによる</a>展開方法の使用を推奨します。</p>
+<p>スタンドアロン展開モードで<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a>をご利用になる場合は、<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Composeによる</a>展開方法の使用を推奨します。</p>
 <p>イメージの取得で問題が発生した場合は、問題の詳細を<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p>
 </div>
 <p>インストールスクリプトの実行後：</p>
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Docker に Milvus をインストールしたら、以下の操作が可能です：</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本操作を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>

@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p>Em seguida, obtenha os gráficos Milvus a partir do repositório da seguinte forma:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>Pode sempre executar este comando para obter os gráficos Helm mais recentes do Milvus.</p>
+<p>Pode executar este comando a qualquer momento para obter os gráficos Helm mais recentes do Milvus.</p>
 <h2 id="Online-install" class="common-anchor-header">Instalação online<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,9 +125,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Depois de instalar o gráfico Helm, pode iniciar o Milvus no Kubernetes. Esta secção orienta-o na implementação de um cluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Precisa, em vez disso, de uma implementação autónoma?</strong></p>
-<p>Se preferir implementar o Milvus no modo autónomo (nó único) para desenvolvimento ou testes, utilize este comando:</p>
+<p>Se preferir implementar o Milvus no modo autónomo (um único nó) para desenvolvimento ou testes, utilize este comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Nota</strong>: O modo autónomo utiliza o Woodpecker como fila de mensagens predefinida e ativa o componente Streaming Node. Para mais detalhes, consulte a <a href="/docs/pt/v2.6.x/architecture_overview.md">Visão Geral da Arquitetura</a> e <a href="/docs/pt/v2.6.x/use-woodpecker.md">Utilizar o Woodpecker</a>.</p>
 </div>
 <p><strong>Implantar o cluster do Milvus:</strong></p>
-<p>O comando seguinte implementa um cluster do Milvus com definições otimizadas para a versão 2.6.21, utilizando o Woodpecker como fila de mensagens recomendada:</p>
+<p>O comando seguinte implementa um cluster do Milvus com definições otimizadas para a versão 2.6.22, utilizando o Woodpecker como fila de mensagens recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -150,7 +150,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li>Utiliza <strong>o Woodpecker</strong> como fila de mensagens (recomendado para reduzir a manutenção)</li>
 <li>Ativa o novo componente <strong>«Streaming Node</strong> » para melhorar o desempenho</li>
 <li>Desativa o <strong>«Index Node»</strong> antigo (a funcionalidade é agora gerida pelo «Data Node»)</li>
-<li>Desativa o Pulsar para utilizar o Woodpecker em seu lugar</li>
+<li>Desativa o Pulsar para utilizar o Woodpecker em vez dele</li>
 </ul>
 <div class="alert note">
 <p><strong>Alterações na arquitetura do Milvus 2.6.x:</strong></p>
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opções alternativas de fila de mensagens:</strong></p>
 <p>Se preferir utilizar <strong>o Pulsar</strong> (opção tradicional) em vez do Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ O comando acima implementa o Milvus com as configurações recomendadas. Para ut
     </button></h3><p>Verifique se a sua implementação foi bem-sucedida, verificando o estado dos pods:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Aguarde até que todos os pods apresentem o estado «Running».</strong> Com a configuração v2.6.21, deverá ver pods semelhantes a:</p>
+<p><strong>Aguarde até que todos os pods apresentem o estado «Running».</strong> Com a configuração v2.6.22, deverá ver pods semelhantes a:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -324,7 +324,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>O Milvus inclui uma ferramenta GUI integrada chamada Milvus WebUI, à qual pode aceder através do seu navegador. A Milvus WebUI melhora a observabilidade do sistema com uma interface simples e intuitiva. Pode utilizar a Milvus WebUI para observar as estatísticas e métricas dos componentes e dependências do Milvus, verificar detalhes da base de dados e da recolha de dados e listar configurações detalhadas do Milvus. Para mais detalhes sobre a Milvus WebUI, consulte <a href="/docs/pt/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
-<p>Para ativar o acesso à Milvus WebUI, é necessário redirecionar as portas do pod do proxy para uma porta local.</p>
+<p>Para ativar o acesso à Milvus WebUI, é necessário redirecionar as portas do pod proxy para uma porta local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -366,7 +366,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>O comando acima gera modelos de gráficos para um cluster do Milvus e guarda o resultado num ficheiro de manifesto denominado « <code translate="no">milvus_manifest.yaml</code> ». Utilizando este manifesto, pode instalar um cluster do Milvus com os seus componentes e dependências em pods separados.</p>
 <div class="alert note">
 <ul>
-<li>Para instalar uma instância do Milvus no modo autónomo, em que todos os componentes do Milvus estão contidos num único pod, deve executar <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> para gerar modelos de gráficos para uma instância do Milvus no modo autónomo.</li>
+<li>Para instalar uma instância do Milvus no modo autónomo, em que todos os componentes do Milvus estão contidos num único pod, deve executar <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> em vez disso, para gerar modelos de gráfico para uma instância do Milvus no modo autónomo.</li>
 <li>Para alterar as configurações do Milvus, descarregue o <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> modelo, insira as definições pretendidas e utilize <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> para gerar o manifesto em conformidade.</li>
 </ul>
 </div>

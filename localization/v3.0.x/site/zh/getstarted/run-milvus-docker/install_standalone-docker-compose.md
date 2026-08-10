@@ -55,7 +55,7 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其代码库中提供了一个 Docker Compose 配置文件。若要使用 Docker Compose 安装 Milvus，只需运行</p>
+    </button></h2><p>Milvus 在其仓库中提供了一个 Docker Compose 配置文件。若要使用 Docker Compose 安装 Milvus，只需运行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -81,11 +81,11 @@ Creating milvus-standalone ... done
 </div>
 <p>启动 Milvus 后，</p>
 <ul>
-<li>名为<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
+<li>名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地监听<strong>9000</strong>和<strong>9001</strong>端口，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
-<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
+<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地提供<strong>9000</strong>和<strong>9001</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
+<li><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>目录中。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令检查容器是否已启动并运行：</p>
@@ -166,13 +166,13 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>消息队列限制</strong>：升级至 Milvus v3.0.0 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
-<p>由于 2.6.x 将默认消息队列更改为 Woodpecker，因此在 2.5.x 上运行<strong>RocksMQ</strong>的实例必须<strong>在升级前显式锁定 RocksMQ</strong>——否则<strong>升级</strong>过程会尝试更改消息队列，而此操作不受支持。 下载 2.6.x 版的 Docker Compose 文件后，请在您的 `<code translate="no">user.yaml</code> ` 覆盖文件中将消息队列类型改回 `<code translate="no">rocksmq</code> `，然后进行升级：</p>
+    </button></h2><p><strong>消息队列限制</strong>：升级至 Milvus v3.0.0 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p>由于 2.6.x 将默认消息队列更改为 Woodpecker，因此在 2.5.x 上运行<strong>RocksMQ</strong>的实例必须<strong>在升级前显式锁定 RocksMQ</strong>—— 否则<strong>升级</strong>过程会尝试更改消息队列，而此操作不受支持。 下载 2.6.x 版的 Docker Compose 文件后，请在您的 `<code translate="no">user.yaml</code> ` 覆盖文件中将消息队列类型改回 `<code translate="no">rocksmq</code> `，然后进行升级：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要在升级<em>后</em>切换消息队列，请参阅<a href="/docs/zh/switch-mq-type.md">“切换 MQ 类型</a>”。</p>
+<p>若要在升级<em>后</em>切换消息队列，请参阅<a href="/docs/zh/switch-mq-type.md">“切换消息队列</a>”。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">可选依赖项<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,14 +188,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>此部署使用<strong>Woodpecker</strong>（嵌入式，MinIO WAL 后端）处理消息，使用<strong>etcd</strong>管理元数据，并使用<strong>MinIO</strong>作为对象存储。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
+    </button></h2><p>此部署运行<strong>Woodpecker</strong>（嵌入式，MinIO WAL 后端）用于消息传递，<strong>etcd</strong>用于元数据，以及<strong>MinIO</strong>用于对象存储。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
 <ul>
 <li>消息队列：<a href="/docs/zh/woodpecker.md">Woodpecker</a>（默认）·<a href="/docs/zh/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh/mq_kafka.md">Kafka</a>·<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></li>
 <li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">S3 兼容</a></li>
 <li>元数据：<a href="/docs/zh/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+<p>Storage V3 默认处于禁用状态。在使用依赖该功能的功能之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -234,7 +234,7 @@ EOF
 </ul></li>
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

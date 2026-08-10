@@ -42,7 +42,7 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>Intel 第二代 Core 處理器或更高規格</li><li>Apple Silicon</li></ul></td><td><ul><li>獨立模式：4 核心或以上</li><li>叢集模式：8 核心或以上</li></ul></td><td></td></tr>
-<tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>在 Milvus 中進行向量相似性搜尋與索引建置，需要 CPU 支援單一指令、多資料 (SIMD) 擴充集。請確保 CPU 至少支援下列 SIMD 擴充集之一。如需更多資訊，請參閱「<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">支援 AVX 的 CPU</a>」。</td></tr>
+<tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>在 Milvus 中進行向量相似性搜尋與索引建置，需要 CPU 支援單一指令、多資料 (SIMD) 擴充集。請確保 CPU 至少支援下列 SIMD 擴充集之一。如需更多資訊，請參閱「<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">具備 AVX 的 CPU</a>」。</td></tr>
 <tr><td>記憶體</td><td><ul><li>獨立系統：8G</li><li>叢集：32G</li></ul></td><td><ul><li>獨立系統：16G</li><li>叢集：128G</li></ul></td><td>RAM 的大小取決於資料量。</td></tr>
 <tr><td>硬碟</td><td>SATA 3.0 SSD 或 CloudStorage</td><td>NVMe SSD 或更高規格</td><td>硬碟容量取決於資料量。</td></tr>
 </tbody>
@@ -79,8 +79,8 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>請參閱<a href="#Additional-disk-requirements">額外的磁碟需求</a>。</td></tr>
-<tr><td>MinIO</td><td>發行版 2024-12-18T13:15:44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>隨 Milvus 捆綁提供（服務模式：<code translate="no">v0.1.36</code> 及以上版本）</td><td>預設訊息佇列。對於分散式部署，Woodpecker 可作為專用<strong>服務</strong>運行；請使用<code translate="no">--set woodpecker.image.tag</code> 鎖定其版本。服務模式自 Woodpecker<code translate="no">v0.1.36</code> 起開始支援。</td></tr>
+<tr><td>MinIO</td><td>發行版.2024-12-18T13-15-44Z</td><td></td></tr>
+<tr><td>Woodpecker</td><td>隨 Milvus 捆綁提供（服務模式：<code translate="no">v0.1.37</code> 及以上版本）</td><td>預設訊息佇列。針對分散式部署，Woodpecker 可作為專用<strong>服務</strong>運行；請透過<code translate="no">--set woodpecker.image.tag</code> 鎖定其版本。服務模式自 Woodpecker<code translate="no">v0.1.37</code> 起開始支援。</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>可選 — 僅當您將訊息佇列切換至 Pulsar 時才需安裝；預設未安裝。</td></tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>理想情況下，您的磁碟應達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的規格要求。</p>
+<p>理想情況下，您的磁碟應達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的要求。</p>
 <h2 id="FAQs" class="common-anchor-header">常見問題<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl cluster-info</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>請確保您能透過<code translate="no">kubectl</code> 存取 K8s 叢集。若您尚未在本地端安裝<code translate="no">kubectl</code> ，請參閱《<a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">在 minikube 內使用 kubectl</a>》。</p>
+<p>請確認您能透過<code translate="no">kubectl</code> 存取 K8s 叢集。若您尚未在本地端安裝<code translate="no">kubectl</code> ，請參閱《<a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">在 minikube 內使用 kubectl</a>》。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

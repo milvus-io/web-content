@@ -105,7 +105,7 @@ title: نظرة عامة على خيارات نشر Milvus
 <li>يُعد<strong>Milvus Standalone</strong> مناسبًا لمجموعات البيانات متوسطة الحجم، التي تصل إلى 100 مليون متجه.</li>
 <li>تم تصميم<strong>Milvus Distributed</strong> للنشر على نطاق واسع، وهو قادر على معالجة مجموعات البيانات التي تتراوح من 100 مليون إلى عشرات المليارات من المتجهات.</li>
 </ul>
-<p>بغض النظر عن وضع النشر، تعتمد كل مثيل من Milvus على قائمة انتظار الرسائل، وتخزين الكائنات، ومخزن البيانات الوصفية — بشكل افتراضي <strong>Woodpecker</strong> <strong>وMinIO</strong> <strong>وetcd</strong>. لمعرفة المزيد عن هذه التبعيات، أو ضبطها، أو ربط خدمات خارجية، راجع <a href="/docs/ar/data-infra-integration-overview.md">«البنية التحتية للبيانات والتكامل</a>».</p>
+<p>بغض النظر عن وضع النشر، تعتمد كل مثيل من Milvus على قائمة انتظار الرسائل، وتخزين الكائنات، ومخزن البيانات الوصفية — بشكل افتراضي <strong>Woodpecker</strong> <strong>وMinIO</strong> <strong>وetcd</strong>. لمعرفة المزيد عن هذه التبعيات، أو ضبطها، أو ربط خدمات خارجية، راجع <a href="/docs/ar/data-infra-integration-overview.md">البنية التحتية للبيانات</a>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" /> 
@@ -133,7 +133,7 @@ title: نظرة عامة على خيارات نشر Milvus
 </thead>
 <tbody>
 <tr><td>SDK / مكتبة العميل</td><td>Python<br/>gRPC</td><td>Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful</td><td>Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful</td></tr>
-<tr><td>أنواع البيانات</td><td>المتجه الكثيف<br/>المتجه المتفرق<br/>المتجه الثنائي<br/>المنطقي<br/>الصحيح<br/>العائم<br/>VarChar<br/>المصفوفة<br/>JSON</td><td>متجه كثيف<br/>متجه متفرق<br/>متجه ثنائي<br/>منطقية<br/>عدد صحيح<br/>عدد عائم<br/>VarChar<br/>مصفوفة<br/>JSON</td><td>متجه كثيف<br/>متجه متفرق<br/>متجه ثنائي<br/>منطقية<br/>عدد صحيح<br/>عدد عائم<br/>VarChar<br/>مصفوفة<br/>JSON</td></tr>
+<tr><td>أنواع البيانات</td><td>المتجه الكثيف<br/>المتجه المتفرق<br/>المتجه الثنائي<br/>المنطقي<br/>الصحيح<br/>العائم<br/>المتغير الطول<br/>المصفوفة<br/>JSON</td><td>متجه كثيف<br/>متجه متفرق<br/>متجه ثنائي<br/>منطقية<br/>عدد صحيح<br/>عدد عائم<br/>VarChar<br/>مصفوفة<br/>JSON</td><td>متجه كثيف<br/>متجه متفرق<br/>متجه ثنائي<br/>منطقية<br/>عدد صحيح<br/>عدد عائم<br/>VarChar<br/>مصفوفة<br/>JSON</td></tr>
 <tr><td>قدرات البحث</td><td>البحث المتجه (البحث باستخدام الشبكات العصبية الاصطناعية)<br/>تصفية البيانات الوصفية<br/>البحث في النطاق<br/>الاستعلام القياسي<br/>استرداد الكيانات حسب المفتاح الأساسي<br/>البحث المختلط</td><td>البحث المتجه (البحث باستخدام الشبكات العصبية الاصطناعية)<br/>تصفية البيانات الوصفية<br/>البحث في النطاق<br/>الاستعلام القياسي<br/>استرداد الكيانات حسب المفتاح الأساسي<br/>البحث الهجين</td><td>البحث المتجه (البحث باستخدام الشبكات العصبية الاصطناعية)<br/>تصفية البيانات الوصفية<br/>البحث في النطاق<br/>الاستعلام القياسي<br/>استرداد الكيانات حسب المفتاح الأساسي<br/>البحث الهجين</td></tr>
 <tr><td>عمليات CRUD</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>إدارة البيانات المتقدمة</td><td>غير متوفر</td><td>التحكم في الوصول<br/>القسم<br/>مفتاح القسم</td><td>التحكم في الوصول<br/>التقسيم<br/>مفتاح التقسيم<br/>تجميع الموارد المادية</td></tr>

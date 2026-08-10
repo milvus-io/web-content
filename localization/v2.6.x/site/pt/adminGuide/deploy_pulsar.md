@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>O Milvus utiliza o Pulsar ou o Kafka para gerir registos de alterações recentes, gerar registos de fluxo e disponibilizar subscrições de registos. O Pulsar é o sistema de armazenamento de mensagens predefinido. Este tópico apresenta como configurar o armazenamento de mensagens com o Docker Compose ou o Helm.</p>
 <p>Pode configurar o Pulsar com <a href="https://docs.docker.com/get-started/overview/">o Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
 <div class="alert note">
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.21, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.22, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar o Pulsar com o Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para configurar o Pulsar com o Docker Compose, forneça os seus valores para a secção « <code translate="no">pulsar</code> » no ficheiro « <code translate="no">milvus.yaml</code> », no caminho «milvus/configs».</p>
+    </button></h3><p>Para configurar o Pulsar com o Docker Compose, introduza os seus valores na secção « <code translate="no">pulsar</code> » do ficheiro « <code translate="no">milvus.yaml</code> », localizado no caminho «milvus/configs».</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -78,10 +78,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Execute o comando seguinte para iniciar o Milvus utilizando as configurações do Pulsar.</p>
+    </button></h3><p>Execute o seguinte comando para iniciar o Milvus utilizando as configurações do Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">As configurações só entram em vigor após o arranque do Milvus. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«Arranque do Milvus»</a> para obter mais informações.</div>
+<div class="alert note">As configurações só entram em vigor após o Milvus ter sido iniciado. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Iniciar o Milvus</a> para obter mais informações.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Configurar o Pulsar com o Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Para clusters do Milvus no K8s, pode configurar o Pulsar no mesmo comando que inicia o Milvus. Em alternativa, pode configurar o Pulsar utilizando o ficheiro « <code translate="no">values.yml</code> » no caminho «/charts/milvus» no repositório <a href="https://github.com/milvus-io/milvus-helm">«milvus-helm»</a> antes de iniciar o Milvus.</p>
-<p>Para obter detalhes sobre como configurar o Milvus utilizando o Helm, consulte <a href="/docs/pt/v2.6.x/configure-helm.md">«Configurar o Milvus com os gráficos do Helm</a>». Para obter detalhes sobre os itens de configuração relacionados com o Pulsar, consulte <a href="/docs/pt/v2.6.x/configure_pulsar.md">«Configurações relacionadas com o Pulsar</a>».
+<p>Para obter detalhes sobre como configurar o Milvus utilizando o Helm, consulte <a href="/docs/pt/v2.6.x/configure-helm.md">«Configurar o Milvus com os Charts do Helm</a>». Para obter detalhes sobre os itens de configuração relacionados com o Pulsar, consulte <a href="/docs/pt/v2.6.x/configure_pulsar.md">«Configurações relacionadas com o Pulsar</a>».
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Utilizar o ficheiro YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,7 +278,7 @@ summary: >-
       </svg>
     </button></h2><p>O Milvus autónomo utiliza o RocksMQ como armazenamento de mensagens predefinido. Para obter passos detalhados sobre como configurar o Milvus com o Helm, consulte <a href="/docs/pt/v2.6.x/configure-helm.md">«Configurar o Milvus com os gráficos do Helm</a>». Para obter detalhes sobre os itens de configuração relacionados com o RocksMQ, consulte <a href="/docs/pt/v2.6.x/configure_rocksmq.md">«Configurações relacionadas com o RocksMQ</a>».</p>
 <ul>
-<li><p>Se iniciar o Milvus com o RocksMQ e pretender alterar as suas definições, pode executar o comando « <code translate="no">helm upgrade -f</code> » com as definições alteradas no seguinte ficheiro YAML.</p></li>
+<li><p>Se iniciar o Milvus com o RocksMQ e pretender alterar as suas definições, pode executar o comando « <code translate="no">helm upgrade -f</code> » com as definições alteradas no ficheiro YAML seguinte.</p></li>
 <li><p>Se tiver instalado o Milvus de forma autónoma utilizando o Helm com um armazenamento de mensagens diferente do RocksMQ e pretender voltar a utilizar o RocksMQ, execute ` <code translate="no">helm upgrade -f</code> ` com o seguinte ficheiro YAML após ter esvaziado todas as coleções e parado o Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>

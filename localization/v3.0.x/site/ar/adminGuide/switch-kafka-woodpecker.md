@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تصف هذه الصفحة كيفية التبديل بين <strong>Kafka</strong> (مدمج أو خارجي) و <strong>Woodpecker</strong> (خلفية MinIO) لقائمة انتظار الرسائل (MQ) في <strong>مجموعة Milvus،</strong> في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">"التبديل بين أنواع MQ</a>".</p>
+    </button></h1><p>تصف هذه الصفحة كيفية التبديل بين <strong>Kafka</strong> (مدمج أو خارجي) و <strong>Woodpecker</strong> (خلفية MinIO) لقائمة انتظار الرسائل (MQ) في <strong>مجموعة Milvus،</strong> في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">التبديل بين قوائم انتظار الرسائل</a>.</p>
 <div class="alert note">
 <p><strong>المتطلبات الأساسية:</strong> تتوفر ميزة «التبديل بين قوائم انتظار الرسائل» في <strong>Milvus 3.0 والإصدارات الأحدث</strong>. قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل البدء — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</p>
 </div>
@@ -69,7 +69,7 @@ summary: >-
 <p><strong>الخطوة 3: تحقق من اكتمال عملية التبديل.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم تسجيل التحويل الناجح في <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
+<p>يتم تسجيل التحويل الناجح في السجل <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
 <p><strong>الخطوة 4: (اختياري) أوقف Kafka وقم بالتنظيف.</strong> بالنسبة <strong>لـ</strong> Kafka <strong>المدمج</strong> ، قم بإزالة وحدات Kafka و PVCs الخاصة بها. بالنسبة لـ Kafka <strong>الخارجي،</strong> قم بتنظيف مواضيع Milvus في مثيل Kafka الخارجي — فهي تتبع التنسيق <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
 <p>إذا كنت تخطط للعودة إلى Kafka لاحقًا، فقم بتنظيف البيانات/المواضيع أولاً لتجنب التعارضات.</p>
@@ -111,7 +111,7 @@ summary: >-
 <p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Kafka قد تم تضمينه في تكوين Milvus.</p>
 <p><strong>الخطوة 3: تنفيذ التبديل إلى MQ.</strong></p>
 <div class="alert note">
-<p>تأكد من أن Kafka المستهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو التبديل الأول إلى Kafka، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>
+<p>تأكد من أن Kafka الهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو التبديل الأول إلى Kafka، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +124,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يُسجل التبديل الناجح الرسالة التالية: <code translate="no">[mqTypeValue=kafka]</code>.</p>
-<p><strong>الخطوة 5: (اختياري) قم بإزالة بيانات Woodpecker.</strong> احذف بيانات Woodpecker الموجودة على MinIO/S3 (تحت <code translate="no">&lt;rootPath&gt;/wp/...</code> ، وعادةً ما تكون <code translate="no">files/wp/...</code>) وبيانات تعريف Woodpecker في etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). إذا كنت تخطط للعودة إلى Woodpecker لاحقًا، فقم بإزالة هذه الملفات أولاً.</p>
+<p><strong>الخطوة 5: (اختياري) قم بإزالة بيانات Woodpecker.</strong> احذف بيانات Woodpecker الموجودة على MinIO/S3 (ضمن <code translate="no">&lt;rootPath&gt;/wp/...</code> ، وعادةً ما تكون <code translate="no">files/wp/...</code>) وبيانات تعريف Woodpecker في etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). إذا كنت تخطط للعودة إلى Woodpecker لاحقًا، فقم بإزالة هذه الملفات أولاً.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">باستخدام Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Switch-from-Kafka-to-Woodpecker-Milvus-Operator" class="common-anchor-header">التحويل من Kafka إلى Woodpecker (مشغل Milvus)<button data-href="#Switch-from-Kafka-to-Woodpecker-Milvus-Operator" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Switch-from-Kafka-to-Woodpecker-Milvus-Operator" class="common-anchor-header">التحويل من Kafka إلى Woodpecker (Milvus Operator)<button data-href="#Switch-from-Kafka-to-Woodpecker-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,7 +156,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل.</strong></p>
-<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير متاحة للخارج، لذا قم بتشغيل واجهة برمجة تطبيقات (API) التبديل من داخل بود MixCoord:</p>
+<p><strong>الخطوة 2: تنفيذ عملية التبديل في MQ.</strong> خدمة MixCoord غير مكشوفة، لذا قم بتشغيل واجهة برمجة تطبيقات (API) التبديل من داخل بود MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -166,7 +166,7 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم تسجيل التبديل الناجح في <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره Operator حتى لا يقوم Operator بإلغاء عملية التبديل. أنشئ <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

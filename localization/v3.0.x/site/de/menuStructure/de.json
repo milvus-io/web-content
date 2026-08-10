@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "Integrierte Analysegeräte",
+                "label": "Integrierte Analysatoren",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennzeichnung",
+                    "label": "Sprachkennung",
                     "id": "language-identifier.md",
                     "order": 6,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Schema der „Alter“-Sammlung ändern",
+            "label": "Schema der Alter-Kollektion ändern",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1082,7 +1082,7 @@
             "order": 8,
             "children": [
               {
-                "label": "Erläuterungen zur Filterung",
+                "label": "Erläuterung zur Filterung",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "Dateninfrastruktur und -integration",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "Übersicht",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Metadaten",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Objektspeicher",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Nachrichtenwarteschlange (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "Übersicht",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Specht",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Auf Pulsar v3 aktualisieren",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Pulsar v2 weiterhin verwenden",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Kafka",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "Administrationshandbuch",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "Bereitstellung",
@@ -1813,7 +1728,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azure",
+                    "label": "Azur",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -1891,6 +1806,122 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Dateninfrastruktur",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "Übersicht",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Metadaten",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Objektspeicher",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Nachrichtenwarteschlange",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "Übersicht",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Specht",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Pulsar",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Auf Pulsar v3 aktualisieren",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar v2 weiterhin verwenden",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Kafka",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Switch-Nachrichtenwarteschlange",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "Übersicht",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar ↔ Specht",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Kafka ↔ Specht",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "MQ-Typ wechseln",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "Übersicht",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar ↔ Specht",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Kafka ↔ Specht",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -2536,7 +2536,7 @@
                 "children": []
               },
               {
-                "label": "Texteinbettung",
+                "label": "Text-Einbettung",
                 "id": "langchain_milvus_dido.md",
                 "order": 2,
                 "children": []

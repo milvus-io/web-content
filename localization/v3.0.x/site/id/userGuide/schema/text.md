@@ -23,19 +23,19 @@ beta: Milvus 3.0.x
       </svg>
     </button></h1><p>Dalam aplikasi pencarian berbasis AI, pencarian vektor membantu Anda menemukan entitas yang serupa secara semantik, namun aplikasi tersebut sering kali juga memerlukan teks sumber asli di balik setiap hasil pencocokan. Sebuah LLM atau agen dapat menggunakan teks tersebut sebagai konteks untuk membaca, mengutip, merangkum, atau menyertakan hasilnya dalam sebuah prompt.</p>
 <p>Milvus menyediakan tipe bidang skalar ` <code translate="no">TEXT</code> ` untuk menyimpan teks sumber yang panjang secara langsung bersama entitas. Nilai-nilai yang umum meliputi kutipan, dokumen panjang, isi artikel, tiket, dan log. Berbeda dengan ` <code translate="no">VARCHAR</code>`, yang memerlukan ` <code translate="no">max_length</code>` tetap, ` <code translate="no">TEXT</code> ` tidak mengharuskan Anda menetapkan panjang byte maksimum dalam skema koleksi.</p>
-<p>Untuk mendefinisikan bidang " <code translate="no">TEXT</code> ", atur ` <code translate="no">datatype</code> ` menjadi ` <code translate="no">DataType.TEXT</code>`.</p>
+<p>Untuk mendefinisikan bidang " <code translate="no">TEXT</code> ", atur " <code translate="no">datatype</code> " menjadi " <code translate="no">DataType.TEXT</code>".</p>
 <div class="alert note">
 <p>Fitur ini memerlukan Storage V3. Untuk petunjuk pengaktifan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
 </div>
-<p>Milvus akan menolak skema koleksi yang berisi bidang ` <code translate="no">TEXT</code> ` jika Storage V3 dinonaktifkan.</p>
+<p><a href="/docs/id/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a> Secara default, nilainya adalah ` <code translate="no">false</code>`, yang berarti Storage V3 dinonaktifkan secara default. Sebelum membuat koleksi yang berisi bidang ` <code translate="no">TEXT</code> `, atur parameter ini menjadi ` <code translate="no">true</code>`; jika tidak, Milvus akan menolak skema koleksi tersebut.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat memasukkan nilai " <code translate="no">TEXT</code> " seperti halnya bidang skalar lainnya dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut di <code translate="no">output_fields</code>.</p>
+<p>Setelah bidang tersebut didefinisikan, setiap entitas dapat menyertakan nilai string di bidang tersebut. Anda dapat memasukkan nilai <code translate="no">TEXT</code> seperti halnya bidang skalar lainnya dan mengembalikannya dari hasil kueri atau pencarian dengan mencantumkan bidang tersebut dalam <code translate="no">output_fields</code>.</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> Bidang-bidang tersebut mendukung nilai null. Untuk mengaktifkan fitur ini, atur ` <code translate="no">nullable</code> ` ke ` <code translate="no">True</code>`. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
+<p><code translate="no">TEXT</code> bidang mendukung nilai null. Untuk mengaktifkan fitur ini, atur ` <code translate="no">nullable</code> ` menjadi ` <code translate="no">True</code>`. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a>.</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,12 +53,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat dijadikan bidang utama. Bidang utama mendukung ` <code translate="no">INT64</code> ` dan ` <code translate="no">VARCHAR</code>`.</li>
-<li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung <code translate="no">PHRASE_MATCH</code>.</li>
-<li>Di Milvus 3.0.0, bidang " <code translate="no">TEXT</code> " tidak mendukung nilai default.</li>
-<li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak didukung dalam koleksi eksternal.</li>
-<li>Di Milvus 3.0.0, bidang <code translate="no">TEXT</code> tidak mendukung indeks skalar.</li>
-<li><code translate="no">TEXT</code> tidak dimaksudkan untuk penyaringan metadata biasa. Jika Anda perlu menyaring metadata string pendek dan nilai bidang sesuai dengan batas panjang ` <code translate="no">VARCHAR</code> `, gunakan ` <code translate="no">VARCHAR</code>`.</li>
+<li>Sebuah bidang ` <code translate="no">TEXT</code> ` tidak dapat menjadi bidang utama, kunci partisi, atau kunci pengelompokan.</li>
+<li><code translate="no">TEXT</code> tidak dapat digunakan sebagai tipe elemen dari bidang ` <code translate="no">ARRAY</code> `, termasuk subbidang skalar dalam ` <code translate="no">StructArray</code>`.</li>
+<li>Di Milvus 3.0.0, bidang ` <code translate="no">TEXT</code> ` tidak mendukung nilai default.</li>
+<li>Di Milvus 3.0.0, bidang ` <code translate="no">TEXT</code> ` tidak didukung dalam koleksi eksternal.</li>
+<li>Pengguna tidak dapat membuat indeks skalar pada bidang <code translate="no">TEXT</code>. Saat <code translate="no">enable_match=True</code>, Milvus membangun indeks teks yang dikelola sistem untuk pencocokan teks. Indeks internal ini bukanlah indeks skalar yang dibuat pengguna.</li>
+<li>Operator filter skalar umum tidak dapat diterapkan secara langsung pada bidang ` <code translate="no">TEXT</code> `. Ini mencakup operator perbandingan seperti <code translate="no">==</code> dan <code translate="no">!=</code>, operator rentang seperti <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;</code>, dan <code translate="no">&lt;=</code>, serta <code translate="no">IN</code>, <code translate="no">LIKE</code>, operator regex (<code translate="no">=~</code> dan <code translate="no">!~</code>), dan <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code>. Untuk menyaring berdasarkan istilah yang dianalisis, tentukan bidang dengan <code translate="no">enable_analyzer=True</code> dan <code translate="no">enable_match=True</code>, lalu gunakan <a href="/docs/id/keyword-match.md"><code translate="no">TEXT_MATCH</code> atau <code translate="no">TEXT_MATCH_FUZZY</code></a>. Untuk pencarian teks lengkap yang diurutkan berdasarkan relevansi, gunakan BM25.</li>
+<li>Di Milvus 3.0.0, Fungsi BM25 atau MinHash yang menggunakan bidang <code translate="no">TEXT</code> sebagai masukan harus didefinisikan saat koleksi dibuat. Fungsi ini tidak dapat ditambahkan kemudian melalui <code translate="no">add_function_field</code> atau <code translate="no">AlterCollectionSchema</code>, bahkan jika koleksi yang ada kosong, karena Milvus tidak dapat mengisi kembali keluaran Fungsi dari nilai-nilai <code translate="no">TEXT</code> yang tersimpan. Untuk menambahkan Fungsi tersebut ke koleksi yang sudah ada, gunakan bidang masukan ` <code translate="no">VARCHAR</code> `, atau buat ulang koleksi tersebut dengan menyertakan Fungsi dalam skemanya. Untuk detail mengenai penambahan Fungsi dan bidang vektor yang dihasilkannya, lihat ` <a href="/docs/id/add-fields-to-an-existing-collection.md#add-a-function-and-its-generated-vector-field--milvus-30x">Alter Collection Schema</a>`.</li>
+<li>Fungsi Embedding Teks juga harus didefinisikan saat koleksi dibuat. Milvus 3.0.0 tidak mendukung penambahan fungsi tersebut saat runtime.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">Pilih TEXT atau VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +77,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> dan <code translate="no">VARCHAR</code> sama-sama menyimpan nilai string, tetapi keduanya mendukung kebutuhan aplikasi yang berbeda. Gunakan <code translate="no">VARCHAR</code> untuk metadata pendek dan terbatas yang mengidentifikasi, mengkategorikan, atau menyaring entitas. Gunakan <code translate="no">TEXT</code> untuk konten sumber yang lebih panjang yang memberikan konteks yang cukup kepada LLM atau agen untuk membaca, mengutip, merangkum, atau membuat prompt.</p>
+    </button></h2><p><code translate="no">TEXT</code> dan " <code translate="no">VARCHAR</code> " sama-sama menyimpan nilai string, tetapi mendukung kebutuhan aplikasi yang berbeda. Gunakan " <code translate="no">VARCHAR</code> " untuk metadata pendek dan terbatas yang mengidentifikasi, mengkategorikan, atau menyaring entitas. Gunakan " <code translate="no">TEXT</code> " untuk konten sumber yang lebih panjang yang memberikan konteks yang cukup bagi LLM atau agen untuk membaca, mengutip, merangkum, atau membuat prompt.</p>
 <table>
 <thead>
 <tr><th>Aspek</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -85,7 +87,7 @@ beta: Milvus 3.0.x
 <tr><td>Pengaturan panjang</td><td>Memerlukan <code translate="no">max_length</code>, yang menentukan jumlah byte maksimum yang dapat disimpan oleh bidang tersebut. Nilai maksimumnya adalah <code translate="no">65,535</code> byte. Jika suatu nilai mungkin melebihi batas ini, gunakan <code translate="no">TEXT</code>.</td><td>Tidak memerlukan ` <code translate="no">max_length</code>`, sehingga skema tidak memerlukan batas byte tetap untuk nilai teks.</td></tr>
 <tr><td>Perilaku penyimpanan</td><td>Menyimpan setiap nilai dalam batas penyimpanan yang dikonfigurasi ( <code translate="no">max_length</code>) pada bidang tersebut.</td><td>Menggunakan pemilihan penyimpanan otomatis untuk nilai teks yang lebih besar. Untuk detailnya, lihat <a href="#how-milvus-stores-large-text-values">Cara Milvus menyimpan nilai TEXT yang besar</a>.</td></tr>
 <tr><td>Dukungan bidang utama</td><td>Dapat digunakan sebagai bidang utama.</td><td>Tidak dapat digunakan sebagai bidang utama.</td></tr>
-<tr><td>Penyaringan</td><td>Digunakan untuk metadata string pendek yang perlu muncul dalam ekspresi penyaringan, seperti <code translate="no">category == &quot;news&quot;</code> atau <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Tidak dimaksudkan untuk penyaringan metadata biasa.</td></tr>
+<tr><td>Penyaringan</td><td>Digunakan untuk metadata string pendek yang perlu muncul dalam ekspresi filter, seperti <code translate="no">category == &quot;news&quot;</code> atau <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Tidak mendukung operator filter skalar umum. Gunakan operator teks yang mendukung pencocokan untuk penyaringan istilah yang dianalisis, atau BM25 untuk pencarian teks lengkap yang diurutkan berdasarkan relevansi.</td></tr>
 </tbody>
 </table>
 <p>Untuk detail mengenai bidang <code translate="no">VARCHAR</code>, lihat <a href="/docs/id/string.md">Bidang VarChar</a>.</p>
@@ -106,7 +108,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>Perluas untuk melihat cara kerjanya</summary></p>
-<p>Saat Anda menyisipkan entitas, string yang Anda berikan untuk bidang <code translate="no">TEXT</code> adalah nilai <code translate="no">TEXT</code>. Milvus membandingkan ukuran nilai tersebut dengan <a href="/docs/id/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>, yang secara default berukuran <code translate="no">65,536</code> byte, lalu memilih salah satu dari dua jalur penyimpanan internal.</p>
+<p>Saat Anda menyisipkan entitas, string yang Anda berikan untuk bidang <code translate="no">TEXT</code> adalah nilai <code translate="no">TEXT</code>. Milvus membandingkan ukuran nilai tersebut dengan <a href="/docs/id/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>, yang secara default berukur <code translate="no">65,536</code> -byte, lalu memilih salah satu dari dua jalur penyimpanan internal.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -120,7 +122,7 @@ beta: Milvus 3.0.x
 <p>Pemilihan penyimpanan ini bersifat internal. Anda dapat menyisipkan, melakukan kueri, dan mencari bidang ` <code translate="no">TEXT</code> ` dengan cara yang sama terlepas dari jalur penyimpanan mana yang digunakan Milvus. Untuk menyesuaikan ambang batas atau perilaku terkait penyimpanan, pemadatan, dan pengumpulan sampah, lihat <a href="/docs/id/configure_datanode.md">Konfigurasi terkait dataNode</a> dan <a href="/docs/id/configure_datacoord.md">Konfigurasi terkait dataCoord</a>.</p>
 <p>Jika deployment Anda menggunakan penyimpanan objek, nilai ` <code translate="no">TEXT</code> ` yang besar mungkin muncul sebagai objek yang dikelola Milvus di bawah jalur seperti <code translate="no">lobs/...</code>. Objek-objek ini merupakan detail implementasi dan tidak boleh dipindahkan, disalin, atau dihapus secara manual. Setelah Anda menghapus entitas, menghapus partisi, atau memadatkan data, penggunaan penyimpanan objek mungkin baru berkurang setelah pengumpulan sampah Milvus menghapus data objek besar yang tidak direferensikan setelah jendela keamanannya berakhir.</p>
 <p></details></p>
-<p>Penggunaan umum ` <code translate="no">TEXT</code> ` adalah Pencarian Teks Lengkap (Full Text Search) dengan BM25. Dalam pola ini, bidang ` <code translate="no">TEXT</code> ` menyimpan konten sumber asli, dan BM25 menganalisis teks serta menghasilkan vektor langka untuk menentukan peringkat kecocokan berdasarkan kata kunci. Hasil pencarian kemudian dapat mengembalikan nilai ` <code translate="no">TEXT</code> ` yang cocok sebagai konteks untuk alur kerja LLM atau agen. Contoh berikut menunjukkan cara menggunakan bidang " <code translate="no">TEXT</code> " sebagai bidang masukan untuk BM25. Untuk mempelajari konsep Pencarian Teks Penuh dan opsi kueri, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Penuh</a>.</p>
+<p>Penggunaan umum ` <code translate="no">TEXT</code> ` adalah Pencarian Teks Lengkap (Full Text Search) dengan BM25. Dalam pola ini, bidang ` <code translate="no">TEXT</code> ` menyimpan konten sumber asli, sedangkan BM25 menganalisis teks dan menghasilkan vektor langka (sparse vectors) untuk menentukan peringkat kecocokan berdasarkan kata kunci. Hasil pencarian kemudian dapat mengembalikan nilai ` <code translate="no">TEXT</code> ` yang cocok sebagai konteks untuk alur kerja LLM atau agen. Contoh berikut menunjukkan cara menggunakan bidang " <code translate="no">TEXT</code> " sebagai bidang masukan untuk BM25. Untuk mempelajari konsep Pencarian Teks Lengkap dan opsi kueri, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">Langkah 1: Buat koleksi dengan bidang TEXT<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

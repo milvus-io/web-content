@@ -69,7 +69,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Standardbereitstellung (v3.0.0):</strong> „ <code translate="no">docker compose up -d</code> “ startet drei Container – „ <code translate="no">milvus-etcd</code> “ (Metadaten), „ <code translate="no">milvus-minio</code> “ (Objektspeicher) und „ <code translate="no">milvus-standalone</code> “. Die Nachrichtenwarteschlange ist <strong>Woodpecker (eingebettet, mit MinIO/Objektspeicher als WAL-Backend)</strong>, sodass kein separater Nachrichtenwarteschlangen-Container erforderlich ist.</p>
+<p><strong>Standardbereitstellung (v3.0.0):</strong> „ <code translate="no">docker compose up -d</code> “ startet drei Container – <code translate="no">milvus-etcd</code> (Metadaten), <code translate="no">milvus-minio</code> (Objektspeicher) und <code translate="no">milvus-standalone</code>. Die Nachrichtenwarteschlange ist <strong>Woodpecker (eingebettet, mit MinIO/Objektspeicher als WAL-Backend)</strong>, sodass kein separater Nachrichtenwarteschlangen-Container erforderlich ist.</p>
 <p><strong>Standard-Nachrichtenwarteschlange je nach Version:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> – Standard-Nachrichtenwarteschlange ist <strong>RocksMQ</strong>.</li>
@@ -77,7 +77,7 @@ Creating milvus-standalone ... done
 </ul>
 <p>Laden Sie stets die aktuellste Docker-Compose-Konfiguration herunter, um die Kompatibilität mit den Funktionen von Version 3.0.0 sicherzustellen.</p>
 <ul>
-<li><p>Falls die Ausführung des obigen Befehls fehlgeschlagen ist, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Ist dies der Fall, wird Ihnen aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a> empfohlen, auf Docker Compose V2 umzusteigen.</p></li>
+<li><p>Falls die Ausführung des obigen Befehls fehlgeschlagen ist, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Sollte dies der Fall sein, empfehlen wir Ihnen aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a>, auf Docker Compose V2 umzusteigen.</p></li>
 <li><p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p></li>
 </ul>
 </div>
@@ -90,7 +90,7 @@ Creating milvus-standalone ... done
 <li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv und läuft sind:</p>
+<p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv sind:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose ps</span>
 
 NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
@@ -174,7 +174,7 @@ EOF
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Informationen zum Wechseln der Nachrichtenwarteschlange <em>nach</em> dem Upgrade finden Sie unter <a href="/docs/de/switch-mq-type.md">„MQ-Typ wechseln</a>“.</p>
+<p>Informationen zum Wechseln der Nachrichtenwarteschlange <em>nach</em> dem Upgrade finden Sie unter <a href="/docs/de/switch-mq-type.md">„Nachrichtenwarteschlange wechseln</a>“.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Optionale Abhängigkeiten<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +190,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Diese Bereitstellung nutzt <strong>Woodpecker</strong> (eingebettet, MinIO-WAL-Backend) für die Nachrichtenübermittlung, <strong>etcd</strong> für Metadaten und <strong>MinIO</strong> für den Objektspeicher. Informationen zur Verwendung einer anderen Nachrichtenwarteschlange oder zur Anbindung eines externen Objektspeichers bzw. externer Metadaten finden Sie unter:</p>
+    </button></h2><p>Diese Bereitstellung nutzt <strong>Woodpecker</strong> (eingebettet, MinIO-WAL-Backend) für die Nachrichtenübermittlung, <strong>etcd</strong> für Metadaten und <strong>MinIO</strong> für den Objektspeicher. Um eine andere Nachrichtenwarteschlange zu verwenden oder einen externen Objektspeicher bzw. externe Metadaten anzubinden, siehe:</p>
 <ul>
 <li>Nachrichtenwarteschlange: <a href="/docs/de/woodpecker.md">Woodpecker</a> (Standard) · <a href="/docs/de/mq_pulsar.md">Pulsar</a> · <a href="/docs/de/mq_kafka.md">Kafka</a> · <a href="/docs/de/mq_rocksmq.md">RocksMQ</a></li>
 <li>Objektspeicher: <a href="/docs/de/deploy_s3.md">MinIO</a> (Standard) · <a href="/docs/de/deploy_s3.md">AWS S3</a> · <a href="/docs/de/abs.md">Azure Blob</a> · <a href="/docs/de/gcs.md">GCP Cloud Storage</a> · <a href="/docs/de/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/de/deploy_s3.md">Tencent COS</a> · <a href="/docs/de/deploy_s3.md">Huawei OBS</a> · <a href="/docs/de/deploy_s3.md">S3-kompatibel</a></li>

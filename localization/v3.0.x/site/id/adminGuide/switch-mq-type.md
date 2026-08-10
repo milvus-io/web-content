@@ -1,11 +1,11 @@
 ---
 id: switch-mq-type.md
-title: Mengubah Jenis MQ
+title: Mengalihkan Antrian Pesan
 summary: >-
-  Mengalihkan antrian pesan pada implementasi Milvus yang sudah ada dari
-  Woodpecker ke antrian pesan lain tanpa waktu henti.
+  Mengalihkan implementasi Milvus yang sudah ada dari Woodpecker ke antrian
+  pesan lain tanpa waktu henti.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Mengubah Jenis MQ<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Mengalihkan Antrian Pesan<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,5 +119,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Hindari berpindah-pindah jenis MQ secara berulang-ulang. Jika Anda memang perlu berpindah, pastikan untuk membersihkan data terkait sebelum setiap perpindahan — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
+<p>Hindari berpindah-pindah jenis MQ berulang kali. Jika Anda memang perlu berpindah, pastikan untuk membersihkan data terkait sebelum setiap perpindahan — data sisa dapat menyebabkan perilaku yang tidak terduga.</p>
 </div>

@@ -67,7 +67,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>기본 배포(v3.0.0):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (오브젝트 스토리지) 및 <code translate="no">milvus-standalone</code> 등 세 개의 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드, WAL 백엔드로 MinIO/오브젝트 스토리지 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
+<p><strong>기본 배포(v3.0.0):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (객체 스토리지) 및 <code translate="no">milvus-standalone</code> 등 세 개의 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드, MinIO/객체 스토리지를 WAL 백엔드로 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
 <p><strong>버전별 메시지 큐 기본값:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — 기본 메시지 큐는 <strong>RocksMQ입니다</strong>.</li>
@@ -167,12 +167,12 @@ EOF
         ></path>
       </svg>
     </button></h2><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.0으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
-<p>2.6.x에서는 기본 메시지 큐가 Woodpecker로 변경되므로, 2.5.x에서 <strong>RocksMQ를</strong> 실행 중인 인스턴스는 <strong>업그레이드 전에 RocksMQ를 명시적으로 고정해야</strong> 합니다. 그렇지 않으면 업그레이드가 메시지 큐를 변경하려고 시도하게 되며, 이는 지원되지 않습니다. 2.6.x Docker Compose 파일을 다운로드한 후, ` <code translate="no">user.yaml</code> ` 오버라이드에서 메시지 큐 유형을 다시 ` <code translate="no">rocksmq</code> `로 설정한 다음 업그레이드를 진행하십시오.</p>
+<p>2.6.x에서는 기본 메시지 큐가 Woodpecker로 변경되므로, 2.5.x에서 <strong>RocksMQ를</strong> 실행 중인 인스턴스는 <strong>업그레이드 전에 RocksMQ를 명시적으로 고정해야</strong> 합니다. 그렇지 않으면 업그레이드가 메시지 큐를 변경하려고 시도하게 되며, 이는 지원되지 않습니다. 2.6.x Docker Compose 파일을 다운로드한 후, ` <code translate="no">user.yaml</code> ` 오버라이드에서 메시지 큐 유형을 다시 ` <code translate="no">rocksmq</code> `로 설정한 다음 업그레이드를 진행하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>업그레이드 <em>후</em> 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘MQ 유형 변경’을</a> 참조하십시오.</p>
+<p>업그레이드 <em>후</em> 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 변경’을</a> 참조하십시오.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">선택적 종속성<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

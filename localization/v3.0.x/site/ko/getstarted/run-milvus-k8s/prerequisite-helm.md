@@ -80,7 +80,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">추가 디스크 요구 사항을</a> 참조하십시오.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Milvus와 번들로 제공됨(서비스 모드: <code translate="no">v0.1.36</code> 이상)</td><td>기본 메시지 큐입니다. 분산 배포의 경우, Woodpecker는 <strong>전용 서비스로</strong> 실행될 수 있으며, <code translate="no">--set woodpecker.image.tag</code> 을 사용하여 버전을 고정할 수 있습니다. 서비스 모드는 Woodpecker <code translate="no">v0.1.36</code> 부터 지원됩니다.</td></tr>
+<tr><td>Woodpecker</td><td>Milvus와 번들로 제공됨(서비스 모드: <code translate="no">v0.1.37</code> 이상)</td><td>기본 메시지 큐입니다. 분산 배포의 경우, Woodpecker는 <strong>전용 서비스로</strong> 실행될 수 있으며, <code translate="no">--set woodpecker.image.tag</code> 을 사용하여 버전을 고정할 수 있습니다. 서비스 모드는 Woodpecker <code translate="no">v0.1.37</code> 부터 지원됩니다.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>선택 사항 — 메시지 큐를 Pulsar로 전환하는 경우에만 해당하며, 기본적으로 설치되지 않습니다.</td></tr>
 </tbody>
 </table>
@@ -99,7 +99,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>디스크 성능은 etcd에 매우 중요합니다. 로컬 NVMe SSD를 사용하는 것을 적극 권장합니다. 디스크 응답 속도가 느리면 클러스터 선거가 빈번하게 발생하여 결국 etcd 서비스 성능이 저하될 수 있습니다.</p>
+    </button></h3><p>디스크 성능은 etcd에 매우 중요합니다. 로컬 NVMe SSD를 사용하는 것을 강력히 권장합니다. 디스크 응답 속도가 느리면 클러스터 선거가 빈번하게 발생하여 결국 etcd 서비스 성능이 저하될 수 있습니다.</p>
 <p>디스크가 요구 사항을 충족하는지 테스트하려면 <a href="https://github.com/axboe/fio">fio를</a> 사용하십시오.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest

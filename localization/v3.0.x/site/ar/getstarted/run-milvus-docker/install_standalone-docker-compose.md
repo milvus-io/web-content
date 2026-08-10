@@ -67,7 +67,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>النشر الافتراضي (الإصدار 3.0.0):</strong> <code translate="no">docker compose up -d</code> يبدأ ثلاث حاويات — <code translate="no">milvus-etcd</code> (البيانات الوصفية)، <code translate="no">milvus-minio</code> (تخزين الكائنات)، و <code translate="no">milvus-standalone</code>. قائمة انتظار الرسائل هي <strong>Woodpecker (مدمجة، مع MinIO / تخزين الكائنات كخلفية WAL لها)</strong>، لذا لا يلزم وجود حاوية منفصلة لقائمة انتظار الرسائل.</p>
+<p><strong>النشر الافتراضي (الإصدار 3.0.0):</strong> <code translate="no">docker compose up -d</code> يبدأ تشغيل ثلاث حاويات — <code translate="no">milvus-etcd</code> (البيانات الوصفية)، <code translate="no">milvus-minio</code> (تخزين الكائنات)، و <code translate="no">milvus-standalone</code>. قائمة انتظار الرسائل هي <strong>Woodpecker (مدمجة، مع MinIO / تخزين الكائنات كخلفية WAL لها)</strong>، لذا لا يلزم وجود حاوية منفصلة لقائمة انتظار الرسائل.</p>
 <p><strong>قائمة انتظار الرسائل الافتراضية حسب الإصدار:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — قائمة انتظار الرسائل الافتراضية هي <strong>RocksMQ</strong>.</li>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>لا تكشف حاوية <strong>milvus-etcd</strong> عن أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>volumes/etcd</strong> في المجلد الحالي.</li>
 <li>تقدم حاوية <strong>milvus-minio</strong> المنافذ <strong>9000</strong> <strong>و9001</strong> محليًا باستخدام بيانات اعتماد المصادقة الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/minio</strong> في المجلد الحالي.</li>
-<li>تقدم حاوية <strong>milvus-standalone</strong> المنافذ <strong>19530</strong> محليًّا باستخدام الإعدادات الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
+<li>تقدم حاوية <strong>milvus-standalone</strong> المنافذ <strong>19530</strong> محليًا باستخدام الإعدادات الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
 </ul></li>
 </ul>
 <p>يمكنك التحقق مما إذا كانت الحاويات قيد التشغيل باستخدام الأمر التالي:</p>
@@ -172,7 +172,7 @@ EOF
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لتغيير قائمة انتظار الرسائل <em>بعد</em> الترقية، راجع <a href="/docs/ar/switch-mq-type.md">«تغيير نوع MQ</a>».</p>
+<p>لتغيير قائمة انتظار الرسائل <em>بعد</em> الترقية، راجع <a href="/docs/ar/switch-mq-type.md">«تغيير قائمة انتظار الرسائل</a>».</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">التبعيات الاختيارية<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

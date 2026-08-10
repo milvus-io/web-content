@@ -80,7 +80,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a> ist ein Debugging-Tool für Milvus, das eine Verbindung zu etcd herstellt und es Ihnen ermöglicht, den Status des Milvus-Servers zu überwachen und Anpassungen in Echtzeit vorzunehmen. Es unterstützt zudem etcd-Dateisicherungen und hilft Entwicklern so bei der Fehlerbehebung.</p>
+    </button></h2><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a> ist ein Debugging-Tool für Milvus, das eine Verbindung zu etcd herstellt und es Ihnen ermöglicht, den Status des Milvus-Servers zu überwachen und Anpassungen in Echtzeit vorzunehmen. Es unterstützt zudem etcd-Dateisicherungen und unterstützt Entwickler so bei der Fehlerbehebung.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Bulk Writer<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, entwickelt von Zilliz Cloud, ist ein hochmoderner Vektorsuchalgorithmus, der eine beispiellose Suchqualität und -leistung bietet. Dank seines innovativen Designs und umfangreicher Optimierungen übertrifft Cardinal Knowhere um ein Vielfaches bis zu einer Größenordnung und bewältigt dabei adaptiv vielfältige Produktionsszenarien wie variierende K-Größen, hohe Filterung, unterschiedliche Datenverteilungen und so weiter.</p>
+    </button></h2><p>Cardinal, entwickelt von Zilliz Cloud, ist ein hochmoderner Vektorsuchalgorithmus, der eine beispiellose Suchqualität und -leistung bietet. Dank seines innovativen Designs und umfangreicher Optimierungen übertrifft Cardinal Knowhere um ein Vielfaches bis hin zu einer Größenordnung und bewältigt dabei adaptiv vielfältige Produktionsszenarien wie variierende K-Größen, hohe Filterung, unterschiedliche Datenverteilungen und so weiter.</p>
 <h2 id="Channel" class="common-anchor-header">Channel<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine Abhängigkeit ist ein Programm, auf das ein anderes Programm angewiesen ist, um zu funktionieren. Zu den Abhängigkeiten von Milvus gehören etcd (speichert Metadaten), MinIO oder S3 (Objektspeicher) sowie eine Nachrichtenwarteschlange wie Woodpecker (verwaltet Snapshot-Protokolle). Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/data-infra-integration-overview.md">„Dateninfrastruktur und -integration</a>“.</p>
+    </button></h2><p>Eine Abhängigkeit ist ein Programm, auf das ein anderes Programm angewiesen ist, um zu funktionieren. Zu den Abhängigkeiten von Milvus gehören etcd (speichert Metadaten), MinIO oder S3 (Objektspeicher) sowie eine Nachrichtenwarteschlange wie Woodpecker (verwaltet Snapshot-Protokolle). Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/data-infra-integration-overview.md">„Dateninfrastruktur</a>“.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Dynamisches Schema<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Die hybride Suche</a> ist seit Milvus 2.4.0 eine API für die hybride Suche. Sie können mehrere Vektorfelder durchsuchen und diese zusammenführen. Bei einer Vektorsuche in Kombination mit einer skalaren Feldfilterung spricht man von einer „gefilterten Suche“. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">„Hybride Suche</a>“.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Die hybride Suche</a> ist seit Milvus 2.4.0 eine API für die hybride Suche. Sie können mehrere Vektorfelder durchsuchen und diese miteinander kombinieren. Bei einer Vektorsuche in Kombination mit einer skalaren Feldfilterung spricht man von einer „gefilterten Suche“. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">„Hybride Suche</a>“.</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> ist die zentrale Vektor-Ausführungs-Engine von Milvus, die mehrere Bibliotheken für die Vektorähnlichkeitssuche integriert, darunter Faiss, Hnswlib und Annoy. Knowhere ist zudem für heterogenes Computing ausgelegt. Es steuert, auf welcher Hardware (CPU oder GPU) die Indexerstellung und Suchanfragen ausgeführt werden. Daher hat Knowhere seinen Namen erhalten – es weiß, wo die Operationen ausgeführt werden müssen.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> ist die zentrale Vektor-Ausführungs-Engine von Milvus, die mehrere Bibliotheken für die Vektorähnlichkeitssuche integriert, darunter Faiss, Hnswlib und Annoy. Knowhere ist zudem für heterogenes Computing ausgelegt. Es steuert, auf welcher Hardware (CPU oder GPU) die Indizierung und Suchanfragen ausgeführt werden. Daher hat Knowhere seinen Namen erhalten – es weiß, wo die Operationen ausgeführt werden müssen.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Log-Snapshot<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -375,7 +375,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ähnlichkeitsmetriktypen werden verwendet, um Ähnlichkeiten zwischen Vektoren zu messen. Derzeit unterstützt Milvus den euklidischen Abstand (L2), das Skalarprodukt (IP), die Kosinusähnlichkeit (COSINE) sowie binäre Metriktypen. Sie können je nach Ihrem Szenario den am besten geeigneten Metriktyp auswählen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/metric.md">Ähnlichkeitsmetriken</a>.</p>
+    </button></h2><p>Ähnlichkeitsmetriktypen werden verwendet, um Ähnlichkeiten zwischen Vektoren zu messen. Derzeit unterstützt Milvus den euklidischen Abstand (L2), das Skalarprodukt (IP), die Kosinusähnlichkeit (COSINE) sowie binäre Metriktypen. Sie können den für Ihr Szenario am besten geeigneten Metriktyp auswählen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/metric.md">Ähnlichkeitsmetriken</a>.</p>
 <h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +391,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBuffer ist ein ressourcenschonender Bereitstellungsmodus von Woodpecker, der eingehende Schreibvorgänge vorübergehend im Arbeitsspeicher puffert und sie in regelmäßigen Abständen in den Cloud-Objektspeicher überträgt. Dieser Modus eignet sich am besten für Workloads mit hohem Batch-Aufkommen in kleineren Bereitstellungen oder Produktionsumgebungen, in denen Einfachheit Vorrang vor Leistung hat. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
+    </button></h2><p>MemoryBuffer ist ein ressourcenschonender Bereitstellungsmodus von Woodpecker, der eingehende Schreibvorgänge vorübergehend im Arbeitsspeicher puffert und sie in regelmäßigen Abständen in den Cloud-Objektspeicher überträgt. Dieser Modus eignet sich am besten für Workloads mit hohem Batch-Anteil in kleineren Bereitstellungen oder Produktionsumgebungen, in denen Einfachheit Vorrang vor Leistung hat. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,7 +407,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memory-Mapped-Dateien ermöglichen eine effiziente Datenverarbeitung, indem der Dateiinhalt direkt in den Arbeitsspeicher abgebildet wird. Dies ist besonders nützlich, wenn der Arbeitsspeicher begrenzt ist und nicht alle Daten geladen werden können. Diese Technik kann die Datenkapazität erhöhen und die Leistung bis zu einem gewissen Grad aufrechterhalten. Wenn die Datenmenge die Arbeitsspeicherkapazität jedoch deutlich übersteigt, können sich die Such- und Abfragegeschwindigkeiten erheblich verringern. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md">„MMap-fähige Datenspeicherung</a>“.</p>
+    </button></h2><p>Memory-Mapped-Dateien ermöglichen eine effiziente Datenverarbeitung, indem der Dateiinhalt direkt in den Arbeitsspeicher abgebildet wird. Dies ist besonders nützlich, wenn der Arbeitsspeicher begrenzt ist und nicht alle Daten geladen werden können. Diese Technik kann die Datenkapazität erhöhen und die Leistung bis zu einem gewissen Grad aufrechterhalten. Wenn die Datenmenge die Arbeitsspeicherkapazität jedoch deutlich überschreitet, können sich die Such- und Abfragegeschwindigkeiten erheblich verringern. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md">„MMap-fähige Datenspeicherung</a>“.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus Backup<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -503,7 +503,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei <a href="https://milvus.io/docs/install_standalone-docker.md">der Standalone-Bereitstellung</a> von Milvus werden alle Vorgänge – einschließlich Dateneinfügung, Indexerstellung und Vektorähnlichkeitssuche – in einem einzigen Prozess ausgeführt.</p>
+    </button></h2><p>Bei <a href="https://milvus.io/docs/install_standalone-docker.md">der Standalone-Bereitstellung</a> von Milvus werden alle Vorgänge – einschließlich Dateneingabe, Indexerstellung und Vektorähnlichkeitssuche – in einem einzigen Prozess ausgeführt.</p>
 <h2 id="Multi-Vector" class="common-anchor-header">Multi-Vektor<button data-href="#Multi-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,7 +551,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Partitionsschlüssel-Attribut eines Feldes ermöglicht die Aufteilung von Entitäten in verschiedene Partitionen auf der Grundlage ihrer Partitionsschlüsselwerte. Diese Gruppierung stellt sicher, dass Entitäten mit demselben Schlüsselwert zusammen gespeichert werden. Dies kann Suchvorgänge beschleunigen, da das System bei Abfragen, die nach dem Partitionsschlüsselfeld gefiltert werden, irrelevante Partitionen umgehen kann. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">„Partitionsschlüssel verwenden</a>“.</p>
+    </button></h2><p>Das Partitionsschlüssel-Attribut eines Feldes ermöglicht die Aufteilung von Entitäten in verschiedene Partitionen auf der Grundlage ihrer Partitionsschlüsselwerte. Diese Gruppierung stellt sicher, dass Entitäten mit demselben Schlüsselwert zusammen gespeichert werden. Dies kann Suchvorgänge beschleunigen, da das System bei Abfragen, die nach dem Partitionsschlüsselfeld gefiltert werden, irrelevante Partitionen überspringen kann. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">„Partitionsschlüssel verwenden</a>“.</p>
 <h2 id="PChannel" class="common-anchor-header">PChannel<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -583,7 +583,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus ist ein Python-SDK für Milvus. Der Quellcode ist als Open Source auf <a href="https://github.com/milvus-io/pymilvus">GitHub</a> verfügbar. Sie haben die Wahl zwischen MilvusClient (neue Version des Python-SDK) und dem ursprünglichen ORM-Modul für die Kommunikation mit Milvus.</p>
+    </button></h2><p>PyMilvus ist ein Python-SDK für Milvus. Der Quellcode ist als Open Source auf <a href="https://github.com/milvus-io/pymilvus">GitHub</a> verfügbar. Sie können flexibel zwischen MilvusClient (neue Version des Python-SDK) und dem ursprünglichen ORM-Modul wählen, um mit Milvus zu kommunizieren.</p>
 <h2 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -647,7 +647,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Schema umfasst die Metainformationen, die den Datentyp und die Dateneigenschaften definieren. Jede Sammlung verfügt über ein eigenes Sammlungsschema, das alle Felder einer Sammlung, die Aktivierung der automatischen ID-Zuweisung (Primärschlüssel) sowie die Beschreibung der Sammlung festlegt. In den Sammlungsschemata sind auch Feldschemata enthalten, die den Namen, den Datentyp und weitere Eigenschaften eines Feldes definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">„Schema verwalten</a>“.</p>
+    </button></h2><p>Das Schema umfasst die Metainformationen, die den Datentyp und die Dateneigenschaften definieren. Jede Sammlung verfügt über ein eigenes Sammlungsschema, das alle Felder einer Sammlung, die Aktivierung der automatischen ID-Zuweisung (Primärschlüssel) sowie die Beschreibung der Sammlung definiert. In den Sammlungsschemata sind auch Feldschemata enthalten, die den Namen, den Datentyp und weitere Eigenschaften eines Feldes festlegen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">„Schema verwalten</a>“.</p>
 <h2 id="Search" class="common-anchor-header">Suche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: Begriffe
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein Einbettungsvektor ist eine Merkmalsabstraktion unstrukturierter Daten, wie beispielsweise E-Mails, IoT-Sensordaten, Instagram-Fotos, Proteinstrukturen und vieles mehr. Mathematisch gesehen ist ein Einbettungsvektor ein Array aus Gleitkommazahlen oder Binärwerten. Zur Umwandlung unstrukturierter Daten in Einbettungsvektoren kommen moderne Einbettungstechniken zum Einsatz. Milvus unterstützt seit Version 2.4.0 sowohl dichte als auch spärliche Vektoren.</p>
+    </button></h2><p>Ein Einbettungsvektor ist eine Merkmalsabstraktion unstrukturierter Daten, wie beispielsweise E-Mails, IoT-Sensordaten, Instagram-Fotos, Proteinstrukturen und vieles mehr. Mathematisch gesehen ist ein Einbettungsvektor ein Array aus Gleitkommazahlen oder Binärwerten. Zur Umwandlung unstrukturierter Daten in Einbettungsvektoren kommen moderne Einbettungsverfahren zum Einsatz. Milvus unterstützt seit Version 2.4.0 sowohl dichte als auch spärliche Vektoren.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">WAL-Speicher<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

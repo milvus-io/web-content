@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Implementar un clúster de Milvus:</strong></p>
 <div class="alert note">
-<p>Para el modo de servicio de Woodpecker, recomendamos utilizar la próxima versión de Milvus 3.0.1 o una posterior, junto con Woodpecker v0.1.36 o posterior, para beneficiarse de las optimizaciones de limpieza por compactación y de confirmación en grupo.</p>
+<p>Para el modo de servicio de Woodpecker, recomendamos utilizar la próxima versión de Milvus 3.0.1 o una posterior, junto con Woodpecker v0.1.37 o posterior, para beneficiarse de las optimizaciones de limpieza por compactación y de confirmación en grupo.</p>
 </div>
-<p>El siguiente comando implementa un clúster de Milvus con la configuración optimizada para la versión 3.0.0, utilizando Woodpecker como cola de mensajes recomendada:</p>
+<p>El siguiente comando implementa un clúster de Milvus con una configuración optimizada para la versión 3.0.0, utilizando Woodpecker como cola de mensajes recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -197,7 +197,7 @@ El comando anterior implementa Milvus con las configuraciones recomendadas. Para
     </button></h3><p>Comprueba que la implementación se ha realizado correctamente verificando el estado de los pods:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Espera a que todos los pods muestren el estado «Running».</strong> Con la configuración v3.0.0, deberías ver pods similares a:</p>
+<p><strong>Espera a que todos los pods muestren el estado «Running».</strong> Con la configuración v3.0.0, deberías ver pods similares a estos:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -534,7 +534,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Descubre <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

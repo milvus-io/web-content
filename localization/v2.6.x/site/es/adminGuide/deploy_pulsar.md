@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus utiliza Pulsar o Kafka para gestionar los registros de cambios recientes, generar registros de flujo y ofrecer suscripciones a registros. Pulsar es el sistema de almacenamiento de mensajes predeterminado. En este tema se explica cómo configurar el almacenamiento de mensajes con Docker Compose o Helm.</p>
 <p>Puede configurar Pulsar con <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> o en K8s, y configurar Kafka en K8s.</p>
 <div class="alert note">
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.21, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.22, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar Pulsar con Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,7 +129,7 @@ summary: >-
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Tras configurar las secciones anteriores y guardar el archivo « <code translate="no">values.yaml</code> », ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Pulsar.</li>
+<li>Tras configurar las secciones anteriores y guardar el archivo ` <code translate="no">values.yaml</code> `, ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Pulsar.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -207,7 +207,7 @@ summary: >-
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Tras configurar las secciones anteriores y guardar el archivo « <code translate="no">values.yaml</code> », ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Woodpecker.</li>
+<li>Tras configurar las secciones anteriores y guardar el archivo ` <code translate="no">values.yaml</code> `, ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Woodpecker.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>

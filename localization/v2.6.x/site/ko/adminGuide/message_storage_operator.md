@@ -20,7 +20,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
         ></path>
       </svg>
     </button></h1><p>Milvus는 최근 변경 내역의 로그 관리, 스트림 로그 출력 및 로그 구독 제공을 위해 RocksMQ, Pulsar 또는 Kafka를 사용합니다. 이 항목에서는 Milvus Operator를 사용하여 Milvus를 설치할 때 메시지 저장소 종속성을 구성하는 방법을 설명합니다. 자세한 내용은 Milvus Operator 저장소의 " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Milvus Operator를 사용한 메시지 저장소 구성</a> "을 참조하십시오.</p>
-<p>이 항목은 Milvus Operator가 이미 배포되어 있다고 가정합니다.</p>
+<p>이 항목은 Milvus Operator가 이미 배포되어 있음을 전제로 합니다.</p>
 <div class="alert note">자세한 내용은 <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">‘Milvus Operator 배포’를</a> 참조하십시오. </div>
 <p>Milvus Operator를 사용하여 Milvus 클러스터를 시작하려면 구성 파일을 지정해야 합니다.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -53,14 +53,14 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 </table>
 <p>메시지 저장소를 지정할 때 다음과 같은 다른 제한 사항도 있습니다:</p>
 <ul>
-<li>Milvus 인스턴스 하나당 하나의 메시지 저장소만 지원됩니다. 하지만 하나의 인스턴스에 여러 메시지 저장소를 설정하는 방식에 대해서는 여전히 하위 호환성을 유지합니다. 우선순위는 다음과 같습니다:
+<li>Milvus 인스턴스 하나당 하나의 메시지 저장소만 지원됩니다. 하지만 하나의 인스턴스에 여러 메시지 저장소가 설정된 경우와의 하위 호환성은 여전히 유지됩니다. 우선순위는 다음과 같습니다:
 <ul>
 <li>독립 실행 모드: RocksMQ(기본값) &gt; Pulsar &gt; Kafka</li>
 <li>클러스터 모드: Pulsar (기본값) &gt; Kafka</li>
 </ul></li>
 <li>Milvus 시스템이 실행 중인 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.21로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
+<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.22로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +242,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">이 예제에서는 Pulsar의 각 구성 요소에 대한 복제본 수, Pulsar BookKeeper의 컴퓨팅 리소스 및 기타 구성을 지정합니다.</div>
-<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.</a>yaml에서 내부 Pulsar 서비스를 구성하는 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
+<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>에서 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
 <p>구성 파일의 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정하고, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -330,7 +330,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> 는 Milvus 클러스터가 시작되면 클러스터 내에서 Kafka 서비스가 자동으로 시작된다는 것을 나타냅니다.</p>
-<h4 id="Example" class="common-anchor-header">예</h4><p>다음 예제는 내부 Kafka 서비스를 구성하는 방법입니다.</p>
+<h4 id="Example" class="common-anchor-header">예시</h4><p>다음 예제는 내부 Kafka 서비스를 구성하는 방법입니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

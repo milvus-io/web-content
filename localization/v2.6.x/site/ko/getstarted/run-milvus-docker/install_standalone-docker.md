@@ -63,7 +63,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.21의 새로운 기능:</strong></p>
+<p><strong>v2.6.22의 새로운 기능:</strong></p>
 <ul>
 <li><strong>스트리밍 노드</strong>: 데이터 처리 기능 강화</li>
 <li><strong>Woodpecker MQ</strong>: 유지 관리 부담을 줄인 개선된 메시지 큐. 자세한 내용은 <a href="/docs/ko/v2.6.x/use-woodpecker.md">‘Woodpecker 사용’을</a> 참조하십시오</li>
@@ -71,7 +71,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
 </ul>
 <p>최신 구성 및 아키텍처 개선 사항을 반영하려면 항상 최신 스크립트를 다운로드하십시오.</p>
 <p>독립형 배포 모드에서 <a href="https://milvus.io/docs/milvus_backup_overview.md">백업을</a> 사용하려는 경우, <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> 배포 방법을 사용하는 것이 좋습니다.</p>
-<p>이미지 가져오기에 문제가 발생하면, 문제에 대한 세부 정보를 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 보내 주시면 필요한 지원을 제공해 드리겠습니다.</p>
+<p>이미지 가져오기에 문제가 발생하면, 문제에 대한 세부 정보를 기재하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
 </div>
 <p>설치 스크립트 실행 후:</p>
 <ul>
@@ -80,7 +80,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
 <li>기본 Milvus 구성을 변경하려면 현재 폴더에 있는 <strong>user.yaml</strong> 파일에 설정을 추가한 후 서비스를 다시 시작하십시오.</li>
 <li>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus</strong> 에 매핑되어 있습니다.</li>
 </ul>
-<p><code translate="no">http://127.0.0.1:9091/webui/</code> 에서 Milvus WebUI에 접속하여 Milvus 인스턴스에 대해 자세히 알아볼 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
+<p><code translate="no">http://127.0.0.1:9091/webui/</code> 에서 Milvus WebUI에 접속하여 Milvus 인스턴스에 대한 자세한 정보를 확인할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

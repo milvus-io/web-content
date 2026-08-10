@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page décrit comment basculer la file d’attente de messages (MQ) d’un <strong>cluster Milvus</strong> entre <strong>Kafka</strong> (intégré ou externe) et <strong>Woodpecker</strong> (backend MinIO), dans les deux sens. Pour connaître le déroulement général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Changer de type de MQ</a>.</p>
+    </button></h1><p>Cette page décrit comment basculer la file d’attente de messages (MQ) d’un <strong>cluster Milvus</strong> entre <strong>Kafka</strong> (intégré ou externe) et <strong>Woodpecker</strong> (backend MinIO), dans les deux sens. Pour connaître le workflow général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Basculer la file d’attente de messages</a>.</p>
 <div class="alert note">
-<p><strong>Prérequis :</strong> la fonctionnalité « Changer de file d’attente de messages » est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong>. Mettez à niveau votre instance Milvus vers Milvus 3.0 ou une version ultérieure avant de commencer — cette fonctionnalité n’est pas disponible dans les versions antérieures.</p>
+<p><strong>Prérequis :</strong> la fonctionnalité « Switch MQ » est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong>. Mettez à niveau votre instance Milvus vers Milvus 3.0 ou une version ultérieure avant de commencer — cette fonctionnalité n’est pas disponible dans les versions antérieures.</p>
 </div>
 <div class="alert warning">
 <p>Le changement de file d’attente de messages est une <strong>opération à haut risque</strong>. Choisissez la section qui correspond <strong>à votre</strong> méthode de déploiement — <strong>« Avec Helm</strong> » ou <strong>« Avec Milvus Operator</strong> » — et suivez-la de A à Z. Ne mélangez pas les commandes Helm et Operator.</p>
@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>Étape 1 : Vérifiez que l’instance Milvus est en cours d’exécution.</strong> Assurez-vous que votre cluster Milvus fonctionne correctement — par exemple, en créant une collection de test, en insérant des données et en exécutant une requête.</p>
-<p><strong>Étape 2 : Exécutez le changement de file d’attente de messages.</strong> Accédez à l’interface de gestion MixCoord, puis appelez l’API de changement :</p>
+<p><strong>Étape 2 : Effectuez le changement de file d’attente de messages.</strong> Accédez à l’interface de gestion MixCoord, puis appelez l’API de changement :</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans un autre terminal :</p>
@@ -69,7 +69,7 @@ summary: >-
 <p><strong>Étape 3 : Vérifiez que la migration est terminée.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Une migration réussie génère l'entrée de journal suivante : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
+<p>Une migration réussie génère l'entrée suivante dans le journal : <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
 <p><strong>Étape 4 : (Facultatif) Arrêtez Kafka et effectuez un nettoyage.</strong> Pour Kafka <strong>intégré</strong>, supprimez les pods Kafka et leurs PVC. Pour Kafka <strong>externe</strong>, nettoyez les sujets Milvus dans l’instance Kafka externe — ils suivent le format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>.</p>
 <div class="alert note">
 <p>Si vous prévoyez de revenir à Kafka ultérieurement, nettoyez d’abord les données/sujets afin d’éviter tout conflit.</p>

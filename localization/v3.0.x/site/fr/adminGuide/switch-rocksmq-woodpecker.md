@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page décrit comment basculer la file d'attente de messages (MQ) d'un déploiement <strong>Milvus Standalone (Docker Compose)</strong> entre <strong>RocksMQ</strong> et <strong>Woodpecker</strong> (backend local ou MinIO), dans les deux sens. Pour connaître le workflow général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Changer de type de MQ</a>.</p>
+    </button></h1><p>Cette page décrit comment basculer la file d’attente de messages (MQ) d’un déploiement <strong>Milvus Standalone (Docker Compose)</strong> entre <strong>RocksMQ</strong> et <strong>Woodpecker</strong> (backend local ou MinIO), dans les deux sens. Pour connaître le déroulement général et les prérequis, consultez la section <a href="/docs/fr/switch-mq-type.md">Basculer la file d’attente de messages</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>Prérequis :</strong> la fonctionnalité de changement de file d’attente de messages est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong>. Mettez à niveau votre instance Milvus vers Milvus 3.0 ou une version ultérieure avant de commencer — cette fonctionnalité n’est pas disponible dans les versions antérieures.</li>
-<li>Le changement de MQ nécessite un déploiement Docker <strong>Compose</strong> (qui active une source de configuration etcd). Le déploiement Docker à conteneur unique ne prend pas en charge ce changement.</li>
+<li><strong>Prérequis :</strong> la fonctionnalité de basculement de la file d’attente de messages est disponible à partir de <strong>Milvus 3.0.</strong> Mettez à niveau votre instance Milvus vers la version 3.0 ou <strong>une version ultérieure</strong> avant de commencer — cette fonctionnalité n’est pas disponible sur les versions antérieures.</li>
+<li>Le changement de file d’attente de messages nécessite un déploiement Docker <strong>Compose</strong> (qui active une source de configuration etcd). Le déploiement Docker à conteneur unique ne prend pas en charge ce changement.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">Passer de RocksMQ à Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">

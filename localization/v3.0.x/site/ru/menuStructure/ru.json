@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Пресс-релизы",
+        "label": "Новости",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "Типы метрических величин",
+        "label": "Типы метрических единиц",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Разбор JSON",
+                "label": "Разделение JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабо-израильских отношений",
+                    "label": "Нормализация арабоского языка",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для вашей задачи",
+                "label": "Выберите анализатор, подходящий для ваших задач",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Обработка записей по принципу «Upsert»",
+            "label": "Объекты с операцией «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Агрегация результатов поиска",
+            "label": "Агрегирование результатов поиска",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1082,7 +1082,7 @@
             "order": 8,
             "children": [
               {
-                "label": "Объяснение принципов фильтрации",
+                "label": "Объяснение принципа фильтрации",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1341,7 +1341,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг с учетом весов",
+                "label": "Рейтинг по взвешенным оценкам",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1487,7 +1487,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Обзор многоуровневого хранения данных",
+                "label": "Обзор многоуровневого хранения",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "Инфраструктура данных и интеграция",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "Обзор",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Метаданные",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Объектное хранилище",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Очередь сообщений (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "Обзор",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Дятел",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Пульсар",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Обновление до Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Продолжить использование Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Кафка",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "Руководство по администрированию",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "Развертывание",
@@ -1891,6 +1806,122 @@
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Инфраструктура данных",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "Обзор",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Метаданные",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Объектное хранилище",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Очередь сообщений",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "Обзор",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Дятел",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Пульсар",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Обновление до Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Продолжить использование Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Кафка",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Переключение очереди сообщений",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "Обзор",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Пульсар ↔ Дятел",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Кафка ↔ Дятел",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -2109,7 +2140,7 @@
             "children": []
           },
           {
-            "label": "Подключение к Kafka с использованием SASL/SSL",
+            "label": "Подключение к Kafka с помощью SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "Изменить тип MQ",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "Обзор",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Пульсар ↔ Дятел",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Кафка ↔ Дятел",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },

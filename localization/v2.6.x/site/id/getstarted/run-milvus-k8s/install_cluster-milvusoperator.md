@@ -89,13 +89,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
  <a href="#kubectl"> Kubectl</a>
 </div>
 <div class="filter-helm">
-<p>Jalankan perintah berikut untuk menginstal Milvus Operator dengan Helm.</p>
+<p>Jalankan perintah berikut untuk menginstal Milvus Operator menggunakan Helm.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda akan melihat hasil yang serupa dengan berikut ini setelah proses instalasi selesai.</p>
+<p>Anda akan melihat hasil yang mirip dengan berikut ini setelah proses instalasi selesai.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -174,10 +174,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat melakukan deploy kluster Milvus sebagai berikut.</p>
+    </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat mendistribusikan kluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v2.6.21) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
+<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v2.6.22) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
 <p><strong>Fitur utama arsitektur dalam penyebaran ini:</strong></p>
 <ul>
 <li><strong>Antrian Pesan</strong>: <a href="/docs/id/v2.6.x/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi beban pemeliharaan infrastruktur)</li>
@@ -238,7 +238,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operator membuat dependensi Milvus, seperti etcd, Pulsar, dan MinIO, lalu komponen Milvus, seperti proxy, koordinator, dan node.</p>
+<p>Milvus Operator membuat dependensi Milvus, seperti etcd, Pulsar, dan MinIO, kemudian komponen Milvus, seperti proxy, koordinator, dan node.</p>
 <p>Setelah kluster Milvus Anda siap, status semua pod di kluster Milvus seharusnya mirip dengan berikut ini.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -334,7 +334,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan bernama Milvus WebUI yang dapat Anda akses melalui browser. Milvus WebUI meningkatkan kemampuan pemantauan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus WebUI untuk memantau statistik dan metrik komponen serta ketergantungan Milvus, memeriksa detail database dan koleksi, serta menampilkan daftar konfigurasi Milvus secara terperinci. Untuk detail tentang Milvus Web UI, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan bernama Milvus WebUI yang dapat Anda akses melalui browser. Milvus Web UI meningkatkan kemampuan pemantauan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus Web UI untuk memantau statistik dan metrik komponen serta dependensi Milvus, memeriksa detail database dan koleksi, serta menampilkan daftar konfigurasi Milvus secara terperinci. Untuk detail tentang Milvus Web UI, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Untuk mengaktifkan akses ke Milvus WebUI, Anda perlu melakukan port forwarding pod proxy ke port lokal.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -411,7 +411,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Perbarui atau Sisipkan (Upsert), dan Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
@@ -425,7 +425,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

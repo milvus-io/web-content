@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本Collection",
+            "label": "关于本系列 Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -334,7 +334,7 @@
             "children": []
           },
           {
-            "label": "View Collections",
+            "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -1359,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "衰减排名器",
+                "label": "衰减排名榜",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1563,7 +1563,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "适用于 AI Agents 的 Milvus",
+        "label": "适用于 AI 代理的 Milvus",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "数据基础设施与集成",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "概述",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "元数据",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "对象存储",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "消息队列 (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "概述",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "啄木鸟",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "脉冲星",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "升级至 Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "继续使用 Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "卡夫卡",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "管理指南",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "部署",
@@ -1895,19 +1810,135 @@
         ]
       },
       {
+        "label": "数据基础设施",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "概述",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "元数据",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "对象存储",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "消息队列",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "概述",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "啄木鸟",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "脉冲星",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "升级至 Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "继续使用 Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "卡夫卡",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "切换消息队列",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "概述",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "脉冲星 ↔ 啄木鸟",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "卡夫卡 ↔ 啄木鸟",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "label": "缩放",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "扩展集群",
+            "label": "规模集群",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "独立称重台",
+            "label": "独立秤",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "切换 MQ 类型",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "概述",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "脉冲星 ↔ 啄木鸟",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "卡夫卡 ↔ 啄木鸟",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -2169,7 +2169,7 @@
         "children": []
       },
       {
-        "label": "Milvus Backup",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -2204,7 +2204,7 @@
                 "children": []
               },
               {
-                "label": "在同一个存储桶内进行实例间迁移",
+                "label": "在同一存储桶内迁移实例",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []

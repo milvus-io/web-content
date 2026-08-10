@@ -59,7 +59,7 @@ title: Menjalankan Milvus di Docker (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Setelah Anda menginstal Docker Desktop di Microsoft Windows, Anda dapat mengakses Docker CLI dari PowerShell atau Command Prompt Windows dalam mode <strong>administrator</strong> dan dari WSL 2. ​</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Command Prompt Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Setelah menjalankan skrip instalasi:​</p>
 <ul>
 <li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.​</p></li>
-<li><p>Embed etcd telah diinstal bersama Milvus dalam kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
+<li><p>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
 <li><p>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.​</p></li>
 </ul>
 <p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang disimpan.​</p>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih <strong>Jalankan sebagai administrator</strong>.</p></li>
 <li><p>Jalankan perintah berikut di PowerShell atau Command Prompt Windows untuk mengunduh berkas konfigurasi Docker Compose untuk Milvus Standalone dan memulai Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -225,14 +225,14 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>Prosedurnya serupa dengan menggunakan Docker Compose untuk menginstal Milvus di sistem Linux.​</p>
 <ol>
-<li><p>Jalankan WSL 2.</p>
+<li><p>Jalankan WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Unduh berkas konfigurasi Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan Milvus.​</p>
@@ -294,7 +294,7 @@ The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
 <li><p>Periksa apakah WSL telah terinstal dengan benar.</p>
-<p>Anda dapat menjalankan perintah berikut untuk menginstal atau memperbarui WSL 2.​</p>
+<p>Anda dapat menjalankan perintah berikut untuk menginstal atau memperbarui WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​

@@ -1,11 +1,11 @@
 ---
 id: switch-mq-type.md
-title: Alterar o tipo de MQ
+title: Mudança da fila de mensagens
 summary: >-
-  Alterar a fila de mensagens de uma implementação existente do Milvus, passando
-  do Woodpecker para outra fila de mensagens, sem tempo de inatividade.
+  Mudar uma implementação existente do Milvus entre o Woodpecker e outra fila de
+  mensagens sem tempo de inatividade.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Alterar o tipo de MQ<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Mudança da fila de mensagens<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Este guia descreve como alternar a fila de mensagens (MQ) de uma implementação existente do Milvus <strong>entre o Woodpecker e outra fila de mensagens</strong>, em linha e sem tempo de inatividade.</p>
 <div class="alert warning">
-<p>Esta funcionalidade está pendente de lançamento e está sujeita a alterações. Contacte o apoio técnico do Milvus se quiser experimentá-la ou se tiver alguma dúvida.</p>
+<p>Esta funcionalidade está pendente de lançamento e está sujeita a alterações. Contacte o suporte do Milvus se quiser experimentá-la ou se tiver alguma dúvida.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

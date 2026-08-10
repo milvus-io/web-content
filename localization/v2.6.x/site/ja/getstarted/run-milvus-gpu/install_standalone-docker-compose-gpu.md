@@ -74,8 +74,8 @@ title: Docker Compose を使用して GPU 対応の Milvus を実行する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> をダウンロードし、手動で、または以下のコマンドを使用して「docker-compose.yml」という名前で保存してください。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> をダウンロードし、手動で、または以下のコマンドを使用して「docker-compose.yml」という名前で保存してください。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>YAML ファイル内のスタンドアロンサービスの環境変数を、次のように変更する必要があります。</p>
 <ul>
@@ -107,7 +107,7 @@ title: Docker Compose を使用して GPU 対応の Milvus を実行する
             <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>]
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus" class="common-anchor-header">2. Milvus を起動する<button data-href="#2-Start-Milvus" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus" class="common-anchor-header">2. Milvusの起動<button data-href="#2-Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,9 +184,9 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <div class="alert note">
 <p><code translate="no">milvus.yaml</code> ファイルは、Milvusコンテナ内の<code translate="no">/milvus/configs/</code> ディレクトリにあります。</p>
 </div>
-<p>メモリプールを設定するには、<code translate="no">milvus.yaml</code> ファイル内の<code translate="no">initMemSize</code> および<code translate="no">maxMemSize</code> の設定を次のように変更します。</p>
+<p>メモリプールを設定するには、<code translate="no">milvus.yaml</code> ファイル内の<code translate="no">initMemSize</code> および<code translate="no">maxMemSize</code> の設定を次のように変更してください。</p>
 <ol>
-<li><p>次のコマンドを使用して、<code translate="no">milvus.yaml</code> を Milvus コンテナからローカルマシンにコピーします。<code translate="no">&lt;milvus_container_id&gt;</code> を実際の Milvus コンテナ ID に置き換えてください。</p>
+<li><p>次のコマンドを使用して、Milvus コンテナ内の `<code translate="no">milvus.yaml</code> ` をローカルマシンにコピーします。<code translate="no">&lt;milvus_container_id&gt;</code> には、実際の Milvus コンテナ ID を指定してください。</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>コピーした<code translate="no">milvus.yaml</code> ファイルを、お好みのテキストエディタで開きます。例えば、vim を使用する場合：</p>

@@ -25,15 +25,15 @@ beta: Milvus 3.0.x
 <div class="alert note">
 <p>この機能を利用するには、Storage V3 が必要です。有効化の手順および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
-<p>Storage V3が無効になっている場合、Milvusは<code translate="no">TEXT</code> フィールドを含むコレクションスキーマを拒否します。</p>
+<p><a href="/docs/ja/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a> デフォルト値は `<code translate="no">false</code>` であり、これは Storage V3 がデフォルトで無効になっていることを意味します。<code translate="no">TEXT</code> フィールドを含むコレクションを作成する前に、このパラメータを `<code translate="no">true</code>` に設定してください。そうしないと、Milvus はそのコレクションスキーマを拒否します。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>フィールドが定義されると、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から取得するには、<code translate="no">output_fields</code> にそのフィールドを指定します。</p>
+<p>フィールドの定義後、各エンティティはそのフィールドに文字列値を格納できるようになります。<code translate="no">TEXT</code> の値は他のスカラーフィールドと同様に挿入でき、クエリや検索結果から取得するには、<code translate="no">output_fields</code> でそのフィールドを指定します。</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> フィールドはNULL値をサポートしています。この機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定します。詳細については、「<a href="/docs/ja/nullable-and-default.md">NULL許容フィールド</a>」を参照してください。</p>
+<p><code translate="no">TEXT</code> フィールドはNULL値をサポートしています。この機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定します。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable Field</a>」を参照してください。</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,14 +51,16 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><code translate="no">TEXT</code> フィールドはプライマリフィールドにすることはできません。プライマリフィールドは<code translate="no">INT64</code> および<code translate="no">VARCHAR</code> をサポートしています。</li>
-<li>Milvus 3.0.0 では、<code translate="no">TEXT</code> フィールドは<code translate="no">PHRASE_MATCH</code> をサポートしていません。</li>
-<li>Milvus 3.0.0 では、<code translate="no">TEXT</code> フィールドは をサポートしていません。</li>
-<li>Milvus 3.0.0 では、外部コレクションで<code translate="no">TEXT</code> フィールドはサポートされていません。</li>
-<li>Milvus 3.0.0 では、<code translate="no">TEXT</code> フィールドはスカラーインデックスをサポートしていません。</li>
-<li><code translate="no">TEXT</code> は、通常のメタデータフィルタリングを目的としたものではありません。短い文字列のメタデータでフィルタリングを行う必要があり、フィールドの値が<code translate="no">VARCHAR</code> の長さ制限内に収まる場合は、<code translate="no">VARCHAR</code> を使用してください。</li>
+<li><code translate="no">TEXT</code> フィールドは、プライマリフィールド、パーティションキー、またはクラスタリングキーにはできません。</li>
+<li><code translate="no">TEXT</code> は、<code translate="no">ARRAY</code> フィールドの要素型として使用できません。これには、<code translate="no">StructArray</code> 内のスカラーサブフィールドも含まれます。</li>
+<li>Milvus 3.0.0 では、<code translate="no">TEXT</code> フィールドはデフォルト値をサポートしていません。</li>
+<li>Milvus 3.0.0 では、外部コレクションでの `<code translate="no">TEXT</code> ` フィールドはサポートされていません。</li>
+<li>ユーザーは、<code translate="no">TEXT</code> フィールドに対してスカラーインデックスを作成することはできません。<code translate="no">enable_match=True</code> の場合、Milvusはテキストマッチング用にシステム管理のテキストインデックスを構築します。この内部インデックスは、ユーザーが作成したスカラーインデックスではありません。</li>
+<li>一般的なスカラーフィルタ演算子は、<code translate="no">TEXT</code> フィールドに直接適用することはできません。 これには、<code translate="no">==</code> や<code translate="no">!=</code> などの比較演算子、<code translate="no">&gt;</code> 、<code translate="no">&gt;=</code> 、<code translate="no">&lt;</code> 、<code translate="no">&lt;=</code> などの範囲演算子、<code translate="no">IN</code> 、<code translate="no">LIKE</code> 、正規表現演算子（<code translate="no">=~</code> および<code translate="no">!~</code> ）、ならびに<code translate="no">IS NULL</code> や<code translate="no">IS NOT NULL</code> などが含まれます。分析済み用語でフィルタリングするには、フィールドを<code translate="no">enable_analyzer=True</code> および<code translate="no">enable_match=True</code> で定義し、<a href="/docs/ja/keyword-match.md"><code translate="no">TEXT_MATCH</code> または<code translate="no">TEXT_MATCH_FUZZY</code></a> を使用します。関連度順の全文検索には、BM25を使用してください。</li>
+<li>Milvus 3.0.0 では、<code translate="no">TEXT</code> フィールドを入力として使用する BM25 または MinHash 関数は、コレクションの作成時に定義する必要があります。既存のコレクションが空であっても、<code translate="no">add_function_field</code> や<code translate="no">AlterCollectionSchema</code> を通じて後から追加することはできません。これは、Milvus が保存された<code translate="no">TEXT</code> の値から関数の出力を遡及的に生成できないためです。 既存のコレクションにこのような関数を追加するには、<code translate="no">VARCHAR</code> 入力フィールドを使用するか、そのスキーマに関数を含めてコレクションを再作成してください。関数およびそれによって生成されるベクトルフィールドの追加に関する詳細については、「<a href="/docs/ja/add-fields-to-an-existing-collection.md#add-a-function-and-its-generated-vector-field--milvus-30x">Alter Collection Schema</a>」を参照してください。</li>
+<li>テキスト埋め込み関数も、コレクションの作成時に定義する必要があります。Milvus 3.0.0 では、実行時にこれらを追加することはサポートされていません。</li>
 </ul>
-<h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">TEXT または VARCHAR を選択してください<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
+<h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">TEXT または VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +75,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、対応するアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く長さが制限されたメタデータには<code translate="no">VARCHAR</code> を使用してください。LLMやエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには<code translate="no">TEXT</code> を使用してください。</p>
+    </button></h2><p><code translate="no">TEXT</code> と<code translate="no">VARCHAR</code> はどちらも文字列値を格納しますが、サポートするアプリケーションのニーズが異なります。エンティティの識別、分類、またはフィルタリングを行う、短く範囲が限定されたメタデータには、<code translate="no">VARCHAR</code> を使用します。LLMやエージェントが読み取り、引用、要約、またはプロンプトを作成するのに十分なコンテキストを提供する、より長いソースコンテンツには、<code translate="no">TEXT</code> を使用します。</p>
 <table>
 <thead>
 <tr><th>側面</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -83,11 +85,11 @@ beta: Milvus 3.0.x
 <tr><td>長さの設定</td><td><code translate="no">max_length</code> が必要です。これは、フィールドが格納できる最大バイト数を定義します。最大値は<code translate="no">65,535</code> バイトです。値がこの制限を超える可能性がある場合は、<code translate="no">TEXT</code> を使用してください。</td><td><code translate="no">max_length</code> は不要であるため、スキーマにテキスト値の固定バイト制限を設定する必要はありません。</td></tr>
 <tr><td>格納の動作</td><td>各値は、フィールドに設定された<code translate="no">max_length</code> 内に格納されます。</td><td>大きなテキスト値については、自動ストレージ選択が使用されます。詳細については、「<a href="#how-milvus-stores-large-text-values">Milvus による大きな TEXT 値の保存方法</a>」を参照してください。</td></tr>
 <tr><td>プライマリフィールドとしてのサポート</td><td>プライマリフィールドとして使用可能です。</td><td>プライマリフィールドとしては使用できません。</td></tr>
-<tr><td>フィルタリング</td><td><code translate="no">category == &quot;news&quot;</code> や<code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> など、フィルタ式に含める必要がある短い文字列のメタデータに使用します。</td><td>通常のメタデータフィルタリングには使用しないでください。</td></tr>
+<tr><td>フィルタリング</td><td><code translate="no">category == &quot;news&quot;</code> や<code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> など、フィルタ式に含める必要がある短い文字列のメタデータに使用します。</td><td>一般的なスカラーフィルタ演算子はサポートされていません。分析済み用語のフィルタリングには、マッチ対応のテキスト演算子を使用するか、関連度順にランク付けされた全文検索には BM25 を使用してください。</td></tr>
 </tbody>
 </table>
 <p><code translate="no">VARCHAR</code> フィールドの詳細については、「<a href="/docs/ja/string.md">VarChar フィールド</a>」を参照してください。</p>
-<h2 id="How-Milvus-stores-large-TEXT-values" class="common-anchor-header">Milvus による大きな TEXT 値の保存方法<button data-href="#How-Milvus-stores-large-TEXT-values" class="anchor-icon" translate="no">
+<h2 id="How-Milvus-stores-large-TEXT-values" class="common-anchor-header">Milvus による大規模な TEXT 値の保存方法<button data-href="#How-Milvus-stores-large-TEXT-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,7 +106,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>展開して仕組みを確認</summary></p>
-<p>エンティティを挿入する際、<code translate="no">TEXT</code> フィールドに指定した文字列が、<code translate="no">TEXT</code> の値となります。Milvus は、その値のサイズを<a href="/docs/ja/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（デフォルトでは<code translate="no">65,536</code> バイト）と比較し、2 つの内部保存パスのいずれかを選択します。</p>
+<p>エンティティを挿入する際、<code translate="no">TEXT</code> フィールドに指定する文字列が、<code translate="no">TEXT</code> 値となります。Milvus は、その値のサイズを<a href="/docs/ja/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（デフォルトでは<code translate="no">65,536</code> バイト）と比較し、2 つの内部保存パスのいずれかを選択します。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -118,7 +120,7 @@ beta: Milvus 3.0.x
 <p>このストレージの選択は内部的なものです。Milvusがどのストレージパスを使用するかに関係なく、<code translate="no">TEXT</code> フィールドへの挿入、クエリ、検索は同じ方法で行います。しきい値や、関連するストレージ、コンパクション、ガベージコレクションの動作を調整するには、<a href="/docs/ja/configure_datanode.md">dataNode関連の設定</a> <a href="/docs/ja/configure_datacoord.md">およびdataCoord関連の設定</a>を参照してください。</p>
 <p>デプロイメントでオブジェクトストレージを使用している場合、大きな<code translate="no">TEXT</code> 値は、<code translate="no">lobs/...</code> などのパス下にMilvusが管理するオブジェクトとして表示されることがあります。これらのオブジェクトは実装上の詳細であり、手動で移動、コピー、または削除してはなりません。 エンティティの削除、パーティションの削除、またはデータの圧縮を行った後、オブジェクトストレージの使用量が減少するのは、Milvusのガベージコレクションがセーフティウィンドウ経過後に参照されていない大容量オブジェクトデータを削除してからとなります。</p>
 <p></details></p>
-<p><code translate="no">TEXT</code> の一般的な用途として、BM25を用いた全文検索が挙げられます。このパターンでは、<code translate="no">TEXT</code> フィールドに元のソースコンテンツが格納され、BM25がテキストを分析して、キーワードに基づく一致をランク付けするためのスパースベクトルを生成します。検索結果では、一致した<code translate="no">TEXT</code> 値をLLMやエージェントワークフローのコンテキストとして返すことができます。 以下の例は、<code translate="no">TEXT</code> フィールドをBM25の入力フィールドとして使用する方法を示しています。全文検索の概念やクエリオプションについては、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p>
+<p><code translate="no">TEXT</code> の一般的な用途として、BM25を用いた全文検索が挙げられます。このパターンでは、<code translate="no">TEXT</code> フィールドに元のソースコンテンツが格納され、BM25がテキストを分析して、キーワードに基づく一致をランク付けするためのスパースベクトルを生成します。これにより、検索結果として一致した<code translate="no">TEXT</code> の値が返され、LLMやエージェントワークフローのコンテキストとして利用できます。 以下の例は、<code translate="no">TEXT</code> フィールドをBM25の入力フィールドとして使用する方法を示しています。全文検索の概念やクエリオプションについては、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">ステップ 1: TEXT フィールドを含むコレクションを作成する<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +136,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例では、ソースコンテンツ用の<code translate="no">TEXT</code> フィールドと、BM25によって生成されたスパースベクトル用のスパースベクトルフィールドを持つコレクションを作成します。BM25関数は、<code translate="no">content</code> のトークン化されたテキストを、<code translate="no">sparse</code> に格納されたスパースベクトルに変換します。</p>
+    </button></h2><p>次の例では、ソースコンテンツ用の<code translate="no">TEXT</code> フィールドと、BM25によって生成されたスパースベクトル用のスパースベクトルフィールドを持つコレクションを作成します。BM25関数は、<code translate="no">content</code> から取得したトークン化されたテキストを、<code translate="no">sparse</code> に格納されたスパースベクトルに変換します。</p>
 <p>BM25全文検索を行うには、入力となる<code translate="no">TEXT</code> フィールドで<code translate="no">enable_analyzer=True</code> が設定されている必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
@@ -229,7 +231,7 @@ client.create_collection(
 client.insert(collection_name=COLLECTION_NAME, data=data)
 client.load_collection(collection_name=COLLECTION_NAME)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Perform-BM25-full-text-search" class="common-anchor-header">ステップ 4: BM25 フルテキスト検索の実行<button data-href="#Step-4-Perform-BM25-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Step-4-Perform-BM25-full-text-search" class="common-anchor-header">ステップ 4: BM25 全文検索を実行する<button data-href="#Step-4-Perform-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,7 +246,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を実行します。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> として返します。</p>
+    </button></h2><p>生のクエリテキストを検索データとして使用し、スパースベクトルフィールドに対して検索を行います。Milvusはクエリテキストをスパースベクトルに変換し、BM25を用いて一致する結果をランク付けし、要求された<code translate="no">TEXT</code> フィールドを<code translate="no">output_fields</code> として返します。</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

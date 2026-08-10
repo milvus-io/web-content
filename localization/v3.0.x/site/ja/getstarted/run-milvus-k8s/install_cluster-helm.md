@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">https://github.com/milvus-io/milvus-helm</code> にある Milvus Helm チャートリポジトリはアーカイブされました。現在は、<code translate="no">https://github.com/zilliztech/milvus-helm</code> の新しいリポジトリを使用しています。アーカイブされたリポジトリはバージョン 4.0.31 までのチャートについては引き続き利用可能ですが、それ以降のリリースについては新しいリポジトリをご利用ください。</p>
+<p><code translate="no">https://github.com/milvus-io/milvus-helm</code> にある Milvus Helm チャートのリポジトリはアーカイブされました。現在は、<code translate="no">https://github.com/zilliztech/milvus-helm</code> の新しいリポジトリを使用しています。アーカイブされたリポジトリはバージョン 4.0.31 までのチャートについては引き続き利用可能ですが、それ以降のリリースについては新しいリポジトリをご利用ください。</p>
 </div>
 <p>その後、次のようにしてリポジトリからMilvusチャートを取得してください：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Milvusクラスタのデプロイ：</strong></p>
 <div class="alert note">
-<p>Woodpecker サービスモードの場合、コンパクションのクリーンアップおよびグループコミットの最適化のため、近日リリース予定の Milvus 3.0.1 以降、および Woodpecker v0.1.36 以降を使用することを推奨します。</p>
+<p>Woodpecker サービスモードの場合、コンパクションのクリーンアップおよびグループコミットの最適化のため、近日リリース予定の Milvus 3.0.1 以降、および Woodpecker v0.1.37 以降を使用することを推奨します。</p>
 </div>
 <p>次のコマンドは、推奨されるメッセージキューとして Woodpecker を使用し、v3.0.0 向けに最適化された設定で Milvus クラスタをデプロイします:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -159,7 +159,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>Milvus 2.6.x におけるアーキテクチャの変更点:</strong></p>
 <ul>
-<li><strong>メッセージキュー</strong>：<strong>Woodpeckerの使用が</strong>推奨されるようになりました（Pulsarと比較してインフラのメンテナンス負担が軽減されます）</li>
+<li><strong>メッセージキュー</strong>：<strong>Woodpeckerの使用が</strong>推奨されるようになりました（Pulsarと比較してインフラのメンテナンス負担を軽減します）</li>
 <li><strong>新しいコンポーネント</strong>:<strong>Streaming Nodeが</strong>導入され、デフォルトで有効化されています</li>
 <li><strong>コンポーネントの統合</strong>:<strong>インデックスノード</strong>と<strong>データノードが</strong>単一の<strong>データノード</strong>に統合されました</li>
 </ul>
@@ -222,9 +222,9 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>依存関係</strong>：<code translate="no">etcd</code> (メタデータ)、<code translate="no">minio</code> (オブジェクトストレージ)、<code translate="no">woodpecker</code> (メッセージキュー)</li>
 </ul>
 <div class="alert note">
-<p><code translate="no">streaming.woodpecker.embedded=false</code> を使用する場合、Woodpecker は<strong>専用の StatefulSet</strong>として実行されます（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで 4 つのレプリカ — クォーラム 3 ノードに加え、フォールトトレランス用の予備ノード 1 つ。<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください）として動作し、ヘッドレスサービスによってフロントエンドが構成され、ストレージバックエンドとしてMinIOを使用しています。そのため、クラスタにはストリーミングノードとは別の<code translate="no">woodpecker</code> ポッドセットが存在します。</p>
+<p><code translate="no">streaming.woodpecker.embedded=false</code> を使用する場合、Woodpecker は<strong>専用の StatefulSet</strong>として実行されます（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで 4 つのレプリカ — クォーラム 3 ノードに加え、フォールトトレランス用の予備 1 ノード。<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください）として動作し、ヘッドレスサービスによってフロントエンドが構成され、ストレージバックエンドとしてMinIOを使用しています。そのため、クラスタにはストリーミングノードとは別の<code translate="no">woodpecker</code> ポッドセットが存在します。</p>
 </div>
-<p>ポートフォワーディングの設定が完了したら（次の手順を参照）、<code translate="no">http://127.0.0.1:9091/webui/</code> から<strong>Milvus WebUI</strong>にアクセスすることもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<p>ポートフォワーディングの設定が完了すれば（次の手順を参照）、<code translate="no">http://127.0.0.1:9091/webui/</code> から<strong>Milvus WebUI</strong>にアクセスすることも可能です。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvusへの接続<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

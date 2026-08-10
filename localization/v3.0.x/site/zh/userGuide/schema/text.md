@@ -25,13 +25,13 @@ beta: Milvus 3.0.x
 <div class="alert note">
 <p>此功能需要 Storage V3。有关启用说明和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
-<p>当 Storage V3 处于禁用状态时，Milvus 将拒绝包含 `<code translate="no">TEXT</code> ` 字段的 Collection Schema。</p>
+<p><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a> 默认值为 `<code translate="no">false</code>`，这意味着 Storage V3 默认处于禁用状态。在创建包含 `<code translate="no">TEXT</code> ` 字段的 Collection 之前，请将此参数设置为 `<code translate="no">true</code>`；否则，Milvus 将拒绝该 Collection Schema。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>定义该字段后，每个实体均可在该字段中包含字符串值。您可以像处理其他标量字段一样插入<code translate="no">TEXT</code> 值，并通过在<code translate="no">output_fields</code> 中列出该字段，从查询或搜索结果中返回这些值。</p>
+<p>定义字段后，每个实体都可以在该字段中包含一个字符串值。您可以像处理其他标量字段一样插入<code translate="no">TEXT</code> 值，并通过在<code translate="no">output_fields</code> 中列出该字段，从查询或搜索结果中返回这些值。</p>
 <div class="alert note">
 <p><code translate="no">TEXT</code> 字段支持空值。要启用此功能，请将<code translate="no">nullable</code> 设置为<code translate="no">True</code> 。有关详细信息，请参阅<a href="/docs/zh/nullable-and-default.md">“可为空字段”</a>。</p>
 </div>
@@ -51,12 +51,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><code translate="no">TEXT</code> 字段不能作为主字段。主字段支持<code translate="no">INT64</code> 和<code translate="no">VARCHAR</code> 。</li>
-<li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持<code translate="no">PHRASE_MATCH</code> 。</li>
-<li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持 。</li>
-<li>在 Milvus 3.0.0 中，外部 Collections 不支持<code translate="no">TEXT</code> 字段。</li>
-<li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持标量索引。</li>
-<li><code translate="no">TEXT</code> 该字段不适用于常规元数据过滤。如果您需要根据短字符串元数据进行过滤，且字段值符合<code translate="no">VARCHAR</code> 的长度限制，请使用<code translate="no">VARCHAR</code> 。</li>
+<li><code translate="no">TEXT</code> 字段不能作为主字段、Partition Key或聚簇键。</li>
+<li><code translate="no">TEXT</code> 不能用作<code translate="no">ARRAY</code> 字段的元素类型，包括<code translate="no">StructArray</code> 中的标量子字段。</li>
+<li>在 Milvus 3.0.0 中，<code translate="no">TEXT</code> 字段不支持默认值。</li>
+<li>在 Milvus 3.0.0 中，外部 Collection 不支持 `<code translate="no">TEXT</code> ` 字段。</li>
+<li>用户无法在<code translate="no">TEXT</code> 字段上创建标量索引。当<code translate="no">enable_match=True</code> 时，Milvus 会构建一个由系统管理的文本索引，用于文本匹配。此内部索引并非用户创建的标量索引。</li>
+<li>一般的标量过滤操作符无法直接应用于 `<code translate="no">TEXT</code> ` 字段。 这些包括比较操作符（如<code translate="no">==</code> 和<code translate="no">!=</code> ）、范围操作符（如<code translate="no">&gt;</code> 、<code translate="no">&gt;=</code> 、<code translate="no">&lt;</code> 和<code translate="no">&lt;=</code> ），以及<code translate="no">IN</code> 、<code translate="no">LIKE</code> 、正则表达式操作符（<code translate="no">=~</code> 和<code translate="no">!~</code> ）和<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 。若要按分析后的术语进行过滤，请使用<code translate="no">enable_analyzer=True</code> 和<code translate="no">enable_match=True</code> 定义字段，并使用<a href="/docs/zh/keyword-match.md"><code translate="no">TEXT_MATCH</code> 或<code translate="no">TEXT_MATCH_FUZZY</code></a> 。对于按相关性排序的全文检索，请使用 BM25。</li>
+<li>在 Milvus 3.0.0 中，若要使用以<code translate="no">TEXT</code> 字段作为输入的 BM25 或 MinHash 函数，必须在创建 Collection 时进行定义。即使现有 Collection 为空，也无法通过<code translate="no">add_function_field</code> 或<code translate="no">AlterCollectionSchema</code> 在后续添加该函数，因为 Milvus 无法根据存储的<code translate="no">TEXT</code> 值回填该函数的输出结果。 若要将此类函数添加到现有Collection中，请使用<code translate="no">VARCHAR</code> 输入字段，或在重新创建Collection时将其包含在Schema中。有关添加函数及其生成的向量字段的详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md#add-a-function-and-its-generated-vector-field--milvus-30x">“修改Collection Schema”</a>。</li>
+<li>文本嵌入函数也必须在创建 Collection 时定义。Milvus 3.0.0 不支持在运行时添加这些函数。</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">选择 TEXT 或 VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,20 +75,20 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> 和<code translate="no">VARCHAR</code> 均用于存储字符串值，但它们支持不同的应用需求。请使用<code translate="no">VARCHAR</code> 处理用于识别、分类或筛选实体的短小且长度受限的元数据。请使用<code translate="no">TEXT</code> 处理较长的源内容，以便为大型语言模型（LLM）或 Agents 提供足够的上下文，用于阅读、引用、摘要或构建提示词。</p>
+    </button></h2><p><code translate="no">TEXT</code> 和<code translate="no">VARCHAR</code> 均用于存储字符串值，但它们支持不同的应用需求。请使用<code translate="no">VARCHAR</code> 来存储用于识别、分类或过滤实体的简短、有限元数据。请使用<code translate="no">TEXT</code> 来存储较长的源内容，以便为大型语言模型（LLM）或Agents提供足够的上下文，用于阅读、引用、摘要或构建提示词。</p>
 <table>
 <thead>
 <tr><th>方面</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
 </thead>
 <tbody>
-<tr><td>最适合</td><td>用于识别、分类或筛选实体的简短元数据，例如<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 或<code translate="no">external_id</code> 。</td><td>用于 LLM 或 Agents 工作流的较长源内容，例如<code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 或<code translate="no">log_message</code> 。</td></tr>
+<tr><td>最适合</td><td>用于识别、分类或筛选实体的短元数据，例如<code translate="no">title</code> 、<code translate="no">tag</code> 、<code translate="no">category</code> 或<code translate="no">external_id</code> 。</td><td>用于 LLM 或 Agents 工作流的较长源内容，例如<code translate="no">content</code> 、<code translate="no">passage</code> 、<code translate="no">article_body</code> 或<code translate="no">log_message</code> 。</td></tr>
 <tr><td>长度设置</td><td>需要<code translate="no">max_length</code> ，该字段定义了该字段可存储的最大字节数。最大值为<code translate="no">65,535</code> 字节。如果值可能超过此限制，请使用<code translate="no">TEXT</code> 。</td><td>不要求<code translate="no">max_length</code> ，因此Schema无需为文本值设定固定的字节限制。</td></tr>
 <tr><td>存储行为</td><td>将每个值存储在字段配置的<code translate="no">max_length</code> 内。</td><td>对于较大的文本值，将使用自动存储选择机制。有关详细信息，请参阅《<a href="#how-milvus-stores-large-text-values">Milvus 如何存储大型 TEXT 值</a>》。</td></tr>
 <tr><td>主字段支持</td><td>可作为主字段使用。</td><td>不能用作主字段。</td></tr>
-<tr><td>过滤</td><td>适用于需要出现在过滤表达式中的短字符串元数据，例如<code translate="no">category == &quot;news&quot;</code> 或<code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> 。</td><td>不适用于常规元数据过滤。</td></tr>
+<tr><td>过滤</td><td>适用于需要出现在过滤表达式中的短字符串元数据，例如<code translate="no">category == &quot;news&quot;</code> 或<code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code> 。</td><td>不支持一般的标量过滤操作符。请使用支持匹配的文本操作符进行分析术语过滤，或使用 BM25 进行相关性排序的全文检索。</td></tr>
 </tbody>
 </table>
-<p>有关<code translate="no">VARCHAR</code> 字段的详细信息，请参阅<a href="/docs/zh/string.md">VarChar 字段</a>。</p>
+<p>有关<code translate="no">VARCHAR</code> 字段的详细信息，请参阅<a href="/docs/zh/string.md">“VarChar 字段</a>”。</p>
 <h2 id="How-Milvus-stores-large-TEXT-values" class="common-anchor-header">Milvus 如何存储大型 TEXT 值<button data-href="#How-Milvus-stores-large-TEXT-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,8 +105,8 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p><details></p>
-<p><summary>展开以了解其工作原理</summary></p>
-<p>插入实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>（默认值为<code translate="no">65,536</code> 字节）进行比较，然后选择两种内部存储路径之一。</p>
+<p><summary>展开以查看工作原理</summary></p>
+<p>当您插入一个实体时，您为<code translate="no">TEXT</code> 字段提供的字符串即为<code translate="no">TEXT</code> 值。Milvus 会将该值的大小与<a href="/docs/zh/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a> 进行比较（默认值为<code translate="no">65,536</code> 字节），然后选择两种内部存储路径中的一种。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -116,7 +118,7 @@ beta: Milvus 3.0.x
 <li><strong>LOB 存储</strong>：如果 `<code translate="no">TEXT</code> ` 的值大于或等于 `<code translate="no">dataNode.text.inlineThreshold</code>`，Milvus 会将该值视为大对象，并将原始文本单独存储在对象存储（如 MinIO）中。`<code translate="no">TEXT</code> ` 字段数据中存储的是指向该单独存储文本的内部引用。当在查询或搜索结果中请求 `<code translate="no">TEXT</code> ` 字段时，Milvus 会使用该引用检索并返回原始文本。</li>
 </ul>
 <p>此存储选择属于内部机制。无论 Milvus 使用何种存储路径，您对<code translate="no">TEXT</code> 字段的插入、查询和搜索操作方式均保持一致。若需调整阈值或相关存储、压缩及垃圾回收行为，请参阅与<a href="/docs/zh/configure_datanode.md">dataNode 相关的配置和</a> <a href="/docs/zh/configure_datacoord.md">与 dataCoord 相关的配置</a>。</p>
-<p>如果您的部署使用对象存储，较大的 `<code translate="no">TEXT</code> ` 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有在 Milvus 垃圾回收机制于安全窗口期结束后移除未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
+<p>如果您的部署使用对象存储，较大的 `<code translate="no">TEXT</code> ` 值可能会以 Milvus 管理的对象形式出现在诸如<code translate="no">lobs/...</code> 之类的路径下。这些对象属于实现细节，不应手动移动、复制或删除。 在删除实体、删除分区或压缩数据后，只有当 Milvus 垃圾回收在安全窗口期结束后移除了未被引用的巨型对象数据，对象存储的使用量才会减少。</p>
 <p></details></p>
 <p><code translate="no">TEXT</code> 的常见用途是配合 BM25 进行全文搜索。在此模式下，<code translate="no">TEXT</code> 字段存储原始源内容，BM25 分析文本并生成稀疏向量，用于对基于关键词的匹配结果进行排序。搜索结果随后可返回匹配的<code translate="no">TEXT</code> 值，作为 LLM 或 Agents 工作流的上下文。 以下示例演示了如何将<code translate="no">TEXT</code> 字段用作BM25的输入字段。如需了解全文搜索的概念和查询选项，请参阅《<a href="/docs/zh/full-text-search.md">全文搜索</a>》。</p>
 <h2 id="Step-1-Create-a-collection-with-a-TEXT-field" class="common-anchor-header">步骤 1：创建包含 TEXT 字段的 Collection<button data-href="#Step-1-Create-a-collection-with-a-TEXT-field" class="anchor-icon" translate="no">

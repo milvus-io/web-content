@@ -96,8 +96,8 @@ milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         
 milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスの詳細を確認することもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスに関する詳細を確認することもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvusの設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,13 +166,13 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.0 にアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムに切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
+    </button></h2><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.0 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
 <p>2.6.x ではデフォルトのメッセージキューが Woodpecker に変更されるため、2.5.x で<strong>RocksMQ</strong>を実行しているインスタンスは、<strong>アップグレード前に RocksMQ を明示的に固定</strong>する必要があります。そうしないと、アップグレード時にメッセージキューの変更が試みられますが、これはサポートされていません。 2.6.xのDocker Composeファイルをダウンロードした後、<code translate="no">user.yaml</code> のオーバーライドでメッセージキューのタイプを<code translate="no">rocksmq</code> に戻してから、アップグレードを行ってください：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><em>アップグレード後に</em>メッセージキューを切り替えるには、「<a href="/docs/ja/switch-mq-type.md">MQ タイプの切り替え</a>」を参照してください。</p>
+<p><em>アップグレード後に</em>メッセージキューを切り替えるには、「<a href="/docs/ja/switch-mq-type.md">メッセージキューの切り替え</a>」を参照してください。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">オプションの依存関係<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,7 +197,7 @@ EOF
 <div class="alert note">
 <p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,7 +214,7 @@ EOF
       </svg>
     </button></h2><p>DockerでMilvusをインストールしたら、以下のことができます:</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作について学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
@@ -226,7 +226,7 @@ EOF
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/scaleout.md">Milvusクラスターのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
+<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/gcp.md">Google Cloud</a></li>

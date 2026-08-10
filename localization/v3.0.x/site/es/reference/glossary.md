@@ -128,7 +128,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, desarrollado por Zilliz Cloud, es un algoritmo de búsqueda vectorial de última generación que ofrece una calidad y un rendimiento de búsqueda sin igual. Gracias a su diseño innovador y a sus amplias optimizaciones, Cardinal supera a Knowhere en varias veces, hasta un orden de magnitud, al tiempo que gestiona de forma adaptativa diversos escenarios de producción, como tamaños de K variables, filtrado intensivo, diferentes distribuciones de datos, etc.</p>
+    </button></h2><p>Cardinal, desarrollado por Zilliz Cloud, es un algoritmo de búsqueda vectorial de vanguardia que ofrece una calidad y un rendimiento de búsqueda sin igual. Gracias a su diseño innovador y a sus amplias optimizaciones, Cardinal supera a Knowhere en varias veces, hasta un orden de magnitud, al tiempo que gestiona de forma adaptativa diversos escenarios de producción, como tamaños de K variables, filtrado intensivo, diferentes distribuciones de datos, etc.</p>
 <h2 id="Channel" class="common-anchor-header">Channel<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una dependencia es un programa del que depende otro programa para funcionar. Las dependencias de Milvus incluyen etcd (almacena metadatos), MinIO o S3 (almacenamiento de objetos) y una cola de mensajes como Woodpecker (gestiona los registros de instantáneas). Para obtener más información, consulta <a href="https://milvus.io/docs/data-infra-integration-overview.md">«Infraestructura de datos e integración</a>».</p>
+    </button></h2><p>Una dependencia es un programa del que depende otro programa para funcionar. Las dependencias de Milvus incluyen etcd (almacena metadatos), MinIO o S3 (almacenamiento de objetos) y una cola de mensajes como Woodpecker (gestiona los registros de instantáneas). Para obtener más información, consulta <a href="https://milvus.io/docs/data-infra-integration-overview.md">«Infraestructura de datos</a>».</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Esquema dinámico<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus ofrece funciones de incrustación integradas que funcionan con los proveedores de incrustación más habituales. Antes de crear una colección en Milvus, puede utilizar estas funciones para generar incrustaciones para sus conjuntos de datos, lo que agiliza el proceso de preparación de datos y las búsquedas vectoriales. Para ver cómo se crean las incrustaciones en la práctica, consulte <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">«Uso del modelo de PyMilvus para generar incrustaciones de texto</a>».</p>
+    </button></h2><p>Milvus ofrece funciones de incrustación integradas que funcionan con los proveedores de incrustación más populares. Antes de crear una colección en Milvus, puede utilizar estas funciones para generar incrustaciones para sus conjuntos de datos, lo que agiliza el proceso de preparación de datos y las búsquedas vectoriales. Para ver cómo se crean las incrustaciones en la práctica, consulte <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">«Uso del modelo de PyMilvus para generar incrustaciones de texto</a>».</p>
 <h2 id="Entity" class="common-anchor-header">Entidad<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: Terminología
         ></path>
       </svg>
     </button></h2><p>Una entidad consiste en un grupo de campos que representan objetos del mundo real. Cada entidad en Milvus está representada por una clave primaria única.</p>
-<p>Puedes personalizar las claves primarias. Si no las configuras manualmente, Milvus asigna automáticamente la clave primaria a las entidades. Si decides personalizar la clave primaria, ten en cuenta que, por el momento, Milvus no admite la deduplicación de claves primarias. Por lo tanto, puede haber claves primarias duplicadas en una misma colección. Para obtener más información, consulta <a href="/docs/es/insert-update-delete.md#Insert-entities">«Insertar entidades</a>».</p>
+<p>Puedes personalizar las claves primarias. Si no las configuras manualmente, Milvus asigna automáticamente la clave primaria a las entidades. Si decides personalizar la clave primaria, ten en cuenta que, por el momento, Milvus no admite la deduplicación de claves primarias. Por lo tanto, puede haber claves primarias duplicadas en la misma colección. Para obtener más información, consulta <a href="/docs/es/insert-update-delete.md#Insert-entities">«Insertar entidades</a>».</p>
 <h2 id="Field" class="common-anchor-header">Campo<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backup</a> es una herramienta para crear copias de los datos, que pueden utilizarse para restaurar los originales tras un incidente de pérdida de datos.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backup</a> es una herramienta para crear copias de los datos, que pueden utilizarse para restaurar el original tras un incidente de pérdida de datos.</p>
 <h2 id="Milvus-CDC" class="common-anchor-header">Milvus CDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -439,7 +439,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (captura de cambios en los datos) es una herramienta que se utiliza para replicar los cambios en los datos de un clúster de Milvus a otro con fines de recuperación ante desastres en modo primario-de reserva.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_cdc_overview.md">Milvus CDC</a> (captura de cambios en los datos) es una herramienta que se utiliza para replicar los cambios en los datos de un clúster de Milvus a otro con el fin de garantizar la recuperación ante desastres en un entorno primario-de reserva.</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">CLI de Milvus<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -745,7 +745,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El servicio de streaming es un concepto para el módulo del sistema de streaming interno de Milvus, construido en torno al registro de escritura anticipada (WAL) para dar soporte a diversas funciones relacionadas con el streaming. Entre ellas se incluyen la ingesta y suscripción de datos en streaming, la recuperación ante fallos del estado del clúster, la conversión de datos en streaming en datos históricos y las consultas de datos en crecimiento. El servicio se compone de los componentes «Coordinador de streaming», «Clúster de nodos de streaming» y «Cliente de streaming». Para obtener más información, consulta <a href="/docs/es/streaming_service.md">«Servicio de streaming</a>».</p>
+    </button></h2><p>El servicio de streaming es un concepto para el módulo del sistema de streaming interno de Milvus, construido en torno al registro de escritura anticipada (WAL) para dar soporte a diversas funciones relacionadas con el streaming. Entre ellas se incluyen la ingesta y suscripción de datos en streaming, la recuperación ante fallos del estado del clúster, la conversión de datos en streaming en datos históricos y las consultas de datos crecientes. El servicio se compone de los componentes «Coordinador de streaming», «Clúster de nodos de streaming» y «Cliente de streaming». Para obtener más información, consulta <a href="/docs/es/streaming_service.md">«Servicio de streaming</a>».</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Datos no estructurados<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -777,7 +777,7 @@ title: Terminología
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VChannel son las siglas de «canal virtual». Cada VChannel representa un fragmento de una colección. A cada colección se le asignará un grupo de VChannels para registrar la inserción, eliminación y actualización de datos. Los VChannels están separados lógicamente, pero comparten recursos físicamente a través del servicio de streaming. Para obtener más información, consulta <a href="/docs/es/streaming_service.md">Servicio de streaming</a>.</p>
+    </button></h2><p>VChannel son las siglas de «canal virtual». Cada VChannel representa un fragmento de una colección. A cada colección se le asignará un grupo de VChannels para registrar la inserción, eliminación y actualización de datos. Los VChannels están separados lógicamente, pero comparten recursos físicamente a través del servicio de streaming. Para obtener más información, consulta <a href="/docs/es/streaming_service.md">el Servicio de streaming</a>.</p>
 <h2 id="Vector" class="common-anchor-header">Vector<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

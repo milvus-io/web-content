@@ -82,7 +82,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在安裝 Milvus Helm Chart 之前，您需要新增 Milvus Helm 儲存庫。</p>
+    </button></h2><p>在安裝 Milvus Helm Chart 之前，您需要先新增 Milvus Helm 儲存庫。</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p>接著請依照以下步驟從儲存庫取得 Milvus Helm Charts：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以隨時執行此指令來取得最新的 Milvus Helm 圖表。</p>
+<p>您可以隨時執行此指令來取得最新的 Milvus Helm Charts。</p>
 <h2 id="Online-install" class="common-anchor-header">線上安裝<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>部署 Milvus 叢集：</strong></p>
 <div class="alert note">
-<p>若採用 Woodpecker 服務模式，我們建議使用即將推出的 Milvus 3.0.1 或更新版本，並搭配 Woodpecker v0.1.36 或更新版本，以獲得壓縮清理與群組提交的優化效果。</p>
+<p>若採用 Woodpecker 服務模式，我們建議使用即將推出的 Milvus 3.0.1 或更新版本，並搭配 Woodpecker v0.1.37 或更新版本，以獲得壓縮清理與群組提交的優化效果。</p>
 </div>
 <p>以下指令將部署一個針對 v3.0.0 進行優化設定的 Milvus 叢集，並使用 Woodpecker 作為建議的消息佇列：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>依賴項</strong>：<code translate="no">etcd</code> （元資料）、<code translate="no">minio</code> （物件儲存）、<code translate="no">woodpecker</code> （訊息佇列）</li>
 </ul>
 <div class="alert note">
-<p>透過<code translate="no">streaming.woodpecker.embedded=false</code> ，Woodpecker<strong>會以專用的 StatefulSet</strong>形式運行（<code translate="no">my-release-milvus-woodpecker</code> ，預設為 4 個複本——3 個節點的法定人數加上 1 個備用節點以實現容錯； 請勿將<code translate="no">woodpecker.replicaCount</code> 設定為低於 3）並由無頭服務作為前端，採用 MinIO 作為儲存後端——因此該叢集擁有獨立於串流節點的<code translate="no">woodpecker</code> Pod 集合。</p>
+<p>透過<code translate="no">streaming.woodpecker.embedded=false</code> ，Woodpecker<strong>會以專用的 StatefulSet</strong>形式運行（<code translate="no">my-release-milvus-woodpecker</code> ，預設為 4 個複本——包含 3 個節點的法定人數，外加 1 個備用節點以確保容錯； 請勿將<code translate="no">woodpecker.replicaCount</code> 設定為低於 3）並由無頭服務作為前端，採用 MinIO 作為儲存後端——因此該叢集擁有獨立於串流節點之外的<code translate="no">woodpecker</code> Pod 集合。</p>
 </div>
 <p>設定完畢端口轉發後（請參閱下一步），您亦可透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取<strong>Milvus WebUI</strong>。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. 連線至 Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -256,7 +256,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>端口轉發選項：</strong></p>
 <ul>
 <li><strong>自動指派本地端口</strong>：使用<code translate="no">:19530</code> 取代<code translate="no">27017:19530</code> ，讓 kubectl 自行選擇可用端口</li>
-<li><strong>在所有介面上監聽</strong>：新增<code translate="no">--address 0.0.0.0</code> 以允許其他機器建立連線：
+<li><strong>監聽所有介面</strong>：新增<code translate="no">--address 0.0.0.0</code> 以允許其他機器建立連線：
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
 <li><strong>獨立部署</strong>：若使用獨立模式，服務名稱保持不變</li>
@@ -314,7 +314,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 內建名為 Milvus WebUI 的圖形化使用者介面工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直覺的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件及依賴項的統計資料與指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 配置。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus 內建名為「Milvus WebUI」的圖形化使用者介面工具，您可透過瀏覽器存取。Milvus WebUI 透過簡單直覺的介面，提升系統的可觀察性。您可以使用 Milvus WebUI 觀察 Milvus 各元件及依賴項的統計資料與指標、檢查資料庫與收集項的詳細資訊，並列出詳細的 Milvus 設定。 有關 Milvus WebUI 的詳細資訊，請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a></p>
 <p>若要啟用對 Milvus WebUI 的存取，您需要將代理 Pod 進行端口轉發至本機端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -415,7 +415,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>現在您可以按照以下步驟，將影像載入至網路受限環境中的主機：</p>
+    </button></h3><p>現在您可以依照以下步驟，將影像載入至網路受限環境中的主機：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="5-Deploy-Milvus" class="common-anchor-header">5. 部署 Milvus<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">
@@ -532,9 +532,9 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
 <li><p><a href="/docs/zh-hant/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

@@ -89,7 +89,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>執行安裝腳本後：​</p>
 <ul>
 <li><p>一個名為<strong>milvus-standalone</strong>的 Docker 容器已於<strong>19530</strong> 埠啟動。​</p></li>
-<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一容器中，並於<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
+<li><p>嵌入式 etcd 已隨 Milvus 一起安裝在同一個容器中，並於<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
 <li><p>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus​</strong></p></li>
 </ul>
 <p>您可以使用以下指令來管理 Milvus 容器及儲存的資料。​</p>
@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若您希望在 Windows 上使用 Linux 命令和 shell 腳本啟動 Milvus，請確保已安裝 WSL 2。有關如何安裝 WSL 2 的詳細資訊，請參閱這篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 文章</a>。</p>
+    </button></h3><p>若您希望在 Windows 上使用 Linux 命令和 shell 腳本啟動 Milvus，請確保已安裝 WSL 2。有關如何安裝 WSL 2 的詳細資訊，請參閱這篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 文章</a>。​</p>
 <ol>
 <li><p>啟動 WSL 2。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -187,9 +187,9 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>以管理員模式開啟 Docker Desktop：右鍵點擊並選擇「<strong>以管理員身分執行</strong>」。​</p></li>
-<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔並啟動 Milvus。​</p>
+<li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔案並啟動 Milvus。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -201,8 +201,8 @@ Creating milvus-standalone ... done​
 <p>視您的網路連線狀況而定，下載 Milvus 安裝所需的映像檔可能需要一段時間。一旦名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器啟動後，您將看到 ​</p>
 <ul>
 <li><p><strong>milvus-etcd</strong>容器並未向主機公開任何端口，且將其資料映射至當前資料夾中的<strong>volumes/etcd​</strong></p></li>
-<li><p><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，使用預設的驗證憑證，並將其資料映射至當前資料夾中的<strong>volumes/minio</strong>。​</p></li>
-<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。​</p></li>
+<li><p><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>。​</p></li>
+<li><p><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。​</p></li>
 </ul></li>
 </ol>
 <p>若您已安裝 WSL 2，亦可呼叫 Linux 版本的 Docker Compose 指令。​</p>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下載 Milvus 配置檔案。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>啟動 Milvus。​</p>

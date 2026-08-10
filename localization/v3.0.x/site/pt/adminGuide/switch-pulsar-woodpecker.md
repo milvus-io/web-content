@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta página descreve como alternar a fila de mensagens (MQ) de um <strong>cluster Milvus</strong> entre <strong>o Pulsar</strong> (integrado ou externo) e <strong>o Woodpecker</strong> (backend MinIO), em ambos os sentidos. Para conhecer o fluxo de trabalho geral e os pré-requisitos, consulte <a href="/docs/pt/switch-mq-type.md">Alternar o tipo de MQ</a>.</p>
+    </button></h1><p>Esta página descreve como alternar a fila de mensagens (MQ) de um <strong>cluster Milvus</strong> entre <strong>o Pulsar</strong> (integrado ou externo) e <strong>o Woodpecker</strong> (backend MinIO), em ambos os sentidos. Para conhecer o fluxo de trabalho geral e os pré-requisitos, consulte <a href="/docs/pt/switch-mq-type.md">Alternar a fila de mensagens</a>.</p>
 <div class="alert note">
 <p><strong>Pré-requisito:</strong> A funcionalidade «Alternar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong>. Atualize a sua instância do Milvus para o Milvus 3.0 ou posterior antes de começar — a funcionalidade não está disponível em versões anteriores.</p>
 </div>
 <div class="alert warning">
-<p>A alteração da fila de mensagens é uma <strong>operação de alto risco</strong>. Escolha a secção que corresponda <strong>ao seu</strong> método de implementação — <strong>«Com o Helm»</strong> ou <strong>«Com o Milvus Operator»</strong> — e siga-a do início ao fim. Não misture comandos do Helm com os do Operator.</p>
+<p>A troca da fila de mensagens é uma <strong>operação de alto risco</strong>. Escolha a secção que corresponde <strong>ao seu</strong> método de implementação — <strong>«Com o Helm»</strong> ou <strong>«Com o Milvus Operator»</strong> — e siga-a do início ao fim. Não misture comandos do Helm com os do Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Com o Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Para o Pulsar <strong>externo</strong>, limpe os tópicos do Milvus na instância externa do Pulsar. Os tópicos do Milvus seguem o formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (por exemplo, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
 <div class="alert note">
-<p>Se pretender voltar a utilizar o Pulsar mais tarde, limpe primeiro os dados/tópicos para evitar conflitos. Devido às limitações do gráfico Helm, não é atualmente possível voltar a utilizar uma instância do Pulsar <strong>integrada</strong>.</p>
+<p>Se pretender voltar a utilizar o Pulsar mais tarde, limpe primeiro os dados/tópicos para evitar conflitos. Devido às limitações do gráfico Helm, não é atualmente possível voltar a utilizar uma instância <strong>integrada</strong> do Pulsar.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Mudar do Woodpecker para o Pulsar (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -232,7 +232,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Aguarde até que todos os pods estejam prontos e, em seguida, confirme se a configuração de acesso ao Pulsar foi incorporada na configuração do Milvus.</p>
 <p><strong>Passo 3: Execute a mudança para o MQ.</strong></p>
 <div class="alert note">
-<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus de uma configuração anterior. Se esta for a sua primeira mudança para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
+<p>Certifique-se de que o Pulsar de destino não contém tópicos do Milvus de uma configuração anterior. Se esta for a sua primeira transição para o Pulsar, ignore esta nota; caso contrário, elimine primeiro os tópicos residuais do Milvus com os mesmos nomes.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

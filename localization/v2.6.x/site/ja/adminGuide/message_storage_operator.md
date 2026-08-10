@@ -19,7 +19,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus は、最近の変更履歴のログ管理、ストリームログの出力、およびログのサブスクリプションの提供に、RocksMQ、Pulsar、または Kafka を使用します。このトピックでは、Milvus Operator を使用して Milvus をインストールする際の、メッセージストレージの依存関係の設定方法について説明します。詳細については、Milvus Operator リポジトリの「<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Milvus Operator を使用したメッセージストレージの設定</a>」を参照してください。</p>
+    </button></h1><p>Milvus は、最近の変更のログ管理、ストリームログの出力、およびログのサブスクリプションの提供に、RocksMQ、Pulsar、または Kafka を使用します。このトピックでは、Milvus Operator を使用して Milvus をインストールする際に、メッセージストレージの依存関係を設定する方法について説明します。詳細については、Milvus Operator リポジトリの<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">「Milvus Operator を使用したメッセージストレージの設定</a>」を参照してください。</p>
 <p>このトピックでは、Milvus Operator がすでにデプロイされていることを前提としています。</p>
 <div class="alert note">詳細については、「<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Milvus Operatorのデプロイ</a>」を参照してください。 </div>
 <p>Milvus Operator を使用して Milvus クラスタを起動するには、設定ファイルを指定する必要があります。</p>
@@ -60,7 +60,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
 </ul></li>
 <li>Milvusシステムの稼働中は、メッセージストレージを変更することはできません。</li>
 <li>Kafka 2.x または 3.x バージョンのみがサポートされています。</li>
-<li><strong>アップグレードに関する制限事項</strong>：<strong>メッセージキューの制限事項</strong>：Milvus v2.6.21 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
+<li><strong>アップグレードに関する制限事項</strong>:<strong>メッセージキューに関する制限事項</strong>: Milvus v2.6.22 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +104,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">主な設定オプション:</h5><ul>
+<h5 id="Key-configuration-options" class="common-anchor-header">主な設定オプション：</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: RocksMQをメッセージキューとして明示的に設定します</li>
 <li><code translate="no">persistence.enabled</code>: RocksMQ データの永続ストレージを有効にします</li>
 <li><code translate="no">persistence.pvcDeletion</code>: true に設定すると、Milvus インスタンスが削除された際に PVC も削除されます</li>

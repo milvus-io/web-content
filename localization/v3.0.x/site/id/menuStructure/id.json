@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Mengelola Sumber Daya File",
+                "label": "Mengelola Sumber Daya Berkas",
                 "id": "manage-file-resources.md",
                 "order": 6,
                 "children": []
@@ -938,7 +938,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "INDEKS TERBALIK YANG JARANG",
+                "label": "SPARSE_INVERTED_INDEX",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1156,7 +1156,7 @@
             "children": []
           },
           {
-            "label": "Pencocokan Frasa",
+            "label": "Kecocokan Frasa",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "Infrastruktur &amp; Integrasi Data",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "Gambaran Umum",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Metadata",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Penyimpanan Objek",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Antrian Pesan (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "Gambaran Umum",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Burung pelatuk",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "Lakukan pembaruan ke Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Terus Gunakan Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Kafka",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "Panduan Administrasi",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "Penerapan",
@@ -1895,6 +1810,122 @@
         ]
       },
       {
+        "label": "Infrastruktur Data",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "Gambaran Umum",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Metadata",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Penyimpanan Objek",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Antrian Pesan",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "Gambaran Umum",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Burung pelatuk",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Pulsar",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Lakukan pembaruan ke Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Terus Gunakan Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Kafka",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Beralih ke Antrian Pesan",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "Gambaran Umum",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Pulsar ↔ Burung Pelatuk",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Kafka ↔ Woodpecker",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "label": "Penskalaan",
         "id": "scaling",
         "order": 4,
@@ -1913,7 +1944,7 @@
             "children": []
           },
           {
-            "label": "Skalabilitas dengan HPA",
+            "label": "Skalakan dengan HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1932,7 +1963,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Meningkatkan Kapasitas Kluster Milvus",
+            "label": "Meningkatkan Kluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "Ubah Jenis MQ",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "Gambaran Umum",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Pulsar ↔ Burung Pelatuk",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Kafka ↔ Woodpecker",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -2585,7 +2585,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "API Asinkron Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

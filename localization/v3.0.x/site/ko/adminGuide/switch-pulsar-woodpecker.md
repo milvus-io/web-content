@@ -18,9 +18,9 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지에서는 <strong>Milvus 클러스터의</strong> 메시지 큐(MQ)를 <strong>Pulsar</strong> (내장형 또는 외부)와 <strong>Woodpecker</strong> (MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
+    </button></h1><p>이 페이지에서는 <strong>Milvus 클러스터의</strong> 메시지 큐(MQ)를 <strong>Pulsar</strong> (내장형 또는 외부)와 <strong>Woodpecker</strong> (MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">'메시지 큐 전환'을</a> 참조하십시오.</p>
 <div class="alert note">
-<p><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</p>
+<p><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상</strong> 버전에서 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</p>
 </div>
 <div class="alert warning">
 <p>메시지 큐 전환은 <strong>위험도가 높은 작업입니다</strong>. <strong>배포 방식</strong> ( <strong>Helm 사용</strong> 또는 <strong>Milvus Operator 사용</strong> ) <strong>에</strong> 해당하는 섹션을 선택하고, 해당 섹션의 지침을 처음부터 끝까지 따르십시오. Helm 명령어와 Operator 명령어를 혼용하지 마십시오.</p>
@@ -83,7 +83,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <div class="alert note">
 <p>나중에 Pulsar로 다시 전환할 계획이라면, 충돌을 방지하기 위해 먼저 데이터/토픽을 정리하십시오. Helm 차트의 제한 사항으로 인해, 현재 <strong>내장형</strong> Pulsar 인스턴스로 다시 전환하는 것은 불가능합니다.</p>
 </div>
-<h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Woodpecker에서 Pulsar로 전환 (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
+<h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Woodpecker에서 Pulsar로 전환하기 (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,7 +128,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>4단계: 전환이 완료되었는지 확인합니다.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>전환이 성공하면 <code translate="no">[mqTypeValue=pulsar]</code> 로깅됩니다.</p>
+<p>전환이 성공하면 <code translate="no">[mqTypeValue=pulsar]</code> 로 기록됩니다.</p>
 <p><strong>5단계: (선택 사항) Woodpecker 데이터를 정리합니다.</strong> MinIO/S3( <code translate="no">&lt;rootPath&gt;/wp/...</code> 폴더 내, 일반적으로 <code translate="no">files/wp/...</code>)에 있는 Woodpecker 데이터와 etcd(<code translate="no">etcdctl get woodpecker --prefix</code>)에 있는 Woodpecker 메타데이터를 삭제합니다. 나중에 Woodpecker로 다시 전환할 계획이라면, 먼저 이 파일들을 정리하십시오.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Milvus Operator 사용 시<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,7 +171,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=woodpecker]</code> 로깅됩니다.</p>
-<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다. <code translate="no">change_configmap.yaml</code> 를 생성합니다:</p>
+<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다<strong>.</strong> <code translate="no">change_configmap.yaml</code> 를 생성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -209,7 +209,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 을 <code translate="no">user.yaml</code> 으로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 포드가 새로운 구성으로 재시작됩니다.</p>
+<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> Pulsar 연결을 <code translate="no">spec.config</code> 아래에 배치하고(Operator는 <code translate="no">spec.config</code> 를 <code translate="no">user.yaml</code> 로 변환합니다), MQ 유형을 설정합니다. CR을 적용하면 포드가 새로운 구성으로 재시작됩니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

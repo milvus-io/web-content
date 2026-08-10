@@ -22,7 +22,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
     </button></h1><p>يستخدم Milvus Pulsar أو Kafka لإدارة سجلات التغييرات الأخيرة، وإخراج سجلات التدفق، وتوفير اشتراكات السجلات. Pulsar هو نظام تخزين الرسائل الافتراضي. يقدم هذا الموضوع كيفية تكوين تخزين الرسائل باستخدام Docker Compose أو Helm.</p>
 <p>يمكنك تكوين Pulsar باستخدام <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> أو على K8s، كما يمكنك تكوين Kafka على K8s.</p>
 <div class="alert note">
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.21، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.22، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">تكوين Pulsar باستخدام Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +54,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتكوين Pulsar باستخدام Docker Compose، أدخل القيم الخاصة بك في قسم « <code translate="no">pulsar</code> » في ملف « <code translate="no">milvus.yaml</code> » الموجود في المسار milvus/configs.</p>
+    </button></h3><p>لتكوين Pulsar باستخدام Docker Compose، أدخل القيم الخاصة بك في قسم « <code translate="no">pulsar</code> » في الملف « <code translate="no">milvus.yaml</code> » الموجود في المسار milvus/configs.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -79,7 +79,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
     </button></h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus باستخدام تكوينات Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">لا تصبح الإعدادات سارية المفعول إلا بعد بدء تشغيل Milvus. راجع <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«بدء تشغيل Milvus»</a> لمزيد من المعلومات.</div>
+<div class="alert note">لا تصبح الإعدادات سارية المفعول إلا بعد بدء تشغيل Milvus. راجع <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«بدء تشغيل Milvus</a> » لمزيد من المعلومات.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">تكوين Pulsar باستخدام Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في ملف <code translate="no">values.yaml</code>.</li>
+<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

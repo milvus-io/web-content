@@ -49,7 +49,7 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
 <ul>
 <li><p>각 Milvus 인스턴스는 정확히 하나의 메시지 큐를 사용합니다.</p></li>
 <li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.0으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
-<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘MQ 유형 전환’을</a> 참조하십시오. MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드하십시오.</p></li>
+<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환’을</a> 참조하십시오. ‘메시지 큐 전환’ 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드하십시오.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">메시지 큐 선택<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

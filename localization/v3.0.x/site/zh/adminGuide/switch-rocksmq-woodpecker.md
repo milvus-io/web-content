@@ -18,7 +18,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍如何在<strong>Milvus Standalone（Docker Compose）</strong>部署中，双向切换消息队列（MQ）在<strong>RocksMQ</strong>和<strong>Woodpecker</strong>（本地或 MinIO 后端）之间的配置。有关一般工作流和先决条件，请参阅《<a href="/docs/zh/switch-mq-type.md">切换 MQ 类型</a>》。</p>
+    </button></h1><p>本页面介绍了如何在<strong>Milvus Standalone</strong>部署<strong>（Docker Compose）</strong>中，双向切换消息队列（MQ）在<strong>RocksMQ</strong>和<strong>Woodpecker</strong>（本地或 MinIO 后端）之间的配置。有关一般工作流和先决条件，请参阅<a href="/docs/zh/switch-mq-type.md">《切换消息队列》</a>。</p>
 <div class="alert note">
 <ul>
 <li><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</li>
@@ -223,7 +223,7 @@ summary: 将 Milvus Standalone 部署（Docker Compose）的消息队列在 Rock
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>元数据（etcd）：</strong>Woodpecker 键的前缀通常为<code translate="no">woodpecker/...</code> 。请通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
+<li><strong>元数据（etcd）：</strong>Woodpecker 键前缀通常为<code translate="no">woodpecker/...</code> 。请通过<code translate="no">etcdctl get woodpecker --prefix</code> 查看该键，然后将其删除。</li>
 <li><strong>存储数据：</strong>在<strong>MinIO 模式下</strong>，删除存储桶中<code translate="no">&lt;rootPath&gt;/wp/...</code> 下的日志数据（通常位于<code translate="no">files/wp/...</code> ）；在<strong>本地模式下</strong>，数据位于本地磁盘的<code translate="no">volumes/milvus/data/wp/...</code> 路径下。</li>
 </ul>
 <p>如果您计划稍后切换回 Woodpecker，请先清理这些文件以避免冲突。</p>

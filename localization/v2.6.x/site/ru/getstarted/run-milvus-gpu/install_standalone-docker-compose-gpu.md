@@ -74,8 +74,8 @@ title: Запуск Milvus с поддержкой GPU с помощью Docker 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Вам необходимо внести следующие изменения в переменные среды автономного сервиса в файле YAML:</p>
 <ul>
@@ -138,7 +138,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
 <li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с использованием учетных данных по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
-<li>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
+<li>Контейнер <strong>milvus-standalone</strong> обслуживает порты <strong>19530</strong> локально с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
 </ul></li>
 </ul>
 <p>Вы можете проверить, запущены ли контейнеры, с помощью следующей команды:</p>
@@ -192,7 +192,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Откройте скопированный файл <code translate="no">milvus.yaml</code> в удобном для вас текстовом редакторе. Например, с помощью vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Отредактируйте настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по мере необходимости и сохраните изменения:</p>
+<li><p>Отредактируйте настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по необходимости и сохраните изменения:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>

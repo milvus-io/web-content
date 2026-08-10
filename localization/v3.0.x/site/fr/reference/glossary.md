@@ -144,7 +144,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utilise deux types de canaux, <a href="#pchannel">PChannel</a> et <a href="#vchannel">VChannel</a>, dans le cadre de l’architecture de son service de streaming. Chaque PChannel correspond à un flux WAL géré par <a href="/docs/fr/woodpecker_architecture.md">Woodpecker</a>, tandis que chaque VChannel correspond à un shard au sein d’une collection. Le service de streaming gère ces canaux afin de garantir la cohérence des données et la récupération en cas de défaillance.</p>
+    </button></h2><p>Milvus utilise deux types de canaux, <a href="#pchannel">PChannel</a> et <a href="#vchannel">VChannel</a>, dans le cadre de l’architecture de son service de streaming. Chaque PChannel correspond à un flux WAL géré par <a href="/docs/fr/woodpecker_architecture.md">Woodpecker</a>, tandis que chaque VChannel correspond à un shard au sein d’une collection. Le service de streaming gère ces canaux afin de garantir la cohérence des données et la récupération en cas de panne.</p>
 <h2 id="Collection" class="common-anchor-header">Collection<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une dépendance est un programme dont un autre programme a besoin pour fonctionner. Les dépendances de Milvus comprennent etcd (qui stocke les métadonnées), MinIO ou S3 (stockage d’objets) et une file d’attente de messages telle que Woodpecker (qui gère les journaux d’instantanés). Pour plus d’informations, consultez la section « <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastructure et intégration des données</a> ».</p>
+    </button></h2><p>Une dépendance est un programme dont un autre programme a besoin pour fonctionner. Les dépendances de Milvus comprennent etcd (qui stocke les métadonnées), MinIO ou S3 (stockage d’objets) et une file d’attente de messages telle que Woodpecker (qui gère les journaux d’instantanés). Pour plus d’informations, consultez la section <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastructure de données</a>.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Schéma dynamique<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le schéma dynamique vous permet d’insérer des entités comportant de nouveaux champs dans une collection sans modifier le schéma existant. Cela signifie que vous pouvez insérer des données sans connaître le schéma complet d’une collection et inclure des champs qui ne sont pas encore définis. Vous pouvez activer cette fonctionnalité sans schéma en activant le champ dynamique lors de la création d’une collection. Pour plus d’informations, consultez la section <a href="/docs/fr/enable-dynamic-field.md">« Activer le champ dynamique</a> ».</p>
+    </button></h2><p>Le schéma dynamique vous permet d’insérer des entités comportant de nouveaux champs dans une collection sans modifier le schéma existant. Cela signifie que vous pouvez insérer des données sans connaître le schéma complet d’une collection et inclure des champs qui ne sont pas encore définis. Vous pouvez activer cette fonctionnalité sans schéma en activant le champ dynamique lors de la création d’une collection. Pour plus d’informations, consultez la section « <a href="/docs/fr/enable-dynamic-field.md">Activer le champ dynamique</a> ».</p>
 <h2 id="Embeddings" class="common-anchor-header">Représentations vectorielles<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,7 +257,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus prend en charge le filtrage scalaire via la recherche avec des prédicats, ce qui vous permet de définir <a href="https://milvus.io/docs/boolean.md">des conditions de filtrage</a> dans les requêtes et les recherches afin d’affiner les résultats.</p>
+    </button></h2><p>Milvus prend en charge le filtrage scalaire via la recherche avec des prédicats, ce qui vous permet de définir <a href="https://milvus.io/docs/boolean.md">des conditions de filtrage</a> au sein des requêtes et des recherches afin d’affiner les résultats.</p>
 <h2 id="Filtered-search" class="common-anchor-header">Recherche filtrée<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d’exécution vectorielle central de Milvus, qui intègre plusieurs bibliothèques de recherche de similarité vectorielle, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge le calcul hétérogène. Il détermine sur quel matériel (CPU ou GPU) exécuter la construction d’index et les requêtes de recherche. C’est de là que vient le nom de Knowhere : il « sait » où exécuter les opérations.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> est le moteur d’exécution vectorielle central de Milvus, qui intègre plusieurs bibliothèques de recherche de similarité vectorielle, notamment Faiss, Hnswlib et Annoy. Knowhere est également conçu pour prendre en charge le calcul hétérogène. Il détermine sur quel matériel (CPU ou GPU) exécuter la création d’index et les requêtes de recherche. C’est de là que Knowhere tire son nom : il « sait » où exécuter les opérations.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Instantané de journal<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -375,7 +375,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les types de métriques de similarité sont utilisés pour mesurer les similitudes entre des vecteurs. Actuellement, Milvus prend en charge la distance euclidienne (L2), le produit scalaire (IP), la similarité cosinus (COSINE) et les métriques binaires. Vous pouvez choisir le type de métrique le plus approprié en fonction de votre scénario. Pour plus d’informations, consultez la section <a href="https://milvus.io/docs/metric.md">Métriques de similarité</a>.</p>
+    </button></h2><p>Les types de métriques de similarité sont utilisés pour mesurer les similarités entre des vecteurs. Actuellement, Milvus prend en charge la distance euclidienne (L2), le produit scalaire (IP), la similarité cosinus (COSINE) et les métriques binaires. Vous pouvez choisir le type de métrique le plus approprié en fonction de votre scénario. Pour plus d’informations, consultez la section <a href="https://milvus.io/docs/metric.md">Métriques de similarité</a>.</p>
 <h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,7 +407,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les fichiers mappés en mémoire permettent une gestion efficace des données en mappant directement le contenu des fichiers en mémoire. Cela s’avère particulièrement utile lorsque la mémoire est limitée et qu’il n’est pas possible de charger l’intégralité des données. Cette technique peut augmenter la capacité de stockage des données et maintenir les performances dans une certaine mesure. Toutefois, si les données dépassent largement la capacité de la mémoire, les vitesses de recherche et de requête pourraient diminuer de manière significative. Pour plus d’informations, consultez la section « <a href="https://milvus.io/docs/mmap.md">Stockage de données avec MMap</a> ».</p>
+    </button></h2><p>Les fichiers mappés en mémoire permettent une gestion efficace des données en mappant directement le contenu des fichiers en mémoire. Cela s’avère particulièrement utile lorsque la mémoire est limitée et qu’il n’est pas possible de charger l’intégralité des données. Cette technique peut augmenter la capacité de stockage des données et maintenir les performances dans une certaine mesure. Cependant, si les données dépassent largement la capacité de la mémoire, les vitesses de recherche et de requête pourraient diminuer de manière significative. Pour plus d’informations, consultez la section « <a href="https://milvus.io/docs/mmap.md">Stockage de données avec MMap</a> ».</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus Backup<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +615,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>QuorumBuffer est un mode de déploiement de Woodpecker conçu pour les charges de travail de lecture/écriture à haute fréquence et sensibles à la latence, nécessitant à la fois une réactivité en temps réel et une forte tolérance aux pannes. Il fonctionne comme un tampon d’écriture à haute vitesse avec des écritures par quorum à trois répliques, garantissant une forte cohérence et une haute disponibilité. Pour plus d’informations, consultez <a href="/docs/fr/woodpecker_architecture.md">la section Architecture de Woodpecker</a>.</p>
+    </button></h2><p>QuorumBuffer est un mode de déploiement de Woodpecker conçu pour les charges de travail de lecture/écriture à haute fréquence et sensibles à la latence, nécessitant à la fois une réactivité en temps réel et une forte tolérance aux pannes. Il fonctionne comme un tampon d’écriture à haute vitesse avec des écritures par quorum à trois répliques, garantissant une forte cohérence et une haute disponibilité. Pour plus d’informations, consultez la section <a href="/docs/fr/woodpecker_architecture.md">« Architecture de Woodpecker</a> ».</p>
 <h2 id="Range-search" class="common-anchor-header">Recherche par plage<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -647,7 +647,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le schéma correspond aux métadonnées qui définissent le type de données et les propriétés de celles-ci. Chaque collection dispose de son propre schéma de collection qui définit tous les champs de la collection, l’activation de l’attribution automatique d’identifiants (clé primaire) et la description de la collection. Les schémas de champs sont également inclus dans les schémas de collection ; ils définissent le nom, le type de données et d’autres propriétés d’un champ. Pour plus d’informations, consultez la section « <a href="https://milvus.io/docs/schema.md#Manage-Schema">Gérer le schéma</a> ».</p>
+    </button></h2><p>Le schéma correspond aux métadonnées qui définissent le type de données et les propriétés de celles-ci. Chaque collection dispose de son propre schéma de collection, qui définit tous les champs de la collection, l’activation de l’attribution automatique d’identifiants (clé primaire) et la description de la collection. Les schémas de champs sont également inclus dans les schémas de collection ; ils définissent le nom, le type de données et d’autres propriétés d’un champ. Pour plus d’informations, consultez la section « <a href="https://milvus.io/docs/schema.md#Manage-Schema">Gérer le schéma</a> ».</p>
 <h2 id="Search" class="common-anchor-header">Recherche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -712,7 +712,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus améliore les performances d’écriture des données en répartissant les opérations d’écriture sur plusieurs nœuds à l’aide de shards, organisés selon le hachage des clés primaires. Cela permet de tirer parti des capacités de calcul parallèle du cluster.</p>
+    </button></h2><p>Milvus améliore les performances d’écriture des données en répartissant les opérations d’écriture sur plusieurs nœuds à l’aide de shards, organisés selon le hachage des clés primaires. Cela permet d’exploiter les capacités de calcul parallèle du cluster.</p>
 <p><em>Le partitionnement permet de réduire la charge de lecture en spécifiant un nom de partition, tandis que le sharding répartit la charge d’écriture entre plusieurs serveurs.</em></p>
 <h2 id="Sparse-vector" class="common-anchor-header">Vecteur clairsemé<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -729,7 +729,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les vecteurs clairsemés représentent des mots ou des expressions à l’aide d’embeddings vectoriels où la plupart des éléments sont nuls, un seul élément non nul indiquant la présence d’un mot spécifique. Les modèles à vecteurs clairsemés, tels que SPLADEv2, surpassent les modèles denses en matière de recherche de connaissances hors domaine, de prise en compte des mots-clés et d’interprétabilité. Pour plus d’informations, consultez la section <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vecteurs clairsemés</a>.</p>
+    </button></h2><p>Les vecteurs clairsemés représentent des mots ou des expressions à l’aide d’embeddings vectoriels dans lesquels la plupart des éléments sont nuls, un seul élément non nul indiquant la présence d’un mot spécifique. Les modèles à vecteurs clairsemés, tels que SPLADEv2, surpassent les modèles denses en matière de recherche de connaissances hors domaine, de prise en compte des mots-clés et d’interprétabilité. Pour plus d’informations, consultez la section <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vecteurs clairsemés</a>.</p>
 <h2 id="Streaming-Service" class="common-anchor-header">Service de streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -761,7 +761,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les données non structurées, notamment les images, les vidéos, les fichiers audio et le langage naturel, sont des informations qui ne suivent pas de modèle ou de mode d’organisation prédéfini. Ce type de données représente environ 80 % des données mondiales et peut être converti en vecteurs à l’aide de divers modèles d’intelligence artificielle (IA) et d’apprentissage automatique (ML).</p>
+    </button></h2><p>Les données non structurées, notamment les images, les vidéos, les fichiers audio et le langage naturel, sont des informations qui ne suivent pas de modèle ni de mode d’organisation prédéfini. Ce type de données représente environ 80 % des données mondiales et peut être converti en vecteurs à l’aide de divers modèles d’intelligence artificielle (IA) et d’apprentissage automatique (ML).</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vecteur d’embedding est une abstraction des caractéristiques de données non structurées, telles que les e-mails, les données de capteurs IoT, les photos Instagram, les structures protéiques, etc. D’un point de vue mathématique, un vecteur d’embedding est un tableau de nombres à virgule flottante ou de valeurs binaires. Des techniques d’embedding modernes sont utilisées pour convertir des données non structurées en vecteurs d’embedding. Milvus prend en charge à la fois les vecteurs denses et clairsemés depuis la version 2.4.0.</p>
+    </button></h2><p>Un vecteur d’embedding est une abstraction des caractéristiques de données non structurées, telles que les e-mails, les données de capteurs IoT, les photos Instagram, les structures protéiques, etc. Mathématiquement parlant, un vecteur d’embedding est un tableau de nombres à virgule flottante ou de valeurs binaires. Des techniques d’embedding modernes sont utilisées pour convertir des données non structurées en vecteurs d’embedding. Milvus prend en charge à la fois les vecteurs denses et clairsemés depuis la version 2.4.0.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">Stockage WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,9 +2,8 @@
 id: add-fields-to-an-existing-collection.md
 title: Изменение схемы коллекции
 summary: >-
-  Измените существующую схему коллекции, добавив или удалив скалярные поля,
-  векторные поля и векторные поля, сгенерированные функциями, без повторного
-  создания коллекции.
+  Измените существующую схему коллекции, добавив или удалив пользовательские
+  поля или функции вместе с сгенерированными ими векторными полями.
 ---
 <h1 id="Alter-Collection-Schema" class="common-anchor-header">Изменение схемы коллекции<button data-href="#Alter-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>По мере перехода коллекции из стадии разработки в стадию производства поля, связанные с каждой сущностью, часто изменяются. Вы можете добавить скалярные поля, такие как « <code translate="no">source_uri</code> » или « <code translate="no">review_status</code> », для фильтрации и реализации бизнес-логики, добавить новое векторное поле для вложений, сгенерированных вашим приложением, добавить сгенерированное BM25 поле разреженных векторов для лексического поиска по существующему тексту или удалить поля, которые больше не используются. Функция «Изменение схемы коллекции» позволяет вносить поддерживаемые изменения в поля на месте, вместо того чтобы заново создавать коллекцию.</p>
+    </button></h1><p>По мере перехода коллекции из стадии разработки в стадию производства ее схема часто изменяется. Вы можете добавить скалярные поля, такие как « <code translate="no">source_uri</code> » или « <code translate="no">review_status</code> », для фильтрации и реализации логики приложения; добавить новое векторное поле для вложений, сгенерированных вашим приложением; добавить функцию BM25 и сгенерированное ею разреженное векторное поле для лексического поиска по существующему тексту; либо удалить поля и функции, которые больше не используются. Функция «Изменить схему коллекции» позволяет вносить поддерживаемые изменения в поля и функции на месте, вместо того чтобы заново создавать коллекцию.</p>
 <div class="alert note">
-<p>В данном руководстве рассматриваются изменения схемы на уровне полей в управляемых коллекциях, включая пользовательские поля и векторные поля, сгенерированные функциями. Чтобы добавить поле во внешнюю коллекцию, см. раздел <a href="/docs/ru/alter-external-collection-schema.md">«Изменение схемы внешней коллекции» (Alter External Collection Schema)</a>. Для изменения свойств полей, таких как изменение параметра « <code translate="no">max_length</code> » в поле « <code translate="no">VARCHAR</code> » или параметра « <code translate="no">max_capacity</code> » в поле « <code translate="no">ARRAY</code> », см. раздел <a href="/docs/ru/alter-collection-field.md">«Изменение поля коллекции» (Alter Collection Field)</a>. Информацию о динамическом поведении полей см. в разделах <a href="/docs/ru/enable-dynamic-field.md">«Динамическое поле</a> » и <a href="/docs/ru/modify-collection.md">«Изменение коллекции</a>».</p>
+<p>В данном руководстве рассматриваются изменения схемы для пользовательских полей и функций с генерируемыми ими векторными полями в управляемых коллекциях. Чтобы добавить поле во внешнюю коллекцию, см. раздел <a href="/docs/ru/alter-external-collection-schema.md">«Изменение схемы внешней коллекции» (Alter External Collection Schema)</a>. Для изменения свойств полей, таких как изменение значения параметра « <code translate="no">max_length</code> » для поля « <code translate="no">VARCHAR</code> » или параметра « <code translate="no">max_capacity</code> » для поля « <code translate="no">ARRAY</code> », см. раздел <a href="/docs/ru/alter-collection-field.md">«Изменение поля коллекции» (Alter Collection Field</a>). Информацию о динамическом поведении полей см. в разделах <a href="/docs/ru/enable-dynamic-field.md">«Динамическое поле</a> » и <a href="/docs/ru/modify-collection.md">«Изменение коллекции</a>».</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,35 +41,36 @@ summary: >-
       </svg>
     </button></h2><p><strong>Добавление полей, определяемых пользователем</strong></p>
 <ul>
-<li><p>Добавляемые пользовательские поля должны допускать нулевые значения. Укажите <code translate="no">nullable=True</code> при вызове <code translate="no">add_collection_field()</code>. Для существующих сущностей добавляемое поле является <code translate="no">NULL</code>, если только вы не добавляете скалярное поле с <code translate="no">default_value</code>.</p></li>
+<li><p>Добавляемые пользовательские поля должны допускать нулевые значения. Укажите параметр ` <code translate="no">nullable=True</code> ` при вызове метода ` <code translate="no">add_collection_field()</code>`. Для существующих сущностей добавляемое поле будет ` <code translate="no">NULL</code> `, если только вы не добавляете скалярное поле с параметром ` <code translate="no">default_value</code>`.</p></li>
 <li><p>Добавление пользовательских скалярных полей поддерживается в Milvus 2.6.x и более поздних версиях. Добавление пользовательских векторных полей поддерживается в Milvus 2.6.18 и более поздних версиях.</p></li>
 <li><p>Добавление полей StructArray поддерживается в Milvus 3.0.0 и более поздних версиях. Добавляемые поля StructArray должны допускать нулевые значения.</p></li>
 <li><p>Имена полей должны быть уникальными среди полей в коллекции.</p></li>
 </ul>
-<p><strong>Добавление векторных полей, сгенерированных функциями</strong></p>
+<p><strong>Добавление функции и сгенерированного ею векторного поля</strong></p>
 <ul>
 <li><p>При каждом обновлении схемы можно добавить только одну функцию и одно сгенерированное векторное поле.</p></li>
-<li><p>Поддерживаемая функция определяет тип сгенерированного векторного поля: <code translate="no">BM25</code> генерирует поле типа « <code translate="no">SPARSE_FLOAT_VECTOR</code> », а <code translate="no">MINHASH</code> — поле типа « <code translate="no">BINARY_VECTOR</code> ».</p></li>
-<li><p>Генерируемое векторное поле должно быть новым полем. Оно не может указывать на поле, которое уже существует в схеме коллекции.</p></li>
+<li><p>Поддерживаемая функция определяет тип сгенерированного векторного поля: « <code translate="no">BM25</code> » генерирует поле « <code translate="no">SPARSE_FLOAT_VECTOR</code> », а « <code translate="no">MINHASH</code> » — поле « <code translate="no">BINARY_VECTOR</code> ».</p></li>
+<li><p>Генерируемое векторное поле должно быть новым полем. Оно не может ссылаться на поле, уже существующее в схеме коллекции.</p></li>
 <li><p>Сгенерированное векторное поле не может быть допускать значение null.</p></li>
 <li><p>Поля ввода, используемые функцией, должны уже существовать в коллекции.</p></li>
-<li><p>При добавлении функции BM25 или MinHash к существующей коллекции входные данные функции должны представлять собой поле типа « <code translate="no">VARCHAR</code> ». Входные данные типа « <code translate="no">TEXT</code> » не поддерживаются в данном рабочем процессе, поскольку Milvus не может заполнить сгенерированные выходные данные для существующих сущностей на основе этого типа входных данных.</p></li>
+<li><p>При добавлении функции BM25 или MinHash в существующую коллекцию входные данные функции должны представлять собой поле типа « <code translate="no">VARCHAR</code> ». Входные данные типа « <code translate="no">TEXT</code> » не поддерживаются в данном рабочем процессе, поскольку Milvus не может заполнить сгенерированные выходные данные для существующих сущностей на основе этого типа входных данных.</p></li>
 </ul>
 <p><strong>Удаление полей, определённых пользователем</strong></p>
 <ul>
 <li><p>Нельзя удалить поле первичного ключа, поле ключа разбиения, поле кластеризующего ключа или последнее векторное поле в коллекции.</p></li>
-<li><p>Можно удалить целое поле типа « <code translate="no">ARRAY&lt;STRUCT&gt;</code> », но нельзя удалить отдельное подполе внутри поля типа « <code translate="no">ARRAY&lt;STRUCT&gt;</code> ».</p></li>
+<li><p>Можно удалить целое поле « <code translate="no">ARRAY&lt;STRUCT&gt;</code> », но нельзя удалить отдельное подполе внутри поля « <code translate="no">ARRAY&lt;STRUCT&gt;</code> ».</p></li>
 <li><p>Нельзя напрямую удалить поле, используемое в качестве поля входа функции или сгенерированное в качестве поля выхода функции. Чтобы удалить поле выхода функции, удалите саму функцию, которая его генерирует.</p></li>
 </ul>
-<p><strong>Удаление векторных полей, сгенерированных функциями</strong></p>
+<p><strong>Удаление функции и сгенерированного ею векторного поля</strong></p>
 <ul>
-<li><p>В данном рабочем процессе изменения схемы удаление функции приводит к удалению самой функции и сгенерированных ею полей вывода. Поля ввода функции остаются в схеме коллекции.</p></li>
-<li><p>Удаление функции отклоняется, если в результате удаления её полей вывода в коллекции не останется ни одного векторного поля.</p></li>
+<li><p>В этом рабочем процессе изменения схемы удаление функции приводит к удалению самой функции, сгенерированного ею векторного поля и связанного с ним индекса. Поля ввода функции остаются в схеме коллекции.</p></li>
+<li><p>Удаление функции отклоняется, если в результате удаления сгенерированного ею векторного поля в коллекции не останется ни одного векторного поля.</p></li>
 </ul>
 <div class="alert note">
 <p>Для изменений схемы, выходящих за рамки поддерживаемых операций добавления и удаления, необходимо заново создать или перенести коллекцию.</p>
 </div>
-<h2 id="Add-fields-to-an-existing-collection" class="common-anchor-header">Добавление полей в существующую коллекцию<button data-href="#Add-fields-to-an-existing-collection" class="anchor-icon" translate="no">
+<p><a id="add-fields-to-an-existing-collection"></a></p>
+<h2 id="Add-fields-and-Functions-to-an-existing-collection" class="common-anchor-header">Добавление полей и функций в существующую коллекцию<button data-href="#Add-fields-and-Functions-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,12 +85,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Выберите способ добавления поля в зависимости от того, как формируются значения поля:</p>
+    </button></h2><p>Выберите рабочий процесс в зависимости от того, добавляете ли вы пользовательское поле или функцию, генерирующую векторное поле:</p>
 <ul>
 <li><p><a href="#add-user-defined-scalar-fields--milvus-26x">Добавляйте пользовательские скалярные поля</a>, если вам нужны новые метаданные для фильтрации, вывода результатов запросов или логики приложения.</p></li>
 <li><p><a href="#add-structarray-fields--milvus-300">Добавляйте поля StructArray</a>, если вам требуется массивное поле, элементы которого имеют одинаковую схему Struct.</p></li>
 <li><p><a href="#add-user-defined-vector-fields--milvus-2618">Добавляйте пользовательские векторные поля</a>, если ваше приложение генерирует вложения и записывает векторные значения в Milvus.</p></li>
-<li><p><a href="#add-vector-fields-generated-by-functions--milvus-30x">Добавляйте векторные поля, генерируемые функциями</a>, когда Milvus должен генерировать векторные значения на основе существующих полей, например разреженные векторы BM25 или сигнатуры MinHash из текста.</p></li>
+<li><p><a href="#add-a-function-and-its-generated-vector-field--milvus-30x">Добавьте функцию и генерируемое ею векторное поле</a>, если Milvus должен генерировать векторные значения на основе существующих полей, таких как разреженные векторы BM25 или сигнатуры MinHash из текста.</p></li>
 </ul>
 <p>Во всех случаях имя нового поля не должно уже существовать в коллекции, а общее количество полей не может превышать ограничение Milvus на количество полей. Подробности см. в разделе <a href="/docs/ru/limitations.md#number-of-resources-in-a-collection">«Ограничения Milvus</a>».</p>
 <h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">Добавление пользовательских скалярных полей<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
@@ -211,7 +211,7 @@ struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</sp
     </button></h3><p>Используйте <code translate="no">add_collection_field()</code> для добавления пользовательского векторного поля, если ваше приложение генерирует вложения и записывает векторные значения в Milvus.</p>
 <p>Каждое добавленное пользовательское векторное поле должно быть допускать значение null. Существующие сущности имеют значение « <code translate="no">NULL</code> » для нового векторного поля до тех пор, пока вы не запишете векторные значения с помощью upsert или рабочего процесса backfill. Новые сущности могут включать векторное поле при вставке. Векторный поиск пропускает сущности, векторное значение которых равно « <code translate="no">NULL</code> ». Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">«Поля, допускающие значение null</a>».</p>
 <p><strong>Пример: добавление векторного поля, допускающего нулевые значения</strong></p>
-<p>В следующем примере к существующей коллекции добавляется допускающее нулевые значения плотное векторное поле с именем <code translate="no">embedding_v2</code>. Установите значение <code translate="no">dim</code> равным размерности вложений, сгенерированных вашим приложением.</p>
+<p>В следующем примере к существующей коллекции добавляется векторное поле с плотной структурой и возможностью принятия нулевых значений, имеющее имя <code translate="no">embedding_v2</code>. Установите значение <code translate="no">dim</code> равным размерности вложений, сгенерированных вашим приложением.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -239,7 +239,8 @@ client.create_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Существующие сущности имеют значение <code translate="no">NULL</code> для параметра <code translate="no">embedding_v2</code> и пропускаются при поиске по этому полю. Чтобы сделать существующие сущности доступными для поиска по параметру <code translate="no">embedding_v2</code>, запишите непустые векторные значения с помощью операции upsert или рабочего процесса backfill. Новые сущности могут включать значение <code translate="no">embedding_v2</code> при вставке.</p>
-<h3 id="Add-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Добавление векторных полей, сгенерированных функциями<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+<p><a id="add-vector-fields-generated-by-functions--milvus-30x"></a></p>
+<h3 id="Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">Добавление функции и сгенерированного ею векторного поля<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,12 +255,13 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте этот рабочий процесс, когда Milvus должен сгенерировать новое векторное поле на основе данных, уже хранящихся в существующей коллекции. Эта операция добавляет два связанных элемента схемы:</p>
+    </button></h3><p>Используйте этот рабочий процесс, когда Milvus должен сгенерировать новое векторное поле на основе данных, уже хранящихся в существующей коллекции. Операция добавляет три связанных элемента схемы:</p>
 <ul>
-<li><p>Функцию, которая считывает одно или несколько существующих полей ввода.</p></li>
-<li><p>Новое векторное поле вывода, в котором хранятся значения, сгенерированные функцией.</p></li>
+<li><p>Определение функции, которая считывает данные из одного или нескольких существующих полей ввода.</p></li>
+<li><p>Новое векторное поле, в котором хранится выходные данные функции.</p></li>
+<li><p>Определение индекса, привязанное к новому векторному полю.</p></li>
 </ul>
-<p>Например, функция BM25 считывает существующее поле « <code translate="no">VARCHAR</code> » и генерирует поле « <code translate="no">SPARSE_FLOAT_VECTOR</code> » для лексического поиска. Функция MinHash генерирует поле « <code translate="no">BINARY_VECTOR</code> » для обнаружения почти-дубликатов. Этот рабочий процесс не добавляет и не заменяет поле ввода функции.</p>
+<p>Например, функция BM25 считывает существующее поле « <code translate="no">VARCHAR</code> » и генерирует поле « <code translate="no">SPARSE_FLOAT_VECTOR</code> » для лексического поиска. Функция MinHash генерирует поле « <code translate="no">BINARY_VECTOR</code> » для обнаружения почти дубликатов. Этот рабочий процесс не добавляет и не заменяет поле ввода функции.</p>
 <div class="alert note">
 <p>Для работы этой функции требуется Storage V3. Инструкции по включению и сведения о совместимости см. в разделе <a href="/docs/ru/storage-v3.md">«Storage V3</a>».</p>
 </div>
@@ -274,10 +276,10 @@ client.create_index(
 <tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td>Поле « <code translate="no">VARCHAR</code> »</td><td>Обнаружение почти-дубликатов</td></tr>
 </tbody>
 </table>
-<p>Подробности о том, как работает каждая из этих функций, см. в разделах <a href="/docs/ru/bm25-function.md">«Функция BM25</a> » и <a href="/docs/ru/minhash-function.md">«Функция MinHash</a>».</p>
-<p>Сгенерированное векторное поле не должно уже существовать в коллекции и не может быть допускать значение null. Поле, вводимое в функцию, должно уже существовать.</p>
-<p><strong>Пример: добавление сгенерированного с помощью BM25 разреженного векторного поля для лексического поиска</strong></p>
-<p>В следующем примере к существующей коллекции добавляются функция BM25 с именем « <code translate="no">text_bm25</code> » и сгенерированное разреженное векторное поле с именем « <code translate="no">text_sparse</code> ». В коллекции уже должно присутствовать поле « <code translate="no">VARCHAR</code> » с именем « <code translate="no">text</code> » и включенным анализатором.</p>
+<p>Подробнее о том, как работает каждая из этих функций, см. в разделах <a href="/docs/ru/bm25-function.md">«Функция BM25</a> » и <a href="/docs/ru/minhash-function.md">«Функция MinHash</a>».</p>
+<p>Сгенерированное векторное поле не должно уже существовать в коллекции и не может быть допускать значение null. Поле ввода функции должно уже существовать.</p>
+<p><strong>Пример: добавление функции BM25 и сгенерированного ею разреженного векторного поля</strong></p>
+<p>В следующем примере к существующей коллекции добавляется функция BM25 с именем « <code translate="no">text_bm25</code> » и сгенерированное ею разреженное векторное поле с именем « <code translate="no">text_sparse</code> ». В коллекции уже должно присутствовать поле « <code translate="no">VARCHAR</code> » с именем « <code translate="no">text</code> », для которого включен анализатор.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -295,14 +297,7 @@ bm25_function = Function(
     function_type=FunctionType.BM25,
 )
 
-<span class="highlighted-comment-line">client.add_function_field(</span>
-<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
-<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
-<span class="highlighted-comment-line">    func=bm25_function,</span>
-<span class="highlighted-comment-line">)</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>После добавления функции BM25 и сгенерированного поля создайте индекс для разреженного векторного поля, прежде чем использовать его для поиска по BM25:</p>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
@@ -315,26 +310,35 @@ index_params.add_index(
     },
 )
 
-client.create_index(
-    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
-    index_params=index_params,
-)
+<span class="highlighted-comment-line">client.add_function_field(</span>
+<span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
+<span class="highlighted-comment-line">    field_schema=sparse_field,</span>
+<span class="highlighted-comment-line">    func=bm25_function,</span>
+<span class="highlighted-comment-line">    index_params=index_params,</span>
+<span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Концептуально эта операция добавляет следующие определения полей и функций:</p>
-<pre><code translate="no" class="language-plaintext">New generated output field:
-  name: &quot;text_sparse&quot;
-  data_type: SPARSE_FLOAT_VECTOR
-  nullable: false
-
-New function:
+<p>Объект <code translate="no">index_params</code> должен содержать ровно одно определение индекса для нового выходного поля функции. Milvus добавляет функцию, сгенерированное ею векторное поле и определение связанного индекса в рамках одного изменения схемы. Не вызывайте <code translate="no">create_index()</code> отдельно после <code translate="no">add_function_field()</code>.</p>
+<p>Концептуально эта операция добавляет следующие определения: функцию, сгенерированное поле вывода и связанный индекс:</p>
+<pre><code translate="no" class="language-plaintext">New Function:
   name: &quot;text_bm25&quot;
   type: BM25
   input_field_names: [&quot;text&quot;]
   output_field_names: [&quot;text_sparse&quot;]
+
+New generated output field:
+  name: &quot;text_sparse&quot;
+  data_type: SPARSE_FLOAT_VECTOR
+  nullable: false
+
+Bound index:
+  field_name: &quot;text_sparse&quot;
+  index_type: SPARSE_INVERTED_INDEX
+  metric_type: BM25
 <button class="copy-code-btn"></button></code></pre>
-<p>После успешного выполнения запроса команда « <code translate="no">describe_collection()</code> » возвращает как новое векторное поле « <code translate="no">text_sparse</code> », так и функцию « <code translate="no">text_bm25</code> » в схеме коллекции. Milvus генерирует выходные данные функции для новых сущностей по мере их записи. Для существующих сущностей Milvus заполняет сгенерированное векторное поле асинхронно посредством фоновой уплотнения. Видимость схемы подтверждает, что обновление схемы прошло успешно, но не означает, что заполнение данных завершилось для каждой существующей сущности. Полный рабочий процесс поиска BM25 описан в разделе <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p>
-<p>Milvus также поддерживает бинарные векторные поля, сгенерированные с помощью MinHash, для обнаружения почти-дубликатов. Функция MinHash использует поле « <code translate="no">FunctionType.MINHASH</code> » и записывает данные в новое поле вывода « <code translate="no">BINARY_VECTOR</code> ». Подробности настройки см. в разделе <a href="/docs/ru/minhash-function.md">«Функция MinHash</a>».</p>
-<h2 id="Drop-fields-from-an-existing-collection" class="common-anchor-header">Удаление полей из существующей коллекции<button data-href="#Drop-fields-from-an-existing-collection" class="anchor-icon" translate="no">
+<p>После успешного выполнения запроса ` <code translate="no">describe_collection()</code> ` возвращает как новую функцию ` <code translate="no">text_bm25</code> `, так и сгенерированное ею векторное поле ` <code translate="no">text_sparse</code> ` в схеме коллекции. Milvus генерирует выходные данные функции для новых сущностей по мере их записи. Для существующих сущностей Milvus заполняет сгенерированное векторное поле асинхронно посредством фоновой компактификации. Видимость схемы подтверждает, что обновление схемы прошло успешно, но не указывает на то, что заполнение данных завершилось для каждой существующей сущности. Полный рабочий процесс поиска BM25 описан в разделе <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p>
+<p>Milvus также поддерживает функции MinHash и сгенерированные ими двоичные векторные поля для обнаружения почти-дубликатов. Функция MinHash использует поле « <code translate="no">FunctionType.MINHASH</code> » и записывает данные в новое поле вывода « <code translate="no">BINARY_VECTOR</code> ». Подробности настройки см. в разделе <a href="/docs/ru/minhash-function.md">«Функция MinHash</a>».</p>
+<p><a id="drop-fields-from-an-existing-collection"></a></p>
+<h2 id="Drop-fields-and-Functions-from-an-existing-collection" class="common-anchor-header">Удаление полей и функций из существующей коллекции<button data-href="#Drop-fields-and-Functions-from-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,7 +353,7 @@ New function:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Удалить поля из существующей коллекции можно двумя способами. Пользовательские скалярные или векторные поля можно удалить напрямую, если они больше не входят в модель вашей коллекции. Векторные поля, сгенерированные функциями, можно удалить, удалив саму функцию, которая их генерирует.</p>
+    </button></h2><p>Вы можете удалить пользовательские поля напрямую, если они больше не входят в модель вашей коллекции. Чтобы удалить функцию и сгенерированное ею векторное поле, удалите саму функцию; Milvus удалит сгенерированное поле и его индекс в рамках одного изменения схемы.</p>
 <h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">Удаление пользовательских полей<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,15 +369,15 @@ New function:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте команду « <code translate="no">drop_collection_field()</code> » для удаления пользовательского скалярного, векторного или поля StructArray, которое больше не входит в модель коллекции.</p>
+    </button></h3><p>Используйте команду ` <code translate="no">drop_collection_field()</code> ` для удаления пользовательского скалярного, векторного или StructArray-поля, которое больше не входит в модель вашей коллекции.</p>
 <p>Удаление поля сначала изменяет схему коллекции и видимость поля:</p>
 <ul>
-<li><p>После успешного выполнения команды ` <code translate="no">drop_collection_field()</code> ` схема коллекции обновляется: команда ` <code translate="no">describe_collection()</code> ` больше не возвращает удаленное поле, а запросы или поиски больше не могут возвращать это поле в ` <code translate="no">output_fields</code> ` или использовать его в выражениях.</p></li>
+<li><p>После успешного выполнения команды « <code translate="no">drop_collection_field()</code> » схема коллекции обновляется: команда « <code translate="no">describe_collection()</code> » больше не возвращает удаленное поле, а запросы или поиски больше не могут возвращать это поле в « <code translate="no">output_fields</code> » или использовать его в выражениях.</p></li>
 <li><p>Индексы, построенные на удалённом поле, очищаются в рамках обновления схемы.</p></li>
 </ul>
-<p>Очистка хранилища выполняется отдельно от очистки схемы. Подробности см. в разделе <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">«Когда освобождается место в хранилище после удаления поля?</a>».</p>
+<p>Очистка хранилища осуществляется отдельно от очистки схемы. Подробности см. в разделе <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">«Когда освобождается место в хранилище после удаления поля?</a>».</p>
 <p><strong>Пример: удаление пользовательского скалярного поля</strong></p>
-<p>В следующем примере предполагается, что <code translate="no">experiment_tag</code> является пользовательским скалярным полем в коллекции <code translate="no">product_catalog</code>, и оно удаляется из этой коллекции.</p>
+<p>В следующем примере предполагается, что « <code translate="no">experiment_tag</code> » — это пользовательское скалярное поле в коллекции « <code translate="no">product_catalog</code> », и оно удаляется из этой коллекции.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -385,7 +389,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <p>После удаления поля можно вызвать функцию ` <code translate="no">describe_collection()</code> `, чтобы убедиться, что поле больше не входит в схему.</p>
 <p><strong>Пример: удаление поля StructArray</strong></p>
-<p>В следующем примере предполагается, что ` <code translate="no">chunks</code> ` — это поле `StructArray` в ` <code translate="no">my_collection</code>`, и оно удаляется из коллекции.</p>
+<p>В следующем примере предполагается, что ` <code translate="no">chunks</code> ` — это поле типа `StructArray` в ` <code translate="no">my_collection</code>`, и оно удаляется из коллекции.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -408,7 +412,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Если <code translate="no">image_vector</code> является последним векторным полем в коллекции, операция удаления отклоняется.</p>
-<h3 id="Drop-vector-fields-generated-by-functions--Milvus-30x" class="common-anchor-header">Удаление векторных полей, сгенерированных функциями<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-vector-fields-generated-by-functions--Milvus-30x" class="anchor-icon" translate="no">
+<p><a id="drop-vector-fields-generated-by-functions--milvus-30x"></a></p>
+<h3 id="Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">Удаление функции и сгенерированного ею векторного поля<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -423,22 +428,21 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте эту операцию, если вам больше не требуется векторное поле, сгенерированное функцией, например, разреженное векторное поле, сгенерированное BM25.</p>
-<p>Чтобы удалить сгенерированное векторное поле, вызовите операцию ` <code translate="no">drop_collection_function()</code> ` для функции, которая его генерирует. В ходе этого рабочего процесса Milvus удаляет функцию из схемы коллекции, а также удаляет сгенерированные ею векторные выходные поля.</p>
-<p>Не вызывайте операцию « <code translate="no">drop_collection_field()</code> » для поля входа или поля выхода функции. Если целевое поле является полем выхода функции, вместо этого вызовите операцию « <code translate="no">drop_collection_function()</code> ». Поля входа функции сохраняются после удаления функции.</p>
-<p><strong>Пример: удаление функции BM25 и сгенерированного ею поля</strong></p>
-<p>В следующем примере предполагается, что ` <code translate="no">text_bm25</code> ` — это функция BM25 в ` <code translate="no">product_catalog</code> `, которая генерирует разреженное векторное поле вывода с именем ` <code translate="no">text_sparse</code>`.</p>
+    </button></h3><p>Используйте эту операцию, если вам больше не нужна функция или сгенерированное ею векторное поле, например, функция BM25 и сгенерированное ею разреженное векторное поле.</p>
+<p>Вызовите команду ` <code translate="no">drop_function_field()</code> `, указав имя функции. Milvus удаляет функцию, сгенерированное ею векторное поле и связанный индекс, сохраняя при этом входные поля функции.</p>
+<p><strong>Пример: удаление функции BM25 и сгенерированного ею разреженного векторного поля</strong></p>
+<p>В следующем примере предполагается, что « <code translate="no">text_bm25</code> » — это функция BM25 в « <code translate="no">product_catalog</code> », которая генерирует разреженное векторное поле вывода с именем « <code translate="no">text_sparse</code> ».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="highlighted-comment-line">client.drop_collection_function(</span>
+<span class="highlighted-comment-line">client.drop_function_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>После успешного выполнения операции <code translate="no">describe_collection()</code> больше не возвращает удалённую функцию или сгенерированные ею выходные поля. Поля входных данных функции остаются в схеме.</p>
-<p>Если удаление выходных полей функции приведёт к тому, что в коллекции не останется ни одного векторного поля, операция отклоняется.</p>
+<p>После успешного выполнения операции <code translate="no">describe_collection()</code> больше не возвращает удалённую функцию или сгенерированное ею векторное поле. Поля ввода функции остаются в схеме.</p>
+<p>Если удаление выходного поля функции приведёт к тому, что коллекция останется без какого-либо векторного поля, операция отклоняется.</p>
 <h2 id="FAQ" class="common-anchor-header">Часто задаваемые вопросы<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -454,7 +458,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Which-add-field-method-should-I-use" class="common-anchor-header">Какой метод добавления поля следует использовать?<button data-href="#Which-add-field-method-should-I-use" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Which-method-should-I-use-to-add-a-field-or-Function" class="common-anchor-header">Какой метод следует использовать для добавления поля или функции?<button data-href="#Which-method-should-I-use-to-add-a-field-or-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -469,10 +473,9 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте <code translate="no">add_collection_field()</code> для добавления пользовательского скалярного поля, если ваше приложение предоставляет скалярные значения для фильтрации, вывода результатов запроса или реализации бизнес-логики.</p>
-<p>Используйте ` <code translate="no">add_collection_struct_field()</code> ` для добавления поля `StructArray`, если вам требуется массивное поле, элементы которого имеют одну и ту же схему `Struct`.</p>
-<p>Используйте « <code translate="no">add_collection_field()</code> » для добавления пользовательского векторного поля, если ваше приложение генерирует вложения и записывает векторные значения в Milvus.</p>
-<p>Используйте рабочий процесс «generated-vector-field», если Milvus должен генерировать векторные значения на основе существующих полей. В данном руководстве показан путь BM25 с использованием « <code translate="no">add_function_field()</code> » для лексического поиска. Milvus также поддерживает бинарные векторные поля, сгенерированные с помощью MinHash, для обнаружения почти-дубликатов.</p>
+    </button></h3><p>Используйте команду <code translate="no">add_collection_field()</code> для добавления пользовательского скалярного или векторного поля.</p>
+<p>Используйте <code translate="no">add_collection_struct_field()</code> для добавления поля StructArray, если вам требуется поле массива, элементы которого имеют одну и ту же схему Struct.</p>
+<p>Используйте ` <code translate="no">add_function_field()</code> ` для добавления функции, сгенерированного ею векторного поля и определения привязанного индекса в рамках одного изменения схемы.</p>
 <h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">Почему добавляемые пользовательские поля должны допускать нулевые значения?<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -488,8 +491,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Существующие сущности были вставлены до появления нового поля, поэтому у них отсутствуют значения для этого поля. Установка параметра « <code translate="no">nullable=True</code> » позволяет Milvus представлять отсутствующее значение как « <code translate="no">NULL</code> » до тех пор, пока ваше приложение не запишет значение или, в случае скалярных полей, пока не будет применено значение по умолчанию.</p>
-<p>Это правило применяется к пользовательским скалярным полям и пользовательским векторным полям, добавленным с помощью <code translate="no">add_collection_field()</code>, а также к полям StructArray, добавленным с помощью <code translate="no">add_collection_struct_field()</code>. Оно не применяется к векторным полям, сгенерированным функциями, которые не могут быть допускать нулевые значения.</p>
+    </button></h3><p>Существующие сущности были вставлены до появления нового поля, поэтому у них отсутствуют значения для этого поля. Установка параметра ` <code translate="no">nullable=True</code> ` позволяет Milvus представлять отсутствующее значение как ` <code translate="no">NULL</code> ` до тех пор, пока ваше приложение не запишет значение или, в случае скалярных полей, пока не будет применено значение по умолчанию.</p>
+<p>Это правило применяется к пользовательским скалярным полям и пользовательским векторным полям, добавленным с флагом « <code translate="no">add_collection_field()</code> », а также к полям StructArray, добавленным с флагом « <code translate="no">add_collection_struct_field()</code> ». Оно не применяется к сгенерированному векторному полю функции, которое не может быть допускать нулевые значения.</p>
 <h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">Что происходит с существующими сущностями после добавления пользовательского поля?<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -505,7 +508,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Для пользовательского скалярного поля существующие сущности возвращают значение по умолчанию ( <code translate="no">NULL</code> ), если вы не задали значение по умолчанию для векторного поля ( <code translate="no">default_value</code>). Если вы задали значение по умолчанию для векторного поля ( <code translate="no">default_value</code>), существующие сущности возвращают это значение по умолчанию.</p>
+    </button></h3><p>Для пользовательского скалярного поля существующие сущности возвращают значение по умолчанию ( <code translate="no">NULL</code> ), если вы не задали значение по умолчанию для нового поля ( <code translate="no">default_value</code>). Если вы задали значение по умолчанию для нового поля ( <code translate="no">default_value</code>), существующие сущности возвращают это значение.</p>
 <p>Для пользовательского векторного поля существующие сущности имеют значение « <code translate="no">NULL</code> » для нового векторного поля. Векторный поиск по добавленному полю пропускает сущности, векторное значение которых равно « <code translate="no">NULL</code> ». Чтобы сделать существующие сущности доступными для поиска по новому векторному полю, запишите непустые векторные значения с помощью операции upsert или рабочего процесса backfill. Новые сущности могут включать новое векторное поле при вставке.</p>
 <p>Для поля StructArray существующие сущности возвращают значение <code translate="no">NULL</code> для нового поля StructArray по всем его подполям. Новые сущности должны предоставлять либо значение <code translate="no">NULL</code> для всех подполей, либо допустимые значения для всех подполей.</p>
 <h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">Можно ли добавить лексический поиск BM25 в существующую коллекцию?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
@@ -523,9 +526,9 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Да. Если в коллекции уже имеется поле « <code translate="no">VARCHAR</code> » с включенным анализатором, вы можете добавить сгенерированное BM25 поле разреженного вектора для лексического поиска. В этом рабочем процессе Milvus добавляет новое поле вывода « <code translate="no">SPARSE_FLOAT_VECTOR</code> » и функцию BM25, которая генерирует значения для него. В этом рабочем процессе, связанном с изменением схемы, нельзя использовать существующее поле « <code translate="no">TEXT</code> » в качестве входных данных для BM25. Чтобы использовать входные данные « <code translate="no">TEXT</code> », определите поле и функцию BM25 при создании коллекции.</p>
-<p>После добавления сгенерированного функцией BM25 разреженного векторного поля создайте индекс « <code translate="no">SPARSE_INVERTED_INDEX</code> » с полем « <code translate="no">metric_type=&quot;BM25&quot;</code> », прежде чем использовать это поле для поиска с помощью BM25.</p>
-<h3 id="Can-I-drop-a-vector-field-generated-by-a-function-directly" class="common-anchor-header">Можно ли удалить векторное поле, сгенерированное функцией, напрямую?<button data-href="#Can-I-drop-a-vector-field-generated-by-a-function-directly" class="anchor-icon" translate="no">
+    </button></h3><p>Да. Если в коллекции уже имеется поле « <code translate="no">VARCHAR</code> » с включенным анализатором, вы можете добавить функцию BM25 и сгенерированное ею разреженное векторное поле для лексического поиска. В этом рабочем процессе Milvus добавляет функцию, новое поле вывода « <code translate="no">SPARSE_FLOAT_VECTOR</code> » и определение связанного индекса в рамках одного изменения схемы. В данном рабочем процессе изменения схемы нельзя использовать существующее поле « <code translate="no">TEXT</code> » в качестве входных данных для BM25. Чтобы использовать входные данные « <code translate="no">TEXT</code> », определите поле и функцию BM25 при создании коллекции.</p>
+<p>При вызове метода ` <code translate="no">add_function_field()</code>` необходимо предоставить объект ` <code translate="no">index_params</code> `, содержащий один индекс ` <code translate="no">SPARSE_INVERTED_INDEX</code> ` с ` <code translate="no">metric_type=&quot;BM25&quot;</code> ` для нового поля вывода. Milvus привязывает определение индекса к сгенерированному полю в рамках одного и того же изменения схемы.</p>
+<h3 id="How-do-I-drop-a-Function-and-its-generated-vector-field" class="common-anchor-header">Как удалить функцию и сгенерированное ею векторное поле?<button data-href="#How-do-I-drop-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,7 +543,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Нет. Векторное поле, сгенерированное функцией, является частью контракта схемы этой функции. Вместо этого используйте операцию « <code translate="no">drop_collection_function()</code> ». В этом рабочем процессе изменения схемы Milvus удаляет функцию и сгенерированные ею векторные выходные поля одновременно, сохраняя при этом входные поля.</p>
+    </button></h3><p>Вызовите команду ` <code translate="no">drop_function_field()</code> ` с именем функции. В рамках этого рабочего процесса изменения схемы Milvus удаляет функцию, сгенерированное ею векторное поле и связанный с ним индекс одновременно, сохраняя при этом входные поля функции.</p>
 <h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">Нужно ли ждать после изменения схемы коллекции?<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -556,8 +559,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Обычно ручное ожидание не требуется. Если ваша следующая операция зависит от обновленной схемы, вы можете сначала вызвать ` <code translate="no">describe_collection()</code> `, чтобы подтвердить схему, которую Milvus возвращает в данный момент.</p>
-<p>В распределенной среде может возникнуть небольшой период распространения изменений, пока компоненты Milvus обновляют метаданные коллекции. Если операция, выполняемая сразу после изменения схемы, завершается с ошибкой, связанной со схемой, обновите схему и повторите операцию.</p>
+    </button></h3><p>Обычно ручное ожидание не требуется. Если ваша следующая операция зависит от обновлённой схемы, вы можете сначала вызвать ` <code translate="no">describe_collection()</code> `, чтобы подтвердить схему, которую Milvus возвращает в данный момент.</p>
+<p>В распределённой среде может наблюдаться небольшой период распространения изменений, пока компоненты Milvus обновляют метаданные коллекции. Если операция, выполняемая сразу после изменения схемы, завершается с ошибкой, связанной со схемой, обновите схему и повторите операцию.</p>
 <h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">Когда освобождается место в хранилище после удаления поля?<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -574,7 +577,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
         ></path>
       </svg>
     </button></h3><p>Удаление поля исключает его из текущей схемы и из области видимости обычных запросов и поиска, однако исторические данные для этого поля не удаляются физически из объектного хранилища сразу.</p>
-<p>Место в хранилище может быть освобождено позже в ходе уплотнения. Уплотнение — это фоновый процесс, в ходе которого существующие файлы данных реорганизуются в новые, более компактные файлы. После удаления поля вновь уплотненные файлы соответствуют текущей схеме и не содержат удаленного поля. Milvus не гарантирует немедленного или происходящего в фиксированный момент времени сокращения занимаемого места в хранилище после удаления поля.</p>
+<p>Место в хранилище может быть освобождено позже в ходе уплотнения. Уплотнение — это фоновый процесс, в ходе которого существующие файлы данных реорганизуются в новые, более компактные файлы. После удаления поля вновь уплотнённые файлы соответствуют текущей схеме и не содержат удалённого поля. Milvus не гарантирует немедленного или происходящего в определённый момент времени сокращения объёма хранилища после удаления поля.</p>
 <h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Что произойдет, если я добавлю скалярное поле с тем же именем, что и ключ динамического поля?<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -57,7 +57,7 @@ title: 使用 Docker Compose 執行 Milvus（Linux）
       </svg>
     </button></h2><p>Milvus 在其儲存庫中提供了一個 Docker Compose 配置檔案。若要使用 Docker Compose 安裝 Milvus，只需執行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.21 版本新增功能：</strong></p>
+<p><strong>v2.6.22 的新功能：</strong></p>
 <ul>
 <li><strong>架構強化</strong>：新增「串流節點」並優化各項元件</li>
-<li><strong>更新依賴項</strong>：包含最新版本的 MinIO 和 etcd</li>
+<li><strong>更新的依賴項</strong>：包含最新版本的 MinIO 和 etcd</li>
 <li><strong>配置優化</strong>：優化設定以提升效能</li>
 </ul>
-<p>請務必下載最新的 Docker Compose 配置檔，以確保與 v2.6.21 功能相容。</p>
+<p>請務必下載最新的 Docker Compose 配置檔，以確保與 v2.6.22 功能相容。</p>
 <ul>
 <li><p>若您無法執行上述指令，請檢查您的系統是否已安裝 Docker Compose V1。若確實如此，根據<a href="https://docs.docker.com/compose/">本頁</a>說明，建議您遷移至 Docker Compose V2。</p></li>
 <li><p>若在拉取映像檔時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>聯絡我們，並提供問題詳情，我們將為您提供必要的支援。</p></li>
@@ -179,7 +179,7 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 圖表升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>
@@ -190,6 +190,6 @@ EOF
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

@@ -2,11 +2,11 @@
 id: keyword-match.md
 title: Pencocokan Teks
 summary: >-
-  Pencocokan teks di Milvus memungkinkan pencarian dokumen yang tepat
+  Fitur pencocokan teks di Milvus memungkinkan pencarian dokumen yang akurat
   berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian
-  yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan
-  pemfilteran skalar untuk menyempurnakan hasil kueri, sehingga memungkinkan
-  pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.
+  tersaring guna memenuhi kondisi tertentu dan dapat menggabungkan penyaringan
+  skalar untuk menyempurnakan hasil pencarian, sehingga memungkinkan pencarian
+  kesamaan di dalam vektor yang memenuhi kriteria skalar.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Pencocokan Teks<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencocokan teks di Milvus memungkinkan pencarian dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyaring hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
+    </button></h1><p>Fitur Pencocokan Teks di Milvus memungkinkan pencarian dokumen yang akurat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter guna memenuhi kondisi tertentu dan dapat menggabungkan penyaringan skalar untuk menyempurnakan hasil kueri, sehingga memungkinkan pencarian kesamaan dalam vektor yang memenuhi kriteria skalar.</p>
 <div class="alert note">
-<p>Pencocokan teks berfokus pada pencarian kemunculan yang tepat dari istilah kueri, tanpa menilai relevansi dokumen yang dicocokkan. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami sarankan Anda menggunakan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p><code translate="no">TEXT_MATCH</code> menemukan istilah yang dianalisis secara tepat, sedangkan Pencarian dengan Jarak Pengeditan ( <code translate="no">TEXT_MATCH_FUZZY</code> ) dapat mentoleransi jarak pengeditan kecil antara token kueri dan token yang diindeks. Keduanya merupakan operasi penyaringan Boolean dan tidak menilai relevansi dokumen yang cocok. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami menyarankan Anda menggunakan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap (Full Text Search)</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,17 +42,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mengintegrasikan <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> untuk mendukung indeks terbalik yang mendasarinya dan pencarian teks berbasis istilah. Untuk setiap entri teks, Milvus mengindeksnya dengan mengikuti prosedur:</p>
+    </button></h2><p>Milvus mengintegrasikan <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> untuk mendukung indeks terbalik dan pencarian teks berbasis istilah yang mendasarinya. Untuk setiap entri teks, Milvus mengindeksnya dengan mengikuti prosedur berikut:</p>
 <ol>
-<li><p><a href="/docs/id/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan menokenya menjadi kata-kata individual, atau token, dan kemudian menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus untuk membangun indeks berdasarkan token-token ini.</p></li>
+<li><p><a href="/docs/id/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan memecahnya menjadi kata-kata individual, atau token, lalu menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus membangun indeks berdasarkan token-token tersebut.</p></li>
 <li><p><a href="/docs/id/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
 </ol>
-<p>Ketika pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk mengambil semua dokumen yang mengandung istilah dengan cepat. Hal ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
-<p>
+<p>Saat pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk dengan cepat mengambil semua dokumen yang mengandung istilah tersebut. Proses ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-   </span> <span class="img-wrapper"> <span>Pencocokan Kata Kunci</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">Mengaktifkan pencocokan teks<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
+   <span>Pencocokan Kata Kunci</span>
+  
+ </span></p>
+<h2 id="Enable-text-match" class="common-anchor-header">Aktifkan pencocokan teks<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,8 +69,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pencocokan teks bekerja pada <a href="/docs/id/string.md"><code translate="no">VARCHAR</code></a> yang pada dasarnya adalah tipe data string di Milvus. Untuk mengaktifkan pencocokan teks, setel <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, lalu secara opsional konfigurasikan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk analisis teks saat menentukan skema koleksi Anda.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Tetapkan <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+    </button></h2><p>Pencocokan teks berfungsi pada bidang string yang diaktifkan untuk pencocokan. Contoh-contoh di halaman ini menggunakan <a href="/docs/id/string.md"><code translate="no">VARCHAR</code></a>, yang didukung di seluruh SDK klien. Di Milvus 3.0.x, <a href="/docs/id/text.md"><code translate="no">TEXT</code></a> bidang juga mendukung pencocokan teks saat Storage V3 diaktifkan. Untuk kedua jenis bidang tersebut, atur <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> menjadi <code translate="no">True</code>, lalu konfigurasikan <a href="/docs/id/analyzer-overview.md">penganalisis</a> secara opsional saat mendefinisikan skema koleksi Anda.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Atur ` <code translate="no">enable_analyzer</code> ` dan <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,9 +85,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengaktifkan pencocokan teks untuk bidang <code translate="no">VARCHAR</code> tertentu, setel parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code> saat menentukan skema bidang. Ini menginstruksikan Milvus untuk memberi token pada teks dan membuat indeks terbalik untuk bidang yang ditentukan, sehingga memungkinkan pencocokan teks yang cepat dan efisien.</p>
+    </button></h3><p>Untuk mengaktifkan pencocokan teks pada bidang <code translate="no">VARCHAR</code> tertentu, atur parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> menjadi <code translate="no">True</code> saat mendefinisikan skema bidang. Hal ini menginstruksikan Milvus untuk menokenisasi teks dan membuat indeks terbalik untuk bidang yang ditentukan, sehingga memungkinkan pencocokan teks yang cepat dan efisien.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
@@ -202,7 +209,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opsional: Mengkonfigurasi penganalisis<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opsional: Konfigurasikan penganalisis<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,11 +224,16 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Performa dan keakuratan pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda disesuaikan dengan berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat secara signifikan memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
-<p>Secara default, Milvus menggunakan <code translate="no">standard</code> analyzer, yang menandai teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-analyzer.md">Standar</a>.</p>
-<p>Jika diperlukan penganalisis yang berbeda, Anda dapat mengonfigurasinya menggunakan parameter <code translate="no">analyzer_params</code>. Misalnya, untuk menerapkan penganalisis <code translate="no">english</code> untuk memproses teks bahasa Inggris:</p>
+    </button></h3><p>Kinerja dan akurasi pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda dirancang khusus untuk berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat secara signifikan memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
+<p>Secara default, Milvus menggunakan penganalisis ` <code translate="no">standard</code> `, yang menokenisasi teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, serta mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-analyzer.md">Standard</a>.</p>
+<p>Jika diperlukan penganalisis yang berbeda, Anda dapat mengonfigurasinya menggunakan parameter ` <code translate="no">analyzer_params</code> `. Misalnya, untuk menerapkan penganalisis ` <code translate="no">english</code> ` guna memproses teks bahasa Inggris:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
@@ -305,8 +317,8 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus juga menyediakan berbagai penganalisis lain yang cocok untuk berbagai bahasa dan skenario. Untuk lebih jelasnya, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
-<h2 id="Use-text-match" class="common-anchor-header">Menggunakan pencocokan teks<button data-href="#Use-text-match" class="anchor-icon" translate="no">
+<p>Milvus juga menyediakan berbagai penganalisis lain yang sesuai untuk berbagai bahasa dan skenario. Untuk detail lebih lanjut, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
+<h2 id="Use-text-match" class="common-anchor-header">Gunakan pencocokan teks<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,7 +333,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda mengaktifkan pencocokan teks untuk bidang VARCHAR dalam skema koleksi Anda, Anda dapat melakukan pencocokan teks menggunakan ekspresi <code translate="no">TEXT_MATCH</code>.</p>
+    </button></h2><p>Setelah Anda mengaktifkan pencocokan teks untuk bidang ` <code translate="no">VARCHAR</code> ` atau ` <code translate="no">TEXT</code> ` dalam skema koleksi Anda, Anda dapat melakukan pencocokan teks menggunakan ekspresi ` <code translate="no">TEXT_MATCH</code> `.</p>
 <h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Sintaks ekspresi TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,16 +349,21 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ekspresi <code translate="no">TEXT_MATCH</code> digunakan untuk menentukan bidang dan istilah yang akan dicari. Sintaksnya adalah sebagai berikut:</p>
+    </button></h3><p>Ekspresi ` <code translate="no">TEXT_MATCH</code> ` digunakan untuk menentukan bidang dan istilah yang akan dicari. Sintaksnya adalah sebagai berikut:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: Nama bidang VARCHAR yang akan dicari.</p></li>
-<li><p><code translate="no">text</code>: Istilah yang akan dicari. Beberapa istilah dapat dipisahkan dengan spasi atau pembatas lain yang sesuai berdasarkan bahasa dan penganalisis yang dikonfigurasi.</p></li>
+<li><p><code translate="no">field_name</code>: Nama kolom <code translate="no">VARCHAR</code> atau <code translate="no">TEXT</code> yang mendukung pencocokan dan akan dicari.</p></li>
+<li><p><code translate="no">text</code>: Istilah-istilah yang akan dicari. Beberapa istilah dapat dipisahkan dengan spasi atau pemisah lain yang sesuai berdasarkan bahasa dan penganalisis yang dikonfigurasi.</p></li>
 </ul>
-<p>Secara default, <code translate="no">TEXT_MATCH</code> menggunakan logika pencocokan <strong>OR</strong>, yang berarti akan mengembalikan dokumen yang mengandung salah satu istilah yang ditentukan. Sebagai contoh, untuk mencari dokumen yang mengandung istilah <code translate="no">machine</code> atau <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
+<p>Secara default, <code translate="no">TEXT_MATCH</code> menggunakan logika pencocokan <strong>OR</strong>, yang berarti ekspresi ini akan mengembalikan dokumen yang mengandung salah satu istilah yang ditentukan. Misalnya, untuk mencari dokumen yang mengandung istilah <code translate="no">machine</code> atau <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>;
@@ -359,9 +376,14 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda juga dapat menggabungkan beberapa ekspresi <code translate="no">TEXT_MATCH</code> menggunakan operator logika untuk melakukan pencocokan <strong>AND</strong>.</p>
 <ul>
-<li><p>Untuk mencari dokumen yang mengandung <code translate="no">machine</code> dan <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
+<li><p>Untuk mencari dokumen yang mengandung baik <code translate="no">machine</code> maupun <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a>
+<a href="#java">Java</a>
+<a href="#go">Go</a>
+<a href="#javascript">NodeJS</a>
+<a href="#bash">cURL</a>
+</div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -372,9 +394,14 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Untuk mencari dokumen yang mengandung <code translate="no">machine</code> dan <code translate="no">learning</code> tetapi tanpa <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
+<li><p>Untuk mencari dokumen yang mengandung baik <code translate="no">machine</code> maupun <code translate="no">learning</code> tetapi tanpa <code translate="no">deep</code> di bidang <code translate="no">text</code>, gunakan ekspresi berikut:</p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a>
+<a href="#java">Java</a>
+<a href="#go">Go</a>
+<a href="#javascript">NodeJS</a>
+<a href="#bash">cURL</a>
+</div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
@@ -386,7 +413,7 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">Mencari dengan pencocokan teks<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+<h3 id="TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="common-anchor-header">Sintaks ekspresi TEXT_MATCH_FUZZY<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -401,13 +428,61 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencocokan teks dapat digunakan bersama dengan pencarian kemiripan vektor untuk mempersempit cakupan pencarian dan meningkatkan kinerja pencarian. Dengan memfilter koleksi menggunakan pencocokan teks sebelum pencarian kemiripan vektor, Anda dapat mengurangi jumlah dokumen yang perlu dicari, sehingga menghasilkan waktu kueri yang lebih cepat.</p>
-<p>Dalam contoh ini, ekspresi <code translate="no">filter</code> memfilter hasil pencarian untuk hanya menyertakan dokumen yang cocok dengan istilah yang ditentukan <code translate="no">keyword1</code> atau <code translate="no">keyword2</code>. Pencarian kemiripan vektor kemudian dilakukan pada subset dokumen yang difilter ini.</p>
+    </button></h3><p>Gunakan <code translate="no">TEXT_MATCH_FUZZY</code> untuk mentoleransi perbedaan ejaan antara token kueri dan token yang diindeks. Milvus menganalisis teks kueri dengan penganalisis bidang dan menerapkan pencocokan fuzzy ke setiap token yang dihasilkan. Jika kueri menghasilkan beberapa token, ekspresi tersebut akan mencocokkan suatu entitas ketika ada token yang memenuhi jarak edit yang telah dikonfigurasi.</p>
+<p>Sintaksnya adalah sebagai berikut:</p>
+<pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
+<button class="copy-code-btn"></button></code></pre>
+<ul>
+<li><p><code translate="no">field_name</code>: Nama bidang ` <code translate="no">VARCHAR</code> ` atau ` <code translate="no">TEXT</code> ` yang diaktifkan untuk pencocokan, yang akan dicari.</p></li>
+<li><p><code translate="no">text</code>: Teks kueri yang akan dianalisis dan dicocokkan dengan token yang diindeks.</p></li>
+<li><p><code translate="no">max_edit_distance</code>: Jarak edit maksimum yang diizinkan untuk setiap token kueri. Nama opsi harus persis <code translate="no">max_edit_distance</code>, dan nilainya harus <code translate="no">0</code>, <code translate="no">1</code>, atau <code translate="no">2</code>. Nilai <code translate="no">0</code> melakukan pencocokan token yang tepat, setara dengan <code translate="no">TEXT_MATCH</code>.</p></li>
+</ul>
+<p>Misalnya, ekspresi berikut mencocokkan token yang berbeda satu karakter dari <code translate="no">machne</code>, termasuk <code translate="no">machine</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">TEXT_MATCH_FUZZY</code> merupakan bagian dari sintaks ekspresi filter, sehingga SDK klien tidak memerlukan metode pencocokan kabur khusus. Masukkan ekspresi tersebut melalui parameter <code translate="no">filter</code> yang sama yang digunakan untuk <code translate="no">TEXT_MATCH</code> dalam operasi pencarian atau kueri.</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">Pencarian dengan pencocokan teks<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pencocokan teks dapat digunakan bersama dengan pencarian kesamaan vektor untuk mempersempit cakupan pencarian dan meningkatkan kinerja pencarian. Dengan menyaring koleksi menggunakan pencocokan teks sebelum pencarian kesamaan vektor, Anda dapat mengurangi jumlah dokumen yang perlu dicari, sehingga waktu kueri menjadi lebih cepat.</p>
+<p>Dalam contoh ini, ekspresi ` <code translate="no">filter</code> ` menyaring hasil pencarian agar hanya mencakup dokumen yang cocok dengan istilah yang ditentukan, yaitu ` <code translate="no">keyword1</code> ` atau ` <code translate="no">keyword2</code>`. Pencarian kesamaan vektor kemudian dilakukan pada subset dokumen yang telah disaring ini.</p>
 <div class="alert note">
-<p>Anda dapat menyorot istilah yang cocok di hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/text-highlighter.md">Teks</a> untuk detailnya.</p>
+<p>Anda dapat menyorot istilah yang cocok dalam hasil pencarian dengan mengonfigurasi penyorot teks. Lihat <a href="/docs/id/text-highlighter.md">Penyorot Teks</a> untuk detailnya.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>
 
@@ -500,10 +575,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencocokan teks juga dapat digunakan untuk pemfilteran skalar dalam operasi kueri. Dengan menetapkan ekspresi <code translate="no">TEXT_MATCH</code> dalam parameter <code translate="no">expr</code> dari metode <code translate="no">query()</code>, Anda dapat mengambil dokumen yang cocok dengan istilah yang diberikan.</p>
-<p>Contoh di bawah ini mengambil dokumen di mana bidang <code translate="no">text</code> berisi kedua istilah <code translate="no">keyword1</code> dan <code translate="no">keyword2</code>.</p>
+    </button></h3><p>Pencocokan teks juga dapat digunakan untuk penyaringan skalar dalam operasi kueri. Dengan menentukan ekspresi <code translate="no">TEXT_MATCH</code> pada parameter <code translate="no">expr</code> dari metode <code translate="no">query()</code>, Anda dapat mengambil dokumen yang cocok dengan istilah yang diberikan.</p>
+<p>Contoh di bawah ini mengambil dokumen di mana bidang ` <code translate="no">text</code> ` berisi kedua istilah ` <code translate="no">keyword1</code> ` dan ` <code translate="no">keyword2</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
 
@@ -573,12 +653,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Mengaktifkan pencocokan istilah untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan ketika memutuskan untuk mengaktifkan fitur ini, karena bervariasi berdasarkan ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
-<li><p>Setelah Anda mendefinisikan penganalisis dalam skema Anda, pengaturannya menjadi permanen untuk koleksi tersebut. Jika Anda memutuskan bahwa penganalisis yang berbeda lebih sesuai dengan kebutuhan Anda, Anda dapat mempertimbangkan untuk menghapus koleksi yang ada dan membuat koleksi baru dengan konfigurasi penganalisis yang diinginkan.</p></li>
-<li><p>Aturan pelarian dalam ekspresi <code translate="no">filter</code>:</p>
+<li><p>Mengaktifkan pencocokan istilah untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan saat memutuskan untuk mengaktifkan fitur ini, karena dampaknya bervariasi tergantung pada ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
+<li><p>Setelah Anda mendefinisikan penganalisis dalam skema Anda, pengaturannya menjadi permanen untuk koleksi tersebut. Jika Anda memutuskan bahwa penganalisis lain lebih sesuai dengan kebutuhan Anda, Anda dapat mempertimbangkan untuk menghapus koleksi yang ada dan membuat yang baru dengan konfigurasi penganalisis yang diinginkan.</p></li>
+<li><p>Aturan escape dalam ekspresi <code translate="no">filter</code>:</p>
 <ul>
-<li><p>Karakter yang diapit oleh tanda kutip ganda atau tanda kutip tunggal di dalam ekspresi ditafsirkan sebagai konstanta string. Jika konstanta string menyertakan karakter escape, karakter escape harus direpresentasikan dengan urutan escape. Misalnya, gunakan <code translate="no">\\</code> untuk mewakili <code translate="no">\</code>, <code translate="no">\\t</code> untuk mewakili tab <code translate="no">\t</code>, dan <code translate="no">\\n</code> untuk mewakili baris baru.</p></li>
-<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal dalam konstanta tersebut harus direpresentasikan sebagai <code translate="no">\\'</code> sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
-<li><p>Jika konstanta string diapit oleh tanda kutip ganda, tanda kutip ganda di dalam konstanta harus direpresentasikan sebagai <code translate="no">\\&quot;</code> sedangkan tanda kutip tunggal dapat direpresentasikan sebagai <code translate="no">'</code> atau <code translate="no">\\'</code>. Contoh: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
+<li><p>Karakter yang diapit tanda kutip ganda atau tanda kutip tunggal dalam ekspresi diinterpretasikan sebagai konstanta string. Jika konstanta string tersebut mengandung karakter escape, karakter escape tersebut harus direpresentasikan dengan urutan escape. Misalnya, gunakan ` <code translate="no">\\</code> ` untuk merepresentasikan ` <code translate="no">\</code>`, ` <code translate="no">\\t</code> ` untuk merepresentasikan tab ` <code translate="no">\t</code>`, dan ` <code translate="no">\\n</code> ` untuk merepresentasikan baris baru.</p></li>
+<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal di dalam konstanta tersebut harus direpresentasikan sebagai <code translate="no">\\'</code>, sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Jika konstanta string diapit oleh tanda kutip ganda, tanda kutip ganda di dalam konstanta tersebut harus ditulis sebagai <code translate="no">\\&quot;</code>, sedangkan tanda kutip tunggal dapat ditulis sebagai <code translate="no">'</code> atau <code translate="no">\\'</code>. Contoh: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

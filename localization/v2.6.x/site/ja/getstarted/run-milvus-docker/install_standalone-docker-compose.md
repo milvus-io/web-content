@@ -57,7 +57,7 @@ title: Docker Compose を使用して Milvus を実行する（Linux）
       </svg>
     </button></h2><p>Milvusのリポジトリには、Docker Compose用の設定ファイルが用意されています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.21の新機能:</strong></p>
+<p><strong>v2.6.22の新機能：</strong></p>
 <ul>
 <li><strong>アーキテクチャの強化</strong>：新しいストリーミングノードと最適化されたコンポーネントを搭載</li>
 <li><strong>依存関係の更新</strong>：最新の MinIO および etcd バージョンが含まれています</li>
 <li><strong>設定の改善</strong>：パフォーマンス向上のための設定最適化</li>
 </ul>
-<p>v2.6.21の機能との互換性を確保するため、常に最新のDocker Compose設定ファイルをダウンロードしてください。</p>
+<p>v2.6.22の機能との互換性を確保するため、常に最新のDocker Compose設定ファイルをダウンロードしてください。</p>
 <ul>
 <li><p>上記のコマンドの実行に失敗した場合は、お使いのシステムに Docker Compose V1 がインストールされていないかご確認ください。インストールされている場合は、<a href="https://docs.docker.com/compose/">このページ</a>に記載されている注意事項に基づき、Docker Compose V2 への移行をお勧めします。</p></li>
 <li><p>イメージの取得で問題が発生した場合は、問題の詳細を<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p></li>
@@ -83,7 +83,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>「milvus-standalone</strong>」、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動します。
 <ul>
-<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされます。</li>
+<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開せず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングします。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
 </ul></li>
@@ -181,7 +181,7 @@ EOF
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスターのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
+<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>

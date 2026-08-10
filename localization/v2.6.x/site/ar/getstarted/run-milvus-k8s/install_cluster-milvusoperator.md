@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق <a href="/docs/ar/v2.6.x/prerequisite-helm.md">من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
-<li><p>قبل تثبيت Milvus، يُنصح باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool</a> ) لتقدير متطلبات الأجهزة بناءً على حجم بياناتك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
+<li><p>قبل تثبيت Milvus، يوصى باستخدام أداة <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> لتقدير متطلبات الأجهزة بناءً على حجم بياناتك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.21) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.22) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/v2.6.x/use-woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
@@ -306,7 +306,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>يمكنك عرض تحديث تكوينات مجموعة Milvus الخاصة بك عن طريق استدعاء الأمر <code translate="no">patch</code> كما يلي:</p>
 <ol>
 <li><p>قم بتشغيل الأمر التالي لمعاينة الإعدادات المقترحة.</p>
-<p>يفترض ما يلي أنك تريد تحديث معلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
+<p>يفترض ما يلي أنك تريد تحديث معلمة « <code translate="no">spec.components.disableMetric</code> » إلى « <code translate="no">false</code> » مللي ثانية.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>

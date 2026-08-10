@@ -80,7 +80,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Vedi <a href="#Additional-disk-requirements">i requisiti aggiuntivi relativi al disco</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>In bundle con Milvus (modalità servizio: <code translate="no">v0.1.36</code>+)</td><td>Coda di messaggi predefinita. Per le distribuzioni distribuite, Woodpecker può essere eseguito come <strong>servizio</strong> dedicato; fissarne la versione con <code translate="no">--set woodpecker.image.tag</code>. La modalità servizio è supportata a partire dalla versione <code translate="no">v0.1.36</code> di Woodpecker.</td></tr>
+<tr><td>Woodpecker</td><td>In bundle con Milvus (modalità servizio: <code translate="no">v0.1.37</code>+)</td><td>Coda di messaggi predefinita. Per le distribuzioni distribuite, Woodpecker può essere eseguito come <strong>servizio</strong> dedicato; fissarne la versione con <code translate="no">--set woodpecker.image.tag</code>. La modalità servizio è supportata a partire dalla versione <code translate="no">v0.1.37</code> di Woodpecker.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Opzionale — solo se si passa alla coda di messaggi Pulsar; non installato di default.</td></tr>
 </tbody>
 </table>
@@ -139,7 +139,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Scarica minikube</li>
 </ol>
-<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il binario.</p>
+<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il file binario.</p>
 <ol start="2">
 <li>Avviare un cluster K8s utilizzando minikube</li>
 </ol>

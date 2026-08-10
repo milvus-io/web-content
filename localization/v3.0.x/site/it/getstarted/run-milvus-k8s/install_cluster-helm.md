@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Distribuzione del cluster Milvus:</strong></p>
 <div class="alert note">
-<p>Per la modalità di servizio Woodpecker, si consiglia di utilizzare la prossima versione Milvus 3.0.1 o una versione successiva con Woodpecker v0.1.36 o successive per la pulizia della compattazione e le ottimizzazioni del group commit.</p>
+<p>Per la modalità di servizio Woodpecker, si consiglia di utilizzare la prossima versione Milvus 3.0.1 o una versione successiva con Woodpecker v0.1.37 o successive per le ottimizzazioni relative alla pulizia della compattazione e al group commit.</p>
 </div>
 <p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione v3.0.0, utilizzando Woodpecker come coda di messaggi consigliata:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -314,7 +314,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, a cui è possibile accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema grazie a un'interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, accessibile tramite il browser. Milvus WebUI migliora l’osservabilità del sistema grazie a un’interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a></p>
 <p>Per abilitare l’accesso a Milvus WebUI, è necessario effettuare il port forwarding del pod proxy su una porta locale.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091

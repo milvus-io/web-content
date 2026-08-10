@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます：</p>
+<p>Milvus OperatorのPodが実行中かどうかは、次のように確認できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.21 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.22 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
@@ -236,7 +236,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを作成します。</p>
+<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを構築します。</p>
 <p>Milvusクラスタの準備が完了すると、Milvusクラスタ内のすべてのポッドのステータスは以下のようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -276,7 +276,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
-<p>Milvusをスタンドアロンモードでデプロイした場合は、pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
+<p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
 </div>
 <p>次に、以下のコマンドを実行して、ローカルポートを Milvus がサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
@@ -287,7 +287,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>これで、転送されたポートを使用して Milvus に接続できるようになります。</p>
+<p>これで、転送されたポートを使用してMilvusに接続できるようになります。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>デフォルトの設定で Milvus クラスタを削除した場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
+<li>デフォルトの設定で Milvus クラスタを削除する場合、etcd、Pulsar、MinIO などの依存関係は削除されません。そのため、次回同じ Milvus クラスタインスタンスをインストールする際には、これらの依存関係が再利用されます。</li>
 <li>Milvus クラスタとともに依存関係および永続ボリュームクレーム (PVC) を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>

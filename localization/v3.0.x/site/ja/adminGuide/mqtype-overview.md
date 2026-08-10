@@ -49,8 +49,8 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>各Milvusインスタンスは、メッセージキューを1つだけ使用します。</p></li>
-<li><p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.0 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p></li>
-<li><p>実行中のインスタンスのメッセージキューを変更するには、<a href="/docs/ja/switch-mq-type.md">「MQ タイプの切り替え」を</a>参照してください。「MQ 切り替え」機能は<strong>Milvus 3.0 以降で</strong>利用可能です。まず Milvus 3.0 以降にアップグレードしてください。</p></li>
+<li><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.0 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p></li>
+<li><p>実行中のインスタンスのメッセージキューを変更するには、<a href="/docs/ja/switch-mq-type.md">「メッセージキューの切り替え</a>」を参照してください。「メッセージ<a href="/docs/ja/switch-mq-type.md">キュー</a>の切り替え」機能は<strong>Milvus 3.0 以降で</strong>利用可能です。まず Milvus 3.0 以降にアップグレードしてください。</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">メッセージキューの選択<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

@@ -122,12 +122,12 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una volta installato il chart Helm, è possibile avviare Milvus su Kubernetes. Questa sezione illustra come distribuire un cluster Milvus.</p>
+    </button></h3><p>Una volta installato il chart Helm, è possibile avviare Milvus su Kubernetes. Questa sezione guida l’utente attraverso la distribuzione di un cluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Preferisci invece una distribuzione in modalità standalone?</strong></p>
 <p>Se preferisci distribuire Milvus in modalità standalone (singolo nodo) per lo sviluppo o il test, utilizza questo comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Nota</strong>: la modalità autonoma utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per ulteriori dettagli, consultare la <a href="/docs/it/v2.6.x/architecture_overview.md">Panoramica dell'architettura</a> e <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a>.</p>
 </div>
 <p><strong>Distribuzione del cluster Milvus:</strong></p>
-<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione v2.6.21, utilizzando Woodpecker come coda di messaggi consigliata:</p>
+<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.22, utilizzando Woodpecker come coda di messaggi consigliata:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -149,7 +149,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li>Utilizza <strong>Woodpecker</strong> come coda di messaggi (consigliato per ridurre la manutenzione)</li>
 <li>Abilita il nuovo componente <strong>Streaming Node</strong> per migliorare le prestazioni</li>
-<li>Disabilita il <strong>nodo di indicizzazione</strong> legacy (la funzionalità è ora gestita dal nodo dati)</li>
+<li>Disattiva il <strong>nodo di indicizzazione</strong> legacy (la funzionalità è ora gestita dal nodo dati)</li>
 <li>Disabilita Pulsar per utilizzare invece Woodpecker</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opzioni alternative per la coda dei messaggi:</strong></p>
 <p>Se si preferisce utilizzare <strong>Pulsar</strong> (scelta tradizionale) anziché Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.21 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.22 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ Il comando sopra riportato distribuisce Milvus con le configurazioni consigliate
     </button></h3><p>Verifica che la distribuzione sia andata a buon fine controllando lo stato dei pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendere che tutti i pod mostrino lo stato “Running”.</strong> Con la configurazione v2.6.21, si dovrebbero vedere pod simili a:</p>
+<p><strong>Attendere che tutti i pod mostrino lo stato “Running”.</strong> Con la configurazione v2.6.22, si dovrebbero vedere pod simili a:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -233,7 +233,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Componenti Milvus</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
 <li><strong>Dipendenze</strong>: <code translate="no">etcd</code> (metadati), <code translate="no">minio</code> (archiviazione oggetti), <code translate="no">pulsar</code> (coda messaggi)</li>
 </ul>
-<p>È inoltre possibile accedere <strong>all’interfaccia web di Milvus</strong> all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta configurato il reindirizzamento delle porte (vedere il passaggio successivo). Per ulteriori dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia web di Milvus</a>.</p>
+<p>È inoltre possibile accedere <strong>all’interfaccia utente web di Milvus</strong> all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta configurato il reindirizzamento delle porte (vedere il passaggio successivo). Per ulteriori dettagli, consultare la documentazione relativa <a href="/docs/it/v2.6.x/milvus-webui.md">all’interfaccia utente web di Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connettersi a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,14 +265,14 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>Opzioni per il port forwarding:</strong></p>
 <ul>
 <li><strong>Assegnazione automatica della porta locale</strong>: utilizzare <code translate="no">:19530</code> al posto di <code translate="no">27017:19530</code> per consentire a kubectl di scegliere una porta disponibile</li>
-<li><strong>Ascolto su tutte le interfacce</strong>: Aggiungere <code translate="no">--address 0.0.0.0</code> per consentire le connessioni da altre macchine:
+<li><strong>Ascolto su tutte le interfacce</strong>: Aggiungi <code translate="no">--address 0.0.0.0</code> per consentire connessioni da altre macchine:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
 <li><strong>Distribuzione autonoma</strong>: se si utilizza la modalità autonoma, il nome del servizio rimane lo stesso</li>
 </ul>
 </div>
 <p><strong>Tenere aperto questo terminale</strong> durante l’utilizzo di Milvus. Ora è possibile connettersi a Milvus utilizzando qualsiasi SDK Milvus all’indirizzo <code translate="no">localhost:27017</code>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +499,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, puoi:</p>
 <ul>
-<li><p>Consultare la guida " <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> " per scoprire le funzionalità di Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> per scoprire le funzionalità di Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>

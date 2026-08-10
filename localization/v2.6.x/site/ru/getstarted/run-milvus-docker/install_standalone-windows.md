@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
 <li><p>Выполните следующие команды в PowerShell или командной строке Windows, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -231,8 +231,8 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>Загрузите файл конфигурации Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<li><p>Загрузите файл конфигурации Milvus.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>
@@ -277,14 +277,14 @@ Creating milvus-standalone ... done​
     </button></h3><p>После установки Docker Desktop в Windows может возникнуть ошибка « <code translate="no">Docker Engine stopped</code> », если ваш компьютер настроен некорректно. В этом случае необходимо выполнить следующие проверки:​</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.​</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.​</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
    <span>Виртуализация в «Диспетчере задач»</span>
   
  </span></p>
-<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> по включению виртуализации.​</p>
+<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
 <p>Затем необходимо перезагрузить компьютер и включить Hyper-V. Подробности см. в этой <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">статье Microsoft</a>.​</p></li>
 <li><p>Проверьте, запущена ли служба Docker Desktop.</p>
 <p>Для запуска службы Docker Desktop можно выполнить следующую команду.</p>
@@ -333,7 +333,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h3><p>Если при запуске Milvus из WSL 2 у вас возникли проблемы, связанные с WSL, возможно, вам необходимо проверить, настроен ли Docker Desktop на использование движка на основе WSL 2, следующим образом:​</p>
 <ol>
-<li><p>Убедитесь, что в разделе <strong>«Настройки»</strong> &gt; <strong>«Общие»</strong> установлен флажок «Использовать движок на основе WSL 2».</p>
+<li><p>Убедитесь, что в разделе <strong>«Настройки»</strong> &gt; <strong>«Общие»</strong> установлен флажок «Использовать движок на основе WSL 2». ​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus с сообщением « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus: « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

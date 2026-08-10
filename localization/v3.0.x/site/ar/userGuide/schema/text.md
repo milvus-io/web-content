@@ -22,12 +22,12 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>في تطبيقات البحث القائمة على الذكاء الاصطناعي، يساعدك البحث المتجهي في العثور على كيانات متشابهة من الناحية الدلالية، لكن التطبيق غالبًا ما يحتاج أيضًا إلى النص الأصلي وراء كل مطابقة. يمكن لنموذج اللغة الكبير (LLM) أو الوكيل استخدام هذا النص كسياق للقراءة أو الاقتباس أو التلخيص أو تضمين النتيجة في موجه.</p>
-<p>يوفر Milvus نوع الحقل القياسي « <code translate="no">TEXT</code> » لتخزين النص المصدر الطويل مباشرةً مع الكيانات. وتشمل القيم النموذجية مقاطع نصية، ووثائق طويلة، ونصوص مقالات، وتذاكر، وسجلات. وعلى عكس « <code translate="no">VARCHAR</code> » الذي يتطلب « <code translate="no">max_length</code> » ثابتًا، لا يتطلب « <code translate="no">TEXT</code> » تعيين الحد الأقصى لطول البايت في مخطط المجموعة.</p>
-<p>لتعريف حقل « <code translate="no">TEXT</code> »، قم بتعيين « <code translate="no">datatype</code> » إلى « <code translate="no">DataType.TEXT</code> ».</p>
+<p>يوفر Milvus نوع الحقل القياسي « <code translate="no">TEXT</code> » لتخزين النص المصدر الطويل مباشرةً مع الكيانات. وتشمل القيم النموذجية مقاطع نصية، ووثائق طويلة، ونصوص المقالات، والتذاكر، والسجلات. وعلى عكس « <code translate="no">VARCHAR</code> » الذي يتطلب « <code translate="no">max_length</code> » ثابتًا، لا يتطلب « <code translate="no">TEXT</code> » تعيين الحد الأقصى لطول البايت في مخطط المجموعة.</p>
+<p>لتعريف حقل « <code translate="no">TEXT</code> »، قم بتعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.TEXT</code>.</p>
 <div class="alert note">
-<p>تتطلب هذه الميزة Storage V3. للاطلاع على إرشادات التفعيل واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
+<p>تتطلب هذه الميزة Storage V3. للاطلاع على إرشادات التمكين واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
 </div>
-<p>يرفض Milvus مخطط المجموعة الذي يحتوي على حقل " <code translate="no">TEXT</code> " أثناء تعطيل Storage V3.</p>
+<p><a href="/docs/ar/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a> القيمة الافتراضية هي <code translate="no">false</code> ، مما يعني أن Storage V3 معطّل افتراضيًا. قبل إنشاء مجموعة تحتوي على حقل <code translate="no">TEXT</code> ، اضبط هذه المعلمة على <code translate="no">true</code> ؛ وإلا، سيرفض Milvus مخطط المجموعة.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
@@ -53,12 +53,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>لا يمكن أن يكون حقل « <code translate="no">TEXT</code> » حقلًا أساسيًا. تدعم الحقول الأساسية « <code translate="no">INT64</code> » و« <code translate="no">VARCHAR</code> ».</li>
-<li>في Milvus 3.0.0، لا تدعم الحقول من نوع « <code translate="no">TEXT</code> » <code translate="no">PHRASE_MATCH</code>.</li>
-<li>في Milvus 3.0.0، لا تدعم الحقول <code translate="no">TEXT</code> القيم الافتراضية.</li>
+<li>لا يمكن أن يكون حقل <code translate="no">TEXT</code> حقلًا أساسيًا أو مفتاح تقسيم أو مفتاح تجميع.</li>
+<li><code translate="no">TEXT</code> لا يمكن استخدام كنوع عنصر لحقل <code translate="no">ARRAY</code> ، بما في ذلك حقل فرعي قياسي في <code translate="no">StructArray</code>.</li>
+<li>في Milvus 3.0.0، لا تدعم الحقول ذات القيم القابلة للفراغ ( <code translate="no">TEXT</code> ) القيم الافتراضية.</li>
 <li>في Milvus 3.0.0، لا يتم دعم حقول <code translate="no">TEXT</code> في المجموعات الخارجية.</li>
-<li>في Milvus 3.0.0، لا تدعم حقول <code translate="no">TEXT</code> الفهارس القياسية.</li>
-<li><code translate="no">TEXT</code> ليس مخصصًا لتصفية البيانات الوصفية العادية. إذا كنت بحاجة إلى التصفية بناءً على بيانات وصفية ذات سلاسل قصيرة وكانت قيمة الحقل تتناسب مع حد طول <code translate="no">VARCHAR</code> ، فاستخدم <code translate="no">VARCHAR</code>.</li>
+<li>لا يمكن للمستخدمين إنشاء فهرس سكالي على حقل <code translate="no">TEXT</code>. عند استخدام <code translate="no">enable_match=True</code> ، يقوم Milvus بإنشاء فهرس نصي يديره النظام لمطابقة النصوص. هذا الفهرس الداخلي ليس فهرسًا سكاليًا أنشأه المستخدم.</li>
+<li>لا يمكن تطبيق عوامل التصفية القياسية العامة مباشرةً على حقل <code translate="no">TEXT</code>. وتشمل هذه عوامل المقارنة مثل <code translate="no">==</code> و <code translate="no">!=</code> ، وعوامل النطاق مثل <code translate="no">&gt;</code> و <code translate="no">&gt;=</code> و <code translate="no">&lt;</code> و <code translate="no">&lt;=</code> ، بالإضافة إلى <code translate="no">IN</code> و <code translate="no">LIKE</code> وعوامل التعبير النمطي (<code translate="no">=~</code> و <code translate="no">!~</code>) و <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code>. للتصفية حسب المصطلحات التي تم تحليلها، قم بتعريف الحقل باستخدام <code translate="no">enable_analyzer=True</code> و <code translate="no">enable_match=True</code> ، واستخدم <a href="/docs/ar/keyword-match.md"><code translate="no">TEXT_MATCH</code> أو <code translate="no">TEXT_MATCH_FUZZY</code></a>. لاسترجاع النص الكامل مرتبًا حسب الصلة، استخدم BM25.</li>
+<li>في Milvus 3.0.0، يجب تعريف دالة BM25 أو MinHash التي تستخدم حقل <code translate="no">TEXT</code> كمدخلات عند إنشاء المجموعة. ولا يمكن إضافتها لاحقًا عبر <code translate="no">add_function_field</code> أو <code translate="no">AlterCollectionSchema</code> ، حتى لو كانت المجموعة الحالية فارغة، لأن Milvus لا يمكنه ملء ناتج الدالة من قيم <code translate="no">TEXT</code> المخزنة. لإضافة مثل هذه الوظيفة إلى مجموعة موجودة، استخدم حقل الإدخال « <code translate="no">VARCHAR</code> »، أو أعد إنشاء المجموعة مع تضمين الوظيفة في مخططها. للحصول على تفاصيل حول إضافة وظيفة وحقل المتجه الناتج عنها، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md#add-a-function-and-its-generated-vector-field--milvus-30x">«Alter Collection Schema</a>».</li>
+<li>يجب أيضًا تعريف وظائف تضمين النص عند إنشاء المجموعة. لا يدعم Milvus 3.0.0 إضافتها أثناء وقت التشغيل.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">اختر TEXT أو VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +77,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> و <code translate="no">VARCHAR</code> كلاهما يخزنان قيمًا نصية، لكنهما يدعمان احتياجات تطبيقات مختلفة. استخدم <code translate="no">VARCHAR</code> للبيانات الوصفية القصيرة والمحدودة التي تحدد الكيانات أو تصنفها أو ترشحها. استخدم <code translate="no">TEXT</code> للمحتوى المصدر الأطول الذي يوفر لنموذج اللغة الكبير (LLM) أو الوكيل سياقًا كافيًا للقراءة أو الاقتباس أو التلخيص أو إنشاء موجه.</p>
+    </button></h2><p><code translate="no">TEXT</code> و <code translate="no">VARCHAR</code> ، وكلاهما يخزنان قيمًا نصية، لكنهما يدعمان احتياجات تطبيقات مختلفة. استخدم « <code translate="no">VARCHAR</code> » للبيانات الوصفية القصيرة والمحدودة التي تحدد الكيانات أو تصنفها أو ترشحها. استخدم « <code translate="no">TEXT</code> » للمحتوى المصدر الأطول الذي يوفر لنموذج اللغة الكبير (LLM) أو الوكيل سياقًا كافيًا للقراءة أو الاقتباس أو التلخيص أو إنشاء موجه.</p>
 <table>
 <thead>
 <tr><th>الجانب</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
@@ -83,9 +85,9 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td>الأفضل لـ</td><td>البيانات الوصفية القصيرة المستخدمة لتحديد الكيانات أو تصنيفها أو تصفيتها، مثل <code translate="no">title</code> أو <code translate="no">tag</code> أو <code translate="no">category</code> أو <code translate="no">external_id</code>.</td><td>محتوى مصدر أطول تستخدمه نماذج اللغة الكبيرة (LLM) أو سير عمل الوكلاء، مثل <code translate="no">content</code> أو <code translate="no">passage</code> أو <code translate="no">article_body</code> أو <code translate="no">log_message</code>.</td></tr>
 <tr><td>إعداد الطول</td><td>يتطلب <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل تخزينها. القيمة القصوى هي <code translate="no">65,535</code> بايت. إذا كانت القيمة قد تتجاوز هذا الحد، فاستخدم <code translate="no">TEXT</code>.</td><td>لا يتطلب <code translate="no">max_length</code> ، لذا لا يحتاج المخطط إلى حد ثابت للبايتات لقيمة النص.</td></tr>
-<tr><td>سلوك التخزين</td><td>يخزن كل قيمة ضمن نطاق التخزين المحدد ( <code translate="no">max_length</code>) للحقل.</td><td>يستخدم الاختيار التلقائي للتخزين للقيم النصية الأكبر حجمًا. لمزيد من التفاصيل، راجع <a href="#how-milvus-stores-large-text-values">كيفية تخزين Milvus للقيم النصية الكبيرة</a>.</td></tr>
+<tr><td>سلوك التخزين</td><td>يخزن كل قيمة ضمن نطاق التخزين المحدد ( <code translate="no">max_length</code>) للحقل.</td><td>يستخدم التحديد التلقائي للتخزين للقيم النصية الأكبر حجمًا. لمزيد من التفاصيل، راجع <a href="#how-milvus-stores-large-text-values">كيفية تخزين Milvus للقيم النصية الكبيرة</a>.</td></tr>
 <tr><td>دعم الحقل الأساسي</td><td>يمكن استخدامه كحقل أساسي.</td><td>لا يمكن استخدامه كحقل أساسي.</td></tr>
-<tr><td>التصفية</td><td>يُستخدم للبيانات الوصفية ذات السلاسل القصيرة التي يجب أن تظهر في تعبيرات التصفية، مثل <code translate="no">category == &quot;news&quot;</code> أو <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>غير مخصص لتصفية البيانات الوصفية العادية.</td></tr>
+<tr><td>التصفية</td><td>يُستخدم للبيانات الوصفية ذات السلاسل القصيرة التي يجب أن تظهر في تعبيرات التصفية، مثل <code translate="no">category == &quot;news&quot;</code> أو <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>لا يدعم عوامل التصفية القياسية العامة. استخدم عوامل النص التي تدعم المطابقة لتصفية المصطلحات التي تم تحليلها، أو BM25 لاسترجاع النص الكامل مرتبًا حسب الصلة.</td></tr>
 </tbody>
 </table>
 <p>للحصول على تفاصيل حول حقول <code translate="no">VARCHAR</code> ، راجع <a href="/docs/ar/string.md">حقل VarChar</a>.</p>
@@ -197,7 +199,7 @@ client.create_collection(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-3-Insert-TEXT-data" class="common-anchor-header">الخطوة 3: إدراج بيانات TEXT<button data-href="#Step-3-Insert-TEXT-data" class="anchor-icon" translate="no">
+<h2 id="Step-3-Insert-TEXT-data" class="common-anchor-header">الخطوة 3: إدراج بيانات النص<button data-href="#Step-3-Insert-TEXT-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,7 +214,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>أدخل النص مباشرةً في حقل « <code translate="no">TEXT</code> ». لا تقم بتوفير قيم لحقل « <code translate="no">sparse</code> ». يقوم Milvus بإنشاء المتجهات المتفرقة داخليًّا من خلال تطبيق دالة BM25 على « <code translate="no">content</code> ».</p>
+    </button></h2><p>أدخل النص مباشرةً في حقل <code translate="no">TEXT</code>. لا تقم بتوفير قيم لحقل <code translate="no">sparse</code>. يقوم Milvus بإنشاء المتجهات المتفرقة داخليًّا من خلال تطبيق دالة BM25 على <code translate="no">content</code>.</p>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -246,7 +248,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم نص الاستعلام الخام كبيانات بحث وقم بالبحث في حقل المتجهات المتفرقة. يقوم Milvus بتحويل نص الاستعلام إلى متجه متفرق، وترتيب النتائج المطابقة باستخدام BM25، وإرجاع حقل <code translate="no">TEXT</code> المطلوب في <code translate="no">output_fields</code>.</p>
+    </button></h2><p>استخدم نص الاستعلام الخام كبيانات البحث وقم بالبحث في حقل المتجهات المتفرقة. يقوم Milvus بتحويل نص الاستعلام إلى متجه متفرق، وترتيب النتائج المطابقة باستخدام BM25، وإرجاع حقل <code translate="no">TEXT</code> المطلوب في <code translate="no">output_fields</code>.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

@@ -52,7 +52,7 @@ summary: >-
 <ul>
 <li><p>Chaque instance Milvus utilise exactement une file d'attente de messages.</p></li>
 <li><p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.0, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p></li>
-<li><p>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-mq-type.md">Changer de type de file d’attente de messages</a> ». La fonctionnalité « Changer de type de file d’attente de messages » est disponible à partir de <strong>Milvus 3.0 —</strong> effectuez d’abord la mise à niveau vers Milvus 3.0 ou <strong>une version ultérieure</strong>.</p></li>
+<li><p>Pour modifier la file d’attente de messages d’une instance en cours d’exécution, consultez la section « <a href="/docs/fr/switch-mq-type.md">Changer de file d’attente de messages</a> ». La fonctionnalité « Changer de file d’attente de messages » est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong> — effectuez d’abord la mise à niveau vers Milvus 3.0 ou une version ultérieure.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Choix d’une file d’attente de messages<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

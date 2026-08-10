@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Deploy kluster Milvus:</strong></p>
 <div class="alert note">
-<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.1 yang akan datang atau rilis yang lebih baru dengan Woodpecker v0.1.36 atau yang lebih baru untuk pembersihan pemadatan dan optimalisasi komit grup.</p>
+<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.1 yang akan datang atau rilis yang lebih baru dengan Woodpecker v0.1.37 atau yang lebih baru untuk pembersihan pemadatan dan optimalisasi komit grup.</p>
 </div>
 <p>Perintah berikut ini menerapkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v3.0.0, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -335,7 +335,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda berada di lingkungan dengan pembatasan jaringan, ikuti prosedur di bagian ini untuk memulai kluster Milvus.</p>
+    </button></h2><p>Jika Anda berada di lingkungan dengan pembatasan jaringan, ikuti prosedur pada bagian ini untuk memulai kluster Milvus.</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Dapatkan manifest Milvus<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -514,13 +514,13 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Kunjungi <a href="/docs/id/quickstart.md">Hello Milvus</a> untuk melihat apa saja yang dapat dilakukan Milvus.</p></li>
+<li><p>Lihat <a href="/docs/id/quickstart.md">Hello Milvus</a> untuk mengetahui apa saja yang dapat dilakukan Milvus.</p></li>
 <li><p>Pelajari operasi dasar Milvus:</p>
 <ul>
 <li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/manage-partitions.md">Mengelola partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
+<li><a href="/docs/id/insert-update-delete.md">Sisipkan, Perbarui atau Sisipkan (Upsert), dan Hapus</a></li>
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>

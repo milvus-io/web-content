@@ -1,11 +1,11 @@
 ---
 id: data-infra-integration-overview.md
-title: Infrastruktur Data & Integrasi
+title: Infrastruktur Data
 summary: >-
-  Gambaran umum mengenai infrastruktur pihak ketiga yang terintegrasi dengan
-  Milvus — metadata, penyimpanan objek, dan antrian pesan.
+  Gambaran umum mengenai penyimpanan metadata, penyimpanan objek, dan antrian
+  pesan yang digunakan oleh Milvus.
 ---
-<h1 id="Data-Infrastructure--Integration" class="common-anchor-header">Infrastruktur Data &amp; Integrasi<button data-href="#Data-Infrastructure--Integration" class="anchor-icon" translate="no">
+<h1 id="Data-Infrastructure" class="common-anchor-header">Infrastruktur Data<button data-href="#Data-Infrastructure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus dibangun di atas infrastruktur data terbuka untuk dependensi intinya. Bab ini membahas komponen-komponen yang dapat Anda tambahkan dan konfigurasikan:</p>
+    </button></h1><p>Milvus mengandalkan penyimpanan metadata, penyimpanan objek, dan antrian pesan sebagai infrastruktur data intinya. Bab ini membahas komponen-komponen yang dapat Anda konfigurasikan:</p>
 <ul>
 <li><strong><a href="/docs/id/etcd.md">Metadata</a></strong> — Milvus menyimpan metadata (skema koleksi, status node, titik pemeriksaan konsumsi) di etcd.</li>
 <li><strong><a href="/docs/id/object-storage.md">Penyimpanan Objek</a></strong> — Milvus menyimpan berkas indeks dan log biner di MinIO, AWS S3, atau penyimpanan objek cloud lain yang kompatibel dengan S3.</li>

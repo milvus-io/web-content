@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Após executar o script de instalação:​</p>
 <ul>
 <li><p>Foi iniciado um contentor Docker denominado <strong>milvus-standalone</strong> na porta <strong>19530</strong>.​</p></li>
-<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e funciona na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
+<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e está disponível na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
 <li><p>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul>
 <p>Pode utilizar os seguintes comandos para gerir o contentor do Milvus e os dados armazenados.​</p>
@@ -188,10 +188,10 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
+<li><p>Abra o Docker Desktop no modo de administrador, clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no Prompt de Comando do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descarregue o ficheiro de configuração do Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie o Milvus.​</p>
@@ -287,7 +287,7 @@ Creating milvus-standalone ... done​
 <p>Se a virtualização estiver desativada, poderá ser necessário verificar as definições da BIOS do firmware da sua placa-mãe. A forma de ativar a virtualização nas definições da BIOS varia consoante o fabricante da placa-mãe. No caso das placas-mãe ASUS, por exemplo, pode consultar <a href="https://www.asus.com/support/faq/1043786/">este artigo</a> sobre como ativar a virtualização.​</p>
 <p>Em seguida, terá de reiniciar o computador e ativar o Hyper-V. Para mais detalhes, consulte este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artigo da Microsoft</a>.​</p></li>
 <li><p>Verifique se o Serviço do Docker Desktop foi iniciado.​</p>
-<p>Pode executar o comando seguinte para iniciar o Serviço do Docker Desktop.</p>
+<p>Pode executar o seguinte comando para iniciar o Serviço do Docker Desktop.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​

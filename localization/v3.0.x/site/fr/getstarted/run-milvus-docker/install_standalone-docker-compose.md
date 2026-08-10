@@ -55,7 +55,7 @@ title: Exécuter Milvus avec Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l’aide de Docker Compose, il suffit d’exécuter</p>
+    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -118,7 +118,7 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ajoutez des paramètres supplémentaires pour remplacer ceux par défaut.
-La procédure suivante part du principe que vous devez remplacer la configuration par défaut de ` <code translate="no">proxy.healthCheckTimeout</code>`. Pour connaître les éléments de configuration concernés, consultez la section <a href="/docs/fr/system_configuration.md">Configuration du système</a>.</p>
+La procédure suivante part du principe que vous devez remplacer la configuration par défaut de ` <code translate="no">proxy.healthCheckTimeout</code>`. Pour connaître les éléments de configuration concernés, reportez-vous à la section « <a href="/docs/fr/system_configuration.md">Configuration du système</a> ».</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -167,12 +167,12 @@ EOF
         ></path>
       </svg>
     </button></h2><p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.0, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
-<p>La version 2.6.x définissant Woodpecker comme file d’attente de messages par défaut, une instance exécutant <strong>RocksMQ</strong> sous la version 2.5.x doit <strong>explicitement verrouiller RocksMQ avant la mise à niveau</strong> — sinon, la mise à niveau tenterait de modifier la file d’attente de messages, ce qui n’est pas pris en charge. Après avoir téléchargé le fichier Docker Compose de la version 2.6.x, remettez le type de file d’attente de messages sur « <code translate="no">rocksmq</code> » dans votre fichier de redéfinition « <code translate="no">user.yaml</code> », puis effectuez la mise à niveau :</p>
+<p>La version 2.6.x définissant Woodpecker comme file d’attente de messages par défaut, une instance exécutant <strong>RocksMQ</strong> sous la version 2.5.x doit <strong>explicitement verrouiller RocksMQ avant la mise à niveau</strong> — sinon, la mise à niveau tenterait de modifier la file d’attente de messages, ce qui n’est pas pris en charge. Après avoir téléchargé le fichier Docker Compose de la version 2.6.x, remettez le type de file d’attente de messages sur « <code translate="no">rocksmq</code> » dans votre fichier de remplacement « <code translate="no">user.yaml</code> », puis effectuez la mise à niveau :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour changer de file d’attente de messages <em>après</em> la mise à niveau, consultez la section « <a href="/docs/fr/switch-mq-type.md">Changer de type de MQ</a> ».</p>
+<p>Pour changer de file d’attente de messages <em>après</em> la mise à niveau, consultez la section « <a href="/docs/fr/switch-mq-type.md">Changer de file d’attente de messages</a> ».</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dépendances facultatives<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>Cada instância do Milvus utiliza exatamente uma fila de mensagens.</p></li>
 <li><p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.0, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p></li>
-<li><p>Para alterar a fila de mensagens de uma instância em execução, consulte <a href="/docs/pt/switch-mq-type.md">«Alterar o tipo de MQ</a>». A funcionalidade «Alterar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong> — atualize primeiro para o Milvus 3.0 ou uma versão posterior.</p></li>
+<li><p>Para alterar a fila de mensagens de uma instância em execução, consulte <a href="/docs/pt/switch-mq-type.md">«Alterar fila de mensagens</a>». A funcionalidade «Alterar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong> — atualize primeiro para o Milvus 3.0 ou uma versão posterior.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Escolher uma fila de mensagens<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

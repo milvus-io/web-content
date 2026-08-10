@@ -1,9 +1,9 @@
 ---
 id: switch-mq-type.md
-title: MQ タイプの切り替え
-summary: 既存のMilvusデプロイメントのメッセージキューを、ダウンタイムなしでWoodpeckerと別のメッセージキューの間で切り替える。
+title: メッセージキューの切り替え
+summary: ダウンタイムなしで、既存のMilvusデプロイメントをWoodpeckerと別のメッセージキューの間で切り替える。
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">MQ タイプの切り替え<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">メッセージキューの切り替え<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,7 +78,7 @@ summary: 既存のMilvusデプロイメントのメッセージキューを、�
         ></path>
       </svg>
     </button></h2><ol>
-<li>Milvusインスタンスが正常に動作していることを確認してください。</li>
+<li>Milvusインスタンスが正常に実行されていることを確認してください。</li>
 <li>ソースMQのタイプとターゲットMQのタイプを確認します。</li>
 <li><code translate="no">mqType</code> の値を変更<strong>せずに</strong>、ターゲットMQのアクセス設定をMilvusの設定に反映させます。</li>
 <li>MixCoord上でWAL alter APIを呼び出し、切り替えをトリガーします。</li>

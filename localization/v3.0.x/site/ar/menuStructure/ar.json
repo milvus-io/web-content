@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ الآن",
+    "label": "ابدأ",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -773,7 +773,7 @@
             "order": 19,
             "children": [
               {
-                "label": "تصميم نموذج البيانات لعملية البحث",
+                "label": "تصميم نموذج البيانات للبحث",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
@@ -826,7 +826,7 @@
             "children": []
           },
           {
-            "label": "مؤشرات المتجهات العائمة",
+            "label": "الفهارس المتجهة العائمة",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1211,7 +1211,7 @@
             ]
           },
           {
-            "label": "استعلامات Elasticsearch إلى Milvus",
+            "label": "استعلامات Elasticsearch الموجهة إلى Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1347,7 +1347,7 @@
                 "children": []
               },
               {
-                "label": "مُصنِّف RRF",
+                "label": "تصنيف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1636,95 +1636,10 @@
     ]
   },
   {
-    "label": "البنية التحتية للبيانات والتكامل",
-    "id": "data_infra_integration",
-    "isMenu": true,
-    "order": 9,
-    "children": [
-      {
-        "label": "نظرة عامة",
-        "id": "data-infra-integration-overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "البيانات الوصفية",
-        "id": "metadata",
-        "isMenu": true,
-        "order": 1,
-        "children": [
-          {
-            "label": "etcd",
-            "id": "etcd.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "تخزين الكائنات",
-        "id": "object-storage.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "قائمة انتظار الرسائل (mqType)",
-        "id": "mqtype",
-        "isMenu": true,
-        "order": 4,
-        "children": [
-          {
-            "label": "نظرة عامة",
-            "id": "mqtype-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "نقار الخشب",
-            "id": "woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "بولسار",
-            "id": "mq_pulsar.md",
-            "order": 2,
-            "children": [
-              {
-                "label": "الترقية إلى Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "استمر في استخدام Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "كافكا",
-            "id": "mq_kafka.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "RocksMQ",
-            "id": "mq_rocksmq.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "label": "دليل الإدارة",
     "id": "admin_guide",
     "isMenu": true,
-    "order": 10,
+    "order": 9,
     "children": [
       {
         "label": "النشر",
@@ -1895,6 +1810,122 @@
         ]
       },
       {
+        "label": "البنية التحتية للبيانات",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "نظرة عامة",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "البيانات الوصفية",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "تخزين الكائنات",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "قائمة انتظار الرسائل",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "نظرة عامة",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "نقار الخشب",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "بولسار",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "الترقية إلى Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "استمر في استخدام Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "كافكا",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "تبديل قائمة انتظار الرسائل",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "نظرة عامة",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "بولسار ↔ وودبيكر",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "كافكا ↔ نقار الخشب",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "label": "التوسع",
         "id": "scaling",
         "order": 4,
@@ -1938,7 +1969,7 @@
             "children": []
           },
           {
-            "label": "ترقية إصدار Milvus المستقل",
+            "label": "ترقية Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2121,37 +2152,6 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
-      },
-      {
-        "label": "تغيير نوع MQ",
-        "id": "switch_milvus_mq_type",
-        "order": 14,
-        "children": [
-          {
-            "label": "نظرة عامة",
-            "id": "switch-mq-type.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "RocksMQ ↔ Woodpecker",
-            "id": "switch-rocksmq-woodpecker.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "بولسار ↔ وودبيكر",
-            "id": "switch-pulsar-woodpecker.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "كافكا ↔ نقار الخشب",
-            "id": "switch-kafka-woodpecker.md",
-            "order": 3,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -2831,7 +2831,7 @@
             "children": []
           },
           {
-            "label": "تويلف لابس",
+            "label": "تويلف لابز",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -3257,7 +3257,7 @@
         "children": []
       },
       {
-        "label": "استكشاف الأعطال وإصلاحها",
+        "label": "استكشاف الأخطاء وإصلاحها",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

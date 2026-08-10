@@ -2,8 +2,8 @@
 id: manage-snapshots.md
 title: Mengelola SnapshotCompatible with Milvus 3.0.x
 summary: >-
-  Dalam panduan ini, Anda akan mempelajari cara membuat dan mengelola snapshot,
-  termasuk
+  Pelajari cara membuat, mencantumkan, mendeskripsikan, menandai, memulihkan,
+  dan menghapus snapshot, serta memantau tugas pemulihan.
 beta: Milvus 3.0.x
 ---
 <h1 id="Manage-Snapshots" class="common-anchor-header">Mengelola Snapshot<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Manage-Snapshots" class="anchor-icon" translate="no">
@@ -21,8 +21,18 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam panduan ini, Anda akan mempelajari cara membuat dan mengelola snapshot.</p>
-<h3 id="Create-snapshot" class="common-anchor-header">Membuat snapshot<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
+    </button></h1><p>Dalam panduan ini, Anda akan mempelajari cara membuat dan mengelola snapshot, termasuk</p>
+<ul>
+<li><a href="#Create-snapshot">Membuat snapshot</a>,</li>
+<li><a href="#List-snapshots">Menampilkan daftar snapshot</a>,</li>
+<li><a href="#Describe-snapshot">Menjelaskan snapshot</a>,</li>
+<li><a href="#Pinunpin-snapshot-data">Menandai/menghapus penandaan data snapshot</a>,</li>
+<li><a href="#Restore-snapshot">Memulihkan snapshot</a>,</li>
+<li><a href="#Drop-snapshot">Hapus snapshot</a>,</li>
+<li><a href="#List-restoration-jobs">Tampilkan daftar tugas pemulihan</a>, dan</li>
+<li><a href="#Get-restoration-state">Mendapatkan status pemulihan</a>.</li>
+</ul>
+<h2 id="Create-snapshot" class="common-anchor-header">Membuat snapshot<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,14 +47,19 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sebelum membuat snapshot, Anda disarankan untuk berhenti menulis data ke koleksi target dan menghubungi <code translate="no">flush()</code> untuk menghindari kemungkinan kehilangan data.</p>
+    </button></h2><p>Sebelum membuat snapshot, Anda disarankan untuk menghentikan penulisan data ke koleksi target dan memanggil ` <code translate="no">flush()</code> ` untuk menghindari kemungkinan kehilangan data.</p>
 <div class="alert note">
-<p>Menghubungi <code translate="no">flush()</code> tidak wajib, tetapi sangat disarankan untuk menghindari kehilangan data. Jika Anda melewatkan langkah ini, snapshot hanya berisi data yang telah di-flush.</p>
+<p>Memanggil ` <code translate="no">flush()</code> ` tidak wajib, tetapi sangat disarankan untuk menghindari kehilangan data. Jika Anda melewati langkah ini, snapshot hanya akan berisi data yang telah di-flush.</p>
 </div>
-<p>Saat menamai snapshot, gunakan nama yang jelas dan deskriptif, seperti <code translate="no">&quot;daily_backup_20240101&quot;</code> atau <code translate="no">&quot;v2.1_production_release&quot;</code> dan hindari istilah umum, seperti <code translate="no">&quot;backup1&quot;</code> dan <code translate="no">&quot;test&quot;</code>. Gunakan nama snapshot dengan bijak untuk membedakan snapshot di seluruh versi, lingkungan, dan tahapan.</p>
+<p>Saat memberi nama snapshot, gunakan nama yang jelas dan deskriptif, seperti <code translate="no">&quot;daily_backup_20240101&quot;</code> atau <code translate="no">&quot;v2.1_production_release&quot;</code>, dan hindari istilah umum, seperti <code translate="no">&quot;backup1&quot;</code> dan <code translate="no">&quot;test&quot;</code>. Gunakan nama snapshot dengan bijak untuk membedakan snapshot di berbagai versi, lingkungan, dan tahap.</p>
 <p>Contoh kode di bawah ini mengasumsikan bahwa Anda sudah memiliki koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -90,7 +105,7 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-snapshots" class="common-anchor-header">Membuat daftar snapshot<button data-href="#List-snapshots" class="anchor-icon" translate="no">
+<h2 id="List-snapshots" class="common-anchor-header">Menampilkan daftar snapshot<button data-href="#List-snapshots" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,9 +120,14 @@ err = client.CreateSnapshot(context.Background(), createOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat membuat daftar nama-nama snapshot yang ada.</p>
+    </button></h2><p>Anda dapat menampilkan daftar nama snapshot yang ada.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all snapshots for a collection</span>
 snapshots = client.list_snapshots(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
@@ -125,7 +145,7 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># bash</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-snapshot" class="common-anchor-header">Mendeskripsikan snapshot<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
+<h2 id="Describe-snapshot" class="common-anchor-header">Menampilkan deskripsi snapshot<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,9 +160,14 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat memperoleh informasi detail tentang snapshot tertentu.</p>
+    </button></h2><p>Anda dapat memperoleh informasi terperinci mengenai snapshot tertentu.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">snapshot_info = client.describe_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
     include_collection_info=<span class="hljs-literal">True</span>
@@ -165,7 +190,7 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Restore-snapshot" class="common-anchor-header">Pulihkan snapshot<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+<h2 id="Pinunpin-snapshot-data" class="common-anchor-header">Menandai/membatalkan penandaan data snapshot<button data-href="#Pinunpin-snapshot-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,17 +205,79 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat memulihkan snapshot ke koleksi baru. Operasi ini bersifat asinkron dan mengembalikan ID pekerjaan untuk melacak kemajuan pemulihan.</p>
-<p>Pemulihan menggunakan mekanisme <strong>salin-segmen</strong> alih-alih impor data, yang lebih efisien karena</p>
-<ul>
-<li><p>secara langsung menyalin file segmen (binlog, deltalog, file indeks) dari penyimpanan snapshot</p></li>
-<li><p>mempertahankan ID bidang dan ID indeks untuk memastikan kompatibilitas dengan file data yang ada</p></li>
-<li><p>menghindari penulisan ulang data dan pembangunan kembali indeks, menghasilkan waktu pemulihan yang jauh lebih cepat, dan</p></li>
-<li><p>memastikan peningkatan kinerja 10 hingga 100 kali lipat dibandingkan dengan metode pencadangan dan pemulihan tradisional</p></li>
-</ul>
-<p>Untuk memulihkan snapshot, lakukan hal berikut:</p>
+    </button></h2><p>Selama proses pemulihan, Anda dapat menandai sebuah snapshot untuk sementara melindungi data dasarnya dari pengumpulan sampah, dan membatalkan penandaan untuk melepaskan data tersebut.</p>
+<p>Anda juga dapat menetapkan durasi time-to-live (TTL) untuk operasi penandaan tersebut sehingga data yang ditandai akan dilepaskan saat durasi tersebut berakhir.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">pin_id = client.pin_snapshot_data(
+    snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    ttl_seconds=<span class="hljs-number">3600</span>,
+)
+
+client.unpin_snapshot_data(
+    pin_id=pin_id
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">pinID, err := client.PinSnapshotData(
+    context.Background(),
+    milvusclient.NewPinSnapshotDataOption(<span class="hljs-string">&quot;backup_20240101&quot;</span>, <span class="hljs-string">&quot;my_collection&quot;</span>).WithTTL(<span class="hljs-number">3600</span>),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> {
+    _ = client.UnpinSnapshotData(
+        context.Background(),
+        milvusclient.NewUnpinSnapshotDataOption(pinID),
+    )
+}()
+
+<span class="hljs-comment">// Do work with pinned snapshot data.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Restore-snapshot" class="common-anchor-header">Memulihkan snapshot<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anda dapat memulihkan snapshot ke koleksi baru. Operasi ini bersifat asinkron dan mengembalikan ID pekerjaan untuk melacak kemajuan pemulihan.</p>
+<p>Pemulihan ini menggunakan mekanisme <strong>penyalinan segmen</strong> alih-alih impor data, yang lebih efisien karena</p>
+<ul>
+<li>menyalin file segmen (binlog, deltalog, file indeks) secara langsung dari penyimpanan snapshot</li>
+<li>mempertahankan ID bidang dan ID indeks untuk memastikan kompatibilitas dengan berkas data yang sudah ada</li>
+<li>menghindari penulisan ulang data dan pembangunan ulang indeks, sehingga waktu pemulihan menjadi jauh lebih cepat, dan</li>
+<li>memastikan peningkatan kinerja 10 hingga 100 kali lipat dibandingkan dengan metode pencadangan dan pemulihan tradisional</li>
+</ul>
+<p>Untuk memulihkan snapshot, lakukan langkah-langkah berikut:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Restore snapshot to new collection</span>
 job_id = client.restore_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
@@ -213,8 +300,8 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk detail tentang memantau kemajuan pekerjaan pemulihan, lihat Memantau <a href="/docs/id/snapshots.md#CvhSd7amkog20mxHid6cvTyknVb">kemajuan pemulihan.</a></p>
-<h3 id="Drop-snapshot" class="common-anchor-header">Jatuhkan snapshot<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
+<p>Untuk detail mengenai pemantauan kemajuan pekerjaan pemulihan, lihat <a href="#Get-restoration-state">Mendapatkan status pemulihan</a>.</p>
+<h2 id="Drop-snapshot" class="common-anchor-header">Hapus snapshot<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,9 +316,14 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat membuang snapshot jika tidak lagi diperlukan. Anda disarankan untuk menghapus snapshot lama secara teratur untuk menghemat penyimpanan.</p>
+    </button></h2><p>Anda dapat menghapus snapshot jika sudah tidak diperlukan lagi. Disarankan untuk menghapus snapshot lama secara berkala guna menghemat ruang penyimpanan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>
 )
@@ -245,7 +337,7 @@ err := client.DropSnapshot(context.Background(), dropOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-restoration-jobs" class="common-anchor-header">Membuat daftar pekerjaan restorasi<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
+<h2 id="List-restoration-jobs" class="common-anchor-header">Daftar pekerjaan pemulihan<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -260,9 +352,14 @@ err := client.DropSnapshot(context.Background(), dropOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat menggunakan API ini untuk mendapatkan daftar snapshot yang telah dibuat untuk koleksi target.</p>
+    </button></h2><p>Anda dapat menggunakan API ini untuk mendapatkan daftar snapshot yang telah dibuat untuk koleksi target.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all restore jobs</span>
 jobs = client.list_restore_snapshot_jobs()
 
@@ -298,7 +395,7 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-restoration-state" class="common-anchor-header">Dapatkan status pemulihan<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
+<h2 id="Get-restoration-state" class="common-anchor-header">Mendapatkan status pemulihan<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,9 +410,14 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah Anda memiliki ID pekerjaan pemulihan, Anda dapat menggunakannya untuk mengambil kemajuan pemulihan.</p>
+    </button></h2><p>Setelah Anda memiliki ID pekerjaan pemulihan, Anda dapat menggunakannya untuk memeriksa kemajuan pemulihan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">state = client.get_restore_snapshot_state(job_id=<span class="hljs-number">12345</span>)
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Job ID: <span class="hljs-subst">{state.job_id}</span>&quot;</span>)

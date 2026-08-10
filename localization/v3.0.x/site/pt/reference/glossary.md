@@ -176,7 +176,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma dependência é um programa do qual outro programa depende para funcionar. As dependências do Milvus incluem o etcd (armazena metadados), o MinIO ou o S3 (armazenamento de objetos) e uma fila de mensagens como o Woodpecker (gere registos de instantâneos). Para mais informações, consulte <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infraestrutura e integração de dados</a>.</p>
+    </button></h2><p>Uma dependência é um programa do qual outro programa depende para funcionar. As dependências do Milvus incluem o etcd (armazena metadados), o MinIO ou o S3 (armazenamento de objetos) e uma fila de mensagens, como o Woodpecker (gere registos de instantâneos). Para mais informações, consulte <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infraestrutura de dados</a>.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Esquema dinâmico<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,7 +375,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os tipos de métricas de similaridade são utilizados para medir as semelhanças entre vetores. Atualmente, o Milvus suporta a distância euclidiana (L2), o produto escalar (IP), a similaridade cosseno (COSINE) e tipos de métricas binárias. Pode escolher o tipo de métrica mais adequado com base no seu cenário. Para mais informações, consulte <a href="https://milvus.io/docs/metric.md">Métricas de similaridade</a>.</p>
+    </button></h2><p>Os tipos de métricas de similaridade são utilizados para medir as semelhanças entre vetores. Atualmente, o Milvus suporta a distância euclidiana (L2), o produto interno (IP), a similaridade cosseno (COSINE) e os tipos de métricas binárias. Pode escolher o tipo de métrica mais adequado com base no seu cenário. Para mais informações, consulte <a href="https://milvus.io/docs/metric.md">Métricas de similaridade</a>.</p>
 <h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,7 +455,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">A Interface de Linha de Comandos</a> (CLI)<a href="https://milvus.io/docs/cli_overview.md">do Milvus</a> é uma ferramenta de linha de comandos que suporta a ligação à base de dados, operações com dados e a importação e exportação de dados. Baseada no <a href="https://github.com/milvus-io/pymilvus">SDK Python do Milvus</a>, permite a execução de comandos através de um terminal utilizando prompts interativos de linha de comandos.</p>
+    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">A Interface de Linha de Comandos</a> (CLI)<a href="https://milvus.io/docs/cli_overview.md">do Milvus</a> é uma ferramenta de linha de comandos que suporta a ligação à base de dados, operações sobre os dados e a importação e exportação de dados. Baseada no <a href="https://github.com/milvus-io/pymilvus">SDK Python do Milvus</a>, permite a execução de comandos através de um terminal utilizando prompts interativos de linha de comandos.</p>
 <h2 id="Milvus-Migration" class="common-anchor-header">Milvus Migration<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -535,7 +535,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma partição é uma divisão de uma coleção. O Milvus suporta a divisão dos dados da coleção em várias partes no armazenamento físico. Este processo é denominado particionamento, e cada partição pode conter vários segmentos. Para mais informações, consulte <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">«Gerir Partições</a>».</p>
+    </button></h2><p>Uma partição é uma divisão de uma coleção. O Milvus suporta a divisão dos dados da coleção em várias partes no armazenamento físico. Este processo denomina-se particionamento, e cada partição pode conter vários segmentos. Para mais informações, consulte <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">«Gerir Partições</a>».</p>
 <h2 id="Partition-key" class="common-anchor-header">Chave de partição<button data-href="#Partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: Terminologia
         ></path>
       </svg>
     </button></h2><p>Um segmento é um ficheiro de dados criado automaticamente que armazena os dados inseridos. Uma coleção pode conter vários segmentos, e cada segmento pode conter inúmeras entidades. Durante uma pesquisa de similaridade vetorial, o Milvus examina cada segmento para compilar os resultados da pesquisa.</p>
-<p>Existem dois tipos de segmentos: em crescimento e selados. Um segmento em crescimento continua a recolher novos dados até atingir um limiar específico ou um limite de tempo, após o qual passa a ser selado. Uma vez selado, um segmento deixa de aceitar novos dados e é transferido para o armazenamento de objetos. Entretanto, os dados recebidos são encaminhados para um novo segmento em crescimento. A transição de um segmento em crescimento para um segmento selado é desencadeada quer pelo atingimento do limite de entidades predefinido, quer pela ultrapassagem da duração máxima permitida no estado de crescimento. Para mais informações, consulte <a href="https://milvus.io/docs/replica.md#Design-Details">«Detalhes de conceção</a>».</p>
+<p>Existem dois tipos de segmentos: em crescimento e selados. Um segmento em crescimento continua a recolher novos dados até atingir um limiar específico ou um limite de tempo, após o qual se torna selado. Uma vez selado, um segmento deixa de aceitar novos dados e é transferido para o armazenamento de objetos. Entretanto, os dados recebidos são encaminhados para um novo segmento em crescimento. A transição de um segmento em crescimento para um segmento selado é desencadeada quer pelo atingimento do limite de entidades predefinido, quer pela ultrapassagem da duração máxima permitida no estado de crescimento. Para mais informações, consulte <a href="https://milvus.io/docs/replica.md#Design-Details">«Detalhes de conceção</a>».</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Conector Spark-Milvus<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um vetor de incorporação é uma abstração das características de dados não estruturados, tais como e-mails, dados de sensores de IoT, fotografias do Instagram, estruturas de proteínas e muito mais. Matematicamente falando, um vetor de incorporação é uma matriz de números de ponto flutuante ou binários. São utilizadas técnicas modernas de incorporação para converter dados não estruturados em vetores de incorporação. O Milvus suporta tanto vetores densos como esparsos desde a versão 2.4.0.</p>
+    </button></h2><p>Um vetor de incorporação é uma abstração de características de dados não estruturados, tais como e-mails, dados de sensores de IoT, fotografias do Instagram, estruturas de proteínas e muito mais. Matematicamente falando, um vetor de incorporação é uma matriz de números de ponto flutuante ou binários. São utilizadas técnicas modernas de incorporação para converter dados não estruturados em vetores de incorporação. O Milvus suporta tanto vetores densos como esparsos desde a versão 2.4.0.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">Armazenamento WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -18,12 +18,12 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍了如何在<strong>Milvus 集群中</strong>将消息队列（MQ）在<strong>Kafka</strong>（内置或外部）和<strong>Woodpecker</strong>（MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅<a href="/docs/zh/switch-mq-type.md">《切换 MQ 类型</a>》。</p>
+    </button></h1><p>本页面介绍如何在<strong>Milvus 集群中</strong>将消息队列 (MQ) 在<strong>Kafka</strong>（内置或外部）和<strong>Woodpecker</strong>（MinIO 后端）之间双向切换。有关一般工作流和先决条件，请参阅<a href="/docs/zh/switch-mq-type.md">《切换消息队列》</a>。</p>
 <div class="alert note">
-<p><strong>先决条件：</strong>MQ 切换功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</p>
+<p><strong>先决条件：</strong>切换消息队列功能仅在<strong>Milvus 3.0 及更高版本中</strong>提供。开始操作前，请将您的 Milvus 实例升级至 Milvus 3.0 或更高版本——此功能在早期版本中不可用。</p>
 </div>
 <div class="alert warning">
-<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从上到下操作。请勿混合使用 Helm 和 Operator 命令。</p>
+<p>切换消息队列是一项<strong>高风险操作</strong>。请选择<strong>与您的</strong>部署方式相匹配的章节<strong>——使用 Helm</strong> <strong>或使用 Milvus Operator</strong>——并按顺序从头到尾操作。请勿混合使用 Helm 和 Operator 命令。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">使用 Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
         ></path>
       </svg>
     </button></h3><p><strong>步骤 1：验证 Milvus 实例是否正在运行。</strong></p>
-<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作要求 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（该操作会滚动更新 Pod）。`<code translate="no">streaming.enabled=true</code> ` 是“切换消息队列（Switch MQ）”功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接 Kafka》</a>。</p>
+<p><strong>步骤 2：配置目标 Kafka 连接并重启 Milvus。</strong>切换操作要求 Milvus 已知晓 Kafka 连接信息，因此请通过 `<code translate="no">extraConfigFiles</code> ` 将其写入 `<code translate="no">user.yaml</code> `，并使用 `<code translate="no">helm upgrade</code> ` 应用配置（该操作会滚动更新 Pod）。<code translate="no">streaming.enabled=true</code> 是“切换消息队列（Switch MQ）”功能的必备条件。有关 SASL/SSL 的详细信息，请参阅<a href="/docs/zh/connect_kafka_ssl.md">《使用 SASL/SSL 连接 Kafka》</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -164,7 +164,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切换成功时会记录日志：<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步骤 4：更新 Operator 中的 MQ 类型。</strong>更新<strong>Operator</strong>管理的配置，以防止 Operator 撤销此次切换。创建<code translate="no">change_configmap.yaml</code> ：</p>
+<p><strong>步骤 4：更新操作符中的 MQ 类型。</strong>更新操作符管理的配置，以防止操作符撤销此次切换。创建<code translate="no">change_configmap.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -230,7 +230,7 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 K
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切换成功时会记录日志：<code translate="no">[mqTypeValue=kafka]</code> 。</p>
-<p><strong>步骤 5：（可选）清理 Woodpecker 数据。</strong>删除 MinIO/S3 上的 Woodpecker 数据（位于<code translate="no">&lt;rootPath&gt;/wp/...</code> 目录下，通常为<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元数据（<code translate="no">etcdctl get woodpecker --prefix</code> ）。如果您计划稍后切换回 Woodpecker，请先清理这些文件。</p>
+<p><strong>步骤 5：（可选）清理 Woodpecker 数据。</strong>删除 MinIO/S3 上的 Woodpecker 数据（位于<code translate="no">&lt;rootPath&gt;/wp/...</code> 下，通常为<code translate="no">files/wp/...</code> ）以及 etcd 中的 Woodpecker 元数据（<code translate="no">etcdctl get woodpecker --prefix</code> ）。如果您计划稍后切换回 Woodpecker，请先清理这些文件。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">支持的场景<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

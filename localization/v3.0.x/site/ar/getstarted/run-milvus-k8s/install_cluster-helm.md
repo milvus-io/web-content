@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>تم أرشفة مستودع مخططات Milvus Helm الموجود على <code translate="no">https://github.com/milvus-io/milvus-helm</code>. نستخدم الآن المستودع الجديد على <code translate="no">https://github.com/zilliztech/milvus-helm</code>. لا يزال المستودع المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31، ولكن استخدم المستودع الجديد للإصدارات الأحدث.</p>
+<p>تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://github.com/milvus-io/milvus-helm</code>. نستخدم الآن المستودع الجديد على <code translate="no">https://github.com/zilliztech/milvus-helm</code>. لا يزال المستودع المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31، ولكن استخدم المستودع الجديد للإصدارات الأحدث.</p>
 </div>
 <p>ثم قم بجلب مخططات Milvus من المستودع على النحو التالي:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>نشر مجموعة Milvus:</strong></p>
 <div class="alert note">
-<p>بالنسبة لوضع خدمة Woodpecker، نوصي باستخدام الإصدار القادم Milvus 3.0.1 أو إصدار أحدث مع Woodpecker v0.1.36 أو أحدث من أجل تحسينات تنظيف الضغط والتزام المجموعة.</p>
+<p>بالنسبة لوضع خدمة Woodpecker، نوصي باستخدام الإصدار القادم Milvus 3.0.1 أو إصدار أحدث مع Woodpecker v0.1.37 أو أحدث من أجل تحسينات تنظيف الضغط والتزام المجموعة.</p>
 </div>
 <p>يقوم الأمر التالي بنشر مجموعة Milvus بإعدادات مُحسَّنة للإصدار v3.0.0، باستخدام Woodpecker كقائمة انتظار الرسائل الموصى بها:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -153,14 +153,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li>يستخدم <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به لتقليل الصيانة)</li>
 <li>تشغيل <strong>Woodpecker كخدمة مخصصة</strong> (مجموعة StatefulSet منفصلة)، وليست مدمجة في عقدة البث</li>
-<li>تمكين مكون <strong>«عقدة البث</strong> » الجديد لتحسين الأداء</li>
+<li>يقوم بتمكين مكون <strong>«عقدة البث</strong> » الجديد لتحسين الأداء</li>
 <li>يعطل <strong>«عقدة الفهرس</strong> » القديمة (تتولى «عقدة البيانات» الآن هذه الوظيفة)</li>
 </ul>
 <div class="alert note">
 <p><strong>التغييرات في بنية Milvus 2.6.x:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: يُوصى الآن باستخدام <strong>Woodpecker</strong> (يقلل من صيانة البنية التحتية مقارنةً بـ Pulsar)</li>
-<li><strong>مكون جديد</strong>: تم إدخال <strong>Streaming Node</strong> وتم تمكينه افتراضيًا</li>
+<li><strong>مكون جديد</strong>: تم تقديم <strong>Streaming Node</strong> وتم تمكينه افتراضيًا</li>
 <li><strong>المكونات المدمجة</strong>: تم دمج <strong>«عقدة الفهرس</strong> » <strong>و«عقدة البيانات</strong> » في <strong>«عقدة بيانات</strong>» واحدة</li>
 </ul>
 <p>للحصول على تفاصيل كاملة عن البنية، راجع <a href="/docs/ar/architecture_overview.md">نظرة عامة</a> على <a href="/docs/ar/architecture_overview.md">البنية</a>.</p>
@@ -197,7 +197,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>تأكد من نجاح النشر عن طريق التحقق من حالة البودات:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>انتظر حتى تظهر حالة "قيد التشغيل" لجميع البودات.</strong> مع تكوين الإصدار v3.0.0، من المفترض أن ترى بودات مشابهة لما يلي:</p>
+<p><strong>انتظر حتى تظهر حالة «قيد التشغيل» لجميع البودات.</strong> مع تكوين الإصدار v3.0.0، من المفترض أن ترى بودات مشابهة لما يلي:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>التبعيات</strong>: <code translate="no">etcd</code> (البيانات الوصفية)، <code translate="no">minio</code> (تخزين الكائنات)، <code translate="no">woodpecker</code> (قائمة انتظار الرسائل)</li>
 </ul>
 <div class="alert note">
-<p>باستخدام <code translate="no">streaming.woodpecker.embedded=false</code> ، يعمل Woodpecker كـ <strong>StatefulSet مخصص</strong> (<code translate="no">my-release-milvus-woodpecker</code> ، 4 نسخ متماثلة افتراضيًا — أغلبية 3 عقد بالإضافة إلى عقدة احتياطية واحدة للتحمل في حالة الأعطال؛ لا تضبط <code translate="no">woodpecker.replicaCount</code> على أقل من 3) مدعومة بخدمة بدون واجهة مستخدم، باستخدام MinIO كخلفية تخزين — لذا فإن المجموعة تحتوي على مجموعة بودات <code translate="no">woodpecker</code> منفصلة، متميزة عن عقدة البث.</p>
+<p>باستخدام <code translate="no">streaming.woodpecker.embedded=false</code> ، يعمل Woodpecker كـ <strong>StatefulSet مخصص</strong> (<code translate="no">my-release-milvus-woodpecker</code> ، 4 نسخ متماثلة افتراضيًا — أغلبية 3 عقد بالإضافة إلى عقدة احتياطية واحدة للتحمل الأعطال؛ لا تضبط <code translate="no">woodpecker.replicaCount</code> على أقل من 3) مدعومة بخدمة بدون واجهة مستخدم، باستخدام MinIO كخلفية تخزين — لذا فإن المجموعة تحتوي على مجموعة بودات <code translate="no">woodpecker</code> منفصلة، متميزة عن عقدة البث.</p>
 </div>
 <p>يمكنك أيضًا الوصول إلى <strong>واجهة المستخدم على الويب لـ Milvus</strong> على <code translate="no">http://127.0.0.1:9091/webui/</code> بمجرد إعداد إعادة توجيه المنفذ (انظر الخطوة التالية). لمزيد من التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب</a> لـ <a href="/docs/ar/milvus-webui.md">Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. الاتصال بـ Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -314,7 +314,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعمل واجهة Milvus WebUI على تحسين قابلية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة Milvus WebUI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والمجموعات، وعرض قائمة بتكوينات Milvus التفصيلية. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعمل واجهة Milvus WebUI على تحسين قابلية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة Milvus WebUI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والمجموعات، وعرض قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a></p>
 <p>لتمكين الوصول إلى واجهة المستخدم الرسومية لـ Milvus WebUI، تحتاج إلى إعادة توجيه منفذ pod الوكيل إلى منفذ محلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -415,7 +415,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك الآن تحميل الصور إلى المضيفات في البيئة المقيدة شبكيًا على النحو التالي:</p>
+    </button></h3><p>يمكنك الآن تحميل الصور إلى المضيفات في البيئة المقيدة بالشبكة على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="5-Deploy-Milvus" class="common-anchor-header">5. نشر Milvus<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">

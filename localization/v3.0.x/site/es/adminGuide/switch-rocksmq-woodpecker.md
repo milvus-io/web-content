@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de una implementación <strong>de Milvus Standalone (Docker Compose)</strong> entre <strong>RocksMQ</strong> y <strong>Woodpecker</strong> (backend local o MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar el tipo de MQ</a>.</p>
+    </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de una implementación <strong>de Milvus Standalone (Docker Compose)</strong> entre <strong>RocksMQ</strong> y <strong>Woodpecker</strong> (backend local o MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar la cola de mensajes</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de comenzar; esta función no está disponible en versiones anteriores.</li>
-<li>El cambio de MQ requiere la implementación de Docker <strong>Compose</strong> (que habilita una fuente de configuración etcd). La implementación de Docker de un solo contenedor no admite este cambio.</li>
+<li><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a Milvus 3.0 o una versión posterior antes de comenzar; la función no está disponible en versiones anteriores.</li>
+<li>El cambio de cola de mensajes requiere una implementación de Docker <strong>Compose</strong> (que habilita una fuente de configuración etcd). La implementación de Docker de un solo contenedor no admite el cambio.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">Cambiar de RocksMQ a Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">
@@ -153,7 +153,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus se esté ejecutando<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Paso 1: Comprueba que la instancia de Milvus esté en ejecución<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

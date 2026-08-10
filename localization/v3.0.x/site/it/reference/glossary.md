@@ -160,7 +160,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, una collezione è equivalente a una tabella in un sistema di gestione di database relazionali (RDBMS). Le collezioni sono oggetti logici principali utilizzati per memorizzare e gestire le entità. Per ulteriori informazioni, consultare <a href="/docs/it/manage-collections.md">Gestione delle collezioni</a>.</p>
+    </button></h2><p>In Milvus, una collezione è equivalente a una tabella in un sistema di gestione di database relazionali (RDBMS). Le collezioni sono oggetti logici principali utilizzati per archiviare e gestire le entità. Per ulteriori informazioni, consultare <a href="/docs/it/manage-collections.md">Gestione delle collezioni</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Dipendenza<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una dipendenza è un programma da cui un altro programma dipende per funzionare. Le dipendenze di Milvus includono etcd (che memorizza i metadati), MinIO o S3 (archiviazione a oggetti) e una coda di messaggi come Woodpecker (che gestisce i log degli snapshot). Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastruttura dati e integrazione</a>.</p>
+    </button></h2><p>Una dipendenza è un programma da cui dipende il funzionamento di un altro programma. Le dipendenze di Milvus includono etcd (che memorizza i metadati), MinIO o S3 (archiviazione a oggetti) e una coda di messaggi come Woodpecker (che gestisce i log degli snapshot). Per ulteriori informazioni, consultare la sezione " <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastruttura dei dati</a>".</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Schema dinamico<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lo schema dinamico consente di inserire entità con nuovi campi in una collezione senza modificare lo schema esistente. Ciò significa che è possibile inserire dati senza conoscere lo schema completo di una collezione e includere campi non ancora definiti. È possibile abilitare questa funzionalità "schema-free" attivando il campo dinamico durante la creazione di una collezione. Per ulteriori informazioni, consultare <a href="/docs/it/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
+    </button></h2><p>Lo schema dinamico consente di inserire entità con nuovi campi in una collezione senza modificare lo schema esistente. Ciò significa che è possibile inserire dati senza conoscere lo schema completo di una collezione e includere campi non ancora definiti. È possibile abilitare questa funzionalità "schema-free" attivando il campo dinamico durante la creazione di una collezione. Per ulteriori informazioni, consultare <a href="/docs/it/enable-dynamic-field.md">Abilitare il campo dinamico</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Embedding<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offre funzioni di embedding integrate che funzionano con i principali provider di embedding. Prima di creare una collezione in Milvus, è possibile utilizzare queste funzioni per generare embedding per i propri set di dati, semplificando il processo di preparazione dei dati e delle ricerche vettoriali. Per creare embedding in pratica, consultare <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilizzo del modello di PyMilvus per generare embedding di testo</a>.</p>
+    </button></h2><p>Milvus offre funzioni di embedding integrate che funzionano con i principali provider di embedding. Prima di creare una collezione in Milvus, è possibile utilizzare queste funzioni per generare embedding per i propri set di dati, ottimizzando il processo di preparazione dei dati e le ricerche vettoriali. Per creare embedding in pratica, consultare <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilizzo del modello di PyMilvus per generare embedding di testo</a>.</p>
 <h2 id="Entity" class="common-anchor-header">Entità<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">La ricerca ibrida</a> è un'API per la ricerca ibrida disponibile a partire da Milvus 2.4.0. È possibile effettuare ricerche su più campi vettoriali e fonderli insieme. Nel caso di una ricerca vettoriale combinata con il filtraggio di campi scalari, si parla di "ricerca filtrata". Per ulteriori informazioni, consultare <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">La ricerca ibrida</a> è un'API per la ricerca ibrida disponibile a partire da Milvus 2.4.0. È possibile effettuare ricerche su più campi vettoriali e fonderli insieme. Una ricerca vettoriale combinata con il filtraggio di campi scalari viene definita "ricerca filtrata". Per ulteriori informazioni, consultare <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
 <h2 id="Index" class="common-anchor-header">Indice<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -321,7 +321,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Il connettore Kafka-Milvus</a> è un connettore di destinazione Kafka per Milvus. Consente di trasmettere in streaming dati vettoriali da Kafka a Milvus.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Il connettore Kafka-Milvus</a> è un connettore sink Kafka per Milvus. Consente di trasmettere in streaming dati vettoriali da Kafka a Milvus.</p>
 <h2 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,7 +355,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uno snapshot di log è un log binario, un’unità più piccola all’interno di un segmento che registra e gestisce gli aggiornamenti e le modifiche apportate ai dati in Milvus. I dati di un segmento vengono salvati in più log binari. In Milvus esistono tre tipi di log binari: InsertBinlog, DeleteBinlog e DDLBinlog. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Meta storage</a>.</p>
+    </button></h2><p>Uno snapshot di log è un log binario, un’unità più piccola all’interno di un segmento che registra e gestisce gli aggiornamenti e le modifiche apportate ai dati in Milvus. I dati di un segmento vengono persistiti in più binlog. In Milvus esistono tre tipi di binlog: InsertBinlog, DeleteBinlog e DDLBinlog. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Meta storage</a>.</p>
 <!-- ## Log subscriber
 <p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
 <!-- ## Message storage
@@ -615,7 +615,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>QuorumBuffer è una modalità di distribuzione di Woodpecker progettata per carichi di lavoro di lettura/scrittura ad alta frequenza e sensibili alla latenza, che richiedono sia reattività in tempo reale che una forte tolleranza ai guasti. Funziona come un buffer di scrittura ad alta velocità con scritture a quorum a tre repliche, garantendo una forte coerenza e un'elevata disponibilità. Per ulteriori informazioni, consultare <a href="/docs/it/woodpecker_architecture.md">Architettura di Woodpecker</a>.</p>
+    </button></h2><p>QuorumBuffer è una modalità di distribuzione di Woodpecker progettata per carichi di lavoro di lettura/scrittura ad alta frequenza e sensibili alla latenza, che richiedono sia reattività in tempo reale che una forte tolleranza ai guasti. Funziona come un buffer di scrittura ad alta velocità con scritture a quorum a tre repliche, garantendo una forte coerenza e un'elevata disponibilità. Per ulteriori informazioni, consultare <a href="/docs/it/woodpecker_architecture.md">Woodpecker Architecture</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">Ricerca per intervallo<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -663,7 +663,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">La ricerca</a> è un’API che esegue un’operazione per effettuare una ricerca di similarità vettoriale, che richiede dati vettoriali per la sua esecuzione. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/single-vector-search.md">Ricerca a vettore singolo</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">La ricerca</a> è un'API che esegue un'operazione per effettuare una ricerca di similarità vettoriale, che richiede dati vettoriali per la sua esecuzione. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/single-vector-search.md">Ricerca a vettore singolo</a>.</p>
 <h2 id="Segment" class="common-anchor-header">Segmento<button data-href="#Segment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: Terminologia
         ></path>
       </svg>
     </button></h2><p>Un segmento è un file di dati creato automaticamente che memorizza i dati inseriti. Una raccolta può contenere più segmenti e ogni segmento può contenere numerose entità. Durante una ricerca di similarità vettoriale, Milvus esamina ogni segmento per compilare i risultati della ricerca.</p>
-<p>Esistono due tipi di segmenti: in crescita e sigillati. Un segmento in crescita continua a raccogliere nuovi dati fino a quando non raggiunge una soglia specifica o un limite di tempo, dopodiché viene sigillato. Una volta sigillato, un segmento non accetta più nuovi dati e viene trasferito all’object storage. Nel frattempo, i dati in arrivo vengono indirizzati a un nuovo segmento in crescita. Il passaggio da un segmento in crescita a uno sigillato viene innescato dal raggiungimento del limite predefinito di entità o dal superamento della durata massima consentita nello stato di crescita. Per ulteriori informazioni, consultare la <a href="https://milvus.io/docs/replica.md#Design-Details">sezione Dettagli di progettazione</a>.</p>
+<p>Esistono due tipi di segmenti: in crescita e sigillati. Un segmento in crescita continua a raccogliere nuovi dati fino a quando non raggiunge una soglia specifica o un limite di tempo, dopodiché viene sigillato. Una volta sigillato, un segmento non accetta più nuovi dati e viene trasferito all’object storage. Nel frattempo, i dati in arrivo vengono indirizzati a un nuovo segmento in crescita. Il passaggio da un segmento in crescita a uno sigillato viene innescato dal raggiungimento del limite predefinito di entità o dal superamento della durata massima consentita nello stato di crescita. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/replica.md#Design-Details">la sezione Dettagli di progettazione</a>.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Connettore Spark-Milvus<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -729,7 +729,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I vettori sparsi rappresentano parole o frasi utilizzando embedding vettoriali in cui la maggior parte degli elementi è pari a zero, con un solo elemento diverso da zero che indica la presenza di una parola specifica. I modelli a vettori sparsi, come SPLADEv2, superano i modelli densi nella ricerca di conoscenze fuori dominio, nella consapevolezza delle parole chiave e nell’interpretabilità. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vettori sparsi</a>.</p>
+    </button></h2><p>I vettori sparsi rappresentano parole o frasi utilizzando embedding vettoriali in cui la maggior parte degli elementi è pari a zero, con un solo elemento diverso da zero che indica la presenza di una parola specifica. I modelli a vettori sparsi, come SPLADEv2, superano i modelli densi nella ricerca di conoscenze fuori dominio, nella sensibilità alle parole chiave e nell’interpretabilità. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vettori sparsi</a>.</p>
 <h2 id="Streaming-Service" class="common-anchor-header">Servizio di streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -809,7 +809,7 @@ title: Terminologia
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'archiviazione Write-Ahead Log (WAL) è alla base della durabilità e della coerenza dei dati nei sistemi distribuiti. Prima che qualsiasi modifica venga confermata, viene prima registrata in un log, garantendo che, in caso di guasto, sia possibile ripristinare esattamente il punto in cui si era interrotta l’operazione. Milvus utilizza Woodpecker come sistema di archiviazione WAL, che supporta sia la modalità MemoryBuffer che quella QuorumBuffer. Per ulteriori informazioni, consultare <a href="/docs/it/woodpecker_architecture.md">l’architettura di Woodpecker</a>.</p>
+    </button></h2><p>L'archiviazione Write-Ahead Log (WAL) è alla base della durabilità e della coerenza dei dati nei sistemi distribuiti. Prima che qualsiasi modifica venga confermata, viene prima registrata in un log, garantendo che, in caso di guasto, sia possibile ripristinare esattamente il punto in cui si era interrotto. Milvus utilizza Woodpecker come sistema di archiviazione WAL, che supporta sia la modalità MemoryBuffer che quella QuorumBuffer. Per ulteriori informazioni, consultare <a href="/docs/it/woodpecker_architecture.md">l’architettura di Woodpecker</a>.</p>
 <h2 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

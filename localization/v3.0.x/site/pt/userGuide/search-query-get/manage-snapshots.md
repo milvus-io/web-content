@@ -1,7 +1,9 @@
 ---
 id: manage-snapshots.md
 title: Gerir instantâneosCompatible with Milvus 3.0.x
-summary: 'Neste guia, aprenderá a criar e gerir instantâneos, incluindo'
+summary: >-
+  Saiba como criar, listar, descrever, fixar, restaurar e eliminar instantâneos,
+  bem como monitorizar tarefas de restauração.
 beta: Milvus 3.0.x
 ---
 <h1 id="Manage-Snapshots" class="common-anchor-header">Gerir instantâneos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Manage-Snapshots" class="anchor-icon" translate="no">
@@ -19,8 +21,18 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Neste guia, aprenderá a criar e a gerir instantâneos.</p>
-<h3 id="Create-snapshot" class="common-anchor-header">Criar instantâneo<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
+    </button></h1><p>Neste guia, irá aprender a criar e gerir instantâneos, incluindo</p>
+<ul>
+<li><a href="#Create-snapshot">Criar um instantâneo</a>,</li>
+<li><a href="#List-snapshots">Listar instantâneos</a>,</li>
+<li><a href="#Describe-snapshot">Descrever um instantâneo</a>,</li>
+<li><a href="#Pinunpin-snapshot-data">Fixar/desfixar dados de um instantâneo</a>,</li>
+<li><a href="#Restore-snapshot">Restaurar um instantâneo</a>,</li>
+<li><a href="#Drop-snapshot">Eliminar um instantâneo</a>,</li>
+<li><a href="#List-restoration-jobs">Listar tarefas de restauração</a> e</li>
+<li><a href="#Get-restoration-state">Obter o estado da restauração</a>.</li>
+</ul>
+<h2 id="Create-snapshot" class="common-anchor-header">Criar instantâneo<button data-href="#Create-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,14 +47,19 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Antes de criar um instantâneo, é aconselhável parar de escrever dados na coleção de destino e chamar <code translate="no">flush()</code> para evitar uma possível perda de dados.</p>
+    </button></h2><p>Antes de criar um instantâneo, recomenda-se que interrompa a gravação de dados na coleção de destino e chame <code translate="no">flush()</code> para evitar uma possível perda de dados.</p>
 <div class="alert note">
-<p>Chamar <code translate="no">flush()</code> não é obrigatório, mas altamente recomendado para evitar a perda de dados. Se não o fizer, o instantâneo contém apenas os dados que já foram descarregados.</p>
+<p>Chamar ` <code translate="no">flush()</code> ` não é obrigatório, mas é altamente recomendado para evitar a perda de dados. Se ignorar este passo, o instantâneo conterá apenas os dados que já foram gravados.</p>
 </div>
-<p>Ao nomear um instantâneo, use nomes claros e descritivos, como <code translate="no">&quot;daily_backup_20240101&quot;</code> ou <code translate="no">&quot;v2.1_production_release&quot;</code> e evite termos genéricos, como <code translate="no">&quot;backup1&quot;</code> e <code translate="no">&quot;test&quot;</code>. Use nomes de snapshot com sabedoria para distinguir snapshots entre versões, ambientes e estágios.</p>
-<p>Os exemplos de código abaixo assumem que você já tem uma coleção chamada <code translate="no">my_collection</code>.</p>
+<p>Ao nomear um instantâneo, utilize nomes claros e descritivos, tais como « <code translate="no">&quot;daily_backup_20240101&quot;</code> » ou « <code translate="no">&quot;v2.1_production_release&quot;</code> », e evite termos genéricos, como « <code translate="no">&quot;backup1&quot;</code> » e « <code translate="no">&quot;test&quot;</code> ». Utilize os nomes dos instantâneos de forma sensata para distinguir instantâneos entre versões, ambientes e fases.</p>
+<p>Os exemplos de código abaixo partem do princípio de que já possui uma coleção denominada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -88,7 +105,7 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-snapshots" class="common-anchor-header">Listar snapshots<button data-href="#List-snapshots" class="anchor-icon" translate="no">
+<h2 id="List-snapshots" class="common-anchor-header">Listar instantâneos<button data-href="#List-snapshots" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,9 +120,14 @@ err = client.CreateSnapshot(context.Background(), createOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Você pode listar os nomes dos snapshots existentes.</p>
+    </button></h2><p>Pode listar os nomes dos instantâneos existentes.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all snapshots for a collection</span>
 snapshots = client.list_snapshots(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
@@ -123,7 +145,7 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># bash</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-snapshot" class="common-anchor-header">Descrever instantâneos<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
+<h2 id="Describe-snapshot" class="common-anchor-header">Descrever um instantâneo<button data-href="#Describe-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,9 +160,14 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pode obter informações detalhadas sobre um instantâneo específico.</p>
+    </button></h2><p>Pode obter informações detalhadas sobre um instantâneo específico.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">snapshot_info = client.describe_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
     include_collection_info=<span class="hljs-literal">True</span>
@@ -163,7 +190,7 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Restore-snapshot" class="common-anchor-header">Restaurar instantâneo<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+<h2 id="Pinunpin-snapshot-data" class="common-anchor-header">Fixar/desfixar dados de instantâneo<button data-href="#Pinunpin-snapshot-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,17 +205,79 @@ fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.G
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pode restaurar um instantâneo para uma nova coleção. Esta operação é assíncrona e devolve um ID de trabalho para acompanhar o progresso do restauro.</p>
-<p>A restauração usa um mecanismo <strong>de cópia de segmento</strong> em vez de importação de dados, que é mais eficiente porque</p>
-<ul>
-<li><p>copia diretamente os arquivos de segmento (binlogs, deltalogs, arquivos de índice) do armazenamento de instantâneos</p></li>
-<li><p>preserva IDs de campo e IDs de índice para garantir a compatibilidade com arquivos de dados existentes</p></li>
-<li><p>evita a reescrita de dados e a reconstrução de índices, o que resulta em tempos de restauro significativamente mais rápidos, e</p></li>
-<li><p>garante um aumento de desempenho de 10 a 100 vezes em comparação com os métodos tradicionais de backup e restauração</p></li>
-</ul>
-<p>Para restaurar um instantâneo, faça o seguinte:</p>
+    </button></h2><p>Durante a restauração, pode fixar um instantâneo para proteger temporariamente os seus dados subjacentes da recolha de lixo e desfixá-lo para libertar os dados.</p>
+<p>Também pode definir um tempo de validade (TTL) para a operação de fixação, de modo a que os dados fixados sejam libertados quando esse tempo expirar.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">pin_id = client.pin_snapshot_data(
+    snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    ttl_seconds=<span class="hljs-number">3600</span>,
+)
+
+client.unpin_snapshot_data(
+    pin_id=pin_id
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">pinID, err := client.PinSnapshotData(
+    context.Background(),
+    milvusclient.NewPinSnapshotDataOption(<span class="hljs-string">&quot;backup_20240101&quot;</span>, <span class="hljs-string">&quot;my_collection&quot;</span>).WithTTL(<span class="hljs-number">3600</span>),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> {
+    _ = client.UnpinSnapshotData(
+        context.Background(),
+        milvusclient.NewUnpinSnapshotDataOption(pinID),
+    )
+}()
+
+<span class="hljs-comment">// Do work with pinned snapshot data.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Restore-snapshot" class="common-anchor-header">Restaurar instantâneo<button data-href="#Restore-snapshot" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Pode restaurar um instantâneo para uma nova coleção. Esta operação é assíncrona e devolve um ID de tarefa para acompanhar o progresso da restauração.</p>
+<p>A restauração utiliza um mecanismo <strong>de cópia de segmentos</strong> em vez da importação de dados, o que é mais eficiente porque</p>
+<ul>
+<li>copia diretamente os ficheiros de segmento (binlogs, deltalogs, ficheiros de índice) do armazenamento do instantâneo</li>
+<li>preserva os IDs dos campos e os IDs dos índices para garantir a compatibilidade com os ficheiros de dados existentes</li>
+<li>evita a reescrita de dados e a reconstrução de índices, resultando em tempos de restauração significativamente mais rápidos, e</li>
+<li>garante um aumento de desempenho de 10 a 100 vezes em comparação com os métodos tradicionais de cópia de segurança e restauração</li>
+</ul>
+<p>Para restaurar um instantâneo, proceda da seguinte forma:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Restore snapshot to new collection</span>
 job_id = client.restore_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>,
@@ -211,8 +300,8 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter detalhes sobre como monitorizar o progresso de um trabalho de restauro, consulte <a href="/docs/pt/snapshots.md#CvhSd7amkog20mxHid6cvTyknVb">Monitorizar o progresso do restauro</a>.</p>
-<h3 id="Drop-snapshot" class="common-anchor-header">Soltar instantâneo<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
+<p>Para obter detalhes sobre como monitorizar o progresso de uma tarefa de restauração, consulte <a href="#Get-restoration-state">Obter o estado da restauração</a>.</p>
+<h2 id="Drop-snapshot" class="common-anchor-header">Eliminar instantâneo<button data-href="#Drop-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,9 +316,14 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Você pode descartar um instantâneo se ele não for mais necessário. É aconselhável remover instantâneos antigos regularmente para economizar armazenamento.</p>
+    </button></h2><p>Pode eliminar um instantâneo se este já não for necessário. Recomenda-se que remova regularmente os instantâneos antigos para poupar espaço de armazenamento.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_snapshot(
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>
 )
@@ -243,7 +337,7 @@ err := client.DropSnapshot(context.Background(), dropOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-restoration-jobs" class="common-anchor-header">Listar trabalhos de restauração<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
+<h2 id="List-restoration-jobs" class="common-anchor-header">Listar tarefas de restauração<button data-href="#List-restoration-jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -258,9 +352,14 @@ err := client.DropSnapshot(context.Background(), dropOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pode utilizar esta API para obter uma lista de instantâneos já criados para a coleção de destino.</p>
+    </button></h2><p>Pode utilizar esta API para obter uma lista dos instantâneos já criados para a coleção de destino.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all restore jobs</span>
 jobs = client.list_restore_snapshot_jobs()
 
@@ -296,7 +395,7 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-restoration-state" class="common-anchor-header">Obter o estado da restauração<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
+<h2 id="Get-restoration-state" class="common-anchor-header">Obter o estado da restauração<button data-href="#Get-restoration-state" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -311,9 +410,14 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de ter um ID de trabalho de restauração, você pode usá-lo para recuperar o progresso da restauração.</p>
+    </button></h2><p>Depois de obter um ID de tarefa de restauração, pode utilizá-lo para recuperar o progresso da restauração.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">state = client.get_restore_snapshot_state(job_id=<span class="hljs-number">12345</span>)
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Job ID: <span class="hljs-subst">{state.job_id}</span>&quot;</span>)

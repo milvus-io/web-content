@@ -63,7 +63,7 @@ title: متطلبات تشغيل Milvus على Kubernetes
         ></path>
       </svg>
     </button></h2><p>يُنصح بتشغيل مجموعة Kubernetes على أنظمة تشغيل Linux.</p>
-<p>kubectl هي أداة سطر الأوامر الخاصة بـ Kubernetes. استخدم إصدارًا من kubectl لا يختلف عن إصدار الكتلة إلا في إصدار فرعي واحد. يساعد استخدام أحدث إصدار من kubectl على تجنب المشكلات غير المتوقعة.</p>
+<p>kubectl هي أداة سطر الأوامر الخاصة بـ Kubernetes. استخدم إصدار kubectl لا يختلف عن إصدار الكتلة إلا في إصدار فرعي واحد. يساعد استخدام أحدث إصدار من kubectl على تجنب المشكلات غير المتوقعة.</p>
 <p>minikube مطلوب عند تشغيل مجموعة Kubernetes محليًا. يتطلب minikube Docker كمتطلب. تأكد من تثبيت Docker قبل تثبيت Milvus باستخدام Helm. راجع <a href="https://docs.docker.com/get-docker">الحصول على Docker</a> لمزيد من المعلومات.</p>
 <table>
 <thead>
@@ -80,7 +80,7 @@ title: متطلبات تشغيل Milvus على Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>انظر <a href="#Additional-disk-requirements">متطلبات القرص الإضافية</a>.</td></tr>
 <tr><td>MinIO</td><td>الإصدار 2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>مُضمّن مع Milvus (وضع الخدمة: <code translate="no">v0.1.36</code>+)</td><td>قائمة انتظار الرسائل الافتراضية. بالنسبة لعمليات النشر الموزعة، يمكن تشغيل Woodpecker <strong>كخدمة</strong> مخصصة؛ قم بتثبيت إصداره باستخدام <code translate="no">--set woodpecker.image.tag</code>. يتم دعم وضع الخدمة بدءًا من الإصدار <code translate="no">v0.1.36</code> من Woodpecker فصاعدًا.</td></tr>
+<tr><td>Woodpecker</td><td>مُضمّن مع Milvus (وضع الخدمة: <code translate="no">v0.1.37</code>+)</td><td>قائمة انتظار الرسائل الافتراضية. بالنسبة لعمليات النشر الموزعة، يمكن تشغيل Woodpecker <strong>كخدمة</strong> مخصصة؛ قم بتثبيت إصداره باستخدام <code translate="no">--set woodpecker.image.tag</code>. يتم دعم وضع الخدمة بدءًا من الإصدار <code translate="no">v0.1.37</code> من Woodpecker فصاعدًا.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>اختياري — فقط إذا قمت بتحويل قائمة انتظار الرسائل إلى Pulsar؛ غير مثبت بشكل افتراضي.</td></tr>
 </tbody>
 </table>
@@ -175,5 +175,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/ar/install_cluster-milvusoperator.md">تشغيل Milvus في Kubernetes باستخدام Milvus Operator</a></li>
 <li><a href="/docs/ar/install_cluster-helm.md">تشغيل Milvus في Kubernetes باستخدام Helm</a></li>
 </ul></li>
-<li><p>راجع <a href="/docs/ar/system_configuration.md">«تكوين النظام»</a> لمعرفة المعلمات التي يمكنك ضبطها أثناء تثبيت Milvus.</p></li>
+<li><p>راجع <a href="/docs/ar/system_configuration.md">«تكوين النظام</a> » للاطلاع على المعلمات التي يمكنك ضبطها أثناء تثبيت Milvus.</p></li>
 </ul>

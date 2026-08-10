@@ -176,7 +176,7 @@ title: Istilah
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketergantungan adalah program yang diandalkan oleh program lain agar dapat berfungsi. Ketergantungan Milvus meliputi etcd (menyimpan metadata), MinIO atau S3 (penyimpanan objek), dan antrian pesan seperti Woodpecker (mengelola log snapshot). Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastruktur &amp; Integrasi Data</a>.</p>
+    </button></h2><p>Ketergantungan adalah program yang diandalkan oleh program lain agar dapat berfungsi. Ketergantungan Milvus meliputi etcd (menyimpan metadata), MinIO atau S3 (penyimpanan objek), dan antrian pesan seperti Woodpecker (mengelola log snapshot). Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/data-infra-integration-overview.md">Infrastruktur Data</a>.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">Skema dinamis<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: Istilah
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menawarkan fungsi embedding bawaan yang bekerja dengan penyedia embedding populer. Sebelum membuat koleksi di Milvus, Anda dapat menggunakan fungsi-fungsi ini untuk menghasilkan embedding untuk dataset Anda, sehingga mempermudah proses persiapan data dan pencarian vektor. Untuk membuat embedding secara praktis, lihat <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Menggunakan Model PyMilvus untuk Menghasilkan Embedding Teks</a>.</p>
+    </button></h2><p>Milvus menawarkan fungsi embedding bawaan yang bekerja dengan penyedia embedding populer. Sebelum membuat koleksi di Milvus, Anda dapat menggunakan fungsi-fungsi ini untuk menghasilkan embedding untuk dataset Anda, sehingga mempermudah proses persiapan data dan pencarian vektor. Untuk melihat penerapan pembuatan embedding, lihat <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Menggunakan Model PyMilvus untuk Menghasilkan Embedding Teks</a>.</p>
 <h2 id="Entity" class="common-anchor-header">Entitas<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +391,7 @@ title: Istilah
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBuffer adalah mode penerapan Woodpecker yang ringan yang menyimpan sementara penulisan yang masuk dalam memori dan secara berkala membuangnya ke penyimpanan objek cloud. Mode ini paling cocok untuk beban kerja batch yang berat dalam penerapan skala kecil atau lingkungan produksi yang mengutamakan kesederhanaan daripada kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
+    </button></h2><p>MemoryBuffer adalah mode penerapan Woodpecker yang ringan yang menyimpan sementara penulisan yang masuk dalam memori dan secara berkala mengosongkannya ke penyimpanan objek cloud. Mode ini paling cocok untuk beban kerja batch yang berat dalam penerapan skala kecil atau lingkungan produksi yang mengutamakan kesederhanaan daripada kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -536,7 +536,7 @@ title: Istilah
         ></path>
       </svg>
     </button></h2><p>Partisi adalah pembagian dari sebuah koleksi. Milvus mendukung pembagian data koleksi menjadi beberapa bagian pada penyimpanan fisik. Proses ini disebut partisi, dan setiap partisi dapat berisi beberapa segmen. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">Kelola Partisi</a>.</p>
-<h2 id="Partition-key" class="common-anchor-header">Kunci partisi<button data-href="#Partition-key" class="anchor-icon" translate="no">
+<h2 id="Partition-key" class="common-anchor-header">Kunci Partisi<button data-href="#Partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -567,7 +567,7 @@ title: Istilah
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel adalah singkatan dari saluran fisik. Setiap PChannel sesuai dengan aliran WAL yang dikelola oleh Woodpecker. Secara default, sekelompok PChannel akan ditugaskan untuk menyimpan log yang mencatat penyisipan, penghapusan, dan pembaruan data saat klaster Milvus dimulai. Untuk informasi lebih lanjut, lihat <a href="/docs/id/streaming_service.md">Layanan Streaming</a>.</p>
+    </button></h2><p>PChannel adalah singkatan dari saluran fisik. Setiap PChannel sesuai dengan aliran WAL yang dikelola oleh Woodpecker. Secara default, sekelompok PChannel akan ditetapkan untuk menyimpan log yang mencatat penyisipan, penghapusan, dan pembaruan data saat klaster Milvus dimulai. Untuk informasi lebih lanjut, lihat <a href="/docs/id/streaming_service.md">Layanan Streaming</a>.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: Istilah
         ></path>
       </svg>
     </button></h2><p>Segmen adalah berkas data yang dibuat secara otomatis untuk menyimpan data yang dimasukkan. Sebuah koleksi dapat berisi beberapa segmen, dan setiap segmen dapat menampung banyak entitas. Selama pencarian kesamaan vektor, Milvus memeriksa setiap segmen untuk menyusun hasil pencarian.</p>
-<p>Ada dua jenis segmen: segmen yang sedang berkembang dan segmen yang disegel. Segmen yang sedang berkembang terus mengumpulkan data baru hingga mencapai ambang batas tertentu atau batas waktu, setelah itu segmen tersebut disegel. Setelah disegel, segmen tidak lagi menerima data baru dan dipindahkan ke penyimpanan objek. Sementara itu, data yang masuk dialihkan ke segmen growing yang baru. Transisi dari segmen growing ke segmen sealed dipicu baik karena mencapai batas entitas yang telah ditentukan sebelumnya maupun karena melebihi durasi maksimum yang diizinkan dalam status growing. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/replica.md#Design-Details">Detail Desain</a>.</p>
+<p>Ada dua jenis segmen: segmen yang sedang berkembang dan segmen yang disegel. Segmen yang sedang berkembang terus mengumpulkan data baru hingga mencapai ambang batas tertentu atau batas waktu, setelah itu segmen tersebut disegel. Setelah disegel, segmen tidak lagi menerima data baru dan dipindahkan ke penyimpanan objek. Sementara itu, data yang masuk dialihkan ke segmen growing yang baru. Transisi dari segmen growing ke segmen sealed dipicu baik oleh tercapainya batas entitas yang telah ditentukan sebelumnya maupun oleh melebihi durasi maksimum yang diizinkan dalam status growing. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/replica.md#Design-Details">Detail Desain</a>.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Konektor Spark-Milvus<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -712,7 +712,7 @@ title: Istilah
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus meningkatkan kinerja penulisan data dengan mendistribusikan operasi penulisan ke beberapa node menggunakan shard, yang diatur berdasarkan hashing dari kunci utama. Hal ini memanfaatkan kemampuan komputasi paralel dari cluster.</p>
+    </button></h2><p>Milvus meningkatkan kinerja penulisan data dengan mendistribusikan operasi penulisan ke beberapa node menggunakan shard, yang diatur berdasarkan hashing dari kunci utama. Hal ini memanfaatkan kemampuan komputasi paralel kluster.</p>
 <p><em>Partisi berfungsi untuk mengurangi beban baca dengan menentukan nama partisi, sedangkan sharding menyebarkan beban penulisan ke beberapa server.</em></p>
 <h2 id="Sparse-vector" class="common-anchor-header">Vektor Sparse<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"

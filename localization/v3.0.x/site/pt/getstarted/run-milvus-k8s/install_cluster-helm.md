@@ -20,7 +20,7 @@ title: Instalar o Milvus Cluster com o Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta página ilustra como iniciar uma instância do Milvus no Kubernetes utilizando <a href="https://github.com/zilliztech/milvus-helm">os gráficos Helm do Milvus</a>.</p>
+    </button></h1><p>Esta página explica como iniciar uma instância do Milvus no Kubernetes utilizando <a href="https://github.com/zilliztech/milvus-helm">os gráficos Helm do Milvus</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Verifique <a href="/docs/pt/prerequisite-helm.md">os requisitos de hardware e software</a> antes da instalação.</p></li>
-<li><p>Antes de instalar o Milvus, recomenda-se utilizar a <a href="https://milvus.io/tools/sizing">Ferramenta de Dimensionamento do Milvus</a> para estimar os requisitos de hardware com base no tamanho dos seus dados. Isto ajuda a garantir um desempenho ideal e uma alocação de recursos adequada para a sua instalação do Milvus.</p></li>
+<li><p>Antes de instalar o Milvus, recomenda-se utilizar a <a href="https://milvus.io/tools/sizing">Ferramenta de Dimensionamento do Milvus</a> para estimar os requisitos de hardware com base no tamanho dos seus dados. Isto ajuda a garantir um desempenho ideal e uma alocação de recursos otimizada para a sua instalação do Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e iremos prestar-lhe o apoio necessário.</p>
@@ -122,9 +122,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de instalar o gráfico Helm, pode iniciar o Milvus no Kubernetes. Esta secção orienta-o na implementação de um cluster Milvus.</p>
+    </button></h3><p>Depois de instalar o gráfico Helm, pode iniciar o Milvus no Kubernetes. Esta secção orienta-o na implementação de um cluster do Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
-<p><strong>Precisa, em vez disso, de uma implantação autónoma?</strong></p>
+<p><strong>Precisa, em vez disso, de uma implementação autónoma?</strong></p>
 <p>Se preferir implementar o Milvus no modo autónomo (um único nó) para desenvolvimento ou testes, utilize este comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
@@ -138,13 +138,13 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Implementar o cluster do Milvus:</strong></p>
 <div class="alert note">
-<p>Para o modo de serviço do Woodpecker, recomendamos a utilização da próxima versão do Milvus 3.0.1 ou de uma versão posterior, com o Woodpecker v0.1.36 ou posterior, para otimizações de limpeza por compactação e de confirmação em grupo.</p>
+<p>Para o modo de serviço do Woodpecker, recomendamos a utilização da próxima versão do Milvus 3.0.1 ou de uma versão posterior, com o Woodpecker v0.1.37 ou posterior, para otimizações de limpeza por compactação e de confirmação em grupo.</p>
 </div>
 <p>O comando seguinte implementa um cluster Milvus com definições otimizadas para a v3.0.0, utilizando o Woodpecker como fila de mensagens recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -161,11 +161,11 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li><strong>Fila de mensagens</strong>: <strong>o Woodpecker</strong> é agora recomendado (reduz a manutenção da infraestrutura em comparação com o Pulsar)</li>
 <li><strong>Novo componente</strong>: <strong>o Nodo de Streaming</strong> é introduzido e ativado por predefinição</li>
-<li><strong>Componentes fundidos</strong>: <strong>o Nodo de Índice</strong> e <strong>o Nodo de Dados</strong> são combinados num único <strong>Nodo de Dados</strong></li>
+<li><strong>Componentes fundidos</strong>: <strong>o «Index Node»</strong> e <strong>o «Data Node»</strong> são combinados num único <strong>«Data Node»</strong></li>
 </ul>
 <p>Para obter detalhes completos sobre a arquitetura, consulte a <a href="/docs/pt/architecture_overview.md">Visão Geral da Arquitetura</a>.</p>
 </div>
-<p><strong>Filas de mensagens alternativas:</strong> para efetuar a implementação com o Pulsar, o Kafka ou o RocksMQ em vez do Woodpecker, consulte <a href="#Optional-dependencies">Dependências opcionais</a>.</p>
+<p><strong>Filas de mensagens alternativas:</strong> para efetuar a implementação com o Pulsar, o Kafka ou o RocksMQ em vez do Woodpecker, consulte <a href="#Optional-dependencies">as dependências opcionais</a>.</p>
 <p><strong>Próximos passos:</strong>
 O comando acima implementa o Milvus com as configurações recomendadas. Para utilização em produção:</p>
 <ul>
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Dependências</strong>: <code translate="no">etcd</code> (metadados), <code translate="no">minio</code> (armazenamento de objetos), <code translate="no">woodpecker</code> (fila de mensagens)</li>
 </ul>
 <div class="alert note">
-<p>Com <code translate="no">streaming.woodpecker.embedded=false</code>, o Woodpecker funciona como um <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por predefinição — um quórum de 3 nós mais um de reserva para tolerância a falhas; não defina <code translate="no">woodpecker.replicaCount</code> para um valor inferior a 3) liderado por um serviço sem interface gráfica, utilizando o MinIO como backend de armazenamento — pelo que o cluster tem um conjunto de pods <code translate="no">woodpecker</code> separado, distinto do nó de streaming.</p>
+<p>Com <code translate="no">streaming.woodpecker.embedded=false</code>, o Woodpecker funciona como um <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por predefinição — um quórum de 3 nós mais um de reserva para tolerância a falhas; não defina <code translate="no">woodpecker.replicaCount</code> para um valor inferior a 3) liderado por um serviço sem interface gráfica, utilizando o MinIO como backend de armazenamento — pelo que o cluster possui um conjunto separado de pods <code translate="no">woodpecker</code>, distinto do nó de streaming.</p>
 </div>
 <p>Também pode aceder à <strong>interface Web do Milvus</strong> em <code translate="no">http://127.0.0.1:9091/webui/</code> assim que o reencaminhamento de portas estiver configurado (ver o passo seguinte). Para mais detalhes, consulte <a href="/docs/pt/milvus-webui.md">a interface Web do Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Ligar-se ao Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -255,7 +255,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p><strong>Opções para o reencaminhamento de portas:</strong></p>
 <ul>
-<li><strong>Atribuir automaticamente a porta local</strong>: Utilize <code translate="no">:19530</code> em vez de <code translate="no">27017:19530</code> para permitir que o kubectl escolha uma porta disponível</li>
+<li><strong>Atribuir porta local automaticamente</strong>: Utilize <code translate="no">:19530</code> em vez de <code translate="no">27017:19530</code> para permitir que o kubectl escolha uma porta disponível</li>
 <li><strong>Escutar em todas as interfaces</strong>: Adicione <code translate="no">--address 0.0.0.0</code> para permitir ligações a partir de outras máquinas:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
@@ -435,7 +435,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Até agora, pode seguir os passos <a href="#2-Check-Milvus-cluster-status">2</a> e <a href="#3-Connect-to-Milvus">3</a> da instalação online para verificar o estado do cluster e reencaminhar uma porta local para o Milvus.</p>
+<p>Até ao momento, pode seguir os passos <a href="#2-Check-Milvus-cluster-status">2</a> e <a href="#3-Connect-to-Milvus">3</a> da instalação online para verificar o estado do cluster e reencaminhar uma porta local para o Milvus.</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Atualizar o cluster do Milvus em execução<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

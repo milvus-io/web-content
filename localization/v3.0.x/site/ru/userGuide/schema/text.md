@@ -21,21 +21,21 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В приложениях искусственного интеллекта для поиска векторный поиск помогает находить семантически схожие сущности, но приложению часто также требуется исходный текст, лежащий в основе каждого совпадения. Большой языковой модель (LLM) или агент может использовать этот текст в качестве контекста для чтения, цитирования, составления резюме или включения результата в запрос.</p>
+    </button></h1><p>В приложениях искусственного интеллекта для поиска векторный поиск помогает находить семантически схожие сущности, но приложению часто также требуется исходный текст, лежащий в основе каждого совпадения. LLM или агент может использовать этот текст в качестве контекста для чтения, цитирования, составления резюме или включения результата в запрос.</p>
 <p>Milvus предоставляет скалярный тип поля « <code translate="no">TEXT</code> » для хранения длинного исходного текста непосредственно вместе с сущностями. Типичные значения включают отрывки, длинные документы, тексты статей, заявки и журналы. В отличие от поля « <code translate="no">VARCHAR</code> », которое требует фиксированного значения « <code translate="no">max_length</code> », поле « <code translate="no">TEXT</code> » не требует установки максимальной длины в байтах в схеме коллекции.</p>
 <p>Чтобы определить поле типа « <code translate="no">TEXT</code> », установите для параметра « <code translate="no">datatype</code> » значение « <code translate="no">DataType.TEXT</code> ».</p>
 <div class="alert note">
 <p>Для работы этой функции требуется Storage V3. Инструкции по включению и сведения о совместимости см. в разделе <a href="/docs/ru/storage-v3.md">«Storage V3</a>».</p>
 </div>
-<p>Milvus отклоняет схему коллекции, содержащую поле « <code translate="no">TEXT</code> », если Storage V3 отключен.</p>
+<p><a href="/docs/ru/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a> По умолчанию установлено значение « <code translate="no">false</code> », что означает, что Storage V3 по умолчанию отключен. Перед созданием коллекции, содержащей поле « <code translate="no">TEXT</code> », установите для этого параметра значение « <code translate="no">true</code> »; в противном случае Milvus отклонит схему коллекции.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;content&quot;</span>,
 <span class="highlighted-wrapper-line">    datatype=DataType.TEXT,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>После определения поля каждая сущность может содержать строковое значение в этом поле. Значения поля « <code translate="no">TEXT</code> » вставляются так же, как и значения других скалярных полей, и возвращаются в результатах запросов или поиска путем указания этого поля в параметре « <code translate="no">output_fields</code> ».</p>
+<p>После определения поля каждая сущность может содержать строковое значение в этом поле. Значения <code translate="no">TEXT</code> вставляются так же, как и в другие скалярные поля, и возвращаются в результатах запросов или поиска путем указания поля в <code translate="no">output_fields</code>.</p>
 <div class="alert note">
-<p><code translate="no">TEXT</code> Поля поддерживают нулевые значения. Чтобы включить эту функцию, установите для параметра « <code translate="no">nullable</code> » значение « <code translate="no">True</code> ». Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">«Поле, допускающее нулевые значения</a>».</p>
+<p><code translate="no">TEXT</code> Поля поддерживают нулевые значения. Чтобы включить эту функцию, установите для параметра « <code translate="no">nullable</code> » значение « <code translate="no">True</code> ». Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">«Поля, допускающие нулевые значения</a>».</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,12 +53,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Поле с параметром « <code translate="no">TEXT</code> » не может быть первичным полем. Первичные поля поддерживают параметры « <code translate="no">INT64</code> » и « <code translate="no">VARCHAR</code> ».</li>
-<li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживают <code translate="no">PHRASE_MATCH</code>.</li>
+<li>Поле <code translate="no">TEXT</code> не может быть первичным полем, ключом разбиения или кластеризующим ключом.</li>
+<li><code translate="no">TEXT</code> не может использоваться в качестве типа элемента поля с параметром « <code translate="no">ARRAY</code> », включая скалярное подполе в <code translate="no">StructArray</code>.</li>
 <li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживают значения по умолчанию.</li>
 <li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживаются во внешних коллекциях.</li>
-<li>В Milvus 3.0.0 поля <code translate="no">TEXT</code> не поддерживают скалярные индексы.</li>
-<li><code translate="no">TEXT</code> не предназначено для обычной фильтрации метаданных. Если вам нужно выполнить фильтрацию по метаданным в виде коротких строк, и значение поля укладывается в ограничение по длине <code translate="no">VARCHAR</code>, используйте <code translate="no">VARCHAR</code>.</li>
+<li>Пользователи не могут создавать скалярный индекс для поля типа « <code translate="no">TEXT</code> ». При использовании типа « <code translate="no">enable_match=True</code> » Milvus создает управляемый системой текстовый индекс для сопоставления текста. Этот внутренний индекс не является скалярным индексом, созданным пользователем.</li>
+<li>Общие операторы скалярного фильтрации нельзя применять напрямую к полю <code translate="no">TEXT</code>. К ним относятся операторы сравнения, такие как <code translate="no">==</code> и <code translate="no">!=</code>, операторы диапазона, такие как <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;</code> и <code translate="no">&lt;=</code>, а также <code translate="no">IN</code>, <code translate="no">LIKE</code>, операторы регулярных выражений (<code translate="no">=~</code> и <code translate="no">!~</code>) и <code translate="no">IS NULL</code> или <code translate="no">IS NOT NULL</code>. Для фильтрации по проанализированным терминам определите поле с помощью <code translate="no">enable_analyzer=True</code> и <code translate="no">enable_match=True</code>, а затем используйте <a href="/docs/ru/keyword-match.md"><code translate="no">TEXT_MATCH</code> или <code translate="no">TEXT_MATCH_FUZZY</code></a>. Для полнотекстового поиска с ранжированием по релевантности используйте BM25.</li>
+<li>В Milvus 3.0.0 функция BM25 или MinHash, использующая поле <code translate="no">TEXT</code> в качестве входных данных, должна быть определена при создании коллекции. Её нельзя добавить позже с помощью <code translate="no">add_function_field</code> или <code translate="no">AlterCollectionSchema</code>, даже если существующая коллекция пуста, поскольку Milvus не может заполнить выходные данные функции на основе сохраненных значений <code translate="no">TEXT</code>. Чтобы добавить такую функцию в существующую коллекцию, используйте поле ввода « <code translate="no">VARCHAR</code> » или заново создайте коллекцию, включив данную функцию в её схему. Подробности о добавлении функции и генерируемого ею векторного поля см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md#add-a-function-and-its-generated-vector-field--milvus-30x">«Изменение схемы коллекции</a>».</li>
+<li>Функции вложения текста также должны быть определены при создании коллекции. Milvus 3.0.0 не поддерживает их добавление во время выполнения.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">Выберите TEXT или VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,17 +77,17 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TEXT</code> и <code translate="no">VARCHAR</code> — оба хранят строковые значения, но предназначены для разных задач. Используйте <code translate="no">VARCHAR</code> для коротких метаданных с ограниченной длиной, которые идентифицируют, классифицируют или фильтруют сущности. Используйте <code translate="no">TEXT</code> для более длинного исходного контента, который предоставляет LLM или агенту достаточно контекста для чтения, цитирования, резюмирования или построения подсказки.</p>
+    </button></h2><p><code translate="no">TEXT</code> и « <code translate="no">VARCHAR</code> » — оба хранят строковые значения, но предназначены для разных задач. Используйте « <code translate="no">VARCHAR</code> » для коротких, ограниченных метаданных, которые идентифицируют, классифицируют или фильтруют сущности. Используйте « <code translate="no">TEXT</code> » для более длинного исходного контента, который предоставляет LLM или агенту достаточно контекста для чтения, цитирования, резюмирования или построения подсказки.</p>
 <table>
 <thead>
 <tr><th>Аспект</th><th><code translate="no">VARCHAR</code></th><th><code translate="no">TEXT</code></th></tr>
 </thead>
 <tbody>
 <tr><td>Лучше всего подходит для</td><td>Короткие метаданные, используемые для идентификации, классификации или фильтрации объектов, например <code translate="no">title</code>, <code translate="no">tag</code>, <code translate="no">category</code> или <code translate="no">external_id</code>.</td><td>Более длинный исходный контент, используемый LLM или рабочими процессами агентов, например <code translate="no">content</code>, <code translate="no">passage</code>, <code translate="no">article_body</code> или <code translate="no">log_message</code>.</td></tr>
-<tr><td>Параметр «Length»</td><td>Требуется параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, которое может хранить поле. Максимальное значение составляет <code translate="no">65,535</code> байт. Если значение может превысить этот предел, используйте параметр <code translate="no">TEXT</code>.</td><td>Не требует параметра <code translate="no">max_length</code>, поэтому в схеме не требуется фиксированное ограничение на количество байтов для текстового значения.</td></tr>
+<tr><td>Параметр «Length»</td><td>Требуется параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, которое может хранить поле. Максимальное значение составляет <code translate="no">65,535</code> байт. Если значение может превысить этот предел, используйте параметр <code translate="no">TEXT</code>.</td><td>Не требует значения <code translate="no">max_length</code>, поэтому в схеме не требуется фиксированное ограничение на количество байтов для текстового значения.</td></tr>
 <tr><td>Поведение хранения</td><td>Каждое значение хранится в пределах настроенного для поля параметра « <code translate="no">max_length</code> ».</td><td>Использует автоматический выбор хранилища для больших текстовых значений. Подробности см. в разделе <a href="#how-milvus-stores-large-text-values">«Как Milvus хранит большие значения TEXT</a>».</td></tr>
 <tr><td>Поддержка в качестве основного поля</td><td>Может использоваться в качестве первичного поля.</td><td>Не может использоваться в качестве первичного поля.</td></tr>
-<tr><td>Фильтрация</td><td>Используется для коротких строковых метаданных, которые должны фигурировать в выражениях фильтрации, таких как <code translate="no">category == &quot;news&quot;</code> или <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Не предназначено для обычной фильтрации метаданных.</td></tr>
+<tr><td>Фильтрация</td><td>Используйте для коротких строковых метаданных, которые должны появляться в выражениях фильтрации, таких как <code translate="no">category == &quot;news&quot;</code> или <code translate="no">tag in [&quot;ai&quot;, &quot;database&quot;]</code>.</td><td>Не поддерживает общие скалярные операторы фильтрации. Для фильтрации по проанализированным терминам используйте текстовые операторы с поддержкой сопоставления, а для полнотекстового поиска с ранжированием по релевантности — алгоритм BM25.</td></tr>
 </tbody>
 </table>
 <p>Подробнее о полях типа « <code translate="no">VARCHAR</code> » см. в разделе <a href="/docs/ru/string.md">«Поле VarChar</a>».</p>
@@ -106,7 +108,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>Разверните, чтобы узнать, как это работает</summary></p>
-<p>При вставке сущности строка, указанная вами для поля <code translate="no">TEXT</code>, является значением <code translate="no">TEXT</code>. Milvus сравнивает размер этого значения с <a href="/docs/ru/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>, который по умолчанию равен <code translate="no">65,536</code> байт, а затем выбирает один из двух внутренних путей хранения.</p>
+<p>При вставке сущности строка, указанная вами для поля « <code translate="no">TEXT</code> », является значением <code translate="no">TEXT</code>. Milvus сравнивает размер этого значения с <a href="/docs/ru/configure_datanode.md#dataNodetextinlineThreshold">dataNode.text.inlineThreshold</a>, который по умолчанию равен <code translate="no">65,536</code> байтам, а затем выбирает один из двух внутренних путей хранения.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/text-large-storage-flow.png" alt="Large text storage" class="doc-image" id="large-text-storage" /> 
@@ -136,7 +138,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующем примере создаётся коллекция с полем « <code translate="no">TEXT</code> » для исходного контента и полем «sparse vector» для разреженных векторов, сгенерированных BM25. Функция BM25 преобразует токенизированный текст из « <code translate="no">content</code> » в разреженные векторы, хранящиеся в « <code translate="no">sparse</code> ».</p>
+    </button></h2><p>В следующем примере создаётся коллекция с полем « <code translate="no">TEXT</code> » для исходного контента и полем «sparse vector» для разреженных векторов, сгенерированных BM25. Функция BM25 преобразует токенизированный текст из поля « <code translate="no">content</code> » в разреженные векторы, хранящиеся в поле « <code translate="no">sparse</code> ».</p>
 <p>Для полнотекстового поиска BM25 входное поле <code translate="no">TEXT</code> должно иметь значение <code translate="no">enable_analyzer=True</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
 
@@ -178,7 +180,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Создайте индекс для поля разреженных векторов, сгенерированного функцией BM25. Тип метрики должен быть установлен на <code translate="no">BM25</code>.</p>
+    </button></h2><p>Создайте индекс для поля разреженных векторов, сгенерированного функцией BM25. Тип метрики должен быть установлен в значение <code translate="no">BM25</code>.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="highlighted-comment-line">index_params.add_index(</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,</span>

@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.21 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.22 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
@@ -185,8 +185,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 후, 해당 YAML 파일을 다운로드하는 것을 권장합니다. 구성 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
-<li>모든 구성 요소가 단일 파드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>릴리스 이름에는 영문자, 숫자 및 하이픈만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
+<li>모든 구성 요소가 단일 포드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvus 클러스터 상태 확인<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator는 etcd, Pulsar, MinIO와 같은 Milvus 종속성을 생성한 다음, 프록시, 코디네이터, 노드와 같은 Milvus 구성 요소를 생성합니다.</p>
-<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 포드의 상태는 다음과 비슷해야 합니다.</p>
+<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 파드의 상태는 다음과 비슷해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -274,7 +274,7 @@ my-release-minio-3                               1/1     Running   0          2m
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>출력 결과를 보면 Milvus 인스턴스가 기본 포트 <strong>19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
+<p>출력 결과를 보면 Milvus 인스턴스가 기본 <strong>포트인 19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
 <div class="alert note">
 <p>Milvus를 독립형 모드로 배포한 경우, pod 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 로 변경하십시오.</p>
 </div>

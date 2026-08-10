@@ -65,7 +65,7 @@ title: Требования к запуску Milvus в Kubernetes
         ></path>
       </svg>
     </button></h2><p>Рекомендуется запускать кластер Kubernetes на платформах Linux.</p>
-<p>kubectl — это инструмент командной строки для Kubernetes. Используйте версию kubectl, которая отличается от версии вашего кластера не более чем на одну второстепенную версию. Использование последней версии kubectl помогает избежать непредвиденных проблем.</p>
+<p>kubectl — это инструмент командной строки для Kubernetes. Используйте версию kubectl, разница между которой и версией вашего кластера не превышает одну второстепенную версию. Использование последней версии kubectl помогает избежать непредвиденных проблем.</p>
 <p>minikube требуется при локальном запуске кластера Kubernetes. minikube зависит от Docker. Убедитесь, что вы установили Docker перед установкой Milvus с помощью Helm. Дополнительную информацию см. в разделе <a href="https://docs.docker.com/get-docker">«Установка Docker</a> ».</p>
 <table>
 <thead>
@@ -82,7 +82,7 @@ title: Требования к запуску Milvus в Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>См. <a href="#Additional-disk-requirements">дополнительные требования к дисковому пространству</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Входит в состав Milvus (режим службы: <code translate="no">v0.1.36</code>+)</td><td>Очередь сообщений по умолчанию. Для распределенных развертываний Woodpecker может работать как отдельный <strong>сервис</strong>; зафиксируйте его версию с помощью <code translate="no">--set woodpecker.image.tag</code>. Режим службы поддерживается начиная с версии Woodpecker <code translate="no">v0.1.36</code> и выше.</td></tr>
+<tr><td>Woodpecker</td><td>Входит в состав Milvus (режим службы: <code translate="no">v0.1.37</code>+)</td><td>Очередь сообщений по умолчанию. Для распределенных развертываний Woodpecker может работать как отдельный <strong>сервис</strong>; зафиксируйте его версию с помощью <code translate="no">--set woodpecker.image.tag</code>. Режим сервиса поддерживается начиная с версии Woodpecker <code translate="no">v0.1.37</code> и выше.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Необязательно — только если вы переключаете очередь сообщений на Pulsar; по умолчанию не устанавливается.</td></tr>
 </tbody>
 </table>

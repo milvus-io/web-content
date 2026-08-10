@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de un <strong>clúster de Milvus</strong> entre <strong>Kafka</strong> (integrado o externo) y <strong>Woodpecker</strong> (backend MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar el tipo de MQ</a>.</p>
+    </button></h1><p>En esta página se describe cómo cambiar la cola de mensajes (MQ) de un <strong>clúster de Milvus</strong> entre <strong>Kafka</strong> (integrado o externo) y <strong>Woodpecker</strong> (backend MinIO), en ambas direcciones. Para conocer el flujo de trabajo general y los requisitos previos, consulta <a href="/docs/es/switch-mq-type.md">Cambiar la cola de mensajes</a>.</p>
 <div class="alert note">
-<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a Milvus 3.0 o posterior antes de empezar; la función no está disponible en versiones anteriores.</p>
+<p><strong>Requisito previo:</strong> la función «Cambiar MQ» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>. Actualiza tu instancia de Milvus a la versión 3.0 o posterior antes de comenzar; esta función no está disponible en versiones anteriores.</p>
 </div>
 <div class="alert warning">
-<p>Cambiar la cola de mensajes es una <strong>operación de alto riesgo</strong>. Elige la sección que se ajuste <strong>a tu</strong> método de implementación <strong>—Con Helm</strong> o <strong>Con Milvus Operator</strong> — y síguela de principio a fin. No mezcles comandos de Helm y de Operator.</p>
+<p>El cambio de la cola de mensajes es una <strong>operación de alto riesgo</strong>. Elige la sección que se corresponda <strong>con tu</strong> método de implementación <strong>—«Con Helm»</strong> o <strong>«Con Milvus Operator</strong> »— y síguela de principio a fin. No mezcles comandos de Helm y de Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Con Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

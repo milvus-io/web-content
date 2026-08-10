@@ -128,7 +128,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zilliz Cloud에서 개발한 카디널(Cardinal)은 타의 추종을 불허하는 검색 품질과 성능을 제공하는 최첨단 벡터 검색 알고리즘입니다. 혁신적인 설계와 광범위한 최적화를 통해 카디널은 Knowhere보다 수배에서 10배에 달하는 성능을 발휘하며, 다양한 K 크기, 높은 필터링, 서로 다른 데이터 분포 등 다양한 운영 시나리오를 유연하게 처리합니다.</p>
+    </button></h2><p>Zilliz Cloud에서 개발한 카디널(Cardinal)은 타의 추종을 불허하는 검색 품질과 성능을 제공하는 최첨단 벡터 검색 알고리즘입니다. 혁신적인 설계와 광범위한 최적화를 통해 카디널은 Knowhere보다 수배에서 10배에 이르는 성능을 발휘하며, 다양한 K 크기, 높은 필터링 비율, 서로 다른 데이터 분포 등 다양한 운영 시나리오를 유연하게 처리합니다.</p>
 <h2 id="Channel" class="common-anchor-header">Channel<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>의존성은 다른 프로그램이 정상적으로 작동하기 위해 의존하는 프로그램을 말합니다. Milvus의 의존성에는 etcd(메타데이터 저장), MinIO 또는 S3(객체 스토리지), 그리고 Woodpecker(스냅샷 로그 관리)와 같은 메시지 큐가 포함됩니다. 자세한 내용은 <a href="https://milvus.io/docs/data-infra-integration-overview.md">‘데이터 인프라 및 통합’을</a> 참조하십시오.</p>
+    </button></h2><p>의존성은 다른 프로그램이 정상적으로 작동하기 위해 의존하는 프로그램을 말합니다. Milvus의 의존성에는 etcd(메타데이터 저장), MinIO 또는 S3(객체 스토리지), 그리고 Woodpecker(스냅샷 로그 관리)와 같은 메시지 큐가 포함됩니다. 자세한 내용은 <a href="https://milvus.io/docs/data-infra-integration-overview.md">‘데이터 인프라’를</a> 참조하십시오.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">동적 스키마<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새로운 필드가 포함된 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 알지 못하더라도 데이터를 삽입할 수 있으며, 아직 정의되지 않은 필드를 포함할 수도 있습니다. 컬렉션을 생성할 때 동적 필드를 활성화하면 이 스키마 자유 기능을 사용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">‘동적 필드 활성화’를</a> 참조하십시오.</p>
+    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새로운 필드가 포함된 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 알지 못해도 데이터를 삽입할 수 있으며, 아직 정의되지 않은 필드도 포함할 수 있습니다. 컬렉션을 생성할 때 동적 필드를 활성화하면 이 스키마 자유 기능을 사용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">‘동적 필드 활성화’를</a> 참조하십시오.</p>
 <h2 id="Embeddings" class="common-anchor-header">임베딩<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,7 +257,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 술어를 사용한 검색을 통해 스칼라 필터링을 지원하며, 쿼리 및 검색 내에서 <a href="https://milvus.io/docs/boolean.md">필터 조건을</a> 정의하여 결과를 정밀하게 필터링할 수 있습니다.</p>
+    </button></h2><p>Milvus는 술어를 사용한 검색을 통해 스칼라 필터링을 지원하며, 쿼리 및 검색 내에서 <a href="https://milvus.io/docs/boolean.md">필터 조건을</a> 정의하여 결과를 구체화할 수 있습니다.</p>
 <h2 id="Filtered-search" class="common-anchor-header">필터링된 검색<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +273,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 정제할 수 있게 해줍니다. 자세한 내용은 <a href="/docs/ko/single-vector-search.md#Filtered-search">‘필터링된 검색’을</a> 참조하십시오.</p>
+    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 정제할 수 있게 해줍니다. 자세한 내용은 <a href="/docs/ko/single-vector-search.md#Filtered-search">필터링된 검색을</a> 참조하십시오.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">하이브리드 검색<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색은</a> Milvus 2.4.0부터 제공되는 하이브리드 검색용 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 스칼라 필드 필터링과 결합된 벡터 검색의 경우, 이를 "필터링된 검색"이라고 합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하십시오.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색은</a> Milvus 2.4.0부터 제공되는 하이브리드 검색용 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 벡터 검색과 스칼라 필드 필터링이 결합된 경우, 이를 "필터링된 검색"이라고 합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하십시오.</p>
 <h2 id="Index" class="common-anchor-header">인덱스<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere는</a> Faiss, Hnswlib, Annoy 등 여러 벡터 유사도 검색 라이브러리를 통합한 Milvus의 핵심 벡터 실행 엔진입니다. 또한 Knowhere는 이기종 컴퓨팅을 지원하도록 설계되었습니다. 인덱스 구축 및 검색 요청을 어떤 하드웨어(CPU 또는 GPU)에서 실행할지 제어합니다. Knowhere라는 이름은 바로 이러한 기능, 즉 연산을 어디에서 실행할지 ‘알고(knowing)’ 있다는 의미에서 유래했습니다.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere는</a> Faiss, Hnswlib, Annoy 등 여러 벡터 유사도 검색 라이브러리를 통합한 Milvus의 핵심 벡터 실행 엔진입니다. 또한 Knowhere는 이기종 컴퓨팅을 지원하도록 설계되었습니다. 인덱스 구축 및 검색 요청을 어떤 하드웨어(CPU 또는 GPU)에서 실행할지 제어합니다. Knowhere라는 이름은 바로 이러한 ‘어디에서 연산을 실행할지(knowing where)’를 파악한다는 의미에서 유래했습니다.</p>
 <!-- ## Log broker
 <p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">로그 스냅샷<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
@@ -407,7 +407,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>메모리 매핑 파일은 파일 내용을 메모리에 직접 매핑하여 효율적인 데이터 처리를 가능하게 합니다. 이는 메모리가 제한적이어서 모든 데이터를 로드할 수 없는 경우에 특히 유용합니다. 이 기법은 데이터 용량을 늘리고 일정 수준까지 성능을 유지할 수 있습니다. 그러나 데이터가 메모리 용량을 크게 초과할 경우, 검색 및 쿼리 속도가 현저히 저하될 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md">MMap 지원 데이터 저장을</a> 참조하십시오.</p>
+    </button></h2><p>메모리 매핑 파일은 파일 내용을 메모리에 직접 매핑하여 효율적인 데이터 처리를 가능하게 합니다. 이는 메모리가 제한적이어서 모든 데이터를 불러올 수 없는 경우에 특히 유용합니다. 이 기법은 데이터 용량을 늘리고 일정 수준까지 성능을 유지할 수 있습니다. 그러나 데이터가 메모리 용량을 크게 초과할 경우, 검색 및 쿼리 속도가 현저히 저하될 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md">MMap 지원 데이터 저장을</a> 참조하십시오.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus 백업<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -567,7 +567,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel은 물리적 채널(physical channel)을 의미합니다. 각 PChannel은 Woodpecker가 관리하는 WAL 스트림에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제 및 업데이트를 기록하는 로그를 저장하기 위해 PChannel 그룹이 할당됩니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">‘스트리밍 서비스’를</a> 참조하십시오.</p>
+    </button></h2><p>PChannel은 물리적 채널(physical channel)을 의미합니다. 각 PChannel은 Woodpecker가 관리하는 WAL 스트림에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제 및 업데이트를 기록하는 로그를 저장하기 위해 일련의 PChannel이 할당됩니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">‘스트리밍 서비스’를</a> 참조하십시오.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: 용어
         ></path>
       </svg>
     </button></h2><p>세그먼트는 삽입된 데이터를 저장하는 자동으로 생성된 데이터 파일입니다. 하나의 컬렉션에는 여러 세그먼트가 포함될 수 있으며, 각 세그먼트는 수많은 엔티티를 담을 수 있습니다. 벡터 유사도 검색이 진행되는 동안 Milvus는 각 세그먼트를 분석하여 검색 결과를 집계합니다.</p>
-<p>세그먼트에는 ‘성장 중(growing)’과 ‘봉인됨(sealed)’의 두 가지 유형이 있습니다. 성장 중인 세그먼트는 특정 임계값이나 시간 제한에 도달할 때까지 새로운 데이터를 계속 수집하며, 그 이후에는 봉인됩니다. 일단 봉인되면 세그먼트는 더 이상 새로운 데이터를 받아들이지 않고 오브젝트 스토리지로 전송됩니다. 한편, 유입되는 데이터는 새로운 성장 중인 세그먼트로 라우팅됩니다. 성장 중인 세그먼트에서 봉인된 세그먼트로의 전환은 미리 정의된 엔티티 한도에 도달하거나 성장 상태에서 허용되는 최대 기간을 초과할 때 트리거됩니다. 자세한 내용은 <a href="https://milvus.io/docs/replica.md#Design-Details">‘설계 세부</a> 사항’을 참조하십시오.</p>
+<p>세그먼트에는 ‘성장 중(growing)’과 ‘봉인됨(sealed)’의 두 가지 유형이 있습니다. 성장 중인 세그먼트는 특정 임계값이나 시간 제한에 도달할 때까지 새로운 데이터를 계속 수집하며, 그 이후에는 봉인됩니다. 일단 봉인되면 세그먼트는 더 이상 새로운 데이터를 수락하지 않고 오브젝트 스토리지로 전송됩니다. 한편, 유입되는 데이터는 새로운 성장 중인 세그먼트로 라우팅됩니다. 성장 중인 세그먼트에서 봉인된 세그먼트로의 전환은 미리 정의된 엔티티 한도에 도달하거나 성장 상태에서 허용되는 최대 기간을 초과할 때 트리거됩니다. 자세한 내용은 <a href="https://milvus.io/docs/replica.md#Design-Details">‘설계 세부</a> 사항’을 참조하십시오.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus 커넥터<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -729,7 +729,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스파스 벡터는 벡터 임베딩을 사용하여 단어나 구를 표현하며, 대부분의 요소는 0이고 단 하나의 0이 아닌 요소만이 특정 단어의 존재를 나타냅니다. SPLADEv2와 같은 스파스 벡터 모델은 도메인 외 지식 검색, 키워드 인식 및 해석 가능성 측면에서 밀집 모델보다 우수한 성능을 보입니다. 자세한 내용은 <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">‘스파스 벡터</a>’를 참조하십시오.</p>
+    </button></h2><p>스파스 벡터는 벡터 임베딩을 사용하여 단어나 구를 표현하며, 대부분의 요소는 0이고 단 하나의 0이 아닌 요소만이 특정 단어의 존재를 나타냅니다. SPLADEv2와 같은 스파스 벡터 모델은 도메인 외 지식 검색, 키워드 인식 및 해석 가능성 측면에서 밀집 모델보다 뛰어난 성능을 보입니다. 자세한 내용은 <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">‘스파스 벡터</a>’를 참조하십시오.</p>
 <h2 id="Streaming-Service" class="common-anchor-header">스트리밍 서비스<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -745,7 +745,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스트리밍 서비스는 다양한 스트리밍 관련 기능을 지원하기 위해 WAL(Write-Ahead Log)을 기반으로 구축된 Milvus 내부 스트리밍 시스템 모듈을 지칭하는 개념입니다. 여기에는 스트리밍 데이터 수집/구독, 클러스터 상태의 장애 복구, 스트리밍 데이터를 이력 데이터로 변환, 증가하는 데이터에 대한 쿼리 등이 포함됩니다. 이 서비스는 스트리밍 코디네이터, 스트리밍 노드 클러스터 및 스트리밍 클라이언트 구성 요소로 구성됩니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하십시오.</p>
+    </button></h2><p>스트리밍 서비스는 다양한 스트리밍 관련 기능을 지원하기 위해 WAL(Write-Ahead Log)을 기반으로 구축된 Milvus 내부 스트리밍 시스템 모듈을 지칭하는 개념입니다. 여기에는 스트리밍 데이터 수집/구독, 클러스터 상태의 장애 복구, 스트리밍 데이터를 이력 데이터로 변환, 증가하는 데이터에 대한 쿼리 등이 포함됩니다. 이 서비스는 스트리밍 코디네이터, 스트리밍 노드 클러스터 및 스트리밍 클라이언트 구성 요소로 이루어져 있습니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하십시오.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">비정형 데이터<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +793,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>임베딩 벡터는 이메일, IoT 센서 데이터, 인스타그램 사진, 단백질 구조 등과 같은 비정형 데이터의 특징을 추상화한 것입니다. 수학적으로 말하면, 임베딩 벡터는 부동 소수점 숫자 또는 이진수의 배열입니다. 비정형 데이터를 임베딩 벡터로 변환하는 데는 최신 임베딩 기법이 사용됩니다. Milvus는 2.4.0 버전부터 밀집 벡터와 스파스 벡터를 모두 지원합니다.</p>
+    </button></h2><p>임베딩 벡터는 이메일, IoT 센서 데이터, 인스타그램 사진, 단백질 구조 등과 같은 비정형 데이터의 특징을 추상화한 것입니다. 수학적으로 말하면, 임베딩 벡터는 부동 소수점 숫자 또는 이진수의 배열입니다. 비정형 데이터를 임베딩 벡터로 변환하는 데는 최신 임베딩 기법이 사용됩니다. Milvus는 2.4.0 버전부터 밀집 벡터와 희소 벡터를 모두 지원합니다.</p>
 <h2 id="WAL-Storage" class="common-anchor-header">WAL 스토리지<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -841,4 +841,4 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://zilliz.com/">Zilliz Cloud에서 제공되는</a> 완전 관리형 Milvus로, 더 많은 엔터프라이즈 기능과 고도로 최적화된 성능을 제공합니다.</p>
+    </button></h2><p><a href="https://zilliz.com/">Zilliz Cloud</a>에서 제공하는 완전 관리형 Milvus로, 더 많은 엔터프라이즈 기능과 고도로 최적화된 성능을 제공합니다.</p>

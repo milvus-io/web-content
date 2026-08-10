@@ -134,17 +134,17 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>참고</strong>: 독립 실행 모드에서는 Woodpecker를 기본 메시지 큐로 사용하며 Streaming Node 구성 요소를 활성화합니다. 독립 실행 모드 배포에서는 Woodpecker가 Milvus 포드에 <strong>내장되어</strong> 실행되며, 전용 Woodpecker <strong>서비스</strong> (별도의 포드)는 <strong>분산/클러스터</strong> 배포에서만 사용됩니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 참조하십시오.</p>
+<p><strong>참고</strong>: 독립 실행 모드에서는 Woodpecker를 기본 메시지 큐로 사용하며 Streaming Node 구성 요소를 활성화합니다. 독립 실행 모드 배포에서는 Woodpecker가 Milvus 포드에 <strong>내장되어</strong> 실행되며, 전용 Woodpecker <strong>서비스</strong> (별도의 포드)는 <strong>분산/클러스터</strong> 배포 시에만 사용됩니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 참조하십시오.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
 <div class="alert note">
-<p>Woodpecker 서비스 모드의 경우, 압축 정리 및 그룹 커밋 최적화를 위해 곧 출시될 Milvus 3.0.1 이상 버전과 Woodpecker v0.1.36 이상을 사용하는 것을 권장합니다.</p>
+<p>Woodpecker 서비스 모드의 경우, 압축 정리 및 그룹 커밋 최적화를 위해 곧 출시될 Milvus 3.0.1 이상 버전과 Woodpecker v0.1.37 이상을 사용하는 것을 권장합니다.</p>
 </div>
 <p>다음 명령어는 권장 메시지 큐로 Woodpecker를 사용하여 v3.0.0에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -175,7 +175,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>중요 사항:</strong></p>
 <ul>
-<li><strong>릴리스 이름 지정</strong>: 영문자, 숫자 및 하이픈만 사용하십시오(점은 허용되지 않음).</li>
+<li><strong>릴리스 이름 지정</strong>: 영문자, 숫자 및 대시만 사용하십시오(점은 허용되지 않음).</li>
 </ul>
 <p>자세한 내용은 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm 차트</a> 및 <a href="https://helm.sh/docs/">Helm 문서를</a> 참조하십시오.</p>
 </div>
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>의존성</strong>: <code translate="no">etcd</code> (메타데이터), <code translate="no">minio</code> (오브젝트 스토리지), <code translate="no">woodpecker</code> (메시지 큐)</li>
 </ul>
 <div class="alert note">
-<p><code translate="no">streaming.woodpecker.embedded=false</code> 를 사용하면, Woodpecker는 <strong>전용 StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 기본적으로 4개의 복제본 — 3노드의 쿼럼에 내결함성을 위한 예비 노드 1개 추가; <code translate="no">woodpecker.replicaCount</code> 값을 3 미만으로 설정하지 마십시오)으로, 헤드리스 서비스가 전면에 배치되어 있으며 MinIO를 스토리지 백엔드로 사용합니다. 따라서 클러스터에는 스트리밍 노드와 별개의 <code translate="no">woodpecker</code> 포드 세트가 존재합니다.</p>
+<p><code translate="no">streaming.woodpecker.embedded=false</code> 를 사용하면, Woodpecker는 <strong>전용 StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 기본적으로 4개의 복제본 — 3노드의 쿼럼에 내결함성을 위한 예비 노드 1개 추가; <code translate="no">woodpecker.replicaCount</code> 값을 3 미만으로 설정하지 마십시오)으로, 헤드리스 서비스가 전면에 배치되고 MinIO를 스토리지 백엔드로 사용합니다. 따라서 클러스터에는 스트리밍 노드와 별개의 <code translate="no">woodpecker</code> 포드 세트가 존재합니다.</p>
 </div>
 <p>포트 포워딩이 설정되면(다음 단계 참조) <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 <strong>Milvus 웹 UI</strong> 에 액세스할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus 웹 UI를</a> 참조하십시오.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvus에 연결하기<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -495,7 +495,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>메타데이터: <a href="/docs/ko/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 활성화하십시오. 요구 사항 및 호환성 고려 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
+<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 활성화해야 합니다. 요구 사항 및 호환성 관련 사항은 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

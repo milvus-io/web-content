@@ -80,7 +80,7 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Lihat <a href="#Additional-disk-requirements">persyaratan disk tambahan</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v0.1.36</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Mode layanan didukung mulai dari Woodpecker <code translate="no">v0.1.36</code> dan seterusnya.</td></tr>
+<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v0.1.37</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Mode layanan didukung mulai dari Woodpecker <code translate="no">v0.1.37</code> dan seterusnya.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Opsional — hanya jika Anda mengalihkan antrian pesan ke Pulsar; tidak diinstal secara default.</td></tr>
 </tbody>
 </table>
@@ -139,7 +139,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Unduh minikube</li>
 </ol>
-<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Yang Anda perlukan</strong>, klik tombol yang sesuai dengan platform target Anda, lalu salin perintah untuk mengunduh dan menginstal binari.</p>
+<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Yang Anda perlukan</strong>, klik tombol yang sesuai dengan platform target Anda, lalu salin perintah untuk mengunduh dan menginstal file biner.</p>
 <ol start="2">
 <li>Jalankan kluster K8s menggunakan minikube</li>
 </ol>

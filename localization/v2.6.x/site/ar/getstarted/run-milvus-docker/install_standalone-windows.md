@@ -58,7 +58,7 @@ title: تشغيل Milvus في Docker (لينكس)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. بمجرد تثبيت Docker Desktop على نظام Microsoft Windows، يمكنك الوصول إلى واجهة Docker CLI من PowerShell أو موجه أوامر Windows في وضع <strong>المسؤول</strong> ومن WSL 2. ​</p>
+    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. بمجرد تثبيت Docker Desktop على Microsoft Windows، يمكنك الوصول إلى واجهة سطر الأوامر (CLI) لـ Docker من PowerShell أو موجه أوامر Windows في وضع <strong>المسؤول</strong> ومن WSL 2. ​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,7 +121,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا كنت تفضل تشغيل Milvus باستخدام أوامر Linux ونصوص shell على نظام Windows، فتأكد من تثبيت WSL 2 مسبقًا. للحصول على تفاصيل حول كيفية تثبيت WSL 2، يمكنك الرجوع إلى هذه <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">المقالة من Microsoft</a>.</p>
+    </button></h3><p>إذا كنت تفضل تشغيل Milvus باستخدام أوامر Linux ونصوص shell على نظام Windows، فتأكد من تثبيت WSL 2 مسبقًا. للحصول على تفاصيل حول كيفية تثبيت WSL 2، يمكنك الرجوع إلى هذه <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">المقالة من Microsoft</a>.​</p>
 <ol>
 <li><p>ابدأ تشغيل WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن واختيار <strong>«تشغيل كمسؤول</strong>».​</p></li>
 <li><p>قم بتشغيل الأوامر التالية في PowerShell أو موجه أوامر Windows لتنزيل ملف تكوين Docker Compose لـ Milvus Standalone وتشغيل Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -223,7 +223,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>الإجراء مشابه لاستخدام Docker Compose لتثبيت Milvus في أنظمة Linux.​</p>
+    </button></h3><p>الإجراء مشابه لاستخدام Docker Compose لتثبيت Milvus في أنظمة Linux.</p>
 <ol>
 <li><p>قم بتشغيل WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>قم بتنزيل ملف تكوين Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.21/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل Milvus.</p>
@@ -276,7 +276,7 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>بمجرد تثبيت Docker Desktop في Windows، قد تواجه خطأ " <code translate="no">Docker Engine stopped</code> " إذا لم يتم تكوين جهاز الكمبيوتر الخاص بك بشكل صحيح. في هذه الحالة، قد تحتاج إلى إجراء الفحوصات التالية:​</p>
 <ol>
-<li><p>تحقق مما إذا كانت المحاكاة الافتراضية ممكّنة أم لا.​</p>
+<li><p>تحقق مما إذا كانت المحاكاة الافتراضية ممكّنة أم لا.</p>
 <p>يمكنك التحقق مما إذا كانت المحاكاة الافتراضية ممكّنة من خلال الاطلاع على علامة التبويب " <strong>الأداء</strong> " في " <strong>مدير المهام</strong>".​</p>
 <p><span class="img-wrapper">
   
@@ -284,7 +284,7 @@ Creating milvus-standalone ... done​
    <span>المحاكاة الافتراضية في «مدير المهام»</span>
   
  </span></p>
-<p>إذا كانت المحاكاة الافتراضية معطلة، فقد تحتاج إلى التحقق من إعدادات BIOS الخاصة ببرنامج اللوحة الأم. تختلف طريقة تمكين المحاكاة الافتراضية في إعدادات BIOS باختلاف الشركات المصنعة للوحات الأم. بالنسبة للوحة الأم من ASUS، على سبيل المثال، يمكنك الرجوع إلى <a href="https://www.asus.com/support/faq/1043786/">هذه المقالة</a> حول تمكين المحاكاة الافتراضية.</p>
+<p>إذا كانت المحاكاة الافتراضية معطلة، فقد تحتاج إلى التحقق من إعدادات BIOS الخاصة ببرنامج اللوحة الأم. تختلف طريقة تمكين المحاكاة الافتراضية في إعدادات BIOS باختلاف مصنعي اللوحات الأم. بالنسبة للوحة الأم من ASUS، على سبيل المثال، يمكنك الرجوع إلى <a href="https://www.asus.com/support/faq/1043786/">هذه المقالة</a> حول تمكين المحاكاة الافتراضية.​</p>
 <p>بعد ذلك، ستحتاج إلى إعادة تشغيل جهاز الكمبيوتر الخاص بك وتمكين Hyper-V. لمزيد من التفاصيل، راجع هذه <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">المقالة</a> من <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft</a>.​</p></li>
 <li><p>تحقق مما إذا كانت خدمة Docker Desktop قد تم تشغيلها أم لا.​</p>
 <p>يمكنك تشغيل الأمر التالي لبدء تشغيل خدمة Docker Desktop.​</p>
@@ -402,7 +402,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>

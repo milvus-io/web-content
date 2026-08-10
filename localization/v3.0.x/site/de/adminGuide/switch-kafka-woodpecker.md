@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf dieser Seite wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) eines <strong>Milvus-Clusters</strong> in beide Richtungen zwischen <strong>Kafka</strong> (integriert oder extern) und <strong>Woodpecker</strong> (MinIO-Backend) umschalten können. Informationen zum allgemeinen Arbeitsablauf und zu den Voraussetzungen finden Sie unter <a href="/docs/de/switch-mq-type.md">„MQ-Typ umschalten</a>“.</p>
+    </button></h1><p>Auf dieser Seite wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) eines <strong>Milvus-Clusters</strong> in beide Richtungen zwischen <strong>Kafka</strong> (integriert oder extern) und <strong>Woodpecker</strong> (MinIO-Backend) umschalten können. Informationen zum allgemeinen Arbeitsablauf und zu den Voraussetzungen finden Sie unter <a href="/docs/de/switch-mq-type.md">„Nachrichtenwarteschlange umschalten</a>“.</p>
 <div class="alert note">
-<p><strong>Voraussetzung:</strong> Die Funktion „MQ wechseln“ ist <strong>ab Milvus 3.0</strong> verfügbar. Aktualisieren Sie Ihre Milvus-Instanz auf Milvus 3.0 oder <strong>höher</strong>, bevor Sie beginnen – die Funktion ist in früheren Versionen nicht verfügbar.</p>
+<p><strong>Voraussetzung:</strong> Die Funktion „Switch MQ“ ist <strong>ab Milvus 3.0</strong> verfügbar. Aktualisieren Sie Ihre Milvus-Instanz auf Milvus 3.0 oder <strong>höher</strong>, bevor Sie beginnen – die Funktion ist in früheren Versionen nicht verfügbar.</p>
 </div>
 <div class="alert warning">
 <p>Das Umschalten der Nachrichtenwarteschlange ist ein <strong>risikoreicher Vorgang</strong>. Wählen Sie den Abschnitt aus, der <strong>Ihrer</strong> Bereitstellungsmethode entspricht – <strong>„Mit Helm“</strong> oder <strong>„Mit Milvus Operator“</strong> – und befolgen Sie die Anweisungen von oben nach unten. Mischen Sie keine Helm- und Operator-Befehle.</p>
@@ -179,7 +179,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Schritt 5: (Optional) Stoppen Sie Kafka und führen Sie eine Bereinigung durch.</strong> Bei <strong>integriertem</strong> Kafka entfernen Sie die Kafka-Pods und deren PVCs. Bei <strong>externem</strong> Kafka bereinigen Sie die Milvus-Themen (Format „ <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> “).</p>
+<p><strong>Schritt 5: (Optional) Stoppen Sie Kafka und führen Sie eine Bereinigung durch.</strong> Bei <strong>integriertem</strong> Kafka entfernen Sie die Kafka-Pods und deren PVCs. Bei <strong>externem</strong> Kafka bereinigen Sie die Milvus-Themen (Format: <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>).</p>
 <h3 id="Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="common-anchor-header">Wechsel von Woodpecker zu Kafka (Milvus-Operator)<button data-href="#Switch-from-Woodpecker-to-Kafka-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

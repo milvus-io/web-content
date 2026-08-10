@@ -67,7 +67,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>La implementación predeterminada (v3.0.0):</strong> <code translate="no">docker compose up -d</code> inicia tres contenedores: <code translate="no">milvus-etcd</code> (metadatos), <code translate="no">milvus-minio</code> (almacenamiento de objetos) y <code translate="no">milvus-standalone</code>. La cola de mensajes es <strong>Woodpecker (integrada, con MinIO / almacenamiento de objetos como backend de WAL)</strong>, por lo que no se requiere un contenedor de cola de mensajes independiente.</p>
+<p><strong>La implementación predeterminada (v3.0.0):</strong> <code translate="no">docker compose up -d</code> inicia tres contenedores: <code translate="no">milvus-etcd</code> (metadatos), <code translate="no">milvus-minio</code> (almacenamiento de objetos) y <code translate="no">milvus-standalone</code>. La cola de mensajes es <strong>Woodpecker (integrada, con MinIO / almacenamiento de objetos como backend WAL)</strong>, por lo que no se requiere un contenedor de cola de mensajes independiente.</p>
 <p><strong>Cola de mensajes predeterminada según la versión:</strong></p>
 <ul>
 <li><strong>2.5.x</strong>: la cola de mensajes predeterminada es <strong>RocksMQ</strong>.</li>
@@ -125,7 +125,7 @@ proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Reinicie el contenedor « <code translate="no">milvus-standalone</code> » para aplicar los cambios.</p>
+<li><p>Reinicia el contenedor « <code translate="no">milvus-standalone</code> » para aplicar los cambios.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -172,7 +172,7 @@ EOF
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para cambiar la cola de mensajes <em>tras</em> la actualización, consulta <a href="/docs/es/switch-mq-type.md">«Cambiar el tipo de MQ</a>».</p>
+<p>Para cambiar la cola de mensajes <em>tras</em> la actualización, consulta <a href="/docs/es/switch-mq-type.md">Cambiar la cola de mensajes</a>.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dependencias opcionales<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,7 +188,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta implementación utiliza <strong>Woodpecker</strong> (integrado, backend WAL de MinIO) para la mensajería, <strong>etcd</strong> para los metadatos y <strong>MinIO</strong> para el almacenamiento de objetos. Para utilizar una cola de mensajes diferente o conectar almacenamiento de objetos o metadatos externos, consulta:</p>
+    </button></h2><p>Esta implementación utiliza <strong>Woodpecker</strong> (integrado, backend WAL de MinIO) para la mensajería, <strong>etcd</strong> para los metadatos y <strong>MinIO</strong> para el almacenamiento de objetos. Para utilizar una cola de mensajes diferente o conectar un almacenamiento de objetos o metadatos externo, consulta:</p>
 <ul>
 <li>Cola de mensajes: <a href="/docs/es/woodpecker.md">Woodpecker</a> (predeterminada) · <a href="/docs/es/mq_pulsar.md">Pulsar</a> · <a href="/docs/es/mq_kafka.md">Kafka</a> · <a href="/docs/es/mq_rocksmq.md">RocksMQ</a></li>
 <li>Almacenamiento de objetos: <a href="/docs/es/deploy_s3.md">MinIO</a> (predeterminado) · <a href="/docs/es/deploy_s3.md">AWS S3</a> · <a href="/docs/es/abs.md">Azure Blob</a> · <a href="/docs/es/gcs.md">GCP Cloud Storage</a> · <a href="/docs/es/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/es/deploy_s3.md">Tencent COS</a> · <a href="/docs/es/deploy_s3.md">Huawei OBS</a> · <a href="/docs/es/deploy_s3.md">Compatible con S3</a></li>

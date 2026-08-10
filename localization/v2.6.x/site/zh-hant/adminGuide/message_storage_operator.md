@@ -60,7 +60,7 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
 </ul></li>
 <li>Milvus 系統運行期間無法變更訊息儲存。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：升級至 Milvus v2.6.21 時，必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：升級至 Milvus v2.6.22 時，必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,9 +77,9 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ 是 Milvus 獨立執行模式中的預設訊息儲存系統。</p>
+    </button></h2><p>RocksMQ 是 Milvus 獨立部署模式中的預設訊息儲存系統。</p>
 <div class="alert note">
-<p>目前，您只能透過 Milvus Operator 將 RocksMQ 設定為 Milvus 獨立執行模式的訊息儲存系統。</p>
+<p>目前，您只能透過 Milvus Operator 將 RocksMQ 設定為 Milvus 獨立模式的消息儲存。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例展示如何配置 RocksMQ 服務。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -144,7 +144,7 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar 負責管理近期變更的日誌、輸出串流日誌，並提供日誌訂閱服務。無論是 Milvus 獨立執行模式還是 Milvus 叢集模式，皆支援將 Pulsar 配置為訊息儲存。然而，若使用 Milvus Operator，您僅能將 Pulsar 配置為 Milvus 叢集的訊息儲存。請在 `<code translate="no">spec.dependencies.pulsar</code> ` 下新增必要欄位以配置 Pulsar。</p>
+    </button></h2><p>Pulsar 負責管理近期變更的日誌、輸出串流日誌，並提供日誌訂閱功能。無論是 Milvus 獨立執行模式或 Milvus 叢集模式，皆支援將 Pulsar 配置為訊息儲存。然而，若使用 Milvus Operator，您僅能將 Pulsar 配置為 Milvus 叢集的訊息儲存。請在 `<code translate="no">spec.dependencies.pulsar</code> ` 下新增必要欄位以配置 Pulsar。</p>
 <p><code translate="no">pulsar</code> 支援<code translate="no">external</code> 及<code translate="no">inCluster</code> 。</p>
 <h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -241,8 +241,8 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">此範例指定了 Pulsar 各元件的複本數、Pulsar BookKeeper 的運算資源，以及其他設定。</div>
-<div class="alert note">請參閱<a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a> 檔案，以了解用於配置內部 Pulsar 服務的完整配置項目。如前例所示，請根據需要在 `<code translate="no">pulsar.inCluster.values</code> ` 之下新增配置項目。</div>
+<div class="alert note">此範例指定了 Pulsar 各元件的複本數量、Pulsar BookKeeper 的運算資源，以及其他設定。</div>
+<div class="alert note">請參閱<a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a> 檔案，以查找用於配置內部 Pulsar 服務的完整配置項目。如前例所示，請根據需要在 `<code translate="no">pulsar.inCluster.values</code> ` 下方新增配置項目。</div>
 <p>假設配置檔案名為<code translate="no">milvuscluster.yaml</code> ，請執行以下命令以套用配置。</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -261,7 +261,7 @@ summary: 瞭解如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar 是 Milvus 叢集中的預設訊息儲存方案。若要使用 Kafka，請新增可選欄位<code translate="no">msgStreamType</code> 來配置 Kafka。</p>
+    </button></h2><p>Pulsar 是 Milvus 叢集中的預設訊息儲存方案。若要使用 Kafka，請新增可選欄位 `<code translate="no">msgStreamType</code> ` 來配置 Kafka。</p>
 <p><code translate="no">kafka</code> 支援<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
 <h3 id="External-Kafka" class="common-anchor-header">外部 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"

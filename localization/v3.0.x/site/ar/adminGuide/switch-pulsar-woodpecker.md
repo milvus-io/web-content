@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>توضح هذه الصفحة كيفية التبديل بين <strong>Pulsar</strong> (مدمج أو خارجي) و <strong>Woodpecker</strong> (خلفية MinIO) لقائمة انتظار الرسائل (MQ) في <strong>مجموعة Milvus،</strong> في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">"التبديل بين أنواع MQ</a>".</p>
+    </button></h1><p>توضح هذه الصفحة كيفية التبديل بين <strong>Pulsar</strong> (مدمج أو خارجي) و <strong>Woodpecker</strong> (خلفية MinIO) لقائمة انتظار الرسائل (MQ) في <strong>مجموعة Milvus،</strong> في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">التبديل بين قوائم انتظار الرسائل</a>.</p>
 <div class="alert note">
-<p><strong>المتطلبات الأساسية:</strong> تتوفر ميزة "التبديل بين قوائم انتظار الرسائل" في <strong>Milvus 3.0 والإصدارات الأحدث</strong>. قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل البدء — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</p>
+<p><strong>المتطلبات الأساسية:</strong> تتوفر ميزة التبديل بين قوائم انتظار الرسائل (Switch MQ) في <strong>Milvus 3.0 والإصدارات الأحدث</strong>. قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل البدء — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</p>
 </div>
 <div class="alert warning">
 <p>يعد تبديل قائمة انتظار الرسائل <strong>عملية تنطوي على مخاطر عالية</strong>. اختر القسم الذي يتوافق مع طريقة النشر <strong>الخاصة بك</strong> — <strong>باستخدام Helm</strong> أو <strong>باستخدام Milvus Operator</strong> — واتبع التعليمات من البداية إلى النهاية. لا تخلط بين أوامر Helm و Operator.</p>
@@ -118,7 +118,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>انتظر حتى تصبح جميع البودات جاهزة، ثم تأكد من أن تكوين الوصول إلى Pulsar قد تم تضمينه في تكوين Milvus.</p>
 <p><strong>الخطوة 3: تنفيذ التبديل إلى MQ.</strong></p>
 <div class="alert note">
-<p>تأكد من أن Pulsar المستهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو أول تحويل لك إلى Pulsar، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>
+<p>تأكد من أن Pulsar الهدف لا يحتوي على مواضيع Milvus من تكوين سابق. إذا كان هذا هو التبديل الأول إلى Pulsar، فتخط هذه الملاحظة؛ وإلا فقم أولاً بتنظيف مواضيع Milvus المتبقية التي تحمل نفس الأسماء.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم تسجيل التبديل الناجح في <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
-<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره<strong>Operator</strong> حتى لا يقوم Operator بإلغاء عملية التبديل. قم بإنشاء <code translate="no">change_configmap.yaml</code>:</p>
+<p><strong>الخطوة 4: قم بتحديث نوع MQ في Operator.</strong> قم بتحديث التكوين الذي يديره Operator حتى لا يقوم Operator بإلغاء عملية التبديل. أنشئ <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>الخطوة 5: (اختياري) أوقف Pulsar وقم بالتنظيف.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
+<p><strong>الخطوة 5: (اختياري) إيقاف Pulsar وتنظيف النظام.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
@@ -266,7 +266,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <tbody>
 <tr><td>Pulsar المدمج</td><td>وودبيكر (MinIO)</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
 <tr><td>Pulsar خارجي</td><td>وودبيكر (MinIO)</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
-<tr><td>وودبيكر (MinIO)</td><td>Pulsar الخارجي</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
+<tr><td>وودبيكر (MinIO)</td><td>Pulsar خارجي</td><td><strong>مدعوم</strong></td><td><strong>مدعوم</strong></td></tr>
 <tr><td>بولسار</td><td>وودبيكر (محلي)</td><td><strong>مدعوم ولكن غير موصى به</strong> (تحتاج جميع الوحدات إلى نظام ملفات مشترك)</td><td><strong>غير مدعوم</strong></td></tr>
 </tbody>
 </table>

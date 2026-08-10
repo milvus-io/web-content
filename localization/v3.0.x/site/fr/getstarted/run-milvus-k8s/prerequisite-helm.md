@@ -80,7 +80,7 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Voir <a href="#Additional-disk-requirements">les exigences supplémentaires en matière d'espace disque</a>.</td></tr>
 <tr><td>MinIO</td><td>VERSION.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v0.1.36</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Le mode service est pris en charge à partir de la version <code translate="no">v0.1.36</code> de Woodpecker.</td></tr>
+<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v0.1.37</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Le mode service est pris en charge à partir de la version <code translate="no">v0.1.37</code> de Woodpecker.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Facultatif — uniquement si vous basculez la file d'attente de messages vers Pulsar ; non installé par défaut.</td></tr>
 </tbody>
 </table>

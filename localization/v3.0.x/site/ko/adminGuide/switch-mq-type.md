@@ -1,9 +1,9 @@
 ---
 id: switch-mq-type.md
-title: MQ 유형 변경
-summary: 가동 중단 없이 기존 Milvus 배포 환경의 메시지 큐를 Woodpecker와 다른 메시지 큐 간에 전환합니다.
+title: 메시지 큐 전환
+summary: 가동 중단 없이 기존 Milvus 배포 환경을 Woodpecker와 다른 메시지 큐 간에 전환합니다.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">MQ 유형 변경<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">메시지 큐 전환<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

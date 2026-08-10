@@ -20,7 +20,7 @@ title: Installer Milvus Cluster avec Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm de Milvus</a>.</p>
+    </button></h1><p>Cette page explique comment démarrer une instance Milvus dans Kubernetes à l'aide <a href="https://github.com/zilliztech/milvus-helm">des charts Helm Milvus</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Vérifiez <a href="/docs/fr/prerequisite-helm.md">la configuration matérielle et logicielle requise</a> avant l’installation.</p></li>
-<li><p>Avant d’installer Milvus, il est recommandé d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction du volume de vos données. Cela permet de garantir des performances optimales et une allocation optimale des ressources pour votre installation Milvus.</p></li>
+<li><p>Avant d’installer Milvus, il est recommandé d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction de la taille de vos données. Cela permet de garantir des performances optimales et une allocation optimale des ressources pour votre installation Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Si vous rencontrez des difficultés pour récupérer l'image, contactez-nous à <a href="mailto:community@zilliz.com">l'adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l'assistance nécessaire.</p>
@@ -134,17 +134,17 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Remarque</strong>: le mode autonome utilise Woodpecker comme file d’attente de messages par défaut et active le composant Streaming Node. Les déploiements autonomes exécutent Woodpecker <strong>intégré</strong> au pod Milvus ; le <strong>service</strong> Woodpecker dédié (pods séparés) est utilisé uniquement pour les déploiements <strong>distribués/en cluster</strong>. Pour plus de détails, reportez-vous à la <a href="/docs/fr/architecture_overview.md">présentation de l’architecture</a> et à la section consacrée à <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
+<p><strong>Remarque</strong>: le mode autonome utilise Woodpecker comme file d’attente de messages par défaut et active le composant Streaming Node. Les déploiements autonomes exécutent Woodpecker <strong>intégré</strong> au pod Milvus ; le <strong>service</strong> Woodpecker dédié (pods séparés) est utilisé uniquement pour les déploiements <strong>distribués/en cluster</strong>. Pour plus de détails, reportez-vous à la <a href="/docs/fr/architecture_overview.md">section Présentation de l’architecture</a> et à la section <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <p><strong>Déployer un cluster Milvus :</strong></p>
 <div class="alert note">
-<p>Pour le mode de service Woodpecker, nous vous recommandons d’utiliser la prochaine version Milvus 3.0.1 ou une version ultérieure avec Woodpecker v0.1.36 ou une version plus récente afin de bénéficier des optimisations relatives au nettoyage par compactage et aux validations groupées.</p>
+<p>Pour le mode de service Woodpecker, nous vous recommandons d’utiliser la prochaine version Milvus 3.0.1 ou une version ultérieure avec Woodpecker v0.1.37 ou une version plus récente afin de bénéficier des optimisations relatives au nettoyage par compactage et au group commit.</p>
 </div>
 <p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.0, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.36 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
@@ -399,7 +399,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Les images sont extraites dans un sous-dossier nommé « <code translate="no">images</code> » situé dans le répertoire courant.</p>
+<p>Les images sont récupérées dans un sous-dossier nommé « <code translate="no">images</code> » situé dans le répertoire courant.</p>
 <h3 id="4-Load-images" class="common-anchor-header">4. Charger les images<button data-href="#4-Load-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -495,7 +495,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>Métadonnées : <a href="/docs/fr/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 est désactivé par défaut. Activez-le avant d’utiliser les fonctionnalités qui en dépendent. Pour connaître les prérequis et les considérations de compatibilité, consultez la section <a href="/docs/fr/storage-v3.md">Storage V3</a>.</p>
+<p>Storage V3 est désactivé par défaut. Activez-le avant d’utiliser les fonctionnalités qui en dépendent. Pour connaître les prérequis et les considérations de compatibilité, consultez la page <a href="/docs/fr/storage-v3.md">Storage V3</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
