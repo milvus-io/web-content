@@ -429,6 +429,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>To insert nested data into the StructArray field, read <a href="/docs/insert-data-into-structarray-fields.md">Insert Data into StructArray Fields</a>.</p></li>
 <li><p>To create vector and scalar indexes, read <a href="/docs/index-structarray-fields.md">Index StructArray Fields</a>.</p></li>
-<li><p>To search StructArray vector subfields, read Basic Vector Search with StructArray.</p></li>
+<li><p>To search StructArray vector subfields, read <a href="/docs/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>.</p></li>
 <li><p>To review supported data types, nullable behavior, and version-specific limitations, read <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p></li>
 </ol>

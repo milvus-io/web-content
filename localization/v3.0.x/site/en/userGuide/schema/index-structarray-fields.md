@@ -359,7 +359,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>To run entity-level EmbeddingList search or element-level vector search, read Basic Vector Search with StructArray.</p></li>
-<li><p>To filter StructArray scalar subfields during search, read Filtered Search with StructArray.</p></li>
+<li><p>To run entity-level EmbeddingList search or element-level vector search, read <a href="/docs/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>.</p></li>
+<li><p>To filter StructArray scalar subfields during search, read <a href="/docs/filtered-search-with-structarray.md">Filtered Search with StructArray</a>.</p></li>
 <li><p>To review index and metric limits, read <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p></li>
 </ol>
