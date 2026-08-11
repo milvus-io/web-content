@@ -316,6 +316,6 @@ client.add_collection_struct_field(
 
 2. To create vector and scalar indexes, read [Index StructArray Fields](index-structarray-fields.md).
 
-3. To search StructArray vector subfields, read Basic Vector Search with StructArray.
+3. To search StructArray vector subfields, read [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md).
 
 4. To review supported data types, nullable behavior, and version-specific limitations, read [StructArray Limits](structarray-limits.md).
