@@ -87,7 +87,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
 <li>Se estiver atualmente a utilizar a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
 <li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior antes de atualizar para a v2.6.17.</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte para a alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alter note">
 <p>Por motivos de segurança, o Milvus atualiza o seu MinIO para a versão RELEASE.2024-12-18T13-15-44Z com o lançamento da v2.6.17.</p>
 </div>
@@ -157,7 +157,7 @@ docker compose up -d
       </svg>
     </button></h3><p>Assim que a versão v2.5.16 estiver a funcionar corretamente, atualize para a versão v2.6.17:</p>
 <ol>
-<li><p>Edite o ficheiro <code translate="no">docker-compose.yaml</code> existente e atualize as etiquetas de imagem do Milvus e do MinIO:</p>
+<li><p>Edite o ficheiro <code translate="no">docker-compose.yaml</code> existente e atualize as etiquetas das imagens do Milvus e do MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>

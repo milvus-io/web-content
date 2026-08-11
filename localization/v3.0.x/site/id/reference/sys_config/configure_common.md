@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Pelajari cara mengonfigurasi umum untuk Milvus.
+summary: Pelajari cara mengonfigurasi pengaturan umum untuk Milvus.
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">Konfigurasi terkait umum<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">Konfigurasi yang terkait<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,7 +72,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Nama indeks ketika dibuat dengan nama yang tidak ditentukan      </td>
+      <td>        Nama indeks saat dibuat tanpa nama yang ditentukan      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Masa berlaku entitas dalam hitungan detik, PERHATIAN -1 berarti tidak pernah kedaluwarsa      </td>
+      <td>        Waktu kedaluwarsa entitas dalam detik, PERHATIAN: -1 berarti tidak pernah kedaluwarsa      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran irisan indeks dalam MB  </td>
+      <td>        Ukuran irisan indeks dalam MB      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas tinggi      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread sama dengan jumlah core di pool prioritas tinggi      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas menengah      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread harus menjadi jumlah core dalam pool prioritas menengah      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas rendah      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread harus menjadi jumlah core dalam pool prioritas rendah.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        milidetik. ini mewakili interval (dalam ms) di mana waktu kedatangan permintaan perlu dikurangi dalam kasus Bounded Consistency.      </td>
+      <td>        milidetik. Nilai ini mewakili interval (dalam ms) yang harus dikurangkan dari waktu kedatangan permintaan dalam kasus Konsistensi Terbatas.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -275,7 +275,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        detik. ini akan memaksa keluar dari server jika proses penghentian secara perlahan tidak selesai selama waktu ini.      </td>
+      <td>        detik. Nilai ini akan memaksa server untuk berhenti jika proses penghentian yang terkendali (graceful stop) tidak selesai dalam waktu ini.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -304,8 +304,37 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        silakan sesuaikan di Milvus yang disematkan: lokal, nilai yang tersedia adalah [lokal, jarak jauh, opendal], nilai minio sudah tidak digunakan, gunakan jarak jauh sebagai gantinya      </td>
+      <td>        silakan sesuaikan di Milvus tertanam: nilai yang tersedia adalah [local, remote, opendal], nilai minio sudah tidak digunakan lagi, gunakan remote sebagai gantinya      </td>
       <td>jarak jauh</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonstorageuseLoonFFI" class="common-anchor-header"><code translate="no">common.storage.useLoonFFI</code><button data-href="#commonstorageuseLoonFFI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.storage.useLoonFFI">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah akan menggunakan Storage V3 untuk penulisan baru dan hasil pemadatan. Parameter ini dapat diperbarui.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -334,9 +363,9 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Nilai default: otomatis</li>      
+        <li>Nilai default: auto</li>      
         <li>Nilai yang valid: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>Konfigurasi ini hanya digunakan oleh querynode dan indexnode, konfigurasi ini memilih set instruksi CPU untuk pencarian dan pembuatan indeks.</li>      </td>
+        <li>Konfigurasi ini hanya digunakan oleh querynode dan indexnode; konfigurasi ini memilih set instruksi CPU untuk pencarian dan pembuatan indeks.</li>      </td>
       <td>auto</td>
     </tr>
   </tbody>
@@ -396,7 +425,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        kata sandi default untuk pengguna root. Panjang maksimum adalah 72 karakter, dan harus menggunakan tanda kutip ganda.      </td>
+      <td>        kata sandi default untuk pengguna root. Panjang maksimumnya adalah 72 karakter, dan tanda kutip ganda wajib digunakan.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -454,7 +483,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Apakah akan mengesampingkan grup hak istimewa bawaan      </td>
+      <td>        Apakah akan mengganti grup hak istimewa bawaan      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -483,8 +512,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa hanya-baca tingkat cluster      </td>
-      <td>DaftarDatabase, PilihKepemilikan, PilihPengguna, JelaskanKelompokSumberDaya, DaftarKelompokSumberDaya, DaftarKelompokHakKhusus</td>
+      <td>        Hak akses baca saja di tingkat kluster      </td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups</td>
     </tr>
   </tbody>
 </table>
@@ -512,8 +541,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa baca-tulis tingkat cluster      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>        Hak akses baca-tulis tingkat kluster      </td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups, FlushAll, TransferNode, TransferReplica, UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -541,8 +570,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa admin tingkat cluster      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,JatuhkanBasis Data, BuatKepemilikan, JatuhkanKepemilikan, KelolaKepemilikan, BuatKelompokSumberDaya, JatuhkanKelompokSumberDaya, PerbaruiPengguna, GantiNamaKoleksi, BuatKelompokHakKhusus, JatuhkanKelompokHakKhusus, OperasikanKelompokHakKhusus</td>
+      <td>        Hak akses admin tingkat kluster      </td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups, FlushAll, TransferNode, TransferReplica,PerbaruiGrupSumberDaya,CadangkanRBAC,PulihkanRBAC,BuatDatabase,HapusDatabase,BuatKepemilikan,HapusKepemilikan,KelolaKepemilikan,BuatGrupSumberDaya,HapusGrupSumberDaya,PerbaruiPengguna,UbahNamaKoleksi,BuatGrupHakAkses,HapusGrupHakAkses,OperasikanGrupHakAkses</td>
     </tr>
   </tbody>
 </table>
@@ -570,8 +599,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa hanya-baca tingkat basis data    </td>
-      <td>TampilkanKoleksi,JelaskanDatabase</td>
+      <td>        Hak akses baca saja di tingkat database      </td>
+      <td>Tampilkan Koleksi, Jelaskan Database</td>
     </tr>
   </tbody>
 </table>
@@ -599,8 +628,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa baca-tulis tingkat basis data    </td>
-      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase</td>
+      <td>        Hak akses baca-tulis di tingkat basis data      </td>
+      <td>Tampilkan Koleksi, Jelaskan Database, Ubah Database</td>
     </tr>
   </tbody>
 </table>
@@ -628,8 +657,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa admin tingkat basis data    </td>
-      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase, BuatKoleksi, HapusKoleksi</td>
+      <td>        Hak akses admin tingkat database      </td>
+      <td>Tampilkan Koleksi, Jelaskan Database, Ubah Database, Buat Koleksi, Hapus Koleksi</td>
     </tr>
   </tbody>
 </table>
@@ -657,8 +686,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa hanya-baca tingkat koleksi      </td>
-      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias</td>
+      <td>        Hak akses baca saja di tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases</td>
     </tr>
   </tbody>
 </table>
@@ -686,8 +715,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Hak istimewa baca-tulis tingkat koleksi      </td>
-      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition</td>
+      <td>        Hak akses baca-tulis tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection,JelaskanAlias, DapatkanStatistik, DaftarAlias, Muat, Lepaskan, Sisipkan, Hapus, Upsert, Impor, Flush, Pemadatan, Keseimbangan Beban, BuatIndeks, HapusIndeks, BuatPartisi, HapusPartisi</td>
     </tr>
   </tbody>
 </table>
@@ -715,8 +744,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Keistimewaan admin tingkat koleksi      </td>
-      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition, CreateAlias, DropAlias</td>
+      <td>        Hak akses admin tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection,JelaskanAlias, DapatkanStatistik, DaftarAlias, Muat, Lepaskan, Sisipkan, Hapus, Upsert, Impor, Kosongkan, Pemadatan, Keseimbangan Beban, BuatIndeks, HapusIndeks, BuatPartisi, HapusPartisi, BuatAlias, HapusAlias</td>
     </tr>
   </tbody>
 </table>
@@ -744,7 +773,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
+      <td>        Nilai TTL saat sesi memberikan izin sewa kepada layanan pendaftaran      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -773,7 +802,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        waktu coba ulang saat sesi mengirim permintaan etcd    </td>
+      <td>        jumlah percobaan ulang saat sesi mengirim permintaan ke etcd      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -802,7 +831,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        apakah mengumpulkan statistik untuk kunci metrik      </td>
+      <td>        apakah akan mengumpulkan statistik untuk kunci metrik      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -831,7 +860,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        milidetik minimum untuk durasi pencetakan di tingkat info    </td>
+      <td>        milidetik minimum untuk mencetak durasi pada tingkat info      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -860,7 +889,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        milidetik minimum untuk durasi pencetakan dalam level peringatan      </td>
+      <td>        milidetik minimum untuk mencetak durasi pada tingkat peringatan      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -889,7 +918,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        detik maksimum untuk menunggu wlock bersyarat      </td>
+      <td>        jumlah detik maksimum untuk menunggu kondisi wlock      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -919,10 +948,10 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Apakah akan menonaktifkan mekanisme pengiriman pesan waktu internal untuk sistem. </li>      
-        <li>Jika dinonaktifkan (diatur ke false), sistem tidak akan mengizinkan operasi DML, termasuk penyisipan, penghapusan, kueri, dan pencarian. </li>      
+        <li>Apakah mekanisme pesan waktu internal untuk sistem akan dinonaktifkan. </li>      
+        <li>Jika dinonaktifkan (disetel ke false), sistem tidak akan mengizinkan operasi DML, termasuk penyisipan, penghapusan, kueri, dan pencarian. </li>      
         <li>Hal ini membantu Milvus-CDC menyinkronkan data tambahan</li>      </td>
-      <td>benar</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -979,8 +1008,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran awal filter mekar     </td>
-      <td>100000</td>
+      <td>        ukuran awal filter bloom      </td>
+      <td>100.000</td>
     </tr>
   </tbody>
 </table>
@@ -1008,8 +1037,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jenis filter mekar, mendukung BasicBloomFilter dan BlockedBloomFilter      </td>
-      <td>Filter Mekar yang Diblokir (BlockedBloomFilter)</td>
+      <td>        jenis bloom filter, mendukung BasicBloomFilter dan BlockedBloomFilter      </td>
+      <td>BlockedBloomFilter</td>
     </tr>
   </tbody>
 </table>
@@ -1037,8 +1066,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        tingkat positif palsu maksimum untuk filter mekar     </td>
-      <td>0.001</td>
+      <td>        tingkat false positive maksimum untuk bloom filter      </td>
+      <td>0,001</td>
     </tr>
   </tbody>
 </table>
@@ -1066,7 +1095,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran batch kapan harus menerapkan pk ke filter bloom     </td>
+      <td>        Ukuran batch saat menerapkan PK ke filter Bloom      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1095,7 +1124,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Apakah akan mengaktifkan replikasi koleksi.      </td>
+      <td>        Apakah replikasi koleksi akan diaktifkan.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1124,7 +1153,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jika benar, lakukan pemadatan clustering dan pemangkasan segmen pada bidang kunci partisi      </td>
+      <td>        jika true, lakukan pemadatan kluster dan pemangkasan segmen pada bidang kunci partisi      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1153,7 +1182,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jika benar, lakukan pemadatan clustering dan pemangkasan segmen pada bidang vektor      </td>
+      <td>        jika true, lakukan pemadatan pengelompokan dan pemangkasan segmen pada bidang vektor      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1182,7 +1211,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jika benar, aktifkan kunci pengelompokan vektor dan pemadatan pengelompokan vektor      </td>
+      <td>        jika true, aktifkan kunci pengelompokan vektor dan pemadatan pengelompokan vektor      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1211,7 +1240,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        aktifkan rpc lokal untuk komunikasi internal saat mode campuran atau mandiri.      </td>
+      <td>        Aktifkan RPC lokal untuk komunikasi internal saat dalam mode campuran atau mandiri.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1240,7 +1269,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Waktu maksimum untuk menunggu tugas selesai dan melepaskan sumber daya dalam pool    </td>
+      <td>        Waktu maksimum untuk menunggu hingga tugas selesai dan melepaskan sumber daya di pool      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1270,9 +1299,9 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Pengenal unik untuk klaster yang digunakan dalam pembuatan AutoID untuk memastikan keunikan global di beberapa klaster Milvus.</li>      
-        <li>Nilai yang valid: [0, 1, 2, 3, 4, 5, 6, 7] (mendukung hingga 8 cluster)</li>      
-        <li>Setiap cluster harus memiliki clusterID yang unik untuk mencegah tumpang tindih AutoID saat menjalankan beberapa cluster.</li>      
+        <li>Pengidentifikasi unik untuk kluster yang digunakan dalam pembangkitan AutoID untuk memastikan keunikan global di seluruh kluster Milvus.</li>      
+        <li>Nilai yang valid: [0, 1, 2, 3, 4, 5, 6, 7] (mendukung hingga 8 kluster)</li>      
+        <li>Setiap kluster harus memiliki clusterID yang unik untuk mencegah tumpang tindih AutoID saat menjalankan beberapa kluster.</li>      
         <li>ID ini disematkan dalam struktur AutoID 64-bit sebagai bagian dari segmen cluster_id.</li>      
         <li>Untuk informasi lebih lanjut, lihat <a href="/docs/id/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Bidang Utama &amp; AutoID</a>.</li>      </td>
       <td>0</td>

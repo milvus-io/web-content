@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 陣列欄位
-summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 ARRAY 欄位如何儲存資料的範例：
+summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素。以下是一個關於 ARRAY 欄位如何儲存資料的範例：
 ---
 <h1 id="Array-Field" class="common-anchor-header">陣列欄位<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 ARRAY 欄位如何儲存資料的範例：</p>
+    </button></h1><p>陣列欄位用於儲存一組具有相同資料型別且依序排列的元素。以下為陣列欄位儲存資料的範例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -40,10 +40,10 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。但是，您可以將<code translate="no">nullable</code> 屬性設定為<code translate="no">True</code> ，以允許空值。詳情請參閱<a href="/docs/zh-hant/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須共用相同的資料類型，此類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，必須同時指定陣列元素的<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
-<li><p><strong>陣列容量</strong>：ARRAY 欄位中元素的數量必須小於或等於陣列建立時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096 範圍</strong>內的整數。</p></li>
-<li><p><strong>字串處理</strong>：Array 欄位中的字串值會以原樣儲存，不會進行語意轉換或轉換。例如，<code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\'b'</code>, 和<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入的方式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則視為無效值。</p></li>
+<li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。不過，您可以將 `<code translate="no">nullable</code> ` 屬性設定為 `<code translate="no">True</code> `，以允許空值。詳細資訊請參閱「<a href="/docs/zh-hant/v2.6.x/nullable-and-default.md">可為空與預設值</a>」。</p></li>
+<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同的資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須為陣列元素指定<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於建立陣列時所定義的最大容量，該容量由<code translate="no">max_capacity</code> 指定。該值應為<strong>1</strong>至<strong>4096</strong> 之間的整數。</p></li>
+<li><p><strong>字串處理</strong>：陣列欄位中的字串值將以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 將以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">新增 ARRAY 欄位<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,18 +60,23 @@ summary: ARRAY 欄位儲存相同資料類型元素的有序集合。以下是 A
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 ARRAY 欄位 Milvus，請在建立集合模式時定義相關的欄位類型。這個過程包括</p>
+    </button></h2><p>若要在 Milvus 中使用 ARRAY 欄位，請在建立集合架構時定義相關的欄位類型。此流程包含：</p>
 <ol>
-<li><p>將<code translate="no">datatype</code> 設定為支援的陣列資料類型<code translate="no">ARRAY</code> 。</p></li>
+<li><p>將 `<code translate="no">datatype</code> ` 設定為受支援的陣列資料型別，即 `<code translate="no">ARRAY</code>`。</p></li>
 <li><p>使用<code translate="no">element_type</code> 參數指定陣列中元素的資料類型。同一陣列中的所有元素必須具有相同的資料類型。</p></li>
-<li><p>使用<code translate="no">max_capacity</code> 參數定義陣列的最大容量，也就是它可以包含的最大元素數量。</p></li>
+<li><p>使用 `<code translate="no">max_capacity</code> ` 參數來定義陣列的最大容量，即其可容納的元素最大數量。</p></li>
 </ol>
-<p>以下是如何定義包含 ARRAY 欄位的集合模式：</p>
+<p>以下是定義包含 ARRAY 欄位的集合模式的方法：</p>
 <div class="alert note">
-<p>如果在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許你插入事先沒有定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>若在定義架構時設定 `<code translate="no">enable_dynamic_fields=True</code> `，Milvus 允許您插入未預先定義的標量欄位。然而，此舉可能會增加查詢與管理的複雜度，進而影響效能。如需更多資訊，請參閱「<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>」。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -268,10 +273,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>索引有助於改善搜尋與查詢效能。在 Milvus 中，對向量欄位必須建立索引，但對標量值欄位則是可選的。</p>
-<p>以下範例在向量欄位<code translate="no">embedding</code> 和 ARRAY 欄位<code translate="no">tags</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">Index Explained</a>。</p>
+    </button></h2><p>建立索引有助於提升搜尋與查詢效能。在 Milvus 中，向量欄位必須建立索引，但標量欄位則為選用。</p>
+<p>以下範例針對向量欄位 `<code translate="no">embedding</code> ` 和 ARRAY 欄位 `<code translate="no">tags</code>` 建立索引，兩者均採用 `<code translate="no">AUTOINDEX</code> ` 索引類型。使用此類型時，Milvus 會根據資料類型自動選擇最適合的索引。您也可以針對每個欄位自訂索引類型和參數。詳細資訊請參閱<a href="/docs/zh-hant/v2.6.x/index-explained.md">《索引說明》</a>。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -349,9 +359,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>定義模式和索引後，建立包含 ARRAY 欄位的集合。</p>
+    </button></h2><p>定義完模式和索引後，請建立一個包含 ARRAY 欄位的集合。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -404,9 +419,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立集合後，您可以插入包含 ARRAY 欄位的資料。</p>
+    </button></h2><p>建立集合後，即可插入包含 ARRAY 欄位的資料。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -524,7 +544,7 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">使用篩選表達式查詢<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">使用篩選表達式進行查詢<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -539,10 +559,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>插入實體後，使用<code translate="no">query</code> 方法擷取符合指定篩選表達式的實體。</p>
-<p>擷取<code translate="no">tags</code> 不是 null 的實體：</p>
+    </button></h2><p>插入實體後，請使用 `<code translate="no">query</code> ` 方法來擷取符合指定篩選表達式的實體。</p>
+<p>若要擷取 `<code translate="no">tags</code> ` 不為空的實體：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -607,9 +632,14 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>檢索<code translate="no">ratings</code> 第一個元素值大於 4 的實體：</p>
+<p>若要擷取 `<code translate="no">ratings</code> ` 的第一個元素值大於 4 的實體：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -684,7 +714,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">使用篩選表達式進行向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">搭配篩選表達式的向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -699,9 +729,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的標量欄位篩選外，您也可以結合向量相似性搜尋與標量欄位篩選。例如，以下程式碼顯示如何在向量搜尋中加入標量欄位篩選器：</p>
+    </button></h2><p>除了基本的標量欄位篩選外，您還可以將向量相似度搜尋與標量欄位篩選器結合使用。例如，以下程式碼展示了如何在向量搜尋中加入標量欄位篩選器：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -791,4 +826,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 支援進階的 Array 過濾運算元，例如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步增強查詢功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/array-operators.md">ARRAY Operators</a>。</p>
+<p>此外，Milvus 支援進階的陣列篩選運算子，例如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步強化查詢能力。如需更多詳細資訊，請參閱「<a href="/docs/zh-hant/v2.6.x/array-operators.md">陣列運算子</a>」。</p>

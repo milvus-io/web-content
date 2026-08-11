@@ -50,7 +50,7 @@ summary: >-
 <tbody>
 </tbody>
 </table>
-<p>En ce sens, la recherche « <code translate="no">emb_list_strategy</code> » est principalement une stratégie de construction d’index et de récupération de candidats. Elle est configurée lors de la construction de l’index et détermine comment l’ensemble de candidats ANN de première étape est généré. Des paramètres de recherche tels que ` <code translate="no">retrieval_ann_ratio</code> ` et ` <code translate="no">emb_list_rerank</code> ` contrôlent ensuite le nombre de candidats récupérés et l’application ou non du reclassement par MaxSim.</p>
+<p>En ce sens, la recherche « <code translate="no">emb_list_strategy</code> » est principalement une stratégie de construction d’index et de récupération de candidats. Elle est configurée lors de la construction de l’index et détermine comment l’ensemble de candidats ANN de première étape est généré. Des paramètres de recherche tels que « <code translate="no">retrieval_ann_ratio</code> » et « <code translate="no">emb_list_rerank</code> » contrôlent ensuite le nombre de candidats récupérés et l’application ou non du reclassement par MaxSim.</p>
 <hr>
 <h2 id="Available-Strategies" class="common-anchor-header">Stratégies disponibles<button data-href="#Available-Strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
 <p><strong>Utilisez TokenANN lorsque la qualité est la priorité absolue.</strong> Il s’agit de l’approximation la plus proche du calcul MaxSim d’origine, car il conserve tous les vecteurs disponibles dans l’index de première étape.</p>
 </div>
 <ul>
-<li><p><strong>Convient particulièrement :</strong> aux fragments de texte courts, aux lignes comportant un nombre faible ou modéré de vecteurs, à une forte séparation sémantique au niveau des tokens, aux bases de référence sensibles à la qualité.</p></li>
+<li><p><strong>Convient particulièrement :</strong> aux fragments de texte courts, aux lignes comportant un nombre faible ou modéré de vecteurs, à une forte séparation sémantique au niveau des tokens, aux références sensibles à la qualité.</p></li>
 <li><p><strong>Moins adapté :</strong> documents très longs, pages visuelles comportant des milliers de vecteurs de patch, contraintes strictes en matière de mémoire ou de latence.</p></li>
 <li><p><strong>Comportement au niveau des éléments :</strong> TokenANN peut extraire des candidats à partir de vecteurs individuels avant de les regrouper en lignes. Le résultat final de la recherche dans l’EmbeddingList reste au niveau des lignes après le calcul du score MaxSim.</p></li>
 </ul>
@@ -165,7 +165,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La stratégie EmbeddingList par défaut dans Knowhere est <code translate="no">tokenann</code>. Si vous ne spécifiez pas <code translate="no">emb_list_strategy</code>, Knowhere utilise TokenANN. Les valeurs par défaut lors de la recherche incluent <code translate="no">retrieval_ann_ratio=3.0</code> et <code translate="no">emb_list_rerank=true</code>.</p>
+    </button></h2><p>La stratégie EmbeddingList par défaut dans Knowhere est <code translate="no">tokenann</code>. Si vous ne spécifiez pas <code translate="no">emb_list_strategy</code>, Knowhere utilise TokenANN. Les valeurs par défaut au moment de la recherche incluent <code translate="no">retrieval_ann_ratio=3.0</code> et <code translate="no">emb_list_rerank=true</code>.</p>
 <h2 id="Configuration-Items-by-Strategy" class="common-anchor-header">Éléments de configuration par stratégie<button data-href="#Configuration-Items-by-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,7 +264,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus peut également renseign <code translate="no">milvus.yaml</code> s d’index à partir de ` `. La section concernée est ` <code translate="no">knowhere</code>`. Les paramètres sont organisés par type d’index et par étape, selon le modèle ` <code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code>`. Les paramètres d’index fournis par l’utilisateur ont priorité sur ces valeurs par défaut.</p>
+    </button></h2><p>Milvus peut également renseign <code translate="no">milvus.yaml</code> s d’index à partir de ` `. La section concernée est <code translate="no">knowhere</code>. Les paramètres sont organisés par type d’index et par étape, selon le modèle <code translate="no">knowhere.&lt;INDEX_TYPE&gt;.&lt;stage&gt;.&lt;parameter&gt;</code>. Les paramètres d’index fournis par l’utilisateur ont priorité sur ces valeurs par défaut.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
   <span class="hljs-attr">HNSW:</span>
@@ -352,7 +352,7 @@ index_params.add_index(
 <tr><td>Souhaitez-vous une compression sans apprentissage ?</td><td>Vous avez besoin d’un modèle opérationnel plus simple et d’un encodage reproductible.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>L'espace d'embedding présente-t-il une faible capacité de discrimination ?</td><td>Les candidats ANN au niveau des tokens sont bruités, et la projection aléatoire ne préserve pas suffisamment le signal.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>La charge de travail est-elle visuelle ou multimodale ?</td><td>Les lignes contiennent de nombreux vecteurs de patchs, et TokenANN est trop coûteux.</td><td><code translate="no">lemur</code> ou <code translate="no">muvera</code></td></tr>
-<tr><td>La longueur des documents est-elle très asymétrique ?</td><td>Certaines lignes contiennent bien plus de vecteurs que d’autres.</td><td>Commencez par <code translate="no">muvera</code>; vérifiez attentivement <code translate="no">lemur</code>.</td></tr>
+<tr><td>La longueur des documents est-elle très asymétrique ?</td><td>Certaines lignes contiennent bien plus de vecteurs que d’autres.</td><td>Commencez par <code translate="no">muvera</code>; validez soigneusement <code translate="no">lemur</code>.</td></tr>
 </tbody>
 </table>
 <h2 id="Suggested-Evaluation-Workflow" class="common-anchor-header">Workflow d'évaluation suggéré<button data-href="#Suggested-Evaluation-Workflow" class="anchor-icon" translate="no">
@@ -374,12 +374,12 @@ index_params.add_index(
 <li><p>Commencez par utiliser <code translate="no">tokenann</code> comme référence de qualité lorsque la taille de l'ensemble de données le permet.</p></li>
 <li><p>Exécutez les mêmes requêtes avec <code translate="no">muvera</code> et comparez le rappel, le nDCG, la latence et la taille de l'index.</p></li>
 <li><p>Essayez <code translate="no">lemur</code> lorsque la liste d’embeddings est volumineuse, que l’espace d’embedding est bruité ou que la charge de travail est visuelle ou multimodale.</p></li>
-<li><p>Ajustez la valeur de ` <code translate="no">retrieval_ann_ratio</code> ` avant de modifier trop de paramètres de compilation. Augmentez-la si le rappel est faible ; réduisez-la si la latence est trop élevée.</p></li>
+<li><p>Ajustez la valeur de « <code translate="no">retrieval_ann_ratio</code> » avant de modifier trop de paramètres de compilation. Augmentez-la si le rappel est faible ; réduisez-la si la latence est trop élevée.</p></li>
 <li><p>Effectuez toujours des validations sur des requêtes représentatives et des distributions de longueur de documents représentatives. Une stratégie qui fonctionne sur des textes courts peut ne pas fonctionner sur des documents visuels ou des corpus à longue traîne.</p></li>
 </ol>
 <table>
 <thead>
-<tr><th>### Priorité à la qualité : commencez par « <code translate="no">tokenann</code> ». Utilisez-le comme référence pour évaluer la qualité de l’approximation MaxSim.</th><th>### Équilibré Essayez <code translate="no">muvera</code> lorsque vous avez besoin d’un coût moindre sans ajouter de pipeline d’entraînement.</th><th>### Compression : essayez <code translate="no">lemur</code> lorsque la compression apprise au niveau des lignes est susceptible de surpasser la projection aléatoire fixe.</th></tr>
+<tr><th>### Priorité à la qualité : commencez par l’ <code translate="no">tokenann</code>. Utilisez-le comme référence pour évaluer la qualité de l’approximation MaxSim.</th><th>### Équilibré Essayez <code translate="no">muvera</code> lorsque vous avez besoin d’un coût moindre sans ajouter de pipeline d’entraînement.</th><th>### Compression : essayez <code translate="no">lemur</code> lorsque la compression apprise au niveau des lignes est susceptible de surpasser la projection aléatoire fixe.</th></tr>
 </thead>
 <tbody>
 </tbody>

@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
-summary: Saiba como instalar um cluster Milvus no Kubernetes.
+summary: Saiba como instalar o cluster Milvus no Kubernetes.
 title: Executar o Milvus com suporte para GPU utilizando o Docker Compose
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Executar o Milvus com suporte para GPU utilizando o Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">

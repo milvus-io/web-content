@@ -1,13 +1,12 @@
 ---
 id: regex-filter.md
-title: ريجكسCompatible with Milvus 2.5.11+
+title: مرشح محلل التعبيرات النمطيةCompatible with Milvus 2.5.11+
 summary: >-
-  عامل تصفية regex هو عامل تصفية للتعبير العادي: أي رمز رمزي يُنتجه مُصنِّف
-  الرموز يتم الاحتفاظ به فقط إذا كان يطابق التعبير الذي تُقدِّمه؛ ويتم تجاهل أي
-  شيء آخر.
+  يحتفظ مرشح محلل التعبيرات النمطية بالرموز التي تتطابق مع تعبير نمطي ويستبعد
+  الباقي.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">ريجكس<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex-Analyzer-Filter" class="common-anchor-header">مرشح محلل التعبيرات النمطية<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex-Analyzer-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +21,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>عامل التصفية <code translate="no">regex</code> هو عامل تصفية للتعبير العادي: يتم الاحتفاظ بأي رمز رمزي ينتج عن أداة الترميز فقط إذا كان يتطابق مع التعبير الذي توفره؛ ويتم تجاهل أي شيء آخر.</p>
+    </button></h1><p>مرشح " <code translate="no">regex</code> " هو مرشح تعبير عادي: لا يتم الاحتفاظ بأي رمز ينتجه أداة تحليل الرموز إلا إذا كان مطابقًا للتعبير الذي تقدمه؛ ويتم تجاهل كل ما عدا ذلك.</p>
+<div class="alert note">
+<p>تصف هذه الصفحة مرشح « <code translate="no">regex</code> » في مسار المحلل. يقوم هذا المرشح بتصفية الرموز التي ينتجها أداة تحليل الرموز، ويؤثر على المصطلحات التي يتم إنشاؤها أثناء تحليل النص. لتصفية الكيانات باستخدام تعبيرات قياسية مثل « <code translate="no">field =~ &quot;pattern&quot;</code> » أو « <code translate="no">field !~ &quot;pattern&quot;</code> » في البحث « <code translate="no">query</code> » أو « <code translate="no">search</code> » أو البحث المختلط، راجع <a href="/docs/ar/pattern-matching.md">«مطابقة الأنماط</a>».</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,9 +40,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عامل التصفية <code translate="no">regex</code> هو عامل تصفية مخصص في ميلفوس. لاستخدامه، حدد <code translate="no">&quot;type&quot;: &quot;regex&quot;</code> في تكوين الفلتر، إلى جانب معلمة <code translate="no">expr</code> لتحديد التعبيرات العادية المطلوبة.</p>
+    </button></h2><p>يُعد مرشح « <code translate="no">regex</code> » مرشحًا مخصصًا في Milvus. لاستخدامه، حدد <code translate="no">&quot;type&quot;: &quot;regex&quot;</code> في تكوين المرشح، إلى جانب معلمة <code translate="no">expr</code> لتحديد التعبيرات العادية المطلوبة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [{
@@ -68,7 +75,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقبل عامل التصفية <code translate="no">regex</code> المعلمات التالية القابلة للتكوين.</p>
+<p>يقبل مرشح « <code translate="no">regex</code> » المعلمات القابلة للتكوين التالية.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -76,11 +83,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    </tr>
    <tr>
      <td><p><code translate="no">expr</code></p></td>
-     <td><p>نمط تعبير عادي يطبق على كل رمز مميز. يتم الاحتفاظ بالرموز التي تتطابق؛ أما غير المتطابقة فيتم إسقاطها. للحصول على تفاصيل حول بناء جملة التعبير العادي، راجع <a href="https://docs.rs/regex/latest/regex/#syntax">بناء الجملة</a>.</p></td>
+     <td><p>نمط تعبير عادي يُطبق على كل رمز. يتم الاحتفاظ بالرموز المطابقة؛ بينما يتم استبعاد الرموز غير المطابقة.
+ للحصول على تفاصيل حول صيغة التعبير العادي، راجع <a href="https://docs.rs/regex/latest/regex/#syntax">«الصيغة</a>».</p></td>
    </tr>
 </table>
-<p>يعمل عامل التصفية <code translate="no">regex</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذا يجب استخدامه مع أداة الترميز.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل الترميز والتصفية الفعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+<p>يعمل مرشح " <code translate="no">regex</code> " على المصطلحات التي يولدها أداة تحليل الرموز (tokenizer)، لذا يجب استخدامه بالاقتران مع أداة تحليل الرموز.</p>
+<p>بعد تعريف « <code translate="no">analyzer_params</code> » (التعبيرات العادية)، يمكنك تطبيقها على حقل « <code translate="no">VARCHAR</code> » (المعالج) عند تعريف مخطط المجموعة. وهذا يسمح لـ Milvus بمعالجة النص الموجود في هذا الحقل باستخدام المحلل المحدد من أجل التقطيع والتصفية بكفاءة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">«مثال على الاستخدام</a>».</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,8 +104,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام الأسلوب <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلّل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,7 +121,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#plaintext">نص عادي</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#plaintext">نص عادي</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-plaintext">analyzer_params = {
     &quot;tokenizer&quot;: &quot;standard&quot;,
     &quot;filter&quot;: [{
@@ -156,7 +169,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -221,7 +239,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">المخرجات المتوقعة<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">الناتج المتوقع<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

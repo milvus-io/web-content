@@ -178,7 +178,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può comparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità principali univoche.</p>
+<p>Nella ricerca a livello di elemento, ogni risultato rappresenta un elemento Struct corrispondente. Il valore " <code translate="no">offset</code> " è la posizione, a partire da zero, di quell’elemento nel campo StructArray. La stessa entità può comparire più di una volta se più di un elemento Struct corrisponde alla query. Il valore " <code translate="no">limit</code> " si applica ai risultati a livello di elemento, non alle entità padre univoche.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretazione dei risultati<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 数组字段
-summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举例说明 ARRAY 字段如何存储数据：
+summary: ARRAY 字段用于存储一组具有相同数据类型的有序元素。以下是一个关于 ARRAY 字段如何存储数据的示例：
 ---
 <h1 id="Array-Field" class="common-anchor-header">数组字段<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ARRAY 字段存储同一数据类型元素的有序集合。下面举例说明 ARRAY 字段如何存储数据：</p>
+    </button></h1><p>数组字段用于存储一组具有相同数据类型的有序元素。以下是一个关于数组字段如何存储数据的示例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -40,10 +40,10 @@ summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>默认值</strong>：ARRAY 字段不支持默认值。但是，可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。有关详情，请参阅<a href="/docs/zh/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>数据类型：</strong>ARRAY 字段中的所有元素必须共享相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，还必须为数组元素指定<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。</p></li>
-<li><p><strong>数组容量</strong>：ARRAY 字段中的元素数必须小于或等于创建数组时定义的最大容量，具体由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>至<strong>4096</strong> 范围内的整数。</p></li>
-<li><p><strong>字符串处理</strong>：数组字段中的字符串值按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 按输入值存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
+<li><p><strong>默认值</strong>：ARRAY字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/nullable-and-default.md">“可为空与默认值</a>”。</p></li>
+<li><p><strong>数据类型：</strong>ARRAY字段中的所有元素必须具有相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，您还必须为数组元素指定<code translate="no">max_length</code> 。<code translate="no">element_type</code> 支持Milvus支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>数组容量</strong>：ARRAY 字段中的元素数量必须小于或等于创建数组时定义的最大容量，该容量由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>到<strong>4096</strong> 之间的整数。</p></li>
+<li><p><strong>字符串处理</strong>：数组字段中的字符串值将按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 将按输入形式存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">添加 ARRAY 字段<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,18 +60,23 @@ summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 ARRAY 字段，Milvus 需要在创建 Collections Schema 时定义相关字段类型。这一过程包括</p>
+    </button></h2><p>要在 Milvus 中使用 ARRAY 字段，请在创建 Collection Schema 时定义相应的字段类型。该过程包括：</p>
 <ol>
-<li><p>将<code translate="no">datatype</code> 设置为支持的数组数据类型<code translate="no">ARRAY</code> 。</p></li>
+<li><p>将 `<code translate="no">datatype</code> ` 设置为受支持的数组数据类型，即 `<code translate="no">ARRAY</code>`。</p></li>
 <li><p>使用<code translate="no">element_type</code> 参数指定数组中元素的数据类型。同一数组中的所有元素必须具有相同的数据类型。</p></li>
-<li><p>使用<code translate="no">max_capacity</code> 参数定义数组的最大容量，即数组可包含的最大元素数。</p></li>
+<li><p>使用 `<code translate="no">max_capacity</code> ` 参数定义数组的最大容量，即它所能包含的元素最大数量。</p></li>
 </ol>
-<p>下面介绍如何定义包含 ARRAY 字段的 Collections Schema：</p>
+<p>以下是定义包含 ARRAY 字段的 Collection Schema 的方法：</p>
 <div class="alert note">
-<p>如果在定义模式时设置<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允许你插入事先未定义的标量字段。不过，这可能会增加查询和管理的复杂性，并可能影响性能。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/enable-dynamic-field.md">动态字段</a>。</p>
+<p>如果在定义 Schema 时设置了 `<code translate="no">enable_dynamic_fields=True</code> `，Milvus 允许您插入未预先定义的标量字段。但这可能会增加查询和管理的复杂性，从而可能影响性能。有关更多信息，请参阅<a href="/docs/zh/v2.6.x/enable-dynamic-field.md">“Dynamic Field”</a>。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -268,10 +273,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>索引有助于提高搜索和查询性能。在 Milvus 中，向量字段必须建立索引，标量字段则可选。</p>
-<p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 和 ARRAY 字段<code translate="no">tags</code> 创建了索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。您还可以自定义每个字段的索引类型和参数。有关详情，请参阅<a href="/docs/zh/v2.6.x/index-explained.md">索引说明</a>。</p>
+    </button></h2><p>建立索引有助于提升搜索和查询性能。在 Milvus 中，向量字段必须建立索引，而标量字段则可选。</p>
+<p>以下示例在向量字段<code translate="no">embedding</code> 和ARRAY字段<code translate="no">tags</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus会根据数据类型自动选择最合适的索引。您还可以为每个字段自定义索引类型和参数。详情请参阅《<a href="/docs/zh/v2.6.x/index-explained.md">索引详解》</a>。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -334,7 +344,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">创建 Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -351,7 +361,12 @@ indexParams.<span class="hljs-title function_">push</span>({
       </svg>
     </button></h2><p>定义好 Schema 和索引后，创建一个包含 ARRAY 字段的 Collection。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -404,9 +419,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建 Collections 后，就可以插入包含 ARRAY 字段的数据。</p>
+    </button></h2><p>创建 Collection 后，您可以插入包含 ARRAY 字段的数据。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -524,7 +544,7 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">使用过滤表达式查询<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">使用过滤表达式进行查询<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -539,10 +559,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>插入实体后，使用<code translate="no">query</code> 方法检索与指定过滤表达式匹配的实体。</p>
-<p>检索<code translate="no">tags</code> 不为空的实体：</p>
+    </button></h2><p>插入实体后，请使用<code translate="no">query</code> 方法检索符合指定过滤表达式的实体。</p>
+<p>要检索<code translate="no">tags</code> 字段不为空的实体：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -607,9 +632,14 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>检索<code translate="no">ratings</code> 第一个元素的值大于 4 的实体：</p>
+<p>要检索<code translate="no">ratings</code> 的第一个元素值大于4的实体：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -684,7 +714,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">使用过滤表达式进行向量搜索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">使用过滤表达式的向量搜索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -699,9 +729,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的标量字段筛选外，您还可以将向量相似性搜索与标量字段筛选结合起来。例如，下面的代码展示了如何在向量搜索中添加标量字段过滤器：</p>
+    </button></h2><p>除了基本的标量字段过滤外，您还可以将向量相似度搜索与标量字段过滤器结合使用。例如，以下代码演示了如何在向量搜索中添加标量字段过滤器：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -791,4 +826,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 还支持高级数组过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> ，以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/v2.6.x/array-operators.md">ÂRAY 操作符</a>。</p>
+<p>此外，Milvus 还支持诸如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> 等高级数组过滤操作符，以进一步增强查询能力。更多详细信息，请参阅《<a href="/docs/zh/v2.6.x/array-operators.md">ARRAY 操作符</a>》。</p>

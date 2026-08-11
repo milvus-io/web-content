@@ -279,7 +279,7 @@ results = client.hybrid_search(
 <tr><td>Tipi interi</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Sottocampi vettoriali</td><td>Non supportati come input per i predicati scalari di tipo <code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
+<tr><td>Sottocampi vettoriali</td><td>Non supportati come input per i predicati scalari di <code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
 </tbody>
 </table>
 <p>Per i casi non supportati, quali percorsi JSON, funzioni relative ai contenitori di array, funzioni di corrispondenza testuale, predicati null su <code translate="no">$[...]</code>, funzioni geometriche, espressioni Timestamptz e chiamate a funzioni generiche, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p>

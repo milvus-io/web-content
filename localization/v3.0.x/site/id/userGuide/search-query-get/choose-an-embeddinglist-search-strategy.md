@@ -5,9 +5,10 @@ summary: >-
   Strategi pencarian EmbeddingList menentukan cara Milvus membangun indeks
   kandidat perkiraan untuk pencarian EmbeddingList. Strategi defaultnya adalah
   tokenann. Anda dapat beralih ke muvera atau lemur jika daftar embedding
-  berukuran besar, TokenANN terlalu boros sumber daya, atau representasi tingkat
-  baris yang telah dilatih/dikompresi lebih sesuai. Hasil akhir tetap dihasilkan
-  oleh proses penataan ulang MaxSim ketika opsi `emb_list_rerank` diaktifkan.
+  berukuran besar, TokenANN terlalu memakan sumber daya, atau representasi
+  tingkat baris yang telah dilatih/dikompresi lebih sesuai. Hasil akhir tetap
+  dihasilkan oleh proses penataan ulang MaxSim ketika opsi `emb_list_rerank`
+  diaktifkan.
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">Pilih Strategi Pencarian EmbeddingList<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Strategi pencarian EmbeddingList menentukan cara Milvus membangun indeks kandidat perkiraan untuk pencarian EmbeddingList. Strategi default adalah " <code translate="no">tokenann</code>". Anda dapat beralih ke " <code translate="no">muvera</code> " atau " <code translate="no">lemur</code> " jika daftar embedding sangat besar, TokenANN terlalu mahal, atau representasi baris yang dipelajari/terkompresi lebih sesuai. Hasil akhir tetap dihasilkan oleh MaxSim reranking saat opsi " <code translate="no">emb_list_rerank</code> " diaktifkan.</p>
+    </button></h1><p>Strategi pencarian EmbeddingList menentukan cara Milvus membangun indeks kandidat perkiraan untuk pencarian EmbeddingList. Strategi defaultnya adalah " <code translate="no">tokenann</code>". Anda dapat beralih ke " <code translate="no">muvera</code> " atau " <code translate="no">lemur</code> " jika daftar embedding sangat besar, TokenANN terlalu mahal, atau representasi baris yang dipelajari/terkompresi lebih sesuai. Hasil akhir tetap dihasilkan oleh MaxSim reranking saat opsi " <code translate="no">emb_list_rerank</code> " diaktifkan.</p>
 <h2 id="Why-Search-Strategies-Exist" class="common-anchor-header">Mengapa Strategi Pencarian Ada<button data-href="#Why-Search-Strategies-Exist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +99,7 @@ summary: >-
 <ul>
 <li><p><strong>Cocok untuk:</strong> potongan teks pendek, baris dengan jumlah vektor kecil atau sedang, pemisahan semantik tingkat token yang kuat, baseline yang sensitif terhadap kualitas.</p></li>
 <li><p><strong>Kurang cocok:</strong> dokumen yang sangat panjang, halaman visual dengan ribuan vektor patch, batasan memori atau latensi yang ketat.</p></li>
-<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali menjadi baris. Hasil pencarian EmbeddingList akhir tetap berada pada tingkat baris setelah penilaian MaxSim.</p></li>
+<li><p><strong>Perilaku tingkat elemen:</strong> TokenANN dapat mengambil kandidat dari vektor individual sebelum menggabungkannya kembali ke baris. Hasil pencarian EmbeddingList akhir tetap berada pada tingkat baris setelah penilaian MaxSim.</p></li>
 </ul>
 <h2 id="MUVERA" class="common-anchor-header">MUVERA<button data-href="#MUVERA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -145,7 +146,7 @@ summary: >-
 </div>
 <ul>
 <li><p><strong>Cocok untuk:</strong> pencarian dokumen visual, embedding patch multimodal, ruang embedding dengan tingkat diskriminasi rendah, daftar embedding besar di mana TokenANN tidak praktis.</p></li>
-<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan distribusi panjang dokumen yang sangat tidak seimbang, serta beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
+<li><p><strong>Kurang cocok:</strong> korpus yang sering berubah, embedding dengan tingkat diskriminasi tinggi dan panjang dokumen yang sangat tidak seimbang, beban kerja di mana biaya pelatihan tidak dapat diterima.</p></li>
 <li><p><strong>Parameter penting:</strong><code translate="no">lemur_hidden_dim</code>, <code translate="no">lemur_num_train_samples</code>, <code translate="no">lemur_num_epochs</code>, <code translate="no">lemur_batch_size</code>, <code translate="no">lemur_learning_rate</code>, <code translate="no">lemur_seed</code>, dan <code translate="no">lemur_num_layers</code>.</p></li>
 </ul>
 <hr>
@@ -164,7 +165,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Strategi EmbeddingList default di Knowhere adalah <code translate="no">tokenann</code>. Jika Anda tidak menentukan <code translate="no">emb_list_strategy</code>, Knowhere akan menggunakan TokenANN. Pengaturan default saat pencarian mencakup <code translate="no">retrieval_ann_ratio=3.0</code> dan <code translate="no">emb_list_rerank=true</code>.</p>
+    </button></h2><p>Strategi EmbeddingList default di Knowhere adalah <code translate="no">tokenann</code>. Jika Anda tidak menentukan <code translate="no">emb_list_strategy</code>, Knowhere akan menggunakan TokenANN. Pengaturan default saat pencarian meliputi <code translate="no">retrieval_ann_ratio=3.0</code> dan <code translate="no">emb_list_rerank=true</code>.</p>
 <h2 id="Configuration-Items-by-Strategy" class="common-anchor-header">Item Konfigurasi Berdasarkan Strategi<button data-href="#Configuration-Items-by-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +190,7 @@ summary: >-
 <tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan secara eksplisit jika Anda menginginkan perilaku pengindeksan vektor elemen default atau saat DiskANN digunakan.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan saat Anda menginginkan pengambilan data yang dikodekan pada tingkat baris tanpa pelatihan.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>Pembuatan indeks</td><td><code translate="no">4</code></td><td>Mengontrol jumlah proyeksi SimHash. Nilai yang lebih tinggi akan membuat lebih banyak bucket dan dapat meningkatkan kualitas pengkodean, tetapi juga meningkatkan dimensi yang dikodekan.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Pembuatan indeks</td><td><code translate="no">7</code></td><td>Mengontrol berapa banyak pengkodean FDE independen yang digabungkan. Nilai yang lebih tinggi mungkin meningkatkan ketahanan tetapi meningkatkan biaya indeks/pencarian.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Pembuatan indeks</td><td><code translate="no">7</code></td><td>Mengontrol berapa banyak pengkodean FDE independen yang digabungkan. Nilai yang lebih tinggi mungkin meningkatkan ketahanan tetapi meningkatkan biaya indeksasi/pencarian.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Pembuatan indeks</td><td><code translate="no">42</code></td><td>Ditetapkan untuk proyeksi acak yang dapat direproduksi, terutama dalam pengujian dan perbandingan benchmark.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Pembuatan indeks</td><td><code translate="no">tokenann</code></td><td>Gunakan ketika kompresi tingkat baris yang dipelajari diperkirakan akan bekerja lebih baik daripada proyeksi acak tetap.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Pembuatan indeks</td><td><code translate="no">256</code></td><td>Mengontrol ukuran representasi terkompresi. Tingkatkan untuk kapasitas yang lebih besar; kurangi untuk penggunaan memori yang lebih rendah dan pengambilan data yang lebih cepat.</td></tr>
@@ -294,7 +295,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Strategi ini menentukan cara indeks dibangun. Pada saat pencarian, gunakan <code translate="no">retrieval_ann_ratio</code> untuk mengontrol berapa banyak kandidat tahap pertama yang diambil sebelum penataan ulang MaxSim. Nilai yang lebih tinggi biasanya meningkatkan recall tetapi meningkatkan latensi.</p>
+    </button></h2><p>Strategi ini menentukan cara indeks dibangun. Pada saat pencarian, gunakan <code translate="no">retrieval_ann_ratio</code> untuk mengontrol berapa banyak kandidat tahap pertama yang diambil sebelum pemeringkatan ulang MaxSim. Nilai yang lebih tinggi biasanya meningkatkan recall tetapi meningkatkan latensi.</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=collection_name,
     data=[query_embedding_list],

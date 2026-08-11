@@ -35,7 +35,7 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
         ></path>
       </svg>
     </button></h2><p>您可以使用 `<code translate="no">upsert</code> ` 操作插入新实体或更新现有实体，具体取决于 `upsert` 请求中提供的主键在 Collection 中是否存在。如果未找到该主键，则执行插入操作；否则，将执行更新操作。</p>
-<p>Milvus 中的 upsert 操作支持<strong>覆盖模式</strong>和<strong>合并模式</strong>。</p>
+<p>Milvus 中的 upsert 操作支持<strong>“覆盖</strong>”或<strong>“合并</strong>”两种模式。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">覆盖模式下的 Upsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,8 +82,9 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
    <span>合并模式下的 Upsert</span>
   
  </span></p>
-<p>要执行合并操作，请在<code translate="no">upsert</code> 请求中将<code translate="no">partial_update</code> 设置为<code translate="no">True</code> ，同时提供主键以及需要更新的字段及其新值。</p>
+<p>要执行合并操作，请在<code translate="no">upsert</code> 请求中将<code translate="no">partial_update</code> 设置为<code translate="no">True</code> ，并同时提供主键以及需要更新的字段及其新值。</p>
 <p>收到此类请求后，Milvus 将执行具有强一致性的查询以检索实体，根据请求中的数据更新字段值，插入修改后的数据，然后删除请求中携带的原始主键对应的现有实体。</p>
+<p>对于<code translate="no">ARRAY</code> 字段，在 Milvus v2.6.17 及更高版本中，合并模式支持两种操作符：<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 。这些操作符允许您向现有的<code translate="no">ARRAY</code> 字段追加元素或从中移除匹配的元素，而无需先查询实体以获取其当前值。有关详细信息，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">合并模式下的 ARRAY 字段 Upsert</a>。</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert 行为：特别说明<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +100,7 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在使用合并功能之前，您应考虑以下几点特别注意事项。以下情况假设您有一个 Collection，其中包含两个名为<code translate="no">title</code> 和<code translate="no">issue</code> 的标量字段，以及一个主键<code translate="no">id</code> 和一个名为<code translate="no">vector</code> 的向量字段。</p>
+    </button></h3><p>在使用合并功能之前，您应考虑以下几点特别注意事项。以下示例假设您有一个Collection，其中包含两个名为<code translate="no">title</code> 和<code translate="no">issue</code> 的标量字段，以及一个主键<code translate="no">id</code> 和一个名为<code translate="no">vector</code> 的向量字段。</p>
 <ul>
 <li><p><strong>对</strong> <strong>启用了</strong> <code translate="no">nullable</code> <strong>的字段进行Upsert操作</strong> <strong>。</strong></p>
 <p>假设<code translate="no">issue</code> 字段可以为空。当您对这些字段进行更新或插入操作时，请注意：</p>
@@ -107,18 +108,28 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
 <li><p>如果您在 `<code translate="no">upsert</code> ` 请求中省略了 `<code translate="no">issue</code> ` 字段并禁用了 `<code translate="no">partial_update</code>`，则 `<code translate="no">issue</code> ` 字段将被更新为 `<code translate="no">null</code> `，而非保留其原始值。</p></li>
 <li><p>若要保留<code translate="no">issue</code> 字段的原始值，您需要启用<code translate="no">partial_update</code> 并省略<code translate="no">issue</code> 字段，或者在<code translate="no">upsert</code> 请求中包含保留原始值的<code translate="no">issue</code> 字段。</p></li>
 </ul></li>
-<li><p><strong>在 Dynamic Field 中进行 Upsert 操作</strong>。</p>
+<li><p><strong>对 Dynamic Field 中的键执行 Upsert 操作</strong>。</p>
 <p>假设您已在示例Collection中启用了动态键，且实体Dynamic Field中的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
 <p>当您使用诸如<code translate="no">author</code> 、<code translate="no">year</code> 或<code translate="no">tags</code> 等键对实体进行 upsert 操作，或添加其他键时，请注意：</p>
 <ul>
 <li><p>如果在禁用<code translate="no">partial_update</code> 的情况下执行 upsert 操作，默认行为是<strong>覆盖</strong>。这意味着 Dynamic Field 的值将被请求中包含的所有非 Schema 定义字段及其值所覆盖。</p>
 <p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ，则目标实体的Dynamic Field中的键值对将更新为该值。</p></li>
 <li><p>如果在启用<code translate="no">partial_update</code> 的情况下执行 upsert 操作，默认行为是<strong>合并</strong>。这意味着 Dynamic Field 的值将与请求中包含的所有非 Schema 定义字段及其值进行合并。</p>
-<p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，则在 upsert 操作后，目标实体的 Dynamic Field 中的键值对将变为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
+<p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，则在 upsert 操作完成后，目标实体的 Dynamic Field 中的键值对将变为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
 </ul></li>
 <li><p><strong>对 JSON 字段执行 Upsert 操作。</strong></p>
-<p>假设示例 Collection 有一个名为<code translate="no">extras</code> 的 Schema 定义的 JSON 字段，且实体中该 JSON 字段的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
-<p>当您使用修改后的 JSON 数据对实体的<code translate="no">extras</code> 字段进行 upsert 操作时，请注意该 JSON 字段会被视为一个整体，无法有选择地更新单个键。换言之，该 JSON 字段<strong>不支持</strong> <strong>合并模式下的</strong>upsert<strong>操作</strong>。</p></li>
+<p>假设示例集合有一个名为<code translate="no">extras</code> 的 Schema 定义的 JSON 字段，且实体中该 JSON 字段的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
+<p>当您使用修改后的 JSON 数据对实体的<code translate="no">extras</code> 字段进行 upsert 操作时，请注意该 JSON 字段将被视为一个整体，无法有选择地更新单个键。换言之，该 JSON 字段<strong>不支持</strong> <strong>合并模式下的</strong>upsert<strong>操作</strong>。</p></li>
+<li><p><strong>对</strong> <code translate="no">ARRAY</code> <strong>字段</strong><strong>进行Upsert操作</strong> <strong>。</strong></p>
+<p>默认情况下，处于合并模式的<code translate="no">ARRAY</code> 字段<strong>遵循REPLACE</strong>语义：请求中携带的值将覆盖现有数组。为了实现更精细的更新，Milvus v2.6.17及更高版本还支持以下两个操作符：</p>
+<ul>
+<li><p><code translate="no">ARRAY_APPEND</code> 将请求负载中的元素追加到现有数组中。</p></li>
+<li><p><code translate="no">ARRAY_REMOVE</code> 从现有数组中移除所有与请求有效载荷中的值匹配的元素。</p></li>
+</ul>
+<p>有关操作符语法、支持的元素类型及其他限制，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">“在合并模式下对 ARRAY 字段进行 Upsert”</a>。</p></li>
+<li><p><strong>对 StructArray 字段进行 Upsert 操作。</strong></p>
+<p>在实体中对 StructArray 字段执行 Upsert 操作会覆盖该字段的值。为此，您需要提供一组字典列表，每个字典都应包含结构体 Schema 中定义的所有子字段，即使在合并模式下执行 Upsert 操作也是如此。</p>
+<p>有关详细信息，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">“在合并模式下</a>对<a href="/docs/zh/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">StructArray 字段执行 Upsert 操作</a>”。</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">限制与约束<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +146,7 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>基于上述内容，需遵守以下限制与约束：</p>
+    </button></h3><p>根据上述内容，需遵守以下限制与约束：</p>
 <ul>
 <li><p><code translate="no">upsert</code> 请求必须始终包含目标实体的主键。</p></li>
 <li><p>目标Collection必须已加载且可供查询。</p></li>
@@ -346,7 +357,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您还可以将实体插入或更新到指定的分区中。以下代码片段假设您的 Collection 中有一个名为<strong>PartitionA</strong>的分区。</p>
+    </button></h2><p>您还可以将实体进行“更新或插入”操作到指定的分区中。以下代码片段假设您的 Collection 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <p>如果这三个实体在分区中已存在，将被请求中包含的实体覆盖。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -483,7 +494,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">在合并模式下执行实体更新或插入<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">在合并模式下更新或插入实体<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +510,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>以下代码示例演示了如何通过部分更新进行实体更新或插入。只需提供需要更新的字段及其新值，并明确指定部分更新标志。</p>
-<p>在下面的示例中，upsert 请求中指定的实体的 `<code translate="no">issue</code> ` 字段将被更新为请求中包含的值。</p>
+<p>在下面的示例中，upsert 请求中指定的实体的 `<code translate="no">issue</code> ` 字段将更新为请求中包含的值。</p>
 <div class="alert note">
 <p>在合并模式下执行 upsert 操作时，请确保请求中涉及的实体具有相同的字段集。假设需要进行 upsert 操作的实体有两个或更多（如下面的代码片段所示），为了防止错误并保持数据完整性，这些实体必须包含完全相同的字段。</p>
 </div>
@@ -625,4 +636,320 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#         ]</span>
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="common-anchor-header">合并模式下对 ARRAY 字段进行 upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在 Milvus v2.6.17 之前，更新<code translate="no">ARRAY</code> 字段的一部分需要客户端执行“读取-修改-写入”流程：查询现有数组，在应用程序代码中进行修改，然后对完整的替换值执行 upsert 操作。 部分更新操作符（<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> ）允许您仅发送需要追加或移除的元素，从而减少了客户端逻辑，并避免了在upsert操作前进行额外的读取。</p>
+<p>假设主键为<code translate="no">1</code> 的实体已包含<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code> 。在引入部分更新操作符之前，若要向数组中添加元素<code translate="no">&quot;premium&quot;</code> ，则需要对整个替换数组执行 upsert 操作：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>, <span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    partial_update=<span class="hljs-literal">True</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; replacementData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;new\&quot;, \&quot;trial\&quot;, \&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .partialUpdate(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .data(replacementData)</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>使用<code translate="no">ARRAY_APPEND</code> 时，只需发送要添加的元素即可：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; appendData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">appendTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(appendData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(appendTags))</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>使用 `<code translate="no">ARRAY_REMOVE</code>` 时，只需发送要删除的匹配元素：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;trial&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_remove()},</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; removeData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;trial\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">removeTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_REMOVE)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(removeData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(removeTags))</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>通过<code translate="no">field_ops</code> 将任一操作符附加到字段上，会隐式启用部分更新语义。因此，您<strong>无需</strong>在调用<code translate="no">field_ops</code> 时同时传递<code translate="no">partial_update=True</code> 。</p>
+</div>
+<h3 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p>有效负载的值必须与目标<code translate="no">ARRAY</code> 字段的<code translate="no">element_type</code> 匹配。例如，如果目标字段是<code translate="no">ARRAY&lt;VARCHAR&gt;</code> ，则有效负载必须包含字符串值。</p></li>
+<li><p>在 Milvus v2.6.17 及更高版本中，<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 支持<code translate="no">ARRAY</code> 字段，其<code translate="no">element_type</code> 为<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 。</p></li>
+<li><p>执行<code translate="no">ARRAY_APPEND</code> 操作后，生成的数组长度不得超过该字段的<code translate="no">max_capacity</code> 。</p></li>
+<li><p>对同一实体的并发更新插入操作在不同请求之间不具有原子性。如果两个请求同时更新同一个<code translate="no">ARRAY</code> 字段，后写的值可能会覆盖先写的值。若需保留所有并发更改，请使用应用程序级别的协调机制。</p></li>
+</ul>
+<h3 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下示例使用了一个小型<code translate="no">users</code> Collection，其主键为<code translate="no">pk</code> ，包含一个类型为<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 的<code translate="no">tags</code> 字段，以及一个<code translate="no">embedding</code> 向量字段。该示例首先插入两个具有初始<code translate="no">tags</code> 值的实体，然后使用<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 演示每个操作符如何更改存储的数组。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+<span class="hljs-comment"># 1. Create a collection with an ARRAY&lt;VARCHAR&gt; field</span>
+schema = client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
+schema.add_field(<span class="hljs-string">&quot;pk&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+schema.add_field(<span class="hljs-string">&quot;embedding&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+schema.add_field(
+    <span class="hljs-string">&quot;tags&quot;</span>,
+    DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">8</span>,
+    max_length=<span class="hljs-number">32</span>,
+)
+
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+)
+
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    schema=schema,
+    index_params=index_params
+)
+
+<span class="hljs-comment"># 2. Seed two entities</span>
+client.insert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    data=[
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>]},
+    ],
+)
+
+<span class="hljs-comment"># 3. Append tags without reading the existing ARRAY values</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>, <span class="hljs-string">&quot;vip&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;trial&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+
+<span class="hljs-comment"># 4. Remove matching tags without replacing the full ARRAY field</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;trial&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_remove()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">以合并模式对 StructArray 字段进行 Upsert 操作<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在实体中对 StructArray 字段进行更新插入（Upsert）操作会覆盖该字段的值。这意味着，当您对 StructArray 字段进行更新插入时，必须包含 Schema 中定义的所有子字段。</p>
+<p>以下示例演示了如何在合并模式下对<code translate="no">chunks</code> 字段（一个包含6个子字段的StructArray字段）进行Upsert操作。操作完成后，ID为1的实体的<code translate="no">chunks</code> 字段将被设置为请求中提供的包含两个元素的结构数组。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;books&quot;</span>,
+<span class="highlighted-comment-line">    data=[{</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;chunks&quot;</span>: [</span>
+<span class="highlighted-comment-line">            {</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Use HNSW efSearch to trade recall for latency.&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">1</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.92</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.31</span>, <span class="hljs-number">0.41</span>]</span>
+<span class="highlighted-comment-line">            },</span>
+<span class="highlighted-comment-line">            {</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Range search returns vectors within a distance boundary.&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">2</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.86</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>]</span>
+<span class="highlighted-comment-line">            }</span>
+<span class="highlighted-comment-line">        ]</span>
+<span class="highlighted-comment-line">    }],</span>
+    partial_update=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

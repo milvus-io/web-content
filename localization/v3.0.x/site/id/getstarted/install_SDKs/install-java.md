@@ -91,7 +91,7 @@ title: Menginstal Milvus Java SDK
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola partisi</a></li>
+<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
 <li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Mengupdate, dan Menghapus</a></li>
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>

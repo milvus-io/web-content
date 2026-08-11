@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Numa carga útil de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
+<p>Numa carga útil de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos Struct. Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Compreender a estrutura da carga útil de inserção<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa por lista de incorporação (EmbeddingList) trata todos os vetores num campo StructArray como uma única lista de incorporação e devolve resultados ao nível da entidade com métricas de <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando os dois modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa por lista de incorporação (EmbeddingList) trata todos os vetores num campo StructArray como uma única lista de incorporação e devolve resultados ao nível da entidade com métricas de <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando ambos os modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserir linhas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

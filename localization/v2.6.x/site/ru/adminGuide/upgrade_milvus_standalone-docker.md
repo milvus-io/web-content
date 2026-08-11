@@ -57,7 +57,7 @@ title: Обновление автономной версии Milvus с помо
     </button></h3><p>Обновление с Milvus 2.5.x до 2.6.17 сопряжено со значительными изменениями в архитектуре:</p>
 <ul>
 <li><strong>Объединение координаторов</strong>: Устаревшие отдельные координаторы (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) были объединены в один <code translate="no">mixCoord</code></li>
-<li><strong>Новые компоненты</strong>: введение потокового узла (Streaming Node) для расширенной обработки данных</li>
+<li><strong>Новые компоненты</strong>: введение потокового узла (Streaming Node) для усовершенствованной обработки данных</li>
 <li><strong>Удаление компонентов</strong>: узел <code translate="no">indexNode</code> был удален и объединен</li>
 </ul>
 <p>Данный процесс обновления обеспечивает правильный переход на новую архитектуру. Для получения дополнительной информации об изменениях в архитектуре см. <a href="/docs/ru/v2.6.x/architecture_overview.md">«Обзор архитектуры Milvus</a>».</p>
@@ -125,7 +125,7 @@ title: Обновление автономной версии Milvus с помо
 <p>Пропустите этот шаг, если в вашем автономном развертывании уже используется версия v2.5.16 или выше.</p>
 </div>
 <ol>
-<li><p>Отредактируйте существующий файл ` <code translate="no">docker-compose.yaml</code> ` и обновите тег образа Milvus до v2.5.16:</p>
+<li><p>Отредактируйте существующий файл ` <code translate="no">docker-compose.yaml</code> ` и обновите тег образа Milvus до версии v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

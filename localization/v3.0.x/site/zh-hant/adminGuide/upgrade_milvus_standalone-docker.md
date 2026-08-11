@@ -1,14 +1,14 @@
 ---
 id: upgrade_milvus_standalone-docker.md
 label: Docker Compose
-order: 1
+order: 2
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 學習如何使用 Docker Compose 升級 Milvus 單機版。
-title: 使用 Docker Compose 升級 Milvus 單機版
+summary: 瞭解如何使用 Docker Compose 升級 Milvus 獨立執行版本。
+title: 使用 Docker Compose 升級 Milvus 獨立部署
 ---
-<div class="tab-wrapper"><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 單機版<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>、Helm、Docker<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 獨立部署<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,11 @@ title: 使用 Docker Compose 升級 Milvus 單機版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南說明如何使用 Docker Compose 將您的 Milvus 獨立部署從 v2.5.x 升級到 v3.0-beta。</p>
-<h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本指南說明如何使用 Docker Compose 將 Milvus 2.6.x 獨立部署版本升級至 v3.0-beta。</p>
+<div class="alert note">
+<p>此程序已針對官方 Milvus 2.6.20 獨立部署版 Docker Compose 配置進行驗證。升級過程保留了 etcd、MinIO、Woodpecker 以及現有的資料目錄，僅將 Milvus 映像檔更換為<code translate="no">milvusdb/milvus:v3.0-beta</code> 。</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,57 +42,16 @@ title: 使用 Docker Compose 升級 Milvus 單機版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">v3.0-beta 的新功能<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>從 Milvus 2.5.x 升級到 3.0-beta 涉及重大的架構變更：</p>
-<ul>
-<li><strong>協調器整合</strong>：傳統獨立的協調器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已經合併為單一的協調器。<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引進 Streaming Node 以增強資料處理能力</li>
-<li><strong>元件移除</strong>：<code translate="no">indexNode</code> 已移除並整合。</li>
+    </button></h2><ul>
+<li>Docker Engine 及 Docker Compose V2</li>
+<li>由 Docker Compose 管理的現有 Milvus 2.6.x 獨立部署環境</li>
+<li>現有部署所使用的 Docker Compose 檔案及設定</li>
+<li>Milvus 元資料與持久化資料的最新備份</li>
 </ul>
-<p>此升級程序可確保妥善遷移至新架構。關於架構改變的更多資訊，請參考<a href="/docs/zh-hant/architecture_overview.md">Milvus 架構概述</a>。</p>
-<h3 id="Requirements" class="common-anchor-header">系統需求<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>系統需求：</strong></p>
-<ul>
-<li>已安裝 Docker 和 Docker Compose</li>
-<li>透過 Docker Compose 部署 Milvus 單機版</li>
-</ul>
-<p><strong>相容性需求：</strong></p>
-<ul>
-<li>Milvus v2.6.0-rc1 與 v3.0-beta<strong>不相容</strong>。不支援從候選版本直接升級。</li>
-<li>如果您目前正在執行 v2.6.0-rc1，並需要保留您的資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以取得遷移協助。</li>
-<li>您<strong>必須</strong>先升級至 v2.5.16 或更新版本，才能升級至 v3.0-beta。</li>
-</ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</p>
-<div class="alter note">
-<p>基於安全考量，Milvus 隨著 v3.0-beta 的發行，將 MinIO 升級至 RELEASE.2024-12-18T13-15-44Z。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，必須維持您目前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<div class="alert warning">
+<p>執行此程序時，請勿替換目前的 Compose 檔案或變更依賴項版本。請保留現有的 etcd、物件儲存、訊息佇列、卷宗及設定。僅需更新 Milvus 映像標籤。</p>
+<p>此程序不支援透過將 Milvus 映像檔降級回 2.6.x 版本來進行降級或回滾。 當 v3.0-beta 寫入資料後，若僅還原映像檔，還原過程可能無法讀取已更新的狀態。若升級失敗，請停止寫入操作，並採用能還原升級前元資料及持久化資料備份的復原方案。請先在非生產環境中驗證該復原方案。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +68,7 @@ title: 使用 Docker Compose 升級 Milvus 單機版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">步驟 1：升級至 v2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-configuration" class="common-anchor-header">步驟 1：備份當前配置<button data-href="#Step-1-Back-up-the-current-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,26 +83,13 @@ title: 使用 Docker Compose 升級 Milvus 單機版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="alert note">
-<p>如果您的單機部署已執行 v2.5.16 或更高版本，請跳過此步驟。</p>
-</div>
-<ol>
-<li><p>編輯您現有的<code translate="no">docker-compose.yaml</code> 檔案，並更新 Milvus 映像標籤至 v2.5.16：</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
-<span class="hljs-attr">standalone:</span>
-  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
-<span class="hljs-string">...</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>套用升級至 v2.5.16：</p>
-<pre><code translate="no" class="language-bash">docker compose down
-docker compose up -d
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>驗證 v2.5.16 升級：</p>
+    </button></h3><p>儲存當前 Compose 檔案的副本，以及所有已掛載的 Milvus 配置檔案：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cp</span> docker-compose.yml docker-compose-before-upgrade.yml
+<button class="copy-code-btn"></button></code></pre>
+<p>在開始升級前，請確認當前容器狀態正常：</p>
 <pre><code translate="no" class="language-bash">docker compose ps
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
-<h3 id="Step-2-Upgrade-to-v30-beta" class="common-anchor-header">步驟 2：升級至 v3.0-beta<button data-href="#Step-2-Upgrade-to-v30-beta" class="anchor-icon" translate="no">
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Milvus-image" class="common-anchor-header">步驟 2：更新 Milvus 映像檔<button data-href="#Step-2-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,24 +104,16 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>v2.5.16 成功執行後，升級至 v3.0-beta：</p>
-<ol>
-<li><p>編輯您現有的<code translate="no">docker-compose.yaml</code> 檔案，並更新 Milvus 與 MinIO 的影像標籤：</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
-<span class="hljs-attr">minio:</span>
-  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">minio/minio:RELEASE.2024-12-18T13-15-44Z</span>
-
-<span class="hljs-string">...</span>
-<span class="hljs-attr">standalone:</span>
-  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0-beta</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>套用最終升級：</p>
-<pre><code translate="no" class="language-bash">docker compose down
-docker compose up -d
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
+    </button></h3><p>在現有的 Compose 檔案中，僅更新<code translate="no">standalone</code> 服務的映像檔：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0-beta</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>拉取目標映像檔，並僅重新建立 Milvus 容器：</p>
+<pre><code translate="no" class="language-bash">docker compose pull standalone
+docker compose up --detach standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Docker Compose 會讓現有的 etcd 和 object-storage 容器繼續運行，並重複使用已設定的資料目錄。</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">驗證升級<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,35 +129,11 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>確認您的單機部署正在執行新版本：</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
-docker compose ps
+    </button></h2><p>檢查容器狀態以及 Milvus 容器所使用的映像檔：</p>
+<pre><code translate="no" class="language-bash">docker compose ps
 
-<span class="hljs-comment"># Check Milvus version</span>
-docker compose logs standalone | grep <span class="hljs-string">&quot;version&quot;</span>
+docker compose images standalone
+
+docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>您可能還想學習如何<ul>
-<li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
-</ul></li>
-<li>如果您已經準備好在雲上部署您的集群：<ul>
-<li>學習如何<a href="/docs/zh-hant/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
-<li>學習如何<a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>學習如何<a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
-</ul></li>
-</ul>
+<p>確認<code translate="no">standalone</code> 服務狀態正常，其映像為<code translate="no">milvusdb/milvus:v3.0-beta</code> ，且現有的集合仍可進行查詢與搜尋。在啟用任何 v3.0-beta 專屬功能之前，請先完成這些檢查。</p>

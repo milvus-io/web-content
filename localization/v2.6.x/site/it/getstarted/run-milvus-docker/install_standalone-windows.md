@@ -200,11 +200,11 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>A seconda della connessione di rete, il download delle immagini per l’installazione di Milvus potrebbe richiedere un po’ di tempo. Una volta avviati i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong>, è possibile osservare che ​</p>
+<p>A seconda della connessione di rete, il download delle immagini per l’installazione di Milvus potrebbe richiedere un po’ di tempo. Una volta che i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, è possibile notare che ​</p>
 <ul>
 <li><p>il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella <strong>cartella volumes/etcd</strong> all’interno della cartella corrente.</p></li>
 <li><p>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9090</strong> e <strong>9091</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella <strong>cartella volumes/minio</strong> nella directory corrente.​</p></li>
-<li><p>Il container <strong>milvus-standalone</strong> espone localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.​</p></li>
+<li><p>Il container <strong>milvus-standalone</strong> espone localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella <strong>cartella volumes/milvus</strong> nella directory corrente.​</p></li>
 </ul></li>
 </ol>
 <p>È inoltre possibile utilizzare la versione Linux dei comandi Docker Compose se è installato WSL 2.​</p>
@@ -223,7 +223,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La procedura è simile a quella utilizzata con Docker Compose per installare Milvus sui sistemi Linux.​</p>
+    </button></h3><p>La procedura è simile a quella utilizzata con Docker Compose per installare Milvus nei sistemi Linux.​</p>
 <ol>
 <li><p>Avviare WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Come posso risolvere gli errori relativi al volume che compaiono all’avvio di Milvus con il messaggio « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Come posso risolvere gli errori relativi al volume che compaiono all’avvio di Milvus con il messaggio “ <code translate="no">Read config failed</code> ”?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,7 +369,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Messaggio di errore “Read config failed” all’avvio di Milvus</span>
   
  </span></p>
-<p>Per risolvere l’errore visualizzato all’avvio di Milvus con il messaggio “Read config failed”, è necessario verificare che il volume montato nel container Milvus sia corretto. Se il volume è montato correttamente nel container, è possibile utilizzare il comando <code translate="no">docker exec</code> per accedere al container ed elencare il contenuto della cartella <strong>/milvus/configs</strong> come segue:​</p>
+<p>Per risolvere l’errore visualizzato all’avvio di Milvus con il messaggio “Read config failed”, è necessario verificare che il volume montato nel container di Milvus sia corretto. Se il volume è montato correttamente nel container, è possibile utilizzare il comando <code translate="no">docker exec</code> per accedere al container ed elencare il contenuto della cartella <strong>/milvus/configs</strong> come segue:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

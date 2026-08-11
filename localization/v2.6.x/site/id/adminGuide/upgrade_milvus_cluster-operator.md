@@ -58,7 +58,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
       </svg>
     </button></h3><p>Memperbarui dari Milvus 2.5.x ke 2.6.17 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
-<li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang sudah usang (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
+<li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang lama (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
 <li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang lebih baik</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> dihapus dan digabungkan</li>
 </ul>
@@ -80,7 +80,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
       </svg>
     </button></h3><p><strong>Persyaratan sistem:</strong></p>
 <ul>
-<li>Cluster Kubernetes dengan Milvus yang telah diimplementasikan melalui Milvus Operator</li>
+<li>Cluster Kubernetes dengan Milvus yang diimplementasikan melalui Milvus Operator</li>
 <li><code translate="no">kubectl</code> yang dikonfigurasi untuk mengakses kluster Anda</li>
 <li>Helm 3.x terinstal</li>
 </ul>
@@ -88,10 +88,10 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> melakukan peningkatan ke v2.5.16 atau yang lebih baru dengan mengaktifkan fitur " <code translate="no">mixCoord</code> " sebelum meningkatkan ke v2.6.17.</li>
+<li>Anda <strong>harus</strong> melakukan peningkatan ke v2.5.16 atau yang lebih baru dengan mengaktifkan fitur " <code translate="no">mixCoord</code> " sebelum melakukan peningkatan ke v2.6.17.</li>
 </ul>
 <p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
-<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan versi<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

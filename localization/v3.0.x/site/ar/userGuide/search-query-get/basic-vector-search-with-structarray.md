@@ -81,7 +81,7 @@ summary: >-
 <tr><td>ما يمثله كل نتيجة</td><td>كيان مطابق يكون حقله الفرعي المتجه StructArray مشابهًا لقائمة التضمين الخاصة بالاستعلام.</td><td>عنصر Struct مطابق داخل حقل StructArray.</td></tr>
 <tr><td>تفصيل النتائج</td><td>مستوى الكيان.</td><td>مستوى عنصر Struct.</td></tr>
 <tr><td>الإزاحة</td><td>غير قابل للتطبيق.</td><td>يحدد الموضع الذي يبدأ من الصفر لعنصر Struct المطابق عند إرجاعه.</td></tr>
-<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الجزء، أو مستوى الحقيقة.</td></tr>
+<tr><td>الاستخدام النموذجي</td><td>ColBERT و ColPali وأنماط الاسترجاع الأخرى ذات التفاعل المتأخر.</td><td>الاسترجاع على مستوى المقطع، أو مستوى الفقرة، أو مستوى المقتطف، أو مستوى الرقعة، أو مستوى الحقيقة.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">تشغيل بحث EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -130,7 +130,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المطابق بدلاً من عنصر Struct واحد محدد.</p>
+<p>في وضع البحث هذا، يتحكم مقياس « <code translate="no">limit</code> » في عدد الكيانات التي يتم إرجاعها لكل استعلام. يمكن أن تتضمن النتيجة حقول فرعية لـ StructArray، لكن النتيجة نفسها تمثل الكيان الأصلي المتطابق بدلاً من عنصر Struct واحد محدد.</p>
 <div class="alert note">
 <p>للحصول على شرح تفصيلي كامل على غرار ColBERT أو ColPali، راجع <a href="/docs/ar/search-with-embedding-lists.md">«البحث باستخدام قوائم التضمين</a>». تغطي هذه الصفحة فقط سلوك البحث الأساسي في StructArray.</p>
 </div>
@@ -247,5 +247,5 @@ results = client.search(
 <li><p>للبحث حسب حدود النتيجة أو المسافة، اقرأ " <a href="/docs/ar/range-search-with-structarray.md">البحث في النطاق باستخدام StructArray</a>".</p></li>
 <li><p>لإرجاع نتيجة واحدة على الأكثر لكل كيان أب بعد البحث على مستوى العنصر، اقرأ " <a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a>".</p></li>
 <li><p>لدمج البحث باستخدام StructArray مع عمليات بحث متجهة أخرى، اقرأ " <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a>".</p></li>
-<li><p>لمراجعة أنواع البيانات المدعومة والمقاييس والمرشحات والحدود الخاصة بكل إصدار، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
+<li><p>لمراجعة أنواع البيانات المدعومة والمقاييس والمرشحات والحدود الخاصة بالإصدارات، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
 </ol>

@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>——一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

@@ -42,7 +42,7 @@ title: Milvus Python SDK installieren
 <li>Google Protobuf muss installiert sein. Sie können es mit dem Befehl „ <code translate="no">pip3 install protobuf==3.20.0</code> “ installieren.</li>
 <li>grpcio-tools muss installiert sein. Sie können es mit dem Befehl „ <code translate="no">pip3 install grpcio-tools</code> “ installieren.</li>
 </ul>
-<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Installieren Sie PyMilvus über pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
+<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">PyMilvus über pip installieren<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -79,7 +79,7 @@ title: 使用 Docker Compose 執行支援 GPU 的 Milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要對 YAML 檔案中獨立服務的環境變數進行以下修改：</p>
 <ul>
-<li>若要將特定 GPU 裝置指派給 Milvus，請在<code translate="no">standalone</code> 服務的定義中找到 `<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 欄位，並將其值替換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式內建的 `<code translate="no">nvidia-smi</code> ` 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
+<li>若要將特定 GPU 裝置指派給 Milvus，請在<code translate="no">standalone</code> 服務的定義中找到 `<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 欄位，並將其值替換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式內附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
 </ul>
 <p>將單一 GPU 裝置指派給 Milvus：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -136,9 +136,9 @@ Creating milvus-standalone ... done
 <ul>
 <li>名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器已啟動。
 <ul>
-<li><strong>milvus-etcd</strong>容器不會向主機公開任何埠，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
+<li><strong>milvus-etcd</strong>容器不會向主機公開任何端口，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>。</li>
-<li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
+<li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下指令檢查容器是否已啟動並正常運作：</p>
@@ -229,7 +229,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>在 Docker 中安裝 Milvus 後，您可以：</p>
 <ul>
 <li><p>參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門》</a>以了解 Milvus 的功能。</p></li>
-<li><p>瀏覽<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>以進一步了解該 Milvus 實例。</p></li>
+<li><p>瀏覽<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>以進一步了解 Milvus 執行個體。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>

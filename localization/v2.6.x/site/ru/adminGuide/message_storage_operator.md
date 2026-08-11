@@ -60,7 +60,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 </ul></li>
 <li>Хранилище сообщений нельзя изменить во время работы системы Milvus.</li>
 <li>Поддерживаются только версии Kafka 2.x или 3.x.</li>
-<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v2.6.17 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очередей сообщений будет доступна в будущих версиях.</li>
+<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v2.6.17 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Настройка RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +109,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 <li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удален при удалении экземпляра Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация PVC в Kubernetes</li>
-<li><code translate="no">accessModes</code>: Обычно используется класс хранения « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
+<li><code translate="no">accessModes</code>: Обычно используется « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
 <li><code translate="no">storageClassName</code>: Класс хранения вашего кластера</li>
 <li><code translate="no">storage</code>: Размер постоянного тома</li>
 </ul>
@@ -144,7 +144,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища сообщений), чтобы настроить Pulsar.</p>
+    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища), чтобы настроить Pulsar.</p>
 <p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">External Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"

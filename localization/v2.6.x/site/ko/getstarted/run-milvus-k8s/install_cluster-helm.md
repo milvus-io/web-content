@@ -253,7 +253,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>포트 포워딩 설정:</strong></p>
 <pre><code translate="no" class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre>
-<p>이 명령어는 로컬 포트 <code translate="no">27017</code> 를 Milvus 포트 <code translate="no">19530</code> 로 포워딩합니다. 다음과 같은 결과가 표시되어야 합니다:</p>
+<p>이 명령어는 로컬 포트 <code translate="no">27017</code> 를 Milvus 포트 <code translate="no">19530</code> 로 포워딩합니다. 다음과 같은 메시지가 표시되어야 합니다:</p>
 <pre><code translate="no"><span class="hljs-attribute">Forwarding</span> from <span class="hljs-number">127.0.0.1:27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>연결 세부 정보:</strong></p>

@@ -4,8 +4,8 @@ title: Membuat Koleksi EksternalCompatible with Milvus 3.0.x
 summary: >-
   Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari
   sistem penyimpanan eksternal atau tabel basis data seperti AWS S3 dan Iceberg
-  tanpa menyalinnya ke dalam Milvus. Koleksi ini bertindak sebagai lapisan kueri
-  di atas danau data dengan tetap menjaga kompatibilitas dengan antarmuka kueri
+  tanpa menyalinnya ke dalam Milvus. Koleksi ini berfungsi sebagai lapisan kueri
+  di atas data lake sambil tetap menjaga kompatibilitas dengan antarmuka kueri
   Milvus.
 beta: Milvus 3.0.x
 ---
@@ -24,7 +24,10 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari sistem penyimpanan eksternal atau tabel basis data seperti AWS S3 dan Iceberg tanpa menyalinnya ke dalam Milvus. Koleksi ini bertindak sebagai lapisan kueri di atas danau data dengan tetap menjaga kompatibilitas dengan antarmuka kueri Milvus.</p>
+    </button></h1><p>Koleksi eksternal adalah jenis koleksi data di Milvus yang mengakses data dari sistem penyimpanan eksternal atau tabel basis data seperti AWS S3 dan Iceberg tanpa menyalinnya ke dalam Milvus. Koleksi ini berfungsi sebagai lapisan kueri di atas data lake sambil tetap menjaga kompatibilitas dengan antarmuka kueri Milvus.</p>
+<div class="alert note">
+<p>Fitur ini memerlukan Storage V3. Untuk petunjuk pengaktifan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,20 +43,24 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam pipeline data AI pada umumnya, pengguna mungkin sudah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Untuk membuat Milvus mengonsumsi data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke dalam penyimpanan Milvus sendiri menggunakan pipeline Extract-Transform-Load (ETL).</p>
-<p>Alur kerja membawa data Anda ke Milvus ini menciptakan data yang berlebihan yang sulit untuk disinkronkan dan menambah beban pemeliharaan teknik untuk memastikan konsistensi data.</p>
-<p>
+    </button></h2><p>Dalam pipa data AI pada umumnya, pengguna mungkin telah menyimpan data mereka dalam format Parquet atau format lain di sistem penyimpanan mereka, seperti AWS S3. Agar Milvus dapat menggunakan data yang disimpan secara eksternal ini, pengguna biasanya perlu mengimpornya ke penyimpanan Milvus sendiri menggunakan pipa Extract-Transform-Load (ETL).</p>
+<p>Alur kerja "bawa data Anda ke Milvus" ini menciptakan data berlebih yang sulit disinkronkan dan menambah beban pemeliharaan teknis untuk memastikan konsistensi data.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" />
-   </span> <span class="img-wrapper"> <span>Membawa data untuk menghitung alur kerja</span> </span></p>
-<p>Untuk mengatasi masalah ini, Milvus menyediakan koleksi eksternal yang memungkinkan Anda mengakses data yang tersimpan secara eksternal dari Milvus tanpa perlu mengkhawatirkan sinkronisasi data dan jalur ETL.</p>
-<p>
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
+   <span>Alur kerja "bawa data ke komputasi</span> </span>" <span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" />
-   </span> <span class="img-wrapper"> <span>Menghadirkan komputasi ke alur kerja data</span> </span></p>
-<p>Setelah dibuat, koleksi eksternal dapat mengakses data Anda secara langsung dan menyimpannya di tempat yang sama dengan tempat Anda menyimpannya. Di latar belakang, Milvus membuat file manifes untuk mencatat pemetaan antara metadata Milvus dan baris dalam file data eksternal. Setelah file manifes siap, Anda dapat membuat indeks di koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola lainnya.</p>
-<p>Ketika data Anda berubah, pemicu penyegaran sub-detik secara manual akan memperbarui metadata, sehingga Milvus akan selalu diperbarui.</p>
-<h2 id="Step-1-Create-schema" class="common-anchor-header">Langkah 1: Membuat skema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
+ </span></p>
+<p>Untuk mengatasi masalah ini, Milvus menyediakan koleksi eksternal yang memungkinkan Anda mengakses data yang disimpan secara eksternal dari Milvus tanpa perlu khawatir tentang sinkronisasi data dan pipa ETL.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
+   <span>Alur kerja "bawa komputasi ke data</span> </span>" <span class="img-wrapper">
+  
+ </span></p>
+<p>Setelah dibuat, koleksi eksternal dapat mengakses data Anda secara langsung dan menyimpannya di lokasi yang sama dengan tempat Anda menyimpannya. Di latar belakang, Milvus membuat berkas manifest untuk mencatat pemetaan antara metadata Milvus dan baris-baris dalam berkas data eksternal. Setelah berkas manifest siap, Anda dapat membuat indeks di koleksi eksternal tersebut seperti halnya di koleksi yang dikelola.</p>
+<p>Saat data Anda berubah, memicu penyegaran dalam waktu kurang dari satu detik secara manual akan memperbarui metadata, sehingga Milvus selalu terupdate.</p>
+<h2 id="Step-1-Create-schema" class="common-anchor-header">Langkah 1: Buat skema<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,9 +75,14 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Seperti halnya membuat koleksi terkelola, Anda juga perlu membuat skema sebelum membuat koleksi eksternal. Namun, skemanya sedikit berbeda dengan koleksi terkelola.</p>
+    </button></h2><p>Sama seperti saat membuat koleksi terkelola, Anda juga perlu membuat skema sebelum membuat koleksi eksternal. Namun, skema ini sedikit berbeda dari skema koleksi terkelola.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(
@@ -129,31 +141,31 @@ schema := entity.NewSchema().
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk membuat skema untuk koleksi eksternal, Anda perlu menentukan URI data sumber, format data, dan pengaturan autentikasi.</p>
+<p>Untuk membuat skema koleksi eksternal, Anda perlu menentukan URI data sumber, format data, dan pengaturan otentikasi.</p>
 <table>
    <tr>
      <th><p>Nama Parameter</p></th>
      <th><p>Deskripsi Parameter</p></th>
-     <th><p>Nilai Contoh</p></th>
+     <th><p>Contoh Nilai</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Format berkas data sumber target.</p></td>
+     <td><p>Format berkas data sumber tujuan.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>ID snapshot tabel Iceberg yang valid. Parameter ini hanya berlaku jika Anda mengatur <code translate="no">format</code> ke <code translate="no">iceberg_table</code>.</p></td>
+     <td><p>ID snapshot tabel Iceberg yang valid. Parameter ini hanya berlaku jika Anda mengatur ` <code translate="no">format</code> ` menjadi ` <code translate="no">iceberg_table</code>`.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Pengaturan sistem file eksternal dalam struktur JSON yang diurutkan.</p></td>
+     <td><p>Pengaturan sistem file eksternal dalam struktur JSON yang diubah menjadi string.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
 <p><details summary="Authentication Options"></p>
-<p>Anda memiliki opsi berikut untuk mengatur pengaturan autentikasi:</p>
+<p>Anda memiliki opsi berikut untuk mengatur pengaturan otentikasi:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">Gunakan AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +181,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Opsi ini berlaku untuk MinIO yang dihosting sendiri atau skenario di mana Anda memiliki AK/SK untuk bekerja.</p>
+    </button></h3><p>Opsi ini berlaku untuk MinIO yang dihosting sendiri atau skenario di mana Anda memiliki AK/SK untuk keperluan kerja.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -186,7 +198,7 @@ schema := entity.NewSchema().
    <tr>
      <th><p>Nama Parameter</p></th>
      <th><p>Deskripsi Parameter</p></th>
-     <th><p>Nilai Contoh</p></th>
+     <th><p>Contoh Nilai</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_id</code></p></td>
@@ -195,7 +207,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.access_key_value</code></p></td>
-     <td><p>Nilai kunci akses</p></td>
+     <td><p>Nilai Kunci Akses</p></td>
      <td><p><code translate="no">u7LH...</code></p></td>
    </tr>
    <tr>
@@ -215,7 +227,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_virtual_host</code></p></td>
-     <td><p>Apakah akan menggunakan hosting virtual untuk akses ke bucket Anda.</p><p>Untuk detailnya, lihat <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">artikel ini</a>.</p></td>
+     <td><p>Apakah akan menggunakan hosting virtual untuk mengakses bucket Anda.</p><p>Untuk detailnya, lihat <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">artikel ini</a>.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -234,7 +246,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Opsi ini berlaku untuk skenario di mana Milvus berjalan di instance EC2 atau cluster EKS. Dalam kasus ini, Anda tidak perlu meng-hardcode AK/SK.</p>
+    </button></h3><p>Opsi ini berlaku untuk skenario di mana Milvus berjalan pada instance EC2 atau kluster EKS. Dalam hal ini, Anda tidak perlu mengkodekan AK/SK secara permanen.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -254,7 +266,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Setel ini ke <code translate="no">"true"</code> untuk opsi ini.</p></td>
+     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Atur ini ke <code translate="no">"true"</code> untuk opsi ini.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -274,7 +286,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Apakah SSL digunakan untuk membuat koneksi.</p></td>
+     <td><p>Apakah SSL digunakan untuk membangun koneksi.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -293,7 +305,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Opsi ini berlaku ketika Anda menyimpan data eksternal di bucket Milvus, dan pengaturan MinIO global yang ditentukan di <code translate="no">milvus.yaml</code> dapat digunakan secara langsung untuk mengakses data.</p>
+    </button></h3><p>Opsi ini berlaku saat Anda menyimpan data eksternal di bucket Milvus, dan pengaturan global MinIO yang ditentukan di <code translate="no">milvus.yaml</code> dapat digunakan secara langsung untuk mengakses data tersebut.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -316,14 +328,14 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Opsi ini berlaku ketika organisasi Anda menggunakan akun AWS yang berbeda untuk mengelola cluster Milvus dan bucket yang menyimpan file data target.</p>
-<p>Dalam kasus ini, pemilik bucket harus membuat peran IAM yang</p>
+    </button></h3><p>Opsi ini berlaku jika organisasi Anda menggunakan akun AWS yang berbeda untuk mengelola kluster Milvus dan bucket yang menyimpan berkas data target.</p>
+<p>Dalam hal ini, pemilik bucket harus membuat peran IAM yang</p>
 <ul>
-<li><p>Melampirkan <code translate="no">AmazonS3FullAccess</code> atau kebijakan yang lebih terperinci untuk akses bucket.</p></li>
-<li><p>Menyertakan <code translate="no">sts:ExternalId</code> yang ditentukan sendiri di bidang Kondisi pada Kebijakan Kepercayaan peran.</p></li>
+<li><p>melampirkan kebijakan " <code translate="no">AmazonS3FullAccess</code> " atau kebijakan yang lebih terperinci untuk akses bucket.</p></li>
+<li><p>Menyertakan ` <code translate="no">sts:ExternalId</code> ` yang didefinisikan sendiri di bidang Kondisi pada Kebijakan Kepercayaan peran tersebut.</p></li>
 </ul>
-<p>Kemudian, pemilik bucket harus memberi Anda ARN peran IAM dan ID Eksternal sehingga Anda dapat memanggil <code translate="no">sts:AssumeRole</code> dengan nilai tersebut untuk mengasumsikan Peran IAM.</p>
-<p>Berikut ini adalah contoh kebijakan izin yang akan dilampirkan ke peran IAM dengan izin yang diizinkan. Anda dapat menyesuaikan ini untuk memenuhi kebutuhan Anda.</p>
+<p>Kemudian, pemilik bucket harus memberikan ARN peran IAM dan ID Eksternal kepada Anda sehingga Anda dapat memanggil ` <code translate="no">sts:AssumeRole</code> ` dengan nilai-nilai tersebut untuk mengambil alih peran IAM.</p>
+<p>Berikut ini adalah contoh kebijakan izin yang akan dilampirkan ke peran IAM dengan izin yang diizinkan. Anda dapat menyesuaikannya sesuai kebutuhan Anda.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -347,7 +359,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dan kebijakan kepercayaan yang terkait dengan peran IAM mendefinisikan siapa yang diizinkan untuk mengasumsikannya.</p>
+<p>Dan kebijakan kepercayaan yang terkait dengan peran IAM tersebut menentukan siapa saja yang diizinkan untuk mengambil alih peran tersebut.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -366,7 +378,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah Anda mendapatkan ARN Peran IAM dan ID Eksternal, Anda dapat mengatur parameter <code translate="no">external_spec</code> sebagai berikut:</p>
+<p>Setelah Anda memperoleh ARN Peran IAM dan ID Eksternal, Anda dapat mengatur parameter ` <code translate="no">external_spec</code> ` sebagai berikut:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -389,7 +401,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>ID penyedia cloud</p></td>
+     <td><p>ID penyedia layanan cloud</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
@@ -404,27 +416,27 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Setel ini ke <code translate="no">"true"</code> untuk opsi ini.</p></td>
+     <td><p>Apakah akan menggunakan AWS IAM.</p><p>Atur opsi ini menjadi " <code translate="no">"true"</code> ".</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>IAM Role ARN yang diperoleh dari pemilik bucket.</p></td>
+     <td><p>ARN Peran IAM yang diperoleh dari pemilik bucket.</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>ID eksternal yang diperoleh dari pemilik bucket.</p></td>
+     <td><p>ID Eksternal yang diperoleh dari pemilik bucket.</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.load_frequency</code></p></td>
-     <td><p>Interval di mana Milvus mengambil kredensial autentikasi sementara dalam hitungan detik.</p></td>
+     <td><p>Interval (dalam detik) di mana Milvus mengambil kredensial otentikasi sementara.</p></td>
      <td><p><code translate="no">900</code></p></td>
    </tr>
 </table>
 <p></details></p>
-<h2 id="Step-2-Add-fields" class="common-anchor-header">Langkah 2: Menambahkan bidang<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
+<h2 id="Step-2-Add-fields" class="common-anchor-header">Langkah 2: Tambahkan kolom<button data-href="#Step-2-Add-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -441,26 +453,28 @@ schema := entity.NewSchema().
       </svg>
     </button></h2><p>Setelah skema siap, Anda dapat menambahkan bidang sebagai berikut:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;product_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-comment"># field name in the external data file</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;product_name&quot;</span>,
     datatype=DataType.VARCHAR,
     max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;name&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;name&quot;</span></span>
 )
 schema.add_field(
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
     dim=<span class="hljs-number">768</span>,
-    <span class="hljs-comment"># highlight-next</span>
-    external_field=<span class="hljs-string">&quot;vector&quot;</span>
+<span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;vector&quot;</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -536,7 +550,12 @@ schema = schema.
       </svg>
     </button></h2><p>Setelah menambahkan semua bidang ke skema, Anda dapat membuat koleksi eksternal.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -592,14 +611,13 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Create-indexes" class="common-anchor-header">Langkah 4: Membuat indeks<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
+<h2 id="Step-4-Create-indexes" class="common-anchor-header">Langkah 4: Buat indeks<button data-href="#Step-4-Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -614,9 +632,14 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat membuat indeks untuk kolom koleksi eksternal seperti yang Anda lakukan di koleksi terkelola.</p>
+    </button></h2><p>Anda dapat membuat indeks untuk bidang-bidang koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
@@ -708,14 +731,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-5-Refresh-data" class="common-anchor-header">Langkah 5: Menyegarkan data<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
+<h2 id="Step-5-Refresh-data" class="common-anchor-header">Langkah 5: Perbarui data<button data-href="#Step-5-Refresh-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -730,9 +752,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah koleksi siap, segarkan kembali untuk membuat metadata dan indeks untuk data Anda.</p>
+    </button></h2><p>Setelah koleksi siap, segarkan koleksi tersebut untuk membuat metadata dan indeks untuk data Anda.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">job_id = client.refresh_external_collection(
     db_name=<span class="hljs-string">&quot;my_database&quot;</span>,
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
@@ -797,7 +824,6 @@ jobID := refreshResult.JobID
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;dbName\&quot;: \&quot;my_database\&quot;,
     \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
@@ -805,16 +831,16 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Operasi penyegaran bersifat asinkron, jadi Anda perlu menyiapkan iterasi untuk memantau kemajuannya.</p>
+<p>Operasi penyegaran bersifat asinkron, sehingga Anda perlu menyiapkan iterasi untuk memantau kemajuannya.</p>
 <div class="alert note">
 <ul>
-<li><p>Operasi penyegaran memindai metadata berkas data dan menghasilkan berkas manifes yang sesuai. Biasanya membutuhkan waktu 150-250 ms.</p></li>
-<li><p>File manifes mencatat pemetaan antara metadata di Milvus dan baris-baris di file eksternal.</p></li>
-<li><p>Jika ada pembaruan pada data sumber Anda, Anda perlu melakukan refresh secara manual agar Milvus tetap mutakhir.</p></li>
-<li><p>Refresh yang mengharuskan menghapus semua metadata aktif tanpa penyisipan akan mengakibatkan penolakan.</p></li>
+<li><p>Operasi penyegaran memindai metadata berkas data dan menghasilkan berkas manifest sesuai dengan itu. Proses ini biasanya memakan waktu 150–250 ms.</p></li>
+<li><p>Berkas manifest mencatat pemetaan antara metadata di Milvus dan baris-baris dalam berkas eksternal.</p></li>
+<li><p>Jika ada pembaruan pada data sumber Anda, Anda perlu memanggil operasi refresh secara manual lagi agar Milvus tetap terupdate.</p></li>
+<li><p>Refresh yang memerlukan penghapusan semua metadata aktif tanpa penambahan apa pun akan ditolak.</p></li>
 </ul>
 </div>
-<h2 id="Follow-ups" class="common-anchor-header">Tindak lanjut<button data-href="#Follow-ups" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,5 +855,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda menyegarkan koleksi eksternal, Anda dapat memuat dan melepaskan koleksi serta melakukan pencarian dan kueri kemiripan di koleksi eksternal seperti yang Anda lakukan di koleksi terkelola mana pun, kecuali bahwa koleksi di basis data untuk komputasi berdasarkan permintaan harus dilampirkan ke kluster berdasarkan permintaan untuk pencarian dan kueri.</p>
-<p>Sebelum melakukan operasi DQL, seperti pencarian, kueri, dapatkan, dan pencarian hybrid, Anda perlu membuat sesi untuk melampirkan sumber daya komputasi dari klaster sesuai permintaan.</p>
+    </button></h2><p>Setelah Anda menyegarkan koleksi eksternal, Anda dapat memuat dan melepaskan koleksi tersebut serta melakukan pencarian kesamaan dan kueri dalam koleksi eksternal seperti yang Anda lakukan pada koleksi terkelola mana pun, kecuali bahwa koleksi dalam database untuk komputasi sesuai permintaan harus dilampirkan ke klaster sesuai permintaan untuk pencarian dan kueri.</p>
+<p>Sebelum melakukan operasi DQL, seperti pencarian, kueri, get, dan pencarian hibrida, Anda perlu membuat sesi untuk menghubungkan sumber daya komputasi dari sebuah kluster sesuai permintaan.</p>
+<p>Jika sumber data eksternal nantinya mengandung bidang lain yang ingin Anda tampilkan di Milvus, tambahkan bidang ke skema koleksi eksternal dan segarkan kembali koleksi eksternal tersebut. Untuk detailnya, lihat <a href="/docs/id/alter-external-collection-schema.md">Mengubah Skema Koleksi Eksternal</a>.</p>

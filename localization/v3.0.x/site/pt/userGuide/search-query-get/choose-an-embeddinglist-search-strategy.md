@@ -8,7 +8,7 @@ summary: >-
   quando a lista de embeddings for extensa, a TokenANN for demasiado dispendiosa
   ou uma representação aprendida/comprimida ao nível da linha for mais adequada.
   O resultado final continua a ser produzido pelo reclassificação do MaxSim
-  quando a opção «emb_list_rerank» está ativada.
+  quando a opção `emb_list_rerank` está ativada.
 ---
 <h1 id="Choose-an-EmbeddingList-Search-Strategy" class="common-anchor-header">Escolher uma estratégia de pesquisa EmbeddingList<button data-href="#Choose-an-EmbeddingList-Search-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A EmbeddingList foi concebida para linhas que contêm vários vetores, tais como incorporações de tokens num documento de texto, incorporações de patches num documento visual ou incorporações de clipes num vídeo. Em vez de comparar um vetor de consulta com um vetor de linha, o MaxSim compara uma lista de incorporações de consulta com uma lista de incorporações de documento e agrega as melhores correspondências.</p>
+    </button></h2><p>A EmbeddingList foi concebida para linhas que contêm vários vetores, tais como embeddings de tokens num documento de texto, embeddings de patches num documento visual ou embeddings de clipes num vídeo. Em vez de comparar um vetor de consulta com um vetor de linha, o MaxSim compara uma lista de embeddings de consulta com uma lista de embeddings de documento e agrega as melhores correspondências.</p>
 <p>Isto proporciona um melhor poder de representação, mas o MaxSim exato é dispendioso em grande escala. Uma pesquisa MaxSim por força bruta teria de comparar os vetores de consulta com todos os vetores em todas as linhas candidatas. Isso é normalmente demasiado lento para uma pesquisa em produção.</p>
 <table>
 <thead>
@@ -190,7 +190,7 @@ summary: >-
 <tr><td><code translate="no">tokenann</code></td><td><code translate="no">emb_list_strategy=&quot;tokenann&quot;</code></td><td>Criação do índice</td><td><code translate="no">tokenann</code></td><td>Utilize explicitamente quando pretender o comportamento de indexação padrão do vetor de elementos ou quando for utilizado o DiskANN.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">emb_list_strategy=&quot;muvera&quot;</code></td><td>Criação do índice</td><td><code translate="no">tokenann</code></td><td>Utilize quando pretender uma recuperação codificada ao nível da linha sem necessidade de treino.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_projections</code></td><td>Criação do índice</td><td><code translate="no">4</code></td><td>Controla o número de projeções do SimHash. Valores mais elevados criam mais buckets e podem melhorar a qualidade da codificação, mas aumentam a dimensionalidade codificada.</td></tr>
-<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Criação do índice</td><td><code translate="no">7</code></td><td>Controla o número de codificações FDE independentes que são concatenadas. Valores mais elevados podem melhorar a robustez, mas aumentam o custo do índice/pesquisa.</td></tr>
+<tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_num_repeats</code></td><td>Criação do índice</td><td><code translate="no">7</code></td><td>Controla o número de codificações FDE independentes que são concatenadas. Valores mais elevados podem melhorar a robustez, mas aumentam o custo do índice e da pesquisa.</td></tr>
 <tr><td><code translate="no">muvera</code></td><td><code translate="no">muvera_seed</code></td><td>Criação do índice</td><td><code translate="no">42</code></td><td>Definir para projeções aleatórias reproduzíveis, especialmente em testes e comparações de benchmark.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">emb_list_strategy=&quot;lemur&quot;</code></td><td>Criação do índice</td><td><code translate="no">tokenann</code></td><td>Utilizar quando se espera que a compressão aprendida ao nível da linha funcione melhor do que a projeção aleatória fixa.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_hidden_dim</code></td><td>Criação do índice</td><td><code translate="no">256</code></td><td>Controla o tamanho da representação comprimida. Aumente para obter mais capacidade; diminua para reduzir o consumo de memória e acelerar a recuperação.</td></tr>
@@ -199,7 +199,7 @@ summary: >-
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_batch_size</code></td><td>Construção do índice</td><td><code translate="no">512</code></td><td>Ajuste em função do rendimento do treino e da utilização de memória.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_learning_rate</code></td><td>Construção do índice</td><td><code translate="no">0.001</code></td><td>Ajuste quando o treino estiver instável ou convergir demasiado lentamente.</td></tr>
 <tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_seed</code></td><td>Criação do índice</td><td><code translate="no">42</code></td><td>Defina para execuções de treino reprodutíveis.</td></tr>
-<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Criação do índice</td><td><code translate="no">2</code></td><td>Aumente apenas quando o corpus necessitar de um extrator de características mais expressivo e for possível suportar o custo adicional de treino.</td></tr>
+<tr><td><code translate="no">lemur</code></td><td><code translate="no">lemur_num_layers</code></td><td>Criação do índice</td><td><code translate="no">2</code></td><td>Aumente apenas quando o corpus necessitar de um extrator de características mais expressivo e puder suportar o custo adicional de treino.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">retrieval_ann_ratio</code></td><td>Pesquisa</td><td><code translate="no">3.0</code></td><td>Aumente para recuperar mais candidatos na primeira fase e melhorar a taxa de recuperação; diminua para reduzir a latência.</td></tr>
 <tr><td>Todas as estratégias</td><td><code translate="no">emb_list_rerank</code></td><td>Pesquisa</td><td><code translate="no">true</code></td><td>Mantenha ativado para o reclassificação do MaxSim. Desative apenas em experiências controladas em que a qualidade da ANN da primeira fase esteja a ser medida diretamente.</td></tr>
 </tbody>
@@ -350,7 +350,7 @@ index_params.add_index(
 <tr><td>As linhas têm um número reduzido ou moderado de vetores?</td><td>Cada linha contém um número reduzido de vetores de token, patch ou clip.</td><td><code translate="no">tokenann</code></td></tr>
 <tr><td>O TokenANN é demasiado grande ou demasiado lento?</td><td>O tamanho do índice ou a latência de recuperação na primeira fase constituem o estrangulamento.</td><td><code translate="no">muvera</code></td></tr>
 <tr><td>Pretende compressão sem treino?</td><td>Precisa de um modelo operacional mais simples e de uma codificação reprodutível.</td><td><code translate="no">muvera</code></td></tr>
-<tr><td>O espaço de incorporação tem baixa discriminação?</td><td>As redes ANN ao nível do token apresentam ruído, e a projeção aleatória não preserva sinal suficiente.</td><td><code translate="no">lemur</code></td></tr>
+<tr><td>O espaço de incorporação tem baixa discriminação?</td><td>As ANN a nível de token apresentam ruído, e a projeção aleatória não preserva sinal suficiente.</td><td><code translate="no">lemur</code></td></tr>
 <tr><td>A carga de trabalho é visual ou multimodal?</td><td>As linhas contêm muitos vetores de patch, e a TokenANN é demasiado dispendiosa.</td><td><code translate="no">lemur</code> ou <code translate="no">muvera</code></td></tr>
 <tr><td>O comprimento dos documentos apresenta grande assimetria?</td><td>Algumas linhas contêm muito mais vetores do que outras.</td><td>Comece com <code translate="no">muvera</code>; valide cuidadosamente <code translate="no">lemur</code>.</td></tr>
 </tbody>

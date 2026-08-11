@@ -89,7 +89,7 @@ beta: Milvus 3.0.0+
 <li><strong>Нормализация цифр</strong>: использует фильтр « <code translate="no">decimaldigit</code> » для преобразования арабо-индийских и других десятичных цифр Unicode в цифры ASCII.</li>
 <li><strong>Нормализация арабских символов</strong>: использует фильтр <code translate="no">arabic_normalization</code> для нормализации вариантов буквы «Алеф», «Тех Марбута» и «Алеф Максура», а также для удаления знаков «Харакат» и «Татвиль».</li>
 <li><strong>Стеминг</strong>: использует фильтр « <code translate="no">stemmer</code> » с параметром « <code translate="no">language</code> », установленным в значение « <code translate="no">arabic</code> ».</li>
-<li><strong>Удаление стоп-слов</strong>: использует фильтр « <code translate="no">stop</code> » со встроенным словарем « <code translate="no">_arabic_</code> ».</li>
+<li><strong>Удаление стоп-слов</strong>: используется фильтр « <code translate="no">stop</code> » со встроенным словарем « <code translate="no">_arabic_</code> ».</li>
 </ul>
 <p>После определения <code translate="no">analyzer_params</code> можно применить анализатор к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Подробности см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">«Пример использования</a>».</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">

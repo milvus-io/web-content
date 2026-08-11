@@ -1,7 +1,7 @@
 ---
 id: storage-v3.md
 title: 存储 V3Compatible with Milvus 3.0.x
-summary: 了解哪些 Milvus 3.0 功能需要 Storage V3、如何启用该功能，以及适用哪些兼容性限制。
+summary: 了解哪些 Milvus 3.0 功能需要 Storage V3 支持、如何启用该功能，以及适用的兼容性限制。
 beta: Milvus 3.0.x
 ---
 <h1 id="Storage-V3" class="common-anchor-header">存储 V3<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Storage-V3" class="anchor-icon" translate="no">
@@ -58,8 +58,8 @@ beta: Milvus 3.0.x
 </thead>
 <tbody>
 <tr><td><a href="/docs/zh/text.md"><code translate="no">TEXT</code> 字段</a></td><td>存储长源文本（例如段落、文档、工单或日志），且无需在Collection Schema中设置固定的最大长度。</td><td><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
-<tr><td><a href="/docs/zh/add-fields-to-an-existing-collection.md">函数生成的向量字段</a></td><td>向现有 Collection 添加 BM25 或 MinHash 函数，以便 Milvus 基于现有的<code translate="no">VARCHAR</code> 字段生成新的向量字段。Milvus 会通过后台压缩，异步地为现有实体补全生成的值。</td><td><ul><li><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></li><li><a href="/docs/zh/configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code translate="no">=true</code></li><li><a href="/docs/zh/configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code translate="no">dataCoord.compaction.storageVersion.enabled</code></a><code translate="no">=true</code></li></ul></td></tr>
-<tr><td><a href="/docs/zh/create-an-external-collection.md">外部 Collections</a></td><td>无需将数据复制到受管 Collection 中，即可查询存储在 Milvus 外部的数据。当源数据发生变化时，请刷新外部 Collection。若要公开其他源字段，请参阅<a href="/docs/zh/alter-external-collection-schema.md">“修改外部 Collection Schema”</a>。</td><td><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
+<tr><td><a href="/docs/zh/add-fields-to-an-existing-collection.md">函数生成的向量字段</a></td><td>向现有 Collection 添加 BM25 或 MinHash 函数，以便 Milvus 基于现有的<code translate="no">VARCHAR</code> 字段生成新的向量字段。Milvus 会通过后台压缩，异步地为现有实体补入生成的值。</td><td><ul><li><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></li><li><a href="/docs/zh/configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code translate="no">=true</code></li><li><a href="/docs/zh/configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code translate="no">dataCoord.compaction.storageVersion.enabled</code></a><code translate="no">=true</code></li></ul></td></tr>
+<tr><td><a href="/docs/zh/create-an-external-collection.md">External Collections</a></td><td>无需将数据复制到受管 Collection 中，即可查询存储在 Milvus 外部的数据。当源数据发生变化时，请刷新外部 Collection。若要公开其他源字段，请参阅<a href="/docs/zh/alter-external-collection-schema.md">“修改外部 Collection Schema”</a>。</td><td><a href="/docs/zh/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 </tbody>
 </table>
 <h2 id="Before-you-enable-Storage-V3" class="common-anchor-header">启用 Storage V3 之前<button data-href="#Before-you-enable-Storage-V3" class="anchor-icon" translate="no">
@@ -78,7 +78,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><div class="alert warning">
-<p>一旦 Milvus 将数据写入 Storage V3，则不支持降级到无法读取 Storage V3 的 Milvus 版本。后续禁用 Storage V3 不会立即转换所有现有的 Storage V3 数据，也不会恢复与旧版本的兼容性。</p>
+<p>一旦 Milvus 将数据写入 Storage V3，将不支持降级到无法读取 Storage V3 的 Milvus 版本。后续禁用 Storage V3 不会立即转换所有现有的 Storage V3 数据，也不会恢复与旧版本的兼容性。</p>
 </div>
 <p>在启用 Storage V3 之前，请考虑以下数据行为：</p>
 <ul>

@@ -2,9 +2,7 @@
 id: hybrid-search-with-structarray.md
 title: StructArray を使用したハイブリッド検索
 summary: >-
-  このページを使用すると、StructArray
-  ベクトル検索と他のベクトル検索を組み合わせて、1つのハイブリッド検索リクエストとして実行できます。StructArray ハイブリッド検索では、組み合わせる
-  AnnSearchRequest オブジェクトに応じて、エンティティレベルの結果または要素レベルの結果のいずれかを生成できます。
+  このページを使用すると、StructArrayベクトル検索と他のベクトル検索を組み合わせて、1つのハイブリッド検索リクエストとして実行できます。StructArrayハイブリッド検索では、組み合わせるAnnSearchRequestオブジェクトに応じて、エンティティレベルの結果または要素レベルの結果のいずれかを生成できます。
 ---
 <h1 id="Hybrid-Search-with-StructArray" class="common-anchor-header">StructArray を使用したハイブリッド検索<button data-href="#Hybrid-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +49,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>警告</p>
-<p><code translate="no">element_scope</code> は、異なる構造体（non-same-struct）の要素レベルのハイブリッド検索において、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトの折りたたみを設定する場合にのみ使用してください。EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同一 StructArray 要素レベルのハイブリッド検索には使用しないでください。</p>
+<p><code translate="no">element_scope</code> は、異なる構造体間の要素レベルのハイブリッド検索において、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトの折りたたみを設定する場合にのみ使用してください。EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同一 StructArray 要素レベルのハイブリッド検索には使用しないでください。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -208,7 +206,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ハイブリッド検索において、StructArrayの要素レベルの<code translate="no">AnnSearchRequest</code> が、コレクションレベルのベクトルリクエスト、EmbeddingListリクエスト、または別のStructArrayフィールド下の要素レベルのリクエストと組み合わされる場合、最終的な候補範囲はエンティティレベルとなります。この場合、ハイブリッド再ランク付けの前に、各StructArray要素レベルの<code translate="no">AnnSearchRequest</code> はエンティティレベルの候補に集約されます。</p>
+    </button></h2><p>ハイブリッド検索において、StructArrayの要素レベルの<code translate="no">AnnSearchRequest</code> が、コレクションレベルのベクトルリクエスト、EmbeddingListリクエスト、または別のStructArrayフィールド下の要素レベルのリクエストと組み合わされる場合、最終的な候補の範囲はエンティティレベルとなります。この場合、ハイブリッド再ランク付けの前に、各StructArray要素レベルの<code translate="no">AnnSearchRequest</code> はエンティティレベルの候補に集約されます。</p>
 <p>同一エンティティからの複数の一致要素をどのように集約するかを制御する必要がある場合は、StructArray要素レベルの<code translate="no">AnnSearchRequest</code> の<code translate="no">params</code> 内で<code translate="no">element_scope</code> を使用してください。</p>
 <pre><code translate="no">title_req = AnnSearchRequest(
     data=[query_vector],
@@ -338,7 +336,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">element_scope</code> は、ハイブリッド検索においてエンティティレベルの候補に折りたたまれる必要がある、StructArray 要素レベルの<code translate="no">AnnSearchRequest</code> オブジェクトにのみ使用してください。</p></li>
 <li><p>EmbeddingList リクエスト、コレクションレベルのベクトルリクエスト、または同じ StructArray 要素レベルのハイブリッド検索には、<code translate="no">element_scope</code> を使用しないでください。</p></li>
 <li><p><code translate="no">sum</code> および<code translate="no">topk_sum</code> の折りたたみ戦略では、<code translate="no">IP</code> や<code translate="no">COSINE</code> などの正の相関メトリクスが必要です。<code translate="no">L2</code> と一緒に使用しないでください。</p></li>
-<li><p><code translate="no">topk_sum</code> また、<code translate="no">topk_avg</code> では、正の<code translate="no">topk</code> 値が必要です。その他の折りたたみ戦略では、<code translate="no">topk</code> を含めてはなりません。</p></li>
+<li><p><code translate="no">topk_sum</code> また、<code translate="no">topk_avg</code> には、正の<code translate="no">topk</code> 値が必要です。その他の折りたたみ戦略には、<code translate="no">topk</code> を含めてはなりません。</p></li>
 <li><p>EmbeddingList レベルの StructArray リクエストは、範囲検索やグループ化をサポートしていません。</p></li>
 <li><p>ハイブリッドグループ化は、同じ StructArray 要素レベルのハイブリッド検索においてのみ、かつ主キーによる場合のみサポートされます。</p></li>
 <li><p>範囲検索とグループ化を組み合わせて使用しないでください。</p></li>
@@ -359,7 +357,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>同じ StructArray 要素レベルのハイブリッドリクエストに<code translate="no">element_scope</code> を追加すること。そのリクエストは要素レベルのままであり、エンティティレベルの折りたたみは実行されません。</p></li>
+<li><p>同じ StructArray 要素レベルのハイブリッドリクエストに<code translate="no">element_scope</code> を追加すること。そのリクエストは要素レベルのままとなり、エンティティレベルの折りたたみは実行されません。</p></li>
 <li><p><code translate="no">chunks[emb_list_vector]</code> に<code translate="no">element_scope</code> を追加すること。EmbeddingList 検索はすでにエンティティレベルです。</p></li>
 <li><p>2つのStructArrayフィールドが要素オフセットを共有していると仮定すること。<code translate="no">chunks</code> 内のオフセット<code translate="no">3</code> と、別のStructArrayフィールド内のオフセット<code translate="no">3</code> は異なる要素であるため、ハイブリッドリクエストはエンティティレベルになります。</p></li>
 <li><p><code translate="no">topk_sum</code> を<code translate="no">L2</code> と共に使用します。負の距離メトリックについては、<code translate="no">max</code> 、<code translate="no">avg</code> 、または<code translate="no">topk_avg</code> を使用してください。</p></li>

@@ -72,7 +72,7 @@ title: DockerでMilvusを実行する（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>PowerShell や Windows コマンドプロンプトに慣れている場合は、以下のコマンドを実行します。​</p>
+    </button></h3><p>PowerShell や Windows コマンドプロンプトに慣れている場合は、以下のコマンドを実行してください。​</p>
 <ol>
 <li><p>Docker Desktopを右クリックし、「<strong>管理者として実行</strong>」を選択して、管理者モードで開きます。​</p></li>
 <li><p>インストールスクリプトをダウンロードし、<code translate="no">standalone.bat</code> として保存します。​</p>
@@ -198,9 +198,9 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>ネットワーク接続状況によっては、Milvus インストール用のイメージのダウンロードに時間がかかる場合があります。<strong>「milvus-standalone」</strong>、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動すると、次のような状態になっていることが確認できます。​</p>
+<p>ネットワーク接続状況によっては、Milvus インストール用のイメージのダウンロードに時間がかかる場合があります。<strong>「milvus-standalone」</strong>、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動すると、次のような状態になります。​</p>
 <ul>
-<li><p><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされています。​</p></li>
+<li><p><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングしています。​</p></li>
 <li><p><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。​</p></li>
 <li><p><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。​</p></li>
 </ul></li>
@@ -298,7 +298,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Docker デーモンが起動しているか確認してください。​</p>
+<li><p>Docker デーモンが起動しているか確認してください。</p>
 <p>Docker Desktopのインストールディレクトリに移動し、<code translate="no">.\DockerCli.exe -SwitchDaemon</code> を実行してDockerデーモンを起動する必要があります。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2 から Milvus を実行中に WSL 関連の問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているか、次のように確認する必要があります：​</p>
+    </button></h3><p>WSL 2 から Milvus を実行中に WSL に関連する問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているかどうかを、次のように確認する必要がある可能性があります：​</p>
 <ol>
 <li><p><strong>[設定]</strong>&gt;<strong>[全般]</strong> で、「WSL 2 ベースのエンジンを使用する」にチェックが入っていることを確認してください。​</p>
 <p><span class="img-wrapper">
@@ -346,7 +346,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時に表示される「<code translate="no">Read config failed</code> 」というボリューム関連のエラーにはどのように対処すればよいですか？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時に「<code translate="no">Read config failed</code> 」というボリューム関連のエラーが表示された場合、どのように対処すればよいですか？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -367,7 +367,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvusの起動時に表示される「Read config failed」エラー</span>
   
  </span></p>
-<p>Milvusの起動時に「Read config failed」というエラーが表示される場合は、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内に移動し、次<strong>のように/milvus/configsフォルダ</strong>の内容を一覧表示できます：​</p>
+<p>Milvusの起動時に「Read config failed」というエラーが表示される場合は、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内に移動し、次<strong>のように/milvus/configsフォルダ</strong>の一覧を表示できます：​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -413,6 +413,6 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
 <li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
-<li><p><a href="https://github.com/zilliztech/attu">Attu</a>（Milvusの直感的な管理を実現するオープンソースのGUIツール）をご覧ください。</p></li>
+<li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

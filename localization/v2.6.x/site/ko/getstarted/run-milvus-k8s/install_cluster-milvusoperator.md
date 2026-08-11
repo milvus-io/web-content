@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator는 etcd, Pulsar, MinIO와 같은 Milvus 종속성을 생성한 다음, 프록시, 코디네이터, 노드와 같은 Milvus 구성 요소를 생성합니다.</p>
-<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 포드의 상태는 다음과 비슷해야 합니다.</p>
+<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 파드의 상태는 다음과 비슷해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -276,7 +276,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>출력 결과를 보면 Milvus 인스턴스가 기본 <strong>포트인 19530에서</strong> 서비스를 제공하는 것을 확인할 수 있습니다.</p>
 <div class="alert note">
-<p>Milvus를 독립형 모드로 배포한 경우, 포드 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 로 변경하십시오.</p>
+<p>Milvus를 독립형 모드로 배포한 경우, pod 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 로 변경하십시오.</p>
 </div>
 <p>그런 다음, 다음 명령어를 실행하여 로컬 포트를 Milvus가 서비스를 제공하는 포트로 포워딩하십시오.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>

@@ -59,7 +59,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> 字段</td><td>是</td><td>是</td><td>字符串字段模式匹配的典型目标。</td></tr>
-<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON路径值必须为字符串才能进行正向匹配。若要在JSON路径上创建索引以提高性能，请设置<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
+<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON 路径值必须为字符串才能进行正向匹配。若要在 JSON 路径上创建索引以提高性能，请设置 `<code translate="no">json_cast_type=&quot;varchar&quot;</code>`。</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素</td><td>是</td><td>是</td><td>按索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不会</strong>扫描所有元素；它仅适用于指定索引处的元素。</td></tr>
 <tr><td>数值、布尔值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目标</td><td>否</td><td>否</td><td>模式匹配仅适用于<code translate="no">VARCHAR</code> 值、解析为字符串的JSON路径，或带索引的<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素。</td></tr>
 </tbody>
@@ -271,7 +271,7 @@ res = client.query(
 <p>当需要匹配正则表达式元字符的字面值时，请在正则表达式模式中对其进行转义。例如，要匹配字面上的点（正则表达式中的 `<code translate="no">\.</code> `），请在 Python 过滤器字符串中写为 `<code translate="no">\\.</code> `：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：Milvus 正则表达式过滤器遵循 RE2 语法。如果正则表达式模式使用了 RE2 不支持的语法，或者存在其他无效情况，Milvus 将拒绝该过滤器表达式。有关正则表达式元字符、标志和匹配行为的详细信息，请参阅<a href="https://github.com/google/re2/wiki/syntax">RE2 语法</a>参考。</p>
+<p>注意：Milvus 正则表达式过滤器遵循 RE2 语法。如果正则表达式模式使用了 RE2 不支持的语法，或存在其他无效情况，Milvus 将拒绝该过滤器表达式。有关正则表达式元字符、标志和匹配行为的详细信息，请参阅<a href="https://github.com/google/re2/wiki/syntax">RE2 语法</a>参考。</p>
 <h3 id="Matching-behavior" class="common-anchor-header">匹配行为<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -334,7 +334,7 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td>包含固定的字面量子字符串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>当 Milvus 能从模式中提取有意义的字面量子字符串时，此项会有所帮助。详情请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</td></tr>
-<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤器接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
+<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤条件接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
 <tr><td>不包含固定字符的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请先进行基准测试</td><td>这些模式可能提供的索引选择性有限，并可能退化为更广泛的扫描。</td></tr>
 </tbody>
 </table>

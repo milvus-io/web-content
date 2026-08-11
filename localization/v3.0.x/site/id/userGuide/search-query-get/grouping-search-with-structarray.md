@@ -5,9 +5,9 @@ summary: >-
   Gunakan halaman ini untuk mengelompokkan hasil pencarian tingkat elemen
   StructArray berdasarkan entitas induknya. Pencarian tingkat elemen dapat
   menghasilkan beberapa hasil dari entitas yang sama jika terdapat beberapa
-  elemen Struct yang sesuai dengan kueri. Pengelompokan ini akan menggabungkan
-  hasil-hasil elemen tersebut sehingga setiap entitas induk hanya muncul paling
-  banyak sekali.
+  elemen Struct yang sesuai dengan kueri. Pengelompokan ini menggabungkan
+  hasil-hasil elemen tersebut sehingga setiap entitas induk muncul paling banyak
+  sekali.
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">Pengelompokan Hasil Pencarian dengan StructArray<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Gunakan halaman ini untuk mengelompokkan hasil pencarian tingkat elemen StructArray berdasarkan entitas induknya. Pencarian tingkat elemen dapat mengembalikan beberapa hasil dari entitas yang sama jika beberapa elemen Struct cocok dengan kueri. Pengelompokan ini menggabungkan hasil-hasil elemen tersebut sehingga setiap entitas induk muncul paling banyak satu kali.</p>
+    </button></h1><p>Gunakan halaman ini untuk mengelompokkan hasil pencarian tingkat elemen StructArray berdasarkan entitas induknya. Pencarian tingkat elemen dapat menghasilkan beberapa hasil dari entitas yang sama jika beberapa elemen Struct cocok dengan kueri. Pengelompokan ini menggabungkan hasil-hasil elemen tersebut sehingga setiap entitas induk muncul paling banyak satu kali.</p>
 <p>Halaman ini menggunakan koleksi <code translate="no">tech_articles</code> dari <a href="/docs/id/create-structarray-field.md">Buat Bidang StructArray</a>. Koleksi tersebut memiliki bidang StructArray bernama <code translate="no">chunks</code>. Subbidang vektor <code translate="no">chunks[emb]</code> diindeks untuk pencarian tingkat elemen dengan metrik vektor reguler.</p>
 <h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">Bagaimana pengelompokan diterapkan pada StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut ini terlebih dahulu mencari potongan-potongan individu, kemudian mengelompokkan hasil elemen berdasarkan kunci utama entitas induk.</p>
+    </button></h2><p>Contoh berikut ini terlebih dahulu mencari potongan-potongan individual, kemudian mengelompokkan hasil elemen berdasarkan kunci utama entitas induk.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -189,7 +189,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengelompokan hibrida dengan StructArray merupakan fitur tingkat elemen. Fitur ini hanya didukung jika semua sub-pencarian menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama. Jangan gunakan permintaan tingkat EmbeddingList dalam pencarian hibrida StructArray yang dikelompokkan.</p>
+    </button></h2><p>Pengelompokan hibrida dengan StructArray merupakan fitur tingkat elemen. Fitur ini hanya didukung jika semua pencarian anak menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama. Jangan gunakan permintaan tingkat EmbeddingList dalam pencarian hibrida StructArray yang dikelompokkan.</p>
 <p>Contoh berikut mengasumsikan bahwa bidang StructArray ` <code translate="no">chunks</code> ` memiliki dua subbidang vektor tingkat elemen, ` <code translate="no">chunks[emb]</code> ` dan ` <code translate="no">chunks[code_emb]</code>`, dan keduanya diindeks dengan metrik vektor reguler.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -221,7 +221,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, yaitu <code translate="no">chunks</code>. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
+<p>Dalam contoh ini, kedua sub-permintaan menargetkan bidang vektor tingkat elemen di bawah bidang StructArray yang sama, yaitu ` <code translate="no">chunks</code>`. Pencarian hibrida tidak mendukung pengelompokan tingkat elemen jika mencampurkan bidang vektor biasa, bidang StructArray yang berbeda, atau permintaan tingkat EmbeddingList.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">Menafsirkan hasil yang dikelompokkan<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

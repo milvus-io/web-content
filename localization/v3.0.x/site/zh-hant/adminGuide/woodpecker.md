@@ -37,8 +37,8 @@ summary: 了解 Woodpecker 如何在 Milvus 中作為預設訊息佇列（WAL）
       </svg>
     </button></h2><ul>
 <li>在 Milvus 3.x 中，Woodpecker<strong>作為預設的</strong>WAL／訊息佇列，以日誌服務的身分提供有序寫入與復原功能。無需額外使用外部訊息佇列服務（例如 Pulsar 或 Kafka）。</li>
-<li>Woodpecker 可以<strong>內嵌於</strong>Milvus/streaming 節點中運行（預設），或作為擁有獨立 Pod<strong>的專用服務</strong>運行（僅限分散式／叢集環境）。</li>
-<li>它支援三種<code translate="no">storage.type</code> 模式：物件儲存（<code translate="no">minio</code> ，預設）、本地檔案系統（<code translate="no">local</code> ）以及專用<code translate="no">service</code> 。請參閱「<a href="#Deployment-modes">部署模式</a>」。</li>
+<li>Woodpecker 可以<strong>內嵌於</strong>Milvus/streaming 節點中運行（預設），或作為擁有獨立 Pod<strong>的專用服務</strong>運行（僅限分散式/叢集環境）。</li>
+<li>它支援三種<code translate="no">storage.type</code> 模式：物件儲存（<code translate="no">minio</code> ，預設）、本地檔案系統（<code translate="no">local</code> ）以及專用的<code translate="no">service</code> 。請參閱「<a href="#Deployment-modes">部署模式</a>」。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">快速入門<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -161,7 +161,7 @@ summary: 了解 Woodpecker 如何在 Milvus 中作為預設訊息佇列（WAL）
 </table>
 <p>備註：</p>
 <ul>
-<li>在<code translate="no">minio</code> 模式下，Woodpecker 會與 Milvus 共用相同的物件儲存（MinIO/S3/GCS/OSS 等）。</li>
+<li>在<code translate="no">minio</code> 模式下，Woodpecker與Milvus共用相同的物件儲存（MinIO/S3/GCS/OSS等）。</li>
 <li>在「<code translate="no">local</code> 」模式下，單節點本機磁碟僅適用於「獨立模式」。若所有 Pod 皆可存取共用檔案系統（例如 NFS），則「叢集模式」亦可使用「<code translate="no">local</code> 」。</li>
 <li><strong><code translate="no">service</code> 此模式將 Woodpecker 作為獨立且可自主擴展的服務運行，僅適用於分散式／叢集部署。</strong>獨立部署則使用內嵌模式（<code translate="no">minio</code> 或<code translate="no">local</code> ）。</li>
 </ul>
@@ -294,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>部署完成後，請依照文件說明進行端口轉發並建立連線。若要調整 Woodpecker 參數，請參照「<a href="#Configuration">設定</a>」章節中的說明進行設定。</p>
+<p>部署完成後，請依照文件說明進行埠轉發並建立連線。若要調整 Woodpecker 參數，請參照「<a href="#Configuration">設定</a>」章節中的說明進行設定。</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">在 Docker 中的 Milvus 獨立模式（storage=local）啟用 Woodpecker<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,7 +310,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Milvus 3.x 中，Docker 獨立部署<strong>預設會使用</strong> <strong>Woodpecker，並以本機檔案系統</strong>作為其 WAL 後端 — 無需額外設定。請參照《<a href="/docs/zh-hant/install_standalone-docker.md">在 Docker 中執行 Milvus</a>》：</p>
+    </button></h3><p>在 Milvus 3.x 中，Docker 獨立部署<strong>預設會使用</strong>Woodpecker<strong>，並以本地檔案系統</strong>作為其 WAL 後端 — 無需額外配置。請參照《<a href="/docs/zh-hant/install_standalone-docker.md">在 Docker 中執行 Milvus</a>》：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
@@ -380,7 +380,7 @@ docker restart milvus-standalone
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此設定將 Woodpecker 部署為專用的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，預設 4 個複本），由無頭服務作為前端，透過<code translate="no">18080</code> （服務）、<code translate="no">17946</code> （閒聊）及<code translate="no">9091</code> （指標）這三個埠進行閒聊式叢集協調，並以 MinIO 作為儲存後端。 該服務需要<strong>3</strong>個節點的法定人數；預設的<strong>4 個</strong>複本既能維持法定人數，又能容忍單一節點故障，因此請勿將<code translate="no">woodpecker.replicaCount</code> 設定為低於 3。該叢集隨後將包含一個獨立的<code translate="no">woodpecker</code> Pod 集合：</p>
+<p>此設定將 Woodpecker 部署為專用的 StatefulSet（<code translate="no">my-release-milvus-woodpecker</code> ，預設 4 個複本），由無頭服務作為前端，透過<code translate="no">18080</code> （服務）、<code translate="no">17946</code> （閒聊）及<code translate="no">9091</code> （指標）這三個埠進行閒聊式叢集協調，並以 MinIO 作為其儲存後端。 該服務需要<strong>3</strong>個節點的法定人數；預設的<strong>4 個</strong>複本既能維持法定人數，又能容忍單一節點故障，因此請勿將<code translate="no">woodpecker.replicaCount</code> 設定為低於 3。該叢集隨後將包含一個獨立的<code translate="no">woodpecker</code> Pod 集合：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -404,7 +404,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker<strong>在嵌入式</strong>模式與<strong>服務</strong>模式（Milvus 3.0 的新功能）下的吞吐量與延遲表現各不相同。以下指引將依模式分類說明。</p>
+    </button></h2><p>Woodpecker<strong>在嵌入式</strong>模式與<strong>服務</strong>模式（Milvus 3.0 的新功能）下的吞吐量與延遲表現各不相同。以下指引將依模式分別說明。</p>
 <h3 id="Embedded-mode" class="common-anchor-header">嵌入式模式<button data-href="#Embedded-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -424,7 +424,7 @@ docker restart milvus-standalone
 <ul>
 <li>儲存端
 <ul>
-<li><strong>物件儲存（MinIO／S3 相容）</strong>：提高並發數並增大物件大小（避免使用微小物件）。注意網路與儲存桶的頻寬限制。單一搭載 SSD 的 MinIO 節點，本地頻寬通常上限約為 100 MB/s；單一從 EC2 傳輸至 S3 的頻寬則可達 GB/s。</li>
+<li><strong>物件儲存（MinIO／S3 相容）</strong>：提高並發數並增大物件大小（避免使用微小物件）。注意網路與儲存桶的頻寬限制。單一 SSD 上的 MinIO 節點，本地頻寬通常上限約為 100 MB/s；單一 EC2 連線至 S3 則可達到 GB/s 級別。</li>
 <li><strong>本機／共用檔案系統（本機）</strong>：優先選用 NVMe／高速硬碟。確保檔案系統能妥善處理小量寫入及 fsync 延遲。</li>
 </ul></li>
 <li>Woodpecker 調整參數
@@ -435,7 +435,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>客戶端／應用程式端
 <ul>
-<li>使用更大的批次大小，並增加並行寫入者／客戶端數量。</li>
+<li>使用較大的批次大小，並增加並行寫入者／客戶端數量。</li>
 <li>控制刷新／索引建置的時機（在觸發前先進行批次彙總），以避免頻繁的小量寫入。</li>
 </ul></li>
 </ul>
@@ -454,7 +454,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>服務模式在維持以物件儲存為後端的 WAL 高寫入吞吐量的同時，還增加了低延遲（請參閱「<a href="#Latency">延遲」</a>）。 上述儲存端與客戶端調校方法依然適用；此外，由於 Woodpecker 以獨立服務形式運行，您可透過增加複本（<code translate="no">woodpecker.replicaCount</code> ，預設為 4）來水平擴展寫入容量，且寫入操作能受益於單次 RTT 法定人數複製，以及可避免經由中介伺服器轉發的拓撲感知讀取機制。</p>
+    </button></h3><p>服務模式在維持以物件儲存為後端的 WAL 高寫入吞吐量的同時，還增加了低延遲（請參閱「<a href="#Latency">延遲」</a>）。 上述儲存端與客戶端側的調校方法依然適用；此外，由於 Woodpecker 作為獨立服務運行，您可以透過增加複本（<code translate="no">woodpecker.replicaCount</code> ，預設為 4）來水平擴展寫入容量，且寫入操作可受益於單 RTT 法定人數複製，以及能避免經由中介伺服器轉發的拓撲感知讀取。</p>
 <p><strong>批次插入示範</strong>— 請使用以下指令測量寫入吞吐量：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -528,7 +528,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker 是一款專為物件儲存設計的雲原生 WAL，在吞吐量、成本與延遲之間取得平衡。輕量級的嵌入式模式優先考量成本與吞吐量的優化，因為多數情境僅需在特定時間內完成資料寫入，而非要求個別寫入請求具備低延遲。 因此，Woodpecker 採用批次寫入機制，針對本地檔案系統儲存後端，預設間隔為 10 毫秒；針對 MinIO 類型的儲存後端，預設間隔則為 200 毫秒。在寫入速度較慢的情況下，最大延遲等於間隔時間加上沖洗時間。</p>
+    </button></h3><p>Woodpecker 是一款專為物件儲存設計的雲原生 WAL，在吞吐量、成本與延遲之間取得權衡。輕量級的嵌入式模式優先考量成本與吞吐量的優化，因為多數情境僅需在特定時間內完成資料寫入，而非要求個別寫入請求具備低延遲。 因此，Woodpecker 採用批次寫入機制，針對本地檔案系統儲存後端，預設間隔為 10 毫秒；針對 MinIO 類型的儲存後端，預設間隔則為 200 毫秒。在寫入速度較慢的情況下，最大延遲等於間隔時間加上沖洗時間。</p>
 <p>請注意，批次插入不僅由時間間隔觸發，亦受批次大小影響，其預設值為 2MB。</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">服務模式（Milvus 3.0+）<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -545,12 +545,12 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>服務模式在保持低成本的同時，可實現<strong>毫秒級的寫入延遲</strong>——與傳統的三副本本地磁碟 WAL 處於同一量級。在典型的三副本跨可用區域（AZ）部署中，寫入延遲維持在毫秒範圍內。其實現方式如下：</p>
+    </button></h3><p>服務模式在維持低成本的同時，可實現<strong>毫秒級的寫入延遲</strong>——與傳統的三副本本地磁碟 WAL 處於同一量級。在典型的三副本、跨可用區域（AZ）部署中，寫入延遲維持在毫秒範圍內。其實現方式如下：</p>
 <ul>
-<li><strong>單 RTT 法定數寫入</strong>— 由客戶端驅動的複製可在單次往返內完成法定數寫入，跨可用區域流量固定為兩個副本的資料量（相較於基於中介/領導節點的複製通常會產生額外約 1/3 的跨可用區域流量）。</li>
+<li><strong>單 RTT 法定數寫入</strong>— 由客戶端驅動的複製可在單次往返內完成法定數寫入，且跨可用區域流量固定為兩個副本的資料量（相較於基於中介/領導節點的複製通常會產生額外約 1/3 的跨可用區域流量）。</li>
 <li><strong>拓撲感知單跳讀取</strong>— 每次讀取皆直接連線至最近的副本，而非透過中介節點轉發，從而避免了基於中介節點系統中隨機的跨可用區域讀取（約佔跨可用區域讀取流量的 2/3）。</li>
 <li><strong>區段滾動後立即上傳至物件儲存</strong>— 每個區段皆追蹤其完整生命週期，並在滾動後立即上傳至物件儲存，在維持低延遲的同時，將本地磁碟佔用空間與儲存成本控制在低水平。</li>
-<li><strong>無需持續的節點間複製</strong>— 日誌持久化至充當共享儲存的物件儲存中，因此故障轉移時僅需重新上傳存活的副本（無需複製整個節點），擴展能力不受節點間複製頻寬限制，且大規模節點更換也不會引發複製風暴。</li>
+<li><strong>無需持續的節點對節點複製</strong>— 日誌持久化至充當共享儲存的物件儲存中，因此故障轉移時僅需重新上傳存活的副本（無需複製整個節點），擴展能力不受節點間複製頻寬限制，且大規模節點更換也不會引發複製風暴。</li>
 </ul>
 <p>在跨可用區域（AZ）部署中，相較於基於中介服務器的日誌系統，此服務模式還能節省約<strong>1/3 的寫入流量</strong>及<strong>2/3 的讀取流量</strong>。完整的設計與成本分析，請參閱《<a href="/docs/zh-hant/woodpecker_architecture.md">Woodpecker 架構</a>》。</p>
 <p>有關架構、部署模式（MemoryBuffer / QuorumBuffer）及效能的詳細資訊，請參閱《<a href="/docs/zh-hant/woodpecker_architecture.md">Woodpecker 架構</a>》。</p>

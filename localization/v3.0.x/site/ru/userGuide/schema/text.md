@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В приложениях искусственного интеллекта для поиска векторный поиск помогает находить семантически схожие сущности, но приложению часто также требуется исходный текст, лежащий в основе каждого совпадения. LLM или агент может использовать этот текст в качестве контекста для чтения, цитирования, составления резюме или включения результата в запрос.</p>
+    </button></h1><p>В приложениях искусственного интеллекта для поиска векторный поиск помогает находить семантически схожие сущности, но приложению часто также требуется исходный текст, лежащий в основе каждого совпадения. Модель LLM или агент может использовать этот текст в качестве контекста для чтения, цитирования, составления резюме или включения результата в запрос.</p>
 <p>Milvus предоставляет скалярный тип поля « <code translate="no">TEXT</code> » для хранения длинного исходного текста непосредственно вместе с сущностями. Типичные значения включают отрывки, длинные документы, тексты статей, заявки и журналы. В отличие от поля « <code translate="no">VARCHAR</code> », которое требует фиксированного значения « <code translate="no">max_length</code> », поле « <code translate="no">TEXT</code> » не требует установки максимальной длины в байтах в схеме коллекции.</p>
 <p>Чтобы определить поле типа « <code translate="no">TEXT</code> », установите для параметра « <code translate="no">datatype</code> » значение « <code translate="no">DataType.TEXT</code> ».</p>
 <div class="alert note">
@@ -56,9 +56,9 @@ beta: Milvus 3.0.x
 <li>Поле с параметром « <code translate="no">TEXT</code> » не может быть первичным полем. Первичные поля поддерживают параметры « <code translate="no">INT64</code> » и « <code translate="no">VARCHAR</code> ».</li>
 <li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживают <code translate="no">PHRASE_MATCH</code>.</li>
 <li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживают значения по умолчанию.</li>
-<li>В Milvus 3.0.0 поля типа « <code translate="no">TEXT</code> » не поддерживаются во внешних коллекциях.</li>
+<li>В Milvus 3.0.0 поля <code translate="no">TEXT</code> не поддерживаются во внешних коллекциях.</li>
 <li>В Milvus 3.0.0 поля <code translate="no">TEXT</code> не поддерживают скалярные индексы.</li>
-<li><code translate="no">TEXT</code> не предназначено для обычной фильтрации метаданных. Если вам нужно выполнить фильтрацию по метаданным в виде коротких строк, а значение поля укладывается в ограничение по длине <code translate="no">VARCHAR</code>, используйте <code translate="no">VARCHAR</code>.</li>
+<li><code translate="no">TEXT</code> не предназначено для обычной фильтрации по метаданным. Если вам нужно выполнить фильтрацию по метаданным в виде коротких строк, а значение поля укладывается в ограничение по длине <code translate="no">VARCHAR</code>, используйте <code translate="no">VARCHAR</code>.</li>
 </ul>
 <h2 id="Choose-TEXT-or-VARCHAR" class="common-anchor-header">Выберите TEXT или VARCHAR<button data-href="#Choose-TEXT-or-VARCHAR" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -178,7 +178,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Создайте индекс для поля разреженных векторов, сгенерированного функцией BM25. Тип метрики должен быть установлен в значение <code translate="no">BM25</code>.</p>
+    </button></h2><p>Создайте индекс для поля разреженных векторов, сгенерированного функцией BM25. Тип метрики должен быть установлен на <code translate="no">BM25</code>.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <span class="highlighted-comment-line">index_params.add_index(</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,</span>
@@ -197,7 +197,7 @@ client.create_collection(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-3-Insert-TEXT-data" class="common-anchor-header">Шаг 3: Вставка данных типа TEXT<button data-href="#Step-3-Insert-TEXT-data" class="anchor-icon" translate="no">
+<h2 id="Step-3-Insert-TEXT-data" class="common-anchor-header">Шаг 3: Вставка данных TEXT<button data-href="#Step-3-Insert-TEXT-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +246,7 @@ client.load_collection(collection_name=COLLECTION_NAME)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте исходный текст запроса в качестве данных для поиска и выполните поиск по полю разреженных векторов. Milvus преобразует текст запроса в разреженный вектор, ранжирует совпадения с помощью BM25 и возвращает запрошенное поле « <code translate="no">TEXT</code> » в поле « <code translate="no">output_fields</code> ».</p>
+    </button></h2><p>Используйте исходный текст запроса в качестве данных для поиска и выполните поиск по полю разреженного вектора. Milvus преобразует текст запроса в разреженный вектор, ранжирует совпадения с помощью BM25 и возвращает запрошенное поле « <code translate="no">TEXT</code> » в поле « <code translate="no">output_fields</code> ».</p>
 <pre><code translate="no" class="language-python">results = client.search(
     collection_name=COLLECTION_NAME,
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&quot;how does Milvus store source text for retrieval&quot;</span>],</span>

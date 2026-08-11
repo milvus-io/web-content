@@ -25,7 +25,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan menggunakan Milvus Opera
 <p>Anda perlu menentukan berkas konfigurasi untuk menggunakan Milvus Operator guna memulai kluster Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda hanya perlu mengedit templat kode di <code translate="no">milvus_cluster_default.yaml</code> untuk mengonfigurasi dependensi pihak ketiga. Bagian berikut ini menjelaskan cara mengonfigurasi penyimpanan objek, etcd, dan Pulsar secara berturut-turut.</p>
+<p>Anda hanya perlu mengedit templat kode di <code translate="no">milvus_cluster_default.yaml</code> untuk mengonfigurasi dependensi pihak ketiga. Bagian berikut ini memperkenalkan cara mengonfigurasi penyimpanan objek, etcd, dan Pulsar secara berturut-turut.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -241,7 +241,7 @@ Bidang yang digunakan untuk mengonfigurasi layanan Pulsar eksternal meliputi:</p
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Contoh ini menentukan jumlah replika dari setiap komponen Pulsar, sumber daya komputasi Pulsar BookKeeper, serta konfigurasi lainnya.</div>
+<div class="alert note">Contoh ini menentukan jumlah replika dari setiap komponen Pulsar, sumber daya komputasi Pulsar BookKeeper, dan konfigurasi lainnya.</div>
 <div class="alert note">Temukan item konfigurasi lengkap untuk mengonfigurasi layanan Pulsar internal di <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Tambahkan item konfigurasi sesuai kebutuhan di bawah ` <code translate="no">pulsar.inCluster.values</code> ` seperti yang ditunjukkan pada contoh sebelumnya.</div>
 <p>Dengan asumsi bahwa berkas konfigurasi bernama ` <code translate="no">milvuscluster.yaml</code>`, jalankan perintah berikut untuk menerapkan konfigurasi.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml

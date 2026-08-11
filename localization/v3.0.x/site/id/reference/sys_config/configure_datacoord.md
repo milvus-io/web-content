@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
 ---
-<h1 id="dataCoord-related-Configurations" class="common-anchor-header">Konfigurasi terkait dataCoord<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataCoord-related-Configurations" class="common-anchor-header">Konfigurasi yang Berkaitan dengan dataCoord<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Batas waktu menonton saluran (dalam detik). Pembaruan datanode tickler kemajuan menonton akan mengatur ulang waktu batas waktu.      </td>
+      <td>        Batas waktu saat memantau saluran (dalam detik). Pembaruan kemajuan pemantauan oleh Datanode tickler akan mereset timer batas waktu.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Datanode &lt;= versi ini dianggap sebagai node lama, yang tidak memiliki watch() berbasis rpc. Ini hanya digunakan selama peningkatan bergulir di mana node lama tidak akan mendapatkan saluran baru    </td>
+      <td>        Datanode versi &lt;= ini dianggap sebagai node lama, yang tidak memiliki fungsi watch() berbasis RPC. Ini hanya digunakan selama proses upgrade bertahap di mana node lama tidak akan mendapatkan saluran baru      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Durasi setelah manajer saluran memulai penyeimbangan saluran latar belakang      </td>
+      <td>        Durasi setelah mana pengelola saluran memulai penyeimbangan saluran di latar belakang      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval yang digunakan manajer saluran untuk memeriksa status keseimbangan saluran dml   </td>
+      <td>        Interval di mana manajer saluran memeriksa status keseimbangan saluran DML      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval dalam detik yang digunakan manajer saluran untuk memajukan status saluran      </td>
+      <td>        Interval dalam detik yang digunakan oleh manajer saluran untuk memperbarui status saluran      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Batas waktu pemberitahuan operasi saluran (dalam detik).      </td>
+      <td>        Waktu tunggu pemberitahuan operasi saluran (dalam detik).      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum segmen, unit: MB. datacoord.segment.maxSize dan datacoord.segment.sealProportion bersama-sama menentukan apakah sebuah segmen dapat disegel.      </td>
+      <td>        Ukuran maksimum sebuah segmen, satuan: MB. datacoord.segment.maxSize dan datacoord.segment.sealProportion bersama-sama menentukan apakah sebuah segmen dapat disegel.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum segmen dalam MB untuk koleksi yang memiliki indeks Disk    </td>
+      <td>        Ukuran maksimum segmen dalam MB untuk koleksi yang memiliki indeks Disk      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -275,8 +275,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Proporsi minimum untuk datacoord.segment.maxSize untuk menyegel segmen. datacoord.segment.maxSize dan datacoord.segment.sealProportion bersama-sama menentukan apakah segmen dapat disegel.      </td>
-      <td>0.12</td>
+      <td>        Proporsi minimum terhadap datacoord.segment.maxSize untuk menyegel segmen. datacoord.segment.maxSize dan datacoord.segment.sealProportion bersama-sama menentukan apakah suatu segmen dapat disegel.      </td>
+      <td>0,12</td>
     </tr>
   </tbody>
 </table>
@@ -304,8 +304,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        rasio jitter proporsi segel segmen, nilai default 0,1 (10%), jika proporsi segel adalah 12%, dengan jitter = 0,1, rasio yang diterapkan secara aktual adalah 10,8 ~ 12  </td>
-      <td>0.1</td>
+      <td>        rasio jitter proporsi penyegelan segmen, nilai default 0,1 (10%); jika proporsi penyegelan adalah 12% dan jitter = 0,1, rasio yang sebenarnya diterapkan akan berkisar antara 10,8% hingga 12%      </td>
+      <td>0,1</td>
     </tr>
   </tbody>
 </table>
@@ -328,12 +328,12 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai default</th> 
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Waktu kedaluwarsa penetapan segmen, unit: ms  </td>
+      <td>        Waktu kedaluwarsa penetapan segmen, satuan: ms      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -362,7 +362,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Waktu yang digunakan untuk mengalokasikan lastExpire terbaru dari rootCoord setelah restart      </td>
+      <td>        Waktu yang digunakan untuk mencoba mengalokasikan lastExpire terbaru dari rootCoord setelah restart      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -391,7 +391,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Masa pakai maksimal segmen dalam detik, 24 * 60 * 60  </td>
+      <td>        Masa hidup maksimum segmen dalam detik, 24*60*60      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -421,9 +421,9 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Jika sebuah segmen tidak menerima catatan dml dalam maxIdleTime dan ukuran segmen lebih besar dari</li>      
+        <li>Jika sebuah segmen tidak menerima catatan DML dalam jangka waktu maxIdleTime dan ukuran segmen tersebut lebih besar dari</li>      
         <li>minSizeFromIdleToSealed, Milvus akan secara otomatis menyegelnya.</li>      
-        <li>Waktu idle maksimum segmen dalam detik, 10 * 60.</li>      </td>
+        <li>Waktu idle maksimum segmen dalam detik, 10*60.</li>      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -452,7 +452,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran minimum dalam MB dari segmen yang dapat menganggur dari disegel.      </td>
+      <td>        Ukuran minimum dalam MB dari segmen yang dapat berada dalam keadaan idle dari status sealed.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -483,7 +483,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     <tr>
       <td>
         <li>Jumlah maksimum binlog (yang sama dengan jumlah file binlog dari kunci utama) untuk satu segmen, </li>      
-        <li>segmen akan disegel jika jumlah file binlog mencapai nilai maksimal.</li>      </td>
+        <li>segmen tersebut akan disegel jika jumlah file binlog mencapai nilai maksimum.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -512,8 +512,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Segmen dianggap sebagai "segmen kecil" jika jumlah barisnya lebih kecil dari    </td>
-      <td>0.5</td>
+      <td>        Segmen dianggap sebagai "segmen kecil" jika jumlah barisnya lebih kecil dari      </td>
+      <td>0,5</td>
     </tr>
   </tbody>
 </table>
@@ -542,9 +542,9 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>(smallProportion * jumlah baris maksimal segmen).</li>      
-        <li>Pemadatan akan terjadi pada segmen kecil jika segmen setelah pemadatan akan memiliki</li>      </td>
-      <td>0.85</td>
+        <li>(smallProportion * jumlah baris maksimum segmen).</li>      
+        <li>Pemadatan akan terjadi pada segmen kecil jika segmen tersebut setelah pemadatan akan memiliki</li>      </td>
+      <td>0,85</td>
     </tr>
   </tbody>
 </table>
@@ -573,10 +573,10 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>lebih dari (compactableProportion * segment max # of rows) baris.</li>      
-        <li>HARUS LEBIH BESAR DARI ATAU SAMA DENGAN <smallProportion>!!!</li>      
-        <li>Selama pemadatan, ukuran segmen # baris dapat melebihi segmen max # baris sebesar (expansionRate-1) * 100%. </li>      </td>
-      <td>1.25</td>
+        <li>lebih dari (proporsi yang dapat dipadatkan * jumlah baris maksimum segmen) baris.</li>      
+        <li>HARUS LEBIH BESAR ATAU SAMA DENGAN <smallProportion>!!!</li>      
+        <li>Selama pemadatan, ukuran jumlah baris segmen dapat melebihi jumlah baris maksimum segmen sebesar (expansionRate-1) * 100%. </li>      </td>
+      <td>1,25</td>
     </tr>
   </tbody>
 </table>
@@ -605,8 +605,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Ambang batas ukuran dalam MB, jika ukuran total segmen yang tumbuh dari setiap pecahan </li>      
-        <li>melebihi ambang batas ini, segmen yang tumbuh terbesar akan disegel.</li>      </td>
+        <li>Ambang batas ukuran dalam MB; jika ukuran total segmen yang sedang tumbuh pada setiap shard </li>      
+        <li>melebihi ambang batas ini, segmen yang sedang tumbuh terbesar akan disegel.</li>      </td>
       <td>4096</td>
     </tr>
   </tbody>
@@ -635,8 +635,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        apakah mengupgrade indeks segmen secara otomatis ke versi mesin indeks      </td>
-      <td>salah</td>
+      <td>        apakah akan meningkatkan indeks segmen secara otomatis ke versi mesin indeks      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -664,7 +664,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        durasi interval minimal (unit: Detik) antara operasi penyalaan pada segmen yang sama    </td>
+      <td>        Durasi interval minimum (satuan: Detik) antara operasi flushing pada segmen yang sama      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -694,8 +694,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Ganti nilai untuk mengontrol apakah akan mengaktifkan pemadatan segmen. </li>      
-        <li>Pemadatan menggabungkan segmen ukuran kecil menjadi segmen besar, dan menghapus entitas yang dihapus di luar durasi penyewaan Perjalanan Waktu.</li>      </td>
+        <li>Nilai sakelar untuk mengontrol apakah pemadatan segmen akan diaktifkan. </li>      
+        <li>Pemadatan menggabungkan segmen-segmen berukuran kecil menjadi satu segmen besar, dan menghapus entitas-entitas yang telah dihapus melebihi durasi retensi Time Travel.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -725,9 +725,67 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Alihkan nilai untuk mengontrol apakah akan mengaktifkan pemadatan segmen otomatis selama data coord menempatkan dan menggabungkan segmen yang dapat dipadatkan di latar belakang.</li>      
-        <li>Konfigurasi ini hanya berlaku jika dataCoord.enableCompaction ditetapkan sebagai true.</li>      </td>
+        <li>Nilai sakelar untuk mengontrol apakah akan mengaktifkan pemadatan segmen otomatis, di mana data coord mencari dan menggabungkan segmen yang dapat dipadatkan di latar belakang.</li>      
+        <li>Konfigurasi ini hanya berlaku jika dataCoord.enableCompaction diatur ke true.</li>      </td>
       <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionstorageVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.storageVersion.enabled</code><button data-href="#dataCoordcompactionstorageVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.storageVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah pemadatan dapat menulis ulang data yang ada dan memenuhi syarat ke versi penyimpanan saat ini. Parameter ini dapat diperbarui.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionbumpSchemaVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code><button data-href="#dataCoordcompactionbumpSchemaVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.bumpSchemaVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah pemadatan dapat menerapkan perubahan versi skema ke data yang ada, termasuk pengisian ulang (backfill) untuk bidang yang dihasilkan oleh Fungsi yang baru ditambahkan. Parameter ini dapat diperbarui.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -756,10 +814,10 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>prioritas tugas pemadatan, opsi: [default, level, mix]. </li>      
+        <li>penentu prioritas tugas pemadatan, opsi: [default, level, mix]. </li>      
         <li>default adalah FIFO.</li>      
-        <li>level diprioritaskan berdasarkan level: Pemadatan L0 terlebih dahulu, kemudian pemadatan campuran, lalu pemadatan pengelompokan.</li>      
-        <li>mix diprioritaskan berdasarkan level: pemadatan campuran terlebih dahulu, kemudian pemadatan L0, lalu pemadatan pengelompokan.</li>      </td>
+        <li>level diprioritaskan berdasarkan level: kompaksi L0 terlebih dahulu, kemudian kompaksi campuran, lalu kompaksi pengelompokan.</li>      
+        <li>mix diprioritaskan berdasarkan level: kompaksi mix terlebih dahulu, kemudian kompaksi L0, lalu kompaksi clustering.</li>      </td>
       <td>default</td>
     </tr>
   </tbody>
@@ -783,12 +841,12 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai default</th> 
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran antrian tugas pemadatan      </td>
+      <td>        Ukuran antrian tugas pemadatan      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -817,8 +875,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tugas pemadatan akan dibersihkan setelah selesai lebih lama dari waktu ini (dalam detik)      </td>
-      <td>86400</td>
+      <td>        Tugas kompaksi akan dihapus setelah selesai melebihi waktu ini (dalam detik)      </td>
+      <td>86.400</td>
     </tr>
   </tbody>
 </table>
@@ -846,7 +904,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval waktu dalam detik untuk pemadatan gc  </td>
+      <td>        Interval waktu dalam detik untuk GC pemadatan      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -904,7 +962,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval waktu dalam detik untuk memicu pemadatan L0  </td>
+      <td>        Interval waktu dalam detik untuk memicu pemadatan L0      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -933,7 +991,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran minimum dalam byte untuk memicu pemicu Pemadatan LevelNol secara paksa, nilai standarnya adalah 8MB   </td>
+      <td>        Ukuran minimum dalam byte untuk memaksa pemadatan LevelZero, nilai defaultnya adalah 8MB      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -962,7 +1020,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum dalam byte untuk memaksa memicu Pemadatan LevelNol, standarnya 64MB    </td>
+      <td>        Ukuran maksimum dalam byte untuk memaksa pemadatan LevelZero, nilai defaultnya adalah 64MB      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -991,7 +1049,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah minimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol      </td>
+      <td>        Jumlah minimum file deltalog untuk memaksa pemadatan LevelZero      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1020,7 +1078,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah maksimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol, nilai defaultnya adalah 30  </td>
+      <td>        Jumlah maksimum berkas deltalog yang akan memicu LevelZero Compaction secara paksa, nilai defaultnya adalah 30      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1049,8 +1107,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ambang batas rasio segmen untuk memicu pemadatan tunggal, standarnya adalah 0,2   </td>
-      <td>0.2</td>
+      <td>        Ambang batas rasio segmen untuk memicu satu kali kompresi, nilai defaultnya adalah 0,2      </td>
+      <td>0,2</td>
     </tr>
   </tbody>
 </table>
@@ -1078,7 +1136,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran deltalog segmen untuk memicu pemadatan tunggal, standarnya adalah 16MB    </td>
+      <td>        Ukuran deltalog suatu segmen yang memicu satu kali pemadatan, nilai defaultnya adalah 16MB      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -1107,7 +1165,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah deltalog segmen untuk memicu pemadatan, standarnya adalah 200   </td>
+      <td>        Jumlah deltalog pada suatu segmen yang memicu proses kompaksi, nilai defaultnya adalah 200      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1136,7 +1194,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran log kedaluwarsa dari sebuah segmen untuk memicu pemadatan, standarnya adalah 10MB    </td>
+      <td>        Ukuran log yang kedaluwarsa pada suatu segmen yang memicu pemadatan, nilai defaultnya adalah 10MB      </td>
       <td>10485760</td>
     </tr>
   </tbody>
@@ -1165,7 +1223,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Mengaktifkan pemadatan pengelompokan      </td>
+      <td>        Aktifkan pemadatan clustering      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1194,8 +1252,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Mengaktifkan pemadatan pengelompokan otomatis      </td>
-      <td>salah</td>
+      <td>        Aktifkan pemadatan kluster otomatis      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1223,7 +1281,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        interval pemicu pemadatan pengelompokan dalam detik     </td>
+      <td>        interval pemicu pemadatan pengelompokan dalam detik      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -1252,7 +1310,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval minimum antara eksekusi pemadatan pengelompokan satu koleksi, untuk menghindari pemadatan yang berlebihan      </td>
+      <td>        Interval minimum antara eksekusi pemadatan pengelompokan pada satu koleksi, untuk menghindari pemadatan yang berlebihan      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1281,7 +1339,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jika sebuah koleksi belum dipadatkan pengelompokannya lebih lama dari maxInterval, paksakan pemadatan      </td>
+      <td>        Jika sebuah koleksi belum dikompresi secara clustering selama lebih dari maxInterval, paksa kompresi      </td>
       <td>259200</td>
     </tr>
   </tbody>
@@ -1310,7 +1368,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jika ukuran data baru lebih besar dari newDataSizeThreshold, jalankan pemadatan pengelompokan      </td>
+      <td>        Jika ukuran data baru lebih besar dari newDataSizeThreshold, jalankan pemadatan kluster      </td>
       <td>512m</td>
     </tr>
   </tbody>
@@ -1339,8 +1397,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        rasio ukuran data maksimum dalam Kmeans train, jika lebih besar dari itu, akan turun sampling untuk memenuhi batas ini   </td>
-      <td>0.8</td>
+      <td>        rasio ukuran data maksimum dalam pelatihan K-means; jika melebihi nilai ini, akan dilakukan downsampling untuk memenuhi batas ini      </td>
+      <td>0,8</td>
     </tr>
   </tbody>
 </table>
@@ -1368,7 +1426,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jumlah centroid maksimum dalam kereta Kmeans      </td>
+      <td>        jumlah pusat kluster maksimum dalam pelatihan K-means      </td>
       <td>10240</td>
     </tr>
   </tbody>
@@ -1397,7 +1455,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jumlah centroid minimum dalam kereta Kmeans      </td>
+      <td>        jumlah pusat kluster minimum dalam pelatihan K-means      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1426,8 +1484,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran klaster minimum / ukuran rata-rata dalam Kmeans train     </td>
-      <td>0.01</td>
+      <td>        Ukuran kluster minimum / ukuran rata-rata dalam pelatihan K-means      </td>
+      <td>0,01</td>
     </tr>
   </tbody>
 </table>
@@ -1455,7 +1513,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran cluster maksimum / ukuran rata-rata dalam kereta Kmeans      </td>
+      <td>        Ukuran kluster maksimum / ukuran rata-rata dalam pelatihan K-means      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1484,7 +1542,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran cluster maksimum dalam Kmeans train     </td>
+      <td>        Ukuran kluster maksimum dalam pelatihan K-means      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -1513,7 +1571,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval waktu untuk menyinkronkan segmen secara teratur      </td>
+      <td>        Interval waktu untuk sinkronisasi segmen secara berkala      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1542,7 +1600,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ketika ukuran memori tidak diatur oleh prosedur indeks, pengali untuk memperkirakan ukuran memori data indeks      </td>
+      <td>        Jika ukuran memori tidak diatur oleh prosedur indeks, maka ini adalah faktor pengali untuk memperkirakan ukuran memori data indeks      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1571,7 +1629,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Nilai sakelar untuk mengontrol apakah akan mengaktifkan pengumpulan sampah untuk menghapus data yang dibuang dalam layanan MinIO atau S3.      </td>
+      <td>        Nilai sakelar untuk mengontrol apakah pengumpulan sampah (garbage collection) akan diaktifkan guna membersihkan data yang dibuang di layanan MinIO atau S3.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1600,7 +1658,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval di mana koordinat data melakukan pengumpulan sampah, unit: detik.      </td>
+      <td>        Interval di mana data coord melakukan pengumpulan sampah, satuan: detik.      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1629,7 +1687,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Durasi penyimpanan file log biner (binlog) yang tidak direkam. Menetapkan nilai yang cukup besar untuk parameter ini untuk menghindari kesalahan menghapus file binlog yang baru dibuat yang tidak memiliki metadata. Satuan: detik.      </td>
+      <td>        Lama penyimpanan file log biner (binlog) yang belum direkam. Menetapkan nilai yang cukup besar untuk parameter ini akan mencegah penghapusan yang tidak disengaja terhadap file binlog yang baru dibuat dan belum memiliki metadata. Satuan: detik.      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -1653,12 +1711,12 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai default</th> 
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Durasi penyimpanan file binlog dari segmen yang dihapus sebelum dihapus, satuan: detik.      </td>
+      <td>        Lamanya penyimpanan berkas binlog dari segmen yang dihapus sebelum dihapus, satuan: detik.      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1687,7 +1745,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jumlah goroutine bersamaan untuk menghapus objek s3 yang terjatuh      </td>
+      <td>        jumlah goroutine bersamaan untuk menghapus objek S3 yang terhapus      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1716,8 +1774,95 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        file yatim (file di oss tetapi belum terdaftar di meta) pada penyimpanan objek interval pemindaian pengumpulan sampah dalam jam   </td>
+      <td>        file terlantar (file yang ada di OSS tetapi belum terdaftar di meta) pada interval pemindaian pengumpulan sampah penyimpanan objek dalam jam      </td>
       <td>168</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobenabled" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.enabled</code><button data-href="#dataCoordgclobenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah akan mengaktifkan pengumpulan sampah untuk file LOB yang tidak direferensikan yang dibuat untuk nilai bidang TEXT.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobsafetyWindow" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.safetyWindow</code><button data-href="#dataCoordgclobsafetyWindow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.safetyWindow">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Usia minimum, dalam detik, yang harus dicapai oleh file LOB TEXT yang tidak direferensikan sebelum pengumpulan sampah dapat menghapusnya.      </td>
+      <td>3600</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobcheckInterval" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.checkInterval</code><button data-href="#dataCoordgclobcheckInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.checkInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Interval, dalam detik, di mana Milvus memindai penyimpanan untuk mencari file LOB yang tidak direferensikan yang dibuat untuk nilai bidang TEXT.      </td>
+      <td>1800</td>
     </tr>
   </tbody>
 </table>
@@ -1745,7 +1890,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, batas waktu rpc broker dataCoord      </td>
+      <td>        5000 ms, batas waktu RPC broker dataCoord      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1774,8 +1919,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Aktifkan saldo otomatis      </td>
-      <td>benar</td>
+      <td>        Aktifkan penyeimbangan otomatis      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1803,7 +1948,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        interval pemeriksaan konfigurasi saldo otomatis      </td>
+      <td>        interval pemeriksaan konfigurasi penyeimbangan otomatis      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1832,7 +1977,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah maksimum file yang diizinkan per tugas pra-impor.      </td>
+      <td>        Jumlah maksimum file yang diperbolehkan per tugas pra-impor.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1861,7 +2006,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Periode retensi dalam detik untuk tugas dalam status Selesai atau Gagal.      </td>
+      <td>        Periode penyimpanan dalam detik untuk tugas dalam status Selesai atau Gagal.      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1890,7 +2035,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Untuk mencegah pembuatan segmen kecil, kami akan mengelompokkan ulang file yang diimpor. Parameter ini mewakili jumlah ukuran file dalam setiap grup (setiap ImportTask).      </td>
+      <td>        Untuk mencegah pembentukan segmen-segmen kecil, kami akan mengelompokkan ulang file-file yang diimpor. Parameter ini mewakili jumlah ukuran file dalam setiap kelompok (setiap ImportTask).      </td>
       <td>6144</td>
     </tr>
   </tbody>
@@ -1919,7 +2064,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval untuk penjadwalan impor, diukur dalam detik.      </td>
+      <td>        Interval penjadwalan impor, diukur dalam detik.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1948,7 +2093,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval untuk memeriksa impor, diukur dalam detik, diatur ke frekuensi tinggi untuk pemeriksa impor.      </td>
+      <td>        Interval pemeriksaan impor, yang diukur dalam detik, diatur ke frekuensi tinggi untuk pemeriksa impor.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1977,7 +2122,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Interval untuk memeriksa impor, diukur dalam detik, diatur ke frekuensi rendah untuk pemeriksa impor.      </td>
+      <td>        Interval pemeriksaan impor, yang diukur dalam detik, diatur ke frekuensi rendah untuk pemeriksa impor.      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -2006,7 +2151,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Jumlah maksimum file yang diizinkan per satu permintaan impor.      </td>
+      <td>        Jumlah maksimum file yang diperbolehkan per permintaan impor tunggal.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2064,7 +2209,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Menunjukkan apakah operasi impor menunggu penyelesaian pembuatan indeks.      </td>
+      <td>        Menunjukkan apakah operasi impor menunggu hingga pembuatan indeks selesai.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -2093,7 +2238,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        detik. paksa menghentikan simpul tanpa penghentian yang anggun      </td>
+      <td>        detik. memaksa penghentian node tanpa penghentian bertahap      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -2122,7 +2267,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        penggunaan slot pekerjaan pemadatan pengelompokan.      </td>
+      <td>        penggunaan slot pada pekerjaan pemadatan clustering.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -2151,7 +2296,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        penggunaan slot pekerjaan pemadatan campuran.      </td>
+      <td>        penggunaan slot pada pekerjaan pemadatan campuran.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2180,7 +2325,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        penggunaan slot pekerjaan pemadatan l0.      </td>
+      <td>        penggunaan slot pada pekerjaan pemadatan l0.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2209,7 +2354,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Alamat TCP/IP dari dataCoord. Jika tidak ditentukan, gunakan alamat pertama yang dapat disiarkan      </td>
+      <td>        Alamat TCP/IP dataCoord. Jika tidak ditentukan, gunakan alamat unicast pertama yang tersedia      </td>
       <td></td>
     </tr>
   </tbody>
@@ -2238,7 +2383,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Port TCP dari dataCoord      </td>
+      <td>        Port TCP dataCoord      </td>
       <td>13333</td>
     </tr>
   </tbody>
@@ -2267,7 +2412,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh dataCoord, satuan: byte    </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh dataCoord, satuan: byte      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -2296,7 +2441,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh dataCoord, satuan: byte    </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh dataCoord, satuan: byte      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2325,7 +2470,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien di dataCoord, satuan: byte    </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien di dataCoord, satuan: byte      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2354,7 +2499,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien di dataCoord, satuan: byte    </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien di dataCoord, satuan: byte      </td>
       <td>536870912</td>
     </tr>
   </tbody>

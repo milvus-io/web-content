@@ -62,7 +62,7 @@ title: Установка автономной версии Milvus с помощ
 <li>Для x86_64/amd64 загрузите пакет <strong>milvus_2.6.9-1_amd64.deb</strong> или <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Для ARM64 загрузите пакет <strong>milvus_2.6.9-1_arm64.deb</strong> или <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
-<p>Следующая команда предполагает, что вы собираетесь запустить автономную версию Milvus на компьютере с архитектурой x86_64/amd64.</p>
+<p>Следующая команда предполагает, что вы собираетесь запустить Milvus Standalone на компьютере с архитектурой x86_64/amd64.</p>
 <pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Установка пакета RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -154,7 +154,7 @@ dpkg -l | grep milvus
     </button></h2><p>Чтобы остановить автономную версию Milvus, можно использовать следующую команду:</p>
 <pre><code translate="no" class="language-shell">systemctl stop milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Удаление Milvus Standalone<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Удаление автономной версии Milvus<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

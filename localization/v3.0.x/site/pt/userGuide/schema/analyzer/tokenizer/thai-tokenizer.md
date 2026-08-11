@@ -39,7 +39,7 @@ beta: Milvus 3.0.0+
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Para texto em tailandês, utilize o <a href="/docs/pt/thai-analyzer.md"><code translate="no">thai</code></a> na maioria dos casos. O analisador integrado inclui este tokenizador, juntamente com a conversão para minúsculas, a normalização de algarismos decimais e a remoção de palavras vazias em tailandês. Utilize o tokenizador « <code translate="no">thai</code> » diretamente apenas quando precisar de criar um pipeline de análise personalizado.</p>
+<p>Para texto em tailandês, utilize o <a href="/docs/pt/thai-analyzer.md"><code translate="no">thai</code></a> na maioria dos casos. O analisador integrado inclui este tokenizador, juntamente com a conversão para minúsculas, a normalização de algarismos decimais e a remoção de palavras-vazio em tailandês. Utilize o tokenizador « <code translate="no">thai</code> » diretamente apenas quando precisar de criar um pipeline de análise personalizado.</p>
 </div>
 <p>Para configurar um analisador utilizando o tokenizador « <code translate="no">thai</code> », defina « <code translate="no">tokenizer</code> » como « <code translate="no">thai</code> » em « <code translate="no">analyzer_params</code> ».</p>
 <pre><code translate="no" class="language-python">analyzer_params = {

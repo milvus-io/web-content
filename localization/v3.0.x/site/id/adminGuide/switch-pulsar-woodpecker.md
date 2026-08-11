@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Halaman ini menjelaskan cara mengganti antrian pesan (MQ) pada <strong>kluster Milvus</strong> antara <strong>Pulsar</strong> (bawaan atau eksternal) dan <strong>Woodpecker</strong> (backend MinIO), baik untuk arah masuk maupun keluar. Untuk alur kerja umum dan persyaratan, lihat <a href="/docs/id/switch-mq-type.md">Mengganti Jenis MQ</a>.</p>
+    </button></h1><p>Halaman ini menjelaskan cara beralih antrian pesan (MQ) pada <strong>kluster Milvus</strong> antara <strong>Pulsar</strong> (bawaan atau eksternal) dan <strong>Woodpecker</strong> (backend MinIO), baik ke arah mana pun. Untuk alur kerja umum dan prasyarat, lihat <a href="/docs/id/switch-mq-type.md">Beralih Antrian Pesan</a>.</p>
 <div class="alert note">
 <p><strong>Persyaratan:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Perbarui instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</p>
 </div>
 <div class="alert warning">
-<p>Mengganti antrian pesan adalah <strong>operasi berisiko tinggi</strong>. Pilih bagian yang sesuai dengan metode penyebaran <strong>Anda</strong> — <strong>Dengan Helm</strong> atau <strong>Dengan Milvus Operator</strong> — dan ikuti langkah-langkahnya dari atas ke bawah. Jangan mencampurkan perintah Helm dan Operator.</p>
+<p>Mengganti antrian pesan adalah <strong>operasi berisiko tinggi</strong>. Pilih bagian yang sesuai dengan metode penyebaran <strong>Anda</strong> — <strong>Dengan Helm</strong> atau <strong>Dengan Milvus Operator</strong> — dan ikuti langkah-langkahnya dari awal hingga akhir. Jangan mencampurkan perintah Helm dan Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Dengan Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,10 +115,10 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke dalam konfigurasi Milvus.</p>
+<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke konfigurasi Milvus.</p>
 <p><strong>Langkah 3: Jalankan peralihan MQ.</strong></p>
 <div class="alert note">
-<p>Pastikan Pulsar target tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu sisa topik Milvus dengan nama yang sama.</p>
+<p>Pastikan Pulsar target tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu topik Milvus sisa dengan nama yang sama.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Peralihan yang berhasil akan mencatat pesan " <code translate="no">[mqTypeValue=pulsar]</code>".</p>
-<p><strong>Langkah 5: (Opsional) Bersihkan data Woodpecker.</strong> Hapus data Woodpecker di MinIO/S3 (di bawah <code translate="no">&lt;rootPath&gt;/wp/...</code>, biasanya <code translate="no">files/wp/...</code>) dan metadata Woodpecker di etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Jika Anda berencana beralih kembali ke Woodpecker nanti, bersihkan file-file ini terlebih dahulu.</p>
+<p><strong>Langkah 5: (Opsional) Bersihkan data Woodpecker.</strong> Hapus data Woodpecker di MinIO/S3 (di bawah <code translate="no">&lt;rootPath&gt;/wp/...</code>, biasanya <code translate="no">files/wp/...</code>) dan metadata Woodpecker di etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Jika Anda berencana untuk beralih kembali ke Woodpecker nanti, bersihkan file-file ini terlebih dahulu.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Dengan Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk Pulsar <strong>eksternal</strong>, bersihkan topik Milvus (format <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code>).</p>
 <div class="alert note">
-<p>Jika Anda berencana untuk kembali ke Pulsar nanti, bersihkan data/topik terlebih dahulu untuk menghindari konflik. Karena keterbatasan Helm chart, saat ini tidak mungkin untuk kembali ke instance Pulsar <strong>bawaan</strong>.</p>
+<p>Jika Anda berencana untuk beralih kembali ke Pulsar nanti, bersihkan data/topik terlebih dahulu untuk menghindari konflik. Karena keterbatasan Helm chart, saat ini tidak mungkin untuk beralih kembali ke instance Pulsar <strong>bawaan</strong>.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Milvus-Operator" class="common-anchor-header">Beralih dari Woodpecker ke Pulsar (Milvus Operator)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"

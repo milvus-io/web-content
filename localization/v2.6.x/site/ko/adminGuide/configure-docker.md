@@ -233,7 +233,7 @@ title: Docker Compose를 사용하여 Milvus 구성하기
         ></path>
       </svg>
     </button></h2><p><code translate="no">docker-compose.yml</code> 파일에서 각 <code translate="no">milvus-standalone</code> 아래에 <code translate="no">volumes</code> 섹션을 추가하십시오.</p>
-<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래에 있는 구성 파일 <code translate="no">/milvus/configs/milvus.yaml</code> 의 해당 Docker 컨테이너 경로에 매핑하십시오.</p>
+<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래에 있는 구성 파일 <code translate="no">/milvus/configs/milvus.yaml</code> 에 해당하는 Docker 컨테이너 경로에 매핑하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -254,7 +254,7 @@ title: Docker Compose를 사용하여 Milvus 구성하기
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-데이터는 <code translate="no">docker-compose.yml</code> 의 기본 구성에 따라 <code translate="no">/volumes</code> 폴더에 저장됩니다. 데이터를 저장할 폴더를 변경하려면 <code translate="no">docker-compose.yml</code> 를 편집하거나 <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 를 실행하십시오.
+데이터는 <code translate="no">docker-compose.yml</code> 의 기본 구성에 따라 <code translate="no">/volumes</code> 폴더에 저장됩니다. 데이터 저장 폴더를 변경하려면 <code translate="no">docker-compose.yml</code> 를 편집하거나 <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 를 실행하십시오.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Milvus 시작<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

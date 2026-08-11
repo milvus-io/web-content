@@ -1,11 +1,9 @@
 ---
 id: switch-mq-type.md
-title: تغيير نوع قائمة انتظار الرسائل (MQ)
-summary: >-
-  تبديل قائمة انتظار الرسائل في أحد عمليات نشر Milvus الحالية بين Woodpecker
-  وقائمة انتظار رسائل أخرى دون توقف.
+title: تبديل قائمة انتظار الرسائل
+summary: تبديل نشر Milvus الحالي بين Woodpecker وقائمة انتظار رسائل أخرى دون توقف.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">تغيير نوع قائمة انتظار الرسائل (MQ)<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">تبديل قائمة انتظار الرسائل<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>تتوفر ميزة تبديل قائمة انتظار الرسائل (MQ) في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
+<li><strong>ميزة "تبديل قائمة انتظار الرسائل" متوفرة في Milvus 3.0 والإصدارات الأحدث.</strong> قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل استخدامها — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
 <li>يجب أن تعمل النسخة بشكل صحيح.</li>
 </ul>
 <h2 id="Scope" class="common-anchor-header">النطاق<button data-href="#Scope" class="anchor-icon" translate="no">
@@ -87,7 +85,7 @@ summary: >-
 <li>راقب السجلات للتأكد من اكتمال عملية التبديل.</li>
 </ol>
 <div class="alert note">
-<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة في مثيل Milvus الحالي. وهذا مهم بشكل خاص إذا كان MQ الهدف قد استخدمه مثيل Milvus آخر، حيث إن أسماء المواضيع المتعارضة قد تؤدي إلى سلوك غير متوقع.</p>
+<p>قبل التبديل، تأكد من أن MQ الهدف لا يحتوي على مواضيع تحمل نفس الأسماء المستخدمة في مثيل Milvus الحالي. وهذا مهم بشكل خاص إذا كان MQ الهدف قد استخدمه مثيل Milvus آخر، حيث يمكن أن تؤدي أسماء المواضيع المتعارضة إلى سلوك غير متوقع.</p>
 </div>
 <h2 id="Support-matrix" class="common-anchor-header">مصفوفة الدعم<button data-href="#Support-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

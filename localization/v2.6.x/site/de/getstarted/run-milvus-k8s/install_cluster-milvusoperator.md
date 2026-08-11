@@ -285,7 +285,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Optional können Sie im obigen Befehl „ <code translate="no">:19530</code> “ anstelle von „ <code translate="no">27017:19530</code> “ verwenden, damit „ <code translate="no">kubectl</code> “ einen lokalen Port für Sie zuweist und Sie sich nicht um Portkonflikte kümmern müssen.</p>
-<p>Standardmäßig lauscht die Portweiterleitung von `kubectl` nur auf <code translate="no">localhost</code>. Verwenden Sie das Flag <code translate="no">address</code>, wenn Milvus auf die ausgewählte oder alle IP-Adressen lauschen soll. Der folgende Befehl bewirkt, dass die Portweiterleitung auf alle IP-Adressen des Host-Rechners lauscht.</p>
+<p>Standardmäßig lauscht die Portweiterleitung von `kubectl` nur auf <code translate="no">localhost</code>. Verwenden Sie das Flag <code translate="no">address</code>, wenn Milvus auf die ausgewählte oder alle IP-Adressen lauschen soll. Der folgende Befehl sorgt dafür, dass die Portweiterleitung auf allen IP-Adressen des Host-Rechners lauscht.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -425,7 +425,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung bei Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

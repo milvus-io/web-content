@@ -38,11 +38,11 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Impor massal biasa secara otomatis dikonfirmasi saat pekerjaan impor selesai, sehingga data yang diimpor langsung terlihat. Dalam topologi replikasi CDC, perilaku ini tidak diperbolehkan karena kluster primer dan siaga harus menampilkan data yang diimpor pada titik logis yang sama.</p>
-<p>Sebagai gantinya, jalankan impor dalam mode dua-fase (two-phase commit) dengan mengatur ` <code translate="no">auto_commit=false</code>`:</p>
+    </button></h2><p>Impor massal biasa secara otomatis dikonfirmasi saat pekerjaan impor selesai, yang membuat data yang diimpor langsung terlihat. Dalam topologi replikasi CDC, perilaku ini tidak diperbolehkan karena kluster primer dan siaga harus menampilkan data yang diimpor pada titik logis yang sama.</p>
+<p>Sebagai gantinya, jalankan impor dalam mode dua fase komit dengan mengatur ` <code translate="no">auto_commit=false</code>`:</p>
 <ol>
 <li><p><strong>Fase impor</strong>: Milvus memuat data di kluster primer dan mereplikasi impor ke kluster cadangan, tetapi data yang diimpor tetap tidak terlihat. Tugas impor berhenti pada status " <code translate="no">Uncommitted</code> " dan menunggu.</p></li>
-<li><p><strong>Fase komit</strong>: Anda secara eksplisit mengkomit pekerjaan impor pada klaster utama. Komit direplikasi ke klaster siaga sebagai satu pagar terurut, sehingga kedua klaster membuat data yang diimpor terlihat pada titik logis yang sama.</p></li>
+<li><p><strong>Fase komit</strong>: Anda secara eksplisit mengkomit pekerjaan impor pada klaster utama. Komit direplikasi ke klaster siaga sebagai satu pagar terurut, sehingga kedua klaster menampilkan data yang diimpor pada titik logis yang sama.</p></li>
 </ol>
 <h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">Langkah 1: Aktifkan impor di kluster yang direplikasi<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,8 +98,8 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jalankan semua panggilan impor pada kluster utama. Data yang diimpor dan keputusan komit akan direplikasi ke kluster cadangan secara otomatis, jadi jangan kirimkan atau lakukan komit impor di kluster cadangan secara manual.</p>
-<p>Setiap kluster membaca berkas impor dari penyimpanan objeknya masing-masing. Pastikan berkas yang akan diimpor ada di penyimpanan objek primer dan cadangan. Anda dapat mengunggah berkas ke kedua kluster, atau menggunakan penyimpanan objek yang dapat diakses oleh kedua kluster. Jika berkas tidak ada di kluster cadangan, proses impor yang direplikasi akan gagal di sana dengan pesan kesalahan "objek tidak ditemukan".</p>
+    </button></h2><p>Jalankan semua panggilan impor pada kluster utama. Data yang diimpor dan keputusan komit akan direplikasi ke kluster cadangan secara otomatis, jadi jangan mengirimkan atau mengonfirmasi impor di kluster cadangan secara manual.</p>
+<p>Setiap kluster membaca berkas impor dari penyimpanan objeknya masing-masing. Pastikan berkas yang akan diimpor tersedia di penyimpanan objek kluster utama dan kluster cadangan. Anda dapat mengunggah berkas ke kedua kluster, atau menggunakan penyimpanan objek yang dapat diakses oleh kedua kluster. Jika berkas tidak ada di kluster cadangan, proses impor yang direplikasi akan gagal di sana dengan pesan kesalahan "objek tidak ditemukan".</p>
 <p>Contoh berikut menggunakan helper impor berbasis REST dari <code translate="no">pymilvus.bulk_writer</code>. Nilai ` <code translate="no">url</code> ` adalah alamat Milvus yang sama yang Anda gunakan untuk panggilan API lainnya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -257,7 +257,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> tidak diaktifkan pada cluster tersebut. Atur menjadi " <code translate="no">true</code> " pada cluster primer dan cluster cadangan.</p>
+    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> tidak diaktifkan pada cluster tersebut. Atur menjadi " <code translate="no">true</code> " pada cluster utama dan cluster cadangan.</p>
 <h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">Mengapa impor saya gagal dengan pesan " <code translate="no">auto_commit=true import in replicating cluster is not supported</code>"?<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

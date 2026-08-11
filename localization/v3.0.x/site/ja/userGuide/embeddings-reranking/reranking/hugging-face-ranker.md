@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ベクトル検索では、結果がベクトル距離に基づいて並べ替えられますが、初期の順序は、各候補テキストがクエリにどの程度適切に応答しているかを必ずしも反映しているとは限りません。Hugging Face Rankerは、クエリと候補テキストをホスト型<a href="https://huggingface.co/docs/inference-providers/index">Hugging Face Inference Providers</a>に送信し、<code translate="no">sentence-similarity</code> のスコアを用いて、Milvusから返された候補の順序を再編成します。</p>
+    </button></h1><p>ベクトル検索はベクトル距離に基づいて結果を並べ替えますが、初期の順序は、各候補テキストがクエリにどの程度適切に応答しているかを必ずしも反映しているとは限りません。Hugging Face Rankerは、クエリと候補テキストをホスト<a href="https://huggingface.co/docs/inference-providers/index">型Hugging Face Inference Providersに</a>送信し、<code translate="no">sentence-similarity</code> のスコアを用いて、Milvusから返された候補の順序を再編成します。</p>
 <p>この統合では、ホスト型Hugging Faceルーターを使用します。別途デプロイされたText Embeddings Inference（TEI）サービスを使用して再ランク付けを行う場合は、<a href="/docs/ja/tei-ranker.md">TEI Rankerを</a>参照してください。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ beta: Milvus v2.6.20+
 <li><strong>個別のモデル表現を作成します。</strong>Milvusは、クエリを<code translate="no">source_sentence</code> として、候補テキストを<code translate="no">sentences</code> として送信します。モデルは内部で、クエリと各候補を個別にエンコードします。</li>
 <li><strong>スコアを比較して返す。</strong>モデルは、クエリの表現と各候補の表現を比較し、候補ごとに1つの類似度スコアを返します。</li>
 </ol>
-<p>Hugging Faceモデルが使用する埋め込みや表現は、モデル処理の中間結果です。Hugging Faceが返すのはスコアであり、ベクトルではありません。したがって、初期のベクトル検索とモデルによる再ランク付けでは、別々の表現が使用され、異なるモデルが使用される場合があります。</p>
+<p>Hugging Faceモデルが使用する埋め込みや表現は、モデル処理の中間段階のものです。Hugging Faceが返すのはスコアであり、ベクトルではありません。したがって、初期のベクトル検索とモデルによる再ランク付けでは、別々の表現が使用され、異なるモデルが使用される場合があります。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始する前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +103,7 @@ beta: Milvus v2.6.20+
 <li>PyMilvus 2.6.16以降。</li>
 <li>Inference Providers を呼び出せる Hugging Face ユーザーアクセストークン。</li>
 <li><code translate="no">hf-inference</code> によって現在提供されている、 <a href="https://huggingface.co/tasks/sentence-similarity"><code translate="no">sentence-similarity</code></a> タスク用にxml-ph-0000@deepl.internalによって現在提供されているモデル。</li>
-<li><code translate="no">VARCHAR</code> のnull不可フィールドに候補テキストを格納するコレクション。</li>
+<li><code translate="no">VARCHAR</code> の null 不可フィールドに候補テキストを格納するコレクション。</li>
 </ul>
 <div class="alert note">
 <p>Milvus は、Hugging Face モデルが<code translate="no">hf-inference</code> を通じて引き続き利用可能であるかどうか、あるいはそのモデルが安定性、レイテンシ、出力品質に関する要件を満たしているかどうかについては管理していません。本番環境で使用する前に、Hugging Face 上でモデルを確認し、ワークロードに対して評価を行ってください。</p>
@@ -337,7 +337,7 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusはまず<code translate="no">dense</code> から候補を抽出し、次に<code translate="no">queries</code> のクエリテキストと<code translate="no">document</code> の候補テキストを用いて、文の類似度スコアを算出します。返される候補は、Hugging Faceのスコア順に並べ替えられます。</p>
+<p>Milvusはまず<code translate="no">dense</code> から候補を抽出し、次に<code translate="no">queries</code> のクエリテキストと<code translate="no">document</code> の候補テキストを用いて、文の類似度スコアを計算します。返される候補は、Hugging Faceのスコア順に並べ替えられます。</p>
 <h2 id="Troubleshooting" class="common-anchor-header">トラブルシューティング<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

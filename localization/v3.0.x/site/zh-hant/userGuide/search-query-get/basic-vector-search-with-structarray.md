@@ -4,7 +4,7 @@ title: 使用 StructArray 進行基本向量搜尋
 summary: >-
   請使用此頁面，對 StructArray 欄位內的向量子欄位執行向量搜尋。StructArray
   支援兩種基本的向量搜尋模式：嵌入清單搜尋（EmbeddingList
-  search），此模式會針對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。
+  search），此模式會對儲存於每個實體中的嵌入清單進行評分；以及元素層級搜尋，此模式會獨立搜尋每個 Struct 元素。
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行基本向量搜尋<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +131,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>在此搜尋模式下，<code translate="no">limit</code> 會控制每個查詢所返回的實體數量。輸出結果可能包含 StructArray 子欄位，但搜尋結果本身代表的是匹配的父實體，而非某個特定的 Struct 元素。</p>
 <div class="alert note">
-<p>如需完整的 ColBERT 或 ColPali 風格操作指南，請參閱<a href="/docs/zh-hant/search-with-embedding-lists.md">《使用嵌入式清單進行搜尋</a>》。本頁僅涵蓋 StructArray 的基本搜尋行為。</p>
+<p>如需完整的 ColBERT 或 ColPali 風格操作指南，請參閱<a href="/docs/zh-hant/search-with-embedding-lists.md">《使用嵌入式清單進行搜尋</a>》。本頁面僅涵蓋 StructArray 的基本搜尋行為。</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">執行元素層級搜尋<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,9 +222,9 @@ results = client.search(
 <li><p>使用 `<code translate="no">chunks.emb</code> ` 代替所需的子欄位路徑語法 `<code translate="no">chunks[emb]</code>`。</p></li>
 <li><p>對使用常規向量度量進行索引的向量子欄位，使用 EmbeddingList 查詢。</p></li>
 <li><p>對使用<code translate="no">MAX_SIM*</code> 度量進行索引的向量子欄位，使用一般向量查詢。</p></li>
-<li><p>預期元素層級搜尋<code translate="no">limit</code> 會回傳相應數量的唯一父實體。其實它回傳的是元素匹配結果。</p></li>
+<li><p>預期元素層級搜尋<code translate="no">limit</code> 會回傳相應數量的唯一父實體。其實它回傳的是元素命中結果。</p></li>
 <li><p>預期 EmbeddingList 搜尋會返回一個特定的元素偏移量，但實際返回的是實體層級的匹配結果。</p></li>
-<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅接受一種索引。</p></li>
+<li><p>將同一個向量子欄位同時用於兩種搜尋模式。應使用獨立的向量子欄位，因為每個向量子欄位僅能接受一種索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

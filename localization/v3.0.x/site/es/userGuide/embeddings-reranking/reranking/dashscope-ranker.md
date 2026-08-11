@@ -205,12 +205,12 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>No</p></td>
-     <td><p>La etiqueta de una credencial definida en la sección de nivel superior <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>.</p></td>
+     <td><p>La etiqueta de una credencial definida en la sección de nivel superior « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>.</p></td>
      <td><p><code translate="no">"dashscope_apikey"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Para los parámetros generales compartidos por todos los clasificadores de modelos, como <code translate="no">provider</code> y <code translate="no">queries</code>, consulta <a href="/docs/es/model-ranker-overview.md#Create-a-model-ranker">«Crear un clasificador de modelos</a>».</p>
+<p>Para los parámetros generales compartidos por todos los clasificadores de modelos, como <code translate="no">provider</code> y <code translate="no">queries</code>, consulta <a href="/docs/es/model-ranker-overview.md#Create-a-model-ranker">Crear un clasificador de modelos</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicación a la búsqueda vectorial estándar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -2,15 +2,12 @@
 id: ngram.md
 title: NGRAM
 summary: >-
-  O índice NGRAM no Milvus foi criado para acelerar as consultas LIKE em campos
-  VARCHAR ou caminhos JSON específicos dentro de campos JSON. Antes de construir
-  o índice, o Milvus divide o texto em substrings curtas e sobrepostas de um
-  comprimento fixo n, conhecidas como n-gramas. Por exemplo, com n = 3, a
-  palavra "Milvus" é dividida em 3 gramas: "Mil", "ilv", "lvu" e "vus". Estes
-  n-gramas são então armazenados num índice invertido que mapeia cada grama para
-  os IDs dos documentos em que aparece. No momento da consulta, este índice
-  permite ao Milvus restringir rapidamente a pesquisa a um pequeno conjunto de
-  candidatos, resultando numa execução muito mais rápida da consulta.
+  O índice NGRAM no Milvus acelera as consultas LIKE e os filtros regex
+  elegíveis em campos VARCHAR ou em percursos JSON específicos dentro de campos
+  JSON. Antes de criar o índice, o Milvus divide o texto em subcadeias curtas e
+  sobrepostas de comprimento fixo n, conhecidas como n-gramas. No momento da
+  consulta, o Milvus utiliza estes n-grams para restringir as entidades
+  candidatas antes de verificar a condição de filtragem original.
 ---
 <h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,15 +24,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <code translate="no">NGRAM</code> no Milvus foi criado para acelerar as consultas <code translate="no">LIKE</code> em campos <code translate="no">VARCHAR</code> ou caminhos JSON específicos dentro de campos <code translate="no">JSON</code>. Antes de construir o índice, o Milvus divide o texto em substrings curtas e sobrepostas de um comprimento fixo <em>n</em>, conhecidas como <em>n-gramas</em>. Por exemplo, com <em>n = 3</em>, a palavra <em>"Milvus"</em> é dividida em 3 gramas: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu"</em> e <em>"vus".</em> Estes n-gramas são então armazenados num índice invertido que mapeia cada grama para os IDs dos documentos em que aparece. No momento da consulta, este índice permite ao Milvus restringir rapidamente a pesquisa a um pequeno conjunto de candidatos, resultando numa execução muito mais rápida da consulta.</p>
-<p>Utilize-o quando necessitar de uma filtragem rápida de prefixos, sufixos, infixos ou wildcards, tais como:</p>
+    </button></h1><p>O índice « <code translate="no">NGRAM</code> » no Milvus acelera as consultas « <code translate="no">LIKE</code> » e os filtros regex elegíveis em campos « <code translate="no">VARCHAR</code> » ou em percursos JSON específicos dentro de campos « <code translate="no">JSON</code> ». Antes de criar o índice, o Milvus divide o texto em subcadeias curtas e sobrepostas de comprimento fixo <em>n</em>, conhecidas como <em>n-grams</em>. Por exemplo, com <em>n = 3</em>, a palavra <em>«Milvus»</em> é dividida em 3-gramas: <em>«Mil»</em>, <em>«ilv»</em>, <em>«lvu»</em> e <em>«vus».</em> Estes n-gramas são, em seguida, armazenados num índice invertido que mapeia cada grama para os IDs dos documentos em que aparece. No momento da consulta, este índice permite ao Milvus restringir rapidamente a pesquisa a um pequeno conjunto de candidatos antes de verificar a condição de filtragem original.</p>
+<p>Utilize-o quando precisar de uma filtragem rápida por prefixo, sufixo, infixo, caracteres curinga ou expressões regulares elegíveis, tais como:</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
 <li><p><code translate="no">path LIKE &quot;%json&quot;</code></p></li>
+<li><p><code translate="no">message =~ &quot;error.*timeout&quot;</code></p></li>
+<li><p><code translate="no">url =~ &quot;/api/v[0-9]+/users&quot;</code></p></li>
 </ul>
 <div class="alert note">
-<p>Para obter detalhes sobre a sintaxe da expressão de filtro, consulte <a href="/docs/pt/basic-operators.md#Range-operators">Operadores básicos</a>.</p>
+<p>Para obter detalhes sobre a sintaxe de expressões de filtragem « <code translate="no">LIKE</code> » e de expressões regulares, consulte <a href="/docs/pt/pattern-matching.md">«Correspondência de Padrões</a>».</p>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,10 +51,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementa o índice <code translate="no">NGRAM</code> num processo de duas fases:</p>
+    </button></h2><p>O Milvus implementa o índice de « <code translate="no">NGRAM</code> » num processo de duas fases:</p>
 <ol>
-<li><p><strong>Construir o índice</strong>: Gerar n-gramas para cada documento e construir um índice invertido durante a ingestão.</p></li>
-<li><p><strong>Acelerar as consultas</strong>: Utilizar o índice para filtrar um pequeno conjunto de candidatos e, em seguida, verificar as correspondências exactas.</p></li>
+<li><p><strong>Criação do índice</strong>: Gere n-gramas para cada documento e crie um índice invertido durante a importação.</p></li>
+<li><p><strong>Acelerar consultas</strong>: Utiliza o índice para filtrar até um pequeno conjunto de candidatos e, em seguida, verifica as correspondências exatas.</p></li>
 </ol>
 <h3 id="Phase-1-Build-the-index" class="common-anchor-header">Fase 1: Construir o índice<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,19 +71,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Durante a ingestão de dados, o Milvus constrói o índice NGRAM executando duas etapas principais:</p>
+    </button></h3><p>Durante a ingestão de dados, o Milvus cria o índice NGRAM através de duas etapas principais:</p>
 <ol>
-<li><p><strong>Decompor o texto em n-gramas</strong>: Milvus desliza uma janela de <em>n</em> em cada string no campo de destino e extrai substrings sobrepostas, ou <em>n-gramas</em>. O comprimento dessas substrings está dentro de um intervalo configurável, <code translate="no">[min_gram, max_gram]</code>.</p>
+<li><p><strong>Decompor o texto em n-gramas</strong>: o Milvus desliza uma janela de <em>n</em> ao longo de cada cadeia de caracteres no campo de destino e extrai subcadeias sobrepostas, ou <em>n-gramas</em>. O comprimento destas subcadeias situa-se dentro de um intervalo configurável, <code translate="no">[min_gram, max_gram]</code>.</p>
 <ul>
-<li><p><code translate="no">min_gram</code>: O n-grama mais curto a ser gerado. Isso também define o comprimento mínimo da substring da consulta que pode se beneficiar do índice.</p></li>
-<li><p><code translate="no">max_gram</code>: O n-grama mais longo a ser gerado. No momento da consulta, também é utilizado como o tamanho máximo da janela ao dividir cadeias de consulta longas.</p></li>
+<li><p><code translate="no">min_gram</code>: O n-gram mais curto a gerar. Isto também define o comprimento mínimo da subcadeia de caracteres da consulta que pode beneficiar do índice.</p></li>
+<li><p><code translate="no">max_gram</code>: O n-gram mais longo a gerar. No momento da consulta, é também utilizado como o tamanho máximo da janela ao dividir cadeias de consulta longas.</p></li>
 </ul>
-<p>Por exemplo, com <code translate="no">min_gram=2</code> e <code translate="no">max_gram=3</code>, a cadeia <code translate="no">&quot;AI database&quot;</code> é dividida da seguinte forma:</p></li>
+<p>Por exemplo, com <code translate="no">min_gram=2</code> e <code translate="no">max_gram=3</code>, a cadeia de caracteres <code translate="no">&quot;AI database&quot;</code> é dividida da seguinte forma:</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
-   </span> <span class="img-wrapper"> <span>Construir índice Ngram</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" /> 
+   <span>Criar índice de n-gramas</span>
+  
+ </span></p>
 <pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
 
 - **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
@@ -108,13 +109,15 @@ summary: >-
 &lt;/div&gt;
 </code></pre>
 <ol>
-<li><p><strong>Construir um índice invertido</strong>: É criado um <strong>índice invertido</strong> que mapeia cada n-grama gerado para uma lista dos IDs de documentos que o contêm.</p>
-<p>Por exemplo, se o 2-grama <code translate="no">&quot;AI&quot;</code> aparecer em documentos com IDs 1, 5, 6, 8 e 9, o índice regista <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Este índice é então utilizado no momento da consulta para restringir rapidamente o âmbito da pesquisa.</p></li>
+<li><p><strong>Criar um índice invertido</strong>: É criado um <strong>índice invertido</strong> que mapeia cada n-gram gerado para uma lista dos IDs dos documentos que o contêm.</p>
+<p>Por exemplo, se o 2-gram <code translate="no">&quot;AI&quot;</code> aparecer em documentos com os IDs 1, 5, 6, 8 e 9, o índice regista <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Este índice é então utilizado no momento da consulta para restringir rapidamente o âmbito da pesquisa.</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
-   </span> <span class="img-wrapper"> <span>Construir o índice de ngramas 2</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" /> 
+   <span>Criação do Índice de N-gram 2</span>
+  
+ </span></p>
 <pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
 
 A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
@@ -136,22 +139,24 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando um filtro <code translate="no">LIKE</code> é executado, o Milvus utiliza o índice NGRAM para acelerar a consulta nos seguintes passos:</p>
-<p>
+    </button></h3><p>Quando um filtro « <code translate="no">LIKE</code> » ou um filtro regex elegível é executado, o Milvus utiliza o índice NGRAM para acelerar a consulta através dos seguintes passos:</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
-   </span> <span class="img-wrapper"> <span>Acelerar consultas</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" /> 
+   <span>Acelerar consultas</span>
+  
+ </span></p>
 <ol>
-<li><p><strong>Extrair o termo da consulta:</strong> A substring contígua sem wildcards é extraída da expressão <code translate="no">LIKE</code> (por exemplo, <code translate="no">&quot;%database%&quot;</code> torna-se <code translate="no">&quot;database&quot;</code>).</p></li>
+<li><p><strong>Extrair o termo da consulta:</strong> A subcadeia contígua sem caracteres curinga é extraída da expressão « <code translate="no">LIKE</code> » (por exemplo, « <code translate="no">&quot;%database%&quot;</code> » torna-se « <code translate="no">&quot;database&quot;</code> »). Para filtros regex, o Milvus extrai subcadeias literais fixas do padrão regex sempre que possível. Por exemplo, « <code translate="no">message =~ &quot;error.*timeout&quot;</code> » contém os literais « <code translate="no">error</code> » e « <code translate="no">timeout</code> ».</p></li>
 <li><p><strong>Decompor o termo de consulta:</strong> O termo de consulta é decomposto em <em>n-gramas</em> com base no seu comprimento (<code translate="no">L</code>) e nas definições <code translate="no">min_gram</code> e <code translate="no">max_gram</code>.</p>
 <ul>
-<li><p>Se <code translate="no">L &lt; min_gram</code>, o índice não pode ser utilizado e a consulta regressa a uma pesquisa completa.</p></li>
-<li><p>Se <code translate="no">min_gram ≤ L ≤ max_gram</code>, todo o termo da consulta é tratado como um único n-grama e não é necessária mais decomposição.</p></li>
-<li><p>Se <code translate="no">L &gt; max_gram</code>, o termo da consulta é decomposto em gramas sobrepostos utilizando um tamanho de janela igual a <code translate="no">max_gram</code>.</p></li>
+<li><p>Se <code translate="no">L &lt; min_gram</code>, o índice não pode ser utilizado e a consulta recorre a uma varredura completa.</p></li>
+<li><p>Se <code translate="no">min_gram ≤ L ≤ max_gram</code>, o termo de consulta na íntegra é tratado como um único n-gram, não sendo necessária qualquer decomposição adicional.</p></li>
+<li><p>Se <code translate="no">L &gt; max_gram</code>, o termo da consulta é dividido em gramas sobrepostas utilizando um tamanho de janela igual a <code translate="no">max_gram</code>.</p></li>
 </ul>
-<p>Por exemplo, se <code translate="no">max_gram</code> estiver definido como <code translate="no">3</code> e o termo consultado for <code translate="no">&quot;database&quot;</code>, que tem um comprimento de <strong>8</strong>, é decomposto em substrings de 3 gramas como <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code>, e assim por diante.</p></li>
-<li><p><strong>Procurar cada grama e intersectar</strong>: O Milvus procura cada uma das gramas da consulta no índice invertido e, em seguida, intersecta as listas de ID dos documentos resultantes para encontrar um pequeno conjunto de documentos candidatos. Estes candidatos contêm todas as gramas da consulta.</p></li>
-<li><p><strong>Verificar e devolver os resultados:</strong> O filtro original <code translate="no">LIKE</code> é então aplicado como verificação final apenas no pequeno conjunto de candidatos para encontrar as correspondências exactas.</p></li>
+<p>Por exemplo, se o parâmetro « <code translate="no">max_gram</code> » estiver definido como « <code translate="no">3</code> » e o termo de consulta for « <code translate="no">&quot;database&quot;</code> », que tem um comprimento de <strong>8</strong>, este é decomposto em subcadeias de 3-gramas como « <code translate="no">&quot;dat&quot;</code> », « <code translate="no">&quot;ata&quot;</code> », « <code translate="no">&quot;tab&quot;</code> » e assim por diante.</p></li>
+<li><p><strong>Pesquisar cada gram e realizar a interseção</strong>: O Milvus pesquisa cada um dos grams da consulta no índice invertido e, em seguida, cruza as listas de IDs de documentos resultantes para encontrar um pequeno conjunto de documentos candidatos. Estes candidatos contêm todos os grams da consulta.</p></li>
+<li><p><strong>Verificar e devolver resultados:</strong> O filtro original « <code translate="no">LIKE</code> » ou regex é então aplicado como verificação final apenas ao pequeno conjunto de candidatos, para encontrar as correspondências exatas.</p></li>
 </ol>
 <h2 id="Create-an-NGRAM-index" class="common-anchor-header">Criar um índice NGRAM<button data-href="#Create-an-NGRAM-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,7 +173,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode criar um índice NGRAM num campo <code translate="no">VARCHAR</code> ou num caminho específico dentro de um campo <code translate="no">JSON</code>.</p>
+    </button></h2><p>Pode criar um índice NGRAM num campo « <code translate="no">VARCHAR</code> » ou num caminho específico dentro de um campo « <code translate="no">JSON</code> ».</p>
 <h3 id="Example-1-Create-on-a-VARCHAR-field" class="common-anchor-header">Exemplo 1: Criar num campo VARCHAR<button data-href="#Example-1-Create-on-a-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +189,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para um campo <code translate="no">VARCHAR</code>, basta especificar o <code translate="no">field_name</code> e configurar <code translate="no">min_gram</code> e <code translate="no">max_gram</code>.</p>
+    </button></h3><p>Para um campo « <code translate="no">VARCHAR</code> », basta especificar o « <code translate="no">field_name</code> » e configurar « <code translate="no">min_gram</code> » e « <code translate="no">max_gram</code> ».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address</span>
@@ -209,7 +214,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta configuração gera 2-gramas e 3-gramas para cada cadeia de caracteres em <code translate="no">text</code> e armazena-os no índice invertido.</p>
+<p>Esta configuração gera 2-gramas e 3-gramas para cada cadeia de caracteres em « <code translate="no">text</code> » e armazena-os no índice invertido.</p>
 <h3 id="Example-2-Create-on-a-JSON-path" class="common-anchor-header">Exemplo 2: Criar num caminho JSON<button data-href="#Example-2-Create-on-a-JSON-path" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,10 +230,10 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para um campo <code translate="no">JSON</code>, para além das definições de grama, também tem de especificar:</p>
+    </button></h3><p>Para um campo <code translate="no">JSON</code>, além das definições de gramas, deve também especificar:</p>
 <ul>
-<li><p><code translate="no">params.json_path</code> - o caminho JSON que aponta para o valor que você deseja indexar.</p></li>
-<li><p><code translate="no">params.json_cast_type</code> - deve ser <code translate="no">&quot;varchar&quot;</code> (não diferencia maiúsculas de minúsculas), porque a indexação NGRAM opera em strings.</p></li>
+<li><p><code translate="no">params.json_path</code> – o caminho JSON que aponta para o valor que pretende indexar.</p></li>
+<li><p><code translate="no">params.json_cast_type</code> – deve ser « <code translate="no">&quot;varchar&quot;</code> » (sem distinção entre maiúsculas e minúsculas), porque a indexação NGRAM opera em cadeias de caracteres.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Assume you have defined a JSON field named &quot;json_field&quot; in your collection schema, with a JSON path named &quot;body&quot;</span>
 
@@ -257,11 +262,11 @@ client.create_index(
 <p>Neste exemplo:</p>
 <ul>
 <li><p>Apenas o valor em <code translate="no">json_field[&quot;body&quot;]</code> é indexado.</p></li>
-<li><p>O valor é convertido para <code translate="no">VARCHAR</code> antes da tokenização do n-grama.</p></li>
-<li><p>O Milvus gera substrings de comprimento 2 a 4 e armazena-as no índice invertido.</p></li>
+<li><p>O valor é convertido para <code translate="no">VARCHAR</code> antes da tokenização n-gram.</p></li>
+<li><p>O Milvus gera subcadeias de caracteres com comprimento entre 2 e 4 e armazena-as no índice invertido.</p></li>
 </ul>
-<p>Para obter mais informações sobre como indexar um campo JSON, consulte <a href="/docs/pt/json-indexing.md">Indexação JSON</a>.</p>
-<h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Consultas aceleradas por NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
+<p>Para mais informações sobre como indexar um campo JSON, consulte <a href="/docs/pt/json-indexing.md">Indexação JSON</a>.</p>
+<h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Consultas aceleradas pelo NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -278,8 +283,9 @@ client.create_index(
       </svg>
     </button></h2><p>Para que o índice NGRAM seja aplicado:</p>
 <ul>
-<li><p>A consulta deve ter como alvo um campo <code translate="no">VARCHAR</code> (ou caminho JSON) que tenha um índice <code translate="no">NGRAM</code>.</p></li>
-<li><p>A parte literal do padrão <code translate="no">LIKE</code> deve ter pelo menos <code translate="no">min_gram</code> caracteres de comprimento.<em>(Por exemplo, se o termo de consulta mais curto esperado for 2 caracteres, defina min_gram=2 ao criar o índice).</em></p></li>
+<li><p>A consulta deve ter como alvo um campo « <code translate="no">VARCHAR</code> » (ou caminho JSON) que possua um índice « <code translate="no">NGRAM</code> ».</p></li>
+<li><p>A parte literal do padrão « <code translate="no">LIKE</code> » deve ter, pelo menos, <code translate="no">min_gram</code> caracteres.
+<em>(Por exemplo, se o termo de consulta mais curto esperado for de 2 caracteres, defina min_gram=2 ao criar o índice.)</em></p></li>
 </ul>
 <p>Tipos de consulta suportados:</p>
 <ul>
@@ -295,16 +301,23 @@ client.create_index(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string that contains the substring &quot;database&quot; anywhere</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Correspondência com curinga</strong></p>
-<p>O Milvus suporta tanto <code translate="no">%</code> (zero ou mais caracteres) como <code translate="no">_</code> (exatamente um carácter).</p>
+<li><p><strong>Correspondência com caracteres curinga</strong></p>
+<p>O Milvus suporta tanto o « <code translate="no">%</code> » (zero ou mais caracteres) como o « <code translate="no">_</code> » (exatamente um caractere).</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match any string where &quot;st&quot; appears first, and &quot;um&quot; appears later in the text </span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text LIKE &quot;%st%um%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Consultas de caminho JSON</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Filtro Regex</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Match log messages that contain &quot;error&quot; followed later by &quot;timeout&quot;</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;text =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Filtro de expressão regular num caminho JSON</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] =~ &quot;error.*timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Para obter mais informações sobre a sintaxe da expressão de filtro, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p>
+<p>Para mais informações sobre a sintaxe das expressões de filtro, consulte <a href="/docs/pt/pattern-matching.md">«Correspondência de padrões</a>».</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Eliminar um índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -320,7 +333,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize o método <code translate="no">drop_index()</code> para remover um índice existente de uma coleção.</p>
+    </button></h2><p>Utilize o método ` <code translate="no">drop_index()</code> ` para remover um índice existente de uma coleção.</p>
 <div class="alert note">
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
@@ -344,10 +357,13 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipos de campo</strong>: Suportado nos campos <code translate="no">VARCHAR</code> e <code translate="no">JSON</code>. Para JSON, forneça <code translate="no">params.json_path</code> e <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
-<li><p><strong>Unicode</strong>: A decomposição NGRAM é baseada em caracteres e independente da língua e inclui espaços em branco e pontuação.</p></li>
-<li><p><strong>Compensação espaço-tempo</strong>: intervalos de gramas mais amplos <code translate="no">[min_gram, max_gram]</code> produzem mais gramas e índices maiores. Se a memória for escassa, considere o modo <code translate="no">mmap</code> para listas de lançamento grandes. Para mais informações, consulte <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Use mmap</a>.</p></li>
-<li><p><strong>Imutabilidade</strong>: <code translate="no">min_gram</code> e <code translate="no">max_gram</code> não podem ser alterados no local - reconstrua o índice para os ajustar.</p></li>
+<li><p><strong>Tipos de campo</strong>: Suportado nos campos « <code translate="no">VARCHAR</code> » e « <code translate="no">JSON</code> ». Para JSON, forneça tanto « <code translate="no">params.json_path</code> » como « <code translate="no">params.json_cast_type=&quot;varchar&quot;</code> ».</p></li>
+<li><p><strong>Aceleração de expressões regulares</strong>: ` <code translate="no">NGRAM</code> ` acelera os filtros de expressões regulares apenas quando o Milvus consegue extrair subcadeias literais fixas do padrão de expressão regular. Padrões como ` <code translate="no">[a-z]+</code> ` podem recorrer à análise por varredura, uma vez que não contêm literais fixos.</p></li>
+<li><p><strong>Expressões regulares insensíveis a maiúsculas e minúsculas</strong>: Os padrões de expressões regulares com <code translate="no">(?i)</code> são suportados, mas podem ignorar a otimização <code translate="no">NGRAM</code>, uma vez que o índice preserva as maiúsculas e minúsculas originais.</p></li>
+<li><p><strong>Etapa de verificação</strong>: Para filtros de expressões regulares, o <code translate="no">NGRAM</code> gera candidatos e o Milvus verifica-os com o padrão completo de expressão regular RE2, pelo que a aceleração do índice não altera os resultados da correspondência.</p></li>
+<li><p><strong>Unicode</strong>: A decomposição NGRAM é baseada em caracteres e independente do idioma, incluindo espaços em branco e pontuação.</p></li>
+<li><p><strong>Compromisso espaço-tempo</strong>: Intervalos de gramas mais amplos <code translate="no">[min_gram, max_gram]</code> produzem mais gramas e índices maiores. Se a memória for limitada, considere o modo <code translate="no">mmap</code> para listas de postagem grandes. Para mais informações, consulte <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">«Utilizar mmap</a>».</p></li>
+<li><p><strong>Imutabilidade</strong>: <code translate="no">min_gram</code> e <code translate="no">max_gram</code> não podem ser alterados no local — reconstrua o índice para os ajustar.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Melhores práticas<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -365,14 +381,14 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Escolha min_gram e max_gram para corresponder ao comportamento de pesquisa</strong></p>
+<li><p><strong>Escolha min_gram e max_gram de forma a corresponder ao comportamento da pesquisa</strong></p>
 <ul>
-<li><p>Comece com <code translate="no">min_gram=2</code>, <code translate="no">max_gram=3</code>.</p></li>
-<li><p>Defina <code translate="no">min_gram</code> como o literal mais curto que espera que os utilizadores escrevam.</p></li>
-<li><p>Defina <code translate="no">max_gram</code> próximo do comprimento típico de substrings significativas; <code translate="no">max_gram</code> maior melhora a filtragem mas aumenta o espaço.</p></li>
+<li><p>Comece com <code translate="no">min_gram=2</code> e <code translate="no">max_gram=3</code>.</p></li>
+<li><p>Defina ` <code translate="no">min_gram</code> ` para o literal mais curto que espera que os utilizadores digitem.</p></li>
+<li><p>Defina ` <code translate="no">max_gram</code> ` próximo do comprimento típico de subcadeias significativas; um valor maior para ` <code translate="no">max_gram</code> ` melhora a filtragem, mas aumenta o espaço ocupado.</p></li>
 </ul></li>
-<li><p><strong>Evitar gramas de baixa seletividade</strong></p>
-<p>Padrões altamente repetitivos (por exemplo, <code translate="no">&quot;aaaaaa&quot;</code>) fornecem filtragem fraca e podem produzir ganhos limitados.</p></li>
+<li><p><strong>Evite gramas de baixa seletividade</strong></p>
+<p>Padrões altamente repetitivos (por exemplo, <code translate="no">&quot;aaaaaa&quot;</code>) proporcionam uma filtragem fraca e podem resultar em ganhos limitados.</p></li>
 <li><p><strong>Normalize de forma consistente</strong></p>
-<p>Aplique a mesma normalização ao texto ingerido e aos literais da consulta (por exemplo, minúsculas, corte) se o seu caso de uso precisar disso.</p></li>
+<p>Aplique a mesma normalização ao texto importado e aos literais de consulta (por exemplo, converter para minúsculas, remover caracteres à esquerda e à direita) se o seu caso de utilização assim o exigir.</p></li>
 </ul>

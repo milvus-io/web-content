@@ -22,7 +22,7 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h1><p>이 문서에서는 Milvus용 Python SDK인 pymilvus를 설치하는 방법을 설명합니다.</p>
 <p>현재 버전의 Milvus는 Python, Node.js, Go 및 Java용 SDK를 지원합니다.</p>
-<h2 id="Requirements" class="common-anchor-header">필수 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h2 id="Requirements" class="common-anchor-header">필수 조건<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +42,7 @@ title: Milvus Python SDK 설치
 <li>Google protobuf가 설치되어 있어야 합니다. ` <code translate="no">pip3 install protobuf==3.20.0</code>` 명령어를 사용하여 설치할 수 있습니다.</li>
 <li>grpcio-tools가 설치되어 있어야 합니다. ` <code translate="no">pip3 install grpcio-tools</code>` 명령어를 사용하여 설치할 수 있습니다.</li>
 </ul>
-<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip을 통해 PyMilvus 설치<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
+<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip를 통해 PyMilvus 설치<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,7 +98,7 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h2><p>PyMilvus를 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 작동 방식을 익힐 수 있습니다:</p>
+<li><p>Milvus의 기본 작동 방식을 익히기:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>

@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li><p>Externe Sammlungen unterstützen derzeit das Hinzufügen von Feldern nach ihrer Erstellung. Andere Schemaänderungen, wie das Löschen von Feldern, das Umbenennen von Feldern, das Ändern von Felddatentypen, das Ändern von Vektordimensionen oder das Neuzuordnen von „ <code translate="no">external_field</code> “, werden nicht unterstützt.</p></li>
-<li><p>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Dieser Vorgang ordnet ein vorhandenes externes Feld einem Milvus-Feld zu. Es wird weder ein neues Feld in der externen Datenquelle erstellt, noch werden Quelldaten nachträglich eingefügt.</p></li>
+<li><p>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Bei diesem Vorgang wird ein vorhandenes externes Feld einem Milvus-Feld zugeordnet. Es wird weder ein neues Feld in der externen Datenquelle erstellt, noch werden Quelldaten nachträglich eingefügt.</p></li>
 <li><p>Das Hinzufügen von „ <code translate="no">SPARSE_FLOAT_VECTOR</code> “-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt.</p></li>
 <li><p>Das Hinzufügen von „StructArray“-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt. Wenn Ihre externe Sammlung ein „StructArray“-Feld benötigt, definieren Sie dieses beim Erstellen der Sammlung im Sammlungsschema.</p></li>
 </ul>

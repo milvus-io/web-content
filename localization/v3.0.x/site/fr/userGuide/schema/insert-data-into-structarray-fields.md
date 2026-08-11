@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Dans une charge utile d’insertion, « <code translate="no">chunks</code> » est un champ standard dont la valeur est un tableau d’objets Struct. À l’intérieur de chaque objet, utilisez des noms de sous-champs tels que « <code translate="no">text</code> » et « <code translate="no">emb</code> ». N’utilisez la syntaxe de chemin d’accès, telle que « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », qu’après l’insertion, lorsque vous créez des index, lancez des recherches, construisez des filtres ou spécifiez des champs de sortie.</p>
+<p>Dans une charge utile d’insertion, « <code translate="no">chunks</code> » est un champ standard dont la valeur est un tableau d’objets Struct. À l’intérieur de chaque objet, utilisez des noms de sous-champs tels que « <code translate="no">text</code> » et « <code translate="no">emb</code> ». N’utilisez la syntaxe de chemin d’accès, telle que « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », qu’après l’insertion, lorsque vous créez des index, effectuez des recherches, construisez des filtres ou spécifiez des champs de sortie.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprendre la structure de la charge utile d’insertion<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"

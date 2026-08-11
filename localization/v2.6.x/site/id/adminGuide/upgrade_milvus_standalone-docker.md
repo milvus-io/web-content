@@ -56,8 +56,8 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
       </svg>
     </button></h3><p>Memperbarui dari Milvus 2.5.x ke 2.6.17 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
-<li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang sudah usang (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah digabungkan menjadi satu <code translate="no">mixCoord</code></li>
-<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang lebih baik</li>
+<li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang lama (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> dihapus dan digabungkan</li>
 </ul>
 <p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut mengenai perubahan arsitektur, lihat <a href="/docs/id/v2.6.x/architecture_overview.md">Ikhtisar Arsitektur Milvus</a>.</p>
@@ -87,11 +87,11 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
 <li>Anda <strong>harus</strong> melakukan upgrade ke v2.5.16 atau yang lebih baru sebelum melakukan upgrade ke v2.6.17.</li>
 </ul>
-<p><strong>Batasan antrian pesan</strong>: Saat melakukan upgrade ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alter note">
 <p>Karena pertimbangan keamanan, Milvus memperbarui MinIO-nya ke RELEASE.2024-12-18T13-15-44Z bersamaan dengan rilis v2.6.17.</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan versi<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,7 +122,7 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Lewati langkah ini jika penyebaran mandiri Anda sudah menjalankan v2.5.16 atau yang lebih baru.</p>
+<p>Lewati langkah ini jika penyebaran mandiri Anda sudah menjalankan v2.5.16 atau yang lebih tinggi.</p>
 </div>
 <ol>
 <li><p>Edit file ` <code translate="no">docker-compose.yaml</code> ` yang ada dan perbarui tag gambar Milvus menjadi v2.5.16:</p>

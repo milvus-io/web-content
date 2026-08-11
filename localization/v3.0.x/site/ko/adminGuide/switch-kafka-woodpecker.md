@@ -18,7 +18,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지에서는 <strong>Milvus 클러스터의</strong> 메시지 큐(MQ)를 <strong>Kafka</strong> (내장형 또는 외부)와 <strong>Woodpecker</strong> (MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">MQ 유형 전환을</a> 참조하십시오.</p>
+    </button></h1><p>이 페이지에서는 <strong>Milvus 클러스터의</strong> 메시지 큐(MQ)를 <strong>Kafka</strong> (내장형 또는 외부)와 <strong>Woodpecker</strong> (MinIO 백엔드) 간에 양방향으로 전환하는 방법을 설명합니다. 일반적인 워크플로우 및 필수 조건에 대해서는 <a href="/docs/ko/switch-mq-type.md">'메시지 큐 전환'을</a> 참조하십시오.</p>
 <div class="alert note">
 <p><strong>필수 조건:</strong> MQ 전환 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있습니다. 시작하기 전에 Milvus 인스턴스를 Milvus 3.0 이상으로 업그레이드하십시오. 이전 버전에서는 이 기능을 사용할 수 없습니다.</p>
 </div>
@@ -88,7 +88,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: 대상 Kafka 연결을 구성하고 Milvus를 다시 시작합니다.</strong> 전환을 위해서는 Milvus가 이미 Kafka 연결 정보를 알고 있어야 하므로, <code translate="no">extraConfigFiles</code> 를 통해 <code translate="no">user.yaml</code> 에 해당 정보를 작성한 후 <code translate="no">helm upgrade</code> (포드를 롤링합니다)를 실행하여 적용하십시오. Switch MQ 기능을 사용하려면 <code translate="no">streaming.enabled=true</code> 가 필요합니다. SASL/SSL에 대한 자세한 내용은 <a href="/docs/ko/connect_kafka_ssl.md">SASL/SSL을 사용하여 Kafka에 연결하기를</a> 참조하십시오.</p>
+<p><strong>2단계: 대상 Kafka 연결을 구성하고 Milvus를 다시 시작합니다.</strong> 전환을 위해서는 Milvus가 이미 Kafka 연결 정보를 알고 있어야 하므로, <code translate="no">extraConfigFiles</code> 를 통해 <code translate="no">user.yaml</code> 에 해당 정보를 작성한 후 <code translate="no">helm upgrade</code> 를 실행하여 적용합니다(이 명령은 포드를 롤오버합니다). Switch MQ 기능을 사용하려면 <code translate="no">streaming.enabled=true</code> 가 필요합니다. SASL/SSL에 대한 자세한 내용은 <a href="/docs/ko/connect_kafka_ssl.md">‘SASL/SSL을 사용하여 Kafka에 연결’을</a> 참조하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -154,7 +154,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: MQ 전환을 실행합니다.</strong> MixCoord 서비스는 외부에 노출되지 않으므로 MixCoord 포드 내부에서 전환 API를 실행하십시오:</p>
+<p><strong>2단계: MQ 전환을 실행합니다.</strong> MixCoord 서비스는 외부에 노출되지 않으므로, MixCoord 포드 내부에서 전환 API를 실행하십시오:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -230,7 +230,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=kafka]</code> 로깅됩니다.</p>
-<p><strong>5단계: (선택 사항) Woodpecker 데이터 정리.</strong> MinIO/S3( <code translate="no">&lt;rootPath&gt;/wp/...</code> 폴더 내, 일반적으로 <code translate="no">files/wp/...</code>)에 있는 Woodpecker 데이터와 etcd(<code translate="no">etcdctl get woodpecker --prefix</code>)에 있는 Woodpecker 메타데이터를 삭제합니다. 나중에 Woodpecker로 다시 전환할 계획이라면, 먼저 이 파일들을 정리하십시오.</p>
+<p><strong>5단계: (선택 사항) Woodpecker 데이터 정리.</strong> MinIO/S3( <code translate="no">&lt;rootPath&gt;/wp/...</code> 폴더 내, 일반적으로 <code translate="no">files/wp/...</code>)에 있는 Woodpecker 데이터와 etcd(<code translate="no">etcdctl get woodpecker --prefix</code>)에 있는 Woodpecker 메타데이터를 삭제합니다. 나중에 Woodpecker로 다시 전환할 계획이라면, 먼저 이러한 파일을 정리하십시오.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">지원되는 시나리오<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

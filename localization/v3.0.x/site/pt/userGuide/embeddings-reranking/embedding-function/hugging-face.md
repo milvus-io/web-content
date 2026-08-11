@@ -22,7 +22,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h1><p>A utilização de um modelo de embedding do Hugging Face requer normalmente que a sua aplicação gere as credenciais, chame o modelo separadamente e gere embeddings de forma consistente para os dados inseridos e as consultas de pesquisa. Com uma Função de Embedding de Texto, o Milvus recorre <a href="https://huggingface.co/docs/inference-providers/index">aos Provedores de Inferência do Hugging Face</a> alojados para converter texto bruto em vetores durante a inserção e a pesquisa.</p>
-<p>Esta integração utiliza o router do Hugging Face alojado. Para ligar o Milvus a um serviço de Inferência de Incorporações de Texto (TEI) implementado separadamente, consulte <a href="/docs/pt/hugging-face-tei.md">o Hugging Face TEI</a>.</p>
+<p>Esta integração utiliza o router do Hugging Face alojado. Para ligar o Milvus a um serviço de Inferência de Incorporações de Texto (TEI) implementado separadamente, consulte <a href="/docs/pt/hugging-face-tei.md">Hugging Face TEI</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>O campo de saída da Função deve utilizar o tipo de dados « <code translate="no">FLOAT_VECTOR</code> ». A incorporação do Hugging Face no Milvus não suporta campos de saída « <code translate="no">INT8_VECTOR</code> », « <code translate="no">BINARY_VECTOR</code> », « <code translate="no">FLOAT16_VECTOR</code> » ou « <code translate="no">BFLOAT16_VECTOR</code> ».</li>
+<li>O campo de saída da Função deve utilizar o tipo de dados « <code translate="no">FLOAT_VECTOR</code> ». A incorporação do Hugging Face no Milvus não suporta campos de saída do tipo « <code translate="no">INT8_VECTOR</code> », « <code translate="no">BINARY_VECTOR</code> », « <code translate="no">FLOAT16_VECTOR</code> » ou « <code translate="no">BFLOAT16_VECTOR</code> ».</li>
 <li>A dimensão do campo de saída «Função» deve corresponder à dimensão de saída do modelo selecionado.</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -265,7 +265,7 @@ client.create_collection(
 <tr><td><code translate="no">provider</code></td><td>Sim</td><td>O fornecedor do modelo de embedding. Defina este valor como <code translate="no">huggingface</code>.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>Sim</td><td>O ID do modelo Hugging Face para um modelo disponibilizado através de <code translate="no">hf-inference</code> para a tarefa « <code translate="no">feature-extraction</code> ».</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>Não</td><td>A rota do fornecedor de inferência do Hugging Face. O valor predefinido e único suportado no Milvus 2.6.20 é <code translate="no">hf-inference</code>.</td></tr>
-<tr><td><code translate="no">credential</code></td><td>Não</td><td>O rótulo de uma credencial definida na secção de nível superior <code translate="no">credential</code> da <code translate="no">milvus.yaml</code>. Este valor não é o próprio token.</td></tr>
+<tr><td><code translate="no">credential</code></td><td>Não</td><td>O rótulo de uma credencial definida na secção de nível superior <code translate="no">credential</code> de <code translate="no">milvus.yaml</code>. Este valor não é o próprio token.</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>Não</td><td>Se o Hugging Face deve devolver embeddings normalizadas. Os valores suportados são <code translate="no">true</code> e <code translate="no">false</code>. Se omitido, o Milvus não define esta opção no pedido.</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>Não</td><td>O nome de um prompt definido na configuração «Sentence Transformers» do modelo selecionado.</td></tr>
 <tr><td><code translate="no">truncate</code></td><td>Não</td><td>Se o Hugging Face deve truncar uma entrada que exceda o comprimento suportado pelo modelo. Os valores suportados são « <code translate="no">true</code> » e « <code translate="no">false</code> ».</td></tr>
@@ -334,7 +334,7 @@ client.create_collection(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>O resultado contém os documentos mais relevantes para o texto da consulta, ordenados por similaridade cosinusoidal.</p>
+<p>O resultado contém os documentos mais relevantes para o texto da consulta, ordenados por similaridade cosseno.</p>
 <h2 id="Troubleshooting" class="common-anchor-header">Resolução de problemas<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -415,5 +415,5 @@ client.create_collection(
       </svg>
     </button></h2><ul>
 <li>Para conceitos gerais da Função e comportamento de inserção/pesquisa, consulte <a href="/docs/pt/embedding-function-overview.md">Visão geral da Função de incorporação</a>.</li>
-<li>Para reclassificar candidatos de pesquisa vetorial com pontuações de similaridade de frases do Hugging Face alojadas, consulte <a href="/docs/pt/hugging-face-ranker.md">o «Hugging Face Ranker</a>».</li>
+<li>Para reclassificar candidatos de pesquisa vetorial com pontuações de similaridade de frases do Hugging Face hospedadas, consulte <a href="/docs/pt/hugging-face-ranker.md">o «Hugging Face Ranker</a>».</li>
 </ul>

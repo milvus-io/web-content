@@ -53,7 +53,7 @@ summary: >-
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>Una lista de objetos «chunk».</td></tr>
 </tbody>
 </table>
-<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema Struct.</p>
+<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema «Struct».</p>
 <table>
 <thead>
 <tr><th>Subcampo</th><th>Tipo</th><th>Valor de inserción</th></tr>
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten modos de búsqueda diferentes. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, se pueden almacenar las mismas representaciones en ambos subcampos cuando ambos modos de búsqueda utilizan la misma representación por fragmentos, o bien almacenar representaciones diferentes cuando los dos modos de búsqueda utilizan representaciones distintas.</p>
+<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten modos de búsqueda diferentes. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, puedes almacenar las mismas representaciones en ambos subcampos cuando ambos modos de búsqueda utilicen la misma representación de fragmentos, o almacenar representaciones diferentes cuando los dos modos de búsqueda utilicen representaciones distintas.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Insertar filas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -353,6 +353,6 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
       </svg>
     </button></h2><ol>
 <li><p>Para crear índices para los subcampos « <code translate="no">chunks[emb_list_vector]</code> », « <code translate="no">chunks[emb]</code> » y los subcampos escalares, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos de StructArray</a>».</p></li>
-<li><p>Para realizar búsquedas en subcampos vectoriales de StructArray, consulta «Búsqueda vectorial básica con StructArray».</p></li>
+<li><p>Para realizar búsquedas en subcampos vectoriales de StructArray, consulte «Búsqueda vectorial básica con StructArray».</p></li>
 <li><p>Para revisar el comportamiento de los valores nulos y las limitaciones específicas de cada versión, consulta <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
 </ol>

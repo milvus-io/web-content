@@ -64,7 +64,7 @@ beta: Milvus v2.6.20+
 <p>Hugging Face Ranker는 초기 벡터 검색이 완료된 후 실행됩니다:</p>
 <ol>
 <li><strong>후보 엔티티를 검색합니다.</strong> Milvus는 구성된 벡터 필드를 검색하여 후보 엔티티를 수집합니다.</li>
-<li><strong>재순위를 위한 텍스트 준비.</strong> 이 함수는 <code translate="no">params.queries</code> 에서 쿼리 텍스트를, <code translate="no">input_field_names</code> 에 지정된 <code translate="no">VARCHAR</code> 필드에서 후보 텍스트를 읽어들입니다.</li>
+<li><strong>재순위를 위한 텍스트 준비.</strong> 이 함수는 <code translate="no">params.queries</code> 에서 쿼리 텍스트를, <code translate="no">input_field_names</code> 에 지정된 <code translate="no">VARCHAR</code> 필드에서 후보 텍스트를 읽어옵니다.</li>
 <li><strong>유사도 점수 요청.</strong> Milvus는 <code translate="no">hf-inference</code> 를 통해 <code translate="no">source_sentence</code> 로 쿼리를, <code translate="no">sentences</code> 로 후보 텍스트를 Hugging Face <code translate="no">sentence-similarity</code> 파이프라인으로 전송합니다.</li>
 <li><strong>후보 텍스트의 순위를 재조정합니다.</strong> Hugging Face는 후보 텍스트당 하나의 점수를 반환합니다. Milvus는 점수가 높은 순서대로 후보 텍스트를 정렬하여 재순위화된 결과를 반환합니다.</li>
 </ol>
@@ -72,7 +72,7 @@ beta: Milvus v2.6.20+
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/hugging-face-ranker-scoring.png" alt="How Hugging Face Ranker calculates similarity scores" class="doc-image" id="how-hugging-face-ranker-calculates-similarity-scores" /> 
-   <span>Hugging Face Ranker가 유사도 점수를 계산하는 방법</span>
+   <span>Hugging Face Ranker가 유사도 점수를 계산하는 방식</span>
   
  </span></p>
 <p>Hugging Face 모델은 다음 세 단계에 걸쳐 점수를 계산합니다:</p>
@@ -173,7 +173,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>함수나 제공자 구성 모두에서 자격 증명 레이블이 지정되지 않은 경우, Milvus 서비스 환경에서 ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> `를 설정하십시오:</p>
+    </button></h3><p>함수나 제공자 구성 모두에서 자격 증명 레이블이 지정되지 않은 경우, Milvus 서비스 환경에서 ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> `을 설정하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -194,7 +194,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hugging Face Ranker는 검색 시점에 정의 및 적용됩니다. 컬렉션 스키마를 변경하지 않고도 각 검색에 대해 랭커를 변경하거나 생략할 수 있습니다.</p>
+    </button></h2><p>Hugging Face Ranker는 검색 시점에 정의되고 적용됩니다. 컬렉션 스키마를 변경하지 않고도 각 검색마다 랭커를 변경하거나 생략할 수 있습니다.</p>
 <h3 id="Step-1-Prepare-a-collection" class="common-anchor-header">1단계: 컬렉션 준비<button data-href="#Step-1-Prepare-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -368,7 +368,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">sentence-similarity</code> 에 대한 모델을 제공하는지 확인하십시오. 그렇지 않은 경우, 해당 작업을 지원하는 다른 모델을 선택하십시오.</p>
+    </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">sentence-similarity</code> 에 대한 모델을 제공하고 있는지 확인하십시오. 그렇지 않은 경우, 해당 작업을 지원하는 다른 모델을 선택하십시오.</p>
 <h3 id="The-number-of-query-strings-does-not-match-the-search-request" class="common-anchor-header">쿼리 문자열의 개수가 검색 요청과 일치하지 않습니다<button data-href="#The-number-of-query-strings-does-not-match-the-search-request" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

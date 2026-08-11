@@ -1,7 +1,7 @@
 ---
 id: stop-filter.md
 title: ストップ
-summary: 解析中にトークン化されたテキストから構成されたストップワードを除去するには、ストップフィルタを使用します。
+summary: ストップフィルターを使用すると、分析中にトークン化されたテキストから、設定されたストップワードを除去することができます。
 ---
 <h1 id="Stop" class="common-anchor-header">ストップ<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: 解析中にトークン化されたテキストから構成された�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">stop</code> フィルタは、トークン化されたテキストから指定されたストップ ワードを除去し、一般的であまり意味のない単語の除去に役立ちます。ストップワードのリストは<code translate="no">stop_words</code> パラメータで設定できます。</p>
-<h2 id="Configuration" class="common-anchor-header">設定方法<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">stop</code> フィルターは、トークン化されたテキストから指定されたストップワードを除去し、一般的で意味の薄い単語を排除するのに役立ちます。ストップワードのリストは、<code translate="no">stop_words</code> パラメータを使用して設定できます。</p>
+<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +34,7 @@ summary: 解析中にトークン化されたテキストから構成された�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">stop</code> フィルタは、<code translate="no">stop_words</code> パラメータでインラインに、または<code translate="no">stop_words_file</code> パラメータで登録されたファイルリソースからストップワードリストを受け取ります。</p>
+    </button></h2><p><code translate="no">stop</code> フィルターは、<code translate="no">stop_words</code> パラメータを介してインラインで指定するか、<code translate="no">stop_words_file</code> パラメータを介して登録済みのファイルリソースから、ストップワードリストを受け入れます。</p>
 <h3 id="Inline-stop-words-list" class="common-anchor-header">インラインのストップワードリスト<button data-href="#Inline-stop-words-list" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,9 +50,14 @@ summary: 解析中にトークン化されたテキストから構成された�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>インラインリストで<code translate="no">stop</code> フィルタを使うには、フィルタ設定で<code translate="no">&quot;type&quot;: &quot;stop&quot;</code> を指定し、ストップワードリストを提供する<code translate="no">stop_words</code> パラメータを指定します。</p>
+    </button></h3><p><code translate="no">stop</code> フィルターをインラインリストで使用するには、フィルター設定で<code translate="no">&quot;type&quot;: &quot;stop&quot;</code> を指定するとともに、ストップワードのリストを指定する<code translate="no">stop_words</code> パラメータを指定します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -102,7 +107,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">stop</code> フィルタは以下の設定可能なパラメータを受け付ける。</p>
+<p><code translate="no">stop</code> フィルターでは、以下の設定可能なパラメータを受け付けます。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -110,12 +115,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>トークン化から削除する単語のリスト。デフォルトでは、組み込みの<code translate="no">_english_</code> 辞書を使用します。この辞書は、次の 3 つの方法でオーバーライドまたは拡張できます：</p><ul><li><p><strong>組み込み辞書</strong>- 定義済みの辞書を使用するには、以下の言語エイリアスのいずれかを指定します：</p><p><code translate="no">"_english_"</code> <code translate="no">"_danish_"</code>, , , , , , , , , , 、<code translate="no">"_dutch_"</code> <code translate="no">"_finnish_"</code> <code translate="no">"_french_"</code> <code translate="no">"_german_"</code> <code translate="no">"_hungarian_"</code> <code translate="no">"_italian_"</code> <code translate="no">"_norwegian_"</code> <code translate="no">"_portuguese_"</code> <code translate="no">"_russian_"</code> <code translate="no">"_spanish_"</code> <code translate="no">"_swedish_"</code></p></li><li><p><strong>カスタムリスト</strong>- 独自の用語の配列を渡します。例：<code translate="no">["foo", "bar", "baz"]</code>.</p></li><li><p><code translate="no">["of", "to", "_english_"]</code>混合リスト<strong></strong>- エイリアスとカスタム用語を組み合わせる。</p><p>各定義済み辞書の正確な内容の詳細については、<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_wordsを</a>参照してください。</p></li></ul></td>
+     <td><p>トークン化から除外する単語のリスト。デフォルトでは、このフィルタは組み込みの<code translate="no">_english_</code> 辞書を使用します。これを上書きまたは拡張するには、次の3つの方法があります:</p><ul><li><p><strong>組み込み辞書</strong>– あらかじめ定義された辞書を使用するには、以下の言語エイリアスのいずれかを指定します：</p><p><code translate="no">"_arabic_"</code>,<code translate="no">"_english_"</code>,<code translate="no">"_danish_"</code>,<code translate="no">"_dutch_"</code>,<code translate="no">"_finnish_"</code>,<code translate="no">"_french_"</code>,<code translate="no">"_german_"</code>,<code translate="no">"_hungarian_"</code>,<code translate="no">"_italian_"</code>,<code translate="no">"_norwegian_"</code>,<code translate="no">"_portuguese_"</code>,<code translate="no">"_russian_"</code>,<code translate="no">"_spanish_"</code>,<code translate="no">"_swedish_"</code>,<code translate="no">"_thai_"</code></p></li><li><p><strong>カスタムリスト</strong>– 独自の用語の配列を渡します。例：<code translate="no">["foo", "bar", "baz"]</code> 。</p></li><li><p><strong>混合リスト</strong>– エイリアスとカスタム用語を組み合わせます。例：<code translate="no">["of", "to", "_english_"]</code> 。</p><p>各事前定義済み辞書の正確な内容については、<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a> を参照してください。アラビア語またはタイ語の辞書を確認するには、<a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">アラビア語のストップワードリストまたは</a> <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/thai.txt">タイ語のストップワードリスト</a>を参照してください。</p></li></ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> フィルタは、トークナイザによって生成された用語に対して動作するため、トークナイザと組み合わせて使用する 必要があります。Milvusで利用可能なトークナイザーのリストについては、<a href="/docs/ja/standard-tokenizer.md">Standard Tokenizerと</a>その兄弟ページを参照してください。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
-<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">ファイルリソースからのストップワードのロード<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
+<p><code translate="no">stop</code> フィルターは、トークナイザーによって生成された用語に対して動作するため、トークナイザーと組み合わせて使用する必要があります。Milvus で利用可能なトークナイザーの一覧については、「<a href="/docs/ja/standard-tokenizer.md">標準トークナイザー</a>」およびその関連ページを参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、それらを<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusはそのフィールド内のテキストを指定されたアナライザーを使用して処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">「使用例」</a>を参照してください。</p>
+<h3 id="Load-stop-words-from-a-file-resource--Milvus-30x" class="common-anchor-header">ファイルリソースからストップワードを読み込む<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Load-stop-words-from-a-file-resource--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,13 +135,13 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>言語固有のリスト、ドメイン語彙、多数のコレクションで共有したいリストなど、大規模なカスタムストップワードリストの場合、単語をファイルに保存し、そのファイルをリモートファイルリソースとして登録し、<code translate="no">stop_words_file</code> パラメータを介してフィルタから参照します。<code translate="no">stop_words_file</code> を単独で使うことも、インラインの<code translate="no">stop_words</code> と一緒に使うこともできます。両方が設定されている場合、フィルタは2つのソースを1つのストップワードリストに統合します。</p>
-<p>ファイルはプレーンなUTF-8テキストで、<strong>1行に1つのストップワードが</strong>あります。例えば</p>
+    </button></h3><p>大規模なカスタムストップワードリスト（言語固有のリスト、ドメイン固有の語彙、または多くのコレクションで共有したいリストなど）については、単語をファイルに保存し、そのファイルをリモートファイルリソースとして登録した後、<code translate="no">stop_words_file</code> パラメータを介してフィルタから参照します。<code translate="no">stop_words_file</code> は単独で使用することも、インラインの<code translate="no">stop_words</code> と併用することもできます。両方が設定されている場合、フィルターは2つのソースを1つのストップワードリストに統合します。</p>
+<p>ファイルは、<strong>1行につき1つのストップワードが</strong>記述されたプレーンなUTF-8テキストである必要があります。例：</p>
 <pre><code translate="no" class="language-plaintext">the
 of
 for
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusクラスタが使用するように設定されているオブジェクトストアにファイルをアップロードし、登録します：</p>
+<p>ファイルを、Milvusクラスタで使用するように設定されたオブジェクトストアにアップロードし、登録します:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -147,7 +152,7 @@ client.add_file_resource(
     path=<span class="hljs-string">&quot;file/stop_words.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>登録されたリソースを<code translate="no">stop_words_file</code> 経由でフィルタ内で参照します：</p>
+<p><code translate="no">stop_words_file</code> を使用して、フィルター内で登録済みのリソースを参照します:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [{
@@ -160,23 +165,23 @@ client.add_file_resource(
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">stop_words_file</code> パラメータは以下のフィールドを持つオブジェクトを受け付けます：</p>
+<p><code translate="no">stop_words_file</code> パラメータは、以下のフィールドを持つオブジェクトを受け付けます:</p>
 <table>
    <tr>
      <th><p><strong>フィールド</strong></p></th>
-     <th><p><strong>フィールド</strong></p></th>
+     <th><p><strong>説明</strong></p></th>
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>リソースタイプ。<code translate="no">add_file_resource</code> 経由で登録されたファイルには<code translate="no">"remote"</code> を使用します。セルフホスト配備で使用される<code translate="no">"local"</code> バリアントについては、「<a href="/docs/ja/manage-file-resources.md">ファイルリソースの管理</a>」を参照してください。</p></td>
+     <td><p>リソースタイプ。<code translate="no">add_file_resource</code> 経由で登録されたファイルの場合は、<code translate="no">"remote"</code> を使用します。セルフホスト型デプロイメントで使用される<code translate="no">"local"</code> バリアントについては、「<a href="/docs/ja/manage-file-resources.md">ファイルリソースの管理</a>」を参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">resource_name</code></p></td>
-     <td><p>ファイルが<code translate="no">add_file_resource</code> で登録されたときに使用された名前。</p></td>
+     <td><p><code translate="no">add_file_resource</code> にファイルを登録した際に使用された名前。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">file_name</code></p></td>
-     <td><p>登録 さ れてい る リ ソ ース のオブジ ェ ク ト ・ ス ト ア ・ パ ス の フ ァ イ ル名部分 （た と えば、 リ ソ ース が<code translate="no">path="file/stop_words.txt"</code> で登録 さ れてい る 場合は<code translate="no">"stop_words.txt"</code> ）。</p></td>
+     <td><p>登録済みリソースのオブジェクトストアパスにおけるファイル名部分（たとえば、リソースが<code translate="no">path="file/stop_words.txt"</code> で登録された場合は<code translate="no">"stop_words.txt"</code> となります）。</p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -194,8 +199,8 @@ client.add_file_resource(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>アナライザ構成をコレクション・スキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認します。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>アナライザー設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザーの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -211,7 +216,12 @@ client.add_file_resource(
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
@@ -241,7 +251,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">以下の方法を使用した検証<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,7 +267,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

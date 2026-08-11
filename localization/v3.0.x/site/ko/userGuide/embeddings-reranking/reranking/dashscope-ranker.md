@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 DashScope에 재순위를 요청하기 전에 사용자의 DashScope API 키를 알아야 합니다. API 키는 <code translate="no">milvus.yaml</code> 에서 또는 환경 변수를 통해 구성할 수 있습니다.</p>
+    </button></h2><p>Milvus가 DashScope에 재순위를 요청하려면 DashScope API 키를 알아야 합니다. <code translate="no">milvus.yaml</code> 에서 또는 환경 변수를 통해 API 키를 구성할 수 있습니다.</p>
 <h3 id="Option-1-Configuration-file" class="common-anchor-header">옵션 1: 구성 파일<button data-href="#Option-1-Configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DashScope 랭커를 사용하려면 DashScope 재순위 지정 모델과 쿼리 텍스트를 지정하는 Function 객체를 생성하십시오. DashScope 재순위 지정을 위해 <code translate="no">provider: &quot;ali&quot;</code> 를 사용하십시오.</p>
+    </button></h2><p>DashScope 랭커를 사용하려면 DashScope 재순위 지정 모델과 쿼리 텍스트를 지정하는 Function 객체를 생성하십시오. DashScope 재순위 지정에는 <code translate="no">provider: &quot;ali&quot;</code> 를 사용하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 dashscope_ranker = Function(
@@ -172,7 +172,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 재순위 지정을 활성화하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
+     <td><p>모델 재순위를 활성화하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -196,7 +196,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>아니요</p></td>
-     <td><p>요청당 모델 서비스로 전송할 문서의 최대 개수입니다.</p></td>
+     <td><p>요청당 모델 서비스로 전송할 문서의 최대 수입니다.</p></td>
      <td><p><code translate="no">128</code> (기본값)</p></td>
    </tr>
    <tr>
@@ -207,7 +207,7 @@ dashscope_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p><code translate="no">provider</code> 및 <code translate="no">queries</code> 와 같이 모든 모델 랭커에서 공통으로 사용되는 일반 매개변수에 대해서는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하십시오.</p>
+<p><code translate="no">provider</code> 및 <code translate="no">queries</code> 과 같이 모든 모델 랭커에서 공통으로 사용되는 일반 매개변수에 대해서는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하십시오.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est fourni avec un outil graphique intégré appelé Milvus WebUI, accessible via votre navigateur. Milvus WebUI améliore la visibilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser Milvus WebUI pour consulter les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collecte, et afficher la liste détaillée des configurations de Milvus. Pour plus de détails sur l’interface Web de Milvus, consultez la page <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus est fourni avec un outil graphique intégré appelé Milvus WebUI, accessible via votre navigateur. Milvus WebUI améliore la visibilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser Milvus WebUI pour consulter les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collecte, et afficher la liste détaillée des configurations de Milvus. Pour plus de détails sur Milvus WebUI, consultez la documentation <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Pour activer l’accès à Milvus WebUI, vous devez rediriger le port du pod proxy vers un port local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -345,7 +345,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
         ></path>
       </svg>
     </button></h2><p>Si vous vous trouvez dans un environnement soumis à des restrictions réseau, suivez la procédure décrite dans cette section pour démarrer un cluster Milvus.</p>
-<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Récupérer le manifeste Milvus<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
+<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Récupérez le manifeste Milvus<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -366,7 +366,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>La commande ci-dessus génère des modèles de chart pour un cluster Milvus et enregistre le résultat dans un fichier de manifeste nommé <code translate="no">milvus_manifest.yaml</code>. À l’aide de ce manifeste, vous pouvez installer un cluster Milvus dont les composants et les dépendances sont répartis dans des pods distincts.</p>
 <div class="alert note">
 <ul>
-<li>Pour installer une instance Milvus en mode autonome, dans laquelle tous les composants Milvus sont regroupés dans un seul pod, vous devez plutôt exécuter la commande ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
+<li>Pour installer une instance Milvus en mode autonome, où tous les composants Milvus sont regroupés dans un seul pod, vous devez plutôt exécuter la commande ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
 <li>Pour modifier les configurations de Milvus, téléchargez le <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> modèle, y indiquer les paramètres souhaités, puis utiliser <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> pour générer le manifeste en conséquence.</li>
 </ul>
 </div>

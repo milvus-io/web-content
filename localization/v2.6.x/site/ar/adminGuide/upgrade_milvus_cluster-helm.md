@@ -127,7 +127,7 @@ title: ترقية مجموعة Milvus باستخدام مخطط Helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> للحصول على إصدارات المخطط 4.0.31 والإصدارات الأحدث.
+تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
 </div>
 <p>للتحقق من توافق إصدار مخطط Helm مع إصدارات Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions

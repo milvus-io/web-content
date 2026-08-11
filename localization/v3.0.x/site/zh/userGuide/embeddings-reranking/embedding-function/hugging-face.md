@@ -38,7 +38,7 @@ beta: Milvus v2.6.20+
       </svg>
     </button></h2><ul>
 <li>函数输出字段必须使用<code translate="no">FLOAT_VECTOR</code> 数据类型。Milvus中的Hugging Face嵌入功能不支持<code translate="no">INT8_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 或<code translate="no">BFLOAT16_VECTOR</code> 类型的输出字段。</li>
-<li>“Function”输出字段的维度必须与所选模型的输出维度一致。</li>
+<li>“Function”输出字段的维度必须与所选模型的输出维度相匹配。</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +141,7 @@ beta: Milvus v2.6.20+
         <span class="hljs-attr">credential:</span> <span class="hljs-string">huggingface_apikey</span>
         <span class="hljs-comment"># url: https://router.huggingface.co</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭证标签的优先级高于提供程序级标签。</p>
+<p>您还可以在函数参数中设置 `<code translate="no">credential</code> `。该值必须是 `<code translate="no">credential</code> ` 顶级部分中定义的标签，而非令牌本身。函数级凭据标签的优先级高于提供程序级标签。</p>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">选项 2：环境变量<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果函数和提供商配置中均未指定凭据标签，Milvus 将从<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code> 中读取令牌。</p>
+    </button></h3><p>如果函数和提供商配置中均未指定凭据标签，Milvus 将从 `<code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>` 中读取令牌。</p>
 <p>对于 Docker Compose，请在 Milvus Standalone 服务中设置该变量：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
@@ -180,7 +180,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="common-anchor-header">步骤 1：创建包含文本嵌入函数的Collection<button data-href="#Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="common-anchor-header">步骤 1：创建包含文本嵌入函数的 Collection<button data-href="#Step-1-Create-a-collection-with-a-Text-Embedding-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,7 +262,7 @@ client.create_collection(
 <tbody>
 <tr><td><code translate="no">provider</code></td><td>是</td><td>嵌入模型提供商。请将此值设置为<code translate="no">huggingface</code> 。</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>是</td><td>通过<code translate="no">hf-inference</code> 提供的、用于<code translate="no">feature-extraction</code> 任务的 Hugging Face 模型 ID。</td></tr>
-<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推理提供程序的路由。在 Milvus 2.6.20 中，默认值且唯一受支持的值是<code translate="no">hf-inference</code> 。</td></tr>
+<tr><td><code translate="no">hf_provider</code></td><td>否</td><td>Hugging Face 推理提供程序的路由。在 Milvus 2.6.20 中，默认值且唯一受支持的值为<code translate="no">hf-inference</code> 。</td></tr>
 <tr><td><code translate="no">credential</code></td><td>否</td><td>在<code translate="no">milvus.yaml</code> 的顶级<code translate="no">credential</code> 部分中定义的凭据标签。此值并非令牌本身。</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>否</td><td>是否应由 Hugging Face 返回归一化 Embeddings。支持的值为<code translate="no">true</code> 和<code translate="no">false</code> 。若省略，Milvus 不会在请求中设置此选项。</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>否</td><td>在所选模型的 Sentence Transformers 配置中定义的提示词名称。</td></tr>

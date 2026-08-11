@@ -1,12 +1,11 @@
 ---
 id: switch-mq-type.md
-title: MQ-Typ wechseln
+title: Wechsel der Nachrichtenwarteschlange
 summary: >-
-  Wechseln Sie die Nachrichtenwarteschlange einer bestehenden
-  Milvus-Bereitstellung ohne Ausfallzeit von Woodpecker zu einer anderen
-  Nachrichtenwarteschlange.
+  Eine bestehende Milvus-Bereitstellung ohne Ausfallzeiten zwischen Woodpecker
+  und einer anderen Nachrichtenwarteschlange umschalten.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">MQ-Typ wechseln<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Wechsel der Nachrichtenwarteschlange<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

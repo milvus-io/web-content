@@ -99,7 +99,7 @@ res = client.query(
 <tr><td>Exclure les valeurs correspondant à un motif d’expression régulière</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Exclut les chaînes commençant par <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
-<p>Utilisez « <code translate="no">LIKE</code> » pour une correspondance simple avec des caractères génériques. Utilisez une expression régulière lorsque le motif nécessite des classes de caractères, des répétitions, des alternatives telles que « <code translate="no">error|failed</code> », des ancrages ou une correspondance sans distinction de majuscules/minuscules.</p>
+<p>Utilisez « <code translate="no">LIKE</code> » pour une correspondance simple avec des caractères génériques. Utilisez une expression régulière lorsque le motif nécessite des classes de caractères, des répétitions, des alternatives telles que « <code translate="no">error|failed</code> », des ancrages ou une correspondance sans distinction de casse.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">Utiliser LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +190,7 @@ res = client.query(
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> correspond aux valeurs commençant par le caractère littéral « <code translate="no">_</code> ».</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> correspond aux valeurs commençant par une barre oblique inversée littérale.</li>
 </ul>
-<p>Les littéraux de chaîne brute, écrits sous la forme <code translate="no">r&quot;...&quot;</code> ou <code translate="no">r'...'</code>, conservent les barres obliques inversées telles quelles dans les expressions de filtre Milvus. Ils sont recommandés pour les expressions « <code translate="no">LIKE</code> » et les motifs d’expressions régulières contenant des barres obliques inversées. Sans chaîne brute, les littéraux de chaîne ordinaires traitent toujours les séquences d’échappement avant l’évaluation du motif ; il peut donc être nécessaire d’ajouter des barres obliques inversées supplémentaires.</p>
+<p>Les littéraux de chaîne brute, écrits sous la forme <code translate="no">r&quot;...&quot;</code> ou <code translate="no">r'...'</code>, conservent les barres obliques inversées telles quelles dans les expressions de filtre Milvus. Ils sont recommandés pour les expressions « <code translate="no">LIKE</code> » et les motifs d’expressions régulières contenant des barres obliques inversées. Sans chaîne brute, les littéraux de chaîne ordinaires continuent de traiter les séquences d’échappement avant l’évaluation du motif ; il peut donc être nécessaire d’ajouter des barres obliques inversées supplémentaires.</p>
 <h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Utilisez les expressions régulières<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +206,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités d’expressions régulières telles que les classes de caractères, la répétition, l’alternance, les ancrages ou la correspondance insensible à la casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
+    </button></h2><p>Utilisez des filtres d’expressions régulières lorsque le motif nécessite des fonctionnalités d’expressions régulières telles que les classes de caractères, la répétition, l’alternance, les ancres ou la correspondance insensible à la casse. Milvus applique une expression régulière <a href="https://github.com/google/re2/wiki/syntax">RE2</a> à une valeur de chaîne.</p>
 <p>Le côté droit de <code translate="no">=~</code> ou <code translate="no">!~</code> doit être un littéral de chaîne.</p>
 <table>
 <thead>
@@ -275,7 +275,7 @@ res = client.query(
 <p>Lorsque vous souhaitez faire correspondre littéralement des méta-caractères d'expressions régulières, échappez-les dans le motif d'expression régulière. Par exemple, pour faire correspondre un point littéral (<code translate="no">\.</code> dans une expression régulière), écrivez <code translate="no">\\.</code> dans une chaîne de filtre Python :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Remarque : les filtres d’expressions régulières de Milvus suivent la syntaxe RE2. Si un motif d’expression régulière utilise une syntaxe non prise en charge par RE2 ou est invalide pour toute autre raison, Milvus rejette l’expression de filtre. Pour plus de détails sur les métacaractères, les indicateurs et le comportement de correspondance des expressions régulières, reportez-vous à la référence <a href="https://github.com/google/re2/wiki/syntax">syntaxique RE2</a>.</p>
+<p>Remarque : les filtres d’expressions régulières de Milvus suivent la syntaxe RE2. Si un motif d’expression régulière utilise une syntaxe non prise en charge par RE2 ou est invalide pour toute autre raison, Milvus rejette l’expression de filtre. Pour plus de détails sur les métacaractères, les indicateurs et le comportement de correspondance des expressions régulières, consultez la référence <a href="https://github.com/google/re2/wiki/syntax">syntaxique RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportement de correspondance<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

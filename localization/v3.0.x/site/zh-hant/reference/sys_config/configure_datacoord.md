@@ -2,9 +2,9 @@
 id: configure_datacoord.md
 related_key: configure
 group: system_configuration.md
-summary: 了解如何為 Milvus 設定 dataCoord。
+summary: 瞭解如何為 Milvus 設定 dataCoord。
 ---
-<h1 id="dataCoord-related-Configurations" class="common-anchor-header">資料室相關組態<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataCoord-related-Configurations" class="common-anchor-header">與 dataCoord 相關的設定<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觀看頻道的逾時時間 (秒)。資料節點 tickler 更新觀看進度會重設逾時計時器。      </td>
+      <td>        監控頻道的超時設定（單位：秒）。當 Datanode 提醒程式更新監控進度時，將重置超時計時器。      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        &lt;= 此版本的資料節點被視為傳統節點，不具備基於 rpc 的 watch()。這只會在滾動升級時使用，因為傳統節點不會獲得新頻道。      </td>
+      <td>        版本 &lt;= 此版本的 Datanode 被視為舊版節點，其不具備基於 RPC 的 watch() 功能。此設定僅在滾動升級期間使用，此時舊版節點將不會獲得新頻道      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        頻道管理員開始背景頻道平衡的持續時間      </td>
+      <td>        通道管理員開始執行背景通道平衡所需的等待時間      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        頻道管理員檢查 dml 頻道平衡狀態的間隔時間      </td>
+      <td>        頻道管理器檢查 DML 頻道平衡狀態的間隔時間      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        頻道管理員更新頻道狀態的間隔 (秒)     </td>
+      <td>        通道管理器更新通道狀態的間隔（以秒為單位）      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        通知通道操作的逾時時間（秒）。      </td>
+      <td>        通道操作通知的超時時間（以秒為單位）。      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        段的最大大小，單位：MB：datacoord.segment.maxSize 和 datacoord.segment.sealProportion 共同決定是否可以封裝區段。      </td>
+      <td>        區段的最大大小，單位：MB。datacoord.segment.maxSize 與 datacoord.segment.sealProportion 共同決定該區段是否可被封存。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -246,7 +246,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        對於有 Disk 索引的資料集，段的最大大小 (MB)    </td>
+      <td>        對於具有磁碟索引的集合，區段的最大大小（單位：MB）      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -275,7 +275,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        datacoord.segment.maxSize 與 datacoord.segment.sealProportion 的最小比例，用以封鎖區段。      </td>
+      <td>        封存一個區段所需的 datacoord.segment.maxSize 最小比例。datacoord.segment.maxSize 與 datacoord.segment.sealProportion 共同決定該區段是否可被封存。      </td>
       <td>0.12</td>
     </tr>
   </tbody>
@@ -304,7 +304,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        封段比例 jitter 比率，預設值 0.1(10%)，若封段比例為 12%，jitter=0.1 時，實際應用比例為 10.8~12%。      </td>
+      <td>        區段封閉比例的抖動比率，預設值為 0.1（10%）；若封閉比例為 12%，且抖動值為 0.1，則實際套用的比率將介於 10.8% 至 12% 之間      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -333,7 +333,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        分段指派的有效時間，單位：ms      </td>
+      <td>        區段指派的過期時間，單位：毫秒      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -362,7 +362,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        重新啟動後嘗試從 rootCoord 分配最新 lastExpire 的時間      </td>
+      <td>        重新啟動後，嘗試從 rootCoord 分配最新 lastExpire 的時間間隔      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -391,7 +391,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        區段的最大使用期限，以秒為單位，24*60*60      </td>
+      <td>        區段的最大存活時間（以秒為單位），即 24×60×60      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -421,9 +421,9 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>如果網段在 maxIdleTime 沒有接受 dml 記錄，且網段大小大於</li>      
-        <li>minSizeFromIdleToSealed 時，Milvus 會自動封鎖它。</li>      
-        <li>區段的最大閒置時間，以秒為單位，10*60。</li>      </td>
+        <li>若某分段在 maxIdleTime 內未接受任何 DML 記錄，且其大小大於</li>      
+        <li>minSizeFromIdleToSealed，Milvus 將自動將其封存。</li>      
+        <li>分段的最大閒置時間（以秒為單位），10*60。</li>      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -452,7 +452,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        從封存到閒置的最小區段大小 (MB)。      </td>
+      <td>        區段從「封存」狀態轉為「閒置」狀態所需的最小大小（以 MB 為單位）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -482,8 +482,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>一個區段的最大 binlog 數量 (等於主索引鍵的 binlog 檔案數量)、 </li>      
-        <li>如果 binlog 檔案數量達到最大值，該區段將被封鎖。</li>      </td>
+        <li>單一區段的二進位日誌最大數量（等同於主鍵的二進位日誌檔案數量）， </li>      
+        <li>若二進位日誌檔案數量達到此最大值，該區段將會被封存。</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -512,7 +512,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        當段的行數小於      </td>
+      <td>        當分區的列數小於      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -542,8 +542,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>(smallProportion * segment max # of rows)。</li>      
-        <li>如果壓縮後的區段有</li>      </td>
+        <li>(smallProportion * 區段最大列數)。</li>      
+        <li>若緊縮後該區段的</li>      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -573,9 +573,9 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>超過 (compactableProportion * segment max # of rows) 行數。</li>      
-        <li>必須大於或等於<smallProportion>!!！</li>      
-        <li>在壓縮期間，區段行數 # 的大小能夠超過區段最大行數 # 的 (expansionRate-1) * 100%。 </li>      </td>
+        <li>超過 (可壓縮比例 * 區段最大列數) 列。</li>      
+        <li>必須大於或等於<smallProportion> ！！！</li>      
+        <li>在壓縮過程中，該區段的行數可超過區段最大行數的 (expansionRate-1) * 100%。 </li>      </td>
       <td>1.25</td>
     </tr>
   </tbody>
@@ -605,8 +605,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>以 MB 為單位的大小臨界值，如果每個分片的成長區段總大小 </li>      
-        <li>超過此臨界值，則會封鎖最大的成長區段。</li>      </td>
+        <li>以 MB 為單位的大小閾值，若每個分片中正在擴張的區段總大小 </li>      
+        <li>超過此閾值，則最大的增長區段將會被封存。</li>      </td>
       <td>4096</td>
     </tr>
   </tbody>
@@ -635,8 +635,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        是否自動將區段索引升級為索引引擎的版本      </td>
-      <td>假</td>
+      <td>        是否自動將區段索引升級至索引引擎的版本      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -664,7 +664,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        在相同網段上進行複製作業的最小間隔時間 (單位: 秒)    </td>
+      <td>        在同一區段上執行 flushing 操作之間的最小間隔時間（單位：秒）      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -694,9 +694,9 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>控制是否啟用段壓縮的開關值。 </li>      
-        <li>壓縮會將小區段合併為一個大區段，並清除超過 Time Travel 的保留時間的刪除實體。</li>      </td>
-      <td>真</td>
+        <li>此開關值用於控制是否啟用區段壓縮。 </li>      
+        <li>壓縮會將小型區段合併為大型區段，並清除那些已超過「時間旅行」保留期限的已刪除實體。</li>      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -725,9 +725,67 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>控制是否啟用自動區段壓縮的開關值，在此期間，data coord 會在背景中定位並合併可壓縮的區段。</li>      
-        <li>只有當 dataCoord.enableCompaction 設為 true 時，此設定才會生效。</li>      </td>
-      <td>真</td>
+        <li>此開關值用於控制是否啟用自動區段壓縮，在此過程中，Data Coord 會在背景中定位並合併可壓縮的區段。</li>      
+        <li>此設定僅在 dataCoord.enableCompaction 設為 true 時才會生效。</li>      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionstorageVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.storageVersion.enabled</code><button data-href="#dataCoordcompactionstorageVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.storageVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        壓縮是否可將符合條件的現有資料重寫至當前儲存版本。此參數可刷新。      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionbumpSchemaVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code><button data-href="#dataCoordcompactionbumpSchemaVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.bumpSchemaVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        緊縮操作是否可將模式版本變更套用至現有資料，包括針對新新增函式所產生欄位的回填。此參數可重新設定。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -756,10 +814,10 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>compaction task prioritizer，選項：[default, level, mix]。 </li>      
-        <li>預設為 FIFO。</li>      
-        <li>level 的優先順序：先進行 L0 壓縮，然後是混合壓縮，最後是群組壓縮。</li>      
-        <li>mix 依等級排列優先順序：先混合壓縮，再 L0 壓縮，最後聚類壓縮。</li>      </td>
+        <li>壓縮任務優先級設定，選項：[default、level、mix]。 </li>      
+        <li>預設值為 FIFO。</li>      
+        <li>「level」是根據層級進行優先排序：先執行 L0 壓縮，接著是混合壓縮，最後是叢集壓縮。</li>      
+        <li>「混合」依層級排序：先進行混合壓縮，再進行 L0 壓縮，最後進行叢集壓縮。</li>      </td>
       <td>預設</td>
     </tr>
   </tbody>
@@ -788,7 +846,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        壓實任務佇列大小      </td>
+      <td>        壓縮任務佇列大小      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -817,7 +875,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        壓實任務完成時間超過此時間（以秒為單位）後會被清理      </td>
+      <td>        若緊縮任務完成時間超過此時間（以秒為單位），該任務將被清除      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -846,7 +904,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        壓實的時間間隔 (秒) gc  </td>
+      <td>        緊湊化垃圾回收的時間間隔（以秒為單位）      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -875,7 +933,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發混合壓實的時間間隔 (秒)     </td>
+      <td>        觸發混合壓縮所需的時間間隔（以秒為單位）      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -904,7 +962,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發 L0 壓實的時間間隔 (秒)     </td>
+      <td>        觸發 L0 壓縮所需的時間間隔（以秒為單位）      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -933,7 +991,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        強制觸發 LevelZero Compaction 的最小大小 (位元組)，預設為 8MB   </td>
+      <td>        強制觸發 LevelZero 壓縮所需的最小大小（以位元組為單位），預設值為 8MB      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -962,7 +1020,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        強制觸發 LevelZero Compaction 的最大大小 (位元組)，預設為 64MB    </td>
+      <td>        強制觸發 LevelZero 壓縮的最大大小（以位元組為單位），預設值為 64MB      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -991,7 +1049,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        強制觸發 LevelZero Compaction 的最小 deltalog 檔案數量      </td>
+      <td>        強制觸發 LevelZero 壓縮所需的最小增量日誌檔案數量      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1020,7 +1078,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        強制觸發 LevelZero Compaction 的最大 deltalog 檔案數量，預設為 30  </td>
+      <td>        強制觸發 LevelZero 壓縮所需的 deltalog 檔案最大數量，預設值為 30      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1049,7 +1107,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發單次壓縮的區段比率臨界值，預設為 0.2   </td>
+      <td>        觸發單次壓縮的區段比例閾值，預設值為 0.2      </td>
       <td>0.2</td>
     </tr>
   </tbody>
@@ -1078,7 +1136,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發單次壓縮的分割區大小，預設為 16MB    </td>
+      <td>        觸發單次壓縮所需的分段增量日誌大小，預設值為 16MB      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -1107,7 +1165,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發壓縮的區段 deltalog 數量，預設為 200   </td>
+      <td>        觸發一次壓縮所需的區段增量日誌數量，預設值為 200      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1136,7 +1194,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發壓縮的區段的過期日誌大小，預設為 10MB    </td>
+      <td>        觸發分段壓縮所需的過期日誌大小，預設值為 10MB      </td>
       <td>10485760</td>
     </tr>
   </tbody>
@@ -1165,8 +1223,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用群集壓縮      </td>
-      <td>真</td>
+      <td>        啟用叢集壓縮      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1194,8 +1252,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用自動群集壓縮      </td>
-      <td>假</td>
+      <td>        啟用自動叢集壓縮      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -1223,7 +1281,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        聚類壓縮觸發時間間隔 (秒)     </td>
+      <td>        叢集壓縮觸發間隔（以秒為單位）      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -1252,7 +1310,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        一個集合的群集壓縮執行之間的最小間隔，以避免重複壓縮      </td>
+      <td>        同一集合中叢集緊縮執行之間的最小間隔，以避免重複緊縮      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1281,7 +1339,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        如果一個集合的集群壓縮時間超過 maxInterval，則強制壓縮      </td>
+      <td>        若某個集合超過 maxInterval 時間未進行叢集緊縮，則強制執行緊縮      </td>
       <td>259200</td>
     </tr>
   </tbody>
@@ -1310,7 +1368,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        如果新資料大小大於 newDataSizeThreshold，執行聚類壓縮      </td>
+      <td>        若新資料大小大於 newDataSizeThreshold，則執行叢集壓縮      </td>
       <td>512m</td>
     </tr>
   </tbody>
@@ -1339,7 +1397,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans 訓練中的最大資料大小比率，若大於此比率，會向下採樣以符合此限制      </td>
+      <td>        K-means 訓練中的最大資料大小比例，若超過此值，將進行下採樣以符合此限制      </td>
       <td>0.8</td>
     </tr>
   </tbody>
@@ -1368,7 +1426,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans 訓練中的最大中心點數      </td>
+      <td>        K-means 訓練中的最大聚類中心數      </td>
       <td>10240</td>
     </tr>
   </tbody>
@@ -1397,7 +1455,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans 訓練中的最小中心點數      </td>
+      <td>        K-means 訓練中的最小聚類中心數目      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1426,7 +1484,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans 訓練中的最小群集大小 / 平均大小      </td>
+      <td>        K-means 訓練中的最小聚類大小／平均大小      </td>
       <td>0.01</td>
     </tr>
   </tbody>
@@ -1455,7 +1513,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        最大聚類大小 / Kmeans 訓練的平均大小      </td>
+      <td>        K-means 訓練中的最大聚類大小 / 平均大小      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1484,7 +1542,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans 訓練中的最大聚類大小      </td>
+      <td>        K-means 訓練中的最大聚類大小      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -1513,7 +1571,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        定期同步片段的時間間隔      </td>
+      <td>        定期同步區段的時間間隔      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1542,7 +1600,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        當索引程序未設定記憶體大小時，用乘數估計索引資料的記憶體大小。      </td>
+      <td>        當記憶體大小未透過索引程序設定時，用於估算索引資料記憶體大小的倍數      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1571,8 +1629,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        用來控制 MinIO 或 S3 服務是否啟用垃圾回收以清除丟棄資料的開關值。      </td>
-      <td>真</td>
+      <td>        用於控制是否啟用垃圾回收功能，以清除 MinIO 或 S3 服務中已捨棄資料的開關值。      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1600,7 +1658,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        資料協調器執行垃圾回收的間隔，單位：秒。      </td>
+      <td>        資料協調器執行垃圾回收的間隔時間，單位：秒。      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1629,7 +1687,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        未記錄的二進位記錄 (binlog) 檔案的保留時間。為此參數設定合理的大值，可避免錯誤刪除新建立但缺乏元資料的 binlog 檔案。單位：秒。      </td>
+      <td>        未記錄的二進位日誌 (binlog) 檔案的保留時間。為此參數設定一個合理較大的數值，可避免誤刪除缺乏元資料的新建立二進位日誌檔案。單位：秒。      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -1658,7 +1716,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        刪除區段的 binlog 檔案在清除前的保留時間，單位：秒。      </td>
+      <td>        已刪除區段的二進位日誌檔案在被清除前的保留時間，單位：秒。      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1687,7 +1745,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        移除刪除的 s3 物件的並發 goroutines 數量      </td>
+      <td>        用於移除已刪除 S3 物件的並行 goroutine 數量      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1716,8 +1774,95 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        物件儲存空間中的無主檔案 (檔案在 oss 上，但尚未在 meta 上註冊) 垃圾收集掃描間隔 (小時)      </td>
+      <td>        物件儲存垃圾回收中，掃描孤立檔案（位於 OSS 上但未在元資料中註冊的檔案）的間隔（以小時為單位）      </td>
       <td>168</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobenabled" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.enabled</code><button data-href="#dataCoordgclobenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.enabled">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        是否啟用針對 TEXT 欄位值所建立、且未被引用的 LOB 檔案的垃圾回收功能。      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobsafetyWindow" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.safetyWindow</code><button data-href="#dataCoordgclobsafetyWindow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.safetyWindow">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        未被引用的 TEXT LOB 檔案必須達到此最低存留時間（以秒為單位），垃圾回收程序才會刪除該檔案。      </td>
+      <td>3600</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobcheckInterval" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.checkInterval</code><button data-href="#dataCoordgclobcheckInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.checkInterval">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Milvus 掃描儲存空間以尋找為 TEXT 欄位值所建立之未被引用的 LOB 檔案的間隔時間（以秒為單位）。      </td>
+      <td>1800</td>
     </tr>
   </tbody>
 </table>
@@ -1745,7 +1890,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, dataCoord 代理商 rpc 超時      </td>
+      <td>        5000 毫秒，dataCoord 中介軟體 RPC 超時      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1774,8 +1919,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用自動平衡      </td>
-      <td>真</td>
+      <td>        啟用自動負載平衡      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1832,7 +1977,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        每個預先匯入工作允許的最大檔案數量。      </td>
+      <td>        每個預匯入任務允許的檔案最大數量。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1861,7 +2006,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        處於完成或失敗狀態的工作的保留期限，以秒為單位。      </td>
+      <td>        處於「已完成」或「失敗」狀態之任務的保留期間（以秒為單位）。      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1890,7 +2035,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        為防止產生小區段，我們會將匯入的檔案重新分組。此參數代表每個群組 (每個 ImportTask) 中的檔案大小總和。      </td>
+      <td>        為避免產生過小的區段，系統將重新分組匯入的檔案。此參數代表每個群組（每個 ImportTask）中檔案大小的總和。      </td>
       <td>6144</td>
     </tr>
   </tbody>
@@ -1919,7 +2064,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        排程匯入的間隔，以秒為單位。      </td>
+      <td>        排程匯入的間隔，單位為秒。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1948,7 +2093,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        檢查匯入的間隔，以秒為單位，設定為匯入檢查器的高頻率。      </td>
+      <td>        檢查匯入的間隔（以秒為單位），此設定會使匯入檢查器的檢查頻率提高。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1977,7 +2122,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        檢查匯入的間隔，以秒為單位，設定為匯入檢查器的低頻率。      </td>
+      <td>        匯入檢查器的檢查間隔（以秒為單位）設定為低頻率。      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -2006,7 +2151,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        每個單一匯入要求允許的最大檔案數量。      </td>
+      <td>        單次匯入請求允許的檔案最大數量。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2035,7 +2180,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        執行中或等待中的最大匯入工作數量。      </td>
+      <td>        正在執行或待處理的匯入工作最大數量。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2064,8 +2209,8 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        表示匯入作業是否等待索引建立完成。      </td>
-      <td>真</td>
+      <td>        指示匯入操作是否會等待索引建置完成。      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -2093,7 +2238,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。強制停止節點而不優先停止      </td>
+      <td>        秒。強制停止節點，不進行平穩停止      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -2122,7 +2267,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        群集壓縮工作的插槽使用量。      </td>
+      <td>        叢集緊縮工作所使用的槽位。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -2151,7 +2296,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        混合壓縮工作的插槽使用量。      </td>
+      <td>        混合壓縮工作所使用的槽位。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2180,7 +2325,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        混合壓實作業的插槽使用量。      </td>
+      <td>        l0 壓縮工作的槽位使用情況。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2209,7 +2354,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord 的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址。      </td>
+      <td>        dataCoord 的 TCP/IP 位址。若未指定，則使用第一個可進行單播的位址      </td>
       <td></td>
     </tr>
   </tbody>
@@ -2238,7 +2383,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        DataCoord 的 TCP 連接埠      </td>
+      <td>        dataCoord 的 TCP 埠號      </td>
       <td>13333</td>
     </tr>
   </tbody>
@@ -2267,7 +2412,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord 可以傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataCoord 可傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -2296,7 +2441,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord 可以接收的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataCoord 可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2325,7 +2470,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord 上的用戶端可以傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataCoord 上的客戶端所能發送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2354,7 +2499,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord 用戶端可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataCoord 上的客戶端可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>536870912</td>
     </tr>
   </tbody>

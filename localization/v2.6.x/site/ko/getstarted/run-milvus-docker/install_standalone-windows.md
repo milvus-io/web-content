@@ -338,7 +338,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Docker Desktop 설정에서 WSL 2 기반 엔진 사용</span>
   
  </span></p></li>
-<li><p><strong>설정</strong> &gt; <strong>리소스</strong> &gt; <strong>WSL 통합으로</strong> 이동하여, Docker 통합을 활성화할 설치된 WSL 2 배포판 중에서 선택하십시오.​</p>
+<li><p><strong>설정</strong> &gt; <strong>리소스</strong> &gt; <strong>WSL 통합으로</strong> 이동하여, Docker 통합을 활성화할 설치된 WSL 2 배포판 중에서 선택하십시오.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -367,7 +367,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvus 시작 시 발생하는 ‘Read config failed’ 오류 메시지</span>
   
  </span></p>
-<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
+<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너에 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

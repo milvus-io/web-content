@@ -1,15 +1,15 @@
 ---
 id: keyword-match.md
-title: Correspondencia de textos
+title: Coincidencia de texto
 summary: >-
-  La concordancia de texto en Milvus permite una recuperación precisa de
-  documentos basada en términos específicos. Esta función se utiliza
-  principalmente para la búsqueda filtrada para satisfacer condiciones
-  específicas y puede incorporar el filtrado escalar para refinar los resultados
-  de la consulta, lo que permite búsquedas de similitud dentro de vectores que
-  cumplen criterios escalares.
+  La búsqueda por coincidencia de texto en Milvus permite recuperar documentos
+  de forma precisa a partir de términos específicos. Esta función se utiliza
+  principalmente para realizar búsquedas filtradas que cumplan condiciones
+  concretas y puede incorporar filtros escalares para refinar los resultados de
+  la consulta, lo que permite realizar búsquedas por similitud entre vectores
+  que cumplan criterios escalares.
 ---
-<h1 id="Text-Match" class="common-anchor-header">Correspondencia de textos<button data-href="#Text-Match" class="anchor-icon" translate="no">
+<h1 id="Text-Match" class="common-anchor-header">Coincidencia de texto<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,11 +24,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La concordancia de texto en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de vectores que cumplen criterios escalares.</p>
+    </button></h1><p>La coincidencia de texto en Milvus permite la recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada con el fin de cumplir condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, lo que permite realizar búsquedas de similitud dentro de vectores que cumplan criterios escalares.</p>
 <div class="alert note">
-<p>La concordancia de texto se centra en la búsqueda de apariciones exactas de los términos de la consulta, sin puntuar la relevancia de los documentos coincidentes. Si desea recuperar los documentos más relevantes basándose en el significado semántico y la importancia de los términos de la consulta, le recomendamos que utilice <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a>.</p>
+<p>La coincidencia de texto se centra en encontrar ocurrencias exactas de los términos de la consulta, sin puntuar la relevancia de los documentos coincidentes. Si deseas recuperar los documentos más relevantes en función del significado semántico y la importancia de los términos de la consulta, te recomendamos que utilices <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,17 +43,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus integra <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para potenciar su índice invertido subyacente y la búsqueda de texto basada en términos. Para cada entrada de texto, Milvus lo indexa siguiendo el procedimiento:</p>
+    </button></h2><p>Milvus integra <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para impulsar su índice invertido subyacente y la búsqueda de texto basada en términos. Milvus indexa cada entrada de texto siguiendo este procedimiento:</p>
 <ol>
-<li><p><a href="/docs/es/analyzer-overview.md">Analizador</a>: El analizador procesa el texto de entrada convirtiéndolo en palabras individuales, o tokens, y aplicando los filtros necesarios. Esto permite a Milvus construir un índice basado en estos tokens.</p></li>
-<li><p><a href="/docs/es/index-explained.md">Indexación</a>: Tras el análisis del texto, Milvus crea un índice invertido que asigna cada token único a los documentos que lo contienen.</p></li>
+<li><p><a href="/docs/es/analyzer-overview.md">Analizador</a>: El analizador procesa el texto de entrada tokenizándolo en palabras individuales, o tokens, y luego aplica los filtros necesarios. Esto permite a Milvus crear un índice basado en estos tokens.</p></li>
+<li><p><a href="/docs/es/index-explained.md">Indexación</a>: Tras el análisis del texto, Milvus crea un índice invertido que asocia cada token único a los documentos que lo contienen.</p></li>
 </ol>
-<p>Cuando un usuario realiza una coincidencia de texto, el índice invertido se utiliza para recuperar rápidamente todos los documentos que contienen los términos. Esto es mucho más rápido que escanear cada documento individualmente.</p>
-<p>
+<p>Cuando un usuario realiza una búsqueda de texto, se utiliza el índice invertido para recuperar rápidamente todos los documentos que contienen los términos. Esto es mucho más rápido que examinar cada documento individualmente.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-   </span> <span class="img-wrapper"> <span>Coincidencia de palabras clave</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">Activar la concordancia de texto<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
+   <span>Búsqueda por palabras clave</span>
+  
+ </span></p>
+<h2 id="Enable-text-match" class="common-anchor-header">Habilitar la búsqueda por texto<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,8 +70,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La concordancia de texto funciona en el <a href="/docs/es/string.md"><code translate="no">VARCHAR</code></a> que es esencialmente el tipo de datos de cadena en Milvus. Para habilitar la coincidencia de texto, establezca <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code> en <code translate="no">True</code> y luego, opcionalmente, configure un <a href="/docs/es/analyzer-overview.md">analizador</a> para el análisis de texto cuando defina el esquema de su colección.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Establezca <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+    </button></h2><p>La búsqueda de texto funciona con el <a href="/docs/es/string.md"><code translate="no">VARCHAR</code></a> tipo de campo, que es esencialmente el tipo de datos de cadena en Milvus. Para habilitar la coincidencia de texto, establece tanto <code translate="no">enable_analyzer</code> como <code translate="no">enable_match</code> en <code translate="no">True</code> y, a continuación, configura opcionalmente un <a href="/docs/es/analyzer-overview.md">analizador</a> para el análisis de texto al definir el esquema de tu colección.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Establece <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,9 +86,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para habilitar la coincidencia de texto para un campo <code translate="no">VARCHAR</code> específico, establezca los parámetros <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code> en <code translate="no">True</code> al definir el esquema del campo. Esto le indica a Milvus que tokenice el texto y cree un índice invertido para el campo especificado, permitiendo coincidencias de texto rápidas y eficientes.</p>
+    </button></h3><p>Para habilitar la búsqueda de texto en un campo específico de « <code translate="no">VARCHAR</code> », establece los parámetros « <code translate="no">enable_analyzer</code> » y « <code translate="no">enable_match</code> » en « <code translate="no">True</code> » al definir el esquema del campo. Esto indica a Milvus que tokenice el texto y cree un índice invertido para el campo especificado, lo que permite búsquedas de texto rápidas y eficientes.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
@@ -203,7 +210,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opcional: Configurar un analizador<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opcional: configurar un analizador<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,11 +225,16 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El rendimiento y la precisión de la concordancia de palabras clave dependen del analizador seleccionado. Los diferentes analizadores están adaptados a varios lenguajes y estructuras de texto, por lo que elegir el correcto puede tener un impacto significativo en los resultados de búsqueda para su caso de uso específico.</p>
-<p>Por defecto, Milvus utiliza el analizador <code translate="no">standard</code>, que tokeniza el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración por defecto. Para más información, consulte <a href="/docs/es/standard-analyzer.md">Estándar</a>.</p>
-<p>En los casos en que se requiera un analizador diferente, puede configurarlo utilizando el parámetro <code translate="no">analyzer_params</code>. Por ejemplo, para aplicar el analizador <code translate="no">english</code> para procesar texto en inglés:</p>
+    </button></h3><p>El rendimiento y la precisión de la búsqueda por palabras clave dependen del analizador seleccionado. Los distintos analizadores están adaptados a diversos idiomas y estructuras de texto, por lo que elegir el adecuado puede influir significativamente en los resultados de búsqueda para tu caso de uso específico.</p>
+<p>Por defecto, Milvus utiliza el analizador « <code translate="no">standard</code> », que segmenta el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración predeterminada. Para obtener más información, consulta la sección <a href="/docs/es/standard-analyzer.md">«Estándar</a>».</p>
+<p>En los casos en los que se requiera un analizador diferente, puede configurar uno utilizando el parámetro ` <code translate="no">analyzer_params</code> `. Por ejemplo, para aplicar el analizador ` <code translate="no">english</code> ` al procesamiento de texto en inglés:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
@@ -306,8 +318,8 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus también proporciona otros analizadores adecuados para diferentes lenguajes y escenarios. Para más detalles, consulte <a href="/docs/es/analyzer-overview.md">Visión general de los analizadores</a>.</p>
-<h2 id="Use-text-match" class="common-anchor-header">Utilizar la concordancia de texto<button data-href="#Use-text-match" class="anchor-icon" translate="no">
+<p>Milvus también ofrece otros analizadores adaptados a diferentes idiomas y escenarios. Para obtener más detalles, consulta <a href="/docs/es/analyzer-overview.md">la Descripción general</a> de <a href="/docs/es/analyzer-overview.md">los analizadores</a>.</p>
+<h2 id="Use-text-match" class="common-anchor-header">Utilizar la coincidencia de texto<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,7 +334,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez que haya habilitado la coincidencia de texto para un campo VARCHAR en el esquema de su colección, puede realizar coincidencias de texto utilizando la expresión <code translate="no">TEXT_MATCH</code>.</p>
+    </button></h2><p>Una vez que haya habilitado la coincidencia de texto para un campo VARCHAR en el esquema de su colección, podrá realizar coincidencias de texto utilizando la expresión <code translate="no">TEXT_MATCH</code>.</p>
 <h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Sintaxis de la expresión TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,16 +350,21 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La expresión <code translate="no">TEXT_MATCH</code> se utiliza para especificar el campo y los términos a buscar. Su sintaxis es la siguiente</p>
+    </button></h3><p>La expresión « <code translate="no">TEXT_MATCH</code> » se utiliza para especificar el campo y los términos que se van a buscar. Su sintaxis es la siguiente:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: El nombre del campo VARCHAR a buscar.</p></li>
-<li><p><code translate="no">text</code>: Los términos a buscar. Los términos múltiples pueden separarse por espacios u otros delimitadores apropiados según el idioma y el analizador configurado.</p></li>
+<li><p><code translate="no">field_name</code>: El nombre del campo VARCHAR en el que se va a realizar la búsqueda.</p></li>
+<li><p><code translate="no">text</code>: Los términos que se van a buscar. Se pueden separar varios términos mediante espacios u otros delimitadores adecuados, en función del idioma y del analizador configurado.</p></li>
 </ul>
-<p>Por defecto, <code translate="no">TEXT_MATCH</code> utiliza la lógica de búsqueda <strong>OR</strong>, lo que significa que devolverá los documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término <code translate="no">machine</code> o <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice la siguiente expresión:</p>
+<p>Por defecto, « <code translate="no">TEXT_MATCH</code> » utiliza la lógica de coincidencia <strong>«OR»</strong>, lo que significa que devolverá los documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término « <code translate="no">machine</code> » o « <code translate="no">deep</code> » en el campo « <code translate="no">text</code> », utiliza la siguiente expresión:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>;
@@ -358,11 +375,16 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>También puede combinar varias expresiones <code translate="no">TEXT_MATCH</code> utilizando operadores lógicos para realizar una búsqueda <strong>AND</strong>.</p>
+<p>También puedes combinar varias expresiones « <code translate="no">TEXT_MATCH</code> » utilizando operadores lógicos para realizar una búsqueda <strong>«AND</strong> ».</p>
 <ul>
-<li><p>Para buscar documentos que contengan <code translate="no">machine</code> y <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice la siguiente expresión:</p>
+<li><p>Para buscar documentos que contengan tanto « <code translate="no">machine</code> » como « <code translate="no">deep</code> » en el campo « <code translate="no">text</code> », utiliza la siguiente expresión:</p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a>
+<a href="#java">Java</a>
+<a href="#go">Go</a>
+<a href="#javascript">NodeJS</a>
+<a href="#bash">cURL</a>
+</div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -373,9 +395,14 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Para buscar documentos que contengan tanto <code translate="no">machine</code> como <code translate="no">learning</code> pero sin <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice las siguientes expresiones:</p>
+<li><p>Para buscar documentos que contengan tanto <code translate="no">machine</code> como <code translate="no">learning</code>, pero sin <code translate="no">deep</code> en el campo <code translate="no">text</code>, utiliza las siguientes expresiones:</p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a>
+<a href="#java">Java</a>
+<a href="#go">Go</a>
+<a href="#javascript">NodeJS</a>
+<a href="#bash">cURL</a>
+</div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
@@ -387,7 +414,7 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">Búsqueda con concordancia de texto<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+<h3 id="Search-with-text-match" class="common-anchor-header">Búsqueda por coincidencia de texto<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -402,13 +429,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La concordancia de texto puede utilizarse en combinación con la búsqueda por similitud vectorial para restringir el alcance de la búsqueda y mejorar su rendimiento. Al filtrar la colección utilizando la concordancia de texto antes de la búsqueda por similitud vectorial, puede reducir el número de documentos en los que es necesario buscar, lo que se traduce en tiempos de consulta más rápidos.</p>
-<p>En este ejemplo, la expresión <code translate="no">filter</code> filtra los resultados de la búsqueda para incluir sólo los documentos que coinciden con el término especificado <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. A continuación, la búsqueda por similitud vectorial se realiza en este subconjunto filtrado de documentos.</p>
+    </button></h3><p>La coincidencia de texto se puede utilizar en combinación con la búsqueda por similitud vectorial para reducir el alcance de la búsqueda y mejorar su rendimiento. Al filtrar la colección mediante la coincidencia de texto antes de la búsqueda por similitud vectorial, se puede reducir el número de documentos que hay que buscar, lo que se traduce en tiempos de consulta más rápidos.</p>
+<p>En este ejemplo, la expresión « <code translate="no">filter</code> » filtra los resultados de la búsqueda para incluir únicamente los documentos que coincidan con el término especificado « <code translate="no">keyword1</code> » o « <code translate="no">keyword2</code> ». A continuación, la búsqueda por similitud vectorial se realiza sobre este subconjunto filtrado de documentos.</p>
 <div class="alert note">
-<p>Puede resaltar los términos coincidentes en los resultados de la búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
+<p>Puedes resaltar los términos coincidentes en los resultados de búsqueda configurando un resaltador de texto. Consulta <a href="/docs/es/text-highlighter.md">Resaltador de texto</a> para obtener más detalles.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>
 
@@ -471,7 +503,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -501,10 +532,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La concordancia de texto también puede utilizarse para el filtrado escalar en operaciones de consulta. Especificando una expresión <code translate="no">TEXT_MATCH</code> en el parámetro <code translate="no">expr</code> del método <code translate="no">query()</code>, puede recuperar documentos que coincidan con los términos dados.</p>
-<p>El siguiente ejemplo recupera documentos en los que el campo <code translate="no">text</code> contiene los términos <code translate="no">keyword1</code> y <code translate="no">keyword2</code>.</p>
+    </button></h3><p>La coincidencia de texto también se puede utilizar para el filtrado escalar en operaciones de consulta. Al especificar una expresión de « <code translate="no">TEXT_MATCH</code> » en el parámetro « <code translate="no">expr</code> » del método « <code translate="no">query()</code> », se pueden recuperar documentos que coincidan con los términos indicados.</p>
+<p>El ejemplo siguiente recupera documentos en los que el campo « <code translate="no">text</code> » contiene ambos términos: « <code translate="no">keyword1</code> » y « <code translate="no">keyword2</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
 
@@ -551,7 +587,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,
@@ -574,12 +609,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>La activación de la concordancia de términos para un campo desencadena la creación de un índice invertido, que consume recursos de almacenamiento. Tenga en cuenta el impacto en el almacenamiento cuando decida activar esta función, ya que varía en función del tamaño del texto, los tokens únicos y el analizador utilizado.</p></li>
-<li><p>Una vez que haya definido un analizador en su esquema, su configuración será permanente para esa colección. Si decide que un analizador diferente se adapta mejor a sus necesidades, puede considerar eliminar la colección existente y crear una nueva con la configuración de analizador deseada.</p></li>
-<li><p>Reglas de escape en las expresiones <code translate="no">filter</code>:</p>
+<li><p>Al habilitar la coincidencia de términos para un campo, se crea un índice invertido, lo que consume recursos de almacenamiento. Ten en cuenta el impacto en el almacenamiento a la hora de decidir si habilitas esta función, ya que varía en función del tamaño del texto, los tokens únicos y el analizador utilizado.</p></li>
+<li><p>Una vez que haya definido un analizador en su esquema, su configuración se vuelve permanente para esa colección. Si decide que otro analizador se adapta mejor a sus necesidades, puede considerar eliminar la colección existente y crear una nueva con la configuración de analizador deseada.</p></li>
+<li><p>Reglas de escape en expresiones de « <code translate="no">filter</code> »:</p>
 <ul>
-<li><p>Los caracteres entre comillas dobles o simples dentro de expresiones se interpretan como constantes de cadena. Si la constante de cadena incluye caracteres de escape, éstos deben representarse con una secuencia de escape. Por ejemplo, utilice <code translate="no">\\</code> para representar <code translate="no">\</code>, <code translate="no">\\t</code> para representar un tabulador <code translate="no">\t</code> y <code translate="no">\\n</code> para representar una nueva línea.</p></li>
-<li><p>Si una constante de cadena está encerrada entre comillas simples, una comilla simple dentro de la constante debe representarse como <code translate="no">\\'</code> mientras que una comilla doble puede representarse como <code translate="no">&quot;</code> o <code translate="no">\\&quot;</code>. Ejemplo: <code translate="no">'It\\'s milvus'</code>.</p></li>
-<li><p>Si una constante de cadena está entre comillas dobles, una comilla doble dentro de la constante debe representarse como <code translate="no">\\&quot;</code> mientras que una comilla simple puede representarse como <code translate="no">'</code> o <code translate="no">\\'</code>. Ejemplo: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
+<li><p>Los caracteres entre comillas dobles o simples dentro de las expresiones se interpretan como constantes de cadena. Si la constante de cadena incluye caracteres de escape, estos deben representarse mediante una secuencia de escape. Por ejemplo, utiliza <code translate="no">\\</code> para representar <code translate="no">\</code>, <code translate="no">\\t</code> para representar una tabulación <code translate="no">\t</code> y <code translate="no">\\n</code> para representar un salto de línea.</p></li>
+<li><p>Si una constante de cadena está entre comillas simples, una comilla simple dentro de la constante debe representarse como <code translate="no">\\'</code>, mientras que una comilla doble puede representarse como <code translate="no">&quot;</code> o <code translate="no">\\&quot;</code>. Ejemplo: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Si una constante de cadena está entre comillas dobles, una comilla doble dentro de la constante debe representarse como <code translate="no">\\&quot;</code>, mientras que una comilla simple puede representarse como <code translate="no">'</code> o <code translate="no">\\'</code>. Ejemplo: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

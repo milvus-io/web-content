@@ -18,11 +18,11 @@ summary: 將 Milvus 獨立部署（Docker Compose）的訊息佇列在 RocksMQ �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本頁面說明如何將<strong>Milvus 獨立部署（Docker Compose）</strong>中的訊息佇列（MQ）在<strong>RocksMQ</strong>與<strong>Woodpecker</strong>（本地端或 MinIO 後端）之間進行雙向切換。有關一般工作流程與先決條件，請參閱《<a href="/docs/zh-hant/switch-mq-type.md">切換 MQ 類型</a>》。</p>
+    </button></h1><p>本頁面說明如何將<strong>Milvus 獨立部署（Docker Compose）</strong>中的訊息佇列（MQ）在<strong>RocksMQ</strong>與<strong>Woodpecker</strong>（本地端或 MinIO 後端）之間雙向切換。有關一般工作流程與先決條件，請參閱<a href="/docs/zh-hant/switch-mq-type.md">《切換訊息佇列》</a>。</p>
 <div class="alert note">
 <ul>
 <li><strong>先決條件：</strong>MQ 切換功能僅適用於<strong>Milvus 3.0 及後續版本</strong>。開始操作前，請將您的 Milvus 實例升級至 Milvus 3.0 或後續版本 — 此功能在較早版本中不可用。</li>
-<li>MQ 切換需採用 Docker<strong>Compose</strong>部署方式（此方式啟用了 etcd 配置來源）。單容器 Docker 部署不支援此切換功能。</li>
+<li>切換訊息佇列需採用 Docker<strong>Compose</strong>部署模式（此模式會啟用 etcd 配置來源）。單容器 Docker 部署模式不支援此切換功能。</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">從 RocksMQ 切換至 Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">
@@ -223,8 +223,8 @@ summary: 將 Milvus 獨立部署（Docker Compose）的訊息佇列在 RocksMQ �
         ></path>
       </svg>
     </button></h3><ul>
-<li><strong>元資料 (etcd)：</strong>Woodpecker 的金鑰前綴通常為<code translate="no">woodpecker/...</code> 。請透過<code translate="no">etcdctl get woodpecker --prefix</code> 檢視該前綴，然後將其刪除。</li>
-<li><strong>儲存資料：</strong>在<strong>MinIO 模式下</strong>，請刪除儲存桶中<code translate="no">&lt;rootPath&gt;/wp/...</code> 下的日誌資料（通常位於<code translate="no">files/wp/...</code> ）；在<strong>本地模式下</strong>，資料位於本機磁碟的<code translate="no">volumes/milvus/data/wp/...</code> 目錄中。</li>
+<li><strong>元資料 (etcd)：</strong>Woodpecker 的金鑰前綴通常為<code translate="no">woodpecker/...</code> 。請透過<code translate="no">etcdctl get woodpecker --prefix</code> 檢視該金鑰，然後將其刪除。</li>
+<li><strong>儲存資料：</strong>在<strong>MinIO 模式下</strong>，請刪除儲存桶中<code translate="no">&lt;rootPath&gt;/wp/...</code> 下的日誌資料（通常位於<code translate="no">files/wp/...</code> ）；在<strong>本地模式下</strong>，資料位於本機磁碟的<code translate="no">volumes/milvus/data/wp/...</code> 。</li>
 </ul>
 <p>若您計劃日後切換回 Woodpecker，請先清理這些檔案以避免衝突。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">支援的情境<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">

@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Scopri come aggiornare Milvus standalone con Milvus Operator.
+summary: Scopri come aggiornare Milvus in modalità standalone con Milvus Operator.
 title: Aggiornamento di Milvus Standalone con Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/it/v2.6.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/it/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/it/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
@@ -23,7 +23,7 @@ title: Aggiornamento di Milvus Standalone con Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida descrive come aggiornare la distribuzione standalone di Milvus dalla versione v2.5.x alla v2.6.17 utilizzando Milvus Operator.</p>
+    </button></h1><p>Questa guida descrive come aggiornare la propria distribuzione standalone di Milvus dalla versione v2.5.x alla v2.6.17 utilizzando Milvus Operator.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,10 +85,10 @@ title: Aggiornamento di Milvus Standalone con Milvus Operator
 <p><strong>Requisiti di compatibilità:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni release candidate non sono supportati.</li>
-<li>Se attualmente si utilizza la versione v2.6.0-rc1 e si desidera conservare i propri dati, consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
+<li>Se attualmente si utilizza la versione v2.6.0-rc1 e si desidera conservare i dati, consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive prima di passare alla v2.6.17.</li>
 </ul>
-<p><strong>Limitazioni relative alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta relativa alle code di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni relative alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Procedura di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

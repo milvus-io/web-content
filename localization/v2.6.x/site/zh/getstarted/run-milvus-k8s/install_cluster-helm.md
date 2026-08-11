@@ -36,7 +36,7 @@ title: 使用 Helm 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的 Collection，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一套图表，以帮助您部署 Milvus 的依赖项和组件。</p>
+    </button></h2><p>Helm 使用一种称为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一套图表，以帮助您部署 Milvus 的依赖项和组件。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,14 +55,14 @@ title: 使用 Helm 安装 Milvus 集群
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">安装 Helm CLI</a>。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建一个 K8s 集群</a>。</p></li>
-<li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以通过以下方式查看已安装的 StorageClass。</p>
+<li><p>安装一个<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以通过以下方式查看已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>安装前请检查<a href="/docs/zh/v2.6.x/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
-<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据您的数据量估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
+<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据您的数据规模估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
@@ -519,7 +519,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

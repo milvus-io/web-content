@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>기본 설정을 재정의할 추가 구성을 추가합니다.
-다음 내용은 기본 <code translate="no">proxy.healthCheckTimeout</code> 설정을 재정의해야 한다고 가정합니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
+다음 내용은 기본 <code translate="no">proxy.healthCheckTimeout</code> 를 재정의해야 한다고 가정합니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -167,7 +167,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Docker에 Milvus를 설치했으므로 다음을 수행할 수 있습니다.</p>
+    </button></h2><p>Docker에 Milvus를 설치한 후에는 다음을 수행할 수 있습니다.</p>
 <ul>
 <li><p><a href="/docs/ko/v2.6.x/quickstart.md">퀵스타트를</a> 확인하여 Milvus의 기능을 살펴보세요.</p></li>
 <li><p>Milvus의 기본 작동 방식을 알아보세요:</p>

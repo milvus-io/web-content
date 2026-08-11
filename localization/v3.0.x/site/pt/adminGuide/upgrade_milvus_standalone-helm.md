@@ -23,74 +23,35 @@ title: Atualizar o Milvus Standalone com o Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar a sua implementação do Milvus Standalone da versão v2.5.x para a v3.0-beta utilizando o Helm Chart.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Antes de começar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">Novidades na v3.0-beta<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>A atualização do Milvus 2.5.x para a versão 3.0-beta envolve alterações arquitetónicas significativas:</p>
-<ul>
-<li><strong>Consolidação do coordenador</strong>: os coordenadores separados legados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) foram consolidados num único <code translate="no">mixCoord</code></li>
-<li><strong>Novos componentes</strong>: Introdução do Nodo de Streaming para um processamento de dados melhorado</li>
-<li><strong>Remoção de componentes</strong>: o <code translate="no">indexNode</code> foi removido e consolidado</li>
-</ul>
-<p>Este processo de atualização garante uma migração adequada para a nova arquitetura. Para mais informações sobre as alterações na arquitetura, consulte <a href="/docs/pt/architecture_overview.md">a Visão Geral da Arquitetura do Milvus</a>.</p>
-<h3 id="Requirements" class="common-anchor-header">Requisitos<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>Requisitos do sistema:</strong></p>
-<ul>
-<li>Versão do Helm &gt;= 3.14.0</li>
-<li>Versão do Kubernetes &gt;= 1.20.0</li>
-<li>Milvus autónomo implementado através do Helm Chart</li>
-</ul>
-<p><strong>Requisitos de compatibilidade:</strong></p>
-<ul>
-<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v3.0-beta. Não são suportadas atualizações diretas a partir de versões candidatas.</li>
-<li>Se estiver atualmente a utilizar a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
-<li><strong>Deve</strong> atualizar para a v2.5.16 ou posterior antes de atualizar para a v3.0-beta.</li>
-</ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte para a alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+    </button></h1><p>Este guia descreve como atualizar a sua implementação autónoma do Milvus 2.6.x para a versão v3.0-beta utilizando o Helm.</p>
 <div class="alert note">
-A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico pulsar-v3.x como dependência. Para garantir a compatibilidade com versões anteriores, atualize o seu Helm para a versão v3.14 ou posterior e certifique-se de que adiciona a opção « <code translate="no">--reset-then-reuse-values</code> » sempre que utilizar « <code translate="no">helm upgrade</code> ».
+<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0-beta com o Helm Chart do Milvus 5.0.22. Se utilizar outra versão de patch do Milvus 2.6.x ou outra versão do Helm Chart, valide primeiro a atualização num ambiente que não seja de produção.</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Helm 3.14.0 ou posterior</li>
+<li>Uma implementação existente do Milvus 2.6.x gerida pelo Helm</li>
+<li>Os valores do Helm utilizados na implementação existente</li>
+<li>Uma cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
+</ul>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<div class="alert warning">
+<p>Não altere nem faça o downgrade do Helm Chart como parte deste procedimento. Mantenha a versão do Chart já instalada para a sua versão do Helm. A linha de base testada manteve o Helm Chart 5.0.22 e alterou apenas a etiqueta da imagem do Milvus para <code translate="no">v3.0-beta</code>.</p>
+<p>Este procedimento não valida um downgrade ou reversão que consista em alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0-beta gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +68,7 @@ A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico p
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">Passo 1: Atualizar o gráfico Helm<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">Passo 1: Atualizar o repositório Helm<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,18 +83,14 @@ A partir da versão 4.2.21 do gráfico Helm do Milvus, introduzimos o gráfico p
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Primeiro, atualize o seu gráfico Helm do Milvus para a versão 5.0.0:</p>
-<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+    </button></h3><p>Adicione ou atualize o repositório Helm do Milvus:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-O repositório de gráficos Helm do Milvus em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado. Utilize o novo repositório <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para as versões 4.0.31 e posteriores do gráfico.
+O repositório de gráficos Helm do Milvus em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado. Utilize o novo repositório <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para as versões 4.0.31 e posteriores dos gráficos.
 </div>
-<p>Para verificar a compatibilidade da versão do Helm Chart com as versões do Milvus:</p>
-<pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
-<button class="copy-code-btn"></button></code></pre>
-<p>Este guia parte do princípio de que está a instalar a versão mais recente. Se precisar de instalar uma versão específica, especifique o parâmetro <code translate="no">--version</code> em conformidade.</p>
-<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Passo 2: Atualizar para a v2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">Passo 2: Atualizar o Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,40 +105,19 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="alert-note">
-<p>Ignore este passo se a sua implementação autónoma já estiver a executar a v2.5.16 ou superior.</p>
-</div>
-<p>Atualize o seu Milvus autónomo para a v2.5.16:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
-  --reset-then-reuse-values \
-  --version=4.2.58
+    </button></h3><p>Verifique a versão do gráfico instalada para a sua versão do Helm:</p>
+<pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Aguarde até que a atualização esteja concluída:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v30-beta" class="common-anchor-header">Passo 3: Atualizar para a v3.0-beta<button data-href="#Step-3-Upgrade-to-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Assim que a v2.5.16 estiver a funcionar corretamente, atualize para a v3.0-beta:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
+<p>Na coluna « <code translate="no">CHART</code> », remova o prefixo « <code translate="no">milvus-</code> » do valor e utilize a versão restante como « <code translate="no">&lt;current-chart-version&gt;</code> ». Em seguida, execute o comando de atualização:</p>
+<pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
+  --namespace &lt;namespace&gt; \
+  --version &lt;current-chart-version&gt; \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0-beta&quot;</span> \
   --reset-then-reuse-values \
-  --version=5.0.0
+  --<span class="hljs-built_in">wait</span> \
+  --<span class="hljs-built_in">timeout</span> 20m
 <button class="copy-code-btn"></button></code></pre>
+<p>A opção « <code translate="no">--reset-then-reuse-values</code> » mantém os valores da versão anterior, aplicando simultaneamente a substituição explícita da imagem em relação aos valores predefinidos do Chart selecionado.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Verifique a atualização<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,8 +133,15 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Confirme se a sua implementação autónoma está a executar a nova versão:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods
+    </button></h2><p>Verifique a revisão do Helm, o estado do Pod e as imagens de contentor:</p>
+<pre><code translate="no" class="language-bash">helm <span class="hljs-built_in">history</span> &lt;release-name&gt; --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt; \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter apoio adicional, consulte a <a href="https://milvus.io/docs">documentação do Milvus</a> ou <a href="https://github.com/milvus-io/milvus/discussions">o fórum da comunidade</a>.</p>
+<p>Verifique se todas as cargas de trabalho necessárias estão prontas, se o Milvus utiliza « <code translate="no">v3.0-beta</code> » e se as suas coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão v3.0-beta.</p>
+<div class="alert note">
+<p>A atualização para o Milvus 3.0 não ativa o Storage V3. Depois de verificar a atualização, analise <a href="/docs/pt/storage-v3.md">o Storage V3</a> antes de ativar funcionalidades que dependam dele. Assim que o Milvus gravar dados no Storage V3, não será suportado o regresso a uma versão anterior do Milvus que não consiga ler o Storage V3.</p>
+</div>

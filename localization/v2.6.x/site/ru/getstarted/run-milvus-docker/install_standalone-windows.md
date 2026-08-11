@@ -204,7 +204,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</p></li>
 <li><p>Контейнер <strong>milvus-minio</strong> обслуживает локально порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.​</p></li>
-<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.​</p></li>
+<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает локально порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.​</p></li>
 </ul></li>
 </ol>
 <p>Вы также можете использовать команды Docker Compose для Linux, если у вас установлен WSL 2.​</p>
@@ -231,7 +231,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>Загрузите файл конфигурации Milvus.​</p>
+<li><p>Загрузите файл конфигурации Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -277,14 +277,14 @@ Creating milvus-standalone ... done​
     </button></h3><p>После установки Docker Desktop в Windows может возникнуть ошибка « <code translate="no">Docker Engine stopped</code> », если ваш компьютер настроен некорректно. В этом случае необходимо выполнить следующие проверки:​</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.​</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.​</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
    <span>Виртуализация в «Диспетчере задач»</span>
   
  </span></p>
-<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки вашей материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
+<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
 <p>Затем необходимо перезагрузить компьютер и включить Hyper-V. Подробности см. в этой <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">статье Microsoft</a>.​</p></li>
 <li><p>Проверьте, запущена ли служба Docker Desktop.</p>
 <p>Для запуска службы Docker Desktop можно выполнить следующую команду.</p>
@@ -333,7 +333,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h3><p>Если при запуске Milvus из WSL 2 у вас возникли проблемы, связанные с WSL, возможно, вам необходимо проверить, настроен ли Docker Desktop на использование движка на основе WSL 2, следующим образом:​</p>
 <ol>
-<li><p>Убедитесь, что в разделе <strong>«Настройки»</strong> &gt; <strong>«Общие»</strong> установлен флажок «Использовать движок на основе WSL 2».</p>
+<li><p>Убедитесь, что в разделе <strong>«Настройки»</strong> &gt; <strong>«Общие»</strong> установлен флажок «Использовать движок на основе WSL 2». ​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
@@ -369,7 +369,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Сообщение об ошибке «Read config failed» при запуске Milvus</span>
   
  </span></p>
-<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, можно использовать команду <code translate="no">docker exec</code> для входа в контейнер и просмотра содержимого папки <strong>/milvus/configs</strong> следующим образом:​</p>
+<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, вы можете использовать команду <code translate="no">docker exec</code>, чтобы войти в контейнер и отобразить содержимое папки <strong>/milvus/configs</strong> следующим образом:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

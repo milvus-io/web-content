@@ -36,7 +36,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus 通过<code translate="no">yc</code> 提供商支持 Yandex Cloud AI Studio 的文本向量模型。在“函数参数”中，将 `<code translate="no">model_name</code> ` 设置为 Milvus 应调用的 Yandex Cloud 模型 URI。</p>
-<p>例如，Yandex文档Text Embeddings模型使用的模型URI为<code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> ，并返回256维向量。有关可用模型URI和维度，请参阅<a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">“文本向量化模型”</a>。</p>
+<p>例如，Yandex文档文本Embeddings模型使用的模型URI为<code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> ，并返回256维向量。有关可用模型URI和维度，请参阅<a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">“文本向量化模型”</a>。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置凭据<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

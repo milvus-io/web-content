@@ -203,7 +203,7 @@ Creating milvus-standalone ... done​
 <p>Je nach Ihrer Netzwerkverbindung kann das Herunterladen der Images für die Milvus-Installation eine Weile dauern. Sobald die Container mit den Namen <strong>„milvus-standalone“</strong>, <strong>„milvus-minio“</strong> und <strong>„milvus-etcd“</strong> laufen, können Sie feststellen, dass ​</p>
 <ul>
 <li><p>Der Container <strong>„milvus-etcd“</strong> keine Ports gegenüber dem Host freigibt und seine Daten auf <strong>„volumes/etcd“</strong> im aktuellen Ordner abbildet.</p></li>
-<li><p>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9090</strong> und <strong>9091</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten dem <strong>Verzeichnis „volumes/minio“</strong> im aktuellen Ordner zu.​</p></li>
+<li><p>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9090</strong> und <strong>9091</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten <strong>dem Verzeichnis „volumes/minio“</strong> im aktuellen Ordner zu.</p></li>
 <li><p>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.​</p></li>
 </ul></li>
 </ol>
@@ -284,7 +284,7 @@ Creating milvus-standalone ... done​
    <span>Virtualisierung im Task-Manager</span>
   
  </span></p>
-<p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Vorgehensweise zum Aktivieren der Virtualisierung in den BIOS-Einstellungen variiert je nach Motherboard-Hersteller. Für ASUS-Motherboards können Sie beispielsweise <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zum Aktivieren der Virtualisierung zu Rate ziehen.​</p>
+<p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Vorgehensweise zum Aktivieren der Virtualisierung in den BIOS-Einstellungen variiert je nach Motherboard-Hersteller. Für ASUS-Motherboards können Sie beispielsweise <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zur Aktivierung der Virtualisierung zu Rate ziehen.​</p>
 <p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Weitere Informationen finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.​</p></li>
 <li><p>Überprüfen Sie, ob der Docker Desktop-Dienst gestartet wurde.</p>
 <p>Sie können den folgenden Befehl ausführen, um den Docker Desktop-Dienst zu starten.</p>

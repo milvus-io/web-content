@@ -73,7 +73,7 @@ title: Importación masiva en la replicación CDC
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta configuración se puede actualizar, por lo que puede surtir efecto sin necesidad de un reinicio completo.</p>
-<p>Cuando esta configuración está habilitada, un clúster de replicación solo acepta importaciones con <code translate="no">auto_commit=false</code>. La siguiente tabla enumera las solicitudes rechazadas más comunes:</p>
+<p>Cuando esta configuración está habilitada, un clúster de replicación solo acepta importaciones con <code translate="no">auto_commit=false</code>. La siguiente tabla enumera las solicitudes rechazadas más habituales:</p>
 <table>
 <thead>
 <tr><th>Situación</th><th>Mensaje de error</th></tr>
@@ -194,7 +194,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
         ></path>
       </svg>
     </button></h2><p>Una vez que el trabajo alcanza el estado « <code translate="no">Completed</code> », las entidades importadas son visibles en ambos clústeres. Carga y consulta la colección en el clúster primario; a continuación, ejecuta la misma consulta en el clúster de reserva sin cargar manualmente la colección allí y confirma que las entidades importadas están presentes en ambos clústeres.</p>
-<p>El clúster de reserva es de solo lectura mientras permanece en estado de reserva. No envíes importaciones, confirmaciones ni otras operaciones DDL o DCL directamente al clúster de reserva. Realiza estas operaciones en el clúster primario y deja que la replicación CDC las aplique al clúster de reserva.</p>
+<p>El clúster de reserva es de solo lectura mientras permanece en estado de reserva. No envíe importaciones, confirmaciones ni otras operaciones DDL o DCL directamente al clúster de reserva. Realice estas operaciones en el clúster primario y deje que la replicación CDC las aplique al clúster de reserva.</p>
 <h2 id="FAQ" class="common-anchor-header">Preguntas frecuentes<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -241,7 +241,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No. Al realizar la confirmación en el clúster primario, esta se replica en el clúster de espera como una única valla ordenada.</p>
+    </button></h3><p>No. Al realizar la confirmación en el clúster primario, esta se replica en el clúster de reserva como una única valla ordenada.</p>
 <h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">¿Por qué falla mi importación con el error « <code translate="no">import in replicating cluster is not supported yet</code> »?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

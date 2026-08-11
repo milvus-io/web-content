@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Используйте эту страницу для выполнения поиска по диапазону в подполях вектора StructArray. Поиск по диапазону возвращает векторные совпадения, оценка или расстояние которых находятся в пределах указанного диапазона. Для полей StructArray используйте поиск по диапазону с векторным поиском на уровне элементов, при котором каждый элемент Struct просматривается независимо.</p>
+    </button></h1><p>Используйте эту страницу для выполнения поиска по диапазону в подполях вектора StructArray. Поиск по диапазону возвращает векторные совпадения, оценка или расстояние которых находится в пределах указанного диапазона. Для полей StructArray используйте поиск по диапазону с векторным поиском на уровне элементов, при котором каждый элемент Struct просматривается независимо.</p>
 <p>На этой странице используется коллекция « <code translate="no">tech_articles</code> » из <a href="/docs/ru/create-structarray-field.md">раздела «Создание поля StructArray</a>». В коллекции имеется поле StructArray с именем « <code translate="no">chunks</code> ». Подполе вектора « <code translate="no">chunks[emb]</code> » индексировано для поиска на уровне элементов с использованием стандартной векторной метрики, такой как « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » или « <code translate="no">L2</code> ».</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">Как поиск по диапазону применяется к StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Если вам нужны только ближайшие элементы Struct, начните с <a href="/docs/ru/basic-vector-search-with-structarray.md">базового векторного поиска с StructArray</a>. Используйте поиск по диапазону, если результат должен удовлетворять ограничению по оценке или расстоянию, а не только входить в рейтинг top-K.</p>
+<p>Если вам нужны только ближайшие элементы Struct, начните с <a href="/docs/ru/basic-vector-search-with-structarray.md">базового векторного поиска с StructArray</a>. Используйте поиск по диапазону, когда результат должен удовлетворять ограничению по оценке или расстоянию, а не только ранжированию по топ-K.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>В данном примере <code translate="no">COSINE</code> является метрикой типа «похожесть», поэтому диапазон результатов больше, чем <code translate="no">radius</code>, и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> идентифицирует совпадающий элемент Struct в массиве <code translate="no">chunks</code> при возвращении результата.</p>
+<p>В данном примере <code translate="no">COSINE</code> является метрикой типа «похожесть», поэтому диапазон результатов больше, чем <code translate="no">radius</code>, и меньше или равен <code translate="no">range_filter</code>. Значение <code translate="no">offset</code> при возвращении идентифицирует совпадающий элемент Struct в массиве <code translate="no">chunks</code>.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при необходимости, <code translate="no">range_filter</code> в запрос <code translate="no">AnnSearchRequest</code>, нацеленный на векторное поле на уровне элементов StructArray.</p>
+    </button></h2><p>Векторные поля на уровне элементов StructArray поддерживают поиск по диапазону в гибридном поиске. Добавьте <code translate="no">radius</code> и, при необходимости, <code translate="no">range_filter</code> в запрос <code translate="no">AnnSearchRequest</code>, нацеленный на векторное поле StructArray на уровне элементов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 title_req = AnnSearchRequest(
@@ -261,7 +261,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В данном примере только подзапрос <code translate="no">chunks[emb]</code> использует параметры поиска по диапазону. Запрос StructArray по-прежнему следует семантике на уровне элементов: границы диапазона применяются к совпадениям элементов Struct до того, как гибридный поиск объединяет и переранжирует результаты.</p>
+<p>В данном примере только подзапрос <code translate="no">chunks[emb]</code> использует параметры поиска по диапазону. Запрос StructArray по-прежнему следует семантике на уровне элементов: границы диапазона применяются к совпадениям элементов Struct до того, как гибридный поиск объединит и переранжирует результаты.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">Интерпретация результатов поиска по диапазону<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -180,7 +180,7 @@ dashscope_ranker = Function(
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der für die Neubewertung zu verwendende Modell-Dienstanbieter. Verwenden Sie für DashScope „ <code translate="no">"ali"</code> “.</p></td>
+     <td><p>Der für die Neubewertung zu verwendende Modelldienstanbieter. Verwenden Sie für DashScope „ <code translate="no">"ali"</code> “.</p></td>
      <td><p><code translate="no">"ali"</code></p></td>
    </tr>
    <tr>

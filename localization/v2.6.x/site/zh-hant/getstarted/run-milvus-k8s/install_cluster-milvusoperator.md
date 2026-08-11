@@ -178,7 +178,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>上述指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議用於 v2.6.17）的 Milvus 叢集，並包含所有新的架構元件，包括串流節點。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
-<li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">採用 Woodpecker</a>（可減少基礎架構維護工作）</li>
+<li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>（可減少基礎架構維護工作）</li>
 <li><strong>串流節點</strong>：已啟用以強化資料處理能力</li>
 <li><strong>Mix 協調器</strong>：整合協調器元件以提升效率</li>
 </ul>
@@ -282,7 +282,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>若需，您可在上述指令中使用<code translate="no">:19530</code> 取代<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 為您自動分配一個本地端埠，如此便無需自行處理埠號衝突問題。</p>
+<p>若需，您可在上述指令中使用<code translate="no">:19530</code> 取代<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 為您自動分配一個本地端口，如此便無需自行處理端口衝突問題。</p>
 <p>預設情況下，kubectl 的端口轉發僅監聽<code translate="no">localhost</code> 。若要讓 Milvus 監聽選定的或所有 IP 位址，請使用<code translate="no">address</code> 標誌。以下指令會讓端口轉發監聽主機上的所有 IP 位址。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
@@ -311,7 +311,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關適用的設定項目，請參閱《<a href="/docs/zh-hant/v2.6.x/system_configuration.md">系統設定》</a>。</p></li>
+<p>有關適用的設定項目，請參閱「<a href="/docs/zh-hant/v2.6.x/system_configuration.md">系統設定</a>」。</p></li>
 <li><p>更新設定。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -421,7 +421,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

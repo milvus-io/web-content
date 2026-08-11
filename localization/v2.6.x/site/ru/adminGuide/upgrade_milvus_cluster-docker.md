@@ -150,7 +150,7 @@ docker compose up -d
 <ul>
 <li><a href="/docs/ru/v2.6.x/scaleout.md">Масштабировать кластер Milvus</a></li>
 </ul></li>
-<li>Если вы готовы развернуть свой кластер в облаке:
+<li>Если вы готовы развернуть кластер в облаке:
 <ul>
 <li>Узнайте, как <a href="/docs/ru/v2.6.x/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a></li>
 <li>Узнайте, как <a href="/docs/ru/v2.6.x/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>

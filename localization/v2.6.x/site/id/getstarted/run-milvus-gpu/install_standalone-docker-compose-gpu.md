@@ -77,7 +77,7 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
     </button></h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan mandiri di berkas YAML sebagai berikut:</p>
+<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan mandiri dalam berkas YAML sebagai berikut:</p>
 <ul>
 <li>Untuk menetapkan perangkat GPU tertentu ke Milvus, temukan bidang ` <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` dalam definisi layanan ` <code translate="no">standalone</code> ` dan ganti nilainya dengan ID GPU yang diinginkan. Anda dapat menggunakan alat ` <code translate="no">nvidia-smi</code> `, yang disertakan dalam driver tampilan GPU NVIDIA, untuk menentukan ID perangkat GPU. Milvus mendukung beberapa perangkat GPU.</li>
 </ul>

@@ -243,7 +243,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Cet exemple précise le nombre de répliques de chaque composant de Pulsar, les ressources de calcul de Pulsar BookKeeper, ainsi que d’autres paramètres de configuration.</div>
 <div class="alert note">Retrouvez l’ensemble des éléments de configuration nécessaires à la configuration d’un service Pulsar interne dans <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">le fichier values.yaml</a>. Ajoutez les éléments de configuration nécessaires sous la section « <code translate="no">pulsar.inCluster.values</code> », comme indiqué dans l’exemple précédent.</div>
-<p>En supposant que le fichier de configuration s’appelle ` <code translate="no">milvuscluster.yaml</code>`, exécutez la commande suivante pour appliquer la configuration.</p>
+<p>En supposant que le fichier de configuration s’appelle <code translate="no">milvuscluster.yaml</code>, exécutez la commande suivante pour appliquer la configuration.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka" class="common-anchor-header">Configurer Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">

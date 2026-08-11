@@ -85,10 +85,10 @@ title: Helmチャートを使用したMilvusクラスタのアップグレード
 <p><strong>互換性に関する要件：</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 は v2.6.17<strong>と互換性がありません</strong>。リリース候補版からの直接アップグレードはサポートされていません。</li>
-<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行に関する支援として<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
+<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の参考として<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
 <li>v2.6.17 へアップグレードする前に、<code translate="no">mixCoordinator</code> を有効にした状態で v2.5.16 以降にアップグレード<strong>する必要があります</strong>。</li>
 </ul>
-<p><strong>メッセージキューの制限事項</strong>: Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>: Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 <div class="alert note">
 Milvus Helmチャートバージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。下位互換性を確保するため、Helmをv3.14以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。
 </div>

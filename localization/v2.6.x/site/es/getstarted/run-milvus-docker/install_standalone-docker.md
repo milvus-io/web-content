@@ -76,7 +76,7 @@ title: Ejecutar Milvus en Docker (Linux)
 <p>Tras ejecutar el script de instalación:</p>
 <ul>
 <li>Se ha iniciado un contenedor de Docker llamado «milvus» en el puerto <strong>19530</strong>.</li>
-<li>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>«embedEtcd.yaml»</strong> en la carpeta actual.</li>
+<li>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asociado a <strong>embedEtcd.yaml</strong> en la carpeta actual.</li>
 <li>Para modificar la configuración predeterminada de Milvus, añade tus ajustes al archivo <strong>user.yaml</strong> de la carpeta actual y, a continuación, reinicia el servicio.</li>
 <li>El volumen de datos de Milvus está asignado a <strong>«volumes/milvus»</strong> en la carpeta actual.</li>
 </ul>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

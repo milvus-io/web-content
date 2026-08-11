@@ -107,8 +107,8 @@ beta: Milvus 3.0.x
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">useLoonFFI:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus considera que este ajuste se puede actualizar. Aplica el cambio mediante el flujo de trabajo de actualización de la configuración compatible con tu implementación. La mera edición de un archivo de configuración estático no garantiza que la implementación en ejecución haya recibido el nuevo valor.</p>
-<p>Si tiene previsto añadir una función y su campo vectorial generado a una colección existente, active también los dos ajustes de compactación necesarios para el rellenado de datos existentes:</p>
+<p>Milvus considera que este ajuste se puede actualizar. Aplica el cambio mediante el flujo de trabajo de actualización de la configuración que admita tu implementación. La mera edición de un archivo de configuración estático no garantiza que la implementación en ejecución haya recibido el nuevo valor.</p>
+<p>Si tiene previsto añadir una función y su campo vectorial generado a una colección existente, active también los dos ajustes de compactación necesarios para la retroalimentación de datos existentes:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">bumpSchemaVersion:</span>

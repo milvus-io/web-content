@@ -2,9 +2,9 @@
 id: configure_datacoord.md
 related_key: configure
 group: system_configuration.md
-summary: MilvusのdataCoordの設定方法について説明します。
+summary: Milvus 向けに dataCoord を設定する方法について学びましょう。
 ---
-<h1 id="dataCoord-related-Configurations" class="common-anchor-header">dataCoord関連コンフィギュレーション<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataCoord-related-Configurations" class="common-anchor-header">dataCoord に関連する設定<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャンネル監視のタイムアウト（秒）。データノードティクラー更新のウォッチプログレスがタイムアウトタイマーをリセットする。      </td>
+      <td>        チャンネルの監視におけるタイムアウト（秒単位）。Datanode ティクラーによる監視進捗の更新により、タイムアウトタイマーがリセットされます。      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        このバージョン未満のデータノードは、rpcベースのwatch()を持たないレガシーノードとみなされます。これは、レガシー・ノードが新しいチャネルを取得できないローリング・アップグレード時にのみ使用されます。      </td>
+      <td>        このバージョン以下のデータノードはレガシーノードとみなされ、RPC ベースの watch() 機能を持ちません。これは、レガシーノードが新しいチャンネルを取得しないローリングアップグレード中にのみ使用されます。      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャネルマネージャがバックグラウンドチャネルバランシングを開始するまでの期間      </td>
+      <td>        チャネルマネージャーがバックグラウンドでのチャネルバランス調整を開始するまでの時間。      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャネルマネージャがdmlチャネルバランスステータスをチェックする間隔      </td>
+      <td>        チャネルマネージャーがDMLチャネルの負荷分散状態を確認する間隔      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャネルマネージャがチャネルステータスを進める間隔(秒)      </td>
+      <td>        チャネルマネージャーがチャネルの状態を更新する間隔（秒単位）      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        チャネル操作のタイムアウト通知 (秒)。      </td>
+      <td>        チャネル操作の通知タイムアウト（秒単位）。      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,7 +217,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        セグメントの最大サイズ：datacoord.segment.maxSizeとdatacoord.segment.sealProportionを合わせて、セグメントを封印できるかどうかを決定する。      </td>
+      <td>        セグメントの最大サイズ。単位：MB。datacoord.segment.maxSize と datacoord.segment.sealProportion の組み合わせにより、セグメントをシールできるかどうかが決まります。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -246,8 +246,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Disk インデックスを持つコレクションのセグメントの最大サイズ（MB）。      </td>
-      <td>2048</td>
+      <td>        ディスクインデックスを持つコレクションにおける、セグメントの最大サイズ（単位：MB）。      </td>
+      <td>2048説明デフォルト値</td>
     </tr>
   </tbody>
 </table>
@@ -275,7 +275,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        datacoord.segment.maxSizeとdatacoord.segment.sealProportionを合わせて、セグメントを封印できるかどうかを決定します。      </td>
+      <td>        セグメントをシールするための、datacoord.segment.maxSize に対する最小割合。datacoord.segment.maxSize と datacoord.segment.sealProportion の組み合わせによって、セグメントをシールできるかどうかが決まります。      </td>
       <td>0.12</td>
     </tr>
   </tbody>
@@ -304,7 +304,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        デフォルト値 0.1(10%)、捺印比率が12%の場合、jitter=0.1で、実際に適用される比率は10.8~12%になる。      </td>
+      <td>        セグメントシール比率のジッター比。デフォルト値は 0.1（10%）です。シール比率が 12% で、ジッターが 0.1 の場合、実際に適用される比率は 10.8～12% になります。      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -362,7 +362,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        再起動後にrootCoordから最新のlastExpireを割り当てようとする時間      </td>
+      <td>        再起動後、rootCoord から最新の lastExpire を割り当てようとするまでの時間      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -391,7 +391,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        セグメントの最大有効期間（秒）、24*60*60      </td>
+      <td>        セグメントの最大有効期間（秒単位、24×60×60）      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -421,9 +421,9 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>セグメントがmaxIdleTime内にdmlレコードを受け付けず、セグメントのサイズが</li>      
-        <li>minSizeFromIdleToSealedより大きい場合、Milvusは自動的にそのセグメントを封印する。</li>      
-        <li>セグメントの最大アイドル時間(秒)、10*60。</li>      </td>
+        <li>あるセグメントが maxIdleTime の間 DML レコードを受け入れず、かつそのセグメントのサイズが</li>      
+        <li>minSizeFromIdleToSealed より大きい場合、Milvus はそのセグメントを自動的にシールします。</li>      
+        <li>セグメントの最大アイドル時間（秒単位、10*60）。</li>      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -452,7 +452,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        封印からアイドル状態にできるセグメントの最小サイズ（MB）。      </td>
+      <td>        シールド状態からアイドル状態になるセグメントの最小サイズ（MB）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -482,8 +482,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>1セグメントの最大binlogファイル数(プライマリキーのbinlogファイル数に等しい)、 </li>      
-        <li>ビンログファイルの数が最大値に達した場合、セグメントは封鎖されます。</li>      </td>
+        <li>1つのセグメントに対するバイナリログの最大数（プライマリキーのバイナリログファイル数に相当）。 </li>      
+        <li>バイナリログファイル数が最大値に達すると、そのセグメントはシールされます。</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -512,7 +512,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        セグメントの行数が      </td>
+      <td>        セグメントの行数が以下より少ない場合、そのセグメントは「スモールセグメント」とみなされます。      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -542,8 +542,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>(smallProportion * セグメントの最大行数)。</li>      
-        <li>コンパクション後のセグメントの行数が</li>      </td>
+        <li>(smallProportion * セグメントの最大行数) 未満の場合、そのセグメントは「小セグメント」とみなされます。</li>      
+        <li>圧縮後のセグメントの行数が</li>      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -573,9 +573,9 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>(compactableProportion * セグメントの最大行数) 行以上。</li>      
-        <li>は<smallProportion> 以上でなければなりません!</li>      
-        <li>コンパクションの間、セグメント # 行のサイズは、(expansionRate-1) * 100% だけ、セグメント最大行数を超えることができます。 </li>      </td>
+        <li>（compactableProportion * セグメントの最大行数）行を超える場合、小さなセグメントに対してコンパクションが行われます。</li>      
+        <li><smallProportion> 以上でなければなりません !!!</li>      
+        <li>コンパクション中、セグメントの行数は、(expansionRate-1) * 100% だけ、セグメントの最大行数を超えることがあります。 </li>      </td>
       <td>1.25</td>
     </tr>
   </tbody>
@@ -605,8 +605,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>MB 単位のサイズのしきい値。 </li>      
-        <li>各シャードの成長セグメントの合計サイズがこの閾値を超えた場合、 最大の成長セグメントが封印されます。</li>      </td>
+        <li>各シャードの拡大中のセグメントの合計サイズが </li>      
+        <li>このしきい値を超えると、最も大きな成長中のセグメントがシールされます。</li>      </td>
       <td>4096</td>
     </tr>
   </tbody>
@@ -635,7 +635,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        セグメントインデックスをインデックスエンジンのバージョンに自動アップグレードするかどうか。      </td>
+      <td>        セグメントインデックスをインデックスエンジンのバージョンに自動アップグレードするかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -664,7 +664,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        同一セグメントに対するフリュージング操作の最小間隔(単位: 秒)    </td>
+      <td>        同一セグメントに対するフラッシュ操作間の最小間隔（単位：秒）      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -694,8 +694,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>セグメントコンパクションを有効にするかどうかを制御するスイッチ値。 </li>      
-        <li>コンパクションは、小さなサイズのセグメントを大きなセグメントにマージし、タイムトラベルの保持時間を超えて削除されたエンティティをクリアする。</li>      </td>
+        <li>セグメントの圧縮を有効にするかどうかを制御するスイッチ値。 </li>      
+        <li>コンパクションは、小規模なセグメントを1つの大きなセグメントに統合し、タイムトラベルの保持期間を超えて削除されたエンティティを消去します。</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -725,9 +725,67 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>自動セグメント圧縮を有効にするかどうかを制御するスイッチ値。この間、dataCoord はバックグラウンドでコンパクト化可能なセグメントを探し、マージする。</li>      
-        <li>この設定は、dataCoord.enableCompactionがtrueに設定されている場合にのみ有効になります。</li>      </td>
+        <li>このスイッチの値を設定して、自動セグメント圧縮を有効にするかどうかを制御します。自動セグメント圧縮では、data coord がバックグラウンドで圧縮可能なセグメントを特定し、それらを統合します。</li>      
+        <li>この設定は、dataCoord.enableCompaction が true に設定されている場合にのみ有効になります。</li>      </td>
       <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionstorageVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.storageVersion.enabled</code><button data-href="#dataCoordcompactionstorageVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.storageVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        圧縮処理により、対象となる既存のデータを現在のストレージバージョンに書き換えることができるかどうか。このパラメータは更新可能です。      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionbumpSchemaVersionenabled" class="common-anchor-header"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code><button data-href="#dataCoordcompactionbumpSchemaVersionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.bumpSchemaVersion.enabled">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        コンパクションが、新しく追加された関数によって生成されたフィールドのバックフィルを含め、既存のデータにスキーマバージョンの変更を適用できるかどうか。このパラメータは更新可能です。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -756,11 +814,11 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>コンパクション・タスクの優先順位付け、オプション：[default、level、mix]。 </li>      
-        <li>デフォルトはFIFO。</li>      
-        <li>levelはレベルごとに優先される：最初にL0コンパクション、次にミックスコンパクション、そしてクラスタリングコンパクション。</li>      
-        <li>mixはレベルによる優先順位で、まずmixコンパクション、次にL0コンパクション、そしてクラスタリングコンパクションの順となる。</li>      </td>
-      <td>デフォルト</td>
+        <li>コンパクション・タスクの優先順位付け。オプション：[default、level、mix]。 </li>      
+        <li>default は FIFO です。</li>      
+        <li>level はレベルごとに優先順位が付けられます。L0 コンパクションが最初に実行され、次に mix コンパクション、その次にクラスタリング コンパクションが実行されます。</li>      
+        <li>mix はレベルごとに優先順位が付けられます。まず mix コンパクション、次に L0 コンパクション、最後にクラスタリング コンパクションの順に行われます。</li>      </td>
+      <td>default</td>
     </tr>
   </tbody>
 </table>
@@ -788,7 +846,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コンパクション・タスクのキュー・サイズ      </td>
+      <td>        コンパクション・タスクのキューサイズ      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -817,7 +875,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コンパクションタスクは、この時間(秒単位)より長く終了すると削除される。      </td>
+      <td>        この時間（秒単位）より長く完了しない場合、コンパクションタスクは削除されます。      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -846,7 +904,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コンパクションの時間間隔（秒単位） gc  </td>
+      <td>        コンパクションのガベージコレクションを行う時間間隔（秒単位）      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -875,7 +933,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        ミックスコンパクションを開始する時間間隔（秒単位      </td>
+      <td>        ミックス・コンパクションをトリガーするまでの時間間隔（秒単位）      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -904,7 +962,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        L0コンパクションを開始する時間間隔（秒      </td>
+      <td>        L0コンパクションをトリガーする時間間隔（秒単位）      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -933,7 +991,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        レベルゼロ・コンパクションを強制的にトリガーする最小サイズ（バイト単位）、デフォルトは8MB      </td>
+      <td>        LevelZero コンパクションを強制的にトリガーするための最小サイズ（バイト単位）。デフォルトは 8MB です。      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -962,7 +1020,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        レベルゼロ・コンパクションを強制的にトリガーするバイト単位の最大サイズ、デフォルトは64MB      </td>
+      <td>        LevelZero コンパクションを強制的にトリガーする最大サイズ（バイト単位）。デフォルトは 64MB です。      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -991,7 +1049,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        LevelZero Compactionを強制的にトリガーするデルタログファイルの最小数      </td>
+      <td>        LevelZero コンパクションを強制的にトリガーするための、デルタログファイルの最小数      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1020,7 +1078,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        LevelZero Compactionを強制的にトリガーするデルタログファイルの最大数。      </td>
+      <td>        LevelZero コンパクションを強制的にトリガーするためのデルタログファイルの最大数。デフォルトは 30 です。      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1049,7 +1107,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        単一コンパクションをトリガーするセグメントの比率のしきい値、デフォルトは0.2      </td>
+      <td>        1回のコンパクションをトリガーするセグメントの比率のしきい値。デフォルトは0.2です。      </td>
       <td>0.2</td>
     </tr>
   </tbody>
@@ -1078,7 +1136,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        単一コンパクションをトリガーするセグメントのデルタログサイズ、デフォルトは16MB      </td>
+      <td>        1回のコンパクションをトリガーするセグメントのデルタログサイズ。デフォルトは16MB。      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -1107,7 +1165,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コンパクションのトリガーとなるセグメントのデルタログカウント、デフォルトは200      </td>
+      <td>        コンパクションをトリガーするセグメントのデルタログ数。デフォルトは 200 です。      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1136,7 +1194,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コンパクションのトリガーとなるセグメントの期限切れログサイズ、デフォルトは10MB      </td>
+      <td>        コンパクションをトリガーするセグメントの期限切れログサイズ。デフォルトは 10MB。      </td>
       <td>10485760</td>
     </tr>
   </tbody>
@@ -1165,8 +1223,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタリングコンパクションを有効にする      </td>
-      <td>真</td>
+      <td>        クラスタリングのコンパクションを有効にする      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1223,7 +1281,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタリング・コンパクションのトリガー間隔（秒      </td>
+      <td>        クラスタリング・コンパクションのトリガー間隔（秒）      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -1252,7 +1310,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        冗長なコンパクションを回避するための、1つのコレクションのクラスタリング・コンパクション実行間の最小間隔      </td>
+      <td>        冗長なコンパクションを回避するために、1つのコレクションに対するクラスタリング・コンパクションの実行間隔の最小値。      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1281,7 +1339,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        コレクションがmaxIntervalより長くクラスタリングコンパクションされていない場合、強制的にコンパクションする      </td>
+      <td>        コレクションのクラスタリング・コンパクションが maxInterval より長い期間実行されていない場合、コンパクションを強制実行する      </td>
       <td>259200</td>
     </tr>
   </tbody>
@@ -1310,7 +1368,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        新しいデータサイズがnewDataSizeThresholdより大きい場合、クラスタリング圧縮を実行する      </td>
+      <td>        新しいデータのサイズが newDataSizeThreshold より大きい場合、クラスタリング・コンパクションを実行する。      </td>
       <td>512m</td>
     </tr>
   </tbody>
@@ -1339,7 +1397,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans訓練における最大データサイズ比率、それよりも大きい場合、この制限を満たすためにダウンサンプリングされる      </td>
+      <td>        K-means トレーニングにおける最大データサイズ比率。これを超える場合、この制限を満たすようにダウンサンプリングを行う。      </td>
       <td>0.8</td>
     </tr>
   </tbody>
@@ -1368,7 +1426,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans訓練における最大セントロイド数      </td>
+      <td>        K-means トレーニングにおける最大中心点数      </td>
       <td>10240</td>
     </tr>
   </tbody>
@@ -1397,7 +1455,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans訓練における最小セントロイド数      </td>
+      <td>        K-means トレーニングにおける最小クラスター数      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1426,7 +1484,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans訓練における最小クラスタサイズ/平均サイズ      </td>
+      <td>        K-means トレーニングにおける最小クラスターサイズ／平均サイズ      </td>
       <td>0.01</td>
     </tr>
   </tbody>
@@ -1455,7 +1513,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        最大クラスタサイズ / Kmeans訓練での平均サイズ      </td>
+      <td>        K-means トレーニングにおける最大クラスターサイズ／平均サイズ      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1484,7 +1542,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Kmeans訓練における最大クラスタサイズ      </td>
+      <td>        K-means トレーニングにおける最大クラスターサイズ      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -1542,7 +1600,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インデックス手順でメモリサイズが設定されていない場合、インデックスデータのメモリサイズを推定するための乗数      </td>
+      <td>        インデックス手順によってメモリサイズが設定されていない場合、インデックスデータのメモリサイズを推定するための乗数      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1571,8 +1629,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        MinIOまたはS3サービスにおいて、破棄されたデータをクリアするためにガベージコレクションを有効にするかどうかを制御するスイッチ値。      </td>
-      <td>真</td>
+      <td>        MinIO または S3 サービス内で破棄されたデータをクリーンアップするためにガベージコレクションを有効にするかどうかを制御するスイッチ値。      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1600,7 +1658,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        データコーディネートがガベージコレクションを実行する間隔、単位：秒。      </td>
+      <td>        データ コーディネーターがガベージコレクションを実行する間隔。単位：秒。      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1629,8 +1687,8 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        記録されていないバイナリログ（binlog）ファイルの保持期間。このパラメータに適度に大きな値を設定することで、メタデータを持たない新しく作成されたバイナリログファイルが誤って削除されるのを防ぐことができる。単位：秒。      </td>
-      <td>86400</td>
+      <td>        未記録のバイナリログ (binlog) ファイルの保持期間。このパラメータに適切に大きな値を設定することで、メタデータのない新しく作成された binlog ファイルが誤って削除されるのを防ぐことができます。単位: 秒。      </td>
+      <td>86400説明</td>
     </tr>
   </tbody>
 </table>
@@ -1658,7 +1716,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        削除されたセグメントのbinlogファイルがクリアされるまでの保持時間、単位：秒。      </td>
+      <td>        削除されたセグメントのバイナリログ（binlog）ファイルがクリアされるまでの保持期間。単位：秒。      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1687,7 +1745,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        削除されたs3オブジェクトを削除する同時実行ゴルーチン数      </td>
+      <td>        削除された S3 オブジェクトを削除するための同時実行ゴルーチン数。      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1716,8 +1774,95 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        オブジェクトストレージのガベージコレクションスキャン間隔(時間)      </td>
+      <td>        オブジェクトストレージ上の孤立ファイル（OSS上にあるがメタデータに登録されていないファイル）のガベージコレクションスキャン間隔（時間単位）      </td>
       <td>168</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobenabled" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.enabled</code><button data-href="#dataCoordgclobenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.enabled">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT フィールドの値として作成された、参照されていない LOB ファイルに対してガベージコレクションを有効にするかどうか。      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobsafetyWindow" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.safetyWindow</code><button data-href="#dataCoordgclobsafetyWindow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.safetyWindow">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        参照されていない TEXT LOB ファイルが、ガベージコレクションによって削除されるまでに経過しなければならない最短の経過時間（秒単位）。      </td>
+      <td>3600</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordgclobcheckInterval" class="common-anchor-header"><code translate="no">dataCoord.gc.lob.checkInterval</code><button data-href="#dataCoordgclobcheckInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.gc.lob.checkInterval">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Milvus が、TEXT フィールドの値用に作成された参照されていない LOB ファイルについて、ストレージをスキャンする間隔（秒単位）。      </td>
+      <td>1800</td>
     </tr>
   </tbody>
 </table>
@@ -1745,7 +1890,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms、dataCoordブローカーrpcタイムアウト      </td>
+      <td>        5000ms、dataCoord ブローカーの RPC タイムアウト      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1775,7 +1920,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>        自動バランスを有効にする      </td>
-      <td>真</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1803,7 +1948,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        オートバランス設定のチェック間隔      </td>
+      <td>        自動バランス調整の設定チェック間隔      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1832,7 +1977,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポート前タスクごとに許可されるファイルの最大数。      </td>
+      <td>        インポート前のタスクごとに許可されるファイルの最大数。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1856,12 +2001,12 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <thead>
     <tr>
       <th class="width80">説明</th>
-      <th class="width20">デフォルト値</th> 
+      <th class="width20">既定値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        完了または失敗状態のタスクの保持期間（秒）。      </td>
+      <td>        「完了」または「失敗」状態のタスクの保持期間（秒単位）。      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1890,7 +2035,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        小さなセグメントが生成されるのを防ぐため、インポートされたファイルを再グループ化します。このパラメータは、各グループ(各ImportTask)のファイルサイズの合計を表します。      </td>
+      <td>        小さなセグメントが生成されるのを防ぐため、インポートされたファイルを再グループ化します。このパラメータは、各グループ（各 ImportTask）内のファイルサイズの合計を表します。      </td>
       <td>6144</td>
     </tr>
   </tbody>
@@ -1919,7 +2064,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポートのスケジューリング間隔。      </td>
+      <td>        インポートのスケジュール間隔（単位：秒）。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1948,7 +2093,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポートをチェックする間隔を秒単位で指定し、インポートチェッカーの頻度を高く設定します。      </td>
+      <td>        インポートのチェック間隔（単位：秒）は、インポートチェッカーに対して高い頻度で設定されています。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1977,7 +2122,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        インポートチェッカーがインポートをチェックする間隔（秒）を低頻度に設定します。      </td>
+      <td>        インポートチェッカーのインポートチェック間隔（単位：秒）は、低頻度に設定されています。      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -2006,7 +2151,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        1回のインポートリクエストで許可される最大ファイル数。      </td>
+      <td>        1回のインポートリクエストで許可されるファイルの最大数。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2065,7 +2210,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   <tbody>
     <tr>
       <td>        インポート操作がインデックス構築の完了を待機するかどうかを示します。      </td>
-      <td>真</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -2093,7 +2238,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。グレースフル・ストップなしでノードを強制停止する。      </td>
+      <td>        秒。グレースフルストップを行わずにノードを強制停止する      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -2122,7 +2267,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クラスタリング圧縮ジョブのスロット使用量。      </td>
+      <td>        クラスタリング・コンパクテーション・ジョブのスロット使用状況。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -2151,7 +2296,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        混合コンパクションジョブのスロット使用量。      </td>
+      <td>        ミックス・コンパクション・ジョブのスロット使用量。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2180,7 +2325,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        l0コンパクションジョブのスロット使用量。      </td>
+      <td>        l0 圧縮ジョブのスロット使用状況。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2209,7 +2354,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoordのTCP/IPアドレス。指定されていない場合は、最初のユニキャスト可能なアドレスを使用します。      </td>
+      <td>        dataCoordのTCP/IPアドレス。指定がない場合は、最初のユニキャスト可能なアドレスを使用する。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -2267,7 +2412,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoordが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataCoordが送信できる各RPCリクエストの最大サイズ（単位：バイト）      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -2296,7 +2441,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoordが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataCoord が受信できる各 RPC リクエストの最大サイズ。単位：バイト。      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2325,7 +2470,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord上のクライアントが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataCoord 上のクライアントが送信できる各 RPC リクエストの最大サイズ。単位：バイト。      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2354,7 +2499,7 @@ summary: MilvusのdataCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        dataCoord上のクライアントが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
+      <td>        dataCoord 上のクライアントが受信できる各 RPC リクエストの最大サイズ。単位：バイト。      </td>
       <td>536870912</td>
     </tr>
   </tbody>

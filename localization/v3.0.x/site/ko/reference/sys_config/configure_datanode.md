@@ -2,9 +2,9 @@
 id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
-summary: Milvus용 데이터노드 구성 방법을 알아보세요.
+summary: Milvus용 dataNode를 구성하는 방법을 알아보세요.
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">데이터 노드 관련 구성<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode 관련 설정<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +43,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        플로그래프에서 작업 대기열의 최대 길이      </td>
+      <td>        플로우그래프 내 작업 큐의 최대 길이      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -72,7 +72,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        플로우그래프에서 병렬로 실행되는 최대 작업 수   </td>
+      <td>        플로우그래프에서 병렬로 실행되는 작업의 최대 개수      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        전 세계적으로 데이터노드 동기화 관리자의 최대 동시 동기화 작업 수입니다.      </td>
+      <td>        데이터노드 동기화 관리자의 전체 최대 동시 동기화 작업 수      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        CPU 사용량을 줄이기 위해 일부 타임틱 메시지 건너뛰기 지원      </td>
+      <td>        CPU 사용량을 줄이기 위해 일부 타임틱 메시지를 건너뛸 수 있도록 지원합니다.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        건너뛴 레코드 n개당 하나씩 사용      </td>
+      <td>        건너뛴 기록 n개마다 1개를 소모합니다.      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        x초 동안 타임틱 메시지만 있는 경우 건너뛰기 모드 켜기      </td>
+      <td>        x초 동안 타임틱 메시지만 남아 있을 때 건너뛰기 모드를 켭니다.      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -218,9 +218,9 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>메모리에 버퍼링되는 세그먼트 내 각 binlog 파일의 최대 크기입니다. 크기가 이 값을 초과하는 빈로그 파일은 MinIO 또는 S3 서비스로 플러시됩니다.</li>      
+        <li>메모리에 버퍼링된 세그먼트 내 각 빈 로그 파일의 최대 크기입니다. 이 값을 초과하는 크기의 빈 로그 파일은 MinIO 또는 S3 서비스로 플러시됩니다.</li>      
         <li>단위: 바이트</li>      
-        <li>이 매개 변수를 너무 작게 설정하면 시스템이 소량의 데이터를 너무 자주 저장하게 됩니다. 너무 크게 설정하면 시스템의 메모리 요구량이 증가합니다.</li>      </td>
+        <li>이 매개변수를 너무 작게 설정하면 시스템이 소량의 데이터를 너무 빈번하게 저장하게 됩니다. 너무 크게 설정하면 시스템의 메모리 요구량이 증가합니다.</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -249,7 +249,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        단일 채널에 대해 del을 플러시할 최대 버퍼 크기(바이트), 기본값은 16MB입니다.      </td>
+      <td>        단일 채널에 대해 del을 플러시하는 데 사용되는 최대 버퍼 크기(바이트 단위), 기본값은 16MB입니다.      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -278,7 +278,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        버퍼가 비어 있지 않은 경우 세그먼트를 동기화할 기간입니다.      </td>
+      <td>        버퍼가 비어 있지 않을 때 세그먼트를 동기화하는 주기입니다.      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -307,7 +307,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        메모리 사용량이 너무 많으면 동기화를 강제로 수행하려면 true로 설정합니다.      </td>
+      <td>        메모리 사용량이 너무 높을 경우 강제 동기화를 수행하려면 true로 설정하십시오.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -336,7 +336,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        동기화할 세그먼트 수, 버퍼가 가장 큰 세그먼트가 동기화됩니다.      </td>
+      <td>        동기화할 세그먼트 수. 버퍼 크기가 가장 큰 세그먼트가 동기화됩니다.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -365,7 +365,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터노드 메모리 사용량을 확인할 간격(밀리초 단위)      </td>
+      <td>        데이터노드 메모리 사용량을 확인하는 간격(밀리초 단위)      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -394,7 +394,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        독립형용 메모리 워터마크로, 이 워터마크에 도달하면 세그먼트가 동기화됩니다.      </td>
+      <td>        독립형(standalone)의 메모리 워터마크로, 이 워터마크에 도달하면 세그먼트가 동기화됩니다.      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -424,9 +424,9 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>모든 채널의 글로벌 작업 풀의 크기를 지정합니다.</li>      
-        <li>이 파라미터가 &lt;= 0이면 실행할 수 있는 최대 CPU 수로 설정합니다.</li>      
-        <li>차단을 피하기 위해 컬렉션 수가 많은 경우 더 크게 설정하는 것이 좋습니다.</li>      </td>
+        <li>모든 채널의 전역 작업 풀 크기를 지정합니다.</li>      
+        <li>이 매개 변수가 0 이하인 경우, 실행 가능한 최대 CPU 수로 설정됩니다.</li>      
+        <li>컬렉션 수가 많은 경우 차단 현상을 방지하기 위해 더 큰 값으로 설정하는 것이 좋습니다</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -456,8 +456,8 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>채널 체크포인트 업데이트를 위한 글로벌 작업 풀의 크기를 지정합니다.</li>      
-        <li>이 파라미터가 &lt;= 0이면 10으로 설정합니다.</li>      </td>
+        <li>채널 체크포인트 업데이트를 위한 전역 작업 풀의 크기를 지정합니다.</li>      
+        <li>이 매개변수가 0 이하인 경우, 10으로 설정됩니다</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -486,7 +486,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드가 각 채널의 채널 체크포인트를 업데이트할 간격(초)입니다.      </td>
+      <td>        데이터 노드가 각 채널의 채널 체크포인트를 업데이트하는 간격(초 단위)입니다.      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -515,7 +515,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        업데이트채널체크포인트 RPC 호출에 대한 시간제한(초)      </td>
+      <td>        UpdateChannelCheckpoint RPC 호출에 대한 타임아웃(초)      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -544,7 +544,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        업데이트채널체크포인트 RPC당 최대 채널 체크포인트 수입니다.      </td>
+      <td>        UpdateChannelCheckpoint RPC당 채널 체크포인트의 최대 개수.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -573,7 +573,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        채널 체크포인트 업데이터가 업데이트를 실행하는 빈도(초)입니다.      </td>
+      <td>        채널 체크포인트 업데이트 프로그램이 업데이트를 실행하는 빈도(초 단위).      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -602,7 +602,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터노드에서 동시에 실행할 수 있는 가져오기/사전 가져오기 작업의 최대 개수입니다.      </td>
+      <td>        데이터노드에서 동시에 실행할 수 있는 최대 가져오기/사전 가져오기 작업 수입니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -631,7 +631,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        가져오기 파일의 최대 파일 크기(GB)이며, 여기서 가져오기 파일은 행 기반 파일 또는 열 기반 파일 집합을 의미합니다.      </td>
+      <td>        가져오기 파일의 최대 파일 크기(GB 단위)입니다. 여기서 가져오기 파일이란 행 기반 파일 또는 열 기반 파일 집합을 의미합니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -660,7 +660,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        가져오기 중 데이터노드가 청크 관리자에서 읽은 데이터 블록 크기(MB)입니다.      </td>
+      <td>        가져오기 중에 데이터 노드가 청크 관리자로부터 읽는 데이터 블록 크기(MB 단위).      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -689,7 +689,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        각 가져오기/사전 가져오기 작업이 차지하는 최대 슬롯 수입니다.      </td>
+      <td>        각 가져오기/사전 가져오기 작업이 차지하는 슬롯의 최대 수입니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -718,7 +718,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        배치 모드에서 실행되는 레벨 제로 압축을 위한 여유 메모리의 최소 메모리 비율입니다.      </td>
+      <td>        배치 모드에서 실행되는 레벨 0 압축을 위한 최소 여유 메모리 비율      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -747,7 +747,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        최대 배치 크기는 L0 압축을 실행할 때 배치에 포함된 최대 L1/L2 세그먼트 수를 나타냅니다. 기본값은 -1이며, 1보다 작은 값은 제한이 없음을 의미합니다. 유효한 범위: &gt;= 1.  </td>
+      <td>        최대 배치 크기는 L0 압축을 실행할 때 배치당 L1/L2 세그먼트의 최대 개수를 의미합니다. 기본값은 -1이며, 1보다 작은 값은 제한이 없음을 의미합니다. 유효 범위: &gt;= 1.      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -776,7 +776,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        mixCompaction을 수행할 때 mergeSort 모드를 활성화할지 여부입니다.      </td>
+      <td>        mixCompaction 수행 시 mergeSort 모드를 활성화할지 여부.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -810,6 +810,35 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT 필드에 대한 기존 LOB 파일의 미사용 공간 비율에 대한 임계값입니다. 압축 과정에서 이 비율이 임계값보다 낮으면 Milvus는 기존 LOB 파일을 재사용합니다. 이 비율이 임계값 이상이면 Milvus는 남은 LOB 페이로드를 새로운 LOB 파일에 다시 기록하여 공간을 회수합니다.      </td>
+      <td>0.3</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodegracefulStopTimeout" class="common-anchor-header"><code translate="no">dataNode.gracefulStopTimeout</code><button data-href="#dataNodegracefulStopTimeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -834,7 +863,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        초. 정상 정지 없이 노드 강제 정지      </td>
+      <td>        초. 정상 종료 절차 없이 노드를 강제 중지합니다.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -863,7 +892,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드에서 동시에 실행할 수 있는 최대 작업(예: 압축, 가져오기) 수입니다.      </td>
+      <td>        데이터노드에서 동시에 실행할 수 있는 최대 작업 수(예: 압축, 가져오기)      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -892,7 +921,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        클러스터링 압축의 메모리 버퍼 비율입니다. 임계값보다 큰 데이터는 스토리지로 플러시됩니다.      </td>
+      <td>        클러스터링 압축의 메모리 버퍼 비율입니다. 임계값을 초과하는 데이터는 스토리지에 플러시됩니다.      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -921,7 +950,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        하나의 클러스터링 압축 작업에 대한 작업자 풀 크기입니다.      </td>
+      <td>        클러스터링 압축 작업 하나당 할당되는 워커 풀 크기입니다.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -945,12 +974,12 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   <thead>
     <tr>
       <th class="width80">설명</th>
-      <th class="width20">기본값</th> 
+      <th class="width20">기본값블룸 필터에 PK를 적용할 때의 병렬화 계수이며, 기본값은 4*CPU_C</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        블룸 필터에 PK를 적용할 병렬 계수, 기본값은 4*CPU_CORE_NUM입니다.      </td>
+      <td>        블룸 필터에 PK를 적용할 때의 병렬화 계수이며, 기본값은 4*CPU_CORE_NUM입니다.      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -979,8 +1008,95 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        델타로그 형식, 옵션: [json, parquet]      </td>
+      <td>        델타 로그 형식, 옵션: [json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT 필드 값의 저장 경로를 선택하는 데 사용되는 크기 임계값(바이트 단위). 이 임계값보다 작은 값은 필드 데이터 내에 인라인으로 저장됩니다. 이 임계값 이상인 값은 LOB 페이로드로 별도로 저장되며, 필드 데이터에는 내부 참조가 저장됩니다.      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT 페이로드를 저장하는 단일 LOB 파일의 최대 크기(바이트 단위). LOB 파일이 이 크기에 도달하면 Milvus는 이후의 TEXT LOB 페이로드를 다른 LOB 파일에 기록합니다.      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Milvus가 증가 중인 세그먼트에서 버퍼링된 TEXT LOB 페이로드를 스토리지에 플러시하도록 트리거하는 버퍼 크기 임계값(바이트 단위).      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -1008,7 +1124,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터노드의 TCP/IP 주소입니다. 지정하지 않으면 첫 번째 유니캐스트 가능한 주소를 사용합니다.      </td>
+      <td>        dataNode의 TCP/IP 주소입니다. 지정되지 않은 경우 첫 번째 유니캐스트 가능한 주소를 사용합니다.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1037,7 +1153,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터노드의 TCP 포트      </td>
+      <td>        dataNode의 TCP 포트      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1066,7 +1182,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드가 전송할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        데이터노드가 전송할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1095,7 +1211,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        dataNode가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1124,7 +1240,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드의 클라이언트가 보낼 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        dataNode의 클라이언트가 보낼 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1153,7 +1269,7 @@ summary: Milvus용 데이터노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        데이터 노드의 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        dataNode의 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>

@@ -244,7 +244,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>每个 Struct 元素内部的<code translate="no">text</code> 子字段。</td><td>输出字段或标量过滤。</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>每个数据块的段标签。</td><td>标量过滤。</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>块级质量评分。</td><td>标量过滤或标量索引。</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入列表的向量量子字段。</td><td>使用<code translate="no">MAX_SIM*</code> 进行EmbeddingList搜索。</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入列表的向量子场。</td><td>使用<code translate="no">MAX_SIM*</code> 进行EmbeddingList搜索。</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>每个 Struct 元素独立使用的向量字段。</td><td>元素级向量搜索。</td></tr>
 </tbody>
 </table>
@@ -275,7 +275,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-可空的 StructArray 字段仅在 Milvus v3.0.x 中可用。对于可空的 StructArray 字段，实体可以提供有效的 StructArray 值，也可以将整个字段设置为 `<code translate="no">null</code>`。插入有效的 StructArray 值时，所有子字段应为空或具有有效值。 若插入的实体中部分子字段设为 null 而其他子字段设为有效值，将导致错误。详情请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p>
+可空的 StructArray 字段仅在 Milvus v3.0.x 中可用。对于可空的 StructArray 字段，实体可以提供有效的 StructArray 值，也可以将整个字段设置为 `<code translate="no">null</code>`。插入有效的 StructArray 值时，所有子字段应均为空或具有有效值。 若插入的实体中部分子字段设为 null 而其他子字段设为有效值，将导致错误。详情请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">向现有 Collection 添加 StructArray 字段<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,7 +403,7 @@ client.add_collection_struct_field(
 <li><p>定义了不受支持的子字段类型，例如 JSON、Geometry、Text、Timestamptz、SparseFloatVector、嵌套 Array、嵌套 Struct 或 Array-of-Struct。</p></li>
 <li><p>将<code translate="no">String</code> 用作子字段类型。请使用<code translate="no">VARCHAR</code> 并设置<code translate="no">max_length</code> 。</p></li>
 <li><p>将同一个向量子字段同时用于 EmbeddingList 搜索和元素级搜索。</p></li>
-<li><p>仅添加向量子字段，而忽略用于过滤所需的标量子字段，例如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 。</p></li>
+<li><p>仅添加向量子字段，而忽略过滤所需的标量子字段，例如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 。</p></li>
 <li><p>将向量字段视为<code translate="no">$[...]</code> 的标量谓词输入。使用向量字段进行向量搜索，使用标量子字段进行标量谓词搜索。</p></li>
 <li><p>假设在现有 StructArray 字段创建后，可以向该字段添加新的子字段。</p></li>
 <li><p>使用<code translate="no">chunks.emb</code> 或<code translate="no">chunks.emb_list_vector</code> 代替必需的路径语法<code translate="no">chunks[emb]</code> 或<code translate="no">chunks[emb_list_vector]</code> 。</p></li>
@@ -428,5 +428,5 @@ client.add_collection_struct_field(
 <li><p>要将嵌套数据插入 StructArray 字段，请参阅<a href="/docs/zh/insert-data-into-structarray-fields.md">《将数据插入 StructArray 字段</a>》。</p></li>
 <li><p>要创建向量和标量索引，请参阅《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p></li>
 <li><p>要搜索 StructArray 向量子字段，请参阅《使用 StructArray 进行基本向量搜索》。</p></li>
-<li><p>要查看支持的数据类型、可为空行为以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制》</a>。</p></li>
+<li><p>要查看支持的数据类型、可为空行为以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

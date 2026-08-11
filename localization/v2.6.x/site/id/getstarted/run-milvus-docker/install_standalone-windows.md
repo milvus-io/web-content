@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Setelah menjalankan skrip instalasi:​</p>
 <ul>
 <li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.​</p></li>
-<li><p>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
+<li><p>Embed etcd telah diinstal bersama Milvus dalam kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
 <li><p>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.​</p></li>
 </ul>
 <p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang disimpan.​</p>
@@ -137,7 +137,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Jalankan Milvus sebagai kontainer Docker.​</p>
+<li><p>Jalankan Milvus sebagai kontainer Docker.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
@@ -369,7 +369,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Pesan kesalahan “Read config failed” saat Milvus dimulai</span>
   
  </span></p>
-<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah <code translate="no">docker exec</code> untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>/milvus/configs</strong> sebagai berikut:​</p>
+<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah ` <code translate="no">docker exec</code> ` untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>`/milvus/configs</strong> ` sebagai berikut:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

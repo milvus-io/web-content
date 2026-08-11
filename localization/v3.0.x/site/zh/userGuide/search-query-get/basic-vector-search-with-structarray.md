@@ -2,7 +2,7 @@
 id: basic-vector-search-with-structarray.md
 title: 使用 StructArray 进行基础向量搜索
 summary: >-
-  使用此页面可在 StructArray 字段内的向量子字段上执行向量搜索。StructArray
+  使用此页面可在 StructArray 字段内的向量字段上执行向量搜索。StructArray
   支持两种基本的向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">使用 StructArray 进行基础向量搜索<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用本页面可在 StructArray 字段内的向量字段上执行向量搜索。StructArray 支持两种基本向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
-<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于嵌入列表搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
+    </button></h1><p>使用本页面可在 StructArray 字段内的向量子字段上执行向量搜索。StructArray 支持两种基本向量搜索模式：嵌入列表搜索（对存储在每个实体中的嵌入列表进行评分）和元素级搜索（独立搜索每个 Struct 元素）。</p>
+<p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code><a href="/docs/zh/create-structarray-field.md">的</a> StructArray 字段。每个块包含文本、标量元数据、一个名为<code translate="no">emb_list_vector</code> 的向量字段（带有用于嵌入列表搜索的索引），以及一个名为<code translate="no">emb</code> 的向量字段（带有用于元素级搜索的索引）。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ summary: >-
 <tbody>
 <tr><td>创建一个 StructArray 字段，例如<code translate="no">chunks</code> 。</td><td><a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a></td></tr>
 <tr><td>插入其<code translate="no">chunks</code> 字段包含Struct对象的实体。</td><td><a href="/docs/zh/insert-data-into-structarray-fields.md">将数据插入 StructArray 字段</a></td></tr>
-<tr><td>在<code translate="no">chunks[emb_list_vector]</code> 上为EmbeddingList搜索创建一个<code translate="no">MAX_SIM*</code> 索引。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
+<tr><td>在<code translate="no">chunks[emb_list_vector]</code> 上为EmbeddingList搜索创建<code translate="no">MAX_SIM*</code> 索引。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
 <tr><td>在<code translate="no">chunks[emb]</code> 上创建常规向量度量索引，用于元素级搜索。</td><td><a href="/docs/zh/index-structarray-fields.md">为 StructArray 字段建立索引</a></td></tr>
 </tbody>
 </table>
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当查询本身包含多个向量，且目标 StructArray 向量子字段使用<code translate="no">MAX_SIM*</code> 度量进行索引时，请使用 EmbeddingList 搜索。结果为实体级匹配。</p>
+    </button></h2><p>当查询本身包含多个向量，且目标 StructArray 向量子字段采用<code translate="no">MAX_SIM*</code> 度量进行索引时，请使用 EmbeddingList 搜索。结果为实体级匹配。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -221,7 +221,7 @@ results = client.search(
 <li><p>使用<code translate="no">chunks.emb</code> 代替必需的子字段路径语法<code translate="no">chunks[emb]</code> 。</p></li>
 <li><p>对使用常规向量度量进行索引的向量子字段使用 EmbeddingList 查询。</p></li>
 <li><p>对使用<code translate="no">MAX_SIM*</code> 度量进行索引的向量字段使用常规向量查询。</p></li>
-<li><p>期望元素级搜索<code translate="no">limit</code> 返回相应数量的唯一父实体。其实它返回的是元素匹配结果。</p></li>
+<li><p>期望元素级搜索<code translate="no">limit</code> 返回相应数量的唯一父实体。它返回的是元素匹配结果。</p></li>
 <li><p>预期 EmbeddingList 搜索会返回一个特定的元素偏移量，但实际返回的是实体级别的匹配结果。</p></li>
 <li><p>将同一个向量子场同时用于两种搜索模式。应使用独立的向量子场，因为每个向量子场仅支持一种索引。</p></li>
 </ul>
@@ -242,7 +242,7 @@ results = client.search(
       </svg>
     </button></h2><ol>
 <li><p>若要通过标量条件限制元素级搜索，请参阅《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
-<li><p>若要按得分或距离阈值进行搜索，请参阅《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
+<li><p>若要按分数或距离阈值进行搜索，请参阅《<a href="/docs/zh/range-search-with-structarray.md">使用 StructArray 进行范围搜索</a>》。</p></li>
 <li><p>若要在元素级搜索后，为每个父实体最多返回一个结果，请参阅《<a href="/docs/zh/grouping-search-with-structarray.md">使用 StructArray 进行分组搜索</a>》。</p></li>
 <li><p>若要将 StructArray 搜索与其他向量搜索结合使用，请参阅《<a href="/docs/zh/hybrid-search-with-structarray.md">使用 StructArray 进行混合搜索</a>》。</p></li>
 <li><p>如需查看支持的数据类型、度量、过滤器以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制》</a>。</p></li>

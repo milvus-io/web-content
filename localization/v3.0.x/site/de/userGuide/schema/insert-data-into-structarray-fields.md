@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
+<p>In einer Einfüge-Nutzlast ist „ <code translate="no">chunks</code> “ ein reguläres Feld, dessen Wert ein Array von Struct-Objekten ist. Verwenden Sie innerhalb jedes Objekts Unterfeldnamen wie „ <code translate="no">text</code> “ und „ <code translate="no">emb</code> “. Verwenden Sie die Pfadsyntax, wie z. B. „ <code translate="no">chunks[text]</code> “ oder „ <code translate="no">chunks[emb]</code> “, erst nach dem Einfügen, wenn Sie Indizes erstellen, Suchvorgänge ausführen, Filter erstellen oder Ausgabefelder angeben.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Die Struktur der Einfügungs-Nutzdaten verstehen<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -334,7 +334,7 @@ Nullfähige „StructArray“-Felder sind nur in Milvus v3.0.x verfügbar. Wenn 
 <li><p>Einfügen von mehr Struct-Elementen, als „ <code translate="no">max_capacity</code> “ zulässt.</p></li>
 <li><p>Nur ein Unterfeld auf „ <code translate="no">null</code> “ setzen, während andere Unterfelder im selben „StructArray“-Wert gültig sind.</p></li>
 <li><p>Das Schreiben von Vektoren ausschließlich in „ <code translate="no">emb_list_vector</code> “ und der anschließende Versuch, eine Suche auf Elementebene in „ <code translate="no">chunks[emb]</code> “ durchzuführen.</p></li>
-<li><p>Das Schreiben von Vektoren ausschließlich in „ <code translate="no">emb</code> “, gefolgt vom Versuch, eine „EmbeddingList“-Suche in „ <code translate="no">chunks[emb_list_vector]</code> “ durchzuführen.</p></li>
+<li><p>Das Schreiben von Vektoren ausschließlich in „ <code translate="no">emb</code> “, gefolgt vom Versuch, eine „EmbeddingList“-Suche auf „ <code translate="no">chunks[emb_list_vector]</code> “ durchzuführen.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

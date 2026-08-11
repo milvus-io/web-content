@@ -306,7 +306,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Periksa konfigurasi yang telah diperbarui.</p>
 <pre><code translate="no" class="language-shell">helm get values my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Hasilnya akan menampilkan konfigurasi yang telah diperbarui.</p></li>
+<p>Hasilnya seharusnya menampilkan konfigurasi yang telah diperbarui.</p></li>
 </ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Akses Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -363,11 +363,11 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>Jalankan perintah berikut untuk mendapatkan manifest Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas merender templat bagan untuk klaster Milvus dan menyimpan hasilnya ke berkas manifest bernama <code translate="no">milvus_manifest.yaml</code>. Dengan menggunakan manifest ini, Anda dapat menginstal klaster Milvus beserta komponen dan ketergantungannya dalam pod terpisah.</p>
+<p>Perintah di atas merender templat chart untuk kluster Milvus dan menyimpan hasilnya ke berkas manifest bernama <code translate="no">milvus_manifest.yaml</code>. Dengan menggunakan manifest ini, Anda dapat menginstal kluster Milvus beserta komponen dan ketergantungannya dalam pod terpisah.</p>
 <div class="alert note">
 <ul>
 <li>Untuk menginstal instance Milvus dalam mode mandiri di mana semua komponen Milvus terdapat dalam satu pod, Anda harus menjalankan perintah ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` sebagai gantinya untuk menghasilkan templat chart untuk instance Milvus dalam mode mandiri.</li>
-<li>Untuk mengubah konfigurasi Milvus, unduh <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> templat, masukkan pengaturan yang Anda inginkan ke dalamnya, lalu gunakan <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> untuk merender manifest sesuai dengan pengaturan tersebut.</li>
+<li>Untuk mengubah konfigurasi Milvus, unduh <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> templat, masukkan pengaturan yang Anda inginkan ke dalamnya, dan gunakan <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> untuk merender manifest sesuai dengan pengaturan tersebut.</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. Unduh skrip pengunduhan gambar<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">

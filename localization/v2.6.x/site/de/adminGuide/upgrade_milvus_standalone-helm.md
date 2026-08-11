@@ -134,7 +134,7 @@ Das Milvus-Helm-Charts-Repo unter <code translate="no">https://milvus-io.github.
 <p>So überprüfen Sie die Kompatibilität der Helm-Chart-Version mit den Milvus-Versionen:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
-<p>In dieser Anleitung wird davon ausgegangen, dass Sie die neueste Version installieren. Wenn Sie eine bestimmte Version installieren müssen, geben Sie den Parameter <code translate="no">--version</code> entsprechend an.</p>
+<p>In dieser Anleitung wird davon ausgegangen, dass Sie die neueste Version installieren. Wenn Sie eine bestimmte Version installieren müssen, geben Sie den Parameter „ <code translate="no">--version</code> “ entsprechend an.</p>
 <h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Schritt 2: Upgrade auf v2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

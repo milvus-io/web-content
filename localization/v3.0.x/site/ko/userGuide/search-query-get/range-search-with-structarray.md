@@ -3,7 +3,7 @@ id: range-search-with-structarray.md
 title: StructArray를 사용한 범위 검색
 summary: >-
   이 페이지를 사용하여 StructArray 벡터 하위 필드에 대해 범위 검색을 실행할 수 있습니다. 범위 검색은 점수나 거리가 지정된 범위
-  내에 속하는 벡터 일치 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터
+  내에 속하는 벡터 검색 결과를 반환합니다. StructArray 필드의 경우, 각 Struct 요소를 독립적으로 검색하는 요소 수준 벡터
   검색과 함께 범위 검색을 사용하십시오.
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">StructArray를 사용한 범위 검색<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
@@ -281,7 +281,7 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>일치하는 Struct 요소를 포함하는 엔티티의 기본 키입니다.</td></tr>
 <tr><td><code translate="no">distance</code> 또는 점수</td><td>쿼리 벡터와 일치하는 Struct 요소 벡터 간의 점수 또는 거리입니다.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>반환 시 StructArray 필드 내에서 일치하는 Struct 요소의 0을 기준으로 한 위치.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>반환 시 StructArray 필드 내에서 일치하는 Struct 요소의 0을 기준으로 한 위치입니다.</td></tr>
 <tr><td>중복된 기본 키</td><td>가능합니다. 동일한 엔티티 내의 두 개 이상의 Struct 요소가 지정된 범위에 포함될 수 있습니다.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>이는 고유한 상위 엔티티가 아닌 요소 일치에 적용됩니다.</td></tr>
 </tbody>
@@ -325,7 +325,7 @@ results = client.hybrid_search(
 <li><p><code translate="no">chunks[emb_list_vector]</code> 에 대해 범위 검색을 실행하는 경우. 이 메트릭은 EmbeddingList 검색용으로 설계되었습니다.</p></li>
 <li><p>요소 수준 범위 검색에 <code translate="no">COSINE</code> 와 같은 일반 메트릭 대신 <code translate="no">MAX_SIM_COSINE</code> 를 사용하는 경우.</p></li>
 <li><p>일반 벡터 쿼리 대신 <code translate="no">EmbeddingList</code> 쿼리를 사용하는 경우.</p></li>
-<li><p>범위 검색 결과가 상위 엔티티별로 고유할 것으로 기대합니다. 범위 검색은 일치하는 Struct 요소 히트를 반환합니다.</p></li>
+<li><p>범위 검색 결과가 상위 엔티티별로 고유할 것으로 기대하는 경우. 범위 검색은 일치하는 Struct 요소 히트를 반환합니다.</p></li>
 <li><p>필수 하위 필드 경로 구문( <code translate="no">chunks[emb]</code>) 대신 <code translate="no">chunks.emb</code> 를 사용하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">

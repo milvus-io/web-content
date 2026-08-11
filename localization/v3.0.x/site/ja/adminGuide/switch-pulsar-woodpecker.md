@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、<strong>Milvusクラスタの</strong>メッセージキュー（MQ）を、<strong>Pulsar</strong>（組み込みまたは外部）<strong>とWoodpecker</strong>（MinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「MQタイプの切り替え</a>」を参照してください。</p>
+    </button></h1><p>このページでは、<strong>Milvusクラスタの</strong>メッセージキュー（MQ）を、<strong>Pulsar</strong>（組み込みまたは外部）<strong>とWoodpecker</strong>（MinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「メッセージキューの切り替え」</a>を参照してください。</p>
 <div class="alert note">
-<p><strong>前提条件：</strong>MQの切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
+<p><strong>前提条件:</strong>「メッセージキューの切り替え」機能は<strong>、Milvus 3.0 以降で</strong>利用可能です。作業を開始する前に、Milvus インスタンスを Milvus 3.0 以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
 <p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
@@ -58,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong>テストコレクションの作成、データの挿入、クエリの実行などを行い、Milvus クラスタが正常に動作していることを確認してください。</p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します。</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord 管理インターフェースを公開し、switch API を呼び出します:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
 <p>別のターミナルで：</p>
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Pulsar 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> 経由で<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部に公開されていないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
+<p><strong>ステップ 2: MQ の切り替えを実行します。</strong>MixCoord サービスは外部からアクセスできないため、MixCoord ポッド内部から切り替え API を実行してください:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -173,7 +173,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=woodpecker]</code> がログに記録されます。</p>
-<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する設定を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
+<p><strong>ステップ 4: Operator 内の MQ タイプを更新します。</strong>Operator が切り替えを元に戻さないように、<strong>Operator</strong>が管理する構成を更新します<strong>。</strong> <code translate="no">change_configmap.yaml</code> を作成します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、ポッドが新しい構成で再起動されます。</p>
+<p><strong>ステップ 2: 対象の Pulsar 接続を設定し、Milvus を再起動します。</strong>Pulsar 接続<strong>を</strong>`<code translate="no">spec.config</code> ` に配置し（Operator は `<code translate="no">spec.config</code> ` を `<code translate="no">user.yaml</code>` に変換します）、MQ タイプを設定します。CR を適用すると、新しい構成でポッドが再起動されます。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -243,7 +243,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=pulsar]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に切り戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">サポートされるシナリオ<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

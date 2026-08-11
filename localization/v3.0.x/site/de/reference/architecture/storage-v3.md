@@ -3,7 +3,8 @@ id: storage-v3.md
 title: Speicher V3Compatible with Milvus 3.0.x
 summary: >-
   Erfahren Sie, für welche Funktionen von Milvus 3.0 „Storage V3“ erforderlich
-  ist, wie Sie diese aktivieren und welche Kompatibilitätsbeschränkungen gelten.
+  ist, wie Sie diese aktivieren können und welche Kompatibilitätsbeschränkungen
+  gelten.
 beta: Milvus 3.0.x
 ---
 <h1 id="Storage-V3" class="common-anchor-header">Speicher V3<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Storage-V3" class="anchor-icon" translate="no">
@@ -80,7 +81,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><div class="alert warning">
-<p>Sobald Milvus Daten in Storage V3 schreibt, wird ein Downgrade auf eine Milvus-Version, die Storage V3 nicht lesen kann, nicht unterstützt. Das spätere Deaktivieren von Storage V3 führt nicht sofort zur Konvertierung aller vorhandenen Storage-V3-Daten oder zur Wiederherstellung der Kompatibilität mit der älteren Version.</p>
+<p>Sobald Milvus Daten in „Storage V3“ schreibt, wird ein Downgrade auf eine Milvus-Version, die „Storage V3“ nicht lesen kann, nicht unterstützt. Das spätere Deaktivieren von „Storage V3“ führt nicht sofort zur Konvertierung aller vorhandenen „Storage V3“-Daten oder zur Wiederherstellung der Kompatibilität mit der älteren Version.</p>
 </div>
 <p>Beachten Sie vor der Aktivierung von Storage V3 das folgende Datenverhalten:</p>
 <ul>

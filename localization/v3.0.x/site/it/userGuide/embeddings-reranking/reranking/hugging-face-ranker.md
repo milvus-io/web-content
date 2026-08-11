@@ -22,7 +22,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca vettoriale ordina i risultati in base alla distanza vettoriale, ma l'ordine iniziale potrebbe non riflettere l'adeguatezza delle risposte fornite dal testo di ciascun candidato alla query. Hugging Face Ranker invia la query e il testo dei candidati ai <a href="https://huggingface.co/docs/inference-providers/index">provider di inferenza Hugging Face</a> ospitati e utilizza i punteggi dell'<code translate="no">sentence-similarity</code> e per riordinare i candidati restituiti da Milvus.</p>
+    </button></h1><p>La ricerca vettoriale ordina i risultati in base alla distanza vettoriale, ma l'ordine iniziale potrebbe non riflettere l'adeguatezza delle risposte fornite dai testi dei candidati alla query. Hugging Face Ranker invia la query e i testi dei candidati ai <a href="https://huggingface.co/docs/inference-providers/index">provider di inferenza Hugging Face</a> ospitati e utilizza i punteggi dell'<code translate="no">sentence-similarity</code> e per riordinare i candidati restituiti da Milvus.</p>
 <p>Questa integrazione utilizza il router Hugging Face ospitato. Per effettuare una nuova classificazione utilizzando un servizio Text Embeddings Inference (TEI) distribuito separatamente, consultare <a href="/docs/it/tei-ranker.md">TEI Ranker</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ beta: Milvus v2.6.20+
 <li><strong>Recupera le entità candidate.</strong> Milvus effettua la ricerca nel campo vettoriale configurato e raccoglie le entità candidate.</li>
 <li><strong>Preparazione del testo per il re-ranking.</strong> La funzione legge il testo della query da <code translate="no">params.queries</code> e il testo dei candidati dal campo <code translate="no">VARCHAR</code> specificato in <code translate="no">input_field_names</code>.</li>
 <li><strong>Richiesta dei punteggi di similarità.</strong> Milvus invia la query come <code translate="no">source_sentence</code> e i testi candidati come <code translate="no">sentences</code> tramite <code translate="no">hf-inference</code> alla pipeline Hugging Face <code translate="no">sentence-similarity</code>.</li>
-<li><strong>Riorganizza i candidati in ordine di punteggio.</strong> Hugging Face restituisce un punteggio per ciascun candidato. Milvus ordina i candidati dal punteggio più alto a quello più basso e restituisce i risultati riorganizzati.</li>
+<li><strong>Riorganizza i candidati in base al punteggio.</strong> Hugging Face restituisce un punteggio per ciascun candidato. Milvus ordina i candidati dal punteggio più alto a quello più basso e restituisce i risultati riorganizzati.</li>
 </ol>
 <p><strong>Come vengono calcolati i punteggi di similarità</strong></p>
 <p><span class="img-wrapper">
@@ -109,7 +109,7 @@ beta: Milvus v2.6.20+
 <li>Una collezione che memorizza il testo candidato in un campo di <code translate="no">VARCHAR</code> non nullo.</li>
 </ul>
 <div class="alert note">
-<p>Milvus non controlla se un modello Hugging Face rimanga disponibile tramite <code translate="no">hf-inference</code>, né se il modello soddisfi i requisiti di stabilità, latenza e qualità dell’output. Verificare il modello su Hugging Face e valutarlo in base al proprio carico di lavoro prima di utilizzarlo in produzione.</p>
+<p>Milvus non controlla se un modello Hugging Face rimanga disponibile tramite <code translate="no">hf-inference</code>, né se il modello soddisfi i requisiti di stabilità, latenza e qualità dell’output. Verificare il modello su Hugging Face e valutarlo in relazione al proprio carico di lavoro prima di utilizzarlo in produzione.</p>
 </div>
 <p>Gli esempi utilizzano <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a> solo a scopo dimostrativo della configurazione. Il modello non costituisce una raccomandazione né una certificazione da parte di Milvus.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurazione delle credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -303,7 +303,7 @@ client.insert(
 <tbody>
 <tr><td><code translate="no">reranker</code></td><td>Sì</td><td>L'implementazione del reranking. Impostare questo valore su <code translate="no">model</code>.</td></tr>
 <tr><td><code translate="no">provider</code></td><td>Sì</td><td>Il fornitore del modello. Impostare questo valore su <code translate="no">huggingface</code>.</td></tr>
-<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task " <code translate="no">sentence-similarity</code> ".</td></tr>
+<tr><td><code translate="no">model_name</code></td><td>Sì</td><td>L'ID del modello Hugging Face per un modello fornito tramite <code translate="no">hf-inference</code> per il task <code translate="no">sentence-similarity</code>.</td></tr>
 <tr><td><code translate="no">queries</code></td><td>Sì</td><td>Stringhe di query utilizzate per il riclassamento. Fornire esattamente una stringa per ogni query di ricerca, anche quando il recupero iniziale utilizza vettori di query.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>No</td><td>Il percorso del provider di inferenza di Hugging Face. Il valore predefinito e l'unico supportato in Milvus 2.6.20 è <code translate="no">hf-inference</code>.</td></tr>
 <tr><td><code translate="no">credential</code></td><td>No</td><td>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential</code> di <code translate="no">milvus.yaml</code>. Questo valore non è il token stesso.</td></tr>

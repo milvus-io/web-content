@@ -1,11 +1,12 @@
 ---
 id: single-vector-search.md
-title: البحث الأساسي عن المتجهات
+title: البحث المتجهي الأساسي
 summary: >-
-  قم بتشغيل عمليات البحث الأساسية للشبكات العصبية الاصطناعية في Milvus باستخدام
-  متجهات الاستعلام، وحقول الإخراج، والمرشحات، والنطاقات، والمكررات.
+  قم بإجراء عمليات بحث أساسية باستخدام الشبكات العصبية الاصطناعية (ANN) في
+  Milvus باستخدام متجهات الاستعلام وحقول الإخراج والمرشحات والنطاقات ومكررات
+  البحث.
 ---
-<h1 id="Basic-Vector-Search" class="common-anchor-header">البحث الأساسي عن المتجهات<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Basic-Vector-Search" class="common-anchor-header">البحث المتجهي الأساسي<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>استنادًا إلى ملف فهرس يسجّل الترتيب المصنّف لتضمينات المتجهات، يحدد البحث التقريبي لأقرب جار (ANN) مجموعة فرعية من تضمينات المتجهات استنادًا إلى متجه الاستعلام المنقول في طلب البحث المستلم، ويقارن متجه الاستعلام مع تلك الموجودة في المجموعة الفرعية، ويعيد النتائج الأكثر تشابهًا. مع البحث باستخدام ANN، يوفر ميلفوس تجربة بحث فعالة. تساعدك هذه الصفحة على تعلم كيفية إجراء عمليات بحث ANN الأساسية.</p>
+    </button></h1><p>استنادًا إلى ملف فهرس يسجل الترتيب المصنف لتضمينات المتجهات، يحدد البحث عن أقرب الجيران التقريبي (ANN) مجموعة فرعية من تضمينات المتجهات بناءً على متجه الاستعلام الوارد في طلب البحث المستلم، ويقارن متجه الاستعلام مع تلك الموجودة في المجموعة الفرعية، ويعرض النتائج الأكثر تشابهًا. بفضل البحث ANN، يوفر Milvus تجربة بحث فعالة. تساعدك هذه الصفحة على تعلم كيفية إجراء عمليات البحث الأساسية باستخدام ANN.</p>
 <div class="alert note">
-<p>إذا قمت بإضافة حقول جديدة ديناميكيًا بعد إنشاء المجموعة، فإن عمليات البحث التي تتضمن هذه الحقول ستُرجع القيم الافتراضية المحددة أو NULL للكيانات التي لم تقم بتعيين قيم محددة بشكل صريح. للحصول على التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p>
+<p>إذا أضفت حقولًا جديدة بعد إنشاء المجموعة، فإن عمليات البحث التي تتضمن هذه الحقول تعرض القيم الافتراضية المحددة أو " <code translate="no">NULL</code> " (لم يتم تعيين القيمة) للكيانات التي لم يتم تعيين قيم لها صراحةً. لمزيد من التفاصيل، راجع " <a href="/docs/ar/add-fields-to-an-existing-collection.md">تعديل مخطط المجموعة</a>".</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,20 +40,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعد بحث ANN وبحث k-Nearest Neighbours (kNN) هما الطريقتان المعتادتان في عمليات البحث عن التشابه المتجه. في بحث kNN، يجب مقارنة جميع المتجهات في فضاء المتجه مع متجه الاستعلام المحمول في طلب البحث قبل معرفة أكثرها تشابهًا، وهو ما يستغرق وقتًا طويلاً ويستهلك الكثير من الموارد.</p>
-<p>على عكس عمليات بحث kNN، تطلب خوارزمية بحث الشبكة العصبية الاصطناعية ملف <strong>فهرس</strong> يسجل الترتيب المصنف لتضمينات المتجهات. عند ورود طلب بحث، يمكنك استخدام ملف الفهرس كمرجع لتحديد موقع مجموعة فرعية تحتوي على الأرجح على تضمينات متجهات أكثر تشابهًا مع متجه الاستعلام بسرعة. وبعد ذلك، يمكنك استخدام <strong>نوع المقياس</strong> المحدد لقياس التشابه بين متجه الاستعلام وتلك الموجودة في المجموعة الفرعية، وفرز أعضاء المجموعة بناءً على التشابه مع متجه الاستعلام، ومعرفة أعضاء المجموعة <strong>الأعلى K.</strong> </p>
-<p>تعتمد عمليات بحث ANN على فهارس مبنية مسبقًا، وقد يختلف إنتاجية البحث واستخدام الذاكرة وصحة البحث باختلاف أنواع الفهارس التي تختارها. تحتاج إلى الموازنة بين أداء البحث وصحة البحث.</p>
-<p>ولتقليل منحنى التعلم، يوفر Milvus <strong>الفهرس التلقائي</strong>. باستخدام <strong>AUTOINDEX،</strong> يمكن لـ Milvus تحليل توزيع البيانات داخل مجموعتك أثناء إنشاء الفهرس وتعيين معلمات الفهرس الأكثر تحسينًا بناءً على التحليل لتحقيق التوازن بين أداء البحث وصحته.</p>
-<p>ستجد في هذا القسم معلومات مفصلة حول المواضيع التالية:</p>
+    </button></h2><p>يُعد كل من البحث باستخدام الشبكة العصبية الاصطناعية (ANN) والبحث باستخدام أقرب k جيران (kNN) من الطرق المعتادة في عمليات البحث عن التشابه بين المتجهات. في البحث باستخدام kNN، يجب مقارنة جميع المتجهات في الفضاء المتجهي بمتجه الاستعلام الوارد في طلب البحث قبل تحديد المتجهات الأكثر تشابهًا، وهو ما يستغرق وقتًا طويلاً ويستهلك موارد كثيرة.</p>
+<p>على عكس عمليات البحث kNN، تطلب خوارزمية البحث ANN ملف <strong>فهرس</strong> يسجل الترتيب المصنف لتضمينات المتجهات. عند وصول طلب بحث، يمكنك استخدام ملف الفهرس كمرجع لتحديد موقع مجموعة فرعية تحتوي على الأرجح على تضمينات المتجهات الأكثر تشابهًا مع متجه الاستعلام بسرعة. بعد ذلك، يمكنك استخدام <strong>نوع المقياس</strong> المحدد لقياس التشابه بين متجه الاستعلام والمتجهات الموجودة في المجموعة الفرعية، وفرز عناصر المجموعة بناءً على التشابه مع متجه الاستعلام، وتحديد <strong>أفضل K</strong> عناصر في المجموعة.</p>
+<p>تعتمد عمليات البحث باستخدام الشبكات العصبية الاصطناعية (ANN) على الفهارس المعدة مسبقًا، وقد تختلف سرعة البحث واستخدام الذاكرة ودقة البحث باختلاف أنواع الفهارس التي تختارها. تحتاج إلى تحقيق التوازن بين أداء البحث ودقته.</p>
+<p>لتقليل منحنى التعلم، يوفر Milvus <strong>ميزة AUTOINDEX</strong>. باستخدام <strong>AUTOINDEX،</strong> يمكن لـ Milvus تحليل توزيع البيانات داخل مجموعتك أثناء إنشاء الفهرس، وتعيين معلمات الفهرس الأكثر تحسينًا بناءً على التحليل لتحقيق التوازن بين أداء البحث ودقته.</p>
+<p>في هذا القسم، ستجد معلومات تفصيلية حول الموضوعات التالية:</p>
 <ul>
-<li><p><a href="/docs/ar/single-vector-search.md#Single-Vector-Search">البحث أحادي المتجه</a></p></li>
-<li><p><a href="/docs/ar/single-vector-search.md#Bulk-Vector-Search">البحث في متجه واحد</a></p></li>
-<li><p><a href="/docs/ar/single-vector-search.md#ANN-Search-in-Partition">بحث ANN في الأقسام</a></p></li>
+<li><p><a href="/docs/ar/single-vector-search.md#Single-Vector-Search">البحث عن متجه واحد</a></p></li>
+<li><p><a href="/docs/ar/single-vector-search.md#Bulk-Vector-Search">البحث عن متجهات مجمعة</a></p></li>
+<li><p><a href="/docs/ar/single-vector-search.md#ANN-Search-in-Partition">البحث باستخدام الشبكات العصبية الاصطناعية (ANN) في الأقسام</a></p></li>
 <li><p><a href="/docs/ar/single-vector-search.md#Use-Output-Fields">استخدام حقول الإخراج</a></p></li>
 <li><p><a href="/docs/ar/single-vector-search.md#Use-Limit-and-Offset">استخدام الحد والإزاحة</a></p></li>
 <li><p><a href="/docs/ar/single-vector-search.md#Use-Level">استخدام المستوى</a></p></li>
 <li><p><a href="/docs/ar/single-vector-search.md#Get-Recall-Rate">الحصول على معدل الاسترجاع</a></p></li>
-<li><p><a href="/docs/ar/single-vector-search.md#Enhancing-ANN-Search">تعزيز بحث ANN</a></p></li>
+<li><p><a href="/docs/ar/single-vector-search.md#Enhancing-ANN-Search">تحسين البحث في الشبكات العصبية الاصطناعية</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">البحث أحادي المتجه<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,10 +70,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في عمليات بحث ANN، يشير البحث أحادي المتجه إلى بحث يتضمن متجه استعلام واحد فقط. استنادًا إلى الفهرس الذي تم إنشاؤه مسبقًا ونوع المقياس المنقول في طلب البحث، سيجد ميلفوس أفضل المتجهات K الأكثر تشابهًا مع متجه الاستعلام.</p>
-<p>في هذا القسم، ستتعلم في هذا القسم كيفية إجراء بحث متجه واحد. يحمل طلب البحث متجه استعلام واحد ويطلب من ميلفوس استخدام الضرب الداخلي (IP) لحساب التشابه بين متجهات الاستعلام والمتجهات في المجموعة وإرجاع أكثر ثلاثة متجهات تشابهًا.</p>
+    </button></h2><p>في عمليات البحث باستخدام الشبكات العصبية الاصطناعية (ANN)، يشير البحث أحادي المتجه إلى عملية بحث تتضمن متجه استعلام واحد فقط. استنادًا إلى الفهرس المُعد مسبقًا ونوع المقياس الموجود في طلب البحث، سيقوم Milvus بالعثور على أفضل K متجهات هي الأكثر تشابهًا مع متجه الاستعلام.</p>
+<p>في هذا القسم، ستتعلم كيفية إجراء بحث أحادي المتجه. يحمل طلب البحث متجه استعلام واحد ويطلب من Milvus استخدام الحاصل الداخلي (IP) لحساب التشابه بين متجهات الاستعلام والمتجهات الموجودة في المجموعة، ثم يعرض المتجهات الثلاثة الأكثر تشابهًا.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -223,7 +229,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -251,8 +256,8 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يصنف ميلفوس نتائج البحث حسب درجات التشابه بينها وبين متجه الاستعلام بترتيب تنازلي. يُطلق على درجة التشابه أيضًا المسافة إلى متجه الاستعلام، ويختلف نطاق قيمتها باختلاف أنواع المقاييس المستخدمة.</p>
-<p>يسرد الجدول التالي أنواع المقاييس القابلة للتطبيق ونطاقات المسافة المقابلة.</p>
+<p>يقوم Milvus بترتيب نتائج البحث حسب درجات التشابه مع متجه الاستعلام بترتيب تنازلي. تُعرف درجة التشابه أيضًا باسم المسافة إلى متجه الاستعلام، وتتنوع قيمها وفقًا لأنواع المقاييس المستخدمة.</p>
+<p>يسرد الجدول التالي أنواع المقاييس القابلة للتطبيق ونطاقات المسافة المقابلة لها.</p>
 <table>
    <tr>
      <th><p>نوع المقياس</p></th>
@@ -262,7 +267,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>تشير القيمة الأصغر إلى تشابه أعلى.</p></td>
-     <td><p>[0, ∞)</p></td>
+     <td><p>[0، ∞)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
@@ -282,7 +287,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>تشير القيمة الأصغر إلى تشابه أعلى.</p></td>
-     <td><p>[0، خافت (متجه)]</p></td>
+     <td><p>[0، dim(vector)]</p></td>
    </tr>
 </table>
 <h2 id="Bulk-Vector-Search" class="common-anchor-header">البحث عن المتجهات المجمعة<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
@@ -300,9 +305,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>وبالمثل، يمكنك تضمين عدة متجهات استعلام في طلب البحث. سيُجري ميلفوس عمليات بحث ANN عن متجهات الاستعلام بالتوازي ويعيد مجموعتين من النتائج.</p>
+    </button></h2><p>وبالمثل، يمكنك تضمين متجهات استعلام متعددة في طلب البحث. سيقوم Milvus بإجراء عمليات بحث باستخدام الشبكات العصبية الاصطناعية (ANN) لمتجهات الاستعلام بشكل متوازٍ وإرجاع مجموعتين من النتائج.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
 query_vectors = [
@@ -454,7 +464,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -500,7 +509,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">البحث بالمفتاح الأساسي<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">البحث باستخدام المفتاح الأساسي<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -517,7 +526,12 @@ curl --request POST \
       </svg>
     </button></h2><p>بدلاً من تعيين متجهات الاستعلام، يمكنك استخدام المفاتيح الأساسية إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -539,7 +553,6 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -551,7 +564,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">البحث عن المفتاح الأساسي في القسم<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">البحث باستخدام الشبكة العصبية الاصطناعية (ANN) في القسم<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -566,10 +579,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لنفترض أنك أنشأت عدة أقسام في مجموعة، ويمكنك تضييق نطاق البحث إلى عدد محدد من الأقسام. في هذه الحالة، يمكنك تضمين أسماء الأقسام المستهدفة في طلب البحث لتقييد نطاق البحث ضمن الأقسام المحددة. يؤدي تقليل عدد الأقسام المتضمنة في البحث إلى تحسين أداء البحث.</p>
-<p>يفترض مقتطف الشيفرة التالي وجود قسم باسم <strong>PartitionA</strong> في مجموعتك.</p>
+    </button></h2><p>لنفترض أنك أنشأت أقسامًا متعددة في مجموعة ما، ويمكنك تضييق نطاق البحث ليشمل عددًا محددًا من الأقسام. في هذه الحالة، يمكنك تضمين أسماء الأقسام المستهدفة في طلب البحث لتقييد نطاق البحث ضمن الأقسام المحددة. يؤدي تقليل عدد الأقسام المشمولة في البحث إلى تحسين أداء البحث.</p>
+<p>يفترض مقتطف الشفرة التالي وجود قسم باسم <strong>PartitionA</strong> في مجموعتك.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
@@ -676,7 +694,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -721,9 +738,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في نتيجة البحث، يتضمن Milvus قيم الحقل الأساسي ومسافات/درجات التشابه للكيانات التي تحتوي على تضمينات متجه K الأعلى افتراضيًا. يمكنك تضمين أسماء الحقول المستهدفة، بما في ذلك كل من الحقول المتجهة والحقول القياسية في طلب البحث كحقول مخرجات لجعل نتائج البحث تحمل القيم من الحقول الأخرى في هذه الكيانات.</p>
+    </button></h2><p>في نتيجة البحث، يقوم Milvus تضمين قيم الحقول الأساسية ومسافات/درجات التشابه للكيانات التي تحتوي على أفضل K تضمينات متجهة بشكل افتراضي. يمكنك تضمين أسماء الحقول المستهدفة، بما في ذلك الحقول المتجهة والعددية، في طلب البحث كحقول إخراج لجعل نتائج البحث تحمل القيم من الحقول الأخرى في هذه الكيانات.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -836,7 +858,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -884,11 +905,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، يرتب ميلفوس نتائج البحث حسب درجة تشابهها مع متجه الاستعلام. إذا كنت تريد أن تتبع الكيانات التي تم إرجاعها ترتيب الحقول القياسية، أضف <code translate="no">order_by_fields</code> إلى طلب البحث.</p>
-<p>يحدد كل عنصر في <code translate="no">order_by_fields</code> حقل قياسي واتجاه الفرز. استخدم <code translate="no">&quot;asc&quot;</code> للترتيب التصاعدي أو <code translate="no">&quot;desc&quot;</code> للترتيب التنازلي. إذا حذفت <code translate="no">order</code> ، يقوم ميلفوس بفرز الحقل بترتيب تصاعدي.</p>
-<p>يقوم المثال التالي بفرز نتائج البحث حسب <code translate="no">price</code> من الأقل إلى الأعلى. قم بتضمين حقل الفرز في <code translate="no">output_fields</code> إذا كنت تريد فحص قيمة الحقل في الاستجابة.</p>
+    </button></h2><p>بشكل افتراضي، يقوم Milvus بترتيب نتائج البحث حسب درجة تشابهها مع متجه الاستعلام. إذا كنت تريد أن تتبع الكيانات التي يتم إرجاعها ترتيب الحقول القياسية، أضف <code translate="no">order_by_fields</code> إلى طلب البحث.</p>
+<p>يحدد كل عنصر في <code translate="no">order_by_fields</code> حقلًا عدديًا واتجاهًا للفرز. استخدم <code translate="no">&quot;asc&quot;</code> للترتيب التصاعدي أو <code translate="no">&quot;desc&quot;</code> للترتيب التنازلي. إذا حذفت <code translate="no">order</code> ، فسيقوم Milvus بفرز الحقل بالترتيب التصاعدي.</p>
+<p>يقوم المثال التالي بفرز نتائج البحث حسب <code translate="no">price</code> من الأقل إلى الأعلى. قم بتضمين حقل الفرز في <code translate="no">output_fields</code> إذا كنت ترغب في فحص قيمة الحقل في الاستجابة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -908,9 +934,14 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا الفرز حسب الحقول القياسية المتعددة. يطبق ميلفوس الحقول بالترتيب الذي تحدده. في المثال التالي، يقوم ميلفوس بفرز النتائج حسب <code translate="no">price</code> بترتيب تصاعدي. بالنسبة للكيانات التي لها نفس <code translate="no">price</code> ، يقوم ميلفوس بعد ذلك بالفرز حسب <code translate="no">rating</code> بترتيب تنازلي.</p>
+<p>يمكنك أيضًا الفرز حسب حقول عددية متعددة. يطبق Milvus الحقول بالترتيب الذي تحدده. في المثال التالي، يقوم Milvus بفرز النتائج حسب <code translate="no">price</code> بترتيب تصاعدي. بالنسبة للكيانات التي لها نفس <code translate="no">price</code> ، يقوم Milvus بعد ذلك بالفرز حسب <code translate="no">rating</code> بترتيب تنازلي.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -931,8 +962,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بالنسبة للكيانات التي لها نفس القيم في جميع حقول الترتيب حسب الحقول المحددة، يحتفظ Milvus بترتيب درجة التشابه الأصلي.</p>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">استخدام الحد والإزاحة<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<p>بالنسبة للكيانات التي لها نفس القيم في جميع حقول الترتيب المحددة، يحتفظ Milvus بالترتيب الأصلي وفقًا لدرجة التشابه.</p>
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">استخدام Limit و Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -947,14 +978,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قد تلاحظ أن المعلمة <code translate="no">limit</code> التي يتم حملها في طلبات البحث تحدد عدد الكيانات التي سيتم تضمينها في نتائج البحث. وتحدد هذه المعلمة الحد الأقصى لعدد الكيانات المراد إرجاعها في بحث واحد، وعادةً ما يُطلق عليها اسم <strong>top-K</strong>.</p>
-<p>إذا كنت ترغب في إجراء استعلامات مرقمة، يمكنك استخدام حلقة لإرسال طلبات بحث متعددة، مع معلمات <strong>الحد</strong> <strong>والإزاحة</strong> المنقولة في كل طلب استعلام. على وجه التحديد، يمكنك تعيين معلمة <strong>الحد</strong> إلى عدد الكيانات التي تريد تضمينها في نتائج الاستعلام الحالية، وتعيين <strong>الإزاحة</strong> إلى إجمالي عدد الكيانات التي تم إرجاعها بالفعل.</p>
-<p>يوضح الجدول أدناه كيفية تعيين معلمات <strong>الحد</strong> <strong>والإزاحة</strong> للاستعلامات المرقمة عند إرجاع 100 كيان في المرة الواحدة.</p>
+    </button></h2><p>قد تلاحظ أن المعلمة <code translate="no">limit</code> المضمنة في طلبات البحث تحدد عدد الكيانات التي سيتم تضمينها في نتائج البحث. تحدد هذه المعلمة الحد الأقصى لعدد الكيانات التي سيتم إرجاعها في عملية بحث واحدة، وعادةً ما يشار إليها باسم <strong>top-K</strong>.</p>
+<p>إذا كنت ترغب في إجراء استعلامات مقسمة إلى صفحات، فيمكنك استخدام حلقة لإرسال طلبات بحث متعددة، مع تضمين المعلمتين <strong>Limit</strong> و <strong>Offset</strong> في كل طلب بحث. على وجه التحديد، يمكنك تعيين المعلمة <strong>Limit</strong> على عدد الكيانات التي تريد تضمينها في نتائج الاستعلام الحالي، وتعيين المعلمة <strong>Offset</strong> على العدد الإجمالي للكيانات التي تم إرجاعها بالفعل.</p>
+<p>يوضح الجدول أدناه كيفية تعيين المعلمتين <strong>Limit</strong> و <strong>Offset</strong> للاستعلامات المقسمة إلى صفحات عند إرجاع 100 كيان في المرة الواحدة.</p>
 <table>
    <tr>
      <th><p>الاستعلامات</p></th>
-     <th><p>الكيانات المراد إرجاعها لكل استعلام</p></th>
-     <th><p>الكيانات التي تم إرجاعها بالفعل في المجموع</p></th>
+     <th><p>الكيانات المطلوب إرجاعها لكل استعلام</p></th>
+     <th><p>إجمالي الكيانات التي تم إرجاعها بالفعل</p></th>
    </tr>
    <tr>
      <td><p>الاستعلام <strong>الأول</strong> </p></td>
@@ -972,14 +1003,19 @@ curl --request POST \
      <td><p>200</p></td>
    </tr>
    <tr>
-     <td><p>الاستعلام <strong>التاسع</strong> </p></td>
+     <td><p>الاستعلام <strong>رقم n</strong> </p></td>
      <td><p>100</p></td>
-     <td><p>100 × (ن-1)</p></td>
+     <td><p>100 × (n-1)</p></td>
    </tr>
 </table>
-<p>لاحظ أنه، يجب أن يكون مجموع <code translate="no">limit</code> و <code translate="no">offset</code> في بحث واحد لشبكة ANN أقل من 16,384.</p>
+<p>يرجى ملاحظة أن مجموع <code translate="no">limit</code> و <code translate="no">offset</code> في عملية بحث واحدة باستخدام الشبكة العصبية الاصطناعية (ANN) يجب أن يكون أقل من 16,384.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1057,7 +1093,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1068,7 +1103,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">تعيين منطقة زمنية مؤقتًا لمنطقة زمنية للبحث<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">تعيين منطقة زمنية مؤقتًا لعملية بحث<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1083,11 +1118,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، يمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء البحث. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
-<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة لـ <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> <strong>أمريكا/شيكاغو،</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
+    </button></h2><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، فيمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء البحث. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
+<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحًا <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">وفقًا لمعايير IANA</a> (على سبيل المثال، <strong>Asia/Shanghai</strong> أو <strong>America/Chicago</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
 <p>يوضح المثال أدناه كيفية تعيين منطقة زمنية مؤقتًا لعملية بحث:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -1108,7 +1148,6 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1120,7 +1159,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Enhancing-ANN-Search" class="common-anchor-header">تحسين بحث ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
+<h2 id="Enhancing-ANN-Search" class="common-anchor-header">تحسين البحث باستخدام الشبكات العصبية الاصطناعية (ANN)<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1135,36 +1174,36 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعمل AUTOINDEX على تسطيح منحنى التعلّم لعمليات بحث الشبكة الآلية بشكل كبير. ومع ذلك، قد لا تكون نتائج البحث صحيحة دائمًا مع زيادة أعلى K. من خلال تقليل نطاق البحث، وتحسين ملاءمة نتائج البحث، وتنويع نتائج البحث، يعمل ميلفوس على تحسينات البحث التالية.</p>
+    </button></h2><p>تعمل ميزة AUTOINDEX على تسهيل عملية تعلم عمليات البحث باستخدام الشبكات العصبية الاصطناعية (ANN) بشكل كبير. ومع ذلك، قد لا تكون نتائج البحث صحيحة دائمًا مع زيادة عدد النتائج الأولى (top-K). من خلال تقليل نطاق البحث، وتحسين ملاءمة نتائج البحث، وتنويع نتائج البحث، تعمل Milvus على تحقيق التحسينات التالية في عملية البحث.</p>
 <ul>
-<li><p>البحث المصفى</p>
-<p>يمكنك تضمين شروط التصفية في طلب البحث بحيث يقوم ميلفوس بإجراء تصفية للبيانات الوصفية قبل إجراء عمليات بحث ANN، مما يقلل نطاق البحث من المجموعة بأكملها إلى الكيانات المطابقة لشروط التصفية المحددة فقط.</p>
-<p>لمزيد من المعلومات حول تصفية البيانات الوصفية وشروط التصفية، راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/boolean.md">وشرح التصفية</a> والمواضيع ذات الصلة.</p></li>
-<li><p>نطاق البحث</p>
-<p>يمكنك تحسين ملاءمة نتائج البحث عن طريق تقييد مسافة أو درجة الكيانات التي تم إرجاعها ضمن نطاق محدد. في ميلفوس، يتضمن البحث في النطاق رسم دائرتين متحدتي المركز مع تضمين المتجه الأكثر تشابهًا مع متجه الاستعلام كمركز. يحدد طلب البحث نصف قطر كلتا الدائرتين، ويعيد ميلفوس جميع التضمينات المتجهة التي تقع ضمن الدائرة الخارجية وليس الدائرة الداخلية.</p>
-<p>لمعرفة المزيد حول بحث النطاق، راجع <a href="/docs/ar/range-search.md">بحث النطاق</a>.</p></li>
-<li><p>بحث التجميع</p>
-<p>إذا كانت الكيانات التي تم إرجاعها تحمل نفس القيمة في حقل معين، فقد لا تمثل نتائج البحث توزيع جميع التضمينات المتجهة في الفضاء المتجه. لتنويع نتائج البحث، فكر في استخدام بحث التجميع.</p>
-<p>لمعرفة المزيد حول بحث التجميع، راجع <a href="/docs/ar/grouping-search.md">بحث التجميع</a>,</p></li>
-<li><p>البحث المختلط</p>
-<p>يمكن أن تتضمن المجموعة حقول متجهات متعددة لحفظ التضمينات المتجهة التي تم إنشاؤها باستخدام نماذج تضمين مختلفة. من خلال القيام بذلك، يمكنك استخدام البحث المختلط لإعادة ترتيب نتائج البحث من هذه الحقول المتجهة، مما يحسن معدل الاستدعاء.</p>
-<p>لمعرفة المزيد حول البحث المختلط، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط</a>.</p></li>
+<li><p>البحث المُصفى</p>
+<p>يمكنك تضمين شروط التصفية في طلب البحث بحيث يقوم Milvus بتصفية البيانات الوصفية قبل إجراء عمليات البحث باستخدام الشبكات العصبية الاصطناعية (ANN)، مما يقلل نطاق البحث من المجموعة بأكملها إلى الكيانات التي تطابق شروط التصفية المحددة فقط.</p>
+<p>لمزيد من المعلومات حول تصفية البيانات الوصفية وشروط التصفية، راجع <a href="/docs/ar/filtered-search.md">«البحث المُصفى»</a> <a href="/docs/ar/boolean.md">و«شرح التصفية»</a> والمواضيع ذات الصلة.</p></li>
+<li><p>البحث في نطاق</p>
+<p>يمكنك تحسين ملاءمة نتائج البحث عن طريق تقييد المسافة أو النتيجة للكيانات التي يتم إرجاعها ضمن نطاق محدد. في Milvus، يتضمن البحث في النطاق رسم دائرتين متحدتي المركز مع اعتبار التضمين المتجه الأكثر تشابهًا مع متجه الاستعلام مركزًا لهما. يحدد طلب البحث نصف قطر كلتا الدائرتين، ويقوم Milvus بإرجاع جميع التضمينات المتجهة التي تقع داخل الدائرة الخارجية ولكن ليس داخل الدائرة الداخلية.</p>
+<p>لمزيد من المعلومات حول البحث في النطاق، راجع <a href="/docs/ar/range-search.md">«البحث</a> في <a href="/docs/ar/range-search.md">النطاق</a>».</p></li>
+<li><p>البحث بالتجميع</p>
+<p>إذا كانت الكيانات التي يتم إرجاعها تحتوي على نفس القيمة في حقل معين، فقد لا تمثل نتائج البحث توزيع جميع التضمينات المتجهة في الفضاء المتجه. لتنويع نتائج البحث، ضع في اعتبارك استخدام البحث حسب المجموعات.</p>
+<p>لمزيد من المعلومات حول البحث بالتجميع، راجع <a href="/docs/ar/grouping-search.md">البحث بالتجميع،</a></p></li>
+<li><p>البحث الهجين</p>
+<p>يمكن أن تتضمن المجموعة حقول متجهات متعددة لحفظ التضمينات المتجهة التي تم إنشاؤها باستخدام نماذج تضمين مختلفة. وبذلك، يمكنك استخدام البحث الهجين لإعادة ترتيب نتائج البحث من حقول المتجهات هذه، مما يؤدي إلى تحسين معدل الاسترجاع.</p>
+<p>لمزيد من المعلومات حول البحث الهجين، راجع <a href="/docs/ar/multi-vector-search.md">«البحث الهجين</a>».</p></li>
 <li><p>مكرر البحث</p>
-<p>يُرجع بحث ANN واحد 16,384 كيانًا كحد أقصى. فكر في استخدام مكرر البحث إذا كنت بحاجة إلى إرجاع المزيد من الكيانات في بحث واحد.</p>
-<p>للحصول على تفاصيل حول مكرر البحث، راجع مكرر <a href="/docs/ar/with-iterators.md">البحث</a>.</p></li>
-<li><p>البحث بالنص الكامل</p>
-<p>البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى الصلة. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًا.</p>
-<p>للحصول على تفاصيل حول البحث في النص الكامل، راجع <a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>.</p></li>
+<p>يعرض البحث الفردي باستخدام الشبكة العصبية الاصطناعية (ANN) ما يصل إلى 16,384 كيانًا كحد أقصى. ضع في اعتبارك استخدام مكررات البحث إذا كنت بحاجة إلى عرض المزيد من الكيانات في عملية بحث واحدة.</p>
+<p>للحصول على تفاصيل حول مكررات البحث، راجع <a href="/docs/ar/with-iterators.md">مكرر البحث</a>.</p></li>
+<li><p>البحث عن النص الكامل</p>
+<p>البحث عن النص الكامل هو ميزة تسترد المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات بيانات النص، ثم تصنف النتائج بناءً على مدى صلتها بالموضوع. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تتجاهل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، فإنها تبسط عمليات البحث المتجهي من خلال قبول إدخال النص الخام، وتحويل بيانات النص تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًّا.</p>
+<p>للحصول على تفاصيل حول البحث عن النص الكامل، راجع " <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>".</p></li>
 <li><p>مطابقة النص</p>
-<p>تتيح مطابقة الكلمات الرئيسية في ميلفوس استرجاع المستندات بدقة بناءً على مصطلحات محددة. تُستخدم هذه الميزة في المقام الأول للبحث المصفى لاستيفاء شروط محددة ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يسمح بالبحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
-<p>للحصول على تفاصيل حول مطابقة الكلمات المفتاحية، راجع <a href="/docs/ar/keyword-match.md">مطابقة الكلمات المفتاحية</a>.</p></li>
+<p>تتيح مطابقة الكلمات المفتاحية في Milvus استرجاع المستندات بدقة بناءً على مصطلحات محددة. تُستخدم هذه الميزة بشكل أساسي في البحث المُصفى لتلبية شروط محددة، ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يتيح إجراء عمليات بحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
+<p>للحصول على تفاصيل حول مطابقة الكلمات المفتاحية، راجع " <a href="/docs/ar/keyword-match.md">مطابقة الكلمات المفتاحية</a>".</p></li>
 <li><p>استخدام مفتاح التقسيم</p>
-<p>قد يؤثر تضمين حقول قياسية متعددة في تصفية البيانات الوصفية واستخدام شرط تصفية معقد نوعًا ما على كفاءة البحث. بمجرد تعيين حقل قياسي كمفتاح التقسيم واستخدام شرط تصفية يتضمن مفتاح التقسيم في طلب البحث، يمكن أن يساعد في تقييد نطاق البحث داخل الأقسام المطابقة لقيم مفتاح التقسيم المحددة.</p>
-<p>للحصول على تفاصيل حول مفتاح القسم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح القسم</a>.</p></li>
+<p>قد يؤثر تضمين حقول قياسية متعددة في تصفية البيانات الوصفية واستخدام شرط تصفية معقد نسبيًا على كفاءة البحث. بمجرد تعيين حقل قياسي كمفتاح التقسيم واستخدام شرط تصفية يتضمن مفتاح التقسيم في طلب البحث، يمكن أن يساعد ذلك في تقييد نطاق البحث ضمن الأقسام المطابقة لقيم مفتاح التقسيم المحددة.</p>
+<p>للحصول على تفاصيل حول مفتاح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
 <li><p>استخدام mmap</p>
 <p>للحصول على تفاصيل حول إعدادات mmap، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p></li>
 <li><p>ضغط التجميع</p>
-<p>للحصول على تفاصيل حول ضغط التجميع، راجع <a href="/docs/ar/clustering-compaction.md">ضغط التجميع</a>.</p></li>
+<p>للحصول على تفاصيل حول عمليات ضغط التجميع، راجع " <a href="/docs/ar/clustering-compaction.md">ضغط التجميع</a>".</p></li>
 <li><p>استخدام إعادة الترتيب</p>
-<p>للحصول على تفاصيل حول استخدام مصنفات الترتيب لتحسين ملاءمة نتائج البحث، راجع <a href="/docs/ar/decay-ranker-overview.md">نظرة عامة على مصنف التضاؤل</a> <a href="/docs/ar/model-ranker-overview.md">ونموذج مصنف النموذج</a>.</p></li>
+<p>للحصول على تفاصيل حول استخدام أدوات الترتيب لتحسين ملاءمة نتائج البحث، راجع <a href="/docs/ar/decay-ranker-overview.md">نظرة عامة</a> على <a href="/docs/ar/decay-ranker-overview.md">أداة الترتيب Decay</a> <a href="/docs/ar/model-ranker-overview.md">ونظرة عامة على أداة الترتيب Model</a>.</p></li>
 </ul>

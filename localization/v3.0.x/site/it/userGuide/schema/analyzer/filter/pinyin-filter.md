@@ -23,7 +23,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>La ricerca di testo in cinese richiede spesso agli utenti di digitare i caratteri cinesi esattamente come appaiono nel testo indicizzato. Nei flussi di lavoro relativi alla ricerca di nomi, al completamento automatico e alla ricerca durante la digitazione, gli utenti digitano spesso il pinyin anziché i caratteri cinesi. Ad esempio, un utente potrebbe digitare <code translate="no">zuqiu</code> per cercare <code translate="no">足球</code>. Il filtro <code translate="no">pinyin</code> aggiunge token Pinyin all'output dell'analizzatore, in modo che il testo cinese possa corrispondere all'input Pinyin senza dover mantenere un campo Pinyin separato.</p>
-<p>Il filtro <code translate="no">pinyin</code> viene solitamente utilizzato con il tokenizzatore <a href="/docs/it/jieba-tokenizer.md">Jieba</a> per il testo cinese. Funziona in una pipeline di filtri dell’analizzatore personalizzata ed è in grado di generare più forme di token Pinyin per lo stesso token cinese.</p>
+<p>Il filtro <code translate="no">pinyin</code> viene in genere utilizzato con il tokenizzatore <a href="/docs/it/jieba-tokenizer.md">Jieba</a> per il testo cinese. Funziona in una pipeline di filtri dell’analizzatore personalizzata e può generare più forme di token Pinyin per lo stesso token cinese.</p>
 <h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

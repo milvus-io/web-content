@@ -46,7 +46,7 @@ summary: >-
 <li><p><strong>生テキストの入力</strong>：テキスト文書を挿入するか、プレーンテキストでクエリを指定します。埋め込みモデルは不要です。</p></li>
 <li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザー</a>を使用して、テキストをインデックス化および検索可能な意味のある用語に処理します。</p></li>
 <li><p><strong>BM25関数による処理</strong>：組み込み関数が、これらの用語をBM25スコアリングに最適化されたスパースベクトル表現に変換します。</p></li>
-<li><p><strong>コレクションへの保存</strong>：Milvusは、高速な検索とランキングを実現するために、結果として得られたスパース埋め込みをコレクションに保存します。</p></li>
+<li><p><strong>コレクションへの保存</strong>：Milvusは、高速な検索とランキングを実現するために、結果として得られた疎な埋め込みベクトルをコレクションに保存します。</p></li>
 <li><p><strong>BM25 関連性スコアリング</strong>：検索時、Milvus は BM25 スコアリング関数を適用して文書の関連性を計算し、クエリ用語に最も一致する結果をランク付けして返します。</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -95,7 +95,7 @@ summary: >-
     </button></h3><p>コレクションのスキーマには、少なくとも以下の 3 つの必須フィールドを含める必要があります。</p>
 <ul>
 <li><p><strong>プライマリフィールド</strong>：コレクション内の各エンティティを一意に識別します。</p></li>
-<li><p><strong>文字列フィールド</strong>（<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> ）：生のテキストドキュメントを格納します。MilvusがBM25の関連性ランキング用にテキストを処理できるよう、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusは <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザーを使用します</a>。別のアナライザーを設定するには、「<a href="/docs/ja/analyzer-overview.md">アナライザーの概要」</a>を参照してください。このページの例では<code translate="no">VARCHAR</code> を使用しています。長いテキストの場合は、入力フィールドを<code translate="no">TEXT</code> として定義し、<code translate="no">max_length</code> を省略できます。完全な例については、<a href="/docs/ja/text.md">「テキストフィールド</a>」を参照してください。</p></li>
+<li><p><strong>文字列フィールド</strong>（<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> ）：生のテキストドキュメントを格納します。MilvusがBM25の関連性ランキングのためにテキストを処理できるよう、<code translate="no">enable_analyzer=True</code> を設定する必要があります。デフォルトでは、Milvusは <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザーを使用します</a>。別のアナライザーを設定するには、「<a href="/docs/ja/analyzer-overview.md">アナライザーの概要」</a>を参照してください。このページの例では<code translate="no">VARCHAR</code> を使用しています。長いテキストの場合は、入力フィールドを<code translate="no">TEXT</code> として定義し、<code translate="no">max_length</code> を省略できます。完全な例については、<a href="/docs/ja/text.md">「テキストフィールド</a>」を参照してください。</p></li>
 <li><p><strong>スパースベクトルフィールド</strong>(<code translate="no">SPARSE_FLOAT_VECTOR</code>)：BM25関数によって自動的に生成されたスパース埋め込みを格納します。</p></li>
 </ul>
 <div class="multipleCode">
@@ -339,11 +339,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、BM25互換のスパースベクトルに変換し、<code translate="no">sparse</code> フィールドに格納します。</p></td>
+     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、<code translate="no">sparse</code> フィールドに格納されるBM25互換のスパースベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>テキストからスパースベクトルへの変換が必要な<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> フィールドの名前です。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定できます。</p></td>
+     <td><p>テキストからスパースベクトルへの変換が必要な<code translate="no">VARCHAR</code> または<code translate="no">TEXT</code> フィールドの名前。<code translate="no">FunctionType.BM25</code> の場合、このパラメータには1つのフィールド名のみ指定できます。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
@@ -465,7 +465,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>BM25スパース反転インデックスの構築およびクエリ実行に使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト): Document-at-a-Time MaxScore クエリ処理。このオプションは、<em>k</em>値が大きい全文検索ワークロードや、多くの検索語を含むクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">クエリ評価: 戦略と最適化</a>」を参照してください。</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Document-at-a-Time WAND クエリ処理。このオプションは、<em>k</em>値が小さいフルテキスト検索ワークロードや、短いクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1145/956863.956944">2 段階検索プロセスを用いた効率的なクエリ評価</a>」を参照してください。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 基本的な「Term-at-a-Time」クエリ処理。このオプションは、ベースラインとして、または平均ドキュメント長などのコレクション全体の統計情報に合わせてスコアリングを動的に調整する必要がある場合に使用します。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: ブロックレベルの最大スコアメタデータを用いた MaxScore クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速なトップ k ドキュメント検索</a>」を参照してください。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: ブロックレベルの最大スコアメタデータを用いた WAND クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速なトップ k ドキュメント検索</a>」を参照してください。</p></li></ul></td>
+     <td><p>BM25スパース反転インデックスの構築およびクエリ実行に使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト): Document-at-a-Time MaxScore クエリ処理。このオプションは、<em>k</em>値が大きい全文検索ワークロードや、多くの検索語を含むクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">クエリ評価: 戦略と最適化</a>」を参照してください。</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Document-at-a-Time WAND クエリ処理。このオプションは、<em>k</em>値が小さいフルテキスト検索ワークロードや、短いクエリに適しています。背景については、「<a href="https://dl.acm.org/doi/10.1145/956863.956944">2 段階検索プロセスを用いた効率的なクエリ評価</a>」を参照してください。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 基本的な「Term-at-a-Time」クエリ処理。このオプションは、ベースラインとして、または平均ドキュメント長などのコレクション全体の統計情報に合わせてスコアリングを動的に調整する必要がある場合に使用します。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: ブロックレベルの最大スコアメタデータを用いた MaxScore クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速なトップ k ドキュメント検索</a>」を参照してください。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: ブロックレベルの最大スコアメタデータを用いた WAND クエリ処理。背景については、「<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">Block-Max インデックスを用いた高速な Top-k ドキュメント検索</a>」を参照してください。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -473,7 +473,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>文書の長さを正規化する程度を制御します。通常、0 から 1 までの値が使用され、デフォルト値は 0.75 です。値が 0 の場合は長さの正規化が行われず、値が 1 の場合は完全な長さの正規化が行われます。</p></td>
+     <td><p>文書の長さを正規化する程度を制御します。通常、0 から 1 の間の値が使用され、デフォルト値は 0.75 です。値が 0 の場合は長さの正規化が行われず、値が 1 の場合は完全な長さの正規化が行われます。</p></td>
    </tr>
 </table>
 <h3 id="Create-the-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-the-collection" class="anchor-icon" translate="no">

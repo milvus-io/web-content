@@ -324,7 +324,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>Milvus には、ブラウザからアクセスできる「Milvus WebUI」という組み込みの GUI ツールが付属しています。Milvus WebUI は、シンプルで直感的なインターフェースにより、システムの可観測性を向上させます。Milvus WebUI を使用すると、Milvus のコンポーネントや依存関係の統計情報やメトリクスを確認したり、データベースやコレクションの詳細を確認したり、Milvus の詳細な設定を一覧表示したりすることができます。 Milvus WebUIの詳細については、「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」を参照してください。</p>
-<p>Milvus WebUIへのアクセスを有効にするには、プロキシPodをローカルポートにポートフォワードする必要があります。</p>
+<p>Milvus WebUIへのアクセスを有効にするには、プロキシポッドをローカルポートにポートフォワードする必要があります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -363,7 +363,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>次のコマンドを実行して、Milvus マニフェストを取得します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、Milvus クラスタ用のチャートテンプレートを生成し、その出力を<code translate="no">milvus_manifest.yaml</code> という名前のマニフェストファイルに保存します。このマニフェストを使用すると、Milvus クラスタを、そのコンポーネントと依存関係を別々のポッドに配置してインストールできます。</p>
+<p>上記のコマンドは、Milvus クラスタ用のチャートテンプレートを生成し、その出力を `<code translate="no">milvus_manifest.yaml</code>` という名前のマニフェストファイルに保存します。このマニフェストを使用すると、Milvus クラスタとそのコンポーネントおよび依存関係を個別のポッドにインストールできます。</p>
 <div class="alert note">
 <ul>
 <li>すべての Milvus コンポーネントが単一のポッド内に含まれるスタンドアロンモードで Milvus インスタンスをインストールする場合は、代わりに `<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` を実行し、スタンドアロンモードの Milvus インスタンス用のチャートテンプレートを生成する必要があります。</li>
@@ -460,7 +460,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>実行中のMilvusクラスタを最新バージョンにアップグレードするには、次のコマンドを実行します:</p>
+    </button></h2><p>実行中のMilvusクラスタを最新バージョンにアップグレードするには、次のコマンドを実行してください：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -479,7 +479,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus をアンインストールするには、次のコマンドを実行してください。</p>
+    </button></h2><p>Milvus をアンインストールするには、次のコマンドを実行します。</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -511,7 +511,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスターのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
+<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>

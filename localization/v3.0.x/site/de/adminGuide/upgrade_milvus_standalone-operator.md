@@ -25,156 +25,120 @@ title: Upgrade von Milvus Standalone mit Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie Ihre Milvus-Standalone-Bereitstellung mithilfe von Milvus Operator von v2.5.x auf v3.0-beta aktualisieren können.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Whats-new-in-v30-beta" class="common-anchor-header">Neuerungen in v3.0-beta<button data-href="#Whats-new-in-v30-beta" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 3.0-beta bringt erhebliche architektonische Änderungen mit sich:</p>
-<ul>
-<li><strong>Konsolidierung der Koordinatoren</strong>: Die bisher separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen zusammengefasst <code translate="no">mixCoord</code></li>
-<li><strong>Neue Komponenten</strong>: Einführung des Streaming-Knotens für eine verbesserte Datenverarbeitung</li>
-<li><strong>Entfernung von Komponenten</strong>: „ <code translate="no">indexNode</code> “ wurde entfernt und konsolidiert</li>
-</ul>
-<p>Dieser Upgrade-Prozess gewährleistet eine ordnungsgemäße Migration zur neuen Architektur. Weitere Informationen zu den Architekturänderungen finden Sie in <a href="/docs/de/architecture_overview.md">der Milvus-Architekturübersicht</a>.</p>
-<h3 id="Requirements" class="common-anchor-header">Anforderungen<button data-href="#Requirements" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><strong>Systemanforderungen:</strong></p>
-<ul>
-<li>Kubernetes-Cluster mit Milvus Standalone, bereitgestellt über den Milvus Operator</li>
-<li><code translate="no">kubectl</code> konfiguriert für den Zugriff auf Ihren Cluster</li>
-<li>Helm 3.x installiert</li>
-</ul>
-<p><strong>Kompatibilitätsanforderungen:</strong></p>
-<ul>
-<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v3.0-beta <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten beibehalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
-<li>Sie <strong>müssen</strong> zunächst auf v2.5.16 oder höher aktualisieren, bevor Sie ein Upgrade auf v3.0-beta durchführen können.</li>
-</ul>
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
-<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgang<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Schritt 1: Milvus Operator aktualisieren<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Führen Sie zunächst ein Upgrade Ihres Milvus-Operators auf Version 1.3.0 durch:</p>
-<pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
-helm repo update zilliztech-milvus-operator
-helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
-<button class="copy-code-btn"></button></code></pre>
-<p>Überprüfen Sie das Operator-Upgrade:</p>
-<pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Schritt 2: Aktualisieren Sie Ihre Milvus-Standalone-Instanz<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 Upgrade auf Version 2.5.16</h4><div class="alert-note">
-<p>Überspringen Sie diesen Schritt, wenn Ihre Standalone-Bereitstellung bereits Version 2.5.16 oder höher ausführt.</p>
+    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie eine Milvus 2.6.x-Standalone-Bereitstellung mit Milvus Operator auf v3.0-beta aktualisieren.</p>
+<div class="alert note">
+<p>Dieses Verfahren wurde von Milvus 2.6.20 auf Milvus v3.0-beta mit Milvus Operator 1.3.0, Woodpecker, einem clusterinternen etcd und einem clusterinternen MinIO getestet. Wenn Sie eine andere Milvus 2.6.x-Patch-Version, Operator-Version, Nachrichtenwarteschlange oder Abhängigkeitskonfiguration verwenden, testen Sie das Upgrade zunächst in einer Nicht-Produktionsumgebung.</p>
 </div>
-<p>Erstellen Sie eine Konfigurationsdatei „ <code translate="no">milvusupgrade.yaml</code> “, um auf Version 2.5.16 zu aktualisieren:</p>
+<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Ein Kubernetes-Cluster mit einer eigenständigen Milvus 2.6.x-Bereitstellung, die vom Milvus Operator verwaltet wird</li>
+<li><code translate="no">kubectl</code> Zugriff auf den Cluster</li>
+<li>Das vollständige Manifest der Milvus-Custom-Resource (CR), das für die bestehende Bereitstellung verwendet wird</li>
+<li>Die für den bestehenden Milvus-Operator verwendete Installationsmethode und die entsprechenden Manifeste</li>
+<li>Eine aktuelle Sicherung der Milvus-Metadaten und persistenten Daten</li>
+</ul>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
+<div class="alert warning">
+<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch Zurücksetzen des Milvus-Images auf 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die vor dem Upgrade erstellten Sicherungen der Metadaten und persistenten Daten wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
+</div>
+<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Schritt 1: Sichern Sie den aktuellen Milvus-CR<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Speichern Sie die aktuelle CR, bevor Sie die Bereitstellung ändern:</p>
+<pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --output yaml &gt; milvus-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<p>Verwenden Sie das Quellmanifest Ihrer bestehenden Bereitstellung als Upgrade-Manifest. Wenden Sie die exportierte Sicherungsdatei nicht direkt an, ohne zuvor die vom Server verwalteten Metadaten und Statusfelder zu entfernen.</p>
+<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Schritt 2: Überprüfen Sie die Version des Milvus-Operators<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Überprüfen Sie das vom installierten Milvus Operator verwendete Image:</p>
+<pre><code translate="no" class="language-bash">kubectl get deployments --all-namespaces \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
+  | grep milvus-operator
+<button class="copy-code-btn"></button></code></pre>
+<p>Bei dem validierten Upgrade wurde der Milvus Operator auf Version 1.3.0 beibehalten. Behalten Sie die Operator-Version bei, die derzeit Ihre Milvus 2.6.x-Bereitstellung verwaltet, es sei denn, Ihre Support-Richtlinie erfordert ein separates Operator-Upgrade. Führen Sie kein Downgrade eines neueren Operators auf die getestete Version durch. Wenn Sie die Operator-Version ändern müssen, verwenden Sie dieselbe Helm- oder „ <code translate="no">kubectl</code> “-Installationsmethode sowie denselben Release-Namen und denselben Namespace wie bei der bestehenden Installation und validieren Sie anschließend die Operator-Änderung, bevor Sie den Milvus-CR aktualisieren.</p>
+<h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Schritt 3: Aktualisieren Sie das Milvus-Image<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ändern Sie im vollständigen Milvus-CR-Manifest nur „ <code translate="no">spec.components.image</code> “. Behalten Sie den bestehenden Modus, die Komponenteneinstellungen, die Nachrichtenwarteschlange, etcd, den Speicher sowie andere Abhängigkeitseinstellungen bei. Der folgende Auszug zeigt das zu ändernde Feld; ersetzen Sie nicht Ihr vollständiges CR durch diesen Auszug.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Übernehmen Sie die Konfiguration:</p>
-<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
-<button class="copy-code-btn"></button></code></pre>
-<p>Warten Sie, bis der Vorgang abgeschlossen ist:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods
-<button class="copy-code-btn"></button></code></pre>
-<h4 id="22-Upgrade-to-v30-beta" class="common-anchor-header">2.2 Upgrade auf v3.0-beta</h4><p>Sobald Version 2.5.16 erfolgreich läuft, führen Sie ein Upgrade auf Version 3.0-beta durch:</p>
-<p>Aktualisieren Sie Ihre Konfigurationsdatei (in diesem Beispiel „<code translate="no">milvusupgrade.yaml</code> “):</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">&lt;instance-name&gt;</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0-beta</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Führen Sie das abschließende Upgrade durch:</p>
-<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
+<p>Wenden Sie das vollständige CR-Manifest an:</p>
+<pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Überprüfen Sie das Upgrade<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,8 +155,14 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vergewissern Sie sich, dass Ihre Standalone-Bereitstellung die neue Version ausführt:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods
+    </button></h2><p>Überprüfen Sie den CR-Status, den Pod-Status und die Container-Images:</p>
+<pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --output jsonpath=<span class="hljs-string">&#x27;{.status.status}{&quot;\t&quot;}{.status.currentImage}{&quot;\n&quot;}&#x27;</span>
+
+kubectl get pods --namespace &lt;namespace&gt;
+
+kubectl get pods --namespace &lt;namespace&gt; \
+  -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Unterstützung finden Sie in der <a href="https://milvus.io/docs">Milvus-Dokumentation</a> oder <a href="https://github.com/milvus-io/milvus/discussions">im Community-Forum</a>.</p>
+<p>Stellen Sie sicher, dass das Milvus-CR „ <code translate="no">Healthy</code> “ angibt, das aktuelle Image „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ lautet und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie Funktionen aktivieren, die spezifisch für die v3.0-Beta-Version sind.</p>

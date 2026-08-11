@@ -36,7 +36,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p>AI 資料集在建立後往往會持續演進。隨著模型和工作流程的變更，團隊可能需要新增文字、為現有實體產生新的向量場，或使用儲存於 Milvus 外部的資料。要支援這些工作流程，需要一種能隨資料集演進而調整的儲存模型。</p>
 <p>Storage V3 在 Milvus 3.0 中提供了此模型。它採用版本化儲存佈局，以整合隨時間新增或重寫的資料，同時應用程式仍可透過相同的 Milvus API 存取集合。</p>
-<p>Storage V3 預設為停用狀態。當 `<code translate="no">common.storage.useLoonFFI</code> ` 生效後，新的寫入操作及壓縮輸出將採用 Storage V3。現有資料將維持在當前佈局中，直到符合條件的資料被背景壓縮程序重寫為止。在此過渡期間，Milvus 可讀取兩種佈局。請啟用 Storage V3 以使用依賴此功能的特性，而非僅作為一般的效能優化措施。</p>
+<p>Storage V3 預設為停用狀態。當 `<code translate="no">common.storage.useLoonFFI</code> ` 生效後，新的寫入操作及壓縮輸出將採用 Storage V3。現有資料將維持在當前佈局中，直到符合條件的資料被背景壓縮程序重寫為止。在此過渡期間，Milvus 可讀取兩種佈局。啟用 Storage V3 是為了使用依賴此功能的特性，而非作為一般的效能優化措施。</p>
 <h2 id="Features-that-require-Storage-V3" class="common-anchor-header">需要 Storage V3 的功能<button data-href="#Features-that-require-Storage-V3" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

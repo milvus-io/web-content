@@ -61,7 +61,7 @@ beta: Milvus 3.0.0+
 <ul>
 <li><strong>Segmentazione in thailandese</strong>: segmenta il testo thailandese in token di parole senza fare affidamento sugli spazi.</li>
 <li><strong>Filtraggio di spazi bianchi e punteggiatura</strong>: filtra i segmenti composti esclusivamente da spazi bianchi e segni di punteggiatura. Ciò differisce dal <a href="/docs/it/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer, che può conservare la punteggiatura e gli spazi come token.</li>
-<li><strong>Testo con scrittura mista</strong>: genera token di parole in alfabeto latino all’interno di testo misto in thailandese e inglese.</li>
+<li><strong>Testo con scrittura mista</strong>: genera token di parole in alfabeto latino in un testo misto in thailandese e inglese.</li>
 <li><strong>Solo tokenizer</strong>: non converte i token in minuscolo, non normalizza le cifre Unicode né rimuove le parole vuote. Aggiungi filtri o utilizza l’ <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> per tali passaggi.</li>
 <li><strong>Semantica di posizione</strong>: utilizza posizioni dei token basate sui caratteri che includono spazi e segni di punteggiatura saltati, il che mantiene il comportamento di corrispondenza delle frasi e di prossimità coerente con altri tokenizzatori non latini.</li>
 </ul>

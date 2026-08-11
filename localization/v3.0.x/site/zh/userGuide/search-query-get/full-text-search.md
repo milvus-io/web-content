@@ -233,8 +233,8 @@ schema.WithField(entity.NewField().
 <p>在上述配置中，</p>
 <ul>
 <li><p><code translate="no">id</code>：作为主键，并通过<code translate="no">auto_id=True</code> 自动生成。</p></li>
-<li><p><code translate="no">text</code>：用于存储用于全文检索操作的原始文本数据。该字段可使用 `<code translate="no">VARCHAR</code> ` 存储有限长度的文本，或使用 `<code translate="no">TEXT</code> ` 存储长源内容。</p></li>
-<li><p><code translate="no">sparse</code>：一个向量字段，专用于存储全文检索操作中内部生成的稀疏Embeddings。数据类型必须为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">text</code>：用于存储用于全文检索操作的原始文本数据。该字段可使用 `<code translate="no">VARCHAR</code> ` 存储有限长文本，或使用 `<code translate="no">TEXT</code> ` 存储长源内容。</p></li>
+<li><p><code translate="no">sparse</code>：一个向量字段，专用于存储全文搜索操作中内部生成的稀疏Embeddings。数据类型必须为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">定义 BM25 函数<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -465,7 +465,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用于构建和查询 BM25 稀疏倒排索引的算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (默认)：按文档逐个处理 MaxScore 查询。此选项适用于<em>k</em>值较高或包含大量术语的全文检索工作负载。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">查询评估：策略与优化》</a>。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：逐文档 WAND 查询处理。此选项适用于<em>k</em>值较小或查询较短的全文检索工作负载。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/956863.956944">使用两级检索过程进行高效查询评估</a>》。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本“逐词”查询处理。可将此选项用作基准，或在需要评分动态适应全局 Collection 统计信息（如平均文档长度）时使用。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 采用块级最高得分元数据的 MaxScore 查询处理。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用 Block-Max 索引加快 Top-k 文档检索</a>》。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 采用块级最大得分元数据的 WAND 查询处理。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用块最大索引加快 Top-k 文档检索</a>》。</p></li></ul></td>
+     <td><p>用于构建和查询 BM25 稀疏倒排索引的算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (默认)：按文档逐个处理的 MaxScore 查询处理。此选项适用于<em>k</em>值较高或包含大量术语的全文检索工作负载。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">查询评估：策略与优化》</a>。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：逐文档 WAND 查询处理。此选项适用于<em>k</em>值较小或查询较短的全文检索工作负载。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/956863.956944">使用两级检索过程进行高效查询评估</a>》。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本“逐词”查询处理。可将此选项用作基准，或在需要评分动态适应全局 Collection 统计信息（如平均文档长度）时使用。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 采用块级最高得分元数据的 MaxScore 查询处理。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用 Block-Max 索引加快 Top-k 文档检索</a>》。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 采用块级最大得分元数据的 WAND 查询处理。有关背景信息，请参阅《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用块最大索引加快 Top-k 文档检索</a>》。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -759,7 +759,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">我可以在全文搜索中输出或访问由 BM25 函数生成的稀疏向量吗？<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">我可以在全文搜索中输出或访问 BM25 函数生成的稀疏向量吗？<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -774,7 +774,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不可以，在全文搜索中无法直接访问或输出由 BM25 函数生成的稀疏向量。具体说明如下：</p>
+    </button></h3><p>不可以，在全文搜索中无法直接访问或输出由 BM25 函数生成的稀疏向量。详情如下：</p>
 <ul>
 <li><p>BM25 函数会在内部生成稀疏向量，用于排序和检索</p></li>
 <li><p>这些向量存储在稀疏字段中，但无法包含在<code translate="no">output_fields</code></p></li>
@@ -821,7 +821,7 @@ client.search(
 <ul>
 <li><p>关注点分离：您处理文本（输入/输出），Milvus 处理向量（内部处理）</p></li>
 <li><p>性能：预计算的稀疏向量可在查询过程中实现快速的 BM25 排序</p></li>
-<li><p>用户体验：通过简单的文本界面将复杂的向量运算抽象化</p></li>
+<li><p>用户体验：通过简单的文本界面将复杂的向量操作抽象化</p></li>
 </ul>
 <p><strong>若需访问向量</strong>：</p>
 <ul>

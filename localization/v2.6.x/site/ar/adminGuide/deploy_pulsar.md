@@ -22,7 +22,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
     </button></h1><p>يستخدم Milvus Pulsar أو Kafka لإدارة سجلات التغييرات الأخيرة، وإخراج سجلات التدفق، وتوفير اشتراكات السجلات. Pulsar هو نظام تخزين الرسائل الافتراضي. يقدم هذا الموضوع كيفية تكوين تخزين الرسائل باستخدام Docker Compose أو Helm.</p>
 <p>يمكنك تكوين Pulsar باستخدام <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> أو على K8s، كما يمكنك تكوين Kafka على K8s.</p>
 <div class="alert note">
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">تكوين Pulsar باستخدام Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -165,7 +165,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
+<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في ملف <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -242,7 +242,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في ملف <code translate="no">values.yaml</code> إذا كنت ترغب في استخدام Kafka كنظام تخزين للرسائل.</li>
+<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في ملف <code translate="no">values.yaml</code> إذا كنت ترغب في استخدام Kafka كنظام تخزين الرسائل.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

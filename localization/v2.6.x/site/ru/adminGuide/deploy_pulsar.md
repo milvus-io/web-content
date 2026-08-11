@@ -127,7 +127,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием настроек Pulsar.</li>
+<li>После настройки вышеуказанных разделов и сохранения файла ` <code translate="no">values.yaml</code> ` выполните следующую команду для установки Milvus с использованием конфигураций Pulsar.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -276,7 +276,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
       </svg>
     </button></h2><p>Автономная версия Milvus использует RocksMQ в качестве хранилища сообщений по умолчанию. Подробные инструкции по настройке Milvus с помощью Helm см. в разделе <a href="/docs/ru/v2.6.x/configure-helm.md">«Настройка Milvus с помощью диаграмм Helm</a>». Подробную информацию о параметрах конфигурации, связанных с RocksMQ, см. в разделе <a href="/docs/ru/v2.6.x/configure_rocksmq.md">«Настройки, связанные с RocksMQ</a>».</p>
 <ul>
-<li><p>Если вы запустили Milvus с RocksMQ и хотите изменить его настройки, вы можете выполнить команду ` <code translate="no">helm upgrade -f</code> ` с изменёнными настройками в следующем файле YAML.</p></li>
+<li><p>Если вы запустили Milvus с RocksMQ и хотите изменить его настройки, вы можете выполнить команду ` <code translate="no">helm upgrade -f</code> ` с измененными настройками в следующем файле YAML.</p></li>
 <li><p>Если вы установили автономную версию Milvus с помощью Helm с хранилищем сообщений, отличным от RocksMQ, и хотите вернуть RocksMQ, запустите команду ` <code translate="no">helm upgrade -f</code> ` с использованием следующего файла YAML после того, как очистите все коллекции и остановите Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>

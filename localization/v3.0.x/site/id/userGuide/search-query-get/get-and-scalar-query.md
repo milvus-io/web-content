@@ -1,11 +1,11 @@
 ---
 id: get-and-scalar-query.md
-title: Kueri
+title: Pencarian
 summary: >-
-  Gunakan Query, Get, dan QueryIterator untuk mengambil entitas, memfilter
-  metadata, mengurutkan hasil kueri, dan mengagregasi nilai skalar di Milvus.
+  Gunakan Query, Get, dan QueryIterator untuk mengambil entitas dan menyaring
+  metadata di Milvus.
 ---
-<h1 id="Query" class="common-anchor-header">Kueri<button data-href="#Query" class="anchor-icon" translate="no">
+<h1 id="Query" class="common-anchor-header">Pencarian<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Selain pencarian ANN, Milvus juga mendukung pemfilteran metadata melalui kueri. Halaman ini memperkenalkan cara menggunakan Query, Get, dan QueryIterator untuk mengambil entitas, memfilter metadata, mengurutkan hasil kueri, dan mengumpulkan nilai skalar.</p>
+    </button></h1><p>Selain pencarian ANN, Milvus juga mendukung penyaringan metadata melalui kueri. Halaman ini menjelaskan cara menggunakan Query, Get, dan QueryIterators untuk melakukan penyaringan metadata.</p>
 <div class="alert note">
-<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, kueri yang menyertakan bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang tidak secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
+<p>Jika Anda menambahkan bidang baru setelah koleksi dibuat, kueri yang menyertakan bidang-bidang tersebut akan mengembalikan nilai default yang telah ditentukan atau " <code translate="no">NULL</code> " untuk entitas yang belum secara eksplisit menetapkan nilainya. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Mengubah Skema Koleksi</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,47 +39,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Koleksi dapat menyimpan berbagai jenis bidang skalar. Anda bisa membuat Milvus memfilter Entitas berdasarkan satu atau beberapa field skalar. Milvus menawarkan tiga jenis kueri: Query, Get, dan QueryIterator. Tabel di bawah ini membandingkan ketiga jenis kueri tersebut.</p>
+    </button></h2><p>Sebuah Koleksi dapat menyimpan berbagai jenis bidang skalar. Anda dapat meminta Milvus untuk memfilter Entitas berdasarkan satu atau lebih bidang skalar. Milvus menawarkan tiga jenis kueri: Query, Get, dan QueryIterator. Tabel di bawah ini membandingkan ketiga jenis kueri tersebut.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Dapatkan</p></th>
+     <th><p>Get</p></th>
      <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Skenario yang berlaku</p></td>
      <td><p>Untuk menemukan entitas yang memiliki kunci utama yang ditentukan.</p></td>
-     <td><p>Untuk menemukan semua atau sejumlah entitas tertentu yang memenuhi kondisi pemfilteran kustom</p></td>
-     <td><p>Untuk menemukan semua entitas yang memenuhi kondisi pemfilteran khusus dalam kueri berpaginasi.</p></td>
+     <td><p>Untuk menemukan semua atau sejumlah entitas tertentu yang memenuhi kondisi penyaringan khusus</p></td>
+     <td><p>Untuk menemukan semua entitas yang memenuhi kondisi penyaringan khusus dalam kueri yang dipaginasi.</p></td>
    </tr>
    <tr>
-     <td><p>Metode pemfilteran</p></td>
-     <td><p>Dengan kunci utama</p></td>
-     <td><p>Dengan memfilter ekspresi.</p></td>
-     <td><p>Dengan memfilter ekspresi.</p></td>
+     <td><p>Metode penyaringan</p></td>
+     <td><p>Berdasarkan kunci utama</p></td>
+     <td><p>Berdasarkan ekspresi penyaringan.</p></td>
+     <td><p>Berdasarkan ekspresi penyaringan.</p></td>
    </tr>
    <tr>
      <td><p>Parameter wajib</p></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Kunci primer</p></li></ul></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Memfilter ekspresi</p></li></ul></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi pemfilteran</p></li><li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Kunci utama</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi penyaringan</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi penyaringan</p></li><li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Parameter opsional</p></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Bidang keluaran</p></li></ul></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan</p></li><li><p>Bidang keluaran</p></li></ul></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan secara total</p></li><li><p>Bidang keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Kolom keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan</p></li><li><p>Kolom keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan secara keseluruhan</p></li><li><p>Kolom keluaran</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>Pengembalian</p></td>
-     <td><p>Mengembalikan entitas yang menyimpan kunci utama yang ditentukan dalam koleksi atau partisi yang ditentukan.</p></td>
-     <td><p>Mengembalikan semua atau sejumlah entitas tertentu yang memenuhi kondisi pemfilteran khusus dalam koleksi atau partisi yang ditentukan.</p></td>
-     <td><p>Mengembalikan semua entitas yang memenuhi kondisi pemfilteran khusus dalam koleksi atau partisi yang ditentukan melalui kueri ber-halaman.</p></td>
+     <td><p>Mengembalikan</p></td>
+     <td><p>Mengembalikan entitas yang memiliki kunci utama yang ditentukan dalam koleksi atau partisi yang ditentukan.</p></td>
+     <td><p>Mengembalikan semua atau sejumlah entitas tertentu yang memenuhi kondisi penyaringan khusus dalam koleksi atau partisi yang ditentukan.</p></td>
+     <td><p>Mengembalikan semua entitas yang memenuhi kondisi penyaringan khusus dalam koleksi atau partisi yang ditentukan melalui kueri berhalaman.</p></td>
    </tr>
 </table>
-<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata, lihat <a href="/docs/id/basic-operators.md">Aturan Ekspresi Boolean</a>.</p>
-<h2 id="Use-Get" class="common-anchor-header">Menggunakan Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Untuk informasi lebih lanjut mengenai penyaringan metadata, lihat .</p>
+<h2 id="Use-Get" class="common-anchor-header">Gunakan Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda perlu menemukan entitas berdasarkan kunci utamanya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut ini mengasumsikan bahwa ada tiga field bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> di dalam koleksi Anda.</p>
+    </button></h2><p>Saat Anda perlu mencari entitas berdasarkan kunci primernya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut mengasumsikan bahwa terdapat tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dalam koleksi Anda.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -108,9 +108,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda bisa mendapatkan entitas berdasarkan ID-nya sebagai berikut.</p>
+<p>Anda dapat mengambil entitas berdasarkan ID-nya sebagai berikut.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -210,7 +215,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -219,7 +223,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Menggunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Gunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,7 +238,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Basic-Query" class="common-anchor-header">Kueri Dasar<button data-href="#Basic-Query" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Basic-Query" class="common-anchor-header">Query Dasar<button data-href="#Basic-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,9 +253,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ketika Anda perlu menemukan entitas dengan kondisi pemfilteran khusus, gunakan metode <strong>Query</strong>. Contoh kode berikut ini mengasumsikan ada tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dan mengembalikan sejumlah entitas yang ditentukan yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
+    </button></h3><p>Jika Anda perlu mencari entitas berdasarkan kondisi penyaringan khusus, gunakan metode <strong>Query</strong>. Contoh kode berikut mengasumsikan terdapat tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code>, serta mengembalikan jumlah entitas yang ditentukan yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -321,7 +330,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -346,15 +354,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Secara default, Query mengembalikan hasil dalam urutan yang tidak ditentukan. Gunakan parameter <code translate="no">order_by</code> untuk mengurutkan hasil berdasarkan satu atau beberapa bidang skalar. Saat menggunakan <code translate="no">order_by</code>, perhatikan bahwa:</p>
+    </button></h3><p>Secara default, Query mengembalikan hasil dalam urutan yang tidak ditentukan. Gunakan parameter ` <code translate="no">order_by</code> ` untuk mengurutkan hasil berdasarkan satu atau lebih bidang skalar. Saat menggunakan ` <code translate="no">order_by</code>`, perhatikan bahwa:</p>
 <ul>
-<li><p><code translate="no">order_by</code> harus digunakan bersama dengan <code translate="no">limit</code>.</p></li>
-<li><p>Jenis bidang yang didukung: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, dan <code translate="no">VARCHAR</code>. Pengurutan berdasarkan vektor, <code translate="no">JSON</code>, atau bidang <code translate="no">ARRAY</code> tidak didukung.</p></li>
-<li><p>Saat mengurutkan berdasarkan bidang yang dapat dinolkan, nilai NULL ditempatkan di akhir untuk urutan menaik (NULL TERAKHIR) dan di awal untuk urutan menurun (NULL PERTAMA).</p></li>
+<li><p><code translate="no">order_by</code> harus digunakan bersama dengan ` <code translate="no">limit</code>`.</p></li>
+<li><p>Jenis bidang yang didukung: ` <code translate="no">INT8</code>`, ` <code translate="no">INT16</code>`, ` <code translate="no">INT32</code>`, ` <code translate="no">INT64</code>`, ` <code translate="no">FLOAT</code>`, ` <code translate="no">DOUBLE</code>`, dan ` <code translate="no">VARCHAR</code>`. Penyortiran berdasarkan bidang vektor, ` <code translate="no">JSON</code>`, atau ` <code translate="no">ARRAY</code> ` tidak didukung.</p></li>
+<li><p>Saat melakukan pengurutan berdasarkan bidang yang dapat bernilai NULL, nilai NULL ditempatkan di akhir untuk urutan naik (NULLS LAST) dan di awal untuk urutan turun (NULLS FIRST).</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">Pengurutan Dasar</h4><p>Berikan daftar string <code translate="no">&quot;field_name:direction&quot;</code> ke parameter <code translate="no">order_by</code>, di mana <code translate="no">direction</code> adalah <code translate="no">asc</code> (menaik) atau <code translate="no">desc</code> (menurun). Perhatikan bahwa <code translate="no">asc</code> dan <code translate="no">desc</code> peka terhadap huruf besar/kecil.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">Penyortiran Dasar</h4><p>Berikan daftar string <code translate="no">&quot;field_name:direction&quot;</code> ke parameter <code translate="no">order_by</code>, di mana <code translate="no">direction</code> adalah <code translate="no">asc</code> (urutan naik) atau <code translate="no">desc</code> (urutan turun). Perhatikan bahwa <code translate="no">asc</code> dan <code translate="no">desc</code> peka huruf besar-kecil.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -379,9 +392,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">Pengurutan multi-bidang</h4><p>Anda dapat mengurutkan berdasarkan beberapa bidang sekaligus. Hasil diurutkan berdasarkan bidang pertama dalam daftar. Ketika dua baris memiliki nilai yang sama dalam bidang tersebut, bidang kedua menentukan urutannya, dan seterusnya.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">Penyortiran Multi-kolom</h4><p>Anda dapat mengurutkan berdasarkan beberapa kolom sekaligus. Hasil akan diurutkan terlebih dahulu berdasarkan kolom pertama dalam daftar. Jika dua baris memiliki nilai yang sama pada kolom tersebut, kolom kedua akan menentukan urutannya, dan seterusnya.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -399,9 +417,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Penomoran halaman dengan Pengurutan</h4><p>Gunakan <code translate="no">order_by</code> bersama dengan <code translate="no">limit</code> dan <code translate="no">offset</code> untuk membuat pagination melalui hasil yang diurutkan. Misalnya, untuk menampilkan daftar produk yang diurutkan berdasarkan harga di beberapa halaman, setiap halaman menampilkan kumpulan item berikutnya dalam urutan harga yang benar tanpa duplikat atau celah.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Pagination dengan Penyortiran</h4><p>Gunakan <code translate="no">order_by</code> bersama dengan <code translate="no">limit</code> dan <code translate="no">offset</code> untuk melakukan paginasi pada hasil yang telah diurutkan. Misalnya, untuk menampilkan daftar produk yang diurutkan berdasarkan harga di beberapa halaman, setiap halaman akan menampilkan kumpulan item berikutnya dalam urutan harga yang benar tanpa duplikat atau celah.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -430,133 +453,6 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Mengelompokkan Hasil Kueri<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Anda dapat mengelompokkan hasil kueri berdasarkan satu atau beberapa bidang skalar dan menghitung agregasi per kelompok. Operator agregasi yang didukung adalah <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code>, dan <code translate="no">avg</code>.</p>
-<p>Saat menggunakan <code translate="no">group_by_fields</code>, perhatikan hal ini:</p>
-<ul>
-<li><p>Jenis bidang yang didukung untuk <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, dan <code translate="no">TIMESTAMPTZ</code>. Pengelompokan berdasarkan bidang <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vektor, <code translate="no">JSON</code>, atau <code translate="no">ARRAY</code> akan menghasilkan kesalahan.</p></li>
-<li><p><code translate="no">sum</code> dan <code translate="no">avg</code> hanya untuk bidang numerik. Anda dapat menerapkannya ke bidang numerik, termasuk <code translate="no">FLOAT</code> dan <code translate="no">DOUBLE</code>, tetapi menerapkannya ke bidang <code translate="no">VARCHAR</code> akan menghasilkan kesalahan.</p></li>
-</ul>
-<p>Untuk mengaktifkan agregasi, berikan <code translate="no">group_by_fields</code> ke <code translate="no">query()</code> dan tambahkan ekspresi agregasi (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) ke <code translate="no">output_fields</code>.</p>
-<p>Contoh berikut ini mengelompokkan entitas berdasarkan bidang <code translate="no">color</code> dan mengembalikan jumlah entitas dalam setiap kelompok warna:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;count(*)&#x27;: 10}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Anda dapat meminta beberapa ekspresi agregasi dalam satu panggilan. Contoh berikut ini mengelompokkan berdasarkan <code translate="no">color</code> dan mengembalikan jumlah entitas, harga rata-rata, dan peringkat maksimum untuk setiap kelompok:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>, <span class="hljs-string">&quot;avg(price)&quot;</span>, <span class="hljs-string">&quot;max(rating)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 65.22, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 48.67, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 64.15, &#x27;max(rating)&#x27;: 3},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 58.28, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 50.20, &#x27;max(rating)&#x27;: 5}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Berikan lebih dari satu bidang ke <code translate="no">group_by_fields</code> untuk menghitung kelompok gabungan. Contoh berikut ini mengelompokkan berdasarkan <code translate="no">(color, rating)</code> dan menghitung kisaran harga di setiap kelompok:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;min(price)&quot;</span>, <span class="hljs-string">&quot;max(price)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;rating&#x27;: 5, &#x27;min(price)&#x27;: 34.51, &#x27;max(price)&#x27;: 70.90},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;rating&#x27;: 2, &#x27;min(price)&#x27;: 12.39, &#x27;max(price)&#x27;: 81.99},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;rating&#x27;: 2, &#x27;min(price)&#x27;: 22.62, &#x27;max(price)&#x27;: 88.24},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;rating&#x27;: 1, &#x27;min(price)&#x27;: 18.35, &#x27;max(price)&#x27;: 59.53},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;rating&#x27;: 4, &#x27;min(price)&#x27;: 21.23, &#x27;max(price)&#x27;: 82.45},</span>
-<span class="hljs-comment">#  ...]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat menggabungkan <code translate="no">group_by_fields</code> dengan <code translate="no">limit</code> untuk membatasi jumlah kelompok yang dihasilkan. Hal ini berguna ketika sebuah field memiliki kardinalitas yang tinggi dan Anda hanya membutuhkan contoh kelompok:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;avg(price)&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>],
-<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;avg(price)&#x27;: 65.22, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;avg(price)&#x27;: 48.67, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;avg(price)&#x27;: 64.15, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;avg(price)&#x27;: 58.28, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;avg(price)&#x27;: 50.20, &#x27;count(*)&#x27;: 10}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <h2 id="Use-QueryIterator" class="common-anchor-header">Gunakan QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -572,9 +468,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda perlu menemukan entitas dengan kondisi pemfilteran khusus melalui kueri berpaginasi, buatlah <strong>QueryIterator</strong> dan gunakan metode <strong>next()</strong> untuk mengulang semua entitas untuk menemukan entitas yang memenuhi kondisi pemfilteran. Contoh kode berikut ini mengasumsikan bahwa ada tiga field bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dan mengembalikan semua entitas yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
+    </button></h2><p>Saat Anda perlu menemukan entitas berdasarkan kondisi penyaringan khusus melalui kueri berpaginasi, buatlah <strong>QueryIterator</strong> dan gunakan metode <strong>next()</strong> -nya untuk mengiterasi semua entitas guna menemukan entitas yang memenuhi kondisi penyaringan tersebut. Contoh kode berikut mengasumsikan bahwa terdapat tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code>, serta mengembalikan semua entitas yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -657,9 +558,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda juga dapat melakukan kueri dalam satu atau beberapa partisi dengan menyertakan nama partisi dalam permintaan Get, Query, atau QueryIterator. Contoh kode berikut ini mengasumsikan bahwa ada partisi bernama <strong>PartitionA</strong> di dalam koleksi.</p>
+    </button></h2><p>Anda juga dapat melakukan kueri di dalam satu atau beberapa partisi dengan menyertakan nama partisi dalam permintaan Get, Query, atau QueryIterator. Contoh kode berikut mengasumsikan bahwa terdapat partisi bernama <strong>PartitionA</strong> dalam koleksi.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -790,7 +696,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -803,7 +708,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -828,12 +732,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengekstrak subset data yang representatif dari koleksi Anda untuk eksplorasi data atau pengujian pengembangan, gunakan ekspresi <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, di mana <code translate="no">sampling_factor</code> adalah float antara 0 dan 1 yang mewakili persentase data yang akan diambil sampelnya.</p>
+    </button></h2><p>Untuk mengekstrak subset data yang representatif dari koleksi Anda untuk eksplorasi data atau pengujian pengembangan, gunakan ekspresi ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, di mana ` <code translate="no">sampling_factor</code> ` adalah bilangan desimal antara 0 dan 1 yang mewakili persentase data yang akan diambil sampelnya.</p>
 <div class="alert note">
-<p>Untuk penggunaan yang lebih rinci, contoh tingkat lanjut, dan praktik terbaik, lihat <a href="/docs/id/random-sampling.md">Pengambilan Sampel Acak</a>.</p>
+<p>Untuk penggunaan terperinci, contoh lanjutan, dan praktik terbaik, lihat <a href="/docs/id/random-sampling.md">Pengambilan Sampel Acak</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -910,7 +819,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Mengatur Zona Waktu Sementara untuk Kueri<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Menetapkan Zona Waktu Secara Sementara untuk Sebuah Kueri<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -925,11 +834,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti zona waktu default basis data atau koleksi untuk sementara waktu untuk satu operasi dengan menetapkan parameter <code translate="no">timezone</code> dalam panggilan kueri. Hal ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi berlangsung.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
-<p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi kueri:</p>
+    </button></h2><p>Jika koleksi Anda memiliki bidang ` <code translate="no">TIMESTAMPTZ</code> `, Anda dapat mengganti zona waktu default basis data atau koleksi secara sementara untuk satu operasi dengan mengatur parameter ` <code translate="no">timezone</code> ` dalam panggilan kueri. Hal ini mengontrol cara nilai ` <code translate="no">TIMESTAMPTZ</code> ` ditampilkan dan dibandingkan selama operasi.</p>
+<p>Nilai ` <code translate="no">timezone</code> ` harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> `, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Contoh di bawah ini menunjukkan cara mengatur zona waktu secara sementara untuk operasi kueri:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

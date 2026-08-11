@@ -3,7 +3,7 @@ id: insert-data-into-structarray-fields.md
 title: 将数据插入 StructArray 字段
 summary: >-
   当每个实体包含一个有序的结构化元素列表时，将数据插入到 StructArray 字段中。在插入有效载荷中，StructArray
-  字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection Schema 中定义的 Struct 子字段名称。
+  字段被表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。
 ---
 <h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">将数据插入 StructArray 字段<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入负载中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection 模式中定义的 Struct 子字段名称。</p>
+    </button></h1><p>当每个实体包含一个有序的结构化元素列表时，可将数据插入到 StructArray 字段中。在插入负载中，StructArray 字段表示为一个对象数组。每个对象代表一个 Struct 元素，并使用 Collection Schema 中定义的 Struct 子字段名称。</p>
 <p>本页使用《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段</a>》中的<code translate="no">tech_articles</code> Collection。每个实体都是一篇技术文章，而<code translate="no">chunks</code> 字段将文章片段作为 Struct 元素进行存储。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>在插入有效载荷中，<code translate="no">chunks</code> 是一个常规字段，其值为一个Struct对象数组。在每个对象内部，请使用<code translate="no">text</code> 和<code translate="no">emb</code> 等子字段名称。仅在插入完成后创建索引、运行搜索、构建过滤器或指定输出字段时，才使用<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 等路径语法。</p>
+<p>在插入有效载荷中，<code translate="no">chunks</code> 是一个常规字段，其值为一个Struct对象数组。在每个对象内部，请使用<code translate="no">text</code> 和<code translate="no">emb</code> 等子字段名称。仅在插入完成后创建索引、运行搜索、构建过滤器或指定输出字段时，才使用路径语法，例如<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 。</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入有效负载的结构<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是独立的向量子字段，因为它们支持不同的搜索模式。EmbeddingList 搜索将 StructArray 字段中的所有向量视为一个嵌入列表，并返回带有<code translate="no">MAX_SIM*</code> 指标的实体级结果。元素级搜索则独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。为简化起见，本示例在两个字段中存储了相同的向量值。 在生产应用中，当两种搜索模式使用相同的块Embeddings时，可以在这两个子字段中存储相同的Embeddings；当两种搜索模式使用不同的表示形式时，则可以存储不同的Embeddings。</p>
+<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是独立的向量子字段，因为它们支持不同的搜索模式。EmbeddingList 搜索将 StructArray 字段中的所有向量视为一个嵌入列表，并返回带有<code translate="no">MAX_SIM*</code> 指标的实体级结果。元素级搜索则独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。为简化起见，本示例在两个字段中存储了相同的向量值。 在生产环境中，当两种搜索模式使用相同的块Embeddings时，可以在这两个子字段中存储相同的Embeddings；当两种搜索模式使用不同的表示形式时，则可以存储不同的Embeddings。</p>
 <h2 id="Insert-rows" class="common-anchor-header">插入行<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

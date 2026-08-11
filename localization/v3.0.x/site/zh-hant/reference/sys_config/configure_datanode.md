@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: 瞭解如何為 Milvus 設定 dataNode。
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode 相關組態<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">與 dataNode 相關的設定<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,7 +72,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        流程圖中並行執行的最大任務數      </td>
+      <td>        流程圖中最多可並行執行的任務數      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點同步管理員的全球最大並發同步任務數      </td>
+      <td>        資料節點同步管理員的全域最大並行同步任務數      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -130,8 +130,8 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        支援跳過某些 Timetick 訊息以減少 CPU 使用量      </td>
-      <td>真</td>
+      <td>        支援跳過部分時間戳訊息以降低 CPU 使用率      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -159,7 +159,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        每跳過 n 個記錄消耗一個      </td>
+      <td>        每跳過 n 筆記錄即消耗一個      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        在 x 秒內只有 Timetick msg 後開啟跳過模式      </td>
+      <td>        當僅剩時標訊息持續 x 秒後，啟用跳過模式      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -218,9 +218,9 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   <tbody>
     <tr>
       <td>
-        <li>每個 binlog 檔案在記憶體緩衝區段中的最大大小。大小超過此值的 binlog 檔案會被刷新到 MinIO 或 S3 服務。</li>      
+        <li>記憶體中緩衝的每個區段內，每個二進位日誌檔案的最大大小。大小超過此數值的二進位日誌檔案將被沖洗至 MinIO 或 S3 服務。</li>      
         <li>單位：位元組</li>      
-        <li>將此參數設定得太小，會導致系統過度頻繁地儲存少量資料。設定太大會增加系統對記憶體的需求。</li>      </td>
+        <li>若將此參數設定過小，會導致系統過於頻繁地儲存少量資料；若設定過大，則會增加系統對記憶體的需求。</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -249,7 +249,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        單一通道刷新 del 的最大緩衝區大小 (位元組)，預設為 16 MB  </td>
+      <td>        單一通道的 del 資料庫排空最大緩衝區大小（以位元組為單位），預設值為 16MB      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -278,7 +278,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        如果緩衝區未清空，則同步處理區段的週期。      </td>
+      <td>        若緩衝區未清空，用於同步區段的週期。      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -307,7 +307,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        如果記憶體使用率過高，設定為 true 可強制同步      </td>
+      <td>        若記憶體使用率過高，請設定為 true 以強制同步      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -336,7 +336,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        要同步的區段數，緩衝區最大的區段會被同步。      </td>
+      <td>        要同步的分段數量，系統將同步緩衝區大小排名前幾位的分段。      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -365,7 +365,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        檢查資料節點記憶體使用情況的間隔時間，以毫秒為單位      </td>
+      <td>        檢查資料節點記憶體使用量的間隔時間，單位為毫秒      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -394,7 +394,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        獨立版的記憶體水印，達到此水印時，區段會被同步。      </td>
+      <td>        獨立執行模式下的記憶體水位標記，當達到此水位標記時，將同步分段。      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -424,9 +424,9 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   <tbody>
     <tr>
       <td>
-        <li>指定所有通道的全局工作池大小</li>      
-        <li>如果此參數 &lt;= 0，將設定為可執行的最大 CPU 數目</li>      
-        <li>建議在收集數量較多時，將其設定為較大，以避免阻塞</li>      </td>
+        <li>指定所有通道的全域工作池大小</li>      
+        <li>若此參數 &lt;= 0，則會將其設定為可執行任務的 CPU 最大數量</li>      
+        <li>若集合數量龐大，建議將此數值設得較大，以避免阻塞</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -456,8 +456,8 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   <tbody>
     <tr>
       <td>
-        <li>指定通道檢查點更新的全局工作池大小</li>      
-        <li>如果此參數 &lt;= 0，將設定為 10</li>      </td>
+        <li>指定用於通道檢查點更新的全域工作池大小</li>      
+        <li>若此參數 &lt;= 0，則會將其設為 10</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -486,7 +486,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點更新每個通道檢查點的間隔時間 (秒)     </td>
+      <td>        資料節點更新各通道檢查點的間隔時間（以秒為單位）      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -515,7 +515,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        UpdateChannelCheckpoint RPC 呼叫的逾時時間 (秒)     </td>
+      <td>        UpdateChannelCheckpoint RPC 呼叫的超時時間（以秒為單位）      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -544,7 +544,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        每次 UpdateChannelCheckpoint RPC 的最大通道檢查點數量。      </td>
+      <td>        每個 UpdateChannelCheckpoint RPC 呼叫的最大通道檢查點數量。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -573,7 +573,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        通道檢查點更新器執行更新的頻率 (以秒為單位)。      </td>
+      <td>        通道檢查點更新程式執行更新的頻率（單位：秒）。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -602,7 +602,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點上允許同時執行的最大匯入/匯出前工作數量。      </td>
+      <td>        在資料節點上允許同時執行的匯入／預匯入任務的最大數量。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -631,7 +631,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        匯入檔案的最大檔案大小 (以 GB 為單位)，其中匯入檔案指的是以行為基礎的檔案或以列為基礎的檔案集。      </td>
+      <td>        匯入檔案的最大檔案大小（以 GB 為單位），此處的匯入檔案指的是「行式檔案」或一組「欄式檔案」。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -660,7 +660,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點在匯入時從分塊管理器讀取的資料區大小（MB）。      </td>
+      <td>        資料節點在匯入過程中從區塊管理器讀取的資料區塊大小（單位：MB）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -689,7 +689,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        每個匯入/匯入前工作佔用的最大插槽數。      </td>
+      <td>        每個匯入／預匯入任務所佔用的槽位最大數量。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -718,7 +718,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        以批次模式執行第零層壓縮的最小可用記憶體比率      </td>
+      <td>        在批次模式下執行第零級壓縮時，可用記憶體的最低比例      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -747,7 +747,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        最大批次大小指執行 L0 壓縮時，批次中 L1/L2 區段的最大數目。預設值為 -1，任何小於 1 的值表示沒有限制。有效範圍：&gt;= 1.  </td>
+      <td>        最大批次大小指的是執行 L0 壓縮時，單一批次中 L1/L2 區段的最大數量。預設值為 -1，任何小於 1 的數值均表示無限制。有效範圍：≥ 1。      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -776,8 +776,8 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        執行 mixCompaction 時，是否啟用 mergeSort 模式。      </td>
-      <td>假</td>
+      <td>        執行 mixCompaction 時是否啟用 mergeSort 模式。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -805,8 +805,37 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        在 mergeSort 模式中要合併的最大區段數。      </td>
+      <td>        在 mergeSort 模式下要合併的區段最大數量。      </td>
       <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TEXT 欄位中現有 LOB 檔案未使用空間比例的閾值。在壓縮過程中，若此比例低於閾值，Milvus 將重複使用現有的 LOB 檔案；若此比例大於或等於閾值，Milvus 會將剩餘的 LOB 資料寫入新的 LOB 檔案以釋放空間。      </td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -834,7 +863,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        秒。強制停止節點而不優先停止      </td>
+      <td>        秒。強制停止節點而不進行平穩關機      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -863,7 +892,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點上允許同時執行的最大任務 (例如壓縮、匯入) 數量      </td>
+      <td>        允許在資料節點上同時執行的任務（例如：壓縮、匯入）的最大數量      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -892,7 +921,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        叢集壓縮的記憶體緩衝比率。大於臨界值的資料會被沖到儲存區。      </td>
+      <td>        叢集式壓縮的記憶體緩衝區比例。大於閾值的資料將被沖洗至儲存裝置。      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -921,7 +950,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        一個群集壓縮工作的工作人員池大小。      </td>
+      <td>        單一叢集式壓縮工作所使用的執行者池大小。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -950,7 +979,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        將 pk 應用於 bloom filter 時的平行因子，預設為 4*CPU_CORE_NUM      </td>
+      <td>        將主鍵 (pk) 套用至布隆濾波器時的並行因子，預設值為 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -979,8 +1008,95 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        deltalog 格式，選項：[json, parquet］      </td>
+      <td>        增量日誌格式，選項：[json, parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        用於選擇 TEXT 欄位值儲存路徑的大小閾值（單位：位元組）。小於此閾值的值將內嵌於欄位資料中儲存；大於或等於此閾值的值則會作為 LOB 有效載荷單獨儲存，而欄位資料中則儲存一個內部參照。      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        儲存 TEXT 有效載荷的單一 LOB 檔案最大大小（以位元組為單位）。當 LOB 檔案達到此大小時，Milvus 會將後續的 TEXT LOB 有效載荷寫入另一個 LOB 檔案。      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        觸發 Milvus 將緩衝區中的 TEXT LOB 有效載荷從擴充中的區段寫入儲存空間的緩衝區大小閾值（單位：位元組）。      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -1008,7 +1124,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 的 TCP/IP 位址。若未指定，則使用第一個可單點傳送的位址      </td>
+      <td>        dataNode 的 TCP/IP 位址。若未指定，則使用第一個可進行單播傳輸的位址      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1037,7 +1153,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        資料節點的 TCP 埠   </td>
+      <td>        dataNode 的 TCP 埠號      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1066,7 +1182,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 可以傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataNode 可傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1095,7 +1211,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 可以接收的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataNode 可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1124,7 +1240,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 上的用戶端可以傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataNode 上的客戶端可發送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1153,7 +1269,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 用戶端可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
+      <td>        dataNode 上的客戶端可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>536870912</td>
     </tr>
   </tbody>

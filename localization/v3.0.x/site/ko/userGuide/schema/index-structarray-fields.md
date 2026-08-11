@@ -188,7 +188,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같은 필터에서 StructArray 스칼라 서브필드가 자주 등장할 때 유용합니다.</p>
+<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같은 필터에서 StructArray 스칼라 하위 필드가 자주 등장할 때 유용합니다.</p>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">인덱스 메트릭 호환성<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

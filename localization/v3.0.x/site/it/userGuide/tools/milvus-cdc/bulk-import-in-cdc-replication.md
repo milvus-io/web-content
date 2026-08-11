@@ -20,7 +20,7 @@ title: Importazione in blocco nella replica CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida spiega come eseguire un'importazione in blocco su cluster Milvus che fanno parte di una topologia di replica CDC. In un cluster in replica, l'importazione in blocco deve utilizzare il commit a due fasi (2PC) in modo che l'importazione venga confermata come un unico punto ordinato sia nel cluster primario che in quello di standby.</p>
+    </button></h1><p>Questa guida spiega come eseguire un'importazione in blocco su cluster Milvus che fanno parte di una topologia di replica CDC. In un cluster in replica, l'importazione in blocco deve utilizzare il commit a due fasi (2PC) in modo che l'importazione venga confermata come un unico punto ordinato sia sul cluster primario che su quello di standby.</p>
 <p>In questa guida, il cluster primario è il cluster Milvus di origine, mentre il cluster di standby è il cluster Milvus di destinazione.</p>
 <p>Prima di iniziare, assicurarsi che la replica CDC sia già configurata tra i cluster. Per ulteriori dettagli, consultare la <a href="/docs/it/set_up_cdc_replication.md">sezione Configurazione della replica CDC</a>.</p>
 <h2 id="Why-2PC-is-required" class="common-anchor-header">Perché è richiesto il 2PC<button data-href="#Why-2PC-is-required" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: Importazione in blocco nella replica CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L’importazione in un cluster in replica è disabilitata per impostazione predefinita. Abilitala impostando ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` su ` <code translate="no">true</code> ` sia sul cluster primario che su quello di standby.</p>
+    </button></h2><p>L’importazione in un cluster replicante è disabilitata per impostazione predefinita. Abilitala impostando ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` su ` <code translate="no">true</code> ` sia sul cluster primario che su quello di standby.</p>
 <p>Se si distribuisce Milvus con Milvus Operator, aggiungere la seguente impostazione a ` <code translate="no">spec.config</code> ` di ciascuna risorsa ` <code translate="no">Milvus</code> `:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
@@ -98,8 +98,8 @@ title: Importazione in blocco nella replica CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eseguire tutte le chiamate di importazione sul cluster primario. I dati importati e la decisione di commit vengono replicati automaticamente sul cluster di standby, pertanto non inviare né eseguire il commit dell'importazione manualmente sul cluster di standby.</p>
-<p>Ciascun cluster legge i file di importazione dal proprio object storage. Assicurarsi che i file da importare siano presenti sia nell’object storage primario che in quello di standby. È possibile caricare i file su entrambi i cluster oppure utilizzare un object storage leggibile da entrambi i cluster. Se i file mancano sul cluster di standby, l’importazione replicata fallirà con un errore di oggetto non trovato.</p>
+    </button></h2><p>Eseguire tutte le chiamate di importazione sul cluster primario. I dati importati e la decisione di commit vengono replicati automaticamente sul cluster di standby, pertanto non inviare né eseguire il commit dell'importazione sul cluster di standby manualmente.</p>
+<p>Ciascun cluster legge i file di importazione dal proprio object storage. Assicurarsi che i file da importare siano presenti sia nell’object storage primario che in quello di standby. È possibile caricare i file su entrambi i cluster oppure utilizzare un object storage leggibile da entrambi i cluster. Se i file non sono presenti sul cluster di standby, l’importazione replicata fallirà con un errore di oggetto non trovato.</p>
 <p>L’esempio seguente utilizza gli helper di importazione basati su REST disponibili all’indirizzo <code translate="no">pymilvus.bulk_writer</code>. I valori <code translate="no">url</code> corrispondono agli stessi indirizzi Milvus utilizzati per altre chiamate API.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -193,7 +193,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta che il processo raggiunge lo stato " <code translate="no">Completed</code>", le entità importate sono visibili su entrambi i cluster. Caricare ed eseguire una query sulla raccolta nel cluster primario, quindi eseguire la stessa query nel cluster di standby senza caricare manualmente la raccolta in quest'ultimo e verificare che le entità importate siano presenti su entrambi i cluster.</p>
+    </button></h2><p>Una volta che il processo raggiunge lo stato " <code translate="no">Completed</code>", le entità importate sono visibili su entrambi i cluster. Caricare ed eseguire una query sulla collezione nel cluster primario, quindi eseguire la stessa query nel cluster di standby senza caricare manualmente la collezione in quest'ultimo e verificare che le entità importate siano presenti su entrambi i cluster.</p>
 <p>Il cluster di standby è di sola lettura finché rimane in modalità standby. Non inviare importazioni, commit o altre operazioni DDL o DCL direttamente al cluster di standby. Eseguire queste operazioni sul cluster primario e lasciare che la replica CDC le applichi al cluster di standby.</p>
 <h2 id="FAQ" class="common-anchor-header">Domande frequenti<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -273,4 +273,4 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In un cluster con replica, sono accettate solo le importazioni 2PC con ` <code translate="no">auto_commit=false</code> `. Impostare ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` nella richiesta di importazione.</p>
+    </button></h3><p>In un cluster con replica, vengono accettate solo importazioni 2PC con ` <code translate="no">auto_commit=false</code> `. Impostare ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` nella richiesta di importazione.</p>

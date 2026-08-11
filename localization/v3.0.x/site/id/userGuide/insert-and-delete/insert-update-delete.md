@@ -2,9 +2,10 @@
 id: insert-update-delete.md
 title: Menyisipkan Entitas
 summary: >-
-  Entitas dalam sebuah koleksi adalah catatan data yang memiliki kumpulan field
-  yang sama. Nilai-nilai field dalam setiap record data membentuk sebuah
-  entitas. Halaman ini memperkenalkan cara menyisipkan entitas ke dalam koleksi.
+  Entitas dalam sebuah koleksi adalah catatan data yang memiliki kumpulan bidang
+  yang sama. Nilai-nilai bidang dalam setiap catatan data membentuk sebuah
+  entitas. Halaman ini menjelaskan cara menyisipkan entitas ke dalam sebuah
+  koleksi.
 ---
 <h1 id="Insert-Entities" class="common-anchor-header">Menyisipkan Entitas<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,11 +22,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Entitas dalam koleksi adalah catatan data yang memiliki kumpulan field yang sama. Nilai-nilai field dalam setiap record data membentuk sebuah entitas. Halaman ini memperkenalkan cara menyisipkan entitas ke dalam koleksi.</p>
+    </button></h1><p>Entitas dalam sebuah koleksi adalah catatan data yang memiliki kumpulan bidang yang sama. Nilai bidang dalam setiap catatan data membentuk sebuah entitas. Halaman ini menjelaskan cara menyisipkan entitas ke dalam sebuah koleksi.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>Field ditambahkan setelah pembuatan koleksi</strong>: Jika Anda menambahkan field baru ke dalam koleksi setelah pembuatan dan tidak menentukan nilai selama penyisipan, Milvus akan secara otomatis mengisinya dengan nilai default yang telah ditentukan atau NULL jika tidak ada nilai default yang ditentukan. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Menambahkan Field ke Koleksi yang Sudah Ada</a>.</p></li>
-<li><p><strong>Penanganan duplikat</strong>: Operasi standar <code translate="no">insert</code> tidak memeriksa duplikat kunci utama. Memasukkan data dengan primary key yang sudah ada akan membuat entitas baru dengan kunci yang sama, sehingga menyebabkan duplikasi data dan potensi masalah aplikasi. Untuk memperbarui entitas yang sudah ada atau menghindari duplikasi, gunakan operasi <strong><code translate="no">upsert</code></strong> sebagai gantinya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/upsert-entities.md">Memperbarui Entitas</a>.</p></li>
+<li><p><strong>Kolom yang ditambahkan setelah pembuatan koleksi</strong>: Jika Anda menambahkan kolom baru ke dalam koleksi setelah pembuatan dan tidak menentukan nilai saat penyisipan, Milvus secara otomatis mengisinya dengan nilai default yang telah ditentukan atau nilai " <code translate="no">NULL</code> " jika tidak ada nilai default yang ditetapkan. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Mengubah Skema Koleksi</a>.</p></li>
+<li><p><strong>Penanganan duplikat</strong>: Operasi " <code translate="no">insert</code> " standar tidak memeriksa adanya duplikat kunci utama. Menyisipkan data dengan kunci utama yang sudah ada akan membuat entitas baru dengan kunci yang sama, yang mengakibatkan duplikasi data dan potensi masalah pada aplikasi. Untuk memperbarui entitas yang sudah ada atau menghindari duplikat, gunakan <strong><code translate="no">upsert</code></strong> . Untuk informasi lebih lanjut, lihat <a href="/docs/id/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -43,9 +44,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Di Milvus, <strong>Entitas</strong> merujuk pada catatan data dalam <strong>Koleksi</strong> yang berbagi <strong>Skema</strong> yang sama, dengan data di setiap bidang dalam satu baris yang merupakan sebuah Entitas. Oleh karena itu, Entitas dalam Koleksi yang sama memiliki atribut yang sama (seperti nama field, tipe data, dan batasan-batasan lainnya).</p>
-<p>Ketika menyisipkan Entitas ke dalam Koleksi, Entitas yang akan disisipkan hanya bisa berhasil ditambahkan jika berisi semua field yang didefinisikan dalam Skema. Entitas yang disisipkan akan masuk ke dalam Partisi bernama <strong>_default</strong> sesuai urutan penyisipan. Asalkan Partisi tertentu ada, Anda juga dapat menyisipkan Entitas ke dalam Partisi tersebut dengan menentukan nama Partisi dalam permintaan penyisipan.</p>
-<p>Milvus juga mendukung field dinamis untuk menjaga skalabilitas Koleksi. Ketika field dinamis diaktifkan, Anda dapat menyisipkan field yang tidak didefinisikan di dalam Skema ke dalam Collection. Field dan nilai ini akan disimpan sebagai pasangan key-value dalam sebuah field yang dicadangkan bernama <strong>$meta</strong>. Untuk informasi lebih lanjut mengenai bidang dinamis, silakan lihat Bidang Dinamis.</p>
+    </button></h2><p>Di Milvus, <strong>Entitas</strong> mengacu pada catatan data dalam <strong>Koleksi</strong> yang memiliki <strong>Skema</strong> yang sama, dengan data di setiap kolom baris membentuk sebuah Entitas. Oleh karena itu, Entitas dalam Koleksi yang sama memiliki atribut yang sama (seperti nama kolom, tipe data, dan batasan lainnya).</p>
+<p>Saat menyisipkan Entitas ke dalam Koleksi, Entitas yang akan disisipkan hanya dapat ditambahkan dengan sukses jika mengandung semua bidang yang didefinisikan dalam Skema. Entitas yang dimasukkan akan masuk ke Partisi bernama <strong>_default</strong> sesuai urutan penyisipan. Asalkan Partisi tertentu sudah ada, Anda juga dapat menyisipkan Entitas ke Partisi tersebut dengan menentukan nama Partisi dalam permintaan penyisipan.</p>
+<p>Milvus juga mendukung bidang dinamis untuk menjaga skalabilitas Koleksi. Saat bidang dinamis diaktifkan, Anda dapat menyisipkan bidang yang tidak didefinisikan dalam Skema ke dalam Koleksi. Bidang dan nilai-nilai ini akan disimpan sebagai pasangan kunci-nilai di bidang yang disediakan bernama <strong>$meta</strong>. Untuk informasi lebih lanjut tentang bidang dinamis, silakan lihat Bidang Dinamis.</p>
 <h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Menyisipkan Entitas ke dalam Koleksi<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,10 +62,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum memasukkan data, Anda perlu mengatur data Anda ke dalam daftar kamus sesuai dengan Skema, dengan setiap kamus mewakili Entitas dan berisi semua bidang yang didefinisikan dalam Skema. Jika Koleksi memiliki field dinamis yang diaktifkan, setiap kamus juga dapat menyertakan field yang tidak didefinisikan dalam Skema.</p>
-<p>Pada bagian ini, Anda akan memasukkan entitas ke dalam Koleksi yang dibuat dengan cara penyiapan cepat. Koleksi yang dibuat dengan cara ini hanya memiliki dua field, yaitu <strong>id</strong> dan <strong>vektor</strong>. Selain itu, Koleksi ini memiliki field dinamis yang diaktifkan, sehingga Entitas dalam kode contoh menyertakan field bernama <strong>color</strong> yang tidak didefinisikan dalam Skema.</p>
+    </button></h2><p>Sebelum menyisipkan data, Anda perlu mengatur data Anda ke dalam daftar kamus sesuai dengan Skema, di mana setiap kamus mewakili sebuah Entitas dan berisi semua bidang yang didefinisikan dalam Skema. Jika Koleksi memiliki bidang dinamis yang diaktifkan, setiap kamus juga dapat menyertakan bidang yang tidak didefinisikan dalam Skema.</p>
+<p>Pada bagian ini, Anda akan menyisipkan entitas ke dalam Koleksi yang dibuat dengan metode pengaturan cepat. Koleksi yang dibuat dengan cara ini hanya memiliki dua bidang, yaitu <strong>id</strong> dan <strong>vector</strong>. Selain itu, Koleksi ini mengaktifkan bidang dinamis, sehingga Entitas dalam kode contoh menyertakan bidang bernama <strong>color</strong> yang tidak didefinisikan dalam Skema.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +227,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -272,9 +277,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda juga dapat menyisipkan entitas ke dalam partisi tertentu. Cuplikan kode berikut ini mengasumsikan bahwa Anda memiliki partisi bernama <strong>PartitionA</strong> dalam koleksi Anda.</p>
+    </button></h2><p>Anda juga dapat menyisipkan entitas ke dalam partisi tertentu. Potongan kode berikut mengasumsikan bahwa Anda memiliki partisi bernama <strong>PartitionA</strong> di dalam koleksi Anda.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -396,7 +406,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

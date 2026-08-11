@@ -1,13 +1,13 @@
 ---
 id: create-structarray-field.md
-title: Creare un campo StructArray
+title: Creazione di un campo StructArray
 summary: >-
   Creare un campo StructArray quando un'entità deve contenere un elenco ordinato
   di elementi strutturati. Un campo StructArray è un campo Array il cui tipo di
   elemento è Struct. Ogni elemento Struct segue lo stesso schema e può contenere
   sottocampi scalari, sottocampi vettoriali o entrambi.
 ---
-<h1 id="Create-a-StructArray-Field" class="common-anchor-header">Creare un campo StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
+<h1 id="Create-a-StructArray-Field" class="common-anchor-header">Creazione di un campo StructArray<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Un campo vettoriale o un sottocampo vettoriale accetta un solo indice. Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, definire due sottocampi vettoriali separati. In questo esempio, <code translate="no">chunks[emb_list_vector]</code> è destinato alla ricerca EmbeddingList, mentre <code translate="no">chunks[emb]</code> è destinato alla ricerca a livello di elemento.</p>
+<p>Un campo vettoriale o un sottocampo vettoriale accetta un solo indice. Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, definire due sottocampi vettoriali distinti. In questo esempio, <code translate="no">chunks[emb_list_vector]</code> è destinato alla ricerca EmbeddingList, mentre <code translate="no">chunks[emb]</code> è destinato alla ricerca a livello di elemento.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipi di dati supportati per i sottocampi<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver creato un campo StructArray, fare riferimento ai suoi sottocampi utilizzando la sintassi del percorso <code translate="no">structArray[subfield]</code>. Utilizzare questa sintassi quando si creano indici, si effettuano ricerche nei sottocampi vettoriali, si generano sottocampi o si creano filtri scalari.</p>
+    </button></h2><p>Dopo aver creato un campo StructArray, fare riferimento ai suoi sottocampi utilizzando la sintassi del percorso <code translate="no">structArray[subfield]</code>. Utilizzare questa sintassi quando si creano indici, si effettuano ricerche nei sottocampi vettoriali, si generano sottocampi di output o si creano filtri scalari.</p>
 <table>
 <thead>
 <tr><th>Percorso</th><th>Significato</th><th>Uso comune</th></tr>
@@ -381,7 +381,7 @@ client.add_collection_struct_field(
 <tr><td>Un sottocampo vettoriale ha un solo indice.</td><td>Se sono necessarie sia la ricerca EmbeddingList che quella a livello di elemento, creare due sottocampi vettoriali separati.</td></tr>
 <tr><td>I sottocampi StructArray esistenti sono fissi.</td><td>Dopo aver creato un campo StructArray, non è possibile aggiungere ulteriori sottocampi a quello stesso campo StructArray.</td></tr>
 <tr><td>Le funzioni non sono supportate all’interno di Struct.</td><td>Non definire funzioni per campi o sottocampi all’interno di un campo StructArray.</td></tr>
-<tr><td>I sottocampi scalari dovrebbero soddisfare le esigenze di filtraggio.</td><td>Aggiungere campi quali <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code> solo quando è necessario filtrarli, raggrupparli o visualizzarli in un secondo momento.</td></tr>
+<tr><td>I sottocampi scalari devono soddisfare le esigenze di filtraggio.</td><td>Aggiungere campi quali <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code> solo quando è necessario filtrarli, raggrupparli o visualizzarli in un secondo momento.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Errori comuni<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

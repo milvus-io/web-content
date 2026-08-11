@@ -37,7 +37,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>غالبًا ما تتطور مجموعات بيانات الذكاء الاصطناعي بعد إنشاء المجموعة. مع تغير النماذج وسير العمل، قد تحتاج الفرق إلى إضافة نص، أو إنشاء حقول متجهة جديدة للكيانات الموجودة، أو استخدام البيانات المخزنة خارج Milvus. يتطلب دعم سير العمل هذا نموذج تخزين يمكنه التطور مع مجموعة البيانات.</p>
-<p>يوفر التخزين V3 هذا النموذج في Milvus 3.0. ويستخدم تخطيط تخزين مُرقّم للإصدارات لدمج البيانات المضافة أو المعاد كتابتها بمرور الوقت، بينما تستمر التطبيقات في الوصول إلى المجموعات من خلال واجهات برمجة تطبيقات Milvus نفسها.</p>
+<p>يوفر التخزين V3 هذا النموذج في Milvus 3.0. ويستخدم تخطيط تخزين مُرقّم بالإصدارات لدمج البيانات المضافة أو المعاد كتابتها بمرور الوقت، بينما تستمر التطبيقات في الوصول إلى المجموعات من خلال نفس واجهات برمجة تطبيقات Milvus.</p>
 <p>يتم تعطيل التخزين V3 افتراضيًا. بعد تفعيل « <code translate="no">common.storage.useLoonFFI</code> »، تستخدم عمليات الكتابة الجديدة ومخرجات الضغط التخزين V3. تظل البيانات الموجودة في تخطيطها الحالي حتى تتم إعادة كتابة البيانات المؤهلة بواسطة عملية الضغط في الخلفية. يمكن لـ Milvus قراءة كلا التخطيطين خلال هذه المرحلة الانتقالية. قم بتمكين التخزين V3 لاستخدام الميزات التي تعتمد عليه، وليس كوسيلة عامة لتحسين الأداء.</p>
 <h2 id="Features-that-require-Storage-V3" class="common-anchor-header">الميزات التي تتطلب Storage V3<button data-href="#Features-that-require-Storage-V3" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ beta: Milvus 3.0.x
 <tr><th>الميزة</th><th>الوصف</th><th>التكوين المطلوب</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/ar/text.md"><code translate="no">TEXT</code> الحقل</a></td><td>تخزين نصوص مصدر طويلة، مثل المقاطع أو المستندات أو التذاكر أو السجلات، دون تحديد طول أقصى ثابت في مخطط المجموعة.</td><td><a href="/docs/ar/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
+<tr><td><a href="/docs/ar/text.md"><code translate="no">TEXT</code> الحقل</a></td><td>تخزين نصوص مصدر طويلة، مثل المقاطع أو المستندات أو التذاكر أو السجلات، دون تعيين طول أقصى ثابت في مخطط المجموعة.</td><td><a href="/docs/ar/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 <tr><td><a href="/docs/ar/add-fields-to-an-existing-collection.md">الحقول المتجهة التي تم إنشاؤها بواسطة الدالة</a></td><td>أضف دالة BM25 أو MinHash إلى مجموعة موجودة حتى يقوم Milvus بإنشاء حقل متجه جديد من حقل " <code translate="no">VARCHAR</code> " الموجود. يقوم Milvus بملء القيم التي تم إنشاؤها للكيانات الموجودة بشكل غير متزامن من خلال عملية الضغط في الخلفية.</td><td><ul><li><a href="/docs/ar/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></li><li><a href="/docs/ar/configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code translate="no">=true</code></li><li><a href="/docs/ar/configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code translate="no">dataCoord.compaction.storageVersion.enabled</code></a><code translate="no">=true</code></li></ul></td></tr>
 <tr><td><a href="/docs/ar/create-an-external-collection.md">المجموعات الخارجية</a></td><td>استعلام البيانات المخزنة خارج Milvus دون نسخها إلى مجموعة مُدارة. قم بتحديث المجموعة الخارجية عند تغيير البيانات المصدر. لعرض حقول مصدر إضافية، راجع <a href="/docs/ar/alter-external-collection-schema.md">«تعديل مخطط المجموعة الخارجية</a>».</td><td><a href="/docs/ar/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 </tbody>
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
 </div>
 <p>قبل تمكين Storage V3، ضع في اعتبارك سلوك البيانات التالي:</p>
 <ul>
-<li>نظرًا لأن ميزة « <code translate="no">dataCoord.compaction.storageVersion.enabled</code> » (التضغط التلقائي) ممكّنة افتراضيًا، يمكن للبيانات الحالية المؤهلة الانتقال إلى «Storage V3» تدريجيًا من خلال عملية التضغط في الخلفية.</li>
+<li>نظرًا لأن ميزة « <code translate="no">dataCoord.compaction.storageVersion.enabled</code> » (التكثيف التلقائي) ممكّنة افتراضيًا، يمكن للبيانات الحالية المؤهلة الانتقال إلى «Storage V3» تدريجيًا من خلال عملية التكثيف في الخلفية.</li>
 <li>يؤدي تعطيل Storage V3 إلى تغيير إصدار التخزين المستهدف لعمليات الكتابة المستقبلية ومخرجات الضغط المؤهلة. ولا يؤدي ذلك إلى تحويل جميع بيانات Storage V3 الحالية بشكل متزامن أو جعل الرجوع إلى إصدار أقدم آمنًا.</li>
 </ul>
 <h2 id="Enable-Storage-V3" class="common-anchor-header">تمكين التخزين V3<button data-href="#Enable-Storage-V3" class="anchor-icon" translate="no">
@@ -107,7 +107,7 @@ beta: Milvus 3.0.x
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">useLoonFFI:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يعامل Milvus هذا الإعداد على أنه قابل للتحديث. قم بتطبيق التغيير من خلال سير عمل تحديث التكوين الذي يدعمه النشر الخاص بك. لا يضمن تعديل ملف التكوين الثابت وحده أن النشر قيد التشغيل قد تلقى القيمة الجديدة.</p>
+<p>يعامل Milvus هذا الإعداد على أنه قابل للتحديث. قم بتطبيق التغيير من خلال سير عمل تحديث التكوين الذي يدعمه النشر الخاص بك. لا يضمن تحرير ملف التكوين الثابت وحده أن النشر قيد التشغيل قد تلقى القيمة الجديدة.</p>
 <p>إذا كنت تخطط لإضافة دالة (Function) وحقل متجه تم إنشاؤه إلى مجموعة موجودة، فقم أيضًا بتمكين إعدادَي الضغط المطلوبين لملء الفجوات في البيانات الموجودة:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>

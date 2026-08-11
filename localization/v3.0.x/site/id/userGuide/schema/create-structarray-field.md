@@ -64,11 +64,11 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat potongan yang digunakan dalam penyaringan skalar dan contoh rentang.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Apakah potongan tersebut berisi kode.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian EmbeddingList dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian tingkat elemen dengan metrik vektor reguler.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Subbidang vektor untuk pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Subbidang vektor atau bidang vektor hanya menerima satu indeks. Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, <code translate="no">chunks[emb_list_vector]</code> digunakan untuk pencarian EmbeddingList, sedangkan <code translate="no">chunks[emb]</code> digunakan untuk pencarian tingkat elemen.</p>
+<p>Subbidang vektor hanya menerima satu indeks. Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, tentukan dua subbidang vektor terpisah. Dalam contoh ini, <code translate="no">chunks[emb_list_vector]</code> digunakan untuk pencarian EmbeddingList, sedangkan <code translate="no">chunks[emb]</code> digunakan untuk pencarian tingkat elemen.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipe data subbidang yang didukung<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,7 +94,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai ` <code translate="no">DataType.BOOL</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, atau <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT</code> atau <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan atur <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan tetapkan <code translate="no">max_length</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT_VECTOR</code> dan tetapkan <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BFLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
@@ -379,7 +379,7 @@ client.add_collection_struct_field(
 <tr><td>Hanya tipe subbidang yang didukung yang diperbolehkan.</td><td>Gunakan tipe subbidang skalar dan vektor yang didukung oleh StructArray. Jangan mendefinisikan subbidang JSON, Geometry, Text, Timestamptz, SparseFloatVector, atau subbidang Struct / Array bersarang.</td></tr>
 <tr><td>Subbidang vektor memerlukan indeks sebelum pencarian.</td><td>Buat indeks pada jalur seperti <code translate="no">chunks[emb_list_vector]</code> atau <code translate="no">chunks[emb]</code> sebelum menjalankan pencarian vektor.</td></tr>
 <tr><td>Satu subfield vektor memiliki satu indeks.</td><td>Jika Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, buat dua subbidang vektor terpisah.</td></tr>
-<tr><td>Subbidang StructArray yang sudah ada bersifat tetap.</td><td>Setelah membuat bidang StructArray, jangan berharap dapat menambahkan subbidang lain ke bidang StructArray yang sama tersebut.</td></tr>
+<tr><td>Subbidang StructArray yang sudah ada bersifat tetap.</td><td>Setelah membuat bidang StructArray, jangan berharap dapat menambahkan subbidang lain ke bidang StructArray yang sama.</td></tr>
 <tr><td>Fungsi tidak didukung di dalam Struct.</td><td>Jangan mendefinisikan fungsi untuk bidang atau subbidang di dalam bidang StructArray.</td></tr>
 <tr><td>Subbidang skalar harus sesuai dengan kebutuhan filter.</td><td>Tambahkan bidang seperti <code translate="no">section</code>, <code translate="no">quality_score</code>, atau <code translate="no">has_code</code> hanya jika Anda perlu memfilter, mengelompokkan, atau menampilkannya nanti.</td></tr>
 </tbody>

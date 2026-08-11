@@ -282,7 +282,7 @@ results = client.hybrid_search(
 <tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
 </tbody>
 </table>
-<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf „ <code translate="no">$[...]</code> “, Geometrie-Funktionen, „Timestamptz“-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf ` <code translate="no">$[...]</code>`, Geometrie-Funktionen, `Timestamptz`-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,7 +300,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
-<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
+<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie beispielsweise „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
 <li><p>Die Erwartung, dass ` <code translate="no">MATCH_*</code> ` Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
 <li><p>Das Schreiben von bloßen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>

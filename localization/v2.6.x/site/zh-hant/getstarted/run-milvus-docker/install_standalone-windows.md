@@ -299,14 +299,14 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>檢查 Docker Daemon 是否已啟動。</p>
-<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker 守護程式。​</p>
+<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker Daemon。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
 <li><p>請確認您是否已以<strong>系統管理員模式</strong>啟動 Docker Desktop。​</p>
-<p>請確保您已以系統管理員模式啟動 Docker Desktop。要執行此操作，請右鍵點擊<strong>Docker</strong>Desktop，然後選擇<strong>「以系統管理員身分執行</strong>」。​</p>
+<p>請確保您已以系統管理員模式啟動 Docker Desktop。要執行此操作，請右鍵點擊<strong>Docker Desktop</strong>並選擇<strong>「以系統管理員身分執行</strong>」。​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -367,7 +367,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvus 啟動時出現「讀取設定失敗」錯誤提示</span>
   
  </span></p>
-<p>若要處理 Milvus 啟動時出現的「讀取設定檔失敗（<code translate="no">docker exec</code> ）」錯誤，您需要檢查掛載至 Milvus 容器中的卷是否正確。若卷已正確掛載至容器中，您可以使用 指令進入容器，並如下所示列出<strong>/milvus/configs</strong>資料夾：​</p>
+<p>若要處理 Milvus 啟動時出現的「讀取設定檔失敗」錯誤，您需要檢查掛載至 Milvus 容器中的卷是否正確。若卷已正確掛載至容器中，您可以使用<code translate="no">docker exec</code> 指令進入容器，並如下所示列出<strong>/milvus/configs</strong>資料夾：​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

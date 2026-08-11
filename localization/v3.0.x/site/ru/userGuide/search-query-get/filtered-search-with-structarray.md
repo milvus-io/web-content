@@ -51,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>На этой странице объясняется, как использовать фильтры StructArray в рабочих процессах поиска. Полные правила синтаксиса, поддерживаемые типы предикатов и матрица неподдерживаемых предикатов см. в разделе <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
+<p>На этой странице объясняется, как использовать фильтры StructArray в рабочих процессах поиска. Полные правила синтаксиса, поддерживаемые типы предикатов и матрица неподдерживаемых предикатов приведены в разделе <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
 </div>
 <h2 id="Filter-by-top-level-fields" class="common-anchor-header">Фильтрация по полям верхнего уровня<button data-href="#Filter-by-top-level-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +96,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня <code translate="no">category</code> имеет значение <code translate="no">&quot;search&quot;</code>. Он не выделяет один конкретный соответствующий элемент Struct.</p>
+<p>Приведенный выше фильтр выбирает только сущности, у которых поле верхнего уровня ` <code translate="no">category</code> ` имеет значение ` <code translate="no">&quot;search&quot;</code>`. Он не выделяет один конкретный соответствующий элемент Struct.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Фильтрация векторного поиска на уровне элементов<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,8 +301,8 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Использование ` <code translate="no">$[subfield]</code> ` вне контекста ` <code translate="no">element_filter</code> ` или ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Использование <code translate="no">chunks.section</code> вместо синтаксиса операторов StructArray, например <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
-<li><p>Использование <code translate="no">element_filter</code>, когда требуется только фильтрация на уровне строк. Вместо этого используйте <code translate="no">MATCH_ANY</code>, если требуется только выборка сущностей.</p></li>
-<li><p>Ожидание того, что оператор ` <code translate="no">MATCH_*</code> ` вернет смещения элементов. Эти операторы выбирают сущности и сами по себе не определяют один соответствующий элемент.</p></li>
+<li><p>Использование <code translate="no">element_filter</code>, когда требуется только фильтрация на уровне строк. Вместо этого используйте <code translate="no">MATCH_ANY</code>, если вам нужно только выбрать сущности.</p></li>
+<li><p>Ожидание того, что оператор ` <code translate="no">MATCH_*</code> ` вернет смещения элементов. Эти операторы выбирают сущности и сами по себе не идентифицируют один соответствующий элемент.</p></li>
 <li><p>Написание простых булевых предикатов, таких как <code translate="no">$[has_code]</code>. Используйте явные сравнения, такие как <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Размещение <code translate="no">element_filter</code> перед предикатом верхнего уровня в одном и том же выражении фильтра.</p></li>
 </ul>
@@ -323,7 +323,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>Чтобы ознакомиться с полным синтаксисом фильтров StructArray, прочтите раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p></li>
-<li><p>Чтобы сначала выполнить поиск по вектору без фильтрации, ознакомьтесь с разделом <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый поиск по вектору с использованием StructArray</a>».</p></li>
+<li><p>Чтобы сначала выполнить поиск по вектору без фильтрации, ознакомьтесь с разделом <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый поиск по вектору с StructArray</a>».</p></li>
 <li><p>Чтобы создать скалярные индексы для часто используемых фильтров StructArray, ознакомьтесь с разделом <a href="/docs/ru/index-structarray-fields.md">«Индексирование полей StructArray</a>».</p></li>
 <li><p>Чтобы ознакомиться с ограничениями фильтрации и поиска для конкретных версий, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

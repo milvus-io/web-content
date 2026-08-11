@@ -42,15 +42,15 @@ summary: >-
 <tr><th>領域</th><th>制限</th></tr>
 </thead>
 <tbody>
-<tr><td>スキーマの形状</td><td>Struct は、Array フィールドの要素型としてのみ使用できます。Struct は、最上位のコレクションフィールドとしてはサポートされていません。</td></tr>
+<tr><td>スキーマの形状</td><td>Structは、Arrayフィールドの要素型としてのみ使用できます。Structは、最上位のコレクションフィールドとしてはサポートされていません。</td></tr>
 <tr><td>サブフィールドのスキーマ</td><td>同じ StructArray フィールド内のすべての Struct 要素は、1 つの事前定義された Struct スキーマを共有します。</td></tr>
 <tr><td>容量</td><td><code translate="no">max_capacity</code> は必須であり、1つのエンティティが StructArray フィールドに格納できる Struct 要素の数を制限します。</td></tr>
 <tr><td>サブフィールドの変更</td><td>StructArray フィールドが作成された後、その既存の StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>サブフィールドのパス</td><td>インデックス、検索対象、出力フィールド、およびフィルタには、<code translate="no">chunks[emb]</code> などの<code translate="no">structArray[subfield]</code> パスを使用してください。<code translate="no">chunks.emb</code> は使用しないでください。</td></tr>
 <tr><td>シェイプの挿入</td><td>StructArrayフィールドをオブジェクトの配列として挿入します。挿入ペイロード内ではパス構文を使用しないでください。</td></tr>
-<tr><td>ベクトルインデックス</td><td>ベクトルフィールドまたはベクトルサブフィールドは、1つのインデックスのみを受け付けます。EmbeddingList検索と要素レベル検索には、それぞれ個別のベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>ベクトルインデックス</td><td>ベクトルフィールドまたはベクトルサブフィールドは、1つのインデックスのみを受け付けます。EmbeddingList検索と要素レベルの検索には、それぞれ個別のベクトルサブフィールドを使用してください。</td></tr>
 <tr><td>関数</td><td>StructArrayフィールド内のフィールドまたはサブフィールドでは、フィールド関数はサポートされていません。</td></tr>
-<tr><td>Null 許容フィールド</td><td>Null 許容の StructArray フィールドはバージョンに依存します。サポートされている場合、null は個々の Struct 要素ごとに独立して適用されるのではなく、StructArray フィールド全体に適用されます。</td></tr>
+<tr><td>Null 許容フィールド</td><td>Null 許容の StructArray フィールドはバージョンに依存します。サポートされている場合、Null は個々の Struct 要素ごとに独立して適用されるのではなく、StructArray フィールド全体に適用されます。</td></tr>
 <tr><td>動的なフィールドの追加</td><td>既存のコレクションへの StructArray フィールドの追加はバージョン制限があり、追加するフィールドは null 許容である必要があります。</td></tr>
 </tbody>
 </table>
@@ -118,7 +118,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Geometry サブフィールドおよび GIS 関数はサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時間指定式はサポートされていません。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時刻指定式はサポートされていません。</td></tr>
 <tr><td>StructArray フィールドでは、<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドは、ネストされた配列、ベクトル配列、Struct、または Array-of-Struct サブフィールドをサポートしていません。</td></tr>
 </tbody>
 </table>
@@ -137,7 +137,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Null 許容 StructArray の動作および動的な StructArray フィールドの追加は、バージョンに依存します。</p>
+    </button></h2><p>Null 許容 StructArray の動作および動的な StructArray フィールドの追加は、バージョンによって制限されます。</p>
 <table>
 <thead>
 <tr><th>機能</th><th>制限</th></tr>
@@ -147,9 +147,9 @@ summary: >-
 <tr><td>Python における null 値</td><td>PythonでStructArrayのnull値を挿入するには、<code translate="no">None</code> を使用してください。<code translate="no">Null</code> や<code translate="no">null</code> は使用しないでください。</td></tr>
 <tr><td>Nullの適用範囲</td><td>NullはStructArrayフィールド全体に適用されます。たとえば、<code translate="no">chunks=None</code> は、<code translate="no">chunks</code> がNull可能である場合にのみ有効です。</td></tr>
 <tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でnullのサブフィールド配列と有効なサブフィールド配列を混在させてはなりません。</td></tr>
-<tr><td>StructArray フィールドの動的追加</td><td>既存のコレクションへの StructArray フィールドの動的追加は、動的な StructArray フィールドのサポートを含むバージョンでのみサポートされています。</td></tr>
+<tr><td>StructArray フィールドの動的追加</td><td>既存のコレクションへの StructArray フィールドの動的追加は、動的な StructArray フィールドのサポートが含まれるバージョンでのみサポートされています。</td></tr>
 <tr><td>動的追加における null 許容要件</td><td>既存のコレクションに StructArray フィールドを追加する場合、既存のエンティティには新しいフィールドの値がないため、そのフィールドは null 許容でなければなりません。</td></tr>
-<tr><td>動的追加後の既存のエンティティ</td><td>既存のエンティティは、追加されたStructArrayフィールドについて、そのサブフィールド全体で<code translate="no">null</code> を返します。</td></tr>
+<tr><td>動的追加後の既存のエンティティ</td><td>既存のエンティティは、追加されたStructArrayフィールドのサブフィールド全体について、<code translate="no">null</code> を返します。</td></tr>
 </tbody>
 </table>
 <p>Milvus v3.0.x では、Null 許容の StructArray フィールド、Null 許容のベクトル配列、および動的な StructArray フィールドの追加が利用可能です。</p>
@@ -232,9 +232,9 @@ summary: >-
 <tbody>
 <tr><td>基本的な EmbeddingList 検索</td><td><code translate="no">MAX_SIM*</code> メトリックでインデックス付けされた StructArray ベクトルサブフィールドでサポートされています。エンティティレベルの結果を返します。</td></tr>
 <tr><td>基本的な要素レベル検索</td><td>通常のベクトルメトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。一致した要素のオフセットを返すことができます。</td></tr>
-<tr><td>範囲検索</td><td>検索モードおよび対象バージョンのインデックス／メトリック対応状況に応じてサポートされます。要素レベルの StructArray リクエストにおけるハイブリッド検索範囲の動作については、対象バージョンを確認してください。</td></tr>
+<tr><td>範囲検索</td><td>検索モードおよび対象バージョンのインデックス／メトリック対応状況に応じてサポートされます。要素レベルのStructArrayリクエストにおけるハイブリッド検索範囲の挙動については、対象バージョンを確認してください。</td></tr>
 <tr><td>グループ化検索</td><td>要素レベルのグループ化検索では、オフセットを返すことができます。要素レベルのStructArrayリクエストにおけるハイブリッド検索のグループ化動作は、バージョンに依存します。</td></tr>
-<tr><td>ハイブリッド検索</td><td>ハイブリッド検索リクエストには、対象バージョンがその検索の組み合わせをサポートしている場合にのみ、StructArrayベクトルサブフィールドのリクエストを含めることができます。各リクエストは、インデックス化されたベクトルサブフィールドのメトリックファミリーに従います。</td></tr>
+<tr><td>ハイブリッド検索</td><td>ハイブリッド検索リクエストには、対象バージョンがその検索の組み合わせをサポートしている場合にのみ、StructArrayベクトルサブフィールドのリクエストを含めることができます。各リクエストは、引き続きインデックス化されたベクトルサブフィールドのメトリックファミリーに従います。</td></tr>
 <tr><td>オフセット出力</td><td>オフセットは、要素レベルの検索結果で利用可能です。EmbeddingList検索はエンティティレベルの結果を返し、主要な結果単位として要素オフセットを使用しません。</td></tr>
 </tbody>
 </table>
@@ -257,7 +257,7 @@ summary: >-
 <p>大まかに言えば：</p>
 <ul>
 <li><p><code translate="no">$[subfield]</code> は、StructArray演算子の内部でのみ使用してください。</p></li>
-<li><p>スカラー述語には、スカラーサブフィールドを使用してください。</p></li>
+<li><p>スカラー述語にはスカラーサブフィールドを使用してください。</p></li>
 <li><p><code translate="no">$[...]</code> のスカラー述語の入力として、ベクトルサブフィールドを使用しないでください。</p></li>
 <li><p>JSONパス構文、JSON関数、配列コンテナ関数、テキスト一致関数、Geometry / GIS関数、およびTimestamptz式は、StructArrayの要素レベルの述語ではサポートされていません。</p></li>
 <li><p>単純なブール式ではなく、<code translate="no">$[has_code] == true</code> などの明示的なブール比較を使用することを推奨します。</p></li>

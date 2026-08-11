@@ -39,7 +39,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h2><ul>
-<li>Fungsi harus merujuk tepat pada satu bidang ` <code translate="no">VARCHAR</code> ` yang tidak boleh bernilai null di <code translate="no">input_field_names</code>.</li>
+<li>Fungsi harus merujuk tepat pada satu bidang ` <code translate="no">VARCHAR</code> ` yang tidak boleh null di <code translate="no">input_field_names</code>.</li>
 <li>Jumlah string di ` <code translate="no">queries</code> ` harus sama dengan jumlah kueri pencarian (<code translate="no">nq</code>).</li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">

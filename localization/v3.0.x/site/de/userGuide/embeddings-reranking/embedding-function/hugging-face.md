@@ -21,7 +21,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Verwendung eines Hugging Face-Embedding-Modells erfordert normalerweise, dass Ihre Anwendung Anmeldedaten verwaltet, das Modell separat aufruft und Embeddings für eingefügte Daten und Suchanfragen konsistent generiert. Mit einer Text-Embedding-Funktion ruft Milvus gehostete <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face-Inferenz-Provider</a> auf, um Rohtext während des Einfügens und der Suche in Vektoren umzuwandeln.</p>
+    </button></h1><p>Die Verwendung eines Hugging Face-Embedding-Modells erfordert normalerweise, dass Ihre Anwendung Anmeldedaten verwaltet, das Modell separat aufruft und Embeddings für eingefügte Daten und Suchanfragen konsistent generiert. Mit einer Text-Embedding-Funktion ruft Milvus gehostete <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face-Inferenz-Provider</a> auf, um Rohtext beim Einfügen und bei der Suche in Vektoren umzuwandeln.</p>
 <p>Diese Integration nutzt den gehosteten Hugging Face-Router. Informationen zur Anbindung von Milvus an einen separat bereitgestellten Text Embeddings Inference (TEI)-Dienst finden Sie unter <a href="/docs/de/hugging-face-tei.md">Hugging Face TEI</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ beta: Milvus v2.6.20+
 <p>Der Workflow umfasst drei Schritte:</p>
 <ol>
 <li><strong>Rohtext senden.</strong> Ihre Anwendung stellt den Rohtext in einer Einfüge- oder Suchanfrage bereit.</li>
-<li><strong>Einbettung generieren.</strong> Die Text-Embedding-Funktion leitet den Text über „ <code translate="no">hf-inference</code> “ an die Hugging Face-Pipeline „ <code translate="no">feature-extraction</code> “ weiter. Die Funktion nutzt „ <code translate="no">model_name</code> “, um das Modell auszuwählen, und kann unterstützte Inferenzoptionen wie Normalisierung und Trunkierung übergeben.</li>
+<li><strong>Einbettung generieren.</strong> Die Text-Embedding-Funktion leitet den Text über „ <code translate="no">hf-inference</code> “ an die Hugging Face-Pipeline „ <code translate="no">feature-extraction</code> “ weiter. Die Funktion wählt das Modell mithilfe von „ <code translate="no">model_name</code> “ aus und kann unterstützte Inferenzoptionen wie Normalisierung und Trunkierung übergeben.</li>
 <li><strong>Verwenden Sie die Einbettung.</strong> Hugging Face gibt pro Eingabetext eine Gleitkomma-Einbettung zurück. Beim Einfügen speichert Milvus den Vektor im Ausgabefeld der Funktion. Bei der Suche verwendet Milvus den Vektor als Abfragevektor.</li>
 </ol>
 <p>Dieselbe Funktionskonfiguration übernimmt sowohl das Einfügen als auch die Suche, wodurch das Modell und die Inferenzparameter bei beiden Vorgängen konsistent bleiben.</p>
@@ -93,7 +93,7 @@ beta: Milvus v2.6.20+
 <li>Ein Modell, das derzeit von <code translate="no">hf-inference</code> für die <a href="https://huggingface.co/docs/inference-providers/en/tasks/feature-extraction"><code translate="no">feature-extraction</code></a> Aufgabe bereitgestellt wird.</li>
 </ul>
 <div class="alert note">
-<p>Milvus hat keinen Einfluss darauf, ob ein Hugging-Face-Modell weiterhin über <code translate="no">hf-inference</code> verfügbar bleibt oder ob das Modell Ihre Anforderungen an Stabilität, Latenz und Ausgabequalität erfüllt. Überprüfen Sie das Modell auf Hugging Face und bewerten Sie es im Hinblick auf Ihre Arbeitslast, bevor Sie es in der Produktion einsetzen.</p>
+<p>Milvus hat keinen Einfluss darauf, ob ein Hugging-Face-Modell über <code translate="no">hf-inference</code> weiterhin verfügbar bleibt oder ob das Modell Ihre Anforderungen an Stabilität, Latenz und Ausgabequalität erfüllt. Überprüfen Sie das Modell auf Hugging Face und bewerten Sie es im Hinblick auf Ihre Arbeitslast, bevor Sie es in der Produktion einsetzen.</p>
 </div>
 <p>In den Beispielen wird <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2"><code translate="no">sentence-transformers/all-MiniLM-L6-v2</code></a>, das 384-dimensionale Einbettungen erzeugt. Das Modell dient lediglich zur Veranschaulichung der Konfiguration und stellt keine Empfehlung oder Zertifizierung durch Milvus dar.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Anmeldedaten konfigurieren<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -415,5 +415,5 @@ client.create_collection(
       </svg>
     </button></h2><ul>
 <li>Allgemeine Konzepte zu „Function“ sowie Informationen zum Einfüge- und Suchverhalten finden Sie unter <a href="/docs/de/embedding-function-overview.md">„Embedding Function – Übersicht</a>“.</li>
-<li>Informationen zum erneuten Ranking von Kandidaten der Vektorsuche mit gehosteten Hugging-Face-Satzähnlichkeitswerten finden Sie unter <a href="/docs/de/hugging-face-ranker.md">„Hugging Face Ranker</a>“.</li>
+<li>Informationen zum erneuten Ranking von Kandidaten bei der Vektorsuche mit gehosteten Hugging-Face-Satzähnlichkeitswerten finden Sie unter <a href="/docs/de/hugging-face-ranker.md">„Hugging Face Ranker</a>“.</li>
 </ul>

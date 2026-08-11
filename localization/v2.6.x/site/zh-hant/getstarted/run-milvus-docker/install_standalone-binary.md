@@ -83,7 +83,7 @@ title: 使用 RPM/DEB 套件安裝 Milvus 獨立版
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>對於基於 DEB 的系統（例如 Ubuntu 和 Debian），請使用<code translate="no">apt</code> 指令安裝套件。</p>
+<p>對於基於 DEB 的系統（例如 Ubuntu 和 Debian），請使用<code translate="no">apt</code> 指令來安裝套件。</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -191,7 +191,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>安裝完 Milvus 獨立版後，您可以：</p>
 <ul>
-<li><p>請參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門》</a>以了解 Milvus 的功能。</p></li>
+<li><p>請參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門指南》</a>，了解 Milvus 的功能。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>
@@ -212,6 +212,6 @@ dpkg -l | grep milvus
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

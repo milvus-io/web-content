@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドは、同じデータ型の要素の順序付きセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
+summary: ARRAYフィールドには、同じデータ型の要素が順序付きで格納されます。以下に、ARRAYフィールドによるデータの格納例を示します。
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,13 +18,13 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ARRAYフィールドは、同じデータ型の要素の順序付けられたセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を示します：</p>
+    </button></h1><p>ARRAYフィールドは、同じデータ型の要素からなる順序付き集合を格納します。以下に、ARRAYフィールドによるデータの格納例を示します。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限界値<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +40,10 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。しかし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、ヌル値を許容することができます。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p></li>
-<li><p><strong>データ型：</strong>データ型：ARRAYフィールドの全要素は、<code translate="no">element_type</code> パラメータで定義される同じデータ型を共有しなければなりません。<code translate="no">element_type</code> が<code translate="no">VARCHAR</code> に設定されている場合、配列要素には<code translate="no">max_length</code> も指定する必要がある。<code translate="no">element_type</code> はmilvusがサポートするスカラーデータ型であれば、<code translate="no">JSON</code> を除いて、どのようなデータ型でも受け付けます。</p></li>
-<li><p><strong>配列の容量</strong>：ARRAYフィールドの要素数は、<code translate="no">max_capacity</code> で指定された、Arrayの作成時に定義された最大容量以下でなければなりません。この値は1から<strong>4096の</strong>範囲内の整数でなければならない。</p></li>
-<li><p><strong>文字列の取り扱い</strong>：Arrayフィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
+<li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。ただし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、NULL値を許可することができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p></li>
+<li><p><code translate="no">element_type</code> データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義された同一のデータ型でなければなりません。 が<code translate="no">VARCHAR</code> に設定されている場合、配列要素の<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除く、Milvusがサポートするすべてのスカラーデータ型を受け入れます。</p></li>
+<li><p><strong>配列の容量</strong>：ARRAYフィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値<strong>は</strong> <strong>1から4096までの</strong>整数である必要があります。</p></li>
+<li><p><strong>文字列の取り扱い</strong>：配列フィールド内の文字列値は、セマンティックなエスケープや変換を行わずに、そのままの形で格納されます。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAYフィールドの追加<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,18 +60,23 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusでARRAYフィールドを使用するには、コレクションスキーマの作成時に関連するフィールドタイプを定義します。このプロセスには以下が含まれます：</p>
+    </button></h2><p>Milvus で ARRAY フィールドを使用するには、コレクションスキーマの作成時に該当するフィールド型を定義します。この手順には以下が含まれます：</p>
 <ol>
-<li><p><code translate="no">datatype</code> をサポートされている配列データ型、<code translate="no">ARRAY</code> に設定します。</p></li>
+<li><p><code translate="no">datatype</code> を、サポートされている配列データ型である<code translate="no">ARRAY</code> に設定します。</p></li>
 <li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。同じ配列内のすべての要素は、同じデータ型でなければなりません。</p></li>
-<li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量、つまり格納できる要素の最大数を定義します。</p></li>
+<li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量（つまり、配列が格納できる要素の最大数）を定義します。</p></li>
 </ol>
-<p>ここでは、ARRAYフィールドを含むコレクションスキーマを定義する方法を説明します：</p>
+<p>ARRAYフィールドを含むコレクションスキーマを定義する方法は次のとおりです：</p>
 <div class="alert note">
-<p>スキーマを定義する際に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusはあらかじめ定義されていないスカラーフィールドを挿入することができます。ただし、この場合、クエリおよび管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細は<a href="/docs/ja/enable-dynamic-field.md">Dynamic Field</a> を参照してください。</p>
+<p>スキーマ定義時に `<code translate="no">enable_dynamic_fields=True</code> ` を設定すると、Milvus では事前に定義されていないスカラーフィールドを挿入できるようになります。ただし、これによりクエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">「動的フィールド」</a>を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -253,7 +258,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">インデックス・パラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,10 +273,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」をご参照ください。</p>
+    </button></h2><p>インデックス作成は、検索およびクエリのパフォーマンス向上に役立ちます。Milvusでは、ベクトルフィールドに対してインデックス作成は必須ですが、スカラーフィールドに対してはオプションです。</p>
+<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` および ARRAY フィールド `<code translate="no">tags</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックス型を使用してインデックスを作成しています。この型を使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックス型やパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -349,9 +359,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマとインデックスを定義したら、ARRAY フィールドを含むコレクションを作成します。</p>
+    </button></h2><p>スキーマとインデックスを定義したら、ARRAYフィールドを含むコレクションを作成します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -382,7 +397,6 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -404,9 +418,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成したら、ARRAYフィールドを含むデータを挿入します。</p>
+    </button></h2><p>コレクションの作成後、ARRAYフィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -499,7 +518,6 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -524,7 +542,10 @@ client.<span class="hljs-title function_">insert</span>({
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">フィルタ式によるクエリ<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<div class="alert note">
+<p><code translate="no">ARRAY</code> フィールドでは、完全な配列の挿入に加え、Milvus v2.6.17以降の<code translate="no">upsert</code> APIにおいて、<code translate="no">ARRAY_APPEND</code> および<code translate="no">ARRAY_REMOVE</code> という部分更新演算子もサポートされています。これらを使用すると、現在の値を事前に取得することなく、既存の配列に要素を追加したり、一致する要素を削除したりできます。これにより、クライアント側の「読み取り-変更-書き込み」パターンを回避できます。 詳細については、「<a href="/docs/ja/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">マージモードでのARRAYフィールドのアップサート</a>」を参照してください。</p>
+</div>
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">フィルタ式を使用したクエリ<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,9 +561,14 @@ client.<span class="hljs-title function_">insert</span>({
         ></path>
       </svg>
     </button></h2><p>エンティティを挿入した後、<code translate="no">query</code> メソッドを使用して、指定されたフィルタ式に一致するエンティティを取得します。</p>
-<p><code translate="no">tags</code> が NULL ではないエンティティを取得する：</p>
+<p><code translate="no">tags</code> が null ではないエンティティを取得するには：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -599,7 +625,6 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;tags IS NOT NULL&quot;,
@@ -607,9 +632,14 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ratings</code> の最初の要素の値が 4 より大きいエンティティを検索する：</p>
+<p><code translate="no">ratings</code> の最初の要素の値が 4 より大きいエンティティを取得するには：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -677,14 +707,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;ratings[0] &gt; 4&quot;,
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">フィルター式を使ったベクトル検索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">フィルタ式を使用したベクトル検索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -699,9 +728,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的なスカラー・フィールド・フィルターに加えて、ベクトルの類似性検索をスカラー・フィールド・フィルターと組み合わせることができます。例えば、次のコードはベクトル検索にスカラー・フィールド・フィルターを追加する方法を示している：</p>
+    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドのフィルタを組み合わせることができます。たとえば、以下のコードは、ベクトル検索にスカラーフィールドのフィルタを追加する方法を示しています:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -777,7 +811,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -791,4 +824,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような高度な配列フィルタリング演算子をサポートしており、クエリー機能をさらに強化することができます。詳細は<a href="/docs/ja/array-operators.md">ARRAY Operatorsを</a>ご参照ください。</p>
+<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> といった高度な配列フィルタ演算子をサポートしており、クエリ機能をさらに強化できます。詳細については、「<a href="/docs/ja/array-operators.md">ARRAY演算子</a>」を参照してください。</p>

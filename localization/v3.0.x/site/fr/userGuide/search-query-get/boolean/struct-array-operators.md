@@ -1,12 +1,13 @@
 ---
 id: struct-array-operators.md
-title: Opérateurs StructArrayCompatible with Milvus 3.0.x
+title: Opérateurs StructArray
 summary: >-
-  Utilisez les filtres d'éléments et les opérateurs de famille de correspondance
-  pour filtrer les sous-champs scalaires à l'intérieur des champs StructArray.
-beta: Milvus 3.0.x
+  Les opérateurs StructArray filtrent les entités en évaluant des prédicats sur
+  des sous-champs scalaires au sein d'un champ StructArray. Utilisez cette page
+  comme référence syntaxique pour l'opérateur `element_filter` et la famille
+  d'opérateurs `MATCH_*`.
 ---
-<h1 id="StructArray-Operators" class="common-anchor-header">Opérateurs StructArray<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#StructArray-Operators" class="anchor-icon" translate="no">
+<h1 id="StructArray-Operators" class="common-anchor-header">Opérateurs StructArray<button data-href="#StructArray-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,12 +22,19 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le tableau de structures, ou StructArray, d'une entité stocke un ensemble ordonné d'éléments de structures. Chaque structure du tableau partage le même schéma prédéfini, qui comprend plusieurs vecteurs et champs scalaires. Lorsqu'un sous-champ scalaire d'une structure est indexé, vous pouvez utiliser des <strong>filtres d'éléments</strong> et des <strong>opérateurs de la famille match</strong> pour effectuer un filtrage scalaire.</p>
-<p>Un filtre d'élément sélectionne les entités qui contiennent au moins une valeur dans un champ StructArray correspondant au prédicat spécifié. En revanche, les opérateurs de la famille match sont utilisés pour trouver des entités qui contiennent des nombres ou des proportions spécifiques de valeurs dans un champ StructArray correspondant au prédicat spécifié.</p>
-<div class="alert note">
-<p>Lorsque vous créez des prédicats sur <code translate="no">$[subField]</code>, assurez-vous que le sous-champ est indexé si vous travaillez avec des ensembles de données à grande échelle, car ces opérateurs nécessitent d'itérer à travers les éléments du tableau pour chaque entité candidate.</p>
-</div>
-<h2 id="Element-filter" class="common-anchor-header">Filtre d'élément<button data-href="#Element-filter" class="anchor-icon" translate="no">
+    </button></h1><p>Les opérateurs StructArray filtrent les entités en évaluant des prédicats sur des sous-champs scalaires à l'intérieur d'un champ StructArray. Utilisez cette page comme référence syntaxique pour les opérateurs « <code translate="no">element_filter</code> » et la famille d'opérateurs « <code translate="no">MATCH_*</code> ».</p>
+<p>Le filtrage StructArray comporte deux familles d’opérateurs :</p>
+<table>
+<thead>
+<tr><th>Famille d’opérateurs</th><th>Objectif principal</th><th>Comportement du résultat</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">element_filter</code></td><td>Correspondance Éléments Struct qui satisfont un prédicat scalaire.</td><td>Dans une recherche au niveau des éléments, les résultats correspondants peuvent inclure des décalages d'éléments. Dans une requête au niveau des lignes ou une recherche filtrée, la structure des résultats dépend de l'API et des champs de sortie.</td></tr>
+<tr><td><code translate="no">MATCH_*</code></td><td>Sélectionne les entités en fonction du nombre d’éléments de structure satisfaisant un prédicat scalaire.</td><td>Filtrage au niveau des lignes. Ces opérateurs ne renvoient pas d’offset d’élément en eux-mêmes.</td></tr>
+</tbody>
+</table>
+<p>Utilisez des sous-champs scalaires dans les opérateurs StructArray. Les sous-champs vectoriels sont utilisés par les chemins de recherche vectoriels et ne constituent pas des entrées de prédicat scalaire.</p>
+<h2 id="When-to-use-which-operator" class="common-anchor-header">Quand utiliser quel opérateur<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,19 +49,49 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les filtres d'éléments lorsque vous devez vérifier si une entité contient les valeurs correspondant à un prédicat spécifique dans son champ StructArray.</p>
-<pre><code translate="no" class="language-python">element_filter(chunks, $[text] LIKE <span class="hljs-string">&quot;Red%&quot;</span>)
+    </button></h2><table>
+<thead>
+<tr><th>Objectif</th><th>Utilisation</th></tr>
+</thead>
+<tbody>
+<tr><td>Limiter la recherche vectorielle au niveau des éléments à ceux qui répondent à des conditions scalaires.</td><td><code translate="no">element_filter</code></td></tr>
+<tr><td>Répondre à plusieurs conditions scalaires au sein d’un même élément Struct.</td><td><code translate="no">element_filter</code></td></tr>
+<tr><td>Renvoyer uniquement les entités pour lesquelles au moins un élément Struct satisfait un prédicat.</td><td><code translate="no">MATCH_ANY</code></td></tr>
+<tr><td>Ne renvoyer que les entités dont tous les éléments Struct satisfont un prédicat.</td><td><code translate="no">MATCH_ALL</code></td></tr>
+<tr><td>Ne renvoyer que les entités pour lesquelles au moins, au plus ou exactement <code translate="no">N</code> éléments Struct satisfont un prédicat.</td><td><code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code></td></tr>
+</tbody>
+</table>
+<h2 id="Element-Filter" class="common-anchor-header">Filtre d'élément<button data-href="#Element-Filter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilisez « <code translate="no">element_filter(structArrayField, predicate)</code> » pour faire correspondre des éléments Struct dans un champ StructArray.</p>
+<p>À l’intérieur du prédicat, utilisez « <code translate="no">$[subfield]</code> » pour faire référence à un sous-champ scalaire de l’élément Struct actuel.</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Comme le montre l'expression du filtre d'éléments ci-dessus, le filtre d'éléments renvoie les entités qui contiennent au moins un morceau commençant par "Red" dans le sous-champ <code translate="no">text</code>. Le premier paramètre est le nom du champ StructArray, tandis que le second est le prédicat qui s'applique au sous-champ Struct.</p>
-<p>Vous pouvez utiliser des opérateurs de comparaison, de plage et arithmétiques pour construire la condition, ainsi que des opérateurs logiques pour concaténer plusieurs conditions, comme indiqué dans <a href="/docs/fr/basic-operators.md">Opérateurs de base</a>.</p>
-<p>Toutefois, lorsque vous construisez une expression de filtre qui combine à la fois un prédicat de niveau entité et un filtre d'élément, vous devez toujours placer le filtre d'élément à la fin, comme le montre l'exemple suivant.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># correct</span>
-<span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span> &amp;&amp; element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>)
+<p>Lorsque plusieurs conditions sont utilisées au sein du prédicat, toutes les références à « <code translate="no">$[subfield]</code> » s’appliquent au même élément de structure :</p>
+<pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; $[quality_score] &gt; <span class="hljs-number">0.9</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Lorsque vous combinez un prédicat au niveau de l’entité avec ` <code translate="no">element_filter</code>`, placez ` <code translate="no">element_filter</code> ` à la fin de l’expression :</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Correct</span>
+category == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>)
 
-<span class="hljs-comment"># incorrect, resulting errors</span>
-element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; <span class="hljs-built_in">id</span> &gt; <span class="hljs-number">0</span>
+<span class="hljs-comment"># Incorrect</span>
+element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>) &amp;&amp; category == <span class="hljs-string">&quot;index&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Match-family-operators" class="common-anchor-header">Opérateurs de famille de correspondance<button data-href="#Match-family-operators" class="anchor-icon" translate="no">
+<p><code translate="no">element_filter</code> ne peut apparaître qu’une seule fois dans une expression de filtrage. N’imbriquez pas <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> à l’intérieur d’un autre <code translate="no">element_filter</code>.</p>
+<h2 id="Match-Family-Operators" class="common-anchor-header">Opérateurs de famille de correspondance<button data-href="#Match-Family-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,14 +106,20 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les opérateurs de famille de correspondance fonctionnent également sur un champ StructArray. Au lieu de simplement vérifier si un élément existe, vous pouvez déterminer combien d'éléments (ou quelle proportion) doivent satisfaire un prédicat d'élément.</p>
-<ul>
-<li><p><a href="/docs/fr/struct-array-operators.md#MATCHANY"><code translate="no">MATCH_ANY(identifier, predicate)</code></a>: renvoie les entités qui contiennent au moins un morceau commençant par " Red " dans le sous-champ <code translate="no">text</code>; sémantiquement, cela équivaut à <code translate="no">element_filter</code>.</p></li>
-<li><p><a href="/docs/fr/struct-array-operators.md#MATCHALL"><code translate="no">MATCH_ALL(identifier, predicate)</code></a>: renvoie les entités dont les sous-champs de texte de tous les morceaux commencent par "Red".</p></li>
-<li><p><a href="/docs/fr/struct-array-operators.md#MATCHLEAST"><code translate="no">MATCH_LEAST(identifier, predicate, k)</code></a><code translate="no">text</code>: renvoie les entités qui contiennent au moins <code translate="no">k</code> chunks qui commencent par "Red" dans le sous-champ .</p></li>
-<li><p><a href="/docs/fr/struct-array-operators.md#MATCHMOST"><code translate="no">MATCH_MOST(identifier, predicate, k)</code></a><code translate="no">text</code>: renvoie les entités qui contiennent au plus des morceaux <code translate="no">k</code> commençant par "Red" dans le sous-champ .</p></li>
-<li><p><a href="/docs/fr/struct-array-operators.md#MATCHEXACT"><code translate="no">MATCH_EXACT(identifier, predicate, k)</code></a>MATCH_ANY : renvoie les entités qui contiennent exactement <code translate="no">k</code> chunks qui commencent par "Red" dans le sous-champ <code translate="no">text</code>.</p></li>
-</ul>
+    </button></h2><p>Utilisez les opérateurs « <code translate="no">MATCH_*</code> » lorsqu’une entité doit être sélectionnée en fonction du nombre d’éléments Struct satisfaisant un prédicat.</p>
+<table>
+<thead>
+<tr><th>Opérateur</th><th>Signification</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>Au moins un élément Struct satisfait le prédicat.</td></tr>
+<tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Tous les éléments Struct satisfont au prédicat.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Au moins <code translate="no">N</code> éléments Struct satisfont le prédicat.</td></tr>
+<tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Au plus <code translate="no">N</code> éléments de la structure satisfont le prédicat.</td></tr>
+<tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td><code translate="no">N</code> éléments de Struct satisfont exactement le prédicat.</td></tr>
+</tbody>
+</table>
+<p><code translate="no">MATCH_ANY</code> et « <code translate="no">element_filter</code> » permettent tous deux d’indiquer qu’au moins un élément Struct satisfait un prédicat. Utilisez « <code translate="no">MATCH_ANY</code> » lorsque vous avez uniquement besoin d’un filtrage au niveau des lignes. Utilisez « <code translate="no">element_filter</code> » lorsque vous avez besoin de contraintes au niveau des éléments, par exemple pour filtrer les éléments Struct participant à une recherche vectorielle au niveau des éléments.</p>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,12 +135,10 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cet opérateur est considéré comme vrai si <strong>au moins un</strong> élément du tableau satisfait au prédicat, ce qui indique que l'équivalent structurel d'une <code translate="no">OR</code> logique s'applique à tous les éléments du tableau.</p>
-<p>Les opérateurs MATCH_ANY et les filtres d'éléments sont sémantiquement identiques et vous pouvez les utiliser de manière interchangeable. Lorsque vous devez exprimer la logique <code translate="no">count(matches) &gt;= 1</code>, vous devez les utiliser.</p>
-<p><strong>EXEMPLE :</strong></p>
-<p>L'exemple suivant renvoie les entités dont n'importe quelle partie du document commence par "Rouge".</p>
-<pre><code translate="no" class="language-python">MATCH_ANY(chunks, $[text] LIKE <span class="hljs-string">&#x27;Red%&#x27;</span>)
+    </button></h3><p><code translate="no">MATCH_ANY</code> donne comme résultat « <code translate="no">true</code> » si au moins un élément de la StructArray satisfait le prédicat.</p>
+<pre><code translate="no" class="language-python">MATCH_ANY(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour un StructArray vide, <code translate="no">MATCH_ANY</code> renvoie <code translate="no">false</code>.</p>
 <h3 id="MATCHALL" class="common-anchor-header">MATCH_ALL<button data-href="#MATCHALL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,11 +154,10 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cet opérateur ne s'évalue comme vrai que si <strong>chaque</strong> élément du tableau satisfait au prédicat.</p>
-<p>Lorsque vous devez exprimer la logique <code translate="no">count(matches) == total elements</code>, utilisez cet opérateur.</p>
-<p><strong>EXEMPLE :</strong></p>
-<pre><code translate="no" class="language-python">MATCH_ALL(chunks, $[text] LIKE <span class="hljs-string">&#x27;Red%&#x27;</span>)
+    </button></h3><p><code translate="no">MATCH_ALL</code> renvoie « <code translate="no">true</code> » si tous les éléments de StructArray satisfont au prédicat.</p>
+<pre><code translate="no" class="language-python">MATCH_ALL(chunks, $[has_code] == true)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour un StructArray vide, <code translate="no">MATCH_ALL</code> renvoie <code translate="no">true</code>.</p>
 <h3 id="MATCHLEAST" class="common-anchor-header">MATCH_LEAST<button data-href="#MATCHLEAST" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,11 +173,10 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cet opérateur est un filtre quantitatif qui renvoie une réponse positive si le nombre d'éléments satisfaisant au prédicat est <strong>supérieur ou égal à</strong> une constante spécifiée <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">kk</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> k.</p>
-<p>Lorsque vous devez exprimer la logique <code translate="no">count(matches) &gt;= k</code>, utilisez cet opérateur.</p>
-<p><strong>EXEMPLE :</strong></p>
-<pre><code translate="no" class="language-python">MATCH_LEAST(chunks, $[text] LIKE <span class="hljs-string">&#x27;Red%&#x27;</span>, <span class="hljs-number">3</span>)
+    </button></h3><p><code translate="no">MATCH_LEAST</code> renvoie <code translate="no">true</code> si le nombre d’éléments satisfaisant le prédicat est supérieur ou égal à <code translate="no">threshold</code>.</p>
+<pre><code translate="no" class="language-python">MATCH_LEAST(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>, threshold=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour <code translate="no">MATCH_LEAST</code>, <code translate="no">threshold</code> doit être un entier positif.</p>
 <h3 id="MATCHMOST" class="common-anchor-header">MATCH_MOST<button data-href="#MATCHMOST" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,11 +192,10 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cet opérateur est un filtre quantitatif qui renvoie un résultat positif si le nombre d'éléments satisfaisant au prédicat est <strong>inférieur ou égal à</strong> une constante spécifiée <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">kk</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> k.</p>
-<p>Cet opérateur est particulièrement utile pour filtrer les entités qui ciblent trop un mot-clé spécifique (réduction du bruit).</p>
-<p><strong>EXEMPLE :</strong></p>
-<pre><code translate="no" class="language-python">MATCH_MOST(chunks, $[text] LIKE <span class="hljs-string">&#x27;Red%&#x27;</span>, <span class="hljs-number">3</span>)
+    </button></h3><p><code translate="no">MATCH_MOST</code> renvoie la valeur « <code translate="no">true</code> » si le nombre d’éléments satisfaisant le prédicat est inférieur ou égal à « <code translate="no">threshold</code> ».</p>
+<pre><code translate="no" class="language-python">MATCH_MOST(chunks, $[has_code] == true, threshold=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour <code translate="no">MATCH_MOST</code>, <code translate="no">threshold</code> peut être égal à zéro ou à un entier positif.</p>
 <h3 id="MATCHEXACT" class="common-anchor-header">MATCH_EXACT<button data-href="#MATCHEXACT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,7 +211,108 @@ element_filter(chunks, $[x] &gt; <span class="hljs-number">1</span>) &amp;&amp; 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cet opérateur est l'opérateur quantitatif le plus restrictif de la famille. Il renvoie un résultat positif si et seulement si le nombre d'éléments satisfaisant le prédicat est <strong>exactement</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">kk</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> k.</p>
-<p><strong>EXEMPLE :</strong></p>
-<pre><code translate="no" class="language-python">MATCH_EXACT(chunks, $[text] LIKE <span class="hljs-string">&#x27;Red%&#x27;</span>, <span class="hljs-number">3</span>)
+    </button></h3><p><code translate="no">MATCH_EXACT</code> renvoie la valeur « <code translate="no">true</code> » si le nombre d’éléments satisfaisant le prédicat est exactement égal à « <code translate="no">threshold</code> ».</p>
+<pre><code translate="no" class="language-python">MATCH_EXACT(chunks, $[section] == <span class="hljs-string">&quot;filter&quot;</span>, threshold=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour <code translate="no">MATCH_EXACT</code>, <code translate="no">threshold</code> peut être égal à zéro ou à un entier positif.</p>
+<h2 id="Supported-predicates" class="common-anchor-header">Prédicats pris en charge<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La syntaxe <code translate="no">$[...]</code> représente la valeur scalaire de l’élément Struct actuel. La prise en charge des prédicats dépend du type de sous-champ scalaire.</p>
+<table>
+<thead>
+<tr><th>Type de sous-champ</th><th>Prise en charge des prédicats au niveau de l’élément</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code></td><td>Prédicats scalaires tels que <code translate="no">$[has_code] == true</code> ou <code translate="no">!($[has_code] == true)</code>. Évitez les expressions booléennes nues telles que <code translate="no">$[has_code]</code>.</td></tr>
+<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>les comparaisons, les plages enchaînées, <code translate="no">in</code>, <code translate="no">not in</code>, les expressions arithmétiques avec <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> ou <code translate="no">%</code> suivies d’une comparaison, ainsi que les combinaisons logiques.</td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Comparaison, plage enchaînée, <code translate="no">in</code>, <code translate="no">not in</code>, expressions arithmétiques avec <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> ou <code translate="no">/</code> suivies d’une comparaison, et combinaisons logiques. L’opérateur <code translate="no">%</code> n’est pas pris en charge pour les sous-champs à virgule flottante.</td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>Comparaison de chaînes, plage enchaînée, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code> et combinaisons logiques.</td></tr>
+<tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires de type « <code translate="no">$[...]</code> ». Utilisez plutôt les sous-champs vectoriels via la recherche EmbeddingList ou la recherche vectorielle au niveau des éléments.</td></tr>
+</tbody>
+</table>
+<p>Les opérateurs logiques tels que « <code translate="no">&amp;&amp;</code> », « <code translate="no">\|\|</code> » et « <code translate="no">!</code> » s’appliquent aux expressions de prédicat. Par exemple, écrivez « <code translate="no">!($[has_code] == true)</code> » au lieu de « <code translate="no">!$[has_code]</code> ».</p>
+<h2 id="Unsupported-predicates" class="common-anchor-header">Prédicats non pris en charge<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Les prédicats de type « <code translate="no">$[...]</code> » au niveau des éléments ne prennent pas en charge :</p>
+<ul>
+<li><p>Les fonctions de correspondance de texte, telles que <code translate="no">text_match(field, &quot;...&quot;)</code> ou <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
+<li><p>La syntaxe JSON Path, les opérations de type « <code translate="no">exists</code> » sur des chemins JSON, ou les fonctions JSON telles que « <code translate="no">json_contains</code> », « <code translate="no">json_contains_all</code> » ou « <code translate="no">json_contains_any</code> ».</p></li>
+<li><p>Les fonctions de conteneurs de tableaux telles que <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> ou <code translate="no">array_length</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> ou <code translate="no">$[subfield] is not null</code>.</p></li>
+<li><p>Fonctions de géométrie / SIG.</p></li>
+<li><p>Expressions de type timestamptz.</p></li>
+<li><p><code translate="no">random_sample(...)</code>.</p></li>
+<li><p>Prédicats vectoriels au niveau des champs.</p></li>
+<li><p>Appels de fonctions de filtrage génériques, sauf si la signature et le chemin d’exécution de la fonction spécifique prennent explicitement en charge les prédicats au niveau des éléments de StructArray.</p></li>
+</ul>
+<h2 id="Syntax-rules" class="common-anchor-header">Règles de syntaxe<button data-href="#Syntax-rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><code translate="no">MATCH_*</code> Les noms d’opérateurs ne sont pas sensibles à la casse.</p></li>
+<li><p>N’utilisez « <code translate="no">$[subfield]</code> » qu’à l’intérieur de prédicats de type « <code translate="no">element_filter</code> » ou « <code translate="no">MATCH_*</code> ».</p></li>
+<li><p>N’utilisez pas <code translate="no">$[subfield]</code> comme chemin JSON, conteneur de tableau ou référence de champ vectoriel.</p></li>
+<li><p>N’imbriquez pas <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> à l’intérieur d’un autre opérateur StructArray.</p></li>
+<li><p>Utilisez des <code translate="no">threshold=N</code> nommés pour <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> et <code translate="no">MATCH_EXACT</code>.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> sur un StructArray vide renvoie <code translate="no">false</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL</code> Appliqué à un StructArray vide, il renvoie <code translate="no">true</code>.</p></li>
+</ul>
+<h2 id="See-also" class="common-anchor-header">Voir aussi<button data-href="#See-also" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a></p></li>
+<li><p><a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a></p></li>
+<li><p><a href="/docs/fr/index-structarray-fields.md">Indexer les champs d'un StructArray</a></p></li>
+<li><p><a href="/docs/fr/structarray-limits.md">Limites de StructArray</a></p></li>
+</ul>

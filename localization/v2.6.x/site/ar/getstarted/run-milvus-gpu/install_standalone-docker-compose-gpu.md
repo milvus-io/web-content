@@ -79,7 +79,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات (GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة للخدمة المستقلة في ملف YAML على النحو التالي:</p>
 <ul>
-<li>لتخصيص جهاز GPU معين لـ Milvus، حدد موقع الحقل « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » في تعريف الخدمة « <code translate="no">standalone</code> » واستبدل قيمته بمعرف GPU المطلوب. يمكنك استخدام أداة « <code translate="no">nvidia-smi</code> »، المضمنة في برامج تشغيل شاشات NVIDIA GPU، لتحديد معرف جهاز GPU. يدعم Milvus أجهزة GPU متعددة.</li>
+<li>لتخصيص جهاز GPU معين لـ Milvus، حدد موقع الحقل « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » في تعريف الخدمة « <code translate="no">standalone</code> » واستبدل قيمته بمعرف جهاز GPU المطلوب. يمكنك استخدام أداة « <code translate="no">nvidia-smi</code> »، المضمنة في برامج تشغيل شاشات NVIDIA GPU، لتحديد معرف جهاز GPU. يدعم Milvus أجهزة GPU متعددة.</li>
 </ul>
 <p>تعيين جهاز GPU واحد لـ Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -229,7 +229,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
 <li><p>راجع «البدء السريع» ( <a href="/docs/ar/v2.6.x/quickstart.md">Quickstart</a> ) لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
-<li><p>راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus (Milvus WebUI</a> ) لمعرفة المزيد عن مثيل Milvus.</p></li>
+<li><p>راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a> لمعرفة المزيد عن مثيل Milvus.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>

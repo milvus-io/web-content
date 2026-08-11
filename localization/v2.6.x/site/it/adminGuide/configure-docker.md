@@ -233,7 +233,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         ></path>
       </svg>
     </button></h2><p>Nel file ` <code translate="no">docker-compose.yml</code>`, aggiungi una sezione ` <code translate="no">volumes</code> ` sotto ogni ` <code translate="no">milvus-standalone</code>`.</p>
-<p>Mappa il percorso locale del tuo file <code translate="no">milvus.yaml</code> ai percorsi corrispondenti all’interno del container Docker per i file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> presenti in tutte le sezioni <code translate="no">volumes</code>.</p>
+<p>Mappa il percorso locale del tuo file <code translate="no">milvus.yaml</code> ai percorsi corrispondenti dei file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> all’interno di tutte le sezioni <code translate="no">volumes</code> del container Docker.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

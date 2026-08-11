@@ -79,7 +79,7 @@ title: Milvus mit GPU-Unterstützung über Docker Compose ausführen
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des eigenständigen Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>
-<li>Um Milvus ein bestimmtes GPU-Gerät zuzuweisen, suchen Sie das Feld „ <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> “ in der Definition des Dienstes „ <code translate="no">standalone</code> “ und ersetzen Sie dessen Wert durch die ID der gewünschten GPU. Mit dem Tool „ <code translate="no">nvidia-smi</code> “, das im Lieferumfang der NVIDIA-GPU-Grafiktreiber enthalten ist, können Sie die ID eines GPU-Geräts ermitteln. Milvus unterstützt mehrere GPU-Geräte.</li>
+<li>Um Milvus ein bestimmtes GPU-Gerät zuzuweisen, suchen Sie das Feld „ <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> “ in der Definition des Dienstes „ <code translate="no">standalone</code> “ und ersetzen Sie dessen Wert durch die ID der gewünschten GPU. Sie können das Tool „ <code translate="no">nvidia-smi</code> “, das im Lieferumfang der NVIDIA-GPU-Grafiktreiber enthalten ist, verwenden, um die ID eines GPU-Geräts zu ermitteln. Milvus unterstützt mehrere GPU-Geräte.</li>
 </ul>
 <p>Ein einzelnes GPU-Gerät Milvus zuweisen:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -141,7 +141,7 @@ Creating milvus-standalone ... done
 <li>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv sind:</p>
+<p>Mit dem folgenden Befehl können Sie überprüfen, ob die Container aktiv und läuft sind:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports

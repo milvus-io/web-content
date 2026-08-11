@@ -62,7 +62,7 @@ title: Mise à niveau du cluster Milvus avec Milvus Operator
 <li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,7 +151,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Mise à niveau vers la version 2.5.16 avec mixCoord</h4><div class="alert-note">
 <p>Ignorez cette étape si votre cluster exécute déjà la version v2.5.16 ou une version ultérieure avec la fonctionnalité « <code translate="no">mixCoord</code> » activée.</p>
 </div>
-<p>Créez un fichier de configuration <code translate="no">milvusupgrade.yaml</code> pour activer <code translate="no">mixCoord</code> et effectuez la mise à niveau vers la version 2.5.16 :</p>
+<p>Créez un fichier de configuration <code translate="no">milvusupgrade.yaml</code> pour activer <code translate="no">mixCoord</code> et effectuer la mise à niveau vers la version 2.5.16 :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

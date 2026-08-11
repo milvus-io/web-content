@@ -157,7 +157,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <p>Ожидаемый результат:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhongwen&#x27;, &#x27;测试&#x27;, &#x27;ceshi&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Match-Chinese-terms-with-Pinyin-initials" class="common-anchor-header">Сопоставление китайских терминов с начальными буквами пиньинь<button data-href="#Match-Chinese-terms-with-Pinyin-initials" class="anchor-icon" translate="no">
+<h3 id="Match-Chinese-terms-with-Pinyin-initials" class="common-anchor-header">Сопоставление китайских терминов с инициалами пиньинь<button data-href="#Match-Chinese-terms-with-Pinyin-initials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

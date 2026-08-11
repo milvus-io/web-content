@@ -304,7 +304,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Jangan gunakan kueri ` <code translate="no">EmbeddingList</code> ` atau metrik ` <code translate="no">MAX_SIM*</code> ` untuk pencarian rentang pada subbidang vektor `StructArray`. Pencarian tingkat `EmbeddingList` tidak mendukung pencarian rentang.</p></li>
+<li><p>Jangan gunakan kueri ` <code translate="no">EmbeddingList</code> ` atau metrik ` <code translate="no">MAX_SIM*</code> ` untuk pencarian rentang pada subbidang vektor StructArray. Pencarian tingkat EmbeddingList tidak mendukung pencarian rentang.</p></li>
 <li><p>Jangan menggabungkan pencarian rentang dengan pencarian pengelompokan. Jika Anda memerlukan satu hasil per entitas induk, jalankan pencarian tingkat elemen tanpa parameter rentang dan gunakan pengelompokan jika didukung.</p></li>
 <li><p>Pencarian rentang hibrida didukung untuk bidang vektor tingkat elemen StructArray. Fitur ini tidak didukung untuk permintaan StructArray tingkat EmbeddingList.</p></li>
 </ul>
@@ -346,7 +346,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
+<li><p>Untuk mempelajari dua mode pencarian vektor StructArray dasar, baca <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>.</p></li>
 <li><p>Untuk menambahkan filter skalar ke pencarian rentang, baca " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian Terfilter dengan StructArray</a>".</p></li>
 <li><p>Untuk mengembalikan paling banyak satu hasil per entitas induk di mana hal ini didukung, baca <a href="/docs/id/grouping-search-with-structarray.md">Pencarian Berkelompok dengan StructArray</a>.</p></li>
 <li><p>Untuk memeriksa batasan pencarian berdasarkan versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>

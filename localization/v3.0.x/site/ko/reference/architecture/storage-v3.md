@@ -80,12 +80,12 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><div class="alert warning">
-<p>Milvus가 Storage V3에 데이터를 한 번 기록하면, Storage V3를 읽을 수 없는 Milvus 버전으로 다운그레이드하는 것은 지원되지 않습니다. 나중에 Storage V3를 비활성화하더라도 모든 기존 Storage V3 데이터가 즉시 변환되거나 이전 버전과의 호환성이 복원되지는 않습니다.</p>
+<p>Milvus가 Storage V3에 데이터를 한 번 기록하면, Storage V3를 읽을 수 없는 Milvus 버전으로 다운그레이드하는 것은 지원되지 않습니다. 나중에 Storage V3를 비활성화하더라도 기존의 모든 Storage V3 데이터가 즉시 변환되거나 이전 버전과의 호환성이 복원되지는 않습니다.</p>
 </div>
 <p>Storage V3를 활성화하기 전에 다음 데이터 동작을 고려하십시오.</p>
 <ul>
 <li><code translate="no">dataCoord.compaction.storageVersion.enabled</code> 가 기본적으로 활성화되어 있으므로, 해당 조건을 충족하는 기존 데이터는 백그라운드 압축을 통해 점진적으로 Storage V3로 전환될 수 있습니다.</li>
-<li>Storage V3를 비활성화하면 향후 쓰기 작업 및 대상 압축 출력에 대한 대상 스토리지 버전이 변경됩니다. 이는 모든 기존 Storage V3 데이터를 동기식으로 변환하거나 버전 다운그레이드를 안전하게 수행할 수 있게 해주는 것은 아닙니다.</li>
+<li>Storage V3를 비활성화하면 향후 쓰기 작업 및 대상 압축 출력에 대한 대상 스토리지 버전이 변경됩니다. 이는 모든 기존 Storage V3 데이터를 동기식으로 변환하거나 버전 다운그레이드를 안전하게 수행하도록 보장하지는 않습니다.</li>
 </ul>
 <h2 id="Enable-Storage-V3" class="common-anchor-header">Storage V3 활성화<button data-href="#Enable-Storage-V3" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,8 +107,8 @@ beta: Milvus 3.0.x
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">useLoonFFI:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus는 이 설정을 새로 고침 가능한 항목으로 처리합니다. 배포 환경에서 지원하는 구성 업데이트 워크플로를 통해 변경 사항을 적용하십시오. 정적 구성 파일을 편집하는 것만으로는 실행 중인 배포 환경이 새로운 값을 반영했음을 보장할 수 없습니다.</p>
-<p>기존 컬렉션에 함수(Function)와 해당 함수가 생성한 벡터 필드를 추가할 계획이라면, 기존 데이터 백필에 필요한 다음 두 가지 압축 설정도 활성화해야 합니다:</p>
+<p>Milvus는 이 설정을 새로 고침 가능한 항목으로 처리합니다. 배포 환경에서 지원하는 구성 업데이트 워크플로를 통해 변경 사항을 적용하십시오. 정적 구성 파일을 편집하는 것만으로는 실행 중인 배포 환경에 새로운 값이 반영되었다고 보장할 수 없습니다.</p>
+<p>기존 컬렉션에 함수(Function)와 해당 함수가 생성한 벡터 필드를 추가할 계획이라면, 기존 데이터 백필에 필요한 다음 두 가지 압축 설정도 활성화하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">bumpSchemaVersion:</span>

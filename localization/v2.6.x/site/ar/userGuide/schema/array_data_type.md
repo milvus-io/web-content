@@ -1,11 +1,11 @@
 ---
 id: array_data_type.md
-title: حقل المصفوفة
+title: حقل «مصفوفة»
 summary: >-
-  يخزن حقل ARRAY مجموعة مرتبة من العناصر من نفس نوع البيانات. إليك مثال على
-  كيفية تخزين حقول ARRAY للبيانات:
+  يخزن حقل ARRAY مجموعة مرتبة من العناصر التي تنتمي إلى نفس نوع البيانات. وفيما
+  يلي مثال يوضح كيفية تخزين حقول ARRAY للبيانات:
 ---
-<h1 id="Array-Field" class="common-anchor-header">حقل المصفوفة<button data-href="#Array-Field" class="anchor-icon" translate="no">
+<h1 id="Array-Field" class="common-anchor-header">حقل «مصفوفة»<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يخزن حقل ARRAY مجموعة مرتبة من العناصر من نفس نوع البيانات. فيما يلي مثال على كيفية تخزين حقول ARRAY للبيانات:</p>
+    </button></h1><p>يخزن حقل ARRAY مجموعة مرتبة من العناصر التي تنتمي إلى نفس نوع البيانات. فيما يلي مثال يوضح كيفية تخزين حقول ARRAY للبيانات:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -42,10 +42,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تعريفه بواسطة المعلمة <code translate="no">element_type</code>. عندما يتم تعيين <code translate="no">element_type</code> على <code translate="no">VARCHAR</code> ، يجب أيضًا تحديد <code translate="no">max_length</code> لعناصر الصفيف. يقبل <code translate="no">element_type</code> أي نوع بيانات قياسي مدعوم من قبل ميلفوس، باستثناء <code translate="no">JSON</code>.</p></li>
-<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا ضمن النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
-<li><p><strong>التعامل مع السلسلة</strong>: يتم تخزين قيم السلسلة في حقول المصفوفات كما هي، دون هروب دلالي أو تحويل. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر قيمًا غير صالحة.</p></li>
+<li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، راجع " <a href="/docs/ar/v2.6.x/nullable-and-default.md">القيم الفارغة والقيم الافتراضية</a>".</p></li>
+<li><p><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تحديده بواسطة المعلمة <code translate="no">element_type</code>. عند تعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تحديد <code translate="no">max_length</code> لعناصر المصفوفة. تقبل المعلمة <code translate="no">element_type</code> أي نوع بيانات قياسي يدعمه Milvus، باستثناء <code translate="no">JSON</code>.</p></li>
+<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا في النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
+<li><p><strong>معالجة السلاسل</strong>: يتم تخزين قيم السلاسل في حقول المصفوفة كما هي، دون أي تحويل أو هروب دلالي. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما يُعتبر كل من <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> قيمتين غير صالحتين.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">إضافة حقل ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,18 +62,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام حقول ARRAY Milvus، قم بتعريف نوع الحقل ذي الصلة عند إنشاء مخطط المجموعة. تتضمن هذه العملية:</p>
+    </button></h2><p>لاستخدام حقول ARRAY في Milvus، قم بتعريف نوع الحقل ذي الصلة عند إنشاء مخطط المجموعة. تتضمن هذه العملية ما يلي:</p>
 <ol>
-<li><p>تعيين <code translate="no">datatype</code> إلى نوع بيانات المصفوفة المدعوم، <code translate="no">ARRAY</code>.</p></li>
+<li><p>تعيين المعلمة " <code translate="no">datatype</code> " إلى نوع البيانات Array المدعوم، <code translate="no">ARRAY</code>.</p></li>
 <li><p>استخدام المعلمة <code translate="no">element_type</code> لتحديد نوع بيانات العناصر في المصفوفة. يجب أن تكون جميع العناصر في نفس المصفوفة من نفس نوع البيانات.</p></li>
-<li><p>استخدام المعلمة <code translate="no">max_capacity</code> لتحديد السعة القصوى للمصفوفة، أي الحد الأقصى لعدد العناصر التي يمكن أن تحتويها.</p></li>
+<li><p>استخدام المعلمة <code translate="no">max_capacity</code> لتحديد السعة القصوى للمصفوفة، أي الحد الأقصى لعدد العناصر التي يمكن أن تحتوي عليها.</p></li>
 </ol>
-<p>إليك كيفية تعريف مخطط مجموعة يتضمن حقول ARRAY:</p>
+<p>فيما يلي كيفية تحديد مخطط مجموعة يتضمن حقول ARRAY:</p>
 <div class="alert note">
-<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، فإن Milvus يسمح لك بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي هذا إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -255,7 +260,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">تعيين معلمات الفهرسة<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -270,10 +275,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
-<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل ARRAY <code translate="no">tags</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a>.</p>
+    </button></h2><p>تساعد الفهرسة في تحسين أداء البحث والاستعلامات. في Milvus، تعد الفهرسة إلزامية لحقول المتجهات، لكنها اختيارية لحقول القيم العددية.</p>
+<p>يُنشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل ARRAY <code translate="no">tags</code> ، وكلاهما يستخدم نوع الفهرس « <code translate="no">AUTOINDEX</code> ». باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والمعلمات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -351,9 +361,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تعريف المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول ARRAY.</p>
+    </button></h2><p>بمجرد تحديد المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول ARRAY.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -408,7 +423,12 @@ client.createCollection(requestCreate);
       </svg>
     </button></h2><p>بعد إنشاء المجموعة، يمكنك إدراج البيانات التي تتضمن حقول ARRAY.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
   {
@@ -541,10 +561,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إدراج الكيانات، استخدم الأسلوب <code translate="no">query</code> لاسترداد الكيانات التي تطابق تعبيرات التصفية المحددة.</p>
-<p>لاسترداد الكيانات التي يكون فيها <code translate="no">tags</code> ليس فارغًا:</p>
+    </button></h2><p>بعد إدراج الكيانات، استخدم طريقة ` <code translate="no">query</code> ` لاسترداد الكيانات التي تتطابق مع تعبيرات التصفية المحددة.</p>
+<p>لاسترداد الكيانات التي تكون فيها قيمة <code translate="no">tags</code> غير فارغة:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to exclude entities where `tags` is not null</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
@@ -611,7 +636,12 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 <button class="copy-code-btn"></button></code></pre>
 <p>لاسترداد الكيانات التي تكون فيها قيمة العنصر الأول من <code translate="no">ratings</code> أكبر من 4:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
@@ -686,7 +716,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">البحث المتجه مع تعبيرات التصفية<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">البحث المتجه باستخدام تعبيرات التصفية<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -701,9 +731,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالإضافة إلى تصفية الحقل القياسي الأساسي، يمكنك دمج عمليات البحث عن التشابه المتجه مع مرشحات الحقل القياسي. على سبيل المثال، يوضح الرمز التالي كيفية إضافة عامل تصفية الحقل القياسي إلى بحث متجه:</p>
+    </button></h2><p>بالإضافة إلى التصفية الأساسية للحقول القياسية، يمكنك الجمع بين عمليات البحث عن التشابه المتجهي وفلاتر الحقول القياسية. على سبيل المثال، يوضح الكود التالي كيفية إضافة فلتر حقل قياسي إلى عملية بحث متجهي:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
@@ -793,4 +828,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بالإضافة إلى ذلك، يدعم Milvus عوامل تصفية المصفوفات المتقدمة مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> لتعزيز قدرات الاستعلام بشكل أكبر. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/array-operators.md">مشغلات ARRAY</a>.</p>
+<p>بالإضافة إلى ذلك، يدعم Milvus عوامل تصفية المصفوفات المتقدمة مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> لتعزيز قدرات الاستعلام بشكل أكبر. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/array-operators.md">عوامل ARRAY</a>.</p>

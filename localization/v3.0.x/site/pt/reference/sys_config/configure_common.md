@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Saiba como configurar o common para o Milvus.
+summary: Saiba como configurar o Common para o Milvus.
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">Configurações relacionadas com o comum<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">Configurações relacionadas com o «common»<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,12 +67,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Nome do índice quando este é criado com um nome não especificado      </td>
+      <td>        Nome do índice quando este é criado sem nome especificado      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -96,12 +96,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Validade da entidade em segundos, CUIDADO -1 significa nunca expirar      </td>
+      <td>        Tempo de validade da entidade em segundos. ATENÇÃO: -1 significa que nunca expira      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -125,12 +125,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Tamanho da fatia de índice em MB  </td>
+      <td>        Tamanho da fatia do índice em MB      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -154,12 +154,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Este parâmetro especifica quantas vezes o número de threads é o número de núcleos no pool de alta prioridade      </td>
+      <td>        Este parâmetro especifica quantas vezes o número de threads é igual ao número de núcleos no conjunto de alta prioridade      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -183,12 +183,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Este parâmetro especifica quantas vezes o número de threads é o número de núcleos na reserva de prioridade média      </td>
+      <td>        Este parâmetro especifica quantas vezes o número de threads é igual ao número de núcleos no conjunto de prioridade média      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -212,12 +212,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Este parâmetro especifica quantas vezes o número de threads é o número de núcleos no conjunto de baixa prioridade      </td>
+      <td>        Este parâmetro especifica quantas vezes o número de threads é igual ao número de núcleos no conjunto de prioridade baixa      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -241,12 +241,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milissegundos. Representa o intervalo (em ms) pelo qual o tempo de chegada do pedido tem de ser subtraído no caso da Consistência Limitada.      </td>
+      <td>        milissegundos. Representa o intervalo (em ms) pelo qual o tempo de chegada do pedido deve ser subtraído no caso de Consistência Limitada.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -270,12 +270,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segundos. forçará o encerramento do servidor se o processo de paragem graciosa não for concluído durante este período.      </td>
+      <td>        segundos. Forçará o encerramento do servidor se o processo de paragem gradual não for concluído durante este período.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -299,13 +299,42 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        por favor ajuste no Milvus incorporado: local, os valores disponíveis são [local, remoto, opendal], o valor minio está obsoleto, utilize remoto      </td>
+      <td>        ajuste no Milvus incorporado: local; os valores disponíveis são [local, remote, opendal]; o valor «minio» está obsoleto; utilize «remote» em vez disso      </td>
       <td>remoto</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonstorageuseLoonFFI" class="common-anchor-header"><code translate="no">common.storage.useLoonFFI</code><button data-href="#commonstorageuseLoonFFI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.storage.useLoonFFI">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor predefinido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indica se deve ser utilizado o Storage V3 para novas gravações e para a saída da compactação. Este parâmetro pode ser atualizado.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -328,15 +357,15 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Valor por defeito: auto</li>      
+        <li>Valor predefinido: auto</li>      
         <li>Valores válidos: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>Esta configuração só é utilizada pelo querynode e pelo indexnode, selecionando o conjunto de instruções da CPU para pesquisa e construção de índices.</li>      </td>
+        <li>Esta configuração é utilizada apenas pelo querynode e pelo indexnode, selecionando o conjunto de instruções da CPU para a pesquisa e a criação de índices.</li>      </td>
       <td>auto</td>
     </tr>
   </tbody>
@@ -360,14 +389,14 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
         <li>Os superutilizadores irão ignorar alguns processos de verificação do sistema,</li>      
-        <li>como a verificação da palavra-passe antiga ao atualizar a credencial</li>      </td>
+        <li>como a verificação da palavra-passe antiga ao atualizar as credenciais</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -391,12 +420,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        palavra-passe predefinida para o utilizador root. O comprimento máximo é de 72 caracteres e são necessárias aspas duplas.      </td>
+      <td>        palavra-passe predefinida para o utilizador root. O comprimento máximo é de 72 caracteres e é obrigatório utilizar aspas duplas.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -425,7 +454,7 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se o utilizador raiz deve vincular uma função quando a autorização está activada.      </td>
+      <td>        Se o utilizador root deve associar uma função quando a autorização estiver ativada.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -449,12 +478,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Se deve substituir os grupos de privilégios incorporados      </td>
+      <td>        Se deve substituir os grupos de privilégios integrados      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -478,13 +507,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios só de leitura ao nível do cluster      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+      <td>        Privilégios de leitura apenas ao nível do cluster      </td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups</td>
     </tr>
   </tbody>
 </table>
@@ -507,13 +536,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>        Privilégios de leitura e escrita ao nível do cluster      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups, FlushAll, TransferNode, TransferReplica, UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -536,13 +565,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios de administrador ao nível do cluster      </td>
-      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups, FlushAll, TransferNode, TransferReplica, UpdateResourceGroups, BackupRBAC, RestoreRBAC, CreateDatabase,DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        Privilégios de administração ao nível do cluster      </td>
+      <td>ListDatabases, SelectOwnership, SelectUser, DescribeResourceGroup, ListResourceGroups, ListPrivilegeGroups, FlushAll, TransferNode, TransferReplica,AtualizarGruposDeRecursos, FazerCópia de Segurança do RBAC, Restaurar o RBAC, CriarBaseDeDados, EliminarBaseDeDados, CriarPropriedade, EliminarPropriedade, GerirPropriedade, CriarGrupoDeRecursos, EliminarGrupoDeRecursos, AtualizarUtilizador, RenomearColeção, CriarGrupoDePrivilégios, EliminarGrupoDePrivilégios, GerirGrupoDePrivilégios</td>
     </tr>
   </tbody>
 </table>
@@ -565,13 +594,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios só de leitura ao nível da base de dados     </td>
-      <td>ShowCollections,DescribeDatabase</td>
+      <td>        Privilégios de leitura apenas ao nível da base de dados      </td>
+      <td>ShowCollections, DescribeDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -594,13 +623,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios de leitura e escrita ao nível da base de dados     </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase</td>
+      <td>        Privilégios de leitura e escrita ao nível da base de dados      </td>
+      <td>ShowCollections, DescribeDatabase, AlterDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -623,13 +652,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios de administrador ao nível da base de dados     </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+      <td>        Privilégios de administração ao nível da base de dados      </td>
+      <td>ShowCollections, DescribeDatabase, AlterDatabase, CreateCollection, DropCollection</td>
     </tr>
   </tbody>
 </table>
@@ -652,13 +681,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios readonly ao nível da coleção      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+      <td>        Privilégios de leitura ao nível da coleção      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases</td>
     </tr>
   </tbody>
 </table>
@@ -681,13 +710,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios de escrita de leitura ao nível da coleção      </td>
-      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition</td>
+      <td>        Privilégios de leitura e escrita ao nível da coleção      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection,DescreverAlias, ObterEstatísticas, ListarAliases, Carregar, Liberar, Inserir, Eliminar, Upsert, Importar, Esvaziar, Compactação, Equilíbrio de Carga, CriarÍndice, EliminarÍndice, CriarPartição, EliminarPartição</td>
     </tr>
   </tbody>
 </table>
@@ -715,8 +744,8 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Privilégios de administrador ao nível da coleção      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
+      <td>        Privilégios de administração ao nível da coleção      </td>
+      <td>Consulta, Pesquisa, Detalhes do Índice, Obter Estado de Flush, Obter Estado de Carregamento, Obter Progresso de Carregamento, Tem Partição, Mostrar Partições, Descrever Coleção,DescreverAlias, ObterEstatísticas, ListarAliases, Carregar, Liberar, Inserir, Eliminar, Atualizar e Inserir, Importar, Esvaziar, Compactação, Equilíbrio de Carga, CriarÍndice, EliminarÍndice, CriarPartição, EliminarPartição, CriarAlias, EliminarAlias</td>
     </tr>
   </tbody>
 </table>
@@ -739,12 +768,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por predefinição</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Valor ttl quando a sessão concede uma concessão para registar o serviço      </td>
+      <td>        Valor de TTL quando a sessão concede uma concessão ao serviço de registo      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -768,12 +797,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tempos de repetição quando a sessão envia pedidos etcd    </td>
+      <td>        Número de tentativas quando a sessão envia pedidos ao etcd      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -797,12 +826,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        se reúne estatísticas para bloqueios de métricas      </td>
+      <td>        se deve recolher estatísticas para métricas de bloqueios      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -826,12 +855,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milissegundos mínimos para durações de impressão no nível de informação      </td>
+      <td>        mínimo de milissegundos para a exibição de durações no nível de informação      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -855,12 +884,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milissegundos mínimos para durações de impressão no nível de aviso     </td>
+      <td>        mínimo de milissegundos para a impressão de durações no nível de aviso      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -884,12 +913,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        máximo de segundos para espera em wlock condicional      </td>
+      <td>        número máximo de segundos de espera para a condição wlock      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -913,16 +942,16 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Se se pretende desativar o mecanismo interno de mensagens de tempo para o sistema. </li>      
-        <li>Se estiver desativado (definido como false), o sistema não permitirá operações DML, incluindo inserção, eliminação, consultas e pesquisas. </li>      
+        <li>Se se deve desativar o mecanismo interno de notificação de tempo do sistema. </li>      
+        <li>Se desativado (definido como «false»), o sistema não permitirá operações DML, incluindo inserções, eliminações, consultas e pesquisas. </li>      
         <li>Isto ajuda o Milvus-CDC a sincronizar dados incrementais</li>      </td>
-      <td>verdadeiro</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -950,7 +979,7 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        informação do pedido de rastreio      </td>
+      <td>        rastrear informações da solicitação      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -974,13 +1003,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tamanho inicial do filtro de floração      </td>
-      <td>100000</td>
+      <td>        tamanho inicial do filtro Bloom      </td>
+      <td>100 000</td>
     </tr>
   </tbody>
 </table>
@@ -1003,12 +1032,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tipo de filtro de florescência, suporta BasicBloomFilter e BlockedBloomFilter      </td>
+      <td>        tipo de filtro Bloom; suporta BasicBloomFilter e BlockedBloomFilter      </td>
       <td>BlockedBloomFilter</td>
     </tr>
   </tbody>
@@ -1032,13 +1061,13 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        taxa máxima de falsos positivos para o filtro bloom     </td>
-      <td>0.001</td>
+      <td>        taxa máxima de falsos positivos para o filtro Bloom      </td>
+      <td>0,001</td>
     </tr>
   </tbody>
 </table>
@@ -1061,12 +1090,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tamanho do lote quando aplicar pk ao filtro bloom     </td>
+      <td>        tamanho do lote para aplicar o pk ao filtro de Bloom      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1090,12 +1119,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Ativar ou não a replicação de colecções.      </td>
+      <td>        Se deve ativar a replicação da coleção.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1119,12 +1148,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Se for verdadeiro, compactação de agrupamentos e poda de segmentos no campo de chave de partição      </td>
+      <td>        Se for «true», efetuar a compactação do cluster e a remoção de segmentos no campo da chave de partição      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1148,12 +1177,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        se verdadeiro, efetuar compactação de agrupamento e poda de segmentos no campo vetorial      </td>
+      <td>        Se for «true», efetuar a compactação por agrupamento e a remoção de segmentos no campo vetorial      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1177,12 +1206,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        se verdadeiro, ativar a chave de agrupamento de vectores e a compactação de agrupamento de vectores      </td>
+      <td>        se for verdadeiro, ativa a chave de agrupamento de vetores e a compactação de agrupamento de vetores      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1206,12 +1235,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ativar o rpc local para comunicação interna em modo misto ou autónomo.      </td>
+      <td>        Ativa o RPC local para comunicação interna nos modos «mix» ou «standalone».      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1235,12 +1264,12 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        O tempo máximo de espera para que a tarefa termine e liberte recursos no conjunto      </td>
+      <td>        O tempo máximo de espera até que a tarefa termine e os recursos sejam libertados do conjunto      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1264,17 +1293,17 @@ summary: Saiba como configurar o common para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Identificador único para o cluster usado na geração de AutoID para garantir a exclusividade global em vários clusters Milvus.</li>      
+        <li>Identificador único do cluster utilizado na geração de AutoID para garantir a exclusividade global entre vários clusters Milvus.</li>      
         <li>Valores válidos: [0, 1, 2, 3, 4, 5, 6, 7] (suporta até 8 clusters)</li>      
-        <li>Cada cluster deve ter um clusterID exclusivo para evitar a sobreposição de AutoID ao executar vários clusters.</li>      
-        <li>Esse ID é incorporado na estrutura AutoID de 64 bits como parte do segmento cluster_id.</li>      
-        <li>Para obter mais informações, consulte <a href="/docs/pt/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Campo primário e AutoID</a>.</li>      </td>
+        <li>Cada cluster deve ter um clusterID único para evitar a sobreposição de AutoIDs ao executar vários clusters.</li>      
+        <li>Este ID está incorporado na estrutura AutoID de 64 bits como parte do segmento cluster_id.</li>      
+        <li>Para mais informações, consulte <a href="/docs/pt/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">«Campo primário e AutoID</a>».</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

@@ -46,13 +46,13 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">chunks</code> 와 같은 StructArray 필드를 생성합니다.</td><td><a href="/docs/ko/create-structarray-field.md">StructArray 필드 생성</a></td></tr>
 <tr><td><code translate="no">chunks</code> 필드에 Struct 객체가 포함된 엔티티를 삽입합니다.</td><td><a href="/docs/ko/insert-data-into-structarray-fields.md">StructArray 필드에 데이터 삽입</a></td></tr>
-<tr><td>EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 <code translate="no">MAX_SIM*</code> 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱</a></td></tr>
+<tr><td>EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 <code translate="no">MAX_SIM*</code> 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 색인 생성</a></td></tr>
 <tr><td>요소 수준 검색을 위해 ` <code translate="no">chunks[emb]</code> `에 일반 벡터-메트릭 인덱스를 생성합니다.</td><td><a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>경고</p>
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오. 이 페이지에서는 <code translate="no">chunks[emb_list_vector]</code> 에 대해 EmbeddingList 검색용 인덱스가 생성되고, <code translate="no">chunks[emb]</code> 에 대해 요소 수준 검색용 인덱스가 생성됩니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오. 이 페이지에서는 <code translate="no">chunks[emb_list_vector]</code> 가 EmbeddingList 검색을 위해 인덱싱되고, <code translate="no">chunks[emb]</code> 가 요소 수준 검색을 위해 인덱싱됩니다.</p>
 </div>
 <h2 id="Choose-a-search-mode" class="common-anchor-header">검색 모드 선택<button data-href="#Choose-a-search-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,7 +148,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 하는 경우 요소 수준 검색을 사용합니다. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
+    </button></h2><p>각 Struct 요소가 벡터 검색에 독립적으로 참여해야 할 때는 요소 수준 검색을 사용하십시오. 쿼리는 일반 벡터이며, 대상 벡터 하위 필드는 일반 벡터 메트릭으로 인덱싱되어야 합니다.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(

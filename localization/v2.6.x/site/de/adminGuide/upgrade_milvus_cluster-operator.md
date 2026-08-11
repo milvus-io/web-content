@@ -90,7 +90,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
 <li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
 <li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.17 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoord</code> “ aktiviert sein muss.</li>
 </ul>
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre derzeitige Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgang<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

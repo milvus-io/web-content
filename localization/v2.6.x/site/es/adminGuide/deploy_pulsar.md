@@ -81,7 +81,7 @@ summary: >-
     </button></h3><p>Ejecuta el siguiente comando para iniciar Milvus utilizando las configuraciones de Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Las configuraciones solo surten efecto una vez que se ha iniciado Milvus. Consulta <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«Iniciar Milvus</a> » para obtener más información.</div>
+<div class="alert note">Las configuraciones solo surten efecto una vez que Milvus se ha iniciado. Consulta <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«Iniciar Milvus</a> » para obtener más información.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Configurar Pulsar con Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -207,7 +207,7 @@ summary: >-
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Tras configurar las secciones anteriores y guardar el archivo ` <code translate="no">values.yaml</code> `, ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Woodpecker.</li>
+<li>Tras configurar las secciones anteriores y guardar el archivo « <code translate="no">values.yaml</code> », ejecute el siguiente comando para instalar Milvus utilizando las configuraciones de Woodpecker.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>

@@ -206,7 +206,7 @@ Der obige Befehl stellt Milvus mit den empfohlenen Konfigurationen bereit. Für 
     </button></h3><p>Überprüfen Sie, ob Ihre Bereitstellung erfolgreich war, indem Sie den Pod-Status überprüfen:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v2.6.17 sollten Sie Pods sehen, die in etwa so aussehen:</p>
+<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v2.6.17 sollten Sie Pods sehen, die in etwa wie folgt aussehen:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus verfügt über ein integriertes GUI-Tool namens „Milvus WebUI“, auf das Sie über Ihren Browser zugreifen können. Die Milvus-WebUI verbessert die Beobachtbarkeit des Systems durch eine einfache und intuitive Benutzeroberfläche. Mit der Milvus-WebUI können Sie die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus überwachen, Datenbank- und Erfassungsdetails überprüfen sowie detaillierte Milvus-Konfigurationen auflisten. Weitere Informationen zur Milvus-Web-UI finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus-Web-UI</a></p>
+    </button></h2><p>Milvus verfügt über ein integriertes GUI-Tool namens „Milvus WebUI“, auf das Sie über Ihren Browser zugreifen können. Die Milvus-WebUI verbessert die Systemüberwachbarkeit durch eine einfache und intuitive Benutzeroberfläche. Mit der Milvus-WebUI können Sie die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus überwachen, Datenbank- und Erfassungsdetails überprüfen sowie detaillierte Milvus-Konfigurationen auflisten. Weitere Informationen zur Milvus-Web-UI finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus-Web-UI</a></p>
 <p>Um den Zugriff auf die Milvus-Web-UI zu ermöglichen, müssen Sie eine Portweiterleitung vom Proxy-Pod auf einen lokalen Port einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -499,7 +499,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">„Hello Milvus</a> “ an, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">„Hello Milvus“</a> an, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>

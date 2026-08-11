@@ -6,7 +6,7 @@ summary: >-
   dentro de um campo StructArray. O StructArray suporta dois modos básicos de
   pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de
   incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento,
-  que pesquisa cada elemento Struct de forma independente.
+  que pesquisa cada elemento do Struct de forma independente.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Pesquisa vetorial básica com StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +82,7 @@ summary: >-
 <tr><td>O que representa um resultado</td><td>Uma entidade correspondente cujo subcampo vetorial StructArray é semelhante à lista de embeddings da consulta.</td><td>Um elemento Struct correspondente dentro do campo StructArray.</td></tr>
 <tr><td>Granularidade do resultado</td><td>Nível de entidade.</td><td>Nível do elemento Struct.</td></tr>
 <tr><td>Deslocamento</td><td>Não aplicável.</td><td>Identifica a posição, a partir do zero, do elemento Struct correspondente quando devolvido.</td></tr>
-<tr><td>Utilização típica</td><td>ColBERT, ColPali e outros padrões de recuperação de interação tardia.</td><td>Recuperação ao nível de fragmento, de passagem, de clipe, de patch ou de facto.</td></tr>
+<tr><td>Utilização típica</td><td>ColBERT, ColPali e outros padrões de recuperação de interação tardia.</td><td>Recuperação ao nível do bloco, da passagem, do excerto, do fragmento ou do facto.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">Executar pesquisa EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste modo de pesquisa, a « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos StructArray, mas o próprio resultado representa a entidade pai correspondente, em vez de um elemento Struct específico.</p>
+<p>Neste modo de pesquisa, a « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos «StructArray», mas o próprio resultado representa a entidade-pai correspondente, em vez de um elemento «Struct» específico.</p>
 <div class="alert note">
 <p>Para um guia passo a passo completo ao estilo ColBERT ou ColPali, consulte <a href="/docs/pt/search-with-embedding-lists.md">«Pesquisa com listas de incorporação</a>». Esta página aborda apenas o comportamento básico da pesquisa no StructArray.</p>
 </div>

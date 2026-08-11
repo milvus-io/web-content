@@ -77,7 +77,7 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
     </button></h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdalo como docker-compose.yml manualmente o con el siguiente comando.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Debe realizar algunos cambios en las variables de entorno del servicio independiente del archivo YAML, tal y como se indica a continuación:</p>
+<p>Debe realizar algunos cambios en las variables de entorno del servicio independiente en el archivo YAML, tal y como se indica a continuación:</p>
 <ul>
 <li>Para asignar un dispositivo de GPU específico a Milvus, localice el campo « <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> » en la definición del servicio « <code translate="no">standalone</code> » y sustituya su valor por el ID de la GPU deseada. Puede utilizar la herramienta « <code translate="no">nvidia-smi</code> », incluida con los controladores de pantalla de las GPU de NVIDIA, para determinar el ID de un dispositivo de GPU. Milvus admite varios dispositivos de GPU.</li>
 </ul>
@@ -94,7 +94,7 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
             <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&quot;0&quot;</span>]
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Asignar varios dispositivos de GPU a Milvus:</p>
+<p>Asignar varios dispositivos GPU a Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-string">...</span>

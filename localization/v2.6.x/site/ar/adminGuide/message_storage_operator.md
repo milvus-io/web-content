@@ -19,7 +19,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يستخدم Milvus RocksMQ أو Pulsar أو Kafka لإدارة سجلات التغييرات الأخيرة، وإخراج سجلات التدفق، وتوفير اشتراكات السجلات. يقدم هذا الموضوع كيفية تكوين تبعيات تخزين الرسائل عند تثبيت Milvus باستخدام Milvus Operator. لمزيد من التفاصيل، راجع " <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">تكوين تخزين الرسائل باستخدام Milvus Operator</a> " في مستودع Milvus Operator.</p>
+    </button></h1><p>يستخدم Milvus RocksMQ أو Pulsar أو Kafka لإدارة سجلات التغييرات الأخيرة، وإخراج سجلات التدفق، وتوفير اشتراكات السجلات. يقدم هذا الموضوع كيفية تكوين تبعيات تخزين الرسائل عند تثبيت Milvus باستخدام Milvus Operator. لمزيد من التفاصيل، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">تكوين تخزين الرسائل باستخدام Milvus Operator</a> في مستودع Milvus Operator.</p>
 <p>يفترض هذا الموضوع أنك قمت بنشر Milvus Operator.</p>
 <div class="alert note">انظر <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">«نشر Milvus Operator»</a> لمزيد من المعلومات. </div>
 <p>تحتاج إلى تحديد ملف تكوين لاستخدام Milvus Operator لبدء تشغيل مجموعة Milvus.</p>
@@ -41,7 +41,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح الجدول أدناه ما إذا كانت RocksMQ وPulsar وKafka وWoodpecker مدعومة في وضع Milvus المستقل ووضع المجموعة.</p>
+    </button></h2><p>يوضح الجدول أدناه ما إذا كانت RocksMQ وPulsar وKafka وWoodpecker مدعومة في وضع Milvus المستقل ووضع الكتلة.</p>
 <table>
 <thead>
 <tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th><th style="text-align:center">Woodpecker</th></tr>
@@ -60,7 +60,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
 </ul></li>
 <li>لا يمكن تغيير مخزن الرسائل أثناء تشغيل نظام Milvus.</li>
 <li>يتم دعم إصدارات Kafka 2.x أو 3.x فقط.</li>
-<li><strong>قيود الترقية</strong>: <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</li>
+<li><strong>قيود الترقية</strong>: <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">تكوين RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">خيارات التهيئة الرئيسية:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: يحدد RocksMQ صراحةً كقائمة انتظار الرسائل</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: يعيّن RocksMQ صراحةً كقائمة انتظار الرسائل</li>
 <li><code translate="no">persistence.enabled</code>: تمكّن التخزين الدائم لبيانات RocksMQ</li>
 <li><code translate="no">persistence.pvcDeletion</code>: عند تعيين القيمة إلى «true»، سيتم حذف PVC عند حذف مثيل Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: مواصفات PVC القياسية في Kubernetes</li>
@@ -144,7 +144,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يدير Pulsar سجلات التغييرات الحديثة، ويُخرج سجلات التدفق، ويوفر اشتراكات في السجلات. يتم دعم تكوين Pulsar لتخزين الرسائل في كل من Milvus المستقل ومجموعة Milvus. ومع ذلك، باستخدام Milvus Operator، لا يمكنك تكوين Pulsar كوحدة تخزين للرسائل إلا لمجموعة Milvus. أضف الحقول المطلوبة ضمن « <code translate="no">spec.dependencies.pulsar</code> » (تكوين وحدة التخزين) لتكوين Pulsar.</p>
+    </button></h2><p>يدير Pulsar سجلات التغييرات الحديثة، ويُخرج سجلات التدفق، ويوفر اشتراكات السجلات. يتم دعم تكوين Pulsar لتخزين الرسائل في كل من Milvus المستقل ومجموعة Milvus. ومع ذلك، باستخدام Milvus Operator، يمكنك فقط تكوين Pulsar كمساحة تخزين للرسائل لمجموعة Milvus. أضف الحقول المطلوبة ضمن « <code translate="no">spec.dependencies.pulsar</code> » لتكوين Pulsar.</p>
 <p><code translate="no">pulsar</code> يدعم <code translate="no">external</code> و <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar خارجي<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +242,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">يحدد هذا المثال عدد النسخ المتماثلة لكل مكون من مكونات Pulsar، وموارد الحوسبة لـ Pulsar BookKeeper، والتكوينات الأخرى.</div>
-<div class="alert note">ابحث عن عناصر التهيئة الكاملة لتهيئة خدمة Pulsar الداخلية في <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">ملف values.yaml</a>. أضف عناصر التهيئة حسب الحاجة ضمن <code translate="no">pulsar.inCluster.values</code> كما هو موضح في المثال السابق.</div>
+<div class="alert note">ابحث عن عناصر التهيئة الكاملة لتهيئة خدمة Pulsar الداخلية في <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">ملف values.yaml</a>. أضف عناصر التهيئة حسب الحاجة ضمن " <code translate="no">pulsar.inCluster.values</code> " كما هو موضح في المثال السابق.</div>
 <p>بافتراض أن ملف التكوين يسمى <code translate="no">milvuscluster.yaml</code> ، قم بتشغيل الأمر التالي لتطبيق التكوين.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

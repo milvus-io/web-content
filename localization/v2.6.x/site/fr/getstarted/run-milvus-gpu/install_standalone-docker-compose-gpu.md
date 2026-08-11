@@ -137,7 +137,7 @@ Creating milvus-standalone ... done
 <li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en cours d'exécution.
 <ul>
 <li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le</strong> répertoire <strong>volumes/etcd</strong> du dossier actuel.</li>
-<li>Le conteneur <strong>« milvus-minio</strong> » expose localement les ports <strong>9090</strong> et <strong>9091</strong> avec les identifiants d’authentification par défaut et mappe ses données vers <strong>le répertoire « volumes/minio »</strong> du dossier courant.</li>
+<li>Le conteneur <strong>« milvus-minio</strong> » expose localement les ports <strong>9090</strong> et <strong>9091</strong> avec les identifiants d’authentification par défaut et mappe ses données vers <strong>le répertoire « volumes/minio »</strong> du dossier actuel.</li>
 <li>Le conteneur <strong>milvus-standalone</strong> expose localement les ports <strong>19530</strong> avec les paramètres par défaut et stocke ses données dans <strong>le répertoire volumes/milvus</strong> du dossier actuel.</li>
 </ul></li>
 </ul>
@@ -155,7 +155,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Rendre le périphérique GPU <code translate="no">0</code> visible pour Milvus :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Rendre les périphériques GPU <code translate="no">0</code> et <code translate="no">1</code> visibles pour Milvus :</p>
+<p>Rendre les périphériques GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez arrêter et supprimer ce conteneur comme suit.</p>

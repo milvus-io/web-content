@@ -97,7 +97,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BFLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.INT8_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポートされていません</td><td>StructArray フィールドでは、スパースベクトルサブフィールドはサポートされていません。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>サポートされていません</td><td>StructArray フィールドでは、スパースベクトルのサブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>`<code translate="no">VARCHAR</code>` を使用し、`<code translate="no">String</code>` は使用しないでください。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Geometry サブフィールドおよび GIS 関数はサポートされていません。</td></tr>
@@ -234,7 +234,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray フィールドを作成したら、<code translate="no">structArray[subfield]</code> パス構文を使用してそのサブフィールドを参照します。インデックスの作成、ベクトルサブフィールドの検索、サブフィールドの出力、またはスカラーフィルタの構築を行う際は、この構文を使用します。</p>
+    </button></h2><p>StructArray フィールドを作成したら、<code translate="no">structArray[subfield]</code> パス構文を使用してそのサブフィールドを参照します。インデックスの作成、ベクトルサブフィールドの検索、サブフィールドの出力、またはスカラーフィルタの構築を行う際には、この構文を使用します。</p>
 <table>
 <thead>
 <tr><th>パス</th><th>意味</th><th>一般的な使用法</th></tr>
@@ -378,7 +378,7 @@ client.add_collection_struct_field(
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスがあります。</td><td>EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成してください。</td></tr>
 <tr><td>既存の StructArray サブフィールドは固定されています。</td><td>StructArray フィールドを作成した後、その同じ StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>Struct 内での関数の使用はサポートされていません。</td><td>StructArray フィールド内のフィールドやサブフィールドに対して関数を定義しないでください。</td></tr>
-<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力を行う必要がある場合にのみ追加してください。</td></tr>
+<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力する必要がある場合にのみ追加してください。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">

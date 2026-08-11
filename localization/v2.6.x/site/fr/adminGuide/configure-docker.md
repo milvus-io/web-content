@@ -233,7 +233,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après le re
         ></path>
       </svg>
     </button></h2><p>Dans le fichier « <code translate="no">docker-compose.yml</code> », ajoutez une section « <code translate="no">volumes</code> » sous chaque « <code translate="no">milvus-standalone</code> ».</p>
-<p>Faites correspondre le chemin d'accès local à votre fichier « <code translate="no">milvus.yaml</code> » aux chemins d'accès correspondants des fichiers de configuration « <code translate="no">/milvus/configs/milvus.yaml</code> » dans le conteneur Docker, sous toutes les sections « <code translate="no">volumes</code> ».</p>
+<p>Faites correspondre le chemin d'accès local à votre fichier « <code translate="no">milvus.yaml</code> » aux chemins d'accès correspondants des conteneurs Docker vers les fichiers de configuration « <code translate="no">/milvus/configs/milvus.yaml</code> » dans toutes les sections « <code translate="no">volumes</code> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

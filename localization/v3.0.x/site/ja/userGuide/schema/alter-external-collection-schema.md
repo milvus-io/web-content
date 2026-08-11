@@ -20,7 +20,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>外部コレクションを作成した後、外部データソースはしばしば変更されます。たとえば、すでに埋め込みデータを格納しているレイクハウステーブルに、後でスコア、カテゴリ、タイムスタンプなどの新しいスカラーフィールドが追加され、それらをクエリ結果として返したり、フィルタで使用したりしたい場合があります。</p>
-<p>外部コレクションを再作成したり、ソースデータをMilvusにコピーしたりする代わりに、外部データソースの既存のフィールドに対応するMilvusフィールドを追加してください。フィールドを追加した後、外部コレクションを更新することで、クエリや検索で新しいフィールドを使用できるようになります。</p>
+<p>外部コレクションを再作成したり、ソースデータをMilvusにコピーしたりする代わりに、外部データソースの既存のフィールドに対応するMilvusフィールドを追加します。フィールドを追加した後、外部コレクションを更新することで、クエリや検索で新しいフィールドを使用できるようになります。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ client.add_collection_field(
 <span class="highlighted-wrapper-line">    external_field=<span class="hljs-string">&quot;score&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">score</code> が Milvus のフィールド名であり、<code translate="no">external_field=&quot;score&quot;</code> は外部データソースの<code translate="no">score</code> フィールドにマッピングされます。コレクションがすでに作成された後にフィールドが追加されるため、<code translate="no">nullable=True</code> を設定します。</p>
+<p>この例では、<code translate="no">score</code> が Milvus のフィールド名であり、<code translate="no">external_field=&quot;score&quot;</code> は外部データソースの<code translate="no">score</code> フィールドにマッピングされます。コレクションがすでに作成された後にフィールドを追加するため、<code translate="no">nullable=True</code> を設定します。</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">ベクトルフィールドの追加<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,9 +2,9 @@
 id: arabic-analyzer.md
 title: AraboCompatible with Milvus 3.0.0+
 summary: >-
-  L'analizzatore arabo integrato elabora il testo in arabo normalizzando le
+  L'analizzatore arabo integrato elabora il testo arabo normalizzando le
   varianti delle lettere e le cifre, effettuando lo stemming dei termini ed
-  eliminando le parole vuote in arabo.
+  eliminando le parole vuote arabe.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Arabic" class="common-anchor-header">Arabo<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Arabic" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ beta: Milvus 3.0.0+
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p><code translate="no">list[str]</code></p></td>
      <td><p><code translate="no">_arabic_</code></p></td>
-     <td><p>Un elenco di parole di stop aggiuntive da escludere dalla tokenizzazione. Per impostazione predefinita, l'analizzatore <code translate="no">arabic</code> utilizza il dizionario integrato <code translate="no">_arabic_</code>. Per consultare il dizionario predefinito, fare riferimento <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">all'elenco delle parole di stop arabe</a> di Milvus. L'elenco proviene dal <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">file delle parole di stop arabe</a> di Apache Lucene.</p></td>
+     <td><p>Un elenco di parole di stop aggiuntive da rimuovere dalla tokenizzazione. Per impostazione predefinita, l'analizzatore <code translate="no">arabic</code> utilizza il dizionario integrato <code translate="no">_arabic_</code>. Per consultare il dizionario predefinito, fare riferimento <a href="https://github.com/milvus-io/milvus/blob/1945ba399b4552fd0fd0b131f7c735ddde21e71c/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words/arabic.txt">all'elenco delle parole di stop arabe</a> di Milvus. L'elenco proviene dal <a href="https://github.com/apache/lucene/blob/main/lucene/analysis/common/src/resources/org/apache/lucene/analysis/ar/stopwords.txt">file delle parole di stop arabe</a> di Apache Lucene.</p></td>
    </tr>
 </table>
 <p>Per aggiungere parole di stop personalizzate, includere <code translate="no">stop_words</code>:</p>
@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus applica le parole di stop personalizzate in aggiunta al dizionario <code translate="no">_arabic_</code> integrato.</p>
-<p>L'analizzatore " <code translate="no">arabic</code> " integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
+<p>L'analizzatore <code translate="no">arabic</code> integrato è equivalente alla seguente configurazione dell'analizzatore personalizzato:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

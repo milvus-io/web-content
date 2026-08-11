@@ -55,7 +55,7 @@ beta: Milvus 3.0.0+
     ],
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Ce pipeline personnalisé n’est pas équivalent à l’analyseur intégré « <code translate="no">thai</code> », car il n’inclut pas le dictionnaire de mots vides intégré « <code translate="no">_thai_</code> ». Pour le pipeline prédéfini complet, utilisez <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
+<p>Ce pipeline personnalisé n’est pas équivalent à l’analyseur <code translate="no">thai</code> intégré, car il n’inclut pas le dictionnaire de mots vides <code translate="no">_thai_</code> intégré. Pour le pipeline prédéfini complet, utilisez <code translate="no">{&quot;type&quot;: &quot;thai&quot;}</code>.</p>
 <p>Le tokeniseur applique le comportement suivant :</p>
 <ul>
 <li><strong>Segmentation du thaï</strong>: segmente le texte thaï en tokens de mots sans s’appuyer sur les espaces.</li>

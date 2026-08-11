@@ -2,7 +2,7 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: MilvusのPython SDKのインストール方法をご覧ください。
+summary: MilvusのPython SDKのインストール方法について学びましょう。
 title: Milvus Python SDK のインストール
 ---
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDK のインストール<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ title: Milvus Python SDK のインストール
       </svg>
     </button></h2><ul>
 <li>Python 3.7 以降が必要です。</li>
-<li>Google Protobuf がインストールされている必要があります。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
-<li>grpcio-tools がインストールされていること。コマンド `<code translate="no">pip3 install grpcio-tools</code>` でインストールできます。</li>
+<li>Google Protobuf がインストールされていること。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
+<li>grpcio-tools がインストールされていること。<code translate="no">pip3 install grpcio-tools</code> コマンドでインストールできます。</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip を使用して PyMilvus をインストールする<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,11 +1,11 @@
 ---
 id: switch-mq-type.md
-title: Cambiar el tipo de cola de mensajes
+title: Cambio de cola de mensajes
 summary: >-
-  Cambiar la cola de mensajes de una implementación existente de Milvus de
-  Woodpecker a otra cola de mensajes sin tiempo de inactividad.
+  Cambiar una implementación existente de Milvus de Woodpecker a otra cola de
+  mensajes sin tiempo de inactividad.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Cambiar el tipo de cola de mensajes<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Cambio de cola de mensajes<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

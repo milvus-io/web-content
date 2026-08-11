@@ -126,7 +126,7 @@ proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Mulai ulang kontainer <code translate="no">milvus-standalone</code> untuk menerapkan perubahan.</p>
+<li><p>Mulai ulang kontainer ` <code translate="no">milvus-standalone</code> ` untuk menerapkan perubahan.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

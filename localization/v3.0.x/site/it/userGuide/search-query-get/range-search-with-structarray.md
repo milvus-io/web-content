@@ -325,7 +325,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinata alla ricerca a livello di EmbeddingList.</p></li>
+<li><p>Eseguire la ricerca per intervallo su <code translate="no">chunks[emb_list_vector]</code>, che è destinato alla ricerca a livello di EmbeddingList.</p></li>
 <li><p>Utilizzo di ` <code translate="no">MAX_SIM_COSINE</code> ` al posto di una metrica standard come ` <code translate="no">COSINE</code> ` per la ricerca per intervallo a livello di elemento.</p></li>
 <li><p>Utilizzo di una query <code translate="no">EmbeddingList</code> al posto di una normale query vettoriale.</p></li>
 <li><p>Aspettarsi che i risultati della ricerca per intervallo siano univoci per entità padre. La ricerca per intervallo restituisce risultati corrispondenti a elementi Struct.</p></li>
@@ -347,7 +347,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Per conoscere le due modalità di ricerca vettoriale di base di StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
+<li><p>Per conoscere le due modalità di ricerca vettoriale di base con StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca per intervallo, consultare <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 <li><p>Per restituire al massimo un risultato per entità padre, ove supportato, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
 <li><p>Per verificare i limiti di ricerca specifici per versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>

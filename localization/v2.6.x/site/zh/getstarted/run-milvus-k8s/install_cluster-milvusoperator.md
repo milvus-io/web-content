@@ -36,7 +36,7 @@ title: 使用 Milvus Operator 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator 是一套解决方案，可帮助您在目标 Kubernetes（K8s）集群中部署和管理完整的 Milvus 服务栈。该栈包含所有 Milvus 组件以及相关依赖项，例如 etcd、Pulsar 和 MinIO。</p>
+    </button></h2><p>Milvus Operator 是一套解决方案，可帮助您在目标 Kubernetes（K8s）集群上部署和管理完整的 Milvus 服务栈。该栈包含所有 Milvus 组件以及相关依赖项，例如 etcd、Pulsar 和 MinIO。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +236,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operator 会先创建 Milvus 依赖项（如 etcd、Pulsar 和 MinIO），随后再创建 Milvus 组件（如代理、协调器和节点）。</p>
+<p>Milvus Operator 会先创建 Milvus 的依赖项（如 etcd、Pulsar 和 MinIO），然后创建 Milvus 组件（如代理、协调器和节点）。</p>
 <p>一旦您的 Milvus 集群准备就绪，Milvus 集群中所有 Pod 的状态应与以下内容类似。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -276,14 +276,14 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果显示，该 Milvus 实例在默认端口<strong>19530</strong> 上提供服务。</p>
 <div class="alert note">
-<p>如果您以独立模式部署了 Milvus，请将 Pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
+<p>如果您以独立模式部署了 Milvus Standalone，请将 Pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
 </div>
 <p>然后，运行以下命令将本地端口转发到 Milvus 的服务端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>此外，您也可以在上述命令中使用<code translate="no">:19530</code> 代替<code translate="no">27017:19530</code> ，让<code translate="no">kubectl</code> 为您分配一个本地端口，从而无需手动处理端口冲突。</p>
-<p>默认情况下，kubectl 的端口转发仅监听<code translate="no">localhost</code> 。若希望 Milvus 监听选定的或所有 IP 地址，请使用<code translate="no">address</code> 标志。以下命令将使端口转发监听主机上的所有 IP 地址。</p>
+<p>默认情况下，kubectl 的端口转发仅监听<code translate="no">localhost</code> 。若希望 Milvus 监听选定或所有 IP 地址，请使用<code translate="no">address</code> 标志。以下命令将使端口转发监听主机上的所有 IP 地址。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -333,7 +333,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
         ></path>
       </svg>
     </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置 GUI 工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计数据与指标，查看数据库和 Collection 详情，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
-<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 进行端口转发至本地端口。</p>
+<p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>

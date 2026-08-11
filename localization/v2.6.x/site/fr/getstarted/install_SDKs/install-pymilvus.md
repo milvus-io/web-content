@@ -98,7 +98,7 @@ Il est recommandé d’installer une version de PyMilvus correspondant à celle 
       </svg>
     </button></h2><p>Une fois PyMilvus installé, vous pouvez :</p>
 <ul>
-<li><p>Apprendre les opérations de base de Milvus :</p>
+<li><p>Découvrir les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/v2.6.x/manage-collections.md">Gérer les collections</a></li>
 <li><a href="/docs/fr/v2.6.x/manage-partitions.md">Gérer les partitions</a></li>
@@ -106,5 +106,5 @@ Il est recommandé d’installer une version de PyMilvus correspondant à celle 
 <li><a href="/docs/fr/v2.6.x/single-vector-search.md">Effectuer une recherche sur un vecteur unique</a></li>
 <li><a href="/docs/fr/v2.6.x/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p>Explorer <a href="/api-reference/pymilvus/v2.4.x/About.md">la documentation de l'API PyMilvus</a></p></li>
+<li><p>Découvrez <a href="/api-reference/pymilvus/v2.4.x/About.md">la documentation de l'API PyMilvus</a></p></li>
 </ul>

@@ -146,7 +146,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك الجمع بين البحث المجمّع وتصفية StructArray القياسية. استخدم <code translate="no">element_filter</code> عندما يتعين أن يقيد الشرط القياسي عناصر Struct التي تشارك في البحث المتجه على مستوى العنصر.</p>
+    </button></h2><p>يمكنك الجمع بين البحث المجمّع وتصفية StructArray القياسية. استخدم <code translate="no">element_filter</code> عندما يتعين أن يقيد الشرط القياسي عناصر Struct التي تشارك في البحث المتجه على مستوى العناصر.</p>
 <pre><code translate="no" class="language-python">filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
@@ -219,7 +219,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، تستهدف كلتا الطلبات الفرعية حقول متجهة على مستوى العنصر ضمن نفس حقل StructArray، <code translate="no">chunks</code>. لا يدعم البحث الهجين التجميع على مستوى العنصر إذا كان يخلط بين حقول متجهة عادية، أو حقول StructArray مختلفة، أو طلبات على مستوى EmbeddingList.</p>
+<p>في هذا المثال، تستهدف كلتا الطلبات الفرعية حقول متجهة على مستوى العنصر ضمن حقل StructArray نفسه، <code translate="no">chunks</code>. لا يدعم البحث الهجين التجميع على مستوى العنصر إذا كان يخلط بين حقول متجهة عادية، أو حقول StructArray مختلفة، أو طلبات على مستوى EmbeddingList.</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">تفسير النتائج المجمعة<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,7 +310,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ol>
 <li><p>لتعلم البحث على مستوى العناصر غير المجمعة أولاً، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">«البحث المتجهي الأساسي باستخدام StructArray</a>».</p></li>
-<li><p>لإضافة مرشحات قياسية إلى البحث المجمّع، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">«البحث المُصفّى باستخدام StructArray</a>».</p></li>
+<li><p>لإضافة مرشحات قياسية إلى البحث المجمّع، اقرأ <a href="/docs/ar/filtered-search-with-structarray.md">«البحث المُصفى باستخدام StructArray</a>».</p></li>
 <li><p>لاستخدام حدود التقييم أو المسافة بدلاً من التجميع، اقرأ <a href="/docs/ar/range-search-with-structarray.md">«البحث في النطاق باستخدام StructArray</a>».</p></li>
 <li><p>للتحقق من حدود البحث في StructArray، اقرأ <a href="/docs/ar/structarray-limits.md">«حدود StructArray</a>».</p></li>
 </ol>

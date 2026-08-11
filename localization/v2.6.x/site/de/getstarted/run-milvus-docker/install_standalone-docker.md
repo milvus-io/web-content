@@ -130,7 +130,7 @@ EOF
 <p>Der Upgrade-Befehl führt automatisch folgende Schritte aus:</p>
 <ul>
 <li>Lädt das neueste Installationsskript mit aktualisierten Konfigurationen herunter</li>
-<li>Das neueste Milvus-Docker-Image abruft</li>
+<li>Das neueste Milvus-Docker-Image abrufen</li>
 <li>den Container mit der neuen Version neu startet</li>
 <li>Ihre vorhandenen Daten und Konfigurationen bleiben erhalten</li>
 </ul>

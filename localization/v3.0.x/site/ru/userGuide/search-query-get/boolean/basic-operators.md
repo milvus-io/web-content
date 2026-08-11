@@ -2,11 +2,12 @@
 id: basic-operators.md
 title: Основные операторы
 summary: >-
-  Milvus предоставляет богатый набор базовых операторов, которые помогут вам
-  эффективно фильтровать и запрашивать данные. Эти операторы позволяют уточнять
-  условия поиска на основе скалярных полей, числовых вычислений, логических
-  условий и многого другого. Понимание того, как использовать эти операторы,
-  очень важно для создания точных запросов и повышения эффективности поиска.
+  Milvus предоставляет обширный набор базовых операторов, которые помогут вам
+  эффективно фильтровать данные и формировать запросы. Эти операторы позволяют
+  уточнять условия поиска на основе скалярных полей, числовых вычислений,
+  логических условий и других критериев. Понимание принципов использования этих
+  операторов имеет решающее значение для составления точных запросов и
+  обеспечения максимальной эффективности поиска.
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">Основные операторы<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus предоставляет богатый набор базовых операторов, которые помогут вам эффективно фильтровать и запрашивать данные. Эти операторы позволяют уточнять условия поиска на основе скалярных полей, числовых вычислений, логических условий и многого другого. Понимание того, как использовать эти операторы, очень важно для создания точных запросов и повышения эффективности поиска.</p>
+    </button></h1><p>Milvus предоставляет обширный набор базовых операторов, которые помогут вам эффективно фильтровать и запрашивать данные. Эти операторы позволяют уточнять условия поиска на основе скалярных полей, числовых вычислений, логических условий и т. д. Понимание того, как использовать эти операторы, имеет решающее значение для построения точных запросов и максимального повышения эффективности ваших поисков.</p>
 <h2 id="Comparison-operators" class="common-anchor-header">Операторы сравнения<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,8 +40,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Операторы сравнения используются для фильтрации данных на основе равенства, неравенства или размера. Они применимы к числовым и текстовым полям.</p>
-<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Поддерживаемые операторы сравнения:<button data-href="#Supported-Comparison-Operators" class="anchor-icon" translate="no">
+    </button></h2><p>Операторы сравнения используются для фильтрации данных на основе равенства, неравенства или величины. Они применимы к числовым и текстовым полям.</p>
+<h3 id="Supported-comparison-operators" class="common-anchor-header">Поддерживаемые операторы сравнения<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,12 +59,12 @@ summary: >-
     </button></h3><ul>
 <li><p><code translate="no">==</code> (Равно)</p></li>
 <li><p><code translate="no">!=</code> (Не равно)</p></li>
-<li><p><code translate="no">&gt;</code> (Больше, чем)</p></li>
-<li><p><code translate="no">&lt;</code> (Меньше, чем)</p></li>
+<li><p><code translate="no">&gt;</code> (Больше)</p></li>
+<li><p><code translate="no">&lt;</code> (Меньше)</p></li>
 <li><p><code translate="no">&gt;=</code> (Больше или равно)</p></li>
 <li><p><code translate="no">&lt;=</code> (Меньше или равно)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Пример 1: Фильтрация с помощью Equal To (<code translate="no">==</code>)<button data-href="#Example-1-Filtering-with-Equal-To-" class="anchor-icon" translate="no">
+<h3 id="Example-1-Filtering-with-equal-to-" class="common-anchor-header">Пример 1: Фильтрация по равенству (<code translate="no">==</code>)<button data-href="#Example-1-Filtering-with-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,10 +79,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Предположим, у вас есть поле с именем <code translate="no">status</code>, и вы хотите найти все сущности, в которых <code translate="no">status</code> является "активным". Для этого можно использовать оператор равенства <code translate="no">==</code>:</p>
+    </button></h3><p>Предположим, у вас есть поле с именем « <code translate="no">status</code> », и вы хотите найти все сущности, у которых значение « <code translate="no">status</code> » равно «active». Для этого можно использовать оператор равенства « <code translate="no">==</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Пример 2: Фильтрация с помощью Not Equal To (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-Not-Equal-To-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">Пример 2: Фильтрация по неравенству (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,10 +97,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы найти сущности, в которых <code translate="no">status</code> не является "неактивным":</p>
+    </button></h3><p>Чтобы найти сущности, у которых <code translate="no">status</code> не равно «inactive»:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Пример 3: Фильтрация с помощью Greater Than (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-Greater-Than-" class="anchor-icon" translate="no">
+<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">Пример 3: Фильтрация по условию «больше» (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,10 +115,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вы хотите найти все сущности с <code translate="no">age</code> больше 30:</p>
+    </button></h3><p>Если вы хотите найти все сущности, у которых <code translate="no">age</code> больше 30:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Пример 4: Фильтрация с помощью Less Than<button data-href="#Example-4-Filtering-with-Less-Than" class="anchor-icon" translate="no">
+<h3 id="Example-4-Filtering-with-less-than" class="common-anchor-header">Пример 4: Фильтрация по значению «меньше»<button data-href="#Example-4-Filtering-with-less-than" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +136,7 @@ summary: >-
     </button></h3><p>Чтобы найти сущности, у которых <code translate="no">price</code> меньше 100:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Пример 5: Фильтрация с помощью Greater Than or Equal To (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="anchor-icon" translate="no">
+<h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">Пример 5: Фильтрация по значению «больше или равно» (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,10 +151,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вы хотите найти все сущности с <code translate="no">rating</code> больше или равным 4:</p>
+    </button></h3><p>Если вы хотите найти все сущности, у которых <code translate="no">rating</code> больше или равно 4:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Пример 6: Фильтрация с помощью Less Than or Equal To<button data-href="#Example-6-Filtering-with-Less-Than-or-Equal-To" class="anchor-icon" translate="no">
+<h3 id="Example-6-Filtering-with-less-than-or-equal-to" class="common-anchor-header">Пример 6: Фильтрация по условию «меньше или равно»<button data-href="#Example-6-Filtering-with-less-than-or-equal-to" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,7 +169,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы найти сущности с <code translate="no">discount</code> меньше или равным 10%:</p>
+    </button></h3><p>Чтобы найти сущности с показателем « <code translate="no">discount</code> », не превышающим 10%:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Range-operators" class="common-anchor-header">Операторы диапазона<button data-href="#Range-operators" class="anchor-icon" translate="no">
@@ -186,46 +187,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Операторы диапазона помогают фильтровать данные на основе определенных наборов или диапазонов значений.</p>
-<h3 id="Supported-Range-Operators" class="common-anchor-header">Поддерживаемые операторы диапазона:<button data-href="#Supported-Range-Operators" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ul>
-<li><p><code translate="no">IN</code>: Используются для поиска значений в определенном наборе или диапазоне.</p></li>
-<li><p><code translate="no">LIKE</code>: : Используется для соответствия шаблону (в основном для текстовых полей).  Milvus позволяет построить индекс <code translate="no">NGRAM</code> на полях VARCHAR или JSON для ускорения текстовых запросов. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</p></li>
-</ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Пример 1: Использование <code translate="no">IN</code> для поиска нескольких значений<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Если вы хотите найти все сущности, для которых <code translate="no">color</code> является либо "красным", либо "зеленым", либо "синим":</p>
+    </button></h2><p>Операторы диапазона помогают фильтровать данные на основе определенного набора значений. Milvus поддерживает <code translate="no">IN</code> для проверки принадлежности к множеству.</p>
+<p>Если вы хотите найти все сущности, у которых значение « <code translate="no">color</code> » равно «red», «green» или «blue»:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Это полезно, когда нужно проверить принадлежность к списку значений.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Пример 2: Использование <code translate="no">LIKE</code> для сопоставления с образцом<button data-href="#Example-2-Using-LIKE-for-Pattern-Matching" class="anchor-icon" translate="no">
+<p>Это полезно, когда требуется проверить принадлежность к списку значений.</p>
+<h2 id="Pattern-matching-operators" class="common-anchor-header">Операторы сопоставления шаблонов<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,68 +207,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Оператор <code translate="no">LIKE</code> используется для поиска шаблонов в строковых полях. Он может сопоставлять подстроки в различных позициях в тексте: в качестве <strong>префикса</strong>, <strong>инфикса</strong> или <strong>суффикса</strong>. Оператор <code translate="no">LIKE</code> использует символ <code translate="no">%</code> в качестве подстановочного знака, который может соответствовать любому количеству символов (включая ноль).</p>
-<div class="alert note">
-<p>В большинстве случаев <strong>инфиксное</strong> или <strong>суффиксное</strong> сопоставление значительно медленнее префиксного. Используйте их с осторожностью, если производительность очень важна.</p>
-</div>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Префиксное совпадение (начинается с)<button data-href="#Prefix-Match-Starts-With" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Чтобы выполнить <strong>префиксное</strong> соответствие, когда строка начинается с заданного шаблона, можно поместить шаблон в начало и использовать <code translate="no">%</code> для соответствия всем символам, следующим за ним. Например, чтобы найти все продукты, чье <code translate="no">name</code> начинается с "Prod":</p>
+    </button></h2><p>Операторы сопоставления шаблонов помогают фильтровать строковые значения на основе шаблонов с подстановочными знаками или регулярных выражений.</p>
+<ul>
+<li><p><code translate="no">LIKE</code>: Используется для сопоставления простых шаблонов с подстановочными знаками со строковыми значениями. Например, <code translate="no">name LIKE &quot;Prod%&quot;</code> сопоставляет значения, начинающиеся с <code translate="no">Prod</code>.</p></li>
+<li><p><code translate="no">=~</code>: Используется для сопоставления строкового значения с регулярным выражением RE2. Например, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> сопоставляет значения, содержащие код ошибки, такой как <code translate="no">E1001</code>.</p></li>
+<li><p><code translate="no">!~</code>: Используется для исключения строковых значений, соответствующих регулярному выражению RE2. Это эквивалентно выражению <code translate="no">NOT (field =~ &quot;pattern&quot;)</code>.</p></li>
+</ul>
+<p>Чтобы найти сущности, у которых <code translate="no">name</code> начинается с <code translate="no">Prod</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом случае будет найден любой продукт, название которого начинается с "Prod", например "Product A", "Product B" и т. д.</p>
-<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Суффиксное совпадение (заканчивается на)<button data-href="#Suffix-Match-Ends-With" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Для <strong>суффиксного</strong> совпадения, когда строка заканчивается заданным шаблоном, поместите символ <code translate="no">%</code> в начало шаблона. Например, чтобы найти все продукты, чей <code translate="no">name</code> заканчивается на "XYZ":</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
+<p>Чтобы найти сущности, у которых <code translate="no">code</code> содержит код ошибки, например <code translate="no">E1001</code>:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом случае будет найден любой продукт, название которого заканчивается на "XYZ", например "ProductXYZ", "SampleXYZ" и т. д.</p>
-<h3 id="Infix-Match-Contains" class="common-anchor-header">Инфиксное совпадение (Contains)<button data-href="#Infix-Match-Contains" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Чтобы выполнить <strong>инфиксное</strong> совпадение, при котором шаблон может встречаться в любом месте строки, вы можете поместить символ <code translate="no">%</code> как в начало, так и в конец шаблона. Например, чтобы найти все продукты, в названии которых <code translate="no">name</code> содержится слово "Pro":</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
+<p>Чтобы исключить сущности, у которых <code translate="no">message</code> начинается с <code translate="no">DEBUG</code>:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом случае будет найден любой продукт, в названии которого содержится подстрока "Pro", например "Product", "ProLine" или "SuperPro".</p>
-<h2 id="Arithmetic-Operators" class="common-anchor-header">Арифметические операторы<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
+<p>Более подробную информацию о выборе между <code translate="no">LIKE</code> и регулярными выражениями, поддерживаемых типах полей, синтаксисе регулярных выражений, правилах экранирования и производительности см. в <a href="/docs/ru/pattern-matching.md">разделе «Сопоставление шаблонов</a>». Milvus также позволяет создавать индекс <code translate="no">NGRAM</code> для полей <code translate="no">VARCHAR</code> или строк-путей JSON, чтобы ускорить работу подходящих фильтров сопоставления шаблонов. Подробности см. в разделе <a href="/docs/ru/ngram.md">«NGRAM</a>».</p>
+<h2 id="Arithmetic-operators" class="common-anchor-header">Арифметические операторы<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -316,8 +238,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Арифметические операторы позволяют создавать условия на основе вычислений с использованием числовых полей.</p>
-<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Поддерживаемые арифметические операторы:<button data-href="#Supported-Arithmetic-Operators" class="anchor-icon" translate="no">
+    </button></h2><p>Арифметические операторы позволяют создавать условия на основе вычислений с числовыми полями.</p>
+<h3 id="Supported-arithmetic-operators" class="common-anchor-header">Поддерживаемые арифметические операторы<button data-href="#Supported-arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -338,9 +260,9 @@ summary: >-
 <li><p><code translate="no">*</code> (Умножение)</p></li>
 <li><p><code translate="no">/</code> (Деление)</p></li>
 <li><p><code translate="no">%</code> (Модуль)</p></li>
-<li><p><code translate="no">**</code> (Экспоненция)</p></li>
+<li><p><code translate="no">**</code> (Возведение в степень)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Пример 1: Использование модуля (<code translate="no">%</code>)<button data-href="#Example-1-Using-Modulus-" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-modulus-" class="common-anchor-header">Пример 1: Использование модуля (<code translate="no">%</code>)<button data-href="#Example-1-Using-modulus-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -355,10 +277,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Нахождение сущностей, в которых <code translate="no">id</code> является четным числом (т.е. кратным 2):</p>
+    </button></h3><p>Чтобы найти числа, у которых <code translate="no">id</code> является чётным числом (т. е. делится на 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Пример 2: Использование экспоненции (<code translate="no">**</code>)<button data-href="#Example-2-Using-Exponentiation-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">Пример 2: Использование возведения в степень (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -373,10 +295,92 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Для поиска сущностей, в которых <code translate="no">price</code>, возведенное в степень 2, больше 1000:</p>
+    </button></h3><p>Чтобы найти элементы, у которых <code translate="no">price</code>, возведённое в степень 2, больше 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Logical-Operators" class="common-anchor-header">Логические операторы<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
+<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Побитовые операторы<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Побитовые операторы полезны, когда целочисленное поле кодирует несколько флагов, таких как права доступа, флаги функций или биты состояния. Эти операторы можно использовать в выражениях фильтра для проверки, объединения или сравнения отдельных битов в целочисленном значении.</p>
+<p>Для скалярных полей битовые операторы применяются к целочисленным типам полей, таким как <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> и <code translate="no">INT64</code>.</p>
+<h3 id="Supported-bitwise-operators" class="common-anchor-header">Поддерживаемые битовые операторы<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
+<thead>
+<tr><th>Оператор</th><th>Название</th><th>Типичное использование</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">&amp;</code></td><td>Побитовое AND</td><td>Проверка, установлены ли определенные биты.</td></tr>
+<tr><td><code translate="no">|</code></td><td>Побитовое «ИЛИ»</td><td>Объединение битов перед сравнением.</td></tr>
+<tr><td><code translate="no">^</code></td><td>Побитовое ИЛИ-ИЛИ</td><td>Сравнить различия в битах между двумя значениями.</td></tr>
+</tbody>
+</table>
+<h3 id="Example-Filtering-by-permission-bits" class="common-anchor-header">Пример: фильтрация по битам прав доступа<button data-href="#Example-Filtering-by-permission-bits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Предположим, у вас есть целочисленное поле с именем « <code translate="no">permissions</code> », и каждый бит в этом целом числе представляет флаг прав доступа:</p>
+<table>
+<thead>
+<tr><th>Флаг прав доступа</th><th>Значение бита</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">READ</code></td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">WRITE</code></td><td><code translate="no">2</code></td></tr>
+<tr><td><code translate="no">SHARE</code></td><td><code translate="no">4</code></td></tr>
+<tr><td><code translate="no">ADMIN</code></td><td><code translate="no">8</code></td></tr>
+</tbody>
+</table>
+<p>Например, значение « <code translate="no">permissions = 5</code> » означает, что установлены биты « <code translate="no">READ</code> » и « <code translate="no">SHARE</code> », поскольку <code translate="no">5 = 1 + 4</code>.</p>
+<p>Чтобы найти объекты, у которых установлен бит <code translate="no">SHARE</code>, используйте побитовое AND (<code translate="no">&amp;</code>):</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Чтобы найти объекты, у которых установка бита <code translate="no">WRITE</code> приводит к набору прав доступа <code translate="no">READ + WRITE + SHARE</code>, используйте битовое ИЛИ (<code translate="no">|</code>):</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Чтобы найти объекты, у которых биты прав доступа отличаются от <code translate="no">READ + WRITE + SHARE</code> только битом <code translate="no">WRITE</code>, используйте битовое ИЛИ-НЕ (<code translate="no">^</code>):</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Всегда заключайте битовую операцию в скобки перед сравнением результата, например <code translate="no">(permissions &amp; 4) == 4</code>. Milvus 3.0.0 поддерживает <code translate="no">&amp;</code>, <code translate="no">|</code> и <code translate="no">^</code> в выражениях фильтра. Битовое «NOT» (<code translate="no">~</code>) и операторы сдвига (<code translate="no">&lt;&lt;</code> и <code translate="no">&gt;&gt;</code>) не поддерживаются.</p>
+</div>
+<h2 id="Logical-operators" class="common-anchor-header">Логические операторы<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -392,7 +396,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Логические операторы используются для объединения нескольких условий в более сложное выражение фильтра. К ним относятся <code translate="no">AND</code>, <code translate="no">OR</code> и <code translate="no">NOT</code>.</p>
-<h3 id="Supported-Logical-Operators" class="common-anchor-header">Поддерживаемые логические операторы:<button data-href="#Supported-Logical-Operators" class="anchor-icon" translate="no">
+<h3 id="Supported-logical-operators" class="common-anchor-header">Поддерживаемые логические операторы<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -409,10 +413,10 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">AND</code>: Объединяет несколько условий, которые все должны быть истинными.</p></li>
-<li><p><code translate="no">OR</code>: : Комбинирует условия, из которых хотя бы одно должно быть истинным.</p></li>
+<li><p><code translate="no">OR</code>: Объединяет условия, при этом хотя бы одно из них должно быть истинным.</p></li>
 <li><p><code translate="no">NOT</code>: Отрицает условие.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Пример 1: Использование <code translate="no">AND</code> для объединения условий<button data-href="#Example-1-Using-AND-to-Combine-Conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Пример 1: Использование <code translate="no">AND</code> для объединения условий<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -427,10 +431,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Найти все товары, в которых <code translate="no">price</code> больше 100, а <code translate="no">stock</code> больше 50:</p>
+    </button></h3><p>Чтобы найти все товары, для которых значение параметра « <code translate="no">price</code> » превышает 100, а значение параметра « <code translate="no">stock</code> » превышает 50:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Пример 2: Использование <code translate="no">OR</code> для объединения условий<button data-href="#Example-2-Using-OR-to-Combine-Conditions" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">Пример 2: Использование параметра « <code translate="no">OR</code> » для объединения условий<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -445,10 +449,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Найти все товары, для которых <code translate="no">color</code> является либо "красным", либо "синим":</p>
+    </button></h3><p>Чтобы найти все товары, у которых показатель « <code translate="no">color</code> » равен либо «red», либо «blue»:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Пример 3: Использование <code translate="no">NOT</code> для исключения условия<button data-href="#Example-3-Using-NOT-to-Exclude-a-Condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Пример 3: Использование параметра « <code translate="no">NOT</code> » для исключения условия<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -463,10 +467,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы найти все продукты, для которых <code translate="no">color</code> не является "зеленым":</p>
+    </button></h3><p>Чтобы найти все товары, у которых значение параметра « <code translate="no">color</code> » не равно «green»:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Операторы IS NULL и IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-operators" class="common-anchor-header">Операторы IS NULL и IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -481,15 +485,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Операторы <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> используются для фильтрации полей на основе того, содержат ли они нулевое значение (отсутствие данных).</p>
+    </button></h2><p>Операторы <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> используются для фильтрации полей в зависимости от того, содержат ли они нулевое значение (отсутствие данных).</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: Определяет сущности, в которых определенное поле содержит нулевое значение, т. е. значение отсутствует или не определено.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Определяет сущности, в которых определенное поле содержит любое значение, отличное от null, что означает, что поле имеет действительное, определенное значение.</p></li>
+<li><p><code translate="no">IS NULL</code>: Определяет сущности, в которых конкретное поле содержит значение null, т. е. значение отсутствует или не определено.</p></li>
+<li><p><code translate="no">IS NOT NULL</code>: Выделяет сущности, в которых конкретное поле содержит любое значение, кроме null, то есть поле имеет действительное, определённое значение.</p></li>
 </ul>
 <div class="alert note">
-<p>Операторы не зависят от регистра, поэтому вы можете использовать <code translate="no">IS NULL</code> или <code translate="no">is null</code>, а также <code translate="no">IS NOT NULL</code> или <code translate="no">is not null</code>.</p>
+<p>Операторы нечувствительны к регистру, поэтому можно использовать как « <code translate="no">IS NULL</code> », так и « <code translate="no">is null</code> », а также как « <code translate="no">IS NOT NULL</code> », так и « <code translate="no">is not null</code> ».</p>
 </div>
-<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Регулярные скалярные поля с нулевыми значениями<button data-href="#Regular-Scalar-Fields-with-Null-Values" class="anchor-icon" translate="no">
+<h3 id="Regular-scalar-fields-with-null-values" class="common-anchor-header">Обычные скалярные поля с нулевыми значениями<button data-href="#Regular-scalar-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -504,20 +508,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus позволяет фильтровать обычные скалярные поля, такие как строки или числа, с нулевыми значениями.</p>
+    </button></h3><p>Milvus позволяет осуществлять фильтрацию по обычным скалярным полям, таким как строки или числа, содержащим нулевые значения.</p>
 <div class="alert note">
 <p>Пустая строка <code translate="no">&quot;&quot;</code> не рассматривается как нулевое значение для поля <code translate="no">VARCHAR</code>.</p>
 </div>
-<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> является нулевым:</p>
+<p>Чтобы извлечь сущности, у которых поле <code translate="no">description</code> имеет значение null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> не является нулевым:</p>
+<p>Чтобы извлечь сущности, у которых поле ` <code translate="no">description</code> ` не равно `null`:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> не является нулевым, а поле <code translate="no">price</code> больше 10:</p>
+<p>Чтобы получить сущности, у которых поле <code translate="no">description</code> не равно null, а значение поля <code translate="no">price</code> превышает 10:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Поля JSON с нулевыми значениями<button data-href="#JSON-Fields-with-Null-Values" class="anchor-icon" translate="no">
+<h3 id="JSON-fields-with-null-values" class="common-anchor-header">Поля JSON с нулевыми значениями<button data-href="#JSON-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -532,15 +536,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus позволяет фильтровать поля JSON, содержащие нулевые значения. Поле JSON считается нулевым в следующих случаях:</p>
+    </button></h3><p>Milvus позволяет фильтровать по полям JSON, содержащим нулевые значения. Поле JSON считается нулевым в следующих случаях:</p>
 <ul>
-<li><p>Весь объект JSON явно имеет значение None (null), например, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
-<li><p>Само JSON-поле полностью отсутствует в сущности.</p></li>
+<li><p>Весь объект JSON явно установлен в None (null), например, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
+<li><p>Само поле JSON полностью отсутствует в сущности.</p></li>
 </ul>
 <div class="alert note">
-<p>Если некоторые элементы в JSON-объекте являются нулевыми (например, отдельные ключи), поле все равно считается ненулевым. Например, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> не рассматривается как null, даже если ключ <code translate="no">category</code> является null.</p>
+<p>Если некоторые элементы внутри объекта JSON имеют значение null (например, отдельные ключи), поле по-прежнему считается не null. Например, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> не рассматривается как null, даже если ключ <code translate="no">category</code> имеет значение null.</p>
 </div>
-<p>Чтобы проиллюстрировать, как Milvus обрабатывает поля JSON с нулевыми значениями, рассмотрим следующий пример данных с полем JSON <code translate="no">metadata</code>:</p>
+<p>Чтобы более наглядно продемонстрировать, как Milvus обрабатывает поля JSON с нулевыми значениями, рассмотрим следующие примерные данные с полем JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -563,8 +567,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Пример 1: Получение сущностей, метаданные которых равны null</strong></p>
-<p>Чтобы найти сущности, в которых поле <code translate="no">metadata</code> либо отсутствует, либо явно установлено значение None:</p>
+<p><strong>Пример 1: Поиск сущностей, у которых метаданные равны null</strong></p>
+<p>Чтобы найти сущности, у которых поле <code translate="no">metadata</code> либо отсутствует, либо явно установлено в None:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -573,8 +577,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Пример 2: Получить сущности, метаданные которых не равны null</strong></p>
-<p>Чтобы найти сущности, в которых поле <code translate="no">metadata</code> не является нулевым:</p>
+<p><strong>Пример 2: Поиск сущностей, у которых метаданные не равны null</strong></p>
+<p>Чтобы найти сущности, у которых поле ` <code translate="no">metadata</code> ` не равно `null`:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -583,7 +587,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Поля ARRAY с нулевыми значениями<button data-href="#ARRAY-Fields-with-Null-Values" class="anchor-icon" translate="no">
+<h3 id="ARRAY-fields-with-null-values" class="common-anchor-header">Поля ARRAY с нулевыми значениями<button data-href="#ARRAY-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -598,15 +602,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus позволяет фильтровать поля ARRAY, содержащие нулевые значения. Поле ARRAY считается нулевым в следующих случаях:</p>
+    </button></h3><p>Milvus позволяет фильтровать по полям типа ARRAY, содержащим нулевые значения. Поле типа ARRAY рассматривается как имеющее значение null в следующих случаях:</p>
 <ul>
-<li><p>Для всего поля ARRAY явно установлено значение None (null), например, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
+<li><p>Весь ARRAY-поле явно установлено в None (null), например, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
 <li><p>Поле ARRAY полностью отсутствует в сущности.</p></li>
 </ul>
 <div class="alert note">
-<p>Поле ARRAY не может содержать частичные нулевые значения, так как все элементы в поле ARRAY должны иметь одинаковый тип данных. Подробнее см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+<p>Поле ARRAY не может содержать частичные нулевые значения, так как все элементы в поле ARRAY должны иметь одинаковый тип данных. Подробности см. в разделе <a href="/docs/ru/array_data_type.md">«Поле массива</a>».</p>
 </div>
-<p>Чтобы проиллюстрировать, как Milvus обрабатывает поля ARRAY с нулевыми значениями, рассмотрим следующий пример данных с полем ARRAY <code translate="no">tags</code>:</p>
+<p>Чтобы более наглядно продемонстрировать, как Milvus обрабатывает поля ARRAY с нулевыми значениями, рассмотрим следующие примерные данные с полем ARRAY <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
@@ -627,8 +631,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Пример 1: Получение сущностей, для которых значение tags равно null</strong></p>
-<p>Чтобы получить сущности, в которых поле <code translate="no">tags</code> либо отсутствует, либо явно установлено в <code translate="no">None</code>:</p>
+<p><strong>Пример 1: Поиск сущностей, в которых поле tags имеет значение null</strong></p>
+<p>Чтобы извлечь сущности, в которых поле ` <code translate="no">tags</code> ` либо отсутствует, либо явно установлено в значение ` <code translate="no">None</code>`:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -637,8 +641,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Пример 2: Получение сущностей, в которых поле tags не равно null</strong></p>
-<p>Получение сущностей, в которых поле <code translate="no">tags</code> не является нулевым:</p>
+<p><strong>Пример 2: Поиск сущностей, у которых поле «tags» не равно null</strong></p>
+<p>Чтобы получить сущности, у которых поле ` <code translate="no">tags</code> ` не равно `null`:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -647,7 +651,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Советы по использованию базовых операторов с полями JSON и ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Советы по использованию базовых операторов с полями JSON и ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -663,13 +667,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Хотя базовые операторы в Milvus универсальны и могут применяться к скалярным полям, их также можно эффективно использовать с ключами и индексами в полях JSON и ARRAY.</p>
-<p>Например, если у вас есть поле <code translate="no">product</code>, содержащее несколько ключей, таких как <code translate="no">price</code>, <code translate="no">model</code> и <code translate="no">tags</code>, всегда ссылайтесь непосредственно на ключ:</p>
+<p>Например, если у вас есть поле « <code translate="no">product</code> », содержащее несколько ключей, таких как <code translate="no">price</code>, <code translate="no">model</code> и <code translate="no">tags</code>, всегда указывайте ключ напрямую:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы найти записи, в которых первая температура в массиве записанных температур превышает определенное значение, используйте:</p>
+<p>Чтобы найти записи, в которых первая температура в массиве зарегистрированных значений температуры превышает определённое значение, используйте:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Заключение .<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Заключение<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -684,8 +688,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus предлагает ряд базовых операторов, которые обеспечивают гибкость при фильтрации и запросе данных. Комбинируя операторы сравнения, диапазона, арифметические и логические операторы, вы можете создавать мощные выражения фильтрации для сужения результатов поиска и эффективного извлечения нужных данных.</p>
-<h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus предлагает набор базовых операторов, которые обеспечивают гибкость при фильтрации и запросах данных. Комбинируя операторы сравнения, диапазона, арифметические и логические операторы, вы можете создавать мощные выражения фильтрации для сужения результатов поиска и эффективного извлечения необходимых данных.</p>
+<h2 id="FAQ" class="common-anchor-header">Часто задаваемые вопросы<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -700,5 +704,6 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Существует ли ограничение на длину списка значений в условиях фильтрации (например, filter='color in ['red', 'green', 'blue']')? Что делать, если список слишком длинный?</strong></p>
-<p>Zilliz Cloud не устанавливает ограничения на длину списка значений совпадения в условиях фильтрации. Однако слишком длинный список может существенно повлиять на производительность запроса. Если условие фильтрации включает длинный список значений соответствия или сложное выражение с большим количеством элементов, мы рекомендуем использовать <a href="/docs/ru/filtering-templating.md">шаблонизацию фильтра</a> для повышения производительности запроса.</p>
+    </button></h2><p><strong>Существует ли ограничение на длину списка значений соответствия в условиях фильтрации (например, filter=’color in ["red", "green", “blue”]')? Что делать, если список слишком длинный?</strong></p>
+<p>Zilliz Cloud не устанавливает ограничений на длину списка значений, соответствующих условию, в условиях фильтрации. Однако чрезмерно длинный список может существенно повлиять на производительность запроса.
+Если ваше условие фильтрации включает длинный список значений, соответствующих условию, или сложное выражение со множеством элементов, мы рекомендуем использовать <a href="/docs/ru/filtering-templating.md">шаблоны фильтров</a> для повышения производительности запроса.</p>

@@ -133,7 +133,7 @@ El repositorio de gráficos Helm de Milvus en <code translate="no">https://milvu
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta guía da por hecho que está instalando la última versión. Si necesita instalar una versión específica, especifique el parámetro <code translate="no">--version</code> en consecuencia.</p>
-<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Paso 2: Actualizar a la versión 2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Paso 2: Actualizar a la v2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

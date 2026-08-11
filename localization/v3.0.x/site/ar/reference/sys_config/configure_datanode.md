@@ -2,9 +2,9 @@
 id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
-summary: تعرف على كيفية تكوين DataNode لـ Milvus.
+summary: تعرف على كيفية تكوين dataNode لـ Milvus.
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بعقدة البيانات<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">الإعدادات المتعلقة بـ dataNode<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,7 +72,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد المهام المنفذة بالتوازي في مخطط التدفق      </td>
+      <td>        الحد الأقصى لعدد المهام التي يتم تنفيذها بالتوازي في مخطط التدفق      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -101,7 +101,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد مهام المزامنة المتزامنة لمزامنة عقدة البيانات على مستوى العالم      </td>
+      <td>        الحد الأقصى لعدد مهام المزامنة المتزامنة لمدير مزامنة عقدة البيانات على مستوى النظام بشكل عام      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -130,7 +130,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        دعم تخطي بعض الرسائل الزمنية لتقليل استخدام وحدة المعالجة المركزية      </td>
+      <td>        دعم تخطي بعض رسائل التوقيت لتقليل استخدام وحدة المعالجة المركزية (CPU)      </td>
       <td>صحيح</td>
     </tr>
   </tbody>
@@ -159,7 +159,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        استهلاك واحد لكل n من السجلات التي تم تخطيها      </td>
+      <td>        استهلاك واحد لكل n سجلات تم تخطيها      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -188,7 +188,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        قم بتشغيل وضع التخطي بعد وجود رسائل موقوتة فقط لمدة x ثانية      </td>
+      <td>        تشغيل وضع التخطي بعد وجود رسائل توقيت فقط لمدة x ثانية      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -218,9 +218,9 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   <tbody>
     <tr>
       <td>
-        <li>الحد الأقصى لحجم كل ملف من ملفات Binlog في مقطع مخزن في الذاكرة. يتم بعد ذلك مسح ملفات Binlog التي يتجاوز حجمها هذه القيمة إلى خدمة MinIO أو S3.</li>      
+        <li>الحجم الأقصى لكل ملف سجل ثنائي (binlog) في مقطع مخزن مؤقتًا في الذاكرة. يتم بعد ذلك تفريغ ملفات سجل ثنائي التي يتجاوز حجمها هذه القيمة إلى خدمة MinIO أو S3.</li>      
         <li>الوحدة: بايت</li>      
-        <li>يؤدي تعيين هذه المعلمة صغيرة جداً إلى قيام النظام بتخزين كمية صغيرة جداً من البيانات بشكل متكرر. يؤدي تعيينها كبيرة جداً إلى زيادة طلب النظام على الذاكرة.</li>      </td>
+        <li>يؤدي تعيين قيمة صغيرة جدًا لهذه المعلمة إلى قيام النظام بتخزين كمية صغيرة من البيانات بشكل متكرر للغاية. أما تعيين قيمة كبيرة جدًا لها، فيؤدي إلى زيادة احتياج النظام للذاكرة.</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -249,7 +249,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم المخزن المؤقت بالبايت لمسح ديل لقناة واحدة، القيمة الافتراضية 16 ميغابايت      </td>
+      <td>        الحجم الأقصى للمخزن المؤقت بالبايتات الذي يتم مسحه لقناة واحدة، والقيمة الافتراضية هي 16 ميغابايت      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -278,7 +278,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        فترة مزامنة المقاطع إذا لم يكن المخزن المؤقت فارغاً.      </td>
+      <td>        الفترة الزمنية لمزامنة المقاطع إذا لم يكن المخزن المؤقت فارغًا.      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -307,7 +307,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        تعيين صواب لفرض المزامنة إذا كان استخدام الذاكرة مرتفعًا جدًا      </td>
+      <td>        اضبط القيمة على "صحيح" لفرض المزامنة إذا كان استخدام الذاكرة مرتفعًا جدًا      </td>
       <td>صحيح</td>
     </tr>
   </tbody>
@@ -336,7 +336,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        عدد المقاطع التي ستتم مزامنتها، ستتم مزامنة المقاطع ذات المخزن المؤقت الأكبر.      </td>
+      <td>        عدد المقاطع المراد مزامنتها، وسيتم مزامنة المقاطع ذات المخزن المؤقت الأكبر.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -394,7 +394,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        العلامة المائية للذاكرة المستقلة، عند الوصول إلى هذه العلامة المائية، ستتم مزامنة المقاطع.      </td>
+      <td>        علامة الحد الأدنى للذاكرة في الوضع المستقل، وعند الوصول إلى هذه العلامة، سيتم مزامنة المقاطع.      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -424,9 +424,9 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   <tbody>
     <tr>
       <td>
-        <li>تحديد حجم مجموعة العمل العامة لجميع القنوات</li>      
-        <li>إذا كانت هذه المعلمة &lt;= 0، فسيتم تعيينها كحد أقصى لعدد وحدات المعالجة المركزية التي يمكن تنفيذها</li>      
-        <li>يقترح تعيينه أكبر على أعداد التجميع الكبيرة لتجنب الحجب</li>      </td>
+        <li>تحديد حجم مجموعة العمل الشاملة لجميع القنوات</li>      
+        <li>إذا كانت هذه المعلمة &lt;= 0، فسيتم تعيينها على أنها الحد الأقصى لعدد وحدات المعالجة المركزية (CPUs) التي يمكنها التنفيذ</li>      
+        <li>يُنصح بزيادة هذه القيمة عند وجود عدد كبير من المجموعات لتجنب الحجب</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -456,8 +456,8 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   <tbody>
     <tr>
       <td>
-        <li>تحديد حجم تجمع العمل العام لتحديث نقطة تفتيش القناة</li>      
-        <li>إذا كانت هذه المعلمة &lt;= 0، سيتم تعيينها على أنها 10</li>      </td>
+        <li>تحديد حجم مجموعة العمل العامة لتحديث نقاط فحص القناة</li>      
+        <li>إذا كانت هذه المعلمة &lt;= 0، فسيتم تعيينها على 10</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -486,7 +486,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        مدة الفاصل الزمني (بالثواني) لعقدة البيانات لتحديث نقطة تدقيق القناة لكل قناة      </td>
+      <td>        مدة الفاصل الزمني (بالثواني) الذي تستغرقه عقدة البيانات لتحديث نقطة فحص كل قناة      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -515,7 +515,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        المهلة بالثواني لاستدعاء UpdateChannelCheckpoint RPC لتحديث نقطة تدقيق القناة      </td>
+      <td>        مهلة الانتظار بالثواني لاستدعاء RPC الخاص بـ UpdateChannelCheckpoint      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -544,7 +544,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد نقاط تفتيش القناة لكل استدعاء UpdateChannelCheckpoint RPC.      </td>
+      <td>        الحد الأقصى لعدد نقاط فحص القناة لكل استدعاء RPC لـ UpdateChannelCheckpoint.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -573,7 +573,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        التردد، بالثواني، الذي يقوم فيه محدث نقطة تدقيق القناة بتنفيذ التحديثات.      </td>
+      <td>        الوتيرة، بالثواني، التي يقوم بها مُحدّث نقاط تفتيش القناة بتنفيذ التحديثات.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -602,7 +602,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد مهام الاستيراد/ما قبل الاستيراد المسموح بتشغيلها بشكل متزامن على عقدة بيانات.      </td>
+      <td>        الحد الأقصى لعدد مهام الاستيراد/ما قبل الاستيراد المسموح بتشغيلها في وقت واحد على عقدة البيانات.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -631,7 +631,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم الملف (بالجيجابايت) لملف الاستيراد، حيث يشير ملف الاستيراد إما إلى ملف يستند إلى الصفوف أو مجموعة من الملفات المستندة إلى الأعمدة.      </td>
+      <td>        الحد الأقصى لحجم ملف الاستيراد (بالجيجابايت)، حيث يشير ملف الاستيراد إما إلى ملف قائم على الصفوف أو مجموعة من الملفات القائمة على الأعمدة.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -660,7 +660,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        حجم كتلة البيانات (بالميغابايت) الذي تتم قراءته من مدير القطع بواسطة عقدة البيانات أثناء الاستيراد.      </td>
+      <td>        حجم كتلة البيانات (بالميغابايت) التي يقرأها عقدة البيانات من مدير الأجزاء أثناء الاستيراد.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -718,7 +718,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأدنى لنسبة الذاكرة الخالية للمستوى صفر من الذاكرة الحرة للضغط من المستوى صفر الذي يتم تنفيذه في الوضع الدفعي      </td>
+      <td>        الحد الأدنى لنسبة الذاكرة الحرة لضغط المستوى صفر الذي يتم تنفيذه في الوضع الدفعي      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -747,7 +747,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        يشير الحد الأقصى لحجم الدُفعة إلى الحد الأقصى لعدد المقاطع L1/L2 في الدُفعة عند تنفيذ ضغط المستوى L0. افتراضي إلى -1 ، أي قيمة أقل من 1 تعني عدم وجود حد. نطاق صالح: &gt;= 1.  </td>
+      <td>        يشير الحد الأقصى لحجم الدفعة إلى الحد الأقصى لعدد شرائح L1/L2 في الدفعة عند تنفيذ ضغط المستوى صفر. القيمة الافتراضية هي -1، وأي قيمة أقل من 1 تعني عدم وجود حد. النطاق الصالح: &gt;= 1.      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -776,8 +776,8 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ما إذا كان يجب تمكين وضع الدمج والفرز عند تنفيذ عملية الدمج.      </td>
-      <td>خطأ</td>
+      <td>        ما إذا كان سيتم تمكين وضع mergeSort عند إجراء عملية mixCompaction.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -805,8 +805,37 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد المقاطع المراد دمجها في وضع الدمج والفرز.      </td>
+      <td>        الحد الأقصى لعدد المقاطع المراد دمجها في وضع mergeSort.      </td>
       <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionlobHoleRatioThreshold" class="common-anchor-header"><code translate="no">dataNode.compaction.lobHoleRatioThreshold</code><button data-href="#dataNodecompactionlobHoleRatioThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.lobHoleRatioThreshold">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الحد الأدنى لنسبة المساحة غير المستخدمة في ملفات LOB الحالية لحقول TEXT. أثناء عملية الضغط، إذا كانت هذه النسبة أقل من الحد الأدنى، فإن Milvus يعيد استخدام ملفات LOB الحالية. إذا كانت هذه النسبة أكبر من أو تساوي الحد الأدنى، فإن Milvus يعيد كتابة حمولات LOB المتبقية في ملفات LOB جديدة لاستعادة المساحة.      </td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -834,7 +863,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ثانية. فرض إيقاف العقدة بدون توقف رشيق      </td>
+      <td>        ثوانٍ. إيقاف العقدة قسريًّا دون إيقاف تدريجي      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -892,7 +921,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        نسبة المخزن المؤقت لذاكرة ضغط التجميع. سيتم مسح البيانات الأكبر من العتبة إلى التخزين.      </td>
+      <td>        نسبة مخزن الذاكرة المؤقت لضغط التجميع. سيتم تفريغ البيانات التي تتجاوز الحد إلى وحدة التخزين.      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -921,7 +950,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        حجم تجمع العاملين لمهمة ضغط تجميع واحدة.      </td>
+      <td>        حجم مجموعة العمال لمهمة ضغط التجميع الواحدة.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -950,7 +979,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        العامل المتوازي عند تطبيق pk على مرشح التجميع، افتراضي إلى 4*CPU_CORE_NUM      </td>
+      <td>        معامل التوازي عند تطبيق مفتاح أساسي (pk) على مرشح بلوم، والقيمة الافتراضية هي 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -979,8 +1008,95 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        تنسيق دلتالوج، خيارات: [json، باركيه]      </td>
+      <td>        تنسيق سجل التغييرات، الخيارات: [json، parquet]      </td>
       <td>json</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextinlineThreshold" class="common-anchor-header"><code translate="no">dataNode.text.inlineThreshold</code><button data-href="#dataNodetextinlineThreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.inlineThreshold">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        حد الحجم، بالبايت، المستخدم لاختيار مسار التخزين لقيمة حقل TEXT. يتم تخزين القيم الأصغر من هذا الحد بشكل مضمن في بيانات الحقل. يتم تخزين القيم الأكبر من هذا الحد أو المساوية له بشكل منفصل كحمولات LOB، ويخزن حقل البيانات مرجعًا داخليًا.      </td>
+      <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextmaxLobFileBytes" class="common-anchor-header"><code translate="no">dataNode.text.maxLobFileBytes</code><button data-href="#dataNodetextmaxLobFileBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.maxLobFileBytes">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الحجم الأقصى، بالبايت، لملف LOB واحد يخزن حمولات TEXT. عندما يصل ملف LOB إلى هذا الحجم، يقوم Milvus بكتابة حمولات TEXT LOB اللاحقة إلى ملف LOB آخر.      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodetextflushThresholdBytes" class="common-anchor-header"><code translate="no">dataNode.text.flushThresholdBytes</code><button data-href="#dataNodetextflushThresholdBytes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.text.flushThresholdBytes">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        عتبة حجم المخزن المؤقت، بالبايت، التي تدفع Milvus إلى تفريغ حمولات TEXT LOB المخزنة مؤقتًا من مقطع متزايد إلى التخزين.      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>
@@ -1008,7 +1124,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        عنوان TCP/IP لعقدة البيانات. إذا لم يتم تحديده، استخدم أول عنوان أحادي الإرسال      </td>
+      <td>        عنوان TCP/IP الخاص بـ dataNode. إذا لم يتم تحديده، فاستخدم أول عنوان قابل للإرسال أحادي      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1037,7 +1153,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        منفذ TCP لعقدة البيانات      </td>
+      <td>        منفذ TCP الخاص بـ dataNode      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1066,7 +1182,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم كل طلب RPC الذي يمكن أن ترسله DataNode، الوحدة: بايت      </td>
+      <td>        الحجم الأقصى لكل طلب RPC الذي يمكن لـ dataNode إرساله، الوحدة: بايت      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1095,7 +1211,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء أمر توجيه طلب (RPC) يمكن لعقدة البيانات تلقيه، الوحدة: بايت      </td>
+      <td>        الحجم الأقصى لكل طلب RPC الذي يمكن لـ dataNode استلامه، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1124,7 +1240,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم كل طلب RPC الذي يمكن للعملاء على dataNode إرساله، الوحدة: بايت      </td>
+      <td>        الحجم الأقصى لكل طلب RPC يمكن للعملاء على dataNode إرساله، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1153,7 +1269,7 @@ summary: تعرف على كيفية تكوين DataNode لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء أوامر الشراء (RPC) الذي يمكن للعملاء على dataNode تلقيه، الوحدة: بايت      </td>
+      <td>        الحجم الأقصى لكل طلب RPC الذي يمكن للعملاء على dataNode استلامه، الوحدة: بايت      </td>
       <td>536870912</td>
     </tr>
   </tbody>

@@ -36,7 +36,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus는 <code translate="no">yc</code> 제공자를 통해 Yandex Cloud AI Studio 텍스트 벡터화 모델을 지원합니다. 함수 매개변수에서 ` <code translate="no">model_name</code> `를 Milvus가 호출해야 할 Yandex Cloud 모델 URI로 설정하십시오.</p>
-<p>예를 들어, 문서를 위한 Yandex 텍스트 임베딩은 <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> 와 같은 모델 URI를 사용하며 256차원 벡터를 반환합니다. 사용 가능한 모델 URI 및 차원에 대해서는 <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">‘텍스트 벡터화 모델’을</a> 참조하십시오.</p>
+<p>예를 들어, 문서를 위한 Yandex 텍스트 임베딩은 <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> 과 같은 모델 URI를 사용하며 256차원 벡터를 반환합니다. 사용 가능한 모델 URI 및 차원에 대해서는 <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">‘텍스트 벡터화 모델’을</a> 참조하십시오.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">인증 정보 구성<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

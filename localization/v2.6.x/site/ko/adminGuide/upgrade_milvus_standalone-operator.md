@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Milvus Operator를 사용하여 Milvus 독립 실행형 버전을 업그레이드하는 방법을 알아보세요.
+summary: Milvus Operator를 사용하여 Milvus 독립형 버전을 업그레이드하는 방법을 알아보세요.
 title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
 ---
 <div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
@@ -86,9 +86,9 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
 <ul>
 <li>Milvus v2.6.0-rc1은 v2.6.17과 <strong>호환되지 않습니다</strong>. 릴리스 후보(RC) 버전에서 직접 업그레이드하는 것은 지원되지 않습니다.</li>
 <li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우, 마이그레이션 지원을 위해 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드를</a> 참조하십시오.</li>
-<li>v2.6.17로 업그레이드하기 전에 <strong>반드시</strong> v2.5.16 이상으로 먼저 업그레이드해야 <strong>합니다</strong>.</li>
+<li>v2.6.17로 업그레이드하기 전에 <strong>반드시</strong> v2.5.16 이상으로 업그레이드해야 <strong>합니다</strong>.</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

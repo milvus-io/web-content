@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Используйте группировку, если поиск на уровне элементов без группировки возвращает слишком много дубликатов родительских сущностей. Если вы хотите, чтобы каждый совпадающий элемент Struct рассматривался как отдельный результат, используйте <a href="/docs/ru/basic-vector-search-with-structarray.md">базовый векторный поиск с StructArray</a> без параметра ` <code translate="no">group_by_field</code>`.</p>
+<p>Используйте группировку, если поиск на уровне элементов без группировки возвращает слишком много дубликатов родительских сущностей. Если вы хотите, чтобы каждый соответствующий элемент Struct рассматривался как отдельное совпадение, используйте <a href="/docs/ru/basic-vector-search-with-structarray.md">базовый векторный поиск с StructArray</a> без параметра ` <code translate="no">group_by_field</code>`.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK предоставляют эту информацию.</p>
+<p>Без группировки один и тот же <code translate="no">doc_id</code> может появиться несколько раз, если запросу соответствуют несколько фрагментов. При использовании <code translate="no">group_by_field=&quot;doc_id&quot;</code> каждая родительская сущность появляется не более одного раза. Группировка сохраняет метаданные на уровне элементов, поэтому сгруппированный результат по-прежнему может включать выбранный индекс или смещение элемента Struct, если API или SDK его предоставляют.</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">Добавление скалярных фильтров<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Предикат верхнего уровня выбирает кандидатов-сущностей. Предикат <code translate="no">element_filter</code> ограничивает векторный поиск на уровне элементов только соответствующими элементами Struct. Затем группировка сворачивает совпадающие элементы по первичному ключу.</p>
+<p>Предикат верхнего уровня выбирает кандидатов-сущностей. Предикат ` <code translate="no">element_filter</code> ` ограничивает векторный поиск на уровне элементов только соответствующими элементами Struct. Затем группировка сворачивает совпадающие элементы по первичному ключу.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Использование группировки в гибридном поиске<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Гибридная группировка с StructArray является функцией на уровне элементов. Она поддерживается только в том случае, если все подпоиски нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray. Не используйте запросы на уровне EmbeddingList в гибридном поиске по StructArray с группировкой.</p>
+    </button></h2><p>Гибридная группировка с StructArray является функцией на уровне элементов. Она поддерживается только в том случае, если все подискания нацелены на векторные поля на уровне элементов в рамках одного и того же поля StructArray. Не используйте запросы на уровне EmbeddingList в гибридном поиске по StructArray с группировкой.</p>
 <p>В следующем примере предполагается, что поле StructArray « <code translate="no">chunks</code> » имеет два подполя векторного типа на уровне элементов: « <code translate="no">chunks[emb]</code> » и « <code translate="no">chunks[code_emb]</code> », и оба индексируются с помощью обычных векторных метрик.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
@@ -244,7 +244,7 @@ results = client.hybrid_search(
 <tbody>
 <tr><td><code translate="no">id</code></td><td>Первичный ключ сгруппированной родительской сущности.</td></tr>
 <tr><td><code translate="no">distance</code> или оценка</td><td>Оценка или расстояние выбранного элемента Struct для данной родительской сущности.</td></tr>
-<tr><td><code translate="no">offset</code></td><td>Позиция выбранного элемента Struct с нулевым индексом при возвращении.</td></tr>
+<tr><td><code translate="no">offset</code></td><td>Позиция выбранного элемента Struct с нулевой базой при возвращении.</td></tr>
 <tr><td>Повторяющиеся первичные ключи</td><td>Не ожидаются при группировке по первичному ключу.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>Применимо к сгруппированным результатам родительских сущностей.</td></tr>
 </tbody>

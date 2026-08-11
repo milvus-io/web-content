@@ -3,7 +3,7 @@ id: thai-analyzer.md
 title: ТайскийCompatible with Milvus 3.0.0+
 summary: >-
   Встроенный анализатор тайского языка разбивает текст на слова, нормализует
-  десятичные цифры в формате Unicode и удаляет тайские стоп-слова.
+  десятичные цифры в кодировке Unicode и удаляет тайские стоп-слова.
 beta: Milvus 3.0.0+
 ---
 <h1 id="Thai" class="common-anchor-header">Тайский<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Thai" class="anchor-icon" translate="no">

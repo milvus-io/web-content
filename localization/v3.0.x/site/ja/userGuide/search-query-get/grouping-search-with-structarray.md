@@ -2,7 +2,7 @@
 id: grouping-search-with-structarray.md
 title: StructArray を使用した検索結果のグループ化
 summary: >-
-  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられるため、各親エンティティは最大1回だけ表示されます。
+  このページを使用すると、StructArrayの要素レベルの検索結果を親エンティティごとにグループ化できます。要素レベルの検索では、複数のStruct要素がクエリに一致する場合、同じエンティティから複数の検索結果が返されることがあります。グループ化を行うと、これらの要素の検索結果がまとめられ、各親エンティティが最大1回だけ表示されるようになります。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">StructArray を使用した検索結果のグループ化<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>グループ化されていない要素レベルの検索で重複する親エンティティが多数返される場合は、グループ化を使用してください。一致するすべての Struct 要素を個別のヒットとして取得したい場合は、<code translate="no">group_by_field</code> を使用せずに、<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本ベクトル検索</a>を使用してください。</p>
+<p>グループ化されていない要素レベルの検索で重複する親エンティティが多数返される場合は、グループ化を使用してください。一致するすべての Struct 要素を個別のヒットとして取得したい場合は、<code translate="no">group_by_field</code> を使用せずに<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本ベクトル検索</a>を使用してください。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"

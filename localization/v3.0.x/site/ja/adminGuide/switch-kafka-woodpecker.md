@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、<strong>Milvusクラスタの</strong>メッセージキュー（MQ）を、<strong>Kafka</strong>（組み込みまたは外部）<strong>とWoodpecker</strong>（MinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「MQタイプの切り替え</a>」を参照してください。</p>
+    </button></h1><p>このページでは、<strong>Milvusクラスタの</strong>メッセージキュー（MQ）を、<strong>Kafka</strong>（組み込みまたは外部）<strong>とWoodpecker</strong>（MinIOバックエンド）の間で双方向に切り替える方法について説明します。一般的なワークフローと前提条件については、<a href="/docs/ja/switch-mq-type.md">「メッセージキューの切り替え」</a>を参照してください。</p>
 <div class="alert note">
-<p><strong>前提条件：</strong>MQ切り替え機能は<strong>、Milvus 3.0以降で</strong>利用可能です。作業を開始する前に、MilvusインスタンスをMilvus 3.0以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
+<p><strong>前提条件:</strong>「メッセージキューの切り替え」機能は<strong>、Milvus 3.0 以降で</strong>利用可能です。作業を開始する前に、Milvus インスタンスを Milvus 3.0 以降にアップグレードしてください。以前のバージョンではこの機能は利用できません。</p>
 </div>
 <div class="alert warning">
-<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させないでください。</p>
+<p>メッセージキューの切り替えは、<strong>リスクの高い操作</strong>です。<strong>ご自身の</strong>デプロイ方法（<strong>Helm を使用する場合</strong>、または<strong>Milvus Operator を使用する場合</strong>）に該当するセクションを選択し、その手順を最初から最後まで順を追って実行してください。Helm コマンドと Operator コマンドを混在させて使用しないでください。</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Helm を使用する場合<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p><strong>ステップ 1: Milvus インスタンスが実行中であることを確認します。</strong></p>
-<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>この切り替えには、Milvus がすでに Kafka 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
+<p><strong>ステップ 2: 対象の Kafka 接続を設定し、Milvus を再起動します。</strong>切り替えを行うには、Milvus がすでに Kafka 接続を認識している必要があるため、<code translate="no">extraConfigFiles</code> を使用して<code translate="no">user.yaml</code> に書き込み、<code translate="no">helm upgrade</code> で適用します（これによりポッドが再起動されます）。Switch MQ 機能には、<code translate="no">streaming.enabled=true</code> が必要です。SASL/SSL の詳細については、<a href="/docs/ja/connect_kafka_ssl.md">「SASL/SSL を使用した Kafka への接続」を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -108,7 +108,7 @@ summary: >-
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>すべてのポッドの準備が整うまで待機し、Kafka へのアクセス設定が Milvus の設定に反映されていることを確認してください。</p>
+<p>すべてのポッドの準備が整うまで待機し、Kafkaへのアクセス設定がMilvusの設定に反映されていることを確認してください。</p>
 <p><strong>ステップ 3: MQ 切り替えを実行します。</strong></p>
 <div class="alert note">
 <p>対象のKafkaに、以前の設定からのMilvusトピックが含まれていないことを確認してください。今回がKafkaへの初めての切り替えである場合は、この注意事項をスキップしてください。そうでない場合は、まず同じ名前の残存するMilvusトピックをクリーンアップしてください。</p>

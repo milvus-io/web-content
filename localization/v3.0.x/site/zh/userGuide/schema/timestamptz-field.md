@@ -1,12 +1,12 @@
 ---
 id: timestamptz-field.md
-title: TIMESTAMPTZ 领域Compatible with Milvus 2.6.6+
+title: TIMESTAMPTZ 字段Compatible with Milvus 2.6.6+
 summary: >-
-  跨区域时间跟踪应用程序，如电子商务系统、协作工具或分布式日志记录，需要精确处理带有时区的时间戳。Milvus 的 TIMESTAMPTZ
-  数据类型通过存储带有相关时区的时间戳，提供了这种功能。
+  跨区域进行时间追踪的应用程序（例如电子商务系统、协作工具或分布式日志系统）需要精确处理包含时区信息的时间戳。Milvus 中的 TIMESTAMPTZ
+  数据类型通过将时间戳与其关联的时区一同存储，提供了这一功能。
 beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ 领域<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ 字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>跨地区跟踪时间的应用程序（如电子商务系统、协作工具或分布式日志记录）需要精确处理带有时区的时间戳。Milvus 的<code translate="no">TIMESTAMPTZ</code> 数据类型通过存储带有相关时区的时间戳提供了这种功能。</p>
+    </button></h1><p>跨区域追踪时间的应用程序（例如电子商务系统、协作工具或分布式日志系统）需要精确处理包含时区的 timestamp。Milvus 中的<code translate="no">TIMESTAMPTZ</code> 数据类型通过将 timestamp 与其关联的时区一同存储，提供了这一功能。</p>
 <h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">什么是 TIMESTAMPTZ 字段？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,20 +37,20 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 字段是 Milvus 中一种 Schema 定义的数据类型 (<code translate="no">DataType.TIMESTAMPTZ</code>)，可处理时区感知输入，并在内部将所有时间点存储为 UTC 绝对时间：</p>
+    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 字段是 Milvus 中一种由 Schema 定义的数据类型（<code translate="no">DataType.TIMESTAMPTZ</code> ），它能够处理包含时区信息的输入，并在内部将所有时间点存储为 UTC 绝对时间：</p>
 <ul>
-<li><p><strong>接受的输入格式</strong>：带有时区偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字符串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 表示 2025 年 5 月 1 日晚上 11:59:59（UTC+08:00））。</p></li>
-<li><p><strong>内部存储</strong>：所有<code translate="no">TIMESTAMPTZ</code> 值均以<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">协调世界时</a>(UTC) 标准化和存储。</p></li>
-<li><p><strong>比较和筛选</strong>：所有过滤和排序操作均以 UTC 进行，确保不同时区的结果一致且可预测。</p></li>
+<li><p><strong>支持的输入格式</strong>：包含时区偏移量的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字符串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 表示 2025 年 5 月 1 日晚上 11:59:59（UTC+08:00））。</p></li>
+<li><p><strong>内部存储</strong>：所有<code translate="no">TIMESTAMPTZ</code> 值均经过标准化处理，并以<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">协调世界时</a>（UTC）存储。</p></li>
+<li><p><strong>比较与筛选</strong>：所有筛选和排序操作均以 UTC 为基准进行，确保在不同时区下结果的一致性和可预测性。</p></li>
 </ul>
 <div class="alert note">
 <ul>
 <li><p>您可以为<code translate="no">TIMESTAMPTZ</code> 字段设置<code translate="no">nullable=True</code> ，以允许缺失值。</p></li>
-<li><p>您可以使用<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>格式的<code translate="no">default_value</code> 属性指定默认时间戳值。</p></li>
+<li><p>您可以使用<code translate="no">default_value</code> 属性<a href="https://en.wikipedia.org/wiki/ISO_8601">以ISO 8601</a>格式指定默认时间戳值。</p></li>
 </ul>
-<p>有关详情，请参阅 "<a href="/docs/zh/nullable-and-default.md">可空值和默认值</a>"。</p>
+<p>详情请参阅<a href="/docs/zh/nullable-and-default.md">“可为空与默认值</a>”。</p>
 </div>
-<h2 id="Basic-operations" class="common-anchor-header">基本操作符<button data-href="#Basic-operations" class="anchor-icon" translate="no">
+<h2 id="Basic-operations" class="common-anchor-header">基本操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用<code translate="no">TIMESTAMPTZ</code> 字段的基本工作流程与 Milvus 中的其他标量字段如出一辙：定义字段 → 插入数据 → 查询/过滤。</p>
+    </button></h2><p>使用<code translate="no">TIMESTAMPTZ</code> 字段的基本工作流与Milvus中的其他标量字段类似：定义字段 → 插入数据 → 查询/过滤。</p>
 <h3 id="Step-1-Define-a-TIMESTAMPTZ-field" class="common-anchor-header">步骤 1：定义 TIMESTAMPTZ 字段<button data-href="#Step-1-Define-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,9 +81,14 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要使用<code translate="no">TIMESTAMPTZ</code> 字段，请在创建 Collections 时在 Collections Schema 中明确定义该字段。下面的示例演示了如何创建一个带有<code translate="no">tsz</code> 类型字段<code translate="no">DataType.TIMESTAMPTZ</code> 的 Collections。</p>
+    </button></h3><p>要使用<code translate="no">TIMESTAMPTZ</code> 字段，请在创建Collection时在Schema中显式定义该字段。以下示例演示了如何创建一个包含类型为<code translate="no">DataType.TIMESTAMPTZ</code> 的<code translate="no">tsz</code> 字段的Collection。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> datetime
@@ -116,7 +121,7 @@ client.create_collection(collection_name, schema=schema, consistency_level=<span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Insert-data" class="common-anchor-header">第 2 步：插入数据<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
+<h3 id="Step-2-Insert-data" class="common-anchor-header">步骤 2：插入数据<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,15 +136,20 @@ client.create_collection(collection_name, schema=schema, consistency_level=<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>插入包含时区偏移的 ISO 8601 字符串的实体。</p>
-<p>下面的示例向 Collection 中插入了 8,193 行样本数据。每一行包括</p>
+    </button></h3><p>插入包含带有时区偏移量的 ISO 8601 字符串的实体。</p>
+<p>下面的示例将 8,193 行示例数据插入到 Collection 中。每行包含：</p>
 <ul>
 <li><p>一个唯一 ID</p></li>
-<li><p>时区感知时间戳（上海时间）</p></li>
+<li><p>一个考虑时区的时间戳（上海时间）</p></li>
 <li><p>一个简单的 4 维向量</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data_size = <span class="hljs-number">8193</span>
 
 <span class="hljs-comment"># Get the Asia/Shanghai time zone using the pytz library</span>
@@ -174,7 +184,7 @@ client.insert(collection_name, data)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Filtering-operations" class="common-anchor-header">步骤 3：过滤操作符<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
+<h3 id="Step-3-Filtering-operations" class="common-anchor-header">步骤 3：筛选操作<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,16 +199,21 @@ client.insert(collection_name, data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">TIMESTAMPTZ</code> 在对  字段执行过滤操作之前，您必须确保该字段是唯一的，并支持标量比较、区间运算和时间成分提取。</p>
-<p>在对<code translate="no">TIMESTAMPTZ</code> 字段执行过滤操作之前，请确保</p>
+    </button></h3><p><code translate="no">TIMESTAMPTZ</code> 支持标量比较、区间运算以及时间分量的提取。</p>
+<p>在对<code translate="no">TIMESTAMPTZ</code> 字段执行筛选操作之前，请确保：</p>
 <ul>
-<li><p>已在每个向量字段上创建索引。</p></li>
-<li><p>已将 Collections 载入内存。</p></li>
+<li><p>已在每个向量字段上创建了索引。</p></li>
+<li><p>Collection已加载到内存中。</p></li>
 </ul>
 <p><details></p>
 <p><summary>显示示例代码</summary></p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index on vector field</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -223,10 +238,15 @@ client.load_collection(collection_name)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">使用时间戳过滤进行查询</h4><p>使用算术操作符，如<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;=</code> 。有关 Milvus 可用算术操作符的完整列表，请参阅<a href="/docs/zh/basic-operators.md#Arithmetic-Operators">算术操作符</a>。</p>
-<p>下面的示例过滤了时间戳 (<code translate="no">tsz</code>) 不等于<strong>2025-01-03T00:00:00+08:00</strong> 的实体：</p>
+<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">带时间戳过滤的查询</h4><p>使用算术运算符，例如<code translate="no">==</code> 、<code translate="no">!=</code> 、<code translate="no">&lt;</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;=</code> 、<code translate="no">&gt;=</code> 。有关 Milvus 中可用算术运算符的完整列表，请参阅《<a href="/docs/zh/basic-operators.md#Arithmetic-operators">算术运算符》</a>。</p>
+<p>下面的示例筛选了时间戳（<code translate="no">tsz</code> ）不等于<strong>2025-01-03T00:00:00+08:00</strong> 的实体：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
 <span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
@@ -250,16 +270,21 @@ results = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的示例中</p>
+<p>在上例中，</p>
 <ul>
 <li><p><code translate="no">tsz</code> 是 Schema 中定义的<code translate="no">TIMESTAMPTZ</code> 字段名。</p></li>
-<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 是<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>格式的时间戳文字，包括时区偏移。</p></li>
-<li><p><code translate="no">!=</code> 将字段值与字面值进行比较。其他支持的操作符包括<code translate="no">==</code>,<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code> 和<code translate="no">&gt;=</code> 。</p></li>
+<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 是一个符合<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>格式的时戳字面量，其中包含时区偏移量。</p></li>
+<li><p><code translate="no">!=</code> 将字段值与该字面量进行比较。其他支持的操作符包括<code translate="no">==</code> 、<code translate="no">&lt;</code> 、<code translate="no">&lt;=</code> 、<code translate="no">&gt;</code> 和<code translate="no">&gt;=</code> 。</p></li>
 </ul>
-<h4 id="Interval-operations" class="common-anchor-header">间隔操作符</h4><p>您可以使用<a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 时长格式</a>中的<strong>INTERVAL</strong>值对<code translate="no">TIMESTAMPTZ</code> 字段进行运算。这样，在筛选数据时，就可以从时间戳中添加或减去持续时间，如天、小时或分钟。</p>
-<p>例如，下面的查询可过滤时间戳 (<code translate="no">tsz</code>) 加上零天<strong>不等于</strong> <strong>2025-01-03T00:00:00+08:00</strong> 的实体：</p>
+<h4 id="Interval-operations" class="common-anchor-header">间隔运算</h4><p>您可以使用符合<a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 时长格式的</a> <strong>INTERVAL</strong>值，对<code translate="no">TIMESTAMPTZ</code> 字段进行算术运算。这使您在过滤数据时，能够对时间戳进行时长（如天、小时或分钟）的加减运算。</p>
+<p>例如，以下查询将筛选出时间戳（<code translate="no">tsz</code> ）加上零天<strong>后不等于</strong> <strong>2025-01-03T00:00:00+08:00</strong> 的实体：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz + INTERVAL &#x27;P0D&#x27; != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
@@ -283,21 +308,26 @@ results = client.query(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">INTERVAL</code> 值遵循<a href="https://www.w3.org/TR/xmlschema-2/#duration">ISO 8601 时长语法</a>。例如</p>
+<p><code translate="no">INTERVAL</code> 值遵循<a href="https://www.w3.org/TR/xmlschema-2/#duration">ISO 8601 时长语法</a>。例如：</p>
 <ul>
 <li><p><code translate="no">P1D</code> → 1 天</p></li>
 <li><p><code translate="no">PT3H</code> → 3 小时</p></li>
 <li><p><code translate="no">P2DT6H</code> → 2 天 6 小时</p></li>
 </ul>
-<p>您可以在筛选表达式中直接使用<code translate="no">INTERVAL</code> 算法，例如</p>
+<p>您可以在过滤表达式中直接使用<code translate="no">INTERVAL</code> 的运算，例如：</p>
 <ul>
-<li><p><code translate="no">tsz + INTERVAL 'P3D'</code> → 增加 3 天</p></li>
+<li><p><code translate="no">tsz + INTERVAL 'P3D'</code> → 加 3 天</p></li>
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → 减去 2 小时</p></li>
 </ul>
 </div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">使用时间戳过滤进行搜索</h4><p>您可以将<code translate="no">TIMESTAMPTZ</code> 过滤与向量相似性搜索结合起来，通过时间和相似性来缩小搜索结果的范围。</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">使用时间戳筛选进行搜索</h4><p>您可以将<code translate="no">TIMESTAMPTZ</code> 筛选与向量相似度搜索结合使用，从而同时根据时间和相似度来缩小搜索结果范围。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;tsz &gt; ISO &#x27;2025-01-05T00:00:00+08:00&#x27;&quot;</span>
 
@@ -323,7 +353,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您的 Collections 有两个或更多向量字段，您可以使用时间戳过滤执行混合搜索操作符。有关详情，请参阅<a href="/docs/zh/multi-vector-search.md">多向量混合搜索</a>。</p>
+<p>如果您的Collection包含两个或多个向量字段，您可以结合时间戳过滤功能执行混合搜索操作。详情请参阅《<a href="/docs/zh/multi-vector-search.md">多向量混合搜索</a>》。</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">高级用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,8 +370,8 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于高级用法，您可以在不同级别（如数据库、Collection 或查询）管理时区，或使用索引加速对<code translate="no">TIMESTAMPTZ</code> 字段的查询。</p>
-<h3 id="Manage-time-zones-at-different-levels" class="common-anchor-header">管理不同级别的时区<button data-href="#Manage-time-zones-at-different-levels" class="anchor-icon" translate="no">
+    </button></h2><p>在高级用法中，您可以在不同级别（例如数据库、Collection或查询）管理时区，或通过索引加速对<code translate="no">TIMESTAMPTZ</code> 字段的查询。</p>
+<h3 id="Manage-time-zones-at-different-levels" class="common-anchor-header">在不同级别管理时区<button data-href="#Manage-time-zones-at-different-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -356,12 +386,12 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以在<strong>数据库</strong>、<strong>Collection</strong> 或<strong>查询/搜索</strong>级别控制<code translate="no">TIMESTAMPTZ</code> 字段的时区。</p>
+    </button></h3><p>您可以在<strong>数据库</strong>、<strong>Collection</strong>或<strong>查询/搜索</strong>级别控制<code translate="no">TIMESTAMPTZ</code> 字段的时区。</p>
 <table>
    <tr>
      <th><p>级别</p></th>
      <th><p>参数</p></th>
-     <th><p>范围</p></th>
+     <th><p>作用域</p></th>
      <th><p>优先级</p></th>
    </tr>
    <tr>
@@ -371,24 +401,24 @@ res = client.search(
      <td><p>最低</p></td>
    </tr>
    <tr>
-     <td><p>Collections</p></td>
+     <td><p>Collection</p></td>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>覆盖该 Collection 的数据库默认时区设置</p></td>
-     <td><p>中</p></td>
+     <td><p>覆盖该Collection的数据库默认时区设置</p></td>
+     <td><p>中等</p></td>
    </tr>
    <tr>
      <td><p>查询/搜索/混合搜索</p></td>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>临时覆盖一个特定操作符</p></td>
+     <td><p>针对某一项特定操作的临时覆盖设置</p></td>
      <td><p>最高</p></td>
    </tr>
 </table>
-<p>有关分步说明和代码示例，请参阅专用页面：</p>
+<p>有关分步说明和代码示例，请参阅相关页面：</p>
 <ul>
-<li><p><a href="/docs/zh/modify-collection.md#Example-6-Set-collection-time-zone">修改 Collections</a></p></li>
+<li><p><a href="/docs/zh/modify-collection.md#Example-6-Set-collection-time-zone">修改 Collection</a></p></li>
 <li><p><a href="/docs/zh/manage_databases.md#Manage-database-properties">数据库</a></p></li>
 <li><p><a href="/docs/zh/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">查询</a></p></li>
-<li><p><a href="/docs/zh/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">基本向量搜索</a></p></li>
+<li><p><a href="/docs/zh/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">基础向量搜索</a></p></li>
 <li><p><a href="/docs/zh/multi-vector-search.md">多向量混合搜索</a></p></li>
 </ul>
 <h3 id="Accelerate-queries" class="common-anchor-header">加速查询<button data-href="#Accelerate-queries" class="anchor-icon" translate="no">
@@ -406,5 +436,5 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在没有索引的情况下，对<code translate="no">TIMESTAMPTZ</code> 字段的查询默认会对所有行执行全扫描，这在大型数据集中可能会比较慢。要加速时间戳查询，请在<code translate="no">TIMESTAMPTZ</code> 字段上创建<code translate="no">STL_SORT</code> 索引。</p>
+    </button></h3><p>默认情况下，对未建立索引的<code translate="no">TIMESTAMPTZ</code> 字段进行的查询将对所有行执行全表扫描，这在处理大型数据集时可能会导致速度变慢。要加速时间戳查询，请在<code translate="no">TIMESTAMPTZ</code> 字段上创建<code translate="no">STL_SORT</code> 索引。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>。</p>

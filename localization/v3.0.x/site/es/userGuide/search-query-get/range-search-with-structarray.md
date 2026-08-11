@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utiliza esta página para realizar una búsqueda por rango en los subcampos vectoriales de StructArray. La búsqueda por rango devuelve resultados vectoriales cuya puntuación o distancia se encuentra dentro de un límite especificado. Para los campos StructArray, utiliza la búsqueda por rango junto con la búsqueda vectorial a nivel de elemento, en la que cada elemento de Struct se busca de forma independiente.</p>
-<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección cuenta con un campo StructArray denominado « <code translate="no">chunks</code> ». El subcampo vectorial « <code translate="no">chunks[emb]</code> » está indexado para la búsqueda a nivel de elemento con una métrica vectorial habitual, como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</p>
+<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección tiene un campo StructArray denominado « <code translate="no">chunks</code> ». El subcampo vectorial « <code translate="no">chunks[emb]</code> » está indexado para la búsqueda a nivel de elemento con una métrica vectorial habitual, como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">Cómo se aplica la búsqueda por rango a StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -261,7 +261,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, solo la sub-solicitud « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La solicitud de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados del elemento Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
+<p>En este ejemplo, solo la subpetición « <code translate="no">chunks[emb]</code> » utiliza parámetros de búsqueda por rango. La petición de StructArray sigue respetando la semántica a nivel de elemento: el límite del rango se aplica a los resultados del elemento Struct antes de que la búsqueda híbrida combine y vuelva a clasificar los resultados.</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">Interpretar los resultados del rango<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

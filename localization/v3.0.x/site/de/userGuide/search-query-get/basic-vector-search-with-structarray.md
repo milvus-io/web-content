@@ -6,7 +6,7 @@ summary: >-
   eines StructArray-Feldes durchführen. StructArray unterstützt zwei
   grundlegende Vektorsuchmodi: die „EmbeddingList“-Suche, bei der eine in jeder
   Entität gespeicherte Einbettungsliste ausgewertet wird, und die Suche auf
-  Elementebene, bei der jedes Struct-Element unabhängig durchsucht wird.
+  Elementebene, bei der jedes Struct-Element einzeln durchsucht wird.
 ---
 <h1 id="Basic-Vector-Search-with-StructArray" class="common-anchor-header">Einfache Vektorsuche mit StructArray<button data-href="#Basic-Vector-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei der Suche auf Elementebene repräsentiert jeder Treffer ein übereinstimmendes „Struct“-Element. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals vorkommen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
+<p>Bei der Suche auf Elementebene repräsentiert jeder Treffer ein übereinstimmendes „Struct“-Element. Der Wert „ <code translate="no">offset</code> “ ist die nullbasierte Position dieses Elements im „StructArray“-Feld. Dieselbe Entität kann mehrmals erscheinen, wenn mehr als ein „Struct“-Element mit der Abfrage übereinstimmt. Der Wert „ <code translate="no">limit</code> “ bezieht sich auf Elementtreffer, nicht auf eindeutige übergeordnete Entitäten.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Ergebnisse interpretieren<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

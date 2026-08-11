@@ -40,7 +40,7 @@ title: Installation de Milvus en mode autonome à l'aide d'un paquet RPM/DEB
       </svg>
     </button></h2><ul>
 <li>Vous avez déjà installé libstdc++ 8.5.0 ou une version ultérieure.</li>
-<li><a href="/docs/fr/prerequisite-docker.md">Vérifiez la configuration matérielle et logicielle requise</a> avant de procéder à l'installation.</li>
+<li><a href="/docs/fr/prerequisite-docker.md">Vérifiez la configuration matérielle et logicielle requise</a> avant l'installation.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Télécharger le paquet RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Installation de Milvus en mode autonome à l'aide d'un paquet RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez télécharger le paquet RPM/DEB correspondant à l'architecture de votre système depuis la <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0-beta">page « Milvus Releases</a> ».</p>
+    </button></h2><p>Vous pouvez télécharger le paquet RPM/DEB correspondant à l'architecture de votre système depuis la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">page « Milvus Releases</a> ».</p>
 <ul>
 <li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.9-1_amd64.deb</strong> ou <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Pour ARM64, téléchargez le paquet <strong>milvus_2.6.9-1_arm64.deb</strong> ou <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
@@ -104,7 +104,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois l’installation terminée, Milvus est configuré en tant que service systemd et peut être lancé à l’aide de la commande suivante :</p>
+    </button></h2><p>Une fois l'installation terminée, Milvus est configuré en tant que service systemd et peut être lancé à l'aide de la commande suivante :</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez vérifier l’état du service Milvus à l’aide de la commande suivante :</p>
@@ -120,6 +120,9 @@ dpkg -l | grep milvus
            <span class="hljs-string">└─1044122</span> <span class="hljs-string">/usr/bin/milvus</span> <span class="hljs-string">run</span> <span class="hljs-string">standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous trouverez le binaire Milvus à l'adresse <code translate="no">/usr/bin/milvus</code>, le fichier de service systemd à l'adresse <code translate="no">/lib/systemd/system/milvus.service</code> et les dépendances à l'adresse <code translate="no">/usr/lib/milvus/</code>.</p>
+<div class="alert note">
+<p>Par défaut, Milvus Standalone utilise <strong>Woodpecker</strong> (système de fichiers local) comme file d’attente de messages avec etcd intégré ; aucun service externe de messagerie ou de métadonnées n’est donc nécessaire. Voir <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
+</div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +138,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez modifier les paramètres de configuration de Milvus dans le fichier <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Par exemple, pour remplacer <code translate="no">proxy.healthCheckTimeout</code> par <code translate="no">1000</code> ms, recherchez le paramètre target et modifiez-le en conséquence. Pour connaître les éléments de configuration concernés, consultez <a href="/docs/fr/system_configuration.md">la section Configuration du système</a>.</p>
+    </button></h2><p>Vous pouvez modifier les configurations de Milvus dans le fichier <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Par exemple, pour remplacer <code translate="no">proxy.healthCheckTimeout</code> par <code translate="no">1000</code> ms, recherchez le paramètre target et modifiez-le en conséquence. Pour connaître les éléments de configuration concernés, consultez <a href="/docs/fr/system_configuration.md">la section Configuration du système</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Arrêter Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +179,10 @@ dpkg -l | grep milvus
 <p>Pour les systèmes basés sur DEB :</p>
 <pre><code translate="no" class="language-shell">apt remove milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Et ensuite<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Storage V3 est désactivé par défaut. Activez-le avant d’utiliser les fonctionnalités qui en dépendent. Pour connaître la configuration requise et les considérations de compatibilité, consultez la section <a href="/docs/fr/storage-v3.md">Storage V3</a>.</p>
+</div>
+<h2 id="Whats-next" class="common-anchor-header">Étapes suivantes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,7 +199,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Une fois Milvus Standalone installé, vous pouvez :</p>
 <ul>
-<li><p>Consulter <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
+<li><p>Consultez <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>

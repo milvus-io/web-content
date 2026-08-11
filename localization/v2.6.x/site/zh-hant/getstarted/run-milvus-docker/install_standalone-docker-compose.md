@@ -75,7 +75,7 @@ Creating milvus-standalone ... done
 </ul>
 <p>請務必下載最新的 Docker Compose 配置檔，以確保與 v2.6.17 功能相容。</p>
 <ul>
-<li><p>若您無法執行上述指令，請檢查系統是否已安裝 Docker Compose V1。若屬此情況，建議您根據<a href="https://docs.docker.com/compose/">本頁</a>說明遷移至 Docker Compose V2。</p></li>
+<li><p>若您無法執行上述指令，請檢查系統是否已安裝 Docker Compose V1。若確實如此，根據<a href="https://docs.docker.com/compose/">本頁</a>說明，建議您遷移至 Docker Compose V2。</p></li>
 <li><p>若在拉取映像檔時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>聯絡我們，並提供問題詳情，我們將為您提供必要的支援。</p></li>
 </ul>
 </div>
@@ -187,7 +187,7 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

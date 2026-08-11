@@ -2,9 +2,9 @@
 id: insert-update-delete.md
 title: إدراج الكيانات
 summary: >-
-  الكيانات في المجموعة هي سجلات البيانات التي تشترك في نفس مجموعة الحقول. تشكل
-  قيم الحقول في كل سجل بيانات كيانًا. تقدم هذه الصفحة كيفية إدراج الكيانات في
-  مجموعة.
+  الكيانات الموجودة في المجموعة هي سجلات بيانات تشترك في نفس مجموعة الحقول.
+  وتشكل قيم الحقول في كل سجل بيانات كيانًا. تشرح هذه الصفحة كيفية إدراج الكيانات
+  في المجموعة.
 ---
 <h1 id="Insert-Entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,11 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>الكيانات في المجموعة هي سجلات البيانات التي تشترك في نفس مجموعة الحقول. تشكل قيم الحقول في كل سجل بيانات كيانًا. تقدم هذه الصفحة كيفية إدراج الكيانات في مجموعة.</p>
+    </button></h1><p>الكيانات في المجموعة هي سجلات بيانات تشترك في نفس مجموعة الحقول. تشكل قيم الحقول في كل سجل بيانات كيانًا. تشرح هذه الصفحة كيفية إدراج الكيانات في المجموعة.</p>
 <div class="alert note">
 <ul>
-<li><p><strong>الحقول المضافة بعد إنشاء المجموعة</strong>: إذا قمت بإضافة حقول جديدة إلى مجموعة بعد الإنشاء ولم تحدد قيمًا أثناء الإدراج، يقوم Milvus تلقائيًا بتعبئتها بقيم افتراضية محددة أو NULL إذا لم يتم تعيين أي قيم افتراضية. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p></li>
-<li><p><strong>معالجة التكرار</strong>: لا تتحقق عملية <code translate="no">insert</code> القياسية من عدم وجود مفاتيح أساسية مكررة. يؤدي إدراج بيانات بمفتاح أساسي موجود إلى إنشاء كيان جديد بنفس المفتاح، مما يؤدي إلى تكرار البيانات ومشاكل محتملة في التطبيق. لتحديث الكيانات الموجودة أو تجنب التكرارات، استخدم العملية <strong><code translate="no">upsert</code></strong> بدلاً من ذلك. لمزيد من المعلومات، راجع <a href="/docs/ar/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>الحقول المضافة بعد إنشاء المجموعة</strong>: إذا أضفت حقولًا جديدة إلى مجموعة بعد إنشائها ولم تحدد قيمًا أثناء الإدراج، فإن Milvus يقوم تلقائيًا بتعبئتها بالقيم الافتراضية المحددة أو بـ « <code translate="no">NULL</code> » (القيمة الافتراضية) إذا لم يتم تعيين أي قيم افتراضية. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">«تعديل مخطط المجموعة</a>».</p></li>
+<li><p><strong>معالجة التكرارات</strong>: لا تتحقق عملية « <code translate="no">insert</code> » القياسية من وجود تكرارات في المفاتيح الأساسية. يؤدي إدراج البيانات التي تحتوي على مفتاح أساسي موجود بالفعل إلى إنشاء كيان جديد بنفس المفتاح، مما يؤدي إلى تكرار البيانات ومشاكل محتملة في التطبيق. لتحديث الكيانات الموجودة أو تجنب التكرارات، استخدم عملية <strong><code translate="no">upsert</code></strong> بدلاً من ذلك. لمزيد من المعلومات، راجع «إدراج أو تحديث <a href="/docs/ar/upsert-entities.md">الكيانات</a>» ( <a href="/docs/ar/upsert-entities.md">Upsert Entities</a>).</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -43,9 +43,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في Milvus، يشير <strong>الكيان</strong> إلى سجلات البيانات في <strong>مجموعة</strong> تشترك في نفس <strong>المخطط،</strong> حيث تشكل البيانات الموجودة في كل حقل من حقول الصف كيانًا. لذلك، فإن الكيانات داخل نفس المجموعة لها نفس السمات (مثل أسماء الحقول وأنواع البيانات والقيود الأخرى).</p>
-<p>عند إدراج كيان في مجموعة، لا يمكن إضافة الكيان المراد إدراجه بنجاح إلا إذا كان يحتوي على جميع الحقول المحددة في المخطط. سيدخل الكيان الذي تم إدراجه في قسم يسمى <strong>_افتراضي</strong> في ترتيب الإدراج. شريطة وجود قسم معين، يمكنك أيضًا إدراج كيانات في هذا القسم من خلال تحديد اسم القسم في طلب الإدراج.</p>
-<p>يدعم Milvus أيضًا الحقول الديناميكية للحفاظ على قابلية التوسع في المجموعة. عندما يتم تمكين الحقل الديناميكي، يمكنك إدراج الحقول التي لم يتم تعريفها في المخطط في المجموعة. سيتم تخزين هذه الحقول والقيم كأزواج مفاتيح-قيم في حقل محجوز باسم <strong>$meta</strong>. لمزيد من المعلومات حول الحقول الديناميكية، يرجى الرجوع إلى الحقل الديناميكي.</p>
+    </button></h2><p>في Milvus، يشير مصطلح <strong>«الكيان» (Entity)</strong> إلى سجلات البيانات الموجودة في <strong>مجموعة (Collection)</strong> والتي تشترك في نفس <strong>المخطط (Schema)</strong>، حيث تشكل البيانات الموجودة في كل حقل من حقول الصف كيانًا. وبالتالي، فإن الكيانات الموجودة ضمن نفس المجموعة لها نفس السمات (مثل أسماء الحقول وأنواع البيانات والقيود الأخرى).</p>
+<p>عند إدراج كيان في مجموعة، لا يمكن إضافة الكيان المراد إدراجه بنجاح إلا إذا كان يحتوي على جميع الحقول المحددة في المخطط. سيتم إدراج الكيان المُدرج في قسم يُسمى <strong>_default</strong> وفقًا لترتيب الإدراج. شريطة وجود قسم معين، يمكنك أيضًا إدراج كيانات في ذلك القسم عن طريق تحديد اسم القسم في طلب الإدراج.</p>
+<p>يدعم Milvus أيضًا الحقول الديناميكية للحفاظ على قابلية التوسع للمجموعة. عند تمكين الحقل الديناميكي، يمكنك إدراج حقول غير محددة في المخطط إلى المجموعة. سيتم تخزين هذه الحقول والقيم كأزواج مفتاح-قيمة في حقل محجوز باسم <strong>$meta</strong>. لمزيد من المعلومات حول الحقول الديناميكية، يرجى الرجوع إلى الحقل الديناميكي.</p>
 <h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">إدراج الكيانات في مجموعة<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,10 +61,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل إدراج البيانات، تحتاج إلى تنظيم بياناتك في قائمة من القواميس وفقًا للمخطط، بحيث يمثل كل قاموس كيانًا ويحتوي على جميع الحقول المحددة في المخطط. إذا تم تمكين الحقل الديناميكي في المجموعة، يمكن أن يتضمن كل قاموس أيضًا الحقول غير المحددة في المخطط.</p>
-<p>في هذا القسم، ستقوم بإدراج كيانات في مجموعة تم إنشاؤها بطريقة الإعداد السريع. تحتوي المجموعة التي تم إنشاؤها بهذه الطريقة على حقلين فقط، وهما <strong>المعرف</strong> <strong>والمتجه</strong>. بالإضافة إلى ذلك، تحتوي هذه المجموعة على حقل ديناميكي ممكّن، لذا فإن الكيانات في شيفرة المثال تتضمن حقلاً يسمى <strong>اللون</strong> غير معرّف في المخطط.</p>
+    </button></h2><p>قبل إدراج البيانات، تحتاج إلى تنظيم بياناتك في قائمة من القواميس وفقًا للمخطط، بحيث يمثل كل قاموس كيانًا ويحتوي على جميع الحقول المحددة في المخطط. إذا كان الحقل الديناميكي ممكّنًا في المجموعة، فيمكن لكل قاموس أيضًا تضمين حقول غير محددة في المخطط.</p>
+<p>في هذا القسم، ستقوم بإدراج الكيانات في مجموعة تم إنشاؤها بطريقة الإعداد السريع. تحتوي المجموعة التي تم إنشاؤها بهذه الطريقة على حقلين فقط، هما <strong>id</strong> و <strong>vector</strong>. بالإضافة إلى ذلك، تم تمكين الحقل الديناميكي في هذه المجموعة، لذا تتضمن الكيانات في كود المثال حقلًا يسمى <strong>color</strong> غير محدد في المخطط.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +226,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -272,9 +276,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك أيضًا إدراج كيانات في قسم محدد. تفترض مقتطفات التعليمات البرمجية التالية أن لديك قسمًا باسم <strong>PartitionA</strong> في مجموعتك.</p>
+    </button></h2><p>يمكنك أيضًا إدراج كيانات في قسم محدد. تفترض مقتطفات الكود التالية أن لديك قسمًا باسم <strong>PartitionA</strong> في مجموعتك.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -396,7 +405,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

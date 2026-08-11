@@ -3,7 +3,7 @@ id: pinyin-filter.md
 title: البينيينCompatible with Milvus 3.0.x
 summary: >-
   يقوم مرشح «البينيين» بتحويل الرموز الخاصة بالأحرف الصينية إلى رموز «البينيين»
-  أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى نظام «البينيين» للنصوص
+  أثناء تحليل النص، مما يتيح إجراء المطابقة استنادًا إلى «البينيين» للنصوص
   الصينية.
 beta: Milvus 3.0.x
 ---
@@ -45,7 +45,7 @@ beta: Milvus 3.0.x
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>يحتفظ هذا الاختصار بالرموز الصينية الأصلية ويُصدر رموز بينيين على مستوى الحرف. ولا يُصدر بينيين مركبًا أو أحرف بينيين الأولى ما لم تقم بتمكين هذه الخيارات صراحةً.</p>
+<p>يحتفظ هذا الاختصار بالرموز الصينية الأصلية ويُنتج رموز بينيين على مستوى الحرف. ولا يُنتج بينيين مركبًا أو أحرف بينيين الأولى ما لم تقم بتمكين هذه الخيارات صراحةً.</p>
 <p>للتحكم الكامل، حدد المرشح ككائن وقم بتكوين أشكال رموز بينيين التي يصدرها Milvus.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,

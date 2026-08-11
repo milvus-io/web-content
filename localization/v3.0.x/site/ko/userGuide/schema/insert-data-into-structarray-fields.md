@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>각 엔티티가 정렬된 구조화된 요소 목록을 포함하는 경우, StructArray 필드에 데이터를 삽입합니다. 삽입 페이로드에서 StructArray 필드는 객체 배열로 표현됩니다. 각 객체는 하나의 Struct 요소를 나타내며, 컬렉션 스키마에 정의된 Struct 하위 필드 이름을 사용합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성</a>’의 <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, <code translate="no">chunks</code> 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
+<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, <code translate="no">chunks</code> 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션 스키마에 이미 ‘ <code translate="no">chunks</code> ’ StructArray 필드가 포함되어 있는지 확인하십시오.</p>
+    </button></h2><p>컬렉션 스키마에 이미 <code translate="no">chunks</code> StructArray 필드가 포함되어 있는지 확인하십시오.</p>
 <table>
 <thead>
 <tr><th>필드</th><th>유형</th><th>삽입 값</th></tr>
@@ -112,7 +112,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> <code translate="no">emb</code> 는 서로 다른 검색 모드를 지원하기 때문에 별도의 벡터 하위 필드입니다. EmbeddingList 검색은 StructArray 필드의 모든 벡터를 하나의 임베딩 목록으로 취급하며, 메트릭을 사용하여 엔티티 수준 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다. 이 예제에서는 단순화를 위해 두 필드 모두에 동일한 벡터 값을 저장합니다. 실전 애플리케이션에서는 두 검색 모드 모두 동일한 청크 임베딩을 사용하는 경우 두 하위 필드에 동일한 임베딩을 저장하거나, 두 검색 모드가 서로 다른 표현 방식을 사용하는 경우 서로 다른 임베딩을 저장할 수 있습니다. <code translate="no">MAX_SIM*</code> </p>
+<p><code translate="no">emb_list_vector</code> <code translate="no">emb</code> 는 서로 다른 검색 모드를 지원하기 때문에 별도의 벡터 하위 필드입니다. EmbeddingList 검색은 StructArray 필드의 모든 벡터를 하나의 임베딩 목록으로 취급하며, 메트릭을 포함한 엔티티 수준 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다. 이 예제에서는 단순화를 위해 두 필드 모두에 동일한 벡터 값을 저장합니다. 실전 애플리케이션에서는 두 검색 모드 모두 동일한 청크 임베딩을 사용하는 경우 두 하위 필드에 동일한 임베딩을 저장하거나, 두 검색 모드가 서로 다른 표현 방식을 사용하는 경우 서로 다른 임베딩을 저장할 수 있습니다. <code translate="no">MAX_SIM*</code> </p>
 <h2 id="Insert-rows" class="common-anchor-header">행 삽입<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez creado un campo StructArray, haz referencia a sus subcampos utilizando la sintaxis de ruta « <code translate="no">structArray[subfield]</code> ». Utiliza esta sintaxis al crear índices, buscar en subcampos vectoriales, generar subcampos de salida o crear filtros escalares.</p>
+    </button></h2><p>Una vez creado un campo StructArray, haz referencia a sus subcampos utilizando la sintaxis de ruta « <code translate="no">structArray[subfield]</code> ». Utiliza esta sintaxis al crear índices, buscar en subcampos vectoriales, generar subcampos o crear filtros escalares.</p>
 <table>
 <thead>
 <tr><th>Ruta</th><th>Significado</th><th>Uso habitual</th></tr>
@@ -375,7 +375,7 @@ client.add_collection_struct_field(
 <tbody>
 <tr><td>Struct se utiliza como tipo de elemento Array.</td><td>Crea un campo StructArray como un campo Array con ` <code translate="no">element_type=STRUCT</code>`. No crees Struct como un campo de colección de nivel superior.</td></tr>
 <tr><td>Todos los elementos comparten un mismo esquema.</td><td>Cada elemento «Struct» del mismo campo «StructArray» sigue el esquema «Struct» definido para ese campo.</td></tr>
-<tr><td><code translate="no">max_capacity</code> es obligatorio.</td><td>Limita el número de elementos «Struct» que cada entidad puede almacenar en el campo «StructArray».</td></tr>
+<tr><td><code translate="no">max_capacity</code> es obligatorio.</td><td>Limita el número de elementos Struct que cada entidad puede almacenar en el campo StructArray.</td></tr>
 <tr><td>Solo se permiten los tipos de subcampos compatibles.</td><td>Utilice los tipos de subcampos escalares y vectoriales compatibles con StructArray. No defina subcampos JSON, Geometry, Text, Timestamptz, SparseFloatVector ni subcampos Struct / Array anidados.</td></tr>
 <tr><td>Los subcampos vectoriales necesitan índices antes de la búsqueda.</td><td>Crea índices en rutas como <code translate="no">chunks[emb_list_vector]</code> o <code translate="no">chunks[emb]</code> antes de ejecutar una búsqueda vectorial.</td></tr>
 <tr><td>Cada subcampo vectorial tiene un índice.</td><td>Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, crea dos subcampos vectoriales independientes.</td></tr>
@@ -407,7 +407,7 @@ client.add_collection_struct_field(
 <li><p>Utilizar un único subcampo vectorial tanto para la búsqueda en EmbeddingList como para la búsqueda a nivel de elemento.</p></li>
 <li><p>Añadir únicamente subcampos vectoriales y omitir los subcampos escalares necesarios para el filtrado, como <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code>.</p></li>
 <li><p>Tratar los subcampos vectoriales como entradas de predicados escalares de tipo <code translate="no">$[...]</code>. Utilizar los subcampos vectoriales para la búsqueda vectorial y los subcampos escalares para los predicados escalares.</p></li>
-<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray existente una vez creado dicho campo.</p></li>
+<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray ya existente una vez creado dicho campo.</p></li>
 <li><p>Utilizar <code translate="no">chunks.emb</code> o <code translate="no">chunks.emb_list_vector</code> en lugar de la sintaxis de ruta requerida <code translate="no">chunks[emb]</code> o <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Tratar el comportamiento de los StructArray nulos como si estuviera disponible en todas las versiones de destino.</p></li>
 </ul>

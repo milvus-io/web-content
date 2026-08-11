@@ -90,7 +90,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 </ul>
 <p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alert note">
-Depuis la version 4.2.21 du Helm chart de Milvus, nous avons introduit le chart pulsar-v3.x en tant que dépendance. Pour des raisons de compatibilité ascendante, veuillez mettre à jour votre Helm vers la version 3.14 ou une version ultérieure, et veillez à ajouter l’option <code translate="no">--reset-then-reuse-values</code> chaque fois que vous utilisez <code translate="no">helm upgrade</code>.
+Depuis la version 4.2.21 du Helm chart de Milvus, nous avons introduit le chart pulsar-v3.x en tant que dépendance. Pour des raisons de compatibilité ascendante, veuillez mettre à jour votre Helm vers la version 3.14 ou une version ultérieure, et veillez à ajouter l’option ` <code translate="no">--reset-then-reuse-values</code> ` chaque fois que vous utilisez ` <code translate="no">helm upgrade</code>`.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à jour<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

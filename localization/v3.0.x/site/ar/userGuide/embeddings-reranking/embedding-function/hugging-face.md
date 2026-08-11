@@ -69,7 +69,7 @@ beta: Milvus v2.6.20+
 <li><strong>إنشاء تضمين.</strong> ترسل وظيفة تضمين النص (Text Embedding Function) النص عبر "إرسال النص إلى Hugging Face" ( <code translate="no">hf-inference</code> ) إلى مسار "تضمين النص" ( <code translate="no">feature-extraction</code> ) في Hugging Face. تستخدم الوظيفة "تحديد النموذج" ( <code translate="no">model_name</code> ) لاختيار النموذج ويمكنها تمرير خيارات الاستدلال المدعومة مثل التطبيع والاقتطاع.</li>
 <li><strong>استخدام التضمين.</strong> تُرجع Hugging Face تضمينًا واحدًا ذي نقطة عائمة لكل نص مدخل. أثناء الإدراج، يخزن Milvus المتجه في حقل إخراج الوظيفة. أثناء البحث، يستخدم Milvus المتجه كمتجه الاستعلام.</li>
 </ol>
-<p>تتولى نفس تهيئة الوظيفة معالجة الإدراج والبحث، مما يحافظ على اتساق النموذج ومعلمات الاستدلال عبر كلتا العمليتين.</p>
+<p>تتولى نفس تهيئة الوظيفة عمليات الإدراج والبحث، مما يحافظ على اتساق النموذج ومعلمات الاستدلال عبر كلتا العمليتين.</p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>حدد الرمز في قسم المستوى الأعلى <code translate="no">credential</code> في <code translate="no">milvus.yaml</code> ، ثم وجه مزود التضمين Hugging Face إلى تسمية بيانات الاعتماد تلك:</p>
+    </button></h3><p>حدد الرمز في قسم المستوى الأعلى <code translate="no">credential</code> في <code translate="no">milvus.yaml</code> ، ثم قم بتوجيه مزود التضمين Hugging Face إلى تسمية بيانات الاعتماد تلك:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">huggingface_apikey:</span>
@@ -265,7 +265,7 @@ client.create_collection(
 <tr><td><code translate="no">provider</code></td><td>نعم</td><td>مزود نموذج التضمين. اضبط هذه القيمة على <code translate="no">huggingface</code>.</td></tr>
 <tr><td><code translate="no">model_name</code></td><td>نعم</td><td>معرف نموذج Hugging Face لنموذج يتم تقديمه عبر <code translate="no">hf-inference</code> لمهمة <code translate="no">feature-extraction</code>.</td></tr>
 <tr><td><code translate="no">hf_provider</code></td><td>لا</td><td>مسار مزود الاستدلال في Hugging Face. القيمة الافتراضية والوحيدة المدعومة في Milvus 2.6.20 هي <code translate="no">hf-inference</code>.</td></tr>
-<tr><td><code translate="no">credential</code></td><td>لا</td><td>تسمية بيانات الاعتماد المحددة في قسم <code translate="no">credential</code> ذي المستوى الأعلى ضمن <code translate="no">milvus.yaml</code>. هذه القيمة ليست الرمز نفسه.</td></tr>
+<tr><td><code translate="no">credential</code></td><td>لا</td><td>تسمية بيانات الاعتماد المحددة في قسم <code translate="no">credential</code> ذي المستوى الأعلى ضمن <code translate="no">milvus.yaml</code>. هذه القيمة ليست الرمز المميز نفسه.</td></tr>
 <tr><td><code translate="no">normalize</code></td><td>لا</td><td>ما إذا كان يجب على Hugging Face إرجاع التضمينات المعيارية. القيم المدعومة هي <code translate="no">true</code> و <code translate="no">false</code>. إذا تم حذفها، فإن Milvus لا يضبط هذا الخيار في الطلب.</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>لا</td><td>اسم الموجه المحدد في تكوين Sentence Transformers للنموذج المحدد.</td></tr>
 <tr><td><code translate="no">truncate</code></td><td>لا</td><td>ما إذا كان يجب على Hugging Face اقتطاع المدخلات التي تتجاوز الطول المدعوم من قبل النموذج. القيم المدعومة هي <code translate="no">true</code> و <code translate="no">false</code>.</td></tr>
@@ -381,7 +381,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تحقق من بُعد مخرجات النموذج وقارنه مع <code translate="no">dim</code> في حقل مخرجات الوظيفة. يرفض Milvus أي استجابة يختلف بُعد متجهها عن بُعد حقل <code translate="no">FLOAT_VECTOR</code>.</p>
+    </button></h3><p>تحقق من بُعد مخرجات النموذج وقارنه مع <code translate="no">dim</code> في حقل «مخرجات الدالة». يرفض Milvus أي استجابة يختلف بُعد متجهها عن بُعد حقل <code translate="no">FLOAT_VECTOR</code>.</p>
 <h3 id="Milvus-reports-missing-Hugging-Face-credentials" class="common-anchor-header">يبلغ Milvus عن فقدان بيانات اعتماد Hugging Face<button data-href="#Milvus-reports-missing-Hugging-Face-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

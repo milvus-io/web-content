@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Репозиторий диаграмм Helm для Milvus по адресу <code translate="no">https://github.com/milvus-io/milvus-helm</code> был заархивирован. Теперь мы используем новый репозиторий по адресу <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Архивированный репозиторий по-прежнему доступен для диаграмм версий до 4.0.31, но для более поздних выпусков используйте новый репозиторий.</p>
+<p>Репозиторий диаграмм Helm для Milvus по адресу <code translate="no">https://github.com/milvus-io/milvus-helm</code> был заархивирован. Теперь мы используем новый репозиторий по адресу <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Заархивированный репозиторий по-прежнему доступен для диаграмм версий до 4.0.31, но для более поздних выпусков используйте новый репозиторий.</p>
 </div>
 <p>Затем загрузите диаграммы Milvus из репозитория следующим образом:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -178,7 +178,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Важные примечания:</strong></p>
 <ul>
 <li><strong>Названия релизов</strong>: используйте только буквы, цифры и дефисы (точки не допускаются)</li>
-<li><strong>Kubernetes v1.25+</strong>: если у вас возникнут проблемы с PodDisruptionBudget, воспользуйтесь следующим обходным решением:
+<li><strong>Kubernetes v1.25+</strong>: если у вас возникли проблемы с PodDisruptionBudget, воспользуйтесь следующим обходным решением:
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -363,7 +363,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>Выполните следующую команду, чтобы получить манифест Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вышеуказанная команда генерирует шаблоны диаграмм для кластера Milvus и сохраняет результат в файл манифеста с именем <code translate="no">milvus_manifest.yaml</code>. Используя этот манифест, вы можете установить кластер Milvus с его компонентами и зависимостями в отдельных подах.</p>
+<p>Вышеуказанная команда генерирует шаблоны диаграмм для кластера Milvus и сохраняет результат в файл манифеста с именем <code translate="no">milvus_manifest.yaml</code>. Используя этот манифест, вы можете установить кластер Milvus, при этом его компоненты и зависимости будут размещены в отдельных подах.</p>
 <div class="alert note">
 <ul>
 <li>Чтобы установить экземпляр Milvus в автономном режиме, при котором все компоненты Milvus находятся в одном поде, вам следует вместо этого выполнить команду ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> `, чтобы сгенерировать шаблоны диаграмм для экземпляра Milvus в автономном режиме.</li>
@@ -427,7 +427,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><p>Теперь вы можете загрузить изображения на хосты в среде с ограниченным доступом к сети следующим образом:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="5-Deploy-Milvus" class="common-anchor-header">5. Разверните Milvus<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">
+<h3 id="5-Deploy-Milvus" class="common-anchor-header">5. Развертывание Milvus<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

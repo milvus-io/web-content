@@ -60,7 +60,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
 </ul></li>
 <li>Milvusシステムの稼働中は、メッセージストレージを変更することはできません。</li>
 <li>Kafka 2.x または 3.x バージョンのみがサポートされています。</li>
-<li><strong>アップグレードに関する制限事項</strong>：<strong>メッセージキューの制限事項</strong>：Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
+<li><strong>アップグレードに関する制限事項</strong>：<strong>メッセージキューに関する制限事項</strong>：Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +144,7 @@ summary: Milvus Operator を使用してメッセージストレージを設定�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsarは、最近の変更履歴を管理し、ストリームログを出力し、ログのサブスクリプションを提供します。メッセージストレージとしてのPulsarの設定は、MilvusスタンドアロンおよびMilvusクラスターの両方でサポートされています。ただし、Milvus Operatorを使用する場合、MilvusクラスターのメッセージストレージとしてPulsarを設定できるのはMilvusクラスターのみです。Pulsarを設定するには、<code translate="no">spec.dependencies.pulsar</code> の下に必要なフィールドを追加してください。</p>
+    </button></h2><p>Pulsarは、最近の変更履歴を管理し、ストリームログを出力し、ログのサブスクリプションを提供します。メッセージストレージとしてのPulsarの設定は、MilvusスタンドアロンおよびMilvusクラスターの両方でサポートされています。ただし、Milvus Operatorを使用する場合、Pulsarをメッセージストレージとして設定できるのはMilvusクラスターのみです。Pulsarを設定するには、<code translate="no">spec.dependencies.pulsar</code> の下に必要なフィールドを追加してください。</p>
 <p><code translate="no">pulsar</code> <code translate="no">external</code> および をサポートしています。<code translate="no">inCluster</code></p>
 <h3 id="External-Pulsar" class="common-anchor-header">外部Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"

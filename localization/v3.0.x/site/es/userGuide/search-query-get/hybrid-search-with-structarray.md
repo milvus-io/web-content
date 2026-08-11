@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utiliza esta página para combinar la búsqueda vectorial de StructArray con otras búsquedas vectoriales en una única solicitud de búsqueda híbrida. La búsqueda híbrida de StructArray puede generar resultados a nivel de entidad o a nivel de elemento, dependiendo de los objetos de <code translate="no">AnnSearchRequest</code> que se combinen.</p>
-<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección tiene un campo vectorial de nivel superior denominado « <code translate="no">title_vector</code> » y un campo StructArray denominado « <code translate="no">chunks</code> ». El subcampo « <code translate="no">chunks[emb_list_vector]</code> » está indexado para la búsqueda de EmbeddingList, y « <code translate="no">chunks[emb]</code> » está indexado para la búsqueda a nivel de elemento.</p>
+<p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección tiene un campo vectorial de nivel superior denominado « <code translate="no">title_vector</code> » y un campo StructArray denominado « <code translate="no">chunks</code> ». El subcampo « <code translate="no">chunks[emb_list_vector]</code> » está indexado para la búsqueda EmbeddingList, y « <code translate="no">chunks[emb]</code> » está indexado para la búsqueda a nivel de elemento.</p>
 <h2 id="How-hybrid-search-applies-to-StructArray" class="common-anchor-header">Cómo se aplica la búsqueda híbrida a StructArray<button data-href="#How-hybrid-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ results = client.hybrid_search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ambos objetos « <code translate="no">AnnSearchRequest</code> » buscan subcampos vectoriales en « <code translate="no">chunks</code> ». El mismo desplazamiento con base en cero hace referencia al mismo elemento de Struct, por lo que el reordenador híbrido puede clasificar directamente los candidatos a nivel de elemento. No establezcas « <code translate="no">element_scope</code> » en este modo, ya que no se realiza ninguna agrupación a nivel de entidad.</p>
+<p>Ambos objetos « <code translate="no">AnnSearchRequest</code> » buscan subcampos vectoriales en « <code translate="no">chunks</code> ». El mismo desplazamiento con base en cero hace referencia al mismo elemento Struct, por lo que el reordenador híbrido puede clasificar directamente los candidatos a nivel de elemento. No establezcas « <code translate="no">element_scope</code> » en este modo, ya que no se realiza ninguna agrupación a nivel de entidad.</p>
 <h2 id="Collapse-element-level-hits-for-entity-level-hybrid-search" class="common-anchor-header">Agrupar resultados a nivel de elemento para la búsqueda híbrida a nivel de entidad<button data-href="#Collapse-element-level-hits-for-entity-level-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ results = client.hybrid_search(
 <tr><th>Estrategia</th><th>Comportamiento</th><th><code translate="no">topk</code></th><th>Requisito de métrica</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max</code></td><td>Conservar la mejor puntuación del elemento devuelto para la entidad.</td><td>No permitido.</td><td>Cualquier métrica vectorial regular compatible.</td></tr>
+<tr><td><code translate="no">max</code></td><td>Conservar la mejor puntuación del elemento devuelto para la entidad.</td><td>No permitido.</td><td>Cualquier métrica vectorial regular admitida.</td></tr>
 <tr><td><code translate="no">sum</code></td><td>Suma todas las puntuaciones de los elementos devueltos para la entidad.</td><td>No permitido.</td><td>Solo métricas de correlación positiva, como <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calcular la media de todas las puntuaciones de los elementos devueltos para la entidad.</td><td>No permitido.</td><td>Cualquier métrica vectorial regular admitida.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Suma de las mejores puntuaciones de los elementos devueltos por « <code translate="no">K</code> » para la entidad.</td><td>Es obligatorio y debe ser positivo.</td><td>Solo métricas de correlación positiva, como « <code translate="no">IP</code> » o « <code translate="no">COSINE</code> ».</td></tr>
@@ -297,7 +297,7 @@ results = client.hybrid_search(
     </button></h2><p>Puede asociar un « <code translate="no">element_filter</code> » a un « <code translate="no">AnnSearchRequest</code> » a nivel de elemento de StructArray cuando deban aplicarse condiciones escalares a los mismos elementos de Struct que participan en la búsqueda vectorial. También puede utilizar un « <code translate="no">filter</code> » de nivel superior en « <code translate="no">hybrid_search()</code> » para condiciones de la entidad principal.</p>
 <p>Los campos vectoriales a nivel de elemento de StructArray admiten la búsqueda por rango en la búsqueda híbrida. Añade <code translate="no">radius</code> y, opcionalmente, <code translate="no">range_filter</code> a la <code translate="no">AnnSearchRequest</code> a nivel de elemento. Las solicitudes de StructArray a nivel de EmbeddingList no admiten la búsqueda por rango.</p>
 <p>La agrupación híbrida a nivel de elemento solo es compatible cuando todos los objetos ` <code translate="no">AnnSearchRequest</code> ` se dirigen a campos vectoriales a nivel de elemento dentro del mismo campo `StructArray`, y ` <code translate="no">group_by_field</code> ` debe ser la clave principal. La agrupación híbrida no es compatible cuando la solicitud mezcla campos vectoriales a nivel de colección, diferentes campos `StructArray` o solicitudes a nivel de `EmbeddingList`. No combine la búsqueda por rango con la agrupación.</p>
-<h2 id="Interpret-hybrid-results" class="common-anchor-header">Interpretación de resultados híbridos<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
+<h2 id="Interpret-hybrid-results" class="common-anchor-header">Interpretación de los resultados híbridos<button data-href="#Interpret-hybrid-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -318,7 +318,7 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td>Nivel de entidad</td><td>Clave primaria.</td><td>No hay desplazamiento de elementos en el resultado final.</td><td>La solicitud híbrida incluye un campo vectorial a nivel de colección, una solicitud EmbeddingList o solicitudes a nivel de elemento en distintos campos StructArray.</td></tr>
-<tr><td>Nivel de elemento</td><td>Clave primaria más el campo StructArray padre más el desplazamiento del elemento.</td><td>El desplazamiento del elemento seleccionado puede devolverse cuando lo exponga la API o el SDK.</td><td>Todos los objetos « <code translate="no">AnnSearchRequest</code> » son a nivel de elemento y se encuentran bajo el mismo campo «StructArray».</td></tr>
+<tr><td>Nivel de elemento</td><td>Clave primaria más el campo StructArray principal más el desplazamiento del elemento.</td><td>El desplazamiento del elemento seleccionado puede devolverse cuando lo exponga la API o el SDK.</td><td>Todos los objetos « <code translate="no">AnnSearchRequest</code> » son a nivel de elemento y se encuentran bajo el mismo campo «StructArray».</td></tr>
 </tbody>
 </table>
 <h2 id="Limitations" class="common-anchor-header">Limitaciones<button data-href="#Limitations" class="anchor-icon" translate="no">

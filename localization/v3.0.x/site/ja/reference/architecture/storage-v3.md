@@ -138,6 +138,6 @@ beta: Milvus 3.0.x
 <li><a href="/docs/ja/upgrade_milvus_standalone-helm.md">Helmチャートを使用したMilvusスタンドアロンのアップグレード</a></li>
 <li><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusクラスタのアップグレード</a></li>
 <li><a href="/docs/ja/configure_common.md">共通関連の設定</a></li>
-<li><a href="/docs/ja/configure_datacoord.md">dataCoord 関連の設定</a></li>
+<li><a href="/docs/ja/configure_datacoord.md">dataCoord に関連する設定</a></li>
 <li><a href="https://milvus.io/blog/why-we-built-loon-a-storage-engine-for-ai-data-that-never-stops-changing.md">Loonを開発した理由：絶えず変化し続けるAIデータのためのストレージエンジン</a>— Storage V3の設計動機に関するエンジニアリングの背景。</li>
 </ul>

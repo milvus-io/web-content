@@ -2,8 +2,8 @@
 id: yandex-cloud.md
 title: Yandex CloudCompatible with Milvus 2.6.x
 summary: >-
-  In questa sezione viene illustrato come configurare e utilizzare le funzioni
-  di embedding di Yandex Cloud in Milvus.
+  In questa sezione viene spiegato come configurare e utilizzare le funzioni di
+  embedding di Yandex Cloud in Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="Yandex-Cloud" class="common-anchor-header">Yandex Cloud<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Yandex-Cloud" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus supporta i modelli di vettorializzazione del testo di Yandex Cloud AI Studio tramite il provider <code translate="no">yc</code>. Nei parametri della funzione, impostare " <code translate="no">model_name</code> " sull'URI del modello Yandex Cloud che Milvus deve richiamare.</p>
-<p>Ad esempio, Yandex Text Embeddings per i documenti utilizza un URI del modello come <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> e restituisce vettori a 256 dimensioni. Per gli URI dei modelli disponibili e le dimensioni, consultare <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Modelli di vettorializzazione del testo</a>.</p>
+<p>Ad esempio, Yandex Text Embeddings per i documenti utilizza un URI del modello del tipo <code translate="no">emb://&lt;folder_ID&gt;/text-search-doc/latest</code> e restituisce vettori a 256 dimensioni. Per gli URI dei modelli disponibili e le dimensioni, consultare <a href="https://aistudio.yandex.ru/docs/en/ai-studio/concepts/embeddings">Modelli di vettorializzazione del testo</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurare le credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

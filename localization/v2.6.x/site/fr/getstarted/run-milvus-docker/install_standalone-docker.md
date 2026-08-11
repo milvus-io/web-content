@@ -75,7 +75,7 @@ title: Exécuter Milvus dans Docker (Linux)
 </div>
 <p>Après l'exécution du script d'installation :</p>
 <ul>
-<li>Un conteneur Docker nommé « milvus » a été lancé sur le port <strong>19530</strong>.</li>
+<li>Un conteneur Docker nommé milvus a été démarré sur le port <strong>19530</strong>.</li>
 <li>Un embed etcd est installé avec Milvus dans le même conteneur et est accessible sur le port <strong>2379</strong>. Son fichier de configuration correspond au <strong>fichier embedEtcd.yaml</strong> situé dans le dossier actuel.</li>
 <li>Pour modifier la configuration par défaut de Milvus, ajoutez vos paramètres au fichier <strong>user.yaml</strong> situé dans le dossier actuel, puis redémarrez le service.</li>
 <li>Le volume de données Milvus est mappé vers le répertoire ` <strong>volumes/milvus</strong> ` du dossier actuel.</li>

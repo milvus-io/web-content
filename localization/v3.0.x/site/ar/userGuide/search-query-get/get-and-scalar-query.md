@@ -2,9 +2,8 @@
 id: get-and-scalar-query.md
 title: الاستعلام
 summary: >-
-  استخدم الاستعلام، والحصول، والاستعلام، والاستعلام المتكرر لاسترداد الكيانات،
-  وتصفية البيانات الوصفية، وفرز نتائج الاستعلام، وتجميع القيم القياسية في
-  Milvus.
+  استخدم «Query» و«Get» و«QueryIterator» لاسترداد الكيانات وتصفية البيانات
+  الوصفية في Milvus.
 ---
 <h1 id="Query" class="common-anchor-header">الاستعلام<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>بالإضافة إلى عمليات بحث ANN، يدعم ميلفوس أيضًا تصفية البيانات الوصفية من خلال الاستعلامات. تقدم هذه الصفحة كيفية استخدام الاستعلام، والحصول، والاستعلامات لاسترداد الكيانات، وتصفية البيانات الوصفية، وفرز نتائج الاستعلام، وتجميع القيم القياسية.</p>
+    </button></h1><p>بالإضافة إلى عمليات البحث باستخدام الشبكات العصبية الاصطناعية (ANN)، يدعم Milvus أيضًا تصفية البيانات الوصفية من خلال الاستعلامات. تشرح هذه الصفحة كيفية استخدام Query و Get و QueryIterators لإجراء تصفية البيانات الوصفية.</p>
 <div class="alert note">
-<p>إذا قمت بإضافة حقول جديدة ديناميكيًا بعد إنشاء المجموعة، فإن الاستعلامات التي تتضمن هذه الحقول ستُرجع القيم الافتراضية المحددة أو NULL للكيانات التي لم تقم بتعيين قيم صريحة. للحصول على التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p>
+<p>إذا أضفت حقولًا جديدة بعد إنشاء المجموعة، فإن الاستعلامات التي تتضمن هذه الحقول ستُرجع القيم الافتراضية المحددة أو « <code translate="no">NULL</code> » (غير محدد) للكيانات التي لم يتم تعيين قيم لها صراحةً. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">«تعديل مخطط المجموعة</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,47 +39,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن للمجموعة تخزين أنواع مختلفة من الحقول القياسية. يمكنك جعل Milvus يقوم بتصفية الكيانات استنادًا إلى حقل قياسي واحد أو أكثر. يقدم Milvus ثلاثة أنواع من الاستعلامات: الاستعلام، والحصول، والاستعلام، والاستعلام المتكرر. يقارن الجدول أدناه بين هذه الأنواع الثلاثة من الاستعلامات.</p>
+    </button></h2><p>يمكن للمجموعة تخزين أنواع مختلفة من الحقول القياسية. يمكنك جعل Milvus يقوم بتصفية الكيانات بناءً على حقل قياسي واحد أو أكثر. يوفر Milvus ثلاثة أنواع من الاستعلامات: الاستعلام (Query) والاسترجاع (Get) ومكرر الاستعلام (QueryIterator). يقارن الجدول أدناه بين أنواع الاستعلامات الثلاثة هذه.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>الحصول على</p></th>
-     <th><p>استعلام</p></th>
-     <th><p>استعلام متكرر</p></th>
+     <th><p>Get</p></th>
+     <th><p>Query</p></th>
+     <th><p>QueryIterator</p></th>
    </tr>
    <tr>
-     <td><p>سيناريوهات قابلة للتطبيق</p></td>
+     <td><p>السيناريوهات القابلة للتطبيق</p></td>
      <td><p>للعثور على الكيانات التي تحتوي على المفاتيح الأساسية المحددة.</p></td>
-     <td><p>للعثور على جميع الكيانات أو عدد محدد من الكيانات التي تستوفي شروط التصفية المخصصة</p></td>
-     <td><p>للعثور على جميع الكيانات التي تفي بشروط التصفية المخصصة في استعلامات مرقمة.</p></td>
+     <td><p>للعثور على جميع الكيانات أو عدد محدد منها التي تستوفي شروط التصفية المخصصة</p></td>
+     <td><p>للبحث عن جميع الكيانات التي تستوفي شروط التصفية المخصصة في الاستعلامات المقسمة إلى صفحات.</p></td>
    </tr>
    <tr>
      <td><p>طريقة التصفية</p></td>
      <td><p>حسب المفاتيح الأساسية</p></td>
-     <td><p>بواسطة تعبيرات التصفية.</p></td>
-     <td><p>بواسطة تعبيرات التصفية.</p></td>
+     <td><p>حسب تعبيرات التصفية.</p></td>
+     <td><p>حسب تعبيرات التصفية.</p></td>
    </tr>
    <tr>
-     <td><p>معلمات إلزامية</p></td>
+     <td><p>المعلمات الإلزامية</p></td>
      <td><ul><li><p>اسم المجموعة</p></li><li><p>المفاتيح الأساسية</p></li></ul></td>
      <td><ul><li><p>اسم المجموعة</p></li><li><p>تعبيرات التصفية</p></li></ul></td>
-     <td><ul><li><p>اسم المجموعة</p></li><li><p>تعبيرات التصفية</p></li><li><p>عدد الكيانات المراد إرجاعها لكل استعلام</p></li></ul></td>
+     <td><ul><li><p>اسم المجموعة</p></li><li><p>تعبيرات التصفية</p></li><li><p>عدد الكيانات المطلوب إرجاعها لكل استعلام</p></li></ul></td>
    </tr>
    <tr>
      <td><p>المعلمات الاختيارية</p></td>
      <td><ul><li><p>اسم القسم</p></li><li><p>حقول الإخراج</p></li></ul></td>
      <td><ul><li><p>اسم القسم</p></li><li><p>عدد الكيانات المطلوب إرجاعها</p></li><li><p>حقول الإخراج</p></li></ul></td>
-     <td><ul><li><p>اسم القسم</p></li><li><p>عدد الكيانات المراد إرجاعها إجمالاً</p></li><li><p>حقول الإخراج</p></li></ul></td>
+     <td><ul><li><p>اسم القسم</p></li><li><p>إجمالي عدد الكيانات المطلوب إرجاعها</p></li><li><p>حقول الإخراج</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>إرجاع</p></td>
-     <td><p>إرجاع الكيانات التي تحتوي على المفاتيح الأساسية المحددة في المجموعة أو القسم المحدد.</p></td>
-     <td><p>إرجاع كل أو عدد محدد من الكيانات التي تستوفي شروط التصفية المخصصة في المجموعة أو القسم المحدد.</p></td>
-     <td><p>إرجاع كافة الكيانات التي تفي بشروط التصفية المخصصة في المجموعة أو القسم المحدد من خلال استعلامات مرقمة بالصفحات.</p></td>
+     <td><p>تُرجع</p></td>
+     <td><p>يعرض الكيانات التي تحتوي على المفاتيح الأساسية المحددة في المجموعة أو القسم المحدد.</p></td>
+     <td><p>يعرض جميع الكيانات أو عددًا محددًا منها التي تستوفي شروط التصفية المخصصة في المجموعة أو القسم المحدد.</p></td>
+     <td><p>يعرض جميع الكيانات التي تستوفي شروط التصفية المخصصة في المجموعة أو القسم المحدد من خلال استعلامات مقسمة إلى صفحات.</p></td>
    </tr>
 </table>
-<p>لمعرفة المزيد حول تصفية بيانات التعريف، راجع <a href="/docs/ar/basic-operators.md">قواعد التعبير المنطقي</a>.</p>
-<h2 id="Use-Get" class="common-anchor-header">استخدام الحصول على<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>لمزيد من المعلومات حول تصفية البيانات الوصفية، راجع .</p>
+<h2 id="Use-Get" class="common-anchor-header">استخدام Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما تحتاج إلى البحث عن كيانات حسب مفاتيحها الأساسية، يمكنك استخدام الأسلوب <strong>Get</strong>. وتفترض الأمثلة البرمجية التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك.</p>
+    </button></h2><p>عندما تحتاج إلى البحث عن الكيانات باستخدام مفاتيحها الأساسية، يمكنك استخدام طريقة <strong>Get</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -109,9 +108,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك الحصول على الكيانات حسب معرّفاتها على النحو التالي.</p>
+<p>يمكنك الحصول على الكيانات باستخدام معرّفاتها (ID) على النحو التالي.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -211,7 +215,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -250,9 +253,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما تحتاج إلى العثور على كيانات حسب شروط التصفية المخصصة، استخدم طريقة <strong>الاستعلام</strong>. وتفترض الأمثلة البرمجية التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> وإرجاع العدد المحدد من الكيانات التي تحمل قيمة <code translate="no">color</code> تبدأ ب <code translate="no">red</code>.</p>
+    </button></h3><p>عندما تحتاج إلى العثور على الكيانات باستخدام شروط تصفية مخصصة، استخدم طريقة <strong>Query</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> وتُرجع العدد المحدد من الكيانات التي تحتوي على قيمة <code translate="no">color</code> تبدأ بـ <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -322,7 +330,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -347,15 +354,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بشكل افتراضي، يقوم الاستعلام بإرجاع النتائج بترتيب غير محدد. استخدم المعلمة <code translate="no">order_by</code> لفرز النتائج حسب حقل قياسي واحد أو أكثر. عند استخدام <code translate="no">order_by</code> ، لاحظ أن:</p>
+    </button></h3><p>بشكل افتراضي، تعرض «Query» النتائج بترتيب غير محدد. استخدم المعلمة <code translate="no">order_by</code> لفرز النتائج حسب حقل قياسي واحد أو أكثر. عند استخدام <code translate="no">order_by</code> ، لاحظ ما يلي:</p>
 <ul>
-<li><p><code translate="no">order_by</code> يجب استخدامه مع <code translate="no">limit</code>.</p></li>
-<li><p>أنواع الحقول المدعومة: <code translate="no">INT8</code> <code translate="no">INT16</code> و <code translate="no">INT32</code> و و <code translate="no">INT64</code> و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code>. الفرز حسب الحقول المتجهة أو <code translate="no">JSON</code> أو <code translate="no">ARRAY</code> غير مدعوم.</p></li>
-<li><p>عند الفرز حسب حقل قابل للإلغاء، يتم وضع القيم الفارغة في النهاية للترتيب التصاعدي (NULLS LAST) وفي البداية للترتيب التنازلي (NULLS FIRST).</p></li>
+<li><p><code translate="no">order_by</code> يجب استخدامها مع المعلمة <code translate="no">limit</code>.</p></li>
+<li><p>أنواع الحقول المدعومة: <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code> و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code>. لا يُدعم الترتيب حسب الحقول المتجهة أو <code translate="no">JSON</code> أو <code translate="no">ARRAY</code>.</p></li>
+<li><p>عند الفرز حسب حقل قابل للقيمة الفارغة (nullable)، تُوضع القيم NULL في النهاية في حالة الترتيب التصاعدي (NULLS LAST) وفي البداية في حالة الترتيب التنازلي (NULLS FIRST).</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">الفرز الأساسي</h4><p>قم بتمرير قائمة من السلاسل <code translate="no">&quot;field_name:direction&quot;</code> إلى المعلمة <code translate="no">order_by</code> ، حيث <code translate="no">direction</code> إما <code translate="no">asc</code> (تصاعدي) أو <code translate="no">desc</code> (تنازلي). لاحظ أن <code translate="no">asc</code> و <code translate="no">desc</code> حساس لحالة الأحرف.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">الفرز الأساسي</h4><p>قم بتمرير قائمة من سلاسل <code translate="no">&quot;field_name:direction&quot;</code> إلى المعلمة <code translate="no">order_by</code> ، حيث يكون <code translate="no">direction</code> إما <code translate="no">asc</code> (تصاعدي) أو <code translate="no">desc</code> (تنازلي). لاحظ أن <code translate="no">asc</code> و <code translate="no">desc</code> حساسة لحالة الأحرف.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -380,9 +392,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">فرز متعدد الحقول</h4><p>يمكنك الفرز حسب حقول متعددة في وقت واحد. يتم ترتيب النتائج أولاً حسب الحقل الأول في القائمة. عندما يكون هناك صفان لهما نفس القيمة في هذا الحقل، يحدد الحقل الثاني ترتيبهم، وهكذا.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">الفرز متعدد الحقول</h4><p>يمكنك الفرز حسب حقول متعددة في آن واحد. يتم ترتيب النتائج أولاً حسب الحقل الأول في القائمة. وعندما يكون لصفين نفس القيمة في ذلك الحقل، فإن الحقل الثاني هو الذي يحدد ترتيبهما، وهكذا دواليك.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -400,9 +417,14 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">ترقيم الصفوف مع الفرز</h4><p>استخدم <code translate="no">order_by</code> مع <code translate="no">limit</code> و <code translate="no">offset</code> لترقيم الصفحات من خلال النتائج المصنفة. على سبيل المثال، لعرض قائمة منتجات مرتبة حسب السعر عبر عدة صفحات، تعرض كل صفحة الدفعة التالية من العناصر بترتيب السعر الصحيح دون تكرار أو فجوات.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">ترقيم الصفحات مع الفرز</h4><p>استخدم <code translate="no">order_by</code> مع <code translate="no">limit</code> و <code translate="no">offset</code> لتقسيم النتائج المصنفة إلى صفحات. على سبيل المثال، لعرض قائمة منتجات مصنفة حسب السعر على عدة صفحات، تعرض كل صفحة المجموعة التالية من العناصر بالترتيب الصحيح حسب السعر دون تكرار أو فجوات.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -431,7 +453,7 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">تجميع نتائج الاستعلام<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">استخدم QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -446,136 +468,14 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك تجميع نتائج الاستعلام حسب حقل قياسي واحد أو أكثر وحساب التجميعات لكل مجموعة. عوامل التجميع المدعومة هي <code translate="no">count</code> و <code translate="no">min</code> و و <code translate="no">max</code> و <code translate="no">sum</code> و <code translate="no">avg</code>.</p>
-<p>عند استخدام <code translate="no">group_by_fields</code> ، لاحظ أن:</p>
-<ul>
-<li><p>أنواع الحقول المدعومة لـ <code translate="no">group_by_fields</code>: <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و و <code translate="no">INT64</code> و <code translate="no">VARCHAR</code> و <code translate="no">TIMESTAMPTZ</code>. يؤدي التجميع حسب حقول <code translate="no">FLOAT</code> أو <code translate="no">DOUBLE</code> أو المتجه أو <code translate="no">JSON</code> أو <code translate="no">ARRAY</code> إلى إرجاع خطأ.</p></li>
-<li><p><code translate="no">sum</code> و <code translate="no">avg</code> رقمية فقط. يمكنك تطبيقهما على حقول رقمية، بما في ذلك <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> ، ولكن تطبيقهما على حقل <code translate="no">VARCHAR</code> يُرجع خطأ.</p></li>
-</ul>
-<p>لتمكين التجميع، مرر <code translate="no">group_by_fields</code> إلى <code translate="no">query()</code> وأضف تعبيرات التجميع (<code translate="no">count(*)</code> و <code translate="no">count(&lt;field&gt;)</code> و <code translate="no">min(&lt;field&gt;)</code> و <code translate="no">max(&lt;field&gt;)</code> و <code translate="no">sum(&lt;field&gt;)</code> و <code translate="no">avg(&lt;field&gt;)</code>) إلى <code translate="no">output_fields</code>.</p>
-<p>يقوم المثال التالي بتجميع الكيانات حسب الحقل <code translate="no">color</code> وإرجاع عدد الكيانات في كل مجموعة لونية:</p>
+    </button></h2><p>عندما تحتاج إلى العثور على الكيانات وفقًا لشروط تصفية مخصصة من خلال استعلامات مقسمة إلى صفحات، قم بإنشاء <strong>QueryIterator</strong> واستخدم طريقة <strong>next()</strong> الخاصة به للتكرار عبر جميع الكيانات للعثور على تلك التي تستوفي شروط التصفية. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> وتُرجع جميع الكيانات التي تحتوي على قيمة <code translate="no">color</code> تبدأ بـ <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;count(*)&#x27;: 10}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>يمكنك طلب عدة تعبيرات تجميع في مكالمة واحدة. يقوم المثال التالي بالتجميع حسب <code translate="no">color</code> وإرجاع عدد الكيانات ومتوسط السعر والحد الأقصى للتقييم لكل مجموعة:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>, <span class="hljs-string">&quot;avg(price)&quot;</span>, <span class="hljs-string">&quot;max(rating)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 65.22, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 48.67, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 64.15, &#x27;max(rating)&#x27;: 3},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 58.28, &#x27;max(rating)&#x27;: 5},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;count(*)&#x27;: 10, &#x27;avg(price)&#x27;: 50.20, &#x27;max(rating)&#x27;: 5}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>مرر أكثر من حقل واحد إلى <code translate="no">group_by_fields</code> لحساب المجموعات المركبة. يقوم المثال التالي بالتجميع حسب <code translate="no">(color, rating)</code> ويحسب النطاق السعري في كل مجموعة:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-<span class="highlighted-comment-line">    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;min(price)&quot;</span>, <span class="hljs-string">&quot;max(price)&quot;</span>],</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;rating&#x27;: 5, &#x27;min(price)&#x27;: 34.51, &#x27;max(price)&#x27;: 70.90},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;rating&#x27;: 2, &#x27;min(price)&#x27;: 12.39, &#x27;max(price)&#x27;: 81.99},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;rating&#x27;: 2, &#x27;min(price)&#x27;: 22.62, &#x27;max(price)&#x27;: 88.24},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;rating&#x27;: 1, &#x27;min(price)&#x27;: 18.35, &#x27;max(price)&#x27;: 59.53},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;rating&#x27;: 4, &#x27;min(price)&#x27;: 21.23, &#x27;max(price)&#x27;: 82.45},</span>
-<span class="hljs-comment">#  ...]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا الجمع بين <code translate="no">group_by_fields</code> مع <code translate="no">limit</code> لتحديد عدد المجموعات التي تعود. يكون هذا مفيدًا عندما يكون الحقل ذا عدد كبير من المجموعات وتحتاج فقط إلى عينة من المجموعات:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,
-    group_by_fields=[<span class="hljs-string">&quot;color&quot;</span>],
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;avg(price)&quot;</span>, <span class="hljs-string">&quot;count(*)&quot;</span>],
-<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,</span>
-)
-
-<span class="hljs-comment"># [{&#x27;color&#x27;: &#x27;red&#x27;,    &#x27;avg(price)&#x27;: 65.22, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;orange&#x27;, &#x27;avg(price)&#x27;: 48.67, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;avg(price)&#x27;: 64.15, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;green&#x27;,  &#x27;avg(price)&#x27;: 58.28, &#x27;count(*)&#x27;: 10},</span>
-<span class="hljs-comment">#  {&#x27;color&#x27;: &#x27;blue&#x27;,   &#x27;avg(price)&#x27;: 50.20, &#x27;count(*)&#x27;: 10}]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">استخدام QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>عندما تحتاج إلى العثور على كيانات من خلال شروط تصفية مخصصة من خلال استعلامات مرقمة، أنشئ <strong>QueryIterator</strong> واستخدم طريقة <strong>التالي()</strong> للتكرار على جميع الكيانات للعثور على تلك التي تستوفي شروط التصفية. تفترض الأمثلة البرمجية التالية أن هناك ثلاثة حقول مسماة <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> وإرجاع جميع الكيانات التي تحتوي على قيمة <code translate="no">color</code> تبدأ ب <code translate="no">red</code>.</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
     batch_size=<span class="hljs-number">10</span>,
@@ -658,9 +558,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك أيضًا إجراء استعلامات ضمن قسم واحد أو عدة أقسام من خلال تضمين أسماء الأقسام في طلب الحصول أو الاستعلام أو الاستعلام أو الاستعلام المتكرر. تفترض الأمثلة البرمجية التالية وجود قسم باسم <strong>PartitionA</strong> في المجموعة.</p>
+    </button></h2><p>يمكنك أيضًا إجراء استعلامات داخل قسم واحد أو عدة أقسام عن طريق تضمين أسماء الأقسام في طلب Get أو Query أو QueryIterator. تفترض أمثلة الكود التالية وجود قسم باسم <strong>PartitionA</strong> في المجموعة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
@@ -791,7 +696,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -804,7 +708,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -814,7 +717,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">أخذ عينات عشوائية باستخدام الاستعلام<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">الأخذ العشوائي للعينات باستخدام Query<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,12 +732,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخراج مجموعة فرعية تمثيلية من البيانات من مجموعتك لاستكشاف البيانات أو اختبار التطوير، استخدم التعبير <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> ، حيث يكون <code translate="no">sampling_factor</code> عبارة عن عوامة بين 0 و1 تمثل النسبة المئوية للبيانات المراد أخذ عينة منها.</p>
+    </button></h2><p>لاستخراج مجموعة فرعية تمثيلية من البيانات من مجموعتك لاستكشاف البيانات أو اختبار التطوير، استخدم التعبير <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> ، حيث يمثل <code translate="no">sampling_factor</code> عددًا عائمًا بين 0 و1 يمثل النسبة المئوية للبيانات المراد أخذ عينات منها.</p>
 <div class="alert note">
-<p>للاطلاع على الاستخدام التفصيلي والأمثلة المتقدمة وأفضل الممارسات، راجع <a href="/docs/ar/random-sampling.md">اختيار العينات العشوائية</a>.</p>
+<p>للاطلاع على تفاصيل الاستخدام والأمثلة المتقدمة وأفضل الممارسات، راجع <a href="/docs/ar/random-sampling.md">«الأخذ العشوائي للعينات</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -911,7 +819,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">تعيين منطقة زمنية مؤقتة لاستعلام مؤقتًا<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">تعيين منطقة زمنية مؤقتًا لاستعلام<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -926,11 +834,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، يمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء الاستعلام. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
-<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة لـ <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> أو <strong>أمريكا/شيكاغو،</strong> أو <strong>التوقيت العالمي المنسق</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
+    </button></h2><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، فيمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء الاستعلام. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
+<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحًا <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">وفقًا لمعايير IANA</a> (على سبيل المثال، <strong>Asia/Shanghai</strong> أو <strong>America/Chicago</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
 <p>يوضح المثال أدناه كيفية تعيين منطقة زمنية مؤقتًا لعملية استعلام:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     <span class="hljs-string">&quot;my_collection&quot;</span>,

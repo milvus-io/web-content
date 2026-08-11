@@ -1,13 +1,12 @@
 ---
 id: regex-filter.md
-title: RegexCompatible with Milvus 2.5.11+
+title: Filtro Regex AnalyzerCompatible with Milvus 2.5.11+
 summary: >-
-  Il filtro regex è un filtro di espressione regolare: qualsiasi token prodotto
-  dal tokenizer viene mantenuto solo se corrisponde all'espressione fornita;
-  tutto il resto viene scartato.
+  Il filtro dell'analizzatore di espressioni regolari conserva i token che
+  corrispondono a un'espressione regolare e scarta il resto.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex-Analyzer-Filter" class="common-anchor-header">Filtro Regex Analyzer<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex-Analyzer-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +21,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Il filtro <code translate="no">regex</code> è un filtro di espressione regolare: qualsiasi token prodotto dal tokenizzatore viene mantenuto solo se corrisponde all'espressione fornita; tutto il resto viene scartato.</p>
+    </button></h1><p>Il filtro " <code translate="no">regex</code> " è un filtro basato su espressioni regolari: ogni token generato dal tokenizer viene mantenuto solo se corrisponde all'espressione specificata; tutto il resto viene scartato.</p>
+<div class="alert note">
+<p>Questa pagina descrive il filtro " <code translate="no">regex</code> " nella pipeline dell'analizzatore. Esso filtra i token generati da un tokenizer e influisce sui termini generati durante l'analisi del testo. Per filtrare le entità con espressioni scalari quali <code translate="no">field =~ &quot;pattern&quot;</code> o <code translate="no">field !~ &quot;pattern&quot;</code> nelle ricerche " <code translate="no">query</code>", " <code translate="no">search</code>" o ibride, consultare la sezione <a href="/docs/it/pattern-matching.md">"Corrispondenza dei pattern"</a>.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,9 +40,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il filtro <code translate="no">regex</code> è un filtro personalizzato di Milvus. Per utilizzarlo, specificare <code translate="no">&quot;type&quot;: &quot;regex&quot;</code> nella configurazione del filtro, insieme a un parametro <code translate="no">expr</code> per specificare le espressioni regolari desiderate.</p>
+    </button></h2><p>Il filtro « <code translate="no">regex</code> » è un filtro personalizzato in Milvus. Per utilizzarlo, specificare <code translate="no">&quot;type&quot;: &quot;regex&quot;</code> nella configurazione del filtro, insieme al parametro <code translate="no">expr</code> per indicare le espressioni regolari desiderate.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [{
@@ -68,7 +75,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il filtro <code translate="no">regex</code> accetta i seguenti parametri configurabili.</p>
+<p>Il filtro " <code translate="no">regex</code> " accetta i seguenti parametri configurabili.</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -76,11 +83,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    </tr>
    <tr>
      <td><p><code translate="no">expr</code></p></td>
-     <td><p>Un modello di espressione regolare applicato a ogni token. I token che corrispondono vengono mantenuti; quelli che non corrispondono vengono eliminati. Per maggiori dettagli sulla sintassi delle regex, fare riferimento a <a href="https://docs.rs/regex/latest/regex/#syntax">Sintassi</a>.</p></td>
+     <td><p>Un modello di espressione regolare applicato a ciascun token. I token che corrispondono vengono conservati; quelli che non corrispondono vengono scartati.
+ Per i dettagli sulla sintassi delle espressioni regolari, consultare la sezione <a href="https://docs.rs/regex/latest/regex/#syntax">Sintassi</a>.</p></td>
    </tr>
 </table>
-<p>Il filtro <code translate="no">regex</code> opera sui termini generati dal tokenizzatore, quindi deve essere usato in combinazione con un tokenizzatore.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Il filtro " <code translate="no">regex</code> " opera sui termini generati dal tokenizer, pertanto deve essere utilizzato in combinazione con un tokenizer.</p>
+<p>Dopo aver definito i filtri " <code translate="no">analyzer_params</code>", è possibile applicarli a un campo " <code translate="no">VARCHAR</code> " durante la definizione dello schema di una collezione. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md#Example-use">"Esempio di utilizzo"</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,8 +104,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di applicare la configurazione dell'analizzatore allo schema di raccolta, verificarne il comportamento con il metodo <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell'analizzatore<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Prima di applicare la configurazione dell’analizzatore allo schema della collezione, verificarne il comportamento utilizzando il metodo ` <code translate="no">run_analyzer</code> `.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell’analizzatore<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,7 +121,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#plaintext">testo semplice</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#plaintext">testo in chiaro</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-plaintext">analyzer_params = {
     &quot;tokenizer&quot;: &quot;standard&quot;,
     &quot;filter&quot;: [{
@@ -140,7 +153,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica tramite <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,7 +169,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

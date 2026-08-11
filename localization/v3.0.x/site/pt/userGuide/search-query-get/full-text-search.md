@@ -7,7 +7,7 @@ summary: >-
   classificando depois os resultados com base na relevância. Esta funcionalidade
   supera as limitações da pesquisa semântica, que pode ignorar termos precisos,
   garantindo que obtém os resultados mais precisos e contextualmente relevantes.
-  Além disso, simplifica as pesquisas vetoriais ao aceitar entrada de texto
+  Além disso, simplifica as pesquisas vetoriais ao aceitar a introdução de texto
   bruto, convertendo automaticamente os seus dados de texto em representações
   esparsas, sem necessidade de gerar manualmente representações vetoriais.
 ---
@@ -51,7 +51,7 @@ summary: >-
 <ol>
 <li><p><strong>Introdução de texto bruto</strong>: insere documentos de texto ou introduz uma consulta utilizando texto simples, sem necessidade de modelos de incorporação.</p></li>
 <li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/analyzer-overview.md">analisador</a> para processar o seu texto em termos significativos que possam ser indexados e pesquisados.</p></li>
-<li><p><strong>Processamento da função BM25</strong>: Uma função integrada transforma estes termos em representações vetoriais esparsas otimizadas para a pontuação BM25.</p></li>
+<li><p><strong>Processamento da função BM25</strong>: Uma função integrada transforma estes termos em representações de vetores esparsos otimizadas para a pontuação BM25.</p></li>
 <li><p><strong>Armazenamento na coleção</strong>: O Milvus armazena as incorporações esparsas resultantes numa coleção para uma recuperação e classificação rápidas.</p></li>
 <li><p><strong>Pontuação de relevância BM25</strong>: No momento da pesquisa, o Milvus aplica a função de pontuação BM25 para calcular a relevância do documento e devolver resultados classificados que melhor correspondam aos termos da consulta.</p></li>
 </ol>
@@ -101,7 +101,7 @@ summary: >-
     </button></h3><p>O esquema da sua coleção deve incluir, pelo menos, três campos obrigatórios:</p>
 <ul>
 <li><p><strong>Campo primário</strong>: identifica de forma única cada entidade na coleção.</p></li>
-<li><p><strong>Campo de cadeia de caracteres</strong> (<code translate="no">VARCHAR</code> ou <code translate="no">TEXT</code>): Armazena documentos de texto bruto. É necessário definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância do BM25. Por predefinição, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/pt/standard-analyzer.md"> analisador</a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">a Visão geral do analisador</a>. Os exemplos nesta página utilizam <code translate="no">VARCHAR</code>; para textos longos, pode definir o campo de entrada como <code translate="no">TEXT</code> e omitir <code translate="no">max_length</code>. Para um exemplo completo, consulte <a href="/docs/pt/text.md">Campo de texto</a>.</p></li>
+<li><p><strong>Campo de cadeia de caracteres</strong> (<code translate="no">VARCHAR</code> ou <code translate="no">TEXT</code>): Armazena documentos de texto bruto. É necessário definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância do BM25. Por predefinição, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/pt/standard-analyzer.md"> analisador</a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">a Visão Geral do Analisador</a>. Os exemplos nesta página utilizam <code translate="no">VARCHAR</code>; para textos longos, pode definir o campo de entrada como <code translate="no">TEXT</code> e omitir <code translate="no">max_length</code>. Para um exemplo completo, consulte <a href="/docs/pt/text.md">Campo de Texto</a>.</p></li>
 <li><p><strong>Campo de vetor esparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Armazena incorporações esparsas geradas automaticamente pela função BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -353,11 +353,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>O nome do campo onde os vetores esparsos gerados internamente serão armazenados. Para « <code translate="no">FunctionType.BM25</code> », este parâmetro aceita apenas um nome de campo.</p></td>
+     <td><p>O nome do campo onde os vetores esparsos gerados internamente serão armazenados. Para <code translate="no">FunctionType.BM25</code>, este parâmetro aceita apenas um nome de campo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>O tipo da função a utilizar. Deve ser « <code translate="no">FunctionType.BM25</code> ».</p></td>
+     <td><p>O tipo da função a utilizar. Deve ser ` <code translate="no">FunctionType.BM25</code>`.</p></td>
    </tr>
 </table>
 <div class="alert note">
@@ -635,7 +635,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>Depois de inserir dados na sua coleção, pode realizar pesquisas de texto completo utilizando consultas de texto bruto. O Milvus converte automaticamente a sua consulta num vetor esparso e classifica os resultados da pesquisa correspondentes utilizando o algoritmo BM25, devolvendo depois os resultados topK (<code translate="no">limit</code>).</p>
 <div class="alert note">
-<p>Pode destacar os termos correspondentes nos resultados da pesquisa, configurando um realçador de texto. Consulte <a href="/docs/pt/text-highlighter.md">«Realçador de texto»</a> para obter mais detalhes.</p>
+<p>Pode destacar os termos correspondentes nos resultados da pesquisa configurando um marcador de texto. Consulte <a href="/docs/pt/text-highlighter.md">Marcador de texto</a> para obter mais detalhes.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

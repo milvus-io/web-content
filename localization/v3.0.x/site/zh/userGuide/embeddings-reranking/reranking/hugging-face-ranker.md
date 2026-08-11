@@ -1,7 +1,7 @@
 ---
 id: hugging-face-ranker.md
 title: Hugging Face RankerCompatible with Milvus v2.6.20+
-summary: 本主题介绍了如何使用托管在 Hugging Face 上的句子相似度模型，对 Milvus 的搜索结果进行重新排序。
+summary: 本主题介绍了如何使用托管在 Hugging Face 上的句子相似度模型对 Milvus 的搜索结果进行重新排序。
 beta: Milvus v2.6.20+
 ---
 <h1 id="Hugging-Face-Ranker" class="common-anchor-header">Hugging Face Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.20+</span><button data-href="#Hugging-Face-Ranker" class="anchor-icon" translate="no">
@@ -78,8 +78,8 @@ beta: Milvus v2.6.20+
 <p>Hugging Face 模型分三个阶段计算分数：</p>
 <ol>
 <li><strong>准备文本输入。</strong>Ranker 从<code translate="no">params.queries</code> 读取查询文本，并从配置的<code translate="no">VARCHAR</code> 字段读取候选文本。</li>
-<li><strong>创建独立的模型表示。</strong>Milvus 将查询文本作为<code translate="no">source_sentence</code> 发送，将候选文本作为<code translate="no">sentences</code> 发送。模型在内部分别对查询和每个候选文本进行编码。</li>
-<li><strong>比较并返回评分。</strong>模型将查询表示与每个候选表示进行比较，并为每个候选结果返回一个相似度评分。</li>
+<li><strong>创建独立的模型表示。</strong>Milvus将查询文本作为<code translate="no">source_sentence</code> ，将候选文本作为<code translate="no">sentences</code> 发送。模型在内部分别对查询和每个候选文本进行编码。</li>
+<li><strong>比较并返回评分。</strong>模型将查询表示与每个候选表示进行比较，并针对每个候选结果返回一个相似度评分。</li>
 </ol>
 <p>Hugging Face 模型所使用的 Embeddings 或表示形式属于模型处理的中间结果。Hugging Face 返回的是评分，而非向量。因此，初始向量检索和模型重新排序使用的是独立的表示形式，且可能采用不同的模型。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">

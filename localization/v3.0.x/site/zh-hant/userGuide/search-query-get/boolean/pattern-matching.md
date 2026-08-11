@@ -36,7 +36,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>本頁面的範例著重於指派給 `<code translate="no">filter</code>` 的表達式。您可以在接受標量篩選器的 Milvus 操作中使用相同的篩選表達式語法，例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 以及混合搜尋。</p>
+<p>本頁的範例著重於指派給 `<code translate="no">filter</code>` 的表達式。您可以在接受標量篩選器的 Milvus 操作中使用相同的篩選表達式語法，例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 以及混合搜尋。</p>
 <h2 id="Supported-field-types" class="common-anchor-header">支援的欄位類型<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,9 +59,9 @@ res = client.query(
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> 欄位</td><td>是</td><td>是</td><td>字串欄位進行模式比對的典型目標。</td></tr>
-<tr><td><code translate="no">JSON</code> 路徑，其<code translate="no">VARCHAR</code> 已進行型別轉換</td><td>是</td><td>是</td><td>若要進行正向匹配，JSON 路徑值必須為字串。若您為加速目的在 JSON 路徑上建立索引，請設定<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
+<tr><td><code translate="no">JSON</code> 路徑，並使用<code translate="no">VARCHAR</code> 進行類型轉換</td><td>是</td><td>是</td><td>若要進行正向匹配，JSON 路徑值必須為字串。若您為加速目的在 JSON 路徑上建立索引，請設定<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素</td><td>是</td><td>是</td><td>根據索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不會</strong>掃描所有元素；它僅適用於指定索引處的元素。</td></tr>
-<tr><td>數值、布林值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目標</td><td>否</td><td>否</td><td>模式匹配僅適用於<code translate="no">VARCHAR</code> 值、解析後為字串的JSON路徑，或具索引的<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素。</td></tr>
+<tr><td>數值、布林值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目標</td><td>否</td><td>否</td><td>模式匹配僅適用於 `<code translate="no">VARCHAR</code> ` 值、解析為字串的 JSON 路徑，或具索引的 `<code translate="no">ARRAY&lt;VARCHAR&gt;</code> ` 元素。</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">選擇 LIKE 或正規表達式<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -233,7 +233,7 @@ res = client.query(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ r&quot;\d{4}-\d{2}-\d{2}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>這會匹配包含類似日期的字串，例如<code translate="no">2026-07-01</code> 。</p>
-<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元字面值的字串，可能需要額外的反斜線。</p>
+<p>若未使用原始字串，一般字串文字會在評估正規表達式模式之前先處理轉義序列，因此像<code translate="no">\d</code> 、<code translate="no">\s</code> 這樣的模式，或是包含轉義字元的字串，可能需要額外的反斜線。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常見的正規表達式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

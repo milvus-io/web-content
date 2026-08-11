@@ -1,10 +1,12 @@
 ---
 id: enable-dynamic-field.md
-title: ダイナミックフィールド
+title: 動的フィールド
 summary: >-
-  Milvusでは、ダイナミックフィールドと呼ばれる特別な機能により、柔軟で進化する構造を持つエンティティを挿入することができます。このフィールドは$metaという名前の隠しJSONフィールドとして実装されており、コレクションスキーマで明示的に定義されていないフィールドをデータ内に自動的に格納します。
+  Milvus
+  では、「動的フィールド」と呼ばれる特別な機能を通じて、柔軟で変化し続ける構造を持つエンティティを挿入することができます。このフィールドは、$meta
+  という名前の非表示の JSON フィールドとして実装されており、コレクションスキーマで明示的に定義されていないデータ内のフィールドを自動的に格納します。
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">ダイナミックフィールド<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">動的フィールド<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、<strong>ダイナミックフィールドと</strong>呼ばれる特別な機能により、柔軟で進化する構造を持つエンティティを挿入することができます。このフィールドは、<code translate="no">$meta</code> という名前の隠しJSONフィールドとして実装されており、コレクションスキーマで<strong>明示的に定義されていない</strong>フィールドがデータ内に自動的に格納されます。</p>
-<h2 id="How-it-works" class="common-anchor-header">どのように機能するか<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusでは、「<strong>ダイナミックフィールド」</strong>と呼ばれる特別な機能を通じて、柔軟で変化し続ける構造を持つエンティティを挿入することができます。このフィールドは、<code translate="no">$meta</code> という名前の非表示のJSONフィールドとして実装されており、コレクションスキーマで<strong>明示的に定義されていない</strong>データ内のフィールドを自動的に格納します。</p>
+<h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +37,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ダイナミックフィールドを有効にすると、milvusは各エンティティに<code translate="no">$meta</code> の隠しフィールドを追加します。このフィールドはJSON型で、JSON互換のデータ構造を格納でき、JSONパス構文を使用してインデックスを作成できます。</p>
-<p>データ挿入の際、スキーマで宣言されていないフィールドは、自動的にこのダイナミック・フィールド内にキーと値のペアとして格納されます。</p>
-<p>milvusは透過的に処理するため、<code translate="no">$meta</code> を手動で管理する必要はありません。</p>
-<p>たとえば、コレクションスキーマで<code translate="no">id</code> と<code translate="no">vector</code> のみを定義し、以下のエンティティを挿入する場合：</p>
+    </button></h2><p>ダイナミックフィールドが有効になっている場合、Milvusは各エンティティに非表示の<code translate="no">$meta</code> フィールドを追加します。このフィールドはJSON型であるため、JSON互換のあらゆるデータ構造を格納でき、JSONパス構文を使用してインデックスを作成できます。</p>
+<p>データの挿入時、スキーマで宣言されていないフィールドはすべて、この動的フィールド内にキーと値のペアとして自動的に格納されます。</p>
+<p><code translate="no">$meta</code> を手動で管理する必要はありません。Milvus が透過的に処理します。</p>
+<p>たとえば、コレクションのスキーマで `<code translate="no">id</code> ` と `<code translate="no">vector</code>` のみが定義されており、次のようなエンティティを挿入する場合を考えます。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -46,7 +48,7 @@ summary: >-
   <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span>  <span class="hljs-comment">// Not in schema</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>動的フィールド機能を有効にすると、Milvusはこれを内部的に次のように保存します：</p>
+<p>動的フィールド機能が有効になっている場合、Milvusはこれを内部的に次のように格納します：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -57,11 +59,11 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>これにより、スキーマを変更することなくデータ構造を進化させることができます。</p>
-<p>一般的な使用例は以下の通りです：</p>
+<p>一般的なユースケースには以下が含まれます：</p>
 <ul>
-<li><p>オプションまたは取得頻度の低いフィールドの保存</p></li>
-<li><p>エンティティによって異なるメタデータの取得</p></li>
-<li><p>特定のダイナミック・フィールド・キーのインデックスによる柔軟なフィルタリングのサポート</p></li>
+<li><p>オプションのフィールドや、めったに取得されないフィールドの保存</p></li>
+<li><p>エンティティごとに異なるメタデータの取得</p></li>
+<li><p>特定の動的フィールドキーに対するインデックスを用いた柔軟なフィルタリングのサポート</p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">サポートされるデータ型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,17 +80,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ダイナミックフィールドはMilvusが提供するすべてのスカラーデータ型をサポートします。これらのデータ型は<code translate="no">$meta</code> に格納されたキーの **値に適用されます。</p>
-<p><strong>サポートされるデータ型は以下の通りです：</strong></p>
+    </button></h2><p>動的フィールドは、単純値および複合値を含め、Milvusが提供するすべてのスカラーデータ型をサポートしています。これらのデータ型は、**<code translate="no">$meta</code> に格納されるキーの値**に適用されます。</p>
+<p><strong>サポートされる型には以下が含まれます：</strong></p>
 <ul>
 <li><p>文字列 (<code translate="no">VARCHAR</code>)</p></li>
 <li><p>整数 (<code translate="no">INT8</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>)</p></li>
-<li><p>浮動小数点 (<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>)</p></li>
+<li><p>浮動小数点数 (<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>)</p></li>
 <li><p>ブール値 (<code translate="no">BOOL</code>)</p></li>
 <li><p>スカラー値の配列 (<code translate="no">ARRAY</code>)</p></li>
-<li><p>JSONオブジェクト (<code translate="no">JSON</code>)</p></li>
+<li><p>JSON オブジェクト (<code translate="no">JSON</code>)</p></li>
 </ul>
-<p><strong>例</strong></p>
+<p><strong>例：</strong></p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Acme&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29.99</span><span class="hljs-punctuation">,</span>
@@ -101,7 +103,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上記の各キーと値は、<code translate="no">$meta</code> フィールド内に格納されます。</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">ダイナミック・フィールドを有効にする<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Enable-dynamic-field" class="common-anchor-header">動的フィールドを有効にする<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,9 +118,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ダイナミック・フィールド機能を使用するには、コレクション・スキーマの作成時に<code translate="no">enable_dynamic_field=True</code> を設定します：</p>
+    </button></h2><p>動的フィールド機能を使用するには、コレクションスキーマの作成時に `<code translate="no">enable_dynamic_field=True</code> ` を設定します:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize client</span>
@@ -260,7 +267,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -282,9 +288,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>動的フィールドを使用すると、スキーマで定義されていない追加フィールドを挿入できます。これらのフィールドは<code translate="no">$meta</code> に自動的に格納されます。</p>
+    </button></h2><p>動的フィールドを使用すると、スキーマで定義されていない追加のフィールドを挿入できます。これらのフィールドは自動的に `<code translate="no">$meta</code>` に格納されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;my_id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-comment"># Explicitly defined primary field</span>
@@ -377,7 +388,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -397,7 +407,7 @@ curl --request POST \
   &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">ダイナミックフィールドのインデックスキー<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">動的フィールド内のキーのインデックス作成<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -412,11 +422,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、<strong>JSONパスインデックスを</strong>使用して、ダイナミックフィールド内の特定のキーにインデックスを作成することができます。これらはスカラー値でも、JSONオブジェクトのネストされた値でもかまいません。</p>
+    </button></h2><p>Milvusでは、<strong>JSONパスインデックス</strong>を使用して、動的フィールド内の特定のキーに対してインデックスを作成できます。これらはスカラー値でも、JSONオブジェクト内のネストされた値でも構いません。</p>
 <div class="alert note">
-<p>ダイナミック・フィールド・キーのインデックスは<strong>オプション</strong>です。インデックスがなくても動的フィールドのキーによるクエリやフィルタリングは可能ですが、ブルートフォース検索によりパフォーマンスが低下する可能性があります。</p>
+<p>動的フィールドのキーに対するインデックス作成は<strong>任意</strong>です。インデックスを作成しなくても、動的フィールドのキーによるクエリやフィルタリングは可能ですが、総当たり検索となるため、パフォーマンスが低下する可能性があります。</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON パスインデックスの構文<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSONパスインデックスの構文<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -431,20 +441,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>JSONパス・インデックスを作成するには、次のように指定します：</p>
+    </button></h3><p>JSONパスインデックスを作成するには、以下を指定します。</p>
 <ul>
-<li><p><strong>JSONパス</strong>(<code translate="no">json_path</code>)：インデックスを作成したいJSONオブジェクト内のキーまたはネストされたフィールドへのパス。</p>
+<li><p><strong>JSONパス</strong>（<code translate="no">json_path</code> ）：インデックスを作成したいJSONオブジェクト内のキーまたはネストされたフィールドへのパス。</p>
 <ul>
-<li><p>例<code translate="no">metadata[&quot;category&quot;]</code></p>
-<p>これは、インデックス作成エンジンがJSON構造内のどこを探すかを定義します。</p></li>
+<li><p>例：<code translate="no">metadata[&quot;category&quot;]</code></p>
+<p>これは、インデックスエンジンがJSON構造内のどこを調べるべきかを定義します。</p></li>
 </ul></li>
-<li><p><strong>JSONキャストタイプ</strong>(<code translate="no">json_cast_type</code>)：Milvusが指定されたパスの値を解釈し、インデックスを作成する際に使用するデータ型です。</p>
+<li><p><strong>JSON キャスト型</strong>(<code translate="no">json_cast_type</code>): 指定されたパスにある値を解釈およびインデックス登録する際に、Milvus が使用するデータ型。</p>
 <ul>
-<li><p>この型は、インデックスされるフィールドの実際のデータ型と一致しなければなりません。</p></li>
-<li><p>完全なリストについては、<a href="/docs/ja/use-json-fields.md#Supported-JSON-cast-types">サポートされるJSONキャスト</a>型を参照してください。</p></li>
+<li><p>この型は、インデックス登録対象のフィールドの実際のデータ型と一致している必要があります。</p></li>
+<li><p>完全な一覧については、「<a href="/docs/ja/use-json-fields.md#Supported-JSON-cast-types">サポートされているJSONキャスト型</a>」を参照してください。</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">JSON パスを使用してダイナミック・フィールド・キーのインデックスを作成する<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">JSONパスを使用して動的フィールドキーをインデックス登録する<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -459,14 +469,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ダイナミック・フィールドはJSONフィールドなので、JSONパス構文を使用して、その中の任意のキーにインデックスを付けることができます。これは、単純なスカラー値と複雑な入れ子構造の両方で機能します。</p>
-<p><strong>JSONパスの例</strong></p>
+    </button></h3><p>動的フィールドは JSON フィールドであるため、JSON パス構文を使用して、その中の任意のキーをインデックス登録することができます。これは、単純なスカラー値と複雑なネスト構造の両方で機能します。</p>
+<p><strong>JSON パスの例：</strong></p>
 <ul>
 <li><p>単純なキーの場合：<code translate="no">overview</code>,<code translate="no">words</code></p></li>
-<li><p>入れ子になったキーの場合：<code translate="no">dynamic_json['varchar']</code>,<code translate="no">dynamic_json['nested']['value']</code></p></li>
+<li><p>ネストされたキーの場合:<code translate="no">dynamic_json['varchar']</code>,<code translate="no">dynamic_json['nested']['value']</code></p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index a simple string key</span>
@@ -663,7 +678,7 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">型変換にJSONキャスト関数を使用する<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">型変換にはJSONキャスト関数を使用する<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -678,9 +693,14 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ダイナミック・フィールドのキーに不正な形式の値（文字列として格納された数値など）が含まれている場合、キャスト関数を使用して変換することができます：</p>
+    </button></h3><p>動的なフィールドキーの値の形式が正しくない場合（例: 数値が文字列として格納されているなど）、キャスト関数を使用して変換できます:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-comment"># JSON key name</span>
@@ -737,8 +757,8 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>型変換に失敗した場合（例：値<code translate="no">&quot;not_a_number&quot;</code> を数値に変換できない）、値はスキップされ、インデックスが解除されます。</p></li>
-<li><p>キャスト関数のパラメータの詳細については、<a href="/docs/ja/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON Fieldを</a>参照してください。</p></li>
+<li><p>型変換に失敗した場合（例：値 `<code translate="no">&quot;not_a_number&quot;</code> ` を数値に変換できない場合など）、その値はスキップされ、インデックスに登録されません。</p></li>
+<li><p>キャスト関数のパラメータの詳細については、「<a href="/docs/ja/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSONフィールド</a>」を参照してください。</p></li>
 </ul>
 </div>
 <h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">コレクションへのインデックスの適用<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
@@ -756,9 +776,14 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>インデックスパラメータを定義した後、<code translate="no">create_index()</code> を使用してコレクションに適用できます：</p>
+    </button></h3><p>インデックスパラメータを定義した後、<code translate="no">create_index()</code> を使用してコレクションにインデックスを適用できます：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     index_params=index_params
@@ -807,14 +832,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">ダイナミック・フィールド・キーによるフィルタリング<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
+<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">動的フィールドキーによるフィルタリング<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,14 +853,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ダイナミック・フィールド・キーでエンティティを挿入した後、標準のフィルタ式を使用してフィルタリングできます。</p>
+    </button></h2><p>動的フィールドキーを持つエンティティを挿入した後、標準のフィルタ式を使用してそれらをフィルタリングできます。</p>
 <ul>
-<li><p>JSON以外のキー（文字列、数値、ブーリアンなど）の場合は、キー名で直接参照できます。</p></li>
-<li><p>JSONオブジェクトを格納するキーの場合は、JSONパス構文を使用してネストした値にアクセスします。</p></li>
+<li><p>JSON以外のキー（文字列、数値、ブール値など）については、キー名を直接指定して参照できます。</p></li>
+<li><p>JSONオブジェクトを格納するキーについては、JSONパス構文を使用してネストされた値にアクセスします。</p></li>
 </ul>
-<p>前の<a href="/docs/ja/enable-dynamic-field.md#Insert-entities-to-the-collection">セクションの </a><a href="/docs/ja/enable-dynamic-field.md#Insert-entities-to-the-collection">エンティティ例に</a>基づくと、有効なフィルター式は以下のとおりです：</p>
+<p>前のセクションの<a href="/docs/ja/enable-dynamic-field.md#Insert-entities-to-the-collection">サンプルエンティティ</a>に基づくと、有効なフィルタ式には次のようなものがあります：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment"># JSON object key</span>
@@ -858,9 +887,14 @@ filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot
 <span class="hljs-built_in">export</span> filterWords=<span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
 <span class="hljs-built_in">export</span> filterNestedValue=<span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>ダイナミック・フィールド・キーの取得</strong>検索結果やクエリ結果に動的フィールドキーを返すには、フィルタリングと同じ JSON パス構文を使用して、<code translate="no">output_fields</code> パラメータで明示的に指定する必要があります：</p>
+<p><strong>動的フィールドキーの取得</strong>：検索またはクエリの結果に動的フィールドキーを含めるには、フィルタリング時と同じJSONパス構文を使用して、<code translate="no">output_fields</code> パラメータにそれらを明示的に指定する必要があります：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Include dynamic field keys in search results</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -958,7 +992,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -971,10 +1004,10 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>ダイナミック・フィールド・キーはデフォルトでは結果に含まれないため、明示的にリクエストする必要があります。</p>
+<p>動的フィールドキーはデフォルトでは結果に含まれないため、明示的に指定する必要があります。</p>
 </div>
-<p>サポートされている演算子とフィルター式の完全なリストについては、<a href="/docs/ja/filtered-search.md">フィルター検索を</a>参照してください。</p>
-<h2 id="Put-it-all-together" class="common-anchor-header">すべてをまとめる<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
+<p>サポートされている演算子およびフィルタ式の完全な一覧については、「<a href="/docs/ja/filtered-search.md">フィルタ付き検索</a>」を参照してください。</p>
+<h2 id="Put-it-all-together" class="common-anchor-header">まとめ<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -989,17 +1022,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ここまでで、動的フィールドを使用してスキーマで定義されていないキーを柔軟に格納し、インデックスを作成する方法を学びました。ダイナミック・フィールドのキーが挿入されると、フィルタ式で他のフィールドと同じように使用できます。</p>
-<p>実際のアプリケーションでワークフローを完成させるには、以下の作業も必要です：</p>
+    </button></h2><p>ここまでで、スキーマに定義されていないキーを動的フィールドを使用して柔軟に保存・インデックス登録する方法について学びました。動的フィールドキーが挿入されれば、特別な構文を必要とせず、他のフィールドと同様にフィルタ式で使用できます。</p>
+<p>実運用環境でのワークフローを完了させるには、以下の操作も必要です：</p>
 <ul>
-<li><p><strong>ベクトル・フィールドにインデックスを作成します</strong>（各コレクションに必須）。</p>
-<p><a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">Set Index Parametersを</a>参照。</p></li>
-<li><p><strong>コレクションをロードする。</strong></p>
-<p><a href="/docs/ja/load-and-release.md">ロードと解放を</a>参照。</p></li>
-<li><p><strong>JSONパスフィルタを使用した検索またはクエリ</strong></p>
-<p><a href="/docs/ja/filtered-search.md">フィルタ検索と</a> <a href="/docs/ja/json-operators.md">JSON演算</a>子を参照してください。</p></li>
+<li><p><strong>ベクトルフィールドにインデックスを作成する</strong>（各コレクションで必須）</p>
+<p>「<a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">インデックスパラメータの設定</a>」を参照してください</p></li>
+<li><p><strong>コレクションを読み込む</strong></p>
+<p>「<a href="/docs/ja/load-and-release.md">読み込みと解放</a>」を参照</p></li>
+<li><p><strong>JSONパスフィルターを使用した検索またはクエリの実行</strong></p>
+<p>「<a href="/docs/ja/filtered-search.md">フィルタ検索</a>と<a href="/docs/ja/json-operators.md">JSON演算子</a>」を参照してください</p></li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1014,7 +1047,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">動的フィールドキーを使用する代わりに、スキーマで明示的にフィールドを定義するのはどのような場合ですか？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">動的なフィールドキーを使用する代わりに、スキーマ内でフィールドを明示的に定義すべき場合はいつですか？<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1029,14 +1062,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下のような場合、動的フィールド・キーを使用する代わりに、スキーマで明示的にフィールドを定義する必要があります：</p>
+    </button></h3><p>次のような場合は、動的なフィールドキーを使用する代わりに、スキーマ内でフィールドを明示的に定義する必要があります。</p>
 <ul>
-<li><p><strong>フィールドが頻繁にoutput_fieldsに含まれる</strong>：明示的に定義されたフィールドだけが、<code translate="no">output_fields</code> によって効率的に検索できることが保証されています。動的フィールド・キーは高頻度の検索に最適化されておらず、パフォーマンス・オーバーヘッドが発生する可能性があります。</p></li>
-<li><p><strong>フィールドは頻繁にアクセスされるか、フィルタリングされる</strong>：動的フィールドキーのインデックスを作成することで、固定スキーマフィールドと同様のフィルタリングパフォーマンスを得ることができますが、明示的に定義されたフィールドはより明確な構造と優れた保守性を提供します。</p></li>
-<li><p><strong>フィールドの動作を完全に制御する必要がある</strong>：明示的フィールドは、スキーマレベルの制約、検証、より明確な型付けをサポートし、データの整合性と一貫性の管理に役立ちます。</p></li>
-<li><p><strong>インデックスの不整合を避けたい</strong>：動的なフィールドキーのデータは、型や構造に矛盾が生じやすくなります。固定スキーマを使用することで、特にインデックスやキャスティングを使用する予定がある場合、データの品質を確保することができます。</p></li>
+<li><p><strong>そのフィールドが output_fields に頻繁に含まれる場合</strong>：<code translate="no">output_fields</code> を通じて効率的に取得できることが保証されるのは、明示的に定義されたフィールドのみです。動的フィールドキーは高頻度の取得に対して最適化されておらず、パフォーマンス上のオーバーヘッドが発生する可能性があります。</p></li>
+<li><p><strong>そのフィールドへのアクセスやフィルタリングが頻繁に行われる場合</strong>：動的フィールドキーをインデックス化することで、固定スキーマフィールドと同等のフィルタリング性能が得られる場合もありますが、明示的に定義されたフィールドの方が構造が明確で、保守性も高くなります。</p></li>
+<li><p><strong>フィールドの挙動を完全に制御する必要がある場合</strong>：明示的に定義されたフィールドは、スキーマレベルの制約、検証、および明確な型指定をサポートしており、データの整合性や一貫性を管理する際に役立ちます。</p></li>
+<li><p><strong>インデックス設定の不整合を回避したい場合</strong>：動的フィールドキー内のデータは、型や構造の不整合が生じやすくなります。特にインデックス設定やキャストを使用する予定がある場合は、固定スキーマを使用することでデータ品質を確保しやすくなります。</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">同じ動的フィールド・キーに、異なるデータ型で複数のインデックスを作成できますか?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+<p>既存のコレクションにおいて、動的フィールドキーを明示的なスカラーフィールドに変更する場合は、<a href="/docs/ja/add-fields-to-an-existing-collection.md">「コレクションスキーマの変更</a>」を参照してください。既存のコレクションレベルの動的フィールド設定は、コレクションのプロパティを通じて管理されます。詳細については、「<a href="/docs/ja/modify-collection.md">コレクションの変更</a>」を参照してください。</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">同じ動的フィールドキーに対して、異なるデータ型で複数のインデックスを作成することはできますか？<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1051,8 +1085,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いいえ、<strong>JSON パスごとに 1 つのインデックスしか</strong>作成できません。ダイナミック・フィールド・キーに混合型の値（文字列と数値など）が含まれている場合でも、そのパスにインデックスを作成する場合は、<code translate="no">json_cast_type</code> を 1 つだけ選択する必要があります。同じキーに異なる型の複数のインデックスを作成することは、現時点ではサポートされていません。</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">動的フィールド・キーにインデックスを作成する際、データ・キャストに失敗した場合はどうなりますか?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+    </button></h3><p>いいえ、<strong>JSONパスごとに</strong>作成できる<strong>インデックスは1つだけです</strong>。動的フィールドキーに異なる型の値（例：文字列と数値が混在）が含まれている場合でも、そのパスにインデックスを作成する際は、単一の<code translate="no">json_cast_type</code> を選択する必要があります。現時点では、同じキーに対して異なる型のインデックスを複数作成することはサポートされていません。</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">動的フィールドキーにインデックスを作成する際、データ型変換に失敗した場合はどうなりますか？<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1067,14 +1101,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>動的フィールド・キーにインデックスを作成し、データ・キャストに失敗した場合、例えば、<code translate="no">double</code> にキャストされるはずの値が<code translate="no">&quot;abc&quot;</code>のような非数値文字列であった場合、これらの特定の値は<strong>インデックス作成時にサイレント・スキップさ</strong>れます。これらの値はインデックスに表示されないため、インデックスに依存する<strong>フィルタベースの検索やクエリの結果には返されません</strong>。</p>
+    </button></h3><p>動的フィールドキーに対してインデックスを作成した際、データ型変換に失敗した場合（例：<code translate="no">double</code> に変換されるはずの値が、<code translate="no">&quot;abc&quot;</code>のような数値ではない文字列である場合）、それらの特定の値は<strong>インデックス作成時に黙ってスキップ</strong>されます。 それらはインデックスに反映されないため、そのインデックスに依存する<strong>フィルタベースの検索やクエリの結果には返されません</strong>。</p>
 <p>これにはいくつかの重要な意味があります：</p>
 <ul>
-<li><p><strong>フルスキャンへのフォールバックがない</strong>：フルスキャンへのフォールバックなし：エンティティの大半が正常にインデックス化されている場合、フィルタリングクエリは完全にインデックスに依存します。キャストに失敗したエンティティは、たとえ論理的にフィルタ条件に合致していても、結果セットから除外されます。</p></li>
-<li><p><strong>検索精度のリスク</strong>：データ品質が一貫していない大規模なデータセット（特に動的なフィールドキー）では、この動作は予期せぬ欠落結果につながる可能性があります。インデックスを作成する前に、一貫性のある有効なデータフォーマットを確保することが重要です。</p></li>
-<li><p><strong>キャスト関数の使用は慎重に</strong>：イ ンデ ッ ク ス作成時に<code translate="no">json_cast_function</code> を使用 し て文字列を数値に変換す る 場合は、 文字列値が確実に変換可能であ る こ と を確認 し て く だ さ い。<code translate="no">json_cast_type</code> 、実際に変換された型との間に不一致があると、エラーや項目のスキップが発生します。</p></li>
+<li><p><strong>フルスキャンへのフォールバックなし</strong>：エンティティの大部分が正常にインデックス化されていれば、フィルタリングクエリは完全にインデックスに依存します。型変換に失敗したエンティティは、たとえ論理的にフィルタ条件に一致していても、結果セットから除外されます。</p></li>
+<li><p><strong>検索精度のリスク</strong>：データ品質にばらつきがある大規模なデータセット（特に動的なフィールドキーの場合）では、この挙動により予期せぬ検索結果の欠落が生じる可能性があります。インデックス作成前に、データ形式が一貫しており有効であることを確認することが極めて重要です。</p></li>
+<li><p><strong>キャスト関数の慎重な使用</strong>：インデックス作成中に<code translate="no">json_cast_function</code> を使用して文字列を数値に変換する場合は、文字列値が確実に変換可能であることを確認してください。<code translate="no">json_cast_type</code> と実際に変換された型との不一致は、エラーやエントリのスキップにつながります。</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">クエリでインデックス付きキャスト型と異なるデータ型を使用するとどうなりますか?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">クエリで、インデックス登録時のキャスト型とは異なるデータ型を使用した場合、どうなりますか？<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1089,4 +1123,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>クエリがインデックスで使用されたものと<strong>異なるデータ型を</strong>使用して動的フィールド・キーを比較した場合（例えば、インデックスが<code translate="no">double</code> にキャストされたときに文字列比較でクエリを実行した場合）、システムは<strong>インデックスを使用せず</strong>、<em>可能であれば</em>フル・<em>スキャンのみに</em>フォールバックする可能性があります。最高のパフォーマンスと精度を得るためには、クエリタイプがインデックス作成時に使用された<code translate="no">json_cast_type</code> と一致するようにしてください。</p>
+    </button></h3><p>クエリで、インデックスで使用された<strong>データ型</strong>とは<strong>異なるデータ型</strong>を使用して動的フィールドキーを比較する場合（たとえば、インデックスが<code translate="no">double</code> にキャストされているのに、文字列比較でクエリを実行する場合など）、システムは<strong>インデックスを使用せず</strong>、<em>可能な場合にのみ</em>フルスキャンに切り替わる可能性があります。 最高のパフォーマンスと精度を得るためには、クエリのデータ型がインデックス作成時に使用された<code translate="no">json_cast_type</code> と一致していることを確認してください。</p>

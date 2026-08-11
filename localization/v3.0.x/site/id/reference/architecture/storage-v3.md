@@ -116,7 +116,7 @@ beta: Milvus 3.0.x
     <span class="hljs-attr">storageVersion:</span>
       <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Output Fungsi untuk entitas yang sudah ada dihasilkan secara asinkron melalui pemadatan latar belakang. Pembaruan skema yang berhasil tidak berarti bahwa pengisian ulang telah selesai untuk setiap entitas yang sudah ada.</p>
+<p>Output Fungsi untuk entitas yang sudah ada dihasilkan secara asinkron melalui pemadatan latar belakang. Pembaruan skema yang berhasil tidak menunjukkan bahwa pengisian ulang telah selesai untuk setiap entitas yang sudah ada.</p>
 <h2 id="Related-documentation" class="common-anchor-header">Dokumentasi terkait<button data-href="#Related-documentation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

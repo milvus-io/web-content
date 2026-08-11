@@ -19,7 +19,7 @@ beta: Milvus v2.6.20+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>일반적으로 Hugging Face 임베딩 모델을 사용하려면 애플리케이션에서 자격 증명을 관리하고, 모델을 별도로 호출하며, 삽입된 데이터와 검색 쿼리에 대해 일관되게 임베딩을 생성해야 합니다. 텍스트 임베딩 기능을 사용하면 Milvus가 호스팅된 <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 추론 제공자를</a> 호출하여 삽입 및 검색 시 원시 텍스트를 벡터로 변환합니다.</p>
+    </button></h1><p>일반적으로 Hugging Face 임베딩 모델을 사용하려면 애플리케이션에서 자격 증명을 관리하고, 모델을 별도로 호출하며, 삽입된 데이터와 검색 쿼리에 대해 일관되게 임베딩을 생성해야 합니다. 텍스트 임베딩 기능을 사용하면 Milvus가 호스팅된 <a href="https://huggingface.co/docs/inference-providers/index">Hugging Face 추론 제공자를</a> 호출하여 삽입 및 검색 시 원본 텍스트를 벡터로 변환합니다.</p>
 <p>이 통합 기능은 호스팅된 Hugging Face 라우터를 사용합니다. Milvus를 별도로 배포된 텍스트 임베딩 추론(TEI) 서비스에 연결하려면 <a href="/docs/ko/hugging-face-tei.md">Hugging Face TEI를</a> 참조하십시오.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ beta: Milvus v2.6.20+
     </button></h2><p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/hugging-face-embedding-flow.png" alt="Hugging Face text embedding workflow" class="doc-image" id="hugging-face-text-embedding-workflow" /> 
-   <span>Hugging Face 텍스트 임베딩 워크플로</span>
+   <span>Hugging Face 텍스트 임베딩 워크플로우</span>
   
  </span></p>
 <p>이 워크플로는 세 단계로 구성됩니다.</p>
@@ -158,7 +158,7 @@ beta: Milvus v2.6.20+
         ></path>
       </svg>
     </button></h3><p>Function이나 제공자 구성에서 자격 증명 레이블이 지정되지 않은 경우, Milvus는 ` <code translate="no">MILVUS_HUGGINGFACE_API_KEY</code>`에서 토큰을 읽습니다.</p>
-<p>Docker Compose의 경우, Milvus 독립 실행형 서비스에서 다음 변수를 설정하십시오:</p>
+<p>Docker Compose의 경우, Milvus 독립형 서비스에서 다음 변수를 설정하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">environment:</span>
@@ -267,7 +267,7 @@ client.create_collection(
 <tr><td><code translate="no">normalize</code></td><td>아니요</td><td>Hugging Face가 정규화된 임베딩을 반환해야 하는지 여부입니다. 지원되는 값은 <code translate="no">true</code> 및 <code translate="no">false</code> 입니다. 생략할 경우, Milvus는 요청에 이 옵션을 설정하지 않습니다.</td></tr>
 <tr><td><code translate="no">prompt_name</code></td><td>아니요</td><td>선택한 모델의 Sentence Transformers 구성에서 정의된 프롬프트의 이름입니다.</td></tr>
 <tr><td><code translate="no">truncate</code></td><td>아니요</td><td>Hugging Face가 모델이 지원하는 길이를 초과하는 입력을 잘라내야 하는지 여부입니다. 지원되는 값은 <code translate="no">true</code> 및 <code translate="no">false</code> 입니다.</td></tr>
-<tr><td><code translate="no">truncation_direction</code></td><td>아니요</td><td>Hugging Face가 입력 데이터를 어느 방향에서 잘라낼지 지정합니다. 지원되는 값은 ` <code translate="no">left</code> ` 및 ` <code translate="no">right</code>`입니다.</td></tr>
+<tr><td><code translate="no">truncation_direction</code></td><td>아니요</td><td>Hugging Face가 입력 데이터를 어느 방향에서 잘라낼지 지정합니다. 지원되는 값은 <code translate="no">left</code> 및 <code translate="no">right</code> 입니다.</td></tr>
 <tr><td><code translate="no">max_client_batch_size</code></td><td>없음</td><td>Hugging Face 요청 한 번에 전송되는 입력 텍스트의 최대 개수입니다. 기본값은 <code translate="no">128</code> 이며, 이 값은 <code translate="no">0</code> 보다 커야 합니다.</td></tr>
 </tbody>
 </table>
@@ -364,7 +364,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h3><p>Hugging Face에서 모델 페이지를 열고 <strong>‘Inference Providers’</strong> 섹션을 확인하십시오. <code translate="no">hf-inference</code> 가 <code translate="no">feature-extraction</code> 에 대한 모델을 제공하는지 확인하십시오. 그렇지 않은 경우, 다른 모델을 선택하고 필요한 경우 벡터 필드 차원을 업데이트하십시오.</p>
-<h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">반환된 벡터 차원이 필드와 일치하지 않습니다<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
+<h3 id="The-returned-vector-dimension-does-not-match-the-field" class="common-anchor-header">반환된 벡터 차원이 필드와 일치하지 않습니다.<button data-href="#The-returned-vector-dimension-does-not-match-the-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تصف هذه الصفحة كيفية التبديل بين <strong>RocksMQ</strong> و <strong>Woodpecker</strong> (الخلفية المحلية أو MinIO) في قائمة انتظار الرسائل (MQ) لنشر <strong>Milvus Standalone (Docker Compose)</strong> ، في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">"التبديل بين أنواع MQ</a>".</p>
+    </button></h1><p>تصف هذه الصفحة كيفية التبديل بين <strong>RocksMQ</strong> و <strong>Woodpecker</strong> (الخلفية المحلية أو MinIO) في قائمة انتظار الرسائل (MQ) لنشر <strong>Milvus Standalone (Docker Compose)</strong> ، في كلا الاتجاهين. للاطلاع على سير العمل العام والمتطلبات الأساسية، راجع <a href="/docs/ar/switch-mq-type.md">التبديل بين قوائم انتظار الرسائل</a>.</p>
 <div class="alert note">
 <ul>
-<li><strong>المتطلبات الأساسية:</strong> تتوفر ميزة التبديل بين أنواع MQ في <strong>Milvus 3.0 والإصدارات الأحدث</strong>. قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل البدء — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
-<li>يتطلب تبديل MQ نشر Docker <strong>Compose</strong> (الذي يتيح مصدر تكوين etcd). لا يدعم نشر Docker ذو الحاوية الواحدة عملية التبديل.</li>
+<li><strong>المتطلبات الأساسية:</strong> تتوفر ميزة «التبديل بين قوائم انتظار الرسائل» في <strong>Milvus 3.0 والإصدارات الأحدث</strong>. قم بترقية مثيل Milvus الخاص بك إلى Milvus 3.0 أو إصدار أحدث قبل البدء — فهذه الميزة غير متوفرة في الإصدارات الأقدم.</li>
+<li>يتطلب تبديل قائمة انتظار الرسائل (MQ) نشر Docker <strong>Compose</strong> (الذي يتيح مصدر تكوين etcd). لا يدعم نشر Docker ذو الحاوية الواحدة عملية التبديل.</li>
 </ul>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker" class="common-anchor-header">التبديل من RocksMQ إلى Woodpecker<button data-href="#Switch-from-RocksMQ-to-Woodpecker" class="anchor-icon" translate="no">

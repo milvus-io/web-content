@@ -233,7 +233,7 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
         ></path>
       </svg>
     </button></h2><p>Di dalam berkas ` <code translate="no">docker-compose.yml</code>`, tambahkan bagian ` <code translate="no">volumes</code> ` di bawah setiap ` <code translate="no">milvus-standalone</code>`.</p>
-<p>Petakan jalur lokal ke berkas <code translate="no">milvus.yaml</code> Anda ke jalur kontainer Docker yang sesuai ke berkas konfigurasi <code translate="no">/milvus/configs/milvus.yaml</code> di bawah semua bagian <code translate="no">volumes</code>.</p>
+<p>Petakan jalur lokal ke berkas ` <code translate="no">milvus.yaml</code> ` Anda ke jalur kontainer Docker yang sesuai ke berkas konfigurasi ` <code translate="no">/milvus/configs/milvus.yaml</code> ` di bawah semua bagian ` <code translate="no">volumes</code> `.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

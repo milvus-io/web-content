@@ -66,7 +66,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus menerapkan kata-kata stop kustom selain kamus <code translate="no">_thai_</code> bawaan.</p>
-<p>Penganalisis bawaan ` <code translate="no">thai</code> ` setara dengan konfigurasi penganalisis khusus berikut:</p>
+<p>Penganalisis bawaan " <code translate="no">thai</code> " setara dengan konfigurasi penganalisis kustom berikut:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;thai&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [

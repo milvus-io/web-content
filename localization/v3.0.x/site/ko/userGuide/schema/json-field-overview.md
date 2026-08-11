@@ -2,10 +2,10 @@
 id: json-field-overview.md
 title: JSON 필드 개요
 summary: >-
-  제품 카탈로그, 콘텐츠 관리 시스템 또는 사용자 환경 설정 엔진과 같은 애플리케이션을 구축할 때는 벡터 임베딩과 함께 유연한 메타데이터를
-  저장해야 하는 경우가 많습니다. 제품 속성은 카테고리에 따라 다양하고, 사용자 선호도는 시간이 지남에 따라 변화하며, 문서 속성은 복잡한
-  중첩 구조를 가지고 있습니다. Milvus의 JSON 필드는 성능 저하 없이 유연한 구조화 데이터를 저장하고 쿼리할 수 있도록 지원하여
-  이러한 문제를 해결합니다.
+  제품 카탈로그, 콘텐츠 관리 시스템, 사용자 선호도 엔진과 같은 애플리케이션을 구축할 때, 벡터 임베딩과 함께 유연한 메타데이터를 저장해야
+  하는 경우가 많습니다. 제품 속성은 카테고리에 따라 다르며, 사용자 선호도는 시간이 지남에 따라 변화하고, 문서 속성은 복잡한 중첩 구조를
+  가지고 있습니다. Milvus의 JSON 필드는 성능 저하 없이 유연한 구조화 데이터를 저장하고 쿼리할 수 있도록 지원함으로써 이러한 과제를
+  해결합니다.
 ---
 <h1 id="JSON-Field-Overview" class="common-anchor-header">JSON 필드 개요<button data-href="#JSON-Field-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>제품 카탈로그, 콘텐츠 관리 시스템 또는 사용자 환경 설정 엔진과 같은 애플리케이션을 구축할 때 벡터 임베딩과 함께 유연한 메타데이터를 저장해야 하는 경우가 많습니다. 제품 속성은 카테고리에 따라 다양하고, 사용자 선호도는 시간이 지남에 따라 변화하며, 문서 속성은 복잡한 중첩 구조를 가지고 있습니다. Milvus의 JSON 필드는 성능 저하 없이 유연한 구조화 데이터를 저장하고 쿼리할 수 있도록 지원하여 이러한 문제를 해결합니다.</p>
+    </button></h1><p>제품 카탈로그, 콘텐츠 관리 시스템(CMS) 또는 사용자 선호도 엔진과 같은 애플리케이션을 구축할 때, 벡터 임베딩과 함께 유연한 메타데이터를 저장해야 하는 경우가 많습니다. 제품 속성은 카테고리에 따라 다르며, 사용자 선호도는 시간이 지남에 따라 변화하고, 문서 속성은 복잡한 중첩 구조를 가집니다. Milvus의 JSON 필드는 성능 저하 없이 유연한 구조화된 데이터를 저장하고 쿼리할 수 있도록 지원함으로써 이러한 과제를 해결합니다.</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">JSON 필드란 무엇인가요?<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON 필드는 구조화된 키-값 데이터를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.JSON</code>)입니다. 기존의 리지드 데이터베이스 열과 달리 JSON 필드는 중첩된 개체, 배열 및 혼합 데이터 유형을 수용하는 동시에 빠른 쿼리를 위한 여러 인덱싱 옵션을 제공합니다.</p>
+    </button></h2><p>JSON 필드는 Milvus에서 구조화된 키-값 데이터를 저장하는 스키마 정의 데이터 유형(<code translate="no">DataType.JSON</code>)입니다. 기존의 경직된 데이터베이스 열과 달리, JSON 필드는 중첩된 객체, 배열 및 혼합 데이터 유형을 수용하는 동시에 빠른 쿼리를 위한 다양한 인덱싱 옵션을 제공합니다.</p>
 <p>JSON 필드 구조 예시:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> 
@@ -59,11 +59,11 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서 <code translate="no">metadata</code> 는 플랫 값(예: <code translate="no">category</code>, <code translate="no">in_stock</code>), 배열(<code translate="no">tags</code>), 중첩된 개체(<code translate="no">supplier</code>)가 혼합되어 있는 단일 JSON 필드입니다.</p>
+<p>이 예시에서 <code translate="no">metadata</code> 는 플랫 값(예: <code translate="no">category</code>, <code translate="no">in_stock</code>), 배열(<code translate="no">tags</code>), 중첩된 객체(<code translate="no">supplier</code>)가 혼합된 단일 JSON 필드입니다.</p>
 <div class="alert note">
-<p><strong>이름 지정 규칙:</strong> JSON 키에는 문자, 숫자, 밑줄만 사용하세요. 특수 문자, 공백 또는 점은 쿼리에서 구문 분석 문제를 일으킬 수 있으므로 피하세요.</p>
+<p><strong>명명 규칙:</strong> JSON 키에는 영문자, 숫자, 밑줄(_)만 사용하십시오. 특수 문자, 공백 또는 점은 쿼리에서 구문 분석 문제를 일으킬 수 있으므로 사용하지 마십시오.</p>
 </div>
-<h2 id="JSON-field-vs-dynamic-field" class="common-anchor-header">JSON 필드와 동적 필드 비교<button data-href="#JSON-field-vs-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="JSON-field-vs-dynamic-field" class="common-anchor-header">JSON 필드와 동적 필드의 차이<button data-href="#JSON-field-vs-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,8 +78,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>흔히 혼동하기 쉬운 점은 JSON 필드와 <a href="/docs/ko/enable-dynamic-field.md">동적 필</a>드의 차이점입니다. 둘 다 JSON과 관련이 있지만 서로 다른 용도로 사용됩니다.</p>
-<p>아래 표에는 JSON 필드와 동적 필드의 주요 차이점이 요약되어 있습니다:</p>
+    </button></h2><p>흔히 혼동되는 점은 JSON 필드와 <a href="/docs/ko/enable-dynamic-field.md">동적 필드의</a> 차이입니다. 둘 다 JSON과 관련이 있지만, 용도는 다릅니다.</p>
+<p>아래 표는 JSON 필드와 동적 필드의 주요 차이점을 요약한 것입니다:</p>
 <table>
    <tr>
      <th><p>기능</p></th>
@@ -93,18 +93,18 @@ summary: >-
    </tr>
    <tr>
      <td><p>사용 사례</p></td>
-     <td><p>스키마가 알려져 있고 일관성이 있는 구조화된 데이터를 저장합니다.</p></td>
-     <td><p>고정된 스키마에 맞지 않는 유연하고 진화하는 데이터 또는 반정형 데이터를 저장합니다.</p></td>
+     <td><p>스키마가 알려져 있고 일관된 구조화된 데이터를 저장합니다.</p></td>
+     <td><p>고정된 스키마에 맞지 않는 유연하고, 지속적으로 변화하거나, 반구조화된 데이터를 저장합니다.</p></td>
    </tr>
    <tr>
      <td><p>제어</p></td>
-     <td><p>필드 이름과 구조를 제어합니다.</p></td>
-     <td><p>정의되지 않은 필드에 대해 시스템에서 관리합니다.</p></td>
+     <td><p>필드 이름과 구조는 사용자가 제어합니다.</p></td>
+     <td><p>정의되지 않은 필드의 경우 시스템에서 관리합니다.</p></td>
    </tr>
    <tr>
      <td><p>쿼리</p></td>
-     <td><p>JSON 필드 내에서 필드 이름 또는 대상 키를 사용하여 쿼리: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>동적 필드 키를 사용하여 직접 쿼리: <code translate="no">"dynamic_key"</code> 또는 <code translate="no">$meta</code> 을 통해 쿼리합니다: <code translate="no">$meta["dynamic_key"]</code></p></td>
+     <td><p>필드 이름이나 JSON 필드 내의 대상 키를 사용하여 쿼리합니다: <code translate="no">metadata["key"]</code>.</p></td>
+     <td><p>동적 필드 키를 사용하여 직접 쿼리: <code translate="no">"dynamic_key"</code> 또는 <code translate="no">$meta</code> 를 통해: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">기본 작업<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -122,8 +122,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON 필드를 사용하기 위한 기본적인 워크플로에는 스키마에서 필드를 정의하고, 데이터를 삽입한 다음 특정 필터 표현식을 사용하여 데이터를 쿼리하는 작업이 포함됩니다.</p>
-<h3 id="Define-a-JSON-field" class="common-anchor-header">JSON 필드 정의하기<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
+    </button></h2><p>JSON 필드를 사용하는 기본 워크플로는 스키마에서 필드를 정의하고, 데이터를 삽입한 다음, 특정 필터 표현식을 사용하여 데이터를 쿼리하는 것입니다.</p>
+<h3 id="Define-a-JSON-field" class="common-anchor-header">JSON 필드 정의<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,7 +138,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>JSON 필드를 사용하려면 컬렉션을 만들 때 컬렉션 스키마에 명시적으로 정의합니다. 다음 예는 <code translate="no">DataType.JSON</code> 유형의 <code translate="no">metadata</code> 필드가 있는 컬렉션을 만드는 방법을 보여줍니다:</p>
+    </button></h3><p>JSON 필드를 사용하려면 컬렉션을 생성할 때 컬렉션 스키마에 해당 필드를 명시적으로 정의해야 합니다. 다음 예제는 <code translate="no">DataType.JSON</code> 유형의 <code translate="no">metadata</code> 필드가 포함된 컬렉션을 생성하는 방법을 보여줍니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address </span>
@@ -157,7 +157,7 @@ client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>이 예제에서 컬렉션 스키마에 정의된 JSON 필드는 <code translate="no">nullable=True</code> 으로 null 값을 허용합니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>이 예제에서 컬렉션 스키마에 정의된 JSON 필드는 ` <code translate="no">nullable=True</code>`에 대해 null 값을 허용합니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable 및 기본값’을</a> 참조하십시오.</p>
 </div>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -174,7 +174,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션이 만들어지면 지정된 JSON 필드에 구조화된 JSON 개체를 포함하는 엔티티를 삽입합니다. 데이터의 형식은 사전 목록으로 지정해야 합니다.</p>
+    </button></h3><p>컬렉션이 생성되면, 지정된 JSON 필드에 구조화된 JSON 객체를 포함하는 엔티티를 삽입합니다. 데이터는 사전(dictionary) 목록 형식으로 구성되어야 합니다.</p>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,
@@ -215,10 +215,10 @@ client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>JSON 필드에서 필터링 작업을 수행하려면 먼저 다음 사항을 확인하세요:</p>
+    </button></h3><p>JSON 필드에 대해 필터링 작업을 수행하기 전에 다음 사항을 확인하십시오:</p>
 <ul>
-<li><p>각 벡터 필드에 인덱스를 만들었습니다.</p></li>
-<li><p>컬렉션이 메모리에 로드되었습니다.</p></li>
+<li><p>각 벡터 필드에 인덱스를 생성했는지 확인하십시오.</p></li>
+<li><p>컬렉션이 메모리에 로드되어 있어야 합니다.</p></li>
 </ul>
 <p><details></p>
 <p><summary>코드 보기</summary></p>
@@ -235,9 +235,9 @@ client.create_index(collection_name=<span class="hljs-string">&quot;product_cata
 client.load_collection(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>이러한 요구 사항이 충족되면 아래 표현식을 사용하여 JSON 필드 내의 값을 기준으로 컬렉션을 필터링할 수 있습니다. 이러한 필터 표현식은 특정 JSON 경로 구문과 전용 연산자를 활용합니다.</p>
-<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">JSON 경로 구문을 사용한 필터링</h4><p>특정 키를 쿼리하려면 대괄호 표기법을 사용하여 JSON 키에 액세스합니다: <code translate="no">json_field_name[&quot;key&quot;]</code>. 중첩된 키의 경우, 서로 연결합니다: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
-<p><code translate="no">category</code> 가 <code translate="no">&quot;electronics&quot;</code> 인 엔티티를 필터링하려면 다음과 같이 하세요:</p>
+<p>이러한 요구 사항이 충족되면, 아래 표현식을 사용하여 JSON 필드 내의 값을 기준으로 컬렉션을 필터링할 수 있습니다. 이러한 필터 표현식은 특정 JSON 경로 구문과 전용 연산자를 활용합니다.</p>
+<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">JSON 경로 구문을 사용한 필터링</h4><p>특정 키를 쿼리하려면 대괄호 표기법을 사용하여 JSON 키에 액세스하십시오: <code translate="no">json_field_name[&quot;key&quot;]</code>. 중첩된 키의 경우, 키를 연결하십시오: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
+<p><code translate="no">category</code> 의 값이 <code translate="no">&quot;electronics&quot;</code> 인 엔티티를 필터링하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
@@ -249,7 +249,7 @@ client.search(
     output_fields=[<span class="hljs-string">&quot;product_id&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>]   <span class="hljs-comment"># Fields to include in the search results</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>중첩된 키가 <code translate="no">supplier[&quot;country&quot;]</code> 인 엔티티를 필터링하려면 <code translate="no">&quot;USA&quot;</code>:</p>
+<p>중첩된 키 <code translate="no">supplier[&quot;country&quot;]</code> 의 값이 <code translate="no">&quot;USA&quot;</code> 인 엔티티를 필터링하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;supplier&quot;][&quot;country&quot;] == &quot;USA&quot;&#x27;</span>
 
@@ -263,13 +263,13 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">JSON 전용 연산자로 필터링하기</h4><p>Milvus는 특정 JSON 필드 키의 배열 값을 쿼리하기 위한 특수 연산자도 제공합니다. 예를 들어</p>
+<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">JSON 전용 연산자를 사용한 필터링</h4><p>Milvus는 특정 JSON 필드 키의 배열 값을 쿼리하기 위한 특수 연산자도 제공합니다. 예를 들어:</p>
 <ul>
-<li><p><code translate="no">json_contains(identifier, expr)</code>: JSON 배열 내에 특정 요소 또는 하위 배열이 존재하는지 확인합니다.</p></li>
-<li><p><code translate="no">json_contains_all(identifier, expr)</code>: 지정된 JSON 표현식의 모든 요소가 필드에 있는지 확인합니다.</p></li>
-<li><p><code translate="no">json_contains_any(identifier, expr)</code>: 필드 내에 JSON 표현식의 멤버가 하나 이상 존재하는 엔티티를 필터링합니다.</p></li>
+<li><p><code translate="no">json_contains(identifier, expr)</code>: JSON 배열 내에 특정 요소나 하위 배열이 존재하는지 확인합니다</p></li>
+<li><p><code translate="no">json_contains_all(identifier, expr)</code>: 지정된 JSON 표현식의 모든 요소가 필드에 포함되어 있는지 확인합니다</p></li>
+<li><p><code translate="no">json_contains_any(identifier, expr)</code>: JSON 표현식의 구성원 중 적어도 하나가 필드 내에 존재하는 엔티티를 필터링합니다</p></li>
 </ul>
-<p><code translate="no">tags</code> 키 아래에 <code translate="no">&quot;summer_sale&quot;</code> 값이 있는 제품을 찾으려면 다음과 같이 입력합니다:</p>
+<p><code translate="no">tags</code> 키 아래에 <code translate="no">&quot;summer_sale&quot;</code> 값을 가진 제품을 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;summer_sale&quot;)&#x27;</span>
 
@@ -283,7 +283,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">tags</code> 키 아래에 <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;new&quot;</code>, <code translate="no">&quot;clearance&quot;</code> 값 중 하나 이상이 있는 제품을 찾으려면 다음을 수행합니다:</p>
+<p><code translate="no">tags</code> 키 아래에 <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;new&quot;</code> 또는 <code translate="no">&quot;clearance&quot;</code> 값 중 하나 이상이 포함된 제품을 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_any(metadata[&quot;tags&quot;], [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 
@@ -297,8 +297,8 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<p>JSON 관련 연산자에 대한 자세한 내용은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하세요.</p>
-<h2 id="Next-Accelerate-JSON-queries" class="common-anchor-header">다음: JSON 쿼리 가속화하기<button data-href="#Next-Accelerate-JSON-queries" class="anchor-icon" translate="no">
+<p>JSON 전용 연산자에 대한 자세한 내용은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하십시오.</p>
+<h2 id="Next-Accelerate-JSON-queries" class="common-anchor-header">다음: JSON 쿼리 가속화<button data-href="#Next-Accelerate-JSON-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,42 +313,45 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본적으로 가속 기능이 없는 JSON 필드에 대한 쿼리는 모든 행에 대한 전체 스캔을 수행하므로 대규모 데이터 세트에서는 속도가 느려질 수 있습니다. JSON 쿼리 속도를 높이기 위해 Milvus는 고급 인덱싱 및 저장소 최적화 기능을 제공합니다.</p>
-<p>아래 표에는 이 기능들의 차이점과 최상의 사용 시나리오가 요약되어 있습니다:</p>
+    </button></h2><p>기본적으로 가속화되지 않은 JSON 필드에 대한 쿼리는 모든 행을 전체 스캔하므로, 대규모 데이터셋에서는 처리 속도가 느려질 수 있습니다. JSON 쿼리 속도를 높이기 위해 Milvus는 고급 인덱싱 및 저장소 최적화 기능을 제공합니다.</p>
+<div class="alert warning">
+<p>Milvus 3.0.0부터 JSON 플랫 인덱싱(<code translate="no">json_cast_type=&quot;JSON&quot;</code>)으로도 알려진 전체 객체 JSON 인덱싱은 더 이상 사용되지 않습니다. 호환성을 위해 기존 인덱스와 새로운 인덱스 생성 요청은 계속 지원되지만, 새로운 워크로드에는 이 모드를 더 이상 권장하지 않습니다. 알려진 쿼리 경로의 경우 JSON 경로 인덱싱을 사용하거나, 복잡하거나 지속적으로 변화하는 문서에 걸쳐 광범위한 쿼리 가속화를 원한다면 <a href="/docs/ko/json-shredding.md">JSON 슈레딩을</a> 고려해 보십시오.</p>
+</div>
+<p>아래 표는 두 방식의 차이점과 최적의 사용 시나리오를 요약한 것입니다:</p>
 <table>
    <tr>
-     <th><p>기술</p></th>
-     <th><p>최상의 용도</p></th>
-     <th><p>배열 가속화</p></th>
+     <th><p>기법</p></th>
+     <th><p>가장 적합한 용도</p></th>
+     <th><p>배열 가속</p></th>
      <th><p>참고</p></th>
    </tr>
    <tr>
      <td><p>JSON 인덱싱</p></td>
-     <td><p>자주 액세스하는 키의 작은 집합, 특정 배열 키의 배열</p></td>
-     <td><p>예(인덱싱된 배열 키에)</p></td>
-     <td><p>키를 미리 선택해야 함, 스키마가 진화하는 경우 유지 관리 필요</p></td>
+     <td><p>자주 액세스되는 소수의 키, 특정 배열 키를 기반으로 한 배열</p></td>
+     <td><p>예 (인덱싱된 배열 키에 한함)</p></td>
+     <td><p>키를 미리 선택해야 하며, 스키마가 변경될 경우 유지 관리가 필요함</p></td>
    </tr>
    <tr>
-     <td><p>JSON 파쇄</p></td>
-     <td><p>많은 키에 걸쳐 일반적인 속도 향상, 다양한 쿼리에 유연하게 적용 가능</p></td>
-     <td><p>아니요(배열 내부의 값을 가속하지 않음)</p></td>
-     <td><p>추가 스토리지 구성, 배열에는 여전히 키별 인덱스 필요</p></td>
+     <td><p>JSON 분할</p></td>
+     <td><p>다수의 키 전반에 걸친 전반적인 속도 향상, 다양한 쿼리에 유연하게 대응</p></td>
+     <td><p>아니요 (배열 내 값의 처리 속도는 향상되지 않음)</p></td>
+     <td><p>추가 저장소 구성이 필요하며, 배열에는 여전히 키별 인덱스가 필요함</p></td>
    </tr>
    <tr>
      <td><p>NGRAM 인덱스</p></td>
-     <td><p>와일드카드 검색, 텍스트 필드에서 하위 문자열 매칭</p></td>
-     <td><p>N/A</p></td>
-     <td><p>숫자/범위 필터에는 사용 불가</p></td>
+     <td><p>와일드카드 검색, 텍스트 필드 내 부분 문자열 일치</p></td>
+     <td><p>해당 없음</p></td>
+     <td><p>숫자/범위 필터에는 적용되지 않음</p></td>
    </tr>
 </table>
-<p><strong>팁:</strong> 이러한 접근 방식을 결합할 수 있습니다. 예를 들어, 광범위한 쿼리 가속을 위해 JSON 파쇄를 사용하고, 빈도가 높은 배열 키에는 JSON 인덱싱을 사용하고, 유연한 텍스트 검색을 위해 NGRAM 인덱싱을 사용할 수 있습니다.</p>
-<p>구현에 대한 자세한 내용은 다음을 참조하세요:</p>
+<p><strong>팁:</strong> 이러한 접근 방식을 조합하여 사용할 수 있습니다. 예를 들어, 광범위한 쿼리 가속화에는 JSON 분할을, 사용 빈도가 높은 배열 키에는 JSON 인덱싱을, 유연한 텍스트 검색에는 NGRAM 인덱싱을 활용할 수 있습니다.</p>
+<p>구현에 대한 자세한 내용은 다음을 참조하십시오:</p>
 <ul>
 <li><p><a href="/docs/ko/json-indexing.md">JSON 인덱싱</a></p></li>
-<li><p><a href="/docs/ko/json-shredding.md">JSON 파쇄</a></p></li>
+<li><p><a href="/docs/ko/json-shredding.md">JSON 분할</a></p></li>
 <li><p><a href="/docs/ko/ngram.md">NGRAM</a></p></li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -363,7 +366,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 필드의 크기에 제한이 있나요?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 필드의 크기에 제한이 있습니까?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -378,8 +381,8 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>네. 각 JSON 필드는 65,536바이트로 제한됩니다.</p>
-<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">JSON 필드에서 기본값 설정을 지원하나요?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
+    </button></h3><p>예. 각 JSON 필드는 65,536바이트로 제한됩니다.</p>
+<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">JSON 필드에서 기본값 설정이 가능한가요?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -394,8 +397,8 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>아니요, JSON 필드는 기본값을 지원하지 않습니다. 그러나 필드를 정의할 때 <code translate="no">nullable=True</code> 을 설정하여 빈 항목을 허용할 수 있습니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+    </button></h3><p>아니요, JSON 필드는 기본값을 지원하지 않습니다. 하지만 필드를 정의할 때 ` <code translate="no">nullable=True</code> `를 설정하여 빈 값 입력을 허용할 수 있습니다.</p>
+<p>자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable 및 기본값</a> ’을 참조하십시오.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 필드 키에 대한 명명 규칙이 있나요?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -411,13 +414,13 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>예, 쿼리 및 인덱싱과의 호환성을 보장하기 위한 것입니다:</p>
+    </button></h3><p>예, 쿼리 및 인덱싱과의 호환성을 보장하기 위해:</p>
 <ul>
-<li><p>JSON 키에는 문자, 숫자, 밑줄만 사용하세요.</p></li>
-<li><p>특수 문자, 공백 또는 점(<code translate="no">.</code>, <code translate="no">/</code>, 등)은 사용하지 마세요.</p></li>
-<li><p>호환되지 않는 키는 필터 표현식에서 구문 분석 문제를 일으킬 수 있습니다.</p></li>
+<li><p>JSON 키에는 영문자, 숫자 및 밑줄(_)만 사용하십시오.</p></li>
+<li><p>특수 문자, 공백 또는 점(<code translate="no">.</code>, <code translate="no">/</code> 등)의 사용은 피하십시오.</p></li>
+<li><p>호환되지 않는 키를 사용하면 필터 표현식에서 구문 분석 문제가 발생할 수 있습니다.</p></li>
 </ul>
-<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Milvus는 JSON 필드에서 문자열 값을 어떻게 처리하나요?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
+<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Milvus는 JSON 필드의 문자열 값을 어떻게 처리하나요?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -432,10 +435,10 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus는 의미 변환 없이 JSON 입력에 표시된 그대로 문자열 값을 저장합니다. 부적절하게 따옴표로 묶인 문자열은 구문 분석 중에 오류가 발생할 수 있습니다.</p>
-<p><strong>유효한 문자열의 예</strong></p>
+    </button></h3><p>Milvus는 의미적 변환 없이 JSON 입력에 표시된 그대로 문자열 값을 저장합니다. 따옴표가 올바르게 지정되지 않은 문자열은 파싱 중에 오류를 일으킬 수 있습니다.</p>
+<p><strong>유효한 문자열의 예</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>유효하지 않은 문자열의 예</strong></p>
+<p><strong>유효하지 않은 문자열의 예</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&#x27;a&quot;b&#x27;, &#x27;a\&#x27;b&#x27;
 <button class="copy-code-btn"></button></code></pre>

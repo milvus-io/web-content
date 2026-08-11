@@ -172,7 +172,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos de Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes por la clave primaria.</p>
+<p>El predicado de nivel superior selecciona las entidades candidatas. El predicado « <code translate="no">element_filter</code> » restringe la búsqueda vectorial a nivel de elemento a los elementos Struct que coincidan. A continuación, la agrupación agrupa los resultados de elementos coincidentes por la clave primaria.</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">Utilice la agrupación en la búsqueda híbrida<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,7 +264,7 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>La búsqueda por agrupación solo se aplica a la búsqueda vectorial de StructArray a nivel de elemento. La búsqueda de EmbeddingList y la búsqueda híbrida a nivel de EmbeddingList no admiten la agrupación.</p></li>
+<li><p>La búsqueda por agrupación solo se aplica a la búsqueda vectorial de StructArray a nivel de elemento. La búsqueda en EmbeddingList y la búsqueda híbrida a nivel de EmbeddingList no admiten la agrupación.</p></li>
 <li><p>Utiliza la clave primaria como « <code translate="no">group_by_field</code> ». La agrupación a nivel de elemento de StructArray no es una agrupación de uso general sobre campos escalares arbitrarios.</p></li>
 <li><p>No combine la búsqueda por agrupación con la búsqueda por rango.</p></li>
 <li><p>No utilices una consulta « <code translate="no">EmbeddingList</code> » ni una métrica « <code translate="no">MAX_SIM*</code> » para la búsqueda agrupada.</p></li>

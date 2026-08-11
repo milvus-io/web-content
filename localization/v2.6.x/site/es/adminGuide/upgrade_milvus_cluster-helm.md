@@ -80,7 +80,7 @@ title: Actualizar el clúster de Milvus con Helm Chart
 <ul>
 <li>Versión de Helm &gt;= 3.14.0</li>
 <li>Versión de Kubernetes &gt;= 1.20.0</li>
-<li>Clúster de Milvus desplegado mediante Helm Chart</li>
+<li>Clúster de Milvus implementado mediante Helm Chart</li>
 </ul>
 <p><strong>Requisitos de compatibilidad:</strong></p>
 <ul>

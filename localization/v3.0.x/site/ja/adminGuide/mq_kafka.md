@@ -99,7 +99,7 @@ title: カフカ
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用して Kafka を含む Milvus クラスターをデプロイする<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用して Kafka を含む Milvus クラスタをデプロイする<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

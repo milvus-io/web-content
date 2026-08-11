@@ -2,7 +2,7 @@
 id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
-summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法をご確認ください。
+summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法について学びましょう。
 title: RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール
 ---
 <h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: RPM/DEB パッケージを使用した Milvus スタンドアロンのイ
         ></path>
       </svg>
     </button></h2><p>RPM/DEB パッケージをインストールするには、お使いのシステムのパッケージマネージャーを使用できます。</p>
-<p>RPM ベースのシステム（CentOS、Fedora、RHEL など）では、<code translate="no">yum</code> コマンドを使用してパッケージをインストールします。</p>
+<p>RPM ベースのシステム（CentOS、Fedora、RHEL など）では、<code translate="no">yum</code> コマンドを使用してパッケージをインストールしてください。</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、Upsert、削除</a></li>
 <li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
 <li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
@@ -212,6 +212,6 @@ dpkg -l | grep milvus
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
 <li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
-<li><p><a href="https://github.com/zilliztech/attu">Attu</a>（Milvusの直感的な管理を実現するオープンソースのGUIツール）をご覧ください。</p></li>
+<li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

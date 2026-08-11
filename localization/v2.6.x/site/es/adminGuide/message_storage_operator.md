@@ -242,7 +242,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Este ejemplo especifica el número de réplicas de cada componente de Pulsar, los recursos de computación de Pulsar BookKeeper y otras configuraciones.</div>
-<div class="alert note">Consulta los elementos de configuración completos para configurar un servicio Pulsar interno en <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">el archivo values.yaml</a>. Añade los elementos de configuración que necesites en la sección « <code translate="no">pulsar.inCluster.values</code> », tal y como se muestra en el ejemplo anterior.</div>
+<div class="alert note">Consulta los elementos de configuración completos para configurar un servicio Pulsar interno en <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">el archivo values.yaml</a>. Añade los elementos de configuración necesarios en la sección « <code translate="no">pulsar.inCluster.values</code> », tal y como se muestra en el ejemplo anterior.</div>
 <p>Suponiendo que el archivo de configuración se llama « <code translate="no">milvuscluster.yaml</code> », ejecute el siguiente comando para aplicar la configuración.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -330,7 +330,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> indica que, al iniciarse un clúster de Milvus, se inicia automáticamente un servicio de Kafka en el clúster.</p>
-<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo muestra cómo configurar un servicio Kafka interno.</p>
+<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo muestra cómo configurar un servicio interno de Kafka.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -346,7 +346,7 @@ Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Consulta <a href="https://artifacthub.io/packages/helm/bitnami/kafka">aquí</a> los elementos de configuración completos para configurar un servicio interno de Kafka. Añade los elementos de configuración que necesites en « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Consulta <a href="https://artifacthub.io/packages/helm/bitnami/kafka">aquí</a> los elementos de configuración completos para configurar un servicio interno de Kafka. Añade los elementos de configuración necesarios en « <code translate="no">kafka.inCluster.values</code> ».</p>
 <p>Suponiendo que el archivo de configuración se llama « <code translate="no">milvuscluster.yaml</code> », ejecute el siguiente comando para aplicar la configuración.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

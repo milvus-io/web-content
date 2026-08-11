@@ -253,7 +253,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>O argumento « <code translate="no">filter</code> » aplica a condição da entidade de nível superior, enquanto o « <code translate="no">expr</code> » em « <code translate="no">chunk_req</code> » restringe apenas a solicitação do vetor ao nível do elemento do StructArray. Para combinações de pesquisa híbrida suportadas e limites específicos da versão, consulte <a href="/docs/pt/hybrid-search-with-structarray.md">«Pesquisa híbrida com StructArray</a> » e <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p>
+<p>O argumento « <code translate="no">filter</code> » aplica a condição de entidade de nível superior, enquanto o « <code translate="no">expr</code> » em « <code translate="no">chunk_req</code> » restringe apenas a solicitação do vetor ao nível do elemento do StructArray. Para combinações de pesquisa híbrida suportadas e limites específicos da versão, consulte <a href="/docs/pt/hybrid-search-with-structarray.md">«Pesquisa híbrida com StructArray</a> » e <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Resumo do suporte a predicados<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +301,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fora de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">chunks.section</code> ` em vez da sintaxe do operador `StructArray`, como ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utilizar <code translate="no">element_filter</code> quando apenas é necessária uma filtragem ao nível da linha. Utilize <code translate="no">MATCH_ANY</code> em vez disso, se apenas precisar de selecionar entidades.</p></li>
+<li><p>Utilizar ` <code translate="no">element_filter</code> ` quando apenas é necessária uma filtragem ao nível da linha. Utilize ` <code translate="no">MATCH_ANY</code> ` em vez disso, se apenas precisar de selecionar entidades.</p></li>
 <li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva deslocamentos de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
 <li><p>Escrever predicados booleanos simples, como <code translate="no">$[has_code]</code>. Utilize comparações explícitas, como <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Colocar « <code translate="no">element_filter</code> » antes de um predicado de nível superior na mesma expressão de filtro.</p></li>

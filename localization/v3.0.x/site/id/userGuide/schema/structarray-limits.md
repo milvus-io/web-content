@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai ` <code translate="no">DataType.BOOL</code>`.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, atau <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT</code> atau <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan atur <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.VARCHAR</code> dan tetapkan <code translate="no">max_length</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT_VECTOR</code> dan tetapkan <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.FLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Didukung</td><td>Tentukan subbidang sebagai <code translate="no">DataType.BFLOAT16_VECTOR</code> dan atur <code translate="no">dim</code>.</td></tr>
@@ -121,7 +121,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang geometri dan fungsi GIS tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang teks tidak didukung dalam bidang StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Tidak didukung</td><td>Subbidang timestamptz dan ekspresi berbasis waktu tidak didukung dalam bidang StructArray.</td></tr>
-<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak mendukung subbidang array bersarang, vektor-array, Struct, atau Array-of-Struct.</td></tr>
+<tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, atau <code translate="no">ArrayOfStruct</code></td><td>Tidak didukung</td><td>Bidang StructArray tidak mendukung subbidang array bersarang, array vektor, Struct, atau Array-of-Struct.</td></tr>
 </tbody>
 </table>
 <h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">Batasan skema nullable dan dinamis<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
@@ -258,11 +258,11 @@ summary: >-
     </button></h2><p>Penyaringan skalar StructArray ditangani oleh operator StructArray, seperti <code translate="no">element_filter</code> dan keluarga <code translate="no">MATCH_*</code>. Matriks dukungan predikat terperinci terdapat di <a href="/docs/id/struct-array-operators.md">StructArray Operators</a>.</p>
 <p>Secara umum:</p>
 <ul>
-<li><p>Gunakan ` <code translate="no">$[subfield]</code> ` hanya di dalam operator StructArray.</p></li>
+<li><p>Gunakan <code translate="no">$[subfield]</code> hanya di dalam operator StructArray.</p></li>
 <li><p>Gunakan subbidang skalar untuk predikat skalar.</p></li>
 <li><p>Jangan gunakan subbidang vektor sebagai masukan predikat skalar ` <code translate="no">$[...]</code> `.</p></li>
 <li><p>Sintaks JSON path, fungsi JSON, fungsi wadah array, fungsi pencocokan teks, fungsi Geometri/GIS, dan ekspresi Timestamptz tidak didukung untuk predikat tingkat elemen StructArray.</p></li>
-<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean mentah.</p></li>
+<li><p>Lebih disarankan menggunakan perbandingan boolean eksplisit seperti ` <code translate="no">$[has_code] == true</code> ` daripada ekspresi boolean biasa.</p></li>
 </ul>
 <h2 id="Related-pages" class="common-anchor-header">Halaman terkait<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Buat bidang StructArray, seperti <code translate="no">chunks</code>.</td><td><a href="/docs/id/create-structarray-field.md">Buat bidang StructArray</a></td></tr>
 <tr><td>Sisipkan entitas yang bidang ` <code translate="no">chunks</code> `-nya berisi objek Struct.</td><td><a href="/docs/id/insert-data-into-structarray-fields.md">Masukkan Data ke dalam Bidang StructArray</a></td></tr>
 <tr><td>Buat indeks ` <code translate="no">MAX_SIM*</code> ` pada ` <code translate="no">chunks[emb_list_vector]</code> ` untuk pencarian `EmbeddingList`.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
-<tr><td>Buat indeks metrik vektor biasa pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
+<tr><td>Buat indeks vektor-metrik biasa pada ` <code translate="no">chunks[emb]</code> ` untuk pencarian tingkat elemen.</td><td><a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -131,7 +131,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam mode pencarian ini, " <code translate="no">limit</code> " mengontrol berapa banyak entitas yang dikembalikan untuk setiap kueri. Keluaran dapat mencakup subbidang StructArray, tetapi hasil pencocokan itu sendiri mewakili entitas induk yang cocok, bukan satu elemen Struct tertentu.</p>
+<p>Dalam mode pencarian ini, " <code translate="no">limit</code> " mengontrol berapa banyak entitas yang dikembalikan untuk setiap kueri. Output dapat mencakup subbidang StructArray, tetapi hasil pencocokan itu sendiri mewakili entitas induk yang cocok, bukan satu elemen Struct tertentu.</p>
 <div class="alert note">
 <p>Untuk panduan lengkap bergaya ColBERT atau ColPali, lihat <a href="/docs/id/search-with-embedding-lists.md">Pencarian dengan Daftar Embedding</a>. Halaman ini hanya membahas perilaku pencarian StructArray dasar.</p>
 </div>
@@ -177,7 +177,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam pencarian tingkat elemen, setiap hasil pencocokan mewakili elemen Struct yang cocok. Nilai " <code translate="no">offset</code> " adalah posisi berbasis nol dari elemen tersebut di bidang StructArray. Entitas yang sama dapat muncul lebih dari sekali jika lebih dari satu elemen Struct cocok dengan kueri. Nilai " <code translate="no">limit</code> " berlaku untuk hasil pencocokan elemen, bukan entitas induk yang unik.</p>
+<p>Dalam pencarian tingkat elemen, setiap hasil pencocokan mewakili elemen Struct yang cocok. Nilai " <code translate="no">offset</code> " adalah posisi berbasis nol dari elemen tersebut dalam bidang StructArray. Entitas yang sama dapat muncul lebih dari sekali jika lebih dari satu elemen Struct cocok dengan kueri. Nilai " <code translate="no">limit</code> " berlaku untuk hasil pencocokan elemen, bukan entitas induk yang unik.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Menafsirkan hasil<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +221,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Menggunak <code translate="no">chunks.emb</code> alih-alih sintaks jalur subbidang yang diperlukan, yaitu <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Menggunakan kueri EmbeddingList terhadap subbidang vektor yang diindeks dengan metrik vektor biasa.</p></li>
 <li><p>Menggunakan kueri vektor biasa terhadap subbidang vektor yang diindeks dengan metrik <code translate="no">MAX_SIM*</code>.</p></li>
 <li><p>Mengharapkan pencarian tingkat elemen <code translate="no">limit</code> mengembalikan sejumlah entitas induk yang unik. Pencarian ini mengembalikan hasil elemen.</p></li>

@@ -2,7 +2,7 @@
 id: alter-external-collection-schema.md
 title: Mengubah Skema Koleksi EksternalCompatible with Milvus 3.0.x
 summary: >-
-  Pelajari cara menampilkan kolom tambahan dari sumber data eksternal dalam
+  Pelajari cara menampilkan bidang tambahan dari sumber data eksternal dalam
   koleksi eksternal yang sudah ada.
 beta: Milvus 3.0.x
 ---

@@ -360,7 +360,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Lorsque vous supprimez le cluster Milvus à l’aide de la configuration par défaut, les dépendances telles que etcd, Pulsar et MinIO ne sont pas supprimées. Par conséquent, lors de la prochaine installation de la même instance de cluster Milvus, ces dépendances seront réutilisées.</li>
+<li>Lorsque vous supprimez le cluster Milvus à l’aide de la configuration par défaut, les dépendances telles que etcd, Pulsar et MinIO ne sont pas supprimées. Par conséquent, la prochaine fois que vous installerez la même instance de cluster Milvus, ces dépendances seront réutilisées.</li>
 <li>Pour supprimer les dépendances et les revendications de volume persistant (PVC) en même temps que le cluster Milvus, consultez <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">le fichier de configuration</a>.</li>
 </ul>
 </div>

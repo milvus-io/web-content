@@ -76,7 +76,7 @@ Creating milvus-standalone ... done
 <p>Téléchargez toujours la dernière configuration Docker Compose pour garantir la compatibilité avec les fonctionnalités de la v2.6.17.</p>
 <ul>
 <li><p>Si vous ne parvenez pas à exécuter la commande ci-dessus, veuillez vérifier si Docker Compose V1 est installé sur votre système. Si tel est le cas, il est recommandé de migrer vers Docker Compose V2, conformément aux remarques figurant sur <a href="https://docs.docker.com/compose/">cette page</a>.</p></li>
-<li><p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l’assistance nécessaire.</p></li>
+<li><p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous apporterons l’assistance nécessaire.</p></li>
 </ul>
 </div>
 <p>Après le démarrage de Milvus,</p>
@@ -119,7 +119,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ajoutez des paramètres supplémentaires pour remplacer ceux par défaut.
-La procédure suivante part du principe que vous devez remplacer la configuration par défaut de ` <code translate="no">proxy.healthCheckTimeout</code>`. Pour connaître les éléments de configuration concernés, consultez la section <a href="/docs/fr/v2.6.x/system_configuration.md">Configuration du système</a>.</p>
+La procédure suivante part du principe que vous devez remplacer la configuration par défaut de ` <code translate="no">proxy.healthCheckTimeout</code>`. Pour connaître les éléments de configuration concernés, consultez la section « <a href="/docs/fr/v2.6.x/system_configuration.md">Configuration du système</a> ».</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:

@@ -1,9 +1,9 @@
 ---
 id: string.md
-title: 문자열 필드
-summary: Milvus에서 VARCHAR는 문자열 데이터를 저장하는 데 사용되는 데이터 유형입니다.
+title: VarChar 필드
+summary: VARCHAR는 Milvus에서 길이가 제한된 짧은 문자열 메타데이터를 저장하기 위한 스칼라 필드 유형입니다.
 ---
-<h1 id="String-Field" class="common-anchor-header">문자열 필드<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="VarChar-Field" class="common-anchor-header">VarChar 필드<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,14 +18,15 @@ summary: Milvus에서 VARCHAR는 문자열 데이터를 저장하는 데 사용�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서 <code translate="no">VARCHAR</code> 은 문자열 데이터를 저장하는 데 사용되는 데이터 유형입니다.</p>
-<p><code translate="no">VARCHAR</code> 필드를 정의할 때 두 개의 매개 변수는 필수입니다:</p>
+    </button></h1><p>Milvus는 ` <code translate="no">VARCHAR</code> ` 및 ` <code translate="no">TEXT</code> ` 필드를 통해 텍스트형 스칼라 데이터를 지원합니다. 이 페이지에서는 이름, 태그, 카테고리, 외부 ID와 같이 짧고 길이가 제한된 문자열 메타데이터를 위해 설계된 ` <code translate="no">VARCHAR</code>`에 대해 설명합니다.</p>
+<p>엔티티와 함께 저장 및 반환해야 하는 긴 원본 텍스트, 문서 구절, 기사 본문, 티켓 또는 로그의 경우, 대신 <code translate="no">TEXT</code> 필드를 사용하십시오. 값이 <code translate="no">65,535</code> 바이트를 초과할 수 있거나 컬렉션 스키마에 고정된 <code translate="no">max_length</code> 를 설정하지 않으려는 경우에는 <code translate="no">TEXT</code> 를 사용하십시오. 자세한 내용은 <a href="/docs/ko/text.md">텍스트 필드를</a> 참조하십시오.</p>
+<p><code translate="no">VARCHAR</code> 필드를 정의할 때는 다음 두 가지 매개변수가 필수입니다.</p>
 <ul>
-<li><p><code translate="no">datatype</code> 을 <code translate="no">DataType.VARCHAR</code> 으로 설정합니다.</p></li>
-<li><p><code translate="no">VARCHAR</code> 필드에 저장할 수 있는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 를 지정합니다. <code translate="no">max_length</code> 의 유효한 범위는 1에서 65,535까지입니다.</p></li>
+<li><p><code translate="no">datatype</code> 을 <code translate="no">DataType.VARCHAR</code> 로 설정합니다.</p></li>
+<li><p><code translate="no">max_length</code> 를 지정해야 하며, 이는 <code translate="no">VARCHAR</code> 필드가 저장할 수 있는 최대 바이트 수를 정의합니다. <code translate="no">max_length</code> 의 유효 범위는 1에서 65,535까지입니다.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로, <code translate="no">default_value</code> 을 문자열 값으로 설정하세요. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 로 설정하고, <code translate="no">default_value</code> 을 문자열 값으로 설정하십시오. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable 및 기본값’을</a> 참조하십시오.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,16 +43,21 @@ summary: Milvus에서 VARCHAR는 문자열 데이터를 저장하는 데 사용�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에 문자열 데이터를 저장하려면 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 정의하세요. 다음은 두 개의 <code translate="no">VARCHAR</code> 필드가 있는 컬렉션 스키마를 정의하는 예제입니다:</p>
+    </button></h2><p>Milvus에 짧고 길이가 제한된 문자열 메타데이터를 저장하려면 컬렉션 스키마에 ` <code translate="no">VARCHAR</code> ` 필드를 정의하십시오. 다음은 두 개의 ` <code translate="no">VARCHAR</code> ` 필드가 포함된 컬렉션 스키마를 정의하는 예시입니다:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: 최대 100바이트까지 저장하고, null 값을 허용하며, 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
-<li><p><code translate="no">varchar_field2</code>: 최대 200바이트까지 저장하고 null 값을 허용하지만 기본값은 없습니다.</p></li>
+<li><p><code translate="no">varchar_field1</code>: 최대 100바이트까지 저장할 수 있으며, null 값을 허용하고 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
+<li><p><code translate="no">varchar_field2</code>: 최대 200바이트까지 저장할 수 있으며, null 값을 허용하지만 기본값은 없습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 ` <code translate="no">enable_dynamic_fields=True</code> `를 설정하면, Milvus에서 사전에 정의되지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이로 인해 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">‘동적 필드(Dynamic Field</a>)’를 참조하십시오.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -246,13 +252,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱싱은 검색 및 쿼리 성능을 개선하는 데 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만 스칼라 필드의 경우 선택 사항입니다.</p>
-<p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 스칼라 필드 <code translate="no">varchar_field1</code> 에 인덱스를 생성하는 예제입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+    </button></h2><p>인덱싱은 검색 및 쿼리 성능 향상에 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만, 스칼라 필드의 경우 선택 사항입니다.</p>
+<p>다음 예제는 벡터 필드 ` <code translate="no">embedding</code> `과 스칼라 필드 ` <code translate="no">varchar_field1</code>`에 대해 모두 ` <code translate="no">AUTOINDEX</code> ` 인덱스 유형을 사용하여 인덱스를 생성합니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 또한 각 필드에 대해 인덱스 유형과 매개변수를 사용자 정의할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">‘인덱스 설명’을</a> 참조하십시오.</p>
 <div class="alert note">
-<p><code translate="no">NGRAM</code> 인덱스를 구축하여 <code translate="no">VARCHAR</code> 필드에 대한 <code translate="no">LIKE</code> 필터링을 가속화할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">NGRAM을</a> 참조하세요.</p>
+<p>또한 <code translate="no">NGRAM</code> 인덱스를 생성하여 <code translate="no">VARCHAR</code> 필드에 대한 <code translate="no">LIKE</code> 필터링 속도를 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">‘NGRAM’을</a> 참조하십시오.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -326,7 +337,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,9 +352,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스키마와 인덱스가 정의되면 문자열 필드를 포함하는 컬렉션을 만듭니다.</p>
+    </button></h2><p>스키마와 인덱스가 정의되면, 문자열 필드를 포함하는 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -376,7 +392,6 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -399,9 +414,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 생성한 후 스키마와 일치하는 엔티티를 삽입합니다.</p>
+    </button></h2><p>컬렉션을 생성한 후, 스키마에 부합하는 엔티티를 삽입합니다.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -495,7 +515,6 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -511,7 +530,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용하여 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용한 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,10 +545,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>엔티티를 삽입한 후 <code translate="no">query</code> 메서드를 사용하여 지정된 필터 표현식과 일치하는 엔티티를 검색합니다.</p>
-<p><code translate="no">varchar_field1</code> 가 <code translate="no">&quot;Product A&quot;</code> 문자열과 일치하는 엔티티를 검색하려면 다음과 같이 하세요:</p>
+    </button></h2><p>엔티티를 삽입한 후, ` <code translate="no">query</code> ` 메서드를 사용하여 지정된 필터 표현식과 일치하는 엔티티를 검색합니다.</p>
+<p><code translate="no">varchar_field1</code> 가 문자열 <code translate="no">&quot;Product A&quot;</code> 와 일치하는 엔티티를 검색하려면:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -588,7 +612,6 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
@@ -596,9 +619,14 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">varchar_field2</code> 이 null인 엔티티를 검색합니다:</p>
+<p><code translate="no">varchar_field2</code> 가 null인 엔티티를 검색하려면:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -658,16 +686,20 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">varchar_field1</code> 에 <code translate="no">&quot;Unknown&quot;</code> 값이 있는 엔티티를 검색하려면 아래 표현식을 사용합니다. <code translate="no">varchar_field1</code> 의 기본값은 <code translate="no">&quot;Unknown&quot;</code> 이므로 예상 결과에는 <code translate="no">varchar_field1</code> 가 명시적으로 <code translate="no">&quot;Unknown&quot;</code> 로 설정된 엔티티 또는 <code translate="no">varchar_field1</code> 가 null로 설정된 엔티티가 포함되어야 합니다.</p>
+<p><code translate="no">varchar_field1</code> 의 값이 <code translate="no">&quot;Unknown&quot;</code> 인 엔티티를 검색하려면 아래의 표현식을 사용하십시오. <code translate="no">varchar_field1</code> 의 기본값은 <code translate="no">&quot;Unknown&quot;</code> 이므로, 예상 결과에는 <code translate="no">varchar_field1</code> 가 명시적으로 <code translate="no">&quot;Unknown&quot;</code> 로 설정된 엔티티나 <code translate="no">varchar_field1</code> 가 null로 설정된 엔티티가 포함되어야 합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -726,7 +758,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
@@ -748,9 +779,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 스칼라 필드 필터링 외에도 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
+    </button></h2><p>기본 스칼라 필드 필터링 외에도, 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>
@@ -831,7 +867,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

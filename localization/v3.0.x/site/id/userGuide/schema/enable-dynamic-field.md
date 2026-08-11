@@ -3,10 +3,10 @@ id: enable-dynamic-field.md
 title: Bidang Dinamis
 summary: >-
   Milvus memungkinkan Anda untuk menyisipkan entitas dengan struktur yang
-  fleksibel dan berkembang melalui fitur khusus yang disebut bidang dinamis.
-  Bidang ini diimplementasikan sebagai bidang JSON tersembunyi bernama $meta,
-  yang secara otomatis menyimpan bidang apa pun dalam data Anda yang tidak
-  secara eksplisit didefinisikan dalam skema koleksi.
+  fleksibel dan dapat berkembang melalui fitur khusus yang disebut bidang
+  dinamis. Bidang ini diimplementasikan sebagai bidang JSON tersembunyi bernama
+  $meta, yang secara otomatis menyimpan semua bidang dalam data Anda yang tidak
+  didefinisikan secara eksplisit dalam skema koleksi.
 ---
 <h1 id="Dynamic-Field" class="common-anchor-header">Bidang Dinamis<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus memungkinkan Anda untuk menyisipkan entitas dengan struktur yang fleksibel dan berkembang melalui fitur khusus yang disebut <strong>bidang dinamis</strong>. Field ini diimplementasikan sebagai field JSON tersembunyi bernama <code translate="no">$meta</code>, yang secara otomatis menyimpan field apa pun dalam data Anda yang <strong>tidak secara eksplisit didefinisikan</strong> dalam skema koleksi.</p>
-<h2 id="How-it-works" class="common-anchor-header">Bagaimana cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus memungkinkan Anda untuk menyisipkan entitas dengan struktur yang fleksibel dan terus berkembang melalui fitur khusus yang disebut <strong>bidang dinamis</strong>. Bidang ini diimplementasikan sebagai bidang JSON tersembunyi bernama ` <code translate="no">$meta</code>`, yang secara otomatis menyimpan bidang apa pun dalam data Anda yang <strong>tidak didefinisikan secara eksplisit</strong> dalam skema koleksi.</p>
+<h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,10 +39,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika bidang dinamis diaktifkan, Milvus menambahkan bidang <code translate="no">$meta</code> yang tersembunyi ke setiap entitas. Bidang ini bertipe JSON, yang berarti dapat menyimpan struktur data apa pun yang kompatibel dengan JSON dan dapat diindeks menggunakan sintaksis jalur JSON.</p>
-<p>Selama penyisipan data, setiap field yang tidak dideklarasikan dalam skema secara otomatis disimpan sebagai pasangan key-value di dalam field dinamis ini.</p>
-<p>Anda tidak perlu mengelola <code translate="no">$meta</code> secara manual-Milvus menanganinya secara transparan.</p>
-<p>Sebagai contoh, jika skema koleksi Anda hanya mendefinisikan <code translate="no">id</code> dan <code translate="no">vector</code>, dan Anda memasukkan entitas berikut ini:</p>
+    </button></h2><p>Saat bidang dinamis diaktifkan, Milvus menambahkan bidang tersembunyi <code translate="no">$meta</code> ke setiap entitas. Bidang ini bertipe JSON, yang berarti dapat menyimpan struktur data apa pun yang kompatibel dengan JSON dan dapat diindeks menggunakan sintaks jalur JSON.</p>
+<p>Selama proses penyisipan data, setiap bidang yang tidak dideklarasikan dalam skema akan secara otomatis disimpan sebagai pasangan kunci-nilai di dalam bidang dinamis ini.</p>
+<p>Anda tidak perlu mengelola ` <code translate="no">$meta</code> ` secara manual—Milvus menanganinya secara transparan.</p>
+<p>Misalnya, jika skema koleksi Anda hanya mendefinisik <code translate="no">id</code> dan <code translate="no">vector</code>, dan Anda menyisipkan entitas berikut:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -50,7 +50,7 @@ summary: >-
   <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span>  <span class="hljs-comment">// Not in schema</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dengan mengaktifkan fitur bidang dinamis, Milvus menyimpannya secara internal sebagai:</p>
+<p>Dengan fitur bidang dinamis yang diaktifkan, Milvus menyimpannya secara internal sebagai:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -60,12 +60,12 @@ summary: >-
 <span class="highlighted-comment-line">  <span class="hljs-punctuation">}</span></span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Hal ini memungkinkan Anda untuk mengembangkan struktur data Anda tanpa mengubah skema.</p>
-<p>Kasus penggunaan yang umum meliputi:</p>
+<p>Hal ini memungkinkan Anda untuk mengembangkan struktur data tanpa mengubah skema.</p>
+<p>Contoh penggunaan umum meliputi:</p>
 <ul>
-<li><p>Menyimpan bidang opsional atau bidang yang jarang diambil</p></li>
-<li><p>Menangkap metadata yang bervariasi berdasarkan entitas</p></li>
-<li><p>Mendukung pemfilteran yang fleksibel melalui indeks pada kunci bidang dinamis tertentu</p></li>
+<li><p>Menyimpan bidang opsional atau yang jarang diambil</p></li>
+<li><p>Merekam metadata yang bervariasi berdasarkan entitas</p></li>
+<li><p>Mendukung penyaringan yang fleksibel melalui indeks pada kunci bidang dinamis tertentu</p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">Tipe data yang didukung<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,14 +82,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang dinamis mendukung semua tipe data skalar yang disediakan oleh Milvus, termasuk nilai sederhana dan kompleks. Tipe data ini berlaku untuk **nilai kunci yang disimpan di <code translate="no">$meta</code>.</p>
-<p><strong>Tipe-tipe yang didukung meliputi:</strong></p>
+    </button></h2><p>Kolom dinamis mendukung semua tipe data skalar yang disediakan oleh Milvus, termasuk nilai sederhana maupun kompleks. Tipe data ini berlaku untuk **nilai kunci yang disimpan di <code translate="no">$meta</code>.</p>
+<p><strong>Tipe yang didukung meliputi:</strong></p>
 <ul>
 <li><p>String (<code translate="no">VARCHAR</code>)</p></li>
 <li><p>Bilangan bulat (<code translate="no">INT8</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</p></li>
-<li><p>Titik mengambang (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
+<li><p>Bilangan floating point (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
 <li><p>Boolean (<code translate="no">BOOL</code>)</p></li>
-<li><p>Larik nilai skalar (<code translate="no">ARRAY</code>)</p></li>
+<li><p>Array nilai skalar (<code translate="no">ARRAY</code>)</p></li>
 <li><p>Objek JSON (<code translate="no">JSON</code>)</p></li>
 </ul>
 <p><strong>Contoh:</strong></p>
@@ -104,8 +104,8 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Masing-masing kunci dan nilai di atas akan disimpan di dalam bidang <code translate="no">$meta</code>.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Mengaktifkan bidang dinamis<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+<p>Setiap kunci dan nilai di atas akan disimpan di dalam bidang <code translate="no">$meta</code>.</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">Aktifkan bidang dinamis<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,9 +120,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan fitur bidang dinamis, setel <code translate="no">enable_dynamic_field=True</code> saat membuat skema koleksi:</p>
+    </button></h2><p>Untuk menggunakan fitur bidang dinamis, atur ` <code translate="no">enable_dynamic_field=True</code> ` saat membuat skema koleksi:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize client</span>
@@ -264,14 +269,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-entities-to-the-collection" class="common-anchor-header">Menyisipkan entitas ke dalam koleksi<button data-href="#Insert-entities-to-the-collection" class="anchor-icon" translate="no">
+<h2 id="Insert-entities-to-the-collection" class="common-anchor-header">Sisipkan entitas ke dalam koleksi<button data-href="#Insert-entities-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,9 +290,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang dinamis memungkinkan Anda menyisipkan bidang tambahan yang tidak didefinisikan dalam skema. Bidang ini akan disimpan secara otomatis di <code translate="no">$meta</code>.</p>
+    </button></h2><p>Fitur bidang dinamis memungkinkan Anda menyisipkan bidang tambahan yang tidak didefinisikan dalam skema. Bidang-bidang ini akan disimpan secara otomatis di ` <code translate="no">$meta</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;my_id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-comment"># Explicitly defined primary field</span>
@@ -381,7 +390,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -401,7 +409,7 @@ curl --request POST \
   &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Kunci indeks dalam bidang dinamis<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Mengindeks kunci di bidang dinamis<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -416,9 +424,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus memungkinkan Anda menggunakan <strong>pengindeksan jalur JSON</strong> untuk membuat indeks pada kunci tertentu di dalam bidang dinamis. Ini dapat berupa nilai skalar atau nilai bersarang dalam objek JSON.</p>
+    </button></h2><p>Milvus memungkinkan Anda menggunakan <strong>pengindeksan jalur JSON</strong> untuk membuat indeks pada kunci tertentu di dalam bidang dinamis. Kunci-kunci ini dapat berupa nilai skalar atau nilai bersarang dalam objek JSON.</p>
 <div class="alert note">
-<p>Mengindeks kunci bidang dinamis bersifat <strong>opsional</strong>. Anda masih dapat melakukan kueri atau memfilter berdasarkan kunci bidang dinamis tanpa indeks, namun hal ini dapat mengakibatkan kinerja yang lebih lambat karena pencarian secara brute force.</p>
+<p>Pengindeksan kunci bidang dinamis bersifat <strong>opsional</strong>. Anda tetap dapat melakukan kueri atau penyaringan berdasarkan kunci bidang dinamis tanpa indeks, tetapi hal ini dapat menyebabkan kinerja yang lebih lambat karena pencarian brute-force.</p>
 </div>
 <h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaks pengindeksan jalur JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -437,18 +445,18 @@ curl --request POST \
       </svg>
     </button></h3><p>Untuk membuat indeks jalur JSON, tentukan:</p>
 <ul>
-<li><p><strong>Jalur JSON</strong> (<code translate="no">json_path</code>): Jalur ke kunci atau bidang bersarang di dalam objek JSON yang ingin Anda indeks.</p>
+<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Jalur ke kunci atau bidang bersarang di dalam objek JSON Anda yang ingin Anda indeks.</p>
 <ul>
 <li><p>Contoh: <code translate="no">metadata[&quot;category&quot;]</code></p>
-<p>Ini menentukan di mana mesin pengindeks harus mencari di dalam struktur JSON.</p></li>
+<p>Ini menentukan di mana mesin pengindeksan harus mencari di dalam struktur JSON.</p></li>
 </ul></li>
-<li><p><strong>Tipe cast JSON</strong> (<code translate="no">json_cast_type</code>): Tipe data yang harus digunakan Milvus ketika menginterpretasikan dan mengindeks nilai pada jalur yang ditentukan.</p>
+<li><p><strong>Tipe konversi JSON</strong> (<code translate="no">json_cast_type</code>): Tipe data yang harus digunakan Milvus saat menafsirkan dan mengindeks nilai pada jalur yang ditentukan.</p>
 <ul>
-<li><p>Tipe ini harus sesuai dengan tipe data aktual dari bidang yang diindeks.</p></li>
-<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">Jenis cast JSON yang didukung</a>.</p></li>
+<li><p>Tipe ini harus sesuai dengan tipe data sebenarnya dari bidang yang diindeks.</p></li>
+<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">Tipe konversi JSON</a> yang <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">didukung</a>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Menggunakan jalur JSON untuk mengindeks kunci bidang dinamis<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Gunakan jalur JSON untuk mengindeks kunci bidang dinamis<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -463,14 +471,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Karena bidang dinamis adalah bidang JSON, Anda dapat mengindeks kunci apa pun di dalamnya menggunakan sintaksis jalur JSON. Ini berfungsi baik untuk nilai skalar sederhana maupun struktur bertingkat yang kompleks.</p>
+    </button></h3><p>Karena bidang dinamis merupakan bidang JSON, Anda dapat mengindeks kunci apa pun di dalamnya menggunakan sintaks jalur JSON. Fitur ini berfungsi baik untuk nilai skalar sederhana maupun struktur bersarang yang kompleks.</p>
 <p><strong>Contoh jalur JSON:</strong></p>
 <ul>
 <li><p>Untuk kunci sederhana: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
 <li><p>Untuk kunci bersarang: <code translate="no">dynamic_json['varchar']</code>, <code translate="no">dynamic_json['nested']['value']</code></p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index a simple string key</span>
@@ -682,9 +695,14 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika kunci bidang dinamis berisi nilai dalam format yang salah, (misalnya angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversinya:</p>
+    </button></h3><p>Jika kunci bidang dinamis berisi nilai dalam format yang salah (misalnya, angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversinya:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-comment"># JSON key name</span>
@@ -742,10 +760,10 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <div class="alert note">
 <ul>
 <li><p>Jika konversi tipe gagal (misalnya, nilai <code translate="no">&quot;not_a_number&quot;</code> tidak dapat dikonversi menjadi angka), nilai tersebut akan dilewati dan tidak diindeks.</p></li>
-<li><p>Untuk detail tentang parameter fungsi cast, lihat <a href="/docs/id/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Bidang JSON</a>.</p></li>
+<li><p>Untuk detail mengenai parameter fungsi cast, lihat <a href="/docs/id/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Bidang JSON</a>.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Menerapkan indeks ke koleksi<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Terapkan indeks ke koleksi<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -760,9 +778,14 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah mendefinisikan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
+    </button></h3><p>Setelah menentukan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     index_params=index_params
@@ -811,14 +834,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Memfilter berdasarkan kunci bidang dinamis<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
+<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Filter berdasarkan kunci bidang dinamis<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -833,14 +855,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menyisipkan entitas dengan kunci bidang dinamis, Anda dapat memfilternya menggunakan ekspresi filter standar.</p>
+    </button></h2><p>Setelah menyisipkan entitas dengan kunci bidang dinamis, Anda dapat menyaringnya menggunakan ekspresi penyaringan standar.</p>
 <ul>
-<li><p>Untuk kunci non-JSON (misalnya string, angka, boolean), Anda dapat mereferensikannya dengan nama kunci secara langsung.</p></li>
-<li><p>Untuk kunci yang menyimpan objek JSON, gunakan sintaksis jalur JSON untuk mengakses nilai bersarang.</p></li>
+<li><p>Untuk kunci non-JSON (misalnya string, angka, boolean), Anda dapat merujuknya langsung berdasarkan nama kunci.</p></li>
+<li><p>Untuk kunci yang menyimpan objek JSON, gunakan sintaks jalur JSON untuk mengakses nilai-nilai bersarang.</p></li>
 </ul>
 <p>Berdasarkan<a href="/docs/id/enable-dynamic-field.md#Insert-entities-to-the-collection">contoh entitas</a> dari bagian sebelumnya, ekspresi filter yang valid meliputi:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment"># JSON object key</span>
@@ -862,9 +889,14 @@ filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot
 <span class="hljs-built_in">export</span> filterWords=<span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
 <span class="hljs-built_in">export</span> filterNestedValue=<span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Mengambil kunci bidang dinamis</strong>: Untuk mengembalikan kunci bidang dinamis dalam hasil pencarian atau kueri, Anda harus secara eksplisit menentukannya dalam parameter <code translate="no">output_fields</code> menggunakan sintaksis jalur JSON yang sama dengan pemfilteran:</p>
+<p><strong>Mengambil kunci bidang dinamis</strong>: Untuk menampilkan kunci bidang dinamis dalam hasil pencarian atau kueri, Anda harus menentukannya secara eksplisit dalam parameter ` <code translate="no">output_fields</code> ` menggunakan sintaks JSON path yang sama seperti saat melakukan penyaringan:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Include dynamic field keys in search results</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -962,7 +994,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -977,8 +1008,8 @@ curl --request POST \
 <div class="alert note">
 <p>Kunci bidang dinamis tidak disertakan dalam hasil secara default dan harus diminta secara eksplisit.</p>
 </div>
-<p>Untuk daftar lengkap operator yang didukung dan ekspresi penyaringan, lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a>.</p>
-<h2 id="Put-it-all-together" class="common-anchor-header">Menyatukan semuanya<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
+<p>Untuk daftar lengkap operator dan ekspresi penyaringan yang didukung, lihat <a href="/docs/id/filtered-search.md">Pencarian yang Disaring</a>.</p>
+<h2 id="Put-it-all-together" class="common-anchor-header">Menggabungkan semuanya<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -993,17 +1024,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sekarang, Anda telah mempelajari cara menggunakan bidang dinamis untuk menyimpan dan mengindeks kunci secara fleksibel yang tidak didefinisikan dalam skema. Setelah kunci bidang dinamis dimasukkan, Anda dapat menggunakannya seperti bidang lain dalam ekspresi filter-tidak diperlukan sintaks khusus.</p>
+    </button></h2><p>Sekarang, Anda telah mempelajari cara menggunakan bidang dinamis untuk menyimpan dan mengindeks kunci yang tidak didefinisikan dalam skema secara fleksibel. Setelah kunci bidang dinamis dimasukkan, Anda dapat menggunakannya seperti bidang lainnya dalam ekspresi filter—tanpa memerlukan sintaks khusus.</p>
 <p>Untuk menyelesaikan alur kerja dalam aplikasi dunia nyata, Anda juga perlu:</p>
 <ul>
 <li><p><strong>Membuat indeks pada bidang vektor Anda</strong> (wajib untuk setiap koleksi)</p>
-<p>Lihat Mengatur <a href="/docs/id/create-collection.md#Optional-Set-Index-Parameters">Parameter Indeks</a></p></li>
+<p>Lihat <a href="/docs/id/create-collection.md#Optional-Set-Index-Parameters">Tetapkan Parameter Indeks</a></p></li>
 <li><p><strong>Memuat koleksi</strong></p>
 <p>Lihat <a href="/docs/id/load-and-release.md">Memuat &amp; Melepaskan</a></p></li>
-<li><p><strong>Mencari atau membuat kueri menggunakan filter jalur JSON</strong></p>
-<p>Lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/json-operators.md">Operator JSON</a></p></li>
+<li><p><strong>Melakukan pencarian atau kueri menggunakan filter jalur JSON</strong></p>
+<p>Lihat <a href="/docs/id/filtered-search.md">Pencarian</a> yang <a href="/docs/id/filtered-search.md">Difilter</a> dan <a href="/docs/id/json-operators.md">Operator JSON</a></p></li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1018,7 +1049,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Kapan saya harus mendefinisikan bidang secara eksplisit di dalam skema alih-alih menggunakan kunci bidang dinamis?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Kapan saya harus mendefinisikan bidang secara eksplisit dalam skema alih-alih menggunakan kunci bidang dinamis?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1033,14 +1064,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda harus mendefinisikan bidang secara eksplisit dalam skema alih-alih menggunakan kunci bidang dinamis bila:</p>
+    </button></h3><p>Anda sebaiknya mendefinisikan bidang secara eksplisit dalam skema daripada menggunakan kunci bidang dinamis jika:</p>
 <ul>
-<li><p><strong>Field tersebut sering disertakan dalam output_fields</strong>: Hanya field yang didefinisikan secara eksplisit yang dijamin dapat diambil secara efisien melalui <code translate="no">output_fields</code>. Kunci bidang dinamis tidak dioptimalkan untuk pengambilan frekuensi tinggi dan dapat menimbulkan biaya tambahan kinerja.</p></li>
-<li><p><strong>Bidang ini sering diakses atau disaring</strong>: Meskipun mengindeks kunci bidang dinamis dapat memberikan kinerja pemfilteran yang serupa dengan bidang skema tetap, bidang yang didefinisikan secara eksplisit menawarkan struktur yang lebih jelas dan pemeliharaan yang lebih baik.</p></li>
-<li><p><strong>Anda memerlukan kontrol penuh atas perilaku bidang</strong>: Field eksplisit mendukung batasan tingkat skema, validasi, dan pengetikan yang lebih jelas, yang berguna untuk mengelola integritas dan konsistensi data.</p></li>
-<li><p><strong>Anda ingin menghindari inkonsistensi pengindeksan</strong>: Data dalam kunci bidang dinamis lebih rentan terhadap ketidakkonsistenan jenis atau struktur. Menggunakan skema tetap membantu memastikan kualitas data, terutama jika Anda berencana menggunakan pengindeksan atau casting.</p></li>
+<li><p><strong>Bidang tersebut sering dimasukkan dalam `output_fields</strong>`: Hanya bidang yang didefinisikan secara eksplisit yang dijamin dapat diambil secara efisien melalui ` <code translate="no">output_fields</code>`. Kunci bidang dinamis tidak dioptimalkan untuk pengambilan data berfrekuensi tinggi dan dapat menimbulkan beban kinerja.</p></li>
+<li><p><strong>Bidang tersebut sering diakses atau difilter</strong>: Meskipun pengindeksan kunci bidang dinamis dapat memberikan kinerja penyaringan yang serupa dengan bidang skema tetap, bidang yang didefinisikan secara eksplisit menawarkan struktur yang lebih jelas dan kemudahan pemeliharaan yang lebih baik.</p></li>
+<li><p><strong>Anda memerlukan kendali penuh atas perilaku bidang</strong>: Bidang eksplisit mendukung batasan tingkat skema, validasi, dan tiping yang lebih jelas, yang dapat berguna untuk mengelola integritas dan konsistensi data.</p></li>
+<li><p><strong>Anda ingin menghindari ketidakkonsistenan pengindeksan</strong>: Data dalam kunci bidang dinamis lebih rentan terhadap ketidakkonsistenan dalam tipe atau struktur. Menggunakan skema tetap membantu memastikan kualitas data, terutama jika Anda berencana menggunakan pengindeksan atau casting.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada kunci bidang dinamis yang sama dengan tipe data yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+<p>Jika Anda memutuskan bahwa kunci bidang dinamis harus menjadi bidang skalar eksplisit dalam koleksi yang ada, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Mengubah Skema Koleksi</a>. Pengaturan bidang dinamis tingkat koleksi yang ada dikelola melalui properti koleksi; untuk detailnya, lihat <a href="/docs/id/modify-collection.md">Memodifikasi Koleksi</a>.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Apakah saya dapat membuat beberapa indeks pada kunci bidang dinamis yang sama dengan tipe data yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1055,8 +1087,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, Anda <strong>hanya</strong> dapat membuat <strong>satu indeks per jalur JSON</strong>. Meskipun kunci bidang dinamis berisi nilai tipe campuran (misalnya, beberapa string dan beberapa angka), Anda harus memilih satu <code translate="no">json_cast_type</code> saat mengindeks jalur tersebut. Beberapa indeks pada kunci yang sama dengan jenis yang berbeda tidak didukung saat ini.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Saat mengindeks kunci bidang dinamis, bagaimana jika casting data gagal?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+    </button></h3><p>Tidak, Anda <strong>hanya</strong> dapat membuat <strong>satu indeks per jalur JSON</strong>. Meskipun kunci bidang dinamis berisi nilai-nilai tipe campuran (misalnya, beberapa string dan beberapa angka), Anda harus memilih satu " <code translate="no">json_cast_type</code> " saat mengindeks jalur tersebut. Beberapa indeks pada kunci yang sama dengan tipe yang berbeda saat ini tidak didukung.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Saat mengindeks kunci bidang dinamis, apa yang terjadi jika konversi data gagal?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1071,14 +1103,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika Anda telah membuat indeks pada kunci bidang dinamis dan casting data gagal-misalnya, nilai yang dimaksudkan untuk di-cast ke <code translate="no">double</code> adalah string non-numerik seperti <code translate="no">&quot;abc&quot;</code>-nilai spesifik tersebut akan <strong>dilewati secara diam-diam selama pembuatan indeks</strong>. Nilai tersebut tidak akan muncul dalam indeks dan oleh karena itu <strong>tidak akan dikembalikan dalam hasil pencarian atau kueri berbasis filter</strong> yang mengandalkan indeks.</p>
-<p>Ini memiliki beberapa implikasi penting:</p>
+    </button></h3><p>Jika Anda telah membuat indeks pada kunci bidang dinamis dan konversi data gagal—misalnya, nilai yang seharusnya dikonversi menjadi bilangan bulat ( <code translate="no">double</code> ) ternyata berupa string non-numerik seperti <code translate="no">&quot;abc&quot;</code>—nilai-nilai spesifik tersebut akan <strong>dilewati secara diam-diam selama proses pembuatan indeks</strong>. Nilai-nilai tersebut tidak akan muncul dalam indeks dan karenanya <strong>tidak akan ditampilkan dalam hasil pencarian berbasis filter atau hasil kueri</strong> yang mengandalkan indeks tersebut.</p>
+<p>Hal ini memiliki beberapa implikasi penting:</p>
 <ul>
-<li><p><strong>Tidak ada fallback ke pemindaian penuh</strong>: Jika sebagian besar entitas berhasil diindeks, kueri penyaringan akan bergantung sepenuhnya pada indeks. Entitas yang gagal diindeks akan dikecualikan dari kumpulan hasil, meskipun secara logika cocok dengan kondisi filter.</p></li>
-<li><p><strong>Risiko akurasi pencarian</strong>: Pada set data besar yang kualitas datanya tidak konsisten (terutama pada kunci bidang dinamis), perilaku ini dapat menyebabkan hasil yang tidak diharapkan. Sangat penting untuk memastikan pemformatan data yang konsisten dan valid sebelum mengindeks.</p></li>
-<li><p><strong>Gunakan fungsi cast dengan hati-hati</strong>: Jika Anda menggunakan <code translate="no">json_cast_function</code> untuk mengonversi string menjadi angka selama pengindeksan, pastikan nilai string dapat dikonversi dengan baik. Ketidaksesuaian antara <code translate="no">json_cast_type</code> dan jenis yang dikonversi akan mengakibatkan kesalahan atau entri yang dilewati.</p></li>
+<li><p><strong>Tidak ada fallback ke pemindaian penuh</strong>: Jika sebagian besar entitas berhasil diindeks, kueri penyaringan akan sepenuhnya bergantung pada indeks. Entitas dengan kegagalan konversi akan dikecualikan dari kumpulan hasil—bahkan jika secara logis sesuai dengan kondisi filter.</p></li>
+<li><p><strong>Risiko akurasi pencarian</strong>: Dalam kumpulan data besar di mana kualitas data tidak konsisten (terutama pada kunci bidang dinamis), perilaku ini dapat menyebabkan hasil yang hilang secara tak terduga. Sangat penting untuk memastikan format data yang konsisten dan valid sebelum pengindeksan.</p></li>
+<li><p><strong>Gunakan fungsi konversi dengan hati-hati</strong>: Jika Anda menggunakan fungsi<strong>konversi</strong>( <code translate="no">json_cast_function</code> ) untuk mengubah string menjadi angka selama pengindeksan, pastikan nilai string tersebut dapat dikonversi dengan andal. Ketidaksesuaian antara tipe data yang dikonversi ( <code translate="no">json_cast_type</code> ) dan tipe data yang sebenarnya akan mengakibatkan kesalahan atau entri yang terlewati.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Apa yang terjadi jika kueri saya menggunakan tipe data yang berbeda dari tipe cast yang diindeks?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Apa yang terjadi jika kueri saya menggunakan tipe data yang berbeda dari tipe konversi yang diindeks?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1093,4 +1125,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika kueri Anda membandingkan kunci bidang dinamis menggunakan <strong>tipe data yang berbeda</strong> dari yang digunakan dalam indeks (misalnya, kueri dengan perbandingan string saat indeks di-cast ke <code translate="no">double</code>), sistem <strong>tidak</strong> akan <strong>menggunakan indeks tersebut</strong>, dan mungkin kembali ke pemindaian penuh <em>hanya jika memungkinkan</em>. Untuk performa dan akurasi terbaik, pastikan jenis kueri Anda sesuai dengan <code translate="no">json_cast_type</code> yang digunakan selama pembuatan indeks.</p>
+    </button></h3><p>Jika kueri Anda membandingkan kunci bidang dinamis menggunakan <strong>tipe data yang berbeda</strong> dari yang digunakan dalam indeks (misalnya, melakukan kueri dengan perbandingan string saat indeks dikonversi ke <code translate="no">double</code>), sistem <strong>tidak</strong> akan <strong>menggunakan indeks tersebut</strong>, dan mungkin akan beralih ke pemindaian penuh <em>hanya jika memungkinkan</em>. Untuk kinerja dan akurasi terbaik, pastikan tipe kueri Anda sesuai dengan tipe yang dikonversi ( <code translate="no">json_cast_type</code> ) yang digunakan saat pembuatan indeks.</p>

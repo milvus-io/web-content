@@ -149,7 +149,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Actualización a la versión 2.5.16 con mixCoord</h4><div class="alert-note">
 <p>Omite este paso si tu clúster ya ejecuta la versión v2.5.16 o superior con <code translate="no">mixCoord</code> habilitado.</p>
 </div>
-<p>Crea un archivo de configuración <code translate="no">milvusupgrade.yaml</code> para habilitar <code translate="no">mixCoord</code> y actualizar a la versión 2.5.16:</p>
+<p>Crea un archivo de configuración <code translate="no">milvusupgrade.yaml</code> para habilitar <code translate="no">mixCoord</code> y actualizar a la versión v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

@@ -47,12 +47,12 @@ summary: >-
 <tr><td>Campo vettoriale a livello di collezione + sottocampo EmbeddingList di StructArray</td><td>A livello di entità</td><td>I candidati finali sono identificati dalla chiave primaria.</td><td>Da non utilizzare.</td></tr>
 <tr><td>Campo vettoriale a livello di collezione + sottocampo a livello di elemento di StructArray</td><td>Livello entità</td><td>I risultati a livello di elemento vengono raggruppati in candidati a livello di entità prima del riordino ibrido.</td><td>Configurazione opzionale di raggruppamento a livello di elemento StructArray <code translate="no">AnnSearchRequest</code>.</td></tr>
 <tr><td>Più sottocampi a livello di elemento all’interno dello stesso campo StructArray</td><td>Livello dell’elemento</td><td>I candidati finali sono identificati dalla chiave primaria più l'offset dell'elemento Struct.</td><td>Non utilizzare.</td></tr>
-<tr><td>Sottocampi a livello di elemento sotto diversi campi StructArray</td><td>Livello dell’entità</td><td>Gli offset degli elementi non condividono l’identità, pertanto ogni <code translate="no">AnnSearchRequest</code> a livello di elemento di StructArray viene compresso prima della riclassificazione.</td><td>Configurazione facoltativa di compressione per ogni <code translate="no">AnnSearchRequest</code> e a livello di elemento di StructArray.</td></tr>
+<tr><td>Sottocampi a livello di elemento sotto diversi campi StructArray</td><td>Livello dell’entità</td><td>Gli offset degli elementi non condividono l'identità, pertanto ogni <code translate="no">AnnSearchRequest</code> a livello di elemento di StructArray viene compresso prima del riclassificamento.</td><td>Configurazione facoltativa di compressione per ogni <code translate="no">AnnSearchRequest</code> e a livello di elemento di StructArray.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <p>Avviso</p>
-<p>Utilizzare l'<code translate="no">element_scope</code> solo per configurare il raggruppamento per oggetti a livello di elemento di StructArray <code translate="no">AnnSearchRequest</code> in una ricerca ibrida a livello di elemento non appartenente alla stessa struttura. Non utilizzarlo per richieste EmbeddingList, richieste vettoriali a livello di raccolta o ricerche ibride a livello di elemento dello stesso StructArray.</p>
+<p>Utilizzare l'<code translate="no">element_scope</code> solo per configurare il raggruppamento per oggetti a livello di elemento di StructArray <code translate="no">AnnSearchRequest</code> in una ricerca ibrida a livello di elemento non della stessa struttura. Non utilizzarlo per richieste EmbeddingList, richieste vettoriali a livello di raccolta o ricerche ibride a livello di elemento dello stesso StructArray.</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +154,7 @@ results = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando tutti gli oggetti ` <code translate="no">AnnSearchRequest</code> ` hanno come target sottocampi vettoriali a livello di elemento all’interno dello stesso campo `StructArray`, la ricerca ibrida può mantenere i candidati a livello di elemento tramite il riclassamento. Questa è l’unica modalità ibrida di `StructArray` in cui i risultati finali rimangono a livello di elemento.</p>
+    </button></h2><p>Quando tutti gli oggetti ` <code translate="no">AnnSearchRequest</code> ` hanno come target sottocampi vettoriali a livello di elemento all’interno dello stesso campo `StructArray`, la ricerca ibrida può mantenere i candidati a livello di elemento tramite il riclassificamento. Questa è l’unica modalità ibrida di `StructArray` in cui i risultati finali rimangono a livello di elemento.</p>
 <p>L’esempio seguente presuppone che il campo StructArray <code translate="no">chunks</code> abbia due sottocampi vettoriali a livello di elemento, <code translate="no">chunks[emb]</code> e <code translate="no">chunks[code_emb]</code>, ed entrambi utilizzino metriche vettoriali regolari.</p>
 <pre><code translate="no">index_chunk_req = AnnSearchRequest(
     data=[query_vector],
@@ -274,7 +274,7 @@ results = client.hybrid_search(
 <tr><td><code translate="no">sum</code></td><td>Sommare tutti i punteggi degli elementi restituiti per l'entità.</td><td>Non consentito.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
 <tr><td><code translate="no">avg</code></td><td>Calcola la media di tutti i punteggi degli elementi restituiti per l’entità.</td><td>Non consentito.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 <tr><td><code translate="no">topk_sum</code></td><td>Somma i migliori punteggi degli elementi restituiti da <code translate="no">K</code> per l'entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Solo metriche a correlazione positiva, come <code translate="no">IP</code> o <code translate="no">COSINE</code>.</td></tr>
-<tr><td><code translate="no">topk_avg</code></td><td>Calcola la media dei punteggi degli elementi migliori restituiti da <code translate="no">K</code> per l’entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
+<tr><td><code translate="no">topk_avg</code></td><td>Calcola la media dei punteggi degli elementi migliori restituiti dall'<code translate="no">K</code> per l'entità.</td><td>Obbligatorio e deve essere positivo.</td><td>Qualsiasi metrica vettoriale regolare supportata.</td></tr>
 </tbody>
 </table>
 <p>Il collasso utilizza solo i risultati degli elementi restituiti da quell'<code translate="no">AnnSearchRequest</code> a livello di elemento StructArray. Non esegue la scansione di ogni elemento Struct nell'entità dopo la ricerca ANN. Impostare l'<code translate="no">limit</code> della richiesta a un valore sufficientemente alto da fornire gli elementi che si desidera siano disponibili per il collasso.</p>
@@ -385,6 +385,6 @@ results = client.hybrid_search(
 <li><p>Per conoscere le due modalità di ricerca vettoriale di base con StructArray, leggere <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per aggiungere filtri scalari alla ricerca ibrida, consultare <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 <li><p>Per utilizzare i limiti di punteggio o di distanza nella ricerca ibrida, leggere <a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a>.</p></li>
-<li><p>Per raggruppare i risultati ibridi a livello di elemento in base all’entità padre, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
+<li><p>Per raggruppare i risultati ibridi a livello di elemento per entità padre, leggere <a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a>.</p></li>
 <li><p>Per verificare i limiti di ricerca di StructArray, leggi " <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>".</p></li>
 </ol>

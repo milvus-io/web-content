@@ -314,7 +314,7 @@ client.create_index(
 <tbody>
 <tr><td>Utilizzare la sintassi del percorso per gli indici dei sottocampi.</td><td><code translate="no">chunks[emb]</code>, non <code translate="no">emb</code> o <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Un sottocampo vettoriale accetta un solo indice.</td><td>Utilizzare sottocampi vettoriali separati se sono necessarie famiglie di metriche diverse.</td></tr>
-<tr><td>Utilizzare le metriche <code translate="no">MAX_SIM*</code> per la ricerca EmbeddingList.</td><td>I dati di query EmbeddingList richiedono un indice creato con una metrica <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td>Utilizzare le metriche <code translate="no">MAX_SIM*</code> per la ricerca EmbeddingList.</td><td>I dati di query di EmbeddingList richiedono un indice creato con una metrica di tipo " <code translate="no">MAX_SIM*</code> ".</td></tr>
 <tr><td>Utilizzare metriche vettoriali standard per la ricerca a livello di elemento.</td><td>La ricerca a livello di elemento utilizza dati di query vettoriali standard e metriche quali <code translate="no">COSINE</code>, <code translate="no">IP</code> o <code translate="no">L2</code>.</td></tr>
 <tr><td>Indice i sottocampi scalari che compaiono nei filtri.</td><td>Utilizzare i tipi di indice scalare supportati dalla destinazione.</td></tr>
 <tr><td>Tenere presenti i limiti dei campi vettoriali.</td><td>Il numero totale di campi vettoriali e sottocampi vettoriali è limitato. Consultare Limiti di StructArray prima di aggiungere molti sottocampi vettoriali.</td></tr>
@@ -339,7 +339,7 @@ client.create_index(
 <li><p>Creare un indice su <code translate="no">chunks.emb</code> anziché su <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Creare solo un indice <code translate="no">MAX_SIM*</code> e poi tentare di eseguire una ricerca a livello di elemento sullo stesso sottocampo.</p></li>
 <li><p>Creare solo un indice vettoriale regolare e poi tentare di eseguire una ricerca EmbeddingList sullo stesso sottocampo.</p></li>
-<li><p>Riutilizzare un sottocampo vettoriale sia per le metriche " <code translate="no">MAX_SIM*</code> " che per quelle vettoriali regolari.</p></li>
+<li><p>Riutilizzare un sottocampo vettoriale sia per le metriche <code translate="no">MAX_SIM*</code> che per quelle vettoriali regolari.</p></li>
 <li><p>Dimenticare gli indici scalari per i filtri StructArray utilizzati intensamente.</p></li>
 <li><p>Indicizzazione di un sottocampo StructArray che non esiste nello schema Struct.</p></li>
 </ul>

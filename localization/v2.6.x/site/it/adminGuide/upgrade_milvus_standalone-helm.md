@@ -90,7 +90,7 @@ title: Aggiornamento di Milvus Standalone con Helm Chart
 </ul>
 <p><strong>Limiti della coda dei messaggi</strong>: durante l'aggiornamento a Milvus v2.6.17, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
 <div class="alert note">
-A partire dalla versione 4.2.21 del chart Helm di Milvus, abbiamo introdotto il chart pulsar-v3.x come dipendenza. Per garantire la retrocompatibilità, si prega di aggiornare Helm alla versione 3.14 o successive e di assicurarsi di aggiungere l’opzione ` <code translate="no">--reset-then-reuse-values</code> ` ogni volta che si utilizza ` <code translate="no">helm upgrade</code>`.
+A partire dalla versione 4.2.21 del chart Helm di Milvus, abbiamo introdotto il chart pulsar-v3.x come dipendenza. Per garantire la retrocompatibilità, si prega di aggiornare Helm alla versione v3.14 o successive e di assicurarsi di aggiungere l’opzione <code translate="no">--reset-then-reuse-values</code> ogni volta che si utilizza <code translate="no">helm upgrade</code>.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Procedura di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

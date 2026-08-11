@@ -2,10 +2,10 @@
 id: enable-dynamic-field.md
 title: Динамическое поле
 summary: >-
-  Milvus позволяет вставлять сущности с гибкой, развивающейся структурой
-  благодаря специальной функции, называемой динамическим полем. Это поле
-  реализовано в виде скрытого JSON-поля с именем $meta, которое автоматически
-  сохраняет любые поля в ваших данных, не определенные явно в схеме коллекции.
+  Milvus позволяет вставлять сущности с гибкими, изменяющимися структурами с
+  помощью специальной функции, называемой «динамическим полем». Это поле
+  реализовано в виде скрытого поля JSON с именем $meta, в котором автоматически
+  хранятся все поля ваших данных, явно не определённые в схеме коллекции.
 ---
 <h1 id="Dynamic-Field" class="common-anchor-header">Динамическое поле<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus позволяет вставлять сущности с гибкой, развивающейся структурой с помощью специальной функции, называемой <strong>динамическим полем</strong>. Это поле реализовано в виде скрытого JSON-поля с именем <code translate="no">$meta</code>, которое автоматически сохраняет любые поля в ваших данных, которые <strong>не определены явно</strong> в схеме коллекции.</p>
+    </button></h1><p>Milvus позволяет вставлять сущности с гибкими, развивающимися структурами с помощью специальной функции, называемой <strong>«динамическое поле</strong>». Это поле реализовано в виде скрытого поля JSON с именем <code translate="no">$meta</code>, которое автоматически сохраняет любые поля в ваших данных, которые <strong>явно не определены</strong> в схеме коллекции.</p>
 <h2 id="How-it-works" class="common-anchor-header">Как это работает<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +38,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда динамическое поле включено, Milvus добавляет скрытое поле <code translate="no">$meta</code> к каждой сущности. Это поле имеет тип JSON, что означает, что оно может хранить любую JSON-совместимую структуру данных и может быть проиндексировано с помощью синтаксиса JSON path.</p>
-<p>При вставке данных любое поле, не объявленное в схеме, автоматически сохраняется в виде пары ключ-значение в этом динамическом поле.</p>
-<p>Вам не нужно управлять <code translate="no">$meta</code> вручную - Milvus делает это прозрачно.</p>
-<p>Например, если в схеме вашей коллекции определены только <code translate="no">id</code> и <code translate="no">vector</code>, и вы вставляете следующую сущность:</p>
+    </button></h2><p>Когда динамическое поле включено, Milvus добавляет к каждому объекту скрытое поле <code translate="no">$meta</code>. Это поле имеет тип JSON, что означает, что оно может хранить любую структуру данных, совместимую с JSON, и может индексироваться с использованием синтаксиса JSON-путей.</p>
+<p>При вставке данных любое поле, не объявленное в схеме, автоматически сохраняется в виде пары «ключ-значение» внутри этого динамического поля.</p>
+<p>Вам не нужно управлять полем « <code translate="no">$meta</code> » вручную — Milvus обрабатывает его прозрачно.</p>
+<p>Например, если схема вашей коллекции определяет только « <code translate="no">id</code> » и « <code translate="no">vector</code> », и вы вставляете следующий объект:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -49,7 +49,7 @@ summary: >-
   <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span>  <span class="hljs-comment">// Not in schema</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>При включенной функции динамического поля Milvus хранит его внутри как:</p>
+<p>При включенной функции динамических полей Milvus сохраняет её внутренне в следующем виде:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -59,12 +59,12 @@ summary: >-
 <span class="highlighted-comment-line">  <span class="hljs-punctuation">}</span></span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Это позволяет вам изменять структуру данных без изменения схемы.</p>
-<p>К распространенным случаям использования относятся:</p>
+<p>Это позволяет вам развивать структуру данных без изменения схемы.</p>
+<p>Типичные сценарии использования включают:</p>
 <ul>
-<li><p>Хранение необязательных или редко извлекаемых полей.</p></li>
-<li><p>Захват метаданных, различающихся в зависимости от сущности.</p></li>
-<li><p>Поддержка гибкой фильтрации с помощью индексов по определенным ключам динамических полей.</p></li>
+<li><p>Хранение необязательных или редко используемых полей</p></li>
+<li><p>Сбор метаданных, которые варьируются в зависимости от сущности</p></li>
+<li><p>Поддержка гибкой фильтрации с помощью индексов по ключам определённых динамических полей</p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,10 +84,10 @@ summary: >-
     </button></h2><p>Динамическое поле поддерживает все скалярные типы данных, предоставляемые Milvus, включая как простые, так и сложные значения. Эти типы данных применяются к **значениям ключей, хранящихся в <code translate="no">$meta</code>.</p>
 <p><strong>Поддерживаемые типы включают:</strong></p>
 <ul>
-<li><p>String (<code translate="no">VARCHAR</code>)</p></li>
+<li><p>Строка (<code translate="no">VARCHAR</code>)</p></li>
 <li><p>Целое число (<code translate="no">INT8</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</p></li>
-<li><p>Плавающая точка (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
-<li><p>Boolean (<code translate="no">BOOL</code>)</p></li>
+<li><p>Число с плавающей запятой (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
+<li><p>Логические значения (<code translate="no">BOOL</code>)</p></li>
 <li><p>Массив скалярных значений (<code translate="no">ARRAY</code>)</p></li>
 <li><p>Объекты JSON (<code translate="no">JSON</code>)</p></li>
 </ul>
@@ -103,7 +103,7 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Каждый из перечисленных выше ключей и значений будет храниться в поле <code translate="no">$meta</code>.</p>
+<p>Каждый из вышеперечисленных ключей и значений будет храниться в поле <code translate="no">$meta</code>.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Включение динамического поля<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,9 +119,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы использовать функцию динамического поля, установите <code translate="no">enable_dynamic_field=True</code> при создании схемы коллекции:</p>
+    </button></h2><p>Чтобы использовать функцию динамического поля, при создании схемы коллекции установите <code translate="no">enable_dynamic_field=True</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize client</span>
@@ -263,7 +268,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -285,9 +289,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Динамическое поле позволяет вставлять дополнительные поля, не определенные в схеме. Эти поля будут автоматически сохранены в <code translate="no">$meta</code>.</p>
+    </button></h2><p>Динамическое поле позволяет вставлять дополнительные поля, не определённые в схеме. Эти поля будут автоматически сохраняться в поле « <code translate="no">$meta</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;my_id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-comment"># Explicitly defined primary field</span>
@@ -380,7 +389,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -415,11 +423,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus позволяет использовать <strong>индексацию по пути JSON</strong> для создания индексов по определенным ключам в динамическом поле. Это могут быть скалярные значения или вложенные значения в JSON-объекты.</p>
+    </button></h2><p>Milvus позволяет использовать <strong>индексирование по JSON-путям</strong> для создания индексов по конкретным ключам внутри динамического поля. Это могут быть скалярные значения или вложенные значения в JSON-объектах.</p>
 <div class="alert note">
-<p>Индексирование ключей динамического поля <strong>необязательно</strong>. Вы все равно можете запрашивать или фильтровать по ключам динамического поля без индекса, но это может привести к снижению производительности из-за грубого поиска.</p>
+<p>Индексирование ключей динамического поля <strong>не</strong> является <strong>обязательным</strong>. Вы по-прежнему можете выполнять запросы или фильтрацию по ключам динамического поля без индекса, однако это может привести к снижению производительности из-за поиска методом перебора.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Синтаксис индексирования пути JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Синтаксис индексирования по JSON-пути<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -434,20 +442,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы создать индекс пути JSON, укажите:</p>
+    </button></h3><p>Чтобы создать индекс по пути JSON, укажите:</p>
 <ul>
-<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): Путь к ключу или вложенному полю в объекте JSON, который вы хотите проиндексировать.</p>
+<li><p><strong>JSON-путь</strong> (<code translate="no">json_path</code>): путь к ключу или вложенному полю в вашем JSON-объекте, которое вы хотите проиндексировать.</p>
 <ul>
 <li><p>Пример: <code translate="no">metadata[&quot;category&quot;]</code></p>
 <p>Это определяет, где механизм индексирования должен искать внутри структуры JSON.</p></li>
 </ul></li>
-<li><p><strong>JSON cast type</strong> (<code translate="no">json_cast_type</code>): Тип данных, который Milvus должен использовать при интерпретации и индексировании значения по указанному пути.</p>
+<li><p><strong>Тип преобразования JSON</strong> (<code translate="no">json_cast_type</code>): тип данных, который Milvus должен использовать при интерпретации и индексировании значения по указанному пути.</p>
 <ul>
-<li><p>Этот тип должен совпадать с реальным типом данных индексируемого поля.</p></li>
-<li><p>Полный список см. в разделе <a href="/docs/ru/use-json-fields.md#Supported-JSON-cast-types">Поддерживаемые типы данных JSON</a>.</p></li>
+<li><p>Этот тип должен соответствовать фактическому типу данных индексируемого поля.</p></li>
+<li><p>Полный список см. в разделе <a href="/docs/ru/use-json-fields.md#Supported-JSON-cast-types">«Поддерживаемые типы преобразования JSON</a>».</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Использование пути JSON для индексации ключей динамических полей<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Использование JSON-пути для индексирования ключей динамических полей<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -462,14 +470,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Поскольку динамическое поле является полем JSON, вы можете индексировать любой ключ в нем, используя синтаксис JSON path. Это работает как для простых скалярных значений, так и для сложных вложенных структур.</p>
-<p><strong>Примеры путей JSON:</strong></p>
+    </button></h3><p>Поскольку динамическое поле является полем JSON, вы можете индексировать любой ключ внутри него, используя синтаксис JSON-пути. Это работает как для простых скалярных значений, так и для сложных вложенных структур.</p>
+<p><strong>Примеры JSON-путей:</strong></p>
 <ul>
 <li><p>Для простых ключей: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
 <li><p>Для вложенных ключей: <code translate="no">dynamic_json['varchar']</code>, <code translate="no">dynamic_json['nested']['value']</code></p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index a simple string key</span>
@@ -666,7 +679,7 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Используйте функции приведения JSON для преобразования типов<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Используйте функции преобразования JSON для преобразования типов<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -681,9 +694,14 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если ключ динамического поля содержит значения в неправильном формате (например, числа, хранящиеся в виде строк), вы можете использовать функцию приведения для их преобразования:</p>
+    </button></h3><p>Если ключ динамического поля содержит значения в некорректном формате (например, числа, сохраненные в виде строк), можно использовать функцию преобразования для их конвертации:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-comment"># JSON key name</span>
@@ -740,8 +758,8 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Если преобразование типа не удается (например, значение <code translate="no">&quot;not_a_number&quot;</code> не может быть преобразовано в число), значение пропускается и не индексируется.</p></li>
-<li><p>Подробнее о параметрах функции cast см. в разделе <a href="/docs/ru/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Поле JSON</a>.</p></li>
+<li><p>Если преобразование типов завершилось неудачей (например, значение <code translate="no">&quot;not_a_number&quot;</code> не может быть преобразовано в число), значение пропускается и не индексируется.</p></li>
+<li><p>Подробнее о параметрах функций преобразования см. в разделе <a href="/docs/ru/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">«Поле JSON</a>».</p></li>
 </ul>
 </div>
 <h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Применение индексов к коллекции<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
@@ -759,9 +777,14 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После определения параметров индекса вы можете применить их к коллекции с помощью <code translate="no">create_index()</code>:</p>
+    </button></h3><p>После определения параметров индекса вы можете применить их к коллекции с помощью команды <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     index_params=index_params
@@ -810,14 +833,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Фильтр по динамическим ключам полей<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
+<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Фильтрация по динамическим ключам полей<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -832,14 +854,19 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После вставки сущностей с динамическими ключами полей вы можете отфильтровать их с помощью стандартных выражений фильтрации.</p>
+    </button></h2><p>После вставки сущностей с динамическими ключами полей вы можете фильтровать их с помощью стандартных выражений фильтрации.</p>
 <ul>
-<li><p>Для не-JSON-ключей (например, строк, чисел, булевых значений) вы можете ссылаться на них по имени ключа напрямую.</p></li>
-<li><p>Для ключей, хранящих JSON-объекты, используйте синтаксис JSON path для доступа к вложенным значениям.</p></li>
+<li><p>Для ключей, не являющихся JSON (например, строк, чисел, логических значений), можно напрямую ссылаться на них по имени ключа.</p></li>
+<li><p>Для ключей, хранящих объекты JSON, используйте синтаксис JSON-путей для доступа к вложенным значениям.</p></li>
 </ul>
 <p>Исходя из<a href="/docs/ru/enable-dynamic-field.md#Insert-entities-to-the-collection">примера сущности</a> из предыдущего раздела, допустимые выражения фильтрации включают:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment"># JSON object key</span>
@@ -861,9 +888,14 @@ filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot
 <span class="hljs-built_in">export</span> filterWords=<span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
 <span class="hljs-built_in">export</span> filterNestedValue=<span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Получение динамических ключей полей</strong>: Чтобы вернуть ключи динамических полей в результатах поиска или запроса, вы должны явно указать их в параметре <code translate="no">output_fields</code>, используя тот же синтаксис пути JSON, что и при фильтрации:</p>
+<p><strong>Получение динамических ключей полей</strong>: Чтобы вернуть динамические ключи полей в результатах поиска или запроса, необходимо явно указать их в параметре ` <code translate="no">output_fields</code> `, используя тот же синтаксис JSON-пути, что и при фильтрации:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Include dynamic field keys in search results</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -961,7 +993,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -974,10 +1005,10 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Динамические ключи полей не включаются в результаты по умолчанию и должны быть явно запрошены.</p>
+<p>По умолчанию динамические ключи полей не включаются в результаты и должны запрашиваться явно.</p>
 </div>
-<p>Полный список поддерживаемых операторов и выражений фильтрации см. в разделе <a href="/docs/ru/filtered-search.md">Фильтрованный поиск</a>.</p>
-<h2 id="Put-it-all-together" class="common-anchor-header">Соберите все вместе<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
+<p>Полный список поддерживаемых операторов и выражений фильтрации см. в разделе <a href="/docs/ru/filtered-search.md">«Фильтрованный поиск</a>».</p>
+<h2 id="Put-it-all-together" class="common-anchor-header">Подведем итоги<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -992,17 +1023,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>К этому моменту вы узнали, как использовать динамическое поле для гибкого хранения и индексирования ключей, не определенных в схеме. После вставки ключа динамического поля вы можете использовать его так же, как и любое другое поле в выражениях фильтрации - специальный синтаксис не требуется.</p>
-<p>Чтобы завершить рабочий процесс в реальном приложении, вам также потребуется:</p>
+    </button></h2><p>К этому моменту вы узнали, как использовать динамическое поле для гибкого хранения и индексирования ключей, не определенных в схеме. После вставки ключа динамического поля его можно использовать в выражениях фильтрации так же, как и любое другое поле — никакого специального синтаксиса не требуется.</p>
+<p>Чтобы завершить рабочий процесс в реальном приложении, вам также необходимо:</p>
 <ul>
-<li><p><strong>Создать индекс для векторного поля</strong> (обязательно для каждой коллекции).</p>
-<p>См. раздел <a href="/docs/ru/create-collection.md#Optional-Set-Index-Parameters">"Установка параметров индекса</a></p></li>
+<li><p><strong>Создать индекс для векторного поля</strong> (обязательно для каждой коллекции)</p>
+<p>См. раздел <a href="/docs/ru/create-collection.md#Optional-Set-Index-Parameters">«Настройка параметров индекса</a>»</p></li>
 <li><p><strong>Загрузить коллекцию</strong></p>
-<p>См. раздел <a href="/docs/ru/load-and-release.md">Загрузка и освобождение</a></p></li>
-<li><p><strong>Выполнить поиск или запрос с использованием фильтров пути JSON</strong></p>
-<p>См. раздел <a href="/docs/ru/filtered-search.md">Фильтрованный поиск</a> и <a href="/docs/ru/json-operators.md">операторы JSON</a></p></li>
+<p>См. раздел <a href="/docs/ru/load-and-release.md">«Загрузка и освобождение»</a></p></li>
+<li><p><strong>Выполнить поиск или запрос с использованием фильтров JSON-пути</strong></p>
+<p>См. раздел <a href="/docs/ru/filtered-search.md">«Фильтрованный поиск</a> и <a href="/docs/ru/json-operators.md">операторы JSON»</a></p></li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">Часто задаваемые вопросы<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1017,7 +1048,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Когда я должен определять поле явно в схеме, а не использовать динамический ключ поля?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Когда следует явно определять поле в схеме вместо использования динамического ключа поля?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1032,14 +1063,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Вы должны определить поле явно в схеме, а не использовать динамический ключ поля, когда:</p>
+    </button></h3><p>Вам следует явно определить поле в схеме вместо использования динамического ключа поля, если:</p>
 <ul>
-<li><p><strong>Поле часто включается в output_fields</strong>: Только явно определенные поля гарантированно будут эффективно извлекаться через <code translate="no">output_fields</code>. Динамические ключи полей не оптимизированы для высокочастотного поиска и могут иметь избыточную производительность.</p></li>
-<li><p><strong>К полю часто обращаются или фильтруют его</strong>: Хотя индексирование по динамическому ключу поля может обеспечить такую же производительность фильтрации, как и для полей фиксированной схемы, явно определенные поля предлагают более четкую структуру и более удобны в обслуживании.</p></li>
-<li><p><strong>Вам нужен полный контроль над поведением поля</strong>: Явно определенные поля поддерживают ограничения на уровне схемы, проверки и более четкую типизацию, что может быть полезно для управления целостностью и непротиворечивостью данных.</p></li>
-<li><p><strong>Вы хотите избежать несоответствий в индексировании</strong>: Данные в динамических ключах полей более склонны к несоответствию типа или структуры. Использование фиксированной схемы помогает обеспечить качество данных, особенно если вы планируете использовать индексирование или приведение.</p></li>
+<li><p><strong>Поле часто включается в `output_fields</strong>`: только явно определенные поля гарантированно эффективно извлекаются с помощью ` <code translate="no">output_fields</code>`. Динамические ключи полей не оптимизированы для частого извлечения и могут приводить к снижению производительности.</p></li>
+<li><p><strong>К полю часто обращаются или его часто фильтруют</strong>: хотя индексирование динамического ключа поля может обеспечить производительность фильтрации, сопоставимую с фиксированными полями схемы, явно определённые поля обеспечивают более чёткую структуру и удобство обслуживания.</p></li>
+<li><p><strong>Вам требуется полный контроль над поведением поля</strong>: явно определенные поля поддерживают ограничения на уровне схемы, проверки и более четкую типизацию, что может быть полезно для управления целостностью и согласованностью данных.</p></li>
+<li><p><strong>Вы хотите избежать несоответствий при индексировании</strong>: данные в ключах динамических полей более подвержены несоответствиям в типе или структуре. Использование фиксированной схемы помогает обеспечить качество данных, особенно если вы планируете использовать индексирование или приведение типов.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Можно ли создать несколько индексов для одного и того же ключа динамического поля с разными типами данных?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+<p>Если вы решили, что ключ динамического поля должен стать явным скалярным полем в существующей коллекции, обратитесь к <a href="/docs/ru/add-fields-to-an-existing-collection.md">разделу «Изменение схемы коллекции</a>». Существующие настройки динамических полей на уровне коллекции управляются через свойства коллекции; подробности см. в разделе <a href="/docs/ru/modify-collection.md">«Изменение коллекции</a>».</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Можно ли создать несколько индексов на один и тот же ключ динамического поля с разными типами данных?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1054,8 +1086,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Нет, вы можете создать <strong>только один индекс для каждого пути JSON</strong>. Даже если ключ динамического поля содержит значения смешанного типа (например, несколько строк и несколько чисел), при индексировании этого пути необходимо выбрать один <code translate="no">json_cast_type</code>. Несколько индексов для одного и того же ключа с разными типами в настоящее время не поддерживаются.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Что делать, если при индексировании ключа динамического поля приведение данных не удается?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+    </button></h3><p>Нет, <strong>для каждого пути JSON</strong> можно создать <strong>только один индекс</strong>. Даже если ключ динамического поля содержит значения смешанных типов (например, строки и числа), при индексировании этого пути необходимо выбрать один тип данных ( <code translate="no">json_cast_type</code> ). Создание нескольких индексов для одного и того же ключа с разными типами данных в настоящее время не поддерживается.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Что произойдет при индексировании ключа динамического поля, если преобразование данных завершится сбоем?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1070,14 +1102,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вы создали индекс по ключу динамического поля, а приведение данных не удалось - например, значение, предназначенное для приведения к <code translate="no">double</code>, является нечисловой строкой, такой как <code translate="no">&quot;abc&quot;</code>, - эти конкретные значения будут <strong>молча пропущены при создании индекса</strong>. Они не появятся в индексе и, следовательно, <strong>не будут возвращены в результатах поиска и запросов, основанных на фильтрах</strong>, которые полагаются на индекс.</p>
-<p>Это имеет несколько важных последствий:</p>
+    </button></h3><p>Если вы создали индекс по ключу динамического поля, но преобразование данных завершилось сбоем — например, значение, которое должно быть преобразовано в число ( <code translate="no">double</code> ), представляет собой нечисловую строку, такую как <code translate="no">&quot;abc&quot;</code>— эти конкретные значения будут <strong>незаметно пропущены при создании индекса</strong>. Они не появятся в индексе и, следовательно, <strong>не будут возвращаться в результатах поиска с использованием фильтров или</strong> в <strong>результатах запросов</strong>, опирающихся на этот индекс.</p>
+<p>Это влечет за собой несколько важных последствий:</p>
 <ul>
-<li><p><strong>Отсутствие возврата к полному сканированию</strong>: Если большинство сущностей успешно проиндексировано, запросы фильтрации будут полностью полагаться на индекс. Сущности с ошибками в индексировании будут исключены из набора результатов - даже если они логически соответствуют условию фильтра.</p></li>
-<li><p><strong>Риск точности поиска</strong>: В больших массивах данных, где качество данных непостоянно (особенно в динамических ключах полей), такое поведение может привести к неожиданным пропущенным результатам. Очень важно обеспечить последовательное и корректное форматирование данных перед индексированием.</p></li>
-<li><p><strong>Осторожно используйте функции приведения</strong>: Если вы используете <code translate="no">json_cast_function</code> для преобразования строк в числа во время индексирования, убедитесь, что строковые значения надежно преобразуются. Несоответствие между <code translate="no">json_cast_type</code> и реальным преобразованным типом приведет к ошибкам или пропуску записей.</p></li>
+<li><p><strong>Отсутствие перехода к полному сканированию</strong>: если большинство сущностей успешно проиндексировано, запросы с фильтрами будут полностью опираться на индекс. Сущности с ошибками при преобразовании будут исключены из набора результатов — даже если они логически соответствуют условию фильтра.</p></li>
+<li><p><strong>Риск снижения точности поиска</strong>: в больших наборах данных, где качество данных нестабильно (особенно в случае динамических ключей полей), такое поведение может привести к неожиданному отсутствию результатов. Крайне важно обеспечить согласованное и корректное форматирование данных перед индексированием.</p></li>
+<li><p><strong>Осторожно используйте функции приведения типов</strong>: если вы используете оператор приведения типа ( <code translate="no">json_cast_function</code> ) для преобразования строк в числа во время индексирования, убедитесь, что строковые значения можно надежно преобразовать. Несоответствие между типом, указанным в операторе приведения типа ( <code translate="no">json_cast_type</code> ), и фактическим преобразованным типом приведет к ошибкам или пропуску записей.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Что произойдет, если в моем запросе используется тип данных, отличный от индексируемого приведенного типа?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Что произойдет, если в моем запросе используется тип данных, отличный от типа преобразования в индексе?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1092,4 +1124,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если ваш запрос сравнивает ключ динамического поля с <strong>типом данных, отличным от</strong> того, который использовался в индексе (например, запрос со строковым сравнением, когда индекс был приведен к <code translate="no">double</code>), система <strong>не</strong> будет <strong>использовать индекс</strong> и может вернуться к полному сканированию <em>, только если это возможно</em>. Для достижения наилучшей производительности и точности убедитесь, что тип запроса соответствует типу <code translate="no">json_cast_type</code>, использованному при создании индекса.</p>
+    </button></h3><p>Если в вашем запросе происходит сравнение ключа динамического поля с использованием <strong>типа данных, отличного</strong> от того, что использовался в индексе (например, запрос с сравнением строк, когда индекс был преобразован в тип <code translate="no">double</code>), система <strong>не</strong> будет <strong>использовать индекс</strong> и <em>, если это возможно,</em> может перейти к полному сканированию. Для обеспечения максимальной производительности и точности убедитесь, что тип вашего запроса соответствует типу « <code translate="no">json_cast_type</code> », использованному при создании индекса.</p>

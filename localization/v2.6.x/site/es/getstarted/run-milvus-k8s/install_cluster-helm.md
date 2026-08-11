@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Comprueba <a href="/docs/es/v2.6.x/prerequisite-helm.md">los requisitos de hardware y software</a> antes de la instalación.</p></li>
-<li><p>Antes de instalar Milvus, se recomienda utilizar la <a href="https://milvus.io/tools/sizing">herramienta Milvus Sizing Tool</a> para calcular los requisitos de hardware en función del tamaño de tus datos. Esto te ayudará a garantizar un rendimiento óptimo y una asignación adecuada de recursos para tu instalación de Milvus.</p></li>
+<li><p>Antes de instalar Milvus, se recomienda utilizar la <a href="https://milvus.io/tools/sizing">herramienta Milvus Sizing Tool</a> para calcular los requisitos de hardware en función del tamaño de tus datos. Esto ayuda a garantizar un rendimiento óptimo y una asignación adecuada de recursos para tu instalación de Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la asistencia necesaria.</p>
@@ -324,7 +324,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre Milvus WebUI, consulta <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
-<p>Para habilitar el acceso a la interfaz de usuario web de Milvus, es necesario redirigir el puerto del pod proxy a un puerto local.</p>
+<p>Para habilitar el acceso a la interfaz de usuario web de Milvus, es necesario redirigir el puerto del pod del proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>

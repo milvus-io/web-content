@@ -1,7 +1,7 @@
 ---
 id: single-vector-search.md
 title: 基本向量搜尋
-summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選器、範圍和迭代器執行基本的 ANN 搜尋。
+summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選條件、範圍及迭代器，執行基本的 ANN 搜尋。
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">基本向量搜尋<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,11 +18,11 @@ summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選器、範圍和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Approximate Nearest Neighbor (ANN) 搜尋是以記錄向量內嵌排序順序的索引檔案為基礎，根據接收到的搜尋請求中的查詢向量，找出向量內嵌的子集，將查詢向量與子集中的向量進行比較，並返回最相似的結果。透過 ANN 搜尋，Milvus 提供了高效率的搜尋體驗。本頁可協助您學習如何進行基本的 ANN 搜尋。</p>
+    </button></h1><p>基於記錄向量嵌入值排序順序的索引檔案，近似最近鄰（ANN）搜尋會根據收到的搜尋請求中所攜帶的查詢向量，定位一組向量嵌入值的子集，將查詢向量與該子集中的向量進行比對，並回傳最相似的結果。 透過 ANN 搜尋，Milvus 提供高效的搜尋體驗。本頁面將協助您了解如何進行基本的 ANN 搜尋。</p>
 <div class="alert note">
-<p>如果您在集合建立後動態新增欄位，包含這些欄位的搜尋將回傳定義的預設值，或對於沒有明確設定值的實體回傳 NULL。如需詳細資訊，請參閱<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">新增欄位到現有的集合</a>。</p>
+<p>若在建立集合後新增欄位，包含這些欄位的搜尋結果將針對未明確設定值的實體，回傳已定義的預設值或 `<code translate="no">NULL</code> `。詳細資訊請參閱「<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">變更集合架構</a>」。</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">概觀<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,20 +37,20 @@ summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選器、範圍和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ANN 和 k-Nearest Neighbors (kNN) 搜尋是向量相似性搜尋的常用方法。在 kNN 搜尋中，您必須將向量空間中的所有向量與搜尋請求中的查詢向量進行比較，才能找出最相似的向量，這既耗時又耗資。</p>
-<p>與 kNN 搜尋不同，ANN 搜尋演算法要求一個<strong>索引</strong>檔案，記錄向量嵌入的排序順序。當收到搜尋要求時，您可以使用索引檔案作為參考，快速找出可能包含與查詢向量最相似的向量內嵌的子群。然後，您可以使用指定的<strong>度量類型</strong>來測量查詢向量與子群組中的向量之間的相似度，根據與查詢向量的相似度來排序群組成員，並找出<strong>前 K 個</strong>群組成員。</p>
-<p>ANN 搜尋依賴預先建立的索引，搜尋的吞吐量、記憶體使用量和搜尋正確性可能會隨您選擇的索引類型而有所不同。您需要平衡搜尋效能與正確性。</p>
-<p>為了降低學習曲線，Milvus 提供<strong>AUTOINDEX</strong>。有了<strong>AUTOINDEX</strong>，Milvus 可以在建立索引的同時，分析您的資料集中的資料分佈，並根據分析結果設定最優化的索引參數，在搜尋效能和正確性之間取得平衡。</p>
-<p>在本節中，您可以找到以下主題的詳細資訊：</p>
+    </button></h2><p>人工神經網路（ANN）與 k 最近鄰（kNN）搜尋是向量相似度搜尋中的常用方法。在 kNN 搜尋中，您必須將向量空間中的所有向量與搜尋請求中攜帶的查詢向量進行比對，才能找出最相似的向量，此過程既耗時又耗費資源。</p>
+<p>與 kNN 搜尋不同，ANN 搜尋演算法需要一個<strong>索引</strong>檔案，用以記錄向量嵌入的排序順序。當收到搜尋請求時，您可以參考該索引檔案，快速定位出一個可能包含與查詢向量最相似的向量嵌入的子群組。 接著，您可以使用指定的<strong>度量類型</strong>來衡量查詢向量與該子群組中向量之間的相似度，並根據與查詢向量的相似度對群組成員進行排序，從而找出<strong>前 K 個</strong>群組成員。</p>
+<p>ANN 搜尋依賴於預先建立的索引，其搜尋吞吐量、記憶體使用量及搜尋正確性可能會因您選擇的索引類型而異。您需要在搜尋效能與正確性之間取得平衡。</p>
+<p>為了降低學習門檻，Milvus 提供了<strong>AUTOINDEX 功能</strong>。透過<strong>AUTOINDEX，</strong>Milvus 能在建立索引的同時分析您的資料集內的資料分佈，並根據分析結果設定最優化的索引參數，以在搜尋效能與正確性之間取得平衡。</p>
+<p>在本節中，您將找到關於以下主題的詳細資訊：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Single-Vector-Search">單向量搜尋</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Bulk-Vector-Search">大量向量搜尋</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#ANN-Search-in-Partition">分區 ANN 搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Single-Vector-Search">單一向量搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Bulk-Vector-Search">批量向量搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#ANN-Search-in-Partition">分區中的 ANN 搜尋</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Output-Fields">使用輸出欄位</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Limit-and-Offset">使用限制和偏移</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Limit-and-Offset">使用 limit 與 offset</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Level">使用層級</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Get-Recall-Rate">取得回復率</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Enhancing-ANN-Search">增強 ANN 搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Get-Recall-Rate">取得召回率</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Enhancing-ANN-Search">強化人工神經網路搜尋</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">單向量搜尋<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,10 +67,15 @@ summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選器、範圍和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 ANN 搜尋中，單向量搜尋指的是只涉及一個查詢向量的搜尋。根據預先建立的索引和搜尋請求所帶的度量類型，Milvus 會找出與查詢向量最相似的前 K 個向量。</p>
-<p>在本節中，您將學習如何進行單一向量搜尋。搜尋請求會攜帶一個單一的查詢向量，並要求 Milvus 使用 Inner Product (IP) 來計算查詢向量與集合中向量的相似度，並傳回三個最相似的向量。</p>
+    </button></h2><p>在人工神經網路（ANN）搜尋中，單向量搜尋指的是僅涉及一個查詢向量的搜尋。根據預先建立的索引以及搜尋請求中攜帶的度量類型，Milvus 將找出與查詢向量最相似的前 K 個向量。</p>
+<p>在本節中，您將學習如何執行單向量搜尋。搜尋請求會攜帶單一查詢向量，並要求 Milvus 使用內積 (IP) 計算查詢向量與資料集內向量之間的相似度，並回傳最相似的三个向量。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -221,7 +226,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -249,8 +253,8 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 依據搜尋結果與查詢向量的相似度得分，以降序排列搜尋結果。相似性分數也稱為與查詢向量的距離，其值範圍會因使用的度量類型而異。</p>
-<p>下表列出了適用的度量類型和相對應的距離範圍。</p>
+<p>Milvus 會根據搜尋結果與查詢向量的相似度分數，以降序排列搜尋結果。相似度分數亦稱為與查詢向量的距離，其數值範圍會因所使用的度量類型而異。</p>
+<p>下表列出了適用的度量類型及其對應的距離範圍。</p>
 <table>
    <tr>
      <th><p>度量類型</p></th>
@@ -259,31 +263,31 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>較小的值表示較高的相似性。</p></td>
+     <td><p>數值越小，表示相似度越高。</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>值越大表示相似度越高。</p></td>
+     <td><p>數值越大，表示相似度越高。</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>較大的值表示較高的相似性。</p></td>
+     <td><p>數值越大，表示相似度越高。</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>值越小，表示相似度越高。</p></td>
+     <td><p>數值越小，表示相似度越高。</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>較小的值表示較高的相似度。</p></td>
-     <td><p>[0，dim(向量)]</p></td>
+     <td><p>數值越小，表示相似度越高。</p></td>
+     <td><p>[0, dim(vector)]</p></td>
    </tr>
 </table>
-<h2 id="Bulk-Vector-Search" class="common-anchor-header">大量向量搜尋<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Bulk-Vector-Search" class="common-anchor-header">批量向量搜尋<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -298,9 +302,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>同樣地，您可以在一個搜尋請求中包含多個查詢向量。Milvus 會平行地對查詢向量進行 ANN 搜尋，並傳回兩組結果。</p>
+    </button></h2><p>同樣地，您可以在搜尋請求中包含多個查詢向量。Milvus 會針對這些查詢向量並行執行人工神經網路（ANN）搜尋，並返回兩組結果。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
 query_vectors = [
@@ -452,7 +461,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -513,9 +521,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果查詢向量已經存在於目標集合中，您可以使用主鍵來取代設定查詢向量。</p>
+    </button></h2><p>若查詢向量已存在於目標集合中，您可使用主鍵，而無需設定查詢向量。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -537,7 +550,6 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
@@ -549,7 +561,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">分區中的 ANN 搜尋<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">分區內的 ANN 搜尋<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -564,10 +576,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>假設您在集合中建立了多個分區，您可以將搜尋範圍縮小到特定數量的分區。在這種情況下，您可以在搜尋請求中包含目標分割區名稱，以將搜尋範圍限制在指定的分割區內。減少搜尋所涉及的磁碟分割數目可改善搜尋效能。</p>
-<p>以下程式碼片段假設您的集合中有一個名為<strong>PartitionA</strong>的分割區。</p>
+    </button></h2><p>假設您已在某個集合中建立多個分區，且可將搜尋範圍縮小至特定數量的分區。在此情況下，您可在搜尋請求中包含目標分區名稱，以將搜尋範圍限制在指定分區內。減少搜尋涉及的分區數量可提升搜尋效能。</p>
+<p>以下程式碼片段假設您的集合中存在一個名為<strong>PartitionA</strong>的分區。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
@@ -674,7 +691,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -719,9 +735,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在搜尋結果中，Milvus 預設會包含包含 top-K 向量內嵌的實體的主要欄位值和相似性距離/分數。您可以在搜尋請求中包含目標欄位的名稱，包括向量和標量欄位，作為輸出欄位，讓搜尋結果帶有這些實體中其他欄位的值。</p>
+    </button></h2><p>在搜尋結果中，Milvus 預設會包含含有前 K 個向量嵌入的實體之主要欄位值，以及相似度距離／分數。您可以將目標欄位名稱（包含向量欄位與標量欄位）作為輸出欄位納入搜尋請求中，使搜尋結果包含這些實體中其他欄位的值。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -834,7 +855,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -882,11 +902,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>預設情況下，Milvus 會依據搜尋結果與查詢向量的相似度來排序。如果您希望返回的實體遵循標量欄位排序，請在搜尋請求中加入<code translate="no">order_by_fields</code> 。</p>
-<p><code translate="no">order_by_fields</code> 中的每一项都指定了标量字段和排序方向。升序請使用<code translate="no">&quot;asc&quot;</code> ，降序請使用<code translate="no">&quot;desc&quot;</code> 。如果省略<code translate="no">order</code> ，Milvus 會以升序排序欄位。</p>
-<p>以下範例依<code translate="no">price</code> 由低到高排序搜尋結果。如果要檢查回應中的欄位值，請在<code translate="no">output_fields</code> 中包含排序欄位。</p>
+    </button></h2><p>預設情況下，Milvus 會根據實體與查詢向量的相似度分數對搜尋結果進行排序。若要讓回傳的實體依照標量欄位的順序排列，請在搜尋請求中加入<code translate="no">order_by_fields</code> 。</p>
+<p><code translate="no">order_by_fields</code> 中的每個項目皆指定一個標量欄位及其排序方向。若要升序排序，請使用<code translate="no">&quot;asc&quot;</code> ；若要降序排序，請使用<code translate="no">&quot;desc&quot;</code> 。若省略<code translate="no">order</code> ，Milvus 將依該欄位升序排序。</p>
+<p>以下範例會根據<code translate="no">price</code> 將搜尋結果由低至高排序。若要檢視回應中的欄位值，請將排序欄位包含在<code translate="no">output_fields</code> 中。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -906,9 +931,14 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以依多個標量欄位排序。Milvus 會依您指定的順序套用欄位。在以下範例中，Milvus 依<code translate="no">price</code> 以升序排序結果。對於具有相同<code translate="no">price</code> 的實體，Milvus 接著依<code translate="no">rating</code> 以降序排序。</p>
+<p>您也可以根據多個標量欄位進行排序。Milvus 會依照您指定的順序套用這些欄位。在以下範例中，Milvus 會依<code translate="no">price</code> 從低到高對結果進行排序。對於<code translate="no">price</code> 相同的實體，Milvus 接著會依<code translate="no">rating</code> 從高到低進行排序。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -929,8 +959,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>對於所有指定 order-by 欄位中具有相同值的實體，Milvus 會保持原始相似度得分順序。</p>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">使用限制和偏移<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<p>對於在所有指定排序欄位中值皆相同的實體，Milvus 會保留原始的相似度分數排序順序。</p>
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">使用 Limit 與 Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -945,39 +975,44 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可能會注意到，搜尋請求中所帶的參數<code translate="no">limit</code> 決定了要包含在搜尋結果中的實體數量。這個參數指定在單次搜尋中返回的最大實體數目，通常稱為<strong>top-K。</strong></p>
-<p>如果您希望執行分頁查詢，可以使用循環傳送多個 Search 請求，並在每個查詢請求中載入<strong>Limit</strong>和<strong>Offset</strong>參數。具體來說，您可以將<strong>Limit</strong>參數設定為您想要包含在目前查詢結果中的 Entities 數量，並將<strong>Offset</strong>設定為已經返回的 Entities 總數。</p>
-<p>下表概述了在一次返回 100 個實體時，如何為分頁查詢設定<strong>Limit</strong>和<strong>Offset</strong>參數。</p>
+    </button></h2><p>您可能會注意到，搜尋請求中攜帶的<code translate="no">limit</code> 參數會決定搜尋結果中包含的實體數量。此參數指定單次搜尋中要回傳的實體最大數量，通常稱為<strong>top-K</strong>。</p>
+<p>若您希望執行分頁查詢，可以使用迴圈來發送多個 Search 請求，並在每個查詢請求中包含<strong>Limit</strong>和<strong>Offset</strong>參數。具體而言，您可以將<strong>Limit</strong>參數設定為希望包含在當前查詢結果中的實體數量，並將<strong>Offset</strong>設定為已返回的實體總數。</p>
+<p>下表概述了在每次返回 100 個實體時，如何為分頁查詢設定<strong>Limit</strong>和<strong>Offset</strong>參數。</p>
 <table>
    <tr>
      <th><p>查詢</p></th>
-     <th><p>每次查詢要返回的實體</p></th>
+     <th><p>每次查詢要回傳的實體數</p></th>
      <th><p>已返回的實體總數</p></th>
    </tr>
    <tr>
-     <td><p><strong>第 1 次查詢</strong></p></td>
+     <td><p>第<strong>1 次</strong>查詢</p></td>
      <td><p>100</p></td>
      <td><p>0</p></td>
    </tr>
    <tr>
-     <td><p><strong>第二次</strong>查詢</p></td>
+     <td><p><strong>第二個</strong>查詢</p></td>
      <td><p>100</p></td>
      <td><p>100</p></td>
    </tr>
    <tr>
-     <td><p><strong>第三次</strong>查詢</p></td>
+     <td><p><strong>第三個</strong>查詢</p></td>
      <td><p>100</p></td>
      <td><p>200</p></td>
    </tr>
    <tr>
-     <td><p><strong>第 n 次查詢</strong></p></td>
+     <td><p>第<strong>n 個</strong>查詢</p></td>
      <td><p>100</p></td>
-     <td><p>100 x (n-1)</p></td>
+     <td><p>100 × (n-1)</p></td>
    </tr>
 </table>
-<p>請注意，在單一 ANN 搜尋中，<code translate="no">limit</code> 和<code translate="no">offset</code> 的總和應該小於 16,384。</p>
+<p>請注意，單次人工神經網路搜尋中，<code translate="no">limit</code> 與<code translate="no">offset</code> 的總和應小於 16,384。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1055,7 +1090,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1081,11 +1115,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您的資料集中有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以在搜尋呼叫中設定<code translate="no">timezone</code> 參數，以暫時覆寫資料庫或資料集中單次操作的預設時區。這可以控制<code translate="no">TIMESTAMPTZ</code> 值在操作過程中的顯示和比較方式。</p>
-<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p>
-<p>以下範例說明如何為搜尋作業暫時設定時區：</p>
+    </button></h2><p>若您的集合具有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以透過在搜尋呼叫中設定<code translate="no">timezone</code> 參數，針對單一操作暫時覆寫資料庫或集合的預設時區。此設定將控制操作過程中<code translate="no">TIMESTAMPTZ</code> 值的顯示與比對方式。</p>
+<p><code translate="no">timezone</code> 的值必須為有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱「<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>」。</p>
+<p>以下範例展示如何為搜尋操作暫時設定時區：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -1106,7 +1145,6 @@ curl --request POST \
 
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;annsField&quot;: &quot;vector&quot;,
@@ -1133,36 +1171,36 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX 可大幅降低 ANN 搜尋的學習曲線。然而，隨著 top-K 的增加，搜尋結果不一定總是正確的。藉由縮小搜尋範圍、改善搜尋結果的相關性，以及使搜尋結果更多元化，Milvus 進行了以下的搜尋強化。</p>
+    </button></h2><p>AUTOINDEX 顯著降低了 ANN 搜尋的學習門檻。然而，隨著前 K 項結果的增加，搜尋結果未必總是正確。透過縮小搜尋範圍、提升搜尋結果的相關性，以及豐富搜尋結果的多樣性，Milvus 實現了以下搜尋增強功能。</p>
 <ul>
-<li><p>過濾搜尋</p>
-<p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
-<p>更多關於元資料篩選和篩選條件，請參考篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
+<li><p>篩選搜尋</p>
+<p>您可以在搜尋請求中加入篩選條件，讓 Milvus 在執行人工神經網路搜尋之前先進行元資料篩選，將搜尋範圍從整個資料集縮小至僅包含符合指定篩選條件的實體。</p>
+<p>有關元資料篩選與篩選條件的詳細資訊，請參閱《<a href="/docs/zh-hant/filtered-search.md">篩選搜尋</a>》、《<a href="/docs/zh-hant/boolean.md">篩選說明</a>》及相關主題。</p></li>
 <li><p>範圍搜尋</p>
-<p>您可以在特定範圍內限制返回實體的距離或分數，以改善搜尋結果的相關性。在 Milvus 中，範圍搜尋涉及以與查詢向量最相似的向量嵌入為中心，畫出兩個同心圓。搜尋請求指定兩個圓圈的半徑，Milvus 會傳回屬於外圈但不屬於內圈的所有向量嵌入。</p>
-<p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。</p></li>
-<li><p>群組搜尋</p>
-<p>如果返回的實體在特定欄位中持有相同的值，搜尋結果可能無法代表向量空間中所有向量內嵌的分佈。若要使搜尋結果多樣化，請考慮使用群組搜尋。</p>
-<p>關於群組搜尋的更多資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>、</p></li>
+<p>您可以透過將回傳實體的距離或分數限制在特定範圍內，來提升搜尋結果的相關性。 在 Milvus 中，範圍搜尋是透過以與查詢向量最相似的向量嵌入為中心，繪製兩個同心圓來實現。搜尋請求會指定兩個圓的半徑，而 Milvus 會回傳所有位於外圈內但不在內圈內的向量嵌入。</p>
+<p>有關範圍搜尋的更多資訊，請參閱《<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>》。</p></li>
+<li><p>分組搜尋</p>
+<p>若回傳的實體在特定欄位中具有相同值，搜尋結果可能無法代表向量空間中所有向量嵌入的分布狀況。為使搜尋結果更具多樣性，建議考慮使用分組搜尋。</p>
+<p>有關分組搜尋的更多資訊，請參閱《<a href="/docs/zh-hant/grouping-search.md">分組搜尋</a>》，</p></li>
 <li><p>混合搜尋</p>
-<p>一個集合可以包含多個向量場，以儲存使用不同嵌入模型產生的向量嵌入。如此一來，您就可以使用混合搜尋來重新排序這些向量欄位的搜尋結果，從而提高召回率。</p>
-<p>有關混合搜尋的更多資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
+<p>一個集合可包含多個向量欄位，用以儲存使用不同嵌入模型所生成的向量嵌入。透過此方式，您可以使用混合搜尋對來自這些向量欄位的搜尋結果進行重新排序，從而提升召回率。</p>
+<p>有關混合搜尋的更多資訊，請參閱《<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>》。</p></li>
 <li><p>搜尋迭代器</p>
-<p>單一 ANN 搜尋最多會返回 16,384 個實體。如果您需要在單一搜尋中返回更多實體，請考慮使用搜尋迭接器。</p>
-<p>有關搜尋迭接器的詳細資訊，請參閱搜尋迭<a href="/docs/zh-hant/with-iterators.md">接器</a>。</p></li>
-<li><p>全文本搜尋</p>
-<p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性排列結果的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以透過接受原始文字輸入來簡化向量搜尋，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入。</p>
-<p>有關全文檢索的詳細資訊，請參閱全文<a href="/docs/zh-hant/full-text-search.md">檢索</a>。</p></li>
-<li><p>文字匹配</p>
-<p>Milvus 中的關鍵字匹配功能可根據特定詞彙進行精確的文件檢索。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
-<p>有關關鍵字匹配的詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">關鍵字匹配</a>。</p></li>
-<li><p>使用分割鍵</p>
-<p>在元資料篩選中涉及多個標量欄位，並使用相當複雜的篩選條件，可能會影響搜尋效率。一旦將標量欄位設定為分割區金鑰，並在搜尋要求中使用涉及分割區金鑰的篩選條件，將有助於將搜尋範圍限制在與指定分割區金鑰值對應的分割區內。</p>
-<p>有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
+<p>單次 ANN 搜尋最多可返回 16,384 個實體。若您需要在單次搜尋中返回更多實體，請考慮使用搜尋迭代器。</p>
+<p>有關搜尋迭代器的詳細資訊，請參閱《<a href="/docs/zh-hant/with-iterators.md">搜尋迭代器》</a>。</p></li>
+<li><p>全文搜尋</p>
+<p>全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的限制（語義搜尋可能會忽略精確的術語），確保您獲得最準確且符合上下文的結果。 此外，它透過接受原始文字輸入來簡化向量搜尋，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入。</p>
+<p>有關全文搜尋的詳細資訊，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>」。</p></li>
+<li><p>文字比對</p>
+<p>Milvus 中的關鍵字匹配功能可根據特定術語精確檢索文件。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細化查詢結果，允許在符合標量標準的向量內進行相似度搜尋。</p>
+<p>有關關鍵字匹配的詳細資訊，請參閱《<a href="/docs/zh-hant/keyword-match.md">關鍵字匹配</a>》。</p></li>
+<li><p>使用分區鍵</p>
+<p>在元資料篩選中涉及多個標量欄位，並使用較為複雜的篩選條件，可能會影響搜尋效率。一旦將標量欄位設定為分區鍵，並在搜尋請求中使用涉及該分區鍵的篩選條件，即可將搜尋範圍限制在對應於指定分區鍵值的分區內。</p>
+<p>有關分區鍵的詳細資訊，請參閱「<a href="/docs/zh-hant/use-partition-key.md">使用分區鍵</a>」。</p></li>
 <li><p>使用 mmap</p>
-<p>有關 mmap 設定的詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></li>
-<li><p>叢集壓縮</p>
-<p>有關群集壓縮的詳細資訊，請參閱<a href="/docs/zh-hant/clustering-compaction.md">群集</a>壓縮。</p></li>
-<li><p>使用排名器</p>
-<p>有關使用排名器增強搜尋結果相關性的詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker Overview</a>和<a href="/docs/zh-hant/model-ranker-overview.md">Model Ranker Overview</a>。</p></li>
+<p>有關 mmap 設定的詳細資訊，請參閱「<a href="/docs/zh-hant/mmap.md">使用 mmap</a>」。</p></li>
+<li><p>叢集式壓縮</p>
+<p>有關叢集式壓縮的詳細資訊，請參閱《<a href="/docs/zh-hant/clustering-compaction.md">叢集式壓縮</a>》。</p></li>
+<li><p>使用重新排序</p>
+<p>有關使用排名器來提升搜尋結果相關性的詳細資訊，請參閱《<a href="/docs/zh-hant/decay-ranker-overview.md">衰減式排名器概覽</a>》和《<a href="/docs/zh-hant/model-ranker-overview.md">模型排名器概覽</a>》。</p></li>
 </ul>

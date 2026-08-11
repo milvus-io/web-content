@@ -85,7 +85,7 @@ beta: Milvus 3.0.x
 </div>
 <p>Avant d’activer Storage V3, tenez compte des comportements suivants des données :</p>
 <ul>
-<li><code translate="no">dataCoord.compaction.storageVersion.enabled</code> étant activé par défaut, les données existantes éligibles peuvent migrer progressivement vers Storage V3 via une compaction en arrière-plan.</li>
+<li><code translate="no">dataCoord.compaction.storageVersion.enabled</code> étant activé par défaut, les données existantes éligibles peuvent migrer progressivement vers Storage V3 via un processus de compaction en arrière-plan.</li>
 <li>La désactivation de Storage V3 modifie la version de stockage cible pour les futures écritures et les résultats de compaction éligibles. Elle ne convertit pas de manière synchrone toutes les données Storage V3 existantes et ne garantit pas la sécurité d’un retour à une version antérieure.</li>
 </ul>
 <h2 id="Enable-Storage-V3" class="common-anchor-header">Activer Storage V3<button data-href="#Enable-Storage-V3" class="anchor-icon" translate="no">
@@ -142,5 +142,5 @@ beta: Milvus 3.0.x
 <li><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mettre à niveau un cluster Milvus à l'aide d'un Helm Chart</a></li>
 <li><a href="/docs/fr/configure_common.md">Configurations liées à « common »</a></li>
 <li><a href="/docs/fr/configure_datacoord.md">Configurations liées à dataCoord</a></li>
-<li><a href="https://milvus.io/blog/why-we-built-loon-a-storage-engine-for-ai-data-that-never-stops-changing.md">Pourquoi nous avons développé Loon : un moteur de stockage pour les données d’IA en constante évolution</a> — Contexte technique sur les motivations qui ont présidé à la conception de Storage V3.</li>
+<li><a href="https://milvus.io/blog/why-we-built-loon-a-storage-engine-for-ai-data-that-never-stops-changing.md">Pourquoi nous avons développé Loon : un moteur de stockage pour les données d’IA en constante évolution</a> — Contexte technique sur les motivations à l’origine de la conception de Storage V3.</li>
 </ul>

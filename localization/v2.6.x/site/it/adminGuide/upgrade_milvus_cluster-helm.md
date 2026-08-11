@@ -85,7 +85,7 @@ title: Aggiornamento del cluster Milvus con Helm Chart
 <p><strong>Requisiti di compatibilità:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni candidate al rilascio non sono supportati.</li>
-<li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
+<li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di fare riferimento a <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoordinator</code> " abilitata prima di passare alla versione v2.6.17.</li>
 </ul>
 <p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
@@ -133,7 +133,7 @@ Il repository dei chart Helm di Milvus all'indirizzo <code translate="no">https:
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Questa guida presuppone che si stia installando l’ultima versione. Se è necessario installare una versione specifica, specificare il parametro <code translate="no">--version</code> di conseguenza.</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Passaggio 2: Esegui l'aggiornamento alla v2.5.16 con mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Passaggio 2: Aggiornamento alla v2.5.16 con mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

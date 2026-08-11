@@ -151,7 +151,7 @@ bash standalone_embed.sh delete
       </svg>
     </button></h2><ul>
 <li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
-Da in 2.6.x die Standalone-Standardeinstellung auf „Woodpecker“ geändert wird, müssen Sie <strong>vor</strong> dem Upgrade „ <code translate="no">mq.type: rocksmq</code> “ in Ihrer Datei „ <code translate="no">user.yaml</code> “ festlegen, wenn Sie „RocksMQ“ beibehalten möchten.</li>
+Da in 2.6.x die Standard-Standalone-Einstellung auf „Woodpecker“ geändert wird, müssen Sie <strong>vor</strong> dem Upgrade „ <code translate="no">mq.type: rocksmq</code> “ in Ihrer Datei „ <code translate="no">user.yaml</code> “ festlegen, wenn Sie „RocksMQ“ beibehalten möchten.</li>
 <li>Informationen zum Ändern der Nachrichtenwarteschlange einer laufenden Instanz finden Sie unter <a href="/docs/de/switch-rocksmq-woodpecker.md">„Wechsel von RocksMQ zu Woodpecker</a>“.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">

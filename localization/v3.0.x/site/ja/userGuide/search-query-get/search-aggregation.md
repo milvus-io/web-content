@@ -19,9 +19,9 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>買い物客が「日常のトレーニング用ブラックランニングシューズ」と検索した場合、近似最近傍（ANN）検索はベクトルの類似度に基づいて商品をランク付けし、フラットなトップKリストを返します。結果は関連性が高いものの、重複しがちです。以下の例では、上位6件の結果のうち4件がブランドAの商品であるのに対し、ブランドBとブランドCはそれぞれ1件ずつしか表示されていません。</p>
+    </button></h1><p>買い物客が「日常のトレーニング用ブラックランニングシューズ」と検索した場合、近似最近傍法（ANN）検索はベクトルの類似度に基づいて商品をランク付けし、フラットなトップKリストを返します。結果は関連性が高いものの、重複しがちです。以下の例では、上位6件の結果のうち4件がブランドAの商品であるのに対し、ブランドBとブランドCはそれぞれ1件ずつしか表示されていません。</p>
 <p>フラットなリストでは、バケット指向の要約を直接提供することはできません。アプリケーションでは、候補の保持数や平均価格によってブランドを比較したり、各ブランドから少数の代表的な商品を精査したり、結果を複数のバケットレベルに整理したりする必要がある場合があります。</p>
-<p>検索集計機能は、選択されたスカラーフィールドに基づいて、保持されたANN候補をバケットに整理します。この例では、各ブランドが個別のバケットとなります。Milvusは、各バケットの統計値を計算し、バケットを順序付け、代表的な製品を関連付けることができます。アプリケーションは、<code translate="no">result.agg_buckets</code> を通じて、このバケット優先のレスポンスを利用します。</p>
+<p>検索集計機能は、選択されたスカラーフィールドに基づいて、保持されたANN候補をバケットに整理します。この例では、各ブランドが個別のバケットとなります。Milvusは、各バケットの統計値を計算し、バケットを順序付け、代表的な製品を関連付けることができます。アプリケーションは、<code translate="no">result.agg_buckets</code> を通じて、この「バケット優先」のレスポンスを利用します。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" /> 
@@ -74,17 +74,18 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p>検索集計を使用する前に、以下の制限事項に注意してください：</p>
 <ul>
-<li><p><strong>ネストされた集計：</strong>1 つのリクエストには、1 つのルート<code translate="no">SearchAggregation</code> と、最大 3 レベルのネストされた<code translate="no">sub_aggregation</code> を含めることができ、合計で最大 4 レベルまで可能です。</p></li>
-<li><p><strong>バケットキーの作成に使用されるフィールド：</strong> <code translate="no">SearchAggregation.fields</code> は、Boolean、integer、<code translate="no">VARCHAR</code> 、および<code translate="no">TIMESTAMPTZ</code> フィールドをサポートしています。<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">ARRAY</code> 、<code translate="no">JSON</code> 、<code translate="no">GEOMETRY</code> 、<code translate="no">TEXT</code> 、vector、およびdynamicフィールドはサポートしていません。</p></li>
+<li><p><strong>ネストされた集計：</strong>1つのリクエストには、1つのルート<code translate="no">SearchAggregation</code> と、最大3つのネストされた<code translate="no">sub_aggregation</code> レベルを含めることができ、合計で最大4レベルとなります。すべてのレベルを通じて、バケットキーの作成に使用できるフィールドは最大10個までです。</p></li>
+<li><p><strong>バケットキーの作成に使用できるフィールド：</strong> <code translate="no">SearchAggregation.fields</code> は、Boolean、integer、<code translate="no">VARCHAR</code> 、および<code translate="no">TIMESTAMPTZ</code> フィールドをサポートしています。<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">ARRAY</code> 、<code translate="no">JSON</code> 、<code translate="no">GEOMETRY</code> 、<code translate="no">TEXT</code> 、vector、およびdynamicフィールドはサポートしていません。</p></li>
 <li><p><strong>メトリックフィールド：</strong> <code translate="no">count</code> は、<code translate="no">&quot;*&quot;</code> 、または<code translate="no">JSON</code> 以外の非動的フィールドを受け付け、フィールドが指定されている場合は<code translate="no">NULL</code> の値をスキップします。<code translate="no">sum</code> および<code translate="no">avg</code> は、整数および浮動小数点フィールドを受け付けます。<code translate="no">min</code> および<code translate="no">max</code> は、さらに文字列および<code translate="no">TIMESTAMPTZ</code> フィールドも受け付けます。</p></li>
 <li><p><strong>トップヒットのソートフィールド：</strong> <code translate="no">TopHits.sort</code> は、比較可能なブール値、整数、浮動小数点数、文字列、および<code translate="no">TIMESTAMPTZ</code> フィールドに加え、<code translate="no">_score</code> を受け付けます。<code translate="no">ARRAY</code> 、<code translate="no">JSON</code> 、<code translate="no">GEOMETRY</code> 、ベクトル、または動的フィールドはサポートしていません。</p></li>
 <li><p><strong>候補数（Candidate budget）：</strong>集計ツリー内のどこかで最大の<code translate="no">TopHits.size</code> は、完全複合キーごとに保持される候補数でもあります。どのレベルでも<code translate="no">top_hits</code> が設定されていない場合、Milvusはキーごとに1つの候補を保持します。バケット<code translate="no">count</code> およびメトリクスは、これらの保持された候補から計算されるため、<code translate="no">TopHits.size</code> を変更すると、これらも変更される可能性があります。</p></li>
 <li><p><strong>Null許容バケットフィールド：</strong> <code translate="no">NULL</code> の値は、それ自体がバケットキーを形成します。Nullバケットを除外するには、検索リクエストに<code translate="no">brand is not null</code> などのフィルターを追加してください。</p></li>
-<li><p><strong>重複するフィールド:</strong>同一のフィールドを複数の「<code translate="no">SearchAggregation.fields</code> 」リストに含めることはできません。たとえば、ルート集計で `<code translate="no">fields=[&quot;category&quot;]</code>` を使用している場合、ネストされた `<code translate="no">sub_aggregation</code> ` では `<code translate="no">fields=[&quot;category&quot;]</code>` を併用することはできません。</p></li>
-<li><p><strong>サポートされていない組み合わせ：</strong>Search Aggregationは、<code translate="no">offset</code> 、Search Iterators、Hybrid Search、Highlighter、またはGrouping Searchと組み合わせることはできません。</p></li>
-<li><p><strong>返されるエントリ数：</strong>設定された結果エントリの最大数を10,000以下に抑えてください。この最大数は次のように計算します：</p>
-<p><code translate="no">number of query vectors × size at every aggregation level × largest TopHits.size at any level</code></p>
-<p><code translate="no">TopHits</code> が設定されていないレベルがある場合、最後の要素には<code translate="no">1</code> を使用してください。たとえば、クエリベクトルが1つ、ルートバケットが10個、ルートバケットごとの子バケットが5個、子バケットごとのヒット数が2つの場合、設定された最大値は次のようになります：</p>
+<li><p><strong>重複するフィールド:</strong>同一のフィールドを複数の<code translate="no">SearchAggregation.fields</code> リストに含めることはできません。たとえば、ルート集計で<code translate="no">fields=[&quot;category&quot;]</code> を使用している場合、ネストされた<code translate="no">sub_aggregation</code> で<code translate="no">fields=[&quot;category&quot;]</code> を使用することはできません。</p></li>
+<li><p><strong>サポートされていない組み合わせ：</strong>Search Aggregationは、ゼロ以外の<code translate="no">offset</code> 、Search Iterators、Hybrid Search、Highlighter、またはGrouping Searchと組み合わせることはできません。トップレベルの<code translate="no">offset</code> の値が<code translate="no">0</code> の場合、そのパラメータを省略したのと同じ扱いとなります。REST v2の検索リクエストでは、<code translate="no">searchAggregation</code> と<code translate="no">ids</code> を同時に指定することはできません。</p></li>
+<li><p><strong>返されるエントリ数：</strong>デフォルトでは、リクエストで算出される結果エントリの最大数が 10,000 を超える場合、Milvus は検索集計リクエストを拒否します。このしきい値は、<code translate="no">proxy.maxSearchAggregationResultEntries</code> で制御されます。このチェックを無効にするには、設定値を<code translate="no">0</code> または負の数に設定してください。</p>
+<p>Milvus はこの最大値を次のように計算します：</p>
+<p><code translate="no">number of query vectors × product of the effective search_size at every aggregation level × largest TopHits.size at any level</code></p>
+<p>このサーバーサイドの計算において、各レベルにおける有効な<code translate="no">search_size</code> は、明示的に設定された<code translate="no">search_size</code> 、または<code translate="no">search_size</code> が省略されている場合はそのレベルの<code translate="no">size</code> となります。本ガイドで使用されるPyMilvus APIは現在<code translate="no">search_size</code> を公開していないため、PyMilvusリクエストではこの計算に各レベルの<code translate="no">size</code> を使用します。 どのレベルでも<code translate="no">TopHits</code> が設定されていない場合、最後の因子には<code translate="no">1</code> を使用します。たとえば、クエリベクトルが1つ、ルートバケットが10個、ルートバケットごとに子バケットが5個、子バケットごとにヒットが2つある場合、計算される最大値は次のようになります：</p>
 <p><code translate="no">1 × 10 × 5 × 2 = 100</code></p></li>
 </ul>
 <h2 id="Use-Search-Aggregation" class="common-anchor-header">検索集計の使用<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
@@ -105,11 +106,11 @@ beta: Milvus 3.0.x
     </button></h2><p>達成したい内容に基づいて例を選択してください：</p>
 <table>
 <thead>
-<tr><th>[検索] に移動して</th><th>説明</th><th>主な設定</th></tr>
+<tr><th>次のページへ</th><th>説明</th><th>主な設定</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="#Compare-and-sort-buckets">バケットの比較と並べ替え</a></td><td>バケットごとの統計情報を計算してバケットを比較し、返されたバケットをメトリクス、カウント、またはキーで並べ替えます。</td><td><code translate="no">fields</code>,<code translate="no">size</code>,<code translate="no">metrics</code>,<code translate="no">order</code></td></tr>
-<tr><td><a href="#Show-representative-results-from-each-bucket">各バケットから代表的な結果を表示</a></td><td>各バケットから限定された数のエンティティを取得し、それらのエンティティをスカラーフィールドまたはベクトルスコアごとに個別に並べ替えます。</td><td><code translate="no">top_hits</code>,<code translate="no">TopHits.size</code>,<code translate="no">TopHits.sort</code></td></tr>
+<tr><td><a href="#Show-representative-results-from-each-bucket">各バケットから代表的な結果を表示</a></td><td>各バケットから限定された数のエンティティを取得し、それらのエンティティをスカラーフィールドまたはベクトルスコアごとに個別にソートします。</td><td><code translate="no">top_hits</code>,<code translate="no">TopHits.size</code>,<code translate="no">TopHits.sort</code></td></tr>
 <tr><td><a href="#Group-results-at-multiple-levels">結果を複数のレベルでグループ化する</a></td><td>結果を親バケットと子バケットのレベルに整理し、複数の次元を順次分析します。</td><td><code translate="no">sub_aggregation</code></td></tr>
 </tbody>
 </table>
@@ -273,7 +274,7 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>このパターンは、計算された統計値を使用して取得されたエンティティのグループを比較し、バケットが返される順序を制御する必要がある場合に使用します。この例では、Milvusは取得された商品を<code translate="no">brand</code> でグループ化し、各ブランドバケットの価格メトリクスを計算し、平均価格に基づいてバケットを並べ替えます。</p>
+    </button></h3><p>このパターンは、計算された統計値を使用して取得されたエンティティのグループを比較し、バケットが返される順序を制御する必要がある場合に使用します。この例では、Milvusは取得された商品を<code translate="no">brand</code> でグループ化し、各ブランドバケットの価格メトリクスを計算し、平均価格に基づいてバケットをソートします。</p>
 <p>フィールド値ごとに1つ以上のエンティティを返すことで、結果の多様性を高めることのみを目的とする場合は、代わりに「<a href="/docs/ja/grouping-search.md">グループ化検索</a>」を使用してください。</p>
 <p>以下の設定では、最大3つのブランド・バケットを作成し、各バケットのメトリクスを計算した上で、平均価格順にバケットを並べ替えます：</p>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
@@ -386,7 +387,7 @@ search_params = {
 </tbody>
 </table>
 <p><code translate="no">search_aggregation</code> が設定されている場合、Milvusは<code translate="no">limit</code> を無視します。トップレベルのバケット数を制御するには、ルート<code translate="no">SearchAggregation.size</code> の値を使用してください。</p>
-<p>これらの設定により、Milvusは<code translate="no">avg_price</code> の降順で、ブランドB、ブランドA、ブランドCのバケットを返します。<code translate="no">_key</code> という基準は、バケットの平均価格が同じ場合にのみ適用されます。この構成では<code translate="no">top_hits</code> が定義されていないため、各バケットの<code translate="no">hits</code> リストは空であり、キーごとの候補予算は<code translate="no">1</code> となります。したがって、表示されるカウントとメトリクスは、ブランドごとに1つの保持候補を表しています。集計にキーごとのより広いメトリクスウィンドウが必要な場合は、<code translate="no">top_hits</code> を<code translate="no">TopHits.size</code> の値を大きくして設定してください。</p>
+<p>これらの設定により、Milvusは<code translate="no">avg_price</code> の降順で、ブランドB、ブランドA、ブランドCのバケットを返します。<code translate="no">_key</code> という基準は、バケットの平均価格が同じ場合にのみ適用されます。この構成では<code translate="no">top_hits</code> が定義されていないため、各バケットの<code translate="no">hits</code> リストは空であり、キーごとの候補予算は<code translate="no">1</code> となります。したがって、表示されるカウントとメトリクスは、ブランドごとに1つの候補が保持されていることを表しています。集計にキーごとのより広いメトリクスウィンドウが必要な場合は、<code translate="no">top_hits</code> を<code translate="no">TopHits.size</code> の値を大きくして設定してください。</p>
 <p><details></p>
 <p><summary>メトリクスと順序付けのルール</summary></p>
 <p>各<code translate="no">SearchAggregation.metrics</code> エントリは、ユーザー定義のエイリアスを<code translate="no">{operation: source}</code> にマッピングします：</p>
@@ -437,7 +438,7 @@ search_params = {
 <p><code translate="no">size=6</code> は、この集計レベルで返される複合バケットの最大数です。サンプルデータには5つの異なるブランドと色の組み合わせが含まれているため、これら5つすべてが返される可能性があります。<a href="#Limits">返されるエントリの制限</a>において、このリクエストは<code translate="no">1 query vector × 6 buckets × 1 = 6</code> で設定された結果エントリを生成します。</p>
 <p>1つの<code translate="no">SearchAggregation.fields</code> リスト内の複数のフィールドは、その集計レベルで複合バケットキーを作成します。親子バケット階層を作成するには、<a href="#Group-results-at-multiple-levels">ネストされた集計</a>を使用してください。</p>
 <p></details></p>
-<p>以下の例では、<code translate="no">aggregation</code> を再定義しています。更新されたオブジェクトを同じ<code translate="no">search_aggregation</code> パラメータに渡して、検索呼び出しを再実行してください。</p>
+<p>以下の例では、<code translate="no">aggregation</code> を再定義しています。更新されたオブジェクトを同じ<code translate="no">search_aggregation</code> パラメータに渡し、検索呼び出しを再実行してください。</p>
 <h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">各バケットから代表的な結果を表示する<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -522,11 +523,11 @@ search_params = {
 <tbody>
 <tr><td><code translate="no">top_hits</code></td><td>オプション。この集計レベルにおける代表的なエンティティを設定します。省略された場合、<code translate="no">bucket.hits</code> は空となり、キーごとの候補予算はデフォルトで 1 になります。</td></tr>
 <tr><td><code translate="no">TopHits.size</code></td><td>選択された各バケットから最大2つの代表的なエンティティを返し、集計ツリー全体に対してキーごとの候補予算を2に設定します。</td></tr>
-<tr><td><code translate="no">TopHits.sort</code></td><td>各バケット内のエンティティを、指定された基準に基づいて並べ替えます。</td></tr>
+<tr><td><code translate="no">TopHits.sort</code></td><td>各バケット内のエンティティを、指定された基準に従って並べ替えます。</td></tr>
 </tbody>
 </table>
 <p>アプリケーションで代表エンティティが必要な場合や、カウントおよびメトリクスでキーごとの候補ウィンドウを広くする必要がある場合は、<code translate="no">top_hits</code> を設定してください。<code translate="no">TopHits.size</code> を大きくすると、候補予算と<a href="#Limits">Limits</a> での最大返却エントリ数の計算値の両方が増加します。</p>
-<p><code translate="no">SearchAggregation.order</code> はバケットをソートし、<code translate="no">TopHits.sort</code> は各バケット内の保持されたエンティティをソートします。このソート順によって、<code translate="no">count</code> やメトリクスのために保持された候補が変更されることはありません。<code translate="no">TopHits.sort</code> は、サポートされている比較可能なスカラーフィールド名と、ANNの類似度または距離を表す組み込みの<code translate="no">_score</code> フィールドを受け入れます。Milvusは、<code translate="no">sort</code> のエントリを先頭から末尾へと評価します。 この例では、<code translate="no">rating</code> の値が高い順から低い順に商品を並べ替え、<code translate="no">_score</code> は2つの評価が等しい場合にのみ使用されます。設定で<code translate="no">COSINE</code> が使用されているため、降順の<code translate="no">_score</code> により、類似度の高い商品が最初に配置されます。</p>
+<p><code translate="no">SearchAggregation.order</code> はバケットをソートし、<code translate="no">TopHits.sort</code> は各バケット内の保持されたエンティティをソートします。このソート順によって、<code translate="no">count</code> やメトリクスのために保持された候補が変更されることはありません。<code translate="no">TopHits.sort</code> は、サポートされている比較可能なスカラーフィールド名と、ANNの類似度または距離を表す組み込みの<code translate="no">_score</code> フィールドを受け入れます。Milvusは、<code translate="no">sort</code> のエントリを先頭から末尾へと評価します。 この例では、<code translate="no">rating</code> の値が高い順から低い順に製品を並べ替え、<code translate="no">_score</code> は2つの評価が等しい場合にのみ使用されます。設定で<code translate="no">COSINE</code> が使用されているため、降順の<code translate="no">_score</code> により、類似度の高い製品が最初に配置されます。</p>
 <p><code translate="no">metrics</code> や<code translate="no">TopHits.sort</code> で使用されるフィールドは、<code translate="no">output_fields</code> に含まれている必要はありません。Milvus は内部的にそれらのフィールドを取得しますが、<code translate="no">output_fields</code> に明示的にリストされているフィールドのみが、返される各ヒットの<code translate="no">fields</code> マッピングに含まれます。主キーとベクトルスコアは、<code translate="no">AggregationHit.pk</code> および<code translate="no">AggregationHit.score</code> を通じて引き続き利用可能です。</p>
 <p>返される各<code translate="no">AggregationHit</code> は、<code translate="no">pk</code> でプライマリキーを、<code translate="no">score</code> でベクトルスコアを、<code translate="no">fields</code> で要求された出力フィールドを公開します。</p>
 <h3 id="Group-results-at-multiple-levels" class="common-anchor-header">複数のレベルで結果をグループ化する<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
@@ -672,9 +673,9 @@ Child bucket keys:
         ></path>
       </svg>
     </button></h3><p>検索集計は、保持された ANN 候補を要約するものです。コレクション全体の集計は実行されません。</p>
-<p>候補の保持には 2 つの近似段階があります。ANN 検索では関連するコレクションエンティティが除外される可能性があり、グループ化段階では、各完全複合キーに対して最大で<code translate="no">TopHits.size</code> の候補が保持されます。<code translate="no">top_hits</code> が設定されているレベルがない場合、このキーごとの上限は 1 です。</p>
-<p>たとえば、あるコレクションにブランドAの製品が5,000件含まれており、その多くがベクトルクエリに関連していると仮定します。集計で<code translate="no">TopHits(size=4)</code> が使用されている場合、ブランドAのバケットは、完全な複合キーに対して最大4つの候補のみを保持できます。その<code translate="no">count</code> およびメトリクスは、保持されたそれらの候補を表しており、関連するブランドAの製品すべてや、コレクション内の5,000件のエンティティすべてを表しているわけではありません。</p>
-<p>近似値が最も重要になるのは、<code translate="no">order</code> がメトリックエイリアスを使用する場合です。検索のリコール率の変化によりメトリック値が変化し、その結果、<code translate="no">SearchAggregation.size</code> に収まるバケットが変わる可能性があります。ネストされた集計では、各子レベルが親バケット内で利用可能なエンティティに対して処理を行うため、この影響がさらに増幅される可能性があります。</p>
+<p>候補の保持には 2 つの近似段階があります。ANN 検索では関連するコレクションエンティティが除外される可能性があり、グループ化段階では、各完全複合キーに対して最大で<code translate="no">TopHits.size</code> の候補が保持されます。<code translate="no">top_hits</code> が設定されているレベルがない場合、このキーごとの上限は 1 となります。</p>
+<p>たとえば、あるコレクションにブランドAの製品が5,000件含まれており、その多くがベクトルクエリに関連していると仮定します。集計で<code translate="no">TopHits(size=4)</code> が使用されている場合、ブランドAのバケットは、完全な複合キーに対して最大4つの候補のみを保持できます。その<code translate="no">count</code> およびメトリクスは、保持されたそれらの候補を表しており、関連するすべてのブランドA製品や、コレクション内の5,000件のエンティティすべてを表しているわけではありません。</p>
+<p>近似値が最も重要になるのは、<code translate="no">order</code> でメトリックエイリアスが使用される場合です。検索のリコール率の変化によりメトリック値が変化し、その結果、<code translate="no">SearchAggregation.size</code> に収まるバケットが変わる可能性があります。ネストされた集計では、各子レベルが親バケット内で利用可能なエンティティに対して処理を行うため、この影響がさらに増幅される可能性があります。</p>
 <p>一致するすべてのエンティティについて正確な統計情報を必要とする場合は、検索集計の代わりに「正確なクエリ集計」ワークフローを使用してください。</p>
 <h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">検索集計とグループ化検索の違いは何ですか？<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -698,8 +699,8 @@ Child bucket keys:
 </thead>
 <tbody>
 <tr><td>グループ化フィールド内の重複値が少なく、標準的な順位付けされたエンティティリストを返す</td><td><a href="/docs/ja/grouping-search.md">グループ化検索</a></td><td>各クエリベクトルに対するフラットな検索ヒット</td></tr>
-<tr><td>グループをバケットとして、キー、カウント、メトリクス、順序、代表的なヒット、または子バケットを用いて検査または比較する</td><td>検索集計</td><td><code translate="no">AggregationBucket</code> オブジェクト<code translate="no">result.agg_buckets</code></td></tr>
+<tr><td>グループをバケットとして、キー、カウント、メトリクス、順序、代表的なヒット、または子バケットとともに検査または比較する</td><td>検索集計</td><td><code translate="no">AggregationBucket</code> オブジェクト<code translate="no">result.agg_buckets</code></td></tr>
 </tbody>
 </table>
 <p>検索集計で<code translate="no">top_hits</code> が設定されている場合でも、その主なレスポンスはバケットツリーのままです。アプリケーションがすでに通常の検索ヒットを処理しており、主に結果の多様性を求めている場合には、グループ化検索が有用です。</p>
-<p>これらのAPIは相互に排他的です。<code translate="no">search_aggregation</code> が、同じリクエスト内で<code translate="no">group_by_field</code> または<code translate="no">group_by_fields</code> と組み合わされた場合、PyMilvusは<code translate="no">ParamError</code> を発生させます。</p>
+<p>これらのAPIは相互に排他的です。同じリクエスト内で<code translate="no">search_aggregation</code> と<code translate="no">group_by_field</code> または<code translate="no">group_by_fields</code> を組み合わせて使用すると、PyMilvusは<code translate="no">ParamError</code> を発生させます。</p>

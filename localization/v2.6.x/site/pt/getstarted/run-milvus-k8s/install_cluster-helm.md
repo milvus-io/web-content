@@ -124,7 +124,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
       </svg>
     </button></h3><p>Depois de instalar o gráfico Helm, pode iniciar o Milvus no Kubernetes. Esta secção orienta-o na implementação de um cluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
-<p><strong>Precisa, em vez disso, de uma implementação autónoma?</strong></p>
+<p><strong>Precisa, em vez disso, de uma implantação autónoma?</strong></p>
 <p>Se preferir implementar o Milvus no modo autónomo (nó único) para desenvolvimento ou testes, utilize este comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.17 \
@@ -324,7 +324,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>O Milvus inclui uma ferramenta GUI integrada chamada Milvus WebUI, à qual pode aceder através do seu navegador. A Milvus WebUI melhora a observabilidade do sistema com uma interface simples e intuitiva. Pode utilizar a Milvus WebUI para observar as estatísticas e métricas dos componentes e dependências do Milvus, verificar detalhes da base de dados e da recolha de dados e listar configurações detalhadas do Milvus. Para mais detalhes sobre a Milvus WebUI, consulte <a href="/docs/pt/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
-<p>Para ativar o acesso à Milvus WebUI, é necessário redirecionar as portas do pod proxy para uma porta local.</p>
+<p>Para ativar o acesso à Milvus WebUI, é necessário fazer o redirecionamento de portas do pod do proxy para uma porta local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -408,7 +408,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>As imagens são descarregadas para uma subpasta chamada « <code translate="no">images</code> » no diretório atual.</p>
+<p>As imagens são descarregadas para uma subpasta denominada « <code translate="no">images</code> » no diretório atual.</p>
 <h3 id="4-Load-images" class="common-anchor-header">4. Carregar as imagens<button data-href="#4-Load-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -21,7 +21,7 @@ title: Instalar el SDK de Java de Milvus
         ></path>
       </svg>
     </button></h1><p>En este tema se describe cómo instalar el SDK de Java de Milvus para Milvus.</p>
-<p>La versión actual de Milvus es compatible con SDK en Python, Node.js, GO y Java.</p>
+<p>La versión actual de Milvus es compatible con los SDK de Python, Node.js, GO y Java.</p>
 <h2 id="Requirement" class="common-anchor-header">Requisitos<button data-href="#Requirement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

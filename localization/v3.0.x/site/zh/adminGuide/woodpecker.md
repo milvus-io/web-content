@@ -59,7 +59,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：对正在运行的集群切换<code translate="no">mq.type</code> 属于升级操作。请仔细遵循升级流程，并在切换至生产环境前，先在全新集群上进行验证。</p>
+<p>注意：对正在运行的集群切换<code translate="no">mq.type</code> 属于升级操作。请仔细遵循升级流程，并在切换至生产环境前先在全新集群上进行验证。</p>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 </thead>
 <tbody>
 <tr><td><code translate="no">minio</code> （默认）</td><td>嵌入 Milvus/流式处理节点中</td><td>对象存储（MinIO/S3兼容）</td><td>支持</td><td>支持</td></tr>
-<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
+<tr><td><code translate="no">local</code></td><td>嵌入在 Milvus/流式处理节点中</td><td>本地文件系统</td><td>支持</td><td>受限（所有节点都需要一个共享文件系统，例如 NFS）</td></tr>
 <tr><td><code translate="no">service</code></td><td><strong>专用的 Woodpecker 服务</strong>（拥有独立的 Pod）</td><td>对象存储（MinIO/S3兼容）</td><td><strong>不支持</strong></td><td>支持</td></tr>
 </tbody>
 </table>
@@ -237,7 +237,7 @@ summary: 了解 Woodpecker 如何作为 Milvus 中的默认消息队列（WAL）
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>此示例将 Woodpecker 配置为消息队列，并启用了流式处理节点。首次启动时，拉取镜像可能需要一些时间；请等待直至所有 Pod 准备就绪：</p>
+<p>此示例将 Woodpecker 配置为消息队列，并启用流式处理节点。首次启动时，拉取镜像可能需要一些时间；请等待直至所有 Pod 准备就绪：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -547,7 +547,7 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h3><p>服务模式在保持低成本的同时，实现了<strong>毫秒级写入延迟</strong>——与传统的三副本本地磁盘 WAL 处于同一量级。在典型的三副本跨可用区部署中，写入延迟始终保持在毫秒范围内。其实现方式包括：</p>
 <ul>
-<li><strong>单 RTT 法定多数写入</strong>——客户端驱动的复制可在单次往返内完成法定多数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外约 1/3 的跨可用区流量）。</li>
+<li><strong>单 RTT 法定数写入</strong>——客户端驱动的复制可在单次往返内完成法定数写入，跨可用区流量固定为两个副本的数据量（相比之下，基于代理/领导者的复制通常会产生额外约 1/3 的跨可用区流量）。</li>
 <li><strong>拓扑感知单跳读取</strong>——每次读取都直接发送到最近的副本，而不是通过代理转发，从而避免了基于代理系统中随机的跨可用区读取（约占跨可用区读取流量的 2/3）。</li>
 <li><strong>分段滚动后立即上传至对象存储</strong>——每个分段都会追踪其完整生命周期，并在滚动后立即上传至对象存储，从而在不牺牲延迟性能的前提下，保持本地磁盘占用空间和存储成本处于较低水平。</li>
 <li><strong>无需持续的节点间复制</strong>——日志持久化到充当共享存储的对象存储中，因此故障转移时仅需重新上传幸存的副本（无需复制整个节点），扩展不再受限于节点间复制带宽，且大规模节点替换不会引发复制风暴。</li>

@@ -38,7 +38,7 @@ title: 安裝 Milvus Java SDK
         ></path>
       </svg>
     </button></h2><ul>
-<li>Java（8 或更高版本）</li>
+<li>Java（8 或更新版本）</li>
 <li>Apache Maven 或 Gradle/Grails</li>
 </ul>
 <h2 id="Install-Milvus-Java-SDK" class="common-anchor-header">安裝 Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">

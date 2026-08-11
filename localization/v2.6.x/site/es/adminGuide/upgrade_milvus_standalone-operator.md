@@ -62,7 +62,7 @@ title: Actualizar Milvus Standalone con Milvus Operator
 <li><strong>Nuevos componentes</strong>: Introducción del nodo de streaming para mejorar el procesamiento de datos</li>
 <li><strong>Eliminación de componentes</strong>: se ha eliminado y consolidado <code translate="no">indexNode</code> </li>
 </ul>
-<p>Este proceso de actualización garantiza una migración adecuada a la nueva arquitectura. Para obtener más información sobre los cambios en la arquitectura, consulta <a href="/docs/es/v2.6.x/architecture_overview.md">la Descripción general de la arquitectura de Milvus</a>.</p>
+<p>Este proceso de actualización garantiza una migración adecuada a la nueva arquitectura. Para obtener más información sobre los cambios en la arquitectura, consulte <a href="/docs/es/v2.6.x/architecture_overview.md">la Descripción general de la arquitectura de Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requisitos<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Actualizar Milvus Standalone con Milvus Operator
 <li>Si actualmente está ejecutando la versión v2.6.0-rc1 y necesita conservar sus datos, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">esta guía</a> de <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">la comunidad</a> para obtener ayuda con la migración.</li>
 <li><strong>Debes</strong> actualizar a la versión v2.5.16 o posterior antes de actualizar a la v2.6.17.</li>
 </ul>
-<p><strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.17, debes mantener tu opción actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.17, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

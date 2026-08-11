@@ -87,7 +87,7 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
 <li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l’aggiornamento alla versione v2.5.16 o successive prima di passare alla v2.6.17.</li>
 </ul>
-<p><strong>Limiti della coda dei messaggi</strong>: Quando si esegue l’aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio tra diversi sistemi di code dei messaggi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti della coda dei messaggi</strong>: Quando si esegue l’aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di coda dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
 <div class="alter note">
 <p>Per motivi di sicurezza, con il rilascio della v2.6.17 Milvus aggiorna MinIO alla versione RELEASE.2024-12-18T13-15-44Z.</p>
 </div>

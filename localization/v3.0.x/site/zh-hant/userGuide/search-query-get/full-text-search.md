@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的局限性——語義搜尋可能會忽略精確的術語——確保您獲得最準確且符合上下文的搜尋結果。 此外，它支援原始文字輸入，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入，從而簡化向量搜尋流程。</p>
+    </button></h1><p>全文搜尋是一項功能，可從文字資料集中檢索包含特定術語或短語的文件，並根據相關性對結果進行排序。此功能克服了語義搜尋的限制——語義搜尋可能會忽略精確的術語——確保您獲得最準確且符合上下文的結果。 此外，它支援原始文字輸入，能自動將您的文字資料轉換為稀疏嵌入向量，無需手動生成向量嵌入，從而簡化向量搜尋流程。</p>
 <p>此功能採用 BM25 演算法進行相關性評分，在檢索增強生成（RAG）情境中尤為實用，能優先呈現與特定搜尋詞彙高度吻合的文件。</p>
 <div class="alert note">
 <p>透過將全文搜尋與基於語義的密集向量搜尋整合，您可以提升搜尋結果的準確性與相關性。如需更多資訊，請參閱「<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>」。</p>
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供由 BM25 相關性演算法驅動的全文檢索功能，該演算法是資訊檢索系統中廣泛採用的評分函數，Milvus 將其整合至搜尋工作流程中，以提供精確且依相關性排序的文字結果。</p>
+    </button></h2><p>Milvus 提供由 BM25 相關性演算法驅動的全文檢索功能，該演算法是資訊檢索系統中廣泛採用的評分函數，Milvus 將其整合至搜尋工作流程中，以提供精準且按相關性排序的文字結果。</p>
 <p>Milvus 中的全文搜尋遵循以下工作流程：</p>
 <ol>
 <li><p><strong>原始文字輸入</strong>：您可直接插入文字文件或以純文字形式提交查詢，無需任何嵌入模型。</p></li>
@@ -343,7 +343,7 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>需要進行「文字轉稀疏向量」轉換的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 欄位名稱。對於<code translate="no">FunctionType.BM25</code> ，此參數僅接受一個欄位名稱。</p></td>
+     <td><p>需要進行「文字轉稀疏向量」轉換的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 欄位名稱。若為<code translate="no">FunctionType.BM25</code> ，此參數僅接受一個欄位名稱。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
@@ -465,7 +465,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用於建立及查詢 BM25 稀疏反向索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設)：逐份文件 (Document-at-a-Time) MaxScore 查詢處理。此選項適用於<em>k</em>值較高或包含大量術語的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">查詢評估：策略與最佳化</a>》。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：逐份文件 WAND 查詢處理。此選項適用於<em>k</em>值較小或查詢詞彙較短的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1145/956863.956944">使用兩級檢索流程進行高效查詢評估</a>》。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本「逐詞」查詢處理。請將此選項用作基準，或當您需要讓評分動態適應整體資料庫統計資料（例如平均文件長度）時使用。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 採用區塊層級最高分數元資料的 MaxScore 查詢處理。有關背景資訊，請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最大分數索引加速 Top-k 文件檢索</a>》。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 採用區塊層級最高分數元資料的 WAND 查詢處理。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最高分數索引加速 Top-k 文件檢索</a>》。</p></li></ul></td>
+     <td><p>用於建立及查詢 BM25 稀疏反向索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設)：逐份文件 (Document-at-a-Time) MaxScore 查詢處理。此選項適用於<em>k</em>值較高或包含大量術語的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">查詢評估：策略與最佳化</a>》。</p></li><li><p><code translate="no">"DAAT_WAND"</code>：逐份文件 WAND 查詢處理。此選項適用於<em>k</em>值較小或查詢詞彙較短的全文檢索工作負載。相關背景請參閱《<a href="https://dl.acm.org/doi/10.1145/956863.956944">使用兩級檢索流程進行高效查詢評估</a>》。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>：基本「逐詞」查詢處理。請將此選項用作基準，或當您需要讓評分動態適應整體資料庫統計資料（例如平均文件長度）時使用。</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: 採用區塊層級最高分數元資料的 MaxScore 查詢處理。有關背景資訊，請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最大分數索引加速 Top-k 文件檢索</a>》。</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: 採用區塊層級最高分數元資料的 WAND 查詢處理。有關背景資訊，請參閱《<a href="https://dl.acm.org/doi/10.1145/2009916.2010048">使用區塊最高分數索引加速 Top-k 文件檢索</a>》。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -821,7 +821,7 @@ client.search(
 <ul>
 <li><p>關注點分離：您負責處理文字（輸入／輸出），Milvus 則負責處理向量（內部處理）</p></li>
 <li><p>效能：預先計算的稀疏向量可讓查詢過程中的 BM25 排序更為快速</p></li>
-<li><p>使用者體驗：透過簡單的文字介面，將複雜的向量運算抽象化</p></li>
+<li><p>使用者體驗：透過簡單的文字介面，將複雜的向量運算進行抽象化處理</p></li>
 </ul>
 <p><strong>若需存取向量</strong>：</p>
 <ul>

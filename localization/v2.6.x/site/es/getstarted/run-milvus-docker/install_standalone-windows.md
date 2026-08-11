@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Tras ejecutar el script de instalación:​</p>
 <ul>
 <li><p>Se ha iniciado un contenedor de Docker llamado <strong>milvus-standalone</strong> en el puerto <strong>19530</strong>.​</p></li>
-<li><p>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>embedEtcd.yaml</strong> en la carpeta actual.</p></li>
+<li><p>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>«embedEtcd.yaml»</strong> en la carpeta actual.</p></li>
 <li><p>El volumen de datos de Milvus está asignado a <strong>volumes/milvus</strong> en la carpeta actual.​</p></li>
 </ul>
 <p>Puede utilizar los siguientes comandos para gestionar el contenedor de Milvus y los datos almacenados.​</p>
@@ -204,7 +204,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</p></li>
 <li><p>El contenedor <strong>milvus-minio</strong> sirve los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>volumes/minio</strong> en la carpeta actual.</p></li>
-<li><p>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>«volumes/milvus»</strong> en la carpeta actual.​</p></li>
+<li><p>El contenedor <strong>«milvus-standalone»</strong> sirve los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>«volumes/milvus»</strong> en la carpeta actual.​</p></li>
 </ul></li>
 </ol>
 <p>También puedes ejecutar la versión para Linux de los comandos de Docker Compose si tienes instalado WSL 2.​</p>
@@ -276,8 +276,8 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>Una vez instalado Docker Desktop en Windows, es posible que aparezca el error « <code translate="no">Docker Engine stopped</code> » si tu ordenador no está configurado correctamente. En ese caso, es posible que tengas que comprobar lo siguiente:​</p>
 <ol>
-<li><p>Comprueba si la virtualización está habilitada.</p>
-<p>Puedes comprobar si la virtualización está activada en la pestaña <strong>«Rendimiento»</strong> del <strong>Administrador de tareas</strong>.</p>
+<li><p>Comprueba si la virtualización está habilitada.​</p>
+<p>Puedes comprobar si la virtualización está activada en la pestaña <strong>«Rendimiento»</strong> del <strong>Administrador de tareas</strong>.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
@@ -301,7 +301,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Comprueba si se ha iniciado el daemon de Docker.</p>
-<p>Debes ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.</p>
+<p>Debes ir al directorio de instalación de Docker Desktop y ejecutar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar el daemon de Docker.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -340,7 +340,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Utilizar el motor basado en WSL 2 en la configuración de Docker Desktop</span>
   
  </span></p></li>
-<li><p>Selecciona, entre las distribuciones de WSL 2 que tengas instaladas, aquellas en las que desees habilitar la integración con Docker accediendo a: <strong>Configuración</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integración con WSL</strong>.</p>
+<li><p>Selecciona, entre las distribuciones de WSL 2 que tengas instaladas, aquellas en las que desees habilitar la integración con Docker yendo a: <strong>Configuración</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integración con WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen al iniciar Milvus y que indican « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen al iniciar Milvus y que dicen « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

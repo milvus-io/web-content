@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sub-chart di Pulsar integrato, disabilitare le policy PDB di Pulsar:</p>
+<p>Su Kubernetes v1.25 e versioni successive, se si riscontrano problemi con l’API PodDisruptionBudget (PDB) derivanti dal sottografico Pulsar integrato, disabilitare le politiche PDB di Pulsar:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>Limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di coda dei messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.
+<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0-beta, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.
 Se si utilizza Pulsar e si desidera mantenerlo, non modificare la coda dei messaggi durante l’aggiornamento.</li>
 <li><strong>Da Pulsar v2 a v3:</strong> consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar dalla v2 alla v3</a>; per rimanere alla v2, consultare <a href="/docs/it/use-pulsar-v2.md">Continuare a utilizzare Pulsar v2</a>.</li>
 </ul>

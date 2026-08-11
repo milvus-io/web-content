@@ -35,7 +35,7 @@ title: RocksMQ
       </svg>
     </button></h2><ul>
 <li><strong>الإصدار المستقل فقط</strong> — <strong>لا</strong> يتم دعم RocksMQ في Milvus Distributed (المجموعة). راجع <a href="/docs/ar/mqtype-overview.md#Supported-message-queues">مصفوفة دعم قوائم انتظار الرسائل</a>.</li>
-<li>يأتي RocksMQ مدمجًا مع Milvus، لذا لا توجد نسخة منفصلة لتثبيتها.</li>
+<li>يأتي RocksMQ مرفقًا مع Milvus، لذا لا توجد نسخة منفصلة لتثبيتها.</li>
 <li>كانت هذه هي قائمة انتظار الرسائل الافتراضية في الإصدارات السابقة من Milvus، وقد حلت محلها قائمة انتظار الرسائل المدمجة Woodpecker في Milvus 3.x.</li>
 </ul>
 <h2 id="Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="common-anchor-header">نشر Milvus Standalone مع RocksMQ باستخدام Docker<button data-href="#Deploy-Milvus-Standalone-with-RocksMQ-using-Docker" class="anchor-icon" translate="no">

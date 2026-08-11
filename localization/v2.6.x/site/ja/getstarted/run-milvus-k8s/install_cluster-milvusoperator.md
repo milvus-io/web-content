@@ -108,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>以前にMilvus Operatorをインストールしたことがある場合は、次のコマンドを使用してアップグレードしてください。</p>
+<p>以前にMilvus Operatorをインストール済みの場合は、次のコマンドを使用してアップグレードしてください。</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -276,18 +276,18 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
-<p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
+<p>Milvusをスタンドアロンモードでデプロイした場合は、pod名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更してください。</p>
 </div>
 <p>次に、以下のコマンドを実行して、ローカルポートを Milvus がサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>オプションとして、上記のコマンドで `<code translate="no">27017:19530</code> ` の代わりに `<code translate="no">:19530</code> ` を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
-<p>デフォルトでは、kubectl のポートフォワーディングは<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポートフォワーディングがホストマシンのすべての IP アドレスでリスニングするようになります。</p>
+<p>デフォルトでは、kubectl のポート転送は<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポート転送がホストマシンのすべての IP アドレスでリスニングするようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>これで、転送されたポートを使用してMilvusに接続できるようになります。</p>
+<p>これで、転送されたポートを使用して Milvus に接続できるようになります。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,7 +305,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>次のように `<code translate="no">patch</code> ` コマンドを実行することで、Milvus クラスタの設定を確認および更新できます。</p>
 <ol>
-<li><p>以下のコマンドを実行すると、変更後の設定内容をプレビューできます。</p>
+<li><p>以下のコマンドを実行して、変更後の設定内容をプレビューします。</p>
 <p>以下では、<code translate="no">spec.components.disableMetric</code> パラメータを<code translate="no">false</code> msに更新する場合を想定しています。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \

@@ -282,8 +282,8 @@ my-release-minio-3                               1/1     Running   0          2m
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>По желанию вы можете использовать <code translate="no">:19530</code> вместо <code translate="no">27017:19530</code> в приведённой выше команде, чтобы <code translate="no">kubectl</code> автоматически выделил вам локальный порт, и вам не пришлось заниматься устранением конфликтов портов.</p>
-<p>По умолчанию перенаправление портов с помощью kubectl осуществляется только на <code translate="no">localhost</code>. Используйте флаг <code translate="no">address</code>, если хотите, чтобы Milvus прослушивал выбранные или все IP-адреса. Следующая команда настраивает перенаправление портов на прослушивание всех IP-адресов хост-машины.</p>
+<p>По желанию вы можете использовать <code translate="no">:19530</code> вместо <code translate="no">27017:19530</code> в приведённой выше команде, чтобы <code translate="no">kubectl</code> автоматически выделил вам локальный порт, и вам не пришлось бы решать проблемы с конфликтами портов.</p>
+<p>По умолчанию перенаправление портов с помощью `kubectl` осуществляется только на ` <code translate="no">localhost</code>`. Используйте флаг ` <code translate="no">address</code> `, если хотите, чтобы Milvus прослушивал выбранные или все IP-адреса. Следующая команда настраивает перенаправление портов на прослушивание всех IP-адресов хост-машины.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -305,7 +305,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>Вы можете просмотреть и обновить конфигурации вашего кластера Milvus, выполнив команду ` <code translate="no">patch</code> ` следующим образом:</p>
 <ol>
-<li><p>Выполните следующую команду, чтобы предварительно просмотреть будущие настройки.</p>
+<li><p>Выполните следующую команду, чтобы предварительно просмотреть предполагаемые настройки.</p>
 <p>Ниже предполагается, что вы хотите обновить параметр ` <code translate="no">spec.components.disableMetric</code> ` на значение ` <code translate="no">false</code> ` мс.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \

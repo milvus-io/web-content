@@ -59,9 +59,9 @@ beta: Milvus 3.0.x
 <tr><th>Funzionalità</th><th>Descrizione</th><th>Configurazione richiesta</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/it/text.md"><code translate="no">TEXT</code> campo</a></td><td>Memorizza testi sorgente lunghi, come brani, documenti, ticket o log, senza impostare una lunghezza massima fissa nello schema della collezione.</td><td><a href="/docs/it/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
+<tr><td><a href="/docs/it/text.md"><code translate="no">TEXT</code> campo</a></td><td>Memorizza testi sorgente lunghi, come brani, documenti, ticket o log, senza impostare una lunghezza massima fissa nello schema della raccolta.</td><td><a href="/docs/it/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 <tr><td><a href="/docs/it/add-fields-to-an-existing-collection.md">Campi vettoriali generati da funzioni</a></td><td>Aggiungere una funzione BM25 o MinHash a una collezione esistente in modo che Milvus generi un nuovo campo vettoriale da un campo " <code translate="no">VARCHAR</code> " esistente. Milvus inserisce i valori generati per le entità esistenti in modo asincrono tramite la compattazione in background.</td><td><ul><li><a href="/docs/it/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></li><li><a href="/docs/it/configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code translate="no">=true</code></li><li><a href="/docs/it/configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code translate="no">dataCoord.compaction.storageVersion.enabled</code></a><code translate="no">=true</code></li></ul></td></tr>
-<tr><td><a href="/docs/it/create-an-external-collection.md">Collezioni esterne</a></td><td>Esegui query sui dati archiviati al di fuori di Milvus senza copiarli in una collezione gestita. Aggiorna la collezione esterna quando i dati di origine cambiano. Per esporre ulteriori campi di origine, consulta <a href="/docs/it/alter-external-collection-schema.md">Modifica dello schema di una collezione esterna</a>.</td><td><a href="/docs/it/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
+<tr><td><a href="/docs/it/create-an-external-collection.md">Collezioni esterne</a></td><td>Esegui query sui dati archiviati al di fuori di Milvus senza copiarli in una raccolta gestita. Aggiorna la raccolta esterna quando i dati di origine cambiano. Per esporre ulteriori campi di origine, consulta <a href="/docs/it/alter-external-collection-schema.md">Modifica dello schema di una raccolta esterna</a>.</td><td><a href="/docs/it/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 </tbody>
 </table>
 <h2 id="Before-you-enable-Storage-V3" class="common-anchor-header">Prima di abilitare Storage V3<button data-href="#Before-you-enable-Storage-V3" class="anchor-icon" translate="no">
@@ -107,7 +107,7 @@ beta: Milvus 3.0.x
   <span class="hljs-attr">storage:</span>
     <span class="hljs-attr">useLoonFFI:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus considera questa impostazione aggiornabile. Applicare la modifica tramite il flusso di lavoro di aggiornamento della configurazione supportato dalla propria distribuzione. La sola modifica di un file di configurazione statico non garantisce che la distribuzione in esecuzione abbia ricevuto il nuovo valore.</p>
+<p>Milvus considera questa impostazione aggiornabile. Applica la modifica tramite il flusso di lavoro di aggiornamento della configurazione supportato dalla tua distribuzione. La sola modifica di un file di configurazione statico non garantisce che la distribuzione in esecuzione abbia ricevuto il nuovo valore.</p>
 <p>Se si intende aggiungere una Funzione e il campo vettoriale da essa generato a una raccolta esistente, abilitare anche le due impostazioni di compattazione necessarie per il backfill dei dati esistenti:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
@@ -116,7 +116,7 @@ beta: Milvus 3.0.x
     <span class="hljs-attr">storageVersion:</span>
       <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L’output della Funzione per le entità esistenti viene generato in modo asincrono tramite la compattazione in background. Un aggiornamento dello schema riuscito non indica che il backfill sia stato completato per ogni entità esistente.</p>
+<p>L’output della Funzione per le entità esistenti viene generato in modo asincrono tramite la compattazione in background. Un aggiornamento dello schema andato a buon fine non indica che il backfill sia stato completato per ogni entità esistente.</p>
 <h2 id="Related-documentation" class="common-anchor-header">Documentazione correlata<button data-href="#Related-documentation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,5 +141,5 @@ beta: Milvus 3.0.x
 <li><a href="/docs/it/upgrade_milvus_cluster-helm.md">Aggiornamento del cluster Milvus con Helm Chart</a></li>
 <li><a href="/docs/it/configure_common.md">Configurazioni relative a common</a></li>
 <li><a href="/docs/it/configure_datacoord.md">Configurazioni relative a dataCoord</a></li>
-<li><a href="https://milvus.io/blog/why-we-built-loon-a-storage-engine-for-ai-data-that-never-stops-changing.md">Perché abbiamo creato Loon: un motore di archiviazione per dati di IA in continua evoluzione</a> — Approfondimento tecnico sulle motivazioni alla base della progettazione di Storage V3.</li>
+<li><a href="https://milvus.io/blog/why-we-built-loon-a-storage-engine-for-ai-data-that-never-stops-changing.md">Perché abbiamo creato Loon: un motore di archiviazione per dati di intelligenza artificiale in continua evoluzione</a> — Approfondimento tecnico sulle motivazioni alla base della progettazione di Storage V3.</li>
 </ul>

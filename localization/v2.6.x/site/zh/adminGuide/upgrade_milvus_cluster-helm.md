@@ -90,7 +90,7 @@ title: 使用 Helm 图表升级 Milvus 集群
 </ul>
 <p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <div class="alert note">
-自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖项。为确保向后兼容性，请将您的 Helm 升级至 v3.14 或更高版本，并且每次使用 `<code translate="no">helm upgrade</code>` 时，请务必添加 `<code translate="no">--reset-then-reuse-values</code> ` 选项。
+自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖项。为确保向后兼容性，请将您的 Helm 升级至 v3.14 或更高版本，并且在每次使用 `<code translate="no">helm upgrade</code>` 时，请务必添加 `<code translate="no">--reset-then-reuse-values</code> ` 选项。
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

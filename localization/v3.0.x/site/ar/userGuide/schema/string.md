@@ -1,9 +1,11 @@
 ---
 id: string.md
-title: حقل السلسلة
-summary: في Milvus، VARCHAR هو نوع البيانات المستخدم لتخزين بيانات السلسلة.
+title: حقل VarChar
+summary: >-
+  VARCHAR هو نوع حقل قياسي يُستخدم لتخزين بيانات وصفية على شكل سلاسل نصية قصيرة
+  ومحدودة في Milvus.
 ---
-<h1 id="String-Field" class="common-anchor-header">حقل السلسلة<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="VarChar-Field" class="common-anchor-header">حقل VarChar<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,14 +20,15 @@ summary: في Milvus، VARCHAR هو نوع البيانات المستخدم ل�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في ميلفوس، <code translate="no">VARCHAR</code> هو نوع البيانات المستخدم لتخزين بيانات السلسلة.</p>
-<p>عندما تقوم بتعريف حقل <code translate="no">VARCHAR</code> ، هناك معلمتان إلزاميتان:</p>
+    </button></h1><p>يدعم Milvus البيانات النصية القياسية من خلال حقول " <code translate="no">VARCHAR</code> " و" <code translate="no">TEXT</code> ". تصف هذه الصفحة حقل " <code translate="no">VARCHAR</code>"، الذي صُمم للبيانات الوصفية النصية القصيرة والمحدودة مثل الأسماء والعلامات والفئات والمعرفات الخارجية.</p>
+<p>بالنسبة للنصوص المصدرية الأطول، أو مقاطع المستندات، أو نصوص المقالات، أو التذاكر، أو السجلات التي يجب تخزينها وإرجاعها مع الكيانات، استخدم حقل <code translate="no">TEXT</code> بدلاً من ذلك. استخدم <code translate="no">TEXT</code> عندما قد تتجاوز القيمة <code translate="no">65,535</code> بايت أو عندما لا ترغب في تعيين <code translate="no">max_length</code> ثابت في مخطط المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/text.md">حقل النص</a>.</p>
+<p>عند تعريف حقل « <code translate="no">VARCHAR</code> »، هناك معلمتان إلزاميتان:</p>
 <ul>
-<li><p>تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>حدد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل <code translate="no">VARCHAR</code> تخزينها. النطاق الصالح <code translate="no">max_length</code> هو من 1 إلى 65,535 65,535.</p></li>
+<li><p>اضبط الحقل <code translate="no">datatype</code> على <code translate="no">DataType.VARCHAR</code>.</p></li>
+<li><p>حدد الحد الأقصى لحجم الحقل ( <code translate="no">max_length</code>)، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن لحقل الحد الأقصى لحجم الحقل ( <code translate="no">VARCHAR</code> ) تخزينها. النطاق الصالح لـ الحد الأقصى لحجم الحقل ( <code translate="no">max_length</code> ) هو من 1 إلى 65,535.</p></li>
 </ul>
 <div class="alert note">
-<p>يدعم Milvus القيم الفارغة والقيم الافتراضية للحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>يدعم Milvus القيم الفارغة والقيم الافتراضية لحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">إضافة حقل VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,16 +45,21 @@ summary: في Milvus، VARCHAR هو نوع البيانات المستخدم ل�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لتخزين بيانات السلسلة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط مجموعتك. فيما يلي مثال على تعريف مخطط مجموعة بحقلين <code translate="no">VARCHAR</code>:</p>
+    </button></h2><p>لتخزين بيانات تعريفية على شكل سلاسل نصية قصيرة ومحدودة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط المجموعة الخاص بك. فيما يلي مثال على تعريف مخطط مجموعة يحتوي على حقلين من نوع <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 بايت، ويسمح بالقيم الفارغة، وله قيمة افتراضية <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: يخزن حتى 200 بايت، ويسمح بالقيم الفارغة، ولكن ليس له قيمة افتراضية.</p></li>
+<li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 بايت، ويسمح بالقيم الفارغة، وقيمته الافتراضية هي <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: يخزن ما يصل إلى 200 بايت، ويسمح بالقيم الفارغة، ولكنه لا يحتوي على قيمة افتراضية.</p></li>
 </ul>
 <div class="alert note">
-<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، فإن Milvus يسمح لك بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي هذا إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -231,7 +239,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">تعيين معلمات الفهرسة<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,13 +254,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
-<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. للحصول على التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+    </button></h2><p>تساعد الفهرسة في تحسين أداء البحث والاستعلام. في Milvus، تعد الفهرسة إلزامية للحقول المتجهة، لكنها اختيارية للحقول القياسية.</p>
+<p>يُنشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والمعلمات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <div class="alert note">
-<p>يمكنك أيضًا إنشاء فهرس <code translate="no">NGRAM</code> لتسريع عملية التصفية <code translate="no">LIKE</code> على حقول <code translate="no">VARCHAR</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</p>
+<p>يمكنك أيضًا إنشاء فهرس « <code translate="no">NGRAM</code> » لتسريع عملية التصفية <code translate="no">LIKE</code> في حقول <code translate="no">VARCHAR</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">«NGRAM</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -341,9 +354,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تعريف المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول سلسلة.</p>
+    </button></h2><p>بمجرد تحديد المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقولًا نصية.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -376,7 +394,6 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -399,9 +416,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إنشاء المجموعة، أدرج الكيانات التي تطابق المخطط.</p>
+    </button></h2><p>بعد إنشاء المجموعة، أدخل الكيانات التي تتطابق مع المخطط.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -495,7 +517,6 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -526,10 +547,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إدراج الكيانات، استخدم الأسلوب <code translate="no">query</code> لاسترداد الكيانات التي تطابق تعبيرات التصفية المحددة.</p>
-<p>لاسترداد الكيانات التي يتطابق فيها <code translate="no">varchar_field1</code> مع السلسلة <code translate="no">&quot;Product A&quot;</code>:</p>
+    </button></h2><p>بعد إدراج الكيانات، استخدم طريقة <code translate="no">query</code> لاسترداد الكيانات التي تتطابق مع تعبيرات التصفية المحددة.</p>
+<p>لاسترداد الكيانات التي تتطابق فيها قيمة <code translate="no">varchar_field1</code> مع السلسلة <code translate="no">&quot;Product A&quot;</code>:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -588,7 +614,6 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
@@ -596,9 +621,14 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لاسترداد الكيانات التي يكون فيها <code translate="no">varchar_field2</code> فارغًا:</p>
+<p>لاسترداد الكيانات التي تكون فيها قيمة <code translate="no">varchar_field2</code> فارغة:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -658,16 +688,20 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لاسترداد الكيانات حيث <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة كيانات ذات <code translate="no">varchar_field1</code> تم تعيينها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو مع تعيين <code translate="no">varchar_field1</code> إلى لا شيء.</p>
+<p>لاسترداد الكيانات التي يكون فيها <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة الكيانات التي تم تعيين <code translate="no">varchar_field1</code> فيها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو التي تم تعيين <code translate="no">varchar_field1</code> فيها إلى null.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -726,14 +760,13 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">البحث المتجه مع تعبيرات التصفية<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">البحث المتجه باستخدام تعبيرات التصفية<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -748,9 +781,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالإضافة إلى تصفية الحقل القياسي الأساسي، يمكنك دمج عمليات البحث عن تشابه المتجهات مع مرشحات الحقل القياسي. على سبيل المثال، يوضح الرمز التالي كيفية إضافة عامل تصفية الحقل القياسي إلى بحث متجه:</p>
+    </button></h2><p>بالإضافة إلى التصفية الأساسية للحقول القياسية، يمكنك الجمع بين عمليات البحث عن التشابه المتجهي وفلاتر الحقول القياسية. على سبيل المثال، يوضح الكود التالي كيفية إضافة فلتر حقل قياسي إلى عملية بحث متجهي:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>
@@ -831,7 +869,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

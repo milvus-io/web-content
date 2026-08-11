@@ -233,7 +233,7 @@ title: 使用 Docker Compose 配置 Milvus
         ></path>
       </svg>
     </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，在每个<code translate="no">milvus-standalone</code> 下方添加一个<code translate="no">volumes</code> 部分。</p>
-<p>将<code translate="no">milvus.yaml</code> 文件的本地路径映射到所有<code translate="no">volumes</code> 部分下的<code translate="no">/milvus/configs/milvus.yaml</code> 配置文件对应的 Docker 容器路径。</p>
+<p>将<code translate="no">milvus.yaml</code> 文件的本地路径映射到所有<code translate="no">volumes</code> 部分下的<code translate="no">/milvus/configs/milvus.yaml</code> 配置文件所在的相应 Docker 容器路径。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

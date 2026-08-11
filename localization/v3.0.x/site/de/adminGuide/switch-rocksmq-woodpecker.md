@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf dieser Seite wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) einer <strong>Milvus-Standalone-Bereitstellung (Docker Compose)</strong> in beide Richtungen zwischen <strong>RocksMQ</strong> und <strong>Woodpecker</strong> (lokales oder MinIO-Backend) wechseln können. Informationen zum allgemeinen Arbeitsablauf und zu den Voraussetzungen finden Sie unter <a href="/docs/de/switch-mq-type.md">„MQ-Typ wechseln</a>“.</p>
+    </button></h1><p>Auf dieser Seite wird beschrieben, wie Sie die Nachrichtenwarteschlange (MQ) einer <strong>Milvus-Standalone-Bereitstellung (Docker Compose)</strong> in beide Richtungen zwischen <strong>RocksMQ</strong> und <strong>Woodpecker</strong> (lokales oder MinIO-Backend) wechseln können. Informationen zum allgemeinen Arbeitsablauf und zu den Voraussetzungen finden Sie unter <a href="/docs/de/switch-mq-type.md">„Nachrichtenwarteschlange wechseln</a>“.</p>
 <div class="alert note">
 <ul>
 <li><strong>Voraussetzung:</strong> Die Funktion „MQ wechseln“ ist <strong>ab Milvus 3.0</strong> verfügbar. Aktualisieren Sie Ihre Milvus-Instanz auf Milvus 3.0 oder <strong>höher</strong>, bevor Sie beginnen – die Funktion ist in früheren Versionen nicht verfügbar.</li>
@@ -209,7 +209,7 @@ summary: >-
       </svg>
     </button></h3><pre><code translate="no" class="language-shell">docker logs milvus-standalone | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einer erfolgreichen Umstellung wird Folgendes protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
+<p>Bei einer erfolgreichen Umstellung wird folgende Meldung protokolliert: „ <code translate="no">[mqTypeValue=rocksmq]</code> “.</p>
 <h3 id="Step-4-Optional-Clean-up-Woodpecker-data" class="common-anchor-header">Schritt 4: (Optional) Woodpecker-Daten bereinigen<button data-href="#Step-4-Optional-Clean-up-Woodpecker-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

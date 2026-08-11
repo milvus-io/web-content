@@ -53,11 +53,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Eine „ <code translate="no">upsert</code> “-Anfrage im „Override“-Modus kombiniert einen Einfügevorgang mit einem Löschvorgang. Wenn eine „ “-Anfrage für eine vorhandene Entität eingeht, fügt Milvus die in der Anfrage-Nutzlast enthaltenen Daten ein und löscht gleichzeitig die vorhandene Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
+    </button></h3><p>Eine „ <code translate="no">upsert</code> “-Anfrage im Überschreibmodus kombiniert einen Einfügevorgang mit einem Löschvorgang. Wenn eine „ “-Anfrage für eine vorhandene Entität eingeht, fügt Milvus die in der Anfrage-Nutzlast enthaltenen Daten ein und löscht gleichzeitig die vorhandene Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
-   <span>Upsert im „Override“-Modus</span>
+   <span>„Upsert“ im „Override“-Modus</span>
   
  </span></p>
 <p>Wenn für das Primärfeld der Zielsammlung „ <code translate="no">autoid</code> “ aktiviert ist, generiert Milvus vor dem Einfügen einen neuen Primärschlüssel für die in der Anforderungsnutzlast enthaltenen Daten.</p>
@@ -86,7 +86,8 @@ summary: >-
  </span></p>
 <p>Um einen Merge durchzuführen, setzen Sie „ <code translate="no">partial_update</code> “ in der Anfrage „ <code translate="no">upsert</code> “ auf „ <code translate="no">True</code> “ – zusammen mit dem Primärschlüssel und den zu aktualisierenden Feldern sowie deren neuen Werten.</p>
 <p>Nach Erhalt einer solchen Anfrage führt Milvus eine Abfrage mit starker Konsistenz durch, um die Entität abzurufen, aktualisiert die Feldwerte basierend auf den Daten in der Anfrage, fügt die geänderten Daten ein und löscht anschließend die vorhandene Entität mit dem in der Anfrage enthaltenen ursprünglichen Primärschlüssel.</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert-Verhalten: Besondere Hinweise<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+<p>Für „ <code translate="no">ARRAY</code> “-Felder unterstützt der Merge-Modus in Milvus v2.6.17 und höher zwei Operatoren: „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “. Mit diesen Operatoren können Sie Elemente an ein bestehendes „ <code translate="no">ARRAY</code> “-Feld anhängen oder übereinstimmende Elemente daraus entfernen, ohne zuvor die Entität abfragen zu müssen, um deren aktuellen Wert abzurufen. Weitere Informationen finden Sie unter <a href="/docs/de/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">„Upsert von ARRAY-Feldern im Merge-Modus</a>“.</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Verhalten bei „Upsert“: Besondere Hinweise<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,11 +104,11 @@ summary: >-
       </svg>
     </button></h3><p>Es gibt einige besondere Hinweise, die Sie vor der Verwendung der Merge-Funktion beachten sollten. Die folgenden Fälle gehen davon aus, dass Sie über eine Sammlung mit zwei Skalarfeldern namens „ <code translate="no">title</code> “ und „ <code translate="no">issue</code> “ sowie einem Primärschlüssel „ <code translate="no">id</code> “ und einem Vektorfeld namens „ <code translate="no">vector</code> “ verfügen.</p>
 <ul>
-<li><p><strong>Upsert von Feldern bei</strong> <strong>aktiviertem</strong> „ <code translate="no">nullable</code> <strong>“.</strong></p>
+<li><p><strong>Felder mit</strong> <strong>aktiviertem</strong> „ <code translate="no">nullable</code> “<strong>per „Upsert“ aktualisieren</strong> <strong>.</strong></p>
 <p>Angenommen, das Feld „ <code translate="no">issue</code> “ darf null sein. Beachten Sie beim Upsert dieser Felder Folgendes:</p>
 <ul>
 <li><p>Wenn Sie das Feld „ <code translate="no">issue</code> “ in der Anfrage „ <code translate="no">upsert</code> “ weglassen und „ <code translate="no">partial_update</code> “ deaktivieren, wird das Feld „ <code translate="no">issue</code> “ auf „ <code translate="no">null</code> “ aktualisiert, anstatt seinen ursprünglichen Wert beizubehalten.</p></li>
-<li><p>Um den ursprünglichen Wert des Felds „ <code translate="no">issue</code> “ beizubehalten, müssen Sie entweder „ <code translate="no">partial_update</code> “ aktivieren und das Feld „ <code translate="no">issue</code> “ weglassen oder das Feld „ <code translate="no">issue</code> “ mit seinem ursprünglichen Wert in die Anfrage „ <code translate="no">upsert</code> “ aufnehmen.</p></li>
+<li><p>Um den ursprünglichen Wert des Feldes „ <code translate="no">issue</code> “ beizubehalten, müssen Sie entweder „ <code translate="no">partial_update</code> “ aktivieren und das Feld „ <code translate="no">issue</code> “ weglassen oder das Feld „ <code translate="no">issue</code> “ mit seinem ursprünglichen Wert in die Anfrage „ <code translate="no">upsert</code> “ aufnehmen.</p></li>
 </ul></li>
 <li><p><strong>Upsert-Schlüssel im dynamischen Feld</strong>.</p>
 <p>Angenommen, Sie haben den dynamischen Schlüssel in der Beispielsammlung aktiviert, und die Schlüssel-Wert-Paare im dynamischen Feld einer Entität sehen ähnlich aus wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
@@ -119,8 +120,18 @@ summary: >-
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> lauten, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem „Upsert“ zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 </ul></li>
 <li><p><strong>Upsert eines JSON-Feldes.</strong></p>
-<p>Angenommen, die Beispielsammlung verfügt über ein schemadefiniertes JSON-Feld namens „ <code translate="no">extras</code> “, und die Schlüssel-Wert-Paare in diesem JSON-Feld einer Entität ähneln „ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> “.</p>
+<p>Angenommen, die Beispielsammlung verfügt über ein schemadefiniertes JSON-Feld namens „ <code translate="no">extras</code> “, und die Schlüssel-Wert-Paare in diesem JSON-Feld einer Entität sehen in etwa so aus: „ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> “.</p>
 <p>Wenn Sie das Feld „ <code translate="no">extras</code> “ einer Entität mit geänderten JSON-Daten per „Upsert“ aktualisieren, beachten Sie, dass das JSON-Feld als Ganzes behandelt wird und Sie einzelne Schlüssel nicht selektiv aktualisieren können. Mit anderen Worten: Das JSON-Feld <strong>unterstützt KEIN</strong> „Upsert“ im <strong>Merge-Modus</strong>.</p></li>
+<li><p><strong>Ein „Upsert“ eines</strong> „ <code translate="no">ARRAY</code> <strong>“-Feldes.</strong></p>
+<p>Standardmäßig folgt ein „ <code translate="no">ARRAY</code> “-Feld im Merge-Modus <strong>der REPLACE-</strong> Semantik: Der in der Anfrage übermittelte Wert überschreibt das vorhandene Array. Für feinere Aktualisierungen unterstützt Milvus ab Version 2.6.17 außerdem zwei Operatoren:</p>
+<ul>
+<li><p><code translate="no">ARRAY_APPEND</code> fügt die Elemente aus der Anfrage-Nutzlast an das vorhandene Array an.</p></li>
+<li><p><code translate="no">ARRAY_REMOVE</code> entfernt jedes Element aus dem bestehenden Array, das mit einem Wert in der Anfrage-Nutzlast übereinstimmt.</p></li>
+</ul>
+<p>Informationen zur Operatorsyntax, zu den unterstützten Elementtypen und zu weiteren Einschränkungen finden Sie unter <a href="/docs/de/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">„Upsert von ARRAY-Feldern im Merge-Modus</a>“.</p></li>
+<li><p><strong>Ein StructArray-Feld „upsert“ ausführen.</strong></p>
+<p>Das Upsert eines „StructArray“-Feldes in einer Entität überschreibt den Feldwert. Dazu müssen Sie eine Liste von Dictionaries bereitstellen, von denen jedes alle im Struct-Schema definierten Unterfelder enthält, selbst wenn Sie das Upsert im Merge-Modus durchführen.</p>
+<p>Weitere Informationen finden Sie unter <a href="/docs/de/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">„Upsert eines StructArray-Feldes im Merge-Modus</a>“.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Grenzen und Einschränkungen<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Aufgrund der obigen Ausführungen sind folgende Grenzen und Einschränkungen zu beachten:</p>
+    </button></h3><p>Aufgrund der oben genannten Inhalte gelten folgende Grenzen und Einschränkungen:</p>
 <ul>
 <li><p>Die „ <code translate="no">upsert</code> “-Anfrage muss immer die Primärschlüssel der Zielentitäten enthalten.</p></li>
 <li><p>Die Zielsammlung muss geladen und für Abfragen verfügbar sein.</p></li>
@@ -145,7 +156,7 @@ summary: >-
 <li><p>Die Werte aller in der Anfrage angegebenen Felder müssen mit den im Schema definierten Datentypen übereinstimmen.</p></li>
 <li><p>Bei Feldern, die mithilfe von Funktionen aus anderen Feldern abgeleitet wurden, entfernt Milvus das abgeleitete Feld während des Upserts, um eine Neuberechnung zu ermöglichen.</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Entitäten in einer Sammlung per „Upsert“ einfügen<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Entitäten in einer Sammlung upsert<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -500,10 +511,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das folgende Codebeispiel veranschaulicht, wie Entitäten mit partiellen Aktualisierungen „upsert“ werden. Geben Sie nur die Felder an, die aktualisiert werden sollen, sowie deren neue Werte, zusammen mit dem expliziten Flag für partielle Aktualisierungen.</p>
+    </button></h2><p>Das folgende Codebeispiel veranschaulicht, wie Entitäten mit partiellen Aktualisierungen „Upsert“ werden. Geben Sie nur die Felder an, die aktualisiert werden sollen, sowie deren neue Werte, zusammen mit dem expliziten Flag für partielle Aktualisierungen.</p>
 <p>Im folgenden Beispiel wird das Feld „ <code translate="no">issue</code> “ der in der Upsert-Anfrage angegebenen Entitäten auf die in der Anfrage enthaltenen Werte aktualisiert.</p>
 <div class="alert note">
-<p>Achten Sie bei der Durchführung eines „Upsert“ im Merge-Modus darauf, dass die in der Anfrage beteiligten Entitäten denselben Satz an Feldern aufweisen. Angenommen, es sollen zwei oder mehr Entitäten per „Upsert“ bearbeitet werden, wie im folgenden Codeausschnitt gezeigt, ist es wichtig, dass diese identische Felder enthalten, um Fehler zu vermeiden und die Datenintegrität zu gewährleisten.</p>
+<p>Stellen Sie bei der Durchführung eines „Upsert“ im Merge-Modus sicher, dass die in der Anfrage beteiligten Entitäten denselben Satz an Feldern aufweisen. Angenommen, es sollen zwei oder mehr Entitäten per „Upsert“ aktualisiert werden, wie im folgenden Codeausschnitt gezeigt, ist es wichtig, dass diese identische Felder enthalten, um Fehler zu vermeiden und die Datenintegrität zu gewährleisten.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -627,4 +638,320 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#         ]</span>
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="common-anchor-header">Upsert von ARRAY-Feldern im Merge-Modus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Vor Milvus v2.6.17 erforderte die Aktualisierung eines Teils eines „ <code translate="no">ARRAY</code> “-Feldes einen clientseitigen „Read-Modify-Write“-Ablauf: Abfrage des bestehenden Arrays, Änderung im Anwendungscode und „Upsert“ des vollständigen Ersatzwerts. Mit Operatoren für Teilaktualisierungen (<code translate="no">ARRAY_APPEND</code> und <code translate="no">ARRAY_REMOVE</code>) können Sie nur die Elemente senden, die angehängt oder entfernt werden sollen. Dies reduziert die clientseitige Logik und vermeidet den zusätzlichen Lesevorgang vor dem „Upsert“.</p>
+<p>Angenommen, die Entität mit dem Primärschlüssel <code translate="no">1</code> enthält bereits <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Vor der Einführung der Operatoren für partielle Aktualisierungen erforderte das Hinzufügen des Elements <code translate="no">&quot;premium&quot;</code> zu einem Array das Upsert des gesamten Ersatz-Arrays:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>, <span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    partial_update=<span class="hljs-literal">True</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; replacementData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;new\&quot;, \&quot;trial\&quot;, \&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .partialUpdate(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .data(replacementData)</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Mit „ <code translate="no">ARRAY_APPEND</code> “ wird nur das hinzuzufügende Element gesendet:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; appendData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;premium\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">appendTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(appendData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(appendTags))</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Mit „ <code translate="no">ARRAY_REMOVE</code> “ senden Sie nur das zu entfernende, übereinstimmende Element:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[{<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;trial&quot;</span>]}],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_remove()},</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;JsonObject&gt; removeData = Collections.singletonList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;: 1, \&quot;tags\&quot;: [\&quot;trial\&quot;]}&quot;</span>, JsonObject.class)
+);
+
+UpsertReq.<span class="hljs-type">FieldPartialUpdateOp</span> <span class="hljs-variable">removeTags</span> <span class="hljs-operator">=</span> UpsertReq.FieldPartialUpdateOp.builder()
+        .fieldName(<span class="hljs-string">&quot;tags&quot;</span>)
+        .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_REMOVE)
+        .build();
+
+client.upsert(UpsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;users&quot;</span>)
+<span class="highlighted-comment-line">        .data(removeData)</span>
+<span class="highlighted-comment-line">        .fieldOps(Collections.singletonList(removeTags))</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Das Anhängen eines der beiden Operatoren an ein Feld über ` <code translate="no">field_ops</code> ` aktiviert implizit die Semantik der Teilaktualisierung. Daher müssen Sie ` <code translate="no">partial_update=True</code> ` <strong>nicht</strong> zusätzlich zu ` <code translate="no">field_ops</code>` übergeben.</p>
+</div>
+<h3 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p>Die Werte der Nutzdaten müssen mit dem „ <code translate="no">element_type</code> “ des Zielfelds „ <code translate="no">ARRAY</code> “ übereinstimmen. Wenn das Zielfeld beispielsweise „ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> “ lautet, müssen die Nutzdaten Zeichenfolgenwerte enthalten.</p></li>
+<li><p>In Milvus v2.6.17 und höher unterstützen „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “ Felder vom Typ „ <code translate="no">ARRAY</code> “, deren „ <code translate="no">element_type</code> “ einer der folgenden Werte ist: „ <code translate="no">BOOL</code> “, „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “ oder „ <code translate="no">VARCHAR</code> “.</p></li>
+<li><p>Nach einem „ <code translate="no">ARRAY_APPEND</code> “-Vorgang darf die Länge des resultierenden Arrays den Wert „ <code translate="no">max_capacity</code> “ des Feldes nicht überschreiten.</p></li>
+<li><p>Parallele Upserts an dieselbe Entität sind nicht über Anfragen hinweg atomar. Wenn zwei Anfragen gleichzeitig dasselbe Feld „ <code translate="no">ARRAY</code> “ aktualisieren, kann der spätere Schreibvorgang den früheren überschreiben. Verwenden Sie eine Koordination auf Anwendungsebene, wenn Sie alle parallelen Änderungen beibehalten müssen.</p></li>
+</ul>
+<h3 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das folgende Beispiel verwendet eine kleine „ <code translate="no">users</code> “-Sammlung mit einem Primärschlüssel „ <code translate="no">pk</code> “, einem Feld „ <code translate="no">tags</code> “ vom Typ „ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> “ und einem Vektorfeld „ <code translate="no">embedding</code> “. Zunächst werden zwei Entitäten mit den Anfangswerten „ <code translate="no">tags</code> “ eingefügt, anschließend wird mithilfe von „ <code translate="no">ARRAY_APPEND</code> “ und „ <code translate="no">ARRAY_REMOVE</code> “ gezeigt, wie die einzelnen Operatoren das gespeicherte Array verändern.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldOp, MilvusClient
+
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+<span class="hljs-comment"># 1. Create a collection with an ARRAY&lt;VARCHAR&gt; field</span>
+schema = client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
+schema.add_field(<span class="hljs-string">&quot;pk&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+schema.add_field(<span class="hljs-string">&quot;embedding&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+schema.add_field(
+    <span class="hljs-string">&quot;tags&quot;</span>,
+    DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">8</span>,
+    max_length=<span class="hljs-number">32</span>,
+)
+
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+)
+
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    schema=schema,
+    index_params=index_params
+)
+
+<span class="hljs-comment"># 2. Seed two entities</span>
+client.insert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    data=[
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},
+        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>], <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;trial&quot;</span>]},
+    ],
+)
+
+<span class="hljs-comment"># 3. Append tags without reading the existing ARRAY values</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>, <span class="hljs-string">&quot;vip&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;premium&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_append()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;trial&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+
+<span class="hljs-comment"># 4. Remove matching tags without replacing the full ARRAY field</span>
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+<span class="highlighted-comment-line">    data=[</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;new&quot;</span>]},</span>
+<span class="highlighted-comment-line">        {<span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;trial&quot;</span>]},</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    field_ops={<span class="hljs-string">&quot;tags&quot;</span>: FieldOp.array_remove()},</span>
+)
+
+res = client.query(
+    collection_name=<span class="hljs-string">&quot;users&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;pk in [1, 2]&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>],
+)
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 1, &#x27;tags&#x27;: [&#x27;premium&#x27;, &#x27;vip&#x27;]}&quot;,</span>
+<span class="hljs-comment">#   &quot;{&#x27;pk&#x27;: 2, &#x27;tags&#x27;: [&#x27;new&#x27;, &#x27;premium&#x27;]}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">„StructArray“-Feld im Merge-Modus upsertieren<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Das Upsert eines StructArray-Feldes in einer Entität überschreibt den Feldwert. Das bedeutet, dass Sie alle im Struktur-Schema definierten Unterfelder angeben müssen, wenn Sie ein StructArray-Feld upsertieren.</p>
+<p>Das folgende Beispiel veranschaulicht, wie das Feld „ <code translate="no">chunks</code> “ im Merge-Modus upsertet wird – ein StructArray-Feld mit 6 Unterfeldern. Nach Abschluss des Vorgangs wird das Feld „ <code translate="no">chunks</code> “ der Entität mit der ID 1 auf das Array mit den in der Anfrage angegebenen Strukturen mit zwei Elementen gesetzt.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.upsert(
+    collection_name=<span class="hljs-string">&quot;books&quot;</span>,
+<span class="highlighted-comment-line">    data=[{</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;chunks&quot;</span>: [</span>
+<span class="highlighted-comment-line">            {</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Use HNSW efSearch to trade recall for latency.&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">1</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.92</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.31</span>, <span class="hljs-number">0.41</span>]</span>
+<span class="highlighted-comment-line">            },</span>
+<span class="highlighted-comment-line">            {</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Range search returns vectors within a distance boundary.&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">2</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.86</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,</span>
+<span class="highlighted-comment-line">              <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>]</span>
+<span class="highlighted-comment-line">            }</span>
+<span class="highlighted-comment-line">        ]</span>
+<span class="highlighted-comment-line">    }],</span>
+    partial_update=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

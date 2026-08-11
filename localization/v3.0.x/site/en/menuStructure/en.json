@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Floating Vector Indexes",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Binary Vector Indexes",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Sparse Vector Indexes",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Scalar Indexes",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "GPU-enabled Indexes",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "GPU Index Overview",

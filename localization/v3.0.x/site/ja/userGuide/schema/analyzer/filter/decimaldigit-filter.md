@@ -45,7 +45,7 @@ beta: Milvus 3.0.0+
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">decimaldigit</code> フィルターには設定可能なパラメータはありません。</p>
-<p>このフィルタは、アラビア・インド系、タイ語、デーヴァナーガリー、ベンガル語、および全角数字を含むUnicode 10進数字を、ASCII数字に変換します。これは、トークナイザーによって生成されたトークンを対象として動作します。上記の設定は意図的にカスタムアナライザーの例として示したものであり、完全なアラビア語処理パイプラインは含まれていません。</p>
+<p>このフィルタは、アラビア・インド系、タイ語、デーヴァナーガリー、ベンガル語、および全角数字を含むUnicode 10進数字を、ASCII数字に変換します。これは、トークナイザによって生成されたトークンを対象として動作します。上記の設定は意図的にカスタムアナライザの例として示したものであり、完全なアラビア語処理パイプラインは含まれていません。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -90,7 +90,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
 <li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous souhaitez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide concernant la migration.</li>
 <li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou une version ultérieure avant de passer à la version v2.6.17.</li>
 </ul>
-<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les prochaines versions.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -145,7 +145,7 @@ results = client.search(
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、最上位の述語 `<code translate="no">category == &quot;search&quot;</code> ` が候補エンティティを選択し、`<code translate="no">element_filter</code> ` が、同じ Struct 要素内で `<code translate="no">section</code>`、`<code translate="no">quality_score</code>`、および `<code translate="no">has_code</code> ` のすべてが一致するチャンクに、要素レベルのベクトル検索を制限します。</p>
+<p>この例では、最上位の述語 `<code translate="no">category == &quot;search&quot;</code> ` が候補エンティティを選択し、`<code translate="no">element_filter</code> ` が、`<code translate="no">section</code>`、`<code translate="no">quality_score</code>`、および `<code translate="no">has_code</code> ` のすべてが同じ Struct 要素内で一致するチャンクに、要素レベルのベクトル検索を制限しています。</p>
 <div class="alert note">
 <p>警告</p>
 <p>トップレベルの述語を<code translate="no">element_filter</code> と組み合わせる場合は、<code translate="no">element_filter</code> を式の最後に配置してください。フィルタ式には<code translate="no">element_filter</code> を1つしか含めることができず、<code translate="no">element_filter</code> や<code translate="no">MATCH_*</code> を別のStructArray演算子の内部にネストすることはできません。</p>
@@ -199,7 +199,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>EmbeddingList の検索結果はエンティティレベルであるため、ここでは `<code translate="no">MATCH_ANY</code> ` を使用します。このフィルターでは、エンティティ内の少なくとも 1 つのチャンクが、高品質な `<code translate="no">&quot;index&quot;</code> ` チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
+<p>EmbeddingList の検索結果はエンティティレベルであるため、ここでは `<code translate="no">MATCH_ANY</code> ` を使用します。このフィルターでは、エンティティ内のチャンクのうち少なくとも 1 つが、高品質な `<code translate="no">&quot;index&quot;</code> ` チャンクである必要がありますが、検索結果自体は依然として親エンティティを表しています。</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">ハイブリッド検索でのフィルタの使用<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,7 +215,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ハイブリッド検索では、条件を適用すべき箇所に StructArray フィルターを適用します。トップレベルのフィルターは、ハイブリッド検索全体で共有できます。<code translate="no">element_filter</code> は、要素レベルの制約を必要とする StructArray 要素レベルのリクエストに添付する必要があります。</p>
+    </button></h2><p>ハイブリッド検索では、条件を適用すべき箇所に StructArray フィルタを適用します。トップレベルのフィルタは、ハイブリッド検索全体で共有できます。<code translate="no">element_filter</code> は、要素レベルの制約が必要な StructArray 要素レベルのリクエストに添付する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
 
 query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]

@@ -36,7 +36,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os conjuntos de dados de IA evoluem frequentemente após a criação de uma coleção. À medida que os modelos e os fluxos de trabalho mudam, as equipas podem precisar de adicionar texto, gerar novos campos vetoriais para entidades existentes ou utilizar dados armazenados fora do Milvus. O suporte a estes fluxos de trabalho requer um modelo de armazenamento capaz de evoluir com o conjunto de dados.</p>
+    </button></h2><p>Os conjuntos de dados de IA evoluem frequentemente após a criação de uma coleção. À medida que os modelos e os fluxos de trabalho mudam, as equipas podem precisar de adicionar texto, gerar novos campos vetoriais para entidades existentes ou utilizar dados armazenados fora do Milvus. O suporte a estes fluxos de trabalho requer um modelo de armazenamento capaz de evoluir juntamente com o conjunto de dados.</p>
 <p>O Armazenamento V3 fornece este modelo no Milvus 3.0. Utiliza um layout de armazenamento com versões para incorporar dados adicionados ou reescritos ao longo do tempo, enquanto as aplicações continuam a aceder às coleções através das mesmas APIs do Milvus.</p>
 <p>O Armazenamento V3 está desativado por predefinição. Após a ativação d <code translate="no">common.storage.useLoonFFI</code>, as novas gravações e os resultados da compactação utilizam o Armazenamento V3. Os dados existentes permanecem no seu layout atual até que os dados elegíveis sejam reescritos pela compactação em segundo plano. O Milvus consegue ler ambos os layouts durante esta transição. Ative o Armazenamento V3 para utilizar funcionalidades que dependem dele, e não apenas como uma otimização geral de desempenho.</p>
 <h2 id="Features-that-require-Storage-V3" class="common-anchor-header">Funcionalidades que requerem o Storage V3<button data-href="#Features-that-require-Storage-V3" class="anchor-icon" translate="no">
@@ -61,7 +61,7 @@ beta: Milvus 3.0.x
 <tbody>
 <tr><td><a href="/docs/pt/text.md"><code translate="no">TEXT</code> campo</a></td><td>Armazenar texto de origem extenso, como passagens, documentos, tickets ou registos, sem definir um comprimento máximo fixo no esquema da coleção.</td><td><a href="/docs/pt/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 <tr><td><a href="/docs/pt/add-fields-to-an-existing-collection.md">Campos vetoriais gerados por funções</a></td><td>Adicione uma função BM25 ou MinHash a uma coleção existente para que o Milvus gere um novo campo vetorial a partir de um campo « <code translate="no">VARCHAR</code> » já existente. O Milvus preenche os valores gerados para as entidades existentes de forma assíncrona, através da compactação em segundo plano.</td><td><ul><li><a href="/docs/pt/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></li><li><a href="/docs/pt/configure_datacoord.md#dataCoordcompactionbumpSchemaVersionenabled"><code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code></a><code translate="no">=true</code></li><li><a href="/docs/pt/configure_datacoord.md#dataCoordcompactionstorageVersionenabled"><code translate="no">dataCoord.compaction.storageVersion.enabled</code></a><code translate="no">=true</code></li></ul></td></tr>
-<tr><td><a href="/docs/pt/create-an-external-collection.md">Coleções externas</a></td><td>Consulte dados armazenados fora do Milvus sem os copiar para uma coleção gerida. Atualize a coleção externa quando os dados de origem forem alterados. Para expor campos de origem adicionais, consulte <a href="/docs/pt/alter-external-collection-schema.md">«Alterar o esquema de uma coleção externa</a>».</td><td><a href="/docs/pt/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
+<tr><td><a href="/docs/pt/create-an-external-collection.md">Coleções externas</a></td><td>Consulte dados armazenados fora do Milvus sem os copiar para uma coleção gerida. Atualize a coleção externa quando os dados de origem forem alterados. Para expor campos de origem adicionais, consulte <a href="/docs/pt/alter-external-collection-schema.md">Alterar o esquema de uma coleção externa</a>.</td><td><a href="/docs/pt/configure_common.md#commonstorageuseLoonFFI"><code translate="no">common.storage.useLoonFFI</code></a><code translate="no">=true</code></td></tr>
 </tbody>
 </table>
 <h2 id="Before-you-enable-Storage-V3" class="common-anchor-header">Antes de ativar o Storage V3<button data-href="#Before-you-enable-Storage-V3" class="anchor-icon" translate="no">
@@ -116,7 +116,7 @@ beta: Milvus 3.0.x
     <span class="hljs-attr">storageVersion:</span>
       <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A saída da Função para entidades existentes é gerada de forma assíncrona através da compactação em segundo plano. Uma atualização bem-sucedida do esquema não indica que o preenchimento retroativo tenha sido concluído para todas as entidades existentes.</p>
+<p>A saída da Função para entidades existentes é gerada de forma assíncrona através da compactação em segundo plano. Uma atualização bem-sucedida do esquema não indica que o preenchimento tenha sido concluído para todas as entidades existentes.</p>
 <h2 id="Related-documentation" class="common-anchor-header">Documentação relacionada<button data-href="#Related-documentation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +134,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li><a href="/docs/pt/text.md">Campo de texto</a></li>
-<li><a href="/docs/pt/add-fields-to-an-existing-collection.md">Alterar o esquema da coleção</a></li>
+<li><a href="/docs/pt/add-fields-to-an-existing-collection.md">Alterar esquema da coleção</a></li>
 <li><a href="/docs/pt/create-an-external-collection.md">Criar uma coleção externa</a></li>
 <li><a href="/docs/pt/install-overview.md">Visão geral das opções de implementação do Milvus</a></li>
 <li><a href="/docs/pt/upgrade_milvus_standalone-helm.md">Atualizar o Milvus Standalone com o Helm Chart</a></li>

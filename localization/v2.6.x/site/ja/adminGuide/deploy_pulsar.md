@@ -54,7 +54,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Docker Compose を使用して Pulsar を設定するには、milvus/configs パスにある<code translate="no">milvus.yaml</code> ファイルの `<code translate="no">pulsar</code> ` セクションに値を指定します。</p>
+    </button></h3><p>Docker Compose を使用して Pulsar を設定するには、milvus/configs パスにある<code translate="no">milvus.yaml</code> ファイル内の `<code translate="no">pulsar</code> ` セクションに値を指定します。</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -205,7 +205,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行して、Woodpeckerの設定を使用するMilvusをインストールします。</li>
+<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Woodpeckerの設定を使用するMilvusをインストールします。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -274,7 +274,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus スタンドアロン版では、デフォルトのメッセージストレージとして RocksMQ が使用されます。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/v2.6.x/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/configure_rocksmq.md">RocksMQ 関連の設定</a>」を参照してください。</p>
+    </button></h2><p>Milvus スタンドアロン版では、デフォルトのメッセージストレージとして RocksMQ を使用します。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/v2.6.x/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/configure_rocksmq.md">RocksMQ に関連する設定</a>」を参照してください。</p>
 <ul>
 <li><p>RocksMQ を使用して Milvus を起動し、その設定を変更したい場合は、変更後の設定を以下の YAML ファイルに記述して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
 <li><p>Helm を使用して RocksMQ 以外のメッセージストアで Milvus をスタンドアロンでインストールしており、これを RocksMQ に戻したい場合は、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
@@ -313,7 +313,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Docker Compose または Helm を使用して、他の Milvus 依存関係を構成する方法については、以下をご覧ください：</p>
+    </button></h2><p>Docker Compose または Helm を使用して、Milvus のその他の依存関係を構成する方法については、以下をご覧ください：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/deploy_s3.md">Docker Compose または Helm を使用したオブジェクトストレージの設定</a></li>
 <li><a href="/docs/ja/v2.6.x/deploy_etcd.md">Docker Compose または Helm を使用したメタストレージの設定</a></li>

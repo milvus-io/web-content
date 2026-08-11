@@ -4,7 +4,7 @@ label: Helm
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Helm 차트를 사용하여 Milvus 독립 실행형 버전을 업그레이드하는 방법을 알아보세요.
+summary: Helm 차트를 사용하여 Milvus 독립형 버전을 업그레이드하는 방법을 알아보세요.
 title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
 ---
 <div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
@@ -23,7 +23,7 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 Helm 차트를 사용하여 Milvus 독립형 배포를 v2.5.x에서 v2.6.17로 업그레이드하는 방법을 설명합니다.</p>
+    </button></h1><p>이 가이드에서는 Helm 차트를 사용하여 Milvus 독립형 배포 환경을 v2.5.x에서 v2.6.17으로 업그레이드하는 방법을 설명합니다.</p>
 <h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
 <li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 이 제거되고 통합되었습니다</li>
 </ul>
-<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 원활한 마이그레이션을 보장합니다. 아키텍처 변경 사항에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하십시오.</p>
 <h3 id="Requirements" class="common-anchor-header">요구 사항<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
 </ul>
 <p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert note">
-Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`를 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
+Milvus Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 하위 호환성을 위해 Helm을 v3.14 이상 버전으로 업그레이드하고, ` <code translate="no">helm upgrade</code>`을 사용할 때마다 ` <code translate="no">--reset-then-reuse-values</code> ` 옵션을 반드시 추가해 주십시오.
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,4 +200,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼</a>을 참조하십시오.</p>
+<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼을</a> 참조하십시오.</p>

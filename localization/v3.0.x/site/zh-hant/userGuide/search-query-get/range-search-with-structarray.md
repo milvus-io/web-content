@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>請使用此頁面對 StructArray 的向量子欄位執行範圍搜尋。範圍搜尋會回傳分數或距離落在指定範圍內的向量搜尋結果。對於 StructArray 欄位，請搭配元素層級的向量搜尋來執行範圍搜尋，此時每個 Struct 元素都會獨立進行搜尋。</p>
-<p>本頁面使用<a href="/docs/zh-hant/create-structarray-field.md">《建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其<code translate="no">chunks[emb]</code> 向量子欄位已建立索引，可透過標準向量度量（例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> ）進行元素層級搜尋。</p>
+<p>本頁面使用<a href="/docs/zh-hant/create-structarray-field.md">《建立 StructArray 欄位》</a>中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其<code translate="no">chunks[emb]</code> 向量子欄位已建立索引，可透過標準向量度量（例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> ）進行元素層級搜尋。</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">範圍搜尋如何套用至 StructArray<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +103,7 @@ summary: >-
 <tr><td><code translate="no">IP</code>,<code translate="no">COSINE</code></td><td>是。分數越高越好。</td><td><code translate="no">radius &lt; distance &lt;= range_filter</code></td></tr>
 </tbody>
 </table>
-<p>當僅設定 `<code translate="no">radius</code> ` 時，範圍搜尋會回傳符合該度量外界限的結果。請根據您的嵌入向量的分數或距離尺度來選擇數值。</p>
+<p>當僅設定 `<code translate="no">radius</code> ` 時，範圍搜尋會回傳符合該度量外界限的結果。請根據您的嵌入向量之分數或距離尺度來選擇數值。</p>
 <h2 id="Run-element-level-range-search" class="common-anchor-header">執行元素層級範圍搜尋<button data-href="#Run-element-level-range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ results = client.search(
         )
 <button class="copy-code-btn"></button></code></pre>
 <p>在此範例中，<code translate="no">COSINE</code> 為相似度型指標，因此結果範圍大於<code translate="no">radius</code> 且小於或等於<code translate="no">range_filter</code> 。當結果返回時，<code translate="no">offset</code> 值可識別<code translate="no">chunks</code> 陣列中匹配的 Struct 元素。</p>
-<h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選器<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
+<h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選條件<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -346,5 +346,5 @@ results = client.hybrid_search(
 <li><p>若要了解 StructArray 的兩種基本向量搜尋模式，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
 <li><p>若要為範圍搜尋新增標量篩選條件，請參閱《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 <li><p>若要在支援的情況下，針對每個父實體最多返回一個結果，請參閱《<a href="/docs/zh-hant/grouping-search-with-structarray.md">使用 StructArray 進行分組搜尋</a>》。</p></li>
-<li><p>若要查看特定版本的搜尋限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
+<li><p>若要查看特定版本的搜尋限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

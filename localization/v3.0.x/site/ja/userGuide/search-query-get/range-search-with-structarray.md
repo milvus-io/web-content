@@ -2,7 +2,7 @@
 id: range-search-with-structarray.md
 title: StructArray を使用した範囲検索
 summary: >-
-  このページを使用して、StructArrayのベクトルサブフィールドに対して範囲検索を実行します。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。
+  このページを使用して、StructArrayのベクトルサブフィールドに対して範囲検索を実行します。範囲検索では、スコアまたは距離が指定された範囲内にあるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。
 ---
 <h1 id="Range-Search-with-StructArray" class="common-anchor-header">StructArray を使用した範囲検索<button data-href="#Range-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>このページでは、StructArrayのベクトルサブフィールドに対して範囲検索を実行できます。範囲検索では、スコアまたは距離が指定された範囲内に収まるベクトルヒットが返されます。StructArrayフィールドの場合、要素レベルのベクトル検索と組み合わせて範囲検索を使用します。この場合、各Struct要素が個別に検索されます。</p>
-<p>このページでは、<a href="/docs/ja/create-structarray-field.md">「StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドがあります。<code translate="no">chunks[emb]</code> ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリックを使用した要素レベルの検索に対応するようにインデックスが作成されています。</p>
+<p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。このコレクションには、<code translate="no">chunks</code> という名前のStructArrayフィールドがあります。<code translate="no">chunks[emb]</code> ベクトルサブフィールドは、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などの通常のベクトルメトリックを使用した要素レベルの検索に対応するようにインデックスが作成されています。</p>
 <h2 id="How-range-search-applies-to-StructArray" class="common-anchor-header">StructArray に対する範囲検索の適用方法<button data-href="#How-range-search-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,7 +256,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに対して適用されます。</p>
+<p>この例では、<code translate="no">chunks[emb]</code> サブリクエストのみが範囲検索パラメータを使用します。StructArray リクエストは依然として要素レベルのセマンティクスに従います。つまり、範囲の境界は、ハイブリッド検索が結果を結合して再ランク付けを行う前に、Struct 要素のヒットに適用されます。</p>
 <h2 id="Interpret-range-results" class="common-anchor-header">範囲検索結果の解釈<button data-href="#Interpret-range-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,9 +278,9 @@ results = client.hybrid_search(
 </thead>
 <tbody>
 <tr><td><code translate="no">id</code></td><td>一致した Struct 要素を含むエンティティのプライマリキー。</td></tr>
-<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリベクトルと一致した Struct 要素のベクトルとの間のスコアまたは距離。</td></tr>
+<tr><td><code translate="no">distance</code> またはスコア</td><td>クエリベクトルと一致したStruct要素のベクトルとの間のスコアまたは距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>返される際の、StructArrayフィールド内における一致したStruct要素の0を基点とする位置。</td></tr>
-<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲内に収まることがあります。</td></tr>
+<tr><td>重複する主キー</td><td>あり得ます。同じエンティティ内の複数の Struct 要素が、指定された範囲に含まれる場合があります。</td></tr>
 <tr><td><code translate="no">limit</code></td><td>これは要素のヒットに適用され、一意の親エンティティには適用されません。</td></tr>
 </tbody>
 </table>

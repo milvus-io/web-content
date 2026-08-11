@@ -70,7 +70,7 @@ Creating milvus-standalone ... done
 <p><strong>ما الجديد في الإصدار v2.6.17:</strong></p>
 <ul>
 <li><strong>بنية محسّنة</strong>: تتضمن عقدة البث الجديدة والمكونات المُحسّنة</li>
-<li><strong>التبعيات المحدثة</strong>: تتضمن أحدث إصدارات MinIO و etcd</li>
+<li><strong>التبعيات المحدثة</strong>: تتضمن أحدث إصدارات MinIO وetcd</li>
 <li><strong>تحسينات في التكوين</strong>: إعدادات مُحسّنة لتحقيق أداء أفضل</li>
 </ul>
 <p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v2.6.17.</p>
@@ -177,7 +177,7 @@ EOF
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>

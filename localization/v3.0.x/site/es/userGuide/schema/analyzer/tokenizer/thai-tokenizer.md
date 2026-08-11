@@ -22,7 +22,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El tokenizador « <code translate="no">thai</code> » segmenta el texto tailandés en tokens de palabras sin basarse en los espacios. Utiliza este tokenizador cuando necesites crear un flujo de análisis personalizado para texto tailandés o mixto (tailandés/inglés).</p>
+    </button></h1><p>El tokenizador « <code translate="no">thai</code> » segmenta el texto tailandés en tokens de palabras sin basarse en los espacios. Utiliza este tokenizador cuando necesites crear un flujo de análisis personalizado para texto tailandés o mixto (tailandés e inglés).</p>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +63,7 @@ beta: Milvus 3.0.0+
 <li><strong>Filtrado de espacios en blanco y signos de puntuación</strong>: filtra los segmentos que contienen únicamente espacios en blanco y signos de puntuación. Esto difiere del <a href="/docs/es/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizador, que puede conservar la puntuación y los espacios como tokens.</li>
 <li><strong>Texto con escritura mixta</strong>: genera tokens de palabras en alfabeto latino en textos mixtos de tailandés e inglés.</li>
 <li><strong>Solo tokenizador</strong>: no convierte los tokens a minúsculas, no normaliza los dígitos Unicode ni elimina las palabras vacías. Añade filtros o utiliza el <a href="/docs/es/thai-analyzer.md"><code translate="no">thai</code></a> analizador integrado para esos pasos.</li>
-<li><strong>Semántica de posición</strong>: utiliza posiciones de tokens basadas en caracteres que incluyen los espacios en blanco y los signos de puntuación omitidos, lo que mantiene el comportamiento de coincidencia de frases y proximidad coherente con otros tokenizadores no latinos.</li>
+<li><strong>Semántica de posición</strong>: utiliza posiciones de tokens basadas en caracteres que incluyen los espacios en blanco y la puntuación omitidos, lo que mantiene el comportamiento de coincidencia de frases y proximidad coherente con otros tokenizadores no latinos.</li>
 </ul>
 <p>Tras definir un analizad <code translate="no">analyzer_params</code>, puede aplicar el analizador a un campo de tipo « <code translate="no">VARCHAR</code> » al definir un esquema de colección. Para obtener más detalles, consulte el <a href="/docs/es/analyzer-overview.md#Example-use">ejemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de aplicar la configuración del analizador a su esquema de colección, compruebe su comportamiento mediante el método ` <code translate="no">run_analyzer</code> `.</p>
+    </button></h2><p>Antes de aplicar la configuración del analizador a su esquema de colección, compruebe su comportamiento utilizando el método ` <code translate="no">run_analyzer</code> `.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Configuración del analizador<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

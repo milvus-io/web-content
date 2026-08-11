@@ -36,10 +36,10 @@ title: CDC 복제에서의 대량 가져오기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>일반적인 대량 가져오기는 가져오기 작업이 완료되면 자동으로 커밋되어, 가져온 데이터를 즉시 확인할 수 있습니다. 그러나 CDC 복제 토폴로지에서는 주 클러스터와 대기 클러스터가 가져온 데이터를 동일한 논리적 시점에서 노출해야 하므로 이러한 동작이 허용되지 않습니다.</p>
+    </button></h2><p>일반적인 대량 가져오기는 가져오기 작업이 완료되면 자동으로 커밋되어, 가져온 데이터를 즉시 확인할 수 있습니다. 그러나 CDC 복제 토폴로지에서는 프라이머리 클러스터와 스탠바이 클러스터가 가져온 데이터를 동일한 논리적 시점에서 노출해야 하므로 이러한 동작이 허용되지 않습니다.</p>
 <p>대신, ` <code translate="no">auto_commit=false</code>`를 설정하여 2단계 커밋(two-phase commit) 모드로 가져오기를 실행하십시오:</p>
 <ol>
-<li><p><strong>가져오기 단계</strong>: Milvus는 프라이머리 클러스터에 데이터를 로드하고 가져오기 작업을 스탠바이 클러스터로 복제하지만, 가져온 데이터는 여전히 표시되지 않습니다. 가져오기 작업은 ‘ <code translate="no">Uncommitted</code> ’ 상태에서 중지되어 대기합니다.</p></li>
+<li><p><strong>가져오기 단계</strong>: Milvus는 프라이머리 클러스터에 데이터를 로드하고 가져오기 작업을 스탠바이 클러스터로 복제하지만, 가져온 데이터는 여전히 표시되지 않습니다. 가져오기 작업은 ‘ <code translate="no">Uncommitted</code> ’ 상태에서 중지되고 대기합니다.</p></li>
 <li><p><strong>커밋 단계</strong>: 프라이머리 클러스터에서 가져오기 작업을 명시적으로 커밋합니다. 커밋은 단일 순차적 펜스(fence)로 스탠바이 클러스터에 복제되므로, 두 클러스터 모두 동일한 논리적 시점에서 가져온 데이터를 표시하게 됩니다.</p></li>
 </ol>
 <h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">1단계: 복제 클러스터에서 가져오기 활성화<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ title: CDC 복제에서의 대량 가져오기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>복제 클러스터의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
+    </button></h2><p>복제 클러스터에서의 가져오기 기능은 기본적으로 비활성화되어 있습니다. 주 클러스터와 대기 클러스터 모두에서 ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> `를 ` <code translate="no">true</code> `로 설정하여 이 기능을 활성화하십시오.</p>
 <p>Milvus Operator를 사용하여 Milvus를 배포하는 경우, 각 <code translate="no">Milvus</code> 리소스의 <code translate="no">spec.config</code> 에 다음 설정을 추가하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
@@ -97,7 +97,7 @@ title: CDC 복제에서의 대량 가져오기
         ></path>
       </svg>
     </button></h2><p>모든 가져오기 호출을 주 클러스터에서 실행하십시오. 가져온 데이터와 커밋 결정은 스탠바이 클러스터로 자동으로 복제되므로, 스탠바이 클러스터에서 직접 가져오기를 제출하거나 커밋하지 마십시오.</p>
-<p>각 클러스터는 자체 오브젝트 스토리지에서 가져오기 파일을 읽습니다. 가져올 파일이 주 클러스터와 대기 클러스터의 오브젝트 스토리지 모두에 존재하는지 확인하십시오. 파일을 두 클러스터 모두에 업로드하거나, 두 클러스터가 모두 읽을 수 있는 오브젝트 스토리지를 사용할 수 있습니다. 대기 클러스터에 파일이 없는 경우, 복제된 가져오기 작업이 ‘오브젝트 없음(object-not-found)’ 오류와 함께 실패합니다.</p>
+<p>각 클러스터는 자체 오브젝트 스토리지에서 가져오기 파일을 읽습니다. 가져올 파일이 주 클러스터와 대기 클러스터의 오브젝트 스토리지 모두에 존재하는지 확인하십시오. 파일을 두 클러스터 모두에 업로드하거나, 두 클러스터가 모두 읽을 수 있는 오브젝트 스토리지를 사용할 수 있습니다. 대기 클러스터에 파일이 없는 경우, 복제된 가져오기 작업은 ‘오브젝트 없음(object-not-found)’ 오류와 함께 실패합니다.</p>
 <p>다음 예제에서는 <code translate="no">pymilvus.bulk_writer</code> 의 REST 기반 가져오기 헬퍼를 사용합니다. <code translate="no">url</code> 값은 다른 API 호출에 사용하는 것과 동일한 Milvus 주소입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -175,7 +175,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>대기 클러스터의 가져오기가 완료되기 전에 커밋을 수행해도 데이터가 손상되지는 않지만, 커밋이 적용될 때 대기 클러스터는 여전히 데이터를 따라잡는 중입니다. 주 클러스터와 대기 클러스터 모두 <code translate="no">Uncommitted</code> 를 반환할 때까지 기다리면, 가져온 데이터가 완전히 복제되었으며 두 클러스터 모두 데이터를 함께 표시할 준비가 되었음을 확인할 수 있습니다.</p>
+    </button></h3><p>대기 클러스터의 가져오기가 완료되기 전에 커밋을 수행해도 데이터가 손상되지는 않지만, 커밋이 적용될 때 대기 클러스터는 여전히 데이터를 동기화하는 중입니다. 주 클러스터와 대기 클러스터 모두 <code translate="no">Uncommitted</code> 를 반환할 때까지 기다리면, 가져온 데이터가 완전히 복제되었으며 두 클러스터 모두 데이터를 함께 표시할 준비가 되었음을 확인할 수 있습니다.</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">3단계: 데이터 확인<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,7 +239,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>아니요. 프라이머리 클러스터에서 커밋을 수행하면 해당 커밋이 단일 순차적 펜스(fence)로 스탠바이 클러스터에 복제됩니다.</p>
+    </button></h3><p>아니요. 프라이머리 클러스터에서 커밋을 수행하면 해당 커밋이 단일 순서 지정 펜스(fence)로 스탠바이 클러스터에 복제됩니다.</p>
 <h3 id="Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="common-anchor-header">왜 ' <code translate="no">import in replicating cluster is not supported yet</code>' 오류로 인해 임포트가 실패하나요?<button data-href="#Why-does-my-import-fail-with-import-in-replicating-cluster-is-not-supported-yet" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

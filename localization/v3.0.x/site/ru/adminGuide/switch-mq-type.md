@@ -1,11 +1,11 @@
 ---
 id: switch-mq-type.md
-title: Смена типа MQ
+title: Переключение очереди сообщений
 summary: >-
-  Переключить очередь сообщений существующего развертывания Milvus с Woodpecker
-  на другую очередь сообщений без простоев.
+  Переключить существующий развернутый проект Milvus с Woodpecker на другую
+  очередь сообщений без простоев.
 ---
-<h1 id="Switch-MQ-Type" class="common-anchor-header">Смена типа MQ<button data-href="#Switch-MQ-Type" class="anchor-icon" translate="no">
+<h1 id="Switch-Message-Queue" class="common-anchor-header">Переключение очереди сообщений<button data-href="#Switch-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

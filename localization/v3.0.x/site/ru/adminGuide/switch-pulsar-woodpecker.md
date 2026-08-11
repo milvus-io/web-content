@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>На этой странице описано, как переключить очередь сообщений (MQ) <strong>кластера Milvus</strong> между <strong>Pulsar</strong> (встроенным или внешним) и <strong>Woodpecker</strong> (с бэкэндом MinIO) в обоих направлениях. Общий порядок действий и необходимые условия см. в разделе <a href="/docs/ru/switch-mq-type.md">«Переключение типа MQ</a>».</p>
+    </button></h1><p>На этой странице описано, как переключить очередь сообщений (MQ) <strong>кластера Milvus</strong> между <strong>Pulsar</strong> (встроенным или внешним) и <strong>Woodpecker</strong> (с бэкэндом MinIO) в обоих направлениях. Общий порядок действий и необходимые условия см. в разделе <a href="/docs/ru/switch-mq-type.md">«Переключение очереди сообщений</a>».</p>
 <div class="alert note">
 <p><strong>Предпосылка:</strong> функция «Переключение MQ» доступна в <strong>Milvus 3.0 и более поздних версиях</strong>. Перед началом обновите свой экземпляр Milvus до версии 3.0 или более поздней — эта функция недоступна в более ранних версиях.</p>
 </div>
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>При успешном переключении в журнале появляется запись « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
-<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в каталоге <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
+<p><strong>Шаг 5: (Необязательно) Удалите данные Woodpecker.</strong> Удалите данные Woodpecker на MinIO/S3 (в папке <code translate="no">&lt;rootPath&gt;/wp/...</code>, обычно <code translate="no">files/wp/...</code>) и метаданные Woodpecker в etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Если вы планируете позже вернуться к Woodpecker, сначала удалите эти файлы.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и его PVC:</p>
+<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и удалите его PVC:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Добавьте подключение к Pulsar в файл <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и установите тип MQ; приложение CR перезапустит поды с новой конфигурацией.</p>
+<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Добавьте подключение к Pulsar в файл <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и установите тип MQ; при применении CR поды будут перезапущены с новой конфигурацией.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

@@ -44,7 +44,7 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList 搜索</td><td>不支持。</td><td>不适用。</td></tr>
 <tr><td>元素级搜索</td><td>使用常规向量查询，配合 `<code translate="no">radius</code> ` 以及（可选）`<code translate="no">range_filter</code>`。</td><td>结构元素级别。</td></tr>
-<tr><td>混合搜索</td><td>当 StructArray 请求针对元素级向量字段时支持此功能。EmbeddingList 级请求不支持范围搜索。</td><td>先进行元素级子搜索，然后进行混合重新排序。</td></tr>
+<tr><td>混合搜索</td><td>当 StructArray 请求针对元素级向量字段时支持。EmbeddingList 级请求不支持范围搜索。</td><td>先进行元素级子搜索，然后进行混合重新排序。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -302,7 +302,7 @@ results = client.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p>请勿对 StructArray 向量子域使用<code translate="no">EmbeddingList</code> 查询或<code translate="no">MAX_SIM*</code> 度量进行范围搜索。EmbeddingList 级别的搜索不支持范围搜索。</p></li>
-<li><p>请勿将范围搜索与分组搜索结合使用。若需为每个父实体返回一个结果，请执行不带范围参数的元素级搜索，并在支持的情况下使用分组功能。</p></li>
+<li><p>请勿将范围搜索与分组搜索结合使用。如果您需要为每个父实体返回一个结果，请执行不带范围参数的元素级搜索，并在支持的情况下使用分组功能。</p></li>
 <li><p>StructArray 元素级向量字段支持混合范围搜索。但 EmbeddingList 级别的 StructArray 请求不支持此功能。</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
