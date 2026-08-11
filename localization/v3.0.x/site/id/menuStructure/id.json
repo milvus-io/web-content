@@ -643,7 +643,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusutan ASCII",
+                    "label": "Penyusunan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Indeks Vektor Mengambang",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Indeks Vektor Biner",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Indeks Vektor Jarang",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Indeks Skalar",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "Indeks yang Didukung GPU",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Gambaran Umum Indeks GPU",
@@ -1156,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Kecocokan Frasa",
+            "label": "Pencocokan Frasa",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1944,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "Skalakan dengan HPA",
+            "label": "Skalabilitas dengan HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1963,7 +1969,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Meningkatkan Kluster Milvus",
+            "label": "Meningkatkan Kapasitas Kluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -2210,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Lintas Bucket",
+                "label": "Migrasi Antar-Instan di Berbagai Bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -3245,7 +3251,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum (FAQ) tentang Operasional",
+        "label": "Pertanyaan Umum (FAQ) Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Gleitkomma-Vektorindizes",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Binäre Vektorindizes",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Spärliche Vektorindizes",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Skalarindizes",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "GPU-gestützte Indizes",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Übersicht über den GPU-Index",
@@ -1728,7 +1734,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azur",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -2536,7 +2542,7 @@
                 "children": []
               },
               {
-                "label": "Text-Einbettung",
+                "label": "Texteinbettung",
                 "id": "langchain_milvus_dido.md",
                 "order": 2,
                 "children": []

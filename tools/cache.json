@@ -1303,7 +1303,7 @@
     "v3.0.x/site/en/reference/time_sync.md": "2026-04-28T06:54:43.033Z",
     "v3.0.x/site/en/reference/timestamp.md": "2026-04-28T06:55:01.292Z",
     "v3.0.x/site/en/reference/tune_consistency.md": "2026-05-15T10:01:56.047Z",
-    "v3.0.x/site/en/release_notes.md": "2026-07-30T03:33:58.250Z",
+    "v3.0.x/site/en/release_notes.md": "2026-08-11T03:14:55.084Z",
     "v3.0.x/site/en/rerankers/rerankers-bge.md": "2026-04-28T06:56:26.361Z",
     "v3.0.x/site/en/rerankers/rerankers-cohere.md": "2026-04-28T06:56:33.354Z",
     "v3.0.x/site/en/rerankers/rerankers-cross-encoder.md": "2026-04-28T06:56:40.276Z",
@@ -1382,7 +1382,7 @@
     "v3.0.x/site/en/userGuide/indexes/gpu/gpu-index-overview.md": "2026-04-28T07:20:04.205Z",
     "v3.0.x/site/en/userGuide/indexes/gpu/gpu-ivf-flat.md": "2026-04-28T07:20:14.620Z",
     "v3.0.x/site/en/userGuide/indexes/gpu/gpu-ivf-pq.md": "2026-04-28T07:20:30.125Z",
-    "v3.0.x/site/en/userGuide/indexes/index-explained.md": "2026-05-11T11:37:47.586Z",
+    "v3.0.x/site/en/userGuide/indexes/index-explained.md": "2026-08-11T03:15:48.641Z",
     "v3.0.x/site/en/userGuide/indexes/scalar/bitmap.md": "2026-04-28T07:21:10.866Z",
     "v3.0.x/site/en/userGuide/indexes/scalar/inverted.md": "2026-04-28T07:21:24.124Z",
     "v3.0.x/site/en/userGuide/indexes/sparse/sparse-inverted-index.md": "2026-07-29T16:38:02.101Z",
@@ -1466,7 +1466,7 @@
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2026-04-28T07:51:22.414Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2026-04-28T07:51:42.436Z",
     "v3.0.x/site/en/userGuide/tools/milvus-webui.md": "2026-04-28T07:52:34.057Z",
-    "v3.0.x/site/en/menuStructure/en.json": "2026-08-10T10:22:53.217Z",
+    "v3.0.x/site/en/menuStructure/en.json": "2026-08-11T03:44:52.616Z",
     "v3.0.x/site/en/reference/architecture/streaming_service.md": "2026-04-28T06:42:55.227Z",
     "v3.0.x/site/en/adminGuide/scale-standalone.md": "2026-04-28T06:08:34.270Z",
     "v3.0.x/site/en/integrations/langchain/langchain_milvus_async.md": "2026-04-28T06:35:17.818Z",
@@ -1589,6 +1589,7 @@
     "v3.0.x/site/en/userGuide/search-query-get/search-aggregation.md": "2026-08-10T09:47:24.354Z",
     "v3.0.x/site/en/userGuide/embeddings-reranking/embedding-function/yandex-cloud.md": "2026-07-30T03:34:46.887Z",
     "v3.0.x/site/en/userGuide/embeddings-reranking/reranking/dashscope-ranker.md": "2026-07-30T03:35:00.903Z",
-    "v3.0.x/site/en/userGuide/tools/milvus-cdc/bulk_import_in_cdc_replication.md": "2026-07-30T03:36:00.283Z"
+    "v3.0.x/site/en/userGuide/tools/milvus-cdc/bulk_import_in_cdc_replication.md": "2026-07-30T03:36:00.283Z",
+    "v3.0.x/site/en/userGuide/indexes/faiss.md": "2026-08-11T03:15:17.297Z"
   }
 }

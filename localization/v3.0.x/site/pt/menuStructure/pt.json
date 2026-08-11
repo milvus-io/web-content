@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico do leme",
+                "label": "Gráfico de leme",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Índices vetoriais flutuantes",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Índices de vetores binários",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Índices de vetores esparsos",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Índices escalares",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "Índices otimizados para GPU",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Visão geral do Índice de GPU",
@@ -1341,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador Ponderado",
+                "label": "Classificador ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1359,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "Classificação de Decadência",
+                "label": "Classificação de Decay",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -3146,7 +3152,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com incorporações Matryoshka",
+        "label": "Pesquisa em funil com representações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

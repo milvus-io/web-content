@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "부동 소수점 벡터 인덱스",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "이진 벡터 인덱스",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "희소 벡터 인덱스",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "스칼라 인덱스",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "GPU 지원 인덱스",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "GPU 지수 개요",
@@ -1217,7 +1223,7 @@
             "children": []
           },
           {
-            "label": "검색 반복자",
+            "label": "검색 이터레이터",
             "id": "with-iterators.md",
             "order": 15,
             "children": []
@@ -1908,7 +1914,7 @@
                     "children": []
                   },
                   {
-                    "label": "펄서 ↔ 딱따구리",
+                    "label": "펄서 ↔ 우드페커",
                     "id": "switch-pulsar-woodpecker.md",
                     "order": 2,
                     "children": []
@@ -2021,7 +2027,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "알림 생성하기",
+                "label": "알림 생성",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -3205,7 +3211,7 @@
             "children": []
           },
           {
-            "label": "DNA 서열 분류",
+            "label": "DNA 염기서열 분류",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

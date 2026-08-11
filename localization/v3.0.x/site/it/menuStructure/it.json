@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Indici vettoriali binari",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Indici vettoriali sparsi",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Indici scalari",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "Indici basati su GPU",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Panoramica sull'indice GPU",
@@ -1100,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtraggio e modelli",
+                "label": "Filtraggio e creazione di modelli",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1627,7 +1633,7 @@
         "children": []
       },
       {
-        "label": "Server MCP per Claude Code",
+        "label": "Server MCP per il codice Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2210,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in bucket diversi",
+                "label": "Migrazione tra istanze in diversi bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -3097,7 +3103,7 @@
         "children": []
       },
       {
-        "label": "Ricerca di immagini con Milvus",
+        "label": "Ricerca immagini con Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []

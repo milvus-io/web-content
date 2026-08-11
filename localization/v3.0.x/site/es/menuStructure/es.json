@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Índices vectoriales flotantes",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Índices vectoriales binarios",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Índices de vectores dispersos",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Índices escalares",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "Índices optimizados para GPU",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Descripción general del índice de GPU",
@@ -1605,7 +1611,7 @@
             "children": []
           },
           {
-            "label": "Canal de RAG",
+            "label": "Canalización RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -3146,7 +3152,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda en embudo con representaciones Matryoshka",
+        "label": "Búsqueda en embudo con representaciones «matrioska»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

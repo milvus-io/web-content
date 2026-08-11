@@ -773,7 +773,7 @@
             "order": 19,
             "children": [
               {
-                "label": "تصميم نموذج البيانات للبحث",
+                "label": "تصميم نموذج البيانات لعملية البحث",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "الفهارس المتجهة العائمة",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "مؤشرات المتجهات الثنائية",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "فهارس المتجهات المتفرقة",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "الفهارس القياسية",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "الفهارس المدعومة بوحدة معالجة الرسومات (GPU)",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "نظرة عامة على مؤشر GPU",
@@ -1088,7 +1094,7 @@
                 "children": []
               },
               {
-                "label": "العمليات الحسابية الأساسية",
+                "label": "العمليات الأساسية",
                 "id": "basic-operators.md",
                 "order": 1,
                 "children": []
@@ -1156,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "المطابقة العبارة",
+            "label": "مطابقة العبارة",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1223,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "استخدام مفتاح التقسيم",
+            "label": "استخدام مفتاح القسم",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1969,7 +1975,7 @@
             "children": []
           },
           {
-            "label": "ترقية Milvus المستقل",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2831,7 +2837,7 @@
             "children": []
           },
           {
-            "label": "تويلف لابز",
+            "label": "تويلف لابس",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []

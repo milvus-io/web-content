@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабоского языка",
+                    "label": "Нормализация арабо-арабских отношений",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для ваших задач",
+                "label": "Выберите анализатор, подходящий для вашей задачи",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -826,9 +826,15 @@
             "children": []
           },
           {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Плавающие векторные индексы",
             "id": "floating-vector-indexes",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -908,7 +914,7 @@
           {
             "label": "Индексы двоичных векторов",
             "id": "binary-vector-indexes",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -934,7 +940,7 @@
           {
             "label": "Индексы разреженных векторов",
             "id": "sparse-vector-indexes",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -948,7 +954,7 @@
           {
             "label": "Скалярные индексы",
             "id": "scalar-indexes",
-            "order": 4,
+            "order": 5,
             "isMenu": true,
             "children": [
               {
@@ -986,7 +992,7 @@
           {
             "label": "Индексы с поддержкой GPU",
             "id": "gpu-enabled-indexes",
-            "order": 5,
+            "order": 6,
             "children": [
               {
                 "label": "Обзор индекса GPU",
@@ -1487,7 +1493,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Обзор многоуровневого хранения",
+                "label": "Обзор многоуровневого хранения данных",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
