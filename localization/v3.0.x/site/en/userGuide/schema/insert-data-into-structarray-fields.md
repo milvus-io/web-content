@@ -352,6 +352,6 @@ Nullable StructArray fields are available only in Milvus v3.0.x. If you dynamica
       </svg>
     </button></h2><ol>
 <li><p>To create indexes for <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, and scalar subfields, read <a href="/docs/index-structarray-fields.md">Index StructArray Fields</a>.</p></li>
-<li><p>To search StructArray vector subfields, read Basic Vector Search with StructArray.</p></li>
+<li><p>To search StructArray vector subfields, read <a href="/docs/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>.</p></li>
 <li><p>To review nullable behavior and version-specific limitations, read <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p></li>
 </ol>
