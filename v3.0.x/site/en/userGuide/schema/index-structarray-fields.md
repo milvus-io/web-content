@@ -211,8 +211,8 @@ print(index)
 
 ## Next steps
 
-1. To run entity-level EmbeddingList search or element-level vector search, read Basic Vector Search with StructArray.
+1. To run entity-level EmbeddingList search or element-level vector search, read [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md).
 
-2. To filter StructArray scalar subfields during search, read Filtered Search with StructArray.
+2. To filter StructArray scalar subfields during search, read [Filtered Search with StructArray](filtered-search-with-structarray.md).
 
 3. To review index and metric limits, read [StructArray Limits](structarray-limits.md).

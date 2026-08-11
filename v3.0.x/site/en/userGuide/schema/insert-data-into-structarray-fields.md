@@ -249,6 +249,6 @@ Use StructArray field paths, such as `chunks[text]`, only when you query, search
 
 1. To create indexes for `chunks[emb_list_vector]`, `chunks[emb]`, and scalar subfields, read [Index StructArray Fields](index-structarray-fields.md).
 
-2. To search StructArray vector subfields, read Basic Vector Search with StructArray.
+2. To search StructArray vector subfields, read [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md).
 
 3. To review nullable behavior and version-specific limitations, read [StructArray Limits](structarray-limits.md).

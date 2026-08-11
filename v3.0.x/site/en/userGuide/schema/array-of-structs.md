@@ -69,17 +69,45 @@ Use the following matrix to choose the right StructArray path.
 | Model one parent object with many structured children. | Create a StructArray field. | Entity contains ordered Struct elements. | [Create a StructArray Field](create-structarray-field.md) |
 | Insert parent records with nested child data. | Insert entities whose StructArray field is a list of Struct objects. | Entity-level insert. | [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md) |
 | Run ColBERT, ColPali, or document-level late-interaction retrieval. | Use EmbeddingList search with a `MAX_SIM*` index. | Entity level. | [Search with Embedding Lists](search-with-embedding-lists.md) |
-| Search individual chunks, clips, or patches. | Use element-level search with a regular vector metric. | Struct element level, with offset when available. | Basic Vector Search with StructArray |
-| Restrict element-level vector search to elements that match scalar conditions. | Use `element_filter`. | Element-level filtering; result shape depends on the search type. | Filtered Search with StructArray |
+| Search individual chunks, clips, or patches. | Use element-level search with a regular vector metric. | Struct element level, with offset when available. | [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md) |
+| Restrict element-level vector search to elements that match scalar conditions. | Use `element_filter`. | Element-level filtering; result shape depends on the search type. | [Filtered Search with StructArray](filtered-search-with-structarray.md) |
 | Select entities by how many Struct elements satisfy a condition. | Use `MATCH_ANY`, `MATCH_ALL`, `MATCH_LEAST`, `MATCH_MOST`, or `MATCH_EXACT`. | Entity level. | [StructArray Operators](struct-array-operators.md) |
-| Use score or distance boundaries on StructArray vector subfields. | Use element-level range search. | Struct element level. | Range Search with StructArray |
-| Return at most one result per parent entity after element-level search. | Use grouping search by primary key. | Entity level after grouping. | Grouping Search with StructArray |
-| Combine StructArray element search with another vector field. | Use hybrid search with one AnnSearchRequest targeting a StructArray vector subfield. | Element-level sub-search, entity-level reranking. | Hybrid Search with StructArray |
+| Use score or distance boundaries on StructArray vector subfields. | Use element-level range search. | Struct element level. | [Range Search with StructArray](range-search-with-structarray.md) |
+| Return at most one result per parent entity after element-level search. | Use grouping search by primary key. | Entity level after grouping. | [Grouping Search with StructArray](grouping-search-with-structarray.md) |
+| Combine StructArray element search with another vector field. | Use hybrid search with one AnnSearchRequest targeting a StructArray vector subfield. | Element-level sub-search, entity-level reranking. | [Hybrid Search with StructArray](hybrid-search-with-structarray.md) |
 
 ## Understand the two search models
 
-| ### EmbeddingList search EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. Milvus compares the query embedding list with the stored embedding list by using a `MAX_SIM*` metric and returns matching entities. - Query data: embedding list. - Metric family: `MAX_SIM*`. - Result granularity: entity level. - Best for: document-level or page-level late-interaction retrieval. | ### Element-level search Element-level search treats each Struct element as an independent vector-search candidate. Each hit represents a matched element inside the StructArray field, and ungrouped results can expose the element offset. - Query data: regular vector. - Metric family: regular vector metrics. - Result granularity: Struct element level. - Best for: chunk-level, clip-level, or patch-level retrieval. |
-| --- | --- |
+<table>
+  <thead>
+    <tr>
+      <th scope="col"><h3>EmbeddingList search</h3></th>
+      <th scope="col"><h3>Element-level search</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>EmbeddingList search treats the vectors inside a StructArray vector subfield as one embedding list for the parent entity. The query is also an embedding list. Milvus compares the query embedding list with the stored embedding list by using a <code>MAX_SIM*</code> metric and returns matching entities.</p>
+        <ul>
+          <li>Query data: embedding list.</li>
+          <li>Metric family: <code>MAX_SIM*</code>.</li>
+          <li>Result granularity: entity level.</li>
+          <li>Best for: document-level or page-level late-interaction retrieval.</li>
+        </ul>
+      </td>
+      <td>
+        <p>Element-level search treats each Struct element as an independent vector-search candidate. Each hit represents a matched element inside the StructArray field, and ungrouped results can expose the element offset.</p>
+        <ul>
+          <li>Query data: regular vector.</li>
+          <li>Metric family: regular vector metrics.</li>
+          <li>Result granularity: Struct element level.</li>
+          <li>Best for: chunk-level, clip-level, or patch-level retrieval.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="alert note">
 
@@ -99,11 +127,11 @@ StructArray documentation is split into modeling pages and search pages. Use the
 | Modeling | [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md) | Prepare and insert nested StructArray data. |
 | Modeling | [Index StructArray Fields](index-structarray-fields.md) | Create vector and scalar indexes on StructArray subfields. |
 | Reference | [StructArray Limits](structarray-limits.md) | Check schema, data type, index, search, filter, and version limits. |
-| Search | Basic Vector Search with StructArray | Compare EmbeddingList search and element-level vector search. |
-| Search | Range Search with StructArray | Use range constraints with StructArray vector subfields. |
-| Search | Grouping Search with StructArray | Group element-level search results by primary key. |
-| Search | Hybrid Search with StructArray | Combine StructArray element-level search with other vector searches. |
-| Search | Filtered Search with StructArray | Use StructArray filters in search, query, and hybrid search. |
+| Search | [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md) | Compare EmbeddingList search and element-level vector search. |
+| Search | [Range Search with StructArray](range-search-with-structarray.md) | Use range constraints with StructArray vector subfields. |
+| Search | [Grouping Search with StructArray](grouping-search-with-structarray.md) | Group element-level search results by primary key. |
+| Search | [Hybrid Search with StructArray](hybrid-search-with-structarray.md) | Combine StructArray element-level search with other vector searches. |
+| Search | [Filtered Search with StructArray](filtered-search-with-structarray.md) | Use StructArray filters in search, query, and hybrid search. |
 | Search | [Search with Embedding Lists](search-with-embedding-lists.md) | Build ColBERT and ColPali-style retrieval systems with StructArray. |
 | Filter | [StructArray Operators](struct-array-operators.md) | Reference syntax for `element_filter` and `MATCH_*` operators. |
 
@@ -127,6 +155,6 @@ StructArray documentation is split into modeling pages and search pages. Use the
 
 3. To choose indexes, read [Index StructArray Fields](index-structarray-fields.md).
 
-4. To search StructArray vector subfields, start with Basic Vector Search with StructArray.
+4. To search StructArray vector subfields, start with [Basic Vector Search with StructArray](basic-vector-search-with-structarray.md).
 
-5. To filter StructArray scalar subfields, read [StructArray Operators](struct-array-operators.md) and Filtered Search with StructArray.
+5. To filter StructArray scalar subfields, read [StructArray Operators](struct-array-operators.md) and [Filtered Search with StructArray](filtered-search-with-structarray.md).
