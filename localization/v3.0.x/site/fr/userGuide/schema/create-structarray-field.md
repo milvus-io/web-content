@@ -96,7 +96,7 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> ou <code translate="no">DataType.INT64</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.FLOAT</code> ou <code translate="no">DataType.DOUBLE</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme suit : <code translate="no">DataType.VARCHAR</code> et définissez <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme <code translate="no">DataType.FLOAT_VECTOR</code> et définissez <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Pris en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT_VECTOR</code> » et définissez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.FLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.BFLOAT16_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Prise en charge</td><td>Définissez le sous-champ comme « <code translate="no">DataType.INT8_VECTOR</code> » et configurez « <code translate="no">dim</code> ».</td></tr>
@@ -247,11 +247,11 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>Le sous-champ « <code translate="no">text</code> » à l’intérieur de chaque élément Struct.</td><td>Champ de sortie ou filtrage scalaire.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>L'étiquette de section pour chaque bloc.</td><td>Filtrage scalaire.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>Le score de qualité au niveau du bloc.</td><td>Filtrage scalaire ou indice scalaire.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Le sous-champ vectoriel utilisé comme liste d'intégration.</td><td>Recherche dans EmbeddingList à l'aide de l'<code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>Le sous-champ vectoriel utilisé comme liste d'intégration.</td><td>Recherche dans EmbeddingList avec l'<code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>Le sous-champ vectoriel utilisé indépendamment par chaque élément Struct.</td><td>Recherche vectorielle au niveau des éléments.</td></tr>
 </tbody>
 </table>
-<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray non obligatoire<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
+<h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Rendre un champ StructArray non nul<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -378,8 +378,8 @@ client.add_collection_struct_field(
 <tr><td>Tous les éléments partagent un même schéma.</td><td>Chaque élément Struct du même champ StructArray respecte le schéma Struct défini pour ce champ.</td></tr>
 <tr><td><code translate="no">max_capacity</code> est obligatoire.</td><td>Il limite le nombre d’éléments Struct que chaque entité peut stocker dans le champ StructArray.</td></tr>
 <tr><td>Seuls les types de sous-champs pris en charge sont autorisés.</td><td>Utilisez les types de sous-champs scalaires et vectoriels pris en charge par StructArray. Ne définissez pas de sous-champs JSON, Geometry, Text, Timestamptz, SparseFloatVector, ni de sous-champs Struct / Array imbriqués.</td></tr>
-<tr><td>Les sous-champs vectoriels nécessitent des index avant toute recherche.</td><td>Créez des index sur des chemins tels que <code translate="no">chunks[emb_list_vector]</code> ou <code translate="no">chunks[emb]</code> avant d’effectuer une recherche vectorielle.</td></tr>
-<tr><td>Un sous-champ vectoriel ne peut avoir qu’un seul index.</td><td>Si vous avez besoin à la fois d’une recherche EmbeddingList et d’une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts.</td></tr>
+<tr><td>Les sous-champs vectoriels nécessitent des index avant la recherche.</td><td>Créez des index sur des chemins tels que <code translate="no">chunks[emb_list_vector]</code> ou <code translate="no">chunks[emb]</code> avant d’exécuter une recherche vectorielle.</td></tr>
+<tr><td>Un sous-champ vectoriel dispose d’un seul index.</td><td>Si vous avez besoin à la fois d’une recherche EmbeddingList et d’une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts.</td></tr>
 <tr><td>Les sous-champs StructArray existants sont fixes.</td><td>Une fois un champ StructArray créé, vous ne pouvez plus y ajouter de sous-champs.</td></tr>
 <tr><td>Les fonctions ne sont pas prises en charge à l’intérieur de Struct.</td><td>Ne définissez pas de fonctions pour les champs ou les sous-champs à l’intérieur d’un champ StructArray.</td></tr>
 <tr><td>Les sous-champs scalaires doivent répondre aux besoins de filtrage.</td><td>N'ajoutez des champs tels que <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code> que si vous avez besoin de les filtrer, de les regrouper ou de les afficher ultérieurement.</td></tr>
@@ -428,8 +428,8 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Pour insérer des données imbriquées dans le champ StructArray, consultez la section « <a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans les champs StructArray</a> ».</p></li>
+<li><p>Pour insérer des données imbriquées dans le champ StructArray, consultez la section <a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans les champs StructArray</a>.</p></li>
 <li><p>Pour créer des index vectoriels et scalaires, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer des champs StructArray</a> ».</p></li>
-<li><p>Pour effectuer une recherche dans les sous-champs vectoriels de StructArray, consultez la section « Recherche vectorielle de base avec StructArray ».</p></li>
+<li><p>Pour effectuer une recherche dans les sous-champs vectoriels de StructArray, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour connaître les types de données pris en charge, le comportement des valeurs pouvant être nulles et les limitations spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

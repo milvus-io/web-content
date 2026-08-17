@@ -3,7 +3,7 @@ id: array-of-structs.md
 title: نظرة عامة على StructArray
 summary: >-
   استخدم StructArray عندما تحتاج إحدى الكيانات إلى تخزين قائمة مرتبة من العناصر
-  المنظمة، مثل مستند واحد يتألف من عدة أجزاء، أو صفحة واحدة تحتوي على عدة عناصر
+  المنظمة، مثل مستند واحد يتألف من عدة أجزاء، أو صفحة واحدة تتألف من عدة رقع
   مرئية، أو مقطع فيديو واحد يتألف من عدة مقاطع. يحافظ StructArray على هذه
   العناصر داخل الكيان الأصلي، مع السماح في الوقت نفسه بالبحث المتجه والتصفية
   القياسية على الحقول الموجودة داخل كل عنصر.
@@ -69,7 +69,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>يمثل الحقلان الفرعيان المتجهان في هذا المثال نفس المقطع من منظورين للبحث. يُقصد بـ « <code translate="no">chunks[emb_list_vector]</code> » البحث في قائمة التضمينات (EmbeddingList) باستخدام مقاييس « <code translate="no">MAX_SIM*</code> »، بينما يُقصد بـ « <code translate="no">chunks[emb]</code> » البحث على مستوى العنصر باستخدام مقاييس متجهة عادية مثل « <code translate="no">COSINE</code> » أو « <code translate="no">IP</code> » أو « <code translate="no">L2</code> ».</p>
+<p>يمثل الحقلان الفرعيان المتجهان في هذا المثال نفس المقطع من منظورين للبحث. يُقصد بـ « <code translate="no">chunks[emb_list_vector]</code> » البحث في قائمة التضمينات (EmbeddingList) باستخدام مقاييس « <code translate="no">MAX_SIM*</code> »، بينما يُقصد بـ « <code translate="no">chunks[emb]</code> » البحث على مستوى العناصر باستخدام مقاييس متجهة عادية مثل « <code translate="no">COSINE</code> » أو « <code translate="no">IP</code> » أو « <code translate="no">L2</code> ».</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">متى تستخدم StructArray<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم StructArray عندما تكون الوحدة الطبيعية التي تريد إرجاعها أكبر من الوحدة الطبيعية التي تريد البحث عنها أو تصفية النتائج وفقًا لها.</p>
+    </button></h2><p>استخدم StructArray عندما تكون الوحدة الطبيعية التي تريد إرجاعها أكبر من الوحدة الطبيعية التي تريد البحث عنها أو تصفيتها.</p>
 <table>
 <thead>
 <tr><th>حالة الاستخدام</th><th>لماذا يساعد StructArray</th><th>حقل StructArray نموذجي</th></tr>
@@ -123,12 +123,12 @@ summary: >-
 <tr><td>نمذجة كائن أب واحد مع العديد من الكائنات الفرعية المنظمة.</td><td>قم بإنشاء حقل StructArray.</td><td>يحتوي الكيان على عناصر Struct مرتبة.</td><td><a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a></td></tr>
 <tr><td>أدخل سجلات الأصل مع بيانات التابعين المتداخلة.</td><td>إدراج كيانات يكون حقل StructArray الخاص بها عبارة عن قائمة من كائنات Struct.</td><td>الإدراج على مستوى الكيان.</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td></tr>
 <tr><td>تشغيل ColBERT أو ColPali أو استرجاع التفاعل المتأخر على مستوى المستند.</td><td>استخدام بحث EmbeddingList مع فهرس <code translate="no">MAX_SIM*</code>.</td><td>على مستوى الكيان.</td><td><a href="/docs/ar/search-with-embedding-lists.md">البحث باستخدام قوائم التضمين</a></td></tr>
-<tr><td>ابحث في المقاطع الفردية أو المقاطع المصغرة أو الأجزاء.</td><td>استخدم البحث على مستوى العناصر باستخدام مقياس متجه عادي.</td><td>مستوى عنصر Struct، مع الإزاحة عند توفرها.</td><td>البحث المتجهي الأساسي باستخدام StructArray</td></tr>
-<tr><td>قصر البحث المتجهي على مستوى العنصر على العناصر التي تتطابق مع الشروط القياسية.</td><td>استخدم <code translate="no">element_filter</code>.</td><td>التصفية على مستوى العناصر؛ يعتمد شكل النتيجة على نوع البحث.</td><td>البحث المُصفى باستخدام StructArray</td></tr>
+<tr><td>ابحث في المقاطع الفردية أو المقاطع المصغرة أو الأجزاء.</td><td>استخدم البحث على مستوى العناصر باستخدام مقياس متجه عادي.</td><td>مستوى عنصر Struct، مع الإزاحة عند توفرها.</td><td><a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a></td></tr>
+<tr><td>قصر البحث المتجهي على مستوى العنصر على العناصر التي تتطابق مع الشروط القياسية.</td><td>استخدم <code translate="no">element_filter</code>.</td><td>التصفية على مستوى العناصر؛ يعتمد شكل النتيجة على نوع البحث.</td><td><a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a></td></tr>
 <tr><td>تحديد الكيانات بناءً على عدد عناصر Struct التي تستوفي شرطًا ما.</td><td>استخدم <code translate="no">MATCH_ANY</code> أو <code translate="no">MATCH_ALL</code> أو <code translate="no">MATCH_LEAST</code> أو <code translate="no">MATCH_MOST</code> أو <code translate="no">MATCH_EXACT</code>.</td><td>مستوى الكيان.</td><td><a href="/docs/ar/struct-array-operators.md">عمليات StructArray</a></td></tr>
-<tr><td>استخدم حدود النتيجة أو المسافة في الحقول الفرعية للمتجه StructArray.</td><td>استخدم البحث عن النطاق على مستوى العنصر.</td><td>مستوى عنصر Struct.</td><td>البحث عن النطاق باستخدام StructArray</td></tr>
-<tr><td>إرجاع نتيجة واحدة كحد أقصى لكل كيان أب بعد البحث على مستوى العنصر.</td><td>استخدم البحث المجمّع حسب المفتاح الأساسي.</td><td>مستوى الكيان بعد التجميع.</td><td>البحث المجمّع باستخدام StructArray</td></tr>
-<tr><td>دمج البحث عن عناصر StructArray مع حقل متجه آخر.</td><td>استخدم البحث الهجين باستخدام طلب AnnSearchRequest واحد يستهدف حقل فرعي متجهي لـ StructArray.</td><td>بحث فرعي على مستوى العنصر، وإعادة ترتيب على مستوى الكيان.</td><td>البحث الهجين باستخدام StructArray</td></tr>
+<tr><td>استخدم حدود النتيجة أو المسافة في الحقول الفرعية للمتجه StructArray.</td><td>استخدم البحث عن النطاق على مستوى العنصر.</td><td>مستوى عنصر Struct.</td><td><a href="/docs/ar/range-search-with-structarray.md">البحث عن النطاق باستخدام StructArray</a></td></tr>
+<tr><td>إرجاع نتيجة واحدة كحد أقصى لكل كيان أب بعد البحث على مستوى العنصر.</td><td>استخدم البحث المجمّع حسب المفتاح الأساسي.</td><td>مستوى الكيان بعد التجميع.</td><td><a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a></td></tr>
+<tr><td>دمج البحث عن عناصر StructArray مع حقل متجه آخر.</td><td>استخدم البحث الهجين باستخدام طلب AnnSearchRequest واحد يستهدف حقل فرعي متجه لـ StructArray.</td><td>بحث فرعي على مستوى العنصر، وإعادة ترتيب على مستوى الكيان.</td><td><a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a></td></tr>
 </tbody>
 </table>
 <h2 id="Understand-the-two-search-models" class="common-anchor-header">فهم نموذجي البحث<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
@@ -147,15 +147,38 @@ summary: >-
         ></path>
       </svg>
     </button></h2><table>
-<thead>
-<tr><th>### البحث في EmbeddingList يعامل البحث في EmbeddingList المتجهات الموجودة داخل حقل فرعي متجهي لـ StructArray كقائمة تضمين واحدة للكيان الأصلي. ويكون الاستعلام أيضًا قائمة تضمين. يقارن Milvus قائمة تضمين الاستعلام بقائمة التضمين المخزنة باستخدام مقياس " <code translate="no">MAX_SIM*</code> " ويعرض الكيانات المطابقة. - بيانات الاستعلام: قائمة تضمين. - عائلة المقاييس: <code translate="no">MAX_SIM*</code>. - دقة النتيجة: مستوى الكيان. - الأنسب لـ: الاسترجاع المتأخر على مستوى المستند أو مستوى الصفحة.</th><th>### البحث على مستوى العنصر: يعامل البحث على مستوى العنصر كل عنصر Struct كمرشح مستقل للبحث المتجهي. يمثل كل نتيجة مطابقة عنصرًا مطابقًا داخل حقل StructArray، ويمكن للنتائج غير المجمعة أن تكشف عن إزاحة العنصر. - بيانات الاستعلام: متجه عادي. - مجموعة المقاييس: مقاييس المتجهات العادية. - دقة النتائج: مستوى عنصر Struct. - الأنسب لـ: الاسترجاع على مستوى المقطع أو المقطع القصير أو الرقعة.</th></tr>
-</thead>
-<tbody>
-</tbody>
+  <thead>
+    <tr>
+      <th scope="col"><h3>البحث في EmbeddingList</h3></th>
+      <th scope="col"><h3>البحث على مستوى العناصر</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>يعامل البحث باستخدام EmbeddingList المتجهات الموجودة داخل حقل فرعي من متجهات StructArray كقائمة تضمين واحدة للكيان الأصلي. ويكون الاستعلام أيضًا قائمة تضمين. يقارن Milvus قائمة تضمين الاستعلام بقائمة التضمين المخزنة باستخدام مقياس <code translate="no">MAX_SIM*</code> ، ثم يعرض الكيانات المطابقة.</p>
+        <ul>
+          <li>بيانات الاستعلام: قائمة التضمين.</li>
+          <li>مجموعة المقاييس: <code translate="no">MAX_SIM*</code>.</li>
+          <li>درجة تفصيل النتائج: مستوى الكيان.</li>
+          <li>الأفضل لـ: استرجاع التفاعل المتأخر على مستوى المستند أو الصفحة.</li>
+        </ul>
+      </td>
+      <td>
+        <p>يعامل البحث على مستوى العنصر كل عنصر من عناصر Struct كمرشح مستقل للبحث المتجهي. يمثل كل نتيجة مطابقة عنصرًا متطابقًا داخل حقل StructArray، ويمكن أن تكشف النتائج غير المجمعة عن إزاحة العنصر.</p>
+        <ul>
+          <li>بيانات الاستعلام: متجه عادي.</li>
+          <li>مجموعة المقاييس: مقاييس المتجهات العادية.</li>
+          <li>تفصيل النتائج: مستوى عنصر Struct.</li>
+          <li>الأفضل لـ: الاسترجاع على مستوى المقطع أو المقطع القصير أو الرقعة.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <div class="alert note">
 <p>تحذير</p>
-<p>إذا كانت مجموعتك تحتاج إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فاستخدم حقلين فرعيين متجهين منفصلين. لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد، ويتطلب وضعا البحث عائلات مقاييس مختلفة.</p>
+<p>إذا كانت مجموعتك تحتاج إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فاستخدم حقلين فرعيين متجهين منفصلين. لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد، ويتطلب وضعا البحث عائلات مقاييس مختلفة.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">خريطة الوثائق<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,11 +205,11 @@ summary: >-
 <tr><td>النمذجة</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td><td>قم بإعداد وإدراج بيانات StructArray المتداخلة.</td></tr>
 <tr><td>النمذجة</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td><td>إنشاء فهارس متجهة وعددية على الحقول الفرعية لـ StructArray.</td></tr>
 <tr><td>المرجع</td><td><a href="/docs/ar/structarray-limits.md">حدود StructArray</a></td><td>تحقق من حدود المخطط ونوع البيانات والفهرس والبحث والتصفية والإصدار.</td></tr>
-<tr><td>البحث</td><td>البحث المتجهي الأساسي باستخدام StructArray</td><td>قارن بين البحث في EmbeddingList والبحث المتجه على مستوى العناصر.</td></tr>
-<tr><td>البحث</td><td>البحث في النطاق باستخدام StructArray</td><td>استخدم قيود النطاق مع الحقول الفرعية للمتجهات في StructArray.</td></tr>
-<tr><td>البحث</td><td>البحث المجمّع باستخدام StructArray</td><td>تجميع نتائج البحث على مستوى العناصر حسب المفتاح الأساسي.</td></tr>
-<tr><td>البحث</td><td>البحث المختلط باستخدام StructArray</td><td>دمج البحث على مستوى العناصر باستخدام StructArray مع عمليات البحث المتجهة الأخرى.</td></tr>
-<tr><td>البحث</td><td>البحث المُصفى باستخدام StructArray</td><td>استخدم عوامل تصفية StructArray في البحث والاستعلام والبحث الهجين.</td></tr>
+<tr><td>البحث</td><td><a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a></td><td>قارن بين البحث في EmbeddingList والبحث المتجه على مستوى العناصر.</td></tr>
+<tr><td>البحث</td><td><a href="/docs/ar/range-search-with-structarray.md">البحث في النطاق باستخدام StructArray</a></td><td>استخدم قيود النطاق مع الحقول الفرعية للمتجهات في StructArray.</td></tr>
+<tr><td>البحث</td><td><a href="/docs/ar/grouping-search-with-structarray.md">البحث المجمّع باستخدام StructArray</a></td><td>تجميع نتائج البحث على مستوى العناصر حسب المفتاح الأساسي.</td></tr>
+<tr><td>البحث</td><td><a href="/docs/ar/hybrid-search-with-structarray.md">البحث المختلط باستخدام StructArray</a></td><td>دمج البحث على مستوى العناصر باستخدام StructArray مع عمليات البحث المتجهة الأخرى.</td></tr>
+<tr><td>البحث</td><td><a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a></td><td>استخدم عوامل تصفية StructArray في البحث والاستعلام والبحث الهجين.</td></tr>
 <tr><td>البحث</td><td><a href="/docs/ar/search-with-embedding-lists.md">البحث باستخدام قوائم التضمين</a></td><td>قم ببناء أنظمة استرجاع على غرار ColBERT وColPali باستخدام StructArray.</td></tr>
 <tr><td>التصفية</td><td><a href="/docs/ar/struct-array-operators.md">مشغلات StructArray</a></td><td>بناء جملة مرجعية لمشغلات <code translate="no">element_filter</code> و <code translate="no">MATCH_*</code>.</td></tr>
 </tbody>
@@ -232,6 +255,6 @@ summary: >-
 <li><p>لتصميم مخطط، اقرأ <a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a>.</p></li>
 <li><p>لتحضير البيانات، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
 <li><p>لاختيار الفهارس، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
-<li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، ابدأ بـ "البحث المتجه الأساسي باستخدام StructArray".</p></li>
-<li><p>لتصفية الحقول الفرعية القياسية في StructArray، اقرأ " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a> والبحث المُصفى باستخدام StructArray".</p></li>
+<li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، ابدأ بـ " <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجه الأساسي باستخدام StructArray</a>".</p></li>
+<li><p>لتصفية الحقول الفرعية القياسية في StructArray، اقرأ " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a> " و" <a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a>".</p></li>
 </ol>

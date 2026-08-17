@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>각 엔티티가 정렬된 구조화된 요소 목록을 포함하는 경우, StructArray 필드에 데이터를 삽입합니다. 삽입 페이로드에서 StructArray 필드는 객체 배열로 표현됩니다. 각 객체는 하나의 Struct 요소를 나타내며, 컬렉션 스키마에 정의된 Struct 하위 필드 이름을 사용합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, <code translate="no">chunks</code> 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
+<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, ‘ <code translate="no">chunks</code> ’ 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>삽입 페이로드에서 ` <code translate="no">chunks</code> `는 값이 Struct 객체 배열인 일반 필드입니다. 각 객체 내부에서는 ` <code translate="no">text</code> ` 및 ` <code translate="no">emb</code>`와 같은 하위 필드 이름을 사용하십시오. ` <code translate="no">chunks[text]</code> ` 또는 ` <code translate="no">chunks[emb]</code>`와 같은 경로 구문은 삽입 후 인덱스를 생성하거나, 검색을 실행하거나, 필터를 구축하거나, 출력 필드를 지정할 때만 사용하십시오.</p>
+<p>삽입 페이로드에서 ` <code translate="no">chunks</code> `는 값이 Struct 객체 배열인 일반 필드입니다. 각 객체 내부에서는 ` <code translate="no">text</code> ` 및 ` <code translate="no">emb</code>`와 같은 하위 필드 이름을 사용합니다. ` <code translate="no">chunks[text]</code> ` 또는 ` <code translate="no">chunks[emb]</code>`와 같은 경로 구문은 삽입 후 인덱스를 생성하거나, 검색을 실행하거나, 필터를 구축하거나, 출력 필드를 지정할 때만 사용하십시오.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 구조를 이해하세요<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,7 +230,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">chunks</code> 필드가 nullable인 경우, 엔티티는 전체 <code translate="no">chunks</code> 필드를 null로 설정할 수 있습니다. Python에서는 ` <code translate="no">None</code> `를 사용하여 null 값을 표현합니다.</p>
+    </button></h2><p><code translate="no">chunks</code> 필드가 nullable인 경우, 엔티티는 전체 <code translate="no">chunks</code> 필드를 null로 설정할 수 있습니다. Python에서는 ` <code translate="no">None</code> `를 사용하여 null 값을 나타냅니다.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -304,10 +304,10 @@ Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <tr><td>StructArray 필드에는 객체 배열을 사용하십시오.</td><td><code translate="no">chunks</code> 의 값은 목록이며, 목록의 각 항목은 Struct 요소입니다.</td></tr>
 <tr><td>각 Struct 요소 내부에서 하위 필드 이름을 사용하십시오.</td><td><code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> 는 <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> 가 아닌 <code translate="no">chunks</code> 안에 삽입하십시오.</td></tr>
 <tr><td>Struct 스키마와 일치시켜야 합니다.</td><td>각 Struct 요소는 Struct 스키마에 정의된 하위 필드를 사용해야 합니다.</td></tr>
-<tr><td>벡터 차원을 일치시켜야 합니다.</td><td>벡터 값은 해당 벡터 하위 필드에 대해 구성된 <code translate="no">dim</code> 과 일치해야 합니다.</td></tr>
+<tr><td>벡터 차원을 일치시켜야 합니다.</td><td>벡터 값은 해당 벡터 하위 필드에 대해 구성된 <code translate="no">dim</code> 와 일치해야 합니다.</td></tr>
 <tr><td><code translate="no">max_capacity</code> 을 준수해야 합니다.</td><td>하나의 엔티티에 포함된 Struct 요소의 수는 StructArray 필드의 <code translate="no">max_capacity</code> 을 초과해서는 안 됩니다.</td></tr>
 <tr><td>별도의 검색 모드에는 별도의 벡터 하위 필드를 사용하십시오.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 벡터 하위 필드 모두에 벡터 값을 작성하십시오.</td></tr>
-<tr><td><code translate="no">null</code> 는 필드가 nullable인 경우에만 사용하십시오.</td><td>null이 허용되지 않는 StructArray 필드에는 유효한 StructArray 값이 필요합니다.</td></tr>
+<tr><td><code translate="no">null</code> 는 필드가 null 허용일 때만 사용하십시오.</td><td>null이 허용되지 않는 StructArray 필드에는 유효한 StructArray 값이 필요합니다.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -330,7 +330,7 @@ Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
 <li><p>Struct 요소에서 필수 하위 필드를 생략하는 경우.</p></li>
 <li><p>잘못된 차원의 벡터를 삽입하는 경우.</p></li>
 <li><p><code translate="no">max_capacity</code> 에서 허용하는 것보다 더 많은 Struct 요소를 삽입하는 경우.</p></li>
-<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효함에도 불구하고, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
+<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효한데, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
 <li><p>벡터를 <code translate="no">emb_list_vector</code> 에만 기록한 후, <code translate="no">chunks[emb]</code> 에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
 <li><p>벡터를 <code translate="no">emb</code> 에만 기록한 후, <code translate="no">chunks[emb_list_vector]</code> 에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
 </ul>
@@ -351,6 +351,6 @@ Nullable StructArray 필드는 Milvus v3.0.x에서만 사용할 수 있습니다
       </svg>
     </button></h2><ol>
 <li><p><code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> 및 스칼라 하위 필드에 대한 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
-<li><p>StructArray 벡터 하위 필드를 검색하려면 ‘StructArray를 사용한 기본 벡터 검색’을 참조하십시오.</p></li>
+<li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
 <li><p>null 허용 동작 및 버전별 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Numa carga útil de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
+<p>Numa carga de inserção, « <code translate="no">chunks</code> » é um campo normal cujo valor é uma matriz de objetos «Struct». Dentro de cada objeto, utilize nomes de subcampos como « <code translate="no">text</code> » e « <code translate="no">emb</code> ». Utilize a sintaxe de caminho, como « <code translate="no">chunks[text]</code> » ou « <code translate="no">chunks[emb]</code> », apenas após a inserção, quando criar índices, executar pesquisas, criar filtros ou especificar campos de saída.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Compreender a estrutura da carga útil de inserção<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa por lista de incorporação (EmbeddingList) trata todos os vetores num campo StructArray como uma única lista de incorporação e devolve resultados ao nível da entidade com métricas de <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando os dois modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> são subcampos vetoriais separados, uma vez que suportam modos de pesquisa diferentes. A pesquisa EmbeddingList trata todos os vetores num campo StructArray como uma única lista de incorporações e devolve resultados ao nível da entidade com métricas <code translate="no">MAX_SIM*</code>. A pesquisa ao nível do elemento pesquisa cada elemento Struct de forma independente e pode devolver o deslocamento do elemento correspondente. Este exemplo armazena os mesmos valores vetoriais em ambos os campos por uma questão de simplicidade. Numa aplicação de produção, pode armazenar as mesmas incorporações em ambos os subcampos quando ambos os modos de pesquisa utilizam a mesma incorporação de blocos, ou armazenar incorporações diferentes quando os dois modos de pesquisa utilizam representações diferentes.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserir linhas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -309,7 +309,7 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
 <tr><td>Respeite as dimensões do vetor.</td><td>Os valores dos vetores devem corresponder aos « <code translate="no">dim</code> » configurados para os seus subcampos vetoriais.</td></tr>
 <tr><td>Respeitar o « <code translate="no">max_capacity</code> ».</td><td>O número de elementos Struct numa entidade não deve exceder o <code translate="no">max_capacity</code> do campo StructArray.</td></tr>
 <tr><td>Utilize subcampos vetoriais separados para modos de pesquisa distintos.</td><td>Se forem necessárias tanto a pesquisa EmbeddingList como a pesquisa ao nível do elemento, escreva os valores do vetor em ambos os subcampos do vetor.</td></tr>
-<tr><td>Utilize « <code translate="no">null</code> » apenas quando o campo for nulo.</td><td>Os campos StructArray não nulos exigem valores StructArray válidos.</td></tr>
+<tr><td>Utilize o parâmetro « <code translate="no">null</code> » apenas quando o campo for nulo.</td><td>Os campos StructArray não nulos exigem valores StructArray válidos.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -353,6 +353,6 @@ Os campos StructArray nulos estão disponíveis apenas no Milvus v3.0.x. Se adic
       </svg>
     </button></h2><ol>
 <li><p>Para criar índices para <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e subcampos escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
-<li><p>Para pesquisar subcampos vetoriais do StructArray, consulte «Pesquisa vetorial básica com StructArray».</p></li>
-<li><p>Para rever o comportamento de valores nulos e as limitações específicas de cada versão, consulte <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
+<li><p>Para pesquisar subcampos vetoriais do StructArray, consulte <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
+<li><p>Para rever o comportamento dos valores nulos e as limitações específicas de cada versão, consulte <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

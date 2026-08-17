@@ -63,7 +63,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>스칼라 필터링 및 범위 예제에서 사용되는 청크 수준 점수.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>청크에 코드가 포함되어 있는지 여부.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> 메트릭을 사용한 EmbeddingList 검색을 위한 벡터 하위 필드.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드입니다.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 벡터 하위 필드.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -378,7 +378,7 @@ client.add_collection_struct_field(
 <tr><td>지원되는 하위 필드 유형만 사용할 수 있습니다.</td><td>StructArray에서 지원하는 스칼라 및 벡터 하위 필드 유형을 사용하십시오. JSON, Geometry, Text, Timestamptz, SparseFloatVector 또는 중첩된 Struct/Array 하위 필드는 정의하지 마십시오.</td></tr>
 <tr><td>벡터 하위 필드는 검색 전에 인덱스가 필요합니다.</td><td>벡터 검색을 실행하기 전에 <code translate="no">chunks[emb_list_vector]</code> 또는 <code translate="no">chunks[emb]</code> 와 같은 경로에 인덱스를 생성하십시오.</td></tr>
 <tr><td>벡터 하위 필드 하나당 인덱스는 하나만 있어야 합니다.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하십시오.</td></tr>
-<tr><td>기존 StructArray 하위 필드는 고정되어 있습니다.</td><td>StructArray 필드를 생성한 후에는 동일한 StructArray 필드에 하위 필드를 더 추가할 수 없습니다.</td></tr>
+<tr><td>기존 StructArray 하위 필드는 고정되어 있습니다.</td><td>StructArray 필드를 생성한 후에는 동일한 StructArray 필드에 더 이상 하위 필드를 추가할 수 없습니다.</td></tr>
 <tr><td>Struct 내에서는 함수가 지원되지 않습니다.</td><td>StructArray 필드 내의 필드나 하위 필드에 대한 함수를 정의하지 마십시오.</td></tr>
 <tr><td>스칼라 하위 필드는 필터 요구 사항에 부합해야 합니다.</td><td><code translate="no">section</code>, <code translate="no">quality_score</code> 또는 <code translate="no">has_code</code> 와 같은 필드는 나중에 필터링, 그룹화 또는 출력이 필요한 경우에만 추가하십시오.</td></tr>
 </tbody>
@@ -408,7 +408,7 @@ client.add_collection_struct_field(
 <li><p>벡터 하위 필드를 <code translate="no">$[...]</code> 스칼라 술어 입력으로 취급합니다. 벡터 검색에는 벡터 하위 필드를 사용하고, 스칼라 술어에는 스칼라 하위 필드를 사용합니다.</p></li>
 <li><p>필드가 생성된 후에도 기존 StructArray 필드에 새로운 하위 필드를 추가할 수 있다고 가정합니다.</p></li>
 <li><p>필수 경로 구문인 <code translate="no">chunks[emb]</code> 또는 <code translate="no">chunks[emb_list_vector]</code> 대신 <code translate="no">chunks.emb</code> 또는 <code translate="no">chunks.emb_list_vector</code> 을 사용합니다.</p></li>
-<li><p>Nullable StructArray의 동작을 모든 대상 버전에서 사용할 수 있는 것으로 간주합니다.</p></li>
+<li><p>Nullable StructArray의 동작을 모든 대상 버전에서 지원되는 것으로 간주합니다.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -428,6 +428,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>StructArray 필드에 중첩된 데이터를 삽입하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">StructArray 필드에 데이터 삽입을</a> 참조하십시오.</p></li>
 <li><p>벡터 및 스칼라 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
-<li><p>StructArray 벡터 하위 필드를 검색하려면 StructArray를 사용한 기본 벡터 검색을 참조하십시오.</p></li>
+<li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray를 사용한 기본 벡터 검색을</a> 참조하십시오.</p></li>
 <li><p>지원되는 데이터 유형, null 허용 동작 및 버전별 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

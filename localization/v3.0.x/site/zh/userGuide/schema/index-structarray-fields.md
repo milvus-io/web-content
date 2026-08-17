@@ -155,7 +155,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当在过滤器中使用 StructArray 的标量子字段时，请为其创建标量索引。使用与<code translate="no">structArray[subfield]</code> 路径相同的语法。</p>
+    </button></h2><p>当在过滤器中使用 StructArray 标量子字段时，请为其创建标量索引。使用与<code translate="no">structArray[subfield]</code> 路径相同的语法。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -246,7 +246,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。</p>
+    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并能返回匹配元素的偏移量。</p>
 <table>
 <thead>
 <tr><th>向量子场数据类型</th><th>索引类型</th><th>度量类型</th></tr>
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建索引后，请描述Collection或列出索引，以确认预期的子字段路径已纳入索引。</p>
+    </button></h2><p>创建索引后，请描述Collection或列表索引，以确认预期的子字段路径已纳入索引。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -312,7 +312,7 @@ client.create_index(
 <tbody>
 <tr><td>对子字段索引，请使用路径语法。</td><td>请使用索引<code translate="no">chunks[emb]</code> ，而不是<code translate="no">emb</code> 或<code translate="no">chunks.emb</code> 。</td></tr>
 <tr><td>一个向量量子字段只能接受一个索引。</td><td>如果需要不同的度量家族，请使用独立的向量子字段。</td></tr>
-<tr><td>请使用<code translate="no">MAX_SIM*</code> 指标进行 EmbeddingList 搜索。</td><td>EmbeddingList 查询数据需要使用<code translate="no">MAX_SIM*</code> 度量构建的索引。</td></tr>
+<tr><td>请使用<code translate="no">MAX_SIM*</code> 指标进行 EmbeddingList 搜索。</td><td>EmbeddingList 查询数据需要使用基于<code translate="no">MAX_SIM*</code> 度量构建的索引。</td></tr>
 <tr><td>对于元素级搜索，请使用常规向量指标。</td><td>元素级搜索使用常规向量查询数据和诸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等度量。</td></tr>
 <tr><td>对出现在过滤器中的标量子字段进行索引。</td><td>请使用目标支持的标量索引类型。</td></tr>
 <tr><td>请注意向量字段的限制。</td><td>向量字段和向量子字段的总数是有限的。在添加大量向量子字段之前，请参阅《StructArray 限制》。</td></tr>
@@ -357,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要运行实体级 EmbeddingList 搜索或元素级向量搜索，请参阅《使用 StructArray 进行基础向量搜索》。</p></li>
-<li><p>若要在搜索过程中过滤 StructArray 的标量子字段，请参阅《使用 StructArray 进行过滤搜索》。</p></li>
+<li><p>若要运行实体级 EmbeddingList 搜索或元素级向量搜索，请参阅《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基础向量搜索</a>》。</p></li>
+<li><p>若要在搜索过程中过滤 StructArray 的标量子字段，请参阅《<a href="/docs/zh/filtered-search-with-structarray.md">使用 StructArray 进行过滤搜索</a>》。</p></li>
 <li><p>如需了解索引和指标限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

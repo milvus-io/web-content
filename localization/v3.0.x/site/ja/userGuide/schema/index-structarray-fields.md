@@ -2,7 +2,8 @@
 id: index-structarray-fields.md
 title: StructArray フィールドのインデックス作成
 summary: >-
-  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayフィールドの場合、インデックスの対象は、chunks[emb_list_vector]、chunks[emb]、chunks[section]などのサブフィールドパスとなります。
+  ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArrayのサブフィールドにインデックスを作成してください。StructArrayのフィールドの場合、インデックスの対象となるのは、chunks[emb_list_vector]、chunks[emb]、chunks[section]
+  などのサブフィールドパスです。
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray フィールドのインデックス作成<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +51,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>ベクトルフィールドまたはベクトルサブフィールドは、1 つのインデックスのみを受け入れます。EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成し、それぞれ個別にインデックスを作成してください。このページでは、<code translate="no">chunks[emb_list_vector]</code> は EmbeddingList 検索用にインデックス化され、<code translate="no">chunks[emb]</code> は要素レベルの検索用にインデックス化されています。</p>
+<p>ベクトルフィールドまたはベクトルサブフィールドは、1 つのインデックスのみを受け入れます。EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成し、それぞれ個別にインデックスを作成してください。このページでは、<code translate="no">chunks[emb_list_vector]</code> は EmbeddingList 検索用に、<code translate="no">chunks[emb]</code> は要素レベルの検索用にインデックスが作成されています。</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">インデックスの選択<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -356,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
-<li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「StructArray を使用したフィルタ検索」を参照してください。</p></li>
+<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
+<li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「<a href="/docs/ja/filtered-search-with-structarray.md">StructArray を使用したフィルタ検索</a>」を参照してください。</p></li>
 <li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p></li>
 </ol>

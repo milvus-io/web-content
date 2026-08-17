@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível de fragmentos como elementos «Struct».</p>
+    </button></h2><p>Esta página utiliza uma coleção denominada « <code translate="no">tech_articles</code> ». Cada entidade representa um artigo técnico, e o campo « <code translate="no">chunks</code> » armazena dados ao nível de fragmentos como elementos Struct.</p>
 <table>
 <thead>
 <tr><th>Campo</th><th>Tipo</th><th>Finalidade</th></tr>
@@ -237,7 +237,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de criar um campo «StructArray», refira-se aos seus subcampos utilizando a sintaxe de caminho « <code translate="no">structArray[subfield]</code> ». Utilize esta sintaxe ao criar índices, pesquisar subcampos vetoriais, gerar subcampos de saída ou criar filtros escalares.</p>
+    </button></h2><p>Depois de criar um campo «StructArray», refira-se aos seus subcampos utilizando a sintaxe de caminho « <code translate="no">structArray[subfield]</code> ». Utilize esta sintaxe ao criar índices, pesquisar subcampos vetoriais, gerar subcampos ou criar filtros escalares.</p>
 <table>
 <thead>
 <tr><th>Caminho</th><th>Significado</th><th>Utilização comum</th></tr>
@@ -246,7 +246,7 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>O subcampo « <code translate="no">text</code> » dentro de cada elemento Struct.</td><td>Campo de saída ou filtragem escalar.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>O rótulo da secção para cada bloco.</td><td>Filtragem escalar.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>A pontuação de qualidade ao nível do bloco.</td><td>Filtragem escalar ou índice escalar.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>O subcampo vetorial utilizado como lista de incorporação.</td><td>Pesquisa na EmbeddingList com « <code translate="no">MAX_SIM*</code> ».</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>O subcampo vetorial utilizado como lista de incorporação.</td><td>Pesquisa na EmbeddingList com ` <code translate="no">MAX_SIM*</code>`.</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td>O subcampo vetorial utilizado por cada elemento Struct de forma independente.</td><td>Pesquisa vetorial ao nível do elemento.</td></tr>
 </tbody>
 </table>
@@ -265,7 +265,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene valores ` <code translate="no">null</code> ` para todo o campo StructArray.</p>
+    </button></h2><p>O Milvus v3.0.x suporta campos StructArray nulos. Um campo StructArray nulo permite que uma entidade armazene valores do tipo « <code translate="no">null</code> » para todo o campo StructArray.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
     datatype=DataType.ARRAY,
@@ -339,7 +339,7 @@ client.add_collection_struct_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Após a adição do campo StructArray, as entidades existentes devolvem ` <code translate="no">null</code> ` para o novo campo em todos os seus subcampos.</p>
-<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se necessitar de atributos de elemento adicionais posteriormente, chame ` <code translate="no">drop_collection_field()</code> ` para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
+<p>Após a criação de um campo StructArray, não é possível adicionar novos subcampos a esse campo StructArray existente. Se, posteriormente, necessitar de atributos de elemento adicionais, chame <code translate="no">drop_collection_field()</code> para eliminar o campo StructArray e, em seguida, adicione um novo campo StructArray com o esquema Struct atualizado.</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     field_name=<span class="hljs-string">&quot;chunks&quot;</span>,
@@ -381,7 +381,7 @@ client.add_collection_struct_field(
 <tr><td>Cada subcampo vetorial tem um índice.</td><td>Se precisar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, crie dois subcampos vetoriais separados.</td></tr>
 <tr><td>Os subcampos StructArray existentes são fixos.</td><td>Após criar um campo StructArray, não espere poder adicionar mais subcampos a esse mesmo campo StructArray.</td></tr>
 <tr><td>As funções não são suportadas dentro de Struct.</td><td>Não defina funções para campos ou subcampos dentro de um campo StructArray.</td></tr>
-<tr><td>Os subcampos escalares devem corresponder aos requisitos de filtragem.</td><td>Adicione campos como <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code> apenas quando precisar de os filtrar, agrupar ou apresentar posteriormente.</td></tr>
+<tr><td>Os subcampos escalares devem corresponder às necessidades de filtragem.</td><td>Adicione campos como <code translate="no">section</code>, <code translate="no">quality_score</code> ou <code translate="no">has_code</code> apenas quando precisar de os filtrar, agrupar ou apresentar posteriormente.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -427,8 +427,8 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Para inserir dados aninhados no campo StructArray, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">«Inserir dados em campos StructArray</a>».</p></li>
+<li><p>Para inserir dados aninhados no campo StructArray, consulte <a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos StructArray</a>.</p></li>
 <li><p>Para criar índices vetoriais e escalares, consulte <a href="/docs/pt/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
-<li><p>Para pesquisar subcampos vetoriais do StructArray, consulte «Pesquisa vetorial básica com StructArray».</p></li>
+<li><p>Para pesquisar subcampos vetoriais do StructArray, consulte <a href="/docs/pt/basic-vector-search-with-structarray.md">«Pesquisa vetorial básica com StructArray</a>».</p></li>
 <li><p>Para consultar os tipos de dados suportados, o comportamento nulo e as limitações específicas de cada versão, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

@@ -332,7 +332,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <li><p>Mengabaikan subbidang yang wajib dari elemen Struct.</p></li>
 <li><p>Menyisipkan vektor dengan dimensi yang salah.</p></li>
 <li><p>Menyisipkan elemen Struct lebih banyak daripada yang diizinkan oleh <code translate="no">max_capacity</code>.</p></li>
-<li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama valid.</p></li>
+<li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama masih valid.</p></li>
 <li><p>Menulis vektor hanya ke ` <code translate="no">emb_list_vector</code> ` dan kemudian mencoba menjalankan pencarian tingkat elemen pada ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Menulis vektor hanya ke ` <code translate="no">emb</code> ` dan kemudian mencoba menjalankan pencarian EmbeddingList pada ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
 </ul>
@@ -353,6 +353,6 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
       </svg>
     </button></h2><ol>
 <li><p>Untuk membuat indeks untuk <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, dan subbidang skalar, baca <a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a>.</p></li>
-<li><p>Untuk melakukan pencarian pada subbidang vektor StructArray, baca "Basic Vector Search with StructArray".</p></li>
+<li><p>Untuk melakukan pencarian pada subbidang vektor StructArray, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>".</p></li>
 <li><p>Untuk meninjau perilaku nullable dan batasan khusus versi, baca " <a href="/docs/id/structarray-limits.md">StructArray Limits</a>".</p></li>
 </ol>

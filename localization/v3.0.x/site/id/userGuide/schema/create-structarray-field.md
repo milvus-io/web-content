@@ -400,7 +400,7 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Membuat ` <code translate="no">DataType.STRUCT</code> ` sebagai bidang koleksi tingkat atas alih-alih menggunakannya sebagai tipe elemen dari bidang `Array`.</p></li>
+<li><p>Membuat ` <code translate="no">DataType.STRUCT</code> ` sebagai bidang koleksi tingkat atas alih-alih menggunakannya sebagai tipe elemen dari bidang Array.</p></li>
 <li><p>Lupa menetapkan ` <code translate="no">max_capacity</code> ` pada bidang `StructArray`.</p></li>
 <li><p>Mendefinisikan tipe subbidang yang tidak didukung, seperti JSON, Geometry, Text, Timestamptz, SparseFloatVector, Array bersarang, Struct bersarang, atau Array-of-Struct.</p></li>
 <li><p>Menggunakan ` <code translate="no">String</code> ` sebagai tipe subbidang. Gunakan ` <code translate="no">VARCHAR</code> ` dan atur ` <code translate="no">max_length</code>`.</p></li>
@@ -429,6 +429,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>Untuk menyisipkan data bersarang ke dalam bidang StructArray, baca <a href="/docs/id/insert-data-into-structarray-fields.md">Menyisipkan Data ke dalam Bidang StructArray</a>.</p></li>
 <li><p>Untuk membuat indeks vektor dan skalar, baca " <a href="/docs/id/index-structarray-fields.md">Index StructArray Fields</a>".</p></li>
-<li><p>Untuk mencari subbidang vektor StructArray, baca "Pencarian Vektor Dasar dengan StructArray".</p></li>
+<li><p>Untuk mencari subbidang vektor StructArray, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
 <li><p>Untuk meninjau tipe data yang didukung, perilaku nullable, dan batasan khusus versi, baca " <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>".</p></li>
 </ol>

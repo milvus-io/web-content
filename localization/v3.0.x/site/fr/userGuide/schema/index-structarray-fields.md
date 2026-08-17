@@ -359,7 +359,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Pour effectuer une recherche EmbeddingList au niveau de l’entité ou une recherche vectorielle au niveau de l’élément, consultez la section « Recherche vectorielle de base avec StructArray ».</p></li>
-<li><p>Pour filtrer les sous-champs scalaires StructArray lors d’une recherche, consultez la section « Recherche filtrée avec StructArray ».</p></li>
+<li><p>Pour effectuer une recherche EmbeddingList au niveau de l’entité ou une recherche vectorielle au niveau de l’élément, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
+<li><p>Pour filtrer les sous-champs scalaires StructArray lors d’une recherche, consultez la section « <a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a> ».</p></li>
 <li><p>Pour connaître les limites relatives aux index et aux métriques, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

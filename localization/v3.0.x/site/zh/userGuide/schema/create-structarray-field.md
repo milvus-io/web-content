@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>当某个实体需要包含一个有序的结构化元素列表时，请创建一个 StructArray 字段。StructArray 字段是一种数组字段，其元素类型为 Struct。每个 Struct 元素遵循相同的 Schema，可以包含标量子字段、向量字段，或两者兼有。</p>
-<p>本页面将介绍如何定义 Struct Schema、将其添加为 StructArray 字段、选择用于后续搜索和过滤的子字段，以及在插入或索引数据之前了解适用的 Schema 规则。</p>
+<p>本页面将介绍如何定义 Schema、将其添加为 StructArray 字段、选择用于后续搜索和过滤的子字段，以及在插入或索引数据之前了解适用的 Schema 规则。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,8 +95,8 @@ summary: >-
 <tr><td><code translate="no">Array</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.VARCHAR</code> ，并设置<code translate="no">max_length</code> 。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.FLOAT_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.FLOAT16_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.BFLOAT16_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.INT8_VECTOR</code> ，并设置<code translate="no">dim</code> 。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.BFLOAT16_VECTOR</code> ，并将<code translate="no">dim</code> 设置为。</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.INT8_VECTOR</code> ，并将<code translate="no">dim</code> 设置为。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>受支持</td><td>将子字段定义为<code translate="no">DataType.BINARY_VECTOR</code> ，并将<code translate="no">dim</code> 设置为。</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>不支持</td><td>StructArray 字段不支持稀疏向量子场。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支持</td><td>请使用<code translate="no">VARCHAR</code> ，而非<code translate="no">String</code> 。</td></tr>
@@ -241,7 +241,7 @@ client.create_collection(
 <tr><th>路径</th><th>含义</th><th>常见用法</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">chunks[text]</code></td><td>每个 Struct 元素内部的<code translate="no">text</code> 子字段。</td><td>输出字段或标量过滤。</td></tr>
+<tr><td><code translate="no">chunks[text]</code></td><td><code translate="no">text</code> 子字段位于每个 Struct 元素内部。</td><td>输出字段或标量过滤。</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>每个数据块的段标签。</td><td>标量过滤。</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>块级质量评分。</td><td>标量过滤或标量索引。</td></tr>
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>用作嵌入列表的向量字段。</td><td>使用<code translate="no">MAX_SIM*</code> 进行EmbeddingList搜索。</td></tr>
@@ -371,9 +371,9 @@ client.add_collection_struct_field(
 <tr><th>规则</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct 用作数组元素类型。</td><td>使用<code translate="no">element_type=STRUCT</code> 将 StructArray 字段作为数组字段创建。请勿将 Struct 作为顶级 Collection 字段创建。</td></tr>
+<tr><td>Struct 用作数组元素类型。</td><td>使用<code translate="no">element_type=STRUCT</code> 将 StructArray 字段创建为数组字段。请勿将 Struct 作为顶级 Collection 字段创建。</td></tr>
 <tr><td>所有元素共享一个Schema。</td><td>同一 StructArray 字段中的每个 Struct 元素均遵循为该字段定义的 Struct Schema。</td></tr>
-<tr><td><code translate="no">max_capacity</code> 是必需的。</td><td>它限制了每个实体可以在 StructArray 字段中存储的 Struct 元素数量。</td></tr>
+<tr><td><code translate="no">max_capacity</code> 是必需的。</td><td>它限制了每个实体可以在 StructArray 字段中存储的 Struct 元素的数量。</td></tr>
 <tr><td>仅允许使用受支持的子字段类型。</td><td>请使用 StructArray 支持的标量和向量字段类型。请勿定义 JSON、Geometry、Text、Timestamptz、SparseFloatVector 或嵌套的 Struct / Array 子字段。</td></tr>
 <tr><td>在进行向量搜索之前，向量子字段需要建立索引。</td><td>在运行向量搜索之前，请在诸如<code translate="no">chunks[emb_list_vector]</code> 或<code translate="no">chunks[emb]</code> 之类的路径上创建索引。</td></tr>
 <tr><td>一个向量量子字段对应一个索引。</td><td>如果您同时需要 EmbeddingList 搜索和元素级搜索，请创建两个独立的向量子字段。</td></tr>
@@ -427,6 +427,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>要将嵌套数据插入 StructArray 字段，请参阅<a href="/docs/zh/insert-data-into-structarray-fields.md">《将数据插入 StructArray 字段</a>》。</p></li>
 <li><p>要创建向量和标量索引，请参阅《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p></li>
-<li><p>要搜索 StructArray 向量子字段，请参阅《使用 StructArray 进行基本向量搜索》。</p></li>
+<li><p>要搜索 StructArray 向量子字段，请参阅《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基本向量搜索</a>》。</p></li>
 <li><p>要查看支持的数据类型、可为空行为以及特定版本的限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

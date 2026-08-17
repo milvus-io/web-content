@@ -83,7 +83,7 @@ summary: >-
 <tr><td>Filtrar por valor booleano</td><td><code translate="no">chunks[has_code]</code></td><td>Um índice escalar suportado pelo seu destino.</td></tr>
 </tbody>
 </table>
-<p>A pesquisa EmbeddingList trata os vetores num subcampo vetorial do StructArray como uma lista de incorporação e devolve resultados ao nível da entidade. A pesquisa ao nível do elemento pesquisa cada elemento do Struct de forma independente e pode devolver o deslocamento do elemento correspondente.</p>
+<p>A pesquisa EmbeddingList trata os vetores num subcampo vetorial de StructArray como uma lista de incorporação e devolve resultados ao nível da entidade. A pesquisa ao nível do elemento pesquisa cada elemento de Struct de forma independente e pode devolver o deslocamento do elemento correspondente.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">Criar índices vetoriais<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A pesquisa EmbeddingList utiliza métricas do tipo « <code translate="no">MAX_SIM*</code> ». Trata os vetores num subcampo de tipo «StructArray» como uma lista de embeddings e devolve resultados ao nível da entidade.</p>
+    </button></h3><p>A pesquisa EmbeddingList utiliza métricas do tipo « <code translate="no">MAX_SIM*</code> ». Trata os vetores num subcampo de tipo «StructArray» como uma lista de incorporação e devolve resultados ao nível da entidade.</p>
 <table>
 <thead>
 <tr><th>Tipo de dados do subcampo vetorial</th><th>Tipo de índice</th><th>Tipo de métrica</th></tr>
@@ -277,7 +277,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após criar os índices, descreva os índices da coleção ou da lista para confirmar que os caminhos dos subcampos esperados estão indexados.</p>
+    </button></h2><p>Após criar os índices, descreva os índices da coleção ou da lista para confirmar se os caminhos dos subcampos esperados estão indexados.</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -359,7 +359,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Para executar uma pesquisa EmbeddingList ao nível da entidade ou uma pesquisa vetorial ao nível do elemento, consulte Pesquisa vetorial básica com StructArray.</p></li>
-<li><p>Para filtrar subcampos escalares do StructArray durante a pesquisa, leia «Pesquisa filtrada com StructArray».</p></li>
+<li><p>Para executar uma pesquisa EmbeddingList ao nível da entidade ou uma pesquisa vetorial ao nível do elemento, consulte <a href="/docs/pt/basic-vector-search-with-structarray.md">Pesquisa vetorial básica com StructArray</a>.</p></li>
+<li><p>Para filtrar subcampos escalares do StructArray durante a pesquisa, leia <a href="/docs/pt/filtered-search-with-structarray.md">«Pesquisa filtrada com StructArray</a>».</p></li>
 <li><p>Para consultar os limites de índices e métricas, leia <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p></li>
 </ol>

@@ -60,7 +60,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Текст фрагмента.</td></tr>
-<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Имя раздела, например « <code translate="no">index</code> », « <code translate="no">search</code> » или « <code translate="no">filter</code> ».</td></tr>
+<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Имя раздела, например <code translate="no">index</code>, <code translate="no">search</code> или <code translate="no">filter</code>.</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Номер страницы или логическое положение фрагмента.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Оценка на уровне фрагмента, используемая в примерах скалярной фильтрации и диапазонов.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Содержит ли фрагмент код.</td></tr>
@@ -102,7 +102,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.INT8_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.BINARY_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
 <tr><td><code translate="no">ArrayOfVector</code></td><td>Не поддерживается</td><td>Подполя в виде разреженных векторов не поддерживаются в полях StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>Используйте « <code translate="no">VARCHAR</code> », а не « <code translate="no">String</code> ».</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>Используйте <code translate="no">VARCHAR</code>, а не <code translate="no">String</code>.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpola JSON не поддерживаются в полях StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Геометрия» и функции ГИС не поддерживаются в полях StructArray.</td></tr>
 <tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Текст» в полях StructArray не поддерживаются.</td></tr>
@@ -278,7 +278,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Предупреждение
-Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для такого поля сущность может предоставлять допустимое значение StructArray или устанавливать для всего поля значение « <code translate="no">null</code> ». При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя имеют значение null, а другие — допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
+Поля StructArray, допускающие значение null, доступны только в Milvus v3.0.x. Для такого поля сущность может предоставлять допустимое значение StructArray или устанавливать для всего поля значение <code translate="no">null</code>. При вставке допустимого значения StructArray все подполя должны либо быть равны null, либо иметь допустимые значения. Вставка сущности, в которой некоторые подполя установлены в null, а другие — в допустимые значения, приводит к ошибке. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Добавление поля StructArray в существующую коллекцию<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +296,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>Milvus v3.0.x поддерживает добавление поля StructArray в существующую коллекцию. Добавляемое поле StructArray должно быть допускать значение null, поскольку сущности, уже существующие в коллекции, не имеют значений для нового поля.</p>
-<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и установите ` <code translate="no">nullable=True</code>`.</p>
+<p>Чтобы добавить поле StructArray в существующую коллекцию, сначала определите схему Struct. Затем вызовите метод ` <code translate="no">add_collection_struct_field()</code> ` и задайте ` <code translate="no">nullable=True</code>`.</p>
 <pre><code translate="no" class="language-python">chunk_schema = client.create_struct_field_schema()
 chunk_schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,
@@ -401,14 +401,14 @@ client.add_collection_struct_field(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Создание поля « <code translate="no">DataType.STRUCT</code> » в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля «Array».</p></li>
+<li><p>Создание <code translate="no">DataType.STRUCT</code> в качестве поля коллекции верхнего уровня вместо использования его в качестве типа элемента поля Array.</p></li>
 <li><p>Забывание установить « <code translate="no">max_capacity</code> » для поля «StructArray».</p></li>
 <li><p>Определение неподдерживаемых типов подполей, таких как JSON, Geometry, Text, Timestamptz, SparseFloatVector, вложенный массив, вложенная структура или массив структур.</p></li>
 <li><p>Использование <code translate="no">String</code> в качестве типа подполя. Используйте <code translate="no">VARCHAR</code> и установите <code translate="no">max_length</code>.</p></li>
 <li><p>Использование одного векторного подполя как для поиска по EmbeddingList, так и для поиска на уровне элементов.</p></li>
 <li><p>Добавление только векторных подполей и игнорирование скалярных подполей, необходимых для фильтрации, таких как <code translate="no">section</code>, <code translate="no">quality_score</code> или <code translate="no">has_code</code>.</p></li>
 <li><p>Рассмотрение векторных подполей в качестве входных данных для скалярных предикатов <code translate="no">$[...]</code>. Использование векторных подполей для векторного поиска, а скалярных подполей — для скалярных предикатов.</p></li>
-<li><p>Предположение о том, что в существующее поле StructArray можно добавлять новые подполя после создания этого поля.</p></li>
+<li><p>Предположение о том, что в существующее поле StructArray можно добавлять новые подполя после его создания.</p></li>
 <li><p>Использование <code translate="no">chunks.emb</code> или <code translate="no">chunks.emb_list_vector</code> вместо обязательного синтаксиса пути <code translate="no">chunks[emb]</code> или <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Рассмотрение поведения StructArray, допускающего нулевые значения, как доступного в любой целевой версии.</p></li>
 </ul>
@@ -430,6 +430,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>Чтобы вставить вложенные данные в поле StructArray, ознакомьтесь с разделом <a href="/docs/ru/insert-data-into-structarray-fields.md">«Вставка данных в поля StructArray</a>».</p></li>
 <li><p>Чтобы создать векторные и скалярные индексы, ознакомьтесь с разделом <a href="/docs/ru/index-structarray-fields.md">«Индексирование полей StructArray</a>».</p></li>
-<li><p>Чтобы выполнить поиск по векторным подполям StructArray, ознакомьтесь с разделом «Базовый векторный поиск с использованием StructArray».</p></li>
+<li><p>Чтобы выполнить поиск по векторным подполям StructArray, ознакомьтесь с разделом <a href="/docs/ru/basic-vector-search-with-structarray.md">«Базовый векторный поиск с использованием StructArray</a>».</p></li>
 <li><p>Чтобы ознакомиться с поддерживаемыми типами данных, поведением при наличии нулевых значений и ограничениями, специфичными для конкретных версий, ознакомьтесь с разделом <a href="/docs/ru/structarray-limits.md">«Ограничения StructArray</a>».</p></li>
 </ol>

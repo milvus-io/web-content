@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>1つのエンティティに、構造化された要素の順序付きリストを含める必要がある場合は、StructArrayフィールドを作成します。StructArrayフィールドは、要素型がStructであるArrayフィールドです。各Struct要素は同じスキーマに従い、スカラーサブフィールド、ベクトルサブフィールド、またはその両方を含むことができます。</p>
-<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリングに備えてサブフィールドを選択する方法、およびデータの挿入やインデックス作成の前に適用されるスキーマ規則について解説します。</p>
+<p>このページでは、Structスキーマを定義し、それをStructArrayフィールドとして追加し、後の検索やフィルタリング用にサブフィールドを選択する方法、およびデータの挿入やインデックス作成前に適用されるスキーマ規則について解説します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>チャンクレベルのテキスト、メタデータ、および埋め込みを格納する StructArray フィールド。</td></tr>
 </tbody>
 </table>
-<p><code translate="no">chunks</code> のStructArrayフィールドには、以下のサブフィールドが含まれます。</p>
+<p><code translate="no">chunks</code> StructArray フィールドには、以下のサブフィールドが含まれます。</p>
 <table>
 <thead>
 <tr><th>サブフィールド</th><th>タイプ</th><th>目的</th></tr>
@@ -61,7 +61,7 @@ summary: >-
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>スカラーフィルタリングや範囲の例で使用されるチャンクレベルのスコア。</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>チャンクにコードが含まれているかどうか。</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">MAX_SIM*</code> メトリックを使用した EmbeddingList 検索のためのベクトルサブフィールド。</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリクスを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>通常のベクトルメトリックを使用した要素レベル検索用のベクトルサブフィールド。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -274,7 +274,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-Null可能な StructArray フィールドは、Milvus v3.0.x でのみ利用可能です。Null可能な StructArray フィールドの場合、エンティティは有効な StructArray 値を指定するか、フィールド全体を `<code translate="no">null</code>` に設定することができます。有効な StructArray 値を挿入する際は、すべてのサブフィールドが null であるか、有効な値を持つ必要があります。 一部のサブフィールドが null に設定され、他のサブフィールドが有効な値に設定されたエンティティを挿入すると、エラーが発生します。詳細については、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p>
+Nullable StructArray フィールドは、Milvus v3.0.x でのみ利用可能です。Nullable StructArray フィールドの場合、エンティティは有効な StructArray 値を指定するか、フィールド全体を `<code translate="no">null</code>` に設定することができます。有効な StructArray 値を挿入する場合、すべてのサブフィールドは null であるか、有効な値を持つ必要があります。 一部のサブフィールドがnullに設定され、他のサブフィールドが有効な値に設定されたエンティティを挿入すると、エラーが発生します。詳細については、「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">既存のコレクションに StructArray フィールドを追加する<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -370,7 +370,7 @@ client.add_collection_struct_field(
 <tr><th>ルール</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct は Array 要素型として使用されます。</td><td><code translate="no">element_type=STRUCT</code> を使用して、StructArray フィールドを Array フィールドとして作成します。Struct を最上位のコレクションフィールドとして作成しないでください。</td></tr>
+<tr><td>Struct は Array 要素型として使用されます。</td><td><code translate="no">element_type=STRUCT</code> を使用して、StructArray フィールドを Array フィールドとして作成します。Struct をトップレベルのコレクションフィールドとして作成しないでください。</td></tr>
 <tr><td>すべての要素は 1 つのスキーマを共有します。</td><td>同じ StructArray フィールド内のすべての Struct 要素は、そのフィールドに対して定義された Struct スキーマに従います。</td></tr>
 <tr><td><code translate="no">max_capacity</code> は必須です。</td><td>これは、各エンティティが StructArray フィールドに格納できる Struct 要素の数を制限するものです。</td></tr>
 <tr><td>サポートされているサブフィールド型のみ使用できます。</td><td>StructArray でサポートされているスカラーおよびベクトルサブフィールド型を使用してください。JSON、Geometry、Text、Timestamptz、SparseFloatVector、またはネストされた Struct / Array サブフィールドは定義しないでください。</td></tr>
@@ -378,7 +378,7 @@ client.add_collection_struct_field(
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスがあります。</td><td>EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを作成してください。</td></tr>
 <tr><td>既存の StructArray サブフィールドは固定されています。</td><td>StructArray フィールドを作成した後、その同じ StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
 <tr><td>Struct 内での関数の使用はサポートされていません。</td><td>StructArray フィールド内のフィールドやサブフィールドに対して関数を定義しないでください。</td></tr>
-<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力する必要がある場合にのみ追加してください。</td></tr>
+<tr><td>スカラーサブフィールドは、フィルタの要件に合致している必要があります。</td><td><code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> などのフィールドは、後でフィルタリング、グループ化、または出力を行う必要がある場合にのみ追加してください。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -405,8 +405,8 @@ client.add_collection_struct_field(
 <li><p>ベクトルサブフィールドのみを追加し、<code translate="no">section</code> 、<code translate="no">quality_score</code> 、<code translate="no">has_code</code> など、フィルタリングに必要なスカラーサブフィールドを省略すること。</p></li>
 <li><p>ベクトルサブフィールドを、<code translate="no">$[...]</code> のようなスカラー述語の入力として扱う。ベクトル検索にはベクトルサブフィールドを、スカラー述語にはスカラーサブフィールドを使用する。</p></li>
 <li><p>フィールドの作成後、既存の StructArray フィールドに新しいサブフィールドを追加できるものと仮定する。</p></li>
-<li><p>必須のパス構文 `<code translate="no">chunks[emb]</code> ` または `<code translate="no">chunks[emb_list_vector]</code>` の代わりに、`<code translate="no">chunks.emb</code> ` または `<code translate="no">chunks.emb_list_vector</code> ` を使用すること。</p></li>
-<li><p>Null 許容 StructArray の挙動を、すべてのターゲットバージョンで利用可能であるかのように扱う。</p></li>
+<li><p>必須のパス構文 `<code translate="no">chunks[emb]</code> ` または `<code translate="no">chunks[emb_list_vector]</code>` の代わりに、`<code translate="no">chunks.emb</code> ` または `<code translate="no">chunks.emb_list_vector</code> ` を使用している。</p></li>
+<li><p>Null 許容型 StructArray の挙動を、すべてのターゲットバージョンで利用可能であるかのように扱う。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -426,6 +426,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>StructArray フィールドにネストされたデータを挿入するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArray フィールドへのデータの挿入</a>」を参照してください。</p></li>
 <li><p>ベクトルおよびスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス付け</a>」を参照してください。</p></li>
-<li><p>StructArray のベクトルサブフィールドを検索するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
+<li><p>StructArray のベクトルサブフィールドを検索するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
 <li><p>サポートされているデータ型、Null 許容の挙動、およびバージョン固有の制限事項を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>」を参照してください。</p></li>
 </ol>

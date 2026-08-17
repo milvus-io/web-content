@@ -5,7 +5,7 @@ summary: >-
   Erstellen Sie Indizes für StructArray-Unterfelder, bevor Sie eine Vektorsuche
   durchführen oder die skalare Filterung beschleunigen. Bei einem
   StructArray-Feld ist das Indexziel ein Unterfeldpfad, beispielsweise
-  chunks[emb_list_vector], chunks[emb] oder chunks[section].
+  `chunks[emb_list_vector]`, `chunks[emb]` oder `chunks[section]`.
 ---
 <h1 id="Index-StructArray-Fields" class="common-anchor-header">StructArray-Felder indizieren<button data-href="#Index-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
+<p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die EmbeddingList-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Indizes auswählen<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ summary: >-
 <tr><th>Such- oder Filterziel</th><th>Zielpfad</th><th>Was Sie auswählen sollten</th></tr>
 </thead>
 <tbody>
-<tr><td>Suche in der „EmbeddingList“</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Eine „ <code translate="no">MAX_SIM*</code> “-Metrikfamilie.</td></tr>
+<tr><td>Suche in der EmbeddingList</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Eine „ <code translate="no">MAX_SIM*</code> “-Metrikfamilie.</td></tr>
 <tr><td>Vektorsuche auf Elementebene</td><td><code translate="no">chunks[emb]</code></td><td>Eine reguläre Vektormetrikfamilie, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Nach Zeichenfolge oder Kategorie filtern</td><td><code translate="no">chunks[section]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
 <tr><td>Nach numerischem Bereich filtern</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
@@ -317,7 +317,7 @@ client.create_index(
 <tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
 <tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
 <tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indizierungstypen, die von Ihrem Zielsystem unterstützt werden.</td></tr>
-<tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Beschränkungen“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
+<tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Grenzwerte“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -359,7 +359,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Um eine „EmbeddingList“-Suche auf Entitätsebene oder eine Vektorsuche auf Elementebene durchzuführen, lesen Sie „Grundlegende Vektorsuche mit StructArray“.</p></li>
-<li><p>Informationen zum Filtern von skalaren StructArray-Unterfeldern während der Suche finden Sie unter „Gefilterte Suche mit StructArray“.</p></li>
-<li><p>Informationen zu Index- und Metrikgrenzen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Grenzwerte</a>“.</p></li>
+<li><p>Um eine „EmbeddingList“-Suche auf Entitätsebene oder eine Vektorsuche auf Elementebene durchzuführen, lesen Sie <a href="/docs/de/basic-vector-search-with-structarray.md">„Grundlegende Vektorsuche mit StructArray</a>“.</p></li>
+<li><p>Informationen zum Filtern von skalaren StructArray-Unterfeldern während der Suche finden Sie unter <a href="/docs/de/filtered-search-with-structarray.md">„Gefilterte Suche mit StructArray</a>“.</p></li>
+<li><p>Informationen zu Index- und Metrikbeschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Beschränkungen</a>“.</p></li>
 </ol>

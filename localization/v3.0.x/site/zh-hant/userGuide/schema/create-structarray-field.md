@@ -3,7 +3,7 @@ id: create-structarray-field.md
 title: 建立 StructArray 欄位
 summary: >-
   當一個實體需要包含一組有序的結構化元素清單時，請建立一個 StructArray 欄位。StructArray 欄位是一種 Array 欄位，其元素類型為
-  Struct。每個 Struct 元素均遵循相同的結構，並可包含標量子欄位、向量子欄位，或兩者兼具。
+  Struct。每個 Struct 元素皆遵循相同的結構，並可包含標量子欄位、向量子欄位，或兩者兼具。
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">建立 StructArray 欄位<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector</code></td><td>不支援</td><td>StructArray 欄位不支援稀疏向量子欄位。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>請使用 `<code translate="no">VARCHAR</code>`，而非 `<code translate="no">String</code>`。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援 JSON 子欄位。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援幾何子欄位及 GIS 函式。</td></tr>
+<tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援幾何子欄位和 GIS 函式。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援文字子欄位。</td></tr>
 <tr><td><code translate="no">Array</code></td><td>不支援</td><td>StructArray 欄位不支援 Timestamptz 子欄位及時間特定表達式。</td></tr>
 <tr><td>嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code></td><td>不支援</td><td>StructArray 欄位不能包含嵌套陣列、嵌套向量陣列、嵌套 Struct 欄位或嵌套 Array-of-Struct 欄位。</td></tr>
@@ -125,11 +125,11 @@ summary: >-
       </svg>
     </button></h2><p>要建立 StructArray 欄位，請先定義每個元素所使用的 Struct 架構。接著新增一個 Array 欄位，並將其元素類型設定為 Struct。</p>
 <ol>
-<li><p>建立集合模式。</p></li>
+<li><p>建立集合架構。</p></li>
 <li><p>新增集合層級的欄位，例如主鍵和文章層級的欄位。</p></li>
-<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 模式。</p></li>
+<li><p>為儲存於 StructArray 欄位內的元素建立 Struct 架構。</p></li>
 <li><p>在 Struct 模式中新增標量與向量子欄位。</p></li>
-<li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct。</p></li>
+<li><p>新增一個陣列欄位，並將其<code translate="no">element_type=DataType.STRUCT</code> 設為 Struct 模式。</p></li>
 <li><p>將 `<code translate="no">struct_schema</code> ` 設定為 `Struct` 模式。</p></li>
 <li><p>設定 `<code translate="no">max_capacity</code> ` 以限制每個實體可在該欄位中儲存的 `Struct` 元素數量。</p></li>
 </ol>
@@ -336,7 +336,7 @@ client.add_collection_struct_field(
     nullable=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>新增 StructArray 欄位後，現有實體針對該新欄位及其所有子欄位，皆會傳回 `<code translate="no">null</code> `。</p>
+<p>新增 StructArray 欄位後，現有實體針對該新欄位的所有子欄位，其值皆為 `<code translate="no">null</code> `。</p>
 <p>StructArray 欄位建立後，您無法向該現有 StructArray 欄位新增子欄位。若日後需要額外的元素屬性，請呼叫 `<code translate="no">drop_collection_field()</code> ` 來刪除該 StructArray 欄位，然後使用更新的 Struct 架構新增一個新的 StructArray 欄位。</p>
 <pre><code translate="no" class="language-python">client.drop_collection_field(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
@@ -401,11 +401,11 @@ client.add_collection_struct_field(
 <li><p>將 `<code translate="no">DataType.STRUCT</code> ` 建立為頂層集合欄位，而非將其用作 `Array` 欄位的元素類型。</p></li>
 <li><p>忘記在 StructArray 欄位上設定<code translate="no">max_capacity</code> 。</p></li>
 <li><p>定義不受支援的子欄位類型，例如 JSON、Geometry、Text、Timestamptz、SparseFloatVector、嵌套 Array、嵌套 Struct 或 Array-of-Struct。</p></li>
-<li><p>將 `<code translate="no">String</code> ` 用作子欄位類型。請改用 `<code translate="no">VARCHAR</code> ` 並設定 `<code translate="no">max_length</code>`。</p></li>
+<li><p>將<code translate="no">String</code> 用作子欄位類型。請改用<code translate="no">VARCHAR</code> 並設定<code translate="no">max_length</code> 。</p></li>
 <li><p>將同一個向量子欄位同時用於 EmbeddingList 搜尋與元素層級搜尋。</p></li>
 <li><p>僅新增向量子欄位，卻忽略了篩選所需的標量子欄位，例如<code translate="no">section</code> 、<code translate="no">quality_score</code> 或<code translate="no">has_code</code> 。</p></li>
 <li><p>將向量子欄位視為<code translate="no">$[...]</code> 的標量謂詞輸入。使用向量子欄位進行向量搜尋，並使用標量子欄位進行標量謂詞搜尋。</p></li>
-<li><p>假設在 StructArray 欄位建立後，可向該欄位新增子欄位。</p></li>
+<li><p>假設在建立 StructArray 欄位後，可向該欄位新增子欄位。</p></li>
 <li><p>使用<code translate="no">chunks.emb</code> 或<code translate="no">chunks.emb_list_vector</code> 取代必需的路徑語法<code translate="no">chunks[emb]</code> 或<code translate="no">chunks[emb_list_vector]</code> 。</p></li>
 <li><p>將可為空的 StructArray 行為視為在每個目標版本中皆可用。</p></li>
 </ul>
@@ -427,6 +427,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>若要將嵌套資料插入 StructArray 欄位，請參閱<a href="/docs/zh-hant/insert-data-into-structarray-fields.md">《將資料插入 StructArray 欄位</a>》。</p></li>
 <li><p>若要建立向量和標量索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
-<li><p>若要搜尋 StructArray 的向量子欄位，請參閱《使用 StructArray 進行基本向量搜尋》。</p></li>
+<li><p>若要搜尋 StructArray 的向量子欄位，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
 <li><p>若要檢視受支援的資料類型、可為空的行為以及特定版本的限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
 </ol>

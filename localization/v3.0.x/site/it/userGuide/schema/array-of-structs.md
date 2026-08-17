@@ -3,11 +3,11 @@ id: array-of-structs.md
 title: Panoramica su StructArray
 summary: >-
   Utilizza StructArray quando un'entità deve memorizzare un elenco ordinato di
-  elementi strutturati, come ad esempio un documento composto da più blocchi,
-  una pagina con più elementi visivi o un video composto da più clip.
-  StructArray conserva questi elementi all'interno dell'entità padre,
-  consentendo al contempo la ricerca vettoriale e il filtraggio scalare sui
-  campi all'interno di ciascun elemento.
+  elementi strutturati, come ad esempio un documento composto da più parti, una
+  pagina con più elementi visivi o un video composto da più clip. StructArray
+  conserva questi elementi all'interno dell'entità principale, consentendo al
+  contempo la ricerca vettoriale e il filtraggio scalare sui campi all'interno
+  di ciascun elemento.
 ---
 <h1 id="StructArray-Overview" class="common-anchor-header">Panoramica su StructArray<button data-href="#StructArray-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Uno <strong>StructArray</strong>, noto anche come array di Struct, memorizza un insieme ordinato di elementi Struct in ciascuna entità. Ogni elemento Struct nell’array segue lo stesso schema. Un elemento Struct può contenere sottocampi scalari, sottocampi vettoriali o entrambi.</p>
-<p>Ad esempio, una raccolta può memorizzare un articolo come entità e memorizzarne i segmenti in un campo StructArray denominato <code translate="no">chunks</code>. Ogni segmento può includere testo, metadati della sezione, punteggi di qualità e uno o più embedding vettoriali.</p>
+<p>Ad esempio, una raccolta può memorizzare un articolo come entità e memorizzarne i segmenti in un campo StructArray denominato <code translate="no">chunks</code>. Ogni segmento può includere testo, metadati della sezione, punteggi di qualità e una o più rappresentazioni vettoriali.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -122,14 +122,14 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Modellare un oggetto padre con molti figli strutturati.</td><td>Crea un campo StructArray.</td><td>L'entità contiene elementi Struct ordinati.</td><td><a href="/docs/it/create-structarray-field.md">Creare un campo StructArray</a></td></tr>
-<tr><td>Inserisci record padre con dati figlio annidati.</td><td>Inserire entità il cui campo StructArray sia un elenco di oggetti Struct.</td><td>Inserimento a livello di entità.</td><td><a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento di dati nei campi StructArray</a></td></tr>
+<tr><td>Inserisci record padre con dati figlio annidati.</td><td>Inserire entità il cui campo StructArray è un elenco di oggetti Struct.</td><td>Inserimento a livello di entità.</td><td><a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento di dati nei campi StructArray</a></td></tr>
 <tr><td>Eseguire ColBERT, ColPali o il recupero a interazione tardiva a livello di documento.</td><td>Utilizzare la ricerca EmbeddingList con un indice <code translate="no">MAX_SIM*</code>.</td><td>A livello di entità.</td><td><a href="/docs/it/search-with-embedding-lists.md">Ricerca con Embedding List</a></td></tr>
-<tr><td>Cerca singoli chunk, clip o patch.</td><td>Utilizza la ricerca a livello di elemento con una metrica vettoriale regolare.</td><td>Livello di elemento Struct, con offset quando disponibile.</td><td>Ricerca vettoriale di base con StructArray</td></tr>
-<tr><td>Limita la ricerca vettoriale a livello di elemento agli elementi che soddisfano condizioni scalari.</td><td>Utilizza ` <code translate="no">element_filter</code>`.</td><td>Filtraggio a livello di elemento; la forma del risultato dipende dal tipo di ricerca.</td><td>Ricerca filtrata con StructArray</td></tr>
+<tr><td>Cerca singoli chunk, clip o patch.</td><td>Utilizza la ricerca a livello di elemento con una metrica vettoriale regolare.</td><td>Livello di elemento Struct, con offset quando disponibile.</td><td><a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a></td></tr>
+<tr><td>Limita la ricerca vettoriale a livello di elemento agli elementi che soddisfano condizioni scalari.</td><td>Utilizza ` <code translate="no">element_filter</code>`.</td><td>Filtraggio a livello di elemento; la forma del risultato dipende dal tipo di ricerca.</td><td><a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a></td></tr>
 <tr><td>Selezionare le entità in base al numero di elementi Struct che soddisfano una condizione.</td><td>Utilizzare <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code>.</td><td>Livello entità.</td><td><a href="/docs/it/struct-array-operators.md">Operatori StructArray</a></td></tr>
-<tr><td>Utilizzare limiti di punteggio o di distanza sui sottocampi vettoriali di StructArray.</td><td>Utilizzare la ricerca per intervallo a livello di elemento.</td><td>Livello degli elementi di Struct.</td><td>Ricerca per intervallo con StructArray</td></tr>
-<tr><td>Restituisce al massimo un risultato per entità padre dopo la ricerca a livello di elemento.</td><td>Utilizzare la ricerca raggruppata per chiave primaria.</td><td>Livello entità dopo il raggruppamento.</td><td>Ricerca raggruppata con StructArray</td></tr>
-<tr><td>Combina la ricerca sugli elementi di StructArray con un altro campo vettoriale.</td><td>Utilizzare la ricerca ibrida con un AnnSearchRequest mirato a un sottocampo vettoriale di StructArray.</td><td>Ricerca secondaria a livello di elemento, riordino dei risultati a livello di entità.</td><td>Ricerca ibrida con StructArray</td></tr>
+<tr><td>Utilizzare i limiti di punteggio o di distanza sui sottocampi vettoriali di StructArray.</td><td>Utilizzare la ricerca per intervallo a livello di elemento.</td><td>Livello degli elementi di Struct.</td><td><a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a></td></tr>
+<tr><td>Restituisce al massimo un risultato per entità padre dopo la ricerca a livello di elemento.</td><td>Utilizzare la ricerca raggruppata per chiave primaria.</td><td>Livello entità dopo il raggruppamento.</td><td><a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a></td></tr>
+<tr><td>Combina la ricerca sugli elementi di StructArray con un altro campo vettoriale.</td><td>Utilizzare la ricerca ibrida con un AnnSearchRequest mirato a un sottocampo vettoriale di StructArray.</td><td>Ricerca secondaria a livello di elemento, riordino dei risultati a livello di entità.</td><td><a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a></td></tr>
 </tbody>
 </table>
 <h2 id="Understand-the-two-search-models" class="common-anchor-header">Comprendere i due modelli di ricerca<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
@@ -148,15 +148,38 @@ summary: >-
         ></path>
       </svg>
     </button></h2><table>
-<thead>
-<tr><th>### Ricerca EmbeddingList La ricerca EmbeddingList tratta i vettori all’interno di un sottocampo vettoriale di StructArray come un unico elenco di embedding per l’entità padre. Anche la query è un elenco di embedding. Milvus confronta l’elenco di embedding della query con quello memorizzato utilizzando una metrica <code translate="no">MAX_SIM*</code> e restituisce le entità corrispondenti. - Dati della query: elenco di embedding. - Famiglia di metriche: <code translate="no">MAX_SIM*</code>. - Granularità dei risultati: livello di entità. - Ideale per: recupero con interazione tardiva a livello di documento o di pagina.</th><th>### Ricerca a livello di elemento La ricerca a livello di elemento tratta ogni elemento Struct come un candidato indipendente per la ricerca vettoriale. Ogni risultato positivo rappresenta un elemento corrispondente all’interno del campo StructArray, e i risultati non raggruppati possono rivelare l’offset dell’elemento. - Dati della query: vettore regolare. - Famiglia di metriche: metriche vettoriali regolari. - Granularità dei risultati: livello di elemento Struct. - Ideale per: recupero a livello di blocco, clip o patch.</th></tr>
-</thead>
-<tbody>
-</tbody>
+  <thead>
+    <tr>
+      <th scope="col"><h3>Ricerca EmbeddingList</h3></th>
+      <th scope="col"><h3>Ricerca a livello di elemento</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>La ricerca EmbeddingList considera i vettori all'interno di un sottocampo vettoriale di StructArray come un unico elenco di embedding per l'entità padre. Anche la query è un elenco di embedding. Milvus confronta l'elenco di embedding della query con quello memorizzato utilizzando una metrica di <code translate="no">MAX_SIM*</code> e e restituisce le entità corrispondenti.</p>
+        <ul>
+          <li>Dati della query: lista di embedding.</li>
+          <li>Famiglia di metriche: <code translate="no">MAX_SIM*</code>.</li>
+          <li>Granularità dei risultati: livello di entità.</li>
+          <li>Ideale per: recupero a interazione tardiva a livello di documento o di pagina.</li>
+        </ul>
+      </td>
+      <td>
+        <p>La ricerca a livello di elemento tratta ogni elemento Struct come un candidato indipendente per la ricerca vettoriale. Ogni risultato positivo rappresenta un elemento corrispondente all’interno del campo StructArray, e i risultati non raggruppati possono rivelare l’offset dell’elemento.</p>
+        <ul>
+          <li>Dati di query: vettore regolare.</li>
+          <li>Famiglia di metriche: metriche vettoriali regolari.</li>
+          <li>Granularità dei risultati: livello di elemento Struct.</li>
+          <li>Ideale per: recupero a livello di blocco, clip o patch.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <div class="alert note">
 <p>Avviso</p>
-<p>Se la tua raccolta richiede sia la ricerca EmbeddingList che quella a livello di elemento, utilizza due sottocampi vettoriali separati. Un campo vettoriale o un sottocampo vettoriale accetta un solo indice, e le due modalità di ricerca richiedono famiglie di metriche diverse.</p>
+<p>Se la tua raccolta richiede sia la ricerca EmbeddingList che quella a livello di elemento, utilizza due sottocampi vettoriali separati. Un campo vettoriale o un sottocampo vettoriale accetta un solo indice e le due modalità di ricerca richiedono famiglie di metriche diverse.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Mappa della documentazione<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,11 +206,11 @@ summary: >-
 <tr><td>Modellazione</td><td><a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento dei dati nei campi StructArray</a></td><td>Preparare e inserire dati StructArray annidati.</td></tr>
 <tr><td>Modellazione</td><td><a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a></td><td>Creare indici vettoriali e scalari sui sottocampi di StructArray.</td></tr>
 <tr><td>Riferimento</td><td><a href="/docs/it/structarray-limits.md">Limiti di StructArray</a></td><td>Verifica i limiti relativi a schema, tipo di dati, indice, ricerca, filtro e versione.</td></tr>
-<tr><td>Ricerca</td><td>Ricerca vettoriale di base con StructArray</td><td>Confronta la ricerca EmbeddingList con la ricerca vettoriale a livello di elemento.</td></tr>
-<tr><td>Ricerca</td><td>Ricerca per intervallo con StructArray</td><td>Utilizza i vincoli di intervallo con i sottocampi vettoriali di StructArray.</td></tr>
-<tr><td>Ricerca</td><td>Ricerca raggruppata con StructArray</td><td>Raggruppa i risultati della ricerca a livello di elemento in base alla chiave primaria.</td></tr>
-<tr><td>Ricerca</td><td>Ricerca ibrida con StructArray</td><td>Combina la ricerca a livello di elemento con StructArray con altre ricerche vettoriali.</td></tr>
-<tr><td>Ricerca</td><td>Ricerca filtrata con StructArray</td><td>Utilizza i filtri di StructArray nella ricerca, nella query e nella ricerca ibrida.</td></tr>
+<tr><td>Ricerca</td><td><a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a></td><td>Confronta la ricerca EmbeddingList con la ricerca vettoriale a livello di elemento.</td></tr>
+<tr><td>Ricerca</td><td><a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a></td><td>Utilizza i vincoli di intervallo con i sottocampi vettoriali di StructArray.</td></tr>
+<tr><td>Ricerca</td><td><a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a></td><td>Raggruppa i risultati della ricerca a livello di elemento in base alla chiave primaria.</td></tr>
+<tr><td>Ricerca</td><td><a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a></td><td>Combina la ricerca a livello di elemento con StructArray con altre ricerche vettoriali.</td></tr>
+<tr><td>Ricerca</td><td><a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a></td><td>Utilizza i filtri di StructArray nella ricerca, nella query e nella ricerca ibrida.</td></tr>
 <tr><td>Ricerca</td><td><a href="/docs/it/search-with-embedding-lists.md">Ricerca con elenchi di embedding</a></td><td>Crea sistemi di recupero in stile ColBERT e ColPali con StructArray.</td></tr>
 <tr><td>Filtro</td><td><a href="/docs/it/struct-array-operators.md">Operatori StructArray</a></td><td>Sintassi di riferimento per gli operatori <code translate="no">element_filter</code> e <code translate="no">MATCH_*</code>.</td></tr>
 </tbody>
@@ -232,7 +255,7 @@ summary: >-
     </button></h2><ol>
 <li><p>Per progettare uno schema, leggere <a href="/docs/it/create-structarray-field.md">Creare un campo StructArray</a>.</p></li>
 <li><p>Per preparare i dati, leggere <a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento di dati nei campi StructArray</a>.</p></li>
-<li><p>Per scegliere gli indici, leggere " <a href="/docs/it/index-structarray-fields.md">Indicizzazione dei campi StructArray</a>".</p></li>
-<li><p>Per effettuare ricerche nei sottocampi vettoriali di StructArray, iniziare con Ricerca vettoriale di base con StructArray.</p></li>
-<li><p>Per filtrare i sottocampi scalari di StructArray, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a> e Ricerca filtrata con StructArray.</p></li>
+<li><p>Per scegliere gli indici, leggere " <a href="/docs/it/index-structarray-fields.md">Indice dei campi StructArray</a>".</p></li>
+<li><p>Per effettuare ricerche nei sottocampi vettoriali di StructArray, iniziare con <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
+<li><p>Per filtrare i sottocampi scalari di StructArray, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a> e <a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a>.</p></li>
 </ol>
