@@ -17,7 +17,7 @@ In current release, all parameters take effect only after being configured at th
 
 ## Sections
 
-For the convenience of maintenance, Milvus classifies its configurations into %s sections based on its components, dependencies, and general usage.
+For the convenience of maintenance, Milvus classifies its configurations into sections based on its components, dependencies, and general usage.
 
 ### `etcd`
 
