@@ -1,6 +1,6 @@
 # create_user()
 
-Adds optional description. Async variant shares the sync method parameter and response contract.
+This operation creates a user with the specified username and password.
 
 ## Request Syntax
 

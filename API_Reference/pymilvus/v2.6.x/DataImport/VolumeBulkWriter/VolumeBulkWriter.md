@@ -1,6 +1,6 @@
 # VolumeBulkWriter
 
-Adds connection and local output-path behavior.
+VolumeBulkWriter handles writing local bulk files to a remote volume.
 
 ## Request Syntax
 

@@ -1,6 +1,6 @@
 # describe_role()
 
-Response now exposes the role description. Async variant shares the sync method parameter and response contract. Intermediate wrapper field converted into the public describe_role() response dictionary.
+This operation returns the description and privileges of a specific role.
 
 ## Request Syntax
 

@@ -1,6 +1,6 @@
 # hybrid_search()
 
-Update the embedded AnnSearchRequest parameter documentation and examples. Async variant shares the sync parameter contract. Document filter as an alias for expr and the mutual-exclusion validation. Document the read-only filter property inline; it is accessed as request.filter, not request.filter().
+This operation performs multi-vector search on a collection and returns search results after reranking.
 
 ## Request Syntax
 
