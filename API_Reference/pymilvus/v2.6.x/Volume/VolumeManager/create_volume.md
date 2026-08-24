@@ -1,6 +1,6 @@
 # create_volume()
 
-Adds project/region and external-volume parameters.
+This operation creates a volume in the specified project and region.
 
 ## Request Syntax
 
