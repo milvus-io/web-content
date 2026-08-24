@@ -1,6 +1,6 @@
 # update_password()
 
-Updates user credential/description-related signature behavior. Async variant shares the sync method parameter and response contract.
+This operation updates the password of a specific user and can also update the user description.
 
 ## Request Syntax
 
