@@ -119,6 +119,13 @@ beta: Milvus 3.0.x
 <p>The examples below use a product collection with brand, category, color, price, and rating fields. All brand names, product names, prices, ratings, and search results are synthetic example data. Expand the following section to create the collection and define the shared search variables.</p>
 <p><details></p>
 <p><summary>Set up the example collection</summary></p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, SearchAggregation, TopHits
 
 client = MilvusClient(
@@ -259,6 +266,130 @@ search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {},
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).token(<span class="hljs-string">&quot;root:Milvus&quot;</span>).build());
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;product_search_aggregation&quot;</span>;
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;id&quot;</span>).dataType(DataType.Int64).isPrimaryKey(<span class="hljs-literal">true</span>).autoID(<span class="hljs-literal">false</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>).dataType(DataType.FloatVector).dimension(<span class="hljs-number">5</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;name&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">200</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;brand&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;category&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;color&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">50</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;price&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;in_stock&quot;</span>).dataType(DataType.Bool).build());
+
+client.createCollection(CreateCollectionReq.builder().collectionName(collectionName).collectionSchema(schema)
+        .indexParams(Collections.singletonList(IndexParam.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+                .indexType(IndexParam.IndexType.AUTOINDEX).metricType(IndexParam.MetricType.COSINE).build()))
+        .build());
+
+List&lt;JsonObject&gt; data = Arrays.asList(
+        product(<span class="hljs-number">1</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.12f</span>, <span class="hljs-number">0.42f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.66f</span>, <span class="hljs-number">0.31f</span>}, <span class="hljs-string">&quot;Runner A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">129.99</span>, <span class="hljs-number">4.7</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">2</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.10f</span>, <span class="hljs-number">0.39f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.61f</span>, <span class="hljs-number">0.29f</span>}, <span class="hljs-string">&quot;Trail A2&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">139.99</span>, <span class="hljs-number">4.6</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">3</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14f</span>, <span class="hljs-number">0.44f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.68f</span>, <span class="hljs-number">0.33f</span>}, <span class="hljs-string">&quot;Runner B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">4</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.16f</span>, <span class="hljs-number">0.41f</span>, <span class="hljs-number">0.22f</span>, <span class="hljs-number">0.62f</span>, <span class="hljs-number">0.30f</span>}, <span class="hljs-string">&quot;Runner C1&quot;</span>, <span class="hljs-string">&quot;Brand C&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-number">119.99</span>, <span class="hljs-number">4.4</span>, <span class="hljs-literal">false</span>),
+        product(<span class="hljs-number">5</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.48f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.59f</span>, <span class="hljs-number">0.15f</span>, <span class="hljs-number">0.71f</span>}, <span class="hljs-string">&quot;Jacket A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">99.99</span>, <span class="hljs-number">4.5</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">6</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.45f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.55f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.69f</span>}, <span class="hljs-string">&quot;Jacket B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">89.99</span>, <span class="hljs-number">4.3</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">7</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.09f</span>, <span class="hljs-number">0.38f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.60f</span>, <span class="hljs-number">0.27f</span>}, <span class="hljs-string">&quot;Runner A3&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">8</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.13f</span>, <span class="hljs-number">0.43f</span>, <span class="hljs-number">0.21f</span>, <span class="hljs-number">0.65f</span>, <span class="hljs-number">0.32f</span>}, <span class="hljs-string">&quot;Runner A4&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">149.99</span>, <span class="hljs-number">4.9</span>, <span class="hljs-literal">true</span>));
+client.insert(InsertReq.builder().collectionName(collectionName).data(data).build());
+
+List&lt;Float&gt; queryVector = Arrays.asList(<span class="hljs-number">0.11f</span>, <span class="hljs-number">0.40f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.64f</span>, <span class="hljs-number">0.30f</span>);
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> JsonObject <span class="hljs-title function_">product</span><span class="hljs-params">(<span class="hljs-type">long</span> id, <span class="hljs-type">float</span>[] embedding, String name, String brand,
+                                  String category, String color, <span class="hljs-type">double</span> price, <span class="hljs-type">double</span> rating,
+                                  <span class="hljs-type">boolean</span> inStock)</span> {
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, id);
+    row.add(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>().toJsonTree(embedding));
+    row.addProperty(<span class="hljs-string">&quot;name&quot;</span>, name);
+    row.addProperty(<span class="hljs-string">&quot;brand&quot;</span>, brand);
+    row.addProperty(<span class="hljs-string">&quot;category&quot;</span>, category);
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, color);
+    row.addProperty(<span class="hljs-string">&quot;price&quot;</span>, price);
+    row.addProperty(<span class="hljs-string">&quot;rating&quot;</span>, rating);
+    row.addProperty(<span class="hljs-string">&quot;in_stock&quot;</span>, inStock);
+    <span class="hljs-keyword">return</span> row;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;Milvus&#x27;</span>,
+});
+<span class="hljs-keyword">const</span> collectionName = <span class="hljs-string">&#x27;product_search_aggregation&#x27;</span>;
+
+<span class="hljs-keyword">if</span> ((<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName })).<span class="hljs-property">value</span>) {
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+}
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&#x27;Session&#x27;</span>,
+  <span class="hljs-attr">fields</span>: [
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">200</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;in_stock&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Bool</span> },
+  ],
+});
+
+<span class="hljs-keyword">const</span> data = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.42</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.66</span>, <span class="hljs-number">0.31</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">129.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.7</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.10</span>, <span class="hljs-number">0.39</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.61</span>, <span class="hljs-number">0.29</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Trail A2&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">139.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.6</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.44</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.68</span>, <span class="hljs-number">0.33</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;white&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.16</span>, <span class="hljs-number">0.41</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.62</span>, <span class="hljs-number">0.30</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner C1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand C&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">119.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.4</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.48</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.59</span>, <span class="hljs-number">0.15</span>, <span class="hljs-number">0.71</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">99.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.5</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.45</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.55</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.69</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">89.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.3</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.09</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.60</span>, <span class="hljs-number">0.27</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A3&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.13</span>, <span class="hljs-number">0.43</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.65</span>, <span class="hljs-number">0.32</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A4&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">149.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.9</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+];
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({ <span class="hljs-attr">collection_name</span>: collectionName, data });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({ <span class="hljs-attr">collection_name</span>: collectionName, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>, <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span> });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollectionSync</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.40</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.64</span>, <span class="hljs-number">0.30</span>];
+<span class="hljs-keyword">const</span> searchParams = { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span>, <span class="hljs-attr">params</span>: {} };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_search_aggregation&quot;</span>
+<span class="hljs-function"><span class="hljs-title">search</span></span>() {
+  curl --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --data <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+}
+schema=<span class="hljs-string">&#x27;{&quot;autoID&quot;:false,&quot;enableDynamicField&quot;:false,&quot;fields&quot;:[{&quot;fieldName&quot;:&quot;id&quot;,&quot;dataType&quot;:&quot;Int64&quot;,&quot;isPrimary&quot;:true},{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;dataType&quot;:&quot;FloatVector&quot;,&quot;elementTypeParams&quot;:{&quot;dim&quot;:5}},{&quot;fieldName&quot;:&quot;name&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:200}},{&quot;fieldName&quot;:&quot;brand&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;category&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;color&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:50}},{&quot;fieldName&quot;:&quot;price&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;rating&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;in_stock&quot;,&quot;dataType&quot;:&quot;Bool&quot;}]}&#x27;</span>
+indexParams=<span class="hljs-string">&#x27;[{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;indexType&quot;:&quot;AUTOINDEX&quot;,&quot;metricType&quot;:&quot;COSINE&quot;}]&#x27;</span>
+data=<span class="hljs-string">&#x27;[{&quot;id&quot;:1,&quot;embedding&quot;:[0.12,0.42,0.18,0.66,0.31],&quot;name&quot;:&quot;Runner A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:129.99,&quot;rating&quot;:4.7,&quot;in_stock&quot;:true},{&quot;id&quot;:2,&quot;embedding&quot;:[0.10,0.39,0.20,0.61,0.29],&quot;name&quot;:&quot;Trail A2&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:139.99,&quot;rating&quot;:4.6,&quot;in_stock&quot;:true},{&quot;id&quot;:3,&quot;embedding&quot;:[0.14,0.44,0.19,0.68,0.33],&quot;name&quot;:&quot;Runner B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;white&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:4,&quot;embedding&quot;:[0.16,0.41,0.22,0.62,0.30],&quot;name&quot;:&quot;Runner C1&quot;,&quot;brand&quot;:&quot;Brand C&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;red&quot;,&quot;price&quot;:119.99,&quot;rating&quot;:4.4,&quot;in_stock&quot;:false},{&quot;id&quot;:5,&quot;embedding&quot;:[0.48,0.20,0.59,0.15,0.71],&quot;name&quot;:&quot;Jacket A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:99.99,&quot;rating&quot;:4.5,&quot;in_stock&quot;:true},{&quot;id&quot;:6,&quot;embedding&quot;:[0.45,0.18,0.55,0.17,0.69],&quot;name&quot;:&quot;Jacket B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:89.99,&quot;rating&quot;:4.3,&quot;in_stock&quot;:true},{&quot;id&quot;:7,&quot;embedding&quot;:[0.09,0.38,0.17,0.60,0.27],&quot;name&quot;:&quot;Runner A3&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:8,&quot;embedding&quot;:[0.13,0.43,0.21,0.65,0.32],&quot;name&quot;:&quot;Runner A4&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:149.99,&quot;rating&quot;:4.9,&quot;in_stock&quot;:true}]&#x27;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;schema\&quot;:<span class="hljs-variable">${schema}</span>,\&quot;indexParams\&quot;:<span class="hljs-variable">${indexParams}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;data\&quot;:<span class="hljs-variable">${data}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>The setup above configures <code translate="no">COSINE</code> for both the vector index and the search parameters. Therefore, later examples use <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> to place higher cosine similarity first. For a distance metric such as <code translate="no">L2</code>, use <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
 <h3 id="Compare-and-sort-buckets" class="common-anchor-header">Compare and sort buckets<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
@@ -279,6 +410,13 @@ search_params = {
     </button></h3><p>Use this pattern when you need to compare groups of retrieved entities using calculated statistics and control the order in which the buckets are returned. In this example, Milvus groups retrieved products by <code translate="no">brand</code>, calculates price metrics for each brand bucket, and sorts the buckets by average price.</p>
 <p>If your goal is only to improve result diversity by returning one or more entities per field value, use <a href="/docs/grouping-search.md">Grouping Search</a> instead.</p>
 <p>The following configuration creates up to three brand buckets, calculates metrics for each bucket, and sorts the buckets by average price:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>],</span>
@@ -298,7 +436,62 @@ search_params = {
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricOps;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SearchAggregation;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SortSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.TopHitsSpec;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;min_price&quot;</span>, MetricSpec.builder().op(MetricOps.MIN).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_price&quot;</span>).direction(AggDirection.DESC).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;_key&quot;</span>).direction(AggDirection.ASC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+    <span class="hljs-attr">min_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;min&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_price&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;_key&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;asc&#x27;</span> },
+  ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+  &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>Pass the object to the <code translate="no">search_aggregation</code> parameter of <code translate="no">MilvusClient.search()</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">result = client.search(
     collection_name=collection_name,
     data=[query_vector],
@@ -315,6 +508,50 @@ search_params = {
     ],
 <span class="highlighted-wrapper-line">    search_aggregation=aggregation,</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryVector)))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(Collections.singletonMap(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;COSINE&quot;</span>))
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;in_stock&quot;</span>))
+        .searchAggregation(aggregation)
+        .build());
+
+List&lt;AggregationBucket&gt; buckets = result.getAggregationBuckets().get(<span class="hljs-number">0</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">data</span>: queryVector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  ...searchParams,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-string">&#x27;in_stock&#x27;</span>],
+  <span class="hljs-attr">search_aggregation</span>: aggregation,
+});
+
+<span class="hljs-keyword">const</span> buckets = result.<span class="hljs-property">agg_buckets</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+    &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 10,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;brand&quot;, &quot;category&quot;, &quot;color&quot;, &quot;price&quot;, &quot;rating&quot;, &quot;in_stock&quot;],
+    &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+    &quot;searchAggregation&quot;: {
+      &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+      &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+      &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+    }
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>When <code translate="no">search_aggregation</code> is set, PyMilvus returns no ordinary entity hits in <code translate="no">result[0]</code>. Read the bucket response from <code translate="no">result.agg_buckets[0]</code> instead. The <code translate="no">output_fields</code> parameter controls which scalar fields appear in each returned <code translate="no">AggregationHit.fields</code> mapping; Milvus can still use metric-source and sort fields that are not listed in <code translate="no">output_fields</code>.</p>
 <p><details></p>
@@ -418,6 +655,13 @@ search_params = {
 </table>
 <p>Each <code translate="no">order</code> entry maps a key to <code translate="no">&quot;asc&quot;</code> or <code translate="no">&quot;desc&quot;</code>. Milvus evaluates multiple entries from first to last. If you omit <code translate="no">order</code>, Milvus keeps the bucket discovery order from the retained candidate set.</p>
 <p>To sort buckets by vector match quality, first calculate a bucket-level metric from <code translate="no">_score</code>, and then use the metric alias in <code translate="no">order</code>. You cannot use <code translate="no">_score</code> directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with <code translate="no">COSINE</code> or <code translate="no">IP</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -425,16 +669,67 @@ search_params = {
     order=[{<span class="hljs-string">&quot;max_score&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>}],
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;max_score&quot;</span>, MetricSpec.builder().op(MetricOps.MAX).fieldName(<span class="hljs-string">&quot;_score&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;max_score&quot;</span>).direction(AggDirection.DESC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: { <span class="hljs-attr">max_score</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;max&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span> } },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;max_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;max_score&quot;: {&quot;op&quot;: &quot;max&quot;, &quot;fieldName&quot;: &quot;_score&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;max_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>With <code translate="no">L2</code>, calculate the minimum <code translate="no">_score</code> value and sort the metric alias in ascending order so that buckets with the lowest distance come first.</p>
 <p></details></p>
 <p><details></p>
 <p><summary>Create composite bucket keys</summary></p>
 <p>To create a composite bucket key, pass multiple field names in the same list:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],</span>
     size=<span class="hljs-number">6</span>,
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Arrays.asList(<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .size(<span class="hljs-number">6</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">6</span>,
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;, &quot;color&quot;], &quot;size&quot;: 6}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>This configuration can produce keys such as <code translate="no">(Brand A, black)</code>, <code translate="no">(Brand A, blue)</code>, and <code translate="no">(Brand B, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. When <code translate="no">_key</code> is used in <code translate="no">order</code>, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.</p>
 <p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
@@ -458,6 +753,13 @@ search_params = {
       </svg>
     </button></h3><p>Include representative entities when the application needs to show actual products from each bucket. In this example, Milvus returns up to two products from each brand bucket, ordered by rating and then by vector score.</p>
 <p>Configure <code translate="no">TopHits</code> as follows:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -472,6 +774,34 @@ search_params = {
 <span class="highlighted-comment-line">        ],</span>
 <span class="highlighted-comment-line">    ),</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+        .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>)
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build())
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;_score&quot;</span>).direction(AggDirection.DESC).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">top_hits</span>: {
+    <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">sort</span>: [
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    ],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;fieldName&quot;: &quot;_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>View a bucket with representative hits</summary></p>
@@ -560,6 +890,13 @@ Child bucket keys:
 <button class="copy-code-btn"></button></code></pre>
 <p>Each level can independently use multiple fields. For example, using <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> in the child aggregation would create composite child keys such as <code translate="no">(Brand A, black)</code>.</p>
 <p>The following configuration implements this hierarchy:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;category&quot;</span>],
     size=<span class="hljs-number">2</span>,
@@ -583,6 +920,55 @@ Child bucket keys:
 <span class="highlighted-comment-line">        ),</span>
 <span class="highlighted-comment-line">    ),</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;category&quot;</span>)).size(<span class="hljs-number">2</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;product_count&quot;</span>).direction(AggDirection.DESC).build())
+        .subAggregation(SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+                .addMetric(<span class="hljs-string">&quot;brand_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+                .addMetric(<span class="hljs-string">&quot;avg_rating&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;rating&quot;</span>).build())
+                .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_rating&quot;</span>).direction(AggDirection.DESC).build())
+                .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>).addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build()).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;category&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;product_count&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+  <span class="hljs-attr">sub_aggregation</span>: {
+    <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+    <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metrics</span>: {
+      <span class="hljs-attr">brand_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+      <span class="hljs-attr">avg_rating</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span> },
+    },
+    <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    <span class="hljs-attr">top_hits</span>: {
+      <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">sort</span>: [{ <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    },
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;category&quot;], &quot;size&quot;: 2,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;product_count&quot;, &quot;direction&quot;: &quot;desc&quot;}],
+    &quot;subAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;brand_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_rating&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;rating&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;avg_rating&quot;, &quot;direction&quot;: &quot;desc&quot;}], &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>View a nested bucket result</summary></p>
