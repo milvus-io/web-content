@@ -1,6 +1,6 @@
 # describe_volume()
 
-New public volume-description method.
+This operation returns detailed information about a specific volume.
 
 ## Request Syntax
 
