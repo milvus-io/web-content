@@ -467,7 +467,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-entity-level-TTL--Milvus-30x" class="common-anchor-header">Set entity-level TTL<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Set-entity-level-TTL--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Set-entity-level-TTL" class="common-anchor-header">Set entity-level TTL<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Set-entity-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

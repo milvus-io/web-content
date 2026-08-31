@@ -177,7 +177,7 @@ beta: Milvus 2.6.4+
      <td><p>Use <code translate="no">sync</code> for vector indexes that are critical to search latency. In batch or low-frequency workloads, <code translate="no">disable</code> for faster segment readiness.</p></td>
    </tr>
 </table>
-<h2 id="Configure-warmup-at-collection-level--Milvus-2611+" class="common-anchor-header">Configure warmup at collection level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-collection-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-collection-level" class="common-anchor-header">Configure warmup at collection level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-collection-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,7 +275,7 @@ client.create_collection(
      <td><p>Warmup setting for all vector indexes in the collection.</p></td>
    </tr>
 </table>
-<h2 id="Configure-warmup-at-field-level--Milvus-2611+" class="common-anchor-header">Configure warmup at field level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-field-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-field-level" class="common-anchor-header">Configure warmup at field level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-field-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -353,7 +353,7 @@ schema.add_field(
     field_params={<span class="hljs-string">&quot;warmup&quot;</span>: <span class="hljs-string">&quot;sync&quot;</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-warmup-at-index-level--Milvus-2611+" class="common-anchor-header">Configure warmup at index level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-index-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-index-level" class="common-anchor-header">Configure warmup at index level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-index-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

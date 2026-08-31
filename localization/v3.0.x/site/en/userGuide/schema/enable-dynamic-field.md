@@ -410,7 +410,7 @@ curl --request POST \
   &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Index keys in the dynamic field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-keys-in-the-dynamic-field" class="common-anchor-header">Index keys in the dynamic field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -681,7 +681,7 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Use JSON cast functions for type conversion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">Use JSON cast functions for type conversion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

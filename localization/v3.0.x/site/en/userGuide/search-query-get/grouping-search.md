@@ -387,7 +387,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">strict_group_size</code>: This boolean parameter controls whether the system should strictly enforce the count set by <code translate="no">group_size</code>. When <code translate="no">strict_group_size=True</code>, the system will attempt to include the exact number of entities specified by <code translate="no">group_size</code> in each group (e.g., two paragraphs), unless there isn’t enough data in that group. By default (<code translate="no">strict_group_size=False</code>), the system prioritizes meeting the number of groups specified by the <code translate="no">limit</code> parameter, rather than ensuring each group contains <code translate="no">group_size</code> entities. This approach is generally more efficient in cases where data distribution is uneven.</p></li>
 </ul>
 <p>For additional parameter details, refer to <a href="https://docs.zilliz.com/reference/python/python/Vector-search">search</a>.</p>
-<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Order groups by a scalar field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Order-groups-by-a-scalar-field" class="common-anchor-header">Order groups by a scalar field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -510,7 +510,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">Primary-Key Search<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+<h2 id="Primary-Key-Search" class="common-anchor-header">Primary-Key Search<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -894,7 +894,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="common-anchor-header">Sort Search Results by Scalar Fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Sort-Search-Results-by-Scalar-Fields" class="common-anchor-header">Sort Search Results by Scalar Fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

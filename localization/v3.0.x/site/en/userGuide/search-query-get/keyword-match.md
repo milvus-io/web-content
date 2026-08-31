@@ -412,7 +412,7 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="common-anchor-header">TEXT_MATCH_FUZZY expression syntax<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="anchor-icon" translate="no">
+<h3 id="TEXTMATCHFUZZY-expression-syntax" class="common-anchor-header">TEXT_MATCH_FUZZY expression syntax<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

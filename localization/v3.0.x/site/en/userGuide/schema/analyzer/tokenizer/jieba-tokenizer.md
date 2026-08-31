@@ -195,7 +195,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 </table>
 <p>To load a large custom vocabulary from an external file instead of inlining it via <code translate="no">dict</code>, see <a href="/docs/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">Custom configuration with a dictionary file</a> below.</p>
 <p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
-<h3 id="Custom-configuration-with-a-dictionary-file--Milvus-30x" class="common-anchor-header">Custom configuration with a dictionary file<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Custom-configuration-with-a-dictionary-file" class="common-anchor-header">Custom configuration with a dictionary file<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

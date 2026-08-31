@@ -93,7 +93,7 @@ summary: >-
 <li><p><a href="#add-a-function-and-its-generated-vector-field--milvus-30x">Add a Function and its generated vector field</a> when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.</p></li>
 </ul>
 <p>In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the Milvus field-count limit. For details, refer to <a href="/docs/limitations.md#number-of-resources-in-a-collection">Milvus Limits</a>.</p>
-<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">Add user-defined scalar fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
+<h3 id="Add-user-defined-scalar-fields" class="common-anchor-header">Add user-defined scalar fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,7 +147,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After the field is added, entities that already existed in the collection return <code translate="no">&quot;unreviewed&quot;</code> for <code translate="no">review_status</code>. New entities can set a different value or use the default value when no value is provided.</p>
-<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">Add StructArray fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
+<h3 id="Add-StructArray-fields" class="common-anchor-header">Add StructArray fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,7 +193,7 @@ struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</sp
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After the StructArray field is added, entities that already exist in the collection return <code translate="no">NULL</code> for <code translate="no">chunks</code> across all its sub-fields. When you insert a new entity, ensure that all sub-fields are either <code translate="no">NULL</code> or have valid values. Inserting an entity with some sub-fields set to <code translate="no">NULL</code> and others set to valid values results in errors.</p>
-<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">Add user-defined vector fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
+<h3 id="Add-user-defined-vector-fields" class="common-anchor-header">Add user-defined vector fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,7 +240,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Existing entities have <code translate="no">NULL</code> for <code translate="no">embedding_v2</code> and are skipped when you search on this field. To make existing entities searchable through <code translate="no">embedding_v2</code>, write non-NULL vector values through upsert or a backfill workflow. New entities can include <code translate="no">embedding_v2</code> during insert.</p>
 <p><a id="add-vector-fields-generated-by-functions--milvus-30x"></a></p>
-<h3 id="Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">Add a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Add-a-Function-and-its-generated-vector-field" class="common-anchor-header">Add a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -354,7 +354,7 @@ Bound index:
         ></path>
       </svg>
     </button></h2><p>You can remove user-defined fields directly when they are no longer part of your collection model. To remove a Function and its generated vector field, drop the Function; Milvus removes the generated field and its index in the same schema change.</p>
-<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">Drop user-defined fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Drop-user-defined-fields" class="common-anchor-header">Drop user-defined fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -413,7 +413,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <p>If <code translate="no">image_vector</code> is the last vector field in the collection, the drop operation is rejected.</p>
 <p><a id="drop-vector-fields-generated-by-functions--milvus-30x"></a></p>
-<h3 id="Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">Drop a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Drop-a-Function-and-its-generated-vector-field" class="common-anchor-header">Drop a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

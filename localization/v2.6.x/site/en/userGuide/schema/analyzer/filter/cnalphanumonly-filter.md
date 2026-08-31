@@ -123,7 +123,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

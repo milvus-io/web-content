@@ -462,7 +462,7 @@ curl --request POST \
 <div class="alert note">
 <p>Indexing JSON fields is <strong>optional</strong>. You can still query or filter by JSON paths without an index, but it may result in slower performance due to brute-force search.</p>
 </div>
-<h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Choose between path index and flat index<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
+<h3 id="Choose-between-path-index-and-flat-index" class="common-anchor-header">Choose between path index and flat index<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -710,7 +710,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Use JSON cast functions for type conversion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>If your JSON field key contains values in an incorrect format (e.g., numbers stored as strings), you can use cast functions to convert values during indexing.</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">Use JSON cast functions for type conversion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>If your JSON field key contains values in an incorrect format (e.g., numbers stored as strings), you can use cast functions to convert values during indexing.</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">Supported cast functions</h5><p>Cast functions are case-insensitive. The following types are supported:</p>
 <table>
    <tr>
@@ -791,7 +791,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <li><p>If conversion fails (e.g., non-numeric string), the value is skipped and not indexed.</p></li>
 </ul>
 </div>
-<h3 id="JSON-flat-indexing--Milvus-26x" class="common-anchor-header">JSON flat indexing<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#JSON-flat-indexing--Milvus-26x" class="anchor-icon" translate="no">
+<h3 id="JSON-flat-indexing" class="common-anchor-header">JSON flat indexing<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#JSON-flat-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -99,7 +99,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">params</code>: Additional configuration options for searching on the index. To learn more search parameters available for the <code translate="no">GPU_CAGRA</code> index, refer to <a href="/docs/gpu-cagra.md#Index-specific-search-params">Index-specific search params</a>.</li>
 </ul>
-<h2 id="Enable-CPU-search-at-load-time--Milvus-264+" class="common-anchor-header">Enable CPU search at load time<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time--Milvus-264+" class="anchor-icon" translate="no">
+<h2 id="Enable-CPU-search-at-load-time" class="common-anchor-header">Enable CPU search at load time<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

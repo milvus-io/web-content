@@ -62,7 +62,7 @@ summary: >-
 </p>
 <p>If the target collection has <code translate="no">autoID</code> enabled on its primary field, the <code translate="no">upsert</code> request must still include the primary key of the target entity. Milvus uses the provided primary key to locate the entity to replace, and generates a new primary key for the data carried in the request payload before inserting it.</p>
 <p>For fields with <code translate="no">nullable</code> enabled, you can omit them in the <code translate="no">upsert</code> request if they do not require any updates.</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode" class="common-anchor-header">Upsert in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -490,7 +490,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert entities in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode" class="common-anchor-header">Upsert entities in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -634,7 +634,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="common-anchor-header">Upsert ARRAY fields with partial-update operators<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.17+</span><button data-href="#Upsert-ARRAY-fields-with-partial-update-operators--Milvus-v2617+" class="anchor-icon" translate="no">
+<h2 id="Upsert-ARRAY-fields-with-partial-update-operators" class="common-anchor-header">Upsert ARRAY fields with partial-update operators<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.17+</span><button data-href="#Upsert-ARRAY-fields-with-partial-update-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

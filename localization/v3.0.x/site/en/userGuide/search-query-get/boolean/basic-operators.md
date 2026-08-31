@@ -297,7 +297,7 @@ summary: >-
     </button></h3><p>To find entities where <code translate="no">price</code> raised to the power of 2 is greater than 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Bitwise operators<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<h2 id="Bitwise-operators" class="common-anchor-header">Bitwise operators<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

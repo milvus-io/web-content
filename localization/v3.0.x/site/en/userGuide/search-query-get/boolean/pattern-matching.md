@@ -267,7 +267,7 @@ curl --request POST \
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> matches values that start with a literal backslash.</li>
 </ul>
 <p>Raw string literals, written as <code translate="no">r&quot;...&quot;</code> or <code translate="no">r'...'</code>, keep backslashes verbatim in Milvus filter expressions. They are recommended for <code translate="no">LIKE</code> and regex patterns that contain backslashes. Without a raw string, ordinary string literals still process escape sequences before the pattern is evaluated, so more backslashes may be required.</p>
-<h2 id="Use-regex--Milvus-30x" class="common-anchor-header">Use regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Use-regex" class="common-anchor-header">Use regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Use-regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
