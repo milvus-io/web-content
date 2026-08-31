@@ -3,15 +3,15 @@ id: dense-vector.md
 title: Vektor Padat
 summary: >-
   Vektor padat adalah representasi data numerik yang banyak digunakan dalam
-  pembelajaran mesin dan analisis data. Vektor padat terdiri dari larik dengan
-  bilangan real, di mana sebagian besar atau semua elemennya bukan nol.
-  Dibandingkan dengan vektor jarang, vektor padat mengandung lebih banyak
-  informasi pada tingkat dimensi yang sama, karena setiap dimensi memiliki nilai
-  yang berarti. Representasi ini dapat secara efektif menangkap pola dan
-  hubungan yang kompleks, membuat data lebih mudah dianalisis dan diproses dalam
-  ruang dimensi tinggi. Vektor padat biasanya memiliki jumlah dimensi yang
-  tetap, mulai dari beberapa lusin hingga beberapa ratus atau bahkan ribuan,
-  tergantung pada aplikasi dan persyaratan tertentu.
+  pembelajaran mesin dan analisis data. Vektor ini terdiri dari larik bilangan
+  real, di mana sebagian besar atau seluruh elemennya tidak nol. Dibandingkan
+  dengan vektor jarang, vektor padat mengandung lebih banyak informasi pada
+  tingkat dimensi yang sama, karena setiap dimensinya menyimpan nilai yang
+  bermakna. Representasi ini dapat secara efektif menangkap pola dan hubungan
+  yang kompleks, sehingga memudahkan analisis dan pemrosesan data di ruang
+  berdimensi tinggi. Vektor padat umumnya memiliki jumlah dimensi yang tetap,
+  berkisar dari beberapa lusin hingga beberapa ratus atau bahkan ribuan,
+  tergantung pada aplikasi dan persyaratan spesifiknya.
 ---
 <h1 id="Dense-Vector" class="common-anchor-header">Vektor Padat<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -28,8 +28,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Vektor padat adalah representasi data numerik yang banyak digunakan dalam pembelajaran mesin dan analisis data. Vektor padat terdiri dari larik dengan bilangan real, di mana sebagian besar atau semua elemennya bukan nol. Dibandingkan dengan vektor jarang, vektor padat mengandung lebih banyak informasi pada tingkat dimensi yang sama, karena setiap dimensi memiliki nilai yang berarti. Representasi ini dapat secara efektif menangkap pola dan hubungan yang kompleks, membuat data lebih mudah dianalisis dan diproses dalam ruang dimensi tinggi. Vektor padat biasanya memiliki jumlah dimensi yang tetap, mulai dari beberapa lusin hingga beberapa ratus atau bahkan ribuan, tergantung pada aplikasi dan persyaratan tertentu.</p>
-<p>Vektor padat terutama digunakan dalam skenario yang membutuhkan pemahaman semantik data, seperti pencarian semantik dan sistem rekomendasi. Dalam pencarian semantik, vektor padat membantu menangkap hubungan yang mendasari antara kueri dan dokumen, sehingga meningkatkan relevansi hasil pencarian. Dalam sistem rekomendasi, vektor padat membantu mengidentifikasi kemiripan antara pengguna dan item, menawarkan saran yang lebih personal.</p>
+    </button></h1><p>Vektor padat adalah representasi data numerik yang banyak digunakan dalam pembelajaran mesin dan analisis data. Vektor ini terdiri dari array bilangan real, di mana sebagian besar atau seluruh elemennya tidak nol. Dibandingkan dengan vektor jarang, vektor padat mengandung lebih banyak informasi pada tingkat dimensi yang sama, karena setiap dimensinya menyimpan nilai yang bermakna. Representasi ini dapat secara efektif menangkap pola dan hubungan yang kompleks, sehingga memudahkan analisis dan pemrosesan data dalam ruang berdimensi tinggi. Vektor padat biasanya memiliki jumlah dimensi yang tetap, berkisar dari beberapa lusin hingga beberapa ratus atau bahkan ribuan, tergantung pada aplikasi dan persyaratan spesifiknya.</p>
+<p>Vektor padat terutama digunakan dalam skenario yang memerlukan pemahaman semantik data, seperti pencarian semantik dan sistem rekomendasi. Dalam pencarian semantik, vektor padat membantu menangkap hubungan mendasar antara kueri dan dokumen, sehingga meningkatkan relevansi hasil pencarian. Dalam sistem rekomendasi, vektor padat membantu mengidentifikasi kesamaan antara pengguna dan item, sehingga menawarkan saran yang lebih dipersonalisasi.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,18 +45,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektor padat biasanya direpresentasikan sebagai larik angka floating-point dengan panjang tetap, seperti <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. Dimensi vektor ini biasanya berkisar antara ratusan hingga ribuan, seperti 128, 256, 768, atau 1024. Setiap dimensi menangkap fitur semantik tertentu dari sebuah objek, sehingga dapat diterapkan ke berbagai skenario melalui perhitungan kemiripan.</p>
-<p>
+    </button></h2><p>Vektor padat biasanya direpresentasikan sebagai array bilangan floating-point dengan panjang tetap, seperti <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. Dimensi vektor-vektor ini biasanya berkisar dari ratusan hingga ribuan, seperti 128, 256, 768, atau 1024. Setiap dimensi menangkap fitur semantik spesifik dari suatu objek, sehingga dapat diterapkan pada berbagai skenario melalui perhitungan kesamaan.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>Vektor Padat</span> </span></p>
-<p>Gambar di atas mengilustrasikan representasi vektor padat dalam ruang 2D. Meskipun vektor padat dalam aplikasi dunia nyata sering kali memiliki dimensi yang jauh lebih tinggi, ilustrasi 2D ini secara efektif menyampaikan beberapa konsep utama:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" /> 
+   <span>Vektor Padat</span>
+  
+ </span></p>
+<p>Gambar di atas menggambarkan representasi vektor padat dalam ruang 2D. Meskipun vektor padat dalam aplikasi dunia nyata sering kali memiliki dimensi yang jauh lebih tinggi, ilustrasi 2D ini secara efektif menyampaikan beberapa konsep utama:</p>
 <ul>
-<li><p><strong>Representasi Multidimensi:</strong> Setiap titik mewakili objek konseptual (seperti <strong>Milvus</strong>, <strong>basis data vektor</strong>, <strong>sistem pencarian</strong>, dll.), dengan posisinya ditentukan oleh nilai dimensinya.</p></li>
-<li><p><strong>Hubungan Semantik:</strong> Jarak antara titik-titik mencerminkan kemiripan semantik antara konsep-konsep. Titik-titik yang lebih dekat menunjukkan konsep-konsep yang lebih terkait secara semantik.</p></li>
-<li><p><strong>Efek Pengelompokan:</strong> Konsep-konsep yang terkait (seperti <strong>Milvus</strong>, <strong>basis data vektor</strong>, dan <strong>sistem pencarian</strong>) diposisikan berdekatan satu sama lain di dalam ruang, membentuk sebuah klaster semantik.</p></li>
+<li><p><strong>Representasi Multidimensi:</strong> Setiap titik mewakili objek konseptual (seperti <strong>Milvus</strong>, <strong>basis data vektor</strong>, <strong>sistem pencarian</strong>, dll.), dengan posisinya ditentukan oleh nilai-nilai dimensinya.</p></li>
+<li><p><strong>Hubungan Semantik:</strong> Jarak antar titik mencerminkan kemiripan semantik antar konsep. Titik yang lebih dekat menunjukkan konsep yang lebih terkait secara semantik.</p></li>
+<li><p><strong>Efek Pengelompokan:</strong> Konsep-konsep yang terkait (seperti <strong>Milvus</strong>, <strong>basis data vektor</strong>, dan <strong>sistem pencarian</strong>) ditempatkan berdekatan satu sama lain dalam ruang, membentuk sebuah kelompok semantik.</p></li>
 </ul>
-<p>Di bawah ini adalah contoh vektor padat nyata yang mewakili teks <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>Di bawah ini adalah contoh vektor padat nyata yang mewakili teks " <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>":</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -70,16 +72,18 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Vektor padat dapat dihasilkan dengan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">penyematan</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik dalam ruang dimensi tinggi, menangkap fitur semantik dari data. Selain itu, Milvus menawarkan metode yang mudah digunakan untuk membantu pengguna menghasilkan dan memproses vektor yang padat, seperti yang dijelaskan dalam Embeddings.</p>
-<p>Setelah data menjadi vektor, data tersebut dapat disimpan di Milvus untuk pengelolaan dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
-<p>
+<p>Vektor padat dapat dihasilkan menggunakan berbagai model <a href="https://en.wikipedia.org/wiki/Embedding">embedding</a>, seperti model CNN (seperti <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) untuk gambar dan model bahasa (seperti <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) untuk teks. Model-model ini mengubah data mentah menjadi titik-titik di ruang berdimensi tinggi, menangkap fitur semantik dari data tersebut. Selain itu, Milvus menawarkan metode praktis untuk membantu pengguna menghasilkan dan memproses vektor padat, sebagaimana dijelaskan secara rinci dalam bagian Embeddings.</p>
+<p>Setelah data divektorisasi, data tersebut dapat disimpan di Milvus untuk pengelolaan dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-   </span> <span class="img-wrapper"> <span>Menggunakan Vektor Padat</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" /> 
+   <span>Gunakan Vektor Padat</span>
+  
+ </span></p>
 <div class="alert note">
-<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor</a> <a href="/docs/id/v2.6.x/binary-vector.md">Jarang</a>.</p>
+<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner umumnya digunakan untuk menangani data biner secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor Jarang</a>.</p>
 </div>
-<h2 id="Use-dense-vectors" class="common-anchor-header">Menggunakan vektor padat<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-dense-vectors" class="common-anchor-header">Gunakan vektor padat<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Tambahkan bidang vektor<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,12 +115,17 @@ summary: >-
       </svg>
     </button></h3><p>Untuk menggunakan vektor padat di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor padat saat membuat koleksi. Proses ini meliputi:</p>
 <ol>
-<li><p>Mengatur <code translate="no">datatype</code> ke tipe data vektor padat yang didukung. Untuk tipe data vektor padat yang didukung, lihat Tipe Data.</p></li>
+<li><p>Menetapkan ` <code translate="no">datatype</code> ` ke tipe data vektor padat yang didukung. Untuk tipe data vektor padat yang didukung, lihat Tipe Data.</p></li>
 <li><p>Menentukan dimensi vektor padat menggunakan parameter <code translate="no">dim</code>.</p></li>
 </ol>
-<p>Pada contoh di bawah ini, kami menambahkan bidang vektor bernama <code translate="no">dense_vector</code> untuk menyimpan vektor padat. Tipe data field tersebut adalah <code translate="no">FLOAT_VECTOR</code>, dengan dimensi <code translate="no">4</code>.</p>
+<p>Pada contoh di bawah ini, kami menambahkan bidang vektor bernama ` <code translate="no">dense_vector</code> ` untuk menyimpan vektor padat. Tipe data bidang tersebut adalah ` <code translate="no">FLOAT_VECTOR</code>`, dengan dimensi ` <code translate="no">4</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -234,22 +243,22 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Menyimpan bilangan floating-point 32-bit, yang biasa digunakan untuk merepresentasikan bilangan riil dalam perhitungan ilmiah dan pembelajaran mesin. Ideal untuk skenario yang membutuhkan presisi tinggi, seperti membedakan vektor yang serupa.</p></td>
+     <td><p>Menyimpan bilangan floating-point 32-bit, yang umumnya digunakan untuk merepresentasikan bilangan real dalam komputasi ilmiah dan pembelajaran mesin. Ideal untuk skenario yang memerlukan presisi tinggi, seperti membedakan vektor yang serupa.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Menyimpan angka floating-point setengah presisi 16-bit, digunakan untuk pembelajaran mendalam dan komputasi GPU. Menghemat ruang penyimpanan dalam skenario di mana presisi tidak terlalu penting, seperti pada fase pemanggilan kembali dengan presisi rendah pada sistem rekomendasi.</p></td>
+     <td><p>Menyimpan bilangan floating-point presisi setengah 16-bit, digunakan untuk pembelajaran mendalam dan komputasi GPU. Tipe ini menghemat ruang penyimpanan dalam skenario di mana presisi tidak terlalu kritis, seperti pada fase recall presisi rendah dalam sistem rekomendasi.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Menyimpan angka Brain Floating Point (bfloat16) 16-bit, menawarkan rentang eksponen yang sama dengan Float32 tetapi dengan presisi yang lebih rendah. Cocok untuk skenario yang perlu memproses vektor dalam jumlah besar dengan cepat, seperti pengambilan gambar berskala besar.</p></td>
+     <td><p>Menyimpan bilangan Brain Floating Point (bfloat16) 16-bit, yang menawarkan rentang eksponen yang sama dengan Float32 tetapi dengan presisi yang lebih rendah. Cocok untuk skenario yang perlu memproses vektor dalam jumlah besar dengan cepat, seperti pencarian gambar skala besar.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.<br><strong>Catatan</strong>: Jenis vektor ini hanya didukung untuk indeks HNSW.</p></td>
+     <td><p>Menyimpan vektor yang elemen individualnya di setiap dimensi berupa bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara –128 hingga 127. Dirancang untuk model pembelajaran mendalam yang dikuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat inferensi dengan kehilangan presisi yang minimal.<br><strong>Catatan</strong>: Tipe vektor ini hanya didukung untuk indeks HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Tentukan parameter indeks untuk bidang vektor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,9 +273,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
+    </button></h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pencarian data vektor berskala besar.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -308,10 +322,10 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada contoh di atas, sebuah indeks bernama <code translate="no">dense_vector_index</code> dibuat untuk bidang <code translate="no">dense_vector</code> menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">IP</code>, yang menunjukkan bahwa inner product akan digunakan sebagai metrik jarak.</p>
-<p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat xxx.</p>
-<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/metric.md">Jenis Metrik</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<p>Pada contoh di atas, sebuah indeks bernama ` <code translate="no">dense_vector_index</code> ` dibuat untuk bidang ` <code translate="no">dense_vector</code> ` menggunakan tipe indeks ` <code translate="no">AUTOINDEX</code> `. Nilai ` <code translate="no">metric_type</code> ` ditetapkan ke ` <code translate="no">IP</code>`, yang menunjukkan bahwa produk dalam (inner product) akan digunakan sebagai metrik jarak.</p>
+<p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk mempermudah proses pembelajaran dalam pencarian vektor. Terdapat banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/index-explained.md">Penjelasan Indeks</a>.</p>
+<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat " <a href="/docs/id/v2.6.x/metric.md">Jenis Metrik</a>".</p>
+<h3 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -326,9 +340,14 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah pengaturan vektor padat dan param indeks selesai, Anda dapat membuat koleksi yang berisi vektor padat. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
+    </button></h3><p>Setelah pengaturan vektor padat dan parameter indeks selesai, Anda dapat membuat koleksi yang berisi vektor padat. Contoh di bawah ini menggunakan metode ` <code translate="no">create_collection</code> ` untuk membuat koleksi bernama ` <code translate="no">my_collection</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -381,7 +400,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h3 id="Insert-data" class="common-anchor-header">Sisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -396,9 +415,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor padat. Pastikan bahwa dimensi vektor padat yang dimasukkan sesuai dengan nilai <code translate="no">dim</code> yang ditentukan saat menambahkan bidang vektor padat.</p>
+    </button></h3><p>Setelah membuat koleksi, gunakan metode ` <code translate="no">insert</code> ` untuk menambahkan data yang berisi vektor padat. Pastikan dimensi vektor padat yang dimasukkan sesuai dengan nilai ` <code translate="no">dim</code> ` yang ditentukan saat menambahkan bidang vektor padat.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -475,9 +499,14 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencarian semantik berdasarkan vektor padat adalah salah satu fitur inti Milvus, yang memungkinkan Anda menemukan data yang paling mirip dengan vektor kueri dengan cepat berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
+    </button></h3><p>Pencarian semantik berdasarkan vektor padat merupakan salah satu fitur inti Milvus, yang memungkinkan Anda menemukan data yang paling mirip dengan vektor kueri berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan, siapkan vektor kueri dan parameter pencarian, lalu panggil metode ` <code translate="no">search</code> `.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -574,4 +603,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
+<p>Untuk informasi lebih lanjut mengenai parameter pencarian kesamaan, lihat <a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian ANN Dasar</a>.</p>

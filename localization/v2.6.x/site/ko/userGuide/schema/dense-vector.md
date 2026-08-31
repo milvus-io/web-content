@@ -1,13 +1,14 @@
 ---
 id: dense-vector.md
-title: 고밀도 벡터
+title: 밀집 벡터
 summary: >-
-  고밀도 벡터는 머신러닝과 데이터 분석에 널리 사용되는 수치 데이터 표현입니다. 대부분의 요소 또는 모든 요소가 0이 아닌 실수로 구성된
-  배열로 구성됩니다. 스파스 벡터에 비해 고밀도 벡터는 각 차원이 의미 있는 값을 보유하기 때문에 동일한 차원 수준에서 더 많은 정보를
-  포함합니다. 이러한 표현은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있습니다.
-  고밀도 벡터는 일반적으로 특정 애플리케이션과 요구사항에 따라 수십 개에서 수백 개 또는 수천 개에 이르는 고정된 수의 차원을 갖습니다.
+  밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 이는 실수로 구성된 배열로 이루어져 있으며,
+  대부분의 요소 또는 모든 요소가 0이 아닙니다. 희소 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로 동일한
+  차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서 데이터를
+  더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 용도와 요구 사항에 따라 수십 개에서
+  수백 개, 심지어 수천 개에 이르기까지 다양합니다.
 ---
-<h1 id="Dense-Vector" class="common-anchor-header">고밀도 벡터<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
+<h1 id="Dense-Vector" class="common-anchor-header">밀집 벡터<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>고밀도 벡터는 머신 러닝과 데이터 분석에 널리 사용되는 수치 데이터 표현입니다. 대부분의 요소 또는 모든 요소가 0이 아닌 실수로 구성된 배열로 구성됩니다. 스파스 벡터에 비해 고밀도 벡터는 각 차원이 의미 있는 값을 보유하기 때문에 동일한 차원 수준에서 더 많은 정보를 포함합니다. 이러한 표현은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있습니다. 고밀도 벡터는 일반적으로 특정 애플리케이션과 요구 사항에 따라 수십 개에서 수백 개 또는 수천 개에 이르는 고정된 수의 차원을 갖습니다.</p>
-<p>고밀도 벡터는 주로 시맨틱 검색 및 추천 시스템과 같이 데이터의 의미를 이해해야 하는 시나리오에서 사용됩니다. 시맨틱 검색에서 고밀도 벡터는 쿼리와 문서 간의 기본 연결을 포착하여 검색 결과의 관련성을 향상시키는 데 도움이 됩니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하여 보다 개인화된 제안을 제공하는 데 도움을 줍니다.</p>
+    </button></h1><p>밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 이는 실수로 구성된 배열로 이루어져 있으며, 대부분의 요소 또는 모든 요소가 0이 아닙니다. 희소 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로 동일한 차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 용도와 요구 사항에 따라 수십 개에서 수백 개, 심지어 수천 개에 이르기까지 다양합니다.</p>
+<p>밀집 벡터는 주로 시맨틱 검색이나 추천 시스템과 같이 데이터의 의미론을 이해해야 하는 상황에서 사용됩니다. 시맨틱 검색에서 밀집 벡터는 쿼리와 문서 간의 근본적인 연관성을 파악하는 데 도움을 주어 검색 결과의 관련성을 높입니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하는 데 기여하여 더욱 개인화된 제안을 제공합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,18 +40,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>고밀도 벡터는 일반적으로 <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 과 같이 고정된 길이의 부동 소수점 숫자 배열로 표현됩니다. 이러한 벡터의 차원은 일반적으로 128, 256, 768 또는 1024와 같이 수백 개에서 수천 개까지 다양합니다. 각 차원은 객체의 특정 의미적 특징을 포착하여 유사도 계산을 통해 다양한 시나리오에 적용할 수 있습니다.</p>
-<p>
+    </button></h2><p>밀집 벡터는 일반적으로 <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 와 같이 고정 길이의 부동 소수점 숫자 배열로 표현됩니다. 이러한 벡터의 차원은 대개 128, 256, 768, 1024와 같이 수백에서 수천에 이릅니다. 각 차원은 객체의 특정 의미적 특징을 포착하므로, 유사도 계산을 통해 다양한 시나리오에 적용될 수 있습니다.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>고밀도 벡터</span> </span></p>
-<p>위 이미지는 2D 공간에서 고밀도 벡터의 표현을 보여줍니다. 실제 애플리케이션에서 고밀도 벡터는 훨씬 더 높은 차원을 갖는 경우가 많지만, 이 2D 그림은 몇 가지 핵심 개념을 효과적으로 전달합니다:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" /> 
+   <span>밀집 벡터</span>
+  
+ </span></p>
+<p>위 이미지는 2차원 공간에서 밀집 벡터가 어떻게 표현되는지 보여줍니다. 실제 응용 분야에서 밀집 벡터는 종종 훨씬 더 높은 차원을 가지지만, 이 2차원 그림은 몇 가지 핵심 개념을 효과적으로 전달합니다:</p>
 <ul>
-<li><p><strong>다차원 표현:</strong> 각 점은 <strong>밀버스</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등과 같은 개념적 객체를 나타내며, 그 위치는 해당 치수의 값에 따라 결정됩니다.</p></li>
-<li><p><strong>의미 관계:</strong> 점 사이의 거리는 개념 간의 의미적 유사성을 반영합니다. 점이 가까울수록 의미적으로 더 연관성이 높은 개념을 나타냅니다.</p></li>
-<li><p><strong>클러스터링 효과:</strong> <strong>밀버스</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등 관련 개념이 공간에서 서로 가깝게 배치되어 의미론적 클러스터를 형성합니다.</p></li>
+<li><p><strong>다차원 표현:</strong> 각 점은 개념적 객체( <strong>Milvus</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등)를 나타내며, 그 위치는 차원의 값에 의해 결정됩니다.</p></li>
+<li><p><strong>의미적 관계:</strong> 점들 간의 거리는 개념 간의 의미적 유사성을 반영합니다. 서로 가까운 점일수록 의미적으로 더 밀접한 관련이 있는 개념임을 나타냅니다.</p></li>
+<li><p><strong>클러스터링 효과:</strong> 관련 개념( <strong>Milvus</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등)은 공간상 서로 가까이 배치되어 의미적 클러스터를 형성합니다.</p></li>
 </ul>
-<p>아래는 텍스트 <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> 를 나타내는 실제 고밀도 벡터의 예입니다:</p>
+<p>다음은 “ <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> ”이라는 텍스트를 나타내는 실제 고밀도 벡터의 예시입니다:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -64,16 +67,18 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>고밀도 벡터는 이미지용 CNN 모델(예: <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>), 텍스트용 언어 모델(예: <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) 등 다양한 <a href="https://en.wikipedia.org/wiki/Embedding">임베딩</a> 모델을 사용하여 생성할 수 있습니다. 이러한 모델은 원시 데이터를 고차원 공간의 점으로 변환하여 데이터의 의미적 특징을 포착합니다. 또한 Milvus는 임베딩에 자세히 설명된 대로 사용자가 고밀도 벡터를 생성하고 처리할 수 있는 편리한 방법을 제공합니다.</p>
-<p>데이터가 벡터화되면 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
-<p>
+<p>밀도 벡터는 이미지의 경우 <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG와</a> 같은 CNN 모델이나 텍스트의 경우 <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec과</a> 같은 언어 모델 등 다양한 <a href="https://en.wikipedia.org/wiki/Embedding">임베딩</a> 모델을 사용하여 생성할 수 있습니다. 이러한 모델은 원시 데이터를 고차원 공간의 점으로 변환하여 데이터의 의미적 특징을 포착합니다. 또한 Milvus는 ‘임베딩(Embeddings)’ 섹션에 자세히 설명된 바와 같이, 사용자가 밀집 벡터를 생성하고 처리할 수 있도록 편리한 방법을 제공합니다.</p>
+<p>데이터가 벡터화되면 Milvus에 저장하여 관리 및 벡터 검색이 가능합니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-   </span> <span class="img-wrapper"> <span>고밀도 벡터 사용</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" /> 
+   <span>밀집 벡터 사용</span>
+  
+ </span></p>
 <div class="alert note">
-<p>밀도 벡터 외에도 Milvus는 스파스 벡터와 바이너리 벡터도 지원합니다. 스파스 벡터는 키워드 검색 및 용어 매칭과 같이 특정 용어에 기반한 정확한 매칭에 적합하며, 바이너리 벡터는 이미지 패턴 매칭 및 특정 해싱 애플리케이션과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/binary-vector.md">이진 벡터</a> 및 <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
+<p>밀집 벡터 외에도 Milvus는 스파스 벡터와 이진 벡터를 지원합니다. 스파스 벡터는 키워드 검색 및 용어 일치와 같이 특정 용어를 기반으로 한 정밀한 일치에 적합하며, 이진 벡터는 이미지 패턴 일치 및 특정 해싱 애플리케이션과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/binary-vector.md">‘이진 벡터</a> <a href="/docs/ko/v2.6.x/sparse_vector.md">’</a> 및 <a href="/docs/ko/v2.6.x/sparse_vector.md">‘스파스 벡터’를</a> 참조하십시오.</p>
 </div>
-<h2 id="Use-dense-vectors" class="common-anchor-header">고밀도 벡터 사용<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-dense-vectors" class="common-anchor-header">밀집 벡터 사용<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,14 +108,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>밀버스에서 고밀도 벡터를 사용하려면 먼저 컬렉션을 만들 때 고밀도 벡터를 저장할 벡터 필드를 정의합니다. 이 과정에는 다음이 포함됩니다:</p>
+    </button></h3><p>Milvus에서 밀집 벡터를 사용하려면, 먼저 컬렉션을 생성할 때 밀집 벡터를 저장할 벡터 필드를 정의해야 합니다. 이 과정은 다음을 포함합니다:</p>
 <ol>
-<li><p><code translate="no">datatype</code> 을 지원되는 고밀도 벡터 데이터 유형으로 설정합니다. 지원되는 고밀도 벡터 데이터 유형은 데이터 유형을 참조하세요.</p></li>
-<li><p><code translate="no">dim</code> 매개변수를 사용하여 고밀도 벡터의 차원을 지정합니다.</p></li>
+<li><p><code translate="no">datatype</code> 를 지원되는 밀집 벡터 데이터 유형으로 설정합니다. 지원되는 밀집 벡터 데이터 유형에 대해서는 ‘데이터 유형’을 참조하십시오.</p></li>
+<li><p><code translate="no">dim</code> 매개변수를 사용하여 밀집 벡터의 차원을 지정합니다.</p></li>
 </ol>
-<p>아래 예에서는 <code translate="no">dense_vector</code> 이라는 이름의 벡터 필드를 추가하여 고밀도 벡터를 저장합니다. 필드의 데이터 유형은 <code translate="no">FLOAT_VECTOR</code> 이며 차원은 <code translate="no">4</code> 입니다.</p>
+<p>아래 예제에서는 밀집 벡터를 저장하기 위해 <code translate="no">dense_vector</code> 이라는 이름의 벡터 필드를 추가합니다. 이 필드의 데이터 유형은 ` <code translate="no">FLOAT_VECTOR</code>`이며, 차원은 ` <code translate="no">4</code>`입니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -220,7 +230,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>고밀도 벡터 필드에 지원되는 데이터 유형입니다</strong>:</p>
+<p><strong>밀집 벡터 필드에 지원되는 데이터 유형</strong>:</p>
 <table>
    <tr>
      <th><p>데이터 유형</p></th>
@@ -228,19 +238,19 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>과학 계산 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동 소수점 숫자를 저장합니다. 유사한 벡터를 구별하는 등 높은 정밀도가 필요한 시나리오에 이상적입니다.</p></td>
+     <td><p>32비트 부동소수점 숫자를 저장하며, 과학 계산 및 머신러닝에서 실수를 표현하는 데 일반적으로 사용됩니다. 유사한 벡터를 구별하는 등 높은 정밀도가 필요한 시나리오에 이상적입니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>딥 러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동 소수점 숫자를 저장합니다. 추천 시스템의 저정밀 리콜 단계와 같이 정밀도가 덜 중요한 시나리오에서 저장 공간을 절약할 수 있습니다.</p></td>
+     <td><p>16비트 반정밀도 부동소수점 숫자를 저장하며, 딥러닝 및 GPU 계산에 사용됩니다. 추천 시스템의 저정밀도 리콜 단계와 같이 정밀도가 그리 중요하지 않은 상황에서 저장 공간을 절약해 줍니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>16비트 뇌 부동 소수점(bfloat16) 숫자를 저장하여 Float32와 동일한 범위의 지수를 제공하지만 정밀도는 떨어집니다. 대규모 이미지 검색과 같이 대량의 벡터를 빠르게 처리해야 하는 시나리오에 적합합니다.</p></td>
+     <td><p>16비트 Brain 부동소수점(bfloat16) 숫자를 저장하며, Float32와 동일한 지수 범위를 제공하지만 정밀도는 낮습니다. 대규모 이미지 검색과 같이 대량의 벡터를 빠르게 처리해야 하는 시나리오에 적합합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>각 차원의 개별 요소가 8비트 정수(int8)이고 각 요소의 범위가 -128에서 127 사이인 벡터를 저장합니다. 양자화된 딥 러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에만 지원됩니다.</p></td>
+     <td><p>각 차원의 개별 요소가 8비트 정수(int8)인 벡터를 저장하며, 각 요소의 범위는 –128에서 127까지입니다. 양자화된 딥러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에서만 지원됩니다.</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
@@ -258,9 +268,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>시맨틱 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱은 대규모 벡터 데이터의 검색 효율성을 크게 향상시킬 수 있습니다.</p>
+    </button></h3><p>의미 기반 검색을 가속화하려면 벡터 필드에 대한 인덱스를 생성해야 합니다. 인덱싱을 통해 대규모 벡터 데이터의 검색 효율을 크게 향상시킬 수 있습니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -302,10 +317,10 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">dense_vector</code> 필드에 대해 <code translate="no">dense_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">IP</code> 으로 설정되어 내적 곱이 거리 메트릭으로 사용됨을 나타냅니다.</p>
-<p>Milvus는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 xxx를 참조하세요.</p>
-<p>Milvus는 다른 메트릭 유형도 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/metric.md">메트릭 유형을</a> 참조하세요.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<p>위의 예제에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">dense_vector</code> 필드에 대해 <code translate="no">dense_vector_index</code> 라는 이름의 인덱스를 생성합니다. <code translate="no">metric_type</code> 는 <code translate="no">IP</code> 로 설정되어 있으며, 이는 내적(inner product)이 거리 측정 기준으로 사용될 것임을 나타냅니다.</p>
+<p>Milvus는 더 나은 벡터 검색 경험을 위해 다양한 인덱스 유형을 제공합니다. AUTOINDEX는 벡터 검색의 학습 곡선을 완화하도록 설계된 특수한 인덱스 유형입니다. 선택할 수 있는 인덱스 유형은 매우 다양합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/index-explained.md">'인덱스 설명'을</a> 참조하십시오.</p>
+<p>Milvus는 다른 메트릭 유형도 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/metric.md">‘메트릭 유형</a>’을 참조하십시오.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -320,9 +335,14 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>밀도 벡터 및 인덱스 매개변수 설정이 완료되면 밀도 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+    </button></h3><p>밀집 벡터 및 인덱스 매개변수 설정이 완료되면, 밀집 벡터를 포함하는 컬렉션을 생성할 수 있습니다. 아래 예제에서는 ` <code translate="no">create_collection</code> ` 메서드를 사용하여 ` <code translate="no">my_collection</code>`라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -390,9 +410,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션을 만든 후 <code translate="no">insert</code> 메서드를 사용하여 고밀도 벡터가 포함된 데이터를 추가합니다. 삽입되는 고밀도 벡터의 차원이 고밀도 벡터 필드를 추가할 때 정의한 <code translate="no">dim</code> 값과 일치하는지 확인합니다.</p>
+    </button></h3><p>컬렉션을 생성한 후, ` <code translate="no">insert</code> ` 메서드를 사용하여 밀집 벡터가 포함된 데이터를 추가합니다. 삽입되는 밀집 벡터의 차원이 밀집 벡터 필드를 추가할 때 정의된 ` <code translate="no">dim</code> ` 값과 일치하는지 확인하십시오.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -469,9 +494,14 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>밀도 벡터 기반의 시맨틱 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 파라미터를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
+    </button></h3><p>밀집 벡터를 기반으로 한 시맨틱 검색은 Milvus의 핵심 기능 중 하나로, 벡터 간의 거리를 바탕으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있게 해줍니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 후 <code translate="no">search</code> 메서드를 호출하십시오.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -568,4 +598,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>
+<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/single-vector-search.md">기본 ANN 검색을</a> 참조하십시오.</p>

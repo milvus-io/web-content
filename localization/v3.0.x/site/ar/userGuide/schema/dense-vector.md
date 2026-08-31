@@ -1,17 +1,17 @@
 ---
 id: dense-vector.md
-title: المتجهات الكثيفة
+title: المتجه الكثيف
 summary: >-
-  المتجهات الكثيفة هي تمثيلات رقمية للبيانات تُستخدم على نطاق واسع في التعلم
-  الآلي وتحليل البيانات. وهي تتكون من مصفوفات بأرقام حقيقية، حيث تكون معظم
-  العناصر أو جميعها غير صفرية. بالمقارنة مع المتجهات المتفرّقة، تحتوي المتجهات
-  الكثيفة على المزيد من المعلومات على نفس مستوى الأبعاد، حيث يحتوي كل بُعد على
-  قيم ذات معنى. يمكن لهذا التمثيل التقاط أنماط وعلاقات معقدة بشكل فعال، مما يسهل
-  تحليل البيانات ومعالجتها في مساحات عالية الأبعاد. عادةً ما تحتوي المتجهات
-  الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى
+  المتجهات الكثيفة هي تمثيلات للبيانات العددية تُستخدم على نطاق واسع في التعلم
+  الآلي وتحليل البيانات. وهي تتألف من مصفوفات من الأعداد الحقيقية، حيث تكون معظم
+  العناصر أو جميعها غير صفرية. وبالمقارنة مع المتجهات المتفرقة، تحتوي المتجهات
+  الكثيفة على معلومات أكثر عند نفس مستوى الأبعاد، حيث يحتوي كل بُعد على قيم ذات
+  مغزى. يمكن لهذا التمثيل التقاط الأنماط والعلاقات المعقدة بفعالية، مما يجعل
+  تحليل البيانات ومعالجتها أسهل في الفضاءات عالية الأبعاد. وعادةً ما يكون
+  للمتجهات الكثيفة عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى
   آلاف، اعتمادًا على التطبيق والمتطلبات المحددة.
 ---
-<h1 id="Dense-Vector" class="common-anchor-header">المتجهات الكثيفة<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
+<h1 id="Dense-Vector" class="common-anchor-header">المتجه الكثيف<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +26,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>المتجهات الكثيفة هي تمثيلات رقمية للبيانات تُستخدم على نطاق واسع في التعلم الآلي وتحليل البيانات. وهي تتكون من مصفوفات بأرقام حقيقية، حيث تكون معظم العناصر أو جميعها غير صفرية. بالمقارنة مع المتجهات المتناثرة، تحتوي المتجهات الكثيفة على المزيد من المعلومات على نفس مستوى الأبعاد، حيث يحتوي كل بُعد على قيم ذات معنى. يمكن لهذا التمثيل التقاط أنماط وعلاقات معقدة بشكل فعال، مما يسهل تحليل البيانات ومعالجتها في مساحات عالية الأبعاد. عادةً ما تحتوي المتجهات الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى الآلاف، اعتمادًا على التطبيق والمتطلبات المحددة.</p>
-<p>تُستخدم المتجهات الكثيفة بشكل أساسي في السيناريوهات التي تتطلب فهم دلالات البيانات، مثل أنظمة البحث الدلالي والتوصيات. في البحث الدلالي، تساعد المتجهات الكثيفة في التقاط الروابط الأساسية بين الاستعلامات والمستندات، مما يحسن من أهمية نتائج البحث. أما في أنظمة التوصيات، فهي تساعد في تحديد أوجه التشابه بين المستخدمين والعناصر، مما يوفر اقتراحات أكثر تخصيصًا.</p>
+    </button></h1><p>المتجهات الكثيفة هي تمثيلات للبيانات العددية تُستخدم على نطاق واسع في التعلم الآلي وتحليل البيانات. وهي تتكون من مصفوفات تحتوي على أعداد حقيقية، حيث تكون معظم العناصر أو جميعها غير صفرية. وبالمقارنة مع المتجهات المتفرقة، تحتوي المتجهات الكثيفة على معلومات أكثر في نفس مستوى الأبعاد، حيث يحتوي كل بُعد على قيم ذات مغزى. يمكن لهذا التمثيل التقاط الأنماط والعلاقات المعقدة بفعالية، مما يجعل تحليل البيانات ومعالجتها أسهل في الفضاءات عالية الأبعاد. عادةً ما يكون للمتجهات الكثيفة عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى آلاف، اعتمادًا على التطبيق والمتطلبات المحددة.</p>
+<p>تُستخدم المتجهات الكثيفة بشكل رئيسي في السيناريوهات التي تتطلب فهم دلالات البيانات، مثل البحث الدلالي وأنظمة التوصيات. في البحث الدلالي، تساعد المتجهات الكثيفة في التقاط الروابط الكامنة بين الاستعلامات والمستندات، مما يحسّن مدى صلة نتائج البحث. وفي أنظمة التوصيات، تساعد في تحديد أوجه التشابه بين المستخدمين والعناصر، مما يوفر اقتراحات أكثر تخصيصًا.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,18 +43,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عادةً ما يتم تمثيل المتجهات الكثيفة كمصفوفات من أرقام الفاصلة العائمة ذات الطول الثابت، مثل <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. تتراوح أبعاد هذه المتجهات عادةً من مئات إلى آلاف الأبعاد، مثل 128 أو 256 أو 768 أو 1024. يلتقط كل بُعد سمات دلالية محددة لكائن ما، مما يجعلها قابلة للتطبيق على سيناريوهات مختلفة من خلال حسابات التشابه.</p>
-<p>
+    </button></h2><p>يتم تمثيل المتجهات الكثيفة عادةً كمصفوفات من الأعداد العائمة ذات الطول الثابت، مثل <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. تتراوح أبعاد هذه المتجهات عادةً من المئات إلى الآلاف، مثل 128 أو 256 أو 768 أو 1024. يستوعب كل بُعد سمات دلالية محددة لكائن ما، مما يجعله قابلاً للتطبيق في سيناريوهات متنوعة من خلال حسابات التشابه.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>المتجه الكثيف</span> </span></p>
-<p>توضح الصورة أعلاه تمثيل المتجهات الكثيفة في فضاء ثنائي الأبعاد. على الرغم من أن المتجهات الكثيفة في تطبيقات العالم الحقيقي غالبًا ما يكون لها أبعاد أعلى بكثير، إلا أن هذا الرسم التوضيحي ثنائي الأبعاد ينقل بشكل فعال العديد من المفاهيم الأساسية:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" /> 
+   <span>المتجه الكثيف</span>
+  
+ </span></p>
+<p>توضح الصورة أعلاه تمثيل المتجهات الكثيفة في فضاء ثنائي الأبعاد. على الرغم من أن المتجهات الكثيفة في التطبيقات الواقعية غالبًا ما تكون ذات أبعاد أعلى بكثير، فإن هذا التوضيح ثنائي الأبعاد ينقل بشكل فعال عدة مفاهيم أساسية:</p>
 <ul>
-<li><p><strong>التمثيل متعدد الأبعاد:</strong> تمثل كل نقطة كائنًا مفاهيميًا (مثل <strong>ميلفوس،</strong> <strong>قاعدة بيانات المتجهات،</strong> <strong>نظام الاسترجاع،</strong> إلخ)، مع تحديد موضعها من خلال قيم أبعادها.</p></li>
-<li><p><strong>العلاقات الدلالية:</strong> تعكس المسافات بين النقاط التشابه الدلالي بين المفاهيم. تشير النقاط الأقرب إلى المفاهيم الأكثر ارتباطاً من الناحية الدلالية.</p></li>
-<li><p><strong>تأثير التجميع:</strong> يتم وضع المفاهيم ذات الصلة (مثل <strong>ميلفوس</strong> <strong>وقاعدة البيانات المتجهة</strong> <strong>ونظام الاسترجاع</strong>) بالقرب من بعضها البعض في الفضاء، مما يشكل مجموعة دلالية.</p></li>
+<li><p><strong>التمثيل متعدد الأبعاد:</strong> تمثل كل نقطة كائنًا مفاهيميًّا (مثل <strong>Milvus</strong>، <strong>وقاعدة بيانات المتجهات</strong>، <strong>ونظام الاسترجاع</strong>، وما إلى ذلك)، حيث يتم تحديد موقعها من خلال قيم أبعادها.</p></li>
+<li><p><strong>العلاقات الدلالية:</strong> تعكس المسافات بين النقاط التشابه الدلالي بين المفاهيم. تشير النقاط الأقرب إلى مفاهيم أكثر ارتباطًا من الناحية الدلالية.</p></li>
+<li><p><strong>تأثير التجميع:</strong> تُوضع المفاهيم ذات الصلة (مثل <strong>Milvus</strong> <strong>وقاعدة البيانات المتجهة</strong> <strong>ونظام الاسترجاع</strong>) بالقرب من بعضها البعض في الفضاء، لتشكل مجموعة دلالية.</p></li>
 </ul>
-<p>فيما يلي مثال لمتجه كثيف حقيقي يمثل النص <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>فيما يلي مثال على متجه كثيف حقيقي يمثل النص « <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> »:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -68,14 +70,16 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكن توليد المتجهات الكثيفة باستخدام نماذج <a href="https://en.wikipedia.org/wiki/Embedding">تضمين</a> مختلفة، مثل نماذج CNN (مثل <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a> <a href="https://pytorch.org/vision/stable/models/vgg.html">وVGG</a>) للصور ونماذج اللغة (مثل <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a> <a href="https://en.wikipedia.org/wiki/Word2vec">وWord2Vec</a>) للنصوص. تقوم هذه النماذج بتحويل البيانات الأولية إلى نقاط في فضاء عالي الأبعاد، مع التقاط السمات الدلالية للبيانات. بالإضافة إلى ذلك، يوفر Milvus طرقًا ملائمة لمساعدة المستخدمين على إنشاء متجهات كثيفة ومعالجتها، كما هو مفصل في Embedddings.</p>
-<p>بمجرد تحويل البيانات إلى متجهات، يمكن تخزينها في ميلفوس لإدارتها واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
-<p>
+<p>يمكن إنشاء المتجهات الكثيفة باستخدام نماذج <a href="https://en.wikipedia.org/wiki/Embedding">تضمين</a> متنوعة، مثل نماذج الشبكات العصبية التلافيفية (CNN) (مثل <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a> و <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) للصور ونماذج اللغة (مثل <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a> و <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) للنصوص. تعمل هذه النماذج على تحويل البيانات الأولية إلى نقاط في فضاء عالي الأبعاد، مما يتيح التقاط السمات الدلالية للبيانات. بالإضافة إلى ذلك، يوفر Milvus طرقًا ملائمة لمساعدة المستخدمين على إنشاء المتجهات الكثيفة ومعالجتها، كما هو موضح بالتفصيل في قسم «التضمينات».</p>
+<p>بمجرد تحويل البيانات إلى متجهات، يمكن تخزينها في Milvus لإدارتها واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-   </span> <span class="img-wrapper"> <span>استخدام المتجهات الكثيفة</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" /> 
+   <span>استخدام المتجهات الكثيفة</span>
+  
+ </span></p>
 <div class="alert note">
-<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائيات مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
+<p>إلى جانب المتجهات الكثيفة، يدعم Milvus أيضًا المتجهات المتفرقة والمتجهات الثنائية. تعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات المفتاحية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية عادةً للتعامل بكفاءة مع البيانات الثنائية، مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع <a href="/docs/ar/binary-vector.md">«المتجهات الثنائية»</a> <a href="/docs/ar/sparse_vector.md">و«المتجهات المتفرقة</a>».</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">استخدام المتجهات الكثيفة<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +96,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">إضافة حقل متجه<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">إضافة حقل متجهات<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,14 +111,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لاستخدام المتجهات الكثيفة في ميلفوس، قم أولاً بتعريف حقل متجه لتخزين المتجهات الكثيفة عند إنشاء مجموعة. تتضمن هذه العملية:</p>
+    </button></h3><p>لاستخدام المتجهات الكثيفة في Milvus، قم أولاً بتعريف حقل متجه لتخزين المتجهات الكثيفة عند إنشاء مجموعة. تتضمن هذه العملية ما يلي:</p>
 <ol>
-<li><p>تعيين <code translate="no">datatype</code> إلى نوع بيانات متجه كثيف مدعوم. لمعرفة أنواع بيانات المتجهات الكثيفة المدعومة، راجع أنواع البيانات.</p></li>
+<li><p>تعيين ` <code translate="no">datatype</code> ` إلى نوع بيانات متجه كثيف مدعوم. للاطلاع على أنواع بيانات المتجهات الكثيفة المدعومة، راجع أنواع البيانات.</p></li>
 <li><p>تحديد أبعاد المتجه الكثيف باستخدام المعلمة <code translate="no">dim</code>.</p></li>
 </ol>
-<p>في المثال أدناه، نضيف حقلاً متجهًا باسم <code translate="no">dense_vector</code> لتخزين المتجهات الكثيفة. نوع بيانات الحقل هو <code translate="no">FLOAT_VECTOR</code> ، بأبعاد <code translate="no">4</code>.</p>
+<p>في المثال أدناه، نضيف حقل متجهًا باسم <code translate="no">dense_vector</code> لتخزين المتجهات الكثيفة. نوع بيانات الحقل هو <code translate="no">FLOAT_VECTOR</code> ، وبأبعاد <code translate="no">4</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -232,22 +241,22 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>يخزن الأرقام ذات الفاصلة العائمة 32 بت، وتستخدم عادةً لتمثيل الأرقام الحقيقية في الحسابات العلمية والتعلم الآلي. مثالية للسيناريوهات التي تتطلب دقة عالية، مثل تمييز المتجهات المتشابهة.</p></td>
+     <td><p>يخزن أرقامًا عائمة ذات 32 بت، تُستخدم عادةً لتمثيل الأعداد الحقيقية في الحسابات العلمية والتعلم الآلي. مثالي للسيناريوهات التي تتطلب دقة عالية، مثل التمييز بين المتجهات المتشابهة.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>يخزن الأرقام ذات الفاصلة العائمة بنصف دقة 16 بت، وتستخدم للتعلم العميق وحسابات وحدة معالجة الرسومات. يوفر مساحة تخزين في السيناريوهات التي تكون فيها الدقة أقل أهمية، كما هو الحال في مرحلة الاستدعاء منخفضة الدقة لأنظمة التوصيات.</p></td>
+     <td><p>يخزن أرقامًا ذات 16 بت بنقطة عائمة نصف الدقة، وتُستخدم في التعلم العميق وحسابات وحدة معالجة الرسومات (GPU). يوفر مساحة تخزين في السيناريوهات التي تكون فيها الدقة أقل أهمية، مثل مرحلة الاسترجاع منخفضة الدقة في أنظمة التوصيات.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>يخزّن أرقام الفاصلة العائمة الدماغية ذات 16 بت (bfloat16)، حيث يقدم نفس نطاق الأسس مثل Float32 ولكن بدقة أقل. مناسب للسيناريوهات التي تحتاج إلى معالجة كميات كبيرة من المتجهات بسرعة، مثل استرجاع الصور على نطاق واسع.</p></td>
+     <td><p>يخزن أرقام Brain Floating Point (bfloat16) ذات 16 بت، ويوفر نفس نطاق الأسس مثل Float32 ولكن بدقة أقل. مناسب للسيناريوهات التي تحتاج إلى معالجة كميات كبيرة من المتجهات بسرعة، مثل استرجاع الصور على نطاق واسع.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>يخزِّن المتجهات التي تكون عناصرها الفردية في كل بُعد عبارة عن أعداد صحيحة 8 بت (int8)، بحيث يتراوح كل عنصر من -128 إلى 127. تم تصميم INT8_VECTOR لنماذج التعلم العميق الكمي (مثل ResNet وEfficientNet)، وهو مصمم لنماذج التعلم العميق الكمي (مثل: ResNet وEfficientNet)، حيث يقلل من حجم النموذج ويسرّع الاستدلال بأقل خسارة في الدقة.<br><strong>ملاحظة</strong>: هذا النوع من المتجهات مدعوم فقط لفهارس HNSW.</p></td>
+     <td><p>يخزن المتجهات التي تكون عناصرها الفردية في كل بُعد أعدادًا صحيحة ذات 8 بت (int8)، حيث يتراوح كل عنصر بين –128 و127. صُمم INT8_VECTOR لنماذج التعلم العميق المُكمَّنة (مثل ResNet و EfficientNet)، حيث يقلل من حجم النموذج ويسرع عملية الاستدلال مع الحد الأدنى من فقدان الدقة.<br><strong>ملاحظة</strong>: يُدعم نوع المتجه هذا فقط لمؤشرات HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين معلمات الفهرس لحقل المتجهات<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,9 +271,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتسريع عمليات البحث الدلالي، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
+    </button></h3><p>لتسريع عمليات البحث الدلالي، يجب إنشاء فهرس لحقل المتجهات. يمكن أن تؤدي الفهرسة إلى تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -306,9 +320,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">dense_vector_index</code> للحقل <code translate="no">dense_vector</code> باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">IP</code> ، مما يشير إلى أنه سيتم استخدام المنتج الداخلي كمقياس للمسافة.</p>
-<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع xxx.</p>
-<p>يدعم ميلفوس أنواع الفهارس المترية الأخرى. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
+<p>في المثال أعلاه، تم إنشاء فهرس باسم <code translate="no">dense_vector_index</code> لحقل <code translate="no">dense_vector</code> باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">IP</code> ، مما يشير إلى أنه سيتم استخدام حاصل الضرب الداخلي كمقياس للمسافة.</p>
+<p>يوفر Milvus أنواعًا متنوعة من الفهارس لتجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل عملية تعلم البحث المتجهي. هناك العديد من أنواع الفهارس المتاحة لتختار منها. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهارس</a>.</p>
+<p>يدعم Milvus أنواعًا أخرى من المقاييس. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -324,9 +338,14 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بمجرد اكتمال إعدادات المتجه الكثيف ومعلمة الفهرس يمكنك إنشاء مجموعة تحتوي على متجهات كثيفة. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
+    </button></h3><p>بمجرد اكتمال إعدادات المتجهات الكثيفة ومعلمات الفهرس، يمكنك إنشاء مجموعة تحتوي على متجهات كثيفة. يستخدم المثال أدناه طريقة ` <code translate="no">create_collection</code> ` لإنشاء مجموعة باسم ` <code translate="no">my_collection</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -394,9 +413,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد إنشاء المجموعة، استخدم الطريقة <code translate="no">insert</code> لإضافة بيانات تحتوي على متجهات كثيفة. تأكد من أن أبعاد المتجهات الكثيفة التي يتم إدراجها تتطابق مع القيمة <code translate="no">dim</code> المحددة عند إضافة حقل المتجهات الكثيفة.</p>
+    </button></h3><p>بعد إنشاء المجموعة، استخدم طريقة <code translate="no">insert</code> لإضافة بيانات تحتوي على متجهات كثيفة. تأكد من أن أبعاد المتجهات الكثيفة التي يتم إدراجها تتطابق مع قيمة <code translate="no">dim</code> المحددة عند إضافة حقل المتجهات الكثيفة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -473,9 +497,14 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يعد البحث الدلالي المستند إلى المتجهات الكثيفة إحدى الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث عن التشابه، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
+    </button></h3><p>يعد البحث الدلالي القائم على المتجهات الكثيفة إحدى الميزات الأساسية لـ Milvus، حيث يتيح لك العثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام استنادًا إلى المسافة بين المتجهات. لإجراء بحث التشابه، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم استدعِ الطريقة <code translate="no">search</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -572,4 +601,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث التشابه الأساسي</a>.</p>
+<p>لمزيد من المعلومات حول معلمات البحث عن التشابه، راجع " <a href="/docs/ar/single-vector-search.md">البحث الأساسي بشبكة ANN</a>".</p>

@@ -1,10 +1,10 @@
 ---
 id: search-aggregation.md
-title: 검색 집계Compatible with Milvus 3.0.x
-summary: '벡터 검색 결과를 버킷별로 그룹화하고, 버킷별 지표를 계산하며, 버킷을 정렬한 후 대표적인 검색 결과를 반환합니다.'
+title: Search AggregationCompatible with Milvus 3.0.x
+summary: '벡터 검색 결과를 버킷별로 그룹화하고, 버킷별 지표를 계산한 뒤, 버킷을 정렬하여 대표적인 검색 결과를 반환합니다.'
 beta: Milvus 3.0.x
 ---
-<h1 id="Search-Aggregation" class="common-anchor-header">검색 집계<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Search-Aggregation" class="anchor-icon" translate="no">
+<h1 id="Search-Aggregation" class="common-anchor-header">Search Aggregation<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Search-Aggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,17 +19,17 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>쇼핑객이 “일상적인 훈련용 검은색 러닝화”를 검색할 때, 근사 최인접 이웃(ANN) 검색은 벡터 유사도에 따라 제품을 순위 매기고 평면적인 상위 K개 목록을 반환합니다. 결과는 관련성이 높을 수 있지만 반복적일 수 있습니다. 아래 예시에서, 상위 6개 결과 중 4개는 브랜드 A 제품인 반면, 브랜드 B와 브랜드 C는 각각 한 번씩만 나타납니다.</p>
-<p>단순한 목록만으로는 버킷 중심의 요약 정보를 직접 제공할 수 없습니다. 애플리케이션에서는 유지된 후보 수나 평균 가격을 기준으로 브랜드를 비교하거나, 각 브랜드의 소수 대표 상품을 검토하거나, 결과를 여러 버킷 수준으로 분류해야 할 수도 있습니다.</p>
-<p>검색 집계(Search Aggregation)는 선택된 스칼라 필드를 기반으로 유지된 ANN 후보들을 버킷으로 구성합니다. 이 예시에서 각 브랜드는 별도의 버킷이 됩니다. Milvus는 각 버킷에 대한 통계를 계산하고, 버킷을 순서대로 정렬하며, 대표 제품을 할당할 수 있습니다. 애플리케이션은 버킷 우선( <code translate="no">result.agg_buckets</code>) 방식을 통해 이 버킷 우선 응답을 활용합니다.</p>
-<p><span class="img-wrapper">
-  
-   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" /> 
-   <span>단순한 러닝화 검색 결과가 비교 가능한 브랜드 버킷 집합으로 변환됩니다</span>
-  
- </span></p>
-<p>검색 집계는 전체 컬렉션에 대한 정확한 집계를 수행하지 않습니다. 버킷의 존재 여부, 개수, 메트릭, 순서 및 대표 히트는 ANN 및 그룹화 단계에서 유지된 후보에 따라 달라집니다.</p>
-<h2 id="How-it-works" class="common-anchor-header">작동 원리<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p>When a shopper searches for “black running shoes for daily training,” approximate nearest neighbor (ANN) search ranks products by vector similarity and returns a flat Top-K list. The results can be relevant but repetitive: in the example below, four of the first six results are Brand A products, while Brand B and Brand C appear once each.</p>
+<p>A flat list cannot directly provide a bucket-oriented summary. An application may need to compare brands by retained candidate count or average price, inspect a small number of representative products from each brand, or organize the results into multiple bucket levels.</p>
+<p>Search Aggregation organizes retained ANN candidates into buckets based on selected scalar fields. In this example, each brand becomes a separate bucket. Milvus can calculate statistics for each bucket, order the buckets, and attach representative products. The application consumes this bucket-first response through <code translate="no">result.agg_buckets</code>.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" />
+    <span>A flat running-shoe search result becomes a set of comparable brand buckets</span>
+  </span>
+</p>
+<p>Search Aggregation does not run an exact full-collection aggregation. Bucket existence, counts, metrics, ordering, and representative hits depend on the candidates retained by the ANN and grouping stages.</p>
+<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,20 +44,20 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><span class="img-wrapper">
-  
-   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" /> 
-   <span>버킷 키별로 그룹화되고 개수, 메트릭 및 대표 히트와 함께 반환되는 ANN 후보</span>
-  
- </span></p>
+    </button></h2><p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" />
+    <span>ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits</span>
+  </span>
+</p>
 <ol>
-<li><p><strong>후보 항목 검색.</strong> Milvus는 ANN 검색을 실행하여 쿼리 벡터와 가장 가까운 엔티티를 찾습니다. 그런 다음 그룹화 단계에서 각 전체 복합 키에 대해 제한된 수의 후보 항목을 유지합니다. 이 키별 후보 항목 할당량은 집계 트리 내 어디서나 <code translate="no">TopHits.size</code> 중 가장 큰 값이거나, <code translate="no">top_hits</code> 를 구성하는 레벨이 없을 경우 <code translate="no">1</code> 입니다.</p></li>
-<li><p><strong>버킷 생성.</strong> <code translate="no">SearchAggregation.fields</code> 는 버킷 키를 정의합니다. 필드 값의 각 고유한 조합은 별도의 키를 생성합니다. 그림에서 <code translate="no">fields=[&quot;brand&quot;]</code> 는 <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, <code translate="no">(Brand C)</code> 버킷 키를 생성합니다. 동일한 키를 가진 유지된 후보는 동일한 버킷에 속하며 해당 버킷의 <code translate="no">count</code> 에 기여합니다. <code translate="no">SearchAggregation.size</code> 는 Milvus가 반환하는 버킷의 수를 제한합니다.</p></li>
-<li><p><strong>결과를 계산하고 반환합니다.</strong> 반환된 각 버킷에는 해당 키와 유지된 후보 개수가 포함됩니다. Milvus는 또한 구성된 메트릭을 계산하고, 버킷을 정렬하며, 대표적인 엔티티를 반환하고, 하위 버킷을 생성할 수도 있습니다. <code translate="no">result.agg_buckets</code> 내의 각 <code translate="no">AggregationBucket</code> 는 <code translate="no">key</code>, <code translate="no">count</code>, <code translate="no">metrics</code>, <code translate="no">hits</code> 및 <code translate="no">sub_groups</code> 를 노출합니다. 검색 집계(Search Aggregation)가 활성화되면 일반 검색 결과 목록은 비어 있습니다.</p></li>
+<li><p><strong>Retrieve candidates.</strong> Milvus runs ANN search to find entities closest to the query vector. The grouping stage then retains a bounded number of candidates for each full composite key. This per-key candidate budget is the largest <code translate="no">TopHits.size</code> anywhere in the aggregation tree, or <code translate="no">1</code> when no level configures <code translate="no">top_hits</code>.</p></li>
+<li><p><strong>Build buckets.</strong> <code translate="no">SearchAggregation.fields</code> defines the bucket key. Each unique combination of field values creates a separate key. In the figure, <code translate="no">fields=[&quot;brand&quot;]</code> creates <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, and <code translate="no">(Brand C)</code> bucket keys. Retained candidates with the same key belong to the same bucket and contribute to its <code translate="no">count</code>. <code translate="no">SearchAggregation.size</code> limits how many buckets Milvus returns.</p></li>
+<li><p><strong>Calculate and return results.</strong> Each returned bucket contains its key and retained-candidate count. Milvus can also calculate configured metrics, order the buckets, return representative entities, and build child buckets. Each <code translate="no">AggregationBucket</code> in <code translate="no">result.agg_buckets</code> exposes <code translate="no">key</code>, <code translate="no">count</code>, <code translate="no">metrics</code>, <code translate="no">hits</code>, and <code translate="no">sub_groups</code>. When Search Aggregation is enabled, the ordinary search-hit list is empty.</p></li>
 </ol>
-<p>도표에서 <code translate="no">TopHits.size=4</code> 는 키당 4개의 후보 예산을 제공하므로, 유지된 4개의 브랜드 A 후보가 <code translate="no">count: 4</code> 를 생성합니다. 완성된 브랜드 A 카드는 도표를 간결하게 유지하기 위해 반환된 4개의 대표 검색 결과 중 2개만 표시합니다.</p>
-<p><code translate="no">sub_aggregation</code> 를 사용하면 Milvus는 각 상위 버킷 내에서 2단계와 3단계를 반복합니다. ANN 리콜률이나 키별 후보 예산의 변경은 버킷 수, 메트릭, 정렬 순서, 검색 결과 및 중첩된 결과를 변경할 수 있습니다.</p>
-<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>In the diagram, <code translate="no">TopHits.size=4</code> supplies a per-key candidate budget of four, so the four retained Brand A candidates produce <code translate="no">count: 4</code>. The completed Brand A card shows only two of the four returned representative hits to keep the figure compact.</p>
+<p>With <code translate="no">sub_aggregation</code>, Milvus repeats steps 2 and 3 inside each parent bucket. Changes in ANN recall or the per-key candidate budget can change bucket counts, metrics, ordering, hits, and nested results.</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,23 +72,23 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>검색 집계(Search Aggregation)를 사용하기 전에 다음 제한 사항을 확인하십시오.</p>
+    </button></h2><p>Before using Search Aggregation, note the following limits:</p>
 <ul>
-<li><p><strong>중첩 집계:</strong> 하나의 요청에는 하나의 루트 <code translate="no">SearchAggregation</code> 와 최대 세 개의 중첩된 <code translate="no">sub_aggregation</code> 레벨이 포함될 수 있으며, 총 레벨 수는 최대 4개입니다. 모든 레벨을 통틀어 버킷 키를 생성하는 데 사용할 수 있는 필드는 최대 10개입니다.</p></li>
-<li><p><strong>버킷 키 생성에 사용되는 필드:</strong> <code translate="no">SearchAggregation.fields</code> 은 Boolean, integer, <code translate="no">VARCHAR</code> 및 <code translate="no">TIMESTAMPTZ</code> 필드를 지원합니다. <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, <code translate="no">TEXT</code>, vector 또는 dynamic 필드는 지원하지 않습니다.</p></li>
-<li><p><strong>메트릭 필드:</strong> <code translate="no">count</code> 는 <code translate="no">&quot;*&quot;</code> 또는<code translate="no">JSON</code> 가 아닌 모든 비동적 필드를 허용하며, 필드가 지정된 경우 <code translate="no">NULL</code> 값은 건너뜁니다. <code translate="no">sum</code> 및 <code translate="no">avg</code> 는 정수 및 실수 필드를 허용합니다. <code translate="no">min</code> 및 <code translate="no">max</code> 는 추가로 문자열 및 <code translate="no">TIMESTAMPTZ</code> 필드를 허용합니다.</p></li>
-<li><p><strong>Top Hits 정렬 필드:</strong> <code translate="no">TopHits.sort</code> 는 비교 가능한 부울, 정수, 부동 소수점, 문자열 및 <code translate="no">TIMESTAMPTZ</code> 필드와 <code translate="no">_score</code> 를 허용합니다. <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, 벡터 또는 동적 필드는 지원하지 않습니다.</p></li>
-<li><p><strong>후보 예산:</strong> 집계 트리 내 어디에서든 가장 큰 <code translate="no">TopHits.size</code> 값은 전체 복합 키당 유지되는 후보의 수와 동일합니다. 어떤 레벨에서도 <code translate="no">top_hits</code> 가 구성되지 않은 경우, Milvus는 키당 하나의 후보를 유지합니다. 버킷 <code translate="no">count</code> 및 메트릭은 이러한 유지된 후보를 기반으로 계산되므로, <code translate="no">TopHits.size</code> 를 변경하면 해당 값도 변경될 수 있습니다.</p></li>
-<li><p><strong>Null 허용 버킷 필드:</strong> <code translate="no">NULL</code> 값은 자체 버킷 키를 형성합니다. null 버킷을 제외하려면 검색 요청에 <code translate="no">brand is not null</code> 와 같은 필터를 추가하십시오.</p></li>
-<li><p><strong>반복되는 필드:</strong> 동일한 필드는 두 개 이상의 <code translate="no">SearchAggregation.fields</code> 목록에 동시에 나타날 수 없습니다. 예를 들어, 루트 집계에서 <code translate="no">fields=[&quot;category&quot;]</code> 를 사용하는 경우, 중첩된 <code translate="no">sub_aggregation</code> 에서는 <code translate="no">fields=[&quot;category&quot;]</code> 를 함께 사용할 수 없습니다.</p></li>
-<li><p><strong>지원되지 않는 조합:</strong> Search Aggregation은 0이 아닌 <code translate="no">offset</code>, Search Iterators, Hybrid Search, Highlighter 또는 Grouping Search와 함께 사용할 수 없습니다. 최상위 <code translate="no">offset</code> 값이 <code translate="no">0</code> 인 경우, 해당 매개변수를 생략한 것과 동일합니다. REST v2 검색 요청에서는 <code translate="no">searchAggregation</code> 과 <code translate="no">ids</code> 을 함께 지정할 수 없습니다.</p></li>
-<li><p><strong>반환되는 항목:</strong> 기본적으로 Milvus는 요청에서 계산된 결과 항목의 최대 수가 10,000개를 초과할 경우 검색 집계(Search Aggregation) 요청을 거부합니다. 이 임계값은 ` <code translate="no">proxy.maxSearchAggregationResultEntries</code>`로 제어됩니다. 이 검사를 비활성화하려면 구성 값을 ` <code translate="no">0</code> ` 또는 음수로 설정하십시오.</p>
-<p>Milvus는 이 최대값을 다음과 같이 계산합니다:</p>
+<li><p><strong>Nested aggregations:</strong> A request can contain one root <code translate="no">SearchAggregation</code> and up to three nested <code translate="no">sub_aggregation</code> levels, for a maximum of four levels in total. Across all levels, at most 10 fields can be used to create bucket keys.</p></li>
+<li><p><strong>Fields used to create bucket keys:</strong> <code translate="no">SearchAggregation.fields</code> supports Boolean, integer, <code translate="no">VARCHAR</code>, and <code translate="no">TIMESTAMPTZ</code> fields. It does not support <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, <code translate="no">TEXT</code>, vector, or dynamic fields.</p></li>
+<li><p><strong>Metric fields:</strong> <code translate="no">count</code> accepts <code translate="no">&quot;*&quot;</code> or any non-<code translate="no">JSON</code>, non-dynamic field and skips <code translate="no">NULL</code> values when a field is specified. <code translate="no">sum</code> and <code translate="no">avg</code> accept integer and floating-point fields. <code translate="no">min</code> and <code translate="no">max</code> additionally accept string and <code translate="no">TIMESTAMPTZ</code> fields.</p></li>
+<li><p><strong>Top Hits sorting fields:</strong> <code translate="no">TopHits.sort</code> accepts comparable Boolean, integer, floating-point, string, and <code translate="no">TIMESTAMPTZ</code> fields, plus <code translate="no">_score</code>. It does not support <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, vector, or dynamic fields.</p></li>
+<li><p><strong>Candidate budget:</strong> The largest <code translate="no">TopHits.size</code> anywhere in the aggregation tree is also the number of candidates retained per full composite key. If no level configures <code translate="no">top_hits</code>, Milvus retains one candidate per key. Bucket <code translate="no">count</code> and metrics are calculated from these retained candidates, so changing <code translate="no">TopHits.size</code> can change them.</p></li>
+<li><p><strong>Nullable bucket fields:</strong> A <code translate="no">NULL</code> value forms its own bucket key. To exclude the null bucket, add a filter such as <code translate="no">brand is not null</code> to the search request.</p></li>
+<li><p><strong>Repeated fields:</strong> The same field cannot appear in more than one <code translate="no">SearchAggregation.fields</code> list. For example, if the root aggregation uses <code translate="no">fields=[&quot;category&quot;]</code>, a nested <code translate="no">sub_aggregation</code> cannot also use <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
+<li><p><strong>Unsupported combinations:</strong> Search Aggregation cannot be combined with a non-zero <code translate="no">offset</code>, Search Iterators, Hybrid Search, a Highlighter, or Grouping Search. A top-level <code translate="no">offset</code> value of <code translate="no">0</code> is equivalent to omitting the parameter. In REST v2 search requests, <code translate="no">searchAggregation</code> and <code translate="no">ids</code> cannot be specified together.</p></li>
+<li><p><strong>Returned entries:</strong> By default, Milvus rejects a Search Aggregation request when the request’s calculated maximum number of result entries exceeds 10,000. This threshold is controlled by <code translate="no">proxy.maxSearchAggregationResultEntries</code>. Set the configuration value to <code translate="no">0</code> or a negative number to disable this check.</p>
+<p>Milvus calculates this maximum as:</p>
 <p><code translate="no">number of query vectors × product of the effective search_size at every aggregation level × largest TopHits.size at any level</code></p>
-<p>이 서버 측 계산에서, 특정 레벨의 유효한 ` <code translate="no">search_size</code> ` 값은 명시적으로 구성된 ` <code translate="no">search_size</code>`이거나, ` <code translate="no">search_size</code> `가 생략된 경우 해당 레벨의 ` <code translate="no">size</code> `입니다. 이 가이드에서 사용하는 PyMilvus API는 현재 ` <code translate="no">search_size</code>`를 노출하지 않으므로, PyMilvus 요청은 이 계산을 위해 각 레벨의 ` <code translate="no">size</code> `를 사용합니다. 어떤 레벨에서도 <code translate="no">TopHits</code> 를 구성하지 않은 경우, 마지막 계수로는 <code translate="no">1</code> 를 사용합니다. 예를 들어, 쿼리 벡터 1개, 루트 버킷 10개, 루트 버킷당 자식 버킷 5개, 자식 버킷당 히트 2개인 경우, 계산된 최대값은 다음과 같습니다:</p>
+<p>For this server-side calculation, the effective <code translate="no">search_size</code> at a level is the explicitly configured <code translate="no">search_size</code>, or that level’s <code translate="no">size</code> when <code translate="no">search_size</code> is omitted. The PyMilvus API used in this guide does not currently expose <code translate="no">search_size</code>, so PyMilvus requests use each level’s <code translate="no">size</code> for this calculation. Use <code translate="no">1</code> for the last factor when no level configures <code translate="no">TopHits</code>. For example, one query vector, 10 root buckets, five child buckets per root bucket, and two hits per child bucket produce a calculated maximum of:</p>
 <p><code translate="no">1 × 10 × 5 × 2 = 100</code></p></li>
 </ul>
-<h2 id="Use-Search-Aggregation" class="common-anchor-header">검색 집계 사용<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
+<h2 id="Use-Search-Aggregation" class="common-anchor-header">Use Search Aggregation<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,20 +103,27 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>달성하고자 하는 목표에 따라 예제를 선택하십시오:</p>
+    </button></h2><p>Choose an example based on what you want to accomplish:</p>
 <table>
 <thead>
-<tr><th>다음으로 이동하십시오</th><th>설명</th><th>주요 설정</th></tr>
+<tr><th>Go to</th><th>Description</th><th>Key settings</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="#Compare-and-sort-buckets">버킷 비교 및 정렬</a></td><td>버킷별 통계를 계산하여 버킷을 비교한 다음, 반환된 버킷을 메트릭, 개수 또는 키 기준으로 정렬합니다.</td><td><code translate="no">fields</code>, <code translate="no">size</code>, <code translate="no">metrics</code>, <code translate="no">order</code></td></tr>
-<tr><td><a href="#Show-representative-results-from-each-bucket">각 버킷의 대표적인 결과 표시</a></td><td>각 버킷에서 제한된 수의 엔티티를 반환하고, 해당 엔티티를 스칼라 필드 또는 벡터 점수에 따라 개별적으로 정렬합니다.</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td></tr>
-<tr><td><a href="#Group-results-at-multiple-levels">여러 수준에서 결과 그룹화</a></td><td>결과를 상위 및 하위 버킷 수준으로 구성하여 여러 차원을 순차적으로 분석합니다.</td><td><code translate="no">sub_aggregation</code></td></tr>
+<tr><td><a href="#Compare-and-sort-buckets">Compare and sort buckets</a></td><td>Calculate per-bucket statistics to compare buckets, then sort the returned buckets by metrics, counts, or keys.</td><td><code translate="no">fields</code>, <code translate="no">size</code>, <code translate="no">metrics</code>, <code translate="no">order</code></td></tr>
+<tr><td><a href="#Show-representative-results-from-each-bucket">Show representative results from each bucket</a></td><td>Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score.</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td></tr>
+<tr><td><a href="#Group-results-at-multiple-levels">Group results at multiple levels</a></td><td>Organize results into parent and child bucket levels to analyze multiple dimensions in sequence.</td><td><code translate="no">sub_aggregation</code></td></tr>
 </tbody>
 </table>
-<p>아래 예제에서는 브랜드, 카테고리, 색상, 가격 및 평점 필드가 포함된 제품 컬렉션을 사용합니다. 모든 브랜드 이름, 제품 이름, 가격, 평점 및 검색 결과는 합성된 예제 데이터입니다. 다음 섹션을 확장하여 컬렉션을 생성하고 공유 검색 변수를 정의하십시오.</p>
+<p>The examples below use a product collection with brand, category, color, price, and rating fields. All brand names, product names, prices, ratings, and search results are synthetic example data. Expand the following section to create the collection and define the shared search variables.</p>
 <p><details></p>
-<p><summary>예제 컬렉션 설정</summary></p>
+<p><summary>Set up the example collection</summary></p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, SearchAggregation, TopHits
 
 client = MilvusClient(
@@ -257,9 +264,133 @@ search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {},
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).token(<span class="hljs-string">&quot;root:Milvus&quot;</span>).build());
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;product_search_aggregation&quot;</span>;
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;id&quot;</span>).dataType(DataType.Int64).isPrimaryKey(<span class="hljs-literal">true</span>).autoID(<span class="hljs-literal">false</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>).dataType(DataType.FloatVector).dimension(<span class="hljs-number">5</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;name&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">200</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;brand&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;category&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;color&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">50</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;price&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;in_stock&quot;</span>).dataType(DataType.Bool).build());
+
+client.createCollection(CreateCollectionReq.builder().collectionName(collectionName).collectionSchema(schema)
+        .indexParams(Collections.singletonList(IndexParam.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+                .indexType(IndexParam.IndexType.AUTOINDEX).metricType(IndexParam.MetricType.COSINE).build()))
+        .build());
+
+List&lt;JsonObject&gt; data = Arrays.asList(
+        product(<span class="hljs-number">1</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.12f</span>, <span class="hljs-number">0.42f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.66f</span>, <span class="hljs-number">0.31f</span>}, <span class="hljs-string">&quot;Runner A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">129.99</span>, <span class="hljs-number">4.7</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">2</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.10f</span>, <span class="hljs-number">0.39f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.61f</span>, <span class="hljs-number">0.29f</span>}, <span class="hljs-string">&quot;Trail A2&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">139.99</span>, <span class="hljs-number">4.6</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">3</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14f</span>, <span class="hljs-number">0.44f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.68f</span>, <span class="hljs-number">0.33f</span>}, <span class="hljs-string">&quot;Runner B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">4</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.16f</span>, <span class="hljs-number">0.41f</span>, <span class="hljs-number">0.22f</span>, <span class="hljs-number">0.62f</span>, <span class="hljs-number">0.30f</span>}, <span class="hljs-string">&quot;Runner C1&quot;</span>, <span class="hljs-string">&quot;Brand C&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-number">119.99</span>, <span class="hljs-number">4.4</span>, <span class="hljs-literal">false</span>),
+        product(<span class="hljs-number">5</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.48f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.59f</span>, <span class="hljs-number">0.15f</span>, <span class="hljs-number">0.71f</span>}, <span class="hljs-string">&quot;Jacket A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">99.99</span>, <span class="hljs-number">4.5</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">6</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.45f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.55f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.69f</span>}, <span class="hljs-string">&quot;Jacket B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">89.99</span>, <span class="hljs-number">4.3</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">7</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.09f</span>, <span class="hljs-number">0.38f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.60f</span>, <span class="hljs-number">0.27f</span>}, <span class="hljs-string">&quot;Runner A3&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">8</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.13f</span>, <span class="hljs-number">0.43f</span>, <span class="hljs-number">0.21f</span>, <span class="hljs-number">0.65f</span>, <span class="hljs-number">0.32f</span>}, <span class="hljs-string">&quot;Runner A4&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">149.99</span>, <span class="hljs-number">4.9</span>, <span class="hljs-literal">true</span>));
+client.insert(InsertReq.builder().collectionName(collectionName).data(data).build());
+
+List&lt;Float&gt; queryVector = Arrays.asList(<span class="hljs-number">0.11f</span>, <span class="hljs-number">0.40f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.64f</span>, <span class="hljs-number">0.30f</span>);
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> JsonObject <span class="hljs-title function_">product</span><span class="hljs-params">(<span class="hljs-type">long</span> id, <span class="hljs-type">float</span>[] embedding, String name, String brand,
+                                  String category, String color, <span class="hljs-type">double</span> price, <span class="hljs-type">double</span> rating,
+                                  <span class="hljs-type">boolean</span> inStock)</span> {
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, id);
+    row.add(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>().toJsonTree(embedding));
+    row.addProperty(<span class="hljs-string">&quot;name&quot;</span>, name);
+    row.addProperty(<span class="hljs-string">&quot;brand&quot;</span>, brand);
+    row.addProperty(<span class="hljs-string">&quot;category&quot;</span>, category);
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, color);
+    row.addProperty(<span class="hljs-string">&quot;price&quot;</span>, price);
+    row.addProperty(<span class="hljs-string">&quot;rating&quot;</span>, rating);
+    row.addProperty(<span class="hljs-string">&quot;in_stock&quot;</span>, inStock);
+    <span class="hljs-keyword">return</span> row;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;Milvus&#x27;</span>,
+});
+<span class="hljs-keyword">const</span> collectionName = <span class="hljs-string">&#x27;product_search_aggregation&#x27;</span>;
+
+<span class="hljs-keyword">if</span> ((<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName })).<span class="hljs-property">value</span>) {
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+}
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&#x27;Session&#x27;</span>,
+  <span class="hljs-attr">fields</span>: [
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">200</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;in_stock&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Bool</span> },
+  ],
+});
+
+<span class="hljs-keyword">const</span> data = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.42</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.66</span>, <span class="hljs-number">0.31</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">129.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.7</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.10</span>, <span class="hljs-number">0.39</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.61</span>, <span class="hljs-number">0.29</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Trail A2&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">139.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.6</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.44</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.68</span>, <span class="hljs-number">0.33</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;white&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.16</span>, <span class="hljs-number">0.41</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.62</span>, <span class="hljs-number">0.30</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner C1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand C&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">119.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.4</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.48</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.59</span>, <span class="hljs-number">0.15</span>, <span class="hljs-number">0.71</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">99.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.5</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.45</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.55</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.69</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">89.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.3</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.09</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.60</span>, <span class="hljs-number">0.27</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A3&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.13</span>, <span class="hljs-number">0.43</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.65</span>, <span class="hljs-number">0.32</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A4&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">149.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.9</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+];
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({ <span class="hljs-attr">collection_name</span>: collectionName, data });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({ <span class="hljs-attr">collection_name</span>: collectionName, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>, <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span> });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollectionSync</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.40</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.64</span>, <span class="hljs-number">0.30</span>];
+<span class="hljs-keyword">const</span> searchParams = { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span>, <span class="hljs-attr">params</span>: {} };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_search_aggregation&quot;</span>
+<span class="hljs-function"><span class="hljs-title">search</span></span>() {
+  curl --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --data <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+}
+schema=<span class="hljs-string">&#x27;{&quot;autoID&quot;:false,&quot;enableDynamicField&quot;:false,&quot;fields&quot;:[{&quot;fieldName&quot;:&quot;id&quot;,&quot;dataType&quot;:&quot;Int64&quot;,&quot;isPrimary&quot;:true},{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;dataType&quot;:&quot;FloatVector&quot;,&quot;elementTypeParams&quot;:{&quot;dim&quot;:5}},{&quot;fieldName&quot;:&quot;name&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:200}},{&quot;fieldName&quot;:&quot;brand&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;category&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;color&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:50}},{&quot;fieldName&quot;:&quot;price&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;rating&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;in_stock&quot;,&quot;dataType&quot;:&quot;Bool&quot;}]}&#x27;</span>
+indexParams=<span class="hljs-string">&#x27;[{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;indexType&quot;:&quot;AUTOINDEX&quot;,&quot;metricType&quot;:&quot;COSINE&quot;}]&#x27;</span>
+data=<span class="hljs-string">&#x27;[{&quot;id&quot;:1,&quot;embedding&quot;:[0.12,0.42,0.18,0.66,0.31],&quot;name&quot;:&quot;Runner A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:129.99,&quot;rating&quot;:4.7,&quot;in_stock&quot;:true},{&quot;id&quot;:2,&quot;embedding&quot;:[0.10,0.39,0.20,0.61,0.29],&quot;name&quot;:&quot;Trail A2&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:139.99,&quot;rating&quot;:4.6,&quot;in_stock&quot;:true},{&quot;id&quot;:3,&quot;embedding&quot;:[0.14,0.44,0.19,0.68,0.33],&quot;name&quot;:&quot;Runner B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;white&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:4,&quot;embedding&quot;:[0.16,0.41,0.22,0.62,0.30],&quot;name&quot;:&quot;Runner C1&quot;,&quot;brand&quot;:&quot;Brand C&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;red&quot;,&quot;price&quot;:119.99,&quot;rating&quot;:4.4,&quot;in_stock&quot;:false},{&quot;id&quot;:5,&quot;embedding&quot;:[0.48,0.20,0.59,0.15,0.71],&quot;name&quot;:&quot;Jacket A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:99.99,&quot;rating&quot;:4.5,&quot;in_stock&quot;:true},{&quot;id&quot;:6,&quot;embedding&quot;:[0.45,0.18,0.55,0.17,0.69],&quot;name&quot;:&quot;Jacket B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:89.99,&quot;rating&quot;:4.3,&quot;in_stock&quot;:true},{&quot;id&quot;:7,&quot;embedding&quot;:[0.09,0.38,0.17,0.60,0.27],&quot;name&quot;:&quot;Runner A3&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:8,&quot;embedding&quot;:[0.13,0.43,0.21,0.65,0.32],&quot;name&quot;:&quot;Runner A4&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:149.99,&quot;rating&quot;:4.9,&quot;in_stock&quot;:true}]&#x27;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;schema\&quot;:<span class="hljs-variable">${schema}</span>,\&quot;indexParams\&quot;:<span class="hljs-variable">${indexParams}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;data\&quot;:<span class="hljs-variable">${data}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>위의 설정은 벡터 인덱스와 검색 매개변수 모두에 대해 <code translate="no">COSINE</code> 를 구성합니다. 따라서 이후 예제에서는 <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> 를 사용하여 코사인 유사도가 높은 결과를 먼저 표시합니다. <code translate="no">L2</code> 와 같은 거리 측정 기준의 경우 <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code> 를 사용하십시오.</p>
-<h3 id="Compare-and-sort-buckets" class="common-anchor-header">버킷 비교 및 정렬<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
+<p>The setup above configures <code translate="no">COSINE</code> for both the vector index and the search parameters. Therefore, later examples use <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> to place higher cosine similarity first. For a distance metric such as <code translate="no">L2</code>, use <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
+<h3 id="Compare-and-sort-buckets" class="common-anchor-header">Compare and sort buckets<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -274,9 +405,16 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>계산된 통계를 사용하여 검색된 엔티티 그룹을 비교하고 버킷이 반환되는 순서를 제어해야 할 때 이 패턴을 사용합니다. 이 예제에서 Milvus는 <code translate="no">brand</code> 에 따라 검색된 제품을 그룹화하고, 각 브랜드 버킷에 대한 가격 지표를 계산한 다음, 평균 가격 순으로 버킷을 정렬합니다.</p>
-<p>필드 값당 하나 이상의 엔티티를 반환하여 결과의 다양성만을 높이는 것이 목표라면, 대신 <a href="/docs/ko/grouping-search.md">‘그룹화 검색(Grouping Search)’을</a> 사용하십시오.</p>
-<p>다음 구성은 최대 세 개의 브랜드 버킷을 생성하고, 각 버킷에 대한 메트릭을 계산한 다음, 평균 가격 순으로 버킷을 정렬합니다:</p>
+    </button></h3><p>Use this pattern when you need to compare groups of retrieved entities using calculated statistics and control the order in which the buckets are returned. In this example, Milvus groups retrieved products by <code translate="no">brand</code>, calculates price metrics for each brand bucket, and sorts the buckets by average price.</p>
+<p>If your goal is only to improve result diversity by returning one or more entities per field value, use <a href="/docs/ko/grouping-search.md">Grouping Search</a> instead.</p>
+<p>The following configuration creates up to three brand buckets, calculates metrics for each bucket, and sorts the buckets by average price:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>],</span>
@@ -296,7 +434,62 @@ search_params = {
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">MilvusClient.search()</code> 의 <code translate="no">search_aggregation</code> 매개변수에 객체를 전달합니다:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricOps;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SearchAggregation;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SortSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.TopHitsSpec;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;min_price&quot;</span>, MetricSpec.builder().op(MetricOps.MIN).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_price&quot;</span>).direction(AggDirection.DESC).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;_key&quot;</span>).direction(AggDirection.ASC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+    <span class="hljs-attr">min_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;min&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_price&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;_key&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;asc&#x27;</span> },
+  ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+  &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pass the object to the <code translate="no">search_aggregation</code> parameter of <code translate="no">MilvusClient.search()</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">result = client.search(
     collection_name=collection_name,
     data=[query_vector],
@@ -314,10 +507,54 @@ search_params = {
 <span class="highlighted-wrapper-line">    search_aggregation=aggregation,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">search_aggregation</code> 가 설정되면, PyMilvus는 <code translate="no">result[0]</code> 에서 일반 엔티티 히트를 반환하지 않습니다. 대신 <code translate="no">result.agg_buckets[0]</code> 에서 버킷 응답을 읽어오십시오. <code translate="no">output_fields</code> 매개변수는 반환된 각 <code translate="no">AggregationHit.fields</code> 매핑에 어떤 스칼라 필드가 표시될지 제어합니다. Milvus는 <code translate="no">output_fields</code> 에 나열되지 않은 메트릭 소스 및 정렬 필드도 여전히 사용할 수 있습니다.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryVector)))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(Collections.singletonMap(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;COSINE&quot;</span>))
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;in_stock&quot;</span>))
+        .searchAggregation(aggregation)
+        .build());
+
+List&lt;AggregationBucket&gt; buckets = result.getAggregationBuckets().get(<span class="hljs-number">0</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">data</span>: queryVector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  ...searchParams,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-string">&#x27;in_stock&#x27;</span>],
+  <span class="hljs-attr">search_aggregation</span>: aggregation,
+});
+
+<span class="hljs-keyword">const</span> buckets = result.<span class="hljs-property">agg_buckets</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+    &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 10,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;brand&quot;, &quot;category&quot;, &quot;color&quot;, &quot;price&quot;, &quot;rating&quot;, &quot;in_stock&quot;],
+    &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+    &quot;searchAggregation&quot;: {
+      &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+      &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+      &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>When <code translate="no">search_aggregation</code> is set, PyMilvus returns no ordinary entity hits in <code translate="no">result[0]</code>. Read the bucket response from <code translate="no">result.agg_buckets[0]</code> instead. The <code translate="no">output_fields</code> parameter controls which scalar fields appear in each returned <code translate="no">AggregationHit.fields</code> mapping; Milvus can still use metric-source and sort fields that are not listed in <code translate="no">output_fields</code>.</p>
 <p><details></p>
-<p><summary>버킷 출력 예시 보기</summary></p>
-<p>다음 출력은 위의 요청에서 캡처한 것으로, 가독성을 위해 JSON 형식으로 직렬화되었습니다. PyMilvus는 JSON 대신 <code translate="no">AggregationBucket</code> 객체를 반환합니다. <code translate="no">key</code> 값은 <code translate="no">fields</code> 에 필드가 하나만 포함되어 있는 경우에도 항상 정렬된 키 구성 요소 목록입니다. 이를 통해 복합 키의 필드 순서가 유지됩니다.</p>
+<p><summary>View the example bucket output</summary></p>
+<p>The following output was captured from the request above and serialized as JSON for readability. PyMilvus returns <code translate="no">AggregationBucket</code> objects rather than JSON. The <code translate="no">key</code> value is always an ordered list of key components, even when <code translate="no">fields</code> contains only one field. This preserves field order for composite keys.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
   <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -373,49 +610,56 @@ search_params = {
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>이 가이드에 소개된 단일 쿼리 벡터의 경우, <code translate="no">result.agg_buckets[0]</code> 에서 반환된 최상위 버킷을 확인하십시오. 각 버킷은 정렬된 키 구성 요소, retained-candidate <code translate="no">count</code>, 계산된 <code translate="no">metrics</code>, 대표 <code translate="no">hits</code> 및 <code translate="no">sub_groups</code> 에 포함된 중첩 버킷을 노출합니다.</p>
-<p>다음과 같이 구성을 읽어옵니다:</p>
+<p>For the single query vector in this guide, read the returned top-level buckets from <code translate="no">result.agg_buckets[0]</code>. Each bucket exposes its ordered key components, retained-candidate <code translate="no">count</code>, calculated <code translate="no">metrics</code>, representative <code translate="no">hits</code>, and nested buckets in <code translate="no">sub_groups</code>.</p>
+<p>Read the configuration as follows:</p>
 <table>
 <thead>
-<tr><th>설정</th><th>제어 대상</th><th>이 예시에서</th></tr>
+<tr><th>Setting</th><th>What it controls</th><th>In this example</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">fields</code></td><td>Milvus가 버킷 키를 생성하는 방식</td><td><code translate="no">brand</code> 의 고유한 값마다 버킷을 하나씩 생성합니다.</td></tr>
-<tr><td><code translate="no">size</code></td><td>반환되는 버킷의 최대 개수</td><td>최대 3개의 브랜드 버킷을 반환합니다.</td></tr>
-<tr><td><code translate="no">metrics</code></td><td>각 버킷에 대해 계산되는 통계</td><td>상품 수, 평균 가격, 최저 가격을 계산합니다.</td></tr>
-<tr><td><code translate="no">order</code></td><td>Milvus가 반환된 버킷을 정렬하는 방법</td><td>평균 가격 순으로 정렬한 후, 동점 시 버킷 키를 사용하여 순위를 결정합니다.</td></tr>
+<tr><td><code translate="no">fields</code></td><td>How Milvus creates bucket keys</td><td>Creates one bucket for each distinct <code translate="no">brand</code> value.</td></tr>
+<tr><td><code translate="no">size</code></td><td>The maximum number of returned buckets</td><td>Returns up to three brand buckets.</td></tr>
+<tr><td><code translate="no">metrics</code></td><td>The statistics calculated for each bucket</td><td>Calculates product count, average price, and minimum price.</td></tr>
+<tr><td><code translate="no">order</code></td><td>How Milvus sorts the returned buckets</td><td>Sorts by average price, then uses the bucket key to break ties.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">search_aggregation</code> 가 설정된 경우 Milvus는 <code translate="no">limit</code> 를 무시합니다. 최상위 버킷의 수를 제어하려면 루트 <code translate="no">SearchAggregation.size</code> 값을 사용하십시오.</p>
-<p>이러한 설정으로 Milvus는 <code translate="no">avg_price</code> 순서대로 내림차순으로 브랜드 B, 브랜드 A, 브랜드 C 버킷을 반환합니다. <code translate="no">_key</code> 기준은 버킷의 평균 가격이 동일한 경우에만 적용됩니다. 이 구성에서는 <code translate="no">top_hits</code> 가 정의되어 있지 않으므로, 모든 버킷의 <code translate="no">hits</code> 목록은 비어 있으며 키별 후보 예산은 <code translate="no">1</code> 입니다. 따라서 표시된 개수 및 메트릭은 브랜드당 하나의 유지된 후보를 나타냅니다. 집계 시 키별 메트릭 창을 더 넓게 설정해야 하는 경우, <code translate="no">top_hits</code> 를 더 큰 <code translate="no">TopHits.size</code> 로 구성하십시오.</p>
+<p>Milvus ignores <code translate="no">limit</code> when <code translate="no">search_aggregation</code> is set. Use the root <code translate="no">SearchAggregation.size</code> value to control the number of top-level buckets.</p>
+<p>With these settings, Milvus returns the Brand B, Brand A, and Brand C buckets in descending <code translate="no">avg_price</code> order. The <code translate="no">_key</code> criterion applies only when buckets have the same average price. Because this configuration does not define <code translate="no">top_hits</code>, every bucket’s <code translate="no">hits</code> list is empty and the per-key candidate budget is <code translate="no">1</code>. The displayed counts and metrics therefore describe one retained candidate per brand. Configure <code translate="no">top_hits</code> with a larger <code translate="no">TopHits.size</code> when the aggregation needs a wider per-key metric window.</p>
 <p><details></p>
-<p><summary>메트릭 및 정렬 규칙</summary></p>
-<p>각 <code translate="no">SearchAggregation.metrics</code> 항목은 사용자 정의 별칭을 <code translate="no">{operation: source}</code> 에 매핑합니다:</p>
+<p><summary>Metric and ordering rules</summary></p>
+<p>Each <code translate="no">SearchAggregation.metrics</code> entry maps a user-defined alias to <code translate="no">{operation: source}</code>:</p>
 <table>
 <thead>
-<tr><th>소스</th><th>지원되는 작업</th><th>동작</th></tr>
+<tr><th>Source</th><th>Supported operations</th><th>Behavior</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">JSON</code> 가 아니며 동적이지 않은 모든 필드</td><td><code translate="no">count</code></td><td><code translate="no">NULL</code> 가 아닌 소스 필드를 가진 유지된 후보를 집계합니다.</td></tr>
-<tr><td>정수형 또는 실수형 필드</td><td><code translate="no">sum</code>, ` <code translate="no">avg</code>`, ` <code translate="no">min</code>`, <code translate="no">max</code></td><td>null이 아닌 유지된 값을 기준으로 계산합니다.</td></tr>
-<tr><td>문자열 또는 <code translate="no">TIMESTAMPTZ</code> 필드</td><td><code translate="no">min</code>, <code translate="no">max</code></td><td>null이 아닌 유지된 값 중 최소값 또는 최대값을 선택합니다.</td></tr>
-<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>버킷 내의 모든 유지된 후보를 집계합니다. 결과는 <code translate="no">bucket.count</code> 과 일치합니다.</td></tr>
-<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>유지된 후보에 대한 ANN 유사도 또는 거리 값을 집계합니다.</td></tr>
+<tr><td>Any non-<code translate="no">JSON</code>, non-dynamic field</td><td><code translate="no">count</code></td><td>Counts retained candidates whose source field is not <code translate="no">NULL</code>.</td></tr>
+<tr><td>Integer or floating-point field</td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Calculates over non-null retained values.</td></tr>
+<tr><td>String or <code translate="no">TIMESTAMPTZ</code> field</td><td><code translate="no">min</code>, <code translate="no">max</code></td><td>Selects the minimum or maximum non-null retained value.</td></tr>
+<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>Counts every retained candidate in the bucket. The result matches <code translate="no">bucket.count</code>.</td></tr>
+<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Aggregates ANN similarity or distance values for retained candidates.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">SearchAggregation.order</code> 다음 키를 허용합니다:</p>
+<p><code translate="no">SearchAggregation.order</code> accepts the following keys:</p>
 <table>
 <thead>
-<tr><th>순서 키</th><th>의미</th></tr>
+<tr><th>Order key</th><th>Meaning</th></tr>
 </thead>
 <tbody>
-<tr><td>메트릭 별칭</td><td><code translate="no">avg_price</code> 와 같이, <code translate="no">metrics</code> 에서 동일한 집계 수준에서 계산된 값을 기준으로 정렬합니다.</td></tr>
-<tr><td><code translate="no">_count</code></td><td>각 버킷에 보존된 후보의 수에 따라 정렬합니다.</td></tr>
-<tr><td><code translate="no">_key</code></td><td><code translate="no">_key</code> 라는 컬렉션 필드가 아닌 버킷 키를 기준으로 정렬합니다.</td></tr>
+<tr><td>A metric alias</td><td>Sorts by a value calculated in <code translate="no">metrics</code> at the same aggregation level, such as <code translate="no">avg_price</code>.</td></tr>
+<tr><td><code translate="no">_count</code></td><td>Sorts by the number of retained candidates in each bucket.</td></tr>
+<tr><td><code translate="no">_key</code></td><td>Sorts by the bucket key rather than a collection field named <code translate="no">_key</code>.</td></tr>
 </tbody>
 </table>
-<p>각 <code translate="no">order</code> 항목은 키를 <code translate="no">&quot;asc&quot;</code> 또는 <code translate="no">&quot;desc&quot;</code> 에 매핑합니다. Milvus는 첫 번째 항목부터 마지막 항목까지 여러 항목을 평가합니다. <code translate="no">order</code> 를 생략하면 Milvus는 유지된 후보 집합의 버킷 검색 순서를 그대로 유지합니다.</p>
-<p>벡터 일치 품질에 따라 버킷을 정렬하려면, 먼저 <code translate="no">_score</code> 에서 버킷 수준 메트릭을 계산한 다음, <code translate="no">order</code> 에서 해당 메트릭 별칭을 사용해야 합니다. 각 버킷에는 여러 엔티티 점수가 포함될 수 있으므로, <code translate="no">_score</code> 를 버킷 정렬 키로 직접 사용할 수는 없습니다. 예를 들어, <code translate="no">COSINE</code> 또는 <code translate="no">IP</code> 의 경우:</p>
+<p>Each <code translate="no">order</code> entry maps a key to <code translate="no">&quot;asc&quot;</code> or <code translate="no">&quot;desc&quot;</code>. Milvus evaluates multiple entries from first to last. If you omit <code translate="no">order</code>, Milvus keeps the bucket discovery order from the retained candidate set.</p>
+<p>To sort buckets by vector match quality, first calculate a bucket-level metric from <code translate="no">_score</code>, and then use the metric alias in <code translate="no">order</code>. You cannot use <code translate="no">_score</code> directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with <code translate="no">COSINE</code> or <code translate="no">IP</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -423,23 +667,74 @@ search_params = {
     order=[{<span class="hljs-string">&quot;max_score&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>}],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">L2</code> 를 사용하여 <code translate="no">_score</code> 의 최소값을 계산하고, 거리 값이 가장 작은 버킷이 먼저 오도록 메트릭 별칭을 오름차순으로 정렬합니다.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;max_score&quot;</span>, MetricSpec.builder().op(MetricOps.MAX).fieldName(<span class="hljs-string">&quot;_score&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;max_score&quot;</span>).direction(AggDirection.DESC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: { <span class="hljs-attr">max_score</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;max&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span> } },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;max_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;max_score&quot;: {&quot;op&quot;: &quot;max&quot;, &quot;fieldName&quot;: &quot;_score&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;max_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>With <code translate="no">L2</code>, calculate the minimum <code translate="no">_score</code> value and sort the metric alias in ascending order so that buckets with the lowest distance come first.</p>
 <p></details></p>
 <p><details></p>
-<p><summary>복합 버킷 키 생성</summary></p>
-<p>복합 버킷 키를 생성하려면 동일한 목록에 여러 필드 이름을 전달합니다:</p>
+<p><summary>Create composite bucket keys</summary></p>
+<p>To create a composite bucket key, pass multiple field names in the same list:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],</span>
     size=<span class="hljs-number">6</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성을 사용하면 <code translate="no">(Brand A, black)</code>, <code translate="no">(Brand A, blue)</code>, <code translate="no">(Brand B, white)</code> 과 같은 키가 생성될 수 있습니다. 두 엔티티는 두 값이 모두 일치할 때만 동일한 버킷을 공유합니다. Milvus는 목록 순서를 유지하므로 <code translate="no">brand</code> 가 첫 번째 키 구성 요소이고 <code translate="no">color</code> 가 두 번째 키 구성 요소입니다. <code translate="no">order</code> 에서 <code translate="no">_key</code> 가 사용될 경우, Milvus는 복합 키 구성 요소를 동일한 순서로 비교합니다. 중첩된 목록은 지원되지 않으므로, 여러 문자열을 하나의 평면 목록으로 전달해야 합니다.</p>
-<p><code translate="no">size=6</code> 는 이 집계 수준에서 반환되는 복합 버킷의 최대 개수입니다. 예제 데이터에는 5개의 서로 다른 브랜드-색상 조합이 포함되어 있으므로, 5개 모두 반환될 수 있습니다. <a href="#Limits">반환 항목 제한에서</a> 이 요청은 <code translate="no">1 query vector × 6 buckets × 1 = 6</code> 에 구성된 결과 항목을 기여합니다.</p>
-<p><code translate="no">SearchAggregation.fields</code> 목록에 여러 필드가 포함되면 해당 집계 수준에서 복합 버킷 키가 생성됩니다. 부모-자식 버킷 계층 구조를 만들려면 <a href="#Group-results-at-multiple-levels">중첩 집계를</a> 사용하십시오.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Arrays.asList(<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .size(<span class="hljs-number">6</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">6</span>,
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;, &quot;color&quot;], &quot;size&quot;: 6}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>This configuration can produce keys such as <code translate="no">(Brand A, black)</code>, <code translate="no">(Brand A, blue)</code>, and <code translate="no">(Brand B, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. When <code translate="no">_key</code> is used in <code translate="no">order</code>, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.</p>
+<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
+<p>Multiple fields in one <code translate="no">SearchAggregation.fields</code> list create a composite bucket key at that aggregation level. To create a parent-child bucket hierarchy, use a <a href="#Group-results-at-multiple-levels">nested aggregation</a>.</p>
 <p></details></p>
-<p>다음 예제에서는 ` <code translate="no">aggregation</code>`를 재정의합니다. 업데이트된 객체를 동일한 ` <code translate="no">search_aggregation</code> ` 매개변수에 전달하고 검색 호출을 다시 실행하십시오.</p>
-<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">각 버킷의 대표적인 결과 표시<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
+<p>The examples that follow redefine <code translate="no">aggregation</code>. Pass the updated object to the same <code translate="no">search_aggregation</code> parameter and rerun the search call.</p>
+<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">Show representative results from each bucket<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -454,8 +749,15 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>애플리케이션에서 각 버킷의 실제 제품을 표시해야 하는 경우 대표적인 엔티티를 포함하십시오. 이 예제에서 Milvus는 각 브랜드 버킷에서 최대 두 개의 제품을 반환하며, 평점 순서대로 정렬한 다음 벡터 점수 순서대로 정렬합니다.</p>
-<p><code translate="no">TopHits</code> 를 다음과 같이 구성하십시오:</p>
+    </button></h3><p>Include representative entities when the application needs to show actual products from each bucket. In this example, Milvus returns up to two products from each brand bucket, ordered by rating and then by vector score.</p>
+<p>Configure <code translate="no">TopHits</code> as follows:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -471,9 +773,37 @@ search_params = {
 <span class="highlighted-comment-line">    ),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+        .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>)
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build())
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;_score&quot;</span>).direction(AggDirection.DESC).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">top_hits</span>: {
+    <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">sort</span>: [
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    ],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;fieldName&quot;: &quot;_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>대표적인 검색 결과를 포함한 버킷 보기</summary></p>
-<p>다음은 위 요청에서 추출한 브랜드 A 버킷으로, 가독성을 높이기 위해 JSON 형식으로 직렬화되었습니다.</p>
+<p><summary>View a bucket with representative hits</summary></p>
+<p>The following Brand A bucket was captured from the request above and serialized as JSON for readability.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -518,19 +848,19 @@ search_params = {
 <p></details></p>
 <table>
 <thead>
-<tr><th>매개변수</th><th>목적</th></tr>
+<tr><th>Parameter</th><th>Purpose</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top_hits</code></td><td>선택 사항입니다. 이 집계 수준에 대한 대표 엔티티를 구성합니다. 생략할 경우, ` <code translate="no">bucket.hits</code> `는 비어 있으며 키별 후보 예산은 기본적으로 1로 설정됩니다.</td></tr>
-<tr><td><code translate="no">TopHits.size</code></td><td>선택된 각 버킷에서 최대 두 개의 대표 엔티티를 반환하고, 전체 집계 트리에 대해 키별 후보 예산을 2로 설정합니다.</td></tr>
-<tr><td><code translate="no">TopHits.sort</code></td><td>나열된 기준을 사용하여 각 버킷 내의 엔티티를 정렬합니다.</td></tr>
+<tr><td><code translate="no">top_hits</code></td><td>Optional. Configures representative entities for this aggregation level. If omitted, <code translate="no">bucket.hits</code> is empty and the per-key candidate budget defaults to one.</td></tr>
+<tr><td><code translate="no">TopHits.size</code></td><td>Returns up to two representative entities from each selected bucket and sets the per-key candidate budget to two for the entire aggregation tree.</td></tr>
+<tr><td><code translate="no">TopHits.sort</code></td><td>Orders entities inside each bucket using the listed criteria.</td></tr>
 </tbody>
 </table>
-<p>애플리케이션에 대표 엔티티가 필요하거나, 카운트 및 메트릭에 더 넓은 키별 후보 창이 필요한 경우 ` <code translate="no">top_hits</code> `를 구성하십시오. ` <code translate="no">TopHits.size</code> ` 값이 클수록 후보 예산과 <a href="#Limits">`Limits</a>`의 최대 반환 항목 계산값이 모두 증가합니다.</p>
-<p><code translate="no">SearchAggregation.order</code> <code translate="no">TopHits.sort</code> 는 각 버킷 내의 엔티티를 정렬하는 반면, 는 버킷을 정렬합니다. 정렬 순서는 및 메트릭을 위해 유지된 후보 항목에 영향을 미치지 않습니다. 는 지원되는 비교 가능한 스칼라 필드 이름과 ANN 유사도 또는 거리를 나타내는 내장 필드를 허용합니다. Milvus는 항목을 첫 번째부터 마지막까지 평가합니다. 이 예제에서는 에 따라 제품을 가장 높은 값에서 가장 낮은 값 순으로 정렬하며, 두 평점이 동일한 경우에만 를 사용합니다. 이 설정에서는 를 사용하므로, 내림차순 을 적용하면 더 유사한 제품이 먼저 표시됩니다. <code translate="no">count</code> <code translate="no">TopHits.sort</code> <code translate="no">_score</code> <code translate="no">sort</code> <code translate="no">rating</code> <code translate="no">_score</code> <code translate="no">COSINE</code> <code translate="no">_score</code> </p>
-<p><code translate="no">metrics</code> 또는 <code translate="no">TopHits.sort</code> 에서 사용하는 필드는 <code translate="no">output_fields</code> 에 반드시 포함될 필요는 없습니다. Milvus는 내부적으로 해당 필드를 가져오지만, <code translate="no">output_fields</code> 에 명시적으로 나열된 필드만 반환된 각 히트의 <code translate="no">fields</code> 매핑에 포함됩니다. 기본 키와 벡터 점수는 <code translate="no">AggregationHit.pk</code> 및 <code translate="no">AggregationHit.score</code> 를 통해 계속 사용할 수 있습니다.</p>
-<p>반환된 각 <code translate="no">AggregationHit</code> 는 <code translate="no">pk</code> 에서 기본 키를, <code translate="no">score</code> 에서 벡터 점수를, <code translate="no">fields</code> 에서 요청된 출력 필드를 노출합니다.</p>
-<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">여러 수준에서 결과 그룹화<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
+<p>Configure <code translate="no">top_hits</code> when the application needs representative entities or when counts and metrics need a wider per-key candidate window. A larger <code translate="no">TopHits.size</code> increases both the candidate budget and the maximum returned-entry calculation in <a href="#Limits">Limits</a>.</p>
+<p><code translate="no">SearchAggregation.order</code> sorts buckets, while <code translate="no">TopHits.sort</code> sorts the retained entities inside each bucket. The sort order does not change which candidates were retained for <code translate="no">count</code> and metrics. <code translate="no">TopHits.sort</code> accepts supported comparable scalar field names and the built-in <code translate="no">_score</code> field, which represents the ANN similarity or distance. Milvus evaluates the <code translate="no">sort</code> entries from first to last. In this example, it orders products by <code translate="no">rating</code> from highest to lowest and uses <code translate="no">_score</code> only when two ratings are equal. Because the setup uses <code translate="no">COSINE</code>, descending <code translate="no">_score</code> places the more similar product first.</p>
+<p>The fields used by <code translate="no">metrics</code> or <code translate="no">TopHits.sort</code> do not have to appear in <code translate="no">output_fields</code>. Milvus fetches those fields internally, but only fields explicitly listed in <code translate="no">output_fields</code> are included in each returned hit’s <code translate="no">fields</code> mapping. Primary keys and vector scores remain available through <code translate="no">AggregationHit.pk</code> and <code translate="no">AggregationHit.score</code>.</p>
+<p>Each returned <code translate="no">AggregationHit</code> exposes its primary key in <code translate="no">pk</code>, vector score in <code translate="no">score</code>, and requested output fields in <code translate="no">fields</code>.</p>
+<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">Group results at multiple levels<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -545,9 +875,9 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>한 수준 내의 버킷이 다른 수준 내에 포함되어야 할 때는 중첩 집계(nested aggregation)를 사용합니다. 이 예시에서 Milvus는 먼저 카테고리 버킷을 생성한 다음, 각 카테고리 내에 브랜드 버킷을 생성합니다.</p>
-<p>자식 집계는 부모 버킷에 할당된 엔티티만 수신합니다. <code translate="no">fields</code> 는 각 집계 수준에서 버킷 키를 제어하며, <code translate="no">sub_aggregation</code> 는 부모-자식 계층 구조를 생성합니다.</p>
-<p>아래 구성은 키가 <code translate="no">(running_shoes)</code> 인 카테고리 버킷을 생성합니다. 해당 상위 버킷 내에서 자식 집계는 <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, <code translate="no">(Brand C)</code> 과 같은 키를 가진 별도의 브랜드 버킷을 생성합니다.</p>
+    </button></h3><p>Use nested aggregation when you need one level of buckets inside another. In this example, Milvus creates category buckets first, and then creates brand buckets within each category.</p>
+<p>The child aggregation receives only the entities assigned to its parent bucket. <code translate="no">fields</code> controls the bucket key at each aggregation level, while <code translate="no">sub_aggregation</code> creates the parent-child hierarchy.</p>
+<p>The configuration below creates a category bucket with the key <code translate="no">(running_shoes)</code>. Within that parent bucket, the child aggregation creates separate brand buckets with keys such as <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, and <code translate="no">(Brand C)</code>.</p>
 <pre><code translate="no" class="language-text">Parent bucket key:
 (running_shoes)
 
@@ -556,8 +886,15 @@ Child bucket keys:
 ├── (Brand B)
 └── (Brand C)
 <button class="copy-code-btn"></button></code></pre>
-<p>각 레벨은 여러 필드를 독립적으로 사용할 수 있습니다. 예를 들어, 자식 집계에서 <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> 을 사용하면 <code translate="no">(Brand A, black)</code> 과 같은 복합 자식 키가 생성됩니다.</p>
-<p>다음 구성은 이 계층 구조를 구현합니다:</p>
+<p>Each level can independently use multiple fields. For example, using <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> in the child aggregation would create composite child keys such as <code translate="no">(Brand A, black)</code>.</p>
+<p>The following configuration implements this hierarchy:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;category&quot;</span>],
     size=<span class="hljs-number">2</span>,
@@ -582,9 +919,58 @@ Child bucket keys:
 <span class="highlighted-comment-line">    ),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;category&quot;</span>)).size(<span class="hljs-number">2</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;product_count&quot;</span>).direction(AggDirection.DESC).build())
+        .subAggregation(SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+                .addMetric(<span class="hljs-string">&quot;brand_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+                .addMetric(<span class="hljs-string">&quot;avg_rating&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;rating&quot;</span>).build())
+                .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_rating&quot;</span>).direction(AggDirection.DESC).build())
+                .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>).addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build()).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;category&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;product_count&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+  <span class="hljs-attr">sub_aggregation</span>: {
+    <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+    <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metrics</span>: {
+      <span class="hljs-attr">brand_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+      <span class="hljs-attr">avg_rating</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span> },
+    },
+    <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    <span class="hljs-attr">top_hits</span>: {
+      <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">sort</span>: [{ <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    },
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;category&quot;], &quot;size&quot;: 2,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;product_count&quot;, &quot;direction&quot;: &quot;desc&quot;}],
+    &quot;subAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;brand_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_rating&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;rating&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;avg_rating&quot;, &quot;direction&quot;: &quot;desc&quot;}], &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>중첩된 버킷 결과 보기</summary></p>
-<p>다음 직렬화된 발췌문은 <code translate="no">running_shoes</code> 상위 버킷과 그 하위 버킷인 Brand B를 보여줍니다. 간결성을 위해 Brand A 및 Brand C 하위 버킷은 생략되었습니다.</p>
+<p><summary>View a nested bucket result</summary></p>
+<p>The following serialized excerpt shows the <code translate="no">running_shoes</code> parent bucket and its Brand B child bucket. The Brand A and Brand C child buckets are omitted for brevity.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -634,15 +1020,15 @@ Child bucket keys:
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>표시된 결과는 단일 복합 버킷 키인 <code translate="no">(running_shoes, Brand B)</code> 가 아니라 버킷 경로 <code translate="no">(running_shoes) → (Brand B)</code> 를 나타냅니다.</p>
-<p>Milvus는 먼저 <code translate="no">product_count</code> 순서로 정렬된 최대 두 개의 카테고리 버킷을 선택합니다. 그런 다음 선택된 각 카테고리 내에서 <code translate="no">sub_aggregation</code> 을 독립적으로 실행하고, <code translate="no">avg_rating</code> 순서로 정렬된 최대 세 개의 브랜드 버킷을 반환합니다.</p>
-<p>위의 출력 결과에서:</p>
+<p>The displayed result represents the bucket path <code translate="no">(running_shoes) → (Brand B)</code>, not a single composite bucket key <code translate="no">(running_shoes, Brand B)</code>.</p>
+<p>Milvus first selects up to two category buckets, ordered by <code translate="no">product_count</code>. It then runs <code translate="no">sub_aggregation</code> independently within each selected category and returns up to three brand buckets, ordered by <code translate="no">avg_rating</code>.</p>
+<p>In the output above:</p>
 <ul>
-<li>루트 <code translate="no">running_shoes</code> 버킷은 하위 복합 키에 걸쳐 4개의 유지된 후보를 포함합니다. 이 버킷의 <code translate="no">metrics</code> 에는 루트 수준의 <code translate="no">avg_price</code> 및 <code translate="no">product_count</code> 값이 포함됩니다.</li>
-<li>루트 버킷의 <code translate="no">sub_groups</code> 목록에는 하위 브랜드 버킷들이 포함되어 있습니다. 표시된 Brand B 버킷에는 유지된 후보 하나와 해당 버킷 자체의 <code translate="no">avg_rating</code> 및 <code translate="no">brand_count</code> 값이 포함되어 있습니다.</li>
-<li>루트 버킷의 <code translate="no">hits</code> 목록은 루트 집계에서 <code translate="no">top_hits</code> 가 구성되지 않았기 때문에 비어 있습니다. 브랜드 B 하위 버킷에는 <code translate="no">sub_aggregation</code> 에서 <code translate="no">top_hits</code> 가 구성되어 있으므로 대표적인 히트가 포함되어 있습니다.</li>
+<li>The root <code translate="no">running_shoes</code> bucket contains four retained candidates across its child composite keys. Its <code translate="no">metrics</code> contain the root-level <code translate="no">avg_price</code> and <code translate="no">product_count</code> values.</li>
+<li>The root bucket’s <code translate="no">sub_groups</code> list contains the child brand buckets. The displayed Brand B bucket contains one retained candidate and its own <code translate="no">avg_rating</code> and <code translate="no">brand_count</code> values.</li>
+<li>The root bucket’s <code translate="no">hits</code> list is empty because the root aggregation does not configure <code translate="no">top_hits</code>. The Brand B child contains a representative hit because <code translate="no">top_hits</code> is configured in <code translate="no">sub_aggregation</code>.</li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -657,7 +1043,7 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-accurate-are-bucket-counts-and-metrics" class="common-anchor-header">버킷 카운트 및 메트릭의 정확도는 어느 정도인가요?<button data-href="#How-accurate-are-bucket-counts-and-metrics" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-accurate-are-bucket-counts-and-metrics" class="common-anchor-header">How accurate are bucket counts and metrics?<button data-href="#How-accurate-are-bucket-counts-and-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -672,12 +1058,12 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>검색 집계는 유지된 ANN 후보를 요약합니다. 전체 컬렉션에 대한 집계를 실행하지는 않습니다.</p>
-<p>후보 유지에는 두 단계의 근사화 과정이 있습니다. ANN 검색은 관련 컬렉션 엔티티를 생략할 수 있으며, 그룹화 단계에서는 각 전체 복합 키에 대해 최대 <code translate="no">TopHits.size</code> 개의 후보만 유지합니다. 어떤 레벨에서도 <code translate="no">top_hits</code> 가 구성되지 않은 경우, 이 키별 제한은 1개입니다.</p>
-<p>예를 들어, 컬렉션에 브랜드 A 제품이 5,000개 포함되어 있고 그중 다수가 벡터 쿼리와 관련이 있다고 가정해 보겠습니다. 집계에서 ` <code translate="no">TopHits(size=4)</code>`를 사용하는 경우, 브랜드 A 버킷은 전체 복합 키에 대해 최대 4개의 후보만 유지할 수 있습니다. 이 버킷의 ` <code translate="no">count</code> ` 및 메트릭은 유지된 후보들을 설명하며, 모든 관련 브랜드 A 제품이나 5,000개의 컬렉션 엔티티 전체를 설명하는 것은 아닙니다.</p>
-<p><code translate="no">order</code> 가 메트릭 별칭을 사용할 때 근사치의 중요성이 가장 큽니다. 검색 리콜의 변화는 메트릭 값을 변경할 수 있으며, 결과적으로 <code translate="no">SearchAggregation.size</code> 에 포함되는 버킷이 달라질 수 있습니다. 중첩 집계는 각 자식 레벨이 부모 버킷에 있는 엔티티를 대상으로 작동하기 때문에 이러한 효과를 증폭시킬 수 있습니다.</p>
-<p>일치하는 모든 엔티티에 대한 정확한 통계가 필요한 경우, 검색 집계 대신 정확한 쿼리 집계 워크플로를 사용하십시오.</p>
-<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">검색 집계는 그룹화 검색과 어떻게 다른가요?<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
+    </button></h3><p>Search Aggregation summarizes retained ANN candidates. It does not run a full-collection aggregation.</p>
+<p>Candidate retention has two approximation stages. ANN search can omit relevant collection entities, and the grouping stage retains at most the largest <code translate="no">TopHits.size</code> candidates for each full composite key. If no level configures <code translate="no">top_hits</code>, this per-key limit is one.</p>
+<p>For example, suppose a collection contains 5,000 Brand A products and many are relevant to the vector query. If the aggregation uses <code translate="no">TopHits(size=4)</code>, the Brand A bucket can retain at most four candidates for a full composite key. Its <code translate="no">count</code> and metrics describe those retained candidates, not all relevant Brand A products and not all 5,000 collection entities.</p>
+<p>Approximation matters most when <code translate="no">order</code> uses a metric alias. Changes in search recall can change the metric values and therefore change which buckets fit within <code translate="no">SearchAggregation.size</code>. Nested aggregation can amplify this effect because each child level operates on the entities available in its parent bucket.</p>
+<p>If you need exact statistics over every matching entity, use an exact query aggregation workflow instead of Search Aggregation.</p>
+<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">How does Search Aggregation differ from Grouping Search?<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -692,15 +1078,15 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>애플리케이션의 주요 결과 형식에 따라 선택하십시오:</p>
+    </button></h3><p>Choose based on the application’s primary result shape:</p>
 <table>
 <thead>
-<tr><th>주요 요구 사항</th><th>권장</th><th>활용할 결과 형식</th></tr>
+<tr><th>Primary need</th><th>Prefer</th><th>Response to consume</th></tr>
 </thead>
 <tbody>
-<tr><td>그룹화 필드에서 중복 값이 적은 표준 순위 엔티티 목록을 반환</td><td><a href="/docs/ko/grouping-search.md">그룹화 검색</a></td><td>각 쿼리 벡터에 대한 플랫 검색 결과</td></tr>
-<tr><td>키, 개수, 메트릭, 정렬 순서, 대표 검색 결과 또는 하위 버킷을 사용하여 그룹을 버킷으로 검사하거나 비교</td><td>검색 집계</td><td><code translate="no">AggregationBucket</code> 내의 객체 <code translate="no">result.agg_buckets</code></td></tr>
+<tr><td>Return a standard ranked entity list with fewer repeated values in a grouping field</td><td><a href="/docs/ko/grouping-search.md">Grouping Search</a></td><td>Flat search hits for each query vector</td></tr>
+<tr><td>Inspect or compare groups as buckets, with keys, counts, metrics, ordering, representative hits, or child buckets</td><td>Search Aggregation</td><td><code translate="no">AggregationBucket</code> objects in <code translate="no">result.agg_buckets</code></td></tr>
 </tbody>
 </table>
-<p>검색 집계에서 ` <code translate="no">top_hits</code>`를 구성하더라도, 주요 응답은 여전히 버킷 트리입니다. 애플리케이션이 이미 일반 검색 결과를 처리하고 있으며 주로 결과의 다양성을 원하는 경우, 그룹화 검색은 여전히 유용합니다.</p>
-<p>이 API들은 상호 배타적입니다. PyMilvus는 동일한 요청에서 <code translate="no">search_aggregation</code> 가 <code translate="no">group_by_field</code> 또는 <code translate="no">group_by_fields</code> 와 결합될 경우 <code translate="no">ParamError</code> 예외를 발생시킵니다.</p>
+<p>Even when Search Aggregation configures <code translate="no">top_hits</code>, its primary response remains a bucket tree. Grouping Search remains useful when the application already processes ordinary search hits and primarily wants result diversity.</p>
+<p>The APIs are mutually exclusive. PyMilvus raises <code translate="no">ParamError</code> when <code translate="no">search_aggregation</code> is combined with <code translate="no">group_by_field</code> or <code translate="no">group_by_fields</code> in the same request.</p>

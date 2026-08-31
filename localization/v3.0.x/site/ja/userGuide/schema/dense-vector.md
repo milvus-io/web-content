@@ -2,7 +2,8 @@
 id: dense-vector.md
 title: 密ベクトル
 summary: >-
-  密なベクトルは、機械学習やデータ分析で広く使われている数値データ表現である。実数の配列で構成され、要素のほとんどまたはすべてが0でない。密なベクトルは疎なベクトルと比較して、各次元が意味のある値を保持しているため、同じ次元レベルでより多くの情報を含んでいる。この表現は、複雑なパターンや関係を効果的に捉えることができ、高次元空間でのデータの分析や処理を容易にします。密なベクトルは通常、特定のアプリケーションや要件に応じて、数十から数百、あるいは数千まで、一定の次元数を持ちます。
+  密ベクトルは、機械学習やデータ分析で広く用いられている数値データの表現形式です。これは実数からなる配列で構成されており、その要素のほとんど、あるいはすべてがゼロ以外です。疎ベクトルと比較して、密ベクトルは各次元が意味のある値を持つため、同じ次元数においてより多くの情報を含んでいます。
+  この表現形式は、複雑なパターンや関係を効果的に捉えることができ、高次元空間におけるデータの分析や処理を容易にします。密ベクトルの次元数は通常固定されており、具体的な用途や要件に応じて、数十から数百、さらには数千にまで及びます。
 ---
 <h1 id="Dense-Vector" class="common-anchor-header">密ベクトル<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>密なベクトルは、機械学習やデータ分析で広く使われている数値データ表現である。実数の配列で構成され、要素のほとんどまたはすべてが0でない。密なベクトルは疎なベクトルと比較して、各次元が意味のある値を保持しているため、同じ次元レベルでより多くの情報を含んでいます。この表現は、複雑なパターンや関係を効果的に捉えることができ、高次元空間でのデータの分析や処理を容易にします。密なベクトルは通常、特定のアプリケーションや要件に応じて、数十から数百、あるいは数千の固定された次元数を持つ。</p>
-<p>密なベクトルは主に、セマンティック検索や推薦システムなど、データのセマンティクスを理解する必要があるシナリオで使用される。セマンティック検索では、密なベクトルはクエリとドキュメント間の根本的なつながりを捕捉するのに役立ち、検索結果の関連性を向上させます。推薦システムでは、ユーザとアイテムの類似性を識別するのに役立ち、よりパーソナライズされた提案を提供します。</p>
+    </button></h1><p>密ベクトルは、機械学習やデータ分析で広く用いられる数値データの表現形式です。これは実数からなる配列で構成され、その要素のほとんどまたはすべてがゼロではありません。疎ベクトルと比較して、密ベクトルは各次元が意味のある値を持つため、同じ次元数においてより多くの情報を含んでいます。 この表現形式は、複雑なパターンや関係を効果的に捉えることができるため、高次元空間におけるデータの分析や処理が容易になります。密ベクトルは通常、固定された次元数を持っており、具体的な用途や要件に応じて、数十から数百、さらには数千にまで及びます。</p>
+<p>密ベクトルは主に、セマンティック検索やレコメンデーションシステムなど、データの意味論を理解する必要がある場面で使用されます。セマンティック検索では、密ベクトルがクエリとドキュメントの間に潜む関連性を捉えるのに役立ち、検索結果の関連性を向上させます。レコメンデーションシステムでは、ユーザーとアイテム間の類似性を特定するのに役立ち、よりパーソナライズされた提案を提供します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,18 +37,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>密なベクトルは通常、<code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> のような固定長の浮動小数点数の配列として表現される。これらのベクトルの次元数は、通常、128、256、768、1024など、数百から数千の範囲である。各次元はオブジェクトの特定の意味的特徴を捉え、類似度計算を通じて様々なシナリオに適用できるようにします。</p>
-<p>
+    </button></h2><p>高密度ベクトルは通常、<code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> のような固定長の浮動小数点数の配列として表現されます。これらのベクトルの次元数は、128、256、768、1024など、通常は数百から数千の範囲です。 各次元はオブジェクトの特定の意味的特徴を捉えており、類似度計算を通じて様々なシナリオに適用可能です。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>高密度ベクトル</span> </span></p>
-<p>上の画像は、2D空間における密なベクトルの表現を示しています。実世界のアプリケーションにおける密なベクトルは、より高い次元を持つことがよくありますが、この2次元の図は、いくつかの重要な概念を効果的に伝えています：</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" /> 
+   <span>密ベクトル</span>
+  
+ </span></p>
+<p>上の図は、2次元空間における密ベクトルの表現を示しています。実世界のアプリケーションにおける密ベクトルは、多くの場合、はるかに高い次元を持っていますが、この2次元の図は、いくつかの重要な概念を効果的に伝えています。</p>
 <ul>
-<li><p><strong>多次元表現：</strong>各点は概念的なオブジェクト（<strong>milvus</strong>、<strong>ベクトルデータベース</strong>、<strong>検索システムなど</strong>）を表し、その位置は次元の値によって決定される。</p></li>
-<li><p><strong>意味的関係：</strong>点間の距離は概念間の意味的類似性を反映する。より近い点は、より意味的に関連する概念を示す。</p></li>
-<li><p><strong>クラスタリング効果：</strong>関連する概念（<strong>milvus</strong>、<strong>ベクトルデータベース</strong>、<strong>検索システムなど</strong>）は、空間内で互いに近接して配置され、意味的なクラスタを形成する。</p></li>
+<li><p><strong>多次元表現：</strong>各点は概念的なオブジェクト（<strong>Milvus</strong>、<strong>ベクトルデータベース</strong>、<strong>検索システム</strong>など）を表しており、その位置は各次元の値によって決定されます。</p></li>
+<li><p><strong>意味的関係：</strong>点間の距離は、概念間の意味的類似性を反映しています。近い点ほど、意味的に密接に関連している概念であることを示しています。</p></li>
+<li><p><strong>クラスタリング効果：</strong>関連する概念（<strong>Milvus</strong>、<strong>ベクトルデータベース</strong>、<strong>検索システム</strong>など）は空間上で互いに近くに配置され、意味的なクラスタを形成しています。</p></li>
 </ul>
-<p>以下は、テキスト<code translate="no">&quot;Milvus is an efficient vector database&quot;</code> を表現する実際の密なベクトルの例である：</p>
+<p>以下は、テキスト「<code translate="no">&quot;Milvus is an efficient vector database&quot;</code> 」を表す実際の高密度ベクトルの例です：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -61,16 +64,18 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGGなど</a>）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecなど</a>）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
-<p>一度ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下図は基本的なプロセスを示しています。</p>
-<p>
+<p>高密度ベクトルは、画像用のCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGGなど</a>）やテキスト用の言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecなど</a>）など、<a href="https://en.wikipedia.org/wiki/Embedding">さまざまな埋め込みモデル</a>を使用して生成できます。これらのモデルは、生データを高次元空間上の点に変換し、データの意味的特徴を捉えます。 さらに、Milvusでは「Embeddings」で詳述されているように、ユーザーが密ベクトルを生成・処理するための便利なメソッドを提供しています。</p>
+<p>データがベクトル化されると、Milvusに保存して管理やベクトル検索を行うことができます。以下の図は、その基本的なプロセスを示しています。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-   </span> <span class="img-wrapper"> <span>密なベクトルを使う</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" /> 
+   <span>密ベクトルの使用</span>
+  
+ </span></p>
 <div class="alert note">
-<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に処理するために一般的に使用されます。詳細については、<a href="/docs/ja/binary-vector.md">バイナリ・ベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパース・ベクトルを</a>参照してください。</p>
+<p>密ベクトルのほか、Milvusは疎ベクトルやバイナリベクトルもサポートしています。疎ベクトルは、キーワード検索や用語マッチングなど、特定の用語に基づく正確なマッチングに適しています。一方、バイナリベクトルは、画像パターンマッチングや特定のハッシュ処理など、二値化されたデータを効率的に扱うために一般的に使用されます。詳細については、<a href="/docs/ja/binary-vector.md">「バイナリベクトル」</a>および<a href="/docs/ja/sparse_vector.md">「疎ベクトル」</a>を参照してください。</p>
 </div>
-<h2 id="Use-dense-vectors" class="common-anchor-header">密なベクトルを使う<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-dense-vectors" class="common-anchor-header">密ベクトルの使用<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,14 +105,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvusで密なベクトルを使用するには、まずコレクションを作成する際に密なベクトルを格納するためのベクトルフィールドを定義します。このプロセスには以下が含まれます：</p>
+    </button></h3><p>Milvusで密ベクトルを使用するには、コレクションの作成時に、密ベクトルを格納するためのベクトルフィールドを最初に定義する必要があります。このプロセスには以下が含まれます：</p>
 <ol>
-<li><p><code translate="no">datatype</code> をサポートされる密なベクトルデータ型に設定する。サポートされる密なベクトルデータ型については、データ型を参照してください。</p></li>
-<li><p><code translate="no">dim</code> パラメータを使用して、密なベクトルの次元を指定します。</p></li>
+<li><p><code translate="no">datatype</code> をサポートされている密ベクトルデータ型に設定します。サポートされている密ベクトルデータ型については、「データ型」を参照してください。</p></li>
+<li><p><code translate="no">dim</code> パラメータを使用して、密ベクトルの次元を指定します。</p></li>
 </ol>
-<p>以下の例では、密なベクトルを格納するために<code translate="no">dense_vector</code> という名前のベクトル・フィールドを追加します。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、次元は<code translate="no">4</code> です。</p>
+<p>以下の例では、密ベクトルを格納するために「<code translate="no">dense_vector</code> 」という名前のベクトルフィールドを追加しています。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、次元は<code translate="no">4</code> です。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -217,30 +227,30 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>密なベクトル・フィールドでサポートされるデータ型</strong></p>
+<p><strong>密ベクトルフィールドでサポートされているデータ型</strong>：</p>
 <table>
    <tr>
      <th><p>データ型</p></th>
-     <th><p>データ型</p></th>
+     <th><p>説明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>科学計算や機械学習で実数を表現するために一般的に使用される32ビット浮動小数点数を格納。類似したベクトルを区別するなど、高精度を必要とするシナリオに最適です。</p></td>
+     <td><p>32ビット浮動小数点数を格納します。科学計算や機械学習において実数を表現するために一般的に使用されます。類似したベクトルの識別など、高精度が求められるシナリオに最適です。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>ディープラーニングや GPU 計算に使用される 16 ビット半精度浮動小数点数を格納します。推薦システムの低精度想起段階など、精度がそれほど重要でないシナリオでは、ストレージ・スペースを節約できます。</p></td>
+     <td><p>16ビットの半精度浮動小数点数を格納します。ディープラーニングやGPU計算に使用されます。レコメンデーションシステムの低精度リコールフェーズなど、精度がそれほど重要ではないシナリオでは、ストレージ容量を節約できます。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>16ビットのBfloat16（Brain Floating Point）数を格納し、Float32と同じ範囲の指数を提供するが、精度は低下する。大規模な画像検索など、大量のベクトルを高速に処理する必要があるシナリオに適している。</p></td>
+     <td><p>16ビットのBrain Floating Point (bfloat16) 数値を格納します。Float32と同じ指数範囲を持ちますが、精度は低くなります。大規模な画像検索など、大量のベクトルを高速に処理する必要があるシナリオに適しています。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。<br><strong>注</strong>：このベクトル型はHNSWインデックスでのみサポートされます。</p></td>
+     <td><p>各次元の要素が8ビット整数（int8）で構成されるベクトルを格納します。各要素の値の範囲は–128から127です。 量子化されたディープラーニングモデル（ResNet、EfficientNetなど）向けに設計されたINT8_VECTORは、精度の低下を最小限に抑えながら、モデルのサイズを縮小し、推論を高速化します。<br><strong>注</strong>：このベクトル型は、HNSWインデックスでのみサポートされています。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドのインデックスパラメタの設定<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドのインデックスパラメータを設定する<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -255,9 +265,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>セマンティック検索を高速化するために、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができます。</p>
+    </button></h3><p>セマンティック検索を高速化するには、ベクトルフィールドに対してインデックスを作成する必要があります。インデックス作成により、大規模なベクトルデータの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -299,9 +314,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、<code translate="no">dense_vector</code> フィールドに<code translate="no">dense_vector_index</code> という名前のインデックスが作成されている。<code translate="no">metric_type</code> は<code translate="no">IP</code> に設定され、距離メトリックとして内積が使用されることを示している。</p>
-<p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくはxxxをご参照ください。</p>
-<p>Milvusは他のメトリックタイプもサポートしています。詳細は<a href="/docs/ja/metric.md">Metric Typesを</a>参照してください。</p>
+<p>上記の例では、<code translate="no">AUTOINDEX</code> インデックス型を使用して、<code translate="no">dense_vector</code> フィールドに対して<code translate="no">dense_vector_index</code> という名前のインデックスが作成されています。<code translate="no">metric_type</code> は<code translate="no">IP</code> に設定されており、距離メトリックとして内積が使用されることを示しています。</p>
+<p>Milvusでは、ベクトル検索の利便性を高めるために、さまざまなインデックスタイプが用意されています。AUTOINDEXは、ベクトル検索の学習曲線を緩やかにするために設計された特別なインデックスタイプです。他にも多くのインデックスタイプから選択可能です。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの解説</a>」を参照してください。</p>
+<p>Milvusは他のメトリックタイプもサポートしています。詳細については、「<a href="/docs/ja/metric.md">Metric Types</a>」を参照してください。</p>
 <h3 id="Create-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -317,9 +332,14 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>密なベクトルとインデックスパラメータ設定が完了したら、密なベクトルを含むコレクションを作成できます。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
+    </button></h3><p>密ベクトルとインデックス・パラメータの設定が完了したら、密ベクトルを含むコレクションを作成できます。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -387,9 +407,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションを作成した後、<code translate="no">insert</code> メソッドを使用して、密なベクトルを含 むデータを追加する。挿入する密なベクトルの次元数が、密なベクトル・フィールドを追加するときに定義した<code translate="no">dim</code> の値と一致することを確認します。</p>
+    </button></h3><p>コレクションの作成後、<code translate="no">insert</code> メソッドを使用して、密ベクトルを含むデータを追加します。挿入する密ベクトルの次元が、密ベクトルフィールドを追加した際に定義した<code translate="no">dim</code> の値と一致していることを確認してください。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -451,7 +476,7 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">類似検索の実行<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+<h3 id="Perform-similarity-search" class="common-anchor-header">類似性検索の実行<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -466,9 +491,14 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>密なベクトルに基づくセマンティック検索はmilvusのコア機能の1つであり、ベクトル間の距離に基づいてクエリベクトルに最も似ているデータを素早く見つけることができます。類似検索を行うには、クエリベクトルと検索パラメータを準備し、<code translate="no">search</code> メソッドを呼び出します。</p>
+    </button></h3><p>密ベクトルに基づくセマンティック検索は、Milvusの中核機能の一つであり、ベクトル間の距離に基づいて、クエリベクトルに最も類似したデータを迅速に見つけることができます。類似度検索を実行するには、クエリベクトルと検索パラメータを準備し、<code translate="no">search</code> メソッドを呼び出します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -565,4 +595,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>類似検索パラメータの詳細については、<a href="/docs/ja/single-vector-search.md">基本的なANN検索を</a>参照してください。</p>
+<p>類似度検索のパラメータに関する詳細については、「<a href="/docs/ja/single-vector-search.md">基本的なANN検索</a>」を参照してください。</p>

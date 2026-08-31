@@ -1,7 +1,7 @@
 ---
 id: schema_design.md
 title: 提示：Milvus Schema 设计
-summary: AI 编码助手设计正确的 Milvus Collection Schema 的规则。
+summary: AI 编码助手设计正确的 Milvus Collection Schemas 的规则。
 ---
 <h1 id="Schema-Design" class="common-anchor-header">模式设计<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,10 +36,10 @@ summary: AI 编码助手设计正确的 Milvus Collection Schema 的规则。
       </svg>
     </button></h2><ol>
 <li>从下方的<a href="#full-prompt">“完整提示</a>”部分<strong>复制</strong>完整的提示。</li>
-<li>将其<strong>保存</strong>到您的 AI 工具指定的位置——具体放置位置请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
+<li>将其<strong>保存</strong>到您的 AI 工具所指定的位置——具体放置位置请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
 <li>您的 AI 助手在生成或审查 Milvus 代码时将自动应用这些规则。</li>
 </ol>
-<p>针对<strong>Cursor</strong>用户：请从<a href="#full-prompt">“完整提示</a>”部分复制提示，并将其保存至项目中的 `<code translate="no">.cursor/rules/</code> ` 目录下。</p>
+<p>针对<strong>Cursor</strong>用户：请从<a href="#full-prompt">“完整提示</a>”部分复制提示，并将其保存到项目中的 `<code translate="no">.cursor/rules/</code> ` 目录下。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完整提示词<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Vector, JSON, and Array fields** do not support nullable. Only scalar fields support `nullable=True`.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
@@ -159,7 +159,7 @@ schema.add_function(bm25_function)
 | Primary key type | `DataType.VARCHAR` | When you need application-controlled string IDs (e.g., UUIDs, composite keys). |
 | Dynamic fields | `enable_dynamic_field=True` | When entities have variable or unpredictable key-value metadata. Dynamic fields are queryable but not indexed as efficiently as schema-defined fields. |
 | Dynamic fields | `enable_dynamic_field=False` | When your schema is well-defined and all fields are known at creation time. Better query performance. |
-| Nullable fields | `nullable=True` | When some entities may not have a value for a scalar field. NOT supported for vector, JSON, or Array fields. |
+| Nullable fields | `nullable=True` | When some entities may lack a value for a scalar or vector field. Never nullable: primary keys, Array of Structs fields. |
 | Default values | `default_value=...` | When you want a fallback value for missing scalar fields during insertion. |
 
 ## Complete example: schema with all common field types
@@ -251,5 +251,5 @@ Before finishing, verify:
 - [ ] Only one primary key field per collection — no composite keys
 - [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
-- [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
+- [ ] Nullable is used only on scalar fields (all versions) or vector fields (v3.0.x+) — never on primary keys or Array of Structs fields
 <button class="copy-code-btn"></button></code></pre>

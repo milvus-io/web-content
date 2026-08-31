@@ -18,7 +18,7 @@ summary: AIコーディングアシスタントが正しいMilvusコレクショ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>フィールド型、主キー、BM25の設定、スキーマの不変性制約など、正しいMilvusコレクションスキーマを設計するためのルールと決定ガイドです。以下のプロンプト全文をAIツールにコピーして貼り付けると、これらのルールが自動的に適用されます。すべてのプロンプトの概要については、「<a href="/docs/ja/milvus_for_agents.md">AIプロンプト</a>」を参照してください。</p>
+    </button></h1><p>フィールド型、主キー、BM25の設定、スキーマの不変性制約など、正しいMilvusコレクションスキーマを設計するためのルールと決定指針。以下のプロンプト全文をAIツールにコピーして貼り付けると、これらのルールが自動的に適用されます。すべてのプロンプトの概要については、「<a href="/docs/ja/milvus_for_agents.md">AIプロンプト</a>」を参照してください。</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">このプロンプトの使用方法<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ summary: AIコーディングアシスタントが正しいMilvusコレクショ
 <li>AIツールが指定する場所に<strong>保存してください</strong>。配置の詳細については、<a href="/docs/ja/milvus_for_agents.md">環境表</a>を参照してください。</li>
 <li>AIアシスタントは、Milvusコードを生成またはレビューする際に、これらのルールを自動的に適用します。</li>
 </ol>
-<p><strong>Cursorユーザー</strong>の場合：「<a href="#full-prompt">完全なプロンプト</a>」セクションからプロンプトをコピーし、プロジェクト内の<code translate="no">.cursor/rules/</code> に保存してください。</p>
+<p><strong>Cursor</strong>ユーザーの場合：「<a href="#full-prompt">完全なプロンプト</a>」セクションからプロンプトをコピーし、プロジェクト内の `<code translate="no">.cursor/rules/</code> ` に保存してください。</p>
 <h2 id="Full-prompt" class="common-anchor-header">プロンプト全文<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Vector, JSON, and Array fields** do not support nullable. Only scalar fields support `nullable=True`.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
@@ -159,7 +159,7 @@ schema.add_function(bm25_function)
 | Primary key type | `DataType.VARCHAR` | When you need application-controlled string IDs (e.g., UUIDs, composite keys). |
 | Dynamic fields | `enable_dynamic_field=True` | When entities have variable or unpredictable key-value metadata. Dynamic fields are queryable but not indexed as efficiently as schema-defined fields. |
 | Dynamic fields | `enable_dynamic_field=False` | When your schema is well-defined and all fields are known at creation time. Better query performance. |
-| Nullable fields | `nullable=True` | When some entities may not have a value for a scalar field. NOT supported for vector, JSON, or Array fields. |
+| Nullable fields | `nullable=True` | When some entities may lack a value for a scalar or vector field. Never nullable: primary keys, Array of Structs fields. |
 | Default values | `default_value=...` | When you want a fallback value for missing scalar fields during insertion. |
 
 ## Complete example: schema with all common field types
@@ -251,5 +251,5 @@ Before finishing, verify:
 - [ ] Only one primary key field per collection — no composite keys
 - [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
-- [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
+- [ ] Nullable is used only on scalar fields (all versions) or vector fields (v3.0.x+) — never on primary keys or Array of Structs fields
 <button class="copy-code-btn"></button></code></pre>

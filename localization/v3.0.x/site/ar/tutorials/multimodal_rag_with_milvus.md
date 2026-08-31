@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
-summary: RAG متعدد الوسائط مع ميلفوس
-title: تعدد الوسائط RAG مع ميلفوس
+summary: RAG متعدد الوسائط باستخدام Milvus
+title: RAG متعدد الوسائط باستخدام Milvus
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">تعدد الوسائط RAG مع ميلفوس<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">RAG متعدد الوسائط باستخدام Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,12 +20,11 @@ title: تعدد الوسائط RAG مع ميلفوس
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://demos.milvus.io/multimodal-image-search/">العرض التوضيحي عبر الإنترنت</a>.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
-"/></p>
-<p>يستعرض هذا البرنامج التعليمي نظام RAG متعدد الوسائط المدعوم من Milvus، <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ونموذج BGE المرئي،</a> و <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. باستخدام هذا النظام، يمكن للمستخدمين تحميل صورة وتحرير تعليمات نصية، والتي تتم معالجتها بواسطة نموذج الاسترجاع المركب من BGE للبحث عن الصور المرشحة. ثم يعمل نظام GPT-4o بعد ذلك كمُعيد تنقيح للصور، حيث يقوم باختيار الصورة الأنسب وتقديم الأساس المنطقي وراء الاختيار. يُتيح هذا المزيج القوي تجربة بحث سلسة وبديهية عن الصور، مستفيداً من Milvus للاسترجاع الفعّال، ونموذج BGE لمعالجة الصور ومطابقتها بدقة، وGPT-4o لإعادة الترتيب المتقدم.</p>
-<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
-<h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>إذا كنت ترغب في تجربة النتيجة النهائية لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://demos.milvus.io/multimodal-image-search/">العرض التوضيحي عبر الإنترنت</a>.</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg"/></p>
+<p>يعرض هذا البرنامج التعليمي نظام RAG متعدد الوسائط المدعوم بـ Milvus <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ونموذج BGE المرئي</a> و <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. باستخدام هذا النظام، يمكن للمستخدمين تحميل صورة وتحرير تعليمات نصية، والتي تتم معالجتها بواسطة نموذج الاسترجاع المركب من BGE للبحث عن الصور المرشحة. ثم يعمل GPT-4o كأداة إعادة ترتيب، حيث يختار الصورة الأنسب ويقدم الأسباب المنطقية وراء هذا الاختيار. تتيح هذه المجموعة القوية تجربة بحث عن الصور سلسة وبديهية، مستفيدة من Milvus للاسترجاع الفعال، ونموذج BGE للمعالجة والمطابقة الدقيقة للصور، وGPT-4o لإعادة الترتيب المتقدمة.</p>
+<p><img translate="no" src="/docs/v3.0.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
+<h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +60,7 @@ title: تعدد الوسائط RAG مع ميلفوس
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، فلتفعيل التبعيات التي تم تثبيتها للتو، قد تحتاج إلى <strong>إعادة تشغيل بيئة التشغيل</strong> (انقر على قائمة «Runtime» في أعلى الشاشة، واختر «Restart session» من القائمة المنسدلة).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">تنزيل البيانات<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,10 +77,10 @@ title: تعدد الوسائط RAG مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>سيقوم الأمر التالي بتنزيل بيانات المثال واستخراجها إلى مجلد محلي "./images_folder" بما في ذلك:</p>
+    </button></h3><p>سيؤدي الأمر التالي إلى تنزيل البيانات النموذجية واستخراجها إلى مجلد محلي «./images_folder» يتضمن:</p>
 <ul>
-<li><strong>الصور</strong>: مجموعة فرعية من <a href="https://github.com/hyp1231/AmazonReviews2023">مراجعات أمازون 2023</a> على أنها تحتوي على ما يقرب من 900 صورة من فئات "الأجهزة" و"الهواتف_الجوّالة_والإكسسوارات" و"الإلكترونيات".</li>
-<li><strong>leopard.jpg</strong>: مثال على صورة استعلام.</li>
+<li><strong>الصور</strong>: مجموعة فرعية من <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> تحتوي على حوالي 900 صورة من الفئات "Appliance" و"Cell_Phones_and_Accessories" و"Electronics".</li>
+<li><strong>leopard.jpg</strong>: صورة استعلام نموذجية.</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
@@ -101,11 +100,11 @@ title: تعدد الوسائط RAG مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>سوف نستخدم نموذج BGE المرئي "bge-visualized-bvisualized-base-en-v1.5" لتوليد تضمينات لكل من الصور والنصوص.</p>
-<p><strong>1. تحميل الوزن</strong></p>
+    </button></h3><p>سنستخدم نموذج Visualized BGE «bge-visualized-base-en-v1.5» لتوليد التضمينات لكل من الصور والنصوص.</p>
+<p><strong>1. تنزيل الأوزان</strong></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. بناء المشفر</strong></p>
+<p><strong>2. إنشاء المشفر</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
@@ -145,8 +144,8 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>سيقوم هذا القسم بتحميل أمثلة على الصور في قاعدة البيانات مع التضمينات المقابلة.</p>
-<h3 id="Generate-embeddings" class="common-anchor-header">توليد التضمينات<button data-href="#Generate-embeddings" class="anchor-icon" translate="no">
+    </button></h2><p>سيتم في هذا القسم تحميل صور أمثلة إلى قاعدة البيانات مع التضمينات المقابلة.</p>
+<h3 id="Generate-embeddings" class="common-anchor-header">إنشاء التضمينات<button data-href="#Generate-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -161,7 +160,7 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتحميل جميع صور jpeg من دليل البيانات وتطبيق المشفر لتحويل الصور إلى تضمينات.</p>
+    </button></h3><p>تحميل جميع الصور بتنسيق jpeg من دليل البيانات وتطبيق المُشفر لتحويل الصور إلى التضمينات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -187,7 +186,7 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">إدراج في ميلفوس<button data-href="#Insert-into-Milvus" class="anchor-icon" translate="no">
+<h3 id="Insert-into-Milvus" class="common-anchor-header">الإدراج في Milvus<button data-href="#Insert-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,9 +205,9 @@ Number of encoded images: 900
 <div class="alert note">
 <p>بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال <code translate="no">./milvus_demo.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا Milvus <a href="https://milvus.io/docs/milvus_lite.md">Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
-<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال <code translate="no">./milvus_demo.db</code> ، الطريقة الأكثر ملاءمة، حيث إنه يستخدم <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> تلقائيًا لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كانت لديك كمية كبيرة من البيانات، فيمكنك إعداد خادم Milvus أكثر كفاءة على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يرجى استخدام عنوان URI للخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> وهي الخدمة السحابية المُدارة بالكامل لـ Milvus، فقم بتعديل <code translate="no">uri</code> و <code translate="no">token</code> ، اللذين يتوافقان مع نقطة <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">النهاية العامة (Public Endpoint) ومفتاح واجهة برمجة التطبيقات (API key)</a> في Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -247,7 +246,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
-<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">البحث متعدد الوسائط مع أداة إعادة التصنيف التوليدية<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">البحث متعدد الوسائط باستخدام أداة إعادة الترتيب التوليدية<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,7 +261,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا القسم، سنبحث أولاً عن الصور ذات الصلة عن طريق استعلام متعدد الوسائط ثم نستخدم خدمة LLM لإعادة تصنيف النتائج والعثور على أفضلها مع الشرح.</p>
+    </button></h2><p>في هذا القسم، سنقوم أولاً بالبحث عن الصور ذات الصلة باستخدام استعلام متعدد الوسائط، ثم نستخدم خدمة LLM لإعادة ترتيب النتائج والعثور على أفضلها مع توضيح.</p>
 <h3 id="Run-search" class="common-anchor-header">تشغيل البحث<button data-href="#Run-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +277,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نحن الآن جاهزون لإجراء البحث المتقدم عن الصور باستخدام بيانات الاستعلام المكونة من تعليمات الصور والنصوص.</p>
+    </button></h3><p>نحن الآن جاهزون لإجراء البحث المتقدم عن الصور باستخدام بيانات استعلام تتألف من كل من الصورة والتعليمات النصية.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -315,7 +314,7 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>سنستخدم خدمة LLM لترتيب الصور وإنشاء شرح لأفضل نتيجة بناءً على استعلام المستخدم والنتائج المسترجعة.</p>
+    </button></h3><p>سنستخدم نموذج اللغة الكبير (LLM) لترتيب الصور وإنشاء تفسير لأفضل نتيجة بناءً على استعلام المستخدم والنتائج المسترجعة.</p>
 <p><strong>1. إنشاء عرض بانورامي</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> cv2
@@ -432,7 +431,7 @@ row_count = <span class="hljs-number">3</span>
     panoramic_image = np.hstack([query_image_null, panoramic_image])
     <span class="hljs-keyword">return</span> panoramic_image
 <button class="copy-code-btn"></button></code></pre>
-<p>اجمع بين صورة الاستعلام والصور المسترجعة مع المؤشرات في عرض بانورامي.</p>
+<p>دمج صورة الاستعلام والصور المسترجعة مع الفهارس في عرض بانورامي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
 combined_image_path = os.path.join(data_dir, <span class="hljs-string">&quot;combined_image.jpg&quot;</span>)
@@ -443,12 +442,14 @@ combined_image = Image.<span class="hljs-built_in">open</span>(combined_image_pa
 show_combined_image = combined_image.resize((<span class="hljs-number">300</span>, <span class="hljs-number">300</span>))
 show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
-   </span> <span class="img-wrapper"> <span>إنشاء عرض بانورامي</span> </span></p>
-<p><strong>2. إعادة التصنيف والشرح</strong></p>
-<p>سنقوم بإرسال الصورة المدمجة إلى خدمة LLM متعددة الوسائط مع المطالبات المناسبة لترتيب النتائج المسترجعة مع الشرح. لتمكين GPT-4o كخدمة LLM، تحتاج إلى إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح OpenAI API</a> الخاص بك.</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" /> 
+   <span>إنشاء عرض بانورامي</span>
+  
+ </span></p>
+<p><strong>2. إعادة الترتيب وتقديم التفسير</strong></p>
+<p>سنرسل الصورة المدمجة إلى خدمة نموذج اللغة الكبير متعدد الوسائط (LLM) مع توجيهات مناسبة لترتيب النتائج المسترجعة مع تفسيرها. لتمكين GPT-4o كنموذج لغة كبير (LLM)، تحتاج إلى إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح واجهة برمجة تطبيقات OpenAI</a> الخاص بك.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 
@@ -517,12 +518,12 @@ openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span clas
 
     <span class="hljs-keyword">return</span> ranked_indices, explanation
 <button class="copy-code-btn"></button></code></pre>
-<p>احصل على مؤشرات الصورة بعد الترتيب وسبب أفضل نتيجة:</p>
+<p>احصل على مؤشرات الصور بعد الترتيب وسبب اختيار أفضل نتيجة:</p>
 <pre><code translate="no" class="language-python">ranked_indices, explanation = generate_ranking_explanation(
     combined_image_path, query_text
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>3. عرض أفضل نتيجة مع الشرح</strong></p>
+<p><strong>3. عرض أفضل نتيجة مع تفسيرها</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(explanation)
 
 best_index = ranked_indices[<span class="hljs-number">0</span>]
@@ -532,10 +533,12 @@ best_img.show()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
 </code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
-   </span> <span class="img-wrapper"> <span>أفضل نتيجة</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" /> 
+   <span>أفضل نتيجة</span>
+  
+ </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">النشر السريع<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,4 +554,4 @@ best_img.show()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">مثال التطبيق</a>.</p>
+    </button></h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">التطبيق النموذجي</a>.</p>

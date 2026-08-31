@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
-summary: RAG multimodal dengan Milvus
-title: RAG multimodal dengan Milvus
+summary: RAG Multimodal dengan Milvus
+title: RAG Multimodal dengan Milvus
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">RAG multimodal dengan Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">RAG Multimodal dengan Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,11 +20,10 @@ title: RAG multimodal dengan Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung menuju <a href="https://demos.milvus.io/multimodal-image-search/">demo online</a>.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
-"/></p>
-<p>Tutorial ini menampilkan RAG multimodal yang didukung oleh Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">model BGE yang divisualisasikan</a>, dan <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Dengan sistem ini, pengguna dapat mengunggah gambar dan mengedit instruksi teks, yang diproses oleh model pengambilan yang disusun oleh BGE untuk mencari gambar kandidat. GPT-4o kemudian bertindak sebagai pemeringkat, memilih gambar yang paling sesuai dan memberikan alasan di balik pilihan tersebut. Kombinasi yang kuat ini memungkinkan pengalaman pencarian gambar yang mulus dan intuitif, memanfaatkan Milvus untuk pengambilan yang efisien, model BGE untuk pemrosesan dan pencocokan gambar yang tepat, dan GPT-4o untuk pemeringkatan ulang tingkat lanjut.</p>
-<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
+<p>Jika Anda ingin melihat hasil akhir dari tutorial ini, Anda dapat langsung mengunjungi <a href="https://demos.milvus.io/multimodal-image-search/">demo online</a>.</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg"/></p>
+<p>Tutorial ini menampilkan RAG multimodal yang didukung oleh Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">model BGE yang telah divisualisasikan</a>, dan <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Dengan sistem ini, pengguna dapat mengunggah gambar dan mengedit instruksi teks, yang diproses oleh model pencarian terpadu BGE untuk mencari gambar-gambar kandidat. GPT-4o kemudian bertindak sebagai pengurut ulang (reranker), memilih gambar yang paling sesuai, dan memberikan alasan di balik pilihan tersebut. Kombinasi yang kuat ini memungkinkan pengalaman pencarian gambar yang mulus dan intuitif, memanfaatkan Milvus untuk pengambilan data yang efisien, model BGE untuk pemrosesan dan pencocokan gambar yang akurat, serta GPT-4o untuk pengurutan ulang tingkat lanjut.</p>
+<p><img translate="no" src="/docs/v3.0.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +39,7 @@ title: RAG multimodal dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Ketergantungan<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Dependensi<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +60,7 @@ title: RAG multimodal dengan Milvus
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
+<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>me-restart runtime</strong> (klik menu “Runtime” di bagian atas layar, lalu pilih “Restart session” dari menu dropdown).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Unduh Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,15 +77,15 @@ title: RAG multimodal dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Perintah berikut ini akan mengunduh data contoh dan mengekstrak ke folder lokal "./images_folder", termasuk:</p>
+    </button></h3><p>Perintah berikut akan mengunduh data contoh dan mengekstraknya ke folder lokal “./images_folder” yang mencakup:</p>
 <ul>
-<li><strong>images</strong>: Bagian dari <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> yang berisi sekitar 900 gambar dari kategori "Alat", "Ponsel dan Aksesori", dan "Elektronik".</li>
-<li>macan<strong>tutul.jpg</strong>: Contoh gambar kueri.</li>
+<li><strong>images</strong>: Sebagian dari <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> yang berisi sekitar 900 gambar dari kategori "Appliance", "Cell_Phones_and_Accessories", dan "Electronics".</li>
+<li><strong>leopard.jpg</strong>: Contoh gambar kueri.</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-Embedding-Model" class="common-anchor-header">Model Penyematan Muatan<button data-href="#Load-Embedding-Model" class="anchor-icon" translate="no">
+<h3 id="Load-Embedding-Model" class="common-anchor-header">Memuat Model Embedding<button data-href="#Load-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -101,11 +100,11 @@ title: RAG multimodal dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kami akan menggunakan model BGE yang divisualisasikan "bge-visualized-base-en-v1.5" untuk menghasilkan sematan untuk gambar dan teks.</p>
-<p><strong>1. Berat unduhan</strong></p>
+    </button></h3><p>Kita akan menggunakan model BGE Visualized “bge-visualized-base-en-v1.5” untuk menghasilkan embedding baik untuk gambar maupun teks.</p>
+<p><strong>1. Unduh bobot</strong></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. Bangun pembuat enkode</strong></p>
+<p><strong>2. Membangun encoder</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
@@ -145,7 +144,7 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bagian ini akan memuat gambar contoh ke dalam database dengan embedding yang sesuai.</p>
+    </button></h2><p>Bagian ini akan memuat gambar contoh ke dalam basis data beserta embedding yang sesuai.</p>
 <h3 id="Generate-embeddings" class="common-anchor-header">Menghasilkan embeddings<button data-href="#Generate-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +160,7 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Muat semua gambar jpeg dari direktori data dan terapkan penyandi untuk mengonversi gambar menjadi embedding.</p>
+    </button></h3><p>Muat semua gambar JPEG dari direktori data dan terapkan encoder untuk mengubah gambar menjadi embedding.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -187,7 +186,7 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">Masukkan ke dalam Milvus<button data-href="#Insert-into-Milvus" class="anchor-icon" translate="no">
+<h3 id="Insert-into-Milvus" class="common-anchor-header">Sisipkan ke Milvus<button data-href="#Insert-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,13 +201,13 @@ Number of encoded images: 900
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sisipkan gambar dengan jalur dan sematan yang sesuai ke dalam koleksi Milvus.</p>
+    </button></h3><p>Masukkan gambar beserta jalur dan embedding-nya ke dalam koleksi Milvus.</p>
 <div class="alert note">
-<p>Adapun argumen dari <code translate="no">MilvusClient</code>:</p>
+<p>Mengenai argumen ` <code translate="no">MilvusClient</code>`:</p>
 <ul>
-<li>Menetapkan <code translate="no">uri</code> sebagai file lokal, misalnya <code translate="no">./milvus_demo.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
-<li>Jika Anda memiliki data dalam skala besar, Anda dapat mengatur server Milvus yang lebih berkinerja pada <a href="https://milvus.io/docs/quickstart.md">docker atau kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>.</li>
-<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
+<li>Menetapkan ` <code translate="no">uri</code> ` sebagai file lokal, misalnya ` <code translate="no">./milvus_demo.db</code>`, merupakan metode yang paling praktis, karena secara otomatis memanfaatkan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file tersebut.</li>
+<li>Jika Anda memiliki data berskala besar, Anda dapat menyiapkan server Milvus yang lebih bertenaga di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam konfigurasi ini, silakan gunakan URI server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code> Anda.</li>
+<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan nilai ` <code translate="no">uri</code> ` dan ` <code translate="no">token</code>`, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint dan API Key</a> di Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -247,7 +246,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
-<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">Pencarian Multimodal dengan Perangking Generatif<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">Pencarian Multimodal dengan Generative Reranker<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,7 +261,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pada bagian ini, pertama-tama kita akan mencari gambar yang relevan dengan kueri multimodal dan kemudian menggunakan layanan LLM untuk memberi peringkat ulang hasil dan menemukan yang terbaik dengan penjelasan.</p>
+    </button></h2><p>Pada bagian ini, kami akan terlebih dahulu mencari gambar yang relevan melalui kueri multimodal, kemudian menggunakan layanan LLM untuk menyusun ulang peringkat hasil dan menemukan yang terbaik beserta penjelasannya.</p>
 <h3 id="Run-search" class="common-anchor-header">Jalankan pencarian<button data-href="#Run-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +277,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sekarang kita siap untuk melakukan pencarian gambar lanjutan dengan data kueri yang terdiri dari gambar dan instruksi teks.</p>
+    </button></h3><p>Sekarang kita siap melakukan pencarian gambar tingkat lanjut dengan data kueri yang terdiri dari instruksi gambar dan teks.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -300,7 +299,7 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
-<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Beri peringkat ulang dengan GPT-4o<button data-href="#Rerank-with-GPT-4o" class="anchor-icon" translate="no">
+<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Menyusun ulang peringkat dengan GPT-4o<button data-href="#Rerank-with-GPT-4o" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +314,7 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kami akan menggunakan LLM untuk mengurutkan gambar dan menghasilkan penjelasan untuk hasil terbaik berdasarkan kueri pengguna dan hasil yang diambil.</p>
+    </button></h3><p>Kita akan menggunakan LLM untuk mengurutkan gambar dan menghasilkan penjelasan untuk hasil terbaik berdasarkan kueri pengguna dan hasil yang diperoleh.</p>
 <p><strong>1. Buat tampilan panorama</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> cv2
@@ -432,7 +431,7 @@ row_count = <span class="hljs-number">3</span>
     panoramic_image = np.hstack([query_image_null, panoramic_image])
     <span class="hljs-keyword">return</span> panoramic_image
 <button class="copy-code-btn"></button></code></pre>
-<p>Gabungkan gambar kueri dan gambar yang diambil dengan indeks dalam tampilan panorama.</p>
+<p>Gabungkan gambar kueri dan gambar yang diperoleh dengan indeks dalam tampilan panorama.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
 combined_image_path = os.path.join(data_dir, <span class="hljs-string">&quot;combined_image.jpg&quot;</span>)
@@ -443,12 +442,14 @@ combined_image = Image.<span class="hljs-built_in">open</span>(combined_image_pa
 show_combined_image = combined_image.resize((<span class="hljs-number">300</span>, <span class="hljs-number">300</span>))
 show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
-   </span> <span class="img-wrapper"> <span>Membuat tampilan panorama</span> </span></p>
-<p><strong>2. Beri peringkat ulang dan jelaskan</strong></p>
-<p>Kami akan mengirimkan gambar gabungan ke layanan LLM multimodal bersama dengan petunjuk yang tepat untuk memberi peringkat hasil yang diambil dengan penjelasan. Untuk mengaktifkan GPT-4o sebagai LLM, Anda perlu menyiapkan <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a>.</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" /> 
+   <span>Buat tampilan panorama</span>
+  
+ </span></p>
+<p><strong>2. Urutkan ulang dan berikan penjelasan</strong></p>
+<p>Kami akan mengirimkan gambar gabungan tersebut ke layanan LLM multimodal bersama dengan prompt yang tepat untuk mengurutkan hasil yang diperoleh beserta penjelasannya. Untuk mengaktifkan GPT-4o sebagai LLM, Anda perlu menyiapkan <a href="https://platform.openai.com/docs/quickstart">Kunci API OpenAI</a> Anda.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 
@@ -517,12 +518,12 @@ openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span clas
 
     <span class="hljs-keyword">return</span> ranked_indices, explanation
 <button class="copy-code-btn"></button></code></pre>
-<p>Dapatkan indeks gambar setelah pemeringkatan dan alasan hasil terbaik:</p>
+<p>Dapatkan indeks gambar setelah pemeringkatan serta alasan di balik hasil terbaik:</p>
 <pre><code translate="no" class="language-python">ranked_indices, explanation = generate_ranking_explanation(
     combined_image_path, query_text
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>3. Tampilkan hasil terbaik dengan penjelasan</strong></p>
+<p><strong>3. Tampilkan hasil terbaik beserta penjelasannya</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(explanation)
 
 best_index = ranked_indices[<span class="hljs-number">0</span>]
@@ -532,10 +533,12 @@ best_img.show()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
 </code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
-   </span> <span class="img-wrapper"> <span>Hasil terbaik</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" /> 
+   <span>Hasil terbaik</span>
+  
+ </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,4 +554,4 @@ best_img.show()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">contoh aplikasi</a>.</p>
+    </button></h3><p>Untuk mempelajari cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">aplikasi contoh</a>.</p>

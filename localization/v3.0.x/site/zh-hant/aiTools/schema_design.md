@@ -1,9 +1,9 @@
 ---
 id: schema_design.md
-title: 提示：Milvus 資料模型設計
+title: 提示：Milvus 架構設計
 summary: AI 程式設計助理用於設計正確 Milvus 集合模式的規則。
 ---
-<h1 id="Schema-Design" class="common-anchor-header">資料結構設計<button data-href="#Schema-Design" class="anchor-icon" translate="no">
+<h1 id="Schema-Design" class="common-anchor-header">模式設計<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +18,7 @@ summary: AI 程式設計助理用於設計正確 Milvus 集合模式的規則。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>設計正確的 Milvus 集合模式所應遵循的規則與決策指南，包括欄位類型、主鍵、BM25 配置以及模式不可變性限制。請將下方的完整提示複製到您的 AI 工具中，以自動套用這些規則。如需所有提示的概覽，請參閱「<a href="/docs/zh-hant/milvus_for_agents.md">AI 提示」</a>。</p>
+    </button></h1><p>用於設計正確 Milvus 資料集模式的規則與決策指南，包含欄位類型、主鍵、BM25 配置以及模式不可變性限制。請將下方的完整提示複製到您的 AI 工具中，以自動套用這些規則。如需所有提示的概覽，請參閱<a href="/docs/zh-hant/milvus_for_agents.md">《AI 提示》</a>。</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">如何使用此提示<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,11 +36,11 @@ summary: AI 程式設計助理用於設計正確 Milvus 集合模式的規則。
       </svg>
     </button></h2><ol>
 <li>請從下方的「<a href="#full-prompt">完整提示</a>」區段<strong>複製</strong> <a href="#full-prompt">完整</a>提示。</li>
-<li><strong>將</strong>其<strong>儲存</strong>至您的 AI 工具所指定的位置 — 請參閱<a href="/docs/zh-hant/milvus_for_agents.md">環境表</a>以了解放置細節。</li>
+<li><strong>將</strong>其<strong>儲存</strong>至您的 AI 工具所預期的位置 — 請參閱<a href="/docs/zh-hant/milvus_for_agents.md">環境表</a>以了解放置細節。</li>
 <li>您的 AI 助理在生成或審查 Milvus 程式碼時，將自動套用這些規則。</li>
 </ol>
 <p>針對<strong>Cursor</strong>使用者：請從「<a href="#full-prompt">完整提示</a>」區段複製提示，並將其儲存至專案中的 `<code translate="no">.cursor/rules/</code> ` 目錄下。</p>
-<h2 id="Full-prompt" class="common-anchor-header">完整提示語<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<h2 id="Full-prompt" class="common-anchor-header">完整提示<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,7 +147,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Vector, JSON, and Array fields** do not support nullable. Only scalar fields support `nullable=True`.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
@@ -159,7 +159,7 @@ schema.add_function(bm25_function)
 | Primary key type | `DataType.VARCHAR` | When you need application-controlled string IDs (e.g., UUIDs, composite keys). |
 | Dynamic fields | `enable_dynamic_field=True` | When entities have variable or unpredictable key-value metadata. Dynamic fields are queryable but not indexed as efficiently as schema-defined fields. |
 | Dynamic fields | `enable_dynamic_field=False` | When your schema is well-defined and all fields are known at creation time. Better query performance. |
-| Nullable fields | `nullable=True` | When some entities may not have a value for a scalar field. NOT supported for vector, JSON, or Array fields. |
+| Nullable fields | `nullable=True` | When some entities may lack a value for a scalar or vector field. Never nullable: primary keys, Array of Structs fields. |
 | Default values | `default_value=...` | When you want a fallback value for missing scalar fields during insertion. |
 
 ## Complete example: schema with all common field types
@@ -251,5 +251,5 @@ Before finishing, verify:
 - [ ] Only one primary key field per collection — no composite keys
 - [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
-- [ ] Nullable is only used on scalar fields, not on vector, JSON, or Array fields
+- [ ] Nullable is used only on scalar fields (all versions) or vector fields (v3.0.x+) — never on primary keys or Array of Structs fields
 <button class="copy-code-btn"></button></code></pre>

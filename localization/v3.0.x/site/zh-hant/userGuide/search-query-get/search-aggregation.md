@@ -1,10 +1,10 @@
 ---
 id: search-aggregation.md
-title: 搜尋聚合Compatible with Milvus 3.0.x
-summary: 將向量搜尋結果分組至各桶中，計算各桶的指標，對各桶進行排序，並回傳具代表性的搜尋結果。
+title: Search AggregationCompatible with Milvus 3.0.x
+summary: 將向量搜尋結果分組至各個桶中，計算各桶的指標，對桶進行排序，並回傳具代表性的搜尋結果。
 beta: Milvus 3.0.x
 ---
-<h1 id="Search-Aggregation" class="common-anchor-header">搜尋聚合<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Search-Aggregation" class="anchor-icon" translate="no">
+<h1 id="Search-Aggregation" class="common-anchor-header">Search Aggregation<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Search-Aggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,17 +19,17 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當購物者搜尋「適合日常訓練的黑色跑鞋」時，近似最近鄰（ANN）搜尋會根據向量相似度對產品進行排序，並回傳一個平面的 Top-K 清單。搜尋結果雖具相關性，但可能過於重複：以下例中，前六項結果中有四項是 A 品牌產品，而 B 品牌和 C 品牌各出現一次。</p>
-<p>平鋪式清單無法直接提供以分桶為導向的摘要。應用程式可能需要根據保留候選項數量或平均價格來比較各品牌，檢視每個品牌中少數具代表性的產品，或將結果組織成多個分桶層級。</p>
-<p>搜尋彙總功能會根據選定的標量欄位，將保留的 ANN 候選項目歸類至不同區間。在此範例中，每個品牌即成為一個獨立的區間。Milvus 可針對每個區間計算統計數據、對區間進行排序，並附上代表性產品。應用程式可透過 `<code translate="no">result.agg_buckets</code>` 介面取得此「區間優先」的回應結果。</p>
-<p><span class="img-wrapper">
-  
-   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" /> 
-   <span>原本平面的運動鞋搜尋結果，轉變為一組可供比較的品牌分桶</span>
-  
- </span></p>
-<p>搜尋聚合並不會執行精確的全集合聚合。桶組的存在、計數、指標、排序以及代表性搜尋結果，皆取決於人工神經網路（ANN）與分組階段所保留的候選項目。</p>
-<h2 id="How-it-works" class="common-anchor-header">運作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p>When a shopper searches for “black running shoes for daily training,” approximate nearest neighbor (ANN) search ranks products by vector similarity and returns a flat Top-K list. The results can be relevant but repetitive: in the example below, four of the first six results are Brand A products, while Brand B and Brand C appear once each.</p>
+<p>A flat list cannot directly provide a bucket-oriented summary. An application may need to compare brands by retained candidate count or average price, inspect a small number of representative products from each brand, or organize the results into multiple bucket levels.</p>
+<p>Search Aggregation organizes retained ANN candidates into buckets based on selected scalar fields. In this example, each brand becomes a separate bucket. Milvus can calculate statistics for each bucket, order the buckets, and attach representative products. The application consumes this bucket-first response through <code translate="no">result.agg_buckets</code>.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-overview.png" alt="A flat running-shoe search result becomes a set of comparable brand buckets" class="doc-image" id="a-flat-running-shoe-search-result-becomes-a-set-of-comparable-brand-buckets" />
+    <span>A flat running-shoe search result becomes a set of comparable brand buckets</span>
+  </span>
+</p>
+<p>Search Aggregation does not run an exact full-collection aggregation. Bucket existence, counts, metrics, ordering, and representative hits depend on the candidates retained by the ANN and grouping stages.</p>
+<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,20 +44,20 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><span class="img-wrapper">
-  
-   <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" /> 
-   <span>依桶鍵分組的 ANN 候選項，並隨同計數、指標及代表性搜尋結果一併返回</span>
-  
- </span></p>
+    </button></h2><p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v3.0.x/assets/search-aggregation-bucketing.png" alt="ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits" class="doc-image" id="ann-candidates-grouped-by-bucket-keys-and-returned-with-counts,-metrics,-and-representative-hits" />
+    <span>ANN candidates grouped by bucket keys and returned with counts, metrics, and representative hits</span>
+  </span>
+</p>
 <ol>
-<li><p><strong>檢索候選項。</strong>Milvus 執行 ANN 搜尋以找出最接近查詢向量的實體。隨後，分組階段會針對每個完整的複合鍵保留有限數量的候選項。此「每鍵候選項配額」等於聚合樹中任何位置的最大<code translate="no">TopHits.size</code> 值，或當未設定<code translate="no">top_hits</code> 時，即為<code translate="no">1</code> 。</p></li>
-<li><p><strong>建立桶（bucket）。</strong> <code translate="no">SearchAggregation.fields</code> 定義桶鍵。每個字段值的唯一組合都會產生一個獨立的鍵。如圖所示，<code translate="no">fields=[&quot;brand&quot;]</code> 會產生<code translate="no">(Brand A)</code> 、<code translate="no">(Brand B)</code> 以及<code translate="no">(Brand C)</code> 這些桶鍵。具有相同鍵的保留候選項屬於同一個桶，並計入該桶的<code translate="no">count</code> 。<code translate="no">SearchAggregation.size</code> 會限制 Milvus 返回的桶數量。</p></li>
-<li><p><strong>計算並返回結果。</strong>每個返回的桶皆包含其鍵及保留候選項的數量。Milvus 亦可計算已設定的指標、對桶進行排序、返回代表性實體，並建立子桶。<code translate="no">result.agg_buckets</code> 中的每個<code translate="no">AggregationBucket</code> 皆會公開<code translate="no">key</code> 、<code translate="no">count</code> 、<code translate="no">metrics</code> 、<code translate="no">hits</code> 及<code translate="no">sub_groups</code> 。當啟用「搜尋聚合」時，一般的搜尋命中清單將為空。</p></li>
+<li><p><strong>Retrieve candidates.</strong> Milvus runs ANN search to find entities closest to the query vector. The grouping stage then retains a bounded number of candidates for each full composite key. This per-key candidate budget is the largest <code translate="no">TopHits.size</code> anywhere in the aggregation tree, or <code translate="no">1</code> when no level configures <code translate="no">top_hits</code>.</p></li>
+<li><p><strong>Build buckets.</strong> <code translate="no">SearchAggregation.fields</code> defines the bucket key. Each unique combination of field values creates a separate key. In the figure, <code translate="no">fields=[&quot;brand&quot;]</code> creates <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, and <code translate="no">(Brand C)</code> bucket keys. Retained candidates with the same key belong to the same bucket and contribute to its <code translate="no">count</code>. <code translate="no">SearchAggregation.size</code> limits how many buckets Milvus returns.</p></li>
+<li><p><strong>Calculate and return results.</strong> Each returned bucket contains its key and retained-candidate count. Milvus can also calculate configured metrics, order the buckets, return representative entities, and build child buckets. Each <code translate="no">AggregationBucket</code> in <code translate="no">result.agg_buckets</code> exposes <code translate="no">key</code>, <code translate="no">count</code>, <code translate="no">metrics</code>, <code translate="no">hits</code>, and <code translate="no">sub_groups</code>. When Search Aggregation is enabled, the ordinary search-hit list is empty.</p></li>
 </ol>
-<p>如圖所示，<code translate="no">TopHits.size=4</code> 提供每個關鍵字四個候選項的預算，因此保留的四個「品牌 A」候選項產生<code translate="no">count: 4</code> 。為使圖表簡潔，完成的「品牌 A」卡片僅顯示四個回傳代表性搜尋結果中的兩個。</p>
-<p>當<code translate="no">sub_aggregation</code> 生效時，Milvus 會在每個父桶內重複執行步驟 2 和 3。人工神經網路（ANN）的召回率或每鍵候選預算的變動，都可能影響桶的數量、指標、排序、搜尋結果以及嵌套結果。</p>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>In the diagram, <code translate="no">TopHits.size=4</code> supplies a per-key candidate budget of four, so the four retained Brand A candidates produce <code translate="no">count: 4</code>. The completed Brand A card shows only two of the four returned representative hits to keep the figure compact.</p>
+<p>With <code translate="no">sub_aggregation</code>, Milvus repeats steps 2 and 3 inside each parent bucket. Changes in ANN recall or the per-key candidate budget can change bucket counts, metrics, ordering, hits, and nested results.</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,23 +72,23 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在使用「搜尋彙總」功能前，請注意以下限制：</p>
+    </button></h2><p>Before using Search Aggregation, note the following limits:</p>
 <ul>
-<li><p><strong>嵌套聚合：</strong>單一請求可包含一個根層級的<code translate="no">SearchAggregation</code> ，以及最多三個嵌套的<code translate="no">sub_aggregation</code> 層級，總計最多四個層級。跨所有層級，最多可使用 10 個欄位來建立區間金鑰。</p></li>
-<li><p><strong>用於建立儲存桶金鑰的欄位：</strong> <code translate="no">SearchAggregation.fields</code> 支援布林值、整數、<code translate="no">VARCHAR</code> 及<code translate="no">TIMESTAMPTZ</code> 欄位。不支援<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">ARRAY</code> 、<code translate="no">JSON</code> 、<code translate="no">GEOMETRY</code> 、<code translate="no">TEXT</code> 、向量或動態欄位。</p></li>
-<li><p><strong>度量欄位：</strong> <code translate="no">count</code> 接受<code translate="no">&quot;*&quot;</code> 或任何非<code translate="no">JSON</code> 且非動態的欄位，並在指定欄位時跳過<code translate="no">NULL</code> 的值。<code translate="no">sum</code> 和<code translate="no">avg</code> 接受整數與浮點數欄位。<code translate="no">min</code> 和<code translate="no">max</code> 此外還接受字串與<code translate="no">TIMESTAMPTZ</code> 欄位。</p></li>
-<li><p><strong>「Top Hits」排序欄位：</strong> <code translate="no">TopHits.sort</code> 接受可比的布林值、整數、浮點數、字串及<code translate="no">TIMESTAMPTZ</code> 欄位，以及<code translate="no">_score</code> 。它不支援<code translate="no">ARRAY</code> 、<code translate="no">JSON</code> 、<code translate="no">GEOMETRY</code> 、向量或動態欄位。</p></li>
-<li><p><strong>候選預算：</strong>聚合樹中任何位置的最大<code translate="no">TopHits.size</code> 值，即為每個完整複合鍵所保留的候選項數量。若無任何層級設定<code translate="no">top_hits</code> ，Milvus 將為每個鍵保留一個候選項。分桶<code translate="no">count</code> 及指標皆根據這些保留的候選項計算得出，因此變更<code translate="no">TopHits.size</code> 可能會影響這些數值。</p></li>
-<li><p><strong>可為空的桶位欄位：</strong> <code translate="no">NULL</code> 的值會形成其自身的桶位鍵。若要排除空桶位，請在搜尋請求中加入如<code translate="no">brand is not null</code> 之類的篩選條件。</p></li>
-<li><p><strong>重複欄位：</strong>同一欄位不得出現在多個<code translate="no">SearchAggregation.fields</code> 清單中。例如，若根聚合使用<code translate="no">fields=[&quot;category&quot;]</code> ，則嵌套的<code translate="no">sub_aggregation</code> 便不能同時使用<code translate="no">fields=[&quot;category&quot;]</code> 。</p></li>
-<li><p><strong>不支援的組合：</strong>搜尋聚合無法與非零的<code translate="no">offset</code> 、搜尋迭代器、混合搜尋、高亮顯示器或分組搜尋結合使用。頂層<code translate="no">offset</code> 的值若為<code translate="no">0</code> ，則等同於省略該參數。在 REST v2 搜尋請求中，<code translate="no">searchAggregation</code> 與<code translate="no">ids</code> 無法同時指定。</p></li>
-<li><p><strong>回傳的條目：</strong>預設情況下，當搜尋聚合請求中計算出的結果條目最大數量超過 10,000 時，Milvus 會拒絕該請求。此閾值由<code translate="no">proxy.maxSearchAggregationResultEntries</code> 控制。若要停用此檢查，請將配置值設定為<code translate="no">0</code> 或負數。</p>
-<p>Milvus 計算此最大值的公式如下：</p>
+<li><p><strong>Nested aggregations:</strong> A request can contain one root <code translate="no">SearchAggregation</code> and up to three nested <code translate="no">sub_aggregation</code> levels, for a maximum of four levels in total. Across all levels, at most 10 fields can be used to create bucket keys.</p></li>
+<li><p><strong>Fields used to create bucket keys:</strong> <code translate="no">SearchAggregation.fields</code> supports Boolean, integer, <code translate="no">VARCHAR</code>, and <code translate="no">TIMESTAMPTZ</code> fields. It does not support <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, <code translate="no">TEXT</code>, vector, or dynamic fields.</p></li>
+<li><p><strong>Metric fields:</strong> <code translate="no">count</code> accepts <code translate="no">&quot;*&quot;</code> or any non-<code translate="no">JSON</code>, non-dynamic field and skips <code translate="no">NULL</code> values when a field is specified. <code translate="no">sum</code> and <code translate="no">avg</code> accept integer and floating-point fields. <code translate="no">min</code> and <code translate="no">max</code> additionally accept string and <code translate="no">TIMESTAMPTZ</code> fields.</p></li>
+<li><p><strong>Top Hits sorting fields:</strong> <code translate="no">TopHits.sort</code> accepts comparable Boolean, integer, floating-point, string, and <code translate="no">TIMESTAMPTZ</code> fields, plus <code translate="no">_score</code>. It does not support <code translate="no">ARRAY</code>, <code translate="no">JSON</code>, <code translate="no">GEOMETRY</code>, vector, or dynamic fields.</p></li>
+<li><p><strong>Candidate budget:</strong> The largest <code translate="no">TopHits.size</code> anywhere in the aggregation tree is also the number of candidates retained per full composite key. If no level configures <code translate="no">top_hits</code>, Milvus retains one candidate per key. Bucket <code translate="no">count</code> and metrics are calculated from these retained candidates, so changing <code translate="no">TopHits.size</code> can change them.</p></li>
+<li><p><strong>Nullable bucket fields:</strong> A <code translate="no">NULL</code> value forms its own bucket key. To exclude the null bucket, add a filter such as <code translate="no">brand is not null</code> to the search request.</p></li>
+<li><p><strong>Repeated fields:</strong> The same field cannot appear in more than one <code translate="no">SearchAggregation.fields</code> list. For example, if the root aggregation uses <code translate="no">fields=[&quot;category&quot;]</code>, a nested <code translate="no">sub_aggregation</code> cannot also use <code translate="no">fields=[&quot;category&quot;]</code>.</p></li>
+<li><p><strong>Unsupported combinations:</strong> Search Aggregation cannot be combined with a non-zero <code translate="no">offset</code>, Search Iterators, Hybrid Search, a Highlighter, or Grouping Search. A top-level <code translate="no">offset</code> value of <code translate="no">0</code> is equivalent to omitting the parameter. In REST v2 search requests, <code translate="no">searchAggregation</code> and <code translate="no">ids</code> cannot be specified together.</p></li>
+<li><p><strong>Returned entries:</strong> By default, Milvus rejects a Search Aggregation request when the request’s calculated maximum number of result entries exceeds 10,000. This threshold is controlled by <code translate="no">proxy.maxSearchAggregationResultEntries</code>. Set the configuration value to <code translate="no">0</code> or a negative number to disable this check.</p>
+<p>Milvus calculates this maximum as:</p>
 <p><code translate="no">number of query vectors × product of the effective search_size at every aggregation level × largest TopHits.size at any level</code></p>
-<p>針對此伺服器端計算，各層級的有效<code translate="no">search_size</code> 為明確設定的<code translate="no">search_size</code> ，或在省略<code translate="no">search_size</code> 時，採用該層級的<code translate="no">size</code> 。本指南中使用的 PyMilvus API 目前未公開<code translate="no">search_size</code> ，因此 PyMilvus 請求會使用各層級的<code translate="no">size</code> 進行此計算。 若無任何層級設定<code translate="no">TopHits</code> ，請使用<code translate="no">1</code> 作為最後一個因子。例如，一個查詢向量、10 個根桶、每個根桶有 5 個子桶，以及每個子桶有 2 次命中，其計算出的最大值為：</p>
+<p>For this server-side calculation, the effective <code translate="no">search_size</code> at a level is the explicitly configured <code translate="no">search_size</code>, or that level’s <code translate="no">size</code> when <code translate="no">search_size</code> is omitted. The PyMilvus API used in this guide does not currently expose <code translate="no">search_size</code>, so PyMilvus requests use each level’s <code translate="no">size</code> for this calculation. Use <code translate="no">1</code> for the last factor when no level configures <code translate="no">TopHits</code>. For example, one query vector, 10 root buckets, five child buckets per root bucket, and two hits per child bucket produce a calculated maximum of:</p>
 <p><code translate="no">1 × 10 × 5 × 2 = 100</code></p></li>
 </ul>
-<h2 id="Use-Search-Aggregation" class="common-anchor-header">使用搜尋聚合<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
+<h2 id="Use-Search-Aggregation" class="common-anchor-header">Use Search Aggregation<button data-href="#Use-Search-Aggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,20 +103,27 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>根據您的目標選擇一個範例：</p>
+    </button></h2><p>Choose an example based on what you want to accomplish:</p>
 <table>
 <thead>
-<tr><th>前往</th><th>說明</th><th>關鍵設定</th></tr>
+<tr><th>Go to</th><th>Description</th><th>Key settings</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="#Compare-and-sort-buckets">比較並排序儲存桶</a></td><td>計算各儲存桶的統計資料以進行比較，然後根據指標、計數或金鑰對回傳的儲存桶進行排序。</td><td><code translate="no">fields</code>,<code translate="no">size</code>,<code translate="no">metrics</code>,<code translate="no">order</code></td></tr>
-<tr><td><a href="#Show-representative-results-from-each-bucket">顯示各桶的代表性結果</a></td><td>從每個桶中返回有限數量的實體，並分別依據標量欄位或向量分數對這些實體進行排序。</td><td><code translate="no">top_hits</code>,<code translate="no">TopHits.size</code>,<code translate="no">TopHits.sort</code></td></tr>
-<tr><td><a href="#Group-results-at-multiple-levels">在多個層級對結果進行分組</a></td><td>將結果組織為父級與子級桶層級，以依序分析多個維度。</td><td><code translate="no">sub_aggregation</code></td></tr>
+<tr><td><a href="#Compare-and-sort-buckets">Compare and sort buckets</a></td><td>Calculate per-bucket statistics to compare buckets, then sort the returned buckets by metrics, counts, or keys.</td><td><code translate="no">fields</code>, <code translate="no">size</code>, <code translate="no">metrics</code>, <code translate="no">order</code></td></tr>
+<tr><td><a href="#Show-representative-results-from-each-bucket">Show representative results from each bucket</a></td><td>Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score.</td><td><code translate="no">top_hits</code>, <code translate="no">TopHits.size</code>, <code translate="no">TopHits.sort</code></td></tr>
+<tr><td><a href="#Group-results-at-multiple-levels">Group results at multiple levels</a></td><td>Organize results into parent and child bucket levels to analyze multiple dimensions in sequence.</td><td><code translate="no">sub_aggregation</code></td></tr>
 </tbody>
 </table>
-<p>以下範例使用一個包含品牌、類別、顏色、價格和評分欄位的產品集合。所有品牌名稱、產品名稱、價格、評分及搜尋結果均為合成範例資料。請展開以下區段以建立該集合並定義共用搜尋變數。</p>
+<p>The examples below use a product collection with brand, category, color, price, and rating fields. All brand names, product names, prices, ratings, and search results are synthetic example data. Expand the following section to create the collection and define the shared search variables.</p>
 <p><details></p>
-<p><summary>設定範例商品集合</summary></p>
+<p><summary>Set up the example collection</summary></p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, SearchAggregation, TopHits
 
 client = MilvusClient(
@@ -257,9 +264,133 @@ search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {},
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).token(<span class="hljs-string">&quot;root:Milvus&quot;</span>).build());
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;product_search_aggregation&quot;</span>;
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;id&quot;</span>).dataType(DataType.Int64).isPrimaryKey(<span class="hljs-literal">true</span>).autoID(<span class="hljs-literal">false</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>).dataType(DataType.FloatVector).dimension(<span class="hljs-number">5</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;name&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">200</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;brand&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;category&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">100</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;color&quot;</span>).dataType(DataType.VarChar).maxLength(<span class="hljs-number">50</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;price&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).dataType(DataType.Double).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;in_stock&quot;</span>).dataType(DataType.Bool).build());
+
+client.createCollection(CreateCollectionReq.builder().collectionName(collectionName).collectionSchema(schema)
+        .indexParams(Collections.singletonList(IndexParam.builder().fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+                .indexType(IndexParam.IndexType.AUTOINDEX).metricType(IndexParam.MetricType.COSINE).build()))
+        .build());
+
+List&lt;JsonObject&gt; data = Arrays.asList(
+        product(<span class="hljs-number">1</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.12f</span>, <span class="hljs-number">0.42f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.66f</span>, <span class="hljs-number">0.31f</span>}, <span class="hljs-string">&quot;Runner A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">129.99</span>, <span class="hljs-number">4.7</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">2</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.10f</span>, <span class="hljs-number">0.39f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.61f</span>, <span class="hljs-number">0.29f</span>}, <span class="hljs-string">&quot;Trail A2&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">139.99</span>, <span class="hljs-number">4.6</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">3</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14f</span>, <span class="hljs-number">0.44f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.68f</span>, <span class="hljs-number">0.33f</span>}, <span class="hljs-string">&quot;Runner B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">4</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.16f</span>, <span class="hljs-number">0.41f</span>, <span class="hljs-number">0.22f</span>, <span class="hljs-number">0.62f</span>, <span class="hljs-number">0.30f</span>}, <span class="hljs-string">&quot;Runner C1&quot;</span>, <span class="hljs-string">&quot;Brand C&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-number">119.99</span>, <span class="hljs-number">4.4</span>, <span class="hljs-literal">false</span>),
+        product(<span class="hljs-number">5</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.48f</span>, <span class="hljs-number">0.20f</span>, <span class="hljs-number">0.59f</span>, <span class="hljs-number">0.15f</span>, <span class="hljs-number">0.71f</span>}, <span class="hljs-string">&quot;Jacket A1&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">99.99</span>, <span class="hljs-number">4.5</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">6</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.45f</span>, <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.55f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.69f</span>}, <span class="hljs-string">&quot;Jacket B1&quot;</span>, <span class="hljs-string">&quot;Brand B&quot;</span>, <span class="hljs-string">&quot;jackets&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-number">89.99</span>, <span class="hljs-number">4.3</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">7</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.09f</span>, <span class="hljs-number">0.38f</span>, <span class="hljs-number">0.17f</span>, <span class="hljs-number">0.60f</span>, <span class="hljs-number">0.27f</span>}, <span class="hljs-string">&quot;Runner A3&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">159.99</span>, <span class="hljs-number">4.8</span>, <span class="hljs-literal">true</span>),
+        product(<span class="hljs-number">8</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.13f</span>, <span class="hljs-number">0.43f</span>, <span class="hljs-number">0.21f</span>, <span class="hljs-number">0.65f</span>, <span class="hljs-number">0.32f</span>}, <span class="hljs-string">&quot;Runner A4&quot;</span>, <span class="hljs-string">&quot;Brand A&quot;</span>, <span class="hljs-string">&quot;running_shoes&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-number">149.99</span>, <span class="hljs-number">4.9</span>, <span class="hljs-literal">true</span>));
+client.insert(InsertReq.builder().collectionName(collectionName).data(data).build());
+
+List&lt;Float&gt; queryVector = Arrays.asList(<span class="hljs-number">0.11f</span>, <span class="hljs-number">0.40f</span>, <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.64f</span>, <span class="hljs-number">0.30f</span>);
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> JsonObject <span class="hljs-title function_">product</span><span class="hljs-params">(<span class="hljs-type">long</span> id, <span class="hljs-type">float</span>[] embedding, String name, String brand,
+                                  String category, String color, <span class="hljs-type">double</span> price, <span class="hljs-type">double</span> rating,
+                                  <span class="hljs-type">boolean</span> inStock)</span> {
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, id);
+    row.add(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>().toJsonTree(embedding));
+    row.addProperty(<span class="hljs-string">&quot;name&quot;</span>, name);
+    row.addProperty(<span class="hljs-string">&quot;brand&quot;</span>, brand);
+    row.addProperty(<span class="hljs-string">&quot;category&quot;</span>, category);
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, color);
+    row.addProperty(<span class="hljs-string">&quot;price&quot;</span>, price);
+    row.addProperty(<span class="hljs-string">&quot;rating&quot;</span>, rating);
+    row.addProperty(<span class="hljs-string">&quot;in_stock&quot;</span>, inStock);
+    <span class="hljs-keyword">return</span> row;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;Milvus&#x27;</span>,
+});
+<span class="hljs-keyword">const</span> collectionName = <span class="hljs-string">&#x27;product_search_aggregation&#x27;</span>;
+
+<span class="hljs-keyword">if</span> ((<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName })).<span class="hljs-property">value</span>) {
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+}
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&#x27;Session&#x27;</span>,
+  <span class="hljs-attr">fields</span>: [
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">200</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Double</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;in_stock&#x27;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Bool</span> },
+  ],
+});
+
+<span class="hljs-keyword">const</span> data = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.42</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.66</span>, <span class="hljs-number">0.31</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">129.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.7</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.10</span>, <span class="hljs-number">0.39</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.61</span>, <span class="hljs-number">0.29</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Trail A2&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">139.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.6</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.44</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.68</span>, <span class="hljs-number">0.33</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;white&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.16</span>, <span class="hljs-number">0.41</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.62</span>, <span class="hljs-number">0.30</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner C1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand C&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">119.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.4</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.48</span>, <span class="hljs-number">0.20</span>, <span class="hljs-number">0.59</span>, <span class="hljs-number">0.15</span>, <span class="hljs-number">0.71</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket A1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">99.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.5</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">6</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.45</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.55</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.69</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Jacket B1&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand B&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;jackets&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">89.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.3</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">7</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.09</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.60</span>, <span class="hljs-number">0.27</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A3&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">159.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.8</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.13</span>, <span class="hljs-number">0.43</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.65</span>, <span class="hljs-number">0.32</span>], <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Runner A4&#x27;</span>, <span class="hljs-attr">brand</span>: <span class="hljs-string">&#x27;Brand A&#x27;</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;running_shoes&#x27;</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>, <span class="hljs-attr">price</span>: <span class="hljs-number">149.99</span>, <span class="hljs-attr">rating</span>: <span class="hljs-number">4.9</span>, <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span> },
+];
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({ <span class="hljs-attr">collection_name</span>: collectionName, data });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({ <span class="hljs-attr">collection_name</span>: collectionName, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>, <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span> });
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollectionSync</span>({ <span class="hljs-attr">collection_name</span>: collectionName });
+
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.11</span>, <span class="hljs-number">0.40</span>, <span class="hljs-number">0.19</span>, <span class="hljs-number">0.64</span>, <span class="hljs-number">0.30</span>];
+<span class="hljs-keyword">const</span> searchParams = { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;COSINE&#x27;</span>, <span class="hljs-attr">params</span>: {} };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;product_search_aggregation&quot;</span>
+<span class="hljs-function"><span class="hljs-title">search</span></span>() {
+  curl --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --data <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+}
+schema=<span class="hljs-string">&#x27;{&quot;autoID&quot;:false,&quot;enableDynamicField&quot;:false,&quot;fields&quot;:[{&quot;fieldName&quot;:&quot;id&quot;,&quot;dataType&quot;:&quot;Int64&quot;,&quot;isPrimary&quot;:true},{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;dataType&quot;:&quot;FloatVector&quot;,&quot;elementTypeParams&quot;:{&quot;dim&quot;:5}},{&quot;fieldName&quot;:&quot;name&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:200}},{&quot;fieldName&quot;:&quot;brand&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;category&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:100}},{&quot;fieldName&quot;:&quot;color&quot;,&quot;dataType&quot;:&quot;VarChar&quot;,&quot;elementTypeParams&quot;:{&quot;max_length&quot;:50}},{&quot;fieldName&quot;:&quot;price&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;rating&quot;,&quot;dataType&quot;:&quot;Double&quot;},{&quot;fieldName&quot;:&quot;in_stock&quot;,&quot;dataType&quot;:&quot;Bool&quot;}]}&#x27;</span>
+indexParams=<span class="hljs-string">&#x27;[{&quot;fieldName&quot;:&quot;embedding&quot;,&quot;indexType&quot;:&quot;AUTOINDEX&quot;,&quot;metricType&quot;:&quot;COSINE&quot;}]&#x27;</span>
+data=<span class="hljs-string">&#x27;[{&quot;id&quot;:1,&quot;embedding&quot;:[0.12,0.42,0.18,0.66,0.31],&quot;name&quot;:&quot;Runner A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:129.99,&quot;rating&quot;:4.7,&quot;in_stock&quot;:true},{&quot;id&quot;:2,&quot;embedding&quot;:[0.10,0.39,0.20,0.61,0.29],&quot;name&quot;:&quot;Trail A2&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:139.99,&quot;rating&quot;:4.6,&quot;in_stock&quot;:true},{&quot;id&quot;:3,&quot;embedding&quot;:[0.14,0.44,0.19,0.68,0.33],&quot;name&quot;:&quot;Runner B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;white&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:4,&quot;embedding&quot;:[0.16,0.41,0.22,0.62,0.30],&quot;name&quot;:&quot;Runner C1&quot;,&quot;brand&quot;:&quot;Brand C&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;red&quot;,&quot;price&quot;:119.99,&quot;rating&quot;:4.4,&quot;in_stock&quot;:false},{&quot;id&quot;:5,&quot;embedding&quot;:[0.48,0.20,0.59,0.15,0.71],&quot;name&quot;:&quot;Jacket A1&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:99.99,&quot;rating&quot;:4.5,&quot;in_stock&quot;:true},{&quot;id&quot;:6,&quot;embedding&quot;:[0.45,0.18,0.55,0.17,0.69],&quot;name&quot;:&quot;Jacket B1&quot;,&quot;brand&quot;:&quot;Brand B&quot;,&quot;category&quot;:&quot;jackets&quot;,&quot;color&quot;:&quot;blue&quot;,&quot;price&quot;:89.99,&quot;rating&quot;:4.3,&quot;in_stock&quot;:true},{&quot;id&quot;:7,&quot;embedding&quot;:[0.09,0.38,0.17,0.60,0.27],&quot;name&quot;:&quot;Runner A3&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:159.99,&quot;rating&quot;:4.8,&quot;in_stock&quot;:true},{&quot;id&quot;:8,&quot;embedding&quot;:[0.13,0.43,0.21,0.65,0.32],&quot;name&quot;:&quot;Runner A4&quot;,&quot;brand&quot;:&quot;Brand A&quot;,&quot;category&quot;:&quot;running_shoes&quot;,&quot;color&quot;:&quot;black&quot;,&quot;price&quot;:149.99,&quot;rating&quot;:4.9,&quot;in_stock&quot;:true}]&#x27;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;schema\&quot;:<span class="hljs-variable">${schema}</span>,\&quot;indexParams\&quot;:<span class="hljs-variable">${indexParams}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,\&quot;data\&quot;:<span class="hljs-variable">${data}</span>}&quot;</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --data <span class="hljs-string">&quot;{\&quot;collectionName\&quot;:\&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>上述設定同時為向量索引和搜尋參數配置了<code translate="no">COSINE</code> 。因此，後續範例將使用<code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> 來優先顯示較高的餘弦相似度。若使用距離度量（例如<code translate="no">L2</code> ），請使用<code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code> 。</p>
-<h3 id="Compare-and-sort-buckets" class="common-anchor-header">比較與排序桶<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
+<p>The setup above configures <code translate="no">COSINE</code> for both the vector index and the search parameters. Therefore, later examples use <code translate="no">{&quot;_score&quot;: &quot;desc&quot;}</code> to place higher cosine similarity first. For a distance metric such as <code translate="no">L2</code>, use <code translate="no">{&quot;_score&quot;: &quot;asc&quot;}</code>.</p>
+<h3 id="Compare-and-sort-buckets" class="common-anchor-header">Compare and sort buckets<button data-href="#Compare-and-sort-buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -274,9 +405,16 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當您需要使用計算出的統計值來比較一組檢索到的實體，並控制桶的回傳順序時，請使用此模式。在此範例中，Milvus 會根據<code translate="no">brand</code> 將檢索到的產品分組，為每個品牌桶計算價格指標，並按平均價格對桶進行排序。</p>
-<p>若您的目標僅是透過針對每個欄位值返回一個或多個實體來提升結果的多樣性，請改用「<a href="/docs/zh-hant/grouping-search.md">分組搜尋</a>」。</p>
-<p>以下設定會建立最多三個品牌區間，為每個區間計算指標，並根據平均價格對區間進行排序：</p>
+    </button></h3><p>Use this pattern when you need to compare groups of retrieved entities using calculated statistics and control the order in which the buckets are returned. In this example, Milvus groups retrieved products by <code translate="no">brand</code>, calculates price metrics for each brand bucket, and sorts the buckets by average price.</p>
+<p>If your goal is only to improve result diversity by returning one or more entities per field value, use <a href="/docs/zh-hant/grouping-search.md">Grouping Search</a> instead.</p>
+<p>The following configuration creates up to three brand buckets, calculates metrics for each bucket, and sorts the buckets by average price:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Form one bucket for each distinct brand value.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>],</span>
@@ -296,7 +434,62 @@ search_params = {
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>將物件傳遞至 `<code translate="no">MilvusClient.search()</code>` 的 `<code translate="no">search_aggregation</code> ` 參數：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricOps;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.MetricSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SearchAggregation;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.SortSpec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.TopHitsSpec;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;min_price&quot;</span>, MetricSpec.builder().op(MetricOps.MIN).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_price&quot;</span>).direction(AggDirection.DESC).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;_key&quot;</span>).direction(AggDirection.ASC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+    <span class="hljs-attr">min_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;min&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_price&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    { <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;_key&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;asc&#x27;</span> },
+  ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+  &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pass the object to the <code translate="no">search_aggregation</code> parameter of <code translate="no">MilvusClient.search()</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">result = client.search(
     collection_name=collection_name,
     data=[query_vector],
@@ -314,10 +507,54 @@ search_params = {
 <span class="highlighted-wrapper-line">    search_aggregation=aggregation,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>當設定<code translate="no">search_aggregation</code> 時，PyMilvus 不會在<code translate="no">result[0]</code> 中傳回任何一般實體命中結果。請改為從<code translate="no">result.agg_buckets[0]</code> 讀取桶區回應。<code translate="no">output_fields</code> 參數控制哪些標量欄位會出現在每個回傳的<code translate="no">AggregationHit.fields</code> 映射中；Milvus 仍可使用未列於<code translate="no">output_fields</code> 中的指標來源欄位和排序欄位。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryVector)))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(Collections.singletonMap(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;COSINE&quot;</span>))
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;in_stock&quot;</span>))
+        .searchAggregation(aggregation)
+        .build());
+
+List&lt;AggregationBucket&gt; buckets = result.getAggregationBuckets().get(<span class="hljs-number">0</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collectionName,
+  <span class="hljs-attr">data</span>: queryVector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;embedding&#x27;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  ...searchParams,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;category&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>, <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-string">&#x27;in_stock&#x27;</span>],
+  <span class="hljs-attr">search_aggregation</span>: aggregation,
+});
+
+<span class="hljs-keyword">const</span> buckets = result.<span class="hljs-property">agg_buckets</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+    &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 10,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;brand&quot;, &quot;category&quot;, &quot;color&quot;, &quot;price&quot;, &quot;rating&quot;, &quot;in_stock&quot;],
+    &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+    &quot;searchAggregation&quot;: {
+      &quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3,
+      &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}, &quot;min_price&quot;: {&quot;op&quot;: &quot;min&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+      &quot;order&quot;: [{&quot;key&quot;: &quot;avg_price&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;key&quot;: &quot;_key&quot;, &quot;direction&quot;: &quot;asc&quot;}]
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>When <code translate="no">search_aggregation</code> is set, PyMilvus returns no ordinary entity hits in <code translate="no">result[0]</code>. Read the bucket response from <code translate="no">result.agg_buckets[0]</code> instead. The <code translate="no">output_fields</code> parameter controls which scalar fields appear in each returned <code translate="no">AggregationHit.fields</code> mapping; Milvus can still use metric-source and sort fields that are not listed in <code translate="no">output_fields</code>.</p>
 <p><details></p>
-<p><summary>檢視桶子輸出範例</summary></p>
-<p>以下輸出是從上述請求擷取並為便於閱讀而序列化為 JSON 的結果。PyMilvus 實際上會傳回<code translate="no">AggregationBucket</code> 物件，而非 JSON。<code translate="no">key</code> 的值始終是鍵組件的有序清單，即使<code translate="no">fields</code> 僅包含一個欄位亦然。此設計可保留複合鍵的欄位順序。</p>
+<p><summary>View the example bucket output</summary></p>
+<p>The following output was captured from the request above and serialized as JSON for readability. PyMilvus returns <code translate="no">AggregationBucket</code> objects rather than JSON. The <code translate="no">key</code> value is always an ordered list of key components, even when <code translate="no">fields</code> contains only one field. This preserves field order for composite keys.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
   <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -373,49 +610,56 @@ search_params = {
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>針對本指南中的單一查詢向量，請從 `<code translate="no">result.agg_buckets[0]</code>` 讀取回傳的頂層桶位。每個桶位會公開其有序的鍵組件、保留候選項 `<code translate="no">count</code>`、計算結果 `<code translate="no">metrics</code>`、代表性向量 `<code translate="no">hits</code>`，以及 `<code translate="no">sub_groups</code>` 中的嵌套桶位。</p>
-<p>請參閱以下設定：</p>
+<p>For the single query vector in this guide, read the returned top-level buckets from <code translate="no">result.agg_buckets[0]</code>. Each bucket exposes its ordered key components, retained-candidate <code translate="no">count</code>, calculated <code translate="no">metrics</code>, representative <code translate="no">hits</code>, and nested buckets in <code translate="no">sub_groups</code>.</p>
+<p>Read the configuration as follows:</p>
 <table>
 <thead>
-<tr><th>設定</th><th>控制項目</th><th>在此範例中</th></tr>
+<tr><th>Setting</th><th>What it controls</th><th>In this example</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">fields</code></td><td>Milvus 如何建立桶鍵</td><td>針對每個不同的 `<code translate="no">brand</code> ` 值，建立一個儲存桶。</td></tr>
-<tr><td><code translate="no">size</code></td><td>回傳的儲存桶最大數量</td><td>最多會返回三個品牌儲存桶。</td></tr>
-<tr><td><code translate="no">metrics</code></td><td>針對每個儲存桶計算的統計資料</td><td>計算產品數量、平均價格及最低價格。</td></tr>
-<tr><td><code translate="no">order</code></td><td>Milvus 如何對回傳的分組進行排序</td><td>依平均價格排序，並使用區間鍵來打破平局。</td></tr>
+<tr><td><code translate="no">fields</code></td><td>How Milvus creates bucket keys</td><td>Creates one bucket for each distinct <code translate="no">brand</code> value.</td></tr>
+<tr><td><code translate="no">size</code></td><td>The maximum number of returned buckets</td><td>Returns up to three brand buckets.</td></tr>
+<tr><td><code translate="no">metrics</code></td><td>The statistics calculated for each bucket</td><td>Calculates product count, average price, and minimum price.</td></tr>
+<tr><td><code translate="no">order</code></td><td>How Milvus sorts the returned buckets</td><td>Sorts by average price, then uses the bucket key to break ties.</td></tr>
 </tbody>
 </table>
-<p>當設定 `<code translate="no">search_aggregation</code> ` 時，Milvus 會忽略 `<code translate="no">limit</code> `。請使用根 `<code translate="no">SearchAggregation.size</code> ` 值來控制頂層區間的數量。</p>
-<p>根據這些設定，Milvus 會依<code translate="no">avg_price</code> 由高至低的順序，返回品牌 B、品牌 A 及品牌 C 的桶。<code translate="no">_key</code> 準則僅在各桶的平均價格相同時才適用。由於此配置未定義<code translate="no">top_hits</code> ，每個桶的<code translate="no">hits</code> 清單皆為空，且每個鍵的候選預算為<code translate="no">1</code> 。因此，顯示的計數和指標描述的是每個品牌保留的一位候選者。若彙總需要更寬的每個鍵指標視窗，請將<code translate="no">top_hits</code> 設定為較大的<code translate="no">TopHits.size</code> 。</p>
+<p>Milvus ignores <code translate="no">limit</code> when <code translate="no">search_aggregation</code> is set. Use the root <code translate="no">SearchAggregation.size</code> value to control the number of top-level buckets.</p>
+<p>With these settings, Milvus returns the Brand B, Brand A, and Brand C buckets in descending <code translate="no">avg_price</code> order. The <code translate="no">_key</code> criterion applies only when buckets have the same average price. Because this configuration does not define <code translate="no">top_hits</code>, every bucket’s <code translate="no">hits</code> list is empty and the per-key candidate budget is <code translate="no">1</code>. The displayed counts and metrics therefore describe one retained candidate per brand. Configure <code translate="no">top_hits</code> with a larger <code translate="no">TopHits.size</code> when the aggregation needs a wider per-key metric window.</p>
 <p><details></p>
-<p><summary>指標與排序規則</summary></p>
-<p>每個<code translate="no">SearchAggregation.metrics</code> 條目會將使用者自訂的別名映射至<code translate="no">{operation: source}</code> ：</p>
+<p><summary>Metric and ordering rules</summary></p>
+<p>Each <code translate="no">SearchAggregation.metrics</code> entry maps a user-defined alias to <code translate="no">{operation: source}</code>:</p>
 <table>
 <thead>
-<tr><th>來源</th><th>支援的操作</th><th>行為</th></tr>
+<tr><th>Source</th><th>Supported operations</th><th>Behavior</th></tr>
 </thead>
 <tbody>
-<tr><td>任何非<code translate="no">JSON</code> 且非動態的欄位</td><td><code translate="no">count</code></td><td>會統計來源欄位非<code translate="no">NULL</code> 的保留候選項。</td></tr>
-<tr><td>整數或浮點數欄位</td><td><code translate="no">sum</code>、<code translate="no">avg</code> 、<code translate="no">min</code> 、<code translate="no">max</code></td><td>針對非空的保留值進行計算。</td></tr>
-<tr><td>字串或<code translate="no">TIMESTAMPTZ</code> 欄位</td><td><code translate="no">min</code>，<code translate="no">max</code></td><td>選取非空保留值的最小值或最大值。</td></tr>
-<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>統計桶中每個保留候選項的數量。結果與<code translate="no">bucket.count</code> 相符。</td></tr>
-<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>,<code translate="no">avg</code>,<code translate="no">min</code>,<code translate="no">max</code></td><td>彙總保留候選項的 ANN 相似度或距離值。</td></tr>
+<tr><td>Any non-<code translate="no">JSON</code>, non-dynamic field</td><td><code translate="no">count</code></td><td>Counts retained candidates whose source field is not <code translate="no">NULL</code>.</td></tr>
+<tr><td>Integer or floating-point field</td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Calculates over non-null retained values.</td></tr>
+<tr><td>String or <code translate="no">TIMESTAMPTZ</code> field</td><td><code translate="no">min</code>, <code translate="no">max</code></td><td>Selects the minimum or maximum non-null retained value.</td></tr>
+<tr><td><code translate="no">&quot;*&quot;</code></td><td><code translate="no">count</code></td><td>Counts every retained candidate in the bucket. The result matches <code translate="no">bucket.count</code>.</td></tr>
+<tr><td><code translate="no">_score</code></td><td><code translate="no">sum</code>, <code translate="no">avg</code>, <code translate="no">min</code>, <code translate="no">max</code></td><td>Aggregates ANN similarity or distance values for retained candidates.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">SearchAggregation.order</code> 接受以下鍵：</p>
+<p><code translate="no">SearchAggregation.order</code> accepts the following keys:</p>
 <table>
 <thead>
-<tr><th>排序鍵</th><th>含義</th></tr>
+<tr><th>Order key</th><th>Meaning</th></tr>
 </thead>
 <tbody>
-<tr><td>度量別名</td><td>依據在<code translate="no">metrics</code> 中於相同彙總層級計算出的值進行排序，例如<code translate="no">avg_price</code> 。</td></tr>
-<tr><td><code translate="no">_count</code></td><td>依每個桶位中保留的候選項數量進行排序。</td></tr>
-<tr><td><code translate="no">_key</code></td><td>根據桶鍵進行排序，而非名為<code translate="no">_key</code> 的集合欄位。</td></tr>
+<tr><td>A metric alias</td><td>Sorts by a value calculated in <code translate="no">metrics</code> at the same aggregation level, such as <code translate="no">avg_price</code>.</td></tr>
+<tr><td><code translate="no">_count</code></td><td>Sorts by the number of retained candidates in each bucket.</td></tr>
+<tr><td><code translate="no">_key</code></td><td>Sorts by the bucket key rather than a collection field named <code translate="no">_key</code>.</td></tr>
 </tbody>
 </table>
-<p>每個<code translate="no">order</code> 條目會將一個鍵映射至<code translate="no">&quot;asc&quot;</code> 或<code translate="no">&quot;desc&quot;</code> 。Milvus 會依序從第一項到最後一項評估多個條目。若省略<code translate="no">order</code> ，Milvus 將保留來自保留候選集的桶位發現順序。</p>
-<p>若要依據向量匹配品質對桶進行排序，請先從 `<code translate="no">_score</code>` 計算出桶層級的指標，然後在 `<code translate="no">order</code>` 中使用該指標別名。您無法直接將 `<code translate="no">_score</code> ` 用作桶排序鍵，因為每個桶可能包含多個實體分數。例如，使用 `<code translate="no">COSINE</code> ` 或 `<code translate="no">IP</code>` 時：</p>
+<p>Each <code translate="no">order</code> entry maps a key to <code translate="no">&quot;asc&quot;</code> or <code translate="no">&quot;desc&quot;</code>. Milvus evaluates multiple entries from first to last. If you omit <code translate="no">order</code>, Milvus keeps the bucket discovery order from the retained candidate set.</p>
+<p>To sort buckets by vector match quality, first calculate a bucket-level metric from <code translate="no">_score</code>, and then use the metric alias in <code translate="no">order</code>. You cannot use <code translate="no">_score</code> directly as a bucket-order key because each bucket can contain multiple entity scores. For example, with <code translate="no">COSINE</code> or <code translate="no">IP</code>:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -423,23 +667,74 @@ search_params = {
     order=[{<span class="hljs-string">&quot;max_score&quot;</span>: <span class="hljs-string">&quot;desc&quot;</span>}],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>使用<code translate="no">L2</code> 時，請計算<code translate="no">_score</code> 的最小值，並將指標別名依升序排序，使距離最小的區間優先顯示。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>))
+        .size(<span class="hljs-number">3</span>)
+        .addMetric(<span class="hljs-string">&quot;max_score&quot;</span>, MetricSpec.builder().op(MetricOps.MAX).fieldName(<span class="hljs-string">&quot;_score&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;max_score&quot;</span>).direction(AggDirection.DESC).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">metrics</span>: { <span class="hljs-attr">max_score</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;max&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span> } },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;max_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;max_score&quot;: {&quot;op&quot;: &quot;max&quot;, &quot;fieldName&quot;: &quot;_score&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;max_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>With <code translate="no">L2</code>, calculate the minimum <code translate="no">_score</code> value and sort the metric alias in ascending order so that buckets with the lowest distance come first.</p>
 <p></details></p>
 <p><details></p>
-<p><summary>建立複合桶鍵</summary></p>
-<p>要建立複合式桶位金鑰，請在同一個清單中傳入多個欄位名稱：</p>
+<p><summary>Create composite bucket keys</summary></p>
+<p>To create a composite bucket key, pass multiple field names in the same list:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
 <span class="highlighted-comment-line">    <span class="hljs-comment"># Combine brand and color to form a composite bucket key.</span></span>
 <span class="highlighted-comment-line">    fields=[<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],</span>
     size=<span class="hljs-number">6</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>此配置可產生如<code translate="no">(Brand A, black)</code> 、<code translate="no">(Brand A, blue)</code> 及<code translate="no">(Brand B, white)</code> 等金鑰。僅當兩個實體的兩項值皆相同時，才會共用同一個桶位。Milvus 會保留清單順序，因此<code translate="no">brand</code> 為第一個金鑰組件，而<code translate="no">color</code> 為第二個。當在<code translate="no">order</code> 中使用<code translate="no">_key</code> 時，Milvus 會依照相同順序比較複合金鑰的各組件。請將多個字串傳入單一平坦清單中；不支援嵌套清單。</p>
-<p><code translate="no">size=6</code> 是此聚合層級下返回的複合桶最大數量。範例資料包含五種不同的品牌-顏色組合，因此可返回全部五種。在<a href="#Limits">返回條目限制中</a>，此請求貢獻了<code translate="no">1 query vector × 6 buckets × 1 = 6</code> 所設定的結果條目。</p>
-<p>在單一<code translate="no">SearchAggregation.fields</code> 清單中包含多個欄位，將在該彙總層級建立一個複合桶鍵。若要建立父子桶層級結構，請使用<a href="#Group-results-at-multiple-levels">嵌套彙總</a>。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder()
+        .fields(Arrays.asList(<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .size(<span class="hljs-number">6</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">6</span>,
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;, &quot;color&quot;], &quot;size&quot;: 6}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>This configuration can produce keys such as <code translate="no">(Brand A, black)</code>, <code translate="no">(Brand A, blue)</code>, and <code translate="no">(Brand B, white)</code>. Two entities share a bucket only when both values match. Milvus preserves the list order, so <code translate="no">brand</code> is the first key component and <code translate="no">color</code> is the second. When <code translate="no">_key</code> is used in <code translate="no">order</code>, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.</p>
+<p><code translate="no">size=6</code> is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the <a href="#Limits">returned-entry limit</a>, this request contributes <code translate="no">1 query vector × 6 buckets × 1 = 6</code> configured result entries.</p>
+<p>Multiple fields in one <code translate="no">SearchAggregation.fields</code> list create a composite bucket key at that aggregation level. To create a parent-child bucket hierarchy, use a <a href="#Group-results-at-multiple-levels">nested aggregation</a>.</p>
 <p></details></p>
-<p>以下範例重新定義了<code translate="no">aggregation</code> 。將更新後的物件傳遞給相同的<code translate="no">search_aggregation</code> 參數，並重新執行搜尋呼叫。</p>
-<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">顯示每個桶位的代表性結果<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
+<p>The examples that follow redefine <code translate="no">aggregation</code>. Pass the updated object to the same <code translate="no">search_aggregation</code> parameter and rerun the search call.</p>
+<h3 id="Show-representative-results-from-each-bucket" class="common-anchor-header">Show representative results from each bucket<button data-href="#Show-representative-results-from-each-bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -454,8 +749,15 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當應用程式需要顯示每個桶中的實際產品時，請包含具代表性的實體。在此範例中，Milvus 會從每個品牌桶中返回最多兩項產品，並依評分排序，接著依向量分數排序。</p>
-<p>請依下列方式設定 `<code translate="no">TopHits</code> `：</p>
+    </button></h3><p>Include representative entities when the application needs to show actual products from each bucket. In this example, Milvus returns up to two products from each brand bucket, ordered by rating and then by vector score.</p>
+<p>Configure <code translate="no">TopHits</code> as follows:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;brand&quot;</span>],
     size=<span class="hljs-number">3</span>,
@@ -471,9 +773,37 @@ search_params = {
 <span class="highlighted-comment-line">    ),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+        .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>)
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build())
+                .addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;_score&quot;</span>).direction(AggDirection.DESC).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">top_hits</span>: {
+    <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">sort</span>: [
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;_score&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> },
+    ],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}, {&quot;fieldName&quot;: &quot;_score&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>檢視包含代表性搜尋結果的桶</summary></p>
-<p>以下品牌 A 桶的資料取自上述請求，並為便於閱讀而序列化為 JSON 格式。</p>
+<p><summary>View a bucket with representative hits</summary></p>
+<p>The following Brand A bucket was captured from the request above and serialized as JSON for readability.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -518,19 +848,19 @@ search_params = {
 <p></details></p>
 <table>
 <thead>
-<tr><th>參數</th><th>目的</th></tr>
+<tr><th>Parameter</th><th>Purpose</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top_hits</code></td><td>可選。用於為此聚合層級設定代表性實體。若省略此參數，<code translate="no">bucket.hits</code> 將為空，且每個金鑰的候選預算預設值為一。</td></tr>
-<tr><td><code translate="no">TopHits.size</code></td><td>從每個選定的區間中最多返回兩個代表性實體，並將整個彙總樹中每個金鑰的候選預算設定為二。</td></tr>
-<tr><td><code translate="no">TopHits.sort</code></td><td>根據列出的標準對每個區塊內的實體進行排序。</td></tr>
+<tr><td><code translate="no">top_hits</code></td><td>Optional. Configures representative entities for this aggregation level. If omitted, <code translate="no">bucket.hits</code> is empty and the per-key candidate budget defaults to one.</td></tr>
+<tr><td><code translate="no">TopHits.size</code></td><td>Returns up to two representative entities from each selected bucket and sets the per-key candidate budget to two for the entire aggregation tree.</td></tr>
+<tr><td><code translate="no">TopHits.sort</code></td><td>Orders entities inside each bucket using the listed criteria.</td></tr>
 </tbody>
 </table>
-<p>當應用程式需要代表性實體，或計數與指標需要更寬廣的「每鍵候選視窗」時，請設定 `<code translate="no">top_hits</code> `。較大的 `<code translate="no">TopHits.size</code> ` 值會同時增加候選預算，並提高<a href="#Limits">`Limits</a>` 中「最大回傳條目數」的計算上限。</p>
-<p><code translate="no">SearchAggregation.order</code> 會對桶進行排序，而「<code translate="no">TopHits.sort</code> 」則會對每個桶內的保留實體進行排序。此排序順序不會改變為「<code translate="no">count</code> 」和指標所保留的候選項。<code translate="no">TopHits.sort</code> 接受受支援的可比較標量欄位名稱，以及代表人工智慧（ANN）相似度或距離的內建「<code translate="no">_score</code> 」欄位。Milvus 會從頭到尾評估「<code translate="no">sort</code> 」中的條目。 在此範例中，系統會依據<code translate="no">rating</code> 將產品從高到低排序，並僅在兩項評分相同時才使用<code translate="no">_score</code> 。由於設定中使用了<code translate="no">COSINE</code> ，因此降序的<code translate="no">_score</code> 會將相似度較高的產品排在首位。</p>
-<p><code translate="no">metrics</code> 或<code translate="no">TopHits.sort</code> 所使用的欄位無需出現在<code translate="no">output_fields</code> 中。Milvus 會在內部擷取這些欄位，但僅有<code translate="no">output_fields</code> 中明確列出的欄位才會被納入每個回傳結果的<code translate="no">fields</code> 映射中。主鍵和向量分數仍可透過<code translate="no">AggregationHit.pk</code> 和<code translate="no">AggregationHit.score</code> 取得。</p>
-<p>每個回傳的<code translate="no">AggregationHit</code> 皆會於<code translate="no">pk</code> 公開其主鍵、於<code translate="no">score</code> 公開向量分數，並於<code translate="no">fields</code> 公開所請求的輸出欄位。</p>
-<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">多層級結果分組<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
+<p>Configure <code translate="no">top_hits</code> when the application needs representative entities or when counts and metrics need a wider per-key candidate window. A larger <code translate="no">TopHits.size</code> increases both the candidate budget and the maximum returned-entry calculation in <a href="#Limits">Limits</a>.</p>
+<p><code translate="no">SearchAggregation.order</code> sorts buckets, while <code translate="no">TopHits.sort</code> sorts the retained entities inside each bucket. The sort order does not change which candidates were retained for <code translate="no">count</code> and metrics. <code translate="no">TopHits.sort</code> accepts supported comparable scalar field names and the built-in <code translate="no">_score</code> field, which represents the ANN similarity or distance. Milvus evaluates the <code translate="no">sort</code> entries from first to last. In this example, it orders products by <code translate="no">rating</code> from highest to lowest and uses <code translate="no">_score</code> only when two ratings are equal. Because the setup uses <code translate="no">COSINE</code>, descending <code translate="no">_score</code> places the more similar product first.</p>
+<p>The fields used by <code translate="no">metrics</code> or <code translate="no">TopHits.sort</code> do not have to appear in <code translate="no">output_fields</code>. Milvus fetches those fields internally, but only fields explicitly listed in <code translate="no">output_fields</code> are included in each returned hit’s <code translate="no">fields</code> mapping. Primary keys and vector scores remain available through <code translate="no">AggregationHit.pk</code> and <code translate="no">AggregationHit.score</code>.</p>
+<p>Each returned <code translate="no">AggregationHit</code> exposes its primary key in <code translate="no">pk</code>, vector score in <code translate="no">score</code>, and requested output fields in <code translate="no">fields</code>.</p>
+<h3 id="Group-results-at-multiple-levels" class="common-anchor-header">Group results at multiple levels<button data-href="#Group-results-at-multiple-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -545,9 +875,9 @@ search_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當您需要在某個層級內建立另一個層級的桶時，請使用嵌套聚合。在此範例中，Milvus 會先建立類別桶，然後在每個類別內建立品牌桶。</p>
-<p>子聚合僅接收指派給其父桶的實體。<code translate="no">fields</code> 控制各聚合層級的桶鍵，而<code translate="no">sub_aggregation</code> 則建立父子層級結構。</p>
-<p>以下配置會建立一個鍵值為<code translate="no">(running_shoes)</code> 的類別儲存桶。在該父儲存桶內，子聚合會建立各自獨立的品牌儲存桶，其鍵值例如<code translate="no">(Brand A)</code> 、<code translate="no">(Brand B)</code> 及<code translate="no">(Brand C)</code> 。</p>
+    </button></h3><p>Use nested aggregation when you need one level of buckets inside another. In this example, Milvus creates category buckets first, and then creates brand buckets within each category.</p>
+<p>The child aggregation receives only the entities assigned to its parent bucket. <code translate="no">fields</code> controls the bucket key at each aggregation level, while <code translate="no">sub_aggregation</code> creates the parent-child hierarchy.</p>
+<p>The configuration below creates a category bucket with the key <code translate="no">(running_shoes)</code>. Within that parent bucket, the child aggregation creates separate brand buckets with keys such as <code translate="no">(Brand A)</code>, <code translate="no">(Brand B)</code>, and <code translate="no">(Brand C)</code>.</p>
 <pre><code translate="no" class="language-text">Parent bucket key:
 (running_shoes)
 
@@ -556,8 +886,15 @@ Child bucket keys:
 ├── (Brand B)
 └── (Brand C)
 <button class="copy-code-btn"></button></code></pre>
-<p>每個層級均可獨立使用多個欄位。例如，在子聚合中使用<code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> ，將產生如<code translate="no">(Brand A, black)</code> 這樣的複合子鍵。</p>
-<p>以下配置實現了此層級結構：</p>
+<p>Each level can independently use multiple fields. For example, using <code translate="no">fields=[&quot;brand&quot;, &quot;color&quot;]</code> in the child aggregation would create composite child keys such as <code translate="no">(Brand A, black)</code>.</p>
+<p>The following configuration implements this hierarchy:</p>
+<div class="multipleCode">
+  <a href="#python">Python</a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
     fields=[<span class="hljs-string">&quot;category&quot;</span>],
     size=<span class="hljs-number">2</span>,
@@ -582,9 +919,58 @@ Child bucket keys:
 <span class="highlighted-comment-line">    ),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchAggregation</span> <span class="hljs-variable">aggregation</span> <span class="hljs-operator">=</span> SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;category&quot;</span>)).size(<span class="hljs-number">2</span>)
+        .addMetric(<span class="hljs-string">&quot;product_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+        .addMetric(<span class="hljs-string">&quot;avg_price&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;price&quot;</span>).build())
+        .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;product_count&quot;</span>).direction(AggDirection.DESC).build())
+        .subAggregation(SearchAggregation.builder().fields(Collections.singletonList(<span class="hljs-string">&quot;brand&quot;</span>)).size(<span class="hljs-number">3</span>)
+                .addMetric(<span class="hljs-string">&quot;brand_count&quot;</span>, MetricSpec.builder().op(MetricOps.COUNT).fieldName(<span class="hljs-string">&quot;*&quot;</span>).build())
+                .addMetric(<span class="hljs-string">&quot;avg_rating&quot;</span>, MetricSpec.builder().op(MetricOps.AVG).fieldName(<span class="hljs-string">&quot;rating&quot;</span>).build())
+                .addOrder(OrderSpec.builder().key(<span class="hljs-string">&quot;avg_rating&quot;</span>).direction(AggDirection.DESC).build())
+                .topHits(TopHitsSpec.builder().size(<span class="hljs-number">2</span>).addSort(SortSpec.builder().fieldName(<span class="hljs-string">&quot;rating&quot;</span>).direction(AggDirection.DESC).build()).build()).build())
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// TBD: Search Aggregation is not yet available in the released Go SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> aggregation = {
+  <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;category&#x27;</span>],
+  <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">metrics</span>: {
+    <span class="hljs-attr">product_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+    <span class="hljs-attr">avg_price</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;price&#x27;</span> },
+  },
+  <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;product_count&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+  <span class="hljs-attr">sub_aggregation</span>: {
+    <span class="hljs-attr">fields</span>: [<span class="hljs-string">&#x27;brand&#x27;</span>],
+    <span class="hljs-attr">size</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metrics</span>: {
+      <span class="hljs-attr">brand_count</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;*&#x27;</span> },
+      <span class="hljs-attr">avg_rating</span>: { <span class="hljs-attr">op</span>: <span class="hljs-string">&#x27;avg&#x27;</span>, <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span> },
+    },
+    <span class="hljs-attr">order</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;avg_rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    <span class="hljs-attr">top_hits</span>: {
+      <span class="hljs-attr">size</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">sort</span>: [{ <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;rating&#x27;</span>, <span class="hljs-attr">direction</span>: <span class="hljs-string">&#x27;desc&#x27;</span> }],
+    },
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">payload=<span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_search_aggregation&quot;,
+  &quot;data&quot;: [[0.11, 0.40, 0.19, 0.64, 0.30]], &quot;annsField&quot;: &quot;embedding&quot;, &quot;limit&quot;: 10,
+  &quot;searchParams&quot;: {&quot;metric_type&quot;: &quot;COSINE&quot;, &quot;params&quot;: {}},
+  &quot;searchAggregation&quot;: {
+    &quot;fields&quot;: [&quot;category&quot;], &quot;size&quot;: 2,
+    &quot;metrics&quot;: {&quot;product_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_price&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;price&quot;}},
+    &quot;order&quot;: [{&quot;key&quot;: &quot;product_count&quot;, &quot;direction&quot;: &quot;desc&quot;}],
+    &quot;subAggregation&quot;: {&quot;fields&quot;: [&quot;brand&quot;], &quot;size&quot;: 3, &quot;metrics&quot;: {&quot;brand_count&quot;: {&quot;op&quot;: &quot;count&quot;, &quot;fieldName&quot;: &quot;*&quot;}, &quot;avg_rating&quot;: {&quot;op&quot;: &quot;avg&quot;, &quot;fieldName&quot;: &quot;rating&quot;}}, &quot;order&quot;: [{&quot;key&quot;: &quot;avg_rating&quot;, &quot;direction&quot;: &quot;desc&quot;}], &quot;topHits&quot;: {&quot;size&quot;: 2, &quot;sort&quot;: [{&quot;fieldName&quot;: &quot;rating&quot;, &quot;direction&quot;: &quot;desc&quot;}]}}
+  }
+}&#x27;</span>
+search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</span>&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>檢視嵌套儲存桶的結果</summary></p>
-<p>以下序列化片段顯示了父桶<code translate="no">running_shoes</code> 及其子桶「品牌 B」。為簡潔起見，已省略「品牌 A」和「品牌 C」的子桶。</p>
+<p><summary>View a nested bucket result</summary></p>
+<p>The following serialized excerpt shows the <code translate="no">running_shoes</code> parent bucket and its Brand B child bucket. The Brand A and Brand C child buckets are omitted for brevity.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -634,15 +1020,15 @@ Child bucket keys:
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>顯示的結果代表儲存桶路徑<code translate="no">(running_shoes) → (Brand B)</code> ，而非單一的複合儲存桶金鑰<code translate="no">(running_shoes, Brand B)</code> 。</p>
-<p>Milvus 首先根據<code translate="no">product_count</code> 的順序，選取最多兩個類別儲存桶。接著，它在每個選定的類別中獨立執行<code translate="no">sub_aggregation</code> ，並根據<code translate="no">avg_rating</code> 的順序，返回最多三個品牌儲存桶。</p>
-<p>在上述輸出中：</p>
+<p>The displayed result represents the bucket path <code translate="no">(running_shoes) → (Brand B)</code>, not a single composite bucket key <code translate="no">(running_shoes, Brand B)</code>.</p>
+<p>Milvus first selects up to two category buckets, ordered by <code translate="no">product_count</code>. It then runs <code translate="no">sub_aggregation</code> independently within each selected category and returns up to three brand buckets, ordered by <code translate="no">avg_rating</code>.</p>
+<p>In the output above:</p>
 <ul>
-<li>根級別的<code translate="no">running_shoes</code> 桶在其子複合鍵中包含四個保留候選項。其<code translate="no">metrics</code> 包含根級別的<code translate="no">avg_price</code> 和<code translate="no">product_count</code> 值。</li>
-<li>根桶的「<code translate="no">sub_groups</code> 」清單包含子品牌桶。顯示中的「Brand B」桶包含一個保留候選值，以及其自身的「<code translate="no">avg_rating</code> 」和「<code translate="no">brand_count</code> 」值。</li>
-<li>由於根匣的<code translate="no">hits</code> 清單未設定<code translate="no">top_hits</code> ，因此該清單為空。品牌 B 子匣包含一個代表性命中，因為在<code translate="no">sub_aggregation</code> 中已設定<code translate="no">top_hits</code> 。</li>
+<li>The root <code translate="no">running_shoes</code> bucket contains four retained candidates across its child composite keys. Its <code translate="no">metrics</code> contain the root-level <code translate="no">avg_price</code> and <code translate="no">product_count</code> values.</li>
+<li>The root bucket’s <code translate="no">sub_groups</code> list contains the child brand buckets. The displayed Brand B bucket contains one retained candidate and its own <code translate="no">avg_rating</code> and <code translate="no">brand_count</code> values.</li>
+<li>The root bucket’s <code translate="no">hits</code> list is empty because the root aggregation does not configure <code translate="no">top_hits</code>. The Brand B child contains a representative hit because <code translate="no">top_hits</code> is configured in <code translate="no">sub_aggregation</code>.</li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -657,7 +1043,7 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-accurate-are-bucket-counts-and-metrics" class="common-anchor-header">桶計數和指標的準確性如何？<button data-href="#How-accurate-are-bucket-counts-and-metrics" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-accurate-are-bucket-counts-and-metrics" class="common-anchor-header">How accurate are bucket counts and metrics?<button data-href="#How-accurate-are-bucket-counts-and-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -672,12 +1058,12 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>搜尋彙總會彙總保留的 ANN 候選項，並不會執行全集合彙總。</p>
-<p>候選項保留包含兩個近似階段。ANN 搜尋可能會遺漏相關的集合實體，而分組階段針對每個完整的複合鍵，最多僅保留<code translate="no">TopHits.size</code> 候選項。若無任何層級設定<code translate="no">top_hits</code> ，則此每鍵限制為一。</p>
-<p>舉例來說，假設某集合包含 5,000 項「品牌 A」產品，其中許多與向量查詢相關。若彙總操作使用<code translate="no">TopHits(size=4)</code> ，則「品牌 A」桶位針對每個完整複合鍵最多可保留四個候選項。其<code translate="no">count</code> 和指標所描述的是這些被保留的候選項，而非所有相關的「品牌 A」產品，亦非集合中的全部 5,000 個實體。</p>
-<p>當「<code translate="no">order</code> 」使用指標別名時，近似值的影響最為顯著。搜尋召回率的變化會改變指標值，進而改變哪些桶能符合「<code translate="no">SearchAggregation.size</code> 」的條件。嵌套聚合會放大此效應，因為每個子層級皆針對其父桶中可用的實體進行運算。</p>
-<p>若您需要針對每個匹配實體取得精確統計資料，請使用「精確查詢彙總」工作流程，而非「搜尋彙總」。</p>
-<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">「搜尋聚合」與「分組搜尋」有何不同？<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
+    </button></h3><p>Search Aggregation summarizes retained ANN candidates. It does not run a full-collection aggregation.</p>
+<p>Candidate retention has two approximation stages. ANN search can omit relevant collection entities, and the grouping stage retains at most the largest <code translate="no">TopHits.size</code> candidates for each full composite key. If no level configures <code translate="no">top_hits</code>, this per-key limit is one.</p>
+<p>For example, suppose a collection contains 5,000 Brand A products and many are relevant to the vector query. If the aggregation uses <code translate="no">TopHits(size=4)</code>, the Brand A bucket can retain at most four candidates for a full composite key. Its <code translate="no">count</code> and metrics describe those retained candidates, not all relevant Brand A products and not all 5,000 collection entities.</p>
+<p>Approximation matters most when <code translate="no">order</code> uses a metric alias. Changes in search recall can change the metric values and therefore change which buckets fit within <code translate="no">SearchAggregation.size</code>. Nested aggregation can amplify this effect because each child level operates on the entities available in its parent bucket.</p>
+<p>If you need exact statistics over every matching entity, use an exact query aggregation workflow instead of Search Aggregation.</p>
+<h3 id="How-does-Search-Aggregation-differ-from-Grouping-Search" class="common-anchor-header">How does Search Aggregation differ from Grouping Search?<button data-href="#How-does-Search-Aggregation-differ-from-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -692,15 +1078,15 @@ Child bucket keys:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請根據應用程式的首要結果格式進行選擇：</p>
+    </button></h3><p>Choose based on the application’s primary result shape:</p>
 <table>
 <thead>
-<tr><th>主要需求</th><th>建議選項</th><th>應使用的回傳格式</th></tr>
+<tr><th>Primary need</th><th>Prefer</th><th>Response to consume</th></tr>
 </thead>
 <tbody>
-<tr><td>回傳標準的排序實體清單，且分組欄位中的重複值較少</td><td><a href="/docs/zh-hant/grouping-search.md">分組搜尋</a></td><td>針對每個查詢向量進行扁平化搜尋結果</td></tr>
-<tr><td>將群組視為桶子進行檢視或比較，包含鍵值、計數、指標、排序、代表性搜尋結果或子桶子</td><td>搜尋彙總</td><td><code translate="no">AggregationBucket</code> 物件位於<code translate="no">result.agg_buckets</code></td></tr>
+<tr><td>Return a standard ranked entity list with fewer repeated values in a grouping field</td><td><a href="/docs/zh-hant/grouping-search.md">Grouping Search</a></td><td>Flat search hits for each query vector</td></tr>
+<tr><td>Inspect or compare groups as buckets, with keys, counts, metrics, ordering, representative hits, or child buckets</td><td>Search Aggregation</td><td><code translate="no">AggregationBucket</code> objects in <code translate="no">result.agg_buckets</code></td></tr>
 </tbody>
 </table>
-<p>即使搜尋聚合設定了<code translate="no">top_hits</code> ，其主要回應仍為桶狀樹。當應用程式已能處理一般搜尋結果，且主要目標在於提升結果多樣性時，分組搜尋仍具實用價值。</p>
-<p>這些 API 彼此互斥。當在同一請求中將 `<code translate="no">search_aggregation</code> ` 與 `<code translate="no">group_by_field</code> ` 或 `<code translate="no">group_by_fields</code> ` 結合使用時，PyMilvus 會拋出 `<code translate="no">ParamError</code> ` 錯誤。</p>
+<p>Even when Search Aggregation configures <code translate="no">top_hits</code>, its primary response remains a bucket tree. Grouping Search remains useful when the application already processes ordinary search hits and primarily wants result diversity.</p>
+<p>The APIs are mutually exclusive. PyMilvus raises <code translate="no">ParamError</code> when <code translate="no">search_aggregation</code> is combined with <code translate="no">group_by_field</code> or <code translate="no">group_by_fields</code> in the same request.</p>
