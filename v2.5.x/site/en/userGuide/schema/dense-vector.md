@@ -282,7 +282,7 @@ export indexParams='[
 
 In the example above, an index named `dense_vector_index` is created for the `dense_vector` field using the `AUTOINDEX` index type. The `metric_type` is set to `IP`, indicating that inner product will be used as the distance metric.
 
-Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.
+Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to [Index Explained](index-explained.md).
 
 Milvus supports other metric types. For more information, refer to [Metric Types](metric.md).
 
