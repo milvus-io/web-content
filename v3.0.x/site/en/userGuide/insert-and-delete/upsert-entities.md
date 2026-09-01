@@ -10,7 +10,7 @@ The `upsert` operation provides a convenient way to insert or update entities in
 
 ## Overview
 
-You can use `upsert` to either insert a new entity or update an existing one, depending on whether the primary key provided in the upsert request exists in the collection. If the primary key is not found, an insert operation occurs. Otherwise, an update operation will be performed.
+You can use `upsert` to either insert a new entity or update an existing one, depending on whether the primary key provided in the upsert request exists in the collection. If the primary key is not found, an insert operation occurs. Otherwise, an update operation will be performed. Partial updates on `autoID` collections are an exception: they update existing entities only, as described below.
 
 An upsert in Milvus works in either **override** or **merge** mode.
 
@@ -33,6 +33,8 @@ You can also use the `partial_update` flag to make an upsert request work in mer
 To perform a merge, set `partial_update` to `True` in the `upsert` request along with the primary key and the fields to update with their new values. 
 
 Upon receiving such a request, Milvus performs a query with strong consistency to retrieve the entity, updates the field values based on the data in the request, inserts the modified data, and then deletes the existing entity with the original primary key carried in the request.
+
+For a collection with `autoID` enabled, merge mode preserves the primary key provided in the request instead of generating a new one. This differs from override mode, in which Milvus generates a new primary key for the replacement entity. The primary key in a merge-mode request must identify an existing entity; otherwise, Milvus rejects the request instead of inserting a new entity.
 
 For `ARRAY` fields, merge mode supports two operators in Milvus v2.6.17 and later: `ARRAY_APPEND` and `ARRAY_REMOVE`. These operators let you append elements to or remove matching elements from an existing `ARRAY` field, without first querying the entity to retrieve its current value. For details, see [Upsert ARRAY fields in merge mode](upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode).
 
@@ -88,7 +90,11 @@ There are several special notes you should consider before using the merge featu
 
 Based on the above content, there are several limits and restrictions to follow:
 
-- The `upsert` request must always include the primary keys of the target entities, even when `autoID` is enabled. For `autoID` collections, the primary keys in the request identify the existing entities to replace. Milvus generates new primary keys for the inserted replacement entities.
+- The `upsert` request must always include the primary keys of the target entities, even when `autoID` is enabled. For `autoID` collections, primary-key handling depends on the upsert mode:
+
+    - In override mode, the primary key identifies the existing entity to replace, and Milvus generates a new primary key for the replacement entity.
+
+    - In merge mode, the primary key identifies the existing entity to update and remains unchanged. If the primary key does not exist, the request fails instead of inserting a new entity.
 
 - The target collection must be loaded and available for queries.
 
