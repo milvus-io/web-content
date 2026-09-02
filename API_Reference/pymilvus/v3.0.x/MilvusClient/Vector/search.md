@@ -19,7 +19,6 @@ search(
     anns_field: Optional[str] = None,
     ranker: Optional[Union[Function, FunctionScore]] = None,
     highlighter: Optional[Highlighter] = None,
-    group_by: Optional[GroupBy] = None,
     order_by_fields: Optional[List[dict]] = None,
     search_aggregation: Optional[SearchAggregation] = None,
     **kwargs,
@@ -80,7 +79,7 @@ search(
 
     <div class="alert note">
     
-    When `group_by` is specified for search aggregation, do not explicitly set `limit`. Use the root `GroupBy.size` value to control the number of top-level buckets to return.
+    When `search_aggregation` is specified, do not explicitly set `limit`. Use the root `SearchAggregation.size` value to control the number of top-level buckets to return.
 
     </div>
 
@@ -142,7 +141,7 @@ search(
 
     Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group.
 
-    This parameter is used by Grouping Search. It is mutually exclusive with `group_by`.
+    This parameter is used by Grouping Search. In PyMilvus 3.0.1 or later, do not use this parameter together with `search_aggregation`.
 
 - **group_size** (*int*)
 
@@ -151,16 +150,6 @@ search(
 - **strict_group_size** (*bool*)
 
     This Boolean parameter dictates whether `group_size` should be strictly enforced. When `strict_group_size=True`, the system will attempt to fill each group with exactly `group_size` results, as long as sufficient data exists within each group. If there is an insufficient number of entities in a group, it will return only the available entities, ensuring that groups with adequate data meet the specified `group_size`.
-
-- **group_by** (*[GroupBy](https://zilliverse.feishu.cn/docx/CFS4dOq2LowXPSxB124cBwQsn0c) | None*) -
-
-    A `GroupBy` object that defines a search aggregation.  When this parameter is specified, Milvus groups ANN search results into buckets based on the fields in the root `GroupBy` object. Each bucket can include per-bucket metrics, representative hits, and nested sub-groups.  `group_by` is mutually exclusive with `group_by_field`. Use `group_by_field` for existing single-field Grouping Search workflows. Use `group_by` when you need per-bucket metrics, multi-field grouping, bucket ordering, hit sorting, or nested grouping.
-
-    <div class="alert note">
-    
-    Search aggregation metrics are computed over ANN-retrieved entities, not over the full collection. Bucket counts, metrics, and metric-based ordering are approximate.
-
-    </div>
 
 - **order_by_fields** (*list[dict] | None*) -
 
@@ -204,7 +193,7 @@ search(
 
 - **search_aggregation** (*Optional[SearchAggregation]*) -
 
-    Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root `SearchAggregation.size` controls the top-level bucket count.
+    Available in PyMilvus 3.0.1 or later. Defines a hierarchical bucket aggregation. Do not use this parameter together with `group_by_field`. When set, `limit` is ignored and the root `SearchAggregation.size` controls the number of top-level buckets.
 
 - **kwargs** -
 
@@ -248,6 +237,22 @@ A list of dictionaries that contains the searched entities with specified output
     This exception will be raised when any error occurs during this operation.
 
 ## Examples
+
+**Grouping Search**
+
+The following focused example omits client setup, collection creation, and data insertion. It assumes that `product_catalog` has a 5-dimensional vector field and a scalar field named `brand`.
+
+```python
+res = client.search(
+    collection_name="product_catalog",
+    data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
+    limit=10,
+    group_by_field="brand",
+    group_size=2,
+    strict_group_size=True,
+    output_fields=["brand"],
+)
+```
 
 ```python
 from pymilvus import MilvusClient
@@ -380,4 +385,3 @@ res = client.search(
 #   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
 #   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
 ```
-
