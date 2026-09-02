@@ -141,15 +141,15 @@ query(
 
         A list of scalar fields to group the query results by. When set, `query()` returns one row per unique combination of the specified field values, and any aggregation expressions in `output_fields` (`count(*)`, `count(<f>)`, `min(<f>)`, `max(<f>)`, `sum(<f>)`, `avg(<f>)`) are computed per group.
 
-        Supported field types: INT8, INT16, INT32, INT64, FLOAT, DOUBLE, VARCHAR, and TIMESTAMPTZ. Grouping by vector, JSON, or Array fields returns an error.
-
-        Aggregation type rules:
-
-        - `sum` and `avg` are numeric only. Applying them to a `VarChar` field returns an error.
-
-        - `sum(int*)` returns `INT64`; `sum(float|double)` returns `DOUBLE`; `avg(...)` always returns `DOUBLE`; `count(...)` returns `INT64`; `min`/`max` preserve the column type.
+        Supported grouping-key field types: `INT8`, `INT16`, `INT32`, `INT64`, `VARCHAR`, and `TIMESTAMPTZ`. Grouping by `FLOAT`, `DOUBLE`, vector, `JSON`, or `ARRAY` fields returns an error.
 
         You can combine `group_by_fields` with `limit` to cap the number of groups returned.
+
+        Aggregation input type rules:
+
+        - `sum` and `avg` accept only numeric fields, including `FLOAT` and `DOUBLE`. Applying either function to a `VARCHAR` field returns an error.
+
+        - `sum` returns `INT64` for integer inputs and `DOUBLE` for `FLOAT` or `DOUBLE` inputs. `avg` always returns `DOUBLE`; `count` returns `INT64`; and `min` and `max` preserve the field type.
 
 **RETURN TYPE:**
 
