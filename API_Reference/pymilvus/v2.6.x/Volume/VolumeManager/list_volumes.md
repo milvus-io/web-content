@@ -1,6 +1,6 @@
 # list_volumes()
 
-Adds project_id and volume_type filtering.
+This operation lists volumes under a project with pagination.
 
 ## Request Syntax
 

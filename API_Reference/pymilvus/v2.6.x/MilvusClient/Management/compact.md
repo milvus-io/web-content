@@ -1,6 +1,6 @@
 # compact()
 
-Adds target_size/target_size_unit and positive-size validation. Async variant shares the sync method contract.
+This operation triggers a manual compaction to merge small segments in a collection and returns the compaction job ID.
 
 ## Request Syntax
 
