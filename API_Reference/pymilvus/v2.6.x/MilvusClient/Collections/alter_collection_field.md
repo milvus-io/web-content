@@ -2,12 +2,6 @@
 
 This operation changes the specified collection field parameters.
 
-<div class="alert note">
-
-This does not apply to external collections.
-
-</div>
-
 ## Request Syntax
 
 ```python

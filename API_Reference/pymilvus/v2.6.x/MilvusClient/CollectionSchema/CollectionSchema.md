@@ -1,6 +1,6 @@
 # CollectionSchema
 
-Updates schema constructor and metadata behavior. Class property behavior changed. Class property behavior changed. Class property behavior changed.
+A **CollectionSchema** instance represents the schema of a collection. A schema sketches the structure of a collection.
 
 ## Request Syntax
 

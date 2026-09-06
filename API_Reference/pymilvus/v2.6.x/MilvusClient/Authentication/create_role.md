@@ -1,6 +1,6 @@
 # create_role()
 
-Adds optional role description. Async variant shares the sync method parameter and response contract.
+This operation creates a role for role-based access control.
 
 ## Request Syntax
 
