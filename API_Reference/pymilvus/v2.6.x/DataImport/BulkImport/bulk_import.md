@@ -1,6 +1,6 @@
 # bulk_import()
 
-Adds project_id/region_id routing and project-database import behavior.
+This function submits a bulk import job for open-source Milvus or Zilliz Cloud.
 
 ## Request Syntax
 

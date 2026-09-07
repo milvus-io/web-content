@@ -1,6 +1,6 @@
 # list_import_jobs()
 
-Adds project_id and region_id filtering.
+This function lists bulk import jobs with optional collection and pagination filters.
 
 ## Request Syntax
 

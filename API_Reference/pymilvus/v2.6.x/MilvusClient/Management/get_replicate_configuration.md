@@ -1,6 +1,6 @@
 # get_replicate_configuration()
 
-Adds replication configuration retrieval. Async variant shares the sync method contract.
+This operation returns the current replication configuration from Milvus.
 
 ## Request Syntax
 

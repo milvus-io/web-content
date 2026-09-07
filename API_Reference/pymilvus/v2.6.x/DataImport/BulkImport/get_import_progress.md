@@ -1,6 +1,6 @@
 # get_import_progress()
 
-Adds project_id, region_id, db_name, and DB-Name header behavior.
+This function returns the current status of a bulk import job.
 
 ## Request Syntax
 

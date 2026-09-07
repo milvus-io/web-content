@@ -1,6 +1,6 @@
 # update_user()
 
-New public helper for changing a user description. Async variant shares the sync method parameter and response contract.
+This operation updates the description of an existing user.
 
 ## Request Syntax
 

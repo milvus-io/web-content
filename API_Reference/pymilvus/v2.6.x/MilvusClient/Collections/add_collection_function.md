@@ -2,12 +2,6 @@
 
 This operation adds a new function to the collection. Functions allow you to define custom processing logic such as BM25 scoring or embedding generation.
 
-<div class="alert note">
-
-This does not apply to external collections.
-
-</div>
-
 ## Request syntax
 
 ```python
