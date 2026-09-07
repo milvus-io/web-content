@@ -1,11 +1,12 @@
 ---
 id: nullable-and-default.md
-title: Campos anuláveis
+title: Campos nulos
 summary: >-
-  Configurar campos anuláveis e valores padrão, incluindo comportamento de
-  esquema, inserção, índice, pesquisa e filtro.
+  Configure campos que podem assumir o valor nulo e valores predefinidos,
+  incluindo o esquema e o comportamento de inserção, indexação, pesquisa e
+  filtragem.
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">Campos anuláveis<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">Campos nulos<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +21,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus suporta campos anuláveis, que permitem que um valor de campo esteja em falta ou seja explicitamente definido como NULL. A nulidade é definida ao nível do esquema e aplica-se de forma consistente nas operações de ingestão, indexação, pesquisa e consulta de dados.</p>
-<p>Utilize campos anuláveis quando:</p>
+    </button></h1><p>O Milvus suporta campos nulos, o que permite que o valor de um campo esteja em falta ou seja explicitamente definido como NULL. A possibilidade de um campo ser nulo é definida ao nível do esquema e aplica-se de forma consistente em todas as operações de ingestão de dados, indexação, pesquisa e consulta.</p>
+<p>Utilize campos nulos quando:</p>
 <ul>
-<li>Os dados são ingeridos a partir de sistemas externos que permitem valores ausentes.</li>
-<li>Alguns metadados são opcionais ou só estão disponíveis para parte do conjunto de dados.</li>
-<li>As incorporações de vetor são geradas de forma assíncrona e inseridas posteriormente.</li>
+<li>Os dados forem introduzidos a partir de sistemas externos que permitem valores em falta.</li>
+<li>Alguns metadados forem opcionais ou estiverem disponíveis apenas para uma parte do conjunto de dados.</li>
+<li>As representações vetoriais são geradas de forma assíncrona e inseridas posteriormente.</li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limitações<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,12 +44,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Os campos vetoriais que permitem valores NULL não suportam expressões de filtro <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code>. Não é possível filtrar explicitamente entidades com base no facto de um valor de campo de vetor ser NULL.</p></li>
-<li><p>Os campos<a href="/docs/pt/array-of-structs.md">Array of Structs</a> não suportam valores NULL. Não é possível marcar um campo de Matriz de Estruturas ou qualquer campo aninhado dentro dele como anulável.</p></li>
-<li><p>O atributo nullable é definido quando um campo é criado e não pode ser modificado posteriormente. Não é possível ativar ou desativar a anulabilidade de um campo existente.</p></li>
-<li><p>Os campos marcados como anuláveis não podem ser utilizados como chaves de partição. Os campos de chave de partição devem sempre conter valores válidos e não nulos. Para obter mais informações, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p></li>
+<li><p>Os campos vetoriais que permitem valores NULL não suportam as expressões de filtro « <code translate="no">IS NULL</code> » ou « <code translate="no">IS NOT NULL</code> ». Não é possível filtrar explicitamente entidades com base no facto de o valor de um campo vetorial ser NULL.</p></li>
+<li><p>A partir do Milvus 3.0.0, o campo <a href="/docs/pt/array-of-structs.md">StructArray</a> pai pode ser nulo. Defina « <code translate="no">nullable=True</code> » no campo StructArray pai, e não em subcampos individuais. O valor NULL aplica-se a todo o campo StructArray, e não a um elemento Struct individual, e o Milvus propaga internamente a possibilidade de o campo pai ser nulo aos seus subcampos. Um campo StructArray adicionado a uma coleção existente deve ser nulo, para que as entidades existentes possam devolver NULL para o novo campo. Para mais detalhes, consulte <a href="/docs/pt/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limites</a> do <a href="/docs/pt/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray</a>.</p></li>
+<li><p>O atributo de nulabilidade é definido quando um campo é criado e não pode ser modificado posteriormente. Não é possível ativar ou desativar a nulabilidade para um campo existente.</p></li>
+<li><p>Os campos marcados como nulos não podem ser utilizados como chaves de partição. Os campos de chave de partição devem conter sempre valores válidos e não nulos. Para mais informações, consulte <a href="/docs/pt/use-partition-key.md">Utilizar chave de partição</a>.</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">O que é um campo anulável?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">O que é um campo que permite valores nulos?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,22 +64,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, o facto de um campo poder armazenar um valor NULL é controlado por um atributo de campo ao nível do esquema denominado <code translate="no">nullable</code>.</p>
-<p>Quando um campo é definido com <code translate="no">nullable=True</code>, o Milvus permite que o valor do campo esteja em falta durante a ingestão de dados. Na prática, Milvus trata as duas entradas seguintes como equivalentes e armazena o valor do campo como NULL:</p>
+    </button></h2><p>No Milvus, a possibilidade de um campo armazenar um valor NULL é controlada por um atributo de campo ao nível do esquema denominado « <code translate="no">nullable</code> ».</p>
+<p>Quando um campo é definido com « <code translate="no">nullable=True</code> », o Milvus permite que o valor do campo esteja em falta durante a ingestão de dados. Na prática, o Milvus trata as duas entradas seguintes como equivalentes e armazena o valor do campo como NULL:</p>
 <ul>
 <li>O campo é omitido da entidade de entrada.</li>
-<li>O campo é explicitamente definido como NULL (por exemplo, <code translate="no">None</code> em Python).</li>
+<li>O campo é explicitamente definido como NULL (por exemplo, ` <code translate="no">None</code> ` em Python).</li>
 </ul>
-<p>Se um campo não for definido como nullable (o comportamento padrão), cada entidade deve fornecer um valor válido para esse campo. A omissão do campo ou a atribuição explícita de um valor NULL fará com que a operação de inserção ou importação falhe.</p>
-<p>O atributo nullable é suportado para <strong>campos escalares e vectoriais</strong> num esquema de coleção. Contudo, os campos Array of Structs não suportam o atributo nullable.</p>
+<p>Se um campo não for definido como nulo (comportamento predefinido), todas as entidades devem fornecer um valor válido para esse campo. A omissão do campo ou a atribuição explícita de um valor NULL fará com que a operação de inserção ou importação falhe.</p>
+<p>O atributo «nullable» é suportado tanto para <strong>campos escalares como</strong> para <strong>campos vetoriais</strong> num esquema de coleção. A partir do Milvus 3.0.0, também é suportado no campo pai StructArray. Não configure os subcampos Struct como nulos de forma independente; defina a nulabilidade no campo pai StructArray e o Milvus propagará essa configuração para os seus subcampos internamente.</p>
 <div class="alert note">
-<p>A anulabilidade determina se um valor de campo pode estar em falta; não define qual o valor utilizado quando um campo está em falta.</p>
+<p>A nulabilidade determina se um valor de campo pode estar em falta; não define qual o valor utilizado quando um campo está em falta.</p>
 <ul>
-<li>Se um campo anulável for configurado sem um valor predefinido, a omissão do campo resulta num valor NULL armazenado.</li>
-<li>Se for configurado um valor por defeito, o Milvus pode armazenar o valor por defeito. Para obter detalhes, consulte <a href="/docs/pt/default-values.md">Valores padrão</a>.</li>
+<li>Se um campo nulo for configurado sem um valor predefinido, a omissão do campo resulta num valor NULL armazenado.</li>
+<li>Se for configurado um valor por defeito, o Milvus poderá armazenar esse valor em vez do valor nulo. Para mais detalhes, consulte <a href="/docs/pt/default-values.md">Valores por defeito</a>.</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Definir um campo anulável no esquema de coleção<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Definir um campo nulo no esquema da coleção<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,10 +94,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar campos anuláveis, é necessário ativar o atributo anulável ao definir o esquema da coleção.</p>
-<p>Neste exemplo, o esquema de coleção define um campo vetorial denominado <code translate="no">embedding</code> com <code translate="no">nullable=True</code>. Isso permite que as entidades na coleção omitam o valor do vetor ou o definam explicitamente como NULL durante a ingestão de dados.</p>
+    </button></h2><p>Para utilizar campos nulos, deve ativar o atributo «nullable» ao definir o esquema da coleção.</p>
+<p>Neste exemplo, o esquema da coleção define um campo vetorial denominado « <code translate="no">embedding</code> » com « <code translate="no">nullable=True</code> ». Isto permite que as entidades na coleção omitam o valor do vetor ou o definam explicitamente como «NULL» durante a ingestão de dados.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -247,16 +253,21 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste esquema:</p>
 <ul>
-<li>O campo <code translate="no">embedding</code> é explicitamente marcado como anulável.</li>
-<li>As entidades podem omitir o campo <code translate="no">embedding</code> ou atribuir-lhe um valor NULL durante a inserção.</li>
-<li>A decisão de permitir valores NULL é fixada no momento da criação da coleção.</li>
+<li>O campo « <code translate="no">embedding</code> » está explicitamente marcado como nulo.</li>
+<li>As entidades podem omitir o campo « <code translate="no">embedding</code> » ou atribuir-lhe um valor NULL durante a inserção.</li>
+<li>A decisão de permitir valores NULL é definida no momento da criação da coleção.</li>
 </ul>
-<p>Para maior clareza, os exemplos seguintes centram-se num campo vetorial anulável (<code translate="no">embedding</code>). A definição de campos escalares anuláveis é opcional e não é necessária para seguir o resto deste guia.</p>
+<p>Para maior clareza, os exemplos seguintes centram-se num campo vetorial nulo (<code translate="no">embedding</code>). A definição de campos escalares nulos é opcional e não é necessária para seguir o resto deste guia.</p>
 <p><details>
-<summary>Opcional: Definir um campo escalar anulável</summary></p>
-<p>Os campos escalares também podem ser definidos como anuláveis usando o mesmo atributo <code translate="no">nullable</code> e seguir as mesmas regras durante a ingestão. Por exemplo:</p>
+<summary>Opcional: Definir um campo escalar nulo</summary></p>
+<p>Os campos escalares também podem ser definidos como nulos utilizando o mesmo atributo ` <code translate="no">nullable</code> ` e seguem as mesmas regras durante a ingestão. Por exemplo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -282,7 +293,7 @@ curl --request POST \
 <span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">Comportamento de inserção com valores ausentes ou NULL<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
+<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">Comportamento de inserção com valores em falta ou NULL<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,10 +308,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando um campo é definido como anulável no esquema de coleção, o Milvus permite que o valor do campo esteja em falta ou seja explicitamente definido como NULL durante a ingestão de dados.</p>
-<p>O exemplo abaixo insere três entidades na coleção criada em <a href="#define-a-nullable-field-in-the-collection-schema">Definir um campo anulável no esquema da coleção</a>, demonstrando estes diferentes casos.</p>
+    </button></h2><p>Assim que um campo for definido como nulo no esquema da coleção, o Milvus permite que o valor do campo esteja em falta ou seja explicitamente definido como NULL durante a ingestão de dados.</p>
+<p>O exemplo abaixo insere três entidades na coleção criada em <a href="#define-a-nullable-field-in-the-collection-schema">«Definir um campo nulo no esquema da coleção»</a>, demonstrando estes diferentes casos.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -396,11 +412,11 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo:</p>
 <ul>
-<li>Entidade <strong>id = 1</strong> fornece um valor de vetor válido.</li>
-<li>Entidade <strong>id = 2</strong> atribui explicitamente um valor NULL ao campo <code translate="no">embedding</code>.</li>
-<li>Entidade <strong>id = 3</strong> omite totalmente o campo <code translate="no">embedding</code>; Milvus armazena-o como NULL.</li>
+<li>A entidade <strong>id = 1</strong> fornece um valor vetorial válido.</li>
+<li>A entidade <strong>com id = 2</strong> atribui explicitamente um valor NULL ao campo « <code translate="no">embedding</code> ».</li>
+<li>A entidade <strong>com id = 3</strong> omite totalmente o campo « <code translate="no">embedding</code> »; o Milvus armazena-o como NULL.</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Comportamento do índice em campos anuláveis<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Comportamento do índice em campos que podem conter valores NULL<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,14 +431,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de inserir dados, pode construir um índice num campo anulável como habitualmente. A principal diferença é como o Milvus trata os valores NULL durante a construção do índice:</p>
+    </button></h2><p>Após a inserção de dados, pode criar um índice num campo nulo, como habitualmente. A principal diferença reside na forma como o Milvus lida com os valores NULL durante a construção do índice:</p>
 <ul>
 <li>Apenas as entidades com valores não nulos são adicionadas ao índice.</li>
 <li>As entidades com valores NULL são ignoradas e não participam na construção do índice.</li>
 </ul>
-<p>Para um campo vetorial nulo, isto significa que apenas as entidades com vectores válidos se tornam pesquisáveis por semelhança vetorial.</p>
+<p>No caso de um campo vetorial nulo, isto significa que apenas as entidades com vetores válidos passam a ser pesquisáveis por semelhança vetorial.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -522,12 +543,12 @@ curl --request POST \
   --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste ponto:</p>
+<p>Nesta fase:</p>
 <ul>
 <li>As entidades com valores de incorporação válidos são indexadas e estão prontas para pesquisa.</li>
 <li>As entidades cuja incorporação é NULL permanecem na coleção, mas não são incluídas no índice vetorial.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Comportamento de pesquisa com campos anuláveis<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Comportamento da pesquisa com campos que podem conter valores nulos<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,16 +563,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando se efectuam operações de pesquisa num campo anulável, o Milvus avalia apenas as entidades com valores não nulos para o campo utilizado na pesquisa. As entidades cujo campo vetorial é NULL são automaticamente ignoradas.</p>
-<p>Para um campo vetorial anulável, como <code translate="no">embedding</code> neste exemplo:</p>
+    </button></h2><p>Quando se realizam operações de pesquisa num campo que pode assumir o valor nulo, o Milvus avalia apenas as entidades com valores não nulos para o campo utilizado na pesquisa. As entidades cujo campo vetorial seja NULL são automaticamente ignoradas.</p>
+<p>Para um campo vetorial nulo, como <code translate="no">embedding</code> neste exemplo:</p>
 <ul>
 <li>Apenas as entidades com valores vetoriais válidos são avaliadas e classificadas.</li>
-<li>As entidades com vectores NULL não causam erros.</li>
-<li>Se o número de vectores válidos for inferior ao solicitado <code translate="no">topK</code> (<code translate="no">limit</code>), o Milvus pode devolver menos resultados do que <code translate="no">limit</code>.</li>
+<li>As entidades com vetores NULL não causam erros.</li>
+<li>Se o número de vetores válidos for inferior ao número de resultados solicitado ( <code translate="no">topK</code>,<code translate="no">limit</code>), o Milvus poderá devolver menos resultados do que <code translate="no">limit</code>.</li>
 </ul>
-<p>O exemplo seguinte executa uma pesquisa de vectores no campo de vectores anuláveis <code translate="no">embedding</code>:</p>
+<p>O exemplo seguinte realiza uma pesquisa vetorial no campo vetorial nulo <code translate="no">embedding</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -630,11 +656,11 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <p>Nesta pesquisa:</p>
 <ul>
-<li>Apenas as entidades com valores <code translate="no">embedding</code> não nulos são consideradas candidatas.</li>
+<li>Apenas as entidades com valores não nulos em « <code translate="no">embedding</code> » são consideradas candidatas.</li>
 <li>As entidades com valores NULL para <code translate="no">embedding</code> são excluídas da avaliação.</li>
-<li>O número de resultados devolvidos depende de quantos vectores válidos existem na coleção.</li>
+<li>O número de resultados devolvidos depende do número de vetores válidos existentes na coleção.</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">Implicações da consulta e da filtragem<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">Implicações nas consultas e na filtragem<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -649,11 +675,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os exemplos anteriores centram-se nos campos vectoriais. Esta secção descreve como os valores NULL se comportam em <strong>expressões de filtro escalar</strong>.</p>
-<p>Os campos escalares podem ser definidos com <code translate="no">nullable=True</code> e seguem as mesmas regras de ingestão que os campos vectoriais. No entanto, <strong>os valores escalares NULL são sempre avaliados como falsos em expressões de filtro</strong>.</p>
-<p>Por exemplo, dado um campo escalar anulável <code translate="no">age</code>, o seguinte filtro seleciona entidades cuja idade é superior a 18 anos:</p>
+    </button></h2><p>Os exemplos anteriores centram-se nos campos vetoriais. Esta secção descreve como os valores NULL se comportam em <strong>expressões de filtro escalares</strong>.</p>
+<p>Os campos escalares podem ser definidos com <code translate="no">nullable=True</code> e seguem as mesmas regras de ingestão que os campos vetoriais. No entanto, <strong>os valores escalares NULL são sempre avaliados como falsos nas expressões de filtro</strong>.</p>
+<p>Por exemplo, dado um campo escalar que pode assumir o valor NULL <code translate="no">age</code>, o filtro seguinte seleciona entidades cuja idade seja superior a 18:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -665,10 +696,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>As entidades em que <code translate="no">age</code> é NULL são excluídas dos resultados porque um valor NULL não satisfaz a condição de filtro.</p>
+<p>As entidades em que <code translate="no">age</code> é NULL são excluídas dos resultados, uma vez que um valor NULL não satisfaz a condição do filtro.</p>
 <p>Da mesma forma, as verificações de igualdade não correspondem a valores NULL. Por exemplo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -679,8 +715,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>As entidades em que <code translate="no">status</code> é NULL são excluídas dos resultados.</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Campos anuláveis e valores padrão<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p>As entidades em que « <code translate="no">status</code> » é NULL são excluídas dos resultados.</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Campos nulos e valores por predefinição<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -695,24 +731,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando <code translate="no">nullable</code> e <code translate="no">default_value</code> estão configurados para um campo, as regras seguintes determinam a forma como o Milvus trata a introdução de valores NULL ou valores de campo em falta durante a inserção.</p>
+    </button></h2><p>Quando tanto « <code translate="no">nullable</code> » como « <code translate="no">default_value</code> » estão configurados para um campo, as regras seguintes determinam como o Milvus lida com entradas NULL ou valores de campo em falta durante a inserção.</p>
 <table>
 <thead>
-<tr><th>Campo anulável ativado</th><th>Valor por defeito</th><th>Entrada do utilizador (NULL ou omitido)</th><th>Resultado</th></tr>
+<tr><th>Nullável ativado</th><th>Valor por defeito</th><th>Entrada do utilizador (NULL ou omitida)</th><th>Resultado</th></tr>
 </thead>
 <tbody>
-<tr><td>Sim</td><td>Sim (não NULL)</td><td>Nulo ou omitido</td><td>Utiliza o valor por defeito</td></tr>
+<tr><td>Sim</td><td>Sim (não NULL)</td><td>NULL ou omitido</td><td>Utiliza o valor predefinido</td></tr>
 <tr><td>Sim</td><td>Não</td><td>NULL ou omitido</td><td>Armazenado como NULL</td></tr>
-<tr><td>Não</td><td>Sim (não NULL)</td><td>NULL ou omitido</td><td>Utiliza o valor por defeito</td></tr>
+<tr><td>Não</td><td>Sim (não NULL)</td><td>NULL ou omitido</td><td>Utiliza o valor predefinido</td></tr>
 <tr><td>Não</td><td>Não</td><td>NULL ou omitido</td><td>Lança um erro</td></tr>
-<tr><td>Não</td><td>Sim (NULL por defeito)</td><td>NULL ou omitido</td><td>Lança um erro</td></tr>
+<tr><td>Não</td><td>Sim (NULL por predefinição)</td><td>NULL ou omitido</td><td>Gera um erro</td></tr>
 </tbody>
 </table>
-<p><strong>Principais conclusões:</strong></p>
+<p><strong>Pontos-chave:</strong></p>
 <ul>
-<li>Quando um campo tem um valor padrão não NULL, esse valor é usado independentemente de <code translate="no">nullable</code> estar ativado.</li>
-<li>Quando <code translate="no">nullable=True</code> mas nenhum valor padrão é definido, o campo armazena NULL.</li>
-<li>Quando <code translate="no">nullable=False</code> e nenhum valor padrão é definido, a inserção falha com um erro.</li>
-<li>A definição de um valor por defeito NULL num campo não anulável é inválida e provoca um erro.</li>
+<li>Quando um campo tem um valor por defeito diferente de NULL, esse valor é utilizado independentemente de a opção « <code translate="no">nullable</code> » estar ativada.</li>
+<li>Quando a opção « <code translate="no">nullable=True</code> » está ativada, mas não está definido nenhum valor por defeito, o campo armazena NULL.</li>
+<li>Quando a opção « <code translate="no">nullable=False</code> » está ativada, mas não está definido nenhum valor predefinido, a inserção falha com um erro.</li>
+<li>Definir um valor predefinido NULL num campo não nulo é inválido e provoca um erro.</li>
 </ul>
-<p>Para exemplos completos e utilização da API para predefinições, consulte <a href="/docs/pt/default-values.md">Valores predefinidos</a>.</p>
+<p>Para exemplos completos e informações sobre a utilização da API para valores por defeito, consulte <a href="/docs/pt/default-values.md">Valores por defeito</a>.</p>

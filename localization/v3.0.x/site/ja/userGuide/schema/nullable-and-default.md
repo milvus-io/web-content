@@ -1,9 +1,9 @@
 ---
 id: nullable-and-default.md
-title: ヌル可能フィールド
-summary: スキーマ、挿入、インデックス、検索、フィルタの動作を含め、NULL可能なフィールドとデフォルト値を設定します。
+title: NULL許可フィールド
+summary: Null許容フィールドとデフォルト値を設定します。これには、スキーマ、挿入、インデックス、検索、およびフィルタリングの動作が含まれます。
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">ヌル可能フィールド<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">NULL許可フィールド<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,14 +18,14 @@ summary: スキーマ、挿入、インデックス、検索、フィルタの�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>MilvusはNullableフィールドをサポートしており、フィールドの値がないか、明示的にNULLに設定することができます。NULL可否はスキーマレベルで定義され、データ取り込み、インデックス作成、検索、クエリ操作に一貫して適用されます。</p>
-<p>以下のような場合は、NULL可能フィールドを使用してください：</p>
+    </button></h1><p>MilvusはNULL許容フィールドをサポートしており、これによりフィールド値が欠落しているか、明示的にNULLに設定されることが可能になります。NULL許容性はスキーマレベルで定義され、データの取り込み、インデックス作成、検索、およびクエリ操作の全プロセスに一貫して適用されます。</p>
+<p>以下の場合にNull許容フィールドを使用します：</p>
 <ul>
-<li>欠損値を許容する外部システムからデータを取り込む。</li>
-<li>一部のメタデータがオプションであるか、データセットの一部でしか利用できない。</li>
-<li>ベクトル埋め込みが非同期に生成され、後で挿入される。</li>
+<li>値が欠落していることを許容する外部システムからデータを取り込む場合。</li>
+<li>一部のメタデータがオプションであるか、データセットの一部でのみ利用可能な場合。</li>
+<li>ベクトル埋め込みが非同期で生成され、後で挿入される場合。</li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,12 +41,12 @@ summary: スキーマ、挿入、インデックス、検索、フィルタの�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>NULL 値を許容するベクターフィールドは、<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> フィルタ式をサポートしません。ベクトル・フィールドの値が NULL かどうかに基づいて明示的にエンティティをフィルタリングすることはできません。</p></li>
-<li><p><a href="/docs/ja/array-of-structs.md">Array of Structs</a>フィールドは NULL 値をサポートしません。Array of Structs フィールドや、その内部に入れ子になっているフィールドを NULLable としてマークすることはできません。</p></li>
-<li><p>NULL可能属性はフィールドの作成時に定義され、その後変更することはできません。既存のフィールドに対してnullableを有効または無効にすることはできません。</p></li>
-<li><p>nullableとしてマークされたフィールドはパーティション・キーとして使用できません。パーティション・キー・フィールドには、常に有効な非NULL値を含める必要があります。詳細については、「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
+<li><p>NULL値を許可するベクトルフィールドは、<code translate="no">IS NULL</code> や<code translate="no">IS NOT NULL</code> のフィルタ式をサポートしていません。ベクトルフィールドの値がNULLであるかどうかに基づいて、エンティティを明示的にフィルタリングすることはできません。</p></li>
+<li><p>Milvus 3.0.0 以降、親<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドは NULL 許容に設定できます。<code translate="no">nullable=True</code> は、個々のサブフィールドではなく、親 StructArray フィールドに設定してください。NULL は個々の Struct 要素ではなく StructArray フィールド全体に適用され、Milvus は親の NULL 許容性を内部的にそのサブフィールドに伝播します。 既存のコレクションに追加される StructArray フィールドは、既存のエンティティが新しいフィールドに対して NULL を返せるように、NULL 許容でなければなりません。詳細については、「<a href="/docs/ja/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray の制限</a>」を参照してください。</p></li>
+<li><p>nullable属性はフィールドの作成時に定義され、事後の変更はできません。既存のフィールドに対してNULL許容性を有効または無効にすることはできません。</p></li>
+<li><p>nullable としてマークされたフィールドは、パーティションキーとして使用できません。パーティションキーとなるフィールドには、常に有効で null ではない値が含まれている必要があります。詳細については、「<a href="/docs/ja/use-partition-key.md">パーティションキーの使用</a>」を参照してください。</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">ヌル可能フィールドとは何ですか？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">NULL 許容フィールドとは何ですか？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,22 +61,22 @@ summary: スキーマ、挿入、インデックス、検索、フィルタの�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、フィールドにNULL値を格納できるかどうかは、<code translate="no">nullable</code> というスキーマレベルのフィールド属性によって制御されます。</p>
-<p>フィールドが<code translate="no">nullable=True</code> で定義されている場合、Milvusはデータ取り込み時にフィールド値が欠損していることを許可します。実際には、Milvusは以下の2つの入力を等価なものとして扱い、フィールド値をNULLとして格納します：</p>
+    </button></h2><p>Milvus では、フィールドが NULL 値を格納できるかどうかは、<code translate="no">nullable</code> というスキーマレベルのフィールド属性によって制御されます。</p>
+<p>フィールドが `<code translate="no">nullable=True</code>` で定義されている場合、Milvus はデータ取り込み時にそのフィールド値が欠落していることを許可します。実際には、Milvus は以下の 2 つの入力を同等とみなして、フィールド値を NULL として格納します:</p>
 <ul>
-<li>入力エンティティからフィールドが省略されている。</li>
-<li>フィールドが明示的にNULLに設定されている(例えば、Pythonでは<code translate="no">None</code> )。</li>
+<li>入力エンティティからそのフィールドが省略されている場合。</li>
+<li>フィールドが明示的にNULLに設定されている場合（例：Pythonでの<code translate="no">None</code> ）。</li>
 </ul>
-<p>フィールドがNULL可能として定義されていない場合（デフォルトの動作）、すべてのエンティティはそのフィールドに有効な値を提供しなければなりません。フィールドを省略したり、明示的にNULL値を代入したりすると、挿入やインポート操作は失敗します。</p>
-<p>nullable 属性は、コレクション・スキーマの<strong>スカラー・フィールドとベクトル・フィールドの</strong>両方でサポートされています。しかし、Array of Structs フィールドは nullable 属性をサポートしていません。</p>
+<p>フィールドがNULL許可として定義されていない場合（デフォルトの動作）、すべてのエンティティはそのフィールドに対して有効な値を指定する必要があります。フィールドを省略したり、明示的にNULL値を割り当てたりすると、挿入またはインポート操作は失敗します。</p>
+<p>nullable 属性は、コレクションスキーマ内の<strong>スカラーフィールドとベクトルフィールドの両方で</strong>サポートされています。Milvus 3.0.0 以降では、親 StructArray フィールドでもサポートされるようになりました。Struct サブフィールドを個別に nullable として設定しないでください。StructArray 親フィールドで nullability を定義すると、Milvus がその設定を内部的にサブフィールドに反映します。</p>
 <div class="alert note">
-<p>Nullable属性は、フィールドの値が欠落しているかどうかを決定します。</p>
+<p>NULL許容性は、フィールド値が欠落していてもよいかを決定するものであり、フィールドが欠落している場合にどの値が使用されるかを定義するものではありません。</p>
 <ul>
-<li>NULL可能なフィールドがデフォルト値なしで構成されている場合、フィールドを省略するとNULL値が格納されます。</li>
-<li>デフォルト値が設定されている場合、Milvusは代わりにデフォルト値を格納することができます。詳細については、<a href="/docs/ja/default-values.md">デフォルト</a>値を参照してください。</li>
+<li>Nullableフィールドがデフォルト値なしで設定されている場合、そのフィールドを省略すると、NULL値が格納されます。</li>
+<li>デフォルト値が設定されている場合、Milvus はそのデフォルト値を代わりに格納することがあります。詳細については、「<a href="/docs/ja/default-values.md">デフォルト値」を</a>参照してください。</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">コレクションスキーマでのNULL可能フィールドの定義<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">コレクションスキーマでヌル許容フィールドを定義する<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,10 +91,15 @@ summary: スキーマ、挿入、インデックス、検索、フィルタの�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NULL可能フィールドを使用するには、コレクションスキーマを定義するときにNULL可能属性を有効にする必要があります。</p>
-<p>この例では、コレクション・スキーマは<code translate="no">nullable=True</code> で<code translate="no">embedding</code> という名前のベクトル・フィールドを定義します。これにより、コレクション内のエンティティは、データ取り込み時にベクトル値を省略するか、明示的に NULL に設定することができます。</p>
+    </button></h2><p>Nullable フィールドを使用するには、コレクションスキーマを定義する際に nullable 属性を有効にする必要があります。</p>
+<p>この例では、コレクションスキーマで、`<code translate="no">embedding</code> ` という名前のベクトルフィールドを `<code translate="no">nullable=True</code>` と定義しています。これにより、データ取り込み時に、コレクション内のエンティティはベクトル値を省略するか、明示的に `NULL` に設定することができます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -243,18 +248,23 @@ curl --request POST \
     }
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>このスキーマでは</p>
+<p>このスキーマでは：</p>
 <ul>
-<li><code translate="no">embedding</code> フィールドは明示的に NULL 可能とマークされている。</li>
-<li>エンティティは、<code translate="no">embedding</code> フィールドを省略するか、挿入時に NULL 値を割り当てることができる。</li>
-<li>NULL 値を許可するかどうかの決定は、コレクション作成時に固定されます。</li>
+<li><code translate="no">embedding</code> フィールドは明示的にNULL許容としてマークされています。</li>
+<li>エンティティは、挿入時に<code translate="no">embedding</code> フィールドを省略するか、NULL値を割り当てることができます。</li>
+<li>NULL値を許可するかどうかは、コレクションの作成時に固定されます。</li>
 </ul>
-<p>わかりやすくするために、以下の例ではNULL可能なベクトル・フィールド(<code translate="no">embedding</code>)を取り上げます。NULL可能なスカラー・フィールドの定義はオプションであり、このガイドの残りの部分に従う必要はありません。</p>
+<p>分かりやすくするため、以下の例ではNULL許容のベクトルフィールド（<code translate="no">embedding</code> ）に焦点を当てています。NULL許容のスカラーフィールドの定義は任意であり、このガイドの残りの部分に従うために必須ではありません。</p>
 <p><details>
-<summary>オプション：ヌル可能なスカラー・フィールドの定義</summary></p>
-<p>スカラー・フィールドも、同じ<code translate="no">nullable</code> 属性を使用してヌル化可能として定義でき、取り込み中は同じルールに従います。例えば</p>
+<summary>オプション: NULL 許容スカラーフィールドの定義</summary></p>
+<p>スカラーフィールドも、同じ `<code translate="no">nullable</code> ` 属性を使用してヌル許容として定義でき、取り込み時には同じルールに従います。例：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -280,7 +290,7 @@ curl --request POST \
 <span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">値がない、またはNULLの場合の挿入動作<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
+<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">値が欠落している場合やNULL値の場合の挿入動作<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,10 +305,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一度フィールドがコレクションスキーマでNULL可能として定義されると、Milvusはデータ取り込み時にフィールド値が見つからないか、明示的にNULLに設定することを許可します。</p>
-<p>以下の例では、<a href="#define-a-nullable-field-in-the-collection-schema">Define a nullable field in the collection schemaで</a>作成したコレクションに3つのエンティティを挿入し、これらの異なるケースを示します。</p>
+    </button></h2><p>コレクションスキーマでフィールドがNULL許容として定義されると、Milvusではデータ取り込み時に、そのフィールドの値が欠落しているか、明示的にNULLに設定されていることを許可します。</p>
+<p>以下の例では、「<a href="#define-a-nullable-field-in-the-collection-schema">コレクションスキーマでのヌル許容フィールドの定義</a>」で作成したコレクションに3つのエンティティを挿入し、これらの異なるケースを示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -392,13 +407,13 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
     ]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では</p>
+<p>この例では：</p>
 <ul>
-<li>エンティティ<strong>id = 1は</strong>有効なベクトル値を提供する。</li>
-<li>エンティティ<strong>ID = 2は</strong>、<code translate="no">embedding</code> フィールドに明示的にNULL値を割り当てています。</li>
-<li>Milvus は<code translate="no">embedding</code> フィールドを NULL として格納します。</li>
+<li>Entity<strong>id = 1</strong>は有効なベクトル値を指定しています。</li>
+<li>エンティティ<strong>id = 2</strong>は、<code translate="no">embedding</code> フィールドに明示的にNULL値を割り当てています。</li>
+<li>エンティティ<strong>ID = 3</strong>では、<code translate="no">embedding</code> フィールドを完全に省略しています。Milvus はこのフィールドを NULL として保存します。</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">NULL可能なフィールドに対するインデックスの動作<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">NULL 許容フィールドにおけるインデックスの動作<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -413,14 +428,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データを挿入した後、通常通りNULL可能フィールドにインデックスを構築することができます。重要な違いは、インデックス構築時にMilvusがNULL値をどのように扱うかです：</p>
+    </button></h2><p>データの挿入後、NULL 許容フィールドに対して通常通りインデックスを構築できます。主な違いは、インデックスの構築中に Milvus が NULL 値をどのように扱うかという点です:</p>
 <ul>
-<li>NULLでない値を持つエンティティのみがインデックスに追加されます。</li>
-<li>NULL値を持つエンティティはスキップされ、インデックス構築に参加しません。</li>
+<li>NULL 以外の値を持つエンティティのみがインデックスに追加されます。</li>
+<li>NULL値を持つエンティティはスキップされ、インデックスの構築には含まれません。</li>
 </ul>
-<p>NULL可能なベクトルフィールドの場合、これは有効なベクトルを持つエンティティだけがベクトルの類似性によって検索可能になることを意味します。</p>
+<p>NULL 許容のベクトルフィールドの場合、これは、有効なベクトルを持つエンティティのみがベクトル類似度による検索対象になることを意味します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -520,12 +540,12 @@ curl --request POST \
   --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この時点で</p>
+<p>この時点で：</p>
 <ul>
-<li>有効な埋め込み値を持つエンティティはインデックス化され、検索可能な状態になる。</li>
-<li>エンベッディングがNULLのエンティティはコレクションに残りますが、ベクトルインデックスには含まれません。</li>
+<li>有効な埋め込み値を持つエンティティはインデックスに登録され、検索可能になります。</li>
+<li>埋め込み値がNULLのエンティティはコレクションに残りますが、ベクトルインデックスには含まれません。</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">NULLフィールドでの検索動作<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">NULL許容フィールドでの検索動作<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,16 +560,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは、NULL可能なフィールドに対して検索操作を行った場合、検索に使用したフィールドの値がNULLでないエンティティのみを評価します。ベクトル フィールドが NULL のエンティティは自動的にスキップされます。</p>
-<p>この例の<code translate="no">embedding</code> のような NULL 可能なベクトルフィールドの場合：</p>
+    </button></h2><p>NULL 許容フィールドに対して検索操作を実行する場合、Milvus は検索に使用されたフィールドの値が NULL ではないエンティティのみを評価します。ベクトルフィールドが NULL のエンティティは自動的にスキップされます。</p>
+<p>この例の<code translate="no">embedding</code> のようなNULL許容ベクトルフィールドの場合：</p>
 <ul>
-<li>有効なベクトル値を持つエンティティだけが評価され、ランク付けされます。</li>
-<li>NULL ベクトルを持つエンティティはエラーになりません。</li>
-<li>有効なベクトルの数が要求された<code translate="no">topK</code> (<code translate="no">limit</code>) よりも少ない場合、milvus は<code translate="no">limit</code> よりも少ない結果を返すことがあります。</li>
+<li>有効なベクトル値を持つエンティティのみが評価され、ランク付けされます。</li>
+<li>ベクトルがNULLのエンティティがあってもエラーは発生しません。</li>
+<li>有効なベクトルの数が、要求された<code translate="no">topK</code> （<code translate="no">limit</code> ）よりも少ない場合、Milvusは<code translate="no">limit</code> よりも少ない結果を返すことがあります。</li>
 </ul>
-<p>以下の例では、NULL可能なベクトル・フィールド<code translate="no">embedding</code> に対してベクトル検索を行っています：</p>
+<p>次の例は、NULL 許容のベクトルフィールド `<code translate="no">embedding</code>` に対してベクトル検索を実行しています：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -626,13 +651,13 @@ fmt.Println(resultSets)
     &quot;outputFields&quot;: [&quot;embedding&quot;]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この検索では</p>
+<p>この検索では：</p>
 <ul>
-<li><code translate="no">embedding</code> の値が NULL でないエンティティのみが候補とみなされる。</li>
-<li><code translate="no">embedding</code> に NULL 値を持つエンティティは評価から除外されます。</li>
-<li>返される結果の数は、コレクションに有効なベクトルがいくつ存在するかによって決まります。</li>
+<li><code translate="no">embedding</code> の値がNULLでないエンティティのみが候補として考慮されます。</li>
+<li><code translate="no">embedding</code> の値がNULLであるエンティティは、評価の対象から除外されます。</li>
+<li>返される結果の数は、コレクション内に有効なベクトルがいくつ存在するかに依存します。</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">クエリとフィルタリングの意味<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">クエリおよびフィルタリングに関する注意点<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -647,11 +672,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>これまでの例では、ベクトル・フィールドに焦点を当てました。このセクションでは、<strong>スカラー・フィルタ式での</strong> NULL 値の動作について説明します。</p>
-<p>スカラー・フィールドは<code translate="no">nullable=True</code> で定義でき、ベクトル・フィールドと同じ取り込みルールに従います。ただし、<strong>NULLスカラー値はフィルター式では常にfalseと評価さ</strong>れます。</p>
-<p>たとえば、NULL可能なスカラー・フィールド<code translate="no">age</code> を指定すると、以下のフィルタは年齢が18より大きいエンティティを選択します：</p>
+    </button></h2><p>これまでの例はベクトルフィールドに焦点を当てていました。このセクションでは、<strong>スカラーフィルタ式</strong>におけるNULL値の挙動について説明します。</p>
+<p>スカラーフィールドは<code translate="no">nullable=True</code> を使用して定義でき、ベクトルフィールドと同じ取り込みルールに従います。ただし、<strong>フィルタ式では、NULL のスカラー値は常に false と評価されます</strong>。</p>
+<p>たとえば、NULL 許容のスカラーフィールド `<code translate="no">age</code>` がある場合、次のフィルタは年齢が 18 より大きいエンティティを選択します:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -663,10 +693,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">age</code> が NULL のエンティティは結果から除外されます。NULL 値はフィルタ条件を満たさないからです。</p>
-<p>同様に、等号チェックは NULL 値にはマッチしません。例えば</p>
+<p><code translate="no">age</code> が NULL であるエンティティは、NULL 値がフィルタ条件を満たさないため、結果から除外されます。</p>
+<p>同様に、等価比較でもNULL値は一致しません。例えば：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -677,8 +712,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">status</code> が NULL のエンティティは結果から除外されます。</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">NULL可能なフィールドとデフォルト値<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p><code translate="no">status</code> が NULL のエンティティは、結果から除外されます。</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">NULL 許容フィールドとデフォルト値<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -693,24 +728,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">nullable</code> 、<code translate="no">default_value</code> の両方がフィールドに設定されている場合、Milvusが挿入時にNULL入力やフィールド値がない場合にどのように処理するかは以下のルールで決まります。</p>
+    </button></h2><p>あるフィールドに対して `<code translate="no">nullable</code> ` と `<code translate="no">default_value</code> ` の両方が設定されている場合、挿入時に Milvus が NULL 入力や欠落したフィールド値をどのように処理するかは、以下のルールによって決定されます。</p>
 <table>
 <thead>
-<tr><th>NULL可能</th><th>デフォルト値</th><th>ユーザ入力(NULLまたは省略)</th><th>結果</th></tr>
+<tr><th>NULL許可が有効</th><th>デフォルト値</th><th>ユーザー入力 (NULL または省略)</th><th>結果</th></tr>
 </thead>
 <tbody>
-<tr><td>はい</td><td>はい（非NULL）</td><td>NULLまたは省略</td><td>デフォルト値を使用</td></tr>
-<tr><td>はい</td><td>なし</td><td>NULLまたは省略</td><td>NULLとして格納</td></tr>
-<tr><td>いいえ</td><td>はい（非NULL）</td><td>NULLまたは省略</td><td>デフォルト値を使用</td></tr>
-<tr><td>いいえ</td><td>いいえ</td><td>NULLまたは省略</td><td>エラーをスローする</td></tr>
-<tr><td>いいえ</td><td>あり（デフォルトNULL）</td><td>NULLまたは省略</td><td>エラーをスローする</td></tr>
+<tr><td>はい</td><td>はい (NULL以外)</td><td>NULL または省略</td><td>デフォルト値を使用する</td></tr>
+<tr><td>はい</td><td>いいえ</td><td>NULL または省略</td><td>NULLとして保存</td></tr>
+<tr><td>いいえ</td><td>はい（NULL以外）</td><td>NULL または省略</td><td>デフォルト値を使用する</td></tr>
+<tr><td>いいえ</td><td>いいえ</td><td>NULL または省略</td><td>エラーをスローする</td></tr>
+<tr><td>いいえ</td><td>はい（デフォルトはNULL）</td><td>NULL または省略</td><td>エラーが発生する</td></tr>
 </tbody>
 </table>
-<p><strong>重要なポイント</strong></p>
+<p><strong>重要なポイント：</strong></p>
 <ul>
-<li>フィールドにNULLでないデフォルト値が設定されている場合、<code translate="no">nullable</code> が有効かどうかにかかわらず、その値が使用される。</li>
-<li><code translate="no">nullable=True</code> 、デフォルト値が設定されていない場合、フィールドにはNULLが格納されます。</li>
-<li><code translate="no">nullable=False</code> 、デフォルト値が設定されていない場合、挿入はエラーで失敗する。</li>
-<li>NULL 値を設定できないフィールドに NULL デフォルト値を設定することは無効であり、エラーになります。</li>
+<li>フィールドにNULL以外のデフォルト値が設定されている場合、<code translate="no">nullable</code> が有効かどうかにかかわらず、その値が使用されます。</li>
+<li><code translate="no">nullable=True</code> が有効で、デフォルト値が設定されていない場合、そのフィールドにはNULLが格納されます。</li>
+<li><code translate="no">nullable=False</code> が有効でデフォルト値が設定されていない場合、挿入はエラーとなり失敗します。</li>
+<li>NULL ではないフィールドに NULL のデフォルト値を設定することは無効であり、エラーが発生します。</li>
 </ul>
-<p>デフォルト値の完全な例とAPIの使用法については、<a href="/docs/ja/default-values.md">デフォルト値を</a>参照してください。</p>
+<p>デフォルト値に関する完全な例および API の使用方法については、「<a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>

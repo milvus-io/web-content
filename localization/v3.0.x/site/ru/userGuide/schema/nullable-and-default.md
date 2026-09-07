@@ -1,11 +1,11 @@
 ---
 id: nullable-and-default.md
-title: Нулевые поля
+title: 'Поля, допускающие значение NULL'
 summary: >-
-  Настройте нулевые поля и значения по умолчанию, включая схему, вставку,
-  индекс, поиск и поведение фильтра.
+  Настройте поля, допускающие нулевые значения, и значения по умолчанию, включая
+  поведение схемы, операций вставки, индексирования, поиска и фильтрации.
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">Нулевые поля<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">Поля, допускающие значение NULL<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,10 +20,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus поддерживает поля с нулевым значением, которые позволяют значению поля отсутствовать или явно задавать значение NULL. Нулевые поля определяются на уровне схемы и последовательно применяются при вводе данных, индексировании, поиске и запросах.</p>
-<p>Используйте поля с нулевым значением, когда:</p>
+    </button></h1><p>Milvus поддерживает поля, допускающие значение NULL, что позволяет не указывать значение поля или явно установить его равным NULL. Возможность установки значения NULL определяется на уровне схемы и последовательно применяется при импорте данных, индексировании, поиске и выполнении запросов.</p>
+<p>Используйте поля, допускающие значение NULL, в следующих случаях:</p>
 <ul>
-<li>Данные поступают из внешних систем, допускающих пропущенные значения.</li>
+<li>Данные поступают из внешних систем, допускающих отсутствие значений.</li>
 <li>Некоторые метаданные являются необязательными или доступны только для части набора данных.</li>
 <li>Векторные вложения генерируются асинхронно и вставляются позже.</li>
 </ul>
@@ -43,12 +43,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Векторные поля, допускающие значения NULL, не поддерживают выражения фильтрации <code translate="no">IS NULL</code> или <code translate="no">IS NOT NULL</code>. Вы не можете явно фильтровать сущности на основе того, является ли значение векторного поля NULL.</p></li>
-<li><p>Поля<a href="/docs/ru/array-of-structs.md">Array of Structs</a> не поддерживают значения NULL. Вы не можете пометить поле Array of Structs или любое поле, вложенное в него, как nullable.</p></li>
-<li><p>Атрибут nullable определяется при создании поля и не может быть изменен впоследствии. Вы не можете включить или отключить возможность использования нуля для существующего поля.</p></li>
-<li><p>Поля, помеченные как nullable, нельзя использовать в качестве ключей разделов. Поля ключей разделов всегда должны содержать правильные, не нулевые значения. Дополнительные сведения см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p></li>
+<li><p>Векторные поля, допускающие значения NULL, не поддерживают выражения фильтрации типа « <code translate="no">IS NULL</code> » или « <code translate="no">IS NOT NULL</code> ». Невозможно явно фильтровать сущности на основе того, является ли значение векторного поля NULL.</p></li>
+<li><p>Начиная с версии Milvus 3.0.0, родительское поле <a href="/docs/ru/array-of-structs.md">StructArray</a> может быть допускать значение NULL. Установите атрибут « <code translate="no">nullable=True</code> » для родительского поля StructArray, а не для отдельных подполей. Значение NULL применяется ко всему полю StructArray, а не к отдельному элементу Struct, и Milvus внутренне распространяет возможность принятия значения NULL родительского поля на его подполя. Поле StructArray, добавленное в существующую коллекцию, должно быть допускающим значение NULL, чтобы существующие объекты могли возвращать значение NULL для нового поля. Подробности см. в разделе <a href="/docs/ru/structarray-limits.md#Nullable-and-dynamic-schema-limits">«Ограничения StructArray</a>».</p></li>
+<li><p>Атрибут «nullable» задается при создании поля и впоследствии не может быть изменен. Невозможно включить или отключить возможность принятия значения NULL для существующего поля.</p></li>
+<li><p>Поля, помеченные как допускающие значение NULL, нельзя использовать в качестве ключей разбиения. Поля ключа разбиения всегда должны содержать допустимые значения, не равные NULL. Дополнительные сведения см. в разделе <a href="/docs/ru/use-partition-key.md">«Использование ключа разбиения</a>».</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">Что такое поле с нулевым значением?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">Что такое поле, допускающее значение NULL?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,22 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus разрешено ли полю хранить NULL-значение, контролируется атрибутом поля на уровне схемы под названием <code translate="no">nullable</code>.</p>
-<p>Если поле определено с помощью <code translate="no">nullable=True</code>, Milvus позволяет значению поля отсутствовать при вводе данных. На практике Milvus рассматривает следующие два входа как эквивалентные и сохраняет значение поля как NULL:</p>
+    </button></h2><p>В Milvus возможность хранения значения NULL в поле контролируется атрибутом поля на уровне схемы, называемым « <code translate="no">nullable</code> ».</p>
+<p>Если поле определено с атрибутом ` <code translate="no">nullable=True</code>`, Milvus допускает отсутствие значения поля при загрузке данных. На практике Milvus рассматривает следующие два входных значения как эквивалентные и сохраняет значение поля как `NULL`:</p>
 <ul>
-<li>Поле опущено во входной сущности.</li>
-<li>Поле явно установлено в NULL (например, <code translate="no">None</code> в Python).</li>
+<li>Поле опущено в входной сущности.</li>
+<li>Поле явно установлено в значение NULL (например, ` <code translate="no">None</code> ` в Python).</li>
 </ul>
-<p>Если поле не определено как nullable (поведение по умолчанию), каждая сущность должна предоставить корректное значение для этого поля. Пропуск поля или явное присвоение ему значения NULL приведет к неудаче операции вставки или импорта.</p>
-<p>Атрибут nullable поддерживается как для <strong>скалярных, так и для векторных полей</strong> в схеме коллекции. Однако поля Array of Structs не поддерживают атрибут nullable.</p>
+<p>Если поле не определено как допускающее значение NULL (поведение по умолчанию), каждая сущность должна предоставлять допустимое значение для этого поля. Пропуск поля или явное присвоение ему значения NULL приведет к сбою операции вставки или импорта.</p>
+<p>Атрибут «nullable» поддерживается как для <strong>скалярных, так и</strong> для <strong>векторных полей</strong> в схеме коллекции. Начиная с версии Milvus 3.0.0, он также поддерживается для родительского поля StructArray. Не настраивайте подполя Struct как допускающие NULL отдельно; определите возможность принятия значения NULL на родительском поле StructArray, и Milvus внутренне распространит этот параметр на его подполя.</p>
 <div class="alert note">
-<p>Атрибут nullable определяет, может ли значение поля отсутствовать; он не определяет, какое значение будет использоваться, когда поле отсутствует.</p>
+<p>Возможность принятия значения NULL определяет, может ли значение поля отсутствовать; она не определяет, какое значение используется, когда поле отсутствует.</p>
 <ul>
-<li>Если поле с возможностью обнуления сконфигурировано без значения по умолчанию, его отсутствие приводит к сохранению значения NULL.</li>
-<li>Если значение по умолчанию задано, Milvus может хранить его вместо значения по умолчанию. Подробнее см. в разделе <a href="/docs/ru/default-values.md">Значения по умолчанию</a>.</li>
+<li>Если поле с возможностью принятия значения NULL настроено без значения по умолчанию, пропуск поля приводит к сохранению значения NULL.</li>
+<li>Если задано значение по умолчанию, Milvus может вместо этого сохранить значение по умолчанию. Подробности см. в разделе <a href="/docs/ru/default-values.md">«Значения по умолчанию</a>».</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Определение поля с нулевым значением в схеме коллекции<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Определение поля, допускающего нулевые значения, в схеме коллекции<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,10 +93,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы использовать поля с нулевым значением, необходимо включить атрибут nullable при определении схемы коллекции.</p>
-<p>В этом примере в схеме коллекции определено векторное поле с именем <code translate="no">embedding</code> и атрибутом <code translate="no">nullable=True</code>. Это позволяет сущностям в коллекции опускать значение вектора или явно устанавливать его в NULL при вводе данных.</p>
+    </button></h2><p>Чтобы использовать поля, допускающие значение null, необходимо включить атрибут «nullable» при определении схемы коллекции.</p>
+<p>В этом примере схема коллекции определяет векторное поле с именем ` <code translate="no">embedding</code> ` со значением ` <code translate="no">nullable=True</code>`. Это позволяет сущностям в коллекции опускать значение вектора или явно устанавливать его равным `NULL` во время загрузки данных.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -247,16 +252,21 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>В этой схеме:</p>
 <ul>
-<li>Поле <code translate="no">embedding</code> явно помечено как nullable.</li>
-<li>Сущности могут опускать поле <code translate="no">embedding</code> или присваивать ему значение NULL при вставке.</li>
-<li>Решение о разрешении NULL-значений принимается при создании коллекции.</li>
+<li>Поле ` <code translate="no">embedding</code> ` явно помечено как допускающее значение NULL.</li>
+<li>Сущности могут опускать поле <code translate="no">embedding</code> или присваивать ему значение NULL во время вставки.</li>
+<li>Решение о допуске значений NULL принимается при создании коллекции.</li>
 </ul>
-<p>Для наглядности в следующих примерах рассматривается векторное поле с нулевым значением (<code translate="no">embedding</code>). Определение нулевых скалярных полей является необязательным и не требуется для выполнения остальной части этого руководства.</p>
+<p>Для наглядности в следующих примерах основное внимание уделяется векторному полю, допускающему значение NULL (<code translate="no">embedding</code>). Определение скалярных полей, допускающих значение NULL, является необязательным и не требуется для понимания остальной части данного руководства.</p>
 <p><details>
-<summary>Необязательно: Определите нулируемое скалярное поле</summary></p>
-<p>Скалярные поля также могут быть определены как nullable с помощью того же атрибута <code translate="no">nullable</code> и подчиняться тем же правилам при вводе. Например:</p>
+<summary>Необязательно: определение скалярного поля, допускающего значение NULL</summary></p>
+<p>Скалярные поля также можно определить как допускающие значение NULL с помощью того же атрибута <code translate="no">nullable</code>, и при их загрузке действуют те же правила. Например:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -297,10 +307,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как поле определено как nullable в схеме коллекции, Milvus позволяет значению поля отсутствовать или явно устанавливать значение NULL во время вставки данных.</p>
-<p>Приведенный ниже пример вставляет три сущности в коллекцию, созданную в разделе <a href="#define-a-nullable-field-in-the-collection-schema">"Определение поля с нулевым значением в схеме коллекции</a>", демонстрируя эти различные случаи.</p>
+    </button></h2><p>Как только поле определено как допускающее значение null в схеме коллекции, Milvus позволяет, чтобы значение поля отсутствовало или явно устанавливалось в NULL во время импорта данных.</p>
+<p>В приведенном ниже примере в коллекцию, созданную в разделе <a href="#define-a-nullable-field-in-the-collection-schema">«Определение поля, допускающего значение NULL, в схеме коллекции»</a>, вставляются три сущности, что демонстрирует эти различные случаи.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -396,11 +411,11 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <button class="copy-code-btn"></button></code></pre>
 <p>В этом примере:</p>
 <ul>
-<li>Сущность <strong>id = 1</strong> предоставляет действительное векторное значение.</li>
-<li>Сущность <strong>id = 2</strong> явно присваивает полю <code translate="no">embedding</code> значение NULL.</li>
-<li>Сущность <strong>id = 3</strong> полностью опускает поле <code translate="no">embedding</code>; Milvus сохраняет его как NULL.</li>
+<li>Entity <strong>id = 1</strong> предоставляет допустимое векторное значение.</li>
+<li>Сущность <strong>с id = 2</strong> явно присваивает значение NULL полю « <code translate="no">embedding</code> ».</li>
+<li>Сущность <strong>с id = 3</strong> полностью опускает поле ` <code translate="no">embedding</code> `; Milvus сохраняет его как NULL.</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Поведение индексов для полей с нулевым значением<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Поведение индекса при полях, допускающих значение NULL<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,14 +430,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После вставки данных вы можете построить индекс для нулевого поля, как обычно. Ключевое различие заключается в том, как Milvus обрабатывает значения NULL при построении индекса:</p>
+    </button></h2><p>После вставки данных можно создать индекс по полю, допускающему значение NULL, как обычно. Ключевое отличие заключается в том, как Milvus обрабатывает значения NULL при построении индекса:</p>
 <ul>
-<li>В индекс добавляются только сущности с ненулевыми значениями.</li>
-<li>Сущности с NULL-значениями пропускаются и не участвуют в построении индекса.</li>
+<li>В индекс добавляются только сущности со значениями, отличными от NULL.</li>
+<li>Энтитеты со значениями NULL пропускаются и не участвуют в построении индекса.</li>
 </ul>
-<p>Для нулевого векторного поля это означает, что только сущности с действительными векторами становятся доступными для поиска по векторному сходству.</p>
+<p>Для векторного поля, допускающего значение NULL, это означает, что поиск по векторному сходству будет доступен только для сущностей с допустимыми векторами.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -522,12 +542,12 @@ curl --request POST \
   --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>На этом этапе:</p>
+<p>На данном этапе:</p>
 <ul>
-<li>Сущности с действительными значениями вложений индексируются и готовы к поиску.</li>
-<li>Сущности, чьи вложения имеют значение NULL, остаются в коллекции, но не включаются в векторный индекс.</li>
+<li>Сущности с допустимыми значениями вложения индексируются и готовы к поиску.</li>
+<li>Элементы, вложение которых равно NULL, остаются в коллекции, но не включаются в векторный индекс.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Поведение при поиске по нулевым полям<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Поведение поиска с полями, допускающими нулевые значения<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,16 +562,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда вы выполняете операции поиска по нулевому полю, Milvus оценивает только сущности с ненулевыми значениями для поля, используемого в поиске. Сущности, векторное поле которых имеет значение NULL, автоматически пропускаются.</p>
-<p>Для нулевого векторного поля, такого как <code translate="no">embedding</code> в данном примере:</p>
+    </button></h2><p>При выполнении операций поиска по полю, допускающему значение NULL, Milvus учитывает только сущности со значениями, отличными от NULL, для поля, используемого в поиске. Сущности, векторное поле которых равно NULL, автоматически пропускаются.</p>
+<p>Для векторного поля, допускающего значение NULL, такого как « <code translate="no">embedding</code> » в данном примере:</p>
 <ul>
-<li>Оцениваются и ранжируются только сущности с действительными значениями вектора.</li>
-<li>Сущности с NULL-векторами не вызывают ошибок.</li>
-<li>Если количество допустимых векторов меньше запрашиваемого <code translate="no">topK</code> (<code translate="no">limit</code>), Milvus может вернуть меньше результатов, чем <code translate="no">limit</code>.</li>
+<li>Оцениваются и ранжируются только сущности с допустимыми векторными значениями.</li>
+<li>Энтитеты с векторами, равными NULL, не вызывают ошибок.</li>
+<li>Если количество допустимых векторов меньше, чем запрашиваемое значение <code translate="no">topK</code> (<code translate="no">limit</code>), Milvus может вернуть меньше результатов, чем <code translate="no">limit</code>.</li>
 </ul>
-<p>В следующем примере выполняется векторный поиск по нулевому векторному полю <code translate="no">embedding</code>:</p>
+<p>В следующем примере выполняется векторный поиск по полю <code translate="no">embedding</code>, допускающему значение NULL:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -630,11 +655,11 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <p>В этом поиске:</p>
 <ul>
-<li>Только сущности с ненулевыми значениями <code translate="no">embedding</code> считаются кандидатами.</li>
-<li>Сущности с NULL-значениями для <code translate="no">embedding</code> исключаются из оценки.</li>
-<li>Количество возвращаемых результатов зависит от того, сколько валидных векторов существует в коллекции.</li>
+<li>В качестве кандидатов рассматриваются только сущности с непустыми значениями <code translate="no">embedding</code>.</li>
+<li>Сущности со значениями ` <code translate="no">embedding</code> `, равными `NULL`, исключаются из оценки.</li>
+<li>Количество возвращаемых результатов зависит от того, сколько допустимых векторов существует в коллекции.</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">Последствия запросов и фильтрации<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">Последствия для запросов и фильтрации<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -649,11 +674,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Предыдущие примеры посвящены векторным полям. В этом разделе описывается поведение значений NULL в <strong>выражениях скалярного фильтра</strong>.</p>
-<p>Скалярные поля могут быть определены с помощью <code translate="no">nullable=True</code> и подчиняются тем же правилам вхождения, что и векторные поля. Однако <strong>скалярные значения NULL всегда оцениваются как false в выражениях фильтрации</strong>.</p>
-<p>Например, при наличии скалярного поля <code translate="no">age</code> с нулевым значением следующий фильтр отбирает сущности, чей возраст больше 18 лет:</p>
+    </button></h2><p>В предыдущих примерах основное внимание уделялось векторным полям. В этом разделе описывается поведение значений NULL в <strong>выражениях скалярных фильтров</strong>.</p>
+<p>Скалярные поля можно определять с помощью <code translate="no">nullable=True</code>, и на них распространяются те же правила ввода данных, что и на векторные поля. Однако <strong>скалярные значения NULL всегда оцениваются как false в выражениях фильтрации</strong>.</p>
+<p>Например, если имеется скалярное поле с возможностью принятия значения NULL <code translate="no">age</code>, следующий фильтр выбирает сущности, возраст которых превышает 18 лет:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -665,10 +695,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Сущности, для которых <code translate="no">age</code> является NULL, исключаются из результатов, поскольку значение NULL не удовлетворяет условию фильтра.</p>
-<p>Аналогично, проверки равенства не соответствуют значениям NULL. Например:</p>
+<p>Сущности, у которых <code translate="no">age</code> равно NULL, исключаются из результатов, поскольку значение NULL не удовлетворяет условию фильтра.</p>
+<p>Аналогично, проверки на равенство не сопоставляются со значениями NULL. Например:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -679,8 +714,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Сущности, для которых <code translate="no">status</code> является NULL, исключаются из результатов.</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Нулевые поля и значения по умолчанию<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p>Сущности, у которых поле ` <code translate="no">status</code> ` имеет значение `NULL`, исключаются из результатов.</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Поля, допускающие значение NULL, и значения по умолчанию<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -695,24 +730,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда для поля настроены оба параметра <code translate="no">nullable</code> и <code translate="no">default_value</code>, следующие правила определяют, как Milvus обрабатывает ввод NULL или отсутствующие значения поля при вставке.</p>
+    </button></h2><p>Если для поля настроены как <code translate="no">nullable</code>, так и <code translate="no">default_value</code>, следующие правила определяют, как Milvus обрабатывает ввод значений NULL или отсутствующие значения полей при вставке.</p>
 <table>
 <thead>
-<tr><th>Включено Nullable</th><th>Значение по умолчанию</th><th>Ввод пользователем (NULL или пропущено)</th><th>Результат</th></tr>
+<tr><th>Включена возможность принятия значений NULL</th><th>Значение по умолчанию</th><th>Пользовательский ввод (NULL или пропущено)</th><th>Результат</th></tr>
 </thead>
 <tbody>
-<tr><td>Да</td><td>Да (не NULL)</td><td>NULL или опущено</td><td>Использует значение по умолчанию</td></tr>
-<tr><td>Да</td><td>Нет</td><td>NULL или опущено</td><td>Хранится как NULL</td></tr>
-<tr><td>Нет</td><td>Да (не NULL)</td><td>NULL или опущено</td><td>Использует значение по умолчанию</td></tr>
-<tr><td>Нет</td><td>Нет</td><td>NULL или опущено</td><td>Выбрасывает ошибку</td></tr>
-<tr><td>Нет</td><td>Да (NULL по умолчанию)</td><td>NULL или опущено</td><td>Выбрасывает ошибку</td></tr>
+<tr><td>Да</td><td>Да (не NULL)</td><td>NULL или не указано</td><td>Используется значение по умолчанию</td></tr>
+<tr><td>Да</td><td>Нет</td><td>NULL или опущено</td><td>Сохраняется как NULL</td></tr>
+<tr><td>Нет</td><td>Да (не NULL)</td><td>NULL или пропущено</td><td>Используется значение по умолчанию</td></tr>
+<tr><td>Нет</td><td>Нет</td><td>NULL или не указан</td><td>Генерирует ошибку</td></tr>
+<tr><td>Нет</td><td>Да (по умолчанию — NULL)</td><td>NULL или пропущено</td><td>Вызывает ошибку</td></tr>
 </tbody>
 </table>
-<p><strong>Основные выводы:</strong></p>
+<p><strong>Ключевые моменты:</strong></p>
 <ul>
-<li>Если поле имеет не NULL-значение по умолчанию, это значение используется независимо от того, включен ли <code translate="no">nullable</code>.</li>
-<li>Когда <code translate="no">nullable=True</code>, но значение по умолчанию не установлено, в поле сохраняется NULL.</li>
-<li>Если <code translate="no">nullable=False</code> и значение по умолчанию не установлено, вставка завершится с ошибкой.</li>
-<li>Установка значения по умолчанию NULL для ненулевого поля является недействительной и приводит к ошибке.</li>
+<li>Если поле имеет значение по умолчанию, отличное от NULL, это значение используется независимо от того, включена ли опция « <code translate="no">nullable</code> ».</li>
+<li>Если включена функция « <code translate="no">nullable=True</code> », но значение по умолчанию не задано, в поле сохраняется значение NULL.</li>
+<li>Если установлен флаг « <code translate="no">nullable=False</code> », но не задано значение по умолчанию, вставка завершается с ошибкой.</li>
+<li>Установка значения по умолчанию NULL для поля, не допускающего значения NULL, является недопустимой и приводит к ошибке.</li>
 </ul>
-<p>Полные примеры и использование API для значений по умолчанию см. в разделе <a href="/docs/ru/default-values.md">Значения по умолчанию</a>.</p>
+<p>Полные примеры и сведения об использовании API для значений по умолчанию см. в разделе <a href="/docs/ru/default-values.md">«Значения по умолчанию</a>».</p>

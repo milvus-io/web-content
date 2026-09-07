@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez utiliser « <code translate="no">upsert</code> » pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la requête « upsert » existe ou non dans la collection. Si la clé primaire n’est pas trouvée, une opération d’insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée.</p>
-<p>Dans Milvus, l’opération « upsert » fonctionne soit en mode « <strong>override</strong> », soit en mode « <strong>merge</strong> ».</p>
+    </button></h2><p>Vous pouvez utiliser « <code translate="no">upsert</code> » pour insérer une nouvelle entité ou mettre à jour une entité existante, selon que la clé primaire fournie dans la requête « upsert » existe ou non dans la collection. Si la clé primaire n’est pas trouvée, une opération d’insertion est effectuée. Dans le cas contraire, une opération de mise à jour est effectuée. Les mises à jour partielles sur les collections « <code translate="no">autoID</code> » constituent une exception : elles ne mettent à jour que les entités existantes, comme décrit ci-dessous.</p>
+<p>Dans Milvus, un « upsert » fonctionne soit en mode « <strong>override</strong> », soit en mode « <strong>merge</strong> ».</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Upsert en mode « override »<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,16 +53,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une requête d’ <code translate="no">upsert</code> fonctionnant en mode « override » combine une insertion et une suppression. Lorsqu’une requête d’ concernant une entité existante est reçue, Milvus insère les données contenues dans la charge utile de la requête et supprime simultanément l’entité existante dont la clé primaire d’origine est spécifiée dans les données.</p>
+    </button></h3><p>Une requête d’upsert fonctionnant en mode « override » combine une insertion et une suppression. Lorsqu’une requête d’ <code translate="no">upsert</code> ion concernant une entité existante est reçue, Milvus insère les données contenues dans la charge utile de la requête et supprime simultanément l’entité existante dont la clé primaire d’origine est spécifiée dans les données.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
    <span>Upsert en mode « override</span> </span>» <span class="img-wrapper">
   
  </span></p>
-<p>Si l’ <code translate="no">autoID</code> est activée sur le champ primaire de la collection cible, la requête d’ <code translate="no">upsert</code> doit tout de même inclure la clé primaire de l’entité cible. Milvus utilise la clé primaire fournie pour localiser l’entité à remplacer, puis génère une nouvelle clé primaire pour les données contenues dans la charge utile de la requête avant de les insérer.</p>
+<p>Si l’ <code translate="no">autoID</code> est activée sur le champ principal de la collection cible, la requête d’ <code translate="no">upsert</code> doit tout de même inclure la clé primaire de l’entité cible. Milvus utilise la clé primaire fournie pour localiser l’entité à remplacer, puis génère une nouvelle clé primaire pour les données contenues dans la charge utile de la requête avant de les insérer.</p>
 <p>Pour les champs dont l’ <code translate="no">nullable</code> est activée, vous pouvez les omettre dans la requête d’ <code translate="no">upsert</code> s’ils ne nécessitent aucune mise à jour.</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode" class="common-anchor-header">Upsert en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,8 +86,9 @@ summary: >-
  </span></p>
 <p>Pour effectuer une fusion, définissez ` <code translate="no">partial_update</code> ` sur ` <code translate="no">True</code> ` dans la requête ` <code translate="no">upsert</code> `, en indiquant la clé primaire et les champs à mettre à jour avec leurs nouvelles valeurs.</p>
 <p>À la réception d’une telle requête, Milvus effectue une requête avec une cohérence forte pour récupérer l’entité, met à jour les valeurs des champs en fonction des données de la requête, insère les données modifiées, puis supprime l’entité existante dont la clé primaire d’origine figurait dans la requête.</p>
-<p>Pour les champs de type « <code translate="no">ARRAY</code> », le mode «merge» prend en charge deux opérateurs dans Milvus v2.6.17 et versions ultérieures : « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> ». Ces opérateurs vous permettent d’ajouter des éléments à un champ « <code translate="no">ARRAY</code> » existant ou d’en supprimer les éléments correspondants, sans avoir à interroger au préalable l’entité pour récupérer sa valeur actuelle. Pour plus de détails, consultez la section <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert des champs ARRAY en mode merge</a>».</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportements de l'Upsert : remarques particulières<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+<p>Pour une collection sur laquelle le mode « <code translate="no">autoID</code> » est activé, le mode «merge» conserve la clé primaire fournie dans la requête au lieu d’en générer une nouvelle. Cela diffère du mode «override», dans lequel Milvus génère une nouvelle clé primaire pour l’entité de remplacement. La clé primaire d’une requête en mode «merge» doit identifier une entité existante ; dans le cas contraire, Milvus rejette la requête au lieu d’insérer une nouvelle entité.</p>
+<p>Pour les champs « <code translate="no">ARRAY</code> », le mode «merge» prend en charge deux opérateurs dans Milvus v2.6.17 et versions ultérieures : « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> ». Ces opérateurs vous permettent d’ajouter des éléments à un champ « <code translate="no">ARRAY</code> » existant ou d’en supprimer les éléments correspondants, sans avoir à interroger au préalable l’entité pour récupérer sa valeur actuelle. Pour plus de détails, consultez la section <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert des champs ARRAY en mode merge</a>».</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportements de l’upsert : remarques particulières<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,10 +105,10 @@ summary: >-
       </svg>
     </button></h3><p>Il existe plusieurs remarques particulières à prendre en compte avant d’utiliser la fonctionnalité de fusion. Les cas suivants partent du principe que vous disposez d’une collection comportant deux champs scalaires nommés <code translate="no">title</code> et <code translate="no">issue</code>, ainsi qu’une clé primaire <code translate="no">id</code> et un champ vectoriel appelé <code translate="no">vector</code>.</p>
 <ul>
-<li><p><strong>Mise à jour ou insertion de champs avec</strong> l'option « <code translate="no">nullable</code> » <strong>activée.</strong></p>
-<p>Supposons que le champ <code translate="no">issue</code> puisse être nul. Lorsque vous effectuez un « upsert » sur ces champs, notez que :</p>
+<li><p><strong>Mise à jour ou insertion de champs avec</strong> l’option « <code translate="no">nullable</code> » <strong>activée.</strong></p>
+<p>Supposons que le champ « <code translate="no">issue</code> » puisse être nul. Lorsque vous effectuez un « upsert » sur ces champs, notez que :</p>
 <ul>
-<li><p>Si vous omettez le champ « <code translate="no">issue</code> » dans la requête « <code translate="no">upsert</code> » et désactivez « <code translate="no">partial_update</code> », le champ « <code translate="no">issue</code> » sera mis à jour en « <code translate="no">null</code> » au lieu de conserver sa valeur d’origine.</p></li>
+<li><p>Si vous omettez le champ « <code translate="no">issue</code> » dans la requête « <code translate="no">upsert</code> » et que vous désactivez « <code translate="no">partial_update</code> », le champ « <code translate="no">issue</code> » sera mis à jour en « <code translate="no">null</code> » au lieu de conserver sa valeur d’origine.</p></li>
 <li><p>Pour conserver la valeur d’origine du champ « <code translate="no">issue</code> », vous devez soit activer l’option « <code translate="no">partial_update</code> » et omettre le champ « <code translate="no">issue</code> », soit inclure le champ « <code translate="no">issue</code> » avec sa valeur d’origine dans la requête « <code translate="no">upsert</code> ».</p></li>
 </ul></li>
 <li><p><strong>Clés d'upsert dans le champ dynamique</strong>.</p>
@@ -121,15 +122,15 @@ summary: >-
 </ul></li>
 <li><p><strong>Upsert d’un champ JSON.</strong></p>
 <p>Supposons que la collection d’exemple comporte un champ JSON défini par le schéma nommé <code translate="no">extras</code>, et que les paires clé-valeur de ce champ JSON d’une entité soient similaires à <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Lorsque vous effectuez un « upsert » sur le champ <code translate="no">extras</code> d’une entité avec des données JSON modifiées, notez que le champ JSON est traité dans son ensemble et que vous ne pouvez pas mettre à jour des clés individuelles de manière sélective. En d’autres termes, le champ JSON <strong>NE PREND PAS en</strong> charge l’« upsert » en mode <strong>fusion</strong>.</p></li>
-<li><p><strong>Effectuer</strong> une opération «<strong>upsert » sur un</strong> <strong>champ</strong> « <code translate="no">ARRAY</code> <strong>».</strong></p>
+<p>Lorsque vous effectuez un « upsert » sur le champ <code translate="no">extras</code> d’une entité avec des données JSON modifiées, notez que le champ JSON est traité dans son ensemble et que vous ne pouvez pas mettre à jour certaines clés de manière sélective. En d’autres termes, le champ JSON <strong>NE PREND PAS en</strong> charge l’« upsert » en mode <strong>fusion</strong>.</p></li>
+<li><p><strong>Effectuer un « upsert » sur un</strong> <strong>champ</strong> « <code translate="no">ARRAY</code> <strong>».</strong></p>
 <p>Par défaut, un champ « <code translate="no">ARRAY</code> » en mode « merge » suit la sémantique <strong>REPLACE</strong>: la valeur transmise dans la requête écrase le tableau existant. Pour des mises à jour plus précises, Milvus v2.6.17 et versions ultérieures prennent également en charge deux opérateurs :</p>
 <ul>
 <li><p><code translate="no">ARRAY_APPEND</code> ajoute les éléments contenus dans la charge utile de la requête au tableau existant.</p></li>
 <li><p><code translate="no">ARRAY_REMOVE</code> supprime de la table existante tous les éléments correspondant à une valeur contenue dans la charge utile de la requête.</p></li>
 </ul>
-<p>Pour la syntaxe des opérateurs, les types d’éléments pris en charge et les autres contraintes, consultez la section « <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert des champs ARRAY en mode fusion</a> ».</p></li>
-<li><p><strong>Upsert d’un champ StructArray.</strong></p>
+<p>Pour la syntaxe des opérateurs, les types d’éléments pris en charge et d’autres contraintes, consultez la section « <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert des champs ARRAY en mode fusion</a> ».</p></li>
+<li><p><strong>Effectuer un « upsert » sur un champ StructArray.</strong></p>
 <p>L’upsert d’un champ StructArray dans une entité écrase la valeur du champ. Pour ce faire, vous devez fournir une liste de dictionnaires, chacun contenant tous les sous-champs définis dans le schéma de la structure, même lorsque vous effectuez l’upsert en mode fusion.</p>
 <p>Pour plus de détails, consultez la section « <a href="/docs/fr/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">Upsert d’un champ StructArray en mode fusion</a> ».</p></li>
 </ul>
@@ -150,7 +151,11 @@ summary: >-
       </svg>
     </button></h3><p>Compte tenu de ce qui précède, plusieurs limites et restrictions doivent être respectées :</p>
 <ul>
-<li><p>La requête d’« <code translate="no">upsert</code> » doit toujours inclure les clés primaires des entités cibles, même lorsque l’option « <code translate="no">autoID</code> » est activée. Pour les collections « <code translate="no">autoID</code> », les clés primaires de la requête identifient les entités existantes à remplacer. Milvus génère de nouvelles clés primaires pour les entités de remplacement insérées.</p></li>
+<li><p>La requête d’« <code translate="no">upsert</code> » doit toujours inclure les clés primaires des entités cibles, même lorsque l’option « <code translate="no">autoID</code> » est activée. Pour les collections de type « <code translate="no">autoID</code> », la gestion des clés primaires dépend du mode d’« upsert » :</p>
+<ul>
+<li><p>En mode « override », la clé primaire identifie l’entité existante à remplacer, et Milvus génère une nouvelle clé primaire pour l’entité de remplacement.</p></li>
+<li><p>En mode « merge », la clé primaire identifie l’entité existante à mettre à jour et reste inchangée. Si la clé primaire n’existe pas, la requête échoue au lieu d’insérer une nouvelle entité.</p></li>
+</ul></li>
 <li><p>La collection cible doit être chargée et accessible pour les requêtes.</p></li>
 <li><p>Tous les champs spécifiés dans la requête doivent exister dans le schéma de la collection cible.</p></li>
 <li><p>Les valeurs de tous les champs spécifiés dans la requête doivent correspondre aux types de données définis dans le schéma.</p></li>
@@ -171,8 +176,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous allons effectuer un « upsert » d’entités dans une collection nommée <code translate="no">my_collection</code>. Cette collection ne comporte que deux champs, nommés <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> et <code translate="no">issue</code>. Le champ <code translate="no">id</code> est le champ principal, tandis que les champs <code translate="no">title</code> et <code translate="no">issue</code> sont des champs scalaires.</p>
-<p>Si ces trois entités existent déjà dans la collection, elles seront remplacées par celles incluses dans la requête d’upsert.</p>
+    </button></h2><p>Dans cette section, nous allons effectuer un « upsert » d’entités dans une collection nommée « <code translate="no">my_collection</code> ». Cette collection ne comporte que deux champs, nommés « <code translate="no">id</code> », « <code translate="no">vector</code> », « <code translate="no">title</code> » et « <code translate="no">issue</code> ». Le champ « <code translate="no">id</code> » est le champ principal, tandis que les champs « <code translate="no">title</code> » et « <code translate="no">issue</code> » sont des champs scalaires.</p>
+<p>Si ces trois entités existent déjà dans la collection, elles seront remplacées par celles incluses dans la requête « upsert ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -498,7 +503,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">Insérer ou mettre à jour des entités en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode" class="common-anchor-header">Insérer ou mettre à jour des entités en mode « merge »<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -514,7 +519,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>L'exemple de code suivant montre comment effectuer un « upsert » d'entités avec des mises à jour partielles. Indiquez uniquement les champs à mettre à jour et leurs nouvelles valeurs, ainsi que l'indicateur explicite de mise à jour partielle.</p>
-<p>Dans l’exemple suivant, le champ « <code translate="no">issue</code> » des entités spécifiées dans la requête d’upsert sera mis à jour avec les valeurs incluses dans la requête.</p>
+<p>Dans l’exemple suivant, le champ « <code translate="no">issue</code> » des entités spécifiées dans la requête d’« upsert » sera mis à jour avec les valeurs incluses dans la requête.</p>
 <div class="alert note">
 <p>Lorsque vous effectuez un « upsert » en mode fusion, assurez-vous que les entités concernées par la requête possèdent le même ensemble de champs. Supposons qu’il y ait deux entités ou plus à mettre à jour ou à insérer, comme le montre l’extrait de code suivant : il est important qu’elles comportent des champs identiques afin d’éviter les erreurs et de préserver l’intégrité des données.</p>
 </div>
@@ -642,7 +647,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="common-anchor-header">Upsert des champs ARRAY en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="anchor-icon" translate="no">
+<h2 id="Upsert-ARRAY-fields-in-merge-mode" class="common-anchor-header">Upsert des champs ARRAY en mode fusion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -657,7 +662,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant la version 2.6.17 de Milvus, la mise à jour d’une partie d’un champ de type « <code translate="no">ARRAY</code> » nécessitait un flux « lecture-modification-écriture » côté client : interroger le tableau existant, le modifier dans le code de l’application, puis effectuer un « upsert » avec la valeur de remplacement complète. Les opérateurs de mise à jour partielle (<code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code>) vous permettent d’envoyer uniquement les éléments à ajouter ou à supprimer, ce qui réduit la logique côté client et évite la lecture supplémentaire avant l’upsert.</p>
+    </button></h2><p>Avant la version 2.6.17 de Milvus, la mise à jour d’une partie d’un champ de type « <code translate="no">ARRAY</code> » nécessitait un flux « lecture-modification-écriture » côté client : interroger le tableau existant, le modifier dans le code de l’application, puis effectuer un « upsert » avec la valeur de remplacement complète. Les opérateurs de mise à jour partielle (<code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code>) vous permettent d’envoyer uniquement les éléments à ajouter ou à supprimer, ce qui réduit la logique côté client et évite une lecture supplémentaire avant l’upsert.</p>
 <p>Supposons que l’entité dont la clé primaire est <code translate="no">1</code> possède déjà <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Avant l’apparition des opérateurs de mise à jour partielle, l’ajout de l’élément <code translate="no">&quot;premium&quot;</code> à un tableau nécessitait l’upsert du tableau de remplacement complet :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -777,8 +782,8 @@ client.upsert(UpsertReq.builder()
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Les valeurs de la charge utile doivent correspondre aux types de données ( <code translate="no">element_type</code> ) du champ cible ( <code translate="no">ARRAY</code> ). Par exemple, si le champ cible est de type <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, la charge utile doit contenir des valeurs de type chaîne de caractères.</p></li>
-<li><p>Dans Milvus v2.6.17 et versions ultérieures, les champs « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> » prennent en charge les champs « <code translate="no">ARRAY</code> » dont l’ <code translate="no">element_type</code> est « <code translate="no">BOOL</code> », « <code translate="no">INT8</code> », « <code translate="no">INT16</code> », « <code translate="no">INT32</code> », « <code translate="no">INT64</code> », « <code translate="no">FLOAT</code> », « <code translate="no">DOUBLE</code> » ou « <code translate="no">VARCHAR</code> ».</p></li>
+<li><p>Les valeurs de la charge utile doivent correspondre à la valeur de ` <code translate="no">element_type</code> ` du champ ` <code translate="no">ARRAY</code> ` cible. Par exemple, si le champ cible est ` <code translate="no">ARRAY&lt;VARCHAR&gt;</code>`, la charge utile doit contenir des valeurs de type chaîne de caractères.</p></li>
+<li><p>Dans Milvus v2.6.17 et versions ultérieures, les champs <code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code> prennent en charge les champs <code translate="no">ARRAY</code> dont l’ <code translate="no">element_type</code> est <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> ou <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Après une opération « <code translate="no">ARRAY_APPEND</code> », la longueur du tableau résultant ne doit pas dépasser la valeur « <code translate="no">max_capacity</code> » du champ.</p></li>
 <li><p>Les opérations « upsert » simultanées sur une même entité ne sont pas atomiques d’une requête à l’autre. Si deux requêtes mettent à jour simultanément le même champ <code translate="no">ARRAY</code>, l’écriture la plus récente peut écraser la précédente. Utilisez une coordination au niveau de l’application si vous devez conserver toutes les modifications simultanées.</p></li>
 </ul>
@@ -797,7 +802,7 @@ client.upsert(UpsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L’exemple suivant utilise une petite collection d’ <code translate="no">users</code> s avec une clé primaire <code translate="no">pk</code>, un champ <code translate="no">tags</code> de type <code translate="no">ARRAY&lt;VARCHAR&gt;</code> et un champ vectoriel <code translate="no">embedding</code>. Il insère d’abord deux entités avec des valeurs initiales <code translate="no">tags</code>, puis utilise <code translate="no">ARRAY_APPEND</code> et <code translate="no">ARRAY_REMOVE</code> pour montrer comment chaque opérateur modifie le tableau stocké.</p>
+    </button></h3><p>L’exemple suivant utilise une petite collection « <code translate="no">users</code> » avec une clé primaire « <code translate="no">pk</code> », un champ « <code translate="no">tags</code> » de type « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> » et un champ vectoriel « <code translate="no">embedding</code> ». Il insère d’abord deux entités avec des valeurs initiales « <code translate="no">tags</code> », puis utilise « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> » pour montrer comment chaque opérateur modifie le tableau stocké.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -900,7 +905,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">Upsert d’un champ StructArray en mode fusion<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
+<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">Upsert d’un champ StructArray en mode « merge »<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -916,7 +921,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>L’upsert d’un champ StructArray dans une entité écrase la valeur du champ. Cela signifie que vous devez inclure tous les sous-champs définis dans le schéma de la structure lorsque vous effectuez un upsert sur un champ StructArray.</p>
-<p>L'exemple suivant montre comment effectuer un « upsert » du champ « <code translate="no">chunks</code> » en mode fusion, un champ StructArray comportant 6 sous-champs. Une fois l'opération terminée, le champ « <code translate="no">chunks</code> » de l'entité dont l'ID est 1 est défini sur le tableau contenant les structures à deux éléments fournies dans la requête.</p>
+<p>L’exemple suivant montre comment effectuer un « upsert » du champ « <code translate="no">chunks</code> » en mode fusion, un champ StructArray comportant 6 sous-champs. Une fois l’opération terminée, le champ « <code translate="no">chunks</code> » de l’entité dont l’ID est 1 est défini sur le tableau contenant les structures à deux éléments fournies dans la requête.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

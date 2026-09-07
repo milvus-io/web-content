@@ -1,11 +1,11 @@
 ---
 id: nullable-and-default.md
-title: الحقول القابلة للإلغاء
+title: الحقول القابلة للقيمة الفارغة
 summary: >-
-  تكوين الحقول القابلة للإلغاء والقيم الافتراضية، بما في ذلك سلوك المخطط
-  والإدراج والفهرس والبحث والتصفية.
+  تكوين الحقول القابلة للقيمة الفارغة والقيم الافتراضية، بما في ذلك سلوك المخطط،
+  والإدراج، والفهرسة، والبحث، والتصفية.
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">الحقول القابلة للإلغاء<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">الحقول القابلة للقيمة الفارغة<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +20,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تدعم Milvus الحقول القابلة للفراغ، والتي تسمح بأن تكون قيمة الحقل مفقودة أو يتم تعيينها صراحةً إلى NULL. يتم تعريف قابلية الإلغاء على مستوى المخطط ويتم تطبيقها بشكل متسق عبر عمليات استيعاب البيانات والفهرسة والبحث والاستعلام.</p>
-<p>استخدم الحقول القابلة للإلغاء عندما:</p>
+    </button></h1><p>يدعم Milvus الحقول القابلة للخلو، والتي تسمح بغياب قيمة الحقل أو تعيينها صراحةً إلى NULL. يتم تعريف قابلية الخلو على مستوى المخطط وتُطبق بشكل متسق عبر عمليات استيعاب البيانات والفهرسة والبحث والاستعلام.</p>
+<p>استخدم الحقول القابلة للقيمة الفارغة في الحالات التالية:</p>
 <ul>
-<li>يتم إدخال البيانات من أنظمة خارجية تسمح بالقيم المفقودة.</li>
-<li>تكون بعض البيانات الوصفية اختيارية أو متاحة فقط لجزء من مجموعة البيانات.</li>
-<li>يتم إنشاء تضمينات المتجهات بشكل غير متزامن وإدراجها لاحقًا.</li>
+<li>يتم استيعاب البيانات من أنظمة خارجية تسمح بوجود قيم مفقودة.</li>
+<li>بعض البيانات الوصفية اختيارية أو متاحة فقط لجزء من مجموعة البيانات.</li>
+<li>يتم إنشاء التضمينات المتجهة بشكل غير متزامن وإدراجها لاحقًا.</li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,12 +43,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>لا تدعم حقول المتجهات التي تسمح بقيم فارغة <code translate="no">IS NULL</code> أو تعبيرات التصفية <code translate="no">IS NOT NULL</code>. لا يمكنك تصفية الكيانات بشكل صريح استنادًا إلى ما إذا كانت قيمة الحقل المتجه NULL.</p></li>
-<li><p>حقول<a href="/docs/ar/array-of-structs.md">صفيف الهياكل</a> لا تدعم القيم الفارغة. لا يمكنك وضع علامة على حقل صفيف الهياكل أو أي حقل متداخل داخله على أنه قابل للإلغاء.</p></li>
-<li><p>يتم تعريف السمة القابلة للإلغاء عند إنشاء الحقل ولا يمكن تعديلها بعد ذلك. لا يمكنك تمكين أو تعطيل قابلية البطلان لحقل موجود.</p></li>
-<li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. يجب أن تحتوي حقول مفاتيح التقسيم دائمًا على قيم صحيحة وغير فارغة. لمزيد من المعلومات، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
+<li><p>الحقول المتجهة التي تسمح بقيم NULL لا تدعم تعبيرات التصفية من نوع " <code translate="no">IS NULL</code> " أو " <code translate="no">IS NOT NULL</code> ". لا يمكنك تصفية الكيانات بشكل صريح بناءً على ما إذا كانت قيمة الحقل المتجه هي NULL أم لا.</p></li>
+<li><p>بدءًا من Milvus 3.0.0، يمكن أن يكون حقل <a href="/docs/ar/array-of-structs.md">StructArray</a> الأصلي قابلاً للقيمة NULL. قم بتعيين <code translate="no">nullable=True</code> على حقل StructArray الأصلي، وليس على الحقول الفرعية الفردية. تنطبق القيمة NULL على حقل StructArray بأكمله، وليس على عنصر Struct فردي، ويقوم Milvus بنقل قابلية الحقل الأصلي للقيمة NULL إلى حقوله الفرعية داخليًا. يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة NULL حتى تتمكن الكيانات الموجودة من إرجاع القيمة NULL للحقل الجديد. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md#Nullable-and-dynamic-schema-limits">حدود StructArray</a>.</p></li>
+<li><p>يتم تعريف السمة «nullable» عند إنشاء الحقل ولا يمكن تعديلها لاحقًا. لا يمكنك تمكين أو تعطيل قابلية القيمة «null» لحقل موجود.</p></li>
+<li><p>لا يمكن استخدام الحقول التي تم وضع علامة "قابلة للقيمة null" عليها كمفاتيح تقسيم. يجب أن تحتوي حقول مفاتيح التقسيم دائمًا على قيم صالحة وغير فارغة. لمزيد من المعلومات، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">ما هو الحقل القابل للإلغاء؟<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">ما هو الحقل القابل للقيمة "null"؟<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,22 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في Milvus، يتم التحكم فيما إذا كان الحقل مسموحًا بتخزين قيمة فارغة أم لا بواسطة سمة حقل على مستوى المخطط تسمى <code translate="no">nullable</code>.</p>
-<p>عندما يتم تعريف الحقل بـ <code translate="no">nullable=True</code> ، يسمح ميلفوس بأن تكون قيمة الحقل مفقودة أثناء استيعاب البيانات. في الممارسة العملية، يتعامل Milvus مع المدخلين التاليين على أنهما متكافئان ويخزن قيمة الحقل على أنها NULL:</p>
+    </button></h2><p>في Milvus، يتم التحكم في ما إذا كان يُسمح لحقل ما بتخزين قيمة NULL من خلال سمة حقل على مستوى المخطط تُسمى « <code translate="no">nullable</code> ».</p>
+<p>عندما يتم تعريف حقل بـ <code translate="no">nullable=True</code> ، يسمح Milvus بفقدان قيمة الحقل أثناء استيعاب البيانات. عمليًا، يعامل Milvus المدخلتين التاليتين على أنهما متكافئتان ويخزن قيمة الحقل كـ NULL:</p>
 <ul>
-<li>يتم حذف الحقل من كيان الإدخال.</li>
-<li>يتم تعيين الحقل بشكل صريح إلى NULL (على سبيل المثال، <code translate="no">None</code> في Python).</li>
+<li>تم حذف الحقل من الكيان المدخل.</li>
+<li>تعيين الحقل صراحةً إلى NULL (على سبيل المثال، <code translate="no">None</code> في لغة Python).</li>
 </ul>
-<p>إذا لم يتم تعريف الحقل على أنه غير قابل للإلغاء (السلوك الافتراضي)، يجب على كل كيان توفير قيمة صالحة لهذا الحقل. سيؤدي حذف الحقل أو تعيين قيمة فارغة بشكل صريح إلى فشل عملية الإدراج أو الاستيراد.</p>
-<p>يتم دعم السمة القابلة للإلغاء لكل من <strong>الحقول القياسية والمتجهة</strong> في مخطط المجموعة. ومع ذلك، لا تدعم حقول صفيف الهياكل السمة القابلة للإلغاء.</p>
+<p>إذا لم يتم تعريف الحقل على أنه قابل للفراغ (السلوك الافتراضي)، فيجب أن يوفر كل كيان قيمة صالحة لهذا الحقل. سيؤدي حذف الحقل أو تعيين قيمة NULL صراحةً إلى فشل عملية الإدراج أو الاستيراد.</p>
+<p>يتم دعم السمة "nullable" لكل <strong>من الحقول القياسية والمتجهة</strong> في مخطط المجموعة. بدءًا من Milvus 3.0.0، يتم دعمها أيضًا في الحقل الأصلي StructArray. لا تقم بتكوين الحقول الفرعية لـ Struct على أنها قابلة للفراغ بشكل مستقل؛ قم بتعريف قابلية الفراغ في الحقل الأصلي StructArray وسيقوم Milvus بنشر هذا الإعداد إلى حقوله الفرعية داخليًا.</p>
 <div class="alert note">
-<p>تحدد قابلية الإلغاء ما إذا كانت قيمة الحقل مفقودة أم لا؛ ولا تحدد القيمة المستخدمة عندما يكون الحقل مفقودًا.</p>
+<p>تحدد خاصية «nullable» ما إذا كان من الممكن أن تكون قيمة الحقل مفقودة؛ وهي لا تحدد القيمة التي يتم استخدامها عند فقدان الحقل.</p>
 <ul>
-<li>إذا تم تكوين حقل قابل للإلغاء بدون قيمة افتراضية، فإن حذف الحقل ينتج عنه قيمة فارغة مخزنة.</li>
-<li>إذا تم تكوين قيمة افتراضية، فقد يخزن ميلفوس القيمة الافتراضية بدلاً من ذلك. لمزيد من التفاصيل، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</li>
+<li>إذا تم تكوين حقل قابل للقيمة الفارغة بدون قيمة افتراضية، فإن حذف الحقل يؤدي إلى تخزين قيمة NULL.</li>
+<li>إذا تم تكوين قيمة افتراضية، فقد يقوم Milvus بتخزين القيمة الافتراضية بدلاً من ذلك. لمزيد من التفاصيل، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">تعريف حقل قابل للإلغاء في مخطط المجموعة<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">تحديد حقل قابل للقيمة الفارغة في مخطط المجموعة<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,10 +93,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام الحقول القابلة للإلغاء، يجب تمكين السمة القابلة للإلغاء عند تعريف مخطط المجموعة.</p>
-<p>في هذا المثال، يحدد مخطط المجموعة حقلاً متجهًا باسم <code translate="no">embedding</code> مع <code translate="no">nullable=True</code>. يسمح هذا للكيانات في المجموعة بحذف قيمة المتجه أو تعيينها صراحةً إلى NULL أثناء استيعاب البيانات.</p>
+    </button></h2><p>لاستخدام الحقول القابلة للفراغ، يجب تمكين السمة «nullable» عند تعريف مخطط المجموعة.</p>
+<p>في هذا المثال، يحدد مخطط المجموعة حقل متجهًا باسم « <code translate="no">embedding</code> » بقيمة « <code translate="no">nullable=True</code> ». وهذا يسمح للكيانات في المجموعة بحذف قيمة المتجه أو تعيينها صراحةً إلى «NULL» أثناء استيعاب البيانات.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -245,18 +250,23 @@ curl --request POST \
     }
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المخطط</p>
+<p>في هذا المخطط:</p>
 <ul>
-<li>يتم تمييز الحقل <code translate="no">embedding</code> بشكل صريح على أنه قابل للإلغاء.</li>
-<li>يجوز للكيانات حذف الحقل <code translate="no">embedding</code> أو تعيين قيمة فارغة له أثناء الإدراج.</li>
-<li>يتم تحديد قرار السماح بالقيم الفارغة في وقت إنشاء المجموعة.</li>
+<li>يتم تمييز الحقل <code translate="no">embedding</code> صراحةً على أنه قابل للقيمة الفارغة.</li>
+<li>يمكن للكيانات حذف حقل <code translate="no">embedding</code> أو تعيين قيمة NULL له أثناء الإدراج.</li>
+<li>يتم تحديد قرار السماح بقيم NULL عند إنشاء المجموعة.</li>
 </ul>
-<p>للتوضيح، تركز الأمثلة التالية على الحقل المتجه القابل للفراغ (<code translate="no">embedding</code>). يعد تحديد الحقول القياسية القابلة للإلغاء اختياريًا وغير مطلوب لاتباع بقية هذا الدليل.</p>
+<p>للتوضيح، تركز الأمثلة التالية على حقل متجه قابل للقيمة NULL (<code translate="no">embedding</code>). يعد تعريف الحقول القياسية القابلة للقيمة NULL اختياريًا وليس مطلوبًا لمتابعة بقية هذا الدليل.</p>
 <p><details>
-<summary>اختياري: تعريف الحقل القياسي القابل للإلغاء</summary></p>
-<p>يمكن أيضًا تعريف الحقول العددية على أنها قابلة للإلغاء باستخدام نفس السمة <code translate="no">nullable</code> واتباع نفس القواعد أثناء الاستيعاب. على سبيل المثال:</p>
+<summary>اختياري: تعريف حقل قياسي قابل للقيمة الفارغة</summary></p>
+<p>يمكن أيضًا تعريف الحقول العددية على أنها قابلة للقيمة NULL باستخدام نفس السمة <code translate="no">nullable</code> وتتبع نفس القواعد أثناء الاستيعاب. على سبيل المثال:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -282,7 +292,7 @@ curl --request POST \
 <span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">سلوك الإدراج مع القيم المفقودة أو الفارغة<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
+<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">سلوك الإدراج مع القيم المفقودة أو القيم NULL<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,10 +307,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تعريف الحقل على أنه قابل للإلغاء في مخطط المجموعة، يسمح Milvus بأن تكون قيمة الحقل مفقودة أو يتم تعيينها صراحةً إلى NULL أثناء استيعاب البيانات.</p>
-<p>يقوم المثال أدناه بإدراج ثلاثة كيانات في المجموعة التي تم إنشاؤها في <a href="#define-a-nullable-field-in-the-collection-schema">تعريف حقل قابل للفراغ في مخطط المجموعة،</a> مما يوضح هذه الحالات المختلفة.</p>
+    </button></h2><p>بمجرد تعريف حقل على أنه قابل للقيمة الفارغة في مخطط المجموعة، يسمح Milvus بأن تكون قيمة الحقل مفقودة أو محددة صراحةً بقيمة NULL أثناء استيعاب البيانات.</p>
+<p>يُدرج المثال أدناه ثلاث كيانات في المجموعة التي تم إنشاؤها في <a href="#define-a-nullable-field-in-the-collection-schema">«تحديد حقل قابل للقيمة الفارغة في مخطط المجموعة</a>»، مما يوضح هذه الحالات المختلفة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -394,13 +409,13 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
     ]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال</p>
+<p>في هذا المثال:</p>
 <ul>
-<li><strong>معرف</strong> الكيان <strong>= 1</strong> يوفر قيمة متجه صالحة.</li>
-<li><strong>معرف</strong> الكيان <strong>= 2</strong> يعين صراحةً قيمة فارغة للحقل <code translate="no">embedding</code>.</li>
-<li><strong>معرّف</strong> الكيان <strong>= 3</strong> يحذف الحقل <code translate="no">embedding</code> بالكامل؛ حيث يخزنه ميلفوس على أنه NULL.</li>
+<li>يوفر الكيان <strong>id = 1</strong> قيمة متجهة صالحة.</li>
+<li>الكيان <strong>id = 2</strong> يعين صراحةً قيمة NULL لحقل <code translate="no">embedding</code>.</li>
+<li>الكيان <strong>ذو المعرف = 3</strong> يحذف الحقل « <code translate="no">embedding</code> » بالكامل؛ ويقوم Milvus بتخزينه كقيمة NULL.</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">سلوك الفهرس على الحقول القابلة للإلغاء<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">سلوك الفهرس في الحقول القابلة للقيمة NULL<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,14 +430,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إدراج البيانات، يمكنك إنشاء فهرس على حقل قابل للإلغاء كالمعتاد. الفرق الرئيسي هو كيفية تعامل ميلفوس مع القيم الفارغة أثناء إنشاء الفهرس:</p>
+    </button></h2><p>بعد إدراج البيانات، يمكنك إنشاء فهرس على حقل قابل للقيمة NULL كالمعتاد. والفرق الرئيسي هو كيفية تعامل Milvus مع القيم NULL أثناء إنشاء الفهرس:</p>
 <ul>
-<li>تتم إضافة الكيانات ذات القيم غير الفارغة فقط إلى الفهرس.</li>
-<li>يتم تخطي الكيانات ذات القيم الفارغة ولا تشارك في بناء الفهرس.</li>
+<li>تُضاف إلى الفهرس فقط الكيانات ذات القيم غير الفارغة.</li>
+<li>يتم تخطي الكيانات ذات القيم NULL ولا تشارك في إنشاء الفهرس.</li>
 </ul>
-<p>بالنسبة للحقل المتجه القابل للفراغ، هذا يعني أن الكيانات ذات المتجهات الصالحة فقط تصبح قابلة للبحث عن طريق تشابه المتجهات.</p>
+<p>بالنسبة لحقل متجه قابل للقيمة NULL، يعني هذا أن الكيانات التي تحتوي على متجهات صالحة هي فقط التي يمكن البحث عنها باستخدام تشابه المتجهات.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -522,12 +542,12 @@ curl --request POST \
   --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذه المرحلة</p>
+<p>في هذه المرحلة:</p>
 <ul>
-<li>يتم فهرسة الكيانات التي تحتوي على قيم تضمين صالحة وجاهزة للبحث.</li>
-<li>تظل الكيانات التي يكون تضمينها فارغًا في المجموعة، ولكن لا يتم تضمينها في فهرس المتجهات.</li>
+<li>يتم فهرسة الكيانات ذات قيم التضمين الصالحة وتصبح جاهزة للبحث.</li>
+<li>تظل الكيانات التي تكون قيم التضمين الخاصة بها NULL موجودة في المجموعة، ولكنها لا تُدرج في فهرس المتجهات.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">سلوك البحث مع الحقول القابلة للإلغاء<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">سلوك البحث مع الحقول القابلة للقيمة الفارغة<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,16 +562,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عند إجراء عمليات بحث على حقل قابل للإلغاء، يقوم Milvus بتقييم الكيانات التي تحتوي على قيم غير فارغة للحقل المستخدم في البحث فقط. يتم تخطي الكيانات التي يكون حقلها المتجه فارغًا تلقائيًا.</p>
-<p>بالنسبة لحقل متجه قابل للإلغاء مثل <code translate="no">embedding</code> في هذا المثال:</p>
+    </button></h2><p>عند إجراء عمليات بحث على حقل قابل للقيمة NULL، يقوم Milvus بتقييم الكيانات التي تحتوي على قيم غير NULL فقط للحقل المستخدم في البحث. يتم تخطي الكيانات التي يكون حقلها المتجه NULL تلقائيًا.</p>
+<p>بالنسبة لحقل متجه قابل للقيمة "null" مثل <code translate="no">embedding</code> في هذا المثال:</p>
 <ul>
-<li>يتم تقييم وترتيب الكيانات ذات القيم المتجهة الصالحة فقط.</li>
-<li>لا تتسبب الكيانات ذات المتجهات الفارغة في حدوث أخطاء.</li>
-<li>إذا كان عدد المتجهات الصالحة أقل من المطلوب <code translate="no">topK</code> (<code translate="no">limit</code>)، قد يُرجع ميلفوس نتائج أقل من <code translate="no">limit</code>.</li>
+<li>يتم تقييم وترتيب الكيانات ذات القيم المتجهة الصحيحة فقط.</li>
+<li>لا تتسبب الكيانات ذات المتجهات NULL في حدوث أخطاء.</li>
+<li>إذا كان عدد المتجهات الصحيحة أقل من عدد الكائنات المطلوبة لـ <code translate="no">topK</code> (<code translate="no">limit</code>)، فقد يعرض Milvus نتائج أقل من <code translate="no">limit</code>.</li>
 </ul>
-<p>يقوم المثال التالي بإجراء بحث متجه على حقل المتجه القابل للفراغ <code translate="no">embedding</code>:</p>
+<p>يقوم المثال التالي بإجراء بحث متجهي على الحقل المتجه القابل للقيمة الفارغة <code translate="no">embedding</code>:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -628,11 +653,11 @@ fmt.Println(resultSets)
     &quot;outputFields&quot;: [&quot;embedding&quot;]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا البحث</p>
+<p>في هذا البحث:</p>
 <ul>
-<li>يتم اعتبار الكيانات التي تحتوي على قيم <code translate="no">embedding</code> غير فارغة فقط مرشحة.</li>
-<li>يتم استبعاد الكيانات ذات القيم الفارغة <code translate="no">embedding</code> من التقييم.</li>
-<li>يعتمد عدد النتائج التي تم إرجاعها على عدد المتجهات الصالحة الموجودة في المجموعة.</li>
+<li>يتم اعتبار الكيانات التي تحتوي على قيم <code translate="no">embedding</code> غير فارغة فقط كمرشحات.</li>
+<li>يتم استبعاد الكيانات التي تحتوي على قيم NULL لـ <code translate="no">embedding</code> من التقييم.</li>
+<li>يعتمد عدد النتائج التي يتم إرجاعها على عدد المتجهات الصالحة الموجودة في المجموعة.</li>
 </ul>
 <h2 id="Query-and-filtering-implications" class="common-anchor-header">آثار الاستعلام والتصفية<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -649,11 +674,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تركز الأمثلة السابقة على حقول المتجهات. يصف هذا القسم كيف تتصرف القيم الفارغة في <strong>تعبيرات</strong> التصفية <strong>العددية</strong>.</p>
-<p>يمكن تعريف الحقول العددية باستخدام <code translate="no">nullable=True</code> واتباع نفس قواعد الاستيعاب مثل الحقول المتجهة. ومع ذلك، <strong>يتم دائمًا تقييم القيم القياسية الفارغة إلى خطأ في تعبيرات التصفية</strong>.</p>
-<p>على سبيل المثال، بالنظر إلى الحقل القياسي القابل للإلغاء <code translate="no">age</code> ، يختار المرشح التالي الكيانات التي يكون عمرها أكبر من 18 عامًا:</p>
+    </button></h2><p>تركز الأمثلة السابقة على الحقول المتجهة. يصف هذا القسم كيفية تصرف القيم NULL في <strong>تعبيرات التصفية القياسية</strong>.</p>
+<p>يمكن تعريف الحقول القياسية باستخدام <code translate="no">nullable=True</code> وتتبع نفس قواعد الاستيعاب التي تتبعها الحقول المتجهة. ومع ذلك، <strong>تُقيَّم القيم القياسية NULL دائمًا على أنها false في تعبيرات التصفية</strong>.</p>
+<p>على سبيل المثال، في حالة وجود حقل سكالاري قابل للقيمة «null» <code translate="no">age</code> ، فإن التصفية التالية تختار الكيانات التي يزيد عمرها عن 18 عامًا:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -665,10 +695,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تُستبعد الكيانات التي يكون فيها <code translate="no">age</code> هو NULL من النتائج لأن القيمة NULL لا تفي بشرط التصفية.</p>
-<p>وبالمثل، لا تتطابق عمليات التحقق من المساواة مع القيم الفارغة. على سبيل المثال:</p>
+<p>يتم استبعاد الكيانات التي تكون فيها قيمة <code translate="no">age</code> هي NULL من النتائج لأن القيمة NULL لا تستوفي شرط التصفية.</p>
+<p>وبالمثل، لا تتطابق عمليات فحص المساواة مع القيم NULL. على سبيل المثال:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -679,8 +714,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم استبعاد الكيانات التي يكون فيها <code translate="no">status</code> هو NULL من النتائج.</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">الحقول القابلة للإلغاء والقيم الافتراضية<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p>يتم استبعاد الكيانات التي تكون قيمة <code translate="no">status</code> فيها NULL من النتائج.</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">الحقول القابلة للقيمة NULL والقيم الافتراضية<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -695,24 +730,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما يتم تكوين كل من <code translate="no">nullable</code> و <code translate="no">default_value</code> لحقل ما، تحدد القواعد التالية كيفية تعامل ميلفوس مع المدخلات الفارغة أو قيم الحقل المفقودة أثناء الإدراج.</p>
+    </button></h2><p>عندما يتم تكوين كل من <code translate="no">nullable</code> و <code translate="no">default_value</code> لحقل ما، تحدد القواعد التالية كيفية تعامل Milvus مع المدخلات NULL أو قيم الحقول المفقودة أثناء الإدراج.</p>
 <table>
 <thead>
-<tr><th>ممكّن قابل للفراغ</th><th>القيمة الافتراضية</th><th>إدخال المستخدم (فارغة أو محذوفة)</th><th>النتيجة</th></tr>
+<tr><th>تم تمكين القيم الفارغة</th><th>القيمة الافتراضية</th><th>مدخلات المستخدم (NULL أو محذوفة)</th><th>النتيجة</th></tr>
 </thead>
 <tbody>
-<tr><td>نعم (غير فارغة)</td><td>نعم (غير فارغة)</td><td>فارغة أو محذوفة</td><td>يستخدم القيمة الافتراضية</td></tr>
-<tr><td>نعم</td><td>غير موجودة</td><td>فارغة أو محذوفة</td><td>مخزنة ك NULLL</td></tr>
-<tr><td>لا يوجد</td><td>نعم (غير فارغة)</td><td>فارغة أو محذوفة</td><td>يستخدم القيمة الافتراضية</td></tr>
-<tr><td>لا يوجد</td><td>لا يوجد</td><td>فارغة أو محذوفة</td><td>إلقاء خطأ</td></tr>
-<tr><td>لا يوجد</td><td>نعم (افتراضي غير موجود)</td><td>فارغة أو محذوفة</td><td>إلقاء خطأ</td></tr>
+<tr><td>نعم</td><td>نعم (غير NULL)</td><td>NULL أو تم تجاهلها</td><td>يستخدم القيمة الافتراضية</td></tr>
+<tr><td>نعم</td><td>لا</td><td>NULL أو تم تجاهله</td><td>يتم تخزينه كـ NULL</td></tr>
+<tr><td>لا</td><td>نعم (غير NULL)</td><td>NULL أو محذوف</td><td>يستخدم القيمة الافتراضية</td></tr>
+<tr><td>لا</td><td>لا</td><td>NULL أو تم حذفه</td><td>يُحدث خطأً</td></tr>
+<tr><td>لا</td><td>نعم (القيمة الافتراضية NULL)</td><td>NULL أو تم حذفه</td><td>يُحدث خطأً</td></tr>
 </tbody>
 </table>
-<p><strong>الخلاصة الرئيسية:</strong></p>
+<p><strong>النقاط الرئيسية:</strong></p>
 <ul>
-<li>عندما يكون للحقل قيمة افتراضية غير فارغة، يتم استخدام تلك القيمة بغض النظر عما إذا كان <code translate="no">nullable</code> ممكّنًا أم لا.</li>
-<li>عندما <code translate="no">nullable=True</code> ولكن لم يتم تعيين قيمة افتراضية، يتم تخزين الحقل NULL.</li>
-<li>عند <code translate="no">nullable=False</code> ولم يتم تعيين قيمة افتراضية، يفشل الإدراج مع حدوث خطأ.</li>
-<li>تعيين قيمة افتراضية فارغة في حقل غير قابل للفراغ غير صالح ويتسبب في حدوث خطأ.</li>
+<li>عندما يكون للحقل قيمة افتراضية غير NULL، يتم استخدام تلك القيمة بغض النظر عما إذا كان الخيار " <code translate="no">nullable</code> " ممكّنًا أم لا.</li>
+<li>عندما تكون ميزة " <code translate="no">nullable=True</code> " مفعّلة دون تعيين قيمة افتراضية، يخزن الحقل قيمة NULL.</li>
+<li>عندما يتم تعيين " <code translate="no">nullable=False</code> " دون تحديد قيمة افتراضية، يفشل الإدراج ويظهر خطأ.</li>
+<li>يُعد تعيين قيمة افتراضية NULL في حقل غير قابل للقيمة NULL غير صالح ويؤدي إلى حدوث خطأ.</li>
 </ul>
-<p>للاطلاع على أمثلة كاملة واستخدام واجهة برمجة التطبيقات للقيم الافتراضية، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</p>
+<p>للاطلاع على أمثلة كاملة واستخدام واجهة برمجة التطبيقات (API) للقيم الافتراضية، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</p>

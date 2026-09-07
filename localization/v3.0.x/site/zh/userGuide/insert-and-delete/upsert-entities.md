@@ -34,8 +34,8 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用 `<code translate="no">upsert</code> ` 操作插入新实体或更新现有实体，具体取决于 `upsert` 请求中提供的主键在 Collection 中是否存在。如果未找到该主键，则执行插入操作；否则，将执行更新操作。</p>
-<p>Milvus 中的 upsert 操作支持<strong>“覆盖</strong>”或<strong>“合并</strong>”两种模式。</p>
+    </button></h2><p>您可以使用 `<code translate="no">upsert</code> ` 操作插入新实体或更新现有实体，具体取决于 `upsert` 请求中提供的主键在 Collection 中是否存在。如果未找到该主键，则执行插入操作；否则，将执行更新操作。<code translate="no">autoID</code> Collection 上部分更新是一个例外：它们仅更新现有实体，如下所述。</p>
+<p>Milvus 中的 upsert 操作可在<strong>“覆盖</strong>”或<strong>“合并”</strong>模式下进行。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">覆盖模式下的 Upsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,16 +51,16 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以覆盖模式运行的upsert请求结合了插入和删除操作。当接收到针对现有实体的<code translate="no">upsert</code> 请求时，Milvus会插入请求负载中携带的数据，同时删除数据中指定的原始主键对应的现有实体。</p>
+    </button></h3><p>以覆盖模式运行的upsert请求结合了插入和删除操作。当接收到针对现有实体的<code translate="no">upsert</code> 请求时，Milvus会插入请求有效载荷中携带的数据，同时删除数据中指定的原始主键对应的现有实体。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
-   <span>覆盖模式下的Upsert</span>
+   <span>覆盖模式下的 Upsert</span>
   
  </span></p>
-<p>如果目标Collection在其主字段上启用了<code translate="no">autoID</code> ，则<code translate="no">upsert</code> 请求仍必须包含目标实体的主键。Milvus会使用提供的主键定位待替换的实体，并在插入请求负载中的数据之前为其生成一个新的主键。</p>
+<p>如果目标Collection在其主字段上启用了<code translate="no">autoID</code> ，则<code translate="no">upsert</code> 请求仍必须包含目标实体的主键。Milvus会使用提供的主键定位要替换的实体，并在插入请求负载中的数据之前为其生成一个新的主键。</p>
 <p>对于已启用<code translate="no">nullable</code> 的字段，如果无需进行任何更新，则可在<code translate="no">upsert</code> 请求中省略这些字段。</p>
-<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">合并模式下的 Upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode" class="common-anchor-header">合并模式下的 Upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,10 +82,11 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
    <span>合并模式下的 Upsert</span>
   
  </span></p>
-<p>要执行合并操作，请在<code translate="no">upsert</code> 请求中将<code translate="no">partial_update</code> 设置为<code translate="no">True</code> ，并同时提供主键以及需要更新的字段及其新值。</p>
-<p>收到此类请求后，Milvus 将执行具有强一致性的查询以检索实体，根据请求中的数据更新字段值，插入修改后的数据，然后删除请求中携带的原始主键对应的现有实体。</p>
-<p>对于<code translate="no">ARRAY</code> 字段，在 Milvus v2.6.17 及更高版本中，合并模式支持两种操作符：<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 。这些操作符允许您向现有的<code translate="no">ARRAY</code> 字段追加元素或从中移除匹配的元素，而无需先查询实体以获取其当前值。有关详细信息，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">合并模式下的 ARRAY 字段 Upsert</a>。</p>
-<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert 行为：特别说明<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
+<p>要执行合并操作，请在<code translate="no">upsert</code> 请求中将 `<code translate="no">partial_update</code> ` 设置为 `<code translate="no">True</code> `，并同时提供主键以及需要更新的字段及其新值。</p>
+<p>收到此类请求后，Milvus 会执行强一致性查询以检索实体，根据请求中的数据更新字段值，插入修改后的数据，然后删除请求中携带的原始主键对应的现有实体。</p>
+<p>对于启用了<code translate="no">autoID</code> 的Collection，合并模式会保留请求中提供的主键，而不是生成一个新的主键。这与覆盖模式不同，在覆盖模式下，Milvus会为替换实体生成一个新的主键。合并模式请求中的主键必须标识一个现有实体；否则，Milvus会拒绝该请求，而不是插入一个新实体。</p>
+<p>对于启用<code translate="no">ARRAY</code> 的字段，在Milvus v2.6.17及更高版本中，合并模式支持两种运算符：<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 。这些运算符允许您向现有的<code translate="no">ARRAY</code> 字段追加元素或移除匹配的元素，而无需先查询实体以获取其当前值。有关详细信息，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">“合并模式下的Upsert ARRAY字段”</a>。</p>
+<h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert 行为：特别注意事项<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,33 +101,33 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在使用合并功能之前，您应考虑以下几点特别注意事项。以下示例假设您有一个 Collection，其中包含两个名为<code translate="no">title</code> 和<code translate="no">issue</code> 的标量字段，以及一个主键<code translate="no">id</code> 和一个名为<code translate="no">vector</code> 的向量字段。</p>
+    </button></h3><p>在使用合并功能之前，您应考虑以下几点特别说明。以下情况假设您有一个 Collection，其中包含两个名为<code translate="no">title</code> 和<code translate="no">issue</code> 的标量字段，以及一个主键<code translate="no">id</code> 和一个名为<code translate="no">vector</code> 的向量字段。</p>
 <ul>
-<li><p><strong>对</strong> <strong>启用了</strong> <code translate="no">nullable</code> <strong>的字段进行Upsert操作</strong> <strong>。</strong></p>
+<li><p><strong>对</strong> <strong>启用了</strong> <code translate="no">nullable</code> <strong>的字段执行Upsert操作</strong> <strong>。</strong></p>
 <p>假设<code translate="no">issue</code> 字段可以为空。当您对这些字段进行更新或插入操作时，请注意：</p>
 <ul>
-<li><p>如果您在 `<code translate="no">upsert</code> ` 请求中省略了 `<code translate="no">issue</code> ` 字段并禁用了 `<code translate="no">partial_update</code>`，则 `<code translate="no">issue</code> ` 字段将被更新为 `<code translate="no">null</code> `，而非保留其原始值。</p></li>
+<li><p>如果您在 `<code translate="no">upsert</code> ` 请求中省略了 `<code translate="no">issue</code> ` 字段，并且禁用了 `<code translate="no">partial_update</code>`，则 `<code translate="no">issue</code> ` 字段将被更新为 `<code translate="no">null</code> `，而不是保留其原始值。</p></li>
 <li><p>若要保留<code translate="no">issue</code> 字段的原始值，您需要启用<code translate="no">partial_update</code> 并省略<code translate="no">issue</code> 字段，或者在<code translate="no">upsert</code> 请求中包含保留原始值的<code translate="no">issue</code> 字段。</p></li>
 </ul></li>
-<li><p><strong>对 Dynamic Field 中的键执行 Upsert 操作</strong>。</p>
+<li><p><strong>在Dynamic Field中更新或插入键</strong>。</p>
 <p>假设您已在示例Collection中启用了动态键，且实体Dynamic Field中的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
 <p>当您使用诸如<code translate="no">author</code> 、<code translate="no">year</code> 或<code translate="no">tags</code> 等键对实体进行 upsert 操作，或添加其他键时，请注意：</p>
 <ul>
 <li><p>如果在禁用<code translate="no">partial_update</code> 的情况下执行upsert操作，默认行为是<strong>覆盖</strong>。这意味着Dynamic Field的值将被请求中包含的所有非Schema定义字段及其值所覆盖。</p>
 <p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ，则目标实体的Dynamic Field中的键值对将更新为该值。</p></li>
 <li><p>如果在启用<code translate="no">partial_update</code> 的情况下执行 upsert 操作，默认行为是<strong>合并</strong>。这意味着 Dynamic Field 的值将与请求中包含的所有非 Schema 定义字段及其值进行合并。</p>
-<p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，则在 upsert 操作完成后，目标实体的 Dynamic Field 中的键值对将变为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
+<p>例如，如果请求中包含的数据为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，则在 upsert 操作后，目标实体的 Dynamic Field 中的键值对将变为<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
 </ul></li>
 <li><p><strong>对 JSON 字段执行 Upsert 操作。</strong></p>
-<p>假设示例 Collection 有一个名为<code translate="no">extras</code> 的 Schema 定义的 JSON 字段，且实体中该 JSON 字段的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
-<p>当您使用修改后的 JSON 数据对实体的<code translate="no">extras</code> 字段进行 upsert 操作时，请注意该 JSON 字段会被视为一个整体，无法有选择地更新单个键。换言之，该 JSON 字段<strong>不支持</strong> <strong>合并模式下的</strong>upsert<strong>操作</strong>。</p></li>
-<li><p><strong>对</strong> <code translate="no">ARRAY</code> <strong>字段</strong><strong>进行Upsert操作</strong> <strong>。</strong></p>
+<p>假设示例 Collection 有一个名为<code translate="no">extras</code> 的 Schema 定义的 JSON 字段，且实体中此 JSON 字段中的键值对类似于<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
+<p>当您使用修改后的 JSON 数据对实体的<code translate="no">extras</code> 字段进行 upsert 操作时，请注意该 JSON 字段将被视为一个整体，您无法有选择地更新单个键。换言之，该 JSON 字段<strong>不支持</strong> <strong>合并模式下的</strong>upsert<strong>操作</strong>。</p></li>
+<li><p><strong>对</strong> <code translate="no">ARRAY</code> <strong>字段</strong><strong>执行upsert操作</strong> <strong>。</strong></p>
 <p>默认情况下，处于合并模式的<code translate="no">ARRAY</code> 字段<strong>遵循REPLACE</strong>语义：请求中携带的值将覆盖现有数组。为了实现更精细的更新，Milvus v2.6.17及更高版本还支持以下两个操作符：</p>
 <ul>
 <li><p><code translate="no">ARRAY_APPEND</code> 将请求负载中的元素追加到现有数组中。</p></li>
 <li><p><code translate="no">ARRAY_REMOVE</code> 从现有数组中移除所有与请求有效载荷中的值匹配的元素。</p></li>
 </ul>
-<p>有关操作符语法、支持的元素类型及其他限制，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">“在合并模式下对 ARRAY 字段进行 Upsert 操作</a>”。</p></li>
+<p>有关操作符语法、支持的元素类型及其他限制，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">“在合并模式下对 ARRAY 字段执行 Upsert 操作</a>”。</p></li>
 <li><p><strong>对 StructArray 字段进行 Upsert 操作。</strong></p>
 <p>在实体中对 StructArray 字段执行 Upsert 操作会覆盖该字段的值。为此，您需要提供一组字典列表，每个字典都应包含结构体 Schema 中定义的所有子字段，即使在合并模式下执行 Upsert 操作也是如此。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">“在合并模式下</a>对<a href="/docs/zh/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">StructArray 字段执行 Upsert 操作</a>”。</p></li>
@@ -146,15 +147,19 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>根据上述内容，需遵守以下限制与约束：</p>
+    </button></h3><p>根据上述内容，需遵守以下限制和约束：</p>
 <ul>
-<li><p><code translate="no">upsert</code> 请求必须始终包含目标实体的主键，即使启用了<code translate="no">autoID</code> 也是如此。对于<code translate="no">autoID</code> Collections，请求中的主键用于标识待替换的现有实体。Milvus会为插入的替换实体生成新的主键。</p></li>
+<li><p><code translate="no">upsert</code> 请求必须始终包含目标实体的主键，即使启用了<code translate="no">autoID</code> 功能也是如此。对于<code translate="no">autoID</code> Collection，主键的处理方式取决于upsert模式：</p>
+<ul>
+<li><p>在覆盖模式下，主键用于标识待替换的现有实体，Milvus 会为替换后的实体生成一个新的主键。</p></li>
+<li><p>在合并模式下，主键用于标识待更新的现有实体，且保持不变。如果主键不存在，请求将失败，而非插入新实体。</p></li>
+</ul></li>
 <li><p>目标Collection必须已加载且可供查询。</p></li>
 <li><p>请求中指定的所有字段必须存在于目标Collection的Schema中。</p></li>
 <li><p>请求中指定的所有字段的值必须与Schema中定义的数据类型匹配。</p></li>
-<li><p>对于通过函数从其他字段派生而来的字段，Milvus 将在 upsert 操作期间移除该派生字段，以便重新计算。</p></li>
+<li><p>对于任何通过函数从另一个字段派生的字段，Milvus 将在 upsert 过程中移除该派生字段，以便重新计算。</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">在Collection中执行“Upsert”操作<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">在 Collection 中执行实体 upsert 操作<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,7 +174,7 @@ summary: upsert 操作提供了一种在 Collection 中插入或更新实体的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，我们将向名为<code translate="no">my_collection</code> 的 Collection 中进行实体 upsert 操作。该 Collection 只有两个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">title</code> 和<code translate="no">issue</code> 。<code translate="no">id</code> 字段为主字段，而<code translate="no">title</code> 和<code translate="no">issue</code> 字段为标量字段。</p>
+    </button></h2><p>在本节中，我们将向名为<code translate="no">my_collection</code> 的Collection中进行实体更新插入。该Collection只有两个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">title</code> 和<code translate="no">issue</code> 。<code translate="no">id</code> 字段为主字段，而<code translate="no">title</code> 和<code translate="no">issue</code> 字段为标量字段。</p>
 <p>如果 Collection 中已存在这三个实体，它们将被 upsert 请求中包含的实体覆盖。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -343,7 +348,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">在分区中执行实体 upsert 操作<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-partition" class="common-anchor-header">在分区中执行实体“Upsert”操作<button data-href="#Upsert-entities-in-a-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -358,7 +363,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您还可以将实体进行“更新或插入”操作到指定的分区中。以下代码片段假设您的 Collection 中有一个名为<strong>PartitionA</strong>的分区。</p>
+    </button></h2><p>您还可以将实体写入（Upsert）到指定的分区中。以下代码片段假设您的 Collection 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <p>如果这三个实体在分区中已存在，将被请求中包含的实体覆盖。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -496,7 +501,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode--Milvus-v262+" class="common-anchor-header">在合并模式下更新或插入实体<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode" class="common-anchor-header">在合并模式下执行实体更新或插入<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -511,10 +516,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下代码示例演示了如何通过部分更新进行实体更新或插入。只需提供需要更新的字段及其新值，并明确指定部分更新标志。</p>
+    </button></h2><p>以下代码示例演示了如何通过部分更新来执行实体的更新或插入操作。只需提供需要更新的字段及其新值，并明确指定部分更新标志。</p>
 <p>在下面的示例中，upsert 请求中指定的实体的 `<code translate="no">issue</code> ` 字段将更新为请求中包含的值。</p>
 <div class="alert note">
-<p>在合并模式下执行 upsert 操作时，请确保请求中涉及的实体具有相同的字段集。假设需要进行 upsert 操作的实体有两个或更多（如下面的代码片段所示），为了防止错误并保持数据完整性，这些实体必须包含完全相同的字段。</p>
+<p>在合并模式下执行 upsert 操作时，请确保请求中涉及的实体具有相同的字段集。假设需要进行 upsert 操作的实体有两个或更多（如下面的代码片段所示），为了防止错误并保持数据完整性，这些实体必须包含相同的字段。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -640,7 +645,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="common-anchor-header">合并模式下对 ARRAY 字段进行 upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617+" class="anchor-icon" translate="no">
+<h2 id="Upsert-ARRAY-fields-in-merge-mode" class="common-anchor-header">在合并模式下对 ARRAY 字段执行 upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#Upsert-ARRAY-fields-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -655,7 +660,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus v2.6.17 之前，更新<code translate="no">ARRAY</code> 字段的一部分需要客户端执行“读取-修改-写入”流程：查询现有数组，在应用程序代码中进行修改，然后对完整的替换值执行 upsert 操作。 部分更新操作符（<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> ）允许您仅发送需要追加或移除的元素，从而减少了客户端逻辑，并避免了在upsert操作前进行额外的读取。</p>
+    </button></h2><p>在 Milvus v2.6.17 之前，更新<code translate="no">ARRAY</code> 字段的一部分需要客户端的“读取-修改-写入”流程：查询现有数组，在应用程序代码中进行修改，然后对完整的替换值执行 upsert 操作。 部分更新操作符（<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> ）允许您仅发送需要追加或删除的元素，从而减少了客户端逻辑，并避免了在upsert操作前进行额外的读取。</p>
 <p>假设主键为<code translate="no">1</code> 的实体已包含<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code> 。在引入部分更新操作符之前，若要向数组中添加元素<code translate="no">&quot;premium&quot;</code> ，则需要对整个替换数组执行 upsert 操作：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -777,8 +782,8 @@ client.upsert(UpsertReq.builder()
     </button></h3><ul>
 <li><p>有效载荷的值必须与目标<code translate="no">ARRAY</code> 字段的<code translate="no">element_type</code> 匹配。例如，如果目标字段是<code translate="no">ARRAY&lt;VARCHAR&gt;</code> ，则有效载荷必须包含字符串值。</p></li>
 <li><p>在 Milvus v2.6.17 及更高版本中，<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 支持<code translate="no">ARRAY</code> 字段，其<code translate="no">element_type</code> 为<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 。</p></li>
-<li><p>执行<code translate="no">ARRAY_APPEND</code> 操作后，生成的数组长度不得超过该字段的<code translate="no">max_capacity</code> 。</p></li>
-<li><p>对同一实体的并发更新插入操作在不同请求之间不具有原子性。如果两个请求同时更新同一个<code translate="no">ARRAY</code> 字段，后写的值可能会覆盖先写的值。若需保留所有并发更改，请使用应用程序级别的协调机制。</p></li>
+<li><p>执行<code translate="no">ARRAY_APPEND</code> 操作后，生成的数组长度不得超过该字段的<code translate="no">max_capacity</code> 值。</p></li>
+<li><p>对同一实体的并发更新插入操作在不同请求之间不具有原子性。如果两个请求同时更新同一个<code translate="no">ARRAY</code> 字段，后写的值可能会覆盖先写的值。若需保留所有并发更改，请使用应用程序级协调机制。</p></li>
 </ul>
 <h3 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -795,7 +800,7 @@ client.upsert(UpsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下示例使用了一个小型<code translate="no">users</code> Collection，其主键为<code translate="no">pk</code> ，包含一个类型为<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 的<code translate="no">tags</code> 字段，以及一个<code translate="no">embedding</code> 向量字段。该示例首先插入两个具有初始<code translate="no">tags</code> 值的实体，然后使用<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 演示每个操作符如何更改存储的数组。</p>
+    </button></h3><p>以下示例使用了一个小型<code translate="no">users</code> Collection，其主键为<code translate="no">pk</code> ，包含一个类型为<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 的<code translate="no">tags</code> 字段，以及一个<code translate="no">embedding</code> 向量字段。它首先插入两个初始<code translate="no">tags</code> 值为 的实体，然后通过<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 演示每个操作符如何更改存储的数组。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -898,7 +903,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">以合并模式对 StructArray 字段进行 Upsert 操作<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
+<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">以合并模式对 StructArray 字段执行 Upsert 操作<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -913,8 +918,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在实体中对 StructArray 字段进行更新插入（Upsert）操作会覆盖该字段的值。这意味着，当您对 StructArray 字段进行更新插入时，必须包含结构 Schema 中定义的所有子字段。</p>
-<p>以下示例演示了如何在合并模式下对<code translate="no">chunks</code> 字段（一个包含6个子字段的StructArray字段）进行Upsert操作。操作完成后，ID为1的实体的<code translate="no">chunks</code> 字段将被设置为请求中提供的包含两个元素的结构数组。</p>
+    </button></h2><p>在实体中对 StructArray 字段进行 Upsert 操作会覆盖该字段的值。这意味着，当您对 StructArray 字段进行 Upsert 操作时，必须包含 Schema 中定义的所有子字段。</p>
+<p>以下示例演示了如何在合并模式下对<code translate="no">chunks</code> 字段（一个包含6个子字段的StructArray字段）进行Upsert操作。操作完成后，ID为1的实体的<code translate="no">chunks</code> 字段将被设置为请求中提供的包含两个元素结构的数组。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

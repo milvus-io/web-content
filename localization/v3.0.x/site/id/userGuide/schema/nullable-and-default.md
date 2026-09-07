@@ -1,11 +1,11 @@
 ---
 id: nullable-and-default.md
-title: Bidang yang dapat dinolkan
+title: Kolom yang Dapat Bernilai NULL
 summary: >-
-  Konfigurasikan bidang yang dapat dinolkan dan nilai default, termasuk skema,
-  sisipan, indeks, pencarian, dan perilaku filter.
+  Konfigurasikan kolom yang dapat bernilai null dan nilai defaultnya, termasuk
+  skema, perilaku penyisipan, pengindeksan, pencarian, dan penyaringan.
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">Bidang yang dapat dinolkan<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">Kolom yang Dapat Bernilai NULL<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,12 +20,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus mendukung field yang dapat dinullkan, yang memungkinkan nilai field hilang atau secara eksplisit disetel ke NULL. Nullability didefinisikan pada tingkat skema dan berlaku secara konsisten di seluruh operasi pemasukan data, pengindeksan, pencarian, dan kueri.</p>
-<p>Gunakan bidang yang dapat dinullkan ketika:</p>
+    </button></h1><p>Milvus mendukung bidang yang dapat bernilai NULL, yang memungkinkan nilai bidang tersebut tidak ada atau secara eksplisit ditetapkan ke NULL. Kemampuan untuk bernilai NULL ditentukan pada tingkat skema dan berlaku secara konsisten di seluruh operasi pengambilan data, pengindeksan, pencarian, dan kueri.</p>
+<p>Gunakan kolom yang dapat bernilai NULL jika:</p>
 <ul>
-<li>Data dimasukkan dari sistem eksternal yang memungkinkan adanya nilai yang hilang.</li>
-<li>Beberapa metadata bersifat opsional atau hanya tersedia untuk sebagian dataset.</li>
-<li>Penyematan vektor dibuat secara asinkron dan disisipkan kemudian.</li>
+<li>Data diimpor dari sistem eksternal yang mengizinkan nilai yang kosong.</li>
+<li>Beberapa metadata bersifat opsional atau hanya tersedia untuk sebagian dari dataset.</li>
+<li>Embedding vektor dihasilkan secara asinkron dan disisipkan kemudian.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,12 +43,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Bidang vektor yang mengizinkan nilai NULL tidak mendukung ekspresi penyaringan <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code>. Anda tidak dapat secara eksplisit memfilter entitas berdasarkan apakah nilai bidang vektor adalah NULL.</p></li>
-<li><p>Bidang<a href="/docs/id/array-of-structs.md">Array of Structs</a> tidak mendukung nilai NULL. Anda tidak dapat menandai bidang Array of Structs atau bidang apa pun yang bersarang di dalamnya sebagai nullable.</p></li>
-<li><p>Atribut nullable ditentukan saat bidang dibuat dan tidak dapat dimodifikasi setelahnya. Anda tidak dapat mengaktifkan atau menonaktifkan nullable untuk bidang yang sudah ada.</p></li>
-<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan tidak nol. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
+<li><p>Kolom vektor yang mengizinkan nilai NULL tidak mendukung ekspresi filter ` <code translate="no">IS NULL</code> ` atau ` <code translate="no">IS NOT NULL</code> `. Anda tidak dapat secara eksplisit menyaring entitas berdasarkan apakah nilai kolom vektor tersebut NULL.</p></li>
+<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinyatakan sebagai nullable. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat nullable dari induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus bersifat nullable agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
+<li><p>Atribut nullable ditentukan saat bidang dibuat dan tidak dapat diubah setelahnya. Anda tidak dapat mengaktifkan atau menonaktifkan nullability untuk bidang yang sudah ada.</p></li>
+<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan tidak null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">Apa yang dimaksud dengan field yang dapat dinullkan?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">Apa itu bidang yang dapat bernilai NULL?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,22 +63,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Di Milvus, apakah sebuah field diperbolehkan untuk menyimpan nilai NULL dikendalikan oleh atribut field tingkat skema bernama <code translate="no">nullable</code>.</p>
-<p>Ketika sebuah field didefinisikan dengan <code translate="no">nullable=True</code>, Milvus mengizinkan nilai field tersebut hilang selama pemasukan data. Dalam praktiknya, Milvus memperlakukan dua masukan berikut ini sebagai masukan yang setara dan menyimpan nilai field sebagai NULL:</p>
+    </button></h2><p>Di Milvus, apakah suatu bidang diizinkan menyimpan nilai NULL dikendalikan oleh atribut bidang tingkat skema bernama ` <code translate="no">nullable</code>`.</p>
+<p>Ketika sebuah bidang didefinisikan dengan ` <code translate="no">nullable=True</code>`, Milvus mengizinkan nilai bidang tersebut tidak ada selama proses pengambilan data. Dalam praktiknya, Milvus memperlakukan dua masukan berikut sebagai setara dan menyimpan nilai bidang sebagai `NULL`:</p>
 <ul>
-<li>Field dihilangkan dari entitas input.</li>
-<li>Field secara eksplisit disetel ke NULL (misalnya, <code translate="no">None</code> di Python).</li>
+<li>Kolom tersebut dihilangkan dari entitas masukan.</li>
+<li>Kolom tersebut secara eksplisit ditetapkan ke NULL (misalnya, ` <code translate="no">None</code> ` dalam Python).</li>
 </ul>
-<p>Jika sebuah field tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus memberikan nilai yang valid untuk field tersebut. Menghilangkan field atau secara eksplisit memberikan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
-<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Namun, bidang Array of Structs tidak mendukung atribut nullable.</p>
+<p>Jika suatu bidang tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus menyediakan nilai yang valid untuk bidang tersebut. Mengabaikan bidang atau secara eksplisit menetapkan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
+<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai dari Milvus 3.0.0, atribut ini juga didukung pada bidang induk StructArray. Jangan mengonfigurasi subbidang Struct sebagai nullable secara terpisah; tentukan nullability pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal.</p>
 <div class="alert note">
-<p>Nullability menentukan apakah nilai field bisa hilang; tidak menentukan nilai apa yang digunakan ketika field hilang.</p>
+<p>Nullability menentukan apakah nilai bidang boleh tidak ada; hal ini tidak menentukan nilai apa yang digunakan ketika suatu bidang tidak ada.</p>
 <ul>
-<li>Jika field yang dapat dinullkan dikonfigurasikan tanpa nilai default, penghilangan field akan menghasilkan nilai NULL yang tersimpan.</li>
-<li>Jika sebuah nilai default dikonfigurasi, Milvus dapat menyimpan nilai default sebagai gantinya. Untuk detailnya, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</li>
+<li>Jika bidang yang dapat bernilai null dikonfigurasi tanpa nilai default, mengabaikan bidang tersebut akan menghasilkan nilai NULL yang disimpan.</li>
+<li>Jika nilai default telah dikonfigurasi, Milvus mungkin akan menyimpan nilai default tersebut sebagai gantinya. Untuk detailnya, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Mendefinisikan bidang yang dapat dinullkan dalam skema koleksi<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Tentukan bidang yang dapat bernilai null dalam skema koleksi<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,10 +93,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan field yang dapat dinullkan, Anda harus mengaktifkan atribut nullable ketika mendefinisikan skema koleksi.</p>
-<p>Dalam contoh ini, skema koleksi mendefinisikan bidang vektor bernama <code translate="no">embedding</code> dengan <code translate="no">nullable=True</code>. Hal ini memungkinkan entitas dalam koleksi untuk menghilangkan nilai vektor atau secara eksplisit mengaturnya menjadi NULL selama konsumsi data.</p>
+    </button></h2><p>Untuk menggunakan bidang nullable, Anda harus mengaktifkan atribut nullable saat mendefinisikan skema koleksi.</p>
+<p>Dalam contoh ini, skema koleksi mendefinisikan bidang vektor bernama ` <code translate="no">embedding</code> ` dengan ` <code translate="no">nullable=True</code>`. Hal ini memungkinkan entitas dalam koleksi untuk mengosongkan nilai vektor atau secara eksplisit menetapkannya ke `NULL` selama proses pengambilan data.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -247,16 +252,21 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam skema ini:</p>
 <ul>
-<li>Kolom <code translate="no">embedding</code> secara eksplisit ditandai sebagai nullable.</li>
-<li>Entitas dapat menghilangkan bidang <code translate="no">embedding</code> atau menetapkan nilai NULL selama penyisipan.</li>
-<li>Keputusan untuk mengizinkan nilai NULL ditetapkan pada waktu pembuatan koleksi.</li>
+<li>Bidang ` <code translate="no">embedding</code> ` secara eksplisit ditandai sebagai nullable.</li>
+<li>Entitas dapat mengabaikan bidang ` <code translate="no">embedding</code> ` atau menetapkan nilainya menjadi NULL selama proses penyisipan.</li>
+<li>Keputusan untuk mengizinkan nilai NULL ditetapkan pada saat pembuatan koleksi.</li>
 </ul>
-<p>Untuk lebih jelasnya, contoh berikut ini berfokus pada field vektor yang dapat dinullkan (<code translate="no">embedding</code>). Mendefinisikan bidang skalar yang dapat dinullkan bersifat opsional dan tidak diharuskan untuk mengikuti bagian selanjutnya dari panduan ini.</p>
+<p>Untuk kejelasan, contoh-contoh berikut berfokus pada bidang vektor yang dapat bernilai NULL (<code translate="no">embedding</code>). Mendefinisikan bidang skalar yang dapat bernilai NULL bersifat opsional dan tidak wajib untuk mengikuti sisa panduan ini.</p>
 <p><details>
-<summary>Opsional: Mendefinisikan bidang skalar yang dapat dinolkan</summary></p>
-<p>Bidang skalar juga dapat didefinisikan sebagai nullable menggunakan atribut <code translate="no">nullable</code> yang sama dan mengikuti aturan yang sama selama pemasukan. Sebagai contoh:</p>
+<summary>Opsional: Menentukan bidang skalar yang dapat bernilai NULL</summary></p>
+<p>Bidang skalar juga dapat didefinisikan sebagai bidang yang dapat bernilai NULL menggunakan atribut ` <code translate="no">nullable</code> ` yang sama dan mengikuti aturan yang sama selama proses pengambilan data. Contohnya:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -297,10 +307,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah sebuah field didefinisikan sebagai nullable dalam skema koleksi, Milvus mengizinkan nilai field hilang atau secara eksplisit disetel ke NULL selama pemasukan data.</p>
-<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat di <a href="#define-a-nullable-field-in-the-collection-schema">Tentukan field yang dapat dinullkan dalam skema koleksi</a>, yang mendemonstrasikan kasus-kasus yang berbeda.</p>
+    </button></h2><p>Setelah suatu bidang didefinisikan sebagai nullable dalam skema koleksi, Milvus mengizinkan nilai bidang tersebut hilang atau secara eksplisit ditetapkan ke NULL selama proses ingestion data.</p>
+<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat dalam bagian " <a href="#define-a-nullable-field-in-the-collection-schema">Mendefinisikan bidang yang dapat bernilai NULL" dalam skema koleksi</a>, yang menunjukkan berbagai kasus ini.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -396,11 +411,11 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam contoh ini:</p>
 <ul>
-<li>Entitas <strong>id = 1</strong> memberikan nilai vektor yang valid.</li>
-<li>Entity <strong>id = 2</strong> secara eksplisit memberikan nilai NULL pada bidang <code translate="no">embedding</code>.</li>
-<li>Entity <strong>id = 3</strong> menghilangkan field <code translate="no">embedding</code> secara keseluruhan; Milvus menyimpannya sebagai NULL.</li>
+<li>Entitas <strong>id = 1</strong> menyediakan nilai vektor yang valid.</li>
+<li>Entitas <strong>dengan ID = 2</strong> secara eksplisit menetapkan nilai NULL ke bidang ` <code translate="no">embedding</code> `.</li>
+<li>Entitas <strong>dengan ID = 3</strong> mengabaikan bidang ` <code translate="no">embedding</code> ` sepenuhnya; Milvus menyimpannya sebagai NULL.</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Perilaku indeks pada bidang yang dapat dinullkan<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Perilaku indeks pada bidang yang dapat bernilai NULL<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,14 +430,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah memasukkan data, Anda dapat membuat indeks pada field yang dapat dinullkan seperti biasa. Perbedaan utamanya adalah bagaimana Milvus menangani nilai NULL selama konstruksi indeks:</p>
+    </button></h2><p>Setelah menyisipkan data, Anda dapat membuat indeks pada bidang yang dapat bernilai NULL seperti biasa. Perbedaan utamanya adalah cara Milvus menangani nilai NULL selama pembuatan indeks:</p>
 <ul>
-<li>Hanya entitas dengan nilai bukan nol yang ditambahkan ke indeks.</li>
-<li>Entitas dengan nilai NULL akan dilewati dan tidak ikut serta dalam pembangunan indeks.</li>
+<li>Hanya entitas dengan nilai non-NULL yang ditambahkan ke indeks.</li>
+<li>Entitas dengan nilai NULL dilewati dan tidak ikut serta dalam pembuatan indeks.</li>
 </ul>
-<p>Untuk bidang vektor yang dapat dinullkan, ini berarti hanya entitas dengan vektor yang valid yang dapat dicari berdasarkan kesamaan vektor.</p>
+<p>Untuk bidang vektor yang dapat bernilai NULL, ini berarti hanya entitas dengan vektor yang valid yang dapat dicari berdasarkan kesamaan vektor.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -522,12 +542,12 @@ curl --request POST \
   --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;my_collection&quot;}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada titik ini:</p>
+<p>Pada tahap ini:</p>
 <ul>
-<li>Entitas dengan nilai penyematan yang valid diindeks dan siap untuk dicari.</li>
-<li>Entitas yang sematannya NULL tetap berada di dalam koleksi, tetapi tidak disertakan di dalam indeks vektor.</li>
+<li>Entitas dengan nilai embedding yang valid diindeks dan siap untuk pencarian.</li>
+<li>Entitas yang embedding-nya NULL tetap berada dalam koleksi, tetapi tidak dimasukkan ke dalam indeks vektor.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Perilaku pencarian dengan bidang yang dapat dinullkan<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Perilaku pencarian dengan bidang yang dapat bernilai NULL<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,16 +562,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda melakukan operasi pencarian pada field yang dapat dinullkan, Milvus hanya mengevaluasi entitas dengan nilai bukan nol untuk field yang digunakan dalam pencarian. Entitas yang bidang vektornya bernilai NULL akan dilewati secara otomatis.</p>
-<p>Untuk bidang vektor yang dapat dinullkan seperti <code translate="no">embedding</code> dalam contoh ini:</p>
+    </button></h2><p>Saat Anda melakukan operasi pencarian pada bidang yang dapat bernilai null, Milvus hanya mengevaluasi entitas dengan nilai non-null untuk bidang yang digunakan dalam pencarian. Entitas yang bidang vektornya bernilai NULL akan dilewati secara otomatis.</p>
+<p>Untuk bidang vektor yang dapat bernilai NULL seperti ` <code translate="no">embedding</code> ` dalam contoh ini:</p>
 <ul>
-<li>Hanya entitas dengan nilai vektor yang valid yang akan dievaluasi dan diberi peringkat.</li>
+<li>Hanya entitas dengan nilai vektor yang valid yang dievaluasi dan diberi peringkat.</li>
 <li>Entitas dengan vektor NULL tidak menyebabkan kesalahan.</li>
-<li>Jika jumlah vektor yang valid lebih kecil dari yang diminta <code translate="no">topK</code> (<code translate="no">limit</code>), Milvus mungkin mengembalikan hasil yang lebih sedikit dari <code translate="no">limit</code>.</li>
+<li>Jika jumlah vektor yang valid lebih kecil dari <code translate="no">topK</code> yang diminta (<code translate="no">limit</code>), Milvus mungkin mengembalikan hasil yang lebih sedikit daripada <code translate="no">limit</code>.</li>
 </ul>
-<p>Contoh berikut ini melakukan pencarian vektor pada bidang vektor yang dapat dinullkan <code translate="no">embedding</code>:</p>
+<p>Contoh berikut melakukan pencarian vektor pada bidang vektor yang dapat bernilai NULL ( <code translate="no">embedding</code>):</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -630,11 +655,11 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam pencarian ini:</p>
 <ul>
-<li>Hanya entitas dengan nilai <code translate="no">embedding</code> yang bukan null yang dianggap sebagai kandidat.</li>
-<li>Entitas dengan nilai NULL untuk <code translate="no">embedding</code> dikecualikan dari evaluasi.</li>
-<li>Jumlah hasil yang dikembalikan bergantung pada jumlah vektor yang valid yang ada di dalam koleksi.</li>
+<li>Hanya entitas dengan nilai <code translate="no">embedding</code> yang tidak null yang dipertimbangkan sebagai kandidat.</li>
+<li>Entitas dengan nilai NULL untuk <code translate="no">embedding</code> tidak dimasukkan dalam evaluasi.</li>
+<li>Jumlah hasil yang dikembalikan bergantung pada berapa banyak vektor valid yang ada dalam koleksi.</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">Kueri dan implikasi pemfilteran<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">Implikasi kueri dan penyaringan<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -649,11 +674,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh-contoh sebelumnya berfokus pada bidang vektor. Bagian ini menjelaskan bagaimana nilai NULL berperilaku dalam <strong>ekspresi filter skalar</strong>.</p>
-<p>Bidang skalar dapat didefinisikan dengan <code translate="no">nullable=True</code> dan mengikuti aturan konsumsi yang sama dengan bidang vektor. Namun, <strong>nilai skalar NULL selalu dievaluasi menjadi false dalam ekspresi filter</strong>.</p>
-<p>Sebagai contoh, diberikan field skalar yang dapat dinullkan <code translate="no">age</code>, filter berikut ini memilih entitas yang usianya lebih besar dari 18 tahun:</p>
+    </button></h2><p>Contoh-contoh sebelumnya berfokus pada bidang vektor. Bagian ini menjelaskan bagaimana nilai NULL berperilaku dalam <strong>ekspresi penyaringan skalar</strong>.</p>
+<p>Bidang skalar dapat didefinisikan dengan <code translate="no">nullable=True</code> dan mengikuti aturan pengambilan data yang sama seperti bidang vektor. Namun, <strong>nilai skalar NULL selalu dievaluasi sebagai false dalam ekspresi penyaringan</strong>.</p>
+<p>Misalnya, dengan bidang skalar yang dapat bernilai NULL <code translate="no">age</code>, filter berikut memilih entitas yang usianya lebih dari 18:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -665,10 +695,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Entitas di mana <code translate="no">age</code> bernilai NULL dikecualikan dari hasil karena nilai NULL tidak memenuhi kondisi filter.</p>
-<p>Demikian pula, pemeriksaan kesetaraan tidak mencocokkan nilai NULL. Sebagai contoh:</p>
+<p>Entitas yang memiliki nilai ` <code translate="no">age</code> ` sebagai `NULL` dikecualikan dari hasil karena nilai `NULL` tidak memenuhi kondisi filter.</p>
+<p>Demikian pula, pemeriksaan kesamaan tidak cocok dengan nilai NULL. Contohnya:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -679,8 +714,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Entitas dengan <code translate="no">status</code> bernilai NULL akan dikecualikan dari hasil.</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Bidang yang dapat dinullkan dan nilai default<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p>Entitas yang memiliki nilai ` <code translate="no">status</code> ` sebagai `NULL` dikecualikan dari hasil.</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Kolom yang dapat bernilai NULL dan nilai default<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -695,24 +730,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika <code translate="no">nullable</code> dan <code translate="no">default_value</code> dikonfigurasikan untuk sebuah field, aturan berikut ini menentukan bagaimana Milvus menangani input NULL atau nilai field yang hilang selama penyisipan.</p>
+    </button></h2><p>Ketika baik ` <code translate="no">nullable</code> ` maupun ` <code translate="no">default_value</code> ` dikonfigurasi untuk suatu bidang, aturan berikut menentukan cara Milvus menangani input `NULL` atau nilai bidang yang hilang selama penyisipan.</p>
 <table>
 <thead>
-<tr><th>Nullable diaktifkan</th><th>Nilai default</th><th>Masukan pengguna (NULL atau dihilangkan)</th><th>Hasil</th></tr>
+<tr><th>Nullable diaktifkan</th><th>Nilai default</th><th>Masukan pengguna (NULL atau diabaikan)</th><th>Hasil</th></tr>
 </thead>
 <tbody>
-<tr><td>Ya</td><td>Ya (bukan NULL)</td><td>NULL atau dihilangkan</td><td>Menggunakan nilai default</td></tr>
-<tr><td>Ya</td><td>Tidak</td><td>NULL atau dihilangkan</td><td>Disimpan sebagai NULL</td></tr>
-<tr><td>Tidak</td><td>Ya (bukan NULL)</td><td>NULL atau dihilangkan</td><td>Menggunakan nilai default</td></tr>
-<tr><td>Tidak</td><td>Tidak</td><td>NULL atau dihilangkan</td><td>Melemparkan kesalahan</td></tr>
-<tr><td>Tidak</td><td>Ya (default NULL)</td><td>NULL atau dihilangkan</td><td>Melemparkan kesalahan</td></tr>
+<tr><td>Ya</td><td>Ya (bukan NULL)</td><td>NULL atau diabaikan</td><td>Menggunakan nilai default</td></tr>
+<tr><td>Ya</td><td>Tidak</td><td>NULL atau diabaikan</td><td>Disimpan sebagai NULL</td></tr>
+<tr><td>Tidak</td><td>Ya (bukan NULL)</td><td>NULL atau diabaikan</td><td>Menggunakan nilai default</td></tr>
+<tr><td>Tidak</td><td>Tidak</td><td>NULL atau tidak ditentukan</td><td>Menimbulkan kesalahan</td></tr>
+<tr><td>Tidak</td><td>Ya (NULL secara default)</td><td>NULL atau diabaikan</td><td>Menimbulkan kesalahan</td></tr>
 </tbody>
 </table>
-<p><strong>Hal-hal penting:</strong></p>
+<p><strong>Poin-poin penting:</strong></p>
 <ul>
-<li>Ketika sebuah bidang memiliki nilai default non-NULL, nilai tersebut akan digunakan terlepas dari apakah <code translate="no">nullable</code> diaktifkan.</li>
-<li>Bila <code translate="no">nullable=True</code> tetapi tidak ada nilai default yang ditetapkan, bidang tersebut menyimpan NULL.</li>
-<li>Bila <code translate="no">nullable=False</code> dan tidak ada nilai default yang ditetapkan, penyisipan akan gagal dengan kesalahan.</li>
-<li>Menetapkan nilai default NULL pada field yang tidak dapat dinullkan adalah tidak valid dan menyebabkan kesalahan.</li>
+<li>Jika suatu kolom memiliki nilai default yang bukan NULL, nilai tersebut akan digunakan terlepas dari apakah opsi " <code translate="no">nullable</code> " diaktifkan atau tidak.</li>
+<li>Jika " <code translate="no">nullable=True</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, bidang tersebut akan menyimpan nilai NULL.</li>
+<li>Jika opsi " <code translate="no">nullable=False</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, proses penyisipan akan gagal dan menimbulkan kesalahan.</li>
+<li>Menetapkan nilai default NULL pada kolom yang tidak boleh NULL adalah tidak valid dan menyebabkan kesalahan.</li>
 </ul>
-<p>Untuk contoh lengkap dan penggunaan API untuk nilai default, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</p>
+<p>Untuk contoh lengkap dan penggunaan API terkait nilai default, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</p>
