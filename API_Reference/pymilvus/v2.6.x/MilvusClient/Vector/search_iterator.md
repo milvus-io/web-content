@@ -58,9 +58,7 @@ search_iterator(
 
     The total number of entities to return.
 
-    You can use this parameter in combination with **offset** in **param** to enable pagination.
-
-    The sum of this value and **offset** in **param** should be less than 16,384. 
+    The `offset` parameter is not supported by this operation.
 
 - **output_fields** (l*ist[str]*) -
 
@@ -121,14 +119,6 @@ search_iterator(
     The number of decimal places for distance values. The default value is -1, which indicates that no rounding is applied.
 
 - **kwargs** -
-
-    - **offset** (int) -
-
-        The number of records to skip in the search result. 
-
-        You can use this parameter in combination with `limit` to enable pagination.
-
-        The sum of this value and `limit` should be less than 16,384. 
 
     - **round_decimal** (int) -
 
@@ -218,4 +208,3 @@ while True:
     for hit in result:
         results.append(hit.to_dict())
 ```
-
