@@ -2743,6 +2743,30 @@
             "id": "milvus_and_mcp.md",
             "order": 5,
             "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []            
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []            
+          },
+                    {
+            "label": "Basic Memory",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []            
+          },
+                    {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
+            "children": []            
           }
         ]
       },
