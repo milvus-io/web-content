@@ -53,6 +53,7 @@ In this section, you will learn how to conduct a single-vector search. The searc
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -207,6 +208,45 @@ console.log(res.results)
 // ]
 ```
 
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("http://localhost:19530", "root:Milvus"));
+if (!status.IsOk()) {
+    std::cerr << "Failed to connect: " << status.Message() << std::endl;
+    return;
+}
+
+std::vector<float> queryVector = {
+    0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F
+};
+
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         .WithLimit(3)
+                         .WithMetricType(milvus::MetricType::IP)
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -290,6 +330,7 @@ Similarly, you can include multiple query vectors in a search request. Milvus wi
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -445,6 +486,34 @@ console.log(res.results)
 // ]
 ```
 
+```cpp
+std::vector<std::vector<float>> queryVectors = {
+    {0.041732933F, 0.013779674F, -0.027564144F, -0.013061441F, 0.009748648F},
+    {0.0039737443F, 0.003020432F, -0.0006188639F, 0.03913546F, -0.00089768134F},
+};
+
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         .WithLimit(3)
+                         .WithFloatVectors(std::move(queryVectors));
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -509,6 +578,7 @@ Instead of setting query vectors, you can use primary keys if the query vectors 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -529,15 +599,88 @@ for hits in res:
 ```
 
 ```java
-// java
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("quick_setup")
+        .annsField("vector")
+        // highlight-start
+        .ids(Arrays.<Object>asList(551L, 296L, 43L))
+        // highlight-end
+        .limit(3)
+        .metricType(IndexParam.MetricType.IP)
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 ```
 
 ```javascript
-// node.js
+const res = await client.search({
+    collection_name: "quick_setup",
+    anns_field: "vector",
+    // highlight-start
+    ids: [551, 296, 43],
+    // highlight-end
+    limit: 3,
+    metric_type: "IP",
+})
+
+console.log(res.results)
 ```
 
 ```go
-// go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+queryIDs := column.NewColumnInt64("id", []int64{551, 296, 43})
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    "quick_setup", // collectionName
+    3,             // limit
+    queryIDs,
+).WithANNSField("vector").
+    WithSearchParam("metric_type", "IP"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+}
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         // highlight-start
+                         .WithIDs({551, 296, 43})
+                         // highlight-end
+                         .WithLimit(3)
+                         .WithMetricType(milvus::MetricType::IP);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
 ```
 
 ```bash
@@ -568,6 +711,7 @@ The following code snippet assumes a partition named **PartitionA** in your coll
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -680,6 +824,30 @@ console.log(res.results)
 // ]
 ```
 
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         // highlight-next-line
+                         .AddPartitionName("partitionA")
+                         .WithLimit(3)
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -728,6 +896,7 @@ In a search result, Milvus includes the primary field values and similarity dist
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -846,6 +1015,33 @@ console.log(res.results)
 // ]
 ```
 
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         .WithLimit(3)
+                         .WithMetricType(milvus::MetricType::IP)
+                         // highlight-next-line
+                         .AddOutputField("color")
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i]
+                  << ", color=" << colors->Data()[i] << std::endl;
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -901,6 +1097,7 @@ The following example sorts search results by `price` from low to high. Include 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -920,15 +1117,105 @@ res = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.aggregation.AggDirection;
+import io.milvus.v2.service.vector.request.aggregation.OrderByField;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+
+FloatVec queryVector = new FloatVec(new float[]{0.35803764f, -0.6023496f, 0.18414013f, -0.26286206f, 0.90294385f});
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("product_catalog")
+        .data(Collections.singletonList(queryVector))
+        .annsField("embedding")
+        .limit(20)
+        .outputFields(Arrays.asList("id", "price", "rating", "category"))
+        // highlight-start
+        .orderByFields(Collections.singletonList(
+                OrderByField.builder()
+                        .fieldName("price")
+                        .direction(AggDirection.ASC)
+                        .build()
+        ))
+        // highlight-end
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 ```
 
 ```javascript
-// nodejs
+const res = await client.search({
+    collection_name: "product_catalog",
+    data: query_vector,
+    anns_field: "embedding",
+    limit: 20,
+    output_fields: ["id", "price", "rating", "category"],
+    // highlight-start
+    order_by_fields: [
+        { field: "price", order: "asc" }
+    ],
+    // highlight-end
+})
+
+console.log(res.results)
 ```
 
 ```go
-// go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+queryVector := []float32{0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "product_catalog", // collectionName
+    20,                // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("embedding").
+    WithOutputFields("id", "price", "rating", "category").
+    WithSearchParam("order_by_fields", "price:asc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Prices: ", resultSet.GetColumn("price").FieldData().GetScalars())
+}
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("product_catalog")
+                         .WithAnnsField("embedding")
+                         .WithLimit(20)
+                         .WithOutputFields({"id", "price", "rating", "category"})
+                         // highlight-start
+                         .AddOrderByField(milvus::OrderByField(
+                             "price", milvus::AggregationDirection::ASC))
+                         // highlight-end
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto prices = result.OutputField<milvus::Int64FieldData>("price");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", price=" << prices->Data()[i] << std::endl;
+    }
+}
 ```
 
 ```bash
@@ -942,6 +1229,7 @@ You can also sort by multiple scalar fields. Milvus applies the fields in the or
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -962,15 +1250,115 @@ res = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.aggregation.AggDirection;
+import io.milvus.v2.service.vector.request.aggregation.OrderByField;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+
+FloatVec queryVector = new FloatVec(new float[]{0.35803764f, -0.6023496f, 0.18414013f, -0.26286206f, 0.90294385f});
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("product_catalog")
+        .data(Collections.singletonList(queryVector))
+        .annsField("embedding")
+        .limit(20)
+        .outputFields(Arrays.asList("id", "price", "rating", "category"))
+        // highlight-start
+        .orderByFields(Arrays.asList(
+                OrderByField.builder()
+                        .fieldName("price")
+                        .direction(AggDirection.ASC)
+                        .build(),
+                OrderByField.builder()
+                        .fieldName("rating")
+                        .direction(AggDirection.DESC)
+                        .build()
+        ))
+        // highlight-end
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 ```
 
 ```javascript
-// nodejs
+const res = await client.search({
+    collection_name: "product_catalog",
+    data: query_vector,
+    anns_field: "embedding",
+    limit: 20,
+    output_fields: ["id", "price", "rating", "category"],
+    // highlight-start
+    order_by_fields: [
+        { field: "price", order: "asc" },
+        { field: "rating", order: "desc" },
+    ],
+    // highlight-end
+})
+
+console.log(res.results)
 ```
 
 ```go
-// go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+queryVector := []float32{0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "product_catalog", // collectionName
+    20,                // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("embedding").
+    WithOutputFields("id", "price", "rating", "category").
+    WithSearchParam("order_by_fields", "price:asc,rating:desc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Prices: ", resultSet.GetColumn("price").FieldData().GetScalars())
+    fmt.Println("Ratings: ", resultSet.GetColumn("rating").FieldData().GetScalars())
+}
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("product_catalog")
+                         .WithAnnsField("embedding")
+                         .WithLimit(20)
+                         .WithOutputFields({"id", "price", "rating", "category"})
+                         // highlight-start
+                         .WithOrderByFields({
+                             milvus::OrderByField("price", milvus::AggregationDirection::ASC),
+                             milvus::OrderByField("rating", milvus::AggregationDirection::DESC),
+                         })
+                         // highlight-end
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto prices = result.OutputField<milvus::Int64FieldData>("price");
+    const auto ratings = result.OutputField<milvus::DoubleFieldData>("rating");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", price=" << prices->Data()[i]
+                  << ", rating=" << ratings->Data()[i] << std::endl;
+    }
+}
 ```
 
 ```bash
@@ -1022,6 +1410,7 @@ Note that, the sum of `limit` and `offset` in a single ANN search should be less
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1105,6 +1494,30 @@ res = await client.search({
 })
 ```
 
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         .WithLimit(3)
+                         // highlight-next-line
+                         .WithOffset(10)
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -1138,6 +1551,7 @@ The example below shows how to temporarily set a timezone for a search operation
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1154,15 +1568,94 @@ res = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+
+FloatVec queryVector = new FloatVec(new float[]{0.35803764f, -0.6023496f, 0.18414013f, -0.26286206f, 0.90294385f});
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("quick_setup")
+        .annsField("vector")
+        .data(Collections.singletonList(queryVector))
+        .limit(3)
+        .metricType(IndexParam.MetricType.IP)
+        // highlight-next-line
+        .timezone("America/Havana")
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 ```
 
 ```javascript
-// js
+const res = await client.search({
+    collection_name: "quick_setup",
+    anns_field: "vector",
+    data: query_vector,
+    limit: 3,
+    metric_type: "IP",
+    // highlight-next-line
+    params: { timezone: "America/Havana" },
+})
+
+console.log(res.results)
 ```
 
 ```go
-// go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+queryVector := []float32{0.35803764, -0.6023496, 0.18414013, -0.26286206, 0.90294385}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "quick_setup", // collectionName
+    3,             // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("vector").
+    WithSearchParam("metric_type", "IP").
+    WithOutputFields("event_time").
+    WithSearchParam("timezone", "America/Havana"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Event times: ", resultSet.GetColumn("event_time").FieldData().GetScalars())
+}
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         .WithLimit(3)
+                         .WithMetricType(milvus::MetricType::IP)
+                         .AddOutputField("event_time")
+                         // highlight-next-line
+                         .WithTimezone("America/Havana")
+                         .AddFloatVector(queryVector);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto eventTimes = result.OutputField<milvus::TimestamptzFieldData>("event_time");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", event_time=" << eventTimes->Data()[i] << std::endl;
+    }
+}
 ```
 
 ```bash
