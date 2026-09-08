@@ -76,6 +76,7 @@ summary: >-
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -221,6 +222,43 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -310,6 +348,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
@@ -456,6 +495,32 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   ]</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;std::vector&lt;<span class="hljs-type">float</span>&gt;&gt; queryVectors = {
+    {<span class="hljs-number">0.041732933F</span>, <span class="hljs-number">0.013779674F</span>, <span class="hljs-number">-0.027564144F</span>, <span class="hljs-number">-0.013061441F</span>, <span class="hljs-number">0.009748648F</span>},
+    {<span class="hljs-number">0.0039737443F</span>, <span class="hljs-number">0.003020432F</span>, <span class="hljs-number">-0.0006188639F</span>, <span class="hljs-number">0.03913546F</span>, <span class="hljs-number">-0.00089768134F</span>},
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithFloatVectors</span>(std::<span class="hljs-built_in">move</span>(queryVectors));
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -529,6 +594,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -543,11 +609,76 @@ curl --request POST \
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-comment-line">        .ids(Arrays.&lt;Object&gt;asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>))</span>
+        .limit(<span class="hljs-number">3</span>)
+        .metricType(IndexParam.MetricType.IP)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+<span class="highlighted-comment-line">    <span class="hljs-attr">ids</span>: [<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>],</span>
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryIDs := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>})
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    <span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,             <span class="hljs-comment">// limit</span>
+    queryIDs,
+).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;IP&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">WithIDs</span>({<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>})</span>
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
@@ -585,6 +716,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -686,6 +818,27 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)</span>
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -743,6 +896,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -850,6 +1004,30 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; entity: {&quot;color&quot;: &quot;grey_8510&quot;}}</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> colors = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::VarCharFieldData&gt;(<span class="hljs-string">&quot;color&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i]
+                  &lt;&lt; <span class="hljs-string">&quot;, color=&quot;</span> &lt;&lt; colors-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -912,6 +1090,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -925,11 +1104,93 @@ curl --request POST \
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">20</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>))
+<span class="highlighted-comment-line">        .orderByFields(Collections.singletonList(</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;price&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.ASC)</span>
+<span class="highlighted-comment-line">                        .build()</span>
+<span class="highlighted-comment-line">        ))</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>],
+<span class="highlighted-comment-line">    <span class="hljs-attr">order_by_fields</span>: [</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> }</span>
+<span class="highlighted-comment-line">    ],</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">20</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+                         .<span class="hljs-built_in">WithOutputFields</span>({<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>})
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">AddOrderByField</span>(milvus::<span class="hljs-built_in">OrderByField</span>(</span>
+<span class="highlighted-comment-line">                             <span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC))</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> prices = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::Int64FieldData&gt;(<span class="hljs-string">&quot;price&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, price=&quot;</span> &lt;&lt; prices-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -939,6 +1200,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -953,11 +1215,103 @@ curl --request POST \
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">20</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>))
+<span class="highlighted-comment-line">        .orderByFields(Arrays.asList(</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;price&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.ASC)</span>
+<span class="highlighted-comment-line">                        .build(),</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;rating&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.DESC)</span>
+<span class="highlighted-comment-line">                        .build()</span>
+<span class="highlighted-comment-line">        ))</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>],
+<span class="highlighted-comment-line">    <span class="hljs-attr">order_by_fields</span>: [</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> },</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;desc&quot;</span> },</span>
+<span class="highlighted-comment-line">    ],</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">20</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc,rating:desc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Ratings: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+                         .<span class="hljs-built_in">WithOutputFields</span>({<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>})
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">WithOrderByFields</span>({</span>
+<span class="highlighted-comment-line">                             milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC),</span>
+<span class="highlighted-comment-line">                             milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;rating&quot;</span>, milvus::AggregationDirection::DESC),</span>
+<span class="highlighted-comment-line">                         })</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> prices = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::Int64FieldData&gt;(<span class="hljs-string">&quot;price&quot;</span>);
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ratings = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::DoubleFieldData&gt;(<span class="hljs-string">&quot;rating&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, price=&quot;</span> &lt;&lt; prices-&gt;<span class="hljs-built_in">Data</span>()[i]
+                  &lt;&lt; <span class="hljs-string">&quot;, rating=&quot;</span> &lt;&lt; ratings-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -1013,6 +1367,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -1085,6 +1440,27 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-wrapper-line">    <span class="hljs-attr">offset</span>: <span class="hljs-number">10</span> <span class="hljs-comment">// The record to skip.</span></span>
 })
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">WithOffset</span>(<span class="hljs-number">10</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -1125,6 +1501,7 @@ curl --request POST \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -1136,11 +1513,85 @@ curl --request POST \
 <span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .limit(<span class="hljs-number">3</span>)
+        .metricType(IndexParam.MetricType.IP)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">params</span>: { <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> },</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,             <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;IP&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;event_time&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Event times: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;event_time&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+                         .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;event_time&quot;</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> eventTimes = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::TimestamptzFieldData&gt;(<span class="hljs-string">&quot;event_time&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, event_time=&quot;</span> &lt;&lt; eventTimes-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> QUERY_VECTOR=<span class="hljs-string">&#x27;[0.1, 0.2, 0.3, 0.4]&#x27;</span>
