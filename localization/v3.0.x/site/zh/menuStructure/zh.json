@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus 采用者",
+        "label": "Milvus 领养者",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -389,7 +389,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema说明",
+            "label": "Schema详解",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -485,13 +485,13 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段中",
+                "label": "将数据插入 StructArray 字段",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "索引 StructArray 字段",
+                "label": "索引、结构体、数组、字段",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -632,7 +632,7 @@
                 ]
               },
               {
-                "label": "筛选条件",
+                "label": "筛选器",
                 "id": "filters",
                 "order": 3,
                 "children": [
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改集合 Schema",
+            "label": "修改Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "基本人工神经网络搜索",
+            "label": "人工神经网络的基本搜索",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1209,7 +1209,7 @@
                 "children": []
               },
               {
-                "label": "选择一种 EmbeddingList 搜索策略",
+                "label": "选择一种嵌入列表搜索策略",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1217,7 +1217,7 @@
             ]
           },
           {
-            "label": "Elasticsearch 向 Milvus 发起的查询",
+            "label": "Elasticsearch 向 Milvus 发送的查询",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1353,7 +1353,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名系统",
+                "label": "RRF 排名器",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1365,13 +1365,13 @@
                 "children": []
               },
               {
-                "label": "衰减排名榜",
+                "label": "衰减排名器",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "《Decay Ranker》概述",
+                    "label": "《Decay》排名系统概述",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1403,7 +1403,7 @@
                 ]
               },
               {
-                "label": "模型排名榜",
+                "label": "模型排名器",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1421,7 +1421,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1581,7 +1581,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 版 Agents.md",
+            "label": "Milvus 的 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1956,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "规模依赖关系",
+            "label": "规模依赖性",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1983,7 +1983,7 @@
         ]
       },
       {
-        "label": "监控、警报与日志",
+        "label": "监控、警报和日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2210,13 +2210,13 @@
                 "children": []
               },
               {
-                "label": "在同一个存储桶内进行实例间迁移",
+                "label": "在同一个存储桶内迁移实例",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "在不同存储桶之间的实例之间进行迁移",
+                "label": "在不同存储桶之间的实例之间迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2341,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Milvus 尺寸选择工具",
+        "label": "Milvus 规格选择工具",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "基本记忆",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -3170,7 +3194,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行文本到图像搜索",
+        "label": "使用 Milvus 进行文本转图像搜索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

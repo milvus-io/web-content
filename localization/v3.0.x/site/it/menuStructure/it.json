@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "Cos’è Milvus",
+        "label": "Che cos’è Milvus?",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Tabella delle elme",
+                "label": "Mappa di Helm",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Tabella delle elme",
+                "label": "Mappa di Helm",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Gestisci le partizioni",
+            "label": "Gestisci partizioni",
             "id": "manage-partitions.md",
             "order": 8,
             "children": []
@@ -637,7 +637,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Minuscolo",
+                    "label": "Minuscole",
                     "id": "lowercase-filter.md",
                     "order": 0,
                     "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Basta",
                     "id": "stop-filter.md",
                     "order": 9,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Modifica lo schema della raccolta",
+            "label": "Modifica lo schema della collezione",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -832,7 +832,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali fluttuanti",
+            "label": "Indici vettoriali flottanti",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali (ANN)",
+            "label": "Ricerca di base con reti neurali artificiali",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1150,7 +1150,7 @@
             "children": []
           },
           {
-            "label": "Corrispondenza testo",
+            "label": "Corrispondenza del testo",
             "id": "keyword-match.md",
             "order": 10,
             "children": []
@@ -1217,7 +1217,7 @@
             ]
           },
           {
-            "label": "Query Elasticsearch verso Milvus",
+            "label": "Query Elasticsearch su Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1229,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "Utilizza la chiave di partizione",
+            "label": "Usa chiave di partizione",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1415,7 +1415,7 @@
                     "children": []
                   },
                   {
-                    "label": "Classificatore vLLM",
+                    "label": "vLLM Ranker",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1475,7 +1475,7 @@
             "children": []
           },
           {
-            "label": "Compattazione per raggruppamento",
+            "label": "Compattazione tramite raggruppamento",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -2001,7 +2001,7 @@
                 "children": []
               },
               {
-                "label": "Implementazione dei servizi di monitoraggio",
+                "label": "Implementare i servizi di monitoraggio",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -2126,7 +2126,7 @@
                 "children": []
               },
               {
-                "label": "Assegnazione dei ruoli",
+                "label": "Ruoli di sovvenzione",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2146,7 +2146,7 @@
             "children": []
           },
           {
-            "label": "Connettiti a Kafka tramite SASL/SSL",
+            "label": "Connettersi a Kafka tramite SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2204,7 +2204,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un'unica istanza",
+                "label": "Backup e ripristino in un’unica istanza",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2355,7 +2355,7 @@
         "children": []
       },
       {
-        "label": "Registro delle esportazioni",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2743,6 +2743,30 @@
             "id": "milvus_and_mcp.md",
             "order": 5,
             "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Memoria di base",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
+            "children": []
           }
         ]
       },
@@ -2790,7 +2814,7 @@
         ]
       },
       {
-        "label": "Incorporazione dei modelli",
+        "label": "Incorporamento dei modelli",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [
@@ -3046,7 +3070,7 @@
         ]
       },
       {
-        "label": "Altri",
+        "label": "Altro",
         "id": "other-integrations",
         "order": 8,
         "children": [
@@ -3103,7 +3127,7 @@
         "children": []
       },
       {
-        "label": "Ricerca immagini con Milvus",
+        "label": "Ricerca di immagini con Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []

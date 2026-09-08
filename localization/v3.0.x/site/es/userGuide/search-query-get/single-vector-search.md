@@ -1,12 +1,12 @@
 ---
 id: single-vector-search.md
-title: Búsqueda vectorial básica
+title: Basic Vector Search
 summary: >-
-  Realiza búsquedas básicas con redes neuronales artificiales (RNA) en Milvus
+  Realiza búsquedas básicas con redes neuronales artificiales (ANN) en Milvus
   utilizando vectores de consulta, campos de salida, filtros, rangos e
   iteradores.
 ---
-<h1 id="Basic-Vector-Search" class="common-anchor-header">Búsqueda vectorial básica<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Basic-Vector-Search" class="common-anchor-header">Basic Vector Search<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Basándose en un archivo de índice que registra el orden clasificado de las representaciones vectoriales, la búsqueda de «vecino más cercano aproximado» (ANN) localiza un subconjunto de representaciones vectoriales a partir del vector de consulta incluido en una solicitud de búsqueda recibida, compara el vector de consulta con los del subconjunto y devuelve los resultados más similares. Con la búsqueda ANN, Milvus ofrece una experiencia de búsqueda eficiente. Esta página te ayuda a aprender a realizar búsquedas ANN básicas.</p>
+    </button></h1><p>Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.</p>
 <div class="alert note">
-<p>Si se añaden nuevos campos después de haber creado la colección, las búsquedas que incluyan dichos campos devolverán los valores predeterminados definidos o « <code translate="no">NULL</code> » para aquellas entidades que no tengan valores establecidos explícitamente. Para obtener más información, consulta <a href="/docs/es/add-fields-to-an-existing-collection.md">«Modificar el esquema de la colección</a>».</p>
+<p>If you add new fields after the collection has been created, searches that include these fields return the defined default values or <code translate="no">NULL</code> for entities that have not explicitly set values. For details, refer to <a href="/docs/es/add-fields-to-an-existing-collection.md">Alter Collection Schema</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,22 +40,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La búsqueda ANN y la de k vecinos más cercanos (kNN) son los métodos habituales en las búsquedas de similitud vectorial. En una búsqueda kNN, es necesario comparar todos los vectores de un espacio vectorial con el vector de consulta incluido en la solicitud de búsqueda antes de determinar cuáles son los más similares, lo cual requiere mucho tiempo y consume muchos recursos.</p>
-<p>A diferencia de las búsquedas kNN, un algoritmo de búsqueda ANN requiere un archivo <strong>de índice</strong> que registre el orden clasificado de las incrustaciones vectoriales. Cuando se recibe una solicitud de búsqueda, se puede utilizar el archivo de índice como referencia para localizar rápidamente un subgrupo que probablemente contenga las incrustaciones vectoriales más similares al vector de consulta. A continuación, puede utilizar el <strong>tipo de métrica</strong> especificado para medir la similitud entre el vector de consulta y los del subgrupo, ordenar los elementos del grupo en función de su similitud con el vector de consulta y determinar los <strong>K</strong> elementos <strong>principales</strong> del grupo.</p>
-<p>Las búsquedas ANN dependen de índices predefinidos, y el rendimiento de la búsqueda, el uso de memoria y la precisión de la búsqueda pueden variar en función de los tipos de índice que se elijan. Es necesario encontrar un equilibrio entre el rendimiento y la precisión de la búsqueda.</p>
-<p>Para reducir la curva de aprendizaje, Milvus ofrece <strong>AUTOINDEX</strong>. Con <strong>AUTOINDEX</strong>, Milvus puede analizar la distribución de los datos dentro de su colección mientras crea el índice y establece los parámetros de índice más optimizados basándose en el análisis, con el fin de lograr un equilibrio entre el rendimiento y la precisión de la búsqueda.</p>
-<p>En esta sección, encontrarás información detallada sobre los siguientes temas:</p>
+    </button></h2><p>The ANN and the k-Nearest Neighbors (kNN) search are the usual methods in vector similarity searches. In a kNN search, you must compare all vectors in a vector space with the query vector carried in the search request before figuring out the most similar ones, which is time-consuming and resource-intensive.</p>
+<p>Unlike kNN searches, an ANN search algorithm asks for an <strong>index</strong> file that records the sorted order of vector embeddings. When a search request comes in, you can use the index file as a reference to quickly locate a subgroup probably containing vector embeddings most similar to the query vector. Then, you can use the specified <strong>metric type</strong> to measure the similarity between the query vector and those in the subgroup, sort the group members based on similarity to the query vector, and figure out the <strong>top-K</strong> group members.</p>
+<p>ANN searches depend on pre-built indexes, and the search throughput, memory usage, and search correctness may vary with the index types you choose. You need to balance search performance and correctness.</p>
+<p>To reduce the learning curve, Milvus provides <strong>AUTOINDEX</strong>. With <strong>AUTOINDEX</strong>, Milvus can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness.</p>
+<p>In this section, you will find detailed information about the following topics:</p>
 <ul>
-<li><p><a href="/docs/es/single-vector-search.md#Single-Vector-Search">Búsqueda de un solo vector</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Bulk-Vector-Search">Búsqueda de vectores en bloque</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#ANN-Search-in-Partition">Búsqueda ANN en particiones</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Output-Fields">Uso de campos de salida</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Limit-and-Offset">Uso de «limit» y «offset»</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Use-Level">Usar nivel</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Get-Recall-Rate">Obtener la tasa de recuperación</a></p></li>
-<li><p><a href="/docs/es/single-vector-search.md#Enhancing-ANN-Search">Mejora de la búsqueda en redes neuronales artificiales</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Single-Vector-Search">Single-vector search</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Bulk-Vector-Search">Bulk-vector search</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#ANN-Search-in-Partition">ANN search in partitions</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Use-Output-Fields">Use output fields</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Use-Limit-and-Offset">Use limit and offset</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Use-Level">Use level</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Get-Recall-Rate">Get Recall Rate</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#Enhancing-ANN-Search">Enhancing ANN search</a></p></li>
 </ul>
-<h2 id="Single-Vector-Search" class="common-anchor-header">Búsqueda de un solo vector<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Single-Vector-Search" class="common-anchor-header">Single-Vector Search<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,14 +70,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En las búsquedas con redes neuronales artificiales (ANN), una búsqueda de vector único es aquella en la que solo se utiliza un vector de consulta. Basándose en el índice predefinido y en el tipo de métrica incluido en la solicitud de búsqueda, Milvus encontrará los K vectores más similares al vector de consulta.</p>
-<p>En esta sección, aprenderás a realizar una búsqueda de vector único. La solicitud de búsqueda incluye un único vector de consulta y pide a Milvus que utilice el producto interno (IP) para calcular la similitud entre los vectores de consulta y los vectores de la colección, devolviendo los tres más similares.</p>
+    </button></h2><p>In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Milvus will find the top-K vectors most similar to the query vector.</p>
+<p>In this section, you will learn how to conduct a single-vector search. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -222,6 +223,43 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -257,41 +295,41 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus clasifica los resultados de la búsqueda por orden descendente según sus puntuaciones de similitud con el vector de consulta. La puntuación de similitud también se denomina «distancia al vector de consulta», y sus rangos de valores varían en función de los tipos de métrica utilizados.</p>
-<p>La siguiente tabla enumera los tipos de métricas aplicables y los rangos de distancia correspondientes.</p>
+<p>Milvus ranks the search results by their similarity scores to the query vector in descending order. The similarity score is also termed the distance to the query vector, and its value ranges vary with the metric types in use.</p>
+<p>The following table lists the applicable metric types and the corresponding distance ranges.</p>
 <table>
    <tr>
-     <th><p>Tipo de métrica</p></th>
-     <th><p>Características</p></th>
-     <th><p>Rango de distancia</p></th>
+     <th><p>Metric Type</p></th>
+     <th><p>Characteristics</p></th>
+     <th><p>Distance Range</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>Un valor más pequeño indica una mayor similitud.</p></td>
+     <td><p>A smaller value indicates a higher similarity.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>Un valor mayor indica una mayor similitud.</p></td>
+     <td><p>A greater value indicates a higher similarity.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Un valor mayor indica una mayor similitud.</p></td>
+     <td><p>A greater value indicates a higher similarity.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>Un valor menor indica una mayor similitud.</p></td>
+     <td><p>A smaller value indicates a higher similarity.</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Un valor menor indica una mayor similitud.</p></td>
+     <td><p>A smaller value indicates a higher similarity.</p></td>
      <td><p>[0, dim(vector)]</p></td>
    </tr>
 </table>
-<h2 id="Bulk-Vector-Search" class="common-anchor-header">Búsqueda masiva de vectores<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Bulk-Vector-Search" class="common-anchor-header">Bulk-Vector Search<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -306,13 +344,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Del mismo modo, puedes incluir varios vectores de consulta en una solicitud de búsqueda. Milvus realizará búsquedas ANN para los vectores de consulta en paralelo y devolverá dos conjuntos de resultados.</p>
+    </button></h2><p>Similarly, you can include multiple query vectors in a search request. Milvus will conduct ANN searches for the query vectors in parallel and return two sets of results.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
@@ -458,6 +497,32 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   ]</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;std::vector&lt;<span class="hljs-type">float</span>&gt;&gt; queryVectors = {
+    {<span class="hljs-number">0.041732933F</span>, <span class="hljs-number">0.013779674F</span>, <span class="hljs-number">-0.027564144F</span>, <span class="hljs-number">-0.013061441F</span>, <span class="hljs-number">0.009748648F</span>},
+    {<span class="hljs-number">0.0039737443F</span>, <span class="hljs-number">0.003020432F</span>, <span class="hljs-number">-0.0006188639F</span>, <span class="hljs-number">0.03913546F</span>, <span class="hljs-number">-0.00089768134F</span>},
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithFloatVectors</span>(std::<span class="hljs-built_in">move</span>(queryVectors));
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -511,7 +576,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">Búsqueda por clave primaria<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+<h2 id="Primary-Key-Search" class="common-anchor-header">Primary-Key Search<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,13 +591,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En lugar de establecer vectores de consulta, puedes utilizar claves primarias si los vectores de consulta ya existen en la colección de destino.</p>
+    </button></h2><p>Instead of setting query vectors, you can use primary keys if the query vectors already exist in the target collection.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -546,11 +612,76 @@ curl --request POST \
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-comment-line">        .ids(Arrays.&lt;Object&gt;asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>))</span>
+        .limit(<span class="hljs-number">3</span>)
+        .metricType(IndexParam.MetricType.IP)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+<span class="highlighted-comment-line">    <span class="hljs-attr">ids</span>: [<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>],</span>
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryIDs := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>})
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    <span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,             <span class="hljs-comment">// limit</span>
+    queryIDs,
+).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;IP&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">WithIDs</span>({<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>})</span>
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
@@ -567,7 +698,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">Búsqueda ANN en particiones<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN Search in Partition<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -582,14 +713,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Supongamos que has creado varias particiones en una colección y que puedes limitar el ámbito de la búsqueda a un número concreto de particiones. En ese caso, puedes incluir los nombres de las particiones de destino en la solicitud de búsqueda para restringir el ámbito de la búsqueda a las particiones especificadas. Reducir el número de particiones implicadas en la búsqueda mejora el rendimiento de la misma.</p>
-<p>El siguiente fragmento de código da por hecho que existe una partición llamada <strong>PartitionA</strong> en su colección.</p>
+    </button></h2><p>Suppose you have created multiple partitions in a collection, and you can narrow the search scope to a specific number of partitions. In that case, you can include the target partition names in the search request to restrict the search scope within the specified partitions. Reducing the number of partitions involved in the search improves search performance.</p>
+<p>The following code snippet assumes a partition named <strong>PartitionA</strong> in your collection.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
@@ -690,6 +822,27 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)</span>
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -727,7 +880,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Output-Fields" class="common-anchor-header">Uso de campos de salida<button data-href="#Use-Output-Fields" class="anchor-icon" translate="no">
+<h2 id="Use-Output-Fields" class="common-anchor-header">Use Output Fields<button data-href="#Use-Output-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -742,13 +895,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En un resultado de búsqueda, Milvus incluye, de forma predeterminada, los valores de los campos principales y las distancias o puntuaciones de similitud de las entidades que contienen las K mejores incrustaciones vectoriales. Puedes incluir los nombres de los campos de destino, tanto los campos vectoriales como los escalares, en una solicitud de búsqueda como campos de salida para que los resultados de la búsqueda incluyan los valores de otros campos de estas entidades.</p>
+    </button></h2><p>In a search result, Milvus includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the names of the target fields, including both the vector and scalar fields, in a search request as the output fields to make the search results carry the values from other fields in these entities.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
@@ -855,6 +1009,30 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; entity: {&quot;color&quot;: &quot;grey_8510&quot;}}</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> colors = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::VarCharFieldData&gt;(<span class="hljs-string">&quot;color&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i]
+                  &lt;&lt; <span class="hljs-string">&quot;, color=&quot;</span> &lt;&lt; colors-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -895,7 +1073,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="common-anchor-header">Ordenar los resultados de búsqueda por campos escalares<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Sort-Search-Results-by-Scalar-Fields" class="common-anchor-header">Sort Search Results by Scalar Fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -910,15 +1088,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por defecto, Milvus ordena los resultados de búsqueda según su puntuación de similitud con el vector de consulta. Si deseas que las entidades devueltas sigan un orden basado en campos escalares, añade <code translate="no">order_by_fields</code> a la solicitud de búsqueda.</p>
-<p>Cada elemento de ` <code translate="no">order_by_fields</code> ` especifica un campo escalar y una dirección de ordenación. Utilice ` <code translate="no">&quot;asc&quot;</code> ` para el orden ascendente o ` <code translate="no">&quot;desc&quot;</code> ` para el orden descendente. Si omite ` <code translate="no">order</code>`, Milvus ordena el campo en orden ascendente.</p>
-<p>El siguiente ejemplo ordena los resultados de la búsqueda por <code translate="no">price</code> de menor a mayor. Incluye el campo de ordenación en <code translate="no">output_fields</code> si deseas inspeccionar el valor del campo en la respuesta.</p>
+    </button></h2><p>By default, Milvus orders search results by their similarity score to the query vector. If you want the returned entities to follow a scalar field order, add <code translate="no">order_by_fields</code> to the search request.</p>
+<p>Each item in <code translate="no">order_by_fields</code> specifies a scalar field and a sort direction. Use <code translate="no">&quot;asc&quot;</code> for ascending order or <code translate="no">&quot;desc&quot;</code> for descending order. If you omit <code translate="no">order</code>, Milvus sorts the field in ascending order.</p>
+<p>The following example sorts search results by <code translate="no">price</code> from low to high. Include the sort field in <code translate="no">output_fields</code> if you want to inspect the field value in the response.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
@@ -931,21 +1110,104 @@ curl --request POST \
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">20</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>))
+<span class="highlighted-comment-line">        .orderByFields(Collections.singletonList(</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;price&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.ASC)</span>
+<span class="highlighted-comment-line">                        .build()</span>
+<span class="highlighted-comment-line">        ))</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>],
+<span class="highlighted-comment-line">    <span class="hljs-attr">order_by_fields</span>: [</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> }</span>
+<span class="highlighted-comment-line">    ],</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">20</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+                         .<span class="hljs-built_in">WithOutputFields</span>({<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>})
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">AddOrderByField</span>(milvus::<span class="hljs-built_in">OrderByField</span>(</span>
+<span class="highlighted-comment-line">                             <span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC))</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> prices = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::Int64FieldData&gt;(<span class="hljs-string">&quot;price&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, price=&quot;</span> &lt;&lt; prices-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>También puedes ordenar por varios campos escalares. Milvus aplica los campos en el orden que especifiques. En el siguiente ejemplo, Milvus ordena los resultados por <code translate="no">price</code> en orden ascendente. Para las entidades con el mismo <code translate="no">price</code>, Milvus ordena a continuación por <code translate="no">rating</code> en orden descendente.</p>
+<p>You can also sort by multiple scalar fields. Milvus applies the fields in the order that you specify. In the following example, Milvus sorts results by <code translate="no">price</code> in ascending order. For entities with the same <code translate="no">price</code>, Milvus then sorts by <code translate="no">rating</code> in descending order.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
@@ -959,16 +1221,108 @@ curl --request POST \
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .limit(<span class="hljs-number">20</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>))
+<span class="highlighted-comment-line">        .orderByFields(Arrays.asList(</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;price&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.ASC)</span>
+<span class="highlighted-comment-line">                        .build(),</span>
+<span class="highlighted-comment-line">                OrderByField.builder()</span>
+<span class="highlighted-comment-line">                        .fieldName(<span class="hljs-string">&quot;rating&quot;</span>)</span>
+<span class="highlighted-comment-line">                        .direction(AggDirection.DESC)</span>
+<span class="highlighted-comment-line">                        .build()</span>
+<span class="highlighted-comment-line">        ))</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>],
+<span class="highlighted-comment-line">    <span class="hljs-attr">order_by_fields</span>: [</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> },</span>
+<span class="highlighted-comment-line">        { <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;desc&quot;</span> },</span>
+<span class="highlighted-comment-line">    ],</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">20</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc,rating:desc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Ratings: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+                         .<span class="hljs-built_in">WithOutputFields</span>({<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>})
+<span class="highlighted-comment-line">                         .<span class="hljs-built_in">WithOrderByFields</span>({</span>
+<span class="highlighted-comment-line">                             milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC),</span>
+<span class="highlighted-comment-line">                             milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;rating&quot;</span>, milvus::AggregationDirection::DESC),</span>
+<span class="highlighted-comment-line">                         })</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> prices = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::Int64FieldData&gt;(<span class="hljs-string">&quot;price&quot;</span>);
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ratings = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::DoubleFieldData&gt;(<span class="hljs-string">&quot;rating&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, price=&quot;</span> &lt;&lt; prices-&gt;<span class="hljs-built_in">Data</span>()[i]
+                  &lt;&lt; <span class="hljs-string">&quot;, rating=&quot;</span> &lt;&lt; ratings-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En el caso de entidades con los mismos valores en todos los campos de ordenación especificados, Milvus mantiene el orden original según la puntuación de similitud.</p>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Uso de «Limit» y «Offset»<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<p>For entities with the same values in all specified order-by fields, Milvus keeps the original similarity-score order.</p>
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Use Limit and Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -983,43 +1337,44 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Es posible que observes que el parámetro « <code translate="no">limit</code> » incluido en las solicitudes de búsqueda determina el número de entidades que se incluirán en los resultados de la búsqueda. Este parámetro especifica el número máximo de entidades que se devolverán en una sola búsqueda, y suele denominarse <strong>«top-K</strong>».</p>
-<p>Si deseas realizar consultas paginadas, puedes utilizar un bucle para enviar varias solicitudes de búsqueda, incluyendo los parámetros <strong>«Limit»</strong> y <strong>«Offset»</strong> en cada una de ellas. En concreto, puedes establecer el parámetro <strong>«Limit»</strong> en el número de entidades que deseas incluir en los resultados de la consulta actual, y el <strong>«Offset»</strong> en el número total de entidades que ya se han devuelto.</p>
-<p>La tabla siguiente muestra cómo configurar los parámetros <strong>«Limit»</strong> y <strong>«Offset»</strong> para consultas paginadas cuando se devuelven 100 entidades a la vez.</p>
+    </button></h2><p>You may notice that the parameter <code translate="no">limit</code> carried in the search requests determines the number of entities to include in the search results. This parameter specifies the maximum number of entities to return in a single search, and it is usually termed <strong>top-K</strong>.</p>
+<p>If you wish to perform paginated queries, you can use a loop to send multiple Search requests, with the <strong>Limit</strong> and <strong>Offset</strong> parameters carried in each query request. Specifically, you can set the <strong>Limit</strong> parameter to the number of Entities you want to include in the current query results, and set the <strong>Offset</strong> to the total number of Entities that have already been returned.</p>
+<p>The table below outlines how to set the <strong>Limit</strong> and <strong>Offset</strong> parameters for paginated queries when returning 100 Entities at a time.</p>
 <table>
    <tr>
-     <th><p>Consultas</p></th>
-     <th><p>Entidades que se deben devolver por consulta</p></th>
-     <th><p>Total de entidades ya devueltas</p></th>
+     <th><p>Queries</p></th>
+     <th><p>Entities to return per query</p></th>
+     <th><p>Entities already been returned in total</p></th>
    </tr>
    <tr>
-     <td><p>La <strong>primera</strong> consulta</p></td>
+     <td><p>The <strong>1st</strong> query</p></td>
      <td><p>100</p></td>
      <td><p>0</p></td>
    </tr>
    <tr>
-     <td><p>La <strong>segunda</strong> consulta</p></td>
+     <td><p>The <strong>2nd</strong> query</p></td>
      <td><p>100</p></td>
      <td><p>100</p></td>
    </tr>
    <tr>
-     <td><p>La <strong>tercera</strong> consulta</p></td>
+     <td><p>The <strong>3rd</strong> query</p></td>
      <td><p>100</p></td>
      <td><p>200</p></td>
    </tr>
    <tr>
-     <td><p>La <strong>enésima</strong> consulta</p></td>
+     <td><p>The <strong>nth</strong> query</p></td>
      <td><p>100</p></td>
-     <td><p>100 × (n-1)</p></td>
+     <td><p>100 x (n-1)</p></td>
    </tr>
 </table>
-<p>Ten en cuenta que la suma de <code translate="no">limit</code> y <code translate="no">offset</code> en una sola búsqueda de ANN debe ser inferior a 16 384.</p>
+<p>Note that, the sum of <code translate="no">limit</code> and <code translate="no">offset</code> in a single ANN search should be less than 16,384.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
@@ -1091,6 +1446,27 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-wrapper-line">    <span class="hljs-attr">offset</span>: <span class="hljs-number">10</span> <span class="hljs-comment">// The record to skip.</span></span>
 })
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">WithOffset</span>(<span class="hljs-number">10</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
@@ -1109,7 +1485,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Establecer temporalmente una zona horaria para una búsqueda<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Temporarily set a timezone for a search<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1124,15 +1500,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si tu colección tiene un campo « <code translate="no">TIMESTAMPTZ</code> », puedes anular temporalmente la zona horaria predeterminada de la base de datos o de la colección para una única operación configurando el parámetro « <code translate="no">timezone</code> » en la llamada de búsqueda. Esto controla cómo se muestran y comparan los valores de « <code translate="no">TIMESTAMPTZ</code> » durante la operación.</p>
-<p>El valor de ` <code translate="no">timezone</code> ` debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria</a> válido <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">de la IANA</a> (por ejemplo, <strong>`Asia/Shanghai</strong>`, <strong>`America/Chicago</strong>` o ` <strong>UTC</strong>`). Para obtener más información sobre cómo utilizar el campo ` <code translate="no">TIMESTAMPTZ</code> `, consulta el apartado <a href="/docs/es/timestamptz-field.md">«Campo TIMESTAMPTZ</a>».</p>
-<p>El siguiente ejemplo muestra cómo establecer temporalmente una zona horaria para una operación de búsqueda:</p>
+    </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the search call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/es/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a search operation:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -1143,11 +1520,85 @@ curl --request POST \
 <span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.35803764f</span>, -<span class="hljs-number">0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, -<span class="hljs-number">0.26286206f</span>, <span class="hljs-number">0.90294385f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .limit(<span class="hljs-number">3</span>)
+        .metricType(IndexParam.MetricType.IP)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+System.out.println(searchResp.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">params</span>: { <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> },</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.35803764</span>, <span class="hljs-number">-0.6023496</span>, <span class="hljs-number">0.18414013</span>, <span class="hljs-number">-0.26286206</span>, <span class="hljs-number">0.90294385</span>}
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,             <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;IP&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;event_time&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Event times: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;event_time&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                         .<span class="hljs-built_in">WithMetricType</span>(milvus::MetricType::IP)
+                         .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;event_time&quot;</span>)
+<span class="highlighted-wrapper-line">                         .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> eventTimes = result.<span class="hljs-built_in">OutputField</span>&lt;milvus::TimestamptzFieldData&gt;(<span class="hljs-string">&quot;event_time&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">GetRowCount</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, event_time=&quot;</span> &lt;&lt; eventTimes-&gt;<span class="hljs-built_in">Data</span>()[i] &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> QUERY_VECTOR=<span class="hljs-string">&#x27;[0.1, 0.2, 0.3, 0.4]&#x27;</span>
@@ -1166,7 +1617,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Mejora de la búsqueda ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
+<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Enhancing ANN Search<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1181,36 +1632,36 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX simplifica considerablemente la curva de aprendizaje de las búsquedas ANN. Sin embargo, es posible que los resultados de la búsqueda no siempre sean correctos a medida que aumenta el «top-K». Al reducir el alcance de la búsqueda, mejorar la relevancia de los resultados y diversificarlos, Milvus ofrece las siguientes mejoras en la búsqueda.</p>
+    </button></h2><p>AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Milvus works out the following search enhancements.</p>
 <ul>
-<li><p>Búsqueda filtrada</p>
-<p>Puede incluir condiciones de filtrado en una solicitud de búsqueda para que Milvus aplique un filtrado de metadatos antes de realizar las búsquedas con redes neuronales artificiales (ANN), reduciendo así el alcance de la búsqueda de toda la colección a solo las entidades que cumplan las condiciones de filtrado especificadas.</p>
-<p>Para obtener más información sobre el filtrado de metadatos y las condiciones de filtrado, consulte <a href="/docs/es/filtered-search.md">«Búsqueda filtrada»</a>, <a href="/docs/es/boolean.md">«Explicación del filtrado</a>» y los temas relacionados.</p></li>
-<li><p>Búsqueda por rango</p>
-<p>Se puede mejorar la relevancia de los resultados de búsqueda restringiendo la distancia o la puntuación de las entidades devueltas dentro de un rango específico. En Milvus, una búsqueda por rango consiste en trazar dos círculos concéntricos con el vector de incrustación más similar al vector de la consulta como centro. La solicitud de búsqueda especifica el radio de ambos círculos, y Milvus devuelve todas las incrustaciones vectoriales que se encuentran dentro del círculo exterior, pero no del círculo interior.</p>
-<p>Para obtener más información sobre la búsqueda por rango, consulta <a href="/docs/es/range-search.md">«Búsqueda</a> por <a href="/docs/es/range-search.md">rango</a>».</p></li>
-<li><p>Búsqueda por agrupación</p>
-<p>Si las entidades devueltas tienen el mismo valor en un campo específico, es posible que los resultados de la búsqueda no representen la distribución de todas las representaciones vectoriales en el espacio vectorial. Para diversificar los resultados de la búsqueda, plantéate utilizar la búsqueda por agrupación.</p>
-<p>Para obtener más información sobre la búsqueda por agrupación, consulta <a href="/docs/es/grouping-search.md">«Búsqueda</a> por <a href="/docs/es/grouping-search.md">agrupación»</a>,</p></li>
-<li><p>Búsqueda híbrida</p>
-<p>Una colección puede incluir varios campos vectoriales para guardar las representaciones vectoriales generadas mediante diferentes modelos de representación. De este modo, puede utilizar una búsqueda híbrida para reordenar los resultados de búsqueda de estos campos vectoriales, mejorando así la tasa de recuperación.</p>
-<p>Para obtener más información sobre la búsqueda híbrida, consulta <a href="/docs/es/multi-vector-search.md">«Búsqueda híbrida</a>».</p></li>
-<li><p>Iterador de búsqueda</p>
-<p>Una única búsqueda con red neuronal artificial (ANN) devuelve un máximo de 16 384 entidades. Considera la posibilidad de utilizar iteradores de búsqueda si necesitas que se devuelvan más entidades en una sola búsqueda.</p>
-<p>Para obtener más información sobre los iteradores de búsqueda, consulta <a href="/docs/es/with-iterators.md">«Iterador</a> de <a href="/docs/es/with-iterators.md">búsqueda</a>».</p></li>
-<li><p>Búsqueda de texto completo</p>
-<p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que podría pasar por alto términos precisos, garantizando que recibas los resultados más precisos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar entradas de texto sin procesar, convirtiendo automáticamente sus datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
-<p>Para obtener más información sobre la búsqueda de texto completo, consulta <a href="/docs/es/full-text-search.md">«Búsqueda de texto completo</a>».</p></li>
-<li><p>Coincidencia de texto</p>
-<p>La coincidencia de palabras clave en Milvus permite la recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada con el fin de cumplir condiciones específicas y puede incorporar filtrado escalar para refinar los resultados de la consulta, lo que permite realizar búsquedas de similitud dentro de vectores que cumplan criterios escalares.</p>
-<p>Para obtener más información sobre la coincidencia de palabras clave, consulta <a href="/docs/es/keyword-match.md">«Coincidencia de palabras clave</a>».</p></li>
-<li><p>Uso de la clave de partición</p>
-<p>Incluir varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante compleja puede afectar a la eficiencia de la búsqueda. Una vez que se establece un campo escalar como clave de partición y se utiliza una condición de filtrado que incluye dicha clave en la solicitud de búsqueda, esto puede ayudar a restringir el alcance de la búsqueda a las particiones correspondientes a los valores especificados de la clave de partición.</p>
-<p>Para obtener más información sobre la clave de partición, consulte <a href="/docs/es/use-partition-key.md">«Uso</a> de <a href="/docs/es/use-partition-key.md">la clave de partición</a>».</p></li>
-<li><p>Utilizar mmap</p>
-<p>Para obtener más información sobre la configuración de mmap, consulta <a href="/docs/es/mmap.md">«Uso</a> de <a href="/docs/es/mmap.md">mmap</a>».</p></li>
-<li><p>Compactación en clúster</p>
-<p>Para obtener más información sobre las compactaciones por clústeres, consulte <a href="/docs/es/clustering-compaction.md">«Compactación</a> por <a href="/docs/es/clustering-compaction.md">clústeres</a>».</p></li>
-<li><p>Uso de la reordenación</p>
-<p>Para obtener más información sobre el uso de clasificadores para mejorar la relevancia de los resultados de búsqueda, consulta <a href="/docs/es/decay-ranker-overview.md">«Descripción general del clasificador de decaimiento</a> » y <a href="/docs/es/model-ranker-overview.md">«Descripción general del clasificador de modelos</a>».</p></li>
+<li><p>Filtered Search</p>
+<p>You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.</p>
+<p>For more about metadata filtering and filtering conditions, refer to <a href="/docs/es/filtered-search.md">Filtered Search</a>, <a href="/docs/es/boolean.md">Filtering Explained</a>, and related topics.</p></li>
+<li><p>Range Search</p>
+<p>You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Milvus, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Milvus returns all vector embeddings that fall within the outer circle but not the inner circle.</p>
+<p>For more about range search, refer to <a href="/docs/es/range-search.md">Range Search</a>.</p></li>
+<li><p>Grouping Search</p>
+<p>If the returned entities hold the same value in a specific field, the search results may not represent the distribution of all vector embeddings in the vector space. To diversify the search results, consider using the grouping search.</p>
+<p>For more about grouping search, refer to <a href="/docs/es/grouping-search.md">Grouping Search</a>,</p></li>
+<li><p>Hybrid Search</p>
+<p>A collection can include multiple vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
+<p>For more about hybrid search, refer to <a href="/docs/es/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<li><p>Search Iterator</p>
+<p>A single ANN search returns a maximum of 16,384 entities. Consider using search iterators if you need more entities to return in a single search.</p>
+<p>For details on search iterators, refer to <a href="/docs/es/with-iterators.md">Search Iterator</a>.</p></li>
+<li><p>Full-Text Search</p>
+<p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
+<p>For details on full-text search, refer to <a href="/docs/es/full-text-search.md">Full Text Search</a>.</p></li>
+<li><p>Text Match</p>
+<p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.</p>
+<p>For details on keyword match, refer to <a href="/docs/es/keyword-match.md">Keyword Match</a>.</p></li>
+<li><p>Use Partition Key</p>
+<p>Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values.</p>
+<p>For details on the partition key, refer to <a href="/docs/es/use-partition-key.md">Use Partition Key</a>.</p></li>
+<li><p>Use mmap</p>
+<p>For details on mmap-settings, refer to <a href="/docs/es/mmap.md">Use mmap</a>.</p></li>
+<li><p>Clustering Compaction</p>
+<p>For details on clustering compactions, refer to <a href="/docs/es/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<li><p>Use reranking</p>
+<p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/es/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/es/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

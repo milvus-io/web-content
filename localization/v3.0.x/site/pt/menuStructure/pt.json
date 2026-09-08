@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "Definir o TTL da coleção",
+            "label": "TTL da coleção de conjuntos",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e AutoID",
+            "label": "Campo primário e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -575,7 +575,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tailandês",
+                    "label": "tailandês",
                     "id": "thai-analyzer.md",
                     "order": 4,
                     "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tailandês",
+                    "label": "tailandês",
                     "id": "thai-tokenizer.md",
                     "order": 3,
                     "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Alfanumérico",
+                    "label": "Apenas alfanumérico",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Descomponedor",
+                    "label": "Descompostação",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "Remover Punct",
+                    "label": "Remover ponto",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externo",
+            "label": "Alterar o esquema de cobrança externa",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -773,7 +773,7 @@
             "order": 19,
             "children": [
               {
-                "label": "Conceção do modelo de dados para a pesquisa",
+                "label": "Conceção do modelo de dados para pesquisa",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Entidades Upsert",
+            "label": "Entidades «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1347,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador ponderado",
+                "label": "Classificador Ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Forçar a compactação da fusão",
+            "label": "Forçar a compactação por fusão",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1605,7 +1605,7 @@
             "children": []
           },
           {
-            "label": "Seleção do Índice",
+            "label": "Seleção de índices",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1633,7 +1633,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o Código Claude",
+        "label": "Servidor MCP para o código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1897,7 +1897,7 @@
                 "children": []
               },
               {
-                "label": "Fila de mensagens do switch",
+                "label": "Fila de mensagens do Switch",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -1932,7 +1932,7 @@
         ]
       },
       {
-        "label": "Escalabilidade",
+        "label": "Dimensionamento",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -1983,7 +1983,7 @@
         ]
       },
       {
-        "label": "Monitorização, alertas e registos",
+        "label": "Monitorização, Alertas e Registos",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2120,13 +2120,13 @@
                 "children": []
               },
               {
-                "label": "Conceder Privilégios",
+                "label": "Conceder privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Funções de subvenção",
+                "label": "Funções das bolsas",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2140,7 +2140,7 @@
             ]
           },
           {
-            "label": "Criptografia em trânsito",
+            "label": "Encriptação em trânsito",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2204,7 +2204,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Cópia de segurança e restauração numa única instância",
+                "label": "Cópia de segurança e recuperação numa única instância",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2222,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias em diferentes ambientes S3",
+                "label": "Migrar entre instâncias em diferentes ambientes do S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2268,7 +2268,7 @@
             "children": []
           },
           {
-            "label": "Configurar a replicação do CDC",
+            "label": "Configurar a replicação CDC",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2355,7 +2355,7 @@
         "children": []
       },
       {
-        "label": "Registo de exportação",
+        "label": "Registo de Exportação",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2496,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "Jina IA",
+                "label": "Jina AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -2743,6 +2743,30 @@
             "id": "milvus_and_mcp.md",
             "order": 5,
             "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Memória Básica",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
+            "children": []
           }
         ]
       },
@@ -2831,7 +2855,7 @@
             "children": []
           },
           {
-            "label": "Jina IA",
+            "label": "Jina AI",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
@@ -3079,7 +3103,7 @@
         "children": []
       },
       {
-        "label": "Criar um RAG com o Milvus",
+        "label": "Criar o RAG com o Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3176,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Geração de expressões de filtro de consultas do Milvus com modelos de linguagem de grande dimensão",
+        "label": "Geração de expressões de filtro de consultas Milvus com modelos de linguagem de grande dimensão",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

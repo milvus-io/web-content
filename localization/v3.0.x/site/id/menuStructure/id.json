@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "Jenis Satuan Metrik",
+        "label": "Jenis Metrik",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -352,13 +352,13 @@
             "children": []
           },
           {
-            "label": "Waktu Hidup Koleksi Set (TTL)",
+            "label": "Waktu Hidup Koleksi Kumpulan (TTL)",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "Tetapkan Tingkat Konsistensi",
+            "label": "Tentukan Tingkat Konsistensi",
             "id": "tune_consistency.md",
             "order": 7,
             "children": []
@@ -643,13 +643,13 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusunan ASCII",
+                    "label": "Penyusutan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Normalisasi Bahasa Arab",
+                    "label": "Normalisasi Hubungan dengan Negara-Negara Arab",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -667,7 +667,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Hanya Cnalphanum",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Mengelola Sumber Daya Berkas",
+                "label": "Mengelola Sumber Daya File",
                 "id": "manage-file-resources.md",
                 "order": 6,
                 "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "SPARSE_INVERTED_INDEX",
+                "label": "INDEKS TERBALIK YANG JARANG",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Pencarian Jaringan Saraf Tiruan Dasar",
+            "label": "Pencarian ANN Dasar",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1162,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Pencocokan Frasa",
+            "label": "Kecocokan Frasa",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1237,7 +1237,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi dan Model",
+        "label": "Inferensi Fungsi &amp; Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1445,7 +1445,7 @@
                     "children": []
                   },
                   {
-                    "label": "DashScope Peringkat",
+                    "label": "DashScope Ranker",
                     "id": "dashscope-ranker.md",
                     "order": 6,
                     "children": []
@@ -1475,7 +1475,7 @@
             "children": []
           },
           {
-            "label": "Pemadatan Berkelompok",
+            "label": "Pemadatan Berbasis Pengelompokan",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1533,7 +1533,7 @@
             "children": []
           },
           {
-            "label": "Kasus Penggunaan",
+            "label": "Contoh Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1698,19 +1698,19 @@
                 "children": []
               },
               {
-                "label": "Melakukan deployment di GCP",
+                "label": "Melakukan penyebaran di GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Lakukan penyebaran di Azure",
+                "label": "Lakukan deployment di Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Lakukan deployment di OpenShift",
+                "label": "Lakukan penerapan di OpenShift",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
@@ -1796,7 +1796,7 @@
             "children": []
           },
           {
-            "label": "Mengonfigurasi Cache Chunk",
+            "label": "Mengonfigurasi Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1920,7 +1920,7 @@
                     "children": []
                   },
                   {
-                    "label": "Kafka ↔ Woodpecker",
+                    "label": "Kafka ↔ Burung Pelatuk",
                     "id": "switch-kafka-woodpecker.md",
                     "order": 3,
                     "children": []
@@ -1969,7 +1969,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Meningkatkan Kapasitas Kluster Milvus",
+            "label": "Meningkatkan Kluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -2013,7 +2013,7 @@
                 "children": []
               },
               {
-                "label": "Dasbor Metrik Milvus",
+                "label": "Dasbor Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2076,7 +2076,7 @@
         "order": 9,
         "children": [
           {
-            "label": "Mengelola Kelompok Sumber Daya",
+            "label": "Kelola Kelompok Sumber Daya",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -2114,7 +2114,7 @@
                 "children": []
               },
               {
-                "label": "Kelompok Privilege",
+                "label": "Grup Privilege",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -2198,7 +2198,7 @@
             "children": []
           },
           {
-            "label": "Kasus-Kasus Umum",
+            "label": "Kasus-kasus Umum",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2222,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Lingkungan S3",
+                "label": "Migrasi Antar Instansi di Berbagai Lingkungan S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2460,7 +2460,7 @@
             ]
           },
           {
-            "label": "Para Pengubah Peringkat",
+            "label": "Pemeringkat Ulang",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Memori Dasar",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -3176,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Pembuatan Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
+        "label": "Membuat Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Skala Besar",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3251,7 +3275,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum (FAQ) Operasional",
+        "label": "Pertanyaan Umum (FAQ) tentang Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

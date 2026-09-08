@@ -1445,7 +1445,7 @@
     "v3.0.x/site/en/userGuide/search-query-get/multi-vector-search.md": "2026-05-15T10:14:58.740Z",
     "v3.0.x/site/en/userGuide/search-query-get/phrase-match.md": "2026-04-28T07:42:56.905Z",
     "v3.0.x/site/en/userGuide/search-query-get/range-search.md": "2026-05-15T10:15:13.976Z",
-    "v3.0.x/site/en/userGuide/search-query-get/single-vector-search.md": "2026-07-29T16:57:12.717Z",
+    "v3.0.x/site/en/userGuide/search-query-get/single-vector-search.md": "2026-09-08T11:17:52.410Z",
     "v3.0.x/site/en/userGuide/search-query-get/use-partition-key.md": "2026-05-15T10:16:03.896Z",
     "v3.0.x/site/en/userGuide/search-query-get/with-iterators.md": "2026-04-28T07:45:51.024Z",
     "v3.0.x/site/en/userGuide/tools/birdwatcher_install_guides.md": "2026-04-28T07:47:08.486Z",
@@ -1466,7 +1466,7 @@
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2026-04-28T07:51:22.414Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2026-04-28T07:51:42.436Z",
     "v3.0.x/site/en/userGuide/tools/milvus-webui.md": "2026-04-28T07:52:34.057Z",
-    "v3.0.x/site/en/menuStructure/en.json": "2026-08-11T03:44:52.616Z",
+    "v3.0.x/site/en/menuStructure/en.json": "2026-09-08T11:54:42.933Z",
     "v3.0.x/site/en/reference/architecture/streaming_service.md": "2026-04-28T06:42:55.227Z",
     "v3.0.x/site/en/adminGuide/scale-standalone.md": "2026-04-28T06:08:34.270Z",
     "v3.0.x/site/en/integrations/langchain/langchain_milvus_async.md": "2026-04-28T06:35:17.818Z",
@@ -1590,6 +1590,10 @@
     "v3.0.x/site/en/userGuide/embeddings-reranking/embedding-function/yandex-cloud.md": "2026-07-30T03:34:46.887Z",
     "v3.0.x/site/en/userGuide/embeddings-reranking/reranking/dashscope-ranker.md": "2026-07-30T03:35:00.903Z",
     "v3.0.x/site/en/userGuide/tools/milvus-cdc/bulk_import_in_cdc_replication.md": "2026-07-30T03:36:00.283Z",
-    "v3.0.x/site/en/userGuide/indexes/faiss.md": "2026-08-11T03:15:17.297Z"
+    "v3.0.x/site/en/userGuide/indexes/faiss.md": "2026-08-11T03:15:17.297Z",
+    "v3.0.x/site/en/integrations/basic_memory_with_milvus.md": "2026-09-08T11:16:04.064Z",
+    "v3.0.x/site/en/integrations/everos_with_milvus.md": "2026-09-08T11:16:33.395Z",
+    "v3.0.x/site/en/integrations/google_adk_with_milvus.md": "2026-09-08T11:17:01.586Z",
+    "v3.0.x/site/en/integrations/mempalace_with_milvus.md": "2026-09-08T11:17:28.165Z"
   }
 }

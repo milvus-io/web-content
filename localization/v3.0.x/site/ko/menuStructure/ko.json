@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "외부 컬렉션 생성",
+            "label": "외부 컬렉션 만들기",
             "id": "create-an-external-collection.md",
             "order": 2,
             "children": []
@@ -346,7 +346,7 @@
             "children": []
           },
           {
-            "label": "장전 및 발사",
+            "label": "장전 및 해제",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -479,19 +479,19 @@
                 "children": []
               },
               {
-                "label": "StructArray 필드 생성",
+                "label": "StructArray 필드 생성하기",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "StructArray 필드에 데이터 삽입",
+                "label": "StructArray 필드에 데이터 삽입하기",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Index StructArray 필드",
+                "label": "StructArray 인덱스 필드",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "아랍권과의 관계 정상화",
+                    "label": "아랍어 표준화",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -964,7 +964,7 @@
                 "children": []
               },
               {
-                "label": "반전됨",
+                "label": "반전",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -1173,7 +1173,7 @@
             "order": 13,
             "children": [
               {
-                "label": "StructArray를 이용한 기본 벡터 검색",
+                "label": "StructArray를 사용한 기본 벡터 검색",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1633,7 +1633,7 @@
         "children": []
       },
       {
-        "label": "Claude 코드용 MCP 서버",
+        "label": "클로드 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1672,7 +1672,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Operator를 사용하여",
+                "label": "Milvus Operator와 함께",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1710,7 +1710,7 @@
                 "children": []
               },
               {
-                "label": "OpenShift에 배포하기",
+                "label": "OpenShift에 배포",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
@@ -1842,7 +1842,7 @@
             ]
           },
           {
-            "label": "오브젝트 스토리지",
+            "label": "객체 스토리지",
             "id": "object-storage.md",
             "order": 2,
             "children": []
@@ -1914,7 +1914,7 @@
                     "children": []
                   },
                   {
-                    "label": "펄서 ↔ 우드페커",
+                    "label": "펄서 ↔ 딱따구리",
                     "id": "switch-pulsar-woodpecker.md",
                     "order": 2,
                     "children": []
@@ -1950,13 +1950,13 @@
             "children": []
           },
           {
-            "label": "HPA를 통한 확장",
+            "label": "HPA를 활용한 확장",
             "id": "hpa.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "스케일 종속성",
+            "label": "스케일 의존성",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -2013,7 +2013,7 @@
                 "children": []
               },
               {
-                "label": "Milvus 메트릭스 대시보드",
+                "label": "Milvus Metrics 대시보드",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2027,7 +2027,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "알림 생성",
+                "label": "알림 생성하기",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -2114,7 +2114,7 @@
                 "children": []
               },
               {
-                "label": "프라이빌리지 그룹",
+                "label": "프릴리저 그룹",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -2204,13 +2204,13 @@
             "isMenu": true,
             "children": [
               {
-                "label": "단일 인스턴스에서의 백업 및 복원",
+                "label": "단일 인스턴스 내 백업 및 복원",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "동일 버킷 내 인스턴스 간 마이그레이션",
+                "label": "하나의 버킷 내 인스턴스 간 마이그레이션",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2704,7 +2704,7 @@
         ]
       },
       {
-        "label": "에이전트",
+        "label": "요원들",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "기본 메모리",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -3152,7 +3176,7 @@
         "children": []
       },
       {
-        "label": "마트료시카 임베딩을 활용한 퍼넬 검색",
+        "label": "마트료시카 임베딩을 활용한 퍼널 검색",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3211,7 +3235,7 @@
             "children": []
           },
           {
-            "label": "DNA 염기서열 분류",
+            "label": "DNA 서열 분류",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

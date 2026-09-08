@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Usuarios de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Comunicados",
+        "label": "Comunicados de prensa",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -370,7 +370,7 @@
             "children": []
           },
           {
-            "label": "Gestionar alias",
+            "label": "Gestionar aliases",
             "id": "manage-aliases.md",
             "order": 9,
             "children": []
@@ -431,7 +431,7 @@
             "children": []
           },
           {
-            "label": "Campo numérico",
+            "label": "Campo de número",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -511,7 +511,7 @@
             "children": []
           },
           {
-            "label": "Campo TIMESTAMPTZ",
+            "label": "Campo «TIMESTAMPTZ»",
             "id": "timestamptz-field.md",
             "order": 12,
             "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Solo alfanumérico",
+                    "label": "Solo caracteres alfanuméricos",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_ESCASO",
+                "label": "ÍNDICE_INVERTIDO_ESPARSO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales",
+            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1185,7 +1185,7 @@
                 "children": []
               },
               {
-                "label": "Búsqueda por rango con StructArray",
+                "label": "Búsqueda por intervalo con StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1229,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "Utilizar clave de partición",
+            "label": "Utilizar la clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1365,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de decadencia",
+                "label": "Clasificación de la descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1433,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "Ranker de Voyage AI",
+                    "label": "Ranker de IA de Voyage",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Forzar la compactación de la fusión",
+            "label": "Forzar la compactación por fusión",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1611,7 +1611,7 @@
             "children": []
           },
           {
-            "label": "Canalización RAG",
+            "label": "Canal de RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1790,7 +1790,7 @@
             "children": []
           },
           {
-            "label": "Limitar el número de recogidas",
+            "label": "Limitar el número de recopilaciones",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1854,7 +1854,7 @@
             "order": 3,
             "children": [
               {
-                "label": "Resumen",
+                "label": "Resumen general",
                 "id": "mqtype-overview.md",
                 "order": 0,
                 "children": []
@@ -1902,7 +1902,7 @@
                 "order": 5,
                 "children": [
                   {
-                    "label": "Resumen",
+                    "label": "Resumen general",
                     "id": "switch-mq-type.md",
                     "order": 0,
                     "children": []
@@ -1950,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "Ampliar con HPA",
+            "label": "Escala con HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -2055,7 +2055,7 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "Traza",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -2210,7 +2210,7 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de un mismo depósito",
+                "label": "Migrar entre instancias dentro de un mismo depósito",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2368,7 +2368,7 @@
         "order": 10,
         "children": [
           {
-            "label": "Incrustaciones",
+            "label": "Representaciones",
             "id": "embeddings",
             "order": 0,
             "isMenu": true,
@@ -2460,7 +2460,7 @@
             ]
           },
           {
-            "label": "Reclasificadores",
+            "label": "Reordenadores",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Memoria básica",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -3121,13 +3145,13 @@
         "children": []
       },
       {
-        "label": "Recuperación contextual",
+        "label": "Búsqueda contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
       },
       {
-        "label": "Agrupación en clústeres HDBSCAN",
+        "label": "Agrupación en clústeres de HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
@@ -3152,13 +3176,13 @@
         "children": []
       },
       {
-        "label": "Búsqueda en embudo con representaciones «matrioska»",
+        "label": "Búsqueda en embudo con representaciones Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
       },
       {
-        "label": "Introducción rápida a Attu",
+        "label": "Guía de inicio rápido con Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []
@@ -3170,7 +3194,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda de imágenes a partir de texto con Milvus",
+        "label": "Búsqueda de texto a imagen con Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

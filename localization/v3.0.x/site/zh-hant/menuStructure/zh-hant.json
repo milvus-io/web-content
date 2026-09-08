@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus 採用者",
+        "label": "Milvus 領養者",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -56,7 +56,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "概覽",
+            "label": "概述",
             "id": "install-overview.md",
             "order": 0,
             "children": []
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "記憶體內副本",
+        "label": "記憶體內複本",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -473,7 +473,7 @@
             "order": 10,
             "children": [
               {
-                "label": "StructArray 概述",
+                "label": "StructArray 概覽",
                 "id": "array-of-structs.md",
                 "order": 0,
                 "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "索引 StructArray 欄位",
+                "label": "索引、結構體、陣列與欄位",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -535,7 +535,7 @@
             "children": []
           },
           {
-            "label": "分析器",
+            "label": "分析儀",
             "id": "analyzer",
             "order": 16,
             "children": [
@@ -557,7 +557,7 @@
                     "children": []
                   },
                   {
-                    "label": "英文",
+                    "label": "英語",
                     "id": "english-analyzer.md",
                     "order": 1,
                     "children": []
@@ -594,7 +594,7 @@
                     "children": []
                   },
                   {
-                    "label": "空白",
+                    "label": "空白字元",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
@@ -703,7 +703,7 @@
                     "children": []
                   },
                   {
-                    "label": "史特默",
+                    "label": "斯特默",
                     "id": "stemmer-filter.md",
                     "order": 11,
                     "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路（ANN）的基本搜尋",
+            "label": "人工神經網路的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1173,7 +1173,7 @@
             "order": 13,
             "children": [
               {
-                "label": "使用 StructArray 進行基本向量搜尋",
+                "label": "使用 StructArray 進行基本的向量搜尋",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1185,7 +1185,7 @@
                 "children": []
               },
               {
-                "label": "使用 StructArray 進行範圍搜尋",
+                "label": "使用 StructArray 進行區間搜尋",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1203,7 +1203,7 @@
                 "children": []
               },
               {
-                "label": "使用嵌入清單進行搜尋：ColBERT 與 ColPali",
+                "label": "使用 EmbeddingLists 進行搜尋：ColBERT 與 ColPali",
                 "id": "search-with-embedding-lists.md",
                 "order": 5,
                 "children": []
@@ -1255,7 +1255,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "嵌入函式概覽",
+                "label": "嵌入函式概述",
                 "id": "embedding-function-overview.md",
                 "order": 0,
                 "children": []
@@ -1403,7 +1403,7 @@
                 ]
               },
               {
-                "label": "模特排名榜",
+                "label": "模特評比系統",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1415,7 +1415,7 @@
                     "children": []
                   },
                   {
-                    "label": "vLLM 排名工具",
+                    "label": "vLLM 排名器",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1549,7 +1549,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "準備來源資料",
+        "label": "準備原始資料",
         "id": "prepare-source-data.md",
         "order": 0,
         "children": []
@@ -1593,7 +1593,7 @@
             "children": []
           },
           {
-            "label": "資料模型設計",
+            "label": "模式設計",
             "id": "schema_design.md",
             "order": 2,
             "children": []
@@ -1611,7 +1611,7 @@
             "children": []
           },
           {
-            "label": "RAG 處理流程",
+            "label": "RAG 流程",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1784,7 +1784,7 @@
             "children": []
           },
           {
-            "label": "即興",
+            "label": "即興應對",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -2140,7 +2140,7 @@
             ]
           },
           {
-            "label": "傳輸中的加密",
+            "label": "傳輸過程中的加密",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2210,7 +2210,7 @@
                 "children": []
               },
               {
-                "label": "在同一個儲存桶內的實例之間進行遷移",
+                "label": "在同一個儲存桶內於不同執行個體之間進行遷移",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2286,7 +2286,7 @@
             "children": []
           },
           {
-            "label": "CDC 複製中的批次匯入",
+            "label": "CDC 複製中的批量匯入",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -2386,7 +2386,7 @@
                 "children": []
               },
               {
-                "label": "句子轉換器",
+                "label": "句子變換器",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []
@@ -2506,7 +2506,7 @@
         ]
       },
       {
-        "label": "SDK 程式碼助手 (MCP)",
+        "label": "SDK 程式碼輔助工具 (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -2609,7 +2609,7 @@
                 "children": []
               },
               {
-                "label": "元資料篩選",
+                "label": "元資料過濾",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "基本記憶",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -2923,7 +2947,7 @@
             "children": []
           },
           {
-            "label": "瓦娜",
+            "label": "凡娜",
             "id": "integrate_with_vanna.md",
             "order": 1,
             "children": []
@@ -3115,7 +3139,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行圖 RAG",
+        "label": "使用 Milvus 建立圖形 RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3152,7 +3176,7 @@
         "children": []
       },
       {
-        "label": "運用「套娃」嵌入法進行漏斗搜尋",
+        "label": "運用「套娃」嵌入法進行漏斗式搜尋",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3170,7 +3194,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行文字轉圖像搜尋",
+        "label": "使用 Milvus 進行文字轉圖片搜尋",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
@@ -3263,7 +3287,7 @@
         "children": []
       },
       {
-        "label": "疑難排解",
+        "label": "問題排除",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

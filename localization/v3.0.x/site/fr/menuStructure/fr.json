@@ -18,7 +18,7 @@
         "children": []
       },
       {
-        "label": "Feuille de route de Milvus",
+        "label": "Feuille de route Milvus",
         "id": "roadmap.md",
         "order": 2,
         "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Exécuter Milvus avec un GPU",
+            "label": "Exécuter Milvus avec le GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -177,7 +177,7 @@
             "children": []
           },
           {
-            "label": "Go SDK",
+            "label": "SDK Go",
             "id": "install-go.md",
             "order": 2,
             "children": []
@@ -431,7 +431,7 @@
             "children": []
           },
           {
-            "label": "Champ « Nombre »",
+            "label": "Champ numérique",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Analyse de JSON",
+                "label": "Analyse de fichiers JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ StructArray",
+                "label": "Créer un champ de type StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Alphanumonly",
+                    "label": "Uniquement alphanumérique",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -1365,13 +1365,13 @@
                 "children": []
               },
               {
-                "label": "Classement de la dégradation",
+                "label": "Classement de la décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du classement « Decay »",
+                    "label": "Présentation de Decay Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1920,7 +1920,7 @@
                     "children": []
                   },
                   {
-                    "label": "Kafka ↔ Pic",
+                    "label": "Kafka ↔ Pic-bois",
                     "id": "switch-kafka-woodpecker.md",
                     "order": 3,
                     "children": []
@@ -2274,7 +2274,7 @@
             "children": []
           },
           {
-            "label": "Passage",
+            "label": "Passage au numérique",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -2355,7 +2355,7 @@
         "children": []
       },
       {
-        "label": "Journal d'exportation",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2410,7 +2410,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "Jina IA",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
@@ -2591,7 +2591,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "API asynchrone Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2742,6 +2742,30 @@
             "label": "MCP",
             "id": "milvus_and_mcp.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Mémoire de base",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
             "children": []
           }
         ]
@@ -3079,7 +3103,7 @@
         "children": []
       },
       {
-        "label": "Développer RAG avec Milvus",
+        "label": "Créer un RAG avec Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3152,7 +3176,7 @@
         "children": []
       },
       {
-        "label": "Recherche en entonnoir avec les représentations « matriochka »",
+        "label": "Recherche en entonnoir avec des représentations de type « matriochka »",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3164,7 +3188,7 @@
         "children": []
       },
       {
-        "label": "Utilisation d'AsyncMilvusClient avec asyncio",
+        "label": "Utiliser AsyncMilvusClient avec asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []
@@ -3205,7 +3229,7 @@
             "children": []
           },
           {
-            "label": "Recherche par similarité audio",
+            "label": "Recherche par similitude audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -3251,7 +3275,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelles",
+        "label": "FAQ opérationnelle",
         "id": "operational_faq.md",
         "order": 2,
         "children": []
