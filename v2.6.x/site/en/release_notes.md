@@ -8,6 +8,53 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.23
+
+Release date: August 28, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.23         | 2.6.17             | 2.6.17              | 2.6.25           | 2.6.23         |
+
+We are excited to announce the release of Milvus v2.6.23! This release strengthens security and reliability, reduces query and compaction overhead, and improves streaming operations.
+
+### Improvements
+
+- Hardened geometry RTree indexes and caches against double frees, invalid memory access, and out-of-bounds writes ([#51103](https://github.com/milvus-io/milvus/pull/51103))
+- Improved Tantivy build portability by discovering Cargo through CMake and tracking actual library artifacts in build dependencies ([#51585](https://github.com/milvus-io/milvus/pull/51585))
+- Batched QueryCoord metadata updates for streaming QueryNode replica recovery and cleanup to reduce transaction overhead while preserving consistency ([#52110](https://github.com/milvus-io/milvus/pull/52110))
+- Pinned the Linux OpenBLAS pthread recipe and enabled runtime CPU dispatch to avoid generic ARMv8 kernels on AWS Graviton4 and Neoverse-V2 ([#52129](https://github.com/milvus-io/milvus/pull/52129))
+- Strengthened newly generated password hashes by increasing bcrypt cost from 4 to 10, with credential rotation required to replace existing legacy hashes ([#52146](https://github.com/milvus-io/milvus/pull/52146))
+- Upgraded cgosymbolizer to prevent processes running as PID 1 from hanging after native faults ([#52300](https://github.com/milvus-io/milvus/pull/52300))
+- Preserved original message-pack boundaries for insert and upsert processing while retaining bounded batching for delete-only packs ([#52364](https://github.com/milvus-io/milvus/pull/52364))
+- Strengthened access control by enforcing the GetStatistics privilege for partition statistics requests ([#52466](https://github.com/milvus-io/milvus/pull/52466))
+- Prevented sensitive credentials and values from appearing in logs and error messages ([#52488](https://github.com/milvus-io/milvus/pull/52488))
+- Aligned interim index creation with the target index version ([#52492](https://github.com/milvus-io/milvus/pull/52492))
+- Reduced memory allocations and comparison overhead during compaction with a k-way merge implementation ([#52496](https://github.com/milvus-io/milvus/pull/52496))
+- Reduced memory overhead for nullable fields by preserving packed validity bitmaps during data access and query execution ([#52576](https://github.com/milvus-io/milvus/pull/52576), [#52627](https://github.com/milvus-io/milvus/pull/52627))
+- Improved storage thread pool scaling during task bursts while avoiding unnecessary worker creation when idle capacity was sufficient ([#52718](https://github.com/milvus-io/milvus/pull/52718))
+- Moved BM25 function execution before WAL append and improved function runner lifecycle handling while preserving legacy-message compatibility ([#52753](https://github.com/milvus-io/milvus/pull/52753))
+- Accelerated recall calculation by approximately 166× in the reported topk=100,000 benchmark by replacing nested loops with a hash set ([#52761](https://github.com/milvus-io/milvus/pull/52761))
+- Optimized nullable-field query hot paths with shared validity bitmaps and improved index memory accounting ([#52824](https://github.com/milvus-io/milvus/pull/52824))
+- Reduced redundant vector copies in string and JSON query paths and preserved pinned string-view lifetimes ([#52826](https://github.com/milvus-io/milvus/pull/52826))
+- Added the X-Milvus-Trace-Id header to REST v1 and v2 responses to correlate requests with server logs ([#52850](https://github.com/milvus-io/milvus/pull/52850))
+- Removed the `/expr` runtime introspection endpoint, its web executor, and the associated configuration and expression library dependency to reduce security exposure ([#52912](https://github.com/milvus-io/milvus/pull/52912))
+- Improved synchronization between Sonic JIT registration and Go plugin loading and adjusted linker flags for Go 1.26 compatibility in CPU and GPU builds ([#52919](https://github.com/milvus-io/milvus/pull/52919))
+
+### Bug fixes
+
+- Fixed an issue where a standby MixCoord could exit after promotion because of an invalid etcd authentication token ([#51926](https://github.com/milvus-io/milvus/pull/51926))
+- Fixed an issue where standalone shutdown could hang while waiting for data migration, with a configurable migration timeout defaulting to 10 seconds ([#52026](https://github.com/milvus-io/milvus/pull/52026))
+- Fixed an issue where sealed segment balancing stopped progressing with Streaming Service enabled ([#52148](https://github.com/milvus-io/milvus/pull/52148), [#52168](https://github.com/milvus-io/milvus/pull/52168))
+- Fixed an issue where REST v2 hybrid searches ignored partitionNames and searched the entire collection ([#52183](https://github.com/milvus-io/milvus/pull/52183))
+- Fixed an issue where searches, queries, and statistics requests could be routed to the previous collection after an alias was repointed ([#52334](https://github.com/milvus-io/milvus/pull/52334))
+- Fixed issues with ArrayOfVector and timezone-aware searches, optimized struct-array Parquet imports, and improved garbage collection and segment release reliability ([#52455](https://github.com/milvus-io/milvus/pull/52455))
+- Fixed out-of-range errors when highlighting nullable or dynamic text fields and added configurable backoff for import write retries ([#52456](https://github.com/milvus-io/milvus/pull/52456))
+- Fixed an issue where Milvus 2.6 accepted the unsupported Text data type ([#52485](https://github.com/milvus-io/milvus/pull/52485))
+- Fixed an issue where newly built encrypted V3 packed scalar and text-match indexes could not be decrypted or loaded ([#52508](https://github.com/milvus-io/milvus/pull/52508), [#52516](https://github.com/milvus-io/milvus/pull/52516), [#52560](https://github.com/milvus-io/milvus/pull/52560))
+- Fixed missing results in grouped vector searches after deletions and reinserts left leading chunks empty ([#52663](https://github.com/milvus-io/milvus/pull/52663))
+- Fixed an issue where streaming gRPC requests could bypass authentication on the external proxy port ([#52858](https://github.com/milvus-io/milvus/pull/52858))
+
 ## v2.6.22
 
 Release date: August 4, 2026
