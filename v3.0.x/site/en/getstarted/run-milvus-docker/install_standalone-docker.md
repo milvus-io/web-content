@@ -31,7 +31,7 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-**What's new in v3.0.0:**
+**What's new in v3.0.1:**
 - **Streaming Node**: Enhanced data processing capabilities
 - **Woodpecker MQ (default)**: This Docker deployment runs Woodpecker as the message queue with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 - **Optimized Architecture**: Consolidated components for better performance

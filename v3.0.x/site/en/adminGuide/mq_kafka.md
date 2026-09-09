@@ -113,7 +113,7 @@ kubectl delete milvus my-release
 
 ## Notes
 
-- **Upgrading from 2.5.x to 2.6.x:** **Message Queue limitations**: When upgrading to Milvus v3.0.0, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+- **Upgrading from 2.5.x to 2.6.x:** **Message Queue limitations**: When upgrading to Milvus v3.0.1, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
  If you run Kafka and want to keep it, do not change the message queue during the upgrade.
 - Only **Kafka 2.x and 3.x** are supported.
 - For SASL/SSL connectivity, see [Connect to Kafka with SASL/SSL](connect_kafka_ssl.md).

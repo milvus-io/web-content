@@ -24,7 +24,7 @@ To deploy a Milvus cluster that uses the bundled Pulsar (instead of Woodpecker),
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.0 \
+  --set image.all.tag=v3.0.1 \
   --set pulsarv3.enabled=true \
   --set woodpecker.enabled=false \
   --set streaming.enabled=true \
@@ -144,7 +144,7 @@ kubectl delete milvus my-release
 
 ## Notes
 
-- **Upgrading from 2.5.x to 2.6.x:** **Message Queue limitations**: When upgrading to Milvus v3.0.0, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+- **Upgrading from 2.5.x to 2.6.x:** **Message Queue limitations**: When upgrading to Milvus v3.0.1, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
  If you run Pulsar and want to keep it, do not change the message queue during the upgrade.
 - **Pulsar v2 → v3:** see [Upgrade Pulsar from v2 to v3](upgrade-pulsar-v3.md); to stay on v2, see [Continue Using Pulsar v2](use-pulsar-v2.md).
 

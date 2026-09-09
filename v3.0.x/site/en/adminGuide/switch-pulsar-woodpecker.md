@@ -52,7 +52,7 @@ A successful switch logs `[mqTypeValue=woodpecker]`.
 
 ```shell
 helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.0 \
+  --set image.all.tag=v3.0.1 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \

@@ -169,7 +169,7 @@ Then deploy with one of the following examples:
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.0 \
+  --set image.all.tag=v3.0.1 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -180,7 +180,7 @@ helm install my-release zilliztech/milvus \
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.0 \
+  --set image.all.tag=v3.0.1 \
   --set cluster.enabled=false \
   --set pulsarv3.enabled=false \
   --set standalone.messageQueue=woodpecker \
@@ -216,7 +216,7 @@ Follow [Run Milvus with Docker Compose](install_standalone-docker-compose.md). E
 
 ```bash
 mkdir milvus-wp-compose && cd milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
 # By default, the Docker Compose standalone uses Woodpecker
 sudo docker compose up -d
 # If you need to change Woodpecker parameters further, write an override:
@@ -247,7 +247,7 @@ Woodpecker **service mode** is a **Milvus 3.0** feature. For distributed/cluster
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.0 \
+  --set image.all.tag=v3.0.1 \
   --set woodpecker.enabled=true \
   --set woodpecker.image.tag=v0.1.37 \
   --set streaming.enabled=true \
