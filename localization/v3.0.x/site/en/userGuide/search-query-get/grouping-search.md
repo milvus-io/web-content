@@ -97,6 +97,7 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -233,6 +234,46 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <p>In the request above, <code translate="no">limit=3</code> indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Configure group size<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -256,6 +297,7 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
@@ -378,6 +420,48 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;strictGroupSize&quot;:true,
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <p>In the example above:</p>
 <ul>
