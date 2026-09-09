@@ -75,7 +75,7 @@ title: Pulsar
       </svg>
     </button></h3><p>To deploy a Milvus cluster that uses the bundled Pulsar (instead of Woodpecker), install the Helm chart with the Streaming Node enabled:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.1 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Upgrading from 2.5.x to 2.6.x:</strong> <strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0.0, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+<li><strong>Upgrading from 2.5.x to 2.6.x:</strong> <strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0.1, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 If you run Pulsar and want to keep it, do not change the message queue during the upgrade.</li>
 <li><strong>Pulsar v2 → v3:</strong> see <a href="/docs/upgrade-pulsar-v3.md">Upgrade Pulsar from v2 to v3</a>; to stay on v2, see <a href="/docs/use-pulsar-v2.md">Continue Using Pulsar v2</a>.</li>
 </ul>

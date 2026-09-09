@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Upgrading from 2.5.x to 2.6.x:</strong> <strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0.0, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+<li><strong>Upgrading from 2.5.x to 2.6.x:</strong> <strong>Message Queue limitations</strong>: When upgrading to Milvus v3.0.1, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 If you run Kafka and want to keep it, do not change the message queue during the upgrade.</li>
 <li>Only <strong>Kafka 2.x and 3.x</strong> are supported.</li>
 <li>For SASL/SSL connectivity, see <a href="/docs/connect_kafka_ssl.md">Connect to Kafka with SASL/SSL</a>.</li>
