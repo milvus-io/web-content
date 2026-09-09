@@ -62,6 +62,7 @@ In the search request, set both `group_by_field` and `output_fields` to `docId`.
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -212,6 +213,48 @@ curl --request POST \
 }'
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddFloatVector(query_vector)
+                   .WithLimit(3)
+                   .WithAnnsField("vector")
+                   .WithGroupByField("docId")
+                   .AddOutputField("docId");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        throw std::runtime_error(status.Message());
+    }
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
 In the request above, `limit=3` indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.
 
 ## Configure group size
@@ -224,6 +267,7 @@ By default, Grouping Search returns only one entity per group. If you want multi
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -361,6 +405,50 @@ curl --request POST \
 }'
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddFloatVector(query_vector)
+                   .WithLimit(5)
+                   .WithAnnsField("vector")
+                   .WithGroupByField("docId")
+                   .WithGroupSize(2)
+                   .WithStrictGroupSize(true)
+                   .AddOutputField("docId");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        throw std::runtime_error(status.Message());
+    }
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
 In the example above:
 
 - `group_size`: Specifies the desired number of entities to return per group. For instance, setting `group_size=2` means each group (or each `docId`) should ideally return two of the most similar paragraphs (or **chunks**). If `group_size` is not set, the system defaults to returning one result per group.
@@ -381,6 +469,7 @@ The following example groups search results by `category`, returns up to three e
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -402,19 +491,122 @@ res = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.request.aggregation.AggDirection;
+import io.milvus.v2.service.vector.request.aggregation.OrderByField;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.List;
+
+// Prerequisite: client is connected to Milvus and product_catalog is loaded.
+FloatVec queryVector = new FloatVec(new float[]{0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f});
+SearchReq request = SearchReq.builder()
+    .collectionName("product_catalog")
+    .data(List.of(queryVector))
+    .annsField("embedding")
+    .topK(20)
+    .groupByFieldName("category")
+    .groupSize(3)
+    .strictGroupSize(true)
+    .outputFields(List.of("category", "price", "rating"))
+    .orderByFields(List.of(OrderByField.builder()
+        .fieldName("price").direction(AggDirection.ASC).build()))
+    .build();
+SearchResp response = client.search(request);
+System.out.println(response.getSearchResults());
 ```
 
 ```javascript
-// nodejs
+// Prerequisite: client is connected to Milvus and product_catalog is loaded.
+const queryVector = [0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088];
+const response = await client.search({
+  collection_name: "product_catalog",
+  data: [queryVector],
+  anns_field: "embedding",
+  limit: 20,
+  group_by_field: "category",
+  group_size: 3,
+  strict_group_size: true,
+  output_fields: ["category", "price", "rating"],
+  order_by_fields: [{ field: "price", order: "asc" }],
+});
+console.log(response.results);
 ```
 
 ```go
-// go
+import (
+    "fmt"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+// Prerequisite: client is connected to Milvus and product_catalog is loaded.
+queryVector := []float32{0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088}
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "product_catalog", 20, []entity.Vector{entity.FloatVector(queryVector)},
+).
+    WithANNSField("embedding").
+    WithGroupByField("category").
+    WithGroupSize(3).
+    WithStrictGroupSize(true).
+    WithOutputFields("category", "price", "rating").
+    WithSearchParam("order_by_fields", "price:asc"))
+if err != nil {
+    panic(err)
+}
+for _, result := range results {
+    fmt.Println(result.IDs, result.Scores)
+    fmt.Println(result.GetColumn("category"), result.GetColumn("price"), result.GetColumn("rating"))
+}
 ```
 
 ```bash
-# restful
+# Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.
+curl --request POST \
+  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "collectionName": "product_catalog",
+    "data": [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
+    "annsField": "embedding",
+    "limit": 20,
+    "groupingField": "category",
+    "groupSize": 3,
+    "strictGroupSize": true,
+    "outputFields": ["category", "price", "rating"],
+    "orderByFields": ["price:asc"]
+  }'
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <stdexcept>
+
+// Prerequisite: client is connected to Milvus and product_catalog is loaded.
+std::vector<float> query_vector = {0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f};
+auto request = milvus::SearchRequest()
+    .WithCollectionName("product_catalog")
+    .AddFloatVector(query_vector)
+    .WithAnnsField("embedding")
+    .WithLimit(20)
+    .WithGroupByField("category")
+    .WithGroupSize(3)
+    .WithStrictGroupSize(true)
+    .AddOutputField("category")
+    .AddOutputField("price")
+    .AddOutputField("rating")
+    .AddOrderByField(milvus::OrderByField("price", milvus::AggregationDirection::ASC));
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) { throw std::runtime_error(status.Message()); }
+for (const auto& result : response.Results().Results()) {
+    milvus::EntityRows rows;
+    status = result.OutputRows(rows);
+    if (!status.IsOk()) { throw std::runtime_error(status.Message()); }
+    std::cout << rows << std::endl;
+}
 ```
 
 In the request above, `limit=20` means Milvus selects up to 20 groups, not 20 entities. Because `group_size=3`, the flat result list can contain up to 60 entities in total.
