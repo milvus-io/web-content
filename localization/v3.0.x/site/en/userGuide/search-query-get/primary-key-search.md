@@ -128,7 +128,32 @@ res = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+
+List&lt;Object&gt; ids = Arrays.asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .ids(ids)
+        .limit(<span class="hljs-number">3</span>)
+        .metricType(IndexParam.MetricType.IP)
+        .build());
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -185,6 +210,16 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;quick_setup&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;ids&quot;: [551, 296, 43],
+    &quot;limit&quot;: 3
+  }&#x27;</span> 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -239,7 +274,21 @@ milvus::SearchResponse searchResponse;
     limit=<span class="hljs-number">3</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">List&lt;Object&gt; ids = Arrays.asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .ids(ids)
+        .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot; and likes &gt; 50&quot;</span>)
+        .limit(<span class="hljs-number">3</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))
+        .build());
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -271,6 +320,18 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;ids&quot;: [551, 296, 43],
+    &quot;filter&quot;: &quot;color like \\&quot;red%\\&quot; and likes &gt; 50&quot;,
+    &quot;outputFields&quot;: [&quot;color&quot;, &quot;likes&quot;],
+    &quot;limit&quot;: 3
+  }&#x27;</span> 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -333,7 +394,24 @@ milvus::SearchResponse searchResponse;
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+params.put(<span class="hljs-string">&quot;radius&quot;</span>, <span class="hljs-string">&quot;0.4&quot;</span>);
+params.put(<span class="hljs-string">&quot;range_filter&quot;</span>, <span class="hljs-string">&quot;0.6&quot;</span>);
+
+List&lt;Object&gt; ids = Arrays.asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .ids(ids)
+        .limit(<span class="hljs-number">3</span>)
+        .searchParams(params)
+        .build());
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -369,6 +447,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;ids&quot;: [551, 296, 43],
+    &quot;limit&quot;: 3,
+    &quot;searchParams&quot;: {
+      &quot;params&quot;: {
+        &quot;radius&quot;: 0.4,
+        &quot;range_filter&quot;: 0.6
+      }
+    }
+  }&#x27;</span> 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -424,7 +518,21 @@ milvus::SearchResponse searchResponse;
     output_fields=[<span class="hljs-string">&quot;docId&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">List&lt;Object&gt; ids = Arrays.asList(<span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span>);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .ids(ids)
+        .limit(<span class="hljs-number">3</span>)
+        .groupByFieldName(<span class="hljs-string">&quot;docId&quot;</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;docId&quot;</span>))
+        .build());
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -455,6 +563,18 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;ids&quot;: [551, 296, 43],
+    &quot;limit&quot;: 3,
+    &quot;groupingField&quot;: &quot;docId&quot;,
+    &quot;outputFields&quot;: [&quot;docId&quot;]
+  }&#x27;</span> 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
