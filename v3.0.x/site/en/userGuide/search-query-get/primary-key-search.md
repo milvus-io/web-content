@@ -53,6 +53,7 @@ To conduct a basic primary-key search, simply replace the query vectors with pri
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -79,19 +80,133 @@ for hits in res:
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.IndexParam;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("quick_setup")
+        .annsField("vector")
+        .ids(ids)
+        .limit(3)
+        .metricType(IndexParam.MetricType.IP)
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
-// node.js
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+const res = await client.search({
+    collection_name: "quick_setup",
+    anns_field: "vector",
+    // highlight-start
+    ids: [551, 296, 43], // a list of primary keys
+    // highlight-end
+    limit: 3,
+    metric_type: "IP",
+});
+
+console.log(res.results);
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx := context.Background()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+// highlight-start
+ids := column.NewColumnInt64("id", []int64{551, 296, 43}) // a list of primary keys
+// highlight-end
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    "quick_setup", // collectionName
+    3,             // limit
+    ids,
+).WithANNSField("vector").
+    WithSearchParam("metric_type", "IP"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs)
+    fmt.Println("Scores: ", resultSet.Scores)
+}
 ```
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "quick_setup",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3
+  }' 
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("quick_setup")
+                         .WithAnnsField("vector")
+                         // highlight-start
+                         .WithIDs({551, 296, 43})
+                         // highlight-end
+                         .WithLimit(3)
+                         .WithMetricType(milvus::MetricType::IP);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
 ```
 
 ### Example 2: Filtered search using primary keys
@@ -104,6 +219,7 @@ The following example assumes that color and likes are two schema-defined fields
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -119,19 +235,104 @@ res = client.search(
 ```
 
 ```java
-// java
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .filter("color like \"red%\" and likes > 50")
+        .limit(3)
+        .outputFields(Arrays.asList("color", "likes"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
-// node.js
+const res = await client.search({
+    collection_name: "my_collection",
+    // highlight-start
+    ids: [551, 296, 43],
+    filter: 'color like "red%" and likes > 50',
+    output_fields: ["id", "color", "likes"],
+    // highlight-end
+    limit: 3,
+});
+
+console.log(res.results);
 ```
 
 ```go
-// go
+// highlight-start
+ids := column.NewColumnInt64("id", []int64{551, 296, 43})
+// highlight-end
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    "my_collection", // collectionName
+    3,               // limit
+    ids,
+).WithFilter(`color like "red%" and likes > 50`).
+    WithOutputFields("color", "likes"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs)
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("color: ", resultSet.GetColumn("color"))
+    fmt.Println("likes: ", resultSet.GetColumn("likes"))
+}
 ```
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "filter": "color like \\"red%\\" and likes > 50",
+    "outputFields": ["color", "likes"],
+    "limit": 3
+  }' 
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("my_collection")
+                         // highlight-start
+                         .WithIDs({551, 296, 43})
+                         .WithFilter(R"(color like "red%" and likes > 50)")
+                         .WithOutputFields({"color", "likes"})
+                         // highlight-end
+                         .WithLimit(3);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
+    const auto likes = result.OutputField<milvus::Int64FieldData>("likes");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i]
+                  << ", score=" << result.Scores()[i]
+                  << ", color=" << colors->Data()[i]
+                  << ", likes=" << likes->Data()[i] << std::endl;
+    }
+}
 ```
 
 ### Example 3: Range search using primary keys
@@ -142,6 +343,7 @@ res = client.search(
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -163,19 +365,115 @@ res = client.search(
 ```
 
 ```java
-// java
+Map<String, Object> params = new HashMap<>();
+params.put("radius", "0.4");
+params.put("range_filter", "0.6");
+
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .limit(3)
+        .searchParams(params)
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
-// node.js
+const res = await client.search({
+    collection_name: "my_collection",
+    // highlight-start
+    ids: [551, 296, 43],
+    // highlight-end
+    limit: 3,
+    params: {
+        // highlight-start
+        radius: 0.4,
+        range_filter: 0.6,
+        // highlight-end
+    },
+});
+
+console.log(res.results);
 ```
 
 ```go
-// go
+annParam := index.NewCustomAnnParam()
+// highlight-start
+annParam.WithRadius(0.4)
+annParam.WithRangeFilter(0.6)
+// highlight-end
+
+// highlight-start
+ids := column.NewColumnInt64("id", []int64{551, 296, 43})
+// highlight-end
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    "my_collection", // collectionName
+    3,               // limit
+    ids,
+).WithANNSField("vector").
+    WithAnnParam(annParam))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs)
+    fmt.Println("Scores: ", resultSet.Scores)
+}
 ```
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3,
+    "searchParams": {
+      "params": {
+        "radius": 0.4,
+        "range_filter": 0.6
+      }
+    }
+  }' 
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("my_collection")
+                         .WithAnnsField("vector")
+                         // highlight-start
+                         .WithIDs({551, 296, 43})
+                         .WithRadius(0.4)
+                         .WithRangeFilter(0.6)
+                         // highlight-end
+                         .WithLimit(3);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
 ```
 
 ### Example 4: Grouping search using primary keys
@@ -188,6 +486,7 @@ The following example assumes `docId` is a schema-defined fields in the target c
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -203,18 +502,101 @@ res = client.search(
 ```
 
 ```java
-// java
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .limit(3)
+        .groupByFieldName("docId")
+        .outputFields(Collections.singletonList("docId"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
-// node.js
+const res = await client.search({
+    collection_name: "my_collection",
+    // highlight-start
+    ids: [551, 296, 43],
+    // highlight-end
+    limit: 3,
+    group_by_field: "docId",
+    output_fields: ["id", "docId"],
+});
+
+console.log(res.results);
 ```
 
 ```go
-// go
+// highlight-start
+ids := column.NewColumnInt64("id", []int64{551, 296, 43})
+// highlight-end
+resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
+    "my_collection", // collectionName
+    3,               // limit
+    ids,
+).WithGroupByField("docId").
+    WithOutputFields("docId"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs)
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("docId: ", resultSet.GetColumn("docId"))
+}
 ```
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3,
+    "groupingField": "docId",
+    "outputFields": ["docId"]
+  }' 
+```
+
+```cpp
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("my_collection")
+                         .WithAnnsField("vector")
+                         // highlight-start
+                         .WithIDs({551, 296, 43})
+                         .WithGroupByField("docId")
+                         .WithOutputFields({"docId"})
+                         // highlight-end
+                         .WithLimit(3);
+
+milvus::SearchResponse searchResponse;
+auto status = client->Search(searchRequest, searchResponse);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : searchResponse.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto docIds = result.OutputField<milvus::Int64FieldData>("docId");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i]
+                  << ", score=" << result.Scores()[i]
+                  << ", docId=" << docIds->Data()[i] << std::endl;
+    }
+}
 ```
 
