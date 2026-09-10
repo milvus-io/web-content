@@ -80,7 +80,32 @@ for hits in res:
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.IndexParam;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("quick_setup")
+        .annsField("vector")
+        .ids(ids)
+        .limit(3)
+        .metricType(IndexParam.MetricType.IP)
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
@@ -147,6 +172,16 @@ for _, resultSet := range resultSets {
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "quick_setup",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3
+  }' 
 ```
 
 ```cpp
@@ -200,7 +235,21 @@ res = client.search(
 ```
 
 ```java
-// java
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .filter("color like \"red%\" and likes > 50")
+        .limit(3)
+        .outputFields(Arrays.asList("color", "likes"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
@@ -242,6 +291,18 @@ for _, resultSet := range resultSets {
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "filter": "color like \\"red%\\" and likes > 50",
+    "outputFields": ["color", "likes"],
+    "limit": 3
+  }' 
 ```
 
 ```cpp
@@ -304,7 +365,24 @@ res = client.search(
 ```
 
 ```java
-// java
+Map<String, Object> params = new HashMap<>();
+params.put("radius", "0.4");
+params.put("range_filter", "0.6");
+
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .limit(3)
+        .searchParams(params)
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
@@ -354,6 +432,22 @@ for _, resultSet := range resultSets {
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3,
+    "searchParams": {
+      "params": {
+        "radius": 0.4,
+        "range_filter": 0.6
+      }
+    }
+  }' 
 ```
 
 ```cpp
@@ -408,7 +502,21 @@ res = client.search(
 ```
 
 ```java
-// java
+List<Object> ids = Arrays.asList(551L, 296L, 43L);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .ids(ids)
+        .limit(3)
+        .groupByFieldName("docId")
+        .outputFields(Collections.singletonList("docId"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```javascript
@@ -449,6 +557,18 @@ for _, resultSet := range resultSets {
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "my_collection",
+    "annsField": "vector",
+    "ids": [551, 296, 43],
+    "limit": 3,
+    "groupingField": "docId",
+    "outputFields": ["docId"]
+  }' 
 ```
 
 ```cpp
