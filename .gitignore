@@ -3,6 +3,22 @@ node_modules
 .env
 .output
 yarn-error.log
+sdk-tmp/
 
 scripts/lark-docs/meta/sources/
 .claude/.worktrees/
+
+# opencode auto-generated project scaffolding (plugins/runtime deps)
+.opencode/*
+!.opencode/skills
+!.opencode/skills/**
+
+# codex auto-generated project files
+.codex/*
+!.codex/skills
+!.codex/skills/**
+
+# claude-code auto-generated project files
+.claude/*
+!.claude/skills
+!.claude/skills/**
