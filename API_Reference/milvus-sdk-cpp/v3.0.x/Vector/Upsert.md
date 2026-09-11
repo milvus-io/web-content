@@ -38,19 +38,19 @@ auto request = UpsertRequest()
 
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
-    Set fields data with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Set fields data with fluent interface. ColumnsData and RowsData cannot both be set.
 
 - `AddColumnData(const FieldDataPtr& column_data)`
 
-    Set a field data with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Set a field data with fluent interface. ColumnsData and RowsData cannot both be set.
 
 - `WithRowsData(EntityRows&& rows_data)`
 
-    Set entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Set entity rows with fluent interface. ColumnsData and RowsData cannot both be set.
 
 - `AddRowData(EntityRow&& row_data)`
 
-    Add en entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Add an entity row with fluent interface. ColumnsData and RowsData cannot both be set.
 
 - `WithPartialUpdate(bool partial_update)`
 

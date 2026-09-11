@@ -1,6 +1,6 @@
 # QueryIterator()
 
-Get QueryIterator object based on scalar field(s) by filtering expression. Don't disconnect the MilvusClientV2 when the iterator is in using. assign the primary key field name to request.
+Get a QueryIterator object based on scalar field(s) by filtering expression. Do not disconnect the MilvusClientV2 while the iterator is in use. Assign the primary key field name to the request.
 
 ```cpp
 Status QueryIterator(QueryIteratorRequest& request, QueryIteratorPtr& response)
@@ -42,7 +42,7 @@ auto request = QueryIteratorRequest()
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -74,11 +74,11 @@ auto request = QueryIteratorRequest()
 
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
@@ -102,7 +102,9 @@ auto request = QueryIteratorRequest()
 
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
 
-    Set the flag of internal retrieve strategy.
+    Set the flag of the internal retrieve strategy. Default: `true` since v3.0.2.
+
+    Note: Unlike `QueryRequest`, `QueryIteratorRequest` does not support querying by primary keys — `WithIDs()`/`SetIDs()` are explicitly deleted on this request type.
 
 **RETURNS:**
 

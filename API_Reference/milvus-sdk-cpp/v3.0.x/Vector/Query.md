@@ -20,6 +20,7 @@ auto request = QueryRequest()
     .WithFilter(filter)
     .AddFilterTemplate(key, filter_template)
     .WithFilterTemplates(filter_templates)
+    .WithIDs(id_array)
     .WithLimit(limit)
     .WithOffset(offset)
     .WithIgnoreGrowing(ignore_growing)
@@ -71,13 +72,21 @@ auto request = QueryRequest()
 
     Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
 
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Set the integer primary keys whose records to query. Since v3.0.2. Note: IDs and filter cannot be set at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Set the string primary keys whose records to query. Since v3.0.2. Note: IDs and filter cannot be set at the same time.
+
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 

@@ -16,7 +16,7 @@ enum class IndexType {
     BIN_FLAT = 1001, BIN_IVF_FLAT = 1002, MINHASH_LSH = 1003,
     // Scalar fields
     TRIE = 1101, STL_SORT = 1102, INVERTED = 1103,
-    BITMAP = 1104, NGRAM = 1105,
+    BITMAP = 1104, NGRAM = 1105, FMINDEX = 1106,
     // Sparse vectors
     SPARSE_INVERTED_INDEX = 1201, SPARSE_WAND = 1202,
 };
@@ -79,6 +79,8 @@ enum class IndexType {
 - **BITMAP** (1104) - Bitmap index. Supports all scalar types except JSON, FLOAT, and DOUBLE. Optimal for low-cardinality fields (e.g., status codes, boolean-like integers).
 
 - **NGRAM** (1105) - N-gram index. **VARCHAR or JSON path only.** Enables fast infix (`LIKE '%keyword%'`) and tokenized text search.
+
+- **FMINDEX** (1106) - Exact byte-level substring index. **VARCHAR only.** Answers anchored `LIKE` (prefix/infix/suffix) queries with no candidate recheck. Since v3.0.2.
 
 *Sparse vectors (`SPARSE_FLOAT_VECTOR`):*
 
