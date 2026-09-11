@@ -6,6 +6,12 @@ Queries entities by primary key or filter, with optional ordering through `order
 public QueryResp query(QueryReq request)
 ```
 
+An asynchronous variant is also available:
+
+```java
+public CompletableFuture<QueryResp> queryAsync(QueryReq request)
+```
+
 ## Request Syntax
 
 ```java
@@ -111,6 +117,8 @@ QueryReq.builder()
 *QueryResp*
 
 Contains query rows ordered according to orderByFields when provided.
+
+For struct-array element-level queries (filter expressions using `element_filter`), each result carries an `elementOffset` — the index of the matched element within the struct-array field. Since v3.0.8.
 
 **EXCEPTIONS:**
 

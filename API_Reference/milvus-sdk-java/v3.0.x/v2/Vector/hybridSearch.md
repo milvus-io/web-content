@@ -6,6 +6,12 @@ This operation performs multi-vector search on a collection and returns search r
 public SearchResp hybridSearch(HybridSearchReq request)
 ```
 
+An asynchronous variant is also available:
+
+```java
+public CompletableFuture<SearchResp> hybridSearchAsync(HybridSearchReq request)
+```
+
 ## Request Syntax
 
 ```java
@@ -118,6 +124,8 @@ searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName("float_vector")
         .vectors(floatVectors)
         .params("{\"nprobe\": 10}")
+        .expr(expr)      // filter expression, since v3.0.9
+        .topK(topK)      // candidates requested per ANN search, since v3.0.9
         .limit(10)
         .build());
 searchRequests.add(AnnSearchReq.builder()

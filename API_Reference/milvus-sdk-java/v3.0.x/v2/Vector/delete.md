@@ -46,6 +46,10 @@ delete(DeleteReq.builder()
 
     A map of template variable values for parameterized filters.
 
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+
+    The consistency level for the delete operation. Since v3.0.9.
+
 **RETURNS:**
 
 *DeleteResp*
