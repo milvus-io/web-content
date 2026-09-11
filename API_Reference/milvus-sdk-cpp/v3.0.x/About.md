@@ -7,7 +7,7 @@ Milvus C++ SDK is an open-source project and its source code is hosted on [GitHu
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|
 | 2.6.x | v2.6.5  |
-| 3.0.x | v3.0.1  |
+| 3.0.x | v3.0.2  |
 
 Note: Milvus and C++ SDK are NOT compatible across major versions.
 
