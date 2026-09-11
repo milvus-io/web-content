@@ -83,6 +83,10 @@ queryIterator(QueryIteratorReq.builder()
 
     A map of template variable values for parameterized filters.
 
+- `cursor(QueryIteratorCursor cursor)`
+
+    A cursor used to resume iteration from a previous position. Since v3.0.9.
+
 **RETURNS:**
 
 *QueryIterator*

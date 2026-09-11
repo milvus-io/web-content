@@ -36,6 +36,14 @@ compact(CompactReq.builder()
 
     Whether to request L0 compaction. Defaults to `Boolean.FALSE` and is independent from clustering compaction.
 
+- `targetSize(Long targetSize)`
+
+    The target segment size in `targetSizeUnit`. `null` uses the server default.
+
+- `targetSizeUnit(String targetSizeUnit)`
+
+    The unit for `targetSize`, defaulting to `"mb"`. Since v3.0.9.
+
 **RETURNS:**
 
 *CompactResp*

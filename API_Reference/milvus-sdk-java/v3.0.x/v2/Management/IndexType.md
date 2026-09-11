@@ -92,6 +92,10 @@ Sets the index type to TRIE. This applies to VarChar fields only.
 
 Sets the index type to NGRAM. This applies to VarChar fields and JSON Path indexes.
 
+### FMINDEX
+
+Sets the index type to FMINDEX. This applies to VarChar fields only. Answers anchored LIKE (prefix/infix/suffix) queries with exact byte-level matching and no candidate recheck.
+
 ### RTREE
 
 Sets the index type to RTREE. This applies to geometry fields only.

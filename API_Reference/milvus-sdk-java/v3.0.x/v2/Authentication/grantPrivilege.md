@@ -24,6 +24,10 @@ grantPrivilege(GrantPrivilegeReq.builder()
 
     The name of the role to assign privileges to.
 
+- `dbName(String dbName)`
+
+    The name of the database the privilege applies to. Since v3.0.9.
+
 - `objectType(String objectType)`
 
     The type of the object for which the privilege is being assigned.

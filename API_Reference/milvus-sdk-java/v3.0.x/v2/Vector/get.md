@@ -6,6 +6,12 @@ This operation gets specific entities by their IDs.
 public GetResp get(GetReq request)
 ```
 
+An asynchronous variant is also available:
+
+```java
+public CompletableFuture<GetResp> getAsync(GetReq request)
+```
+
 ## Request Syntax
 
 ```java
@@ -32,6 +38,10 @@ get(GetReq.builder()
 - `partitionName(String partitionName)`
 
     The name of a partition.
+
+- `partitionNames(List<String> partitionNames)`
+
+    A list of partition names to query. Since v3.0.9.
 
 - `ids(List<Object> ids)`
 

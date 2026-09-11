@@ -6,6 +6,12 @@ Performs vector search with optional result ordering, aggregation requests and b
 public SearchResp search(SearchReq request)
 ```
 
+An asynchronous variant is also available:
+
+```java
+public CompletableFuture<SearchResp> searchAsync(SearchReq request)
+```
+
 ## Request Syntax
 
 ```java
@@ -94,6 +100,10 @@ SearchReq.builder()
 
     The number of nearest candidates requested from the server.
 
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used for the search, overriding the one defined on the index.
+
 - `filter(String filter)`
 
     A scalar filtering expression.
@@ -165,6 +175,14 @@ SearchReq.builder()
 - `functionScore(FunctionScore functionScore)`
 
     The scoring functions applied to the search results.
+
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    The ranker (e.g. `RRFRanker`, `WeightedRanker`) used to fuse results from multiple vector fields in a hybrid search.
+
+- `functionChains(List<FunctionChain> functionChains)`
+
+    Function chains applied to the query input before vectorization. Since v3.0.9.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
