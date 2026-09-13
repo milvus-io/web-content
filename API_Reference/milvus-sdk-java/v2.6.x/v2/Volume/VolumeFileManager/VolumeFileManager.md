@@ -8,7 +8,7 @@ io.milvus.bulkwriter.VolumeFileManager
 
 <div class="alert note">
 
-A volume is an intermediate storage spot where you can hold your data for further processing, such as data merging, migration, or importing. For details, refer to [Volume](https://docs.zilliz.com/docs/volume).
+A volume is an intermediate storage spot where you can hold your data for further processing, such as data merging, migration, or importing. For details, refer to [Managed Volumes](https://zilliverse.feishu.cn/wiki/A33MwQX84iXyQNkzopece3oenye) and [External Volumes](https://zilliverse.feishu.cn/wiki/JaLdw76LPiX003kLpKHcA0n8n2d).
 
 </div>
 

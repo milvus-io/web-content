@@ -20,7 +20,7 @@ A **VolumeBulkWriter** object intends to rewrite your raw data to a Zilliz Cloud
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection, defined with [`CreateCollectionReq.CollectionSchema`](../../Collections/CollectionSchema/CollectionSchema.md).
+    The schema of the target collection, defined with [`CreateCollectionReq.CollectionSchema`](https://zilliverse.feishu.cn/docx/IXVHdXVncoEp64xD6vdcvUJwnlH).
 
 - `withRemotePath(String remotePath)`
 

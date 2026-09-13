@@ -1,6 +1,6 @@
 # StructFieldSchema
 
-Constructor behavior changed. New nullable property documented on the existing class page.
+A **StructFieldSchema** instance describes a struct-typed field that contains one or more child fields.
 
 ## Request Syntax
 

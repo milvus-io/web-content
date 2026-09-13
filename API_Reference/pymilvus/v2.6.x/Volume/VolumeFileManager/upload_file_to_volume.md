@@ -1,6 +1,6 @@
 # upload_file_to_volume()
 
-Adds concurrency, retry, multipart-size, path, and progress callback controls.
+This operation uploads the local file at the specified source path to the target file path within the specified managed volume.
 
 <div class="alert note">
 
