@@ -2,7 +2,7 @@
 id: install_standalone-windows.md
 label: Docker
 related_key: Docker
-summary: Windows 版 Docker Desktop を使用して Milvus スタンドアロンをインストールする方法をご覧ください。
+summary: Windows 版 Docker Desktop を使用して、Milvus スタンドアロンをインストールする方法をご確認ください。
 title: DockerでMilvusを実行する（Linux）
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Docker で Milvus を実行する（Windows）<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
@@ -38,8 +38,8 @@ title: DockerでMilvusを実行する（Linux）
       </svg>
     </button></h2><ul>
 <li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop をインストールします</a>。</p></li>
-<li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Windows Subsystem for Linux 2 (WSL 2) をインストールしてください</a>。​</p></li>
-<li><p>Python 3.8 以降をインストールしてください。</p></li>
+<li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Windows Subsystem for Linux 2 (WSL 2) をインストールします</a>。​</p></li>
+<li><p>Python 3.8 以降をインストールしてください。​</p></li>
 </ul>
 <h2 id="Run-Milvus-in-Docker​" class="common-anchor-header">Docker での Milvus の実行​<button data-href="#Run-Milvus-in-Docker​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ title: DockerでMilvusを実行する（Linux）
       </svg>
     </button></h3><p>PowerShell や Windows コマンドプロンプトに慣れている場合は、以下のコマンドを実行してください。​</p>
 <ol>
-<li><p>Docker Desktopを右クリックし、「<strong>管理者として実行</strong>」を選択して、管理者モードで開きます。​</p></li>
+<li><p>Docker Desktopを右クリックし、「<strong>管理者として実行</strong>」を選択して、管理者モードで起動します。​</p></li>
 <li><p>インストールスクリプトをダウンロードし、<code translate="no">standalone.bat</code> として保存します。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
@@ -88,11 +88,11 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>インストールスクリプトの実行後：​</p>
 <ul>
-<li><p><strong>milvus-standalone</strong>という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。​</p></li>
-<li><p>Milvus とともに、同じコンテナ内に埋め込み型の etcd がインストールされ、ポート<strong>2379</strong> でサービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。​</p></li>
+<li><p><strong>milvus-standalone</strong>という名前の Docker コンテナがポート<strong>19530</strong> で起動されました。​</p></li>
+<li><p>Milvus とともに、同じコンテナ内に embed etcd がインストールされ、ポート<strong>2379</strong> でサービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。​</p></li>
 <li><p>Milvusのデータボリュームは、現在のフォルダ内の<strong>volumes/milvusに</strong>マッピングされています。​</p></li>
 </ul>
-<p>以下のコマンドを使用して、Milvus コンテナおよび保存されたデータを管理できます。​</p>
+<p>以下のコマンドを使用して、Milvusコンテナおよび保存されたデータを管理できます。​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
 C:\&gt;standalone.bat stop​
 Stop successfully.​
@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Windows上でLinuxコマンドやシェルスクリプトを使用してMilvusを起動する場合は、WSL 2がすでにインストールされていることを確認してください。WSL 2のインストール方法の詳細については、<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoftのこの記事を</a>参照してください。​</p>
+    </button></h3><p>Windows上でLinuxコマンドやシェルスクリプトを使用してMilvusを起動したい場合は、WSL 2がすでにインストールされていることを確認してください。WSL 2のインストール方法の詳細については、<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">こちらのMicrosoftの記事を</a>参照してください。​</p>
 <ol>
 <li><p>WSL 2 を起動します。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -169,7 +169,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Microsoft Windows に Docker Desktop をインストールすると、<strong>管理者モードの</strong>PowerShell または Windows コマンドプロンプトから Docker CLI にアクセスできるようになります。PowerShell、Windows コマンドプロンプト、または WSL 2 のいずれかで Docker Compose を実行して、Milvus を起動できます。​</p>
+    </button></h2><p>Microsoft Windows に Docker Desktop をインストールすると、<strong>管理者モードの</strong>PowerShell または Windows コマンド プロンプトから Docker CLI にアクセスできるようになります。PowerShell、Windows コマンド プロンプト、または WSL 2 のいずれかで Docker Compose を実行して、Milvus を起動できます。​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell または Windows コマンドプロンプトから​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>Docker Desktopを右クリックし、「<strong>管理者として実行</strong>」を選択して、管理者モードで開きます。​</p></li>
 <li><p>PowerShell または Windows コマンドプロンプトで以下のコマンドを実行し、Milvus Standalone 用の Docker Compose 設定ファイルをダウンロードして、Milvus を起動します。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -198,9 +198,9 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>ネットワーク接続状況によっては、Milvus インストール用のイメージのダウンロードに時間がかかる場合があります。<strong>「milvus-standalone」</strong>、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動すると、次のような状態になります。​</p>
+<p>ネットワーク接続状況によっては、Milvus インストール用のイメージのダウンロードに時間がかかる場合があります。<strong>「milvus-standalone」</strong>、「<strong>milvus-minio</strong>」、および「<strong>milvus-etcd</strong>」という名前のコンテナが起動すると、次のような状態になっていることが確認できます。​</p>
 <ul>
-<li><p><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングしています。​</p></li>
+<li><p><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングしていることが確認できます。​</p></li>
 <li><p><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。​</p></li>
 <li><p><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。​</p></li>
 </ul></li>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Milvusの設定ファイルをダウンロードします。​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusを起動します。​</p>
@@ -274,7 +274,7 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>WindowsにDocker Desktopをインストールした後、コンピュータの設定が適切でない場合、「<code translate="no">Docker Engine stopped</code> 」というエラーが発生することがあります。その場合は、以下の点を確認してください：​</p>
 <ol>
-<li><p>仮想化機能が有効になっているか確認してください。​</p>
+<li><p>仮想化が有効になっているか確認してください。​</p>
 <p>仮想化が有効になっているかどうかは、<strong>タスクマネージャーの</strong>[<strong>パフォーマンス</strong>] タブで確認できます。​</p>
 <p><span class="img-wrapper">
   
@@ -282,10 +282,10 @@ Creating milvus-standalone ... done​
    <span>タスクマネージャーでの仮想化設定</span>
   
  </span></p>
-<p>仮想化が無効になっている場合は、マザーボードのファームウェアのBIOS設定を確認する必要があるかもしれません。BIOS設定で仮想化を有効にする方法は、マザーボードのメーカーによって異なります。例えば、ASUSのマザーボードの場合は、仮想化を有効にする方法について、<a href="https://www.asus.com/support/faq/1043786/">こちらの記事を</a>参照してください。​</p>
-<p>その後、コンピュータを再起動して Hyper-V を有効にする必要があります。詳細については、<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft のこの記事を</a>参照してください。​</p></li>
-<li><p>Docker Desktop サービスが起動しているか確認してください。</p>
-<p>次のコマンドを実行して、Docker Desktop サービスを起動できます。​</p>
+<p>仮想化が無効になっている場合は、マザーボードのBIOS設定を確認する必要があるかもしれません。BIOS設定で仮想化を有効にする方法は、マザーボードのメーカーによって異なります。例えば、ASUSのマザーボードの場合は、仮想化を有効にする方法について、<a href="https://www.asus.com/support/faq/1043786/">こちらの記事を</a>参照してください。​</p>
+<p>その後、コンピュータを再起動して Hyper-V を有効にする必要があります。詳細については、この<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft の記事を</a>参照してください。​</p></li>
+<li><p>Docker Desktop サービスが起動しているか確認してください。​</p>
+<p>次のコマンドを実行して、Docker Desktop サービスを開始できます。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -298,8 +298,8 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Docker デーモンが起動しているか確認してください。</p>
-<p>Docker Desktopのインストールディレクトリに移動し、<code translate="no">.\DockerCli.exe -SwitchDaemon</code> を実行してDockerデーモンを起動する必要があります。​</p>
+<li><p>Docker デーモンが起動しているか確認してください。​</p>
+<p>Docker Desktop のインストールディレクトリに移動し、<code translate="no">.\DockerCli.exe -SwitchDaemon</code> を実行して Docker デーモンを起動する必要があります。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2 から Milvus を実行中に WSL に関連する問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているか、次のように確認する必要があります：​</p>
+    </button></h3><p>WSL 2 から Milvus を実行中に WSL 関連の問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているか、次のように確認する必要があります：​</p>
 <ol>
 <li><p><strong>[設定]</strong>&gt;<strong>[全般]</strong> で、「WSL 2 ベースのエンジンを使用する」にチェックが入っていることを確認してください。​</p>
 <p><span class="img-wrapper">
@@ -338,7 +338,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Docker Desktopの設定でWSL 2ベースのエンジンを使用する</span>
   
  </span></p></li>
-<li><p><strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合</strong>] に移動し、Docker 統合を有効にしたいインストール済みの WSL 2 ディストリビューションを選択してください。​</p>
+<li><p><strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合</strong>] に移動し、インストール済みの WSL 2 ディストリビューションの中から、Docker 統合を有効にしたいものを選択してください。​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -364,10 +364,10 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Milvusの起動時に表示される「Read config failed」エラー</span>
+   <span>Milvusの起動時に表示される「Read config failed」エラーメッセージ</span>
   
  </span></p>
-<p>Milvusの起動時に「Read config failed」というエラーが表示された場合は、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内に移動し、次<strong>のように/milvus/configsフォルダ</strong>の内容を一覧表示できます：​</p>
+<p>Milvusの起動時に「Read config failed」というエラーが表示される場合の対処法として、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内にアクセスし、次のように<strong>/milvus/configsフォルダ</strong>の一覧を表示できます：​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -393,7 +393,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h2><p>DockerにMilvusをインストールしたら、以下の操作が可能です：</p>
 <ul>
 <li><p><a href="/docs/ja/v2.6.x/quickstart.md">クイックスタートを</a>参照して、Milvusの機能を確認してください。</p></li>
-<li><p>Milvusの基本的な操作方法を学びましょう：</p>
+<li><p>Milvusの基本的な操作を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
@@ -404,14 +404,14 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
+<li><p>クラウド上に Milvus クラスターを展開する:</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/ja/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
-<li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
+<li><p>Milvus データのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
 <li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
 <li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>

@@ -20,7 +20,7 @@ title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지에서는 미리 빌드된 RPM/DEB 패키지를 사용하여 Milvus 독립 실행형을 설치하는 방법을 설명합니다.</p>
+    </button></h1><p>이 페이지에서는 미리 빌드된 RPM/DEB 패키지를 사용하여 Milvus 독립 실행형 버전을 설치하는 방법을 설명합니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">필수 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,13 +55,13 @@ title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.22">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 맞는 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.23">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 맞는 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
 <ul>
-<li>x86_64/amd64의 경우, <strong>milvus_2.6.22-1_amd64.deb</strong> 또는 <strong>milvus_2.6.22-1_amd64.rpm</strong> 패키지를 다운로드하십시오.</li>
-<li>ARM64의 경우, <strong>milvus_2.6.22-1_arm64.deb</strong> 또는 <strong>milvus_2.6.22-1_arm64.rpm</strong> 패키지를 다운로드하십시오.</li>
+<li>x86_64/amd64의 경우 <strong>milvus_2.6.23-1_amd64.deb</strong> 또는 <strong>milvus_2.6.23-1_amd64.rpm</strong> 패키지를 다운로드하십시오.</li>
+<li>ARM64의 경우, <strong>milvus_2.6.23-1_arm64.deb</strong> 또는 <strong>milvus_2.6.23-1_arm64.rpm</strong> 패키지를 다운로드하십시오.</li>
 </ul>
 <p>다음 명령어는 x86_64/amd64 시스템에서 Milvus Standalone을 실행할 것을 전제로 합니다.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus_2.6.22-1_amd64.rpm -O milvus_2.6.22-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus_2.6.23-1_amd64.rpm -O milvus_2.6.23-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">RPM/DEB 패키지 설치<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
       </svg>
     </button></h2><p>RPM/DEB 패키지를 설치하려면 시스템의 패키지 관리자를 사용할 수 있습니다.</p>
 <p>RPM 기반 시스템(CentOS, Fedora, RHEL 등)의 경우, <code translate="no">yum</code> 명령을 사용하여 패키지를 설치하십시오.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.22-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.23-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>DEB 기반 시스템(Ubuntu, Debian 등)의 경우, ` <code translate="no">apt</code> ` 명령을 사용하여 패키지를 설치하십시오.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.22-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.23-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus 독립형 실행<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -133,7 +133,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 해당 내용을 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
+    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 해당 부분을 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Milvus Standalone 중지<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ dpkg -l | grep milvus
     </button></h2><p>Milvus Standalone을 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
 <li><p>'빠른 시작( <a href="/docs/ko/v2.6.x/quickstart.md">Quickstart</a> )'을 확인하여 Milvus의 기능을 살펴보세요.</p></li>
-<li><p>Milvus의 기본 사용법을 알아보세요:</p>
+<li><p>Milvus의 기본 작동 방식을 알아보세요:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>

@@ -1,7 +1,9 @@
 ---
 id: mqtype-overview.md
 title: 메시지 큐 개요
-summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요와, 독립형 배포와 분산형 배포 시 각각 어떤 옵션을 사용해야 하는지.'
+summary: >-
+  Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요와, 독립형 배포와 분산형 배포 시 각각 어떤 옵션을 사용해야 하는지에 대한
+  설명.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">메시지 큐 개요<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,20 +38,20 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>메시지 큐</th><th style="text-align:center">Milvus 독립형</th><th style="text-align:center">Milvus 분산형(클러스터)</th><th>기본값</th><th>참고</th></tr>
+<tr><th>메시지 큐</th><th style="text-align:center">Milvus 독립형</th><th style="text-align:center">Milvus 분산형(클러스터)</th><th>기본값</th><th>참고 사항</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ko/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (임베디드)</td><td style="text-align:center">✔️ (내장형 또는 서비스)</td><td><strong>Milvus 3.x</strong> (두 모드 모두)</td><td>기본값이자 권장 설정입니다. 오브젝트 스토리지에 저장되는 클라우드 네이티브 WAL; 외부 서비스가 필요하지 않습니다.</td></tr>
 <tr><td><a href="/docs/ko/mq_pulsar.md">펄사</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (클러스터 기본값)</td><td>지원됨(외부 또는 번들).</td></tr>
 <tr><td><a href="/docs/ko/mq_kafka.md">카프카</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>지원됨. Kafka 2.x 또는 3.x만 지원됩니다.</td></tr>
-<tr><td><a href="/docs/ko/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (독립 실행형 기본값)</td><td><strong>스탠드얼론</strong> 환경 <strong>에서만</strong> 지원됩니다.</td></tr>
+<tr><td><a href="/docs/ko/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (스탠드얼론 기본값)</td><td><strong>스탠드얼론 버전에서만</strong> 지원됩니다.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <ul>
 <li><p>각 Milvus 인스턴스는 정확히 하나의 메시지 큐를 사용합니다.</p></li>
-<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.0으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
-<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환’을</a> 참조하십시오. ‘메시지 큐 전환’ 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드하십시오.</p></li>
+<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.1로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
+<li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환’을</a> 참조하십시오. ‘메시지 큐 전환’ 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드해야 합니다.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">메시지 큐 선택<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">
@@ -68,7 +70,7 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>새 배포(Milvus 3.x):</strong> <strong>Woodpecker</strong> (기본값) <strong>를</strong> 사용하십시오. 독립 실행형(Standalone)의 경우 내장형으로 실행되며, 분산형(클러스터)의 경우 Helm을 통해 배포된 전용 <a href="/docs/ko/woodpecker.md#Deployment-modes">서비스를</a> 기본값으로 권장하지만, 내장형도 지원됩니다.</li>
+<li><strong>새 배포(Milvus 3.x):</strong> <strong>Woodpecker</strong> (기본값) <strong>를</strong> 사용하십시오. 독립 실행형(Standalone)의 경우 내장(embedded) 방식으로 실행되며, 분산(클러스터) 환경에서는 Helm을 통해 배포된 전용 <a href="/docs/ko/woodpecker.md#Deployment-modes">서비스를</a> 기본값으로 권장하지만, 내장 방식도 지원됩니다.</li>
 <li><strong>기존 Pulsar 또는 Kafka 사용자:</strong> Pulsar와 Kafka는 계속해서 완벽하게 지원됩니다. 기존 설정을 유지하거나 <a href="/docs/ko/switch-mq-type.md">Woodpecker로 전환하십시오</a>.</li>
-<li><strong>RocksMQ:</strong> 독립형 환경에서만 사용 가능하며, Milvus 3.x에서는 내장형 Woodpecker로 대체되었습니다.</li>
+<li><strong>RocksMQ:</strong> 독립형(standalone)에서만 사용 가능하며, Milvus 3.x에서는 내장형 Woodpecker로 대체되었습니다.</li>
 </ul>

@@ -55,7 +55,7 @@ title: تشغيل Milvus في Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. البرنامج النصي متاح في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
+    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -63,11 +63,11 @@ title: تشغيل Milvus في Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار v2.6.22:</strong></p>
+<p><strong>ما الجديد في الإصدار v2.6.23:</strong></p>
 <ul>
 <li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
-<li><strong>Woodpecker MQ</strong>: قائمة انتظار رسائل محسّنة مع تقليل أعباء الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام Woodpecker</a> لمزيد من التفاصيل</li>
-<li><strong>بنية محسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
+<li><strong>Woodpecker MQ</strong>: قائمة انتظار الرسائل المحسّنة مع تقليل تكاليف الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام Woodpecker</a> لمزيد من التفاصيل</li>
+<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
 </ul>
 <p>احرص دائمًا على تنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
 <p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
@@ -106,7 +106,7 @@ EOF
 <p>ثم أعد تشغيل الخدمة على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على عناصر التكوين ذات الصلة، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">«تكوين النظام</a>».</p>
+<p>للاطلاع على عناصر التكوين ذات الصلة، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">تكوين النظام</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">ترقية Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة إمكانيات Milvus.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -193,7 +193,7 @@ EOF
 <li><a href="/docs/ar/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/ar/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة Milvus WebUI</a>، وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>

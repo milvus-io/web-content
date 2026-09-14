@@ -63,20 +63,20 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Neuerungen in Version 2.6.22:</strong></p>
+<p><strong>Neuerungen in Version 2.6.23:</strong></p>
 <ul>
 <li><strong>Streaming-Knoten</strong>: Erweiterte Datenverarbeitungsfunktionen</li>
-<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
+<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand; Details finden Sie unter <a href="/docs/de/v2.6.x/use-woodpecker.md">„Woodpecker verwenden“</a> </li>
 <li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
 </ul>
-<p>Laden Sie immer das aktuellste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
-<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">„Backup“</a> im Standalone-Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker-Compose</a> -Bereitstellungsmethode empfohlen.</p>
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie von den aktuellsten Konfigurationen und Architekturverbesserungen profitieren.</p>
+<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> im Standalone-Betriebsmodus nutzen möchten, wird die Bereitstellung mit <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> empfohlen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, damit wir Ihnen die erforderliche Unterstützung leisten können.</p>
 </div>
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
 <li>Ein Docker-Container namens „milvus“ wurde am Port <strong>19530</strong> gestartet.</li>
-<li>Zusammen mit Milvus ist im selben Container ein „embed etcd“ installiert, das auf Port <strong>2379</strong> läuft. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
+<li>Ein „embed etcd“ ist zusammen mit Milvus im selben Container installiert und läuft auf Port <strong>2379</strong>. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.</li>
 </ul>
@@ -175,19 +175,19 @@ EOF
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/v2.6.x/quickstart.md">den Schnellstart</a> an, um zu erfahren, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/manage-collections.md">Kollektionen verwalten</a></li>
+<li><a href="/docs/de/v2.6.x/manage-collections.md">Verwalten von Sammlungen</a></li>
 <li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
-<li><a href="/docs/de/v2.6.x/single-vector-search.md">Einzelvektor-Suche</a></li>
+<li><a href="/docs/de/v2.6.x/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Milvus mit Helm-Chart aktualisieren</a>.</p></li>
 <li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
-<li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
+<li><p>Stellen Sie Ihren Milvus-Cluster in der Cloud bereit:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/de/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
-<li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung bei Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">„Attu“</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

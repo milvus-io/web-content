@@ -2,7 +2,7 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: Pelajari cara menginstal Milvus standalone menggunakan Docker Compose.
+summary: Pelajari cara menginstal Milvus versi mandiri menggunakan Docker Compose.
 title: Menjalankan Milvus dengan Docker Compose (Linux)
 ---
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Menjalankan Milvus dengan Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Untuk menginstal Milvus menggunakan Docker Compose, cukup jalankan</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,16 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.22:</strong></p>
+<p><strong>Apa yang baru di v2.6.23:</strong></p>
 <ul>
-<li><strong>Arsitektur yang Ditingkatkan</strong>: Menampilkan Streaming Node baru dan komponen yang dioptimalkan</li>
+<li><strong>Arsitektur yang Ditingkatkan</strong>: Dilengkapi dengan Streaming Node baru dan komponen yang dioptimalkan</li>
 <li><strong>Dependensi yang Diperbarui</strong>: Termasuk versi terbaru MinIO dan etcd</li>
-<li><strong>Konfigurasi yang Ditingkatkan</strong>: Pengaturan yang dioptimalkan untuk kinerja yang lebih baik</li>
+<li><strong>Konfigurasi yang Ditingkatkan</strong>: Pengaturan yang dioptimalkan untuk performa yang lebih baik</li>
 </ul>
-<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur-fitur v2.6.22.</p>
+<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur-fitur v2.6.23.</p>
 <ul>
 <li><p>Jika Anda gagal menjalankan perintah di atas, silakan periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
-<li><p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p></li>
+<li><p>Jika Anda mengalami masalah saat mengunduh gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail masalahnya, dan kami akan memberikan dukungan yang diperlukan.</p></li>
 </ul>
 </div>
 <p>Setelah Milvus dimulai,</p>
@@ -98,7 +98,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda juga dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Perbarui konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Memperbarui Konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,11 +115,11 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Untuk memperbarui konfigurasi Milvus agar sesuai dengan kebutuhan Anda, Anda perlu memodifikasi berkas ` <code translate="no">/milvus/configs/user.yaml</code> ` di dalam kontainer ` <code translate="no">milvus-standalone</code> `.</p>
 <ol>
-<li><p>Akses kontainer ` <code translate="no">milvus-standalone</code> `.</p>
+<li><p>Akses kontainer <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tambahkan konfigurasi tambahan untuk menggantikan konfigurasi default.
-Berikut ini mengasumsikan bahwa Anda perlu menggantikan konfigurasi default ` <code translate="no">proxy.healthCheckTimeout</code>`. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/v2.6.x/system_configuration.md">Konfigurasi Sistem</a>.</p>
+Berikut ini mengasumsikan bahwa Anda perlu menggantikan konfigurasi default di ` <code translate="no">proxy.healthCheckTimeout</code>`. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/v2.6.x/system_configuration.md">Konfigurasi Sistem</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -152,7 +152,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Langkah selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Langkah Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,8 +180,8 @@ EOF
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Helm Chart</a>.</p></li>
-<li><p><a href="/docs/id/v2.6.x/scaleout.md">Skalakan kluster Milvus Anda</a>.</p></li>
-<li><p>Terapkan kluster Milvus Anda di cloud:</p>
+<li><p><a href="/docs/id/v2.6.x/scaleout.md">Skalakan klaster Milvus Anda</a>.</p></li>
+<li><p>Terapkan klaster Milvus Anda di cloud:</p>
 <ul>
 <li><a href="/docs/id/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -189,7 +189,7 @@ EOF
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
-<li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI open-source untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

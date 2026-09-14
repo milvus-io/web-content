@@ -57,13 +57,13 @@ title: Установка автономной версии Milvus с помощ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете скачать пакет RPM/DEB, соответствующий архитектуре вашей системы, со <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.0">страницы «Выпуски Milvus</a>».</p>
+    </button></h2><p>Вы можете скачать пакет RPM/DEB, соответствующий архитектуре вашей системы, со <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.1">страницы «Выпуски Milvus</a>».</p>
 <ul>
-<li>Для x86_64/amd64 загрузите пакет <strong>milvus_3.0.0-1_amd64.deb</strong> или <strong>milvus_3.0.0-1_amd64.rpm</strong>.</li>
-<li>Для ARM64 загрузите пакет <strong>milvus_3.0.0-1_arm64.deb</strong> или <strong>milvus_3.0.0-1_arm64.rpm</strong>.</li>
+<li>Для x86_64/amd64 загрузите пакет <strong>milvus_3.0.1-1_amd64.deb</strong> или <strong>milvus_3.0.1-1_amd64.rpm</strong>.</li>
+<li>Для ARM64 загрузите пакет <strong>milvus_3.0.1-1_arm64.deb</strong> или <strong>milvus_3.0.1-1_arm64.rpm</strong>.</li>
 </ul>
-<p>Следующая команда предполагает, что вы собираетесь запустить автономную версию Milvus на компьютере с архитектурой x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus_3.0.0-1_amd64.rpm -O milvus_3.0.0-1_amd64.rpm
+<p>Следующая команда предполагает, что вы собираетесь запустить Milvus Standalone на компьютере с архитектурой x86_64/amd64.</p>
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus_3.0.1-1_amd64.rpm -O milvus_3.0.1-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Установка пакета RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,13 +80,13 @@ title: Установка автономной версии Milvus с помощ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Для установки пакета RPM/DEB можно использовать диспетчер пакетов вашей системы.</p>
+    </button></h2><p>Для установки пакета RPM/DEB можно использовать менеджер пакетов вашей системы.</p>
 <p>Для систем на базе RPM (таких как CentOS, Fedora и RHEL) используйте команду <code translate="no">yum</code> для установки пакета.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_3.0.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_3.0.1-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Для систем на базе DEB (таких как Ubuntu и Debian) используйте команду ` <code translate="no">apt</code> ` для установки пакета.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_3.0.0-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_3.0.1-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Запуск автономной версии Milvus<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -104,13 +104,13 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>По завершении установки Milvus устанавливается в качестве службы systemd и может быть запущен с помощью следующей команды:</p>
+    </button></h2><p>По завершении установки Milvus устанавливается как служба systemd и может быть запущен с помощью следующей команды:</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете проверить состояние службы Milvus с помощью следующей команды:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Если Milvus работает успешно, вы должны увидеть следующий вывод:</p>
+<p>Если Milvus работает корректно, вы должны увидеть следующий вывод:</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>
@@ -138,7 +138,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете изменить настройки Milvus в файле <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Например, чтобы заменить службу <code translate="no">proxy.healthCheckTimeout</code> на <code translate="no">1000</code>, найдите параметр target и внесите соответствующие изменения. Список применимых элементов конфигурации см. в разделе <a href="/docs/ru/system_configuration.md">«Конфигурация системы</a>».</p>
+    </button></h2><p>Вы можете изменить настройки Milvus в файле <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Например, чтобы заменить <code translate="no">proxy.healthCheckTimeout</code> на <code translate="no">1000</code> ms, найдите параметр target и измените его соответствующим образом. Информацию о соответствующих элементах конфигурации см. в разделе <a href="/docs/ru/system_configuration.md">«Конфигурация системы</a>».</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Остановка автономной версии Milvus<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ dpkg -l | grep milvus
     </button></h2><p>Чтобы остановить автономную версию Milvus, можно использовать следующую команду:</p>
 <pre><code translate="no" class="language-shell">systemctl stop milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Удаление автономной версии Milvus<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Удаление Milvus Standalone<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,7 +182,7 @@ dpkg -l | grep milvus
 <div class="alert note">
 <p>Storage V3 по умолчанию отключен. Включите его перед использованием функций, которые от него зависят. Требования и рекомендации по совместимости см. в разделе <a href="/docs/ru/storage-v3.md">«Storage V3</a>».</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Дальнейшие действия<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Установив Milvus Standalone, вы можете:</p>
+    </button></h2><p>Установив Milvus Standalone, вы сможете:</p>
 <ul>
 <li><p>Ознакомьтесь с <a href="/docs/ru/quickstart.md">разделом «Быстрый старт»</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Ознакомиться с основными операциями Milvus:</p>
@@ -205,7 +205,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ru/manage_databases.md">Управление базами данных</a></li>
 <li><a href="/docs/ru/manage-collections.md">Управление коллекциями</a></li>
 <li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, обновление и удаление</a></li>
+<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка с обновлением и удаление</a></li>
 <li><a href="/docs/ru/single-vector-search.md">Поиск по одному вектору</a></li>
 <li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
@@ -219,7 +219,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Ознакомьтесь с <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Познакомьтесь с <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
 <li><p><a href="/docs/ru/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

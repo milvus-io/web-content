@@ -77,7 +77,7 @@ title: Запуск Milvus в Docker (Windows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вы лучше знакомы с PowerShell или командной строкой Windows, выполните следующие команды.​</p>
+    </button></h3><p>Если вы лучше знакомы с PowerShell или командной строкой Windows, выполните следующие действия.</p>
 <ol>
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
 <li><p>Загрузите скрипт установки и сохраните его как « <code translate="no">standalone.bat</code> ».​</p>
@@ -174,7 +174,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После установки Docker Desktop в Microsoft Windows вы можете получить доступ к командной строке Docker (CLI) из PowerShell или командной строки Windows в режиме <strong>администратора</strong>. Для запуска Milvus вы можете запустить Docker Compose в PowerShell, командной строке Windows или WSL 2.</p>
+    </button></h2><p>После установки Docker Desktop в Microsoft Windows вы можете получить доступ к командной строке Docker (CLI) из PowerShell или командной строки Windows в режиме <strong>администратора</strong>. Для запуска Milvus можно использовать Docker Compose в PowerShell, командной строке Windows или WSL 2.​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Из PowerShell или командной строки Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
 <li><p>Выполните следующие команды в PowerShell или командной строке Windows, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -203,14 +203,14 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>В зависимости от вашего сетевого соединения загрузка образов для установки Milvus может занять некоторое время. Как только контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены, вы увидите, что ​</p>
+<p>В зависимости от вашего сетевого подключения загрузка образов для установки Milvus может занять некоторое время. Как только контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены, вы увидите, что ​</p>
 <ul>
 <li><p>контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</p></li>
 <li><p>Контейнер <strong>milvus-minio</strong> обслуживает локально порты <strong>9000</strong> и <strong>9001</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.​</p></li>
-<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает локально порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.​</p></li>
+<li><p>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.​</p></li>
 </ul></li>
 </ol>
-<p>Вы также можете использовать команды Docker Compose для Linux, если у вас установлен WSL 2.​</p>
+<p>Вы также можете использовать Linux-версию команд Docker Compose, если у вас установлен WSL 2.​</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">Из WSL 2​<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Процедура аналогична установке Milvus в системах Linux с помощью Docker Compose.​</p>
+    </button></h3><p>Процедура аналогична использованию Docker Compose для установки Milvus в системах Linux.​</p>
 <ol>
 <li><p>Запустите WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -234,8 +234,8 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>Загрузите файл конфигурации Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<li><p>Загрузите файл конфигурации Milvus.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>
@@ -277,17 +277,17 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После установки Docker Desktop в Windows может возникнуть ошибка « <code translate="no">Docker Engine stopped</code> », если ваш компьютер настроен некорректно. В этом случае необходимо выполнить следующие проверки:​</p>
+    </button></h3><p>После установки Docker Desktop в Windows может возникнуть ошибка « <code translate="no">Docker Engine stopped</code> », если ваш компьютер настроен неправильно. В этом случае необходимо выполнить следующие проверки:​</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.​</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>«Производительность»</strong> в <strong>диспетчере задач</strong>.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
    <span>Виртуализация в «Диспетчере задач»</span>
   
  </span></p>
-<p>Если виртуализация отключена, вам, возможно, потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете воспользоваться <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
+<p>Если виртуализация отключена, возможно, вам потребуется проверить настройки BIOS прошивки материнской платы. Способ включения виртуализации в настройках BIOS зависит от производителя материнской платы. Например, для материнских плат ASUS вы можете ознакомиться с <a href="https://www.asus.com/support/faq/1043786/">этой статьёй</a> о включении виртуализации.​</p>
 <p>Затем необходимо перезагрузить компьютер и включить Hyper-V. Подробности см. в этой <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">статье Microsoft</a>.​</p></li>
 <li><p>Проверьте, запущена ли служба Docker Desktop.</p>
 <p>Для запуска службы Docker Desktop можно выполнить следующую команду.</p>
@@ -296,21 +296,21 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
-<li><p>Проверьте, правильно ли установлена среда WSL.</p>
+<li><p>Проверьте, правильно ли установлен WSL.</p>
 <p>Для установки или обновления WSL 2 выполните следующую команду.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Проверьте, запущен ли Docker Daemon.</p>
+<li><p>Убедитесь, что демон Docker запущен.</p>
 <p>Для запуска демона Docker необходимо перейти в каталог установки Docker Desktop и выполнить команду « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> ».</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>Убедитесь, что Docker Desktop запущен в режиме <strong>администратора</strong>.</p>
+<li><p>Убедитесь, что вы запустили Docker Desktop в режиме <strong>администратора</strong>.​</p>
 <p>Убедитесь, что Docker Desktop запущен в режиме администратора. Для этого щелкните правой кнопкой мыши по <strong>Docker Desktop</strong> и выберите <strong>«Запуск от имени администратора</strong>».​</p>
 <p><span class="img-wrapper">
   
@@ -334,7 +334,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если при запуске Milvus из WSL 2 у вас возникли проблемы, связанные с WSL, возможно, вам необходимо проверить, настроен ли Docker Desktop на использование движка на основе WSL 2, следующим образом:​</p>
+    </button></h3><p>Если при запуске Milvus из WSL 2 у вас возникли проблемы, связанные с WSL, возможно, вам нужно проверить, настроен ли Docker Desktop на использование движка на основе WSL 2, следующим образом:​</p>
 <ol>
 <li><p>Убедитесь, что в разделе <strong>«Настройки»</strong> &gt; <strong>«Общие»</strong> установлен флажок «Использовать движок на основе WSL 2». ​</p>
 <p><span class="img-wrapper">
@@ -372,16 +372,16 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Сообщение об ошибке «Read config failed» при запуске Milvus</span>
   
  </span></p>
-<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, можно использовать команду <code translate="no">docker exec</code> для входа в контейнер и просмотра содержимого папки <strong>/milvus/configs</strong> следующим образом:​</p>
+<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, вы можете использовать команду ` <code translate="no">docker exec</code> `, чтобы войти в контейнер и отобразить содержимое папки <strong>`/milvus/configs</strong> ` следующим образом:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
-   <span>Отображение списка файлов конфигурации Milvus</span>
+   <span>Просмотр списка файлов конфигурации Milvus</span>
   
  </span></p>
 <p>​</p>
 <div class="alert note">
-<p>Storage V3 по умолчанию отключен. Включите его перед использованием функций, которые от него зависят. Требования и рекомендации по совместимости см. в разделе <a href="/docs/ru/storage-v3.md">«Storage V3</a>».</p>
+<p>Storage V3 по умолчанию отключен. Включите его перед использованием функций, которые от него зависят. Требования и соображения по совместимости см. в разделе <a href="/docs/ru/storage-v3.md">«Storage V3</a>».</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Дальнейшие действия<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -412,7 +412,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p><a href="/docs/ru/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ru/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
-<li><p>Разверните кластер Milvus в облаке:</p>
+<li><p>Разверните кластер Milvus в облаках:</p>
 <ul>
 <li><a href="/docs/ru/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ru/gcp.md">Google Cloud</a></li>
@@ -420,7 +420,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Ознакомьтесь с <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Познакомьтесь с <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
 <li><p><a href="/docs/ru/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

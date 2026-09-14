@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: تعرف على كيفية ترقية الإصدار المستقل من Milvus باستخدام Milvus Operator.
+summary: تعرف على كيفية ترقية إصدار Milvus المستقل باستخدام Milvus Operator.
 title: ترقية Milvus Standalone باستخدام Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/ar/upgrade_milvus_standalone-docker.md" class=''>Operator و Helm و Docker Compose</a></div>
@@ -23,9 +23,9 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية نشر Milvus 2.6.x المستقل إلى الإصدار v3.0.0 باستخدام Milvus Operator.</p>
+    </button></h1><p>يصف هذا الدليل كيفية ترقية نشر Milvus 2.6.x المستقل إلى الإصدار v3.0.1 باستخدام Milvus Operator.</p>
 <div class="alert note">
-<p>تم التحقق من صحة هذا الإجراء من Milvus 2.6.20 إلى Milvus v3.0.0 باستخدام Milvus Operator 1.3.0 وWoodpecker وetcd داخل المجموعة وMinIO داخل المجموعة. إذا كنت تستخدم إصدار تصحيح آخر لـ Milvus 2.6.x، أو إصدار Operator آخر، أو قائمة انتظار رسائل مختلفة، أو تكوين تبعيات مختلف، فقم بالتحقق من صحة الترقية في بيئة غير إنتاجية أولاً.</p>
+<p>تم التحقق من صحة هذا الإجراء من Milvus 2.6.20 إلى Milvus v3.0.1 باستخدام Milvus Operator 1.3.0 وWoodpecker وetcd داخل المجموعة وMinIO داخل المجموعة. إذا كنت تستخدم إصدار تصحيح آخر من Milvus 2.6.x، أو إصدار Operator آخر، أو قائمة انتظار رسائل مختلفة، أو تكوين تبعيات مختلف، فقم بالتحقق من صحة الترقية في بيئة غير إنتاجية أولاً.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,15 +43,15 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
         ></path>
       </svg>
     </button></h2><ul>
-<li>مجموعة Kubernetes مع نشر مستقل لـ Milvus 2.6.x يديره Milvus Operator</li>
+<li>مجموعة Kubernetes مع نشر مستقل لـ Milvus 2.6.x تديره أداة تشغيل Milvus</li>
 <li><code translate="no">kubectl</code> الوصول إلى المجموعة</li>
 <li>بيان الموارد المخصصة (CR) الكامل لـ Milvus المستخدم في النشر الحالي</li>
 <li>طريقة التثبيت وقوائم البيانات المستخدمة لـ Milvus Operator الحالي</li>
 <li>نسخة احتياطية حديثة من بيانات Milvus الوصفية والبيانات الدائمة</li>
 </ul>
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.0، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.1، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alert warning">
-<p>لا يتضمن هذا الإجراء التحقق من صحة الرجوع إلى إصدار أقدم أو التراجع عن الترقية عن طريق إعادة صورة Milvus إلى الإصدار 2.6.x. بعد أن تقوم الإصدار v3.0.0 بكتابة البيانات، قد تفشل عملية التراجع التي تقتصر على الصورة في قراءة الحالة المحدثة. إذا فشلت عملية الترقية، فقم بإيقاف عمليات الكتابة واستخدم خطة استعادة تعيد نسخ البيانات الاحتياطية للبيانات الوصفية والبيانات الدائمة قبل الترقية. تحقق أولاً من صحة خطة الاستعادة في بيئة غير إنتاجية.</p>
+<p>لا يتحقق هذا الإجراء من صحة الرجوع إلى إصدار أقدم أو التراجع عن الترقية عن طريق إعادة صورة Milvus إلى الإصدار 2.6.x. بعد أن تقوم الإصدار v3.0.1 بكتابة البيانات، قد تفشل عملية التراجع التي تقتصر على الصورة في قراءة الحالة المحدثة. إذا فشلت عملية الترقية، فقم بإيقاف عمليات الكتابة واستخدم خطة استعادة تعيد نسخ البيانات الاحتياطية للبيانات الوصفية والبيانات الدائمة إلى ما قبل الترقية. تحقق أولاً من صحة خطة الاستعادة في بيئة غير إنتاجية.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">الخطوة 1: قم بعمل نسخة احتياطية من CR الحالي لـ Milvus<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">الخطوة 1: قم بعمل نسخة احتياطية من CR Milvus الحالي<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,7 +88,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>استخدم ملف البيان المصدر للنشر الحالي الخاص بك كملف بيان الترقية. لا تقم بتطبيق ملف النسخ الاحتياطي المصدَّر مباشرةً دون إزالة البيانات الوصفية التي يديرها الخادم وحقول الحالة أولاً.</p>
+<p>استخدم ملف البيانات المرجعية المصدر للنشر الحالي كملف بيانات مرجعية للترقية. لا تقم بتطبيق ملف النسخ الاحتياطي المصدَّر مباشرةً دون إزالة البيانات الوصفية التي يديرها الخادم وحقول الحالة أولاً.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">الخطوة 2: تأكيد إصدار Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>أبقت عملية الترقية التي تم التحقق من صحتها على إصدار Milvus Operator عند 1.3.0. احتفظ بإصدار Operator الذي يدير حاليًا نشر Milvus 2.6.x الخاص بك ما لم تتطلب سياسة الدعم الخاصة بك ترقية Operator منفصلة. لا تقم بتخفيض إصدار Operator الأحدث إلى الإصدار الذي تم اختباره. إذا كنت بحاجة إلى تغيير إصدار Operator، فاستخدم نفس طريقة التثبيت Helm أو <code translate="no">kubectl</code> ونفس اسم الإصدار ومساحة الاسم المستخدمة في التثبيت الحالي، ثم قم بالتحقق من صحة تغيير Operator قبل تحديث Milvus CR.</p>
+<p>أبقت عملية الترقية التي تم التحقق من صحتها على إصدار Milvus Operator عند 1.3.0. احتفظ بإصدار Operator الذي يدير حاليًا نشر Milvus 2.6.x الخاص بك ما لم تتطلب سياسة الدعم الخاصة بك ترقية منفصلة لـ Operator. لا تقم بتخفيض إصدار Operator الأحدث إلى الإصدار الذي تم اختباره. إذا كنت بحاجة إلى تغيير إصدار Operator، فاستخدم نفس طريقة التثبيت Helm أو <code translate="no">kubectl</code> ونفس اسم الإصدار ومساحة الاسم مثل التثبيت الحالي، ثم قم بالتحقق من صحة تغيير Operator قبل تحديث Milvus CR.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">الخطوة 3: تحديث صورة Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>في بيان Milvus CR الكامل، قم بتغيير <code translate="no">spec.components.image</code> فقط. احتفظ بالوضع الحالي وإعدادات المكونات وقائمة انتظار الرسائل وetcd والتخزين وإعدادات التبعيات الأخرى. يوضح المقتطف التالي الحقل المطلوب تغييره؛ لا تستبدل CR الكامل بهذا المقتطف.</p>
+    </button></h3><p>في بيان Milvus CR الكامل، قم بتغيير <code translate="no">spec.components.image</code> فقط. احتفظ بالوضع الحالي وإعدادات المكونات وقائمة انتظار الرسائل وetcd والتخزين وإعدادات التبعيات الأخرى. يوضح المقتطف التالي الحقل الذي يجب تغييره؛ لا تستبدل CR الكامل الخاص بك بهذا المقتطف.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -133,9 +133,9 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.0</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.1</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتطبيق ملف بيان CR الكامل:</p>
+<p>قم بتطبيق ملف CR الكامل:</p>
 <pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">تحقق من الترقية<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
@@ -153,7 +153,7 @@ title: ترقية Milvus Standalone باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تحقق من حالة طلب التغيير (CR) وحالة البود (Pod) وصور الحاويات:</p>
+    </button></h2><p>تحقق من حالة CR وحالة Pod وصور الحاويات:</p>
 <pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
   --namespace &lt;namespace&gt; \
   --output jsonpath=<span class="hljs-string">&#x27;{.status.status}{&quot;\t&quot;}{.status.currentImage}{&quot;\n&quot;}&#x27;</span>
@@ -163,4 +163,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تأكد من أن CR الخاص بـ Milvus يُبلغ عن <code translate="no">Healthy</code> ، وأن الصورة الحالية هي <code translate="no">milvusdb/milvus:v3.0.0</code> ، وأن المجموعات الحالية لا تزال قابلة للاستعلام والبحث. أكمل هذه الفحوصات قبل تمكين أي ميزة خاصة بالإصدار v3.0.0.</p>
+<p>تأكد من أن CR الخاص بـ Milvus يُبلغ عن <code translate="no">Healthy</code> ، وأن الصورة الحالية هي <code translate="no">milvusdb/milvus:v3.0.1</code> ، وأن المجموعات الحالية لا تزال قابلة للاستعلام والبحث. أكمل هذه الفحوصات قبل تمكين أي ميزة خاصة بالإصدار v3.0.1.</p>

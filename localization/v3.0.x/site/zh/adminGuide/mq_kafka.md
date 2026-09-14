@@ -222,10 +222,10 @@ title: 卡夫卡
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>从 2.5.x 升级至 2.6.x：</strong> <strong>消息队列限制</strong>：升级至 Milvus v3.0.0 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
+<li><strong>从 2.5.x 升级至 2.6.x：</strong> <strong>消息队列限制</strong>：升级至 Milvus v3.0.1 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
 如果您正在运行 Kafka 且希望继续使用它，请在升级过程中不要更改消息队列。</li>
 <li>仅支持<strong>Kafka 2.x 和 3.x</strong>版本。</li>
-<li>有关 SASL/SSL 连接，请参阅《<a href="/docs/zh/connect_kafka_ssl.md">使用 SASL/SSL 连接到 Kafka</a>》。</li>
+<li>有关 SASL/SSL 连接，请参阅《<a href="/docs/zh/connect_kafka_ssl.md">使用 SASL/SSL 连接 Kafka</a>》。</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">后续步骤<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

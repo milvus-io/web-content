@@ -2,7 +2,7 @@
 id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
-summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法をご覧ください。
+summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法について学びましょう。
 title: RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール
 ---
 <h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: RPM/DEB パッケージを使用した Milvus スタンドアロンのイ
         ></path>
       </svg>
     </button></h2><ul>
-<li>libstdc++ 8.5.0 以降がすでにインストールされていること。</li>
+<li>libstdc++ 8.5.0 以降のバージョンがすでにインストールされていること。</li>
 <li>インストール前に、<a href="/docs/ja/v2.6.x/prerequisite-docker.md">ハードウェアおよびソフトウェアの要件を確認してください</a>。</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">RPM/DEB パッケージのダウンロード<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -55,13 +55,13 @@ title: RPM/DEB パッケージを使用した Milvus スタンドアロンのイ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.22">Milvus リリースページ</a>から、お使いのシステムアーキテクチャに応じた RPM/DEB パッケージをダウンロードできます。</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.23">Milvus リリースページ</a>から、お使いのシステムアーキテクチャに応じた RPM/DEB パッケージをダウンロードできます。</p>
 <ul>
-<li>x86_64/amd64 の場合は、<strong>milvus_2.6.22-1_amd64.deb</strong>または<strong>milvus_2.6.22-1_amd64.rpm</strong>パッケージをダウンロードしてください。</li>
-<li>ARM64 の場合は、<strong>milvus_2.6.22-1_arm64.deb</strong>または<strong>milvus_2.6.22-1_arm64.rpm</strong>パッケージをダウンロードしてください。</li>
+<li>x86_64/amd64 の場合は、<strong>milvus_2.6.23-1_amd64.deb</strong>または<strong>milvus_2.6.23-1_amd64.rpm</strong>パッケージをダウンロードしてください。</li>
+<li>ARM64 の場合は、<strong>milvus_2.6.23-1_arm64.deb</strong>または<strong>milvus_2.6.23-1_arm64.rpm</strong>パッケージをダウンロードしてください。</li>
 </ul>
-<p>以下のコマンドは、x86_64/amd64 マシンで Milvus Standalone を実行することを前提としています。</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.22/milvus_2.6.22-1_amd64.rpm -O milvus_2.6.22-1_amd64.rpm
+<p>以下のコマンドは、x86_64/amd64マシンでMilvus Standaloneを実行することを前提としています。</p>
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus_2.6.23-1_amd64.rpm -O milvus_2.6.23-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">RPM/DEB パッケージのインストール<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: RPM/DEB パッケージを使用した Milvus スタンドアロンのイ
       </svg>
     </button></h2><p>RPM/DEB パッケージをインストールするには、お使いのシステムのパッケージマネージャーを使用できます。</p>
 <p>RPM ベースのシステム（CentOS、Fedora、RHEL など）では、<code translate="no">yum</code> コマンドを使用してパッケージをインストールします。</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.22-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.23-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>DEB ベースのシステム（Ubuntu や Debian など）の場合は、<code translate="no">apt</code> コマンドを使用してパッケージをインストールします。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.22-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.23-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus スタンドアロンの起動<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -105,10 +105,10 @@ dpkg -l | grep milvus
     </button></h2><p>インストールが完了すると、Milvus は systemd サービスとしてインストールされ、次のコマンドを使用して起動できます。</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコマンドを使用して、Milvus サービスのステータスを確認できます:</p>
+<p>以下のコマンドを使用して、Milvus サービスの状態を確認できます:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusが正常に実行されている場合、次のような出力が表示されます:</p>
+<p>Milvusが正常に実行されている場合、以下の出力が表示されます：</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>
@@ -189,9 +189,9 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone のインストールが完了したら、以下の操作が可能です:</p>
+    </button></h2><p>Milvus Standalone のインストールが完了したら、次のことができます:</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作方法を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
@@ -203,7 +203,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする:</p>
+<li><p>クラウド上に Milvus クラスタをデプロイする:</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -212,6 +212,6 @@ dpkg -l | grep milvus
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
 <li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
-<li><p>Milvusを直感的に管理できるオープンソースのGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するためのオープンソースGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

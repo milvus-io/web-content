@@ -43,7 +43,7 @@ title: Executar o Milvus no Docker (Windows)
       </svg>
     </button></h2><ul>
 <li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Instale o Docker Desktop</a>.</p></li>
-<li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Instale o Windows Subsystem for Linux 2 (WSL 2)</a>.​</p></li>
+<li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Instale o Subsistema do Windows para Linux 2 (WSL 2)</a>.​</p></li>
 <li><p>Instale o Python 3.8 ou superior.</p></li>
 </ul>
 <h2 id="Run-Milvus-in-Docker​" class="common-anchor-header">Executar o Milvus no Docker​<button data-href="#Run-Milvus-in-Docker​" class="anchor-icon" translate="no">
@@ -61,7 +61,7 @@ title: Executar o Milvus no Docker (Windows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. Depois de instalar o Docker Desktop no Microsoft Windows, pode aceder à CLI do Docker a partir do PowerShell ou do Prompt de Comando do Windows em modo <strong>de administrador</strong> e a partir do WSL 2. ​</p>
+    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. Depois de instalar o Docker Desktop no Microsoft Windows, pode aceder à CLI do Docker a partir do PowerShell ou do Prompt de Comando do Windows no modo <strong>de administrador</strong> e a partir do WSL 2. ​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">A partir do PowerShell ou do Prompt de Comando do Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,10 +94,10 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Após executar o script de instalação:​</p>
 <ul>
 <li><p>Foi iniciado um contentor Docker denominado <strong>milvus-standalone</strong> na porta <strong>19530</strong>.​</p></li>
-<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e está disponível na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
+<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e funciona na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
 <li><p>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul>
-<p>Pode utilizar os seguintes comandos para gerir o contentor do Milvus e os dados armazenados.​</p>
+<p>Pode utilizar os seguintes comandos para gerir o contentor Milvus e os dados armazenados.​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
 C:\&gt;standalone.bat stop​
 Stop successfully.​
@@ -124,7 +124,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se preferir iniciar o Milvus utilizando comandos Linux e scripts de shell no Windows, certifique-se de que já instalou o WSL 2. Para obter detalhes sobre como instalar o WSL 2, pode consultar este <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artigo da Microsoft</a>.​</p>
+    </button></h3><p>Se preferir iniciar o Milvus utilizando comandos Linux e scripts de shell no Windows, certifique-se de que já tem o WSL 2 instalado. Para obter detalhes sobre como instalar o WSL 2, pode consultar este <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artigo da Microsoft</a>.​</p>
 <ol>
 <li><p>Inicie o WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -194,7 +194,7 @@ Delete successfully.​
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no Prompt de Comando do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -203,14 +203,14 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>Dependendo da sua ligação de rede, o download das imagens para a instalação do Milvus pode demorar algum tempo. Assim que os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estiverem ativos, poderá verificar que ​</p>
+<p>Dependendo da sua ligação de rede, o download das imagens para a instalação do Milvus pode demorar algum tempo. Assim que os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estiverem em funcionamento, poderá verificar que ​</p>
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.​</p></li>
-<li><p>O contentor <strong>milvus-minio</strong> disponibiliza as portas <strong>9000</strong> e <strong>9001</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.​</p></li>
+<li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9000</strong> e <strong>9001</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</p></li>
 <li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul></li>
 </ol>
-<p>Também pode utilizar a versão Linux dos comandos do Docker Compose, caso tenha o WSL 2 instalado.​</p>
+<p>Também pode utilizar a versão Linux dos comandos do Docker Compose se tiver o WSL 2 instalado.​</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">A partir do WSL 2​<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O procedimento é semelhante ao da utilização do Docker Compose para instalar o Milvus em sistemas Linux.​</p>
+    </button></h3><p>O procedimento é semelhante ao da utilização do Docker Compose para instalar o Milvus em sistemas Linux.</p>
 <ol>
 <li><p>Inicie o WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -235,10 +235,10 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descarregue o ficheiro de configuração do Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Inicie o Milvus.​</p>
+<li><p>Inicie o Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
 Creating milvus-etcd  ... done​
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de instalar o Docker Desktop no Windows, poderá deparar-se com o erro « <code translate="no">Docker Engine stopped</code> » se o seu computador não estiver configurado corretamente. Neste caso, poderá ser necessário verificar o seguinte:​</p>
+    </button></h3><p>Depois de instalar o Docker Desktop no Windows, poderá deparar-se com o erro « <code translate="no">Docker Engine stopped</code> » se o seu computador não estiver configurado corretamente. Nesse caso, poderá ser necessário verificar o seguinte:​</p>
 <ol>
 <li><p>Verifique se a virtualização está ativada.​</p>
 <p>Pode verificar se a virtualização está ativada consultando o separador <strong>«Desempenho»</strong> no <strong>Gestor de Tarefas</strong>.​</p>
@@ -290,7 +290,7 @@ Creating milvus-standalone ... done​
 <p>Se a virtualização estiver desativada, poderá ser necessário verificar as definições da BIOS do firmware da sua placa-mãe. A forma de ativar a virtualização nas definições da BIOS varia consoante o fabricante da placa-mãe. No caso das placas-mãe ASUS, por exemplo, pode consultar <a href="https://www.asus.com/support/faq/1043786/">este artigo</a> sobre como ativar a virtualização.​</p>
 <p>Em seguida, terá de reiniciar o computador e ativar o Hyper-V. Para mais detalhes, consulte este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artigo da Microsoft</a>.​</p></li>
 <li><p>Verifique se o Serviço do Docker Desktop foi iniciado.​</p>
-<p>Pode executar o comando seguinte para iniciar o Serviço do Docker Desktop.</p>
+<p>Pode executar o seguinte comando para iniciar o Serviço Docker Desktop.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -351,7 +351,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Como posso resolver os erros relacionados com o volume que aparecem durante o arranque do Milvus, com a mensagem « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Como posso resolver os erros relacionados com o volume que surgem durante o arranque do Milvus, com a mensagem « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,10 +369,10 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Mensagem de erro «Falha na leitura da configuração» na inicialização do Milvus</span>
+   <span>Mensagem de erro «Falha ao ler a configuração» na inicialização do Milvus</span>
   
  </span></p>
-<p>Para resolver o erro apresentado durante o arranque do Milvus com a mensagem «Falha ao ler a configuração», tem de verificar se o volume montado no contentor do Milvus está correto. Se o volume estiver corretamente montado no contentor, pode utilizar o comando <code translate="no">docker exec</code> para aceder ao contentor e listar a pasta <strong>/milvus/configs</strong> da seguinte forma:​</p>
+<p>Para resolver o erro exibido durante o arranque do Milvus com a mensagem «Falha ao ler a configuração», é necessário verificar se o volume montado no contentor do Milvus está correto. Se o volume estiver corretamente montado no contentor, pode utilizar o comando <code translate="no">docker exec</code> para aceder ao contentor e listar a pasta <strong>/milvus/configs</strong> da seguinte forma:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -418,7 +418,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/milvus-webui.md">a Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>

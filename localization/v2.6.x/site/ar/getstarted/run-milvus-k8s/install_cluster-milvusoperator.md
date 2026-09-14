@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق <a href="/docs/ar/v2.6.x/prerequisite-helm.md">من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
-<li><p>قبل تثبيت Milvus، يوصى باستخدام أداة <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> لتقدير متطلبات الأجهزة بناءً على حجم بياناتك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
+<li><p>قبل تثبيت Milvus، يوصى باستخدام أداة <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> لتقدير متطلبات الأجهزة بناءً على حجم البيانات لديك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.22) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.23) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/v2.6.x/use-woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
@@ -186,7 +186,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <div class="alert note">
 <ul>
 <li>يجب أن يحتوي اسم الإصدار على أحرف وأرقام وشرطات فقط. لا يُسمح باستخدام النقاط في اسم الإصدار.</li>
-<li>يمكنك أيضًا نشر مثيل Milvus في الوضع المستقل، حيث تكون جميع مكوناته موجودة داخل بود واحد. للقيام بذلك، قم بتغيير عنوان URL لملف التكوين في الأمر أعلاه إلى <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>يمكنك أيضًا نشر مثيل Milvus في الوضع المستقل، حيث تكون جميع مكوناته مضمنة في بود واحد. للقيام بذلك، قم بتغيير عنوان URL لملف التكوين في الأمر أعلاه إلى <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. التحقق من حالة مجموعة Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -254,7 +254,7 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. إعادة توجيه منفذ محلي إلى Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. توجيه منفذ محلي إلى Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -278,12 +278,12 @@ my-release-minio-3                               1/1     Running   0          2m
 <div class="alert note">
 <p>إذا كنت قد قمت بنشر Milvus في الوضع المستقل، فقم بتغيير اسم البود من <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> إلى <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
-<p>بعد ذلك، قم بتشغيل الأمر التالي لإعادة توجيه منفذ محلي إلى المنفذ الذي تعمل عليه Milvus.</p>
+<p>ثم، قم بتشغيل الأمر التالي لإعادة توجيه منفذ محلي إلى المنفذ الذي تعمل عليه Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>اختياريًا، يمكنك استخدام <code translate="no">:19530</code> بدلاً من <code translate="no">27017:19530</code> في الأمر أعلاه للسماح لـ <code translate="no">kubectl</code> بتخصيص منفذ محلي لك حتى لا تضطر إلى إدارة تعارضات المنافذ.</p>
-<p>بشكل افتراضي، لا يستمع توجيه المنافذ في kubectl إلا على <code translate="no">localhost</code>. استخدم العلامة <code translate="no">address</code> إذا كنت تريد أن يستمع Milvus على عناوين IP المحددة أو جميعها. يجعل الأمر التالي توجيه المنافذ يستمع على جميع عناوين IP على الجهاز المضيف.</p>
+<p>بشكل افتراضي، لا يستمع توجيه المنفذ في kubectl إلا على <code translate="no">localhost</code>. استخدم علامة <code translate="no">address</code> إذا كنت تريد أن يستمع Milvus على عناوين IP المحددة أو جميعها. يجعل الأمر التالي توجيه المنفذ يستمع على جميع عناوين IP على الجهاز المضيف.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -306,18 +306,18 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>يمكنك عرض تحديث تكوينات مجموعة Milvus الخاصة بك عن طريق استدعاء الأمر <code translate="no">patch</code> كما يلي:</p>
 <ol>
 <li><p>قم بتشغيل الأمر التالي لمعاينة الإعدادات المقترحة.</p>
-<p>يفترض ما يلي أنك تريد تحديث معلمة « <code translate="no">spec.components.disableMetric</code> » إلى « <code translate="no">false</code> » مللي ثانية.</p>
+<p>يفترض ما يلي أنك تريد تحديث معلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على عناصر التكوين ذات الصلة، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">«تكوين النظام</a>».</p></li>
+<p>للاطلاع على عناصر التكوين ذات الصلة، راجع <a href="/docs/ar/v2.6.x/system_configuration.md">تكوين النظام</a>.</p></li>
 <li><p>قم بتحديث التكوينات.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">الوصول إلى واجهة المستخدم على الويب لـ Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">الوصول إلى واجهة المستخدم الرسومية لـ Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -332,12 +332,12 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة المستخدم على الويب لـ Milvus إمكانية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة المستخدم على الويب لـ Milvus لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والمجموعات، وعرض قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم على الويب لـ Milvus، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة المستخدم على الويب لـ Milvus إمكانية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة المستخدم على الويب لـ Milvus لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والتجميعات، وإدراج قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم على الويب Milvus Web UI، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>لتمكين الوصول إلى واجهة المستخدم على الويب لـ Milvus، تحتاج إلى إعادة توجيه منفذ pod الوكيل إلى منفذ محلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
-<p>الآن، يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على العنوان <code translate="no">http://localhost:27018</code>.</p>
+<p>الآن، يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">إلغاء تثبيت Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>عند حذف مجموعة Milvus باستخدام التكوين الافتراضي، لا يتم حذف التبعيات مثل etcd وPulsar وMinIO. لذلك، في المرة التالية التي تقوم فيها بتثبيت نفس مثيل مجموعة Milvus، سيتم استخدام هذه التبعيات مرة أخرى.</li>
+<li>عند حذف مجموعة Milvus باستخدام التكوين الافتراضي، لا يتم حذف التبعيات مثل etcd و Pulsar و MinIO. لذلك، في المرة التالية التي تقوم فيها بتثبيت نفس مثيل مجموعة Milvus، سيتم استخدام هذه التبعيات مرة أخرى.</li>
 <li>لحذف التبعيات ومطالبات وحدات التخزين الدائمة (PVCs) مع مجموعة Milvus، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">ملف التكوين</a>.</li>
 </ul>
 </div>
@@ -422,7 +422,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ar/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
+<li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup،</a> وهي أداة مفتوحة المصدر لإجراء النسخ الاحتياطي لبيانات Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>

@@ -2,7 +2,7 @@
 id: mqtype-overview.md
 title: メッセージキューの概要
 summary: >-
-  Milvusがサポートするメッセージキュー（mqType）オプションの概要、およびスタンドアロン環境と分散環境の各展開形態でどのオプションを使用すべきかについて。
+  Milvusがサポートするメッセージキュー（mqType）オプションの概要、およびスタンドアロン環境と分散環境の各展開形態において、それぞれどのオプションを使用すべきかについて。
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">メッセージキューの概要<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,14 +42,14 @@ summary: >-
 <tbody>
 <tr><td><a href="/docs/ja/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (組み込み)</td><td style="text-align:center">✔️ (組み込みまたはサービス)</td><td><strong>Milvus 3.x</strong>（両モード）</td><td>デフォルトかつ推奨。オブジェクトストレージ上のクラウドネイティブWAL。外部サービスは不要。</td></tr>
 <tr><td><a href="/docs/ja/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x（クラスタのデフォルト）</td><td>サポート対象（外部またはバンドル版）。</td></tr>
-<tr><td><a href="/docs/ja/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>対応済み。Kafka 2.x または 3.x のみ。</td></tr>
+<tr><td><a href="/docs/ja/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>対応。Kafka 2.x または 3.x のみ。</td></tr>
 <tr><td><a href="/docs/ja/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x（スタンドアロンのデフォルト）</td><td><strong>スタンドアロンのみ</strong>対応。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <ul>
-<li><p>各Milvusインスタンスは、メッセージキューを1つだけ使用します。</p></li>
-<li><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.0 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p></li>
+<li><p>各 Milvus インスタンスは、メッセージキューを正確に 1 つ使用します。</p></li>
+<li><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.1 へアップグレードする際は、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p></li>
 <li><p>実行中のインスタンスのメッセージキューを変更するには、<a href="/docs/ja/switch-mq-type.md">「メッセージキューの切り替え</a>」を参照してください。「メッセージ<a href="/docs/ja/switch-mq-type.md">キュー</a>の切り替え」機能は<strong>Milvus 3.0 以降で</strong>利用可能です。まず Milvus 3.0 以降にアップグレードしてください。</p></li>
 </ul>
 </div>
@@ -69,7 +69,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>新規デプロイ（Milvus 3.x）：</strong> <strong>Woodpecker</strong>（デフォルト）を使用してください。スタンドアロン環境では組み込み型で実行されます。分散（クラスタ）環境の場合、推奨されるデフォルトはHelmでデプロイされた専用<a href="/docs/ja/woodpecker.md#Deployment-modes">サービス</a>ですが、組み込み型もサポートされています。</li>
+<li><strong>新規デプロイ（Milvus 3.x）：</strong> <strong>Woodpecker</strong>（デフォルト）を使用してください。スタンドアロン環境では組み込みモードで実行されます。分散（クラスタ）環境の場合、推奨されるデフォルトはHelmでデプロイされた専用<a href="/docs/ja/woodpecker.md#Deployment-modes">サービス</a>ですが、組み込みモードもサポートされています。</li>
 <li><strong>既存のPulsarまたはKafkaユーザー：</strong>PulsarおよびKafkaは引き続き完全にサポートされています。そのまま使用するか、<a href="/docs/ja/switch-mq-type.md">Woodpeckerに切り替えてください</a>。</li>
-<li><strong>RocksMQ：</strong>スタンドアロン環境のみ対応しており、Milvus 3.x では組み込み型の Woodpecker に置き換えられています。</li>
+<li><strong>RocksMQ：</strong>スタンドアロン環境のみ対応。Milvus 3.x では、組み込み型の Woodpecker に置き換えられています。</li>
 </ul>

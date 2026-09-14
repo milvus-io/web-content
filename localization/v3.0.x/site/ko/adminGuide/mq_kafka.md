@@ -17,7 +17,7 @@ title: 카프카
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka는 Milvus가 지원하는 메시지 큐(WAL) 백엔드 중 하나입니다. Milvus 3.x에서는 <a href="/docs/ko/woodpecker.md">Woodpecker가</a> 기본 메시지 큐로 설정되어 있지만, Kafka를 선호하는 사용자를 위해 Kafka에 대한 지원은 여전히 완벽하게 제공됩니다. Kafka는 주로 Milvus Distributed(클러스터)와 함께 사용되며, 독립형 배포 환경에서는 일반적으로 내장형 Woodpecker 또는 <a href="/docs/ko/mq_rocksmq.md">RocksMQ가</a> 사용됩니다.</p>
+    </button></h1><p>Apache Kafka는 Milvus가 지원하는 메시지 큐(WAL) 백엔드 중 하나입니다. Milvus 3.x에서는 <a href="/docs/ko/woodpecker.md">Woodpecker가</a> 기본 메시지 큐로 설정되어 있지만, Kafka를 선호하는 사용자를 위해 Kafka에 대한 완전한 지원이 계속 제공됩니다. Kafka는 주로 Milvus Distributed(클러스터)와 함께 사용되며, 독립 실행형 배포 환경에서는 일반적으로 내장된 Woodpecker 또는 <a href="/docs/ko/mq_rocksmq.md">RocksMQ가</a> 사용됩니다.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">버전 호환성<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +114,7 @@ title: 카프카
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator를 사용하여 <code translate="no">spec.dependencies.msgStreamType: &quot;kafka&quot;</code> 를 설정하고, <code translate="no">spec.dependencies.kafka</code> (클러스터 전용)에서 Kafka를 구성하십시오. <code translate="no">kafka</code> 는 <code translate="no">external</code> 및 <code translate="no">inCluster</code> 를 지원합니다.</p>
+    </button></h2><p>Milvus Operator를 사용하는 경우, ` <code translate="no">spec.dependencies.msgStreamType: &quot;kafka&quot;</code> `를 설정하고 ` <code translate="no">spec.dependencies.kafka</code> `(클러스터 전용)에서 Kafka를 구성하십시오. ` <code translate="no">kafka</code> `는 ` <code translate="no">external</code> ` 및 ` <code translate="no">inCluster</code>`을 지원합니다.</p>
 <h3 id="External-Kafka" class="common-anchor-header">외부 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,7 @@ title: 카프카
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>다음과 같이 구성을 적용합니다(파일명이 <code translate="no">milvuscluster.yaml</code> 라고 가정함):</p>
+<p>다음과 같이 구성을 적용합니다(파일 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정함):</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">제거<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -222,8 +222,8 @@ title: 카프카
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.0으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
-Kafka를 실행 중이며 이를 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.1로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+Kafka를 실행 중이고 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
 <li><strong>Kafka 2.x 및 3.x</strong> 만 지원됩니다.</li>
 <li>SASL/SSL 연결에 대해서는 <a href="/docs/ko/connect_kafka_ssl.md">‘SASL/SSL을 사용하여 Kafka에 연결’을</a> 참조하십시오.</li>
 </ul>

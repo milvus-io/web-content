@@ -25,7 +25,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara melakukan upgrade kluster Milvus Anda dari v2.5.x ke v2.6.22 menggunakan Milvus Operator.</p>
+    </button></h1><p>Panduan ini menjelaskan cara memperbarui kluster Milvus Anda dari v2.5.x ke v2.6.23 menggunakan Milvus Operator.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2622" class="common-anchor-header">Apa yang baru di v2.6.22<button data-href="#Whats-new-in-v2622" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2623" class="common-anchor-header">Apa yang baru di v2.6.23<button data-href="#Whats-new-in-v2623" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Memperbarui dari Milvus 2.5.x ke 2.6.22 melibatkan perubahan arsitektur yang signifikan:</p>
+    </button></h3><p>Memperbarui dari Milvus 2.5.x ke 2.6.23 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
 <li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang sudah usang (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
 <li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang lebih baik</li>
@@ -80,17 +80,17 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
       </svg>
     </button></h3><p><strong>Persyaratan sistem:</strong></p>
 <ul>
-<li>Cluster Kubernetes dengan Milvus yang diimplementasikan melalui Milvus Operator</li>
+<li>Cluster Kubernetes dengan Milvus yang di-deploy melalui Milvus Operator</li>
 <li><code translate="no">kubectl</code> yang dikonfigurasi untuk mengakses kluster Anda</li>
-<li>Helm 3.x terinstal</li>
+<li>Helm 3.x terpasang</li>
 </ul>
 <p><strong>Persyaratan kompatibilitas:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.22. Peningkatan langsung dari rilis kandidat tidak didukung.</li>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.23. Peningkatan langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> melakukan peningkatan ke v2.5.16 atau yang lebih baru dengan mengaktifkan fitur " <code translate="no">mixCoord</code> " sebelum melakukan peningkatan ke v2.6.22.</li>
+<li>Anda <strong>harus</strong> melakukan peningkatan ke v2.5.16 atau yang lebih baru dengan mengaktifkan fitur " <code translate="no">mixCoord</code> " sebelum melakukan peningkatan ke v2.6.23.</li>
 </ul>
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan peningkatan ke Milvus v2.6.22, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v2.6.23, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Perpindahan antar sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ title: Meningkatkan Versi Kluster Milvus dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Langkah 1: Memutakhirkan Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Langkah 1: Memperbarui Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,7 +151,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Memperbarui ke v2.5.16 dengan mixCoord</h4><div class="alert-note">
 <p>Lewati langkah ini jika kluster Anda sudah menjalankan v2.5.16 atau lebih tinggi dengan <code translate="no">mixCoord</code> diaktifkan.</p>
 </div>
-<p>Buat berkas konfigurasi ` <code translate="no">milvusupgrade.yaml</code> ` untuk mengaktifkan ` <code translate="no">mixCoord</code> ` dan melakukan pembaruan ke v2.5.16:</p>
+<p>Buat berkas konfigurasi <code translate="no">milvusupgrade.yaml</code> untuk mengaktifkan <code translate="no">mixCoord</code> dan melakukan pembaruan ke v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -169,7 +169,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2622" class="common-anchor-header">2.3 Tingkatkan ke v2.6.22</h4><p>Setelah v2.5.16 berjalan dengan lancar dengan fitur " <code translate="no">mixCoord</code>", lakukan pembaruan ke v2.6.22:</p>
+<h4 id="23-Upgrade-to-v2623" class="common-anchor-header">2.3 Tingkatkan ke v2.6.23</h4><p>Setelah v2.5.16 berhasil berjalan dengan <code translate="no">mixCoord</code>, lakukan pembaruan ke v2.6.23:</p>
 <p>Perbarui berkas konfigurasi Anda (<code translate="no">milvusupgrade.yaml</code> dalam contoh ini):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -177,9 +177,9 @@ kubectl get pods
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.22</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Terapkan pembaruan terakhir:</p>
+<p>Terapkan pembaruan akhir:</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Verifikasi pembaruan<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
@@ -197,8 +197,8 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pastikan kluster Anda sudah menjalankan versi baru:</p>
+    </button></h2><p>Pastikan kluster Anda menjalankan versi baru:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk dukungan tambahan, silakan merujuk ke <a href="https://milvus.io/docs">dokumentasi Milvus</a> atau <a href="https://github.com/milvus-io/milvus/discussions">forum komunitas</a>.</p>
+<p>Untuk dukungan tambahan, silakan lihat <a href="https://milvus.io/docs">dokumentasi Milvus</a> atau <a href="https://github.com/milvus-io/milvus/discussions">forum komunitas</a>.</p>

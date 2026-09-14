@@ -63,7 +63,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Comprueba <a href="/docs/es/prerequisite-helm.md">los requisitos de hardware y software</a> antes de la instalación.</p></li>
-<li><p>Antes de instalar Milvus, se recomienda utilizar la <a href="https://milvus.io/tools/sizing">herramienta de dimensionamiento de Milvus</a> para estimar los requisitos de hardware en función del tamaño de tus datos. Esto ayuda a garantizar un rendimiento óptimo y una asignación adecuada de recursos para tu instalación de Milvus.</p></li>
+<li><p>Antes de instalar Milvus, se recomienda utilizar la <a href="https://milvus.io/tools/sizing">herramienta Milvus Sizing Tool</a> para estimar los requisitos de hardware en función del tamaño de tus datos. Esto te ayudará a garantizar un rendimiento óptimo y una asignación adecuada de recursos para tu instalación de Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Si tiene algún problema al descargar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y le proporcionaremos la asistencia necesaria.</p>
@@ -83,7 +83,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator define recursos personalizados del clúster de Milvus sobre la base de <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">los recursos personalizados de Kubernetes</a>. Una vez definidos los recursos personalizados, puede utilizar las API de K8s de forma declarativa y gestionar la pila de implementación de Milvus para garantizar su escalabilidad y alta disponibilidad.</p>
+    </button></h2><p>Milvus Operator define recursos personalizados para el clúster de Milvus sobre la base de <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">los recursos personalizados de Kubernetes</a>. Una vez definidos los recursos personalizados, puede utilizar las API de K8s de forma declarativa y gestionar la pila de implementación de Milvus para garantizar su escalabilidad y alta disponibilidad.</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -121,7 +121,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p>Ejecuta el siguiente comando para instalar Milvus Operator con <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Una vez finalizado el proceso de instalación, verás un resultado similar al siguiente.</p>
+<p>Al finalizar el proceso de instalación, verás un mensaje similar al siguiente.</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -137,7 +137,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>Puedes comprobar si el pod de Milvus Operator está en ejecución de la siguiente manera:</p>
+<p>Puedes comprobar si el pod de Milvus Operator se está ejecutando de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -177,8 +177,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una vez que el pod de Milvus Operator esté en ejecución, puedes implementar un clúster de Milvus de la siguiente manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El comando anterior implementa un clúster de Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para la versión 3.0.0) y todos los nuevos componentes arquitectónicos, incluido el nodo de streaming.</p>
-<p><strong>Aspectos destacados de la arquitectura en esta implementación:</strong></p>
+<p>El comando anterior implementa un clúster de Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para la versión 3.0.1) y todos los nuevos componentes arquitectónicos, incluido el nodo de streaming.</p>
+<p><strong>Aspectos destacados de la arquitectura en este despliegue:</strong></p>
 <ul>
 <li><strong>Cola de mensajes</strong>: <a href="/docs/es/woodpecker.md">utiliza Woodpecker</a> (reduce el mantenimiento de la infraestructura)</li>
 <li><strong>Nodo de streaming</strong>: habilitado para un procesamiento de datos mejorado</li>
@@ -209,7 +209,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Ejecuta el siguiente comando para comprobar el estado del clúster de Milvus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Una vez que su clúster de Milvus esté listo, el resultado del comando anterior debería ser similar al siguiente. Si el campo « <code translate="no">status.status</code> » sigue indicando « <code translate="no">Unhealthy</code> », su clúster de Milvus aún se está creando.</p>
+<p>Una vez que tu clúster de Milvus esté listo, la salida del comando anterior debería ser similar a la siguiente. Si el campo « <code translate="no">status.status</code> » sigue indicando « <code translate="no">Unhealthy</code> », tu clúster de Milvus aún se está creando.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -279,8 +279,8 @@ my-release-minio-3                               1/1     Running   0          2m
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Si lo prefieres, puedes utilizar <code translate="no">:19530</code> en lugar de <code translate="no">27017:19530</code> en el comando anterior para que <code translate="no">kubectl</code> te asigne un puerto local y así no tengas que gestionar conflictos de puertos.</p>
-<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas las direcciones IP. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina host.</p>
+<p>Si lo prefieres, puedes utilizar <code translate="no">:19530</code> en lugar de <code translate="no">27017:19530</code> en el comando anterior para que <code translate="no">kubectl</code> te asigne un puerto local y así no tengas que gestionar los conflictos de puertos.</p>
+<p>Por defecto, el reenvío de puertos de kubectl solo escucha en <code translate="no">localhost</code>. Utiliza el indicador <code translate="no">address</code> si quieres que Milvus escuche en la dirección IP seleccionada o en todas las direcciones IP. El siguiente comando hace que el reenvío de puertos escuche en todas las direcciones IP de la máquina anfitriona.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -308,7 +308,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para conocer los elementos de configuración aplicables, consulta <a href="/docs/es/system_configuration.md">«Configuración del sistema</a>».</p></li>
+<p>Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/system_configuration.md">«Configuración del sistema</a>».</p></li>
 <li><p>Actualice las configuraciones.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
@@ -329,8 +329,8 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre la interfaz web de Milvus, consulta <a href="/docs/es/milvus-webui.md">«Milvus WebUI»</a></p>
-<p>Para habilitar el acceso a Milvus WebUI, es necesario redirigir el puerto del pod del proxy a un puerto local.</p>
+    </button></h2><p>Milvus incluye una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre Milvus WebUI, consulta <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
+<p>Para habilitar el acceso a Milvus WebUI, es necesario redirigir el puerto del pod proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -355,7 +355,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Al eliminar el clúster de Milvus con la configuración predeterminada, no se eliminan las dependencias como etcd y MinIO. Por lo tanto, la próxima vez que instales la misma instancia del clúster de Milvus, estas dependencias se volverán a utilizar.</li>
+<li>Al eliminar el clúster de Milvus utilizando la configuración predeterminada, no se eliminan las dependencias como etcd y MinIO. Por lo tanto, la próxima vez que instales la misma instancia del clúster de Milvus, estas dependencias se volverán a utilizar.</li>
 <li>Para eliminar las dependencias y las reclamaciones de volumen persistente (PVC) junto con el clúster de Milvus, consulta <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">el archivo de configuración</a>.</li>
 </ul>
 </div>

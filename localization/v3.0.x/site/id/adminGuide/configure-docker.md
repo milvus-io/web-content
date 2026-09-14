@@ -20,7 +20,7 @@ title: Mengonfigurasi Milvus dengan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Topik ini menjelaskan cara mengonfigurasi komponen Milvus dan dependensi pihak ketiga menggunakan Docker Compose.</p>
+    </button></h1><p>Topik ini menjelaskan cara mengonfigurasi komponen Milvus dan dependensi pihak ketiga yang terkait menggunakan Docker Compose.</p>
 <div class="alert note">
 Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
 </div>
@@ -39,8 +39,8 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.0/configs/milvus.yaml">Unduh</a> berk <code translate="no">milvus.yaml</code> secara langsung atau dengan perintah berikut.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.0/configs/milvus.yaml</span>
+    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.1/configs/milvus.yaml">Unduh</a> berkas ` <code translate="no">milvus.yaml</code> ` secara langsung atau gunakan perintah berikut.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.1/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">Ubah berkas konfigurasi<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
         ></path>
       </svg>
     </button></h2><p>Konfigurasikan instance Milvus Anda agar sesuai dengan skenario aplikasi Anda dengan menyesuaikan parameter yang sesuai di <code translate="no">milvus.yaml</code>.</p>
-<p>Periksa tautan berikut untuk informasi lebih lanjut mengenai setiap parameter.</p>
+<p>Periksa tautan berikut untuk informasi lebih lanjut tentang setiap parameter.</p>
 <p>Diurutkan berdasarkan:</p>
 <div class="filter">
 <a href="#component">Komponen atau dependensi</a> <a href="#purpose">Tujuan konfigurasi</a> 
@@ -84,7 +84,7 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
     <td>
         <ul>
             <li><a href="/docs/id/configure_rootcoord.md">Koord. akar</a></li>
-            <li><a href="/docs/id/configure_proxy.md">Proxy</a></li>
+            <li><a href="/docs/id/configure_proxy.md">Proksi</a></li>
             <li><a href="/docs/id/configure_querycoord.md">Koord. kueri</a></li>
             <li><a href="/docs/id/configure_querynode.md">Node kueri</a></li>
             <li><a href="/docs/id/configure_indexnode.md">Node indeks</a></li>
@@ -212,10 +212,10 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unduh berkas instalasi untuk Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml">standalone</a>, lalu simpan sebagai <code translate="no">docker-compose.yml</code>.</p>
+    </button></h2><p>Unduh berkas instalasi untuk Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml">standalone</a>, lalu simpan sebagai <code translate="no">docker-compose.yml</code>.</p>
 <p>Anda juga dapat langsung menjalankan perintah berikut.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">Ubah berkas instalasi<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -254,7 +254,7 @@ Pada rilis saat ini, semua parameter baru berlaku setelah Milvus dimulai ulang.
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Data disimpan di folder <code translate="no">/volumes</code> sesuai dengan konfigurasi default di <code translate="no">docker-compose.yml</code>. Untuk mengubah folder penyimpanan data, edit <code translate="no">docker-compose.yml</code> atau jalankan perintah <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data disimpan di folder <code translate="no">/volumes</code> sesuai dengan konfigurasi default di <code translate="no">docker-compose.yml</code>. Untuk mengubah folder penyimpanan data, edit <code translate="no">docker-compose.yml</code> atau jalankan perintah ` <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>`.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Jalankan Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -290,7 +290,7 @@ Data disimpan di folder <code translate="no">/volumes</code> sesuai dengan konfi
         ></path>
       </svg>
     </button></h2><ul>
-<li>Pelajari cara mengelola dependensi Milvus berikut ini dengan Docker Compose atau Helm:
+<li>Pelajari cara mengelola dependensi Milvus berikut dengan Docker Compose atau Helm:
 <ul>
 <li><a href="/docs/id/deploy_s3.md">Konfigurasikan Penyimpanan Objek dengan Docker Compose atau Helm</a></li>
 <li><a href="/docs/id/deploy_etcd.md">Konfigurasikan Penyimpanan Meta dengan Docker Compose atau Helm</a></li>

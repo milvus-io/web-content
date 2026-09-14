@@ -36,7 +36,7 @@ title: Milvus Operator를 사용하여 Milvus 클러스터 설치하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator는 대상 Kubernetes(K8s) 클러스터에 전체 Milvus 서비스 스택을 배포하고 관리할 수 있도록 지원하는 솔루션입니다. 이 스택에는 모든 Milvus 구성 요소와 etcd, MinIO와 같은 관련 종속성이 포함되어 있으며, Woodpecker가 내장 메시지 큐로 사용됩니다.</p>
+    </button></h2><p>Milvus Operator는 대상 Kubernetes(K8s) 클러스터에 완전한 Milvus 서비스 스택을 배포하고 관리할 수 있도록 지원하는 솔루션입니다. 이 스택에는 모든 Milvus 구성 요소와 etcd, MinIO와 같은 관련 종속성이 포함되어 있으며, 내장 메시지 큐로는 Woodpecker가 사용됩니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">필수 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Milvus를 설치하기 전에 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 데이터 크기에 기반한 하드웨어 요구 사항을 추정하는 것이 좋습니다. 이를 통해 Milvus 설치 시 최적의 성능과 리소스 할당을 보장할 수 있습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>이미지 가져오기 과정에서 문제가 발생하면, 문제 세부 정보를 기재하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
+<p>이미지 가져오기 과정에서 문제가 발생하면, 문제의 세부 내용을 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Milvus Operator 설치<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>이전에 Milvus Operator를 설치한 적이 있다면, 다음 명령어를 사용하여 업그레이드하십시오.</p>
+<p>이전에 Milvus Operator를 설치한 적이 있다면 다음 명령어를 사용하여 업그레이드하십시오.</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -175,18 +175,18 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v3.0.0 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하는(v3.0.1 권장) Milvus 클러스터와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 활성화됨</li>
-<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 코디네이터 구성 요소를 통합</li>
+<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 통합된 코디네이터 구성 요소</li>
 </ul>
 <p>이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 후, 해당 YAML 파일을 다운로드하는 것을 권장합니다. 구성 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하십시오.</p>
 <div class="alert note">
 <ul>
-<li>릴리스 이름에는 영문자, 숫자 및 대시만 포함되어야 합니다. 릴리스 이름에는 점(.)을 사용할 수 없습니다.</li>
-<li>모든 구성 요소가 단일 포드 내에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이를 위해서는 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>릴리스 이름에는 영문자, 숫자 및 하이픈만 포함되어야 합니다. 릴리스 이름에 점은 사용할 수 없습니다.</li>
+<li>모든 구성 요소가 단일 파드에 포함된 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 배포할 수도 있습니다. 이렇게 하려면 위 명령어의 구성 파일 URL을 다음과 같이 변경하십시오. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvus 클러스터 상태 확인<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인하십시오</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 클러스터가 준비되면 위 명령어의 출력 결과는 다음과 유사해야 합니다. ‘ <code translate="no">status.status</code> ’ 필드가 ‘ <code translate="no">Unhealthy</code> ’ 상태로 유지된다면, Milvus 클러스터가 아직 생성 중인 것입니다.</p>
+<p>Milvus 클러스터가 준비되면 위 명령어의 출력은 다음과 비슷하게 표시됩니다. ‘ <code translate="no">status.status</code> ’ 필드가 ‘ <code translate="no">Unhealthy</code> ’ 상태로 유지된다면, Milvus 클러스터가 아직 생성 중인 것입니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -277,8 +277,8 @@ my-release-minio-3                               1/1     Running   0          2m
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>선택적으로, 위 명령어에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 가 로컬 포트를 자동으로 할당하도록 할 수 있습니다. 이렇게 하면 포트 충돌을 직접 관리할 필요가 없습니다.</p>
-<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택한 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 호스트 머신의 모든 IP 주소에서 포트 포워딩이 수신 대기하도록 설정합니다.</p>
+<p>선택적으로, 위 명령어에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 를 사용하여 <code translate="no">kubectl</code> 가 로컬 포트를 자동으로 할당하도록 하면, 포트 충돌을 직접 관리할 필요가 없습니다.</p>
+<p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기합니다. Milvus가 선택된 IP 주소 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용하십시오. 다음 명령어는 호스트 머신의 모든 IP 주소에서 포트 포워딩이 수신 대기하도록 설정합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -327,12 +327,12 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 내장 GUI 도구가 함께 제공됩니다. Milvus WebUI는 간단하고 직관적인 인터페이스를 통해 시스템 가시성을 향상시킵니다. Milvus WebUI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계와 메트릭을 관찰하고, 데이터베이스 및 컬렉션 세부 정보를 확인하며, 자세한 Milvus 구성을 나열할 수 있습니다. Milvus WebUI에 대한 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
+    </button></h2><p>Milvus에는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 내장 GUI 도구가 함께 제공됩니다. Milvus WebUI는 간단하고 직관적인 인터페이스를 통해 시스템 가시성을 향상시킵니다. Milvus WebUI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계와 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하며, 자세한 Milvus 구성을 나열할 수 있습니다. Milvus WebUI에 대한 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
 <p>Milvus WebUI에 액세스하려면 프록시 포드를 로컬 포트로 포트 포워딩해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
-<p>이제 <code translate="no">http://localhost:27018</code> 에서 Milvus Web UI에 접속할 수 있습니다.</p>
+<p>이제 <code translate="no">http://localhost:27018</code> 에서 Milvus WebUI에 접속할 수 있습니다.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Milvus 제거<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -379,7 +379,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Helm을 사용하여 제거</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm -n milvus-operator uninstall milvus-operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl을 사용하여 제거</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl을 사용하여 제거하기</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Optional-dependencies" class="common-anchor-header">선택적 종속성<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,7 +403,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>메타데이터: <a href="/docs/ko/meta_storage_operator.md">Milvus Operator를 사용하여 etcd 구성</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 이를 활성화하십시오. 요구 사항 및 호환성 고려 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
+<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 이를 활성화해야 합니다. 요구 사항 및 호환성 관련 고려 사항은 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -433,7 +433,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
+<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/eks.md">Amazon EKS</a></li>

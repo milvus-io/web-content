@@ -2,7 +2,7 @@
 id: mq_pulsar.md
 title: Pulsar
 ---
-<h1 id="Use-Pulsar-as-the-Milvus-Message-Queue" class="common-anchor-header">Gunakan Pulsar sebagai antrian pesan Milvus<button data-href="#Use-Pulsar-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
+<h1 id="Use-Pulsar-as-the-Milvus-Message-Queue" class="common-anchor-header">Gunakan Pulsar sebagai Antrian Pesan Milvus<button data-href="#Use-Pulsar-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,7 +17,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Pada Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> adalah antrian pesan default; Pulsar tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Pulsar terutama digunakan dengan Milvus Distributed (kluster); penerapan mandiri biasanya menggunakan Woodpecker tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
+    </button></h1><p>Apache Pulsar adalah salah satu backend antrian pesan (WAL) yang didukung oleh Milvus. Pada Milvus 3.x, <a href="/docs/id/woodpecker.md">Woodpecker</a> merupakan antrian pesan default; Pulsar tetap didukung sepenuhnya bagi pengguna yang lebih memilihnya. Pulsar terutama digunakan bersama Milvus Distributed (kluster); sementara penerapan mandiri biasanya menggunakan Woodpecker tertanam atau <a href="/docs/id/mq_rocksmq.md">RocksMQ</a>.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Kompatibilitas versi<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +75,7 @@ title: Pulsar
       </svg>
     </button></h3><p>Untuk mengimplementasikan kluster Milvus yang menggunakan Pulsar yang disertakan (bukan Woodpecker), instal chart Helm dengan Streaming Node diaktifkan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.1 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -183,7 +183,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar internal (di dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0.0, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
+<li><strong>Memperbarui dari 2.5.x ke 2.6.x:</strong> <strong>Batasan antrian pesan</strong>: Saat memperbarui ke Milvus v3.0.1, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
 Jika Anda menjalankan Pulsar dan ingin tetap menggunakannya, jangan ubah antrian pesan selama proses peningkatan versi.</li>
 <li><strong>Pulsar v2 → v3:</strong> lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a>; untuk tetap menggunakan v2, lihat <a href="/docs/id/use-pulsar-v2.md">Terus Menggunakan Pulsar v2</a>.</li>
 </ul>

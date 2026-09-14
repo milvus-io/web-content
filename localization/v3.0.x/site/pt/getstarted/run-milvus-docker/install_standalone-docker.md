@@ -55,7 +55,7 @@ title: Executar o Milvus no Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. O script está disponível no <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositório</a> do <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus</a>. Para instalar o Milvus no Docker, basta executar</p>
+    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. O script está disponível no <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositório do Milvus</a>. Para instalar o Milvus no Docker, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -63,13 +63,13 @@ title: Executar o Milvus no Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novidades na versão 3.0.0:</strong></p>
+<p><strong>Novidades na versão 3.0.1:</strong></p>
 <ul>
 <li><strong>Nó de streaming</strong>: Capacidades de processamento de dados melhoradas</li>
 <li><strong>Woodpecker MQ (predefinição)</strong>: Esta implementação no Docker executa o Woodpecker como fila de mensagens, utilizando o <strong>sistema de ficheiros local</strong> como backend WAL, pelo que não é necessário qualquer serviço externo de fila de mensagens. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</li>
 <li><strong>Arquitetura otimizada</strong>: componentes consolidados para um melhor desempenho</li>
 </ul>
-<p>Descarregue sempre o script mais recente para garantir que obtém as configurações e melhorias de arquitetura mais recentes.</p>
+<p>Descarregue sempre o script mais recente para garantir que obtém as configurações mais recentes e as melhorias na arquitetura.</p>
 <p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p>
 </div>
@@ -199,7 +199,7 @@ EOF
       </svg>
     </button></h2><p>Depois de instalar o Milvus no Docker, pode:</p>
 <ul>
-<li><p>Consultar <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consulte <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>

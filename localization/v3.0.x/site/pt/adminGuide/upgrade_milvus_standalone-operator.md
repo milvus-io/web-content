@@ -23,9 +23,9 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar uma implementação autónoma do Milvus 2.6.x para a versão 3.0.0 com o Milvus Operator.</p>
+    </button></h1><p>Este guia descreve como atualizar uma implementação autónoma do Milvus 2.6.x para a versão v3.0.1 com o Milvus Operator.</p>
 <div class="alert note">
-<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0.0 com o Milvus Operator 1.3.0, o Woodpecker, o etcd no cluster e o MinIO no cluster. Se utilizar outra versão de patch do Milvus 2.6.x, versão do Operator, fila de mensagens ou configuração de dependências, valide primeiro a atualização num ambiente que não seja de produção.</p>
+<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0.1 com o Milvus Operator 1.3.0, o Woodpecker, o etcd no cluster e o MinIO no cluster. Se utilizar outra versão de patch do Milvus 2.6.x, versão do Operator, fila de mensagens ou configuração de dependências, valide primeiro a atualização num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,9 +49,9 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
 <li>O método de instalação e os manifestos utilizados para o Milvus Operator existente</li>
 <li>Uma cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.0, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.1, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
-<p>Este procedimento não valida um downgrade ou reversão, alterando a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.0 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os backups de metadados e dados persistentes anteriores à atualização. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Este procedimento não permite a realização de um downgrade ou reversão, alterando a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.1 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure as cópias de segurança dos metadados e dos dados persistentes anteriores à atualização. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Passo 1: Fazer uma cópia de segurança do CR atual do Milvus<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Passo 1: Faça uma cópia de segurança do CR atual do Milvus<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,7 +109,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>A atualização validada manteve o Milvus Operator na versão 1.3.0. Mantenha a versão do Operator que atualmente gere a sua implementação do Milvus 2.6.x, a menos que a sua política de suporte exija uma atualização separada do Operator. Não faça o downgrade de um Operator mais recente para a versão testada. Se precisar de alterar a versão do Operator, utilize o mesmo método de instalação do Helm ou do <code translate="no">kubectl</code> e o mesmo nome de versão e namespace que a instalação existente; em seguida, valide a alteração do Operator antes de atualizar o Milvus CR.</p>
+<p>A atualização validada manteve o Milvus Operator na versão 1.3.0. Mantenha a versão do Operator que gere atualmente a sua implementação do Milvus 2.6.x, a menos que a sua política de suporte exija uma atualização separada do Operator. Não faça o downgrade de um Operator mais recente para a versão testada. Se precisar de alterar a versão do Operator, utilize o mesmo método de instalação do Helm ou do <code translate="no">kubectl</code> e o mesmo nome de versão e namespace da instalação existente; em seguida, valide a alteração do Operator antes de atualizar o Milvus CR.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Passo 3: Atualizar a imagem do Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No manifesto completo do CR do Milvus, altere apenas ` <code translate="no">spec.components.image</code>`. Mantenha o modo existente, as definições dos componentes, a fila de mensagens, o etcd, o armazenamento e outras definições de dependências. O excerto seguinte mostra o campo a alterar; não substitua o seu CR completo por este excerto.</p>
+    </button></h3><p>No manifesto CR completo do Milvus, altere apenas <code translate="no">spec.components.image</code>. Mantenha o modo existente, as definições dos componentes, a fila de mensagens, o etcd, o armazenamento e outras definições de dependências. O excerto seguinte mostra o campo a alterar; não substitua o seu CR completo por este excerto.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -133,7 +133,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.0</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.1</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Aplique o manifesto CR completo:</p>
 <pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
@@ -153,7 +153,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verifique o estado do CR, o estado do Pod e as imagens de contentor:</p>
+    </button></h2><p>Verifique o estado do CR, o estado dos pods e as imagens dos contentores:</p>
 <pre><code translate="no" class="language-bash">kubectl get milvus &lt;instance-name&gt; \
   --namespace &lt;namespace&gt; \
   --output jsonpath=<span class="hljs-string">&#x27;{.status.status}{&quot;\t&quot;}{.status.currentImage}{&quot;\n&quot;}&#x27;</span>
@@ -163,4 +163,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifique se o CR do Milvus indica « <code translate="no">Healthy</code> », se a imagem atual é « <code translate="no">milvusdb/milvus:v3.0.0</code> » e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.0.</p>
+<p>Verifique se o CR do Milvus indica <code translate="no">Healthy</code>, se a imagem atual é <code translate="no">milvusdb/milvus:v3.0.1</code> e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.1.</p>

@@ -22,7 +22,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
     </button></h1><p>Milvus は、最近の変更のログ管理、ストリームログの出力、およびログのサブスクリプションの提供にメッセージキューを使用します。Milvus 3.0.x 以降、Woodpecker がデフォルトで推奨されるメッセージキューとなっています。このトピックでは、Docker Compose または Helm を使用して Pulsar または Kafka を設定する方法について説明します。</p>
 <p>Pulsar は<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>または K8s 上で設定でき、Kafka は K8s 上で設定できます。</p>
 <div class="alert note">
-<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.0 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.1 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose を使用した Pulsar の設定<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,13 +54,13 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Docker Compose を使用して Pulsar を設定するには、milvus/configs パスにある<code translate="no">milvus.yaml</code> ファイル内の `<code translate="no">pulsar</code> ` セクションに値を指定してください。</p>
+    </button></h3><p>Docker Compose を使用して Pulsar を設定するには、milvus/configs パスにある<code translate="no">milvus.yaml</code> ファイル内の `<code translate="no">pulsar</code> ` セクションに値を指定します。</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細については、「<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定</a>」を参照してください。</p>
+<p>詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定を</a>参照してください。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvusの実行<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,7 +255,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
       securityProtocol: SASL_SSL    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行して、Kafkaの設定を使用したMilvusをインストールします。</li>
+<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Kafkaの設定を使用したMilvusをインストールします。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -274,7 +274,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ は、バージョン 2.5.x までの Milvus スタンドアロン版におけるデフォルトのメッセージストレージでしたが、バージョン 2.6.x 以降では Woodpecker がデフォルトとなっています。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。 RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/configure_rocksmq.md">RocksMQ に関連する設定</a>」を参照してください。</p>
+    </button></h2><p>RocksMQ は、バージョン 2.5.x までは Milvus スタンドアロンのデフォルトのメッセージストレージでしたが、バージョン 2.6.x からは Woodpecker がデフォルトとなっています。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。 RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/configure_rocksmq.md">RocksMQ 関連の設定</a>」を参照してください。</p>
 <ul>
 <li><p>RocksMQ を使用して Milvus を起動し、その設定を変更したい場合は、変更後の設定を以下の YAML ファイルに記述して、<code translate="no">helm upgrade -f</code> を実行してください。</p></li>
 <li><p>Helm を使用して Milvus をスタンドアロンでインストールし、RocksMQ 以外のメッセージストアを使用している場合、これを RocksMQ に戻したいときは、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>

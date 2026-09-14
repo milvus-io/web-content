@@ -17,7 +17,7 @@ title: カフカ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka は、Milvus がサポートするメッセージキュー（WAL）バックエンドの 1 つです。 Milvus 3.x では、<a href="/docs/ja/woodpecker.md">Woodpecker</a>がデフォルトのメッセージキューとなっていますが、Kafka を希望するユーザーに対しては引き続き完全なサポートが提供されています。Kafka は主に Milvus Distributed（クラスタ）で使用されます。スタンドアロン展開では、通常、組み込みの Woodpecker または<a href="/docs/ja/mq_rocksmq.md">RocksMQ</a> が使用されます。</p>
+    </button></h1><p>Apache Kafka は、Milvus がサポートするメッセージキュー（WAL）バックエンドの 1 つです。 Milvus 3.x では、<a href="/docs/ja/woodpecker.md">Woodpecker</a>がデフォルトのメッセージキューとなっていますが、Kafka を希望するユーザーに対しては引き続き完全なサポートが提供されています。Kafka は主に Milvus Distributed（クラスター）で使用されます。スタンドアロン展開では、通常、組み込みの Woodpecker または<a href="/docs/ja/mq_rocksmq.md">RocksMQ</a> が使用されます。</p>
 <h2 id="Version-compatibility" class="common-anchor-header">バージョンの互換性<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: カフカ
       </svg>
     </button></h2><ul>
 <li>Milvus<strong>はKafka 2.xおよび3.x</strong>のみをサポートしています。</li>
-<li>Milvus Distributed（クラスタ）向けのKafkaの設定は、HelmまたはMilvus Operatorを介して行います。</li>
+<li>Milvus Distributed（クラスタ）向けのKafkaの設定は、HelmまたはMilvus Operatorを介して行われます。</li>
 </ul>
 <h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Helm を使用して Kafka を含む Milvus クラスタをデプロイする<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +156,7 @@ title: カフカ
 <div class="alert note">
 <p>SASLの設定は、Milvus Operator v0.8.5以降でサポートされています。</p>
 </div>
-<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">内部（クラスタ内）Kafka<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">内部（クラスター内）Kafka<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,7 +186,7 @@ title: カフカ
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>設定を適用します（ファイル名が<code translate="no">milvuscluster.yaml</code> であると仮定します）：</p>
+<p>設定を適用します（ファイル名が<code translate="no">milvuscluster.yaml</code> である場合）：</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">アンインストール<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -222,7 +222,7 @@ title: カフカ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.0 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
+<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.1 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
 Kafka を実行しており、それを継続して使用したい場合は、アップグレード中にメッセージキューを変更しないでください。</li>
 <li>サポートされているのは<strong>Kafka 2.x および 3.x</strong>のみです。</li>
 <li>SASL/SSL による接続については、「<a href="/docs/ja/connect_kafka_ssl.md">SASL/SSL を使用した Kafka への接続</a>」を参照してください。</li>

@@ -20,7 +20,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta página explica como iniciar uma instância do Milvus no Docker utilizando o Docker Compose.</p>
+    </button></h1><p>Esta página ilustra como iniciar uma instância do Milvus no Docker utilizando o Docker Compose.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
       </svg>
     </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Para instalar o Milvus utilizando o Docker Compose, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,15 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>A implementação predefinida (v3.0.0):</strong> <code translate="no">docker compose up -d</code> inicia três contentores — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
+<p><strong>A implementação predefinida (v3.0.1):</strong> <code translate="no">docker compose up -d</code> inicia três contentores — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
 <p><strong>Fila de mensagens predefinida por versão:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — a fila de mensagens predefinida é <strong>o RocksMQ</strong>.</li>
 <li><strong>2.6.x e versões posteriores</strong> — a fila de mensagens predefinida é <strong>o Woodpecker (incorporado)</strong>.</li>
 </ul>
-<p>Descarregue sempre a configuração mais recente do Docker Compose para garantir a compatibilidade com as funcionalidades da v3.0.0.</p>
+<p>Descarregue sempre a configuração mais recente do Docker Compose para garantir a compatibilidade com as funcionalidades da v3.0.1.</p>
 <ul>
-<li><p>Se não conseguiu executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomendamos que migre para o Docker Compose V2, de acordo com as notas <a href="https://docs.docker.com/compose/">nesta página</a>.</p></li>
+<li><p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomendamos que migre para o Docker Compose V2, tendo em conta as notas <a href="https://docs.docker.com/compose/">nesta página</a>.</p></li>
 <li><p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p></li>
 </ul>
 </div>
@@ -112,20 +112,20 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, tem de modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> dentro do contentor <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, é necessário modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> dentro do contentor <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li><p>Aceda ao contentor <code translate="no">milvus-standalone</code>.</p>
+<li><p>Aceda ao contentor « <code translate="no">milvus-standalone</code> ».</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Adicione configurações adicionais para substituir as predefinidas.
-O que se segue pressupõe que precisa de substituir o ficheiro <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para conhecer os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">a Configuração do Sistema</a>.</p>
+O que se segue pressupõe que precisa de substituir o ficheiro <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para os itens de configuração aplicáveis, consulte a <a href="/docs/pt/system_configuration.md">Configuração do Sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</p>
+<li><p>Reinicie o contentor « <code translate="no">milvus-standalone</code> » para aplicar as alterações.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -151,7 +151,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Atualização do Milvus 2.5.x para a versão 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
+<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Atualização do Milvus 2.5.x para o 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,8 +166,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.0, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
-<p>Como a versão 2.6.x altera a fila de mensagens predefinida para Woodpecker, uma instância que execute <strong>o RocksMQ</strong> na versão 2.5.x deve <strong>fixar explicitamente o RocksMQ antes da atualização</strong> — caso contrário, a atualização tentaria alterar a fila de mensagens, o que não é suportado. Após descarregar o ficheiro Docker Compose da versão 2.6.x, defina novamente o tipo de fila de mensagens como « <code translate="no">rocksmq</code> » na sua substituição de ` <code translate="no">user.yaml</code> ` e, em seguida, efetue a atualização:</p>
+    </button></h2><p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.1, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p>Como a versão 2.6.x altera a fila de mensagens predefinida para Woodpecker, uma instância que execute <strong>o RocksMQ</strong> na versão 2.5.x deve <strong>fixar explicitamente o RocksMQ antes da atualização</strong> — caso contrário, a atualização tentaria alterar a fila de mensagens, o que não é suportado. Após descarregar o ficheiro Docker Compose da versão 2.6.x, redefina o tipo de fila de mensagens para « <code translate="no">rocksmq</code> » na sua substituição de « <code translate="no">user.yaml</code> » e, em seguida, efetue a atualização:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
@@ -214,7 +214,7 @@ EOF
       </svg>
     </button></h2><p>Depois de instalar o Milvus no Docker, pode:</p>
 <ul>
-<li><p>Consultar <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consulte <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>
@@ -233,7 +233,7 @@ EOF
 <li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
-<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para fazer cópias de segurança dos dados do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitorize o Milvus com o Prometheus</a>.</p></li>

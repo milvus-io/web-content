@@ -23,9 +23,9 @@ title: Atualizar o Milvus Standalone com o Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar uma implementação autónoma do Milvus 2.6.x para a versão 3.0.0 com o Docker Compose.</p>
+    </button></h1><p>Este guia descreve como atualizar uma implementação autónoma do Milvus 2.6.x para a versão 3.0.1 com o Docker Compose.</p>
 <div class="alert note">
-<p>Este procedimento foi validado com a configuração oficial do Docker Compose para o Milvus 2.6.20 autônomo. A atualização manteve o etcd, o MinIO, o Woodpecker e os diretórios de dados existentes, tendo alterado apenas a imagem do Milvus para <code translate="no">milvusdb/milvus:v3.0.0</code>.</p>
+<p>Este procedimento foi validado com a configuração oficial do Docker Compose para o Milvus 2.6.20 autónomo. A atualização manteve o etcd, o MinIO, o Woodpecker e os diretórios de dados existentes, tendo alterado apenas a imagem do Milvus para <code translate="no">milvusdb/milvus:v3.0.1</code>.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,14 +44,14 @@ title: Atualizar o Milvus Standalone com o Docker Compose
       </svg>
     </button></h2><ul>
 <li>Docker Engine e Docker Compose V2</li>
-<li>Uma implementação autónoma existente do Milvus 2.6.x gerida pelo Docker Compose</li>
-<li>O ficheiro e a configuração do Docker Compose utilizados na implementação existente</li>
-<li>Um cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
+<li>Uma implementação autônoma existente do Milvus 2.6.x gerida pelo Docker Compose</li>
+<li>O ficheiro Docker Compose e a configuração utilizados na implementação existente</li>
+<li>Um backup atual dos metadados e dados persistentes do Milvus</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.0, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.1, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de fila de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de fila de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
 <p>Não substitua o seu ficheiro Compose atual nem altere as versões das dependências como parte deste procedimento. Mantenha o etcd, o armazenamento de objetos, a fila de mensagens, os volumes e a configuração existentes. Atualize apenas a etiqueta da imagem do Milvus.</p>
-<p>Este procedimento não valida um downgrade ou reversão, alterando a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.0 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Este procedimento não valida um downgrade ou reversão, alterando a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.1 gravar dados, uma reversão apenas da imagem pode falhar ao ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
     </button></h3><p>Guarde uma cópia do ficheiro Compose atual e de quaisquer ficheiros de configuração do Milvus montados:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cp</span> docker-compose.yml docker-compose-before-upgrade.yml
 <button class="copy-code-btn"></button></code></pre>
-<p>Confirme que os contentores atuais estão em bom estado antes de iniciar a atualização:</p>
+<p>Confirme se os contentores atuais estão em bom estado antes de iniciar a atualização:</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Update-the-Milvus-image" class="common-anchor-header">Passo 2: Atualizar a imagem do Milvus<button data-href="#Step-2-Update-the-Milvus-image" class="anchor-icon" translate="no">
@@ -107,7 +107,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
     </button></h3><p>No ficheiro Compose existente, atualize apenas a imagem do serviço « <code translate="no">standalone</code> »:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
   <span class="hljs-attr">standalone:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.0</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.1</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Recupere a imagem de destino e recrie apenas o contentor do Milvus:</p>
 <pre><code translate="no" class="language-bash">docker compose pull standalone
@@ -136,4 +136,4 @@ docker compose images standalone
 
 docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifique se o serviço <code translate="no">standalone</code> está em bom estado, se a sua imagem é <code translate="no">milvusdb/milvus:v3.0.0</code> e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.0.</p>
+<p>Verifique se o serviço <code translate="no">standalone</code> está em bom estado, se a sua imagem é <code translate="no">milvusdb/milvus:v3.0.1</code> e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão v3.0.1.</p>

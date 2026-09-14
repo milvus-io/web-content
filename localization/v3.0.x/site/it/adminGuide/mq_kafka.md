@@ -37,7 +37,7 @@ title: Kafka
 <li>Milvus supporta solo <strong>Kafka 2.x e 3.x</strong>.</li>
 <li>Kafka viene configurato per Milvus Distributed (cluster) tramite Helm o Milvus Operator.</li>
 </ul>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Distribuire un cluster Milvus con Kafka utilizzando Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Distribuzione di un cluster Milvus con Kafka utilizzando Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per utilizzare un servizio Kafka esterno, disabilitare Pulsar integrato e abilitare <code translate="no">externalKafka</code> in un override di <code translate="no">values.yaml</code>, quindi installare Milvus con tale configurazione:</p>
+    </button></h3><p>Per utilizzare un servizio Kafka esterno, disabilitare Pulsar integrato e abilitare <code translate="no">externalKafka</code> in un override dell'<code translate="no">values.yaml</code>, quindi installare Milvus con esso:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -156,7 +156,7 @@ title: Kafka
 <div class="alert note">
 <p>Le configurazioni SASL sono supportate in Milvus Operator v0.8.5 o versioni successive.</p>
 </div>
-<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Kafka interno (all'interno del cluster)<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Kafka interno (all’interno del cluster)<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alle code di messaggi</strong>: durante l’aggiornamento a Milvus v3.0.0, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.
+<li><strong>Aggiornamento dalla versione 2.5.x alla 2.6.x:</strong> <strong>limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v3.0.1, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.
 Se si utilizza Kafka e si desidera mantenerlo, non modificare la coda dei messaggi durante l'aggiornamento.</li>
 <li>Sono supportate solo le versioni <strong>2.x e 3.x di Kafka</strong>.</li>
 <li>Per la connettività SASL/SSL, consultare <a href="/docs/it/connect_kafka_ssl.md">Connettersi a Kafka con SASL/SSL</a>.</li>
@@ -244,5 +244,5 @@ Se si utilizza Kafka e si desidera mantenerlo, non modificare la coda dei messag
       </svg>
     </button></h2><ul>
 <li><a href="/docs/it/woodpecker.md">Woodpecker (coda di messaggi predefinita)</a></li>
-<li><a href="/docs/it/switch-kafka-woodpecker.md">Passaggio da Kafka a Woodpecker</a></li>
+<li><a href="/docs/it/switch-kafka-woodpecker.md">Passare da Kafka a Woodpecker</a></li>
 </ul>

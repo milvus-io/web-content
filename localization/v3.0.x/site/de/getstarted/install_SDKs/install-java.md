@@ -2,7 +2,7 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das Java-SDK von Milvus installieren.'
+summary: 'Erfahren Sie, wie Sie das Java SDK von Milvus installieren.'
 title: Milvus Java SDK installieren
 ---
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDK installieren<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
@@ -63,13 +63,13 @@ title: Milvus Java SDK installieren
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.5<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.5&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.9&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Was nun<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,5 +96,5 @@ title: Milvus Java SDK installieren
 <li><a href="/docs/de/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/api-reference/java/v3.0.x/About.md">die Milvus-Java-API-Referenz</a></p></li>
+<li><p>Entdecken Sie <a href="/api-reference/java/v3.0.x/About.md">die Milvus Java-API-Referenz</a></p></li>
 </ul>

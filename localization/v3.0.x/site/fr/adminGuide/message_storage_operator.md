@@ -25,7 +25,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 <p>Vous devez spécifier un fichier de configuration pour utiliser Milvus Operator afin de démarrer un cluster Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il vous suffit de modifier le modèle de code disponible à l’adresse <code translate="no">milvus_cluster_default.yaml</code> pour configurer les dépendances tierces. Les sections suivantes expliquent comment configurer respectivement le stockage d’objets, etcd et Pulsar.</p>
+<p>Il vous suffit de modifier le modèle de code disponible dans ` <code translate="no">milvus_cluster_default.yaml</code> ` pour configurer les dépendances tierces. Les sections suivantes expliquent comment configurer respectivement le stockage d’objets, etcd et Pulsar.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,14 +53,14 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 </table>
 <p>Il existe également d'autres restrictions concernant la configuration du stockage des messages :</p>
 <ul>
-<li>Un seul stockage de messages est pris en charge par instance Milvus. Cependant, la rétrocompatibilité avec la configuration de plusieurs stockages de messages pour une même instance est toujours assurée. L'ordre de priorité est le suivant :
+<li>Un seul stockage de messages est pris en charge par instance Milvus. Cependant, la rétrocompatibilité avec la configuration de plusieurs stockages de messages pour une même instance est conservée. L’ordre de priorité est le suivant :
 <ul>
 <li>mode autonome : Woodpecker (par défaut) &gt; RocksMQ &gt; Pulsar &gt; Kafka</li>
 <li>mode cluster : Woodpecker (par défaut) &gt; Pulsar &gt; Kafka</li>
 </ul></li>
 <li>Le stockage des messages ne peut pas être modifié pendant que le système Milvus est en cours d’exécution.</li>
 <li>Seules les versions 2.x ou 3.x de Kafka sont prises en charge.</li>
-<li><strong>Restrictions de mise à niveau</strong>: <strong>Restrictions relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.0, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</li>
+<li><strong>Restrictions de mise à niveau</strong>: <strong>Restrictions relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.1, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurer RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 <div class="alert note">
 <p>Actuellement, vous ne pouvez configurer RocksMQ comme stockage de messages pour Milvus en mode autonome qu’avec Milvus Operator.</p>
 </div>
-<h4 id="Example" class="common-anchor-header">Exemple</h4><p>L'exemple suivant configure un service RocksMQ.</p>
+<h4 id="Example" class="common-anchor-header">Exemple</h4><p>L’exemple suivant configure un service RocksMQ.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -105,9 +105,9 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Options de configuration clés :</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq : définit explicitement RocksMQ comme file d'attente de messages</li>
+<li><code translate="no">msgStreamType</code>: rocksmq : définit explicitement RocksMQ comme file d’attente de messages</li>
 <li><code translate="no">persistence.enabled</code>: Active le stockage persistant des données RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Si la valeur est « true », le PVC sera supprimé lors de la suppression de l’instance Milvus</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Si la valeur est « true », le PVC sera supprimé lors de la suppression de l'instance Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Spécification PVC Kubernetes standard</li>
 <li><code translate="no">accessModes</code>: Généralement « <code translate="no">ReadWriteOnce</code> » pour le stockage en blocs</li>
 <li><code translate="no">storageClassName</code>: Classe de stockage de votre cluster</li>
@@ -128,7 +128,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker est un journal d’écriture anticipée (WAL) natif du cloud, conçu pour le stockage objet. Il offre un débit élevé, une faible charge opérationnelle et une évolutivité transparente. Pour plus de détails, consultez <a href="/docs/fr/woodpecker.md">la page Woodpecker</a>.</p>
+    </button></h2><p>Woodpecker est un journal d’écriture anticipée (WAL) natif du cloud, conçu pour le stockage d’objets. Il offre un débit élevé, une faible charge opérationnelle et une évolutivité transparente. Pour plus de détails, consultez <a href="/docs/fr/woodpecker.md">la page Woodpecker</a>.</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Configurer Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +144,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gère les journaux des modifications récentes, génère des flux de journaux et permet de s’abonner à ces journaux. La configuration de Pulsar en tant que stockage de messages est prise en charge aussi bien dans Milvus en mode autonome que dans Milvus en cluster. Cependant, avec Milvus Operator, vous ne pouvez configurer Pulsar comme stockage de messages que pour un cluster Milvus. Remplissez les champs obligatoires sous « <code translate="no">spec.dependencies.pulsar</code> » pour configurer Pulsar.</p>
+    </button></h2><p>Pulsar gère les journaux des modifications récentes, génère des flux de journaux et permet de s’abonner à ces journaux. La configuration de Pulsar pour le stockage de messages est prise en charge à la fois dans Milvus en mode autonome et dans le cluster Milvus. Cependant, avec Milvus Operator, vous ne pouvez configurer Pulsar comme stockage de messages que pour le cluster Milvus. Remplissez les champs obligatoires sous « <code translate="no">spec.dependencies.pulsar</code> » pour configurer Pulsar.</p>
 <p><code translate="no">pulsar</code> Prend en charge <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar externe<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,7 +162,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> indique l’utilisation d’un service Pulsar externe.
-Les champs permettant de configurer un service Pulsar externe sont les suivants :</p>
+Les champs utilisés pour configurer un service Pulsar externe sont les suivants :</p>
 <ul>
 <li><code translate="no">external</code>:  Une valeur « <code translate="no">true</code> » indique que Milvus utilise un service Pulsar externe.</li>
 <li><code translate="no">endpoints</code>: Les points de terminaison de Pulsar.</li>
@@ -201,7 +201,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> indique que, lors du démarrage d’un cluster Milvus, un service Pulsar démarre automatiquement au sein du cluster.</p>
+    </button></h3><p><code translate="no">inCluster</code> indique que, lors du démarrage d'un cluster Milvus, un service Pulsar démarre automatiquement au sein du cluster.</p>
 <h4 id="Example" class="common-anchor-header">Exemple</h4><p>L'exemple suivant configure un service Pulsar interne.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -241,7 +241,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Cet exemple précise le nombre de répliques de chaque composant de Pulsar, les ressources de calcul de Pulsar BookKeeper, ainsi que d’autres paramètres de configuration.</div>
+<div class="alert note">Cet exemple précise le nombre de répliques de chaque composant de Pulsar, les ressources de calcul de Pulsar BookKeeper, ainsi que d'autres paramètres de configuration.</div>
 <div class="alert note">Retrouvez l’ensemble des éléments de configuration nécessaires à la configuration d’un service Pulsar interne dans <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">le fichier values.yaml</a>. Ajoutez les éléments de configuration nécessaires sous la section « <code translate="no">pulsar.inCluster.values</code> », comme indiqué dans l’exemple précédent.</div>
 <p>En supposant que le fichier de configuration s’appelle ` <code translate="no">milvuscluster.yaml</code>`, exécutez la commande suivante pour appliquer la configuration.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
@@ -261,7 +261,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar était le stockage de messages par défaut dans un cluster Milvus jusqu’à la version 2.5.x (remplacé par Woodpecker à partir de la version 2.6.x). Si vous souhaitez utiliser Kafka, ajoutez le champ facultatif « <code translate="no">msgStreamType</code> » pour configurer Kafka.</p>
+    </button></h2><p>Pulsar était le stockage de messages par défaut dans un cluster Milvus jusqu’à la version 2.5.x (remplacé par Woodpecker à partir de la version 2.6.x). Si vous souhaitez utiliser Kafka, ajoutez le champ facultatif ` <code translate="no">msgStreamType</code> ` pour configurer Kafka.</p>
 <p><code translate="no">kafka</code> Prend en charge <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
 <h3 id="External-Kafka" class="common-anchor-header">Kafka externe<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,10 +278,10 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">external</code> indique l’utilisation d’un service Kafka externe.</p>
+    </button></h3><p><code translate="no">external</code> indique l'utilisation d'un service Kafka externe.</p>
 <p>Les champs utilisés pour configurer un service Kafka externe sont les suivants :</p>
 <ul>
-<li><code translate="no">external</code>: Une valeur « <code translate="no">true</code> » indique que Milvus utilise un service Kafka externe.</li>
+<li><code translate="no">external</code>: Une valeur <code translate="no">true</code> indique que Milvus utilise un service Kafka externe.</li>
 <li><code translate="no">brokerList</code>: La liste des brokers auxquels envoyer les messages.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Exemple</h4><p>L'exemple suivant configure un service Kafka externe.</p>
@@ -312,7 +312,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Les configurations SASL sont prises en charge à partir de la version v0.8.5 de l'opérateur.</p>
+<p>Les configurations SASL sont prises en charge à partir de la version v0.8.5 de l’opérateur.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Kafka interne<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -346,7 +346,7 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous trouverez <a href="https://artifacthub.io/packages/helm/bitnami/kafka">ici</a> la liste complète des éléments de configuration nécessaires pour configurer un service Kafka interne. Ajoutez les éléments de configuration nécessaires sous « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Retrouvez <a href="https://artifacthub.io/packages/helm/bitnami/kafka">ici</a> la liste complète des éléments de configuration nécessaires pour configurer un service Kafka interne. Ajoutez les éléments de configuration nécessaires sous ` <code translate="no">kafka.inCluster.values</code>`.</p>
 <p>En supposant que le fichier de configuration s'appelle <code translate="no">milvuscluster.yaml</code>, exécutez la commande suivante pour appliquer la configuration.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -368,5 +368,5 @@ Les champs permettant de configurer un service Pulsar externe sont les suivants 
     </button></h2><p>Découvrez comment configurer d’autres dépendances Milvus avec Milvus Operator :</p>
 <ul>
 <li><a href="/docs/fr/object_storage_operator.md">Configurer le stockage d’objets avec Milvus Operator</a></li>
-<li><a href="/docs/fr/meta_storage_operator.md">Configurer le stockage de métadonnées avec Milvus Operator</a></li>
+<li><a href="/docs/fr/meta_storage_operator.md">Configurer le stockage des métadonnées avec Milvus Operator</a></li>
 </ul>

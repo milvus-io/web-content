@@ -2,8 +2,8 @@
 id: upsert-entities.md
 title: Inserimento o aggiornamento di entità
 summary: >-
-  L'operazione "upsert" offre un modo pratico per inserire o aggiornare le
-  entità in una raccolta.
+  L'operazione "upsert" offre un modo pratico per inserire o aggiornare entità
+  in una collezione.
 ---
 <h1 id="Upsert-Entities" class="common-anchor-header">Inserimento o aggiornamento di entità<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'operazione " <code translate="no">upsert</code> " offre un modo pratico per inserire o aggiornare entità in una raccolta.</p>
+    </button></h1><p>L'operazione <code translate="no">upsert</code> offre un modo pratico per inserire o aggiornare entità in una raccolta.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,16 +53,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una richiesta di upsert in modalità "override" combina un'operazione di inserimento e una di eliminazione. Quando viene ricevuta una richiesta " <code translate="no">upsert</code> " per un'entità esistente, Milvus inserisce i dati contenuti nel payload della richiesta ed elimina contemporaneamente l'entità esistente con la chiave primaria originale specificata nei dati.</p>
+    </button></h3><p>Una richiesta di upsert in modalità "override" combina un inserimento e un'eliminazione. Quando viene ricevuta una richiesta di " <code translate="no">upsert</code> " per un'entità esistente, Milvus inserisce i dati contenuti nel payload della richiesta ed elimina contemporaneamente l’entità esistente con la chiave primaria originale specificata nei dati.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
    <span>Upsert in modalità "override</span> </span>" <span class="img-wrapper">
   
  </span></p>
-<p>Se la collezione di destinazione ha l’ <code translate="no">autoID</code> abilitato sul proprio campo primario, la richiesta <code translate="no">upsert</code> deve comunque includere la chiave primaria dell’entità di destinazione. Milvus utilizza la chiave primaria fornita per individuare l’entità da sostituire e genera una nuova chiave primaria per i dati contenuti nel payload della richiesta prima di inserirli.</p>
-<p>Per i campi con l’ <code translate="no">nullable</code> abilitato, è possibile ometterli nella richiesta <code translate="no">upsert</code> se non richiedono alcun aggiornamento.</p>
-<h3 id="Upsert-in-merge-mode" class="common-anchor-header">Upsert in modalità di unione<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
+<p>Se la collezione di destinazione ha l'<code translate="no">autoID</code> abilitato sul proprio campo primario, la richiesta <code translate="no">upsert</code> deve comunque includere la chiave primaria dell’entità di destinazione. Milvus utilizza la chiave primaria fornita per individuare l’entità da sostituire e genera una nuova chiave primaria per i dati contenuti nel payload della richiesta prima di inserirli.</p>
+<p>Per i campi con l’ <code translate="no">nullable</code> e abilitato, è possibile ometterli nella richiesta <code translate="no">upsert</code> se non richiedono alcun aggiornamento.</p>
+<h3 id="Upsert-in-merge-mode" class="common-anchor-header">Upsert in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,17 +77,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È inoltre possibile utilizzare il flag ` <code translate="no">partial_update</code> ` per far funzionare una richiesta di upsert in modalità merge. Ciò consente di includere nel payload della richiesta solo i campi che necessitano di aggiornamento.</p>
+    </button></h3><p>Utilizzare la modalità di unione per aggiornare campi specifici di un’entità esistente, lasciando invariati gli altri campi.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
    <span>Upsert in modalità merge</span>
   
  </span></p>
-<p>Per eseguire un merge, impostare ` <code translate="no">partial_update</code> ` su ` <code translate="no">True</code> ` nella richiesta ` <code translate="no">upsert</code> `, insieme alla chiave primaria e ai campi da aggiornare con i loro nuovi valori.</p>
-<p>Alla ricezione di tale richiesta, Milvus esegue una query con forte coerenza per recuperare l’entità, aggiorna i valori dei campi in base ai dati presenti nella richiesta, inserisce i dati modificati e infine elimina l’entità esistente con la chiave primaria originale contenuta nella richiesta.</p>
-<p>Per una collezione con la modalità " <code translate="no">autoID</code> " abilitata, la modalità "merge" conserva la chiave primaria fornita nella richiesta invece di generarne una nuova. Ciò differisce dalla modalità "override", in cui Milvus genera una nuova chiave primaria per l’entità sostitutiva. La chiave primaria in una richiesta in modalità "merge" deve identificare un’entità esistente; in caso contrario, Milvus rifiuta la richiesta invece di inserire una nuova entità.</p>
-<p>Per i campi di tipo " <code translate="no">ARRAY</code> ", la modalità di unione supporta due operatori in Milvus v2.6.17 e versioni successive: <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code>. Questi operatori consentono di aggiungere elementi o rimuovere elementi corrispondenti da un campo " <code translate="no">ARRAY</code> " esistente, senza dover prima interrogare l’entità per recuperarne il valore corrente. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">"Upsert dei campi ARRAY in modalità di unione"</a>.</p>
+<p>Impostare ` <code translate="no">partial_update=True</code> ` e specificare la chiave primaria e i campi che si desidera aggiornare.</p>
+<p>Milvus recupera l’entità esistente con una query a forte coerenza, unisce le modifiche ai dati memorizzati, inserisce l’entità risultante dall’unione ed elimina l’entità precedente.</p>
+<p>Se la chiave primaria non esiste, il risultato dipende dal fatto che " <code translate="no">autoID</code> " sia abilitato o meno:</p>
+<ul>
+<li><strong>Con l'<code translate="no">autoID</code> disabilitato</strong>, Milvus tenta di inserire una nuova entità con la chiave primaria fornita. La richiesta va a buon fine se soddisfa i normali requisiti di inserimento. Se manca un campo obbligatorio, la richiesta fallisce con un errore di campo mancante. I campi nullabili e quelli con valori predefiniti possono essere omessi, proprio come in un normale inserimento.</li>
+<li><strong>Con l’opzione « <code translate="no">autoID</code> » abilitata</strong>, ogni chiave primaria presente nella richiesta deve già esistere. Milvus rifiuta la richiesta se manca una qualsiasi chiave primaria, anche se vengono forniti tutti i campi necessari per l’inserimento. Per le entità esistenti, la modalità di unione mantiene invariata la chiave primaria.</li>
+</ul>
+<p>Se un aggiornamento parziale fallisce con un errore di campo mancante, verificare se l’entità di destinazione esiste. In assenza di un’entità esistente, Milvus non può recuperare i valori dei campi omessi.</p>
+<p>Per le nuove entità, utilizzare l’ <code translate="no">insert</code> o un upsert in modalità override. Utilizzare la modalità di unione per gli aggiornamenti successivi ai singoli campi.</p>
+<p>Per i campi di tipo " <code translate="no">ARRAY</code> ", la modalità di unione supporta due operatori in Milvus v2.6.17 e versioni successive: <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code>. Questi operatori consentono di aggiungere elementi o rimuovere elementi corrispondenti da un campo " <code translate="no">ARRAY</code> " esistente, senza dover prima interrogare l'entità per recuperarne il valore corrente. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">"Upsert dei campi ARRAY in modalità di unione"</a>.</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Comportamenti di Upsert: note speciali<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,23 +114,23 @@ summary: >-
 <li><p><strong>Upsert dei campi con</strong> l’opzione « <code translate="no">nullable</code> » <strong>abilitata.</strong></p>
 <p>Supponiamo che il campo <code translate="no">issue</code> possa essere nullo. Quando si esegue l’upsert di questi campi, tenere presente che:</p>
 <ul>
-<li><p>Se si omette il campo ` <code translate="no">issue</code> ` nella richiesta ` <code translate="no">upsert</code> ` e si disabilita ` <code translate="no">partial_update</code>`, il campo ` <code translate="no">issue</code> ` verrà aggiornato a ` <code translate="no">null</code> ` invece di mantenere il proprio valore originale.</p></li>
+<li><p>Se si omette il campo ` <code translate="no">issue</code> ` nella richiesta ` <code translate="no">upsert</code> ` e si disabilita ` <code translate="no">partial_update</code>`, il campo ` <code translate="no">issue</code> ` verrà aggiornato a ` <code translate="no">null</code> ` anziché mantenere il proprio valore originale.</p></li>
 <li><p>Per mantenere il valore originale del campo <code translate="no">issue</code>, è necessario abilitare <code translate="no">partial_update</code> e omettere il campo <code translate="no">issue</code> oppure includere il campo <code translate="no">issue</code> con il suo valore originale nella richiesta <code translate="no">upsert</code>.</p></li>
 </ul></li>
 <li><p><strong>Chiavi di upsert nel campo dinamico</strong>.</p>
-<p>Supponiamo di aver abilitato la chiave dinamica nella raccolta di esempio e che le coppie chiave-valore nel campo dinamico di un'entità siano simili a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Quando si esegue un upsert dell’entità con chiavi quali <code translate="no">author</code>, <code translate="no">year</code> o <code translate="no">tags</code>, oppure si aggiungono altre chiavi, tenere presente che:</p>
+<p>Supponiamo di aver abilitato la chiave dinamica nella raccolta di esempio e che le coppie chiave-valore nel campo dinamico di un’entità siano simili a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>Quando si esegue l'upsert dell'entità con chiavi quali <code translate="no">author</code>, <code translate="no">year</code> o <code translate="no">tags</code>, oppure si aggiungono altre chiavi, tenere presente quanto segue:</p>
 <ul>
-<li><p>Se si esegue un'operazione di upsert con l'opzione " <code translate="no">partial_update</code> " disabilitata, il comportamento predefinito è la <strong>sovrascrittura</strong>. Ciò significa che il valore del campo dinamico verrà sovrascritto da tutti i campi non definiti dallo schema inclusi nella richiesta e dai relativi valori.</p>
+<li><p>Se si esegue un'operazione "upsert" con <code translate="no">partial_update</code> disabilitato, il comportamento predefinito è la <strong>sovrascrittura</strong>. Ciò significa che il valore del campo dinamico verrà sovrascritto da tutti i campi non definiti dallo schema inclusi nella richiesta e dai relativi valori.</p>
 <p>Ad esempio, se i dati inclusi nella richiesta sono <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, le coppie chiave-valore nel campo dinamico dell’entità di destinazione verranno aggiornate in base a tali valori.</p></li>
-<li><p>Se si esegue un upsert con l'opzione " <code translate="no">partial_update</code> " abilitata, il comportamento predefinito è quello di <strong>unire</strong>. Ciò significa che il valore del campo dinamico verrà unito a tutti i campi non definiti dallo schema inclusi nella richiesta e ai relativi valori.</p>
-<p>Ad esempio, se i dati inclusi nella richiesta sono <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, le coppie chiave-valore nel campo dinamico dell’entità di destinazione diventeranno <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> dopo l’`upsert`.</p></li>
+<li><p>Se si esegue un upsert con l’opzione ` <code translate="no">partial_update</code> ` abilitata, il comportamento predefinito è la <strong>fusione</strong>. Ciò significa che il valore del campo dinamico si fonderà con tutti i campi non definiti dallo schema inclusi nella richiesta e con i relativi valori.</p>
+<p>Ad esempio, se i dati inclusi nella richiesta sono <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, le coppie chiave-valore nel campo dinamico dell’entità di destinazione diventeranno <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> dopo l’upsert.</p></li>
 </ul></li>
 <li><p><strong>Upsert di un campo JSON.</strong></p>
-<p>Supponiamo che la collezione di esempio abbia un campo JSON definito dallo schema denominato <code translate="no">extras</code> e che le coppie chiave-valore in questo campo JSON di un'entità siano simili a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Quando si esegue l’upsert del campo <code translate="no">extras</code> di un’entità con dati JSON modificati, si noti che il campo JSON viene trattato nel suo insieme e non è possibile aggiornare singole chiavi in modo selettivo. In altre parole, il campo JSON <strong>NON</strong> supporta l’upsert in modalità <strong>di unione</strong>.</p></li>
-<li><p><strong>Eseguire l’</strong> `<strong>upsert` di un</strong> <strong>campo</strong> ` <code translate="no">ARRAY</code> <strong>`.</strong></p>
-<p>Per impostazione predefinita, un campo <code translate="no">ARRAY</code> in modalità "merge" segue la semantica <strong>REPLACE</strong>: il valore contenuto nella richiesta sovrascrive l'array esistente. Per aggiornamenti più granulari, Milvus v2.6.17 e versioni successive supportano anche due operatori:</p>
+<p>Supponiamo che la collezione di esempio abbia un campo JSON definito dallo schema denominato <code translate="no">extras</code> e che le coppie chiave-valore in questo campo JSON di un’entità siano simili a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>Quando si esegue l’upsert del campo <code translate="no">extras</code> di un’entità con dati JSON modificati, si noti che il campo JSON viene trattato come un unico insieme e non è possibile aggiornare singole chiavi in modo selettivo. In altre parole, il campo JSON <strong>NON</strong> supporta l’upsert in modalità <strong>di unione</strong>.</p></li>
+<li><p><strong>Eseguire l’upsert di un</strong> <strong>campo</strong> ` <code translate="no">ARRAY</code> <strong>`.</strong></p>
+<p>Per impostazione predefinita, un campo <code translate="no">ARRAY</code> in modalità merge segue la semantica <strong>REPLACE</strong>: il valore contenuto nella richiesta sovrascrive l’array esistente. Per aggiornamenti più granulari, Milvus v2.6.17 e versioni successive supportano anche due operatori:</p>
 <ul>
 <li><p><code translate="no">ARRAY_APPEND</code> aggiunge gli elementi presenti nel payload della richiesta all’array esistente.</p></li>
 <li><p><code translate="no">ARRAY_REMOVE</code> rimuove dall’array esistente ogni elemento che corrisponda a un valore presente nel payload della richiesta.</p></li>
@@ -132,7 +138,7 @@ summary: >-
 <p>Per la sintassi degli operatori, i tipi di elementi supportati e altri vincoli, consultare <a href="/docs/it/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert dei campi ARRAY in modalità merge</a>.</p></li>
 <li><p><strong>Upsert di un campo StructArray.</strong></p>
 <p>L'upsert di un campo StructArray in un'entità sovrascrive il valore del campo. A tal fine, è necessario fornire un elenco di dizionari, ciascuno dei quali contiene tutti i sottocampi definiti nello schema della struttura, anche quando si esegue l'upsert in modalità merge.</p>
-<p>Per ulteriori dettagli, consultare <a href="/docs/it/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">Upsert</a> del <a href="/docs/it/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">campo StructArray in modalità merge</a>.</p></li>
+<p>Per ulteriori dettagli, consultare <a href="/docs/it/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">Upsert</a> di <a href="/docs/it/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">un campo StructArray in modalità merge</a>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Limiti e restrizioni<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,17 +157,17 @@ summary: >-
       </svg>
     </button></h3><p>In base a quanto sopra, è necessario rispettare diversi limiti e restrizioni:</p>
 <ul>
-<li><p>La richiesta " <code translate="no">upsert</code> " deve sempre includere le chiavi primarie delle entità di destinazione, anche quando è abilitata la modalità " <code translate="no">autoID</code> ". Per le collezioni " <code translate="no">autoID</code> ", la gestione delle chiavi primarie dipende dalla modalità di upsert:</p>
+<li><p>La richiesta " <code translate="no">upsert</code> " deve sempre includere le chiavi primarie delle entità di destinazione, anche quando è abilitata l'opzione " <code translate="no">autoID</code> ". Per le collezioni " <code translate="no">autoID</code> ", la gestione delle chiavi primarie dipende dalla modalità di upsert:</p>
 <ul>
-<li><p>In modalità "override", la chiave primaria identifica l'entità esistente da sostituire e Milvus genera una nuova chiave primaria per l'entità sostitutiva.</p></li>
+<li><p>In modalità "override", la chiave primaria identifica l’entità esistente da sostituire e Milvus genera una nuova chiave primaria per l’entità sostitutiva.</p></li>
 <li><p>In modalità "merge", la chiave primaria identifica l'entità esistente da aggiornare e rimane invariata. Se la chiave primaria non esiste, la richiesta fallisce invece di inserire una nuova entità.</p></li>
 </ul></li>
 <li><p>La collezione di destinazione deve essere caricata e disponibile per le query.</p></li>
-<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema della collezione di destinazione.</p></li>
+<li><p>Tutti i campi specificati nella richiesta devono esistere nello schema della raccolta di destinazione.</p></li>
 <li><p>I valori di tutti i campi specificati nella richiesta devono corrispondere ai tipi di dati definiti nello schema.</p></li>
 <li><p>Per qualsiasi campo derivato da un altro tramite funzioni, Milvus rimuoverà il campo derivato durante l’upsert per consentire il ricalcolo.</p></li>
 </ul>
-<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Upsert di entità in una collezione<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Upsert di entità in una raccolta<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,7 +182,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questa sezione, eseguiremo l’upsert di entità in una collezione denominata <code translate="no">my_collection</code>. Questa collezione ha solo due campi, denominati <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> e <code translate="no">issue</code>. Il campo <code translate="no">id</code> è il campo primario, mentre i campi <code translate="no">title</code> e <code translate="no">issue</code> sono campi scalari.</p>
+    </button></h2><p>In questa sezione, eseguiremo l'upsert di entità in una collezione denominata <code translate="no">my_collection</code>. Questa collezione presenta solo due campi, denominati <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> e <code translate="no">issue</code>. Il campo <code translate="no">id</code> è il campo primario, mentre i campi <code translate="no">title</code> e <code translate="no">issue</code> sono campi scalari.</p>
 <p>Le tre entità, se presenti nella raccolta, verranno sovrascritte da quelle incluse nella richiesta di upsert.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -365,7 +371,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È inoltre possibile eseguire l'upsert di entità in una partizione specificata. I seguenti frammenti di codice presuppongono che nella collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
+    </button></h2><p>È inoltre possibile eseguire l'upsert di entità in una partizione specificata. I seguenti frammenti di codice presuppongono che nella propria collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
 <p>Le tre entità, se presenti nella partizione, verranno sovrascritte da quelle incluse nella richiesta.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -503,7 +509,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-entities-in-merge-mode" class="common-anchor-header">Upsert di entità in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode" class="anchor-icon" translate="no">
+<h2 id="Upsert-entities-in-merge-mode" class="common-anchor-header">Inserimento o aggiornamento di entità in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-entities-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -518,10 +524,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'esempio di codice seguente illustra come eseguire l'upsert di entità con aggiornamenti parziali. È sufficiente specificare solo i campi che richiedono aggiornamenti e i relativi nuovi valori, insieme al flag esplicito di aggiornamento parziale.</p>
-<p>Nell’esempio seguente, il campo ` <code translate="no">issue</code> ` delle entità specificate nella richiesta di `upsert` verrà aggiornato con i valori inclusi nella richiesta.</p>
+    </button></h2><p>L'esempio seguente aggiorna solo il campo ` <code translate="no">issue</code> ` delle entità con chiavi primarie ` <code translate="no">1</code> ` e ` <code translate="no">2</code> ` in ` <code translate="no">my_collection</code>`. Prima di eseguirlo, assicurarsi che entrambe le entità esistano già. Gli altri campi mantengono i valori attuali.</p>
 <div class="alert note">
-<p>Quando si esegue un upsert in modalità merge, assicurarsi che le entità coinvolte nella richiesta abbiano lo stesso insieme di campi. Supponendo che vi siano due o più entità da sottoporre a upsert, come mostrato nel seguente frammento di codice, è importante che includano campi identici per prevenire errori e mantenere l’integrità dei dati.</p>
+<p>Quando si esegue un upsert in modalità merge, assicurarsi che le entità coinvolte nella richiesta abbiano lo stesso insieme di campi. Supponendo che vi siano due o più entità da sottoporre a upsert, come mostrato nel seguente frammento di codice, è importante che includano campi identici per evitare errori e mantenere l’integrità dei dati.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -662,8 +667,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di Milvus v2.6.17, l’aggiornamento di una parte di un campo di tipo ` <code translate="no">ARRAY</code> ` richiedeva un flusso di lettura-modifica-scrittura lato client: interrogare l’array esistente, modificarlo nel codice dell’applicazione ed eseguire l’`upsert` del valore di sostituzione completo. Gli operatori di aggiornamento parziale (<code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code>) consentono di inviare solo gli elementi da aggiungere o rimuovere, riducendo così la logica lato client ed evitando la lettura aggiuntiva prima dell’upsert.</p>
-<p>Supponiamo che l’entità con chiave primaria <code translate="no">1</code> contenga già <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Prima dell’introduzione degli operatori di aggiornamento parziale, l’aggiunta dell’elemento <code translate="no">&quot;premium&quot;</code> a un array richiedeva l’upsert dell’intero array sostitutivo:</p>
+    </button></h2><p>Prima di Milvus v2.6.17, l’aggiornamento di una parte di un campo di tipo « <code translate="no">ARRAY</code> » richiedeva un flusso di lettura-modifica-scrittura lato client: interrogare l’array esistente, modificarlo nel codice dell’applicazione ed eseguire l’upsert del valore di sostituzione completo. Gli operatori di aggiornamento parziale (<code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code>) consentono di inviare solo gli elementi da aggiungere o rimuovere, riducendo così la logica lato client ed evitando la lettura aggiuntiva prima dell’upsert.</p>
+<p>Supponiamo che l’entità con chiave primaria <code translate="no">1</code> contenga già <code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>. Prima dell’introduzione degli operatori di aggiornamento parziale, l’aggiunta dell’elemento <code translate="no">&quot;premium&quot;</code> a un array richiedeva l’inserimento o l’aggiornamento dell’intero array sostitutivo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -728,7 +733,7 @@ client.upsert(UpsertReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Con ` <code translate="no">ARRAY_REMOVE</code>`, invia solo l'elemento corrispondente da rimuovere:</p>
+<p>Con ` <code translate="no">ARRAY_REMOVE</code>`, è sufficiente inviare solo l'elemento corrispondente da rimuovere:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -783,7 +788,7 @@ client.upsert(UpsertReq.builder()
       </svg>
     </button></h3><ul>
 <li><p>I valori del payload devono corrispondere all’ <code translate="no">element_type</code> del campo di destinazione <code translate="no">ARRAY</code>. Ad esempio, se il campo di destinazione è <code translate="no">ARRAY&lt;VARCHAR&gt;</code>, il payload deve contenere valori di tipo stringa.</p></li>
-<li><p>In Milvus v2.6.17 e versioni successive, <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> supportano i campi <code translate="no">ARRAY</code> il cui <code translate="no">element_type</code> è <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> o <code translate="no">VARCHAR</code>.</p></li>
+<li><p>In Milvus v2.6.17 e versioni successive, <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> supportano campi <code translate="no">ARRAY</code> il cui <code translate="no">element_type</code> è <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> o <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Dopo un’operazione di tipo “ <code translate="no">ARRAY_APPEND</code> ”, la lunghezza dell’array risultante non deve superare il valore specificato nel campo “ <code translate="no">max_capacity</code> ”.</p></li>
 <li><p>Gli upsert simultanei sulla stessa entità non sono atomici tra le richieste. Se due richieste aggiornano contemporaneamente lo stesso campo <code translate="no">ARRAY</code>, la scrittura successiva può sovrascrivere quella precedente. Utilizzare il coordinamento a livello di applicazione se è necessario preservare tutte le modifiche simultanee.</p></li>
 </ul>
@@ -802,7 +807,7 @@ client.upsert(UpsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L’esempio seguente utilizza una piccola raccolta di <code translate="no">users</code> con una chiave primaria <code translate="no">pk</code>, un campo <code translate="no">tags</code> di tipo <code translate="no">ARRAY&lt;VARCHAR&gt;</code> e un campo vettore <code translate="no">embedding</code>. Innanzitutto inserisce due entità con valori iniziali <code translate="no">tags</code>, quindi utilizza <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> per mostrare come ciascun operatore modifichi l’array memorizzato.</p>
+    </button></h3><p>L’esempio seguente utilizza una piccola raccolta di <code translate="no">users</code> con una chiave primaria <code translate="no">pk</code>, un campo <code translate="no">tags</code> di tipo <code translate="no">ARRAY&lt;VARCHAR&gt;</code> e un campo vettoriale <code translate="no">embedding</code>. Innanzitutto inserisce due entità con valori iniziali <code translate="no">tags</code>, quindi utilizza <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> per mostrare come ciascun operatore modifichi l’array memorizzato.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -920,8 +925,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L’upsert di un campo StructArray in un’entità sovrascrive il valore del campo. Ciò significa che è necessario includere tutti i sottocampi definiti nello schema della struttura quando si esegue l’upsert di un campo StructArray.</p>
-<p>L’esempio seguente mostra come eseguire l’upsert del campo ` <code translate="no">chunks</code> ` in modalità merge, un campo StructArray con 6 sottocampi. Al termine dell’operazione, il campo ` <code translate="no">chunks</code> ` dell’entità con id 1 viene impostato sull’array contenente le strutture a due elementi fornite nella richiesta.</p>
+    </button></h2><p>L'upsert di un campo StructArray in un'entità sovrascrive il valore del campo. Ciò significa che è necessario includere tutti i sottocampi definiti nello schema della struttura quando si esegue l'upsert di un campo StructArray.</p>
+<p>L'esempio seguente mostra come eseguire l'`upsert` del campo ` <code translate="no">chunks</code> ` in modalità merge, un campo StructArray con 6 sottocampi. Al termine dell'operazione, il campo ` <code translate="no">chunks</code> ` dell'entità con id 1 viene impostato sull'array contenente le strutture a due elementi fornite nella richiesta.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

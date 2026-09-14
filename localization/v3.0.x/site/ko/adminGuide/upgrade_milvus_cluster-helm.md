@@ -23,9 +23,9 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 Helm을 사용하여 Milvus 2.6.x 클러스터를 v3.0.0으로 업그레이드하는 방법을 설명합니다.</p>
+    </button></h1><p>이 가이드에서는 Helm을 사용하여 Milvus 2.6.x 클러스터를 v3.0.1로 업그레이드하는 방법을 설명합니다.</p>
 <div class="alert note">
-<p>이 절차는 Milvus Helm 차트 5.0.22를 사용하여 Milvus 2.6.20에서 Milvus v3.0.0으로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스나 Helm 차트 버전을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
+<p>이 절차는 Milvus Helm 차트 5.0.22를 사용하여 Milvus 2.6.20에서 Milvus v3.0.1로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스나 Helm 차트 버전을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">필수 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,10 +48,10 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 <li>기존 배포에 사용된 Helm 값</li>
 <li>Milvus 메타데이터 및 영구 데이터의 최신 백업</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.0으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.1로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert warning">
-<p>이 절차의 일환으로 Helm 차트를 변경하거나 다운그레이드하지 마십시오. Helm 릴리스에 이미 설치된 차트 버전을 유지하십시오. 테스트된 기준 환경에서는 Helm 차트 5.0.22를 그대로 유지하고 Milvus 이미지 태그만 <code translate="no">v3.0.0</code> 로 변경했습니다.</p>
-<p>이 절차는 Milvus 이미지를 2.6.x로 되돌리는 다운그레이드 또는 롤백을 검증하지 않습니다. v3.0.0이 데이터를 기록한 후에는, 이미지만 롤백할 경우 업데이트된 상태를 읽지 못할 수 있습니다. 업그레이드가 실패하면 쓰기 작업을 중지하고, 업그레이드 전 메타데이터와 영구 데이터 백업을 복원하는 복구 계획을 사용하십시오. 복구 계획은 먼저 비생산 환경에서 검증하십시오.</p>
+<p>이 절차의 일환으로 Helm 차트를 변경하거나 다운그레이드하지 마십시오. Helm 릴리스에 이미 설치된 차트 버전을 유지하십시오. 테스트된 기준 환경에서는 Helm 차트 5.0.22를 유지한 채 Milvus 이미지 태그만 <code translate="no">v3.0.1</code> 으로 변경했습니다.</p>
+<p>이 절차는 Milvus 이미지를 2.6.x로 되돌리는 다운그레이드 또는 롤백을 검증하지 않습니다. v3.0.1이 데이터를 기록한 후에는, 이미지만 롤백하는 경우 업데이트된 상태를 읽지 못할 수 있습니다. 업그레이드가 실패하면 쓰기 작업을 중지하고, 업그레이드 전의 메타데이터와 영구 데이터 백업을 복원하는 복구 계획을 사용하십시오. 복구 계획은 먼저 비생산 환경에서 검증하십시오.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm Chart 5.0.22로 생성된 검증된 Milvus 2.6.20 배포 환경은 MixCoord 및 StreamingNode를 사용했으며 IndexNode는 실행하지 않았습니다. 배포 환경이 동일한 토폴로지를 사용하는 경우 별도의 코디네이터 마이그레이션 단계가 필요하지 않습니다.</p>
+    </button></h2><p>Helm Chart 5.0.22로 생성된 검증된 Milvus 2.6.20 배포 환경은 MixCoord 및 StreamingNode를 사용했으며 IndexNode는 실행하지 않았습니다. 배포 환경에서 동일한 토폴로지를 사용하는 경우 별도의 코디네이터 마이그레이션 단계가 필요하지 않습니다.</p>
 <h3 id="Step-1-Confirm-the-current-topology" class="common-anchor-header">1단계: 현재 토폴로지 확인<button data-href="#Step-1-Confirm-the-current-topology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,8 +91,8 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>클러스터가 MixCoord 및 StreamingNode를 사용하고 있으며, IndexNode Pod가 실행 중이지 않은지 확인하십시오. 이 가이드 후반부에 설명된 업그레이드 명령어는 기존 Helm 값을 유지합니다. 현재 값에서 IndexNode가 활성화되어 있거나 다른 구성 요소 토폴로지를 사용하는 경우, 이 이미지 전용 업그레이드를 실행하지 마십시오. 비생산 환경에서 토폴로지를 재현하고, 먼저 엔지니어링 팀의 승인을 받은 마이그레이션 계획을 수립하십시오.</p>
-<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">2단계: Helm 저장소 업데이트<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
+<p>클러스터가 MixCoord 및 StreamingNode를 사용하고 있으며, IndexNode Pod가 실행 중이지 않은지 확인하십시오. 이 가이드 후반부에 소개된 업그레이드 명령어는 기존 Helm 값을 유지합니다. 현재 값에서 IndexNode가 활성화되어 있거나 다른 구성 요소 토폴로지를 사용하는 경우, 이 ‘이미지만’ 업그레이드 절차를 실행하지 마십시오. 먼저 비생산 환경에서 토폴로지를 재현하고 엔지니어링 팀의 승인을 받은 마이그레이션 계획을 확보하십시오.</p>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">2단계: Helm 리포지토리 업데이트<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +135,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
   --namespace &lt;namespace&gt; \
   --version &lt;current-chart-version&gt; \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.0&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.1&quot;</span> \
   --reset-then-reuse-values \
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 30m
@@ -164,7 +164,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 필수 워크로드가 준비되었는지, 모든 Milvus 구성 요소가 ` <code translate="no">v3.0.0</code>`를 사용하는지, 기존 컬렉션에 대한 쿼리 및 검색이 가능한지 확인하십시오. v3.0.0 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
+<p>모든 필수 워크로드가 준비되었는지, 모든 Milvus 구성 요소가 <code translate="no">v3.0.1</code> 을 사용 중인지, 기존 컬렉션을 계속 쿼리하고 검색할 수 있는지 확인하십시오. v3.0.1 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
 <div class="alert note">
-<p>Milvus 3.0으로 업그레이드한다고 해서 Storage V3가 활성화되는 것은 아닙니다. 업그레이드를 확인한 후, <a href="/docs/ko/storage-v3.md">Storage</a> V3에 의존하는 기능을 활성화하기 전에 <a href="/docs/ko/storage-v3.md">Storage V3에 대해</a> 검토하십시오. Milvus가 Storage V3 데이터를 기록한 후에는 Storage V3를 읽을 수 없는 이전 Milvus 버전으로 다운그레이드하는 것이 지원되지 않습니다.</p>
+<p>Milvus 3.0으로 업그레이드한다고 해서 Storage V3가 활성화되는 것은 아닙니다. 업그레이드를 확인한 후, Storage V3에 의존하는 기능을 활성화하기 전에 <a href="/docs/ko/storage-v3.md">Storage V3에 대해</a> 검토하십시오. Milvus가 Storage V3 데이터를 기록한 후에는 Storage V3를 읽을 수 없는 이전 Milvus 버전으로 다운그레이드하는 것이 지원되지 않습니다.</p>
 </div>

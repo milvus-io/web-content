@@ -34,8 +34,8 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用 `<code translate="no">upsert</code> ` 來插入新實體或更新現有實體，具體取決於 `upsert` 請求中提供的主鍵是否存在於集合中。若未找到該主鍵，則執行插入操作；否則，則執行更新操作。<code translate="no">autoID</code> 集合上的部分更新屬於例外情況：它們僅更新現有實體，詳情如下所述。</p>
-<p>Milvus 中的 upsert 操作可採用「<strong>覆寫模式</strong>」或「<strong>合併</strong>模式」。</p>
+    </button></h2><p>您可以使用 `<code translate="no">upsert</code> ` 來插入新實體或更新現有實體，具體取決於 `upsert` 請求中提供的主鍵是否存在於集合中。若未找到該主鍵，則會執行插入操作；否則，將執行更新操作。針對 `<code translate="no">autoID</code> ` 集合的部分更新則屬例外情況：它們僅更新現有實體，詳情如下所述。</p>
+<p>Milvus 中的 upsert 操作可在「<strong>覆寫</strong>」或「<strong>合併</strong>」模式下運作。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">覆寫模式下的 Upsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,15 +51,15 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以覆寫模式運作的 upsert 請求結合了插入與刪除操作。當收到針對現有實體的 `<code translate="no">upsert</code> ` 請求時，Milvus 會插入請求負載中攜帶的資料，並同時刪除資料中指定原始主鍵的現有實體。</p>
+    </button></h3><p>以覆寫模式運作的 upsert 請求結合了插入與刪除兩項操作。當收到針對現有實體的 `<code translate="no">upsert</code> ` 請求時，Milvus 會插入請求載荷中攜帶的資料，並同時刪除資料中指定原始主鍵的現有實體。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" /> 
    <span>覆寫模式下的 Upsert</span>
   
  </span></p>
-<p>若目標集合在其主欄位上已啟用<code translate="no">autoID</code> ，<code translate="no">upsert</code> 請求仍必須包含目標實體的主鍵。Milvus會使用提供的主鍵來定位待替換的實體，並在插入前為請求載荷中攜帶的資料生成一個新的主鍵。</p>
-<p>對於已啟用「<code translate="no">nullable</code> 」功能的欄位，若無需進行任何更新，則可在<code translate="no">upsert</code> 請求中省略這些欄位。</p>
+<p>若目標集合在其主欄位上已啟用「<code translate="no">autoID</code> 」，則「<code translate="no">upsert</code> 」請求仍須包含目標實體的主鍵。Milvus 會使用提供的主鍵定位待替換的實體，並在插入請求載荷中的資料之前，為該資料產生一個新的主鍵。</p>
+<p>對於已啟用<code translate="no">nullable</code> 的欄位，若無需進行任何更新，則可在<code translate="no">upsert</code> 請求中省略這些欄位。</p>
 <h3 id="Upsert-in-merge-mode" class="common-anchor-header">合併模式下的 Upsert<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,17 +75,23 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您也可以使用 `<code translate="no">partial_update</code> ` 標誌，讓 `upsert` 請求以合併模式運作。這使您能夠僅在請求載荷中包含需要更新的欄位。</p>
+    </button></h3><p>使用合併模式可更新現有實體的特定欄位，同時保持其他欄位不變。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
    <span>合併模式下的 Upsert</span>
   
  </span></p>
-<p>要執行合併操作，請在<code translate="no">upsert</code> 請求中將<code translate="no">partial_update</code> 設定為<code translate="no">True</code> ，並一併提供主鍵以及需更新之欄位及其新值。</p>
-<p>收到此類請求後，Milvus 會執行具有強一致性的查詢來擷取實體，根據請求中的資料更新欄位值，插入修改後的資料，然後刪除請求中攜帶原始主鍵的現有實體。</p>
-<p>對於啟用「<code translate="no">autoID</code> 」的集合，合併模式會保留請求中提供的主鍵，而非產生新的主鍵。這與覆寫模式不同，在覆寫模式下，Milvus 會為替代實體產生新的主鍵。合併模式請求中的主鍵必須能識別現有實體；否則，Milvus 會拒絕該請求，而非插入新實體。</p>
-<p>針對<code translate="no">ARRAY</code> 欄位，在 Milvus v2.6.17 及後續版本中，合併模式支援兩種運算子：<code translate="no">ARRAY_APPEND</code> 與<code translate="no">ARRAY_REMOVE</code> 。這些運算子可讓您將元素追加至現有的<code translate="no">ARRAY</code> 欄位，或從該欄位中移除符合條件的元素，而無需先查詢實體以取得其當前值。詳細資訊請參閱「<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">合併模式下的 Upsert ARRAY 欄位</a>」。</p>
+<p>設定 `<code translate="no">partial_update=True</code> `，並提供主鍵以及您要更新的欄位。</p>
+<p>Milvus 會透過強一致性查詢檢索現有實體，將您的變更與儲存的資料合併，插入合併後的實體，並刪除舊實體。</p>
+<p>若主鍵不存在，結果將取決於是否啟用 `<code translate="no">autoID</code> `：</p>
+<ul>
+<li><strong>當「<code translate="no">autoID</code> 」停用時</strong>，Milvus 會嘗試以您提供的主鍵插入新實體。若符合一般插入要求，請求即會成功。若缺少必填欄位，請求將因「欄位缺失」錯誤而失敗。可為空欄位及具有預設值的欄位可省略，與一般插入操作相同。</li>
+<li><strong>當啟用「<code translate="no">autoID</code> 」時</strong>，請求中的每個主鍵都必須已存在。若任何主鍵缺失，即使您提供了插入所需的所有欄位，Milvus 仍會拒絕該請求。對於現有實體，合併模式會保持主鍵不變。</li>
+</ul>
+<p>若部分更新因「欄位缺失」錯誤而失敗，請檢查目標實體是否存在。若不存在該實體，Milvus 將無法擷取您省略之欄位的值。</p>
+<p>對於新實體，請使用「<code translate="no">insert</code> 」或覆寫模式下的 upsert 操作。後續針對個別欄位的更新，請使用合併模式。</p>
+<p>對於<code translate="no">ARRAY</code> 欄位，在 Milvus v2.6.17 及後續版本中，合併模式支援兩種運算子：<code translate="no">ARRAY_APPEND</code> 與<code translate="no">ARRAY_REMOVE</code> 。這些運算子可讓您將元素追加至現有的<code translate="no">ARRAY</code> 欄位，或從其中移除符合條件的元素，而無需先查詢實體以取得其當前值。詳細資訊請參閱《<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">在合併模式下對 ARRAY 欄位進行 Upsert》</a>。</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert 行為：特別注意事項<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -101,35 +107,35 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在使用合併功能之前，有幾點特別注意事項需加以考量。以下情境假設您有一個集合，其中包含兩個名為<code translate="no">title</code> 和<code translate="no">issue</code> 的標量欄位，以及一個主鍵<code translate="no">id</code> 和一個名為<code translate="no">vector</code> 的向量欄位。</p>
+    </button></h3><p>在使用合併功能之前，有幾點特別注意事項需加以考量。以下情況假設您有一個集合，其中包含兩個名為<code translate="no">title</code> 和<code translate="no">issue</code> 的標量欄位，以及一個主鍵<code translate="no">id</code> 和一個名為<code translate="no">vector</code> 的向量欄位。</p>
 <ul>
-<li><p><strong>啟用</strong> <code translate="no">nullable</code> <strong>功能時對字段執行 Upsert 操作</strong> <strong>。</strong></p>
-<p>假設<code translate="no">issue</code> 欄位可以為空值。當您對這些欄位執行「Upsert」操作時，請注意：</p>
+<li><p><strong>啟用</strong> <code translate="no">nullable</code> <strong>後對欄位進行 Upsert 操作</strong> <strong>。</strong></p>
+<p>假設<code translate="no">issue</code> 欄位可以為空。當您對這些欄位執行 upsert 操作時，請注意：</p>
 <ul>
 <li><p>若在 `<code translate="no">upsert</code> ` 請求中省略 `<code translate="no">issue</code> ` 欄位，並停用 `<code translate="no">partial_update</code>`，則 `<code translate="no">issue</code> ` 欄位將被更新為 `<code translate="no">null</code> `，而非保留其原始值。</p></li>
-<li><p>若要保留<code translate="no">issue</code> 欄位的原始值，您需要啟用<code translate="no">partial_update</code> 並省略<code translate="no">issue</code> 欄位，或者在<code translate="no">upsert</code> 請求中包含<code translate="no">issue</code> 欄位及其原始值。</p></li>
+<li><p>若要保留<code translate="no">issue</code> 欄位的原始值，您需啟用<code translate="no">partial_update</code> 並省略<code translate="no">issue</code> 欄位，或在<code translate="no">upsert</code> 請求中包含<code translate="no">issue</code> 欄位及其原始值。</p></li>
 </ul></li>
-<li><p><strong>在動態欄位中更新或插入鍵值</strong>。</p>
+<li><p><strong>在動態欄位中執行「Upsert」操作</strong>。</p>
 <p>假設您已在範例集合中啟用動態鍵，且實體動態欄位中的鍵值對類似於<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
-<p>當您使用諸如<code translate="no">author</code> 、<code translate="no">year</code> 或<code translate="no">tags</code> 等金鑰對實體執行 upsert 操作，或新增其他金鑰時，請注意：</p>
+<p>當您使用諸如<code translate="no">author</code> 、<code translate="no">year</code> 或<code translate="no">tags</code> 等鍵來對實體執行「更新或插入」（upsert），或新增其他鍵時，請注意：</p>
 <ul>
 <li><p>若在停用<code translate="no">partial_update</code> 的情況下執行 upsert 操作，預設行為為<strong>覆寫</strong>。這表示動態欄位的值將會被請求中包含的所有非架構定義欄位及其對應值所覆寫。</p>
-<p>例如，若請求中包含的資料為<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ，則目標實體中動態欄位的鍵值對將更新為該值。</p></li>
-<li><p>若在啟用<code translate="no">partial_update</code> 的情況下執行 upsert 操作，預設行為是「<strong>合併</strong>」。這表示動態欄位的值將與請求中包含的所有非模式定義欄位及其值進行合併。</p>
-<p>例如，若請求中包含的資料為<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，則在執行 upsert 後，目標實體中動態欄位的鍵值對將變為<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
+<p>例如，若請求中包含的資料為<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ，則目標實體中動態欄位的鍵值對將會更新為該值。</p></li>
+<li><p>若在啟用<code translate="no">partial_update</code> 的情況下執行 upsert 操作，預設行為為「<strong>合併</strong>」。這表示動態欄位的值將與請求中包含的所有非模式定義欄位及其值進行合併。</p>
+<p>例如，若請求中包含的資料為<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，則在 upsert 操作完成後，目標實體中動態欄位的鍵值對將變為<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
 </ul></li>
-<li><p><strong>對 JSON 欄位執行 Upsert 操作。</strong></p>
-<p>假設範例集合中有一項名為<code translate="no">extras</code> 的模式定義 JSON 欄位，且實體中此 JSON 欄位的鍵值對類似於<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
-<p>當您使用修改過的 JSON 資料對實體的<code translate="no">extras</code> 欄位進行「Upsert」時，請注意該 JSON 欄位會被視為一個整體，您無法選擇性地更新個別鍵值。換言之，該 JSON 欄位<strong>不支援</strong> <strong>合併模式</strong>下的「Upsert」。</p></li>
-<li><p><strong>對</strong> <code translate="no">ARRAY</code> <strong>欄位</strong><strong>進行更新或插入</strong> <strong>。</strong></p>
-<p>預設情況下，處於合併模式的<code translate="no">ARRAY</code> 欄位遵循<strong>REPLACE</strong>語義：請求中傳遞的值會覆寫現有的陣列。若需更細粒度的更新，Milvus v2.6.17 及後續版本亦支援兩種運算子：</p>
+<li><p><strong>對 JSON 欄位執行 Upsert。</strong></p>
+<p>假設範例集合中有一項名為<code translate="no">extras</code> 的模式定義 JSON 欄位，且某實體在此 JSON 欄位中的鍵值對類似於<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 。</p>
+<p>當您使用修改後的 JSON 資料對實體的<code translate="no">extras</code> 欄位進行 upsert 時，請注意該 JSON 欄位會被視為一個整體，您無法選擇性地更新個別鍵值。換言之，該 JSON 欄位<strong>不支援</strong> <strong>合併模式</strong>下的 upsert。</p></li>
+<li><p><strong>對</strong> <code translate="no">ARRAY</code> <strong>欄位</strong><strong>進行 upsert 操作</strong> <strong>。</strong></p>
+<p>預設情況下，處於合併模式的<code translate="no">ARRAY</code> 欄位遵循<strong>REPLACE</strong>語義：請求中攜帶的值會覆寫現有的陣列。為了進行更細粒度的更新，Milvus v2.6.17 及後續版本還支援兩個運算子：</p>
 <ul>
 <li><p><code translate="no">ARRAY_APPEND</code> 將請求載荷中的元素追加至現有陣列。</p></li>
-<li><p><code translate="no">ARRAY_REMOVE</code> 從現有陣列中移除所有與請求載荷中某個值相符的元素。</p></li>
+<li><p><code translate="no">ARRAY_REMOVE</code> 從現有陣列中移除所有與請求載荷中值相符的元素。</p></li>
 </ul>
-<p>有關運算子語法、受支援的元素類型及其他限制，請參閱「<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">在合併模式下對 ARRAY 欄位執行 Upsert</a>」。</p></li>
+<p>有關運算子語法、支援的元素類型及其他限制，請參閱「<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">在合併模式下對 ARRAY 欄位執行 Upsert</a>」。</p></li>
 <li><p><strong>對 StructArray 欄位進行 Upsert。</strong></p>
-<p>在實體中對 StructArray 欄位進行 Upsert 會覆寫該欄位的值。要執行此操作，您需要提供一組字典清單，每個字典都必須包含結構模式中定義的所有子欄位，即使您是在合併模式下執行 Upsert 亦然。</p>
+<p>在實體中對 StructArray 欄位進行 Upsert 會覆寫該欄位的值。要執行此操作，您需要提供一組字典清單，每個字典都必須包含結構體模式中定義的所有子欄位，即使您在合併模式下執行 Upsert 亦然。</p>
 <p>有關詳細資訊，請參閱《<a href="/docs/zh-hant/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">在合併模式下對 StructArray 欄位執行 Upsert</a>》。</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">限制與規範<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
@@ -152,7 +158,7 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
 <li><p>即使啟用了「<code translate="no">autoID</code> 」，<code translate="no">upsert</code> 請求也必須始終包含目標實體的主鍵。對於<code translate="no">autoID</code> 集合，主鍵的處理方式取決於更新模式：</p>
 <ul>
 <li><p>在覆寫模式下，主鍵用於識別待取代的現有實體，而 Milvus 會為取代後的實體產生一個新的主鍵。</p></li>
-<li><p>在合併模式下，主鍵用於識別待更新的現有實體，且主鍵保持不變。若主鍵不存在，則請求會失敗，而非插入新實體。</p></li>
+<li><p>在合併模式下，主鍵用於識別待更新的現有實體，且主鍵保持不變。若主鍵不存在，請求將失敗，而非插入新實體。</p></li>
 </ul></li>
 <li><p>目標集合必須已載入且可供查詢。</p></li>
 <li><p>請求中指定的所有欄位都必須存在於目標集合的資料結構中。</p></li>
@@ -174,7 +180,7 @@ summary: upsert 操作提供了一種方便的方式，用於在集合中插入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本節中，我們將向名為<code translate="no">my_collection</code> 的集合進行實體的 upsert 操作。此集合僅有兩個欄位，分別名為<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">title</code> 以及<code translate="no">issue</code> 。<code translate="no">id</code> 欄位為主欄位，而<code translate="no">title</code> 和<code translate="no">issue</code> 欄位則是標量欄位。</p>
+    </button></h2><p>在本節中，我們將將實體進行「Upsert」操作至名為<code translate="no">my_collection</code> 的集合。此集合僅有兩個欄位，分別名為<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">title</code> 以及<code translate="no">issue</code> 。<code translate="no">id</code> 欄位為主欄位，而<code translate="no">title</code> 和<code translate="no">issue</code> 欄位則是標量欄位。</p>
 <p>若這三個實體已存在於集合中，將會被「upsert」請求中所包含的實體所覆寫。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -363,7 +369,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您也可以將實體「Upsert」到指定的區隔中。以下程式碼片段假設您的集合中已有一個名為<strong>PartitionA</strong>的區隔。</p>
+    </button></h2><p>您也可以將實體「Upsert」至指定的分區。以下程式碼片段假設您的集合中已有一個名為<strong>PartitionA</strong>的分區。</p>
 <p>若這三個實體已存在於該分區中，將會被請求中包含的實體所覆寫。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -516,10 +522,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下程式碼範例示範如何透過部分更新來執行實體的「Upsert」操作。只需提供需要更新的欄位及其新值，並搭配明確的部分更新標誌。</p>
-<p>在以下範例中，upsert 請求中指定的實體之 `<code translate="no">issue</code> ` 欄位將更新為請求中所包含的值。</p>
+    </button></h2><p>以下範例僅更新<code translate="no">my_collection</code> 中主鍵為<code translate="no">1</code> 和<code translate="no">2</code> 的實體之 `<code translate="no">issue</code> ` 欄位。執行前，請確保這兩項實體已存在。其餘欄位將保留現行值。</p>
 <div class="alert note">
-<p>在合併模式下執行 upsert 時，請確保請求中涉及的實體具有相同的欄位集。假設有兩個或更多實體需要進行 upsert（如以下程式碼片段所示），為了防止錯誤並維持資料完整性，這些實體必須包含相同的欄位。</p>
+<p>在合併模式下執行 upsert 時，請確保請求中所涉及的實體具有相同的欄位集。假設有兩個或更多實體需要進行 upsert（如以下程式碼片段所示），為了防止錯誤並維持資料完整性，這些實體必須包含完全相同的欄位。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -660,8 +665,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus v2.6.17 之前，若要更新<code translate="no">ARRAY</code> 字段的一部分，必須採用客戶端「讀取-修改-寫入」的流程：先查詢現有陣列，在應用程式程式碼中進行修改，然後對整個陣列執行「Upsert」操作以替換原有值。 部分更新運算子（<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> ）讓您只需傳送要追加或移除的元素，這不僅能減少客戶端邏輯，還能避免在執行「Upsert」前進行額外的讀取操作。</p>
-<p>假設主鍵為<code translate="no">1</code> 的實體已包含<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code> 。在引入部分更新運算子之前，若要將元素<code translate="no">&quot;premium&quot;</code> 新增至陣列，必須對整個替代陣列執行 upsert 操作：</p>
+    </button></h2><p>在 Milvus v2.6.17 之前，若要更新 `<code translate="no">ARRAY</code> ` 欄位的一部分，必須採用客戶端「讀取-修改-寫入」的流程：先查詢現有的陣列，在應用程式程式碼中進行變更，然後對完整的替換值執行「Upsert」。 部分更新運算子（<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> ）讓您只需傳送要追加或移除的元素，這不僅能減少客戶端邏輯，還能避免在執行「Upsert」前進行額外的讀取操作。</p>
+<p>假設主鍵為<code translate="no">1</code> 的實體已包含<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code> 。在引入部分更新運算子之前，若要將元素<code translate="no">&quot;premium&quot;</code> 加入陣列，必須對整個替換陣列執行 upsert 操作：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -783,7 +788,7 @@ client.upsert(UpsertReq.builder()
 <li><p>有效載荷的值必須與目標<code translate="no">ARRAY</code> 欄位的<code translate="no">element_type</code> 相符。例如，若目標欄位為<code translate="no">ARRAY&lt;VARCHAR&gt;</code> ，則有效載荷必須包含字串值。</p></li>
 <li><p>在 Milvus v2.6.17 及後續版本中，<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 支援<code translate="no">ARRAY</code> 欄位，其<code translate="no">element_type</code> 為<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 。</p></li>
 <li><p>執行<code translate="no">ARRAY_APPEND</code> 操作後，結果陣列的長度不得超過該欄位的<code translate="no">max_capacity</code> 。</p></li>
-<li><p>對同一實體的並行更新插入（upserts）在不同請求之間並非原子性的。若兩個請求同時更新同一<code translate="no">ARRAY</code> 欄位，後寫入的資料可能會覆寫先前的資料。若需保留所有並行變更，請使用應用程式層級的協調機制。</p></li>
+<li><p>對同一實體的並行更新插入（upsert）操作在不同請求之間並非原子性的。若兩個請求同時更新同一<code translate="no">ARRAY</code> 欄位，後寫入的資料可能會覆寫先寫入的資料。若需保留所有並行變更，請使用應用程式層級的協調機制。</p></li>
 </ul>
 <h3 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -800,7 +805,7 @@ client.upsert(UpsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下範例使用一個小型<code translate="no">users</code> 集合，其主鍵為<code translate="no">pk</code> ，包含一個型別為<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 的<code translate="no">tags</code> 欄位，以及一個<code translate="no">embedding</code> 向量欄位。此範例首先插入兩個實體，並賦予初始<code translate="no">tags</code> 值，接著使用<code translate="no">ARRAY_APPEND</code> 與<code translate="no">ARRAY_REMOVE</code> 來展示每個運算子如何變更儲存的陣列。</p>
+    </button></h3><p>以下範例使用一個小型<code translate="no">users</code> 集合，其主鍵為<code translate="no">pk</code> ，包含一個類型為<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 的<code translate="no">tags</code> 欄位，以及一個<code translate="no">embedding</code> 向量欄位。該範例首先插入兩個實體，其<code translate="no">tags</code> 值為初始值，接著使用<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 來展示每個運算子如何變更儲存的陣列。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -903,7 +908,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">以合併模式對 StructArray 欄位執行 Upsert<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
+<h2 id="Upsert-StructArray-field-in-merge-mode" class="common-anchor-header">以合併模式對 StructArray 欄位進行 Upsert<button data-href="#Upsert-StructArray-field-in-merge-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -918,8 +923,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在實體中對 StructArray 欄位進行 Upsert 操作會覆寫該欄位的值。這意味著當您對 StructArray 欄位進行 Upsert 時，必須包含結構模式中定義的所有子欄位。</p>
-<p>以下範例演示如何在合併模式下對<code translate="no">chunks</code> 欄位進行更新或插入操作，該 StructArray 欄位包含 6 個子欄位。當操作完成時，ID 為 1 的實體的<code translate="no">chunks</code> 欄位將被設定為請求中提供的包含兩個元素結構體的陣列。</p>
+    </button></h2><p>在實體中對 StructArray 欄位進行「Upsert」操作會覆寫該欄位的值。這意味著當您對 StructArray 欄位執行「Upsert」時，必須包含結構模式中定義的所有子欄位。</p>
+<p>以下範例示範如何在合併模式下對<code translate="no">chunks</code> 欄位進行 Upsert 操作，該 StructArray 欄位包含 6 個子欄位。當操作完成時，ID 為 1 的實體之<code translate="no">chunks</code> 欄位將被設定為請求中提供的包含兩個元素結構的陣列。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

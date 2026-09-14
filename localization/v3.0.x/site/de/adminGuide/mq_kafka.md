@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um einen externen Kafka-Dienst zu verwenden, deaktivieren Sie den mitgelieferten Pulsar und aktivieren Sie „ <code translate="no">externalKafka</code> “ in einer „ <code translate="no">values.yaml</code> “-Überschreibung. Installieren Sie anschließend Milvus damit:</p>
+    </button></h3><p>Um einen externen Kafka-Dienst zu nutzen, deaktivieren Sie den mitgelieferten Pulsar und aktivieren Sie „ <code translate="no">externalKafka</code> “ in einer „ <code translate="no">values.yaml</code> “-Überschreibung. Installieren Sie anschließend Milvus damit:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -222,12 +222,12 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.0 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
+<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0.1 müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
 Wenn Sie Kafka einsetzen und beibehalten möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
 <li>Es werden nur <strong>Kafka 2.x und 3.x</strong> unterstützt.</li>
 <li>Informationen zur SASL/SSL-Verbindung finden Sie unter <a href="/docs/de/connect_kafka_ssl.md">„Verbindung zu Kafka mit SASL/SSL herstellen</a>“.</li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

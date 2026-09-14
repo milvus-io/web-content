@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x und früher</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Seit Milvus 2.5 stellen das Milvus-Helm-Chart und der Milvus-Operator standardmäßig <strong>Pulsar v3</strong> bereit; Pulsar v2 bleibt weiterhin kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
+<p>Seit Milvus 2.5 stellen das Milvus-Helm-Chart und der Milvus-Operator standardmäßig <strong>Pulsar v3</strong> bereit; Pulsar v2 bleibt kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe von Helm bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +75,7 @@ title: Pulsar
       </svg>
     </button></h3><p>Um einen Milvus-Cluster bereitzustellen, der das mitgelieferte Pulsar (anstelle von Woodpecker) verwendet, installieren Sie das Helm-Chart mit aktiviertem Streaming-Knoten:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.1 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -103,7 +103,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um Milvus mit einem <strong>externen</strong> Pulsar-Dienst zu verbinden, deaktivieren Sie den mitgelieferten Pulsar und aktivieren Sie „ <code translate="no">externalPulsar</code> “ in einem „ <code translate="no">values.yaml</code> “-Override:</p>
+    </button></h3><p>Um Milvus mit einem <strong>externen</strong> Pulsar-Dienst zu verbinden, deaktivieren Sie den mitgelieferten Pulsar und aktivieren Sie „ <code translate="no">externalPulsar</code> “ in einer „ <code translate="no">values.yaml</code> “-Überschreibung:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalPulsar:</span>
@@ -116,7 +116,7 @@ title: Pulsar
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Uninstall" class="common-anchor-header">Deinstallieren<button data-href="#Uninstall" class="anchor-icon" translate="no">
+<h3 id="Uninstall" class="common-anchor-header">Deinstallation<button data-href="#Uninstall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,11 +133,11 @@ title: Pulsar
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn Sie das mitgelieferte Pulsar verwendet haben und dessen persistierte Daten entfernen möchten, löschen Sie die Pulsar-PVCs (mit dem Namen „ <code translate="no">my-release-pulsarv3-*</code> “):</p>
+<p>Wenn Sie den mitgelieferten Pulsar verwendet haben und dessen persistierte Daten entfernen möchten, löschen Sie die Pulsar-PVCs (mit dem Namen „ <code translate="no">my-release-pulsarv3-*</code> “):</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Bereitstellung eines Milvus-Clusters mit Pulsar mithilfe des Milvus-Operators<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe des Milvus Operators bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -263,9 +263,9 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.0 müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
+<li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.1 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.
 Wenn Sie Pulsar einsetzen und weiterhin nutzen möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
-<li><strong>Pulsar v2 → v3:</strong> Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Upgrade von Pulsar von v2 auf v3</a>“; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Weiterverwendung von Pulsar v2</a>“.</li>
+<li><strong>Pulsar v2 → v3:</strong> siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren“</a>; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

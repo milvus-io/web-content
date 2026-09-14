@@ -4,10 +4,10 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: تعرف على كيفية ترقية الإصدار المستقل من Milvus باستخدام Docker Compose.
+summary: تعرف على كيفية ترقية إصدار Milvus المستقل باستخدام Docker Compose.
 title: ترقية Milvus المستقل باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>OperatorHelmDocker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator و Helm و Docker Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">ترقية Milvus المستقل باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,7 +23,7 @@ title: ترقية Milvus المستقل باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية النشر المستقل لـ Milvus من الإصدار v2.5.x إلى الإصدار v2.6.22 باستخدام Docker Compose.</p>
+    </button></h1><p>يصف هذا الدليل كيفية ترقية النشر المستقل لـ Milvus من الإصدار v2.5.x إلى الإصدار v2.6.23 باستخدام Docker Compose.</p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: ترقية Milvus المستقل باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2622" class="common-anchor-header">ما الجديد في الإصدار v2.6.22<button data-href="#Whats-new-in-v2622" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2623" class="common-anchor-header">ما الجديد في الإصدار v2.6.23<button data-href="#Whats-new-in-v2623" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +54,11 @@ title: ترقية Milvus المستقل باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تتضمن الترقية من Milvus 2.5.x إلى 2.6.22 تغييرات كبيرة في البنية:</p>
+    </button></h3><p>تتضمن الترقية من Milvus 2.5.x إلى 2.6.23 تغييرات كبيرة في البنية:</p>
 <ul>
-<li><strong>دمج المنسقين</strong>: تم دمج المنسقين المنفصلين القدامى (<code translate="no">dataCoord</code> ، <code translate="no">queryCoord</code> ، <code translate="no">indexCoord</code>) في منسق واحد <code translate="no">mixCoord</code></li>
+<li><strong>دمج المنسقين</strong>: تم دمج المنسقين المنفصلين القدامى (<code translate="no">dataCoord</code> و <code translate="no">queryCoord</code> و <code translate="no">indexCoord</code>) في منسق واحد <code translate="no">mixCoord</code></li>
 <li><strong>مكونات جديدة</strong>: إدخال «عقدة البث» (Streaming Node) لتحسين معالجة البيانات</li>
-<li><strong>إزالة المكونات</strong>: تمت إزالة <code translate="no">indexNode</code> ودمجها</li>
+<li><strong>إزالة المكونات</strong>: تمت إزالة <code translate="no">indexNode</code> ودمجه</li>
 </ul>
 <p>تضمن عملية الترقية هذه الترحيل السليم إلى البنية الجديدة. لمزيد من المعلومات حول تغييرات البنية، راجع <a href="/docs/ar/v2.6.x/architecture_overview.md">«نظرة عامة</a> على <a href="/docs/ar/v2.6.x/architecture_overview.md">بنية Milvus</a>».</p>
 <h3 id="Requirements" class="common-anchor-header">المتطلبات<button data-href="#Requirements" class="anchor-icon" translate="no">
@@ -83,13 +83,13 @@ title: ترقية Milvus المستقل باستخدام Docker Compose
 </ul>
 <p><strong>متطلبات التوافق:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>غير متوافق</strong> مع الإصدار v2.6.22. لا يتم دعم الترقيات المباشرة من الإصدارات التجريبية.</li>
-<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الاحتفاظ ببياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
-<li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث قبل الترقية إلى الإصدار v2.6.22.</li>
+<li>Milvus v2.6.0-rc1 <strong>غير متوافق</strong> مع الإصدار v2.6.23. لا يتم دعم الترقيات المباشرة من الإصدارات التجريبية.</li>
+<li>إذا كنت تستخدم الإصدار v2.6.0-rc1 حاليًا وتحتاج إلى الحفاظ على بياناتك، فيرجى الرجوع إلى <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">دليل المجتمع هذا</a> للحصول على المساعدة في عملية الترحيل.</li>
+<li><strong>يجب</strong> عليك الترقية إلى الإصدار v2.5.16 أو أحدث قبل الترقية إلى الإصدار v2.6.23.</li>
 </ul>
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.22، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يتم دعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.23، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alter note">
-<p>نظرًا لمخاوف أمنية، يقوم Milvus بترقية MinIO إلى الإصدار RELEASE.2024-12-18T13-15-44Z مع إصدار الإصدار v2.6.22.</p>
+<p>نظرًا لمخاوف أمنية، يقوم Milvus بترقية MinIO إلى الإصدار RELEASE.2024-12-18T13-15-44Z مع إصدار الإصدار v2.6.23.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,10 +122,10 @@ title: ترقية Milvus المستقل باستخدام Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>تخطّ هذه الخطوة إذا كان النشر المستقل الخاص بك يعمل بالفعل بالإصدار v2.5.16 أو أعلى.</p>
+<p>تخط هذه الخطوة إذا كان النشر المستقل الخاص بك يعمل بالفعل بالإصدار v2.5.16 أو أعلى.</p>
 </div>
 <ol>
-<li><p>قم بتحرير ملف « <code translate="no">docker-compose.yaml</code> » الموجود لديك وقم بتحديث علامة صورة Milvus إلى الإصدار v2.5.16:</p>
+<li><p>قم بتحرير ملف « <code translate="no">docker-compose.yaml</code> » الحالي وقم بتحديث علامة صورة Milvus إلى الإصدار v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -140,7 +140,7 @@ docker compose up -d
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-2-Upgrade-to-v2622" class="common-anchor-header">الخطوة 2: الترقية إلى الإصدار v2.6.22<button data-href="#Step-2-Upgrade-to-v2622" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2623" class="common-anchor-header">الخطوة 2: الترقية إلى الإصدار v2.6.23<button data-href="#Step-2-Upgrade-to-v2623" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,9 +155,9 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بمجرد تشغيل الإصدار v2.5.16 بنجاح، قم بالترقية إلى الإصدار v2.6.22:</p>
+    </button></h3><p>بمجرد تشغيل الإصدار v2.5.16 بنجاح، قم بالترقية إلى الإصدار v2.6.23:</p>
 <ol>
-<li><p>قم بتحرير ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث كل من علامتي صورة Milvus و MinIO:</p>
+<li><p>قم بتعديل ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث كل من علامتي صورة Milvus و MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -166,7 +166,7 @@ docker compose up -d
 <span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.22</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتطبيق الترقية النهائية:</p>
 <pre><code translate="no" class="language-bash">docker compose down
@@ -188,7 +188,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تأكد من أن النشر المستقل الخاص بك يعمل بالإصدار الجديد:</p>
+    </button></h2><p>تأكد من أن النشر المستقل يعمل بالإصدار الجديد:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
 docker compose ps
 

@@ -63,11 +63,11 @@ title: تشغيل Milvus في Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 3.0.0:</strong></p>
+<p><strong>ما الجديد في الإصدار 3.0.1:</strong></p>
 <ul>
 <li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
-<li><strong>Woodpecker MQ (الافتراضي)</strong>: يعمل هذا النشر في Docker على تشغيل Woodpecker كقائمة انتظار الرسائل مع استخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، وبالتالي لا توجد حاجة لخدمة قائمة انتظار رسائل خارجية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
+<li><strong>Woodpecker MQ (الافتراضي)</strong>: يعمل هذا النشر في Docker على تشغيل Woodpecker كقائمة انتظار الرسائل مع استخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، لذلك لا يلزم وجود خدمة خارجية لقائمة انتظار الرسائل. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</li>
+<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لأداء أفضل</li>
 </ul>
 <p>قم دائمًا بتنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
 <p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
@@ -76,11 +76,11 @@ title: تشغيل Milvus في Docker (Linux)
 <p>بعد تشغيل البرنامج النصي للتثبيت:</p>
 <ul>
 <li>تم تشغيل حاوية Docker باسم milvus-standalone على المنفذ <strong>19530</strong>.</li>
-<li>تم تثبيت embed etcd مع Milvus في نفس الحاوية ويعمل على المنفذ <strong>2379</strong>. يتم تعيين ملف التكوين الخاص به إلى <strong>embedEtcd.yaml</strong> في المجلد الحالي.</li>
+<li>تم تثبيت etcd المدمج مع Milvus في نفس الحاوية، وهو يعمل على المنفذ <strong>2379</strong>. يتم تعيين ملف التكوين الخاص به إلى <strong>embedEtcd.yaml</strong> في المجلد الحالي.</li>
 <li>لتغيير التكوين الافتراضي لـ Milvus، أضف إعداداتك إلى ملف <strong>user.yaml</strong> الموجود في المجلد الحالي، ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب</a> ل <a href="/docs/ar/milvus-webui.md">ـ Milvus</a>.</p>
+<p>يمكنك الوصول إلى واجهة المستخدم على الويب (WebUI) لـ Milvus على الرابط <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب</a> لـ <a href="/docs/ar/milvus-webui.md">Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك الترقية إلى أحدث إصدار من Milvus باستخدام أمر الترقية المدمج. يؤدي هذا تلقائيًا إلى تنزيل أحدث إعدادات وصورة Milvus:</p>
+    </button></h2><p>يمكنك الترقية إلى أحدث إصدار من Milvus باستخدام أمر الترقية المدمج. يؤدي هذا إلى تنزيل أحدث إعدادات وصورة Milvus تلقائيًا:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -173,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على تشغيل <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يلزم تثبيت أي شيء آخر. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية خارجية، انظر:</p>
+    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يوجد شيء آخر لتثبيته. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية خارجية، انظر:</p>
 <ul>
 <li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (افتراضي) · <a href="/docs/ar/mq_pulsar.md">Pulsar</a> · <a href="/docs/ar/mq_kafka.md">Kafka</a> · <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></li>
 <li>تخزين الكائنات: <a href="/docs/ar/deploy_s3.md">MinIO</a> (افتراضي) · <a href="/docs/ar/deploy_s3.md">AWS S3</a> · <a href="/docs/ar/abs.md">Azure Blob</a> · <a href="/docs/ar/gcs.md">GCP Cloud Storage</a> · <a href="/docs/ar/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/ar/deploy_s3.md">Tencent COS</a> · <a href="/docs/ar/deploy_s3.md">Huawei OBS</a> · <a href="/docs/ar/deploy_s3.md">متوافق مع S3</a></li>
@@ -199,7 +199,7 @@ EOF
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>راجع <a href="/docs/ar/quickstart.md">«البدء السريع</a> » لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/quickstart.md">«البدء السريع»</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -219,7 +219,7 @@ EOF
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
-<li><p>اكتشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
+<li><p>اكتشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكي.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>
 </ul>
