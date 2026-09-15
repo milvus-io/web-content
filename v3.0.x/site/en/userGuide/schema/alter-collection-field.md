@@ -136,6 +136,7 @@ The following example assumes the collection has an array field named `array` an
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -176,6 +177,34 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+        .WithCollectionName("my_collection")
+        .WithFieldName("array")
+        .AddProperty("max_capacity", "64"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -202,6 +231,7 @@ The following example assumes the collection has a field named `doc_chunk` and s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -237,6 +267,17 @@ err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFi
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .WithFieldName("doc_chunk")
+    .AddProperty("mmap.enabled", "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

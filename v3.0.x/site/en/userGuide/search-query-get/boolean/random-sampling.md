@@ -25,6 +25,7 @@ Random sampling operates at the segment level, ensuring efficient performance wh
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -39,6 +40,10 @@ String filter = "RANDOM_SAMPLE(sampling_factor)"
 
 ```go
 filter := "RANDOM_SAMPLE(sampling_factor)"
+```
+
+```cpp
+filter = "RANDOM_SAMPLE(sampling_factor)";
 ```
 
 ```javascript
@@ -67,6 +72,7 @@ The random sampling operator must be combined with other filtering expressions u
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -100,6 +106,16 @@ filter := 'color == "red" OR RANDOM_SAMPLE(0.001)' // ❌ Invalid logic
 // This would mean: "Either red items OR sample everything" - which is meaningless
 ```
 
+```cpp
+// Correct: Filter first, then sample
+filter = "color == \"red\" AND RANDOM_SAMPLE(0.001)";
+// Processing: Find all red items → Sample 0.1% of those red items
+
+// Incorrect: OR doesn't make logical sense
+// filter = "color == \"red\" OR RANDOM_SAMPLE(0.001)"; // ❌ Invalid logic
+// This would mean: "Either red items OR sample everything" - which is meaningless
+```
+
 ```javascript
 // node
 ```
@@ -118,6 +134,7 @@ Quickly preview your collection structure:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -198,6 +215,40 @@ fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
 fmt.Println("product_name: ", resultSet.GetColumn("product_name").FieldData().GetScalars())
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Sample approximately 1% of the entire collection
+    milvus::QueryResponse query_resp;
+    status = client->Query(milvus::QueryRequest()
+        .WithCollectionName("product_catalog")
+        .WithFilter("RANDOM_SAMPLE(0.01)")
+        .WithLimit(10)
+        .AddOutputField("id")
+        .AddOutputField("product_name"), query_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    std::cout << "Sampled " << query_resp.Results().GetRowCount() << " products from collection" << std::endl;
+
+    return 0;
+}
+```
+
 ```javascript
 // node
 ```
@@ -214,6 +265,7 @@ Test filtering logic on a manageable subset:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -258,6 +310,23 @@ if err != nil {
 }
 ```
 
+```cpp
+filter = "category == \"electronics\" AND price > 100 AND RANDOM_SAMPLE(0.005)";
+
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("product_catalog")
+    .WithFilter(filter)
+    .WithLimit(10)
+    .AddOutputField("product_name")
+    .AddOutputField("price")
+    .AddOutputField("rating"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node
 ```
@@ -274,6 +343,7 @@ Perform rapid statistical analysis on filtered data:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -325,6 +395,23 @@ if err != nil {
 }
 ```
 
+```cpp
+filter = "customer_tier == \"premium\" AND region == \"North America\" AND RANDOM_SAMPLE(0.001)";
+
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("customer_profiles")
+    .WithFilter(filter)
+    .WithLimit(10)
+    .AddOutputField("purchase_amount")
+    .AddOutputField("satisfaction_score")
+    .AddOutputField("last_purchase_date"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node
 ```
@@ -341,6 +428,7 @@ Use random sampling in filtered search scenarios:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -406,6 +494,26 @@ for _, resultSet := range resultSets {
     fmt.Println("author: ", resultSet.GetColumn("author").FieldData().GetScalars())
     fmt.Println("price: ", resultSet.GetColumn("price").FieldData().GetScalars())
 }
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("product_catalog")
+    .WithAnnsField("vector")
+    .WithLimit(10)
+    .WithFilter("category == \"books\" AND RANDOM_SAMPLE(0.01)")
+    .AddOutputField("title")
+    .AddOutputField("author")
+    .AddOutputField("price");
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << "Found " << response.Results().Results().size() << " similar books in sample" << std::endl;
 ```
 
 ```javascript

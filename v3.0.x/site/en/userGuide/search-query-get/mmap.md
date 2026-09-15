@@ -91,6 +91,7 @@ The following example demonstrates how to configure field-specific mmap when you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -222,6 +223,44 @@ await client.alterCollectionFieldProperties({
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+    // Add a scalar field and enable mmap
+    milvus::FieldSchema doc_chunk("doc_chunk", milvus::DataType::INT64);
+    doc_chunk.SetTypeParams({{milvus::MMAP_ENABLED, "true"}});
+    schema->AddField(doc_chunk);
+
+    // Alter mmap settings on a specific field
+    status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+        .WithCollectionName("my_collection")
+        .WithFieldName("doc_chunk")
+        .WithProperties({{milvus::MMAP_ENABLED, "true"}}));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 #restful
 export TOKEN="root:Milvus"
@@ -307,6 +346,7 @@ The following example demonstrates how to configure index-specific mmap when you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -382,6 +422,24 @@ await client.alterIndexProperties({
 // go
 ```
 
+```cpp
+schema->AddField(milvus::FieldSchema("title", milvus::DataType::VARCHAR).WithMaxLength(512));
+
+milvus::IndexDesc index_title("title", "", milvus::IndexType::AUTOINDEX);
+index_title.AddExtraParam(milvus::MMAP_ENABLED, "false");
+index_params.emplace_back(std::move(index_title));
+
+// Change mmap settings for an index
+status = client->AlterIndexProperties(milvus::AlterIndexPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .WithIndexName("title")
+    .WithProperties({{milvus::MMAP_ENABLED, "true"}}));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -437,6 +495,7 @@ The following example demonstrates how to enable mmap in a collection named **my
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -470,6 +529,18 @@ await client.createCollection({
 // go
 ```
 
+```cpp
+// Enable mmap when creating a collection
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .AddProperty(milvus::MMAP_ENABLED, "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -492,6 +563,7 @@ You can also change the mmap settings of an existing collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -551,6 +623,32 @@ await client.loadCollection({
 
 ```go
 // go
+```
+
+```cpp
+// Release collection before change mmap settings
+status = client->ReleaseCollection(milvus::ReleaseCollectionRequest().WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Ensure that the collection has already been released
+// and run the following
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty(milvus::MMAP_ENABLED, "false"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Load the collection to make the above change take effect
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

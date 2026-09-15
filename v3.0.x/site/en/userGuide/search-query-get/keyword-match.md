@@ -38,6 +38,7 @@ To enable text match for a specific `VARCHAR` field, set both the `enable_analyz
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -116,6 +117,31 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(false);
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true).EnableMatch(true));
+    schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+    return 0;
+}
+```
+
 ```javascript
 const schema = [
   {
@@ -180,6 +206,7 @@ In cases where a different analyzer is required, you can configure one using the
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -221,6 +248,11 @@ schema.WithField(entity.NewField().
     WithAnalyzerParams(analyzerParams).
     WithMaxLength(200),
 )
+```
+
+```cpp
+analyzer_params = nlohmann::json::parse(R"({"type": "english"})");
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
 ```
 
 ```javascript
@@ -301,6 +333,7 @@ By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -315,6 +348,10 @@ String filter = "TEXT_MATCH(text, 'machine deep')";
 
 ```go
 filter := "TEXT_MATCH(text, 'machine deep')"
+```
+
+```cpp
+filter = "TEXT_MATCH(text, 'machine deep')";
 ```
 
 ```javascript
@@ -333,6 +370,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#python">Python</a>
         <a href="#java">Java</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
     </div>
@@ -349,6 +387,10 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
     ```
 
+    ```cpp
+    filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
+
     ```javascript
     const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
     ```
@@ -363,6 +405,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#python">Python</a>
         <a href="#java">Java</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
     </div>
@@ -377,6 +420,10 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
 
     ```go
     filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+    ```
+
+    ```cpp
+    filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
     ```
 
     ```javascript
@@ -409,6 +456,7 @@ For example, the following expression matches tokens within one edit of `machne`
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -423,6 +471,10 @@ String filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 
 ```go
 filter := "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
+```
+
+```cpp
+filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 ```
 
 ```javascript
@@ -451,6 +503,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -499,6 +552,26 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
+
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("embeddings")
+    .WithFilter(filter)
+    .WithLimit(10)
+    .AddOutputField("id")
+    .AddOutputField("text");
+request.AddFloatVector(std::vector<float>{0.19886812562848388f, 0.06023560599112088f, 0.6976963061752597f, 0.2614474506242501f, 0.838729485096104f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -555,6 +628,7 @@ The example below retrieves documents where the `text` field contains both terms
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -593,6 +667,21 @@ if err != nil {
     // handle error
 }
 
+```
+
+```cpp
+filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
+
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter(filter)
+    .AddOutputField("id")
+    .AddOutputField("text"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```javascript

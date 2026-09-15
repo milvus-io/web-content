@@ -36,6 +36,7 @@ The code examples below assume that you already have a collection named `my_coll
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -87,6 +88,42 @@ createOpt := milvusclient.NewCreateSnapshotOption("backup_20240101", "my_collect
 err = client.CreateSnapshot(context.Background(), createOpt)
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Recommended: Flush data before creating snapshot to ensure all data is included
+    status = client->Flush(milvus::FlushRequest().AddCollectionName("my_collection"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create snapshot for entire collection
+    status = client->CreateSnapshot(milvus::CreateSnapshotRequest()
+        .WithCollectionName("my_collection")
+        .WithSnapshotName("backup_20240101")
+        .WithDescription("Daily backup for January 1st, 2024"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -103,6 +140,7 @@ You can list the names of existing snapshots.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -126,6 +164,16 @@ listOpt := milvusclient.NewListSnapshotsOption().
 snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 ```
 
+```cpp
+// List all snapshots for a collection
+milvus::ListSnapshotsResponse list_resp;
+status = client->ListSnapshots(milvus::ListSnapshotsRequest().WithCollectionName("my_collection"), list_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -142,6 +190,7 @@ You can get the detailed information about a specific snapshot.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -170,6 +219,22 @@ fmt.Printf("Snapshot ID: %d\n", resp.GetSnapshotInfo().GetId())
 fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
 ```
 
+```cpp
+milvus::DescribeSnapshotResponse describe_resp;
+status = client->DescribeSnapshot(milvus::DescribeSnapshotRequest()
+    .WithCollectionName("my_collection")
+    .WithSnapshotName("backup_20240101"), describe_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+std::cout << "Snapshot Name: " << describe_resp.Name() << std::endl;
+std::cout << "Collection: " << describe_resp.CollectionName() << std::endl;
+std::cout << "Created: " << describe_resp.CreateTs() << std::endl;
+std::cout << "Description: " << describe_resp.Description() << std::endl;
+```
+
 ```javascript
 // node.js
 ```
@@ -188,6 +253,7 @@ You can also set a time-to-live (TTL) duration for the pin operation so that the
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -227,6 +293,24 @@ defer func() {
 // Do work with pinned snapshot data.
 ```
 
+```cpp
+milvus::PinSnapshotDataResponse pin_resp;
+status = client->PinSnapshotData(milvus::PinSnapshotDataRequest()
+    .WithCollectionName("my_collection")
+    .WithSnapshotName("backup_20240101")
+    .WithTtlSeconds(3600), pin_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+status = client->UnpinSnapshotData(milvus::UnpinSnapshotDataRequest().WithPinID(pin_resp.PinID()));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -252,6 +336,7 @@ To restore a snapshot, do as follows:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -280,6 +365,19 @@ if err != nil {
 }
 ```
 
+```cpp
+// Restore snapshot to new collection
+milvus::RestoreSnapshotResponse restore_resp;
+status = client->RestoreSnapshot(milvus::RestoreSnapshotRequest()
+    .WithSnapshotName("backup_20240101")
+    .WithSourceCollectionName("my_collection")
+    .WithTargetCollectionName("restored_collection"), restore_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -298,6 +396,7 @@ You can drop a snapshot if it is no longer needed. You are advised to remove old
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -317,6 +416,16 @@ dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101")
 err := client.DropSnapshot(context.Background(), dropOpt)
 ```
 
+```cpp
+status = client->DropSnapshot(milvus::DropSnapshotRequest()
+    .WithCollectionName("my_collection")
+    .WithSnapshotName("backup_20240101"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -333,6 +442,7 @@ You can use this API to get a list of snapshots already created for the target c
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -374,6 +484,28 @@ listOpt = milvusclient.NewListRestoreSnapshotJobsOption().
 jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 ```
 
+```cpp
+// List all restore jobs
+milvus::ListRestoreSnapshotJobsResponse jobs_resp;
+status = client->ListRestoreSnapshotJobs(milvus::ListRestoreSnapshotJobsRequest(), jobs_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+for (const auto& job : jobs_resp.Jobs()) {
+    std::cout << "Job " << job.JobID() << ": " << job.SnapshotName() << " -> Collection " << job.CollectionName() << std::endl;
+    std::cout << "  State: " << std::to_string(job.State()) << ", Progress: " << job.Progress() << "%" << std::endl;
+}
+
+// List restore jobs for a specific collection
+status = client->ListRestoreSnapshotJobs(milvus::ListRestoreSnapshotJobsRequest().WithCollectionName("my_collection"), jobs_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -390,6 +522,7 @@ Once you have a restoration job ID, you can use it to retrieve restoration progr
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -427,6 +560,26 @@ if state.GetState() == milvuspb.RestoreSnapshotState_RestoreSnapshotFailed {
     fmt.Printf("Failure Reason: %s\n", state.GetReason())
 }
 fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
+```
+
+```cpp
+milvus::GetRestoreSnapshotStateResponse state_resp;
+status = client->GetRestoreSnapshotState(milvus::GetRestoreSnapshotStateRequest().WithJobID(12345), state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+const auto& job_info = state_resp.JobInfo();
+std::cout << "Job ID: " << job_info.JobID() << std::endl;
+std::cout << "Snapshot Name: " << job_info.SnapshotName() << std::endl;
+std::cout << "Collection Name: " << job_info.CollectionName() << std::endl;
+std::cout << "State: " << std::to_string(job_info.State()) << std::endl;
+std::cout << "Progress: " << job_info.Progress() << "%" << std::endl;
+if (job_info.State() == milvus::RestoreSnapshotStateCode::FAILED) {
+    std::cout << "Failure Reason: " << job_info.Reason() << std::endl;
+}
+std::cout << "Time Cost: " << job_info.TimeCost() << "ms" << std::endl;
 ```
 
 ```javascript

@@ -52,8 +52,8 @@ To conduct a basic primary-key search, simply replace the query vectors with pri
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -170,6 +170,47 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::SearchRequest request;
+    request.WithCollectionName("quick_setup")
+        .WithAnnsField("vector")
+        .WithIDs(std::vector<int64_t>{551, 296, 43})
+        .WithMetricType(milvus::MetricType::IP)
+        .WithLimit(3);
+
+    milvus::SearchResponse response;
+    status = client->Search(request, response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    for (auto& result : response.Results().Results()) {
+        milvus::EntityRows output_rows;
+        status = result.OutputRows(output_rows);
+        for (const auto& row : output_rows) {
+            std::cout << row << std::endl;
+        }
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -184,30 +225,6 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   }' 
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         // highlight-start
-                         .WithIDs({551, 296, 43})
-                         // highlight-end
-                         .WithLimit(3)
-                         .WithMetricType(milvus::MetricType::IP);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ### Example 2: Filtered search using primary keys
 
@@ -218,8 +235,8 @@ The following example assumes that color and likes are two schema-defined fields
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -289,6 +306,24 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithIDs(std::vector<int64_t>{551, 296, 43})
+    .WithFilter("color like \"red%\" and likes > 50")
+    .WithLimit(3)
+    .AddOutputField("color")
+    .AddOutputField("likes");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -305,35 +340,6 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   }' 
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("my_collection")
-                         // highlight-start
-                         .WithIDs({551, 296, 43})
-                         .WithFilter(R"(color like "red%" and likes > 50)")
-                         .WithOutputFields({"color", "likes"})
-                         // highlight-end
-                         .WithLimit(3);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
-    const auto likes = result.OutputField<milvus::Int64FieldData>("likes");
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i]
-                  << ", score=" << result.Scores()[i]
-                  << ", color=" << colors->Data()[i]
-                  << ", likes=" << likes->Data()[i] << std::endl;
-    }
-}
-```
 
 ### Example 3: Range search using primary keys
 
@@ -342,8 +348,8 @@ for (const auto& result : searchResponse.Results().Results()) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -430,6 +436,23 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithIDs(std::vector<int64_t>{551, 296, 43})
+    .WithLimit(3)
+    .WithRadius(0.4)
+    .WithRangeFilter(0.6);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -450,31 +473,6 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   }' 
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("my_collection")
-                         .WithAnnsField("vector")
-                         // highlight-start
-                         .WithIDs({551, 296, 43})
-                         .WithRadius(0.4)
-                         .WithRangeFilter(0.6)
-                         // highlight-end
-                         .WithLimit(3);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ### Example 4: Grouping search using primary keys
 
@@ -485,8 +483,8 @@ The following example assumes `docId` is a schema-defined fields in the target c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -555,6 +553,23 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithIDs(std::vector<int64_t>{551, 296, 43})
+    .WithLimit(3)
+    .WithGroupByField("docId")
+    .AddOutputField("docId");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -571,32 +586,4 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
   }' 
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("my_collection")
-                         .WithAnnsField("vector")
-                         // highlight-start
-                         .WithIDs({551, 296, 43})
-                         .WithGroupByField("docId")
-                         .WithOutputFields({"docId"})
-                         // highlight-end
-                         .WithLimit(3);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto docIds = result.OutputField<milvus::Int64FieldData>("docId");
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i]
-                  << ", score=" << result.Scores()[i]
-                  << ", docId=" << docIds->Data()[i] << std::endl;
-    }
-}
-```
 

@@ -17,6 +17,7 @@ You can rename a collection as follows.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -102,6 +103,33 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    status = client->RenameCollection(milvus::RenameCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithNewCollectionName("my_new_collection"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -169,6 +197,7 @@ The following code snippet demonstrates how to set collection TTL.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -210,6 +239,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty(milvus::COLLECTION_TTL_SECONDS, "60"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -238,6 +277,7 @@ For the full entity-level TTL workflow (schema setup, insert, query, refresh, dr
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -263,6 +303,16 @@ client.alter_collection_properties(
 // go
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("ttl_field", "expire_at"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -276,6 +326,7 @@ The following code snippet demonstrates how to enable mmap.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -314,6 +365,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty(milvus::MMAP_ENABLED, "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -336,6 +397,7 @@ The following code snippet demonstrates how to enable the partition key.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -374,6 +436,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("partitionkey.isolation", "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -397,6 +469,7 @@ The following code snippet demonstrates how to enable the dynamic field.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -435,6 +508,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("dynamicfield.enabled", "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -460,6 +543,7 @@ The example below shows how to enable `allow_insert_auto_id`:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -498,6 +582,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("allow_insert_auto_id", "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -525,6 +619,7 @@ The example below shows how to set the collection time zone to **Asia/Shanghai**
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -557,6 +652,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("timezone", "Asia/Shanghai"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -580,6 +685,7 @@ You can also reset a collection property by dropping it as follows.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -611,6 +717,16 @@ err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropert
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->DropCollectionProperties(milvus::DropCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddPropertyKey(milvus::COLLECTION_TTL_SECONDS));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

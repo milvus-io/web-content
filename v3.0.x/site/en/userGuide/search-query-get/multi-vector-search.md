@@ -54,6 +54,7 @@ Since we will use the built-in BM25 algorithm to perform a full-text search on t
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -200,6 +201,39 @@ schema.WithField(entity.NewField().
 ).WithFunction(function)
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Init schema with auto_id disabled
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "product id", true, false));
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+    schema->AddField(milvus::FieldSchema("text_dense", milvus::DataType::FLOAT_VECTOR).WithDimension(768));
+    schema->AddField(milvus::FieldSchema("text_sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+    schema->AddField(milvus::FieldSchema("image_dense", milvus::DataType::FLOAT_VECTOR).WithDimension(512));
+
+    // Add function to schema
+    milvus::FunctionPtr bm25_function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+    bm25_function->AddInputFieldName("text");
+    bm25_function->AddOutputFieldName("text_sparse");
+    schema->AddFunction(bm25_function);
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -314,6 +348,7 @@ You can choose other index types as necessary to best suit your needs and data t
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -392,6 +427,18 @@ indexOption3 := milvusclient.NewCreateIndexOption("my_collection", "image_dense"
 )
 ```
 
+```cpp
+// Prepare index parameters
+milvus::IndexDesc index_text_dense("text_dense", "text_dense_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP);
+milvus::IndexDesc index_text_sparse("text_sparse", "text_sparse_index", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_text_sparse.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+milvus::IndexDesc index_image_dense("image_dense", "image_dense_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP);
+
+index_params.emplace_back(std::move(index_text_dense));
+index_params.emplace_back(std::move(index_text_sparse));
+index_params.emplace_back(std::move(index_image_dense));
+```
+
 ```javascript
 const index_params = [{
     field_name: "text_dense",
@@ -446,6 +493,7 @@ Create a collection named `demo` with the collection schema and indexes configur
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -474,6 +522,17 @@ err = client.CreateCollection(ctx,
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -521,6 +580,7 @@ Since this example uses the built-in BM25 function to generate sparse embeddings
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -617,6 +677,36 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRow row;
+row["id"] = 0;
+row["text"] = "Red cotton t-shirt with round neck";
+row["text_dense"] = std::vector<float>(768, 0.1f);
+row["image_dense"] = std::vector<float>(512, 0.2f);
+rows.emplace_back(std::move(row));
+
+row["id"] = 1;
+row["text"] = "Wireless noise-cancelling over-ear headphones";
+row["text_dense"] = std::vector<float>(768, 0.1f);
+row["image_dense"] = std::vector<float>(512, 0.2f);
+rows.emplace_back(std::move(row));
+
+row["id"] = 2;
+row["text"] = "Stainless steel water bottle, 500ml";
+row["text_dense"] = std::vector<float>(768, 0.1f);
+row["image_dense"] = std::vector<float>(512, 0.2f);
+rows.emplace_back(std::move(row));
+
+milvus::InsertResponse resp;
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 const { MilvusClient, DataType } = require("@zilliz/milvus2-sdk-node")
 
@@ -674,6 +764,7 @@ To demonstrate the capabilities of various search vector fields, we will constru
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -766,6 +857,28 @@ request3 := milvusclient.NewAnnRequest("image_dense", 2, entity.FloatVector(quer
     WithAnnParam(index.NewIvfAnnParam(10))
 ```
 
+```cpp
+// text semantic search (dense)
+std::vector<float> query_dense_vector{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto sub_req1 = milvus::SubSearchRequest()
+    .WithAnnsField("text_dense")
+    .WithLimit(2);
+sub_req1.AddFloatVector(query_dense_vector);
+
+// full-text search (sparse)
+auto sub_req2 = milvus::SubSearchRequest()
+    .WithAnnsField("text_sparse")
+    .WithLimit(2);
+sub_req2.AddEmbeddedText("white headphones, quiet and comfortable");
+
+// text-to-image search (multimodal)
+std::vector<float> query_multimodal_vector{0.015829865178701663f, 0.5264158340734488f};
+auto sub_req3 = milvus::SubSearchRequest()
+    .WithAnnsField("image_dense")
+    .WithLimit(2);
+sub_req3.AddFloatVector(query_multimodal_vector);
+```
+
 ```javascript
 const query_text = "white headphones, quiet and comfortable"
 const query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]
@@ -827,6 +940,7 @@ In this example, since there is no particular emphasis on specific search querie
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -879,6 +993,10 @@ ranker := entity.NewFunction().
     WithParam("k", "100")
 ```
 
+```cpp
+auto reranker = std::make_shared<milvus::RRFRerank>(100);
+```
+
 ```bash
 # Restful
 export functionScore='{
@@ -905,6 +1023,7 @@ Before initiating a Hybrid Search, ensure that the collection is loaded. If any 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -953,6 +1072,40 @@ if err != nil {
 for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
+}
+```
+
+```cpp
+auto sub_req1 = milvus::SubSearchRequest()
+    .WithAnnsField("text_dense")
+    .WithLimit(2);
+sub_req1.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+auto sub_req2 = milvus::SubSearchRequest()
+    .WithAnnsField("text_sparse")
+    .WithLimit(2);
+sub_req2.AddEmbeddedText("white headphones, quiet and comfortable");
+
+auto sub_req3 = milvus::SubSearchRequest()
+    .WithAnnsField("image_dense")
+    .WithLimit(2);
+sub_req3.AddFloatVector(std::vector<float>{0.015829865178701663f, 0.5264158340734488f});
+
+auto reranker = std::make_shared<milvus::RRFRerank>(100);
+
+auto request = milvus::HybridSearchRequest()
+    .WithCollectionName("my_collection")
+    .WithLimit(2)
+    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req1)))
+    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req2)))
+    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req3)))
+    .WithRerank(reranker);
+
+milvus::SearchResponse response;
+status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

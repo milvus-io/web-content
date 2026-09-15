@@ -40,6 +40,7 @@ To use SiliconFlow Ranker in your Milvus application, create a Function object t
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -67,6 +68,35 @@ siliconflow_ranker = Function(
         # "credential": "your-siliconflow-api-key" # Optional: if not set, uses SILICONFLOW_API_KEY env var
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Configure SiliconFlow Ranker
+    auto siliconflow_ranker = std::make_shared<milvus::ModelRerank>("siliconflow_semantic_ranker");
+    siliconflow_ranker->AddInputFieldName("document");
+    siliconflow_ranker->SetProvider("siliconflow");
+    siliconflow_ranker->AddParam("model_name", "BAAI/bge-reranker-v2-m3");
+    siliconflow_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+    siliconflow_ranker->SetMaxClientBatchSize(128);
+    siliconflow_ranker->AddParam("max_chunks_per_doc", "5");
+    siliconflow_ranker->AddParam("overlap_tokens", "50");
+
+    return 0;
+}
 ```
 
 ```java
@@ -184,6 +214,7 @@ To apply SiliconFlow Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -199,6 +230,38 @@ results = client.search(
     ranker=siliconflow_ranker,                  # Apply SiliconFlow reranking
     consistency_level="Bounded"
 )
+```
+
+```cpp
+// Configure SiliconFlow Ranker
+auto siliconflow_ranker = std::make_shared<milvus::ModelRerank>("siliconflow_semantic_ranker");
+siliconflow_ranker->AddInputFieldName("document");
+siliconflow_ranker->SetProvider("siliconflow");
+siliconflow_ranker->AddParam("model_name", "BAAI/bge-reranker-v2-m3");
+siliconflow_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+siliconflow_ranker->SetMaxClientBatchSize(128);
+siliconflow_ranker->AddParam("max_chunks_per_doc", "5");
+siliconflow_ranker->AddParam("overlap_tokens", "50");
+
+// Execute search with SiliconFlow reranking
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(siliconflow_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("your_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

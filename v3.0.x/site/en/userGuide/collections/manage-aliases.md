@@ -36,6 +36,7 @@ The following code snippet demonstrates how to create an alias for a collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -161,6 +162,39 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // 9. Manage aliases
+    // 9.1 Create aliases
+    status = client->CreateAlias(milvus::CreateAliasRequest().WithCollectionName("my_collection_1").WithAlias("bob"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    status = client->CreateAlias(milvus::CreateAliasRequest().WithCollectionName("my_collection_1").WithAlias("alice"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -205,6 +239,7 @@ The following code snippet demonstrates the procedure to list the aliases alloca
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -268,6 +303,19 @@ if err != nil {
 fmt.Println(aliases)
 ```
 
+```cpp
+// 9.2 List aliases
+milvus::ListAliasesResponse resp_aliases;
+status = client->ListAliases(milvus::ListAliasesRequest().WithCollectionName("my_collection_1"), resp_aliases);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& alias : resp_aliases.Aliases()) {
+    std::cout << alias << std::endl;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -297,6 +345,7 @@ The following code snippet describes a specific alias in detail, including the n
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -370,6 +419,17 @@ if err != nil {
 fmt.Println(alias)
 ```
 
+```cpp
+// 9.3 Describe alias
+milvus::DescribeAliasResponse describe_alias_resp;
+status = client->DescribeAlias(milvus::DescribeAliasRequest().WithAlias("bob"), describe_alias_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << describe_alias_resp.Desc().Name() << ": " << describe_alias_resp.Desc().CollectionName() << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -402,6 +462,7 @@ You can reallocate the alias already allocated to a specific collection to anoth
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -536,6 +597,34 @@ if err != nil {
 fmt.Println(aliases)
 ```
 
+```cpp
+// 9.4 Reassign aliases to other collections
+status = client->AlterAlias(milvus::AlterAliasRequest().WithCollectionName("my_collection_2").WithAlias("alice"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::ListAliasesResponse resp_aliases;
+status = client->ListAliases(milvus::ListAliasesRequest().WithCollectionName("my_collection_2"), resp_aliases);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& alias : resp_aliases.Aliases()) {
+    std::cout << alias << std::endl;
+}
+
+status = client->ListAliases(milvus::ListAliasesRequest().WithCollectionName("my_collection_1"), resp_aliases);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& alias : resp_aliases.Aliases()) {
+    std::cout << alias << std::endl;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -601,6 +690,7 @@ The following code snippet demonstrates the procedure to drop an alias.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -668,6 +758,21 @@ err = client.DropAlias(ctx, milvusclient.NewDropAliasOption("alice"))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+// 9.5 Drop aliases
+status = client->DropAlias(milvus::DropAliasRequest().WithAlias("bob"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+status = client->DropAlias(milvus::DropAliasRequest().WithAlias("alice"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

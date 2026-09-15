@@ -40,6 +40,7 @@ As with creating a managed collection, you also need to create a schema before c
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -82,6 +83,35 @@ schema := entity.NewSchema().
     WithName("product_embeddings").
     WithExternalSource("s3://my-bucket/embeddings/").
     WithExternalSpec(`{"format": "parquet", "extfs": { ... }}`)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create the schema for an external collection
+    nlohmann::json external_spec = {
+        {"format", "parquet"},
+        {"extfs", nlohmann::json::object()}
+    };
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(false);  // external collections do not support the dynamic field
+    schema->WithExternalSource("s3://s3.<region-id>.amazonaws.com/<bucket>/");
+    schema->WithExternalSpec(external_spec);
+
+    return 0;
+}
 ```
 
 ```javascript
@@ -392,6 +422,7 @@ Once the schema is ready, you can add fields as follows:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -471,6 +502,13 @@ schema = schema.
     )
 ```
 
+```cpp
+// Add fields and map them to the columns in the external data file
+schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::INT64, "", true, false).WithExternalField("id"));
+schema->AddField(milvus::FieldSchema("product_name", milvus::DataType::VARCHAR).WithMaxLength(512).WithExternalField("name"));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(768).WithExternalField("vector"));
+```
+
 ```javascript
 // node
 ```
@@ -491,6 +529,7 @@ After adding all the fields to the schema, you can create the external collectio
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -550,6 +589,17 @@ if err != nil {
 }
 ```
 
+```cpp
+// Create the external collection
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("test_collection")
+    .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node
 ```
@@ -575,6 +625,7 @@ You can create indexes for external collection fields as you do in managed colle
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -645,6 +696,21 @@ if err != nil {
 }
 ```
 
+```cpp
+// Prepare index parameters
+index_params.emplace_back("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+index_params.emplace_back("product_name", "", milvus::IndexType::AUTOINDEX);
+
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("test_collection")
+    .WithDatabaseName("my_database")
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 client.createIndex({
     db_name: "my_database",
@@ -695,6 +761,7 @@ Once the collection is ready, refresh it to create the metadata and indexes for 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -760,6 +827,40 @@ for {
         break
     }
     time.Sleep(2 * time.Second)
+}
+```
+
+```cpp
+// Refresh the external collection to generate the metadata and indexes
+milvus::RefreshExternalCollectionResponse refresh_resp;
+status = client->RefreshExternalCollection(milvus::RefreshExternalCollectionRequest()
+    .WithCollectionName("test_collection")
+    .WithDatabaseName("my_database"), refresh_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Poll the refresh progress
+int64_t job_id = refresh_resp.JobID();
+while (true) {
+    milvus::GetRefreshExternalCollectionProgressResponse progress_resp;
+    status = client->GetRefreshExternalCollectionProgress(milvus::GetRefreshExternalCollectionProgressRequest()
+        .WithJobID(job_id), progress_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    const auto& job_info = progress_resp.JobInfo();
+    std::cout << "  " << std::to_string(job_info.State()) << ": " << job_info.Progress() << "%" << std::endl;
+    if (job_info.State() == milvus::RefreshExternalCollectionStateCode::COMPLETED) {
+        uint64_t elapsed = job_info.EndTime() - job_info.StartTime();
+        std::cout << "  Completed in " << elapsed << "ms" << std::endl;
+        break;
+    } else if (job_info.State() == milvus::RefreshExternalCollectionStateCode::FAILED) {
+        std::cout << "  Failed: " << job_info.Reason() << std::endl;
+        break;
+    }
 }
 ```
 

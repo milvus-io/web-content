@@ -138,6 +138,7 @@ For clustering compacting in a specific collection, you should select a scalar f
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -215,6 +216,41 @@ client.createCollection(requestCreate);
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    milvus::FieldSchema key_field("key", milvus::DataType::INT64, "clustering key");
+    key_field.SetClusteringKey(true);
+    schema->AddField(key_field);
+    schema->AddField(milvus::FieldSchema("var", milvus::DataType::VARCHAR).WithMaxLength(1000));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("clustering_test")
+        .WithCollectionSchema(schema));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 
@@ -273,6 +309,7 @@ If you have enabled automatic clustering compaction, Milvus automatically trigge
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -310,6 +347,26 @@ System.out.println(stateResp.getState());
 
 ```go
 // go
+```
+
+```cpp
+// trigger a manual compaction
+milvus::CompactResponse compact_resp;
+status = client->Compact(milvus::CompactRequest()
+    .WithCollectionName("clustering_test")
+    .WithClusteringCompaction(true), compact_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// get the compaction state
+milvus::GetCompactionStateResponse state_resp;
+status = client->GetCompactionState(milvus::GetCompactionStateRequest().WithCompactionID(compact_resp.CompactionID()), state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```javascript

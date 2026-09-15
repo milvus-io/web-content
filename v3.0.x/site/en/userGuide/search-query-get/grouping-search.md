@@ -60,9 +60,9 @@ In the search request, set both `group_by_field` and `output_fields` to `docId`.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
-    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -170,6 +170,49 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Group search results
+    milvus::SearchRequest request;
+    request.WithCollectionName("my_collection")
+        .WithAnnsField("vector")
+        .WithLimit(3)
+        .WithGroupByField("docId")
+        .AddOutputField("docId");
+    request.AddFloatVector(std::vector<float>{0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f});
+
+    milvus::SearchResponse response;
+    status = client->Search(request, response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    for (auto& result : response.Results().Results()) {
+        milvus::EntityRows output_rows;
+        status = result.OutputRows(output_rows);
+        for (const auto& row : output_rows) {
+            std::cout << row << std::endl;
+        }
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -213,47 +256,6 @@ curl --request POST \
 }'
 ```
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <iostream>
-#include <stdexcept>
-#include <vector>
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    throw std::runtime_error(status.Message());
-}
-
-std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
-auto request = milvus::SearchRequest()
-                   .WithCollectionName("my_collection")
-                   .AddFloatVector(query_vector)
-                   .WithLimit(3)
-                   .WithAnnsField("vector")
-                   .WithGroupByField("docId")
-                   .AddOutputField("docId");
-
-milvus::SearchResponse response;
-status = client->Search(request, response);
-if (!status.IsOk()) {
-    throw std::runtime_error(status.Message());
-}
-
-for (auto& result : response.Results().Results()) {
-    std::cout << "TopK results:" << std::endl;
-    milvus::EntityRows output_rows;
-    status = result.OutputRows(output_rows);
-    if (!status.IsOk()) {
-        throw std::runtime_error(status.Message());
-    }
-    for (const auto& row : output_rows) {
-        std::cout << "\t" << row << std::endl;
-    }
-}
-```
 
 In the request above, `limit=3` indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.
 
@@ -265,9 +267,9 @@ By default, Grouping Search returns only one entity per group. If you want multi
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
-    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -361,6 +363,26 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+// Group search results
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    .WithGroupByField("docId")
+    .WithGroupSize(2)
+    .WithStrictGroupSize(true)
+    .AddOutputField("docId");
+request.AddFloatVector(std::vector<float>{0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -405,49 +427,6 @@ curl --request POST \
 }'
 ```
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <iostream>
-#include <stdexcept>
-#include <vector>
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    throw std::runtime_error(status.Message());
-}
-
-std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
-auto request = milvus::SearchRequest()
-                   .WithCollectionName("my_collection")
-                   .AddFloatVector(query_vector)
-                   .WithLimit(5)
-                   .WithAnnsField("vector")
-                   .WithGroupByField("docId")
-                   .WithGroupSize(2)
-                   .WithStrictGroupSize(true)
-                   .AddOutputField("docId");
-
-milvus::SearchResponse response;
-status = client->Search(request, response);
-if (!status.IsOk()) {
-    throw std::runtime_error(status.Message());
-}
-
-for (auto& result : response.Results().Results()) {
-    std::cout << "TopK results:" << std::endl;
-    milvus::EntityRows output_rows;
-    status = result.OutputRows(output_rows);
-    if (!status.IsOk()) {
-        throw std::runtime_error(status.Message());
-    }
-    for (const auto& row : output_rows) {
-        std::cout << "\t" << row << std::endl;
-    }
-}
-```
 
 In the example above:
 
@@ -468,8 +447,8 @@ The following example groups search results by `category`, returns up to three e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -560,6 +539,28 @@ for _, result := range results {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("product_catalog")
+    .WithAnnsField("embedding")
+    .WithLimit(20)
+    .WithGroupByField("category")
+    .WithGroupSize(3)
+    .WithStrictGroupSize(true)
+    .AddOutputField("category")
+    .AddOutputField("price")
+    .AddOutputField("rating")
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)});
+request.AddFloatVector(std::vector<float>{0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.
 curl --request POST \
@@ -579,35 +580,6 @@ curl --request POST \
   }'
 ```
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <iostream>
-#include <stdexcept>
-
-// Prerequisite: client is connected to Milvus and product_catalog is loaded.
-std::vector<float> query_vector = {0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f};
-auto request = milvus::SearchRequest()
-    .WithCollectionName("product_catalog")
-    .AddFloatVector(query_vector)
-    .WithAnnsField("embedding")
-    .WithLimit(20)
-    .WithGroupByField("category")
-    .WithGroupSize(3)
-    .WithStrictGroupSize(true)
-    .AddOutputField("category")
-    .AddOutputField("price")
-    .AddOutputField("rating")
-    .AddOrderByField(milvus::OrderByField("price", milvus::AggregationDirection::ASC));
-milvus::SearchResponse response;
-auto status = client->Search(request, response);
-if (!status.IsOk()) { throw std::runtime_error(status.Message()); }
-for (const auto& result : response.Results().Results()) {
-    milvus::EntityRows rows;
-    status = result.OutputRows(rows);
-    if (!status.IsOk()) { throw std::runtime_error(status.Message()); }
-    std::cout << rows << std::endl;
-}
-```
 
 In the request above, `limit=20` means Milvus selects up to 20 groups, not 20 entities. Because `group_size=3`, the flat result list can contain up to 60 entities in total.
 

@@ -122,6 +122,7 @@ The three entities, if exists in the collection, will be overridden by those inc
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -269,6 +270,58 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Upsert entities into the "my_collection" collection
+    milvus::EntityRows rows;
+    milvus::EntityRow row;
+    row["id"] = 0;
+    row["vector"] = std::vector<float>{-0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f, -0.4248030059917294f, -0.8648452746018911f};
+    row["title"] = "Artificial Intelligence in Real Life";
+    row["issue"] = "vol.12";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 1;
+    row["vector"] = std::vector<float>{0.4762662251462588f, -0.6942502138717026f, -0.4490002642657902f, -0.628696575798281f, 0.9660395877041965f};
+    row["title"] = "Hollow Man";
+    row["issue"] = "vol.19";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 2;
+    row["vector"] = std::vector<float>{-0.8864122635045097f, 0.9260170474445351f, 0.801326976181461f, 0.6383943392381306f, 0.7563037341572827f};
+    row["title"] = "Treasure Hunt in Missouri";
+    row["issue"] = "vol.12";
+    rows.emplace_back(std::move(row));
+
+    milvus::UpsertResponse upsert_resp;
+    status = client->Upsert(milvus::UpsertRequest()
+        .WithCollectionName("my_collection")
+        .WithRowsData(std::move(rows)), upsert_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    std::cout << upsert_resp.Results().UpsertCount() << std::endl;
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -311,6 +364,7 @@ The three entities, if exists in the partition, will be overridden by those incl
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -421,6 +475,39 @@ if err != nil {
 }
 ```
 
+```cpp
+// Upsert entities into a specific partition
+row["id"] = 10;
+row["vector"] = std::vector<float>{0.06998888224297328f, 0.8582816610326578f, -0.9657938677934292f, 0.6527905683627726f, -0.8668460657158576f};
+row["title"] = "Layour Design Reference";
+row["issue"] = "vol.34";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 11;
+row["vector"] = std::vector<float>{0.6060703043917468f, -0.3765080534566074f, -0.7710758854987239f, 0.36993888322346136f, 0.5507513364206531f};
+row["title"] = "Doraemon and His Friends";
+row["issue"] = "vol.2";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 12;
+row["vector"] = std::vector<float>{-0.9041813104515337f, -0.9610546012461163f, 0.20033003106083358f, 0.11842506351635174f, 0.8327356724591011f};
+row["title"] = "Pikkachu and Pokemon";
+row["issue"] = "vol.12";
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("my_collection")
+    .WithPartitionName("partitionA")
+    .WithRowsData(std::move(rows)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << upsert_resp.Results().UpsertCount() << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -467,6 +554,7 @@ When performing an upsert in merge mode, ensure that the entities involved in th
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -532,6 +620,28 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+// Upsert entities in merge mode with partial updates
+row["id"] = 1;
+row["issue"] = "vol.14";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 2;
+row["issue"] = "vol.7";
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows))
+    .WithPartialUpdate(true), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << upsert_resp.Results().UpsertCount() << std::endl;
 ```
 
 ```javascript
@@ -609,6 +719,7 @@ Suppose the entity with primary key `1` already has `tags = ["new", "trial"]`. B
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -644,6 +755,22 @@ client.upsert(UpsertReq.builder()
 // go
 ```
 
+```cpp
+// Upserting the full replacement array
+row["pk"] = 1;
+row["tags"] = std::vector<std::string>{"new", "trial", "premium"};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows))
+    .WithPartialUpdate(true), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -655,6 +782,7 @@ With `ARRAY_APPEND`, send only the element to add:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -695,6 +823,22 @@ client.upsert(UpsertReq.builder()
 // go
 ```
 
+```cpp
+// Append elements to the existing ARRAY field without reading it first
+row["pk"] = 1;
+row["tags"] = std::vector<std::string>{"premium"};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows))
+    .AddFieldOp(milvus::FieldPartialUpdateOp("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_APPEND)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -706,6 +850,7 @@ With `ARRAY_REMOVE`, send only the matching element to remove:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -746,6 +891,22 @@ client.upsert(UpsertReq.builder()
 // go
 ```
 
+```cpp
+// Remove matching elements from the existing ARRAY field
+row["pk"] = 1;
+row["tags"] = std::vector<std::string>{"trial"};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows))
+    .AddFieldOp(milvus::FieldPartialUpdateOp("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_REMOVE)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -775,6 +936,7 @@ The following example uses a small `users` collection with a primary key `pk`, a
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -883,6 +1045,82 @@ print(res)
 // go
 ```
 
+```cpp
+// Create a collection with an ARRAY<VARCHAR> field
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64, "", true, false));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+schema->AddField(milvus::FieldSchema("tags", milvus::DataType::ARRAY).WithElementType(milvus::DataType::VARCHAR).WithMaxCapacity(8).WithMaxLength(32));
+
+milvus::IndexDesc index("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("users")
+    .WithCollectionSchema(schema)
+    .AddIndex(std::move(index)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Seed two entities
+row["pk"] = 1;
+row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+row["tags"] = std::vector<std::string>{"new"};
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["pk"] = 2;
+row["embedding"] = std::vector<float>{0.6f, 0.7f, 0.8f, 0.9f, 1.0f};
+row["tags"] = std::vector<std::string>{"new", "trial"};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Append tags without reading the existing ARRAY values
+row["pk"] = 1;
+row["tags"] = std::vector<std::string>{"premium", "vip"};
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["pk"] = 2;
+row["tags"] = std::vector<std::string>{"premium"};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows))
+    .AddFieldOp(milvus::FieldPartialUpdateOp("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_APPEND)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Remove matching tags without replacing the full ARRAY field
+row["pk"] = 1;
+row["tags"] = std::vector<std::string>{"new"};
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["pk"] = 2;
+row["tags"] = std::vector<std::string>{"trial"};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("users")
+    .WithRowsData(std::move(rows))
+    .AddFieldOp(milvus::FieldPartialUpdateOp("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_REMOVE)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -898,6 +1136,7 @@ The following example demonstrates how to upsert the `chunks` field in merge mod
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -941,6 +1180,39 @@ client.upsert(
 
 ```go
 // go
+```
+
+```cpp
+// Upsert a StructArray field in merge mode: include all subfields
+row["id"] = 1;
+row["chunks"] = std::vector<nlohmann::json>{
+    {
+        {"text", "Use HNSW efSearch to trade recall for latency."},
+        {"section", "index"},
+        {"page", 1},
+        {"quality_score", 0.92},
+        {"has_code", true},
+        {"emb_list_vector", std::vector<float>{0.11f, 0.21f, 0.31f, 0.41f}}
+    },
+    {
+        {"text", "Range search returns vectors within a distance boundary."},
+        {"section", "search"},
+        {"page", 2},
+        {"quality_score", 0.86},
+        {"has_code", false},
+        {"emb_list_vector", std::vector<float>{0.18f, 0.23f, 0.29f, 0.36f}}
+    }
+};
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("books")
+    .WithRowsData(std::move(rows))
+    .WithPartialUpdate(true), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

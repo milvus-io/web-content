@@ -28,6 +28,7 @@ The following code snippet demonstrates how to create a SearchIterator.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -88,6 +89,41 @@ SearchIterator searchIterator = client.searchIterator(SearchIteratorReq.builder(
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // create iterator
+    milvus::SearchIteratorRequest sreq;
+    sreq.SetCollectionName("iterator_collection");
+    sreq.SetBatchSize(50);
+    sreq.SetLimit(20000);
+    sreq.SetAnnsField("vector");
+    sreq.AddOutputField("color");
+    sreq.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+    milvus::SearchIteratorPtr iterator;
+    status = client->SearchIterator(sreq, iterator);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient } from '@zilliz/milvus2-sdk-node';
 
@@ -127,6 +163,7 @@ Once the SearchIterator is ready, you can call its next() method to get the sear
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -164,6 +201,34 @@ while (true) {
 
 ```go
 // go
+```
+
+```cpp
+milvus::SearchIteratorPtr iterator;
+milvus::SearchIteratorRequest sreq;
+sreq.SetCollectionName("iterator_collection");
+sreq.SetAnnsField("vector");
+sreq.SetLimit(20000);
+sreq.SetBatchSize(50);
+sreq.AddOutputField("color");
+sreq.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+status = client->SearchIterator(sreq, iterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+while (true) {
+    milvus::SingleResult batch_results;
+    status = iterator->Next(batch_results);
+    if (batch_results.GetRowCount() == 0) break;
+    milvus::EntityRows rows;
+    status = batch_results.OutputRows(rows);
+    for (const auto& row : rows) {
+        std::cout << row << std::endl;
+    }
+}
 ```
 
 ```javascript

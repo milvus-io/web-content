@@ -42,6 +42,7 @@ To use a `TIMESTAMPTZ` field, explicitly define it in your collection schema whe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -84,6 +85,46 @@ print(f"Collection '{collection_name}' with a TimestampTz field created successf
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    const std::string collection_name = "timestamptz_test123";
+
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName(collection_name));
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    // Add a primary key field
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    // Add a TIMESTAMPTZ field that allows null values
+    schema->AddField(milvus::FieldSchema("tsz", milvus::DataType::TIMESTAMPTZ).WithNullable(true));
+    // Add a vector field
+    schema->AddField(milvus::FieldSchema("vec", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName(collection_name)
+        .WithCollectionSchema(schema)
+        .WithConsistencyLevel(milvus::ConsistencyLevel::SESSION));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -105,6 +146,7 @@ The example below inserts 8,193 rows of sample data into the collection. Each ro
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -148,6 +190,28 @@ print("Data inserted successfully.")
 // go
 ```
 
+```cpp
+const int64_t data_size = 8193;
+
+milvus::EntityRows rows;
+for (int64_t i = 0; i < data_size; ++i) {
+    row = milvus::EntityRow();
+    row["id"] = i + 1;
+    // Asia/Shanghai time zone (UTC+08:00); stored internally as UTC
+    row["tsz"] = "2025-01-01T00:00:00+08:00";
+    row["vec"] = std::vector<float>{0.0f, 0.1f, 0.2f, 0.3f};
+    rows.emplace_back(std::move(row));
+}
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("timestamptz_test123")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -171,6 +235,7 @@ Before you can perform filtering operations on `TIMESTAMPTZ` fields, make sure:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -203,6 +268,25 @@ print(f"Collection '{collection_name}' loaded successfully.")
 // go
 ```
 
+```cpp
+// Create index on vector field
+milvus::IndexDesc index_desc("vec", "vec_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("timestamptz_test123")
+    .AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Load the collection
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("timestamptz_test123"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -220,6 +304,7 @@ The example below filters entities with timestamps (`tsz`) that are not equal to
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -253,6 +338,22 @@ print("Query result: ", results)
 // go
 ```
 
+```cpp
+// Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
+filter = "tsz != ISO '2025-01-03T00:00:00+08:00'";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("timestamptz_test123")
+    .WithFilter(filter)
+    .AddOutputField("id")
+    .AddOutputField("tsz")
+    .WithLimit(10), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -276,6 +377,7 @@ For example, the following query filters entities where the timestamp (`tsz`) pl
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -306,6 +408,21 @@ print("Query result: ", results)
 
 ```go
 // go
+```
+
+```cpp
+filter = "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("timestamptz_test123")
+    .WithFilter(filter)
+    .AddOutputField("id")
+    .AddOutputField("tsz")
+    .WithLimit(10), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash
@@ -339,6 +456,7 @@ You can combine `TIMESTAMPTZ` filtering with vector similarity search to narrow 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -371,6 +489,25 @@ print("Search result: ", res)
 
 ```go
 // go
+```
+
+```cpp
+// Define a time-based filter expression
+filter = "tsz > ISO '2025-01-05T00:00:00+08:00'";
+
+milvus::SearchRequest request;
+request.WithCollectionName("timestamptz_test123")
+    .WithLimit(5)
+    .WithFilter(filter)
+    .WithAnnsField("vec")
+    .AddOutputField("id")
+    .AddOutputField("tsz");
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

@@ -17,6 +17,7 @@ To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `w
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -41,6 +42,12 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "whitespace"}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "whitespace"}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -55,6 +62,7 @@ The whitespace tokenizer can work in conjunction with one or more filters. For e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -80,6 +88,13 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
+```
+
+```cpp
+analyzer_params = {
+    {"tokenizer", "whitespace"},
+    {"filter", {"lowercase"}}
+};
 ```
 
 ```bash
@@ -105,6 +120,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -129,6 +145,13 @@ analyzerParams.put("filter", Collections.singletonList("lowercase"));
 analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "whitespace"},
+    {"filter", {"lowercase"}}
+};
+```
+
 ```bash
 # restful
 ```
@@ -140,6 +163,7 @@ analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -213,6 +237,43 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"tokenizer", "whitespace"},
+        {"filter", {"lowercase"}}
+    };
+
+    // Sample text to analyze
+    std::string sample_text = "The Milvus vector database is built for scale!";
+
+    // Run the standard analyzer with the defined configuration
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -222,4 +283,6 @@ if err != nil {
 ```plaintext
 ['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale!']
 ```
+
+
 

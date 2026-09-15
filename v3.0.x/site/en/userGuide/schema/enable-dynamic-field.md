@@ -96,6 +96,7 @@ To use the dynamic field feature, set `enable_dynamic_field=True` when creating 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,6 +218,42 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create schema with dynamic field enabled
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+
+    // Add explicitly defined fields
+    schema->AddField(milvus::FieldSchema("my_id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("my_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+    // Create the collection
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithCollectionSchema(schema));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -267,6 +304,7 @@ The dynamic field allows you to insert extra fields not defined in the schema. T
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -365,6 +403,27 @@ if err != nil {
 }
 ```
 
+```cpp
+row["my_id"] = 1;                                                       // Explicitly defined primary field
+row["my_vector"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f};   // Explicitly defined vector field
+row["overview"] = "Great product";                                      // Scalar key not defined in schema
+row["words"] = 150;                                                     // Scalar key not defined in schema
+row["dynamic_json"] = nlohmann::json{                                   // JSON key not defined in schema
+    {"varchar", "some text"},
+    {"nested", {{"value", 42.5}}},
+    {"string_price", "99.99"}                                           // Number stored as string
+};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -433,6 +492,7 @@ Since the dynamic field is a JSON field, you can index any key within it using J
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -609,6 +669,28 @@ indexOpt3 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", 
 indexOpt4 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex4)
 ```
 
+```cpp
+// Index a simple string key
+index_params.emplace_back("overview", "overview_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "overview");
+index_params.back().AddExtraParam("json_cast_type", "varchar");
+
+// Index a simple numeric key
+index_params.emplace_back("words", "words_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "words");
+index_params.back().AddExtraParam("json_cast_type", "double");
+
+// Index a nested key within a JSON object
+index_params.emplace_back("dynamic_json", "json_varchar_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "dynamic_json['varchar']");
+index_params.back().AddExtraParam("json_cast_type", "varchar");
+
+// Index a deeply nested key
+index_params.emplace_back("dynamic_json", "json_nested_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "dynamic_json['nested']['value']");
+index_params.back().AddExtraParam("json_cast_type", "double");
+```
+
 ```bash
 export TOKEN="root:Milvus"
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -663,6 +745,7 @@ If a dynamic field key contains values in an incorrect format, (e.g. numbers sto
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -714,6 +797,14 @@ jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `dynamic_json['s
 indexOpt5 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex5)
 ```
 
+```cpp
+// Convert a string to double before indexing
+index_params.emplace_back("dynamic_json", "json_string_price_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "dynamic_json['string_price']");
+index_params.back().AddExtraParam("json_cast_type", "double");
+index_params.back().AddExtraParam("json_cast_function", "STRING_TO_DOUBLE");
+```
+
 ```bash
 export TOKEN="root:Milvus"
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -748,6 +839,7 @@ After defining the index parameters, you can apply them to the collection using 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -794,6 +886,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("my_collection")
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 export indexParams="[
@@ -831,6 +933,7 @@ Based on [the ](enable-dynamic-field.md#Insert-entities-to-the-collection)[examp
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -858,6 +961,12 @@ filter := 'words >= 100'
 filter := 'dynamic_json["nested"]["value"] < 50'
 ```
 
+```cpp
+filter = "overview == \"Great product\"";                    // Non-JSON key
+filter = "words >= 100";                                     // Non-JSON key
+filter = "dynamic_json[\"nested\"][\"value\"] < 50";         // JSON object key
+```
+
 ```bash
 # restful
 export filterOverview='overview == "Great product"'
@@ -872,6 +981,7 @@ export filterNestedValue='dynamic_json["nested"]["value"] < 50'
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -971,6 +1081,23 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+// Example: Include dynamic field keys in search results
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(10)
+    .WithFilter(filter)                       // Filter expression defined earlier
+    .WithAnnsField("my_vector")
+    .AddOutputField("overview")               // Simple dynamic field key
+    .AddOutputField("dynamic_json['varchar']");  // Nested JSON key
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

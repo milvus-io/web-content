@@ -128,6 +128,7 @@ Pass `collection.ttl.seconds` (integer, in seconds) through the `properties` map
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,6 +228,43 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(false);
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(128));
+
+    std::vector<milvus::IndexDesc> index_params;
+    index_params.emplace_back("vector", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithCollectionSchema(schema)
+        .WithIndexes(std::move(index_params))
+        .AddProperty(milvus::COLLECTION_TTL_SECONDS, "1209600"));  // 14 days
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 export params='{
     "ttlSeconds": 1209600
@@ -256,6 +294,7 @@ Call `alter_collection_properties` with `collection.ttl.seconds` in the `propert
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -337,6 +376,17 @@ if err != nil {
 }
 ```
 
+```cpp
+// Assumes "my_collection" was created earlier without TTL
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty(milvus::COLLECTION_TTL_SECONDS, "1209600"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
@@ -360,6 +410,7 @@ If you decide to keep the data in a collection indefinitely, you can simply drop
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -416,6 +467,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->DropCollectionProperties(milvus::DropCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddPropertyKey(milvus::COLLECTION_TTL_SECONDS));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/drop_properties" \
@@ -443,6 +504,7 @@ Enabling entity-level TTL at creation time takes two additions in the same `crea
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -537,6 +599,26 @@ await client.createCollection({
 // go
 ```
 
+```cpp
+// Create schema with a TIMESTAMPTZ field for entity-level TTL
+schema->SetEnableDynamicField(false);
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+schema->AddField(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(128));
+
+index_params.emplace_back("vector", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params))
+    .AddProperty("ttl_field", "expire_at"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -548,6 +630,7 @@ Once the collection exists, insert entities with [ISO 8601](https://en.wikipedia
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -657,6 +740,38 @@ await client.insert({
 // go
 ```
 
+```cpp
+// Assumes "my_collection" was created earlier with `ttl_field`: "expire_at"
+// Never expires
+row = milvus::EntityRow();
+row["id"] = 1;
+row["expire_at"] = nullptr;
+row["vector"] = std::vector<float>(128, 0.1f);
+rows.emplace_back(row);
+
+// Expires at 2026-12-31 UTC midnight
+row = milvus::EntityRow();
+row["id"] = 2;
+row["expire_at"] = "2026-12-31T00:00:00Z";
+row["vector"] = std::vector<float>(128, 0.1f);
+rows.emplace_back(row);
+
+// Shanghai local time — normalized to UTC internally
+row = milvus::EntityRow();
+row["id"] = 3;
+row["expire_at"] = "2027-01-01T00:00:00+08:00";
+row["vector"] = std::vector<float>(128, 0.1f);
+rows.emplace_back(row);
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -668,6 +783,7 @@ On every query and vector search, the server auto-injects the TTL filter — you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -742,6 +858,32 @@ console.log(results.data);
 // go
 ```
 
+```cpp
+client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("my_collection"));
+
+// Expired rows are filtered out automatically
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("id >= 0")
+    .AddOutputField("id")
+    .AddOutputField("expire_at")
+    .WithLimit(10)
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+milvus::EntityRows output_rows;
+status = qresp.Results().OutputRows(output_rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& r : output_rows) {
+    std::cout << r << std::endl;
+}
+```
+
 ```bash
 # restful
 ```
@@ -755,6 +897,7 @@ To extend an entity's lifetime before compaction physically removes it, upsert w
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -829,6 +972,22 @@ await client.upsert({
 // go
 ```
 
+```cpp
+row = milvus::EntityRow();
+row["id"] = 2;
+row["vector"] = std::vector<float>(128, 0.1f);
+row["expire_at"] = "2028-01-01T00:00:00Z";
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -842,6 +1001,7 @@ If the collection already exists and does not have `collection.ttl.seconds` set,
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -966,6 +1126,41 @@ await client.upsert({
 // go
 ```
 
+```cpp
+// Step 1 — add a TIMESTAMPTZ column to the schema
+status = client->AddCollectionField(milvus::AddCollectionFieldRequest()
+    .WithCollectionName("my_collection")
+    .WithField(std::move(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true))));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Step 2 — mark the new column as the TTL field
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("ttl_field", "expire_at"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Step 3 (optional) — backfill expiration timestamps for historical rows
+row = milvus::EntityRow();
+row["id"] = 1;
+row["vector"] = std::vector<float>(128, 0.1f);
+row["expire_at"] = "2026-12-31T00:00:00Z";
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -979,6 +1174,7 @@ Call `drop_collection_properties` with `ttl_field` in `property_keys` to stop pe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1031,6 +1227,16 @@ await client.dropCollectionProperties({
 // go
 ```
 
+```cpp
+status = client->DropCollectionProperties(milvus::DropCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddPropertyKey("ttl_field"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -1050,6 +1256,7 @@ If your collection was created with `collection.ttl.seconds` and you want to swi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1163,6 +1370,51 @@ client.upsert(UpsertReq.builder()
 // go
 ```
 
+```cpp
+// Assumes "my_collection" already exists with `collection.ttl.seconds` set.
+// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)
+status = client->DropCollectionProperties(milvus::DropCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddPropertyKey(milvus::COLLECTION_TTL_SECONDS));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Step 2 — add a TIMESTAMPTZ column to the schema
+status = client->AddCollectionField(milvus::AddCollectionFieldRequest()
+    .WithCollectionName("my_collection")
+    .WithField(std::move(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true))));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Step 3 — set the ttl_field property on the column you just added
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty("ttl_field", "expire_at"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Step 4 (optional) — backfill expiration timestamps for historical entities
+row = milvus::EntityRow();
+row["id"] = 1;
+row["vector"] = std::vector<float>(128, 0.1f);
+row["expire_at"] = "2026-12-31T00:00:00Z";
+rows.emplace_back(std::move(row));
+
+status = client->Upsert(milvus::UpsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), upsert_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -1178,6 +1430,7 @@ To move in the other direction, drop `ttl_field` and set `collection.ttl.seconds
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1235,6 +1488,25 @@ client.alterCollectionProperties(AlterCollectionPropertiesReq.builder()
 
 ```go
 // go
+```
+
+```cpp
+// Assumes "my_collection" already exists with `ttl_field` set.
+status = client->DropCollectionProperties(milvus::DropCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddPropertyKey("ttl_field"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+    .WithCollectionName("my_collection")
+    .AddProperty(milvus::COLLECTION_TTL_SECONDS, "1209600"));  // 14 days
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

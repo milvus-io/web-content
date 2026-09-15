@@ -56,6 +56,7 @@ To use a `GEOMETRY` field, explicitly define it in your collection schema when c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -146,6 +147,45 @@ await milvusClient.createCollection({
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    const uint32_t dimension = 8;
+    const std::string collection_name = "geo_collection";
+
+    // Create schema with a GEOMETRY field
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(dimension));
+    schema->AddField(milvus::FieldSchema("geo", milvus::DataType::GEOMETRY).WithNullable(true));
+    schema->AddField(milvus::FieldSchema("name", milvus::DataType::VARCHAR).WithMaxLength(128));
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName(collection_name)
+        .WithCollectionSchema(schema)
+        .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 
@@ -166,6 +206,7 @@ Insert entities with geometry data in [WKT](https://en.wikipedia.org/wiki/Well-k
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -262,6 +303,35 @@ console.log(insert_result);
 // go
 ```
 
+```cpp
+std::vector<std::string> geo_points = {
+    "POINT(13.399710 52.518010)",
+    "POINT(13.403934 52.522877)",
+    "POINT(13.405088 52.521124)",
+    "POINT(13.408223 52.516876)",
+    "POINT(13.400092 52.521507)",
+    "POINT(13.408529 52.519274)",
+};
+std::vector<std::string> names = {"Shop A", "Shop B", "Shop C", "Shop D", "Shop E", "Shop F"};
+
+for (size_t i = 0; i < geo_points.size(); ++i) {
+    row = milvus::EntityRow();
+    row["id"] = static_cast<int64_t>(i) + 1;
+    row["name"] = names[i];
+    row["embeddings"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f};
+    row["geo"] = geo_points[i];
+    rows.emplace_back(std::move(row));
+}
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("geo_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -283,6 +353,7 @@ Before you can perform filtering operations on `GEOMETRY` fields, make sure:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -334,6 +405,23 @@ await milvusClient.loadCollection({
 // go
 ```
 
+```cpp
+milvus::IndexDesc index_desc("embeddings", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("geo_collection")
+    .AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("geo_collection"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -369,6 +457,7 @@ The following examples demonstrate how to use different geometry-specific operat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -444,6 +533,20 @@ for (const ret of query_results.data) {
 // go
 ```
 
+```cpp
+filter = "st_within(geo, 'POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))')";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("geo_collection")
+    .WithFilter(filter)
+    .AddOutputField("name")
+    .AddOutputField("geo"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -455,6 +558,7 @@ for (const ret of query_results.data) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -518,6 +622,20 @@ for (const ret of query_results_dwithin.data) {
 // go
 ```
 
+```cpp
+filter = "st_dwithin(geo, 'POINT(13.403683 52.520711)', 1000.0)";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("geo_collection")
+    .WithFilter(filter)
+    .AddOutputField("name")
+    .AddOutputField("geo"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -529,6 +647,7 @@ for (const ret of query_results_dwithin.data) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -596,6 +715,24 @@ for (const hits of search_results.results) {
 
 ```go
 // go
+```
+
+```cpp
+filter = "st_within(geo, 'POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))')";
+
+milvus::SearchRequest request;
+request.WithCollectionName("geo_collection")
+    .WithLimit(3)
+    .WithAnnsField("embeddings")
+    .AddOutputField("name")
+    .AddOutputField("geo")
+    .WithFilter(filter);
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash
