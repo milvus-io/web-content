@@ -84,6 +84,7 @@ Enable `auto_id=True` in your primary field definition. Milvus will handle ID ge
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -197,6 +198,43 @@ await client.createCollection({
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+    // Define primary field with AutoID enabled
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+
+    // Define the other fields
+    schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4));  // Vector field
+    schema->AddField(milvus::FieldSchema("category", milvus::DataType::VARCHAR).WithMaxLength(1000));     // Scalar field of the VARCHAR type
+
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName("demo_autoid"));
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("demo_autoid")
+        .WithCollectionSchema(schema));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 export SCHEMA='{
@@ -245,6 +283,7 @@ curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -303,6 +342,25 @@ console.log(res);
 // go
 ```
 
+```cpp
+// Important: Do not include the primary field column in your data. Milvus generates IDs automatically.
+row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f};
+row["category"] = "book";
+rows.emplace_back(std::move(row));
+
+row["embedding"] = std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f};
+row["category"] = "toy";
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("demo_autoid")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 export INSERT_DATA='[
@@ -342,6 +400,7 @@ If you need to control IDs manually, disable AutoID and provide your own values.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -455,6 +514,22 @@ const res = await client.createCollection({
 // go
 ```
 
+```cpp
+// Define the primary field without AutoID
+schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::VARCHAR, "", true, false).WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+schema->AddField(milvus::FieldSchema("category", milvus::DataType::VARCHAR).WithMaxLength(1000));
+
+status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName("demo_manual_ids"));
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("demo_manual_ids")
+    .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 export SCHEMA='{
@@ -505,6 +580,7 @@ You must include the primary field column in every insert operation.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -565,6 +641,27 @@ console.log(insert);
 
 ```go
 // go
+```
+
+```cpp
+// Each entity must contain the primary field `product_id`
+row["product_id"] = "PROD-001";
+row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f};
+row["category"] = "book";
+rows.emplace_back(std::move(row));
+
+row["product_id"] = "PROD-002";
+row["embedding"] = std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f};
+row["category"] = "toy";
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("demo_manual_ids")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

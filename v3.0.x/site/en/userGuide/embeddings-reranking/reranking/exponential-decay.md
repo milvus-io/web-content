@@ -134,6 +134,7 @@ After your collection is set up with a numeric field (in this example, `publish_
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -156,6 +157,35 @@ ranker = Function(
         "scale": 24 * 60 * 60             # 24 hours (in seconds, matching collection data)
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create an exponential decay ranker for news recency
+    // Note: All time parameters must use the same unit as your collection data
+    auto ranker = std::make_shared<milvus::DecayRerank>("news_recency");
+    ranker->AddInputFieldName("publish_time");
+    ranker->SetFunction("exp");
+    ranker->SetOrigin(1736899200);       // Current time in seconds, matching collection data
+    ranker->SetOffset(3 * 60 * 60);      // 3 hour breaking news window (seconds)
+    ranker->SetDecay(0.5);               // Half score at scale distance
+    ranker->SetScale(24 * 60 * 60);      // 24 hours (in seconds, matching collection data)
+
+    return 0;
+}
 ```
 
 ```java
@@ -210,6 +240,7 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -225,6 +256,38 @@ result = milvus_client.search(
     ranker=ranker,                        # Apply the decay ranker
     consistency_level="Strong"
 )
+```
+
+```cpp
+// Create an exponential decay ranker for news recency
+auto ranker = std::make_shared<milvus::DecayRerank>("news_recency");
+ranker->AddInputFieldName("publish_time");
+ranker->SetFunction("exp");
+ranker->SetOrigin(1736899200);
+ranker->SetOffset(3 * 60 * 60);
+ranker->SetDecay(0.5);
+ranker->SetScale(24 * 60 * 60);
+
+// Apply decay ranker to vector search
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("collection_name")
+    .WithAnnsField("dense")
+    .WithLimit(10)
+    .WithRerank(function_score)
+    .AddOutputField("title")
+    .AddOutputField("publish_time")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

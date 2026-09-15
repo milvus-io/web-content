@@ -57,6 +57,7 @@ In this example, the collection schema defines a vector field named `embedding` 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -187,6 +188,39 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Define schema fields
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));  // Primary field
+    // Enable the nullable attribute; defaults to False
+    schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4).WithNullable(true));
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithCollectionSchema(schema));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 export TOKEN="root:Milvus"
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -238,6 +272,7 @@ Scalar fields can also be defined as nullable using the same `nullable` attribut
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -272,6 +307,10 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64).WithNullable(true));
+```
+
 ```bash
 # Add another field object to the schema "fields" array, for example:
 # { "fieldName": "age", "dataType": "Int64", "nullable": true }
@@ -290,6 +329,7 @@ The example below inserts three entities into the collection created in [Define 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -380,6 +420,27 @@ if err != nil {
 }
 ```
 
+```cpp
+row["id"] = 1;
+row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f};
+rows.emplace_back(std::move(row));
+
+row["id"] = 2;
+row["embedding"] = nullptr;  // Explicitly set to NULL
+rows.emplace_back(std::move(row));
+
+row["id"] = 3;  // Field omitted -> stored as NULL
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -416,6 +477,7 @@ For a nullable vector field, this means only entities with valid vectors become 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -503,6 +565,27 @@ if err != nil {
 }
 ```
 
+```cpp
+// Set index parameters
+milvus::IndexDesc index_desc("embedding", "embedding_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+// Create index
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("my_collection")
+    .AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Load collection for future search operations
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
@@ -550,6 +633,7 @@ The following example performs a vector search on the nullable vector field `emb
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -623,6 +707,20 @@ if err != nil {
 fmt.Println(resultSets)
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(3)
+    .WithAnnsField("embedding")
+    .AddOutputField("embedding");
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -658,6 +756,7 @@ For example, given a nullable scalar field `age`, the following filter selects e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -677,6 +776,10 @@ const expr = "age > 18";
 filter := "age > 18"
 ```
 
+```cpp
+filter = "age > 18";
+```
+
 ```bash
 # Use in query/search filter parameter, for example:
 # "filter": "age > 18"
@@ -691,6 +794,7 @@ Similarly, equality checks do not match NULL values. For example:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -708,6 +812,10 @@ const expr = 'status == "active"';
 
 ```go
 filter := `status == "active"`
+```
+
+```cpp
+filter = "status == \"active\"";
 ```
 
 ```bash

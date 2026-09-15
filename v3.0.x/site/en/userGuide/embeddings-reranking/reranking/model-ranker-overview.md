@@ -135,6 +135,7 @@ To implement model reranking, first define a Function object with the appropriat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -159,6 +160,33 @@ model_ranker = Function(
         # "maxBatch": 32  # Optional: batch size for processing
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a model ranker function
+    auto model_ranker = std::make_shared<milvus::ModelRerank>("semantic_ranker");
+    model_ranker->AddInputFieldName("document");
+    model_ranker->SetProvider("tei");
+    model_ranker->SetQueries(std::vector<std::string>{"machine learning for time series"});
+    model_ranker->SetEndpoint("http://model-service:8080");
+    model_ranker->SetMaxClientBatchSize(32);
+
+    return 0;
+}
 ```
 
 ```java
@@ -263,6 +291,7 @@ After defining your model ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -278,6 +307,36 @@ results = client.search(
     ranker=model_ranker,  # Apply the model ranker here
     consistency_level="Bounded"
 )
+```
+
+```cpp
+// Create a model ranker function
+auto model_ranker = std::make_shared<milvus::ModelRerank>("semantic_ranker");
+model_ranker->AddInputFieldName("document");
+model_ranker->SetProvider("tei");
+model_ranker->SetQueries(std::vector<std::string>{"machine learning for time series"});
+model_ranker->SetEndpoint("http://model-service:8080");
+model_ranker->SetMaxClientBatchSize(32);
+
+// Use the model ranker in standard vector search
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(model_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("collection_name")
+    .WithAnnsField("vector_field")
+    .WithLimit(10)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddEmbeddedText("machine learning for time series")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

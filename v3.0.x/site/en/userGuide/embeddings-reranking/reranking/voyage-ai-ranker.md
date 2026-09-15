@@ -40,6 +40,7 @@ To use Voyage AI Ranker in your Milvus application, create a Function object tha
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -66,6 +67,34 @@ voyageai_ranker = Function(
         # "credential": "your-voyage-api-key" # Optional: if not set, uses VOYAGE_API_KEY env var
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Configure Voyage AI Ranker
+    auto voyageai_ranker = std::make_shared<milvus::ModelRerank>("voyageai_semantic_ranker");
+    voyageai_ranker->AddInputFieldName("document");
+    voyageai_ranker->SetProvider("voyageai");
+    voyageai_ranker->AddParam("model_name", "rerank-2.5");
+    voyageai_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+    voyageai_ranker->SetMaxClientBatchSize(128);
+    voyageai_ranker->AddParam("truncation", "true");
+
+    return 0;
+}
 ```
 
 ```java
@@ -174,6 +203,7 @@ To apply Voyage AI Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -189,6 +219,37 @@ results = client.search(
     ranker=voyageai_ranker,                     # Apply Voyage AI reranker
     consistency_level="Bounded"
 )
+```
+
+```cpp
+// Configure Voyage AI Ranker
+auto voyageai_ranker = std::make_shared<milvus::ModelRerank>("voyageai_semantic_ranker");
+voyageai_ranker->AddInputFieldName("document");
+voyageai_ranker->SetProvider("voyageai");
+voyageai_ranker->AddParam("model_name", "rerank-2.5");
+voyageai_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+voyageai_ranker->SetMaxClientBatchSize(128);
+voyageai_ranker->AddParam("truncation", "true");
+
+// Execute search with Voyage AI reranker
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(voyageai_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("your_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

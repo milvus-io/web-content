@@ -82,6 +82,7 @@ To use sparse vectors in Milvus, you need to create a collection with a schema i
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -203,6 +204,31 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR, "", true, true).WithMaxLength(100));
+    schema->AddField(milvus::FieldSchema("sparse_vector", milvus::DataType::SPARSE_FLOAT_VECTOR));
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(65535).EnableAnalyzer(true));
+
+    return 0;
+}
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -260,6 +286,7 @@ The process of creating an index for sparse vectors is similar to that for [dens
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -314,6 +341,12 @@ idx := index.NewSparseInvertedIndex(entity.IP, 0.2)
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse_vector", idx)
 ```
 
+```cpp
+milvus::IndexDesc index_desc("sparse_vector", "sparse_inverted_index", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::IP);
+index_desc.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_params.emplace_back(std::move(index_desc));
+```
+
 ```bash
 
 export indexParams='[
@@ -345,6 +378,7 @@ Once the sparse vector and index settings are complete, you can create a collect
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -389,6 +423,17 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -411,6 +456,7 @@ You must provide data for all fields defined during collection creation, except 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -519,6 +565,24 @@ if err != nil {
 }
 ```
 
+```cpp
+row["text"] = "information retrieval is a field of study.";
+row["sparse_vector"] = nlohmann::json{{1, 0.5}, {100, 0.3}, {500, 0.8}};
+rows.emplace_back(std::move(row));
+
+row["text"] = "information retrieval focuses on finding relevant information in large datasets.";
+row["sparse_vector"] = nlohmann::json{{10, 0.1}, {200, 0.7}, {1000, 0.9}};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -548,6 +612,7 @@ To perform a similarity search using sparse vectors, prepare both the query data
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -587,6 +652,11 @@ annSearchParams.WithExtraParam("drop_ratio_search", 0.2)
 queryData, _ := entity.NewSliceSparseEmbedding([]uint32{1, 50, 1000}, []float32{0.2, 0.4, 0.7})
 ```
 
+```cpp
+// Query with the sparse vector
+nlohmann::json query_data = {{1, 0.2}, {50, 0.4}, {1000, 0.7}};
+```
+
 ```javascript
 // Prepare search parameters
 const searchParams = {drop_ratio_search: 0.2}
@@ -610,6 +680,7 @@ Then, execute the similarity search using the `search` method:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -687,6 +758,21 @@ for _, resultSet := range resultSets {
 //   Scores:  [0.63 0.1]
 //   Pks:  string_data:{data:"457270974427187705"  data:"457270974427187704"}
 
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(3)
+    .WithAnnsField("sparse_vector")
+    .AddOutputField("pk")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+request.AddSparseVector(nlohmann::json{{1, 0.2}, {50, 0.4}, {1000, 0.7}});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

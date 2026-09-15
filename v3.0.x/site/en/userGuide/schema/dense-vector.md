@@ -70,6 +70,7 @@ In the example below, we add a vector field named `dense_vector` to store dense 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -165,6 +166,30 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR, "", true, true).WithMaxLength(100));
+    schema->AddField(milvus::FieldSchema("dense_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+
+    return 0;
+}
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -226,6 +251,7 @@ To accelerate semantic searches, an index must be created for the vector field. 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -269,6 +295,10 @@ idx := index.NewAutoIndex(index.MetricType(entity.IP))
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
 ```
 
+```cpp
+index_params.emplace_back("dense_vector", "dense_vector_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP);
+```
+
 ```bash
 export indexParams='[
         {
@@ -295,6 +325,7 @@ Once the dense vector and index param settings are complete, you can create a co
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -347,6 +378,17 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -369,6 +411,7 @@ After creating the collection, use the `insert` method to add data containing de
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -426,6 +469,22 @@ if err != nil {
 }
 ```
 
+```cpp
+row["dense_vector"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.7f};
+rows.emplace_back(std::move(row));
+
+row["dense_vector"] = std::vector<float>{0.2f, 0.3f, 0.4f, 0.8f};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -452,6 +511,7 @@ Semantic search based on dense vectors is one of the core features of Milvus, al
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -536,6 +596,20 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
+}
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(5)
+    .WithAnnsField("dense_vector")
+    .AddOutputField("pk");
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.7f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

@@ -29,6 +29,7 @@ The built-in `chinese` analyzer does not emit Pinyin tokens. To match Chinese te
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -56,6 +57,13 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cnalphanumonly"}}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -76,6 +84,7 @@ To apply the `chinese` analyzer to a field, simply set `type` to `chinese` in `a
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -98,6 +107,12 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"type": "chinese"}
+```
+
+```cpp
+analyzer_params = {
+    {"type", "chinese"}
+};
 ```
 
 ```bash
@@ -124,6 +139,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -146,6 +162,12 @@ analyzerParams.put("type", "chinese");
 analyzerParams = map[string]any{"type": "chinese"}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "chinese"}
+};
+```
+
 ```bash
 # restful
 ```
@@ -157,6 +179,7 @@ analyzerParams = map[string]any{"type": "chinese"}
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,6 +250,48 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"type", "chinese"}
+    };
+
+    // Sample text to analyze
+    std::string sample_text = "Milvus 是一个高性能、可扩展的向量数据库！";
+
+    // Run the standard analyzer with the defined configuration
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    for (const auto& result : run_resp.Results()) {
+        for (const auto& token : result.Tokens()) {
+            std::cout << token.token_ << " ";
+        }
+    }
+    std::cout << std::endl;
+
+    return 0;
 }
 ```
 

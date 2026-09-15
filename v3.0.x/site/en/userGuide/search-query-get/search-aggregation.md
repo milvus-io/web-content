@@ -81,6 +81,7 @@ The examples below use a product collection with brand, category, color, price, 
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -295,6 +296,162 @@ private static JsonObject product(long id, float[] embedding, String name, Strin
 // TBD: Search Aggregation is not yet available in the released Go SDK.
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    std::string collection_name = "product_search_aggregation";
+
+    milvus::HasCollectionResponse has_resp;
+    status = client->HasCollection(milvus::HasCollectionRequest().WithCollectionName(collection_name), has_resp);
+    if (has_resp.Has()) {
+        status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName(collection_name));
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+    schema->AddField(milvus::FieldSchema("name", milvus::DataType::VARCHAR).WithMaxLength(200));
+    schema->AddField(milvus::FieldSchema("brand", milvus::DataType::VARCHAR).WithMaxLength(100));
+    schema->AddField(milvus::FieldSchema("category", milvus::DataType::VARCHAR).WithMaxLength(100));
+    schema->AddField(milvus::FieldSchema("color", milvus::DataType::VARCHAR).WithMaxLength(50));
+    schema->AddField(milvus::FieldSchema("price", milvus::DataType::DOUBLE));
+    schema->AddField(milvus::FieldSchema("rating", milvus::DataType::DOUBLE));
+    schema->AddField(milvus::FieldSchema("in_stock", milvus::DataType::BOOL));
+
+    milvus::IndexDesc index_embedding("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName(collection_name)
+        .WithCollectionSchema(schema)
+        .AddIndex(std::move(index_embedding)));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::EntityRows rows;
+    milvus::EntityRow row;
+    row["id"] = 1;
+    row["embedding"] = std::vector<float>{0.12f, 0.42f, 0.18f, 0.66f, 0.31f};
+    row["name"] = "Runner A1";
+    row["brand"] = "Brand A";
+    row["category"] = "running_shoes";
+    row["color"] = "black";
+    row["price"] = 129.99;
+    row["rating"] = 4.7;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 2;
+    row["embedding"] = std::vector<float>{0.10f, 0.39f, 0.20f, 0.61f, 0.29f};
+    row["name"] = "Trail A2";
+    row["brand"] = "Brand A";
+    row["category"] = "running_shoes";
+    row["color"] = "blue";
+    row["price"] = 139.99;
+    row["rating"] = 4.6;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 3;
+    row["embedding"] = std::vector<float>{0.14f, 0.44f, 0.19f, 0.68f, 0.33f};
+    row["name"] = "Runner B1";
+    row["brand"] = "Brand B";
+    row["category"] = "running_shoes";
+    row["color"] = "white";
+    row["price"] = 159.99;
+    row["rating"] = 4.8;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 4;
+    row["embedding"] = std::vector<float>{0.16f, 0.41f, 0.22f, 0.62f, 0.30f};
+    row["name"] = "Runner C1";
+    row["brand"] = "Brand C";
+    row["category"] = "running_shoes";
+    row["color"] = "red";
+    row["price"] = 119.99;
+    row["rating"] = 4.4;
+    row["in_stock"] = false;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 5;
+    row["embedding"] = std::vector<float>{0.48f, 0.20f, 0.59f, 0.15f, 0.71f};
+    row["name"] = "Jacket A1";
+    row["brand"] = "Brand A";
+    row["category"] = "jackets";
+    row["color"] = "black";
+    row["price"] = 99.99;
+    row["rating"] = 4.5;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 6;
+    row["embedding"] = std::vector<float>{0.45f, 0.18f, 0.55f, 0.17f, 0.69f};
+    row["name"] = "Jacket B1";
+    row["brand"] = "Brand B";
+    row["category"] = "jackets";
+    row["color"] = "blue";
+    row["price"] = 89.99;
+    row["rating"] = 4.3;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 7;
+    row["embedding"] = std::vector<float>{0.09f, 0.38f, 0.17f, 0.60f, 0.27f};
+    row["name"] = "Runner A3";
+    row["brand"] = "Brand A";
+    row["category"] = "running_shoes";
+    row["color"] = "black";
+    row["price"] = 159.99;
+    row["rating"] = 4.8;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    row["id"] = 8;
+    row["embedding"] = std::vector<float>{0.13f, 0.43f, 0.21f, 0.65f, 0.32f};
+    row["name"] = "Runner A4";
+    row["brand"] = "Brand A";
+    row["category"] = "running_shoes";
+    row["color"] = "black";
+    row["price"] = 149.99;
+    row["rating"] = 4.9;
+    row["in_stock"] = true;
+    rows.emplace_back(std::move(row));
+
+    milvus::InsertResponse resp;
+    status = client->Insert(milvus::InsertRequest()
+        .WithCollectionName(collection_name)
+        .WithRowsData(std::move(rows)), resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName(collection_name));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    std::vector<float> query_vector{0.11f, 0.40f, 0.19f, 0.64f, 0.30f};
+
+    return 0;
+}
+```
+
 ```javascript
 const { DataType, MilvusClient } = require('@zilliz/milvus2-sdk-node');
 
@@ -375,6 +532,7 @@ The following configuration creates up to three brand buckets, calculates metric
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -427,6 +585,15 @@ SearchAggregation aggregation = SearchAggregation.builder()
 // TBD: Search Aggregation is not yet available in the released Go SDK.
 ```
 
+```cpp
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand"}, 3);
+aggregation->AddMetric("product_count", {milvus::AggregationMetricOp::COUNT, "*"})
+    .AddMetric("avg_price", {milvus::AggregationMetricOp::AVG, "price"})
+    .AddMetric("min_price", {milvus::AggregationMetricOp::MIN, "price"})
+    .AddOrder({"avg_price", milvus::AggregationDirection::DESC})
+    .AddOrder({"_key", milvus::AggregationDirection::ASC});
+```
+
 ```javascript
 const aggregation = {
   fields: ['brand'],
@@ -464,6 +631,7 @@ Pass the object to the `search_aggregation` parameter of `MilvusClient.search()`
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -504,6 +672,41 @@ List<AggregationBucket> buckets = result.getAggregationBuckets().get(0);
 
 ```go
 // TBD: Search Aggregation is not yet available in the released Go SDK.
+```
+
+```cpp
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand"}, 3);
+aggregation->AddMetric("product_count", {milvus::AggregationMetricOp::COUNT, "*"})
+    .AddMetric("avg_price", {milvus::AggregationMetricOp::AVG, "price"})
+    .AddMetric("min_price", {milvus::AggregationMetricOp::MIN, "price"})
+    .AddOrder({"avg_price", milvus::AggregationDirection::DESC})
+    .AddOrder({"_key", milvus::AggregationDirection::ASC});
+
+milvus::SearchRequest request;
+request.WithCollectionName("product_search_aggregation")
+    .WithAnnsField("embedding")
+    .WithLimit(10)
+    .AddOutputField("name")
+    .AddOutputField("brand")
+    .AddOutputField("category")
+    .AddOutputField("color")
+    .AddOutputField("price")
+    .AddOutputField("rating")
+    .AddOutputField("in_stock")
+    .WithSearchAggregation(aggregation);
+request.AddFloatVector(std::vector<float>{0.11f, 0.40f, 0.19f, 0.64f, 0.30f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+const auto& buckets = response.AggregationBuckets();
+for (const auto& bucket : buckets[0]) {
+    std::cout << "bucket count=" << bucket.count << std::endl;
+}
 ```
 
 ```javascript
@@ -651,6 +854,7 @@ To sort buckets by vector match quality, first calculate a bucket-level metric f
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -675,6 +879,12 @@ SearchAggregation aggregation = SearchAggregation.builder()
 
 ```go
 // TBD: Search Aggregation is not yet available in the released Go SDK.
+```
+
+```cpp
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand"}, 3);
+aggregation->AddMetric("max_score", {milvus::AggregationMetricOp::MAX, "_score"})
+    .AddOrder({"max_score", milvus::AggregationDirection::DESC});
 ```
 
 ```javascript
@@ -710,6 +920,7 @@ To create a composite bucket key, pass multiple field names in the same list:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -733,6 +944,11 @@ SearchAggregation aggregation = SearchAggregation.builder()
 
 ```go
 // TBD: Search Aggregation is not yet available in the released Go SDK.
+```
+
+```cpp
+// Combine brand and color to form a composite bucket key.
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand", "color"}, 6);
 ```
 
 ```javascript
@@ -772,6 +988,7 @@ Configure `TopHits` as follows:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -805,6 +1022,15 @@ SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.s
 
 ```go
 // TBD: Search Aggregation is not yet available in the released Go SDK.
+```
+
+```cpp
+auto top_hits = std::make_shared<milvus::AggregationTopHits>(2);
+top_hits->AddSort(milvus::AggregationSort("rating", milvus::AggregationDirection::DESC));
+top_hits->AddSort(milvus::AggregationSort("_score", milvus::AggregationDirection::DESC));
+
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand"}, 3);
+aggregation->WithTopHits(top_hits);
 ```
 
 ```javascript
@@ -922,6 +1148,7 @@ The following configuration implements this hierarchy:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -969,6 +1196,23 @@ SearchAggregation aggregation = SearchAggregation.builder().fields(Collections.s
 
 ```go
 // TBD: Search Aggregation is not yet available in the released Go SDK.
+```
+
+```cpp
+auto sub_top_hits = std::make_shared<milvus::AggregationTopHits>(2);
+sub_top_hits->AddSort(milvus::AggregationSort("rating", milvus::AggregationDirection::DESC));
+
+auto sub_aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"brand"}, 3);
+sub_aggregation->AddMetric("brand_count", {milvus::AggregationMetricOp::COUNT, "*"})
+    .AddMetric("avg_rating", {milvus::AggregationMetricOp::AVG, "rating"})
+    .AddOrder({"avg_rating", milvus::AggregationDirection::DESC})
+    .WithTopHits(sub_top_hits);
+
+auto aggregation = std::make_shared<milvus::SearchAggregation>(std::vector<std::string>{"category"}, 2);
+aggregation->AddMetric("product_count", {milvus::AggregationMetricOp::COUNT, "*"})
+    .AddMetric("avg_price", {milvus::AggregationMetricOp::AVG, "price"})
+    .AddOrder({"product_count", milvus::AggregationDirection::DESC})
+    .WithSubAggregation(sub_aggregation);
 ```
 
 ```javascript

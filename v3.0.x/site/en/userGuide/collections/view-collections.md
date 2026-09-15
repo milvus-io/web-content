@@ -17,6 +17,7 @@ The following example demonstrates how to obtain the name list of all collection
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -93,6 +94,35 @@ if err != nil {
 fmt.Println(collectionNames)
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::ListCollectionsResponse resp;
+    status = client->ListCollections(milvus::ListCollectionsRequest(), resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    for (const auto& name : resp.CollectionNames()) {
+        std::cout << name << std::endl;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
@@ -117,6 +147,7 @@ You can also obtain the details of a specific collection. The following example 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -155,6 +186,16 @@ if err != nil {
 }
 
 fmt.Println(collection)
+```
+
+```cpp
+milvus::DescribeCollectionResponse desc_resp;
+status = client->DescribeCollection(milvus::DescribeCollectionRequest().WithCollectionName("quick_setup"), desc_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << desc_resp.Desc().CollectionName() << std::endl;
 ```
 
 ```bash

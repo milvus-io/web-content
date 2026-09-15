@@ -118,6 +118,7 @@ After your collection is set up with a numeric field (in this example, `distance
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -138,6 +139,34 @@ ranker = Function(
         "scale": 2000                     # 2 km scale (2000 meters)
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a Gaussian decay ranker for location-based restaurant search
+    auto ranker = std::make_shared<milvus::DecayRerank>("restaurant_distance_decay");
+    ranker->AddInputFieldName("distance");
+    ranker->SetFunction("gauss");
+    ranker->SetOrigin(0);           // Your current location (0 meters)
+    ranker->SetOffset(300);         // 300m no-decay zone
+    ranker->SetDecay(0.5);          // Half score at scale distance
+    ranker->SetScale(2000);         // 2 km scale (2000 meters)
+
+    return 0;
+}
 ```
 
 ```java
@@ -190,6 +219,7 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -205,6 +235,39 @@ result = milvus_client.search(
     ranker=ranker,                        # Apply the decay ranker
     consistency_level="Strong"
 )
+```
+
+```cpp
+// Create a Gaussian decay ranker for location-based restaurant search
+auto ranker = std::make_shared<milvus::DecayRerank>("restaurant_distance_decay");
+ranker->AddInputFieldName("distance");
+ranker->SetFunction("gauss");
+ranker->SetOrigin(0);
+ranker->SetOffset(300);
+ranker->SetDecay(0.5);
+ranker->SetScale(2000);
+
+// Apply decay ranker to restaurant vector search
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("collection_name")
+    .WithAnnsField("dense")
+    .WithLimit(10)
+    .WithRerank(function_score)
+    .AddOutputField("name")
+    .AddOutputField("cuisine")
+    .AddOutputField("distance")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

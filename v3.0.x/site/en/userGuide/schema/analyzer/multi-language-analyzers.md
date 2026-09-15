@@ -68,6 +68,7 @@ The `multi_analyzer_params` is a single JSON object that determines how Milvus s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -160,6 +161,19 @@ multiAnalyzerParams := map[string]any{
 }
 ```
 
+```cpp
+multi_analyzers = {
+    {"analyzers",
+     {{"english", {{"type", "english"}}},
+      {"chinese", {{"type", "chinese"}}},
+      {"arabic", {{"type", "arabic"}}},
+      {"thai", {{"type", "thai"}}},
+      {"default", {{"tokenizer", "icu"}}}}},
+    {"by_field", "language"},
+    {"alias", {{"ar", "arabic"}, {"cn", "chinese"}, {"en", "english"}, {"th", "thai"}}}
+};
+```
+
 ```bash
 # restful
 export multi_analyzer_params='{
@@ -247,6 +261,7 @@ In this step, define the collection schema with four essential fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -423,6 +438,55 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json multi_analyzer_params = {
+        {"analyzers",
+         {{"english", {{"type", "english"}}},
+          {"chinese", {{"type", "chinese"}}},
+          {"arabic", {{"type", "arabic"}}},
+          {"thai", {{"type", "thai"}}},
+          {"default", {{"tokenizer", "icu"}}}}},
+        {"by_field", "language"},
+        {"alias", {{"ar", "arabic"}, {"cn", "chinese"}, {"en", "english"}, {"th", "thai"}}}
+    };
+
+    // Initialize a new schema
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+    // Step 2.1: Add a primary key field for unique document identification
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+
+    // Step 2.2: Add language identifier field
+    // This MUST match the "by_field" value in language_analyzer_config
+    schema->AddField(milvus::FieldSchema("language", milvus::DataType::VARCHAR).WithMaxLength(255));
+
+    // Step 2.3: Add text content field with multi-language analysis capability
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)
+        .WithMaxLength(8192)
+        .EnableAnalyzer(true)
+        .WithMultiAnalyzerParams(multi_analyzer_params));
+
+    // Step 2.4: Add sparse vector field to store the BM25 output
+    schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -468,6 +532,7 @@ Define a BM25 function to generate sparse vector representations from your raw t
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -515,6 +580,16 @@ schema.WithFunction(function.WithName("text_to_vector").
     WithOutputFields("sparse"))
 ```
 
+```cpp
+// Create the BM25 function
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_to_vector", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+
+// Add the function to our schema
+schema->AddFunction(function);
+```
+
 ```bash
 # restful
 export function='{
@@ -549,6 +624,7 @@ To allow efficient searching, create an index on the sparse vector field:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -586,6 +662,11 @@ idx := index.NewAutoIndex(index.MetricType(entity.BM25))
 indexOption := milvusclient.NewCreateIndexOption("multilingual_documents", "sparse", idx)
 ```
 
+```cpp
+// Configure index parameters
+index_params.emplace_back("sparse", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::BM25);
+```
+
 ```bash
 # restful
 export IndexParams='[
@@ -615,6 +696,7 @@ This final creation step brings together all your previous configurations:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -671,6 +753,18 @@ if err != nil {
 }
 ```
 
+```cpp
+// Create collection
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("multilingual_documents")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -697,6 +791,7 @@ When adding documents to your multi-language collection, each must include both 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -820,6 +915,42 @@ if err != nil {
 }
 ```
 
+```cpp
+// Prepare multilingual documents
+milvus::EntityRow row;
+row["text"] = "Artificial intelligence is transforming technology";
+row["language"] = "english";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow();
+row["text"] = "Machine learning models require large datasets";
+row["language"] = "en";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow();
+row["text"] = "人工智能正在改变技术领域";
+row["language"] = "chinese";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow();
+row["text"] = "机器学习模型需要大型数据集";
+row["language"] = "cn";
+rows.emplace_back(std::move(row));
+
+// Insert the documents
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("multilingual_documents")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Print results
+std::cout << "Successfully inserted " << resp.Results().InsertCount() << " documents" << std::endl;
+std::cout << "Documents by language: 2 English, 2 Chinese" << std::endl;
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -883,6 +1014,7 @@ When searching with multi-language analyzers, `search_params` contains crucial c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -992,6 +1124,26 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("multilingual_documents")
+    .WithLimit(3)
+    .WithAnnsField("sparse")
+    .WithMetricType(milvus::MetricType::BM25)
+    .AddExtraParam("analyzer_name", "english")
+    .AddExtraParam("drop_ratio_search", "0")
+    .AddOutputField("text")
+    .AddOutputField("language")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+request.AddEmbeddedText("artificial intelligence");
+
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -1023,6 +1175,7 @@ This example demonstrates switching to the Chinese analyzer (using its alias `"c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1120,6 +1273,26 @@ for _, resultSet := range resultSets {
     }
 }
 
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("multilingual_documents")
+    .WithLimit(3)
+    .WithAnnsField("sparse")
+    .WithMetricType(milvus::MetricType::BM25)
+    .AddExtraParam("analyzer_name", "cn")
+    .AddExtraParam("drop_ratio_search", "0")
+    .AddOutputField("text")
+    .AddOutputField("language")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+request.AddEmbeddedText("人工智能");
+
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

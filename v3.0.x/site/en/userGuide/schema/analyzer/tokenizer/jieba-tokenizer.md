@@ -27,6 +27,7 @@ With the simple configuration, you only need to set the tokenizer to `"jieba"`. 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -52,6 +53,12 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "jieba"}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "jieba"}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -66,6 +73,7 @@ This simple configuration is equivalent to the following custom configuration:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -95,6 +103,15 @@ analyzerParams.put("hmm", true);
 analyzerParams = map[string]any{"type": "jieba", "dict": []any{"_default_"}, "mode": "search", "hmm": true}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "jieba"},
+    {"dict", {"_default_"}},
+    {"mode", "search"},
+    {"hmm", true}
+};
+```
+
 ```bash
 # restful
 ```
@@ -110,6 +127,7 @@ For more control, you can provide a custom configuration that allows you to spec
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -149,6 +167,17 @@ analyzerParams := map[string]interface{}{
       "hmm":  false,
   },
 }
+```
+
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"customDictionary"}},
+        {"mode", "exact"},
+        {"hmm", false}
+    }}
+};
 ```
 
 ```bash
@@ -205,6 +234,7 @@ Upload the file to the object store that your Milvus cluster is configured to us
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -232,6 +262,34 @@ client.add_file_resource(
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Register the uploaded file under a name you'll reference from analyzer configs.
+    status = client->AddFileResource(milvus::AddFileResourceRequest()
+        .WithName("zh_terms")
+        .WithPath("file/zh_terms.txt"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -243,6 +301,7 @@ Reference the registered resource in the tokenizer via `extra_dict_file`:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -275,6 +334,31 @@ client.run_analyzer(["milvus结巴分词器中文测试"], analyzer_params)
 
 ```go
 // go
+```
+
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"_default_"}},
+        {"mode", "exact"},
+        {"hmm", false},
+        {"extra_dict_file", {
+            {"type", "remote"},
+            {"resource_name", "zh_terms"},
+            {"file_name", "zh_terms.txt"}
+        }}
+    }}
+};
+
+milvus::RunAnalyzerResponse run_resp;
+status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+    .AddText("milvus结巴分词器中文测试")
+    .WithAnalyzerParams(analyzer_params), run_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash
@@ -315,6 +399,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -354,6 +439,17 @@ analyzerParams := map[string]interface{}{
 }
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"结巴分词器"}},
+        {"mode", "exact"},
+        {"hmm", false}
+    }}
+};
+```
+
 ```bash
 # restful
 ```
@@ -365,6 +461,7 @@ analyzerParams := map[string]interface{}{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -442,6 +539,30 @@ if err != nil {
 }
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"结巴分词器"}},
+        {"mode", "exact"},
+        {"hmm", false}
+    }}
+};
+
+// Sample text to analyze
+std::string sample_text = "milvus结巴分词器中文测试";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerResponse run_resp;
+status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+    .AddText(sample_text)
+    .WithAnalyzerParams(analyzer_params), run_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -451,4 +572,6 @@ if err != nil {
 ```python
 ['milvus', '结巴分词器', '中', '文', '测', '试']
 ```
+
+
 

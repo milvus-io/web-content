@@ -138,6 +138,7 @@ After your collection is set up with a numeric field (in this example, `event_da
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -163,6 +164,35 @@ ranker = Function(
         "scale": 7 * 24 * 60 * 60         # 7 days (in seconds, matching collection data)
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a linear decay ranker for event listings
+    // Note: All time parameters must use the same unit as your collection data
+    auto ranker = std::make_shared<milvus::DecayRerank>("event_relevance");
+    ranker->AddInputFieldName("event_date");
+    ranker->SetFunction("linear");
+    ranker->SetOrigin(1736899200);              // Current time (seconds, matching collection data)
+    ranker->SetOffset(12 * 60 * 60);            // 12 hour immediate events window (seconds)
+    ranker->SetDecay(0.5);                      // Half score at scale distance
+    ranker->SetScale(7 * 24 * 60 * 60);         // 7 days (in seconds, matching collection data)
+
+    return 0;
+}
 ```
 
 ```java
@@ -215,6 +245,7 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -230,6 +261,39 @@ result = milvus_client.search(
     ranker=ranker,                        # Apply the decay ranker
     consistency_level="Strong"
 )
+```
+
+```cpp
+// Create a linear decay ranker for event listings
+auto ranker = std::make_shared<milvus::DecayRerank>("event_relevance");
+ranker->AddInputFieldName("event_date");
+ranker->SetFunction("linear");
+ranker->SetOrigin(1736899200);
+ranker->SetOffset(12 * 60 * 60);
+ranker->SetDecay(0.5);
+ranker->SetScale(7 * 24 * 60 * 60);
+
+// Apply decay ranker to vector search
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("collection_name")
+    .WithAnnsField("dense")
+    .WithLimit(10)
+    .WithRerank(function_score)
+    .AddOutputField("title")
+    .AddOutputField("venue")
+    .AddOutputField("event_date")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

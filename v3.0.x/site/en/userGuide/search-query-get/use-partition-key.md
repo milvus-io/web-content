@@ -48,6 +48,7 @@ When you set a scalar field as the Partition Key, the field values cannot be emp
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -160,6 +161,35 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+    // Add the partition key
+    milvus::FieldSchema pkey("my_varchar", milvus::DataType::VARCHAR, "partition key");
+    pkey.SetMaxLength(512);
+    pkey.SetPartitionKey(true);
+    schema->AddField(pkey);
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -219,6 +249,7 @@ You can also determine the number of partitions to create along with the collect
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -250,6 +281,17 @@ err = client.CreateCollection(ctx,
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithNumPartitions(128));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -293,6 +335,7 @@ The following examples demonstrate Partition-Key-based filtering based on a spec
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -319,6 +362,14 @@ filter = "partition_key == 'x' && <other conditions>"
 
 // Filter based on multiple partition key values
 filter = "partition_key in ['x', 'y', 'z'] && <other conditions>"
+```
+
+```cpp
+// Filter based on a single partition key value, or
+filter = "partition_key == \"x\" && <other conditions>";
+
+// Filter based on multiple partition key values
+filter = "partition_key in [\"x\", \"y\", \"z\"] && <other conditions>";
 ```
 
 ```javascript
@@ -367,6 +418,7 @@ The following code examples demonstrate how to enable Partition Key Isolation.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -401,6 +453,17 @@ err = client.CreateCollection(ctx,
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .AddProperty("partitionkey.isolation", "true"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

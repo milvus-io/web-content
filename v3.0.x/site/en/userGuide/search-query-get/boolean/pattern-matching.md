@@ -22,6 +22,7 @@ Pattern matching expressions are written in the `filter` parameter. For example,
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -83,6 +84,36 @@ if err != nil {
     // handle error
 }
 fmt.Println(res)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::QueryResponse query_resp;
+    status = client->Query(milvus::QueryRequest()
+        .WithCollectionName("log_events")
+        .WithFilter("message =~ \"E[0-9]{4}\"")
+        .AddOutputField("message")
+        .AddOutputField("severity"), query_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
 ```
 
 ```javascript
@@ -209,6 +240,7 @@ For example:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -223,6 +255,10 @@ String filter = "filename =~ r\"\\.json$\"";
 
 ```go
 filter := `filename =~ r"\.json$"`
+```
+
+```cpp
+filter = R"(filename =~ r"\.json$")";
 ```
 
 ```javascript
@@ -258,6 +294,7 @@ To match one of several words, use alternation with `|`:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -274,6 +311,10 @@ String filter = "message =~ \"error|failed|timeout\"";
 filter := `message =~ "error|failed|timeout"`
 ```
 
+```cpp
+filter = "message =~ \"error|failed|timeout\"";
+```
+
 ```javascript
 const filter = 'message =~ "error|failed|timeout"';
 ```
@@ -288,6 +329,7 @@ When matching regex metacharacters literally, escape them in the regex pattern. 
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -302,6 +344,10 @@ String filter = "email =~ \"@gmail\\.com$\"";
 
 ```go
 filter := `email =~ "@gmail\\.com$"`
+```
+
+```cpp
+filter = R"(email =~ "@gmail\.com$")";
 ```
 
 ```javascript
@@ -324,6 +370,7 @@ Milvus regex matching uses substring semantics. The pattern does not need to mat
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -340,6 +387,10 @@ String filter = "message =~ \"E[0-9]{4}\"";
 filter := `message =~ "E[0-9]{4}"`
 ```
 
+```cpp
+filter = "message =~ \"E[0-9]{4}\"";
+```
+
 ```javascript
 const filter = 'message =~ "E[0-9]{4}"';
 ```
@@ -354,6 +405,7 @@ To match the entire field value, use the `^` and `$` anchors:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -371,6 +423,11 @@ String filter = "code =~ \"^E[0-9]{4}$\"";
 ```go
 // Match only values that are exactly E followed by four digits
 filter := `code =~ "^E[0-9]{4}$"`
+```
+
+```cpp
+// Match only values that are exactly E followed by four digits
+filter = R"(code =~ "^E[0-9]{4}$")";
 ```
 
 ```javascript
@@ -391,6 +448,7 @@ Regex filters do not match null values. This applies to both `=~` and `!~`. If y
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
+  <a href="#cpp">C++</a>
   <a href="#javascript">Node.js</a>
   <a href="#bash">cURL</a>
 </div>
@@ -405,6 +463,10 @@ String filter = "message !~ \"^DEBUG\" OR message IS NULL";
 
 ```go
 filter := `message !~ "^DEBUG" OR message IS NULL`
+```
+
+```cpp
+filter = "message !~ \"^DEBUG\" OR message IS NULL";
 ```
 
 ```javascript

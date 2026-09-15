@@ -152,6 +152,7 @@ Your collection schema must include at least three required fields:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -240,6 +241,37 @@ schema.WithField(entity.NewField().
     WithName("sparse").
     WithDataType(entity.FieldTypeSparseVector),
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create schema
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+    // Primary field
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+
+    // Text field with analyzer enabled
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+
+    // Sparse vector field; no dim required for sparse vectors
+    schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+
+    return 0;
+}
 ```
 
 ```javascript

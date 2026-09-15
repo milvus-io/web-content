@@ -205,6 +205,7 @@ To implement decay ranking, first define a `Function` object with the appropriat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -226,6 +227,35 @@ decay_ranker = Function(
         "decay": 0.5                    # Half score at scale distance
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a decay function for timestamp-based decay
+    // Note: All time parameters must use the same unit as your collection data
+    auto decay_ranker = std::make_shared<milvus::DecayRerank>("time_decay");
+    decay_ranker->AddInputFieldName("timestamp");
+    decay_ranker->SetFunction("gauss");
+    decay_ranker->SetOrigin(1736899200);  // 2025-01-15 00:00:00 in seconds
+    decay_ranker->SetScale(7 * 24 * 60 * 60);  // 7 days in seconds
+    decay_ranker->SetOffset(24 * 60 * 60);     // 1 day no-decay zone in seconds
+    decay_ranker->SetDecay(0.5);
+
+    return 0;
+}
 ```
 
 ```java
@@ -348,6 +378,7 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -363,6 +394,38 @@ results = milvus_client.search(
     ranker=decay_ranker,                      # Apply the decay ranker here
     consistency_level="Strong"
 )
+```
+
+```cpp
+// Create a decay function for timestamp-based decay
+auto decay_ranker = std::make_shared<milvus::DecayRerank>("time_decay");
+decay_ranker->AddInputFieldName("timestamp");
+decay_ranker->SetFunction("gauss");
+decay_ranker->SetOrigin(1736899200);  // 2025-01-15 00:00:00 in seconds
+decay_ranker->SetScale(7 * 24 * 60 * 60);  // 7 days in seconds
+decay_ranker->SetOffset(24 * 60 * 60);     // 1 day no-decay zone in seconds
+decay_ranker->SetDecay(0.5);
+
+// Use the decay function in standard vector search
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(decay_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("collection_name")
+    .WithAnnsField("vector_field")
+    .WithLimit(10)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddOutputField("timestamp")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

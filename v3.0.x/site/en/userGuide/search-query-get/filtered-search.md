@@ -71,6 +71,7 @@ The following code snippets demonstrate a search with standard filtering, and th
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -187,6 +188,50 @@ for _, resultSet := range resultSets {
 
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::SearchRequest request;
+    request.WithCollectionName("my_collection")
+        .WithAnnsField("vector")
+        .WithLimit(5)
+        .WithFilter("color like \"red%\" and likes > 50")
+        .AddOutputField("color")
+        .AddOutputField("likes");
+    request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+    milvus::SearchResponse response;
+    status = client->Search(request, response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    for (auto& result : response.Results().Results()) {
+        std::cout << "TopK results:" << std::endl;
+        milvus::EntityRows output_rows;
+        status = result.OutputRows(output_rows);
+        for (const auto& row : output_rows) {
+            std::cout << row << std::endl;
+        }
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -264,6 +309,7 @@ To conduct a filtered search with iterative filtering, you can do as follows:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -383,6 +429,34 @@ for _, resultSet := range resultSets {
     fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
 }
 
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    .WithFilter("color like \"red%\" and likes > 50")
+    .AddExtraParam("hints", "iterative_filter")
+    .AddOutputField("color")
+    .AddOutputField("likes");
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << row << std::endl;
+    }
+}
 ```
 
 ```javascript
