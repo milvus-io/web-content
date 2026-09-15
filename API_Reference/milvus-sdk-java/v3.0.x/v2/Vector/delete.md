@@ -16,6 +16,7 @@ delete(DeleteReq.builder()
     .filter(String filter)
     .ids(List<Object> ids)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
     .build()
 );
 ```
@@ -45,6 +46,10 @@ delete(DeleteReq.builder()
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
     A map of template variable values for parameterized filters.
+
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+
+    The consistency level for the delete operation.
 
 **RETURNS:**
 

@@ -14,6 +14,8 @@ compact(CompactReq.builder()
     .collectionName(String collectionName)
     .isClustering(Boolean isClustering)
     .isL0(Boolean isL0)
+    .targetSize(Long targetSize)
+    .targetSizeUnit(String targetSizeUnit)
     .build()
 );
 ```
@@ -35,6 +37,14 @@ compact(CompactReq.builder()
 - `isL0(Boolean isL0)`
 
     Whether to request L0 compaction. Defaults to `Boolean.FALSE` and is independent from clustering compaction.
+
+- `targetSize(Long targetSize)`
+
+    The target segment size, expressed in `targetSizeUnit`. When set to `null` or `0`, the server default applies.
+
+- `targetSizeUnit(String targetSizeUnit)`
+
+    The unit of the `targetSize` value, for example `"mb"`. Defaults to `"mb"`.
 
 **RETURNS:**
 

@@ -52,6 +52,10 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Geometry**.
 
+- Text(25)
+
+    Sets the data type to **Text**, which supports full-text search.
+
 - Timestamptz(26)
 
     Sets the data type to **Timestamptz**.
@@ -76,7 +80,7 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Sparse Vector**.
 
-- Inv8Vector(105)
+- Int8Vector(105)
 
     Sets the data type to **Int8 Vector**.
 

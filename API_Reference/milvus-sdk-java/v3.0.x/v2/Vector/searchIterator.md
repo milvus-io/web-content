@@ -1,7 +1,5 @@
 # searchIterator()
 
-# searchIterator()
-
 This method returns a search iterator to iterate search results.
 
 ```java
@@ -16,6 +14,7 @@ searchIterator(SearchIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .limit(long limit)
     .expr(String expr)
@@ -48,6 +47,10 @@ searchIterator(SearchIteratorReq.builder()
 - `vectorFieldName(String vectorFieldName)`
 
     The name of the vector field.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity.
 
 - `topK(int topK)`
 

@@ -116,6 +116,6 @@ Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors onl
 
 Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
 
-### EMB_LIST_HNSW
+### FMINDEX
 
-Sets the index type to EMB_LIST_HNSW. This applies to an Array of Structs field.
+Sets the index type to FMINDEX. This applies to VarChar fields, providing an exact byte-level substring index.

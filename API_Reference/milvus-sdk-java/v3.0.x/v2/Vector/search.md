@@ -15,6 +15,7 @@ SearchReq.builder()
     .collectionName(collectionName)
     .partitionNames(partitionNames)
     .annsField(annsField)
+    .metricType(metricType)
     .topK(topK)
     .filter(filter)
     .outputFields(outputFields)
@@ -34,6 +35,7 @@ SearchReq.builder()
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -46,6 +48,7 @@ SearchReq.builder()
     .clusterId(clusterId)
     .partitionNames(partitionNames)
     .annsField(annsField)
+    .metricType(metricType)
     .topK(topK)
     .filter(filter)
     .outputFields(outputFields)
@@ -65,6 +68,7 @@ SearchReq.builder()
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -89,6 +93,10 @@ SearchReq.builder()
 - `annsField(String annsField)`
 
     The vector field used for approximate nearest-neighbor search.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity.
 
 - `topK(int topK)`
 
@@ -165,6 +173,14 @@ SearchReq.builder()
 - `functionScore(FunctionScore functionScore)`
 
     The scoring functions applied to the search results.
+
+- `functionChains(List<FunctionChain> functionChains)`
+
+    Function chains applied to ordinary search. Mutually exclusive with `ranker` and `functionScore`.
+
+- `addFunctionChain(FunctionChain functionChain)`
+
+    Adds a function chain to the list applied to ordinary search. Mutually exclusive with `ranker` and `functionScore`.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
