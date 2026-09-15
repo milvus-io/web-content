@@ -14,6 +14,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .limit(long limit)
     .filter(String filter)
@@ -26,6 +27,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     .timezone(String timezone)
     .groupByFieldName(String groupByFieldName)
     .batchSize(long batchSize)
+    .externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
     .build()
 );
@@ -48,6 +50,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 - `vectorFieldName(String vectorFieldName)`
 
     The name of the vector field to search.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity.
 
 - `topK(int topK)`
 
@@ -96,6 +102,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 - `batchSize(long batchSize)`
 
     The batch size for iterator operations.
+
+- `externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)`
+
+    A function applied to each batch of search results before they are returned.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 

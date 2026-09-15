@@ -13,6 +13,7 @@ get(GetReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
+    .partitionNames(List<String> partitionNames)
     .ids(List<Object> ids)
     .outputFields(List<String> outputFields)
     .build()
@@ -32,6 +33,10 @@ get(GetReq.builder()
 - `partitionName(String partitionName)`
 
     The name of a partition.
+
+- `partitionNames(List<String> partitionNames)`
+
+    A list of partition names.
 
 - `ids(List<Object> ids)`
 

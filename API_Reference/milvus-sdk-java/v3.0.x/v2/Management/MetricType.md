@@ -28,6 +28,10 @@ This is an enumeration that provides the following constants.
 
     Sets the metric type to **JACCARD**. This applies to binary vectors only.
 
+- MHJACCARD
+
+    Sets the metric type to **MHJACCARD**, the modified Hamming-Jaccard distance. This applies to binary vectors only.
+
 - BM25
 
     Sets the metric type to **BM25**. This applies to sparse vector fields derived from BM25 functions.
