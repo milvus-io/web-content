@@ -109,6 +109,7 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
@@ -246,7 +247,7 @@ schema.WithField(entity.NewField().
     WithDim(<span class="hljs-number">512</span>),
 ).WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
@@ -264,7 +265,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>,
-        <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>
+        <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
@@ -273,7 +274,7 @@ schema.WithField(entity.NewField().
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SPARSE_FLOAT_VECTOR</span>
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SparseFloatVector</span>
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
@@ -294,17 +295,17 @@ schema.WithField(entity.NewField().
     },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> bm25Function=<span class="hljs-string">&#x27;{
-    &quot;name&quot;: &quot;text_bm25_emb&quot;,
-    &quot;type&quot;: &quot;BM25&quot;,
-    &quot;inputFieldNames&quot;: [&quot;text&quot;],
-    &quot;outputFieldNames&quot;: [&quot;text_sparse&quot;],
-    &quot;params&quot;: {}
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: false,
-        &quot;functions&quot;: [$bm25Function],
+        &quot;functions&quot;: [
+            {
+                &quot;name&quot;: &quot;text_bm25_emb&quot;,
+                &quot;type&quot;: &quot;BM25&quot;,
+                &quot;inputFieldNames&quot;: [&quot;text&quot;],
+                &quot;outputFieldNames&quot;: [&quot;text_sparse&quot;],
+                &quot;params&quot;: {}
+            }
+        ],
         &quot;fields&quot;: [
             {
                 &quot;fieldName&quot;: &quot;id&quot;,
@@ -340,6 +341,28 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25, <span class="hljs-string">&quot;text bm25 function&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>);
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text_dense&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">768</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;text_sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;image_dense&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">512</span>));
+schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-index" class="common-anchor-header">Create index<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -368,6 +391,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
@@ -408,7 +432,7 @@ Map&lt;String, Object&gt; denseParams = <span class="hljs-keyword">new</span> <s
         .build();
 
 Map&lt;String, Object&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
 <span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForTextSparse</span> <span class="hljs-operator">=</span> IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .indexName(<span class="hljs-string">&quot;text_sparse_index&quot;</span>)
@@ -435,7 +459,6 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
     index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.2</span>))
 indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;image_dense&quot;</span>,
     index.NewAutoIndex(index.MetricType(entity.IP)))
-)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
@@ -445,7 +468,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
 },{
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;text_sparse_index&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;IndexType.SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
     <span class="hljs-attr">params</span>: {
       <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, 
@@ -479,6 +502,15 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">text_sparse_index</span><span class="hljs-params">(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-string">&quot;text_sparse_index&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25)</span></span>;
+text_sparse_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+
+std::vector&lt;milvus::IndexDesc&gt; indexes = {
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-string">&quot;text_dense_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+    text_sparse_index,
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-string">&quot;image_dense_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+};
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -501,6 +533,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -517,7 +550,7 @@ client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-        WithIndexOptions(indexOption1, indexOption2))
+        WithIndexOptions(indexOption1, indexOption2, indexOption3))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
@@ -526,6 +559,7 @@ client.createCollection(createCollectionReq);
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">fields</span>: fields,
+    <span class="hljs-attr">functions</span>: functions,
     <span class="hljs-attr">index_params</span>: index_params,
 })
 <button class="copy-code-btn"></button></code></pre>
@@ -541,6 +575,14 @@ curl --request POST \
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -572,6 +614,7 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
@@ -609,25 +652,26 @@ res = client.insert(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">0</span>);
 row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>);
-row1.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense1));
-row1.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense));
+row1.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, ...}));
+row1.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.6366019600530924f</span>, -<span class="hljs-number">0.09323198122475052f</span>, ...}));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
 row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>);
-row2.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense2));
-row2.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense2));
+row2.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.19886812562848388f</span>, <span class="hljs-number">0.06023560599112088f</span>, <span class="hljs-number">0.6976963061752597f</span>, ...}));
+row2.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.6414180010301553f</span>, <span class="hljs-number">0.8976979978567611f</span>, ...}));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
 row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>);
-row3.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(dense3));
-row3.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(sparse3));
+row3.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.43742130801983836f</span>, -<span class="hljs-number">0.5597502546264526f</span>, <span class="hljs-number">0.6457887650909682f</span>, ...}));
+row3.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.6901259768402174f</span>, <span class="hljs-number">0.6100500332193755f</span>, ...}));
 
 List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
@@ -653,7 +697,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         {<span class="hljs-number">0.6366019600530924</span>, <span class="hljs-number">-0.09323198122475052</span>, ...},
         {<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...},
         {<span class="hljs-number">-0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...},
-    }).
+    }))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
@@ -684,6 +728,35 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
     ],
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;random&gt;</span></span>
+
+<span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt;
+<span class="hljs-title">GenerateFloatVector</span><span class="hljs-params">(<span class="hljs-type">int</span> dimension)</span> </span>{
+    std::random_device rd;
+    <span class="hljs-function">std::mt19937 <span class="hljs-title">ran</span><span class="hljs-params">(rd())</span></span>;
+    <span class="hljs-function">std::uniform_real_distribution&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">float_gen</span><span class="hljs-params">(<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>)</span></span>;
+    <span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">vector</span><span class="hljs-params">(dimension)</span></span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> d = <span class="hljs-number">0</span>; d &lt; dimension; ++d) {
+        vector[d] = <span class="hljs-built_in">float_gen</span>(ran);
+    }
+    <span class="hljs-keyword">return</span> vector;
+}
+
+milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">0</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}}
+};
+
+milvus::InsertResponse response;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                        response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Perform-Hybrid-Search" class="common-anchor-header">Perform Hybrid Search<button data-href="#Perform-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -732,6 +805,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
@@ -752,6 +826,7 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -775,9 +850,9 @@ reqs = [request_1, request_2, request_3]
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">float</span>[] queryDense = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.0475336798f</span>,  <span class="hljs-number">0.0521207601f</span>,  <span class="hljs-number">0.0904406682f</span>, ...};
-<span class="hljs-type">float</span>[] queryMultimodal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.0158298651f</span>, <span class="hljs-number">0.5264158340f</span>, ...}
+<span class="hljs-type">float</span>[] queryMultimodal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.0158298651f</span>, <span class="hljs-number">0.5264158340f</span>, ...};
 
-List&lt;BaseVector&gt; queryTexts = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>);)
+List&lt;BaseVector&gt; queryTexts = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>));
 List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryDense));
 List&lt;BaseVector&gt; queryMultimodalVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryMultimodal));
 
@@ -800,7 +875,7 @@ searchRequests.add(AnnSearchReq.builder()
         .topK(<span class="hljs-number">2</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryText := entity.Text({<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>})
+<pre><code translate="no" class="language-go">queryText := entity.Text(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>)
 queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...}
 queryMultimodalVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...}
 
@@ -822,7 +897,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_1 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -835,7 +910,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_3 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_multimodal_vector, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -858,6 +933,30 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
         &quot;limit&quot;: 2
     }
  ]&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>;
+<span class="hljs-keyword">auto</span> query_dense_vector = <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>);
+<span class="hljs-keyword">auto</span> query_multimodal_vector = <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>);
+
+<span class="hljs-comment">// text semantic search (dense)</span>
+<span class="hljs-keyword">auto</span> sub_req1 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddFloatVector</span>(query_dense_vector)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_dense&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+sub_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-comment">// full-text search (sparse)</span>
+<span class="hljs-keyword">auto</span> sub_req2 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddEmbeddedText</span>(query_text)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// text-to-image search (multimodal)</span>
+<span class="hljs-keyword">auto</span> sub_req3 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddFloatVector</span>(query_multimodal_vector)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;image_dense&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <p>Given that the parameter <code translate="no">limit</code> is set to 2, each <code translate="no">AnnSearchRequest</code> returns 2 search results. In this example, 3 <code translate="no">AnnSearchRequest</code> instances are created, resulting in a total of 6 search results.</p>
 <h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Step 2: Configure a reranking strategy<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
@@ -883,6 +982,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
@@ -902,7 +1002,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
         .functionType(FunctionType.RERANK)
         .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
         .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
-        .build()
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> rerank = {
   <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rrf&#x27;</span>,
@@ -915,31 +1015,13 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
   },
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-)
-
-ranker := entity.NewFunction().
-    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
-    WithType(entity.FunctionTypeRerank).
-    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
-    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Restful</span>
-<span class="hljs-built_in">export</span> functionScore=<span class="hljs-string">&#x27;{
-    &quot;functions&quot;: [
-        {
-            &quot;name&quot;: &quot;rrf&quot;,
-            &quot;type&quot;: &quot;Rerank&quot;,
-            &quot;inputFieldNames&quot;: [],
-            &quot;params&quot;: {
-                &quot;reranker&quot;: &quot;rrf&quot;,
-                &quot;k&quot;: 100
-            }
-        }
-    ]
-}&#x27;</span>
+<span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{&quot;k&quot;: 100}&#x27;</span>
 
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> ranker = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::RRFRerank&gt;(<span class="hljs-number">100</span>);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Step 3: Perform a Hybrid Search<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -963,6 +1045,7 @@ ranker := entity.NewFunction().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -982,7 +1065,7 @@ ranker := entity.NewFunction().
 <span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .searchRequests(searchRequests)
-        .ranker(reranker)
+        .ranker(ranker)
         .topK(<span class="hljs-number">2</span>)
         .build();
 
@@ -1034,8 +1117,31 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">HybridSearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req1)))
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req2)))
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req3)))
+                   .<span class="hljs-built_in">WithRerank</span>(ranker)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <p>The following is the output:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
+<pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>With the <code translate="no">limit=2</code> parameter specified for the Hybrid Search, Milvus will rerank the six results obtained from the three searches. Ultimately, they will return only the top two most similar results.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Advanced usage<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
@@ -1071,6 +1177,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h3><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the hybrid search call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
 <p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
 <p>The example below shows how to temporarily set a timezone for a hybrid search operation:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -1078,4 +1192,134 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     limit=<span class="hljs-number">2</span>,
 <span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;AnnSearchReq&gt; tzRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;text_dense&quot;</span>)
+        .vectors(queryDenseVectors)
+        .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+        .vectors(queryTexts)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;image_dense&quot;</span>)
+        .vectors(queryMultimodalVectors)
+        .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">tzHybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .searchRequests(tzRequests)
+        .ranker(ranker)
+        .topK(<span class="hljs-number">2</span>)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">tzSearchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(tzHybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">tzRequest1 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>)).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+tzRequest2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-number">2</span>, queryText).
+    WithAnnParam(annParam).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+tzRequest3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryMultimodalVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>)).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+resultSets, err = client.HybridSearch(ctx, milvusclient.NewHybridSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-number">2</span>,
+    tzRequest1,
+    tzRequest2,
+    tzRequest3,
+).WithReranker(reranker))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [
+    { ...search_param_1, <span class="hljs-attr">params</span>: { <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+    { ...search_param_2, <span class="hljs-attr">params</span>: { <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+    { ...search_param_3, <span class="hljs-attr">params</span>: { <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+  ],
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">rerank</span>: rerank
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;search&quot;: [
+        {
+            &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]],
+            &quot;annsField&quot;: &quot;text_dense&quot;,
+            &quot;params&quot;: {&quot;nprobe&quot;: 10, &quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        },
+        {
+            &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
+            &quot;annsField&quot;: &quot;text_sparse&quot;,
+            &quot;params&quot;: {&quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        },
+        {
+            &quot;data&quot;: [[0.015829865178701663, 0.5264158340734488, ...]],
+            &quot;annsField&quot;: &quot;image_dense&quot;,
+            &quot;params&quot;: {&quot;nprobe&quot;: 10, &quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        }
+    ],
+    &quot;rerank&quot;: {
+        &quot;strategy&quot;: &quot;rrf&quot;,
+        &quot;params&quot;: {&quot;k&quot;: 100}
+    },
+    &quot;limit&quot;: 2
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> tz_req1 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_dense_vector)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_dense&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+tz_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-keyword">auto</span> tz_req2 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddEmbeddedText</span>(query_text)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+<span class="hljs-keyword">auto</span> tz_req3 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_multimodal_vector)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;image_dense&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+tz_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-keyword">auto</span> tz_request = milvus::<span class="hljs-built_in">HybridSearchRequest</span>()
+                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req1)))
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req2)))
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req3)))
+                      .<span class="hljs-built_in">WithRerank</span>(ranker)
+                      .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+milvus::SearchResponse tz_response;
+status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(tz_request, tz_response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
