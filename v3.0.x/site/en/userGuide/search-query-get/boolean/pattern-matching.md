@@ -23,6 +23,7 @@ Pattern matching expressions are written in the `filter` parameter. For example,
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -121,6 +122,31 @@ curl --request POST \
   }'
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("log_events")
+                   .WithFilter(R"(message =~ "E[0-9]{4}")")
+                   .AddOutputField("message")
+                   .AddOutputField("severity");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
 
 ## Supported field types
@@ -210,6 +236,7 @@ For example:
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -231,6 +258,10 @@ const filter = 'filename =~ r"\\.json$"';
 
 ```bash
 filter='filename =~ r"\.json$"'
+```
+
+```cpp
+std::string filter = R"(filename =~ r"\.json$")";
 ```
 
 This matches strings that end with `.json`, such as `report.json`.
@@ -259,6 +290,7 @@ To match one of several words, use alternation with `|`:
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -282,6 +314,10 @@ const filter = 'message =~ "error|failed|timeout"';
 filter='message =~ "error|failed|timeout"'
 ```
 
+```cpp
+std::string filter = R"(message =~ "error|failed|timeout")";
+```
+
 When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python, Java, Go, or Node.js source string:
 
 <div class="multipleCode">
@@ -289,6 +325,7 @@ When matching regex metacharacters literally, escape them in the regex pattern. 
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -312,6 +349,10 @@ const filter = 'email =~ "@gmail\\.com$"';
 filter='email =~ "@gmail\\.com$"'
 ```
 
+```cpp
+std::string filter = R"(email =~ "@gmail\\.com$")";
+```
+
 Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
 
 ### Matching behavior
@@ -325,6 +366,7 @@ Milvus regex matching uses substring semantics. The pattern does not need to mat
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -348,6 +390,10 @@ const filter = 'message =~ "E[0-9]{4}"';
 filter='message =~ "E[0-9]{4}"'
 ```
 
+```cpp
+std::string filter = R"(message =~ "E[0-9]{4}")";
+```
+
 To match the entire field value, use the `^` and `$` anchors:
 
 <div class="multipleCode">
@@ -355,6 +401,7 @@ To match the entire field value, use the `^` and `$` anchors:
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -383,6 +430,10 @@ const filter = 'code =~ "^E[0-9]{4}$"';
 filter='code =~ "^E[0-9]{4}$"'
 ```
 
+```cpp
+std::string filter = R"(code =~ "^E[0-9]{4}$")";
+```
+
 **Nullable VARCHAR fields**
 
 Regex filters do not match null values. This applies to both `=~` and `!~`. If you want to exclude a regex pattern but keep null values, explicitly add `OR field IS NULL`:
@@ -392,6 +443,7 @@ Regex filters do not match null values. This applies to both `=~` and `!~`. If y
   <a href="#java">Java</a>
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
   <a href="#bash">cURL</a>
 </div>
 
@@ -413,6 +465,10 @@ const filter = 'message !~ "^DEBUG" OR message IS NULL';
 
 ```bash
 filter='message !~ "^DEBUG" OR message IS NULL'
+```
+
+```cpp
+std::string filter = R"(message !~ "^DEBUG" OR message IS NULL)";
 ```
 
 **JSON paths**
