@@ -61,6 +61,7 @@ Your collection schema must include at least three required fields:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -172,7 +173,7 @@ const schema = [
   },
 ];
 
-console.log(res.results)
+console.log(schema);
 ```
 
 ```bash
@@ -200,6 +201,22 @@ export schema='{
         ]
     }'
 ```
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+```
 
 In the preceding config,
 
@@ -220,6 +237,7 @@ Define the function and add it to your schema:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -268,7 +286,7 @@ const functions = [
       output_field_names: ['sparse'],
       params: {},
     },
-]；
+];
 ```
 
 ```bash
@@ -304,6 +322,12 @@ export schema='{
             }
         ]
     }'
+```
+```cpp
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+schema->AddFunction(function);
 ```
 
 <table>
@@ -344,6 +368,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -418,6 +443,12 @@ export indexParams='[
         }
     ]'
 ```
+```cpp
+auto index_params = milvus::IndexDesc("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_params.AddExtraParam("bm25_k1", "1.2");
+index_params.AddExtraParam("bm25_b", "0.75");
+```
 
 <table>
    <tr>
@@ -463,6 +494,7 @@ Now create the collection using the schema and index parameters defined.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -496,12 +528,12 @@ if err != nil {
 ```
 
 ```javascript
-await client.create_collection(
-    collection_name: 'my_collection', 
-    schema: schema, 
+await client.create_collection({
+    collection_name: 'my_collection',
+    schema: schema,
     index_params: index_params,
     functions: functions
-);
+});
 ```
 
 ```bash
@@ -512,11 +544,21 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
+```
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithCollectionSchema(schema)
+                                    .AddIndex(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Insert text data
@@ -528,6 +570,7 @@ After setting up your collection and index, you're ready to insert text data. In
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -559,17 +602,29 @@ client.insert(InsertReq.builder()
 ```
 
 ```go
-// go
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithVarcharColumn("text", []string{
+        "information retrieval is a field of study.",
+        "information retrieval focuses on finding relevant information in large datasets.",
+        "data mining and information retrieval overlap in research.",
+    }),
+)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
+
 
 ```javascript
 await client.insert({
-collection_name: 'my_collection', 
-data: [
-    {'text': 'information retrieval is a field of study.'},
-    {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
-    {'text': 'data mining and information retrieval overlap in research.'},
-]);
+    collection_name: 'my_collection',
+    data: [
+        {'text': 'information retrieval is a field of study.'},
+        {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
+        {'text': 'data mining and information retrieval overlap in research.'},
+    ],
+});
 ```
 
 ```bash
@@ -577,6 +632,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "data": [
         {"text": "information retrieval is a field of study."},
@@ -586,6 +642,22 @@ curl --request POST \
     "collectionName": "my_collection"
 }'
 
+```
+```cpp
+milvus::EntityRows data = {
+    {{"text", "information retrieval is a field of study."}},
+    {{"text", "information retrieval focuses on finding relevant information in large datasets."}},
+    {{"text", "data mining and information retrieval overlap in research."}}
+};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data))
+                                , response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Perform full text search
@@ -603,6 +675,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -660,13 +733,13 @@ for _, resultSet := range resultSets {
 ```
 
 ```javascript
-await client.search(
-    collection_name: 'my_collection', 
+await client.search({
+    collection_name: 'my_collection',
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
     output_fields: ['text'],
     limit: 3,
-)
+});
 ```
 
 ```bash
@@ -674,6 +747,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data-raw '{
     "collectionName": "my_collection",
     "data": [
@@ -688,6 +762,20 @@ curl --request POST \
         "params":{}
     }
 }'
+```
+```cpp
+auto request = milvus::SearchRequest()
+                       .WithCollectionName("my_collection")
+                       .AddEmbeddedText("whats the focus of information retrieval?")
+                       .WithLimit(3)
+                       .WithAnnsField("sparse")
+                       .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 <table>
@@ -742,25 +830,88 @@ Example:
 ```python
 # ❌ This throws an error - you cannot output the sparse field
 client.search(
-    collection_name='my_collection', 
+    collection_name='my_collection',
     data=['query text'],
     anns_field='sparse',
     # highlight-next-line
-    output_fields=['text', 'sparse']  # 'sparse' causes an error
+    output_fields=['text', 'sparse'],  # 'sparse' causes an error
     limit=3,
     search_params=search_params
 )
 
 # ✅ This works - output text fields only
 client.search(
-    collection_name='my_collection', 
+    collection_name='my_collection',
     data=['query text'],
     anns_field='sparse',
     # highlight-next-line
-    output_fields=['text']
+    output_fields=['text'],
     limit=3,
     search_params=search_params
 )
+```
+
+```java
+// Searching with the sparse field in outputFields throws an error.
+// Only output the original text and metadata fields.
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(new EmbeddedText("query text")))
+        .annsField("sparse")
+        .topK(3)
+        .outputFields(Collections.singletonList("text"))
+        .build());
+```
+
+```go
+// Searching with the sparse field in output_fields throws an error.
+// Only output the original text and metadata fields.
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection",
+    3,
+    []entity.Vector{entity.Text("query text")},
+).WithConsistencyLevel(entity.ClStrong).
+    WithANNSField("sparse").
+    WithAnnParam(index.NewCustomAnnParam()).
+    WithOutputFields("text"))
+```
+
+```javascript
+// Searching with the sparse field in output_fields throws an error.
+// Only output the original text and metadata fields.
+await client.search({
+    collection_name: 'my_collection',
+    data: ['query text'],
+    anns_field: 'sparse',
+    output_fields: ['text'],
+    limit: 3,
+});
+```
+
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+--data-raw '{
+    "collectionName": "my_collection",
+    "data": ["query text"],
+    "annsField": "sparse",
+    "limit": 3,
+    "outputFields": ["text"]
+}'
+```
+
+```cpp
+// Searching with the sparse field in output_fields throws an error.
+// Only output the original text and metadata fields.
+milvus::SearchRequest request = milvus::SearchRequest()
+    .WithCollectionName("my_collection")
+    .AddEmbeddedText("query text")
+    .WithLimit(3)
+    .WithAnnsField("sparse")
+    .AddOutputField("text");
 ```
 
 ### Why do I need to define a sparse vector field if I can't access it?
