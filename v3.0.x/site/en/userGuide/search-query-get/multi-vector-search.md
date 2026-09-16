@@ -56,6 +56,7 @@ Since we will use the built-in BM25 algorithm to perform a full-text search on t
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -201,7 +202,7 @@ schema.WithField(entity.NewField().
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+import { MilvusClient, DataType, FunctionType } from "@zilliz/milvus2-sdk-node";
 
 const address = "http://localhost:19530";
 const token = "root:Milvus";
@@ -219,7 +220,7 @@ const fields = [
         name: "text",
         data_type: DataType.VarChar,
         max_length: 1000,
-        enable_match: true
+        enable_analyzer: true
     },
     {
         name: "text_dense",
@@ -228,7 +229,7 @@ const fields = [
     },
     {
         name: "text_sparse",
-        data_type: DataType.SPARSE_FLOAT_VECTOR
+        data_type: DataType.SparseFloatVector
     },
     {
         name: "image_dense",
@@ -251,17 +252,17 @@ const functions = [
 ```
 
 ```bash
-export bm25Function='{
-    "name": "text_bm25_emb",
-    "type": "BM25",
-    "inputFieldNames": ["text"],
-    "outputFieldNames": ["text_sparse"],
-    "params": {}
-}'
-
 export schema='{
         "autoId": false,
-        "functions": [$bm25Function],
+        "functions": [
+            {
+                "name": "text_bm25_emb",
+                "type": "BM25",
+                "inputFieldNames": ["text"],
+                "outputFieldNames": ["text_sparse"],
+                "params": {}
+            }
+        ],
         "fields": [
             {
                 "fieldName": "id",
@@ -298,6 +299,30 @@ export schema='{
     }'
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25, "text bm25 function");
+function->AddInputFieldName("text");
+function->AddOutputFieldName("text_sparse");
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("text_dense", milvus::DataType::FLOAT_VECTOR).WithDimension(768));
+schema->AddField({"text_sparse", milvus::DataType::SPARSE_FLOAT_VECTOR});
+schema->AddField(milvus::FieldSchema("image_dense", milvus::DataType::FLOAT_VECTOR).WithDimension(512));
+schema->AddFunction(function);
+```
+
 ### Create index
 
 After defining the collection schema, the next step is to configure the vector indexes and specify the similarity metrics. In the given example:
@@ -316,6 +341,7 @@ You can choose other index types as necessary to best suit your needs and data t
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -360,7 +386,7 @@ IndexParam indexParamForTextDense = IndexParam.builder()
         .build();
 
 Map<String, Object> sparseParams = new HashMap<>();
-sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");
+sparseParams.put("inverted_index_algo", "DAAT_MAXSCORE");
 IndexParam indexParamForTextSparse = IndexParam.builder()
         .fieldName("text_sparse")
         .indexName("text_sparse_index")
@@ -389,7 +415,6 @@ indexOption2 := milvusclient.NewCreateIndexOption("my_collection", "text_sparse"
     index.NewSparseInvertedIndex(entity.BM25, 0.2))
 indexOption3 := milvusclient.NewCreateIndexOption("my_collection", "image_dense",
     index.NewAutoIndex(index.MetricType(entity.IP)))
-)
 ```
 
 ```javascript
@@ -401,7 +426,7 @@ const index_params = [{
 },{
     field_name: "text_sparse",
     index_name: "text_sparse_index",
-    index_type: "IndexType.SPARSE_INVERTED_INDEX",
+    index_type: "SPARSE_INVERTED_INDEX",
     metric_type: "BM25",
     params: {
       inverted_index_algo: "DAAT_MAXSCORE", 
@@ -438,6 +463,17 @@ export indexParams='[
     ]'
 ```
 
+```cpp
+milvus::IndexDesc text_sparse_index("text_sparse", "text_sparse_index", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+text_sparse_index.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+
+std::vector<milvus::IndexDesc> indexes = {
+    milvus::IndexDesc("text_dense", "text_dense_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+    text_sparse_index,
+    milvus::IndexDesc("image_dense", "image_dense_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+};
+```
+
 ### Create collection
 
 Create a collection named `demo` with the collection schema and indexes configured in the previous two steps.
@@ -448,6 +484,7 @@ Create a collection named `demo` with the collection schema and indexes configur
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -470,7 +507,7 @@ client.createCollection(createCollectionReq);
 ```go
 err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption("my_collection", schema).
-        WithIndexOptions(indexOption1, indexOption2))
+        WithIndexOptions(indexOption1, indexOption2, indexOption3))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
@@ -481,6 +518,7 @@ if err != nil {
 res = await client.createCollection({
     collection_name: "my_collection",
     fields: fields,
+    functions: functions,
     index_params: index_params,
 })
 ```
@@ -499,6 +537,16 @@ curl --request POST \
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("my_collection")
+                                      .WithCollectionSchema(schema)
+                                      .WithIndexes(std::move(indexes)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Insert data
@@ -523,6 +571,7 @@ Since this example uses the built-in BM25 function to generate sparse embeddings
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -564,25 +613,26 @@ res = client.insert(
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
 
 Gson gson = new Gson();
 JsonObject row1 = new JsonObject();
 row1.addProperty("id", 0);
 row1.addProperty("text", "Red cotton t-shirt with round neck");
-row1.add("text_dense", gson.toJsonTree(text_dense1));
-row1.add("image_dense", gson.toJsonTree(image_dense));
+row1.add("text_dense", gson.toJsonTree(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, ...}));
+row1.add("image_dense", gson.toJsonTree(new float[]{0.6366019600530924f, -0.09323198122475052f, ...}));
 
 JsonObject row2 = new JsonObject();
 row2.addProperty("id", 1);
 row2.addProperty("text", "Wireless noise-cancelling over-ear headphones");
-row2.add("text_dense", gson.toJsonTree(text_dense2));
-row2.add("image_dense", gson.toJsonTree(image_dense2));
+row2.add("text_dense", gson.toJsonTree(new float[]{0.19886812562848388f, 0.06023560599112088f, 0.6976963061752597f, ...}));
+row2.add("image_dense", gson.toJsonTree(new float[]{0.6414180010301553f, 0.8976979978567611f, ...}));
 
 JsonObject row3 = new JsonObject();
 row3.addProperty("id", 2);
 row3.addProperty("text", "Stainless steel water bottle, 500ml");
-row3.add("text_dense", gson.toJsonTree(dense3));
-row3.add("image_dense", gson.toJsonTree(sparse3));
+row3.add("text_dense", gson.toJsonTree(new float[]{0.43742130801983836f, -0.5597502546264526f, 0.6457887650909682f, ...}));
+row3.add("image_dense", gson.toJsonTree(new float[]{-0.6901259768402174f, 0.6100500332193755f, ...}));
 
 List<JsonObject> data = Arrays.asList(row1, row2, row3);
 InsertReq insertReq = InsertReq.builder()
@@ -610,7 +660,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collecti
         {0.6366019600530924, -0.09323198122475052, ...},
         {0.6414180010301553, 0.8976979978567611, ...},
         {-0.6901259768402174, 0.6100500332193755, ...},
-    }).
+    }))
 if err != nil {
     fmt.Println(err.Error())
     // handle err
@@ -648,6 +698,37 @@ curl --request POST \
 }'
 ```
 
+```cpp
+#include <random>
+
+std::vector<float>
+GenerateFloatVector(int dimension) {
+    std::random_device rd;
+    std::mt19937 ran(rd());
+    std::uniform_real_distribution<float> float_gen(0.0, 1.0);
+    std::vector<float> vector(dimension);
+    for (auto d = 0; d < dimension; ++d) {
+        vector[d] = float_gen(ran);
+    }
+    return vector;
+}
+
+milvus::EntityRows data = {
+    {{"id", 0}, {"text", "Red cotton t-shirt with round neck"}, {"text_dense", GenerateFloatVector(768)}, {"image_dense", GenerateFloatVector(512)}},
+    {{"id", 1}, {"text", "Wireless noise-cancelling over-ear headphones"}, {"text_dense", GenerateFloatVector(768)}, {"image_dense", GenerateFloatVector(512)}},
+    {{"id", 2}, {"text", "Stainless steel water bottle, 500ml"}, {"text_dense", GenerateFloatVector(768)}, {"image_dense", GenerateFloatVector(512)}}
+};
+
+milvus::InsertResponse response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(data)),
+                        response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ## Perform Hybrid Search
 
 ### Step 1: Create multiple AnnSearchRequest instances
@@ -676,6 +757,7 @@ To demonstrate the capabilities of various search vector fields, we will constru
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -698,6 +780,7 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     "data": [query_text],
     "anns_field": "text_sparse",
+    "param": {},
     "limit": 2
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -723,9 +806,9 @@ import io.milvus.v2.service.vector.request.data.SparseFloatVec;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 float[] queryDense = new float[]{-0.0475336798f,  0.0521207601f,  0.0904406682f, ...};
-float[] queryMultimodal = new float[]{0.0158298651f, 0.5264158340f, ...}
+float[] queryMultimodal = new float[]{0.0158298651f, 0.5264158340f, ...};
 
-List<BaseVector> queryTexts = Collections.singletonList(new EmbeddedText("white headphones, quiet and comfortable");)
+List<BaseVector> queryTexts = Collections.singletonList(new EmbeddedText("white headphones, quiet and comfortable"));
 List<BaseVector> queryDenseVectors = Collections.singletonList(new FloatVec(queryDense));
 List<BaseVector> queryMultimodalVectors = Collections.singletonList(new FloatVec(queryMultimodal));
 
@@ -750,7 +833,7 @@ searchRequests.add(AnnSearchReq.builder()
 ```
 
 ```go
-queryText := entity.Text({"white headphones, quiet and comfortable"})
+queryText := entity.Text("white headphones, quiet and comfortable")
 queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...}
 queryMultimodalVector := []float32{0.015829865178701663, 0.5264158340734488, ...}
 
@@ -774,7 +857,7 @@ const query_multimodal_vector = [0.015829865178701663, 0.5264158340734488, ...]
 const search_param_1 = {
     "data": query_vector, 
     "anns_field": "text_dense", 
-    "param": {"nprobe": 10},
+    "params": {"nprobe": 10},
     "limit": 2
 }
 
@@ -787,7 +870,7 @@ const search_param_2 = {
 const search_param_3 = {
     "data": query_multimodal_vector, 
     "anns_field": "image_dense", 
-    "param": {"nprobe": 10},
+    "params": {"nprobe": 10},
     "limit": 2
 }
 ```
@@ -814,6 +897,32 @@ export req='[
  ]'
 ```
 
+```cpp
+auto query_text = "white headphones, quiet and comfortable";
+auto query_dense_vector = GenerateFloatVector(768);
+auto query_multimodal_vector = GenerateFloatVector(512);
+
+// text semantic search (dense)
+auto sub_req1 = milvus::SubSearchRequest()
+                    .AddFloatVector(query_dense_vector)
+                    .WithAnnsField("text_dense")
+                    .WithLimit(2);
+sub_req1.AddExtraParam("nprobe", "10");
+
+// full-text search (sparse)
+auto sub_req2 = milvus::SubSearchRequest()
+                    .AddEmbeddedText(query_text)
+                    .WithAnnsField("text_sparse")
+                    .WithLimit(2);
+
+// text-to-image search (multimodal)
+auto sub_req3 = milvus::SubSearchRequest()
+                    .AddFloatVector(query_multimodal_vector)
+                    .WithAnnsField("image_dense")
+                    .WithLimit(2);
+sub_req3.AddExtraParam("nprobe", "10");
+```
+
 Given that the parameter `limit` is set to 2, each `AnnSearchRequest` returns 2 search results. In this example, 3 `AnnSearchRequest` instances are created, resulting in a total of 6 search results.
 
 ### Step 2: Configure a reranking strategy
@@ -828,6 +937,7 @@ In this example, since there is no particular emphasis on specific search querie
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -851,7 +961,7 @@ Function ranker = Function.builder()
         .functionType(FunctionType.RERANK)
         .param("reranker", "rrf")
         .param("k", "100")
-        .build()
+        .build();
 ```
 
 ```javascript
@@ -868,33 +978,17 @@ const rerank = {
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-)
-
-ranker := entity.NewFunction().
-    WithName("rrf").
-    WithType(entity.FunctionTypeRerank).
-    WithParam("reranker", "rrf").
-    WithParam("k", "100")
+reranker := milvusclient.NewRRFReranker().WithK(100)
 ```
 
 ```bash
 # Restful
-export functionScore='{
-    "functions": [
-        {
-            "name": "rrf",
-            "type": "Rerank",
-            "inputFieldNames": [],
-            "params": {
-                "reranker": "rrf",
-                "k": 100
-            }
-        }
-    ]
-}'
+export rerank='{"k": 100}'
 
+```
+
+```cpp
+auto ranker = std::make_shared<milvus::RRFRerank>(100);
 ```
 
 ### Step 3: Perform a Hybrid Search
@@ -907,6 +1001,7 @@ Before initiating a Hybrid Search, ensure that the collection is loaded. If any 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -930,7 +1025,7 @@ import io.milvus.v2.service.vector.response.SearchResp;
 HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
         .collectionName("my_collection")
         .searchRequests(searchRequests)
-        .ranker(reranker)
+        .ranker(ranker)
         .topK(2)
         .build();
 
@@ -990,9 +1085,34 @@ curl --request POST \
 }"
 ```
 
+```cpp
+auto request = milvus::HybridSearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req1)))
+                   .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req2)))
+                   .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req3)))
+                   .WithRerank(ranker)
+                   .WithLimit(2);
+
+milvus::SearchResponse response;
+status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
 The following is the output:
 
-```python
+```text
 ["['id: 1, distance: 0.006047376897186041, entity: {}', 'id: 2, distance: 0.006422005593776703, entity: {}']"]
 ```
 
@@ -1008,6 +1128,15 @@ The value of `timezone` must be a valid [IANA time zone identifier](https://en.w
 
 The example below shows how to temporarily set a timezone for a hybrid search operation:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
+
 ```python
 res = client.hybrid_search(
     collection_name="my_collection",
@@ -1017,5 +1146,154 @@ res = client.hybrid_search(
     # highlight-next-line
     timezone="America/Havana",
 )
+```
+
+```java
+List<AnnSearchReq> tzRequests = new ArrayList<>();
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("text_dense")
+        .vectors(queryDenseVectors)
+        .params("{\"nprobe\": 10}")
+        .topK(2)
+        // highlight-next-line
+        .timezone("America/Havana")
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("text_sparse")
+        .vectors(queryTexts)
+        .topK(2)
+        // highlight-next-line
+        .timezone("America/Havana")
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("image_dense")
+        .vectors(queryMultimodalVectors)
+        .params("{\"nprobe\": 10}")
+        .topK(2)
+        // highlight-next-line
+        .timezone("America/Havana")
+        .build());
+
+HybridSearchReq tzHybridSearchReq = HybridSearchReq.builder()
+        .collectionName("my_collection")
+        .searchRequests(tzRequests)
+        .ranker(ranker)
+        .topK(2)
+        .build();
+
+SearchResp tzSearchResp = client.hybridSearch(tzHybridSearchReq);
+```
+
+```go
+tzRequest1 := milvusclient.NewAnnRequest("text_dense", 2, entity.FloatVector(queryVector)).
+    WithAnnParam(index.NewIvfAnnParam(10)).
+    // highlight-next-line
+    WithSearchParam("timezone", "America/Havana")
+
+tzRequest2 := milvusclient.NewAnnRequest("text_sparse", 2, queryText).
+    WithAnnParam(annParam).
+    // highlight-next-line
+    WithSearchParam("timezone", "America/Havana")
+
+tzRequest3 := milvusclient.NewAnnRequest("image_dense", 2, entity.FloatVector(queryMultimodalVector)).
+    WithAnnParam(index.NewIvfAnnParam(10)).
+    // highlight-next-line
+    WithSearchParam("timezone", "America/Havana")
+
+resultSets, err = client.HybridSearch(ctx, milvusclient.NewHybridSearchOption(
+    "my_collection",
+    2,
+    tzRequest1,
+    tzRequest2,
+    tzRequest3,
+).WithReranker(reranker))
+```
+
+```javascript
+res = await client.search({
+  collection_name: "my_collection",
+  data: [
+    { ...search_param_1, params: { "nprobe": 10, timezone: "America/Havana" } },
+    { ...search_param_2, params: { timezone: "America/Havana" } },
+    { ...search_param_3, params: { "nprobe": 10, timezone: "America/Havana" } },
+  ],
+  limit: 2,
+  rerank: rerank
+});
+```
+
+```bash
+# restful
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/hybrid_search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_collection",
+    "search": [
+        {
+            "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]],
+            "annsField": "text_dense",
+            "params": {"nprobe": 10, "timezone": "America/Havana"},
+            "limit": 2
+        },
+        {
+            "data": ["white headphones, quiet and comfortable"],
+            "annsField": "text_sparse",
+            "params": {"timezone": "America/Havana"},
+            "limit": 2
+        },
+        {
+            "data": [[0.015829865178701663, 0.5264158340734488, ...]],
+            "annsField": "image_dense",
+            "params": {"nprobe": 10, "timezone": "America/Havana"},
+            "limit": 2
+        }
+    ],
+    "rerank": {
+        "strategy": "rrf",
+        "params": {"k": 100}
+    },
+    "limit": 2
+}'
+```
+
+```cpp
+auto tz_req1 = milvus::SubSearchRequest()
+                   .AddFloatVector(query_dense_vector)
+                   .WithAnnsField("text_dense")
+                   // highlight-next-line
+                   .WithTimezone("America/Havana")
+                   .WithLimit(2);
+tz_req1.AddExtraParam("nprobe", "10");
+
+auto tz_req2 = milvus::SubSearchRequest()
+                   .AddEmbeddedText(query_text)
+                   .WithAnnsField("text_sparse")
+                   // highlight-next-line
+                   .WithTimezone("America/Havana")
+                   .WithLimit(2);
+
+auto tz_req3 = milvus::SubSearchRequest()
+                   .AddFloatVector(query_multimodal_vector)
+                   .WithAnnsField("image_dense")
+                   // highlight-next-line
+                   .WithTimezone("America/Havana")
+                   .WithLimit(2);
+tz_req3.AddExtraParam("nprobe", "10");
+
+auto tz_request = milvus::HybridSearchRequest()
+                      .WithCollectionName("my_collection")
+                      .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(tz_req1)))
+                      .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(tz_req2)))
+                      .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(tz_req3)))
+                      .WithRerank(ranker)
+                      .WithLimit(2);
+
+milvus::SearchResponse tz_response;
+status = client->HybridSearch(tz_request, tz_response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
