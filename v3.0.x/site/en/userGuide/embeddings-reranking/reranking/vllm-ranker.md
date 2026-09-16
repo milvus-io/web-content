@@ -59,6 +59,7 @@ To use vLLM Ranker in your Milvus application, create a Function object that spe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -84,6 +85,34 @@ vllm_ranker = Function(
         "truncate_prompt_tokens": 256,  # Optional: Use last 256 tokens
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a vLLM Ranker function
+    auto vllm_ranker = std::make_shared<milvus::ModelRerank>("vllm_semantic_ranker");
+    vllm_ranker->AddInputFieldName("document");
+    vllm_ranker->SetProvider("vllm");
+    vllm_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+    vllm_ranker->SetEndpoint("http://localhost:8080");
+    vllm_ranker->SetMaxClientBatchSize(32);
+    vllm_ranker->AddParam("truncate_prompt_tokens", "256");
+
+    return 0;
+}
 ```
 
 ```java
@@ -185,6 +214,7 @@ To apply vLLM Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -200,6 +230,37 @@ results = client.search(
     ranker=vllm_ranker,                         # Apply vLLM reranking
     consistency_level="Bounded"
 )
+```
+
+```cpp
+// Create a vLLM Ranker function
+auto vllm_ranker = std::make_shared<milvus::ModelRerank>("vllm_semantic_ranker");
+vllm_ranker->AddInputFieldName("document");
+vllm_ranker->SetProvider("vllm");
+vllm_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+vllm_ranker->SetEndpoint("http://localhost:8080");
+vllm_ranker->SetMaxClientBatchSize(32);
+vllm_ranker->AddParam("truncate_prompt_tokens", "256");
+
+// Execute search with vLLM reranking
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(vllm_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("your_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

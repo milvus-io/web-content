@@ -29,6 +29,7 @@ The functionality of the `standard` analyzer is equivalent to the following cust
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -56,6 +57,13 @@ const analyzer_params = {
 analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -75,6 +83,7 @@ To apply the `standard` analyzer to a field, simply set `type` to `standard` in 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -97,6 +106,12 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"type": "standard"}
+```
+
+```cpp
+analyzer_params = {
+    {"type", "standard"}
+};
 ```
 
 ```bash
@@ -126,13 +141,14 @@ Example configuration of custom stop words:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 analyzer_params = {
     "type": "standard", # Specifies the standard analyzer type
-    "stop_words", ["of"] # Optional: List of words to exclude from tokenization
+    "stop_words": ["of"] # Optional: List of words to exclude from tokenization
 }
 ```
 
@@ -153,6 +169,13 @@ analyzer_params = {
 analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"of"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "standard"},
+    {"stop_words", {"of"}}
+};
+```
+
 ```bash
 # restful
 ```
@@ -170,6 +193,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -194,6 +218,13 @@ analyzerParams.put("stop_words", Collections.singletonList("for"));
 analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"for"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "standard"},
+    {"stop_words", {"for"}}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -211,6 +242,7 @@ analyzerParams='{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -288,6 +320,43 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"type", "standard"},
+        {"stop_words", {"for"}}
+    };
+
+    // Sample text to analyze
+    std::string sample_text = "The Milvus vector database is built for scale!";
+
+    // Run the standard analyzer with the defined configuration
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -297,3 +366,5 @@ if err != nil {
 ```plaintext
 Standard analyzer output: ['the', 'milvus', 'vector', 'database', 'is', 'built', 'scale']
 ```
+
+

@@ -29,6 +29,7 @@ The following example creates a collection with two scalar fields that have defa
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -70,6 +71,45 @@ client.create_collection(collection_name="my_collection", schema=schema, index_p
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Define collection schema
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+    schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64).WithDefaultValue(18));
+    schema->AddField(milvus::FieldSchema("status", milvus::DataType::VARCHAR).WithMaxLength(10).WithDefaultValue("active"));
+
+    // Set index params
+    milvus::IndexDesc index_desc("vector", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+
+    // Create collection
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithCollectionSchema(schema)
+        .AddIndex(std::move(index_desc)));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -83,6 +123,7 @@ When inserting data, if you omit a field that has a default value or explicitly 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -113,6 +154,42 @@ client.insert(collection_name="my_collection", data=data)
 // go
 ```
 
+```cpp
+// All fields provided explicitly
+row["id"] = 1;
+row["vector"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+row["age"] = 30;
+row["status"] = "premium";
+rows.emplace_back(std::move(row));
+
+// age and status omitted -> both use default values (18 and "active")
+row["id"] = 2;
+row["vector"] = std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f, 0.6f};
+rows.emplace_back(std::move(row));
+
+// status set to nullptr -> uses default value "active"
+row["id"] = 3;
+row["vector"] = std::vector<float>{0.3f, 0.4f, 0.5f, 0.6f, 0.7f};
+row["age"] = 25;
+row["status"] = nullptr;
+rows.emplace_back(std::move(row));
+
+// age set to nullptr -> uses default value 18
+row["id"] = 4;
+row["vector"] = std::vector<float>{0.4f, 0.5f, 0.6f, 0.7f, 0.8f};
+row["age"] = nullptr;
+row["status"] = "inactive";
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -128,6 +205,7 @@ The following example searches for entities where `age` equals the default value
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -158,6 +236,23 @@ for hit in res[0]:
 // go
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(10)
+    .WithFilter("age == 18")
+    .WithAnnsField("vector")
+    .AddOutputField("id")
+    .AddOutputField("age")
+    .AddOutputField("status");
+request.AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.4f, 0.3f, 0.5f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 ```
@@ -182,6 +277,7 @@ You can also query entities by matching default values directly:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -219,6 +315,32 @@ for r in default_status_results:
 
 ```go
 // go
+```
+
+```cpp
+// Query entities where age equals the default value (18)
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("age == 18")
+    .AddOutputField("id")
+    .AddOutputField("age")
+    .AddOutputField("status"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Query entities where status equals the default value ("active")
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("status == \"active\"")
+    .AddOutputField("id")
+    .AddOutputField("age")
+    .AddOutputField("status"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

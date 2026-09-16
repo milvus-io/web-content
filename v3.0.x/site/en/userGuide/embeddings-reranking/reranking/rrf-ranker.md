@@ -230,6 +230,7 @@ Milvus 2.6.x and later let you configure reranking strategies directly via the `
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -245,6 +246,28 @@ ranker = Function(
         "k": 100  # Optional
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create an RRF Ranker
+    auto ranker = std::make_shared<milvus::RRFRerank>(100);
+
+    return 0;
+}
 ```
 
 ```java
@@ -331,6 +354,7 @@ RRF Ranker is designed specifically for hybrid search operations that combine mu
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -368,6 +392,42 @@ hybrid_results = milvus_client.hybrid_search(
     limit=10,
     output_fields=["product_name", "price", "category"]
 )
+```
+
+```cpp
+// Create an RRF Ranker
+auto ranker = std::make_shared<milvus::RRFRerank>(100);
+
+// Define text vector search request
+auto text_search = milvus::SubSearchRequest()
+    .WithAnnsField("text_vector")
+    .WithLimit(10)
+    .AddEmbeddedText("modern dining table");
+
+// Define image vector search request
+auto image_search = milvus::SubSearchRequest()
+    .WithAnnsField("image_vector")
+    .WithLimit(10)
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f});
+
+// Apply RRF Ranker to product hybrid search
+auto request = milvus::HybridSearchRequest()
+    .WithCollectionName("collection_name")
+    .WithLimit(10)
+    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(text_search)))
+    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(image_search)))
+    .WithRerank(ranker)
+    .AddOutputField("product_name")
+    .AddOutputField("price")
+    .AddOutputField("category")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

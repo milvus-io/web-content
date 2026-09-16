@@ -35,6 +35,7 @@ In this section, you will insert entities into a Collection created in the quick
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -195,6 +196,99 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Insert entities into the "quick_setup" collection. The dynamic field is
+    // enabled, so each row also carries the non-schema field "color".
+    milvus::EntityRows rows;
+    milvus::EntityRow row;
+
+    row["id"] = 0;
+    row["vector"] = std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+    row["color"] = "pink_8682";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 1;
+    row["vector"] = std::vector<float>{0.19886812562848388f, 0.06023560599112088f, 0.6976963061752597f, 0.2614474506242501f, 0.838729485096104f};
+    row["color"] = "red_7025";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 2;
+    row["vector"] = std::vector<float>{0.43742130801983836f, -0.5597502546264526f, 0.6457887650909682f, 0.7894058910881185f, 0.20785793220625592f};
+    row["color"] = "orange_6781";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 3;
+    row["vector"] = std::vector<float>{0.3172005263489739f, 0.9719044792798428f, -0.36981146090600725f, -0.4860894583077995f, 0.95791889146345f};
+    row["color"] = "pink_9298";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 4;
+    row["vector"] = std::vector<float>{0.4452349528804562f, -0.8757026943054742f, 0.8220779437047674f, 0.46406290649483184f, 0.30337481143159106f};
+    row["color"] = "red_4794";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 5;
+    row["vector"] = std::vector<float>{0.985825131989184f, -0.8144651566660419f, 0.6299267002202009f, 0.1206906911183383f, -0.1446277761879955f};
+    row["color"] = "yellow_4222";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 6;
+    row["vector"] = std::vector<float>{0.8371977790571115f, -0.015764369584852833f, -0.31062937026679327f, -0.562666951622192f, -0.8984947637863987f};
+    row["color"] = "red_9392";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 7;
+    row["vector"] = std::vector<float>{-0.33445148015177995f, -0.2567135004164067f, 0.8987539745369246f, 0.9402995886420709f, 0.5378064918413052f};
+    row["color"] = "grey_8510";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 8;
+    row["vector"] = std::vector<float>{0.39524717779832685f, 0.4000257286739164f, -0.5890507376891594f, -0.8650502298996872f, -0.6140360785406336f};
+    row["color"] = "white_9381";
+    rows.emplace_back(std::move(row));
+
+    row = milvus::EntityRow{};
+    row["id"] = 9;
+    row["vector"] = std::vector<float>{0.5718280481994695f, 0.24070317428066512f, -0.3737913482606834f, -0.06726932177492717f, -0.6980531615588608f};
+    row["color"] = "purple_4976";
+    rows.emplace_back(std::move(row));
+
+    milvus::InsertResponse resp;
+    status = client->Insert(milvus::InsertRequest()
+        .WithCollectionName("quick_setup")
+        .WithRowsData(std::move(rows)), resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    std::cout << resp.Results().InsertCount() << std::endl;
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -248,6 +342,7 @@ You can also insert entities into a specified partition. The following code snip
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -373,6 +468,78 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+// Insert entities into a specific partition
+row["id"] = 10;
+row["vector"] = std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+row["color"] = "pink_8682";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 11;
+row["vector"] = std::vector<float>{0.19886812562848388f, 0.06023560599112088f, 0.6976963061752597f, 0.2614474506242501f, 0.838729485096104f};
+row["color"] = "red_7025";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 12;
+row["vector"] = std::vector<float>{0.43742130801983836f, -0.5597502546264526f, 0.6457887650909682f, 0.7894058910881185f, 0.20785793220625592f};
+row["color"] = "orange_6781";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 13;
+row["vector"] = std::vector<float>{0.3172005263489739f, 0.9719044792798428f, -0.36981146090600725f, -0.4860894583077995f, 0.95791889146345f};
+row["color"] = "pink_9298";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 14;
+row["vector"] = std::vector<float>{0.4452349528804562f, -0.8757026943054742f, 0.8220779437047674f, 0.46406290649483184f, 0.30337481143159106f};
+row["color"] = "red_4794";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 15;
+row["vector"] = std::vector<float>{0.985825131989184f, -0.8144651566660419f, 0.6299267002202009f, 0.1206906911183383f, -0.1446277761879955f};
+row["color"] = "yellow_4222";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 16;
+row["vector"] = std::vector<float>{0.8371977790571115f, -0.015764369584852833f, -0.31062937026679327f, -0.562666951622192f, -0.8984947637863987f};
+row["color"] = "red_9392";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 17;
+row["vector"] = std::vector<float>{-0.33445148015177995f, -0.2567135004164067f, 0.8987539745369246f, 0.9402995886420709f, 0.5378064918413052f};
+row["color"] = "grey_8510";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 18;
+row["vector"] = std::vector<float>{0.39524717779832685f, 0.4000257286739164f, -0.5890507376891594f, -0.8650502298996872f, -0.6140360785406336f};
+row["color"] = "white_9381";
+rows.emplace_back(std::move(row));
+
+row = milvus::EntityRow{};
+row["id"] = 19;
+row["vector"] = std::vector<float>{0.5718280481994695f, 0.24070317428066512f, -0.3737913482606834f, -0.06726932177492717f, -0.6980531615588608f};
+row["color"] = "purple_4976";
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("quick_setup")
+    .WithPartitionName("partitionA")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << resp.Results().InsertCount() << std::endl;
 ```
 
 ```bash

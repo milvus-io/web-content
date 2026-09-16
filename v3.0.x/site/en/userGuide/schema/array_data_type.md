@@ -47,6 +47,7 @@ If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -168,6 +169,40 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Add `tags` and `ratings` ARRAY fields with nullable=True
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("tags", milvus::DataType::ARRAY)
+        .WithElementType(milvus::DataType::VARCHAR)
+        .WithMaxCapacity(10)
+        .WithMaxLength(65535)
+        .WithNullable(true));
+    schema->AddField(milvus::FieldSchema("ratings", milvus::DataType::ARRAY)
+        .WithElementType(milvus::DataType::INT64)
+        .WithMaxCapacity(5)
+        .WithNullable(true));
+    schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 const schema = [
@@ -252,6 +287,7 @@ The following example creates indexes on the vector field `embedding` and the AR
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -299,6 +335,12 @@ indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "tags", index.Ne
 indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "embedding", index.NewAutoIndex(entity.COSINE))
 ```
 
+```cpp
+// Set index params
+index_params.emplace_back("tags", "tags_index", milvus::IndexType::AUTOINDEX);
+index_params.emplace_back("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+```
+
 ```javascript
 const indexParams = [{
     index_name: 'inverted_index',
@@ -336,6 +378,7 @@ Once the schema and index are defined, create a collection that includes ARRAY f
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -363,6 +406,17 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_co
 if err != nil {
     fmt.Println(err.Error())
     // handler err
+}
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -395,6 +449,7 @@ After creating the collection, you can insert data that includes ARRAY fields.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -464,6 +519,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collecti
 if err != nil {
     fmt.Println(err.Error())
     // handle err
+}
+```
+
+```cpp
+row["tags"] = std::vector<std::string>{"pop", "rock", "classic"};
+row["ratings"] = std::vector<int64_t>{5, 4, 3};
+row["pk"] = 1;
+row["embedding"] = std::vector<float>{0.12f, 0.34f, 0.56f};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -542,6 +613,7 @@ To retrieve entities where the `tags` is not null:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -598,6 +670,22 @@ fmt.Println("tags", rs.GetColumn("tags").FieldData().GetScalars())
 fmt.Println("ratings", rs.GetColumn("ratings").FieldData().GetScalars())
 ```
 
+```cpp
+// Query to exclude entities where `tags` is not null
+filter = "tags IS NOT NULL";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter(filter)
+    .AddOutputField("tags")
+    .AddOutputField("ratings")
+    .AddOutputField("pk"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 client.query({
     collection_name: 'my_collection',
@@ -626,6 +714,7 @@ To retrieve entities where the value of the first element of `ratings` is greate
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -681,6 +770,21 @@ fmt.Println("tags", rs.GetColumn("tags"))
 fmt.Println("ratings", rs.GetColumn("ratings"))
 ```
 
+```cpp
+filter = "ratings[0] > 4";
+
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter(filter)
+    .AddOutputField("tags")
+    .AddOutputField("ratings")
+    .AddOutputField("pk"), qresp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // node
 const filter = 'ratings[0] > 4';
@@ -722,6 +826,7 @@ In addition to basic scalar field filtering, you can combine vector similarity s
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -792,6 +897,25 @@ for _, resultSet := range resultSets {
     fmt.Println("tags", resultSet.GetColumn("tags").FieldData().GetScalars())
     fmt.Println("ratings", resultSet.GetColumn("ratings").FieldData().GetScalars())
     fmt.Println("embedding", resultSet.GetColumn("embedding").FieldData().GetVectors())
+}
+```
+
+```cpp
+filter = "tags[0] == \"pop\"";
+
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(5)
+    .WithAnnsField("embedding")
+    .AddOutputField("tags")
+    .AddOutputField("ratings")
+    .AddOutputField("embedding")
+    .WithFilter(filter);
+request.AddFloatVector(std::vector<float>{0.3f, -0.6f, 0.1f});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

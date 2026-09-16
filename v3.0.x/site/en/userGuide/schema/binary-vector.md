@@ -55,6 +55,7 @@ To use binary vectors in Milvus, first define a vector field for storing binary 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -149,6 +150,30 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR, "", true, true).WithMaxLength(100));
+    schema->AddField(milvus::FieldSchema("binary_vector", milvus::DataType::BINARY_VECTOR).WithDimension(128));
+
+    return 0;
+}
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -189,6 +214,7 @@ To speed up searches, an index must be created for the binary vector field. Inde
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -233,6 +259,10 @@ idx := index.NewAutoIndex(entity.HAMMING)
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "binary_vector", idx)
 ```
 
+```cpp
+index_params.emplace_back("binary_vector", "binary_vector_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::HAMMING);
+```
+
 ```bash
 export indexParams='[
         {
@@ -259,6 +289,7 @@ Once the binary vector and index settings are complete, create a collection that
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -310,6 +341,17 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -334,6 +376,7 @@ For example, for a 128-dimensional binary vector, a 16-byte array is required (s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -427,6 +470,21 @@ if err != nil {
 }
 ```
 
+```cpp
+// a 128-dimensional binary vector is stored as a 16-byte array
+std::vector<uint8_t> binary_vector = {0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+row["binary_vector"] = binary_vector;
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -450,6 +508,7 @@ During search operations, binary vectors must also be provided in the form of a 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -538,6 +597,20 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
+}
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithLimit(5)
+    .WithAnnsField("binary_vector")
+    .AddOutputField("pk");
+request.AddBinaryVector(std::vector<uint8_t>{0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

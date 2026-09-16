@@ -84,6 +84,7 @@ You can get entities by their IDs as follows.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -174,6 +175,42 @@ fmt.Println("vector: ", resultSet.GetColumn("vector").FieldData().GetVectors())
 fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::GetResponse get_resp;
+    status = client->Get(milvus::GetRequest()
+        .WithCollectionName("my_collection")
+        .WithIDs(std::vector<int64_t>{0, 1, 2})
+        .AddOutputField("vector")
+        .AddOutputField("color"), get_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::EntityRows output_rows;
+    status = get_resp.Results().OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << row << std::endl;
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -216,6 +253,7 @@ When you need to find entities by custom filtering conditions, use the **Query**
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -275,6 +313,20 @@ fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 
 ```
 
+```cpp
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithLimit(3)
+    .AddOutputField("vector")
+    .AddOutputField("color"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -328,6 +380,7 @@ Pass a list of `"field_name:direction"` strings to the `order_by` parameter, whe
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -359,6 +412,22 @@ res = client.query(
 // go
 ```
 
+```cpp
+// Sort results by id in ascending order
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithLimit(3)
+    .AddOutputField("vector")
+    .AddOutputField("color")
+    .WithOrderByFields({milvus::OrderByField("id", milvus::AggregationDirection::ASC)}), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // nodejs
 ```
@@ -375,6 +444,7 @@ You can sort by multiple fields at once. Results are first ordered by the first 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -399,6 +469,25 @@ res = client.query(
 // go
 ```
 
+```cpp
+// Sort by rating descending, then by price ascending for ties
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("")
+    .WithLimit(10)
+    .AddOutputField("color")
+    .AddOutputField("rating")
+    .AddOutputField("price")
+    .WithOrderByFields({
+        milvus::OrderByField("rating", milvus::AggregationDirection::DESC),
+        milvus::OrderByField("price", milvus::AggregationDirection::ASC)}), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // nodejs
 ```
@@ -415,6 +504,7 @@ Use `order_by` together with `limit` and `offset` to paginate through sorted res
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -449,6 +539,37 @@ page2 = client.query(
 
 ```go
 // go
+```
+
+```cpp
+// Page 1
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithLimit(5)
+    .WithOffset(0)
+    .AddOutputField("color")
+    .AddOutputField("price")
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)}), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Page 2
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithLimit(5)
+    .WithOffset(5)
+    .AddOutputField("color")
+    .AddOutputField("price")
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)}), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```javascript
@@ -659,6 +780,7 @@ When you need to find entities by custom filtering conditions through paginated 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -719,6 +841,32 @@ while (true) {
 // go
 ```
 
+```cpp
+milvus::QueryIteratorRequest qreq;
+qreq.SetCollectionName("my_collection");
+qreq.SetBatchSize(10);
+qreq.SetFilter("color like \"red%\"");
+qreq.AddOutputField("color");
+
+milvus::QueryIteratorPtr qiterator;
+status = client->QueryIterator(qreq, qiterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+while (true) {
+    milvus::QueryResults batch_results;
+    status = qiterator->Next(batch_results);
+    if (batch_results.GetRowCount() == 0) break;
+    milvus::EntityRows rows;
+    status = batch_results.OutputRows(rows);
+    for (const auto& row : rows) {
+        std::cout << row << std::endl;
+    }
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -748,6 +896,7 @@ You can also perform queries within one or multiple partitions by including the 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -850,6 +999,50 @@ fmt.Println("vector: ", resultSet.GetColumn("vector").FieldData().GetVectors())
 fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 ```
 
+```cpp
+// Use get
+milvus::GetResponse get_resp;
+status = client->Get(milvus::GetRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA")
+    .WithIDs(std::vector<int64_t>{10, 11, 12})
+    .AddOutputField("vector")
+    .AddOutputField("color"), get_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Use query
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA")
+    .WithFilter("color like \"red%\"")
+    .WithLimit(3)
+    .AddOutputField("vector")
+    .AddOutputField("color"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Use QueryIterator
+milvus::QueryIteratorRequest qreq;
+qreq.SetCollectionName("my_collection");
+qreq.AddPartitionName("partitionA");
+qreq.SetBatchSize(10);
+qreq.SetFilter("color like \"red%\"");
+qreq.AddOutputField("color");
+
+milvus::QueryIteratorPtr qiterator;
+status = client->QueryIterator(qreq, qiterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // Use get
 var res = client.get({
@@ -933,6 +1126,7 @@ For detailed usage, advanced examples, and best practices, refer to [Random Samp
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1017,6 +1211,34 @@ if err != nil {
 }
 ```
 
+```cpp
+// Sample 1% of the entire collection
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("RANDOM_SAMPLE(0.01)")
+    .AddOutputField("vector")
+    .AddOutputField("color"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << "Sampled " << query_resp.Results().GetRowCount() << " entities from collection" << std::endl;
+
+// Combine with other filters - first filter, then sample
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\" AND RANDOM_SAMPLE(0.005)")
+    .WithLimit(10)
+    .AddOutputField("vector")
+    .AddOutputField("color"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << "Found " << query_resp.Results().GetRowCount() << " red items in sample" << std::endl;
+```
+
 ```javascript
 // node
 ```
@@ -1038,6 +1260,7 @@ The example below shows how to temporarily set a timezone for a query operation:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1063,6 +1286,22 @@ results = client.query(
 
 ```go
 // go
+```
+
+```cpp
+milvus::QueryResponse query_resp;
+status = client->Query(milvus::QueryRequest()
+    .WithCollectionName("my_collection")
+    .WithFilter("id <= 10")
+    .WithLimit(2)
+    .AddOutputField("id")
+    .AddOutputField("tsz")
+    .AddOutputField("vec")
+    .WithTimezone("America/Havana"), query_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

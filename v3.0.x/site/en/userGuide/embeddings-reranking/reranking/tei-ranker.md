@@ -26,6 +26,7 @@ To use TEI Ranker in your Milvus application, create a Function object that spec
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -52,6 +53,35 @@ tei_ranker = Function(
         "truncation_direction": "Right",    # Optional: Direction to truncate the inputs
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Configure TEI Ranker
+    auto tei_ranker = std::make_shared<milvus::ModelRerank>("tei_semantic_ranker");
+    tei_ranker->AddInputFieldName("document");
+    tei_ranker->SetProvider("tei");
+    tei_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+    tei_ranker->SetEndpoint("http://localhost:8080");
+    tei_ranker->SetMaxClientBatchSize(32);
+    tei_ranker->AddParam("truncate", "true");
+    tei_ranker->AddParam("truncation_direction", "Right");
+
+    return 0;
+}
 ```
 
 ```java
@@ -161,6 +191,7 @@ To apply TEI Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -176,6 +207,38 @@ results = client.search(
     ranker=tei_ranker,                         # Apply tei reranking
     consistency_level="Bounded"
 )
+```
+
+```cpp
+// Configure TEI Ranker
+auto tei_ranker = std::make_shared<milvus::ModelRerank>("tei_semantic_ranker");
+tei_ranker->AddInputFieldName("document");
+tei_ranker->SetProvider("tei");
+tei_ranker->SetQueries(std::vector<std::string>{"renewable energy developments"});
+tei_ranker->SetEndpoint("http://localhost:8080");
+tei_ranker->SetMaxClientBatchSize(32);
+tei_ranker->AddParam("truncate", "true");
+tei_ranker->AddParam("truncation_direction", "Right");
+
+// Execute search with vLLM reranking
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(tei_ranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("your_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithRerank(function_score)
+    .AddOutputField("document")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

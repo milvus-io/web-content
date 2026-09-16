@@ -211,6 +211,7 @@ The following example defines a schema with one scalar field `"document"` for st
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -236,6 +237,39 @@ schema.add_field("document", DataType.VARCHAR, max_length=9000)
 # For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
 # For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR
 schema.add_field("dense", DataType.FLOAT_VECTOR, dim=1536)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a new schema for the collection
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+    // Add primary field "id"
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+
+    // Add scalar field "document" for storing textual data
+    schema->AddField(milvus::FieldSchema("document", milvus::DataType::VARCHAR).WithMaxLength(9000));
+
+    // Add vector field "dense" for storing embeddings.
+    // IMPORTANT: Set dim to match the exact output dimension of the embedding model.
+    // For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
+    schema->AddField(milvus::FieldSchema("dense", milvus::DataType::FLOAT_VECTOR).WithDimension(1536));
+
+    return 0;
+}
 ```
 
 ```java
@@ -265,6 +299,7 @@ The example below adds a Function module (`openai_embedding`) that converts the 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -287,6 +322,18 @@ text_embedding_function = Function(
 
 # Add the embedding function to your schema
 schema.add_function(text_embedding_function)
+```
+
+```cpp
+// Define embedding function (example: OpenAI provider)
+auto text_embedding_function = std::make_shared<milvus::Function>("openai_embedding", milvus::FunctionType::TEXTEMBEDDING);
+text_embedding_function->AddInputFieldName("document");
+text_embedding_function->AddOutputFieldName("dense");
+text_embedding_function->AddParam("provider", "openai");
+text_embedding_function->AddParam("model_name", "text-embedding-3-small");
+
+// Add the embedding function to your schema
+schema->AddFunction(text_embedding_function);
 ```
 
 ```java
@@ -378,6 +425,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -391,6 +439,12 @@ index_params.add_index(
     index_type="AUTOINDEX",
     metric_type="COSINE" 
 )
+```
+
+```cpp
+// Prepare index parameters
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back("dense", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
 ```
 
 ```java
@@ -418,6 +472,7 @@ Now create the collection using the schema and index parameters defined.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -428,6 +483,18 @@ client.create_collection(
     schema=schema, 
     index_params=index_params
 )
+```
+
+```cpp
+// Create collection named "demo"
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("demo")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -455,6 +522,7 @@ After setting up your collection and index, you're ready to insert your raw data
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -465,6 +533,30 @@ client.insert('demo', [
     {'id': 2, 'document': 'Vector embeddings convert text into searchable numeric data.'},
     {'id': 3, 'document': 'Semantic search helps users find relevant information quickly.'},
 ])
+```
+
+```cpp
+// Insert sample documents
+milvus::EntityRows rows;
+milvus::EntityRow row;
+row["id"] = 1;
+row["document"] = "Milvus simplifies semantic search through embeddings.";
+rows.emplace_back(std::move(row));
+row["id"] = 2;
+row["document"] = "Vector embeddings convert text into searchable numeric data.";
+rows.emplace_back(std::move(row));
+row["id"] = 3;
+row["document"] = "Semantic search helps users find relevant information quickly.";
+rows.emplace_back(std::move(row));
+
+milvus::InsertResponse resp;
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("demo")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -492,6 +584,7 @@ After data insertion, perform a semantic search using raw query text. Milvus aut
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -509,6 +602,24 @@ print(results)
 
 # Example output:
 # data: ["[{'id': 1, 'distance': 0.8821347951889038, 'entity': {'document': 'Milvus simplifies semantic search through embeddings.'}}]"]
+```
+
+```cpp
+// Perform semantic search
+milvus::SearchRequest request;
+request.WithCollectionName("demo")
+    .WithLimit(1)
+    .WithAnnsField("dense")
+    .AddOutputField("document")
+    .AddEmbeddedText("How does Milvus handle semantic search?")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -562,6 +673,7 @@ Yes, you can use pre-computed query vectors instead of raw text for similarity s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -582,6 +694,37 @@ results = client.search(
     anns_field='dense',
     limit=1
 )
+```
+
+```cpp
+// Using raw text (Function module converts automatically)
+milvus::SearchRequest request;
+request.WithCollectionName("demo")
+    .WithLimit(1)
+    .WithAnnsField("dense")
+    .AddEmbeddedText("How does Milvus handle semantic search?")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// Using pre-computed query vector (must match stored vector dimensions)
+request = milvus::SearchRequest();
+request.WithCollectionName("demo")
+    .WithLimit(1)
+    .WithAnnsField("dense")
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java

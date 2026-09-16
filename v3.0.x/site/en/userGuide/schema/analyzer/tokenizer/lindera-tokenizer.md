@@ -117,6 +117,7 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -173,6 +174,18 @@ analyzerParams := map[string]interface{}{
   }
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "lindera"},
+        {"dict_kind", "ko-dic"},
+        {"filter", {
+            {{"kind", "korean_stop_tags"}, {"tags", {"SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"}}}
+        }}
+    }}
+};
+```
+
 ```javascript
 const analyzer_params = {
     "tokenizer": {
@@ -223,6 +236,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -336,6 +350,47 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"tokenizer", {
+            {"type", "lindera"},
+            {"dict_kind", "ko-dic"},
+            {"filter", {
+                {{"kind", "korean_stop_tags"}, {"tags", {"SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"}}}
+            }}
+        }}
+    };
+
+    // Sample Korean text: "서울에서 맛있는 음식을 먹었습니다" (I ate delicious food in Seoul)
+    std::string sample_text = "서울에서 맛있는 음식을 먹었습니다";
+
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
@@ -400,6 +455,7 @@ Without `korean_stop_tags`, the output would include particles like `에서` (in
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -435,6 +491,30 @@ print("Analyzer output:", result)
 
 ```go
 // go
+```
+
+```cpp
+analyzer_params = {
+    {"tokenizer", {
+        {"type", "lindera"},
+        {"dict_kind", "ipadic"},
+        {"filter", {
+            {{"kind", "japanese_stop_tags"}, {"tags", {"接続詞", "助詞,格助詞", "助詞,格助詞,一般", "助詞,格助詞,引用", "助詞,格助詞,連語", "助詞,係助詞", "助詞,終助詞", "助詞,接続助詞", "助詞,特殊", "助詞,副助詞", "助詞,副助詞／並立助詞／終助詞", "助詞,連体化", "助詞,副詞化", "助詞,並立助詞", "助動詞", "記号,一般", "記号,読点", "記号,句点", "記号,空白", "記号,括弧閉", "記号,括弧開", "その他,間投", "フィラー", "非言語音"}}}
+        }}
+    }}
+};
+
+// Sample Japanese text: "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です"
+std::string sample_text = "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です";
+
+milvus::RunAnalyzerResponse run_resp;
+status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+    .AddText(sample_text)
+    .WithAnalyzerParams(analyzer_params), run_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```javascript

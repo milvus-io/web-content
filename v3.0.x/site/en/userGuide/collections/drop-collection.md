@@ -17,6 +17,7 @@ The following code snippets assume that you have a collection named **my_collect
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -105,6 +106,31 @@ err = client.DropCollection(ctx, milvusclient.NewDropCollectionOption("my_collec
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName("my_collection"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
 }
 ```
 

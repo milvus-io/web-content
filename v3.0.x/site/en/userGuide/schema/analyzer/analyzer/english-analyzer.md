@@ -29,6 +29,7 @@ The functionality of the `english` analyzer is equivalent to the following custo
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -83,6 +84,17 @@ analyzerParams = map[string]any{"tokenizer": "standard",
         }}}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        "lowercase",
+        {{"type", "stemmer"}, {"language", "english"}},
+        {{"type", "stop"}, {"stop_words", "_english_"}}
+    }}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -111,6 +123,7 @@ To apply the `english` analyzer to a field, simply set `type` to `english` in `a
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -133,6 +146,12 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"type": "english"}
+```
+
+```cpp
+analyzer_params = {
+    {"type", "english"}
+};
 ```
 
 ```bash
@@ -162,6 +181,7 @@ Example configuration with custom stop words:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -189,6 +209,13 @@ const analyzer_params = {
 analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "english"},
+    {"stop_words", {"a", "an", "the"}}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -199,7 +226,6 @@ analyzerParams='{
     "the"
   ]
 }'
-
 ```
 
 After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
@@ -215,6 +241,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -239,6 +266,13 @@ analyzerParams.put("stop_words", Arrays.asList("a", "an", "the"));
 analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "english"},
+    {"stop_words", {"a", "an", "the"}}
+};
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -249,7 +283,6 @@ analyzerParams='{
     "the"
   ]
 }'
-
 ```
 
 ### Verification using `run_analyzer` | Milvus 2.5.11+
@@ -259,6 +292,7 @@ analyzerParams='{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -332,6 +366,43 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"type", "english"},
+        {"stop_words", {"a", "an", "the"}}
+    };
+
+    // Sample text to analyze
+    std::string sample_text = "Milvus is a vector database built for scale!";
+
+    // Run the standard analyzer with the defined configuration
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -341,4 +412,6 @@ if err != nil {
 ```python
 English analyzer output: ['milvus', 'vector', 'databas', 'built', 'scale']
 ```
+
+
 

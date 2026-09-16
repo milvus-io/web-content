@@ -19,6 +19,7 @@ The following code snippets demonstrate how to load a collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -156,6 +157,40 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // 7. Load the collection
+    status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName("my_collection"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::GetLoadStateResponse load_state_resp;
+    status = client->GetLoadState(milvus::GetLoadStateRequest().WithCollectionName("my_collection"), load_state_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -210,6 +245,7 @@ The following code snippet assumes that you have created a collection named **my
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,7 +253,7 @@ The following code snippet assumes that you have created a collection named **my
 client.load_collection(
     collection_name="my_collection",
     # highlight-next-line
-    load_fields=["my_id", "my_vector"] # Load only the specified fields
+    load_fields=["my_id", "my_vector"], # Load only the specified fields
     skip_load_dynamic_field=True # Skip loading the dynamic field
 )
 
@@ -289,6 +325,25 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+// Load only the specified fields
+status = client->LoadCollection(milvus::LoadCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithLoadFields({"my_id", "my_vector"}));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest().WithCollectionName("my_collection"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+```
+
 ```bash
 # REST
 Not support yet
@@ -311,6 +366,7 @@ The following code snippet demonstrates how to release a collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -391,6 +447,23 @@ if err != nil {
     // handle error
 }
 fmt.Println(state)
+```
+
+```cpp
+// 8. Release the collection
+status = client->ReleaseCollection(milvus::ReleaseCollectionRequest().WithCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest().WithCollectionName("my_collection"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
 ```
 
 ```bash

@@ -60,6 +60,7 @@ Your collection schema must include at least three required fields:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -147,6 +148,30 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+    schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+    schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -219,6 +244,7 @@ Define the function and add it to your schema:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -256,6 +282,13 @@ function := entity.NewFunction().
     WithOutputFields("sparse").
     WithType(entity.FunctionTypeBM25)
 schema.WithFunction(function)
+```
+
+```cpp
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+schema->AddFunction(function);
 ```
 
 ```javascript
@@ -343,6 +376,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -387,6 +421,14 @@ indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
     .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
     .WithExtraParam("bm25_k1", 1.2)
     .WithExtraParam("bm25_b", 0.75)
+```
+
+```cpp
+milvus::IndexDesc index_sparse("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_sparse.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_sparse.AddExtraParam("bm25_k1", "1.2");
+index_sparse.AddExtraParam("bm25_b", "0.75");
+index_params.emplace_back(std::move(index_sparse));
 ```
 
 ```javascript
@@ -462,6 +504,7 @@ Now create the collection using the schema and index parameters defined.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -492,6 +535,17 @@ err = client.CreateCollection(ctx,
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -528,6 +582,7 @@ After setting up your collection and index, you're ready to insert text data. In
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -561,6 +616,25 @@ client.insert(InsertReq.builder()
 
 ```go
 // go
+```
+
+```cpp
+milvus::EntityRow row;
+row["text"] = "information retrieval is a field of study.";
+rows.emplace_back(row);
+row["text"] = "information retrieval focuses on finding relevant information in large datasets.";
+rows.emplace_back(row);
+row["text"] = "data mining and information retrieval overlap in research.";
+rows.emplace_back(std::move(row));
+
+milvus::InsertResponse resp;
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("my_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```javascript
@@ -604,6 +678,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -658,6 +733,23 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("text: ", resultSet.GetColumn("text").FieldData().GetScalars())
+}
+```
+
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("sparse")
+    .WithMetricType(milvus::MetricType::BM25)
+    .WithLimit(3)
+    .AddOutputField("text");
+request.AddEmbeddedText("whats the focus of information retrieval?");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -749,7 +841,7 @@ client.search(
     data=['query text'],
     anns_field='sparse',
     # highlight-next-line
-    output_fields=['text', 'sparse']  # 'sparse' causes an error
+    output_fields=['text', 'sparse'],  # 'sparse' causes an error
     limit=3,
     search_params=search_params
 )
@@ -760,7 +852,7 @@ client.search(
     data=['query text'],
     anns_field='sparse',
     # highlight-next-line
-    output_fields=['text']
+    output_fields=['text'],
     limit=3,
     search_params=search_params
 )

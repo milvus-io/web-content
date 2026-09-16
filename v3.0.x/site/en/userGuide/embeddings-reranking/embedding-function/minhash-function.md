@@ -90,6 +90,7 @@ Your collection schema must include at least three fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -103,6 +104,37 @@ schema = client.create_schema()
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, auto_id=True)
 schema.add_field(field_name="document_content", datatype=DataType.VARCHAR, max_length=9000, enable_analyzer=True)
 schema.add_field(field_name="binary_vector", datatype=DataType.BINARY_VECTOR, dim=8192)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create schema
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+    // Primary field
+    schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+
+    // Text field with analyzer enabled
+    schema->AddField(milvus::FieldSchema("document_content", milvus::DataType::VARCHAR).WithMaxLength(9000).EnableAnalyzer(true));
+
+    // Binary vector field, dim = 32 * num_hashes
+    schema->AddField(milvus::FieldSchema("binary_vector", milvus::DataType::BINARY_VECTOR).WithDimension(8192));
+
+    return 0;
+}
 ```
 
 ```java
@@ -132,6 +164,7 @@ Define the function and add it to your schema:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -148,6 +181,17 @@ minhash_function = Function(
 )
 
 schema.add_function(minhash_function)
+```
+
+```cpp
+// Define the MinHash function
+auto minhash_function = std::make_shared<milvus::Function>("minhash_function", milvus::FunctionType::MINHASH);
+minhash_function->AddInputFieldName("document_content");
+minhash_function->AddOutputFieldName("binary_vector");
+minhash_function->AddParam("num_hashes", "256");
+minhash_function->AddParam("shingle_size", "3");
+
+schema->AddFunction(minhash_function);
 ```
 
 ```java
@@ -218,6 +262,7 @@ The recommended index type for MinHash binary vectors is `MINHASH_LSH`, with met
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -234,6 +279,17 @@ index_params.add_index(
         "with_raw_data": True,
     },
 )
+```
+
+```cpp
+// Configure the index
+milvus::IndexDesc index("binary_vector", "", milvus::IndexType::MINHASH_LSH, milvus::MetricType::MHJACCARD);
+index.AddExtraParam("mh_lsh_band", "128");
+index.AddExtraParam("mh_element_bit_width", "32");
+index.AddExtraParam("with_raw_data", "true");
+
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back(std::move(index));
 ```
 
 ```java
@@ -263,6 +319,7 @@ Create the collection using the schema and index parameters defined above:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -272,6 +329,18 @@ client.create_collection(
     schema=schema,
     index_params=index_params,
 )
+```
+
+```cpp
+// Create the collection
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("dedup_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -299,6 +368,7 @@ After setting up your collection, insert text data. You only need to provide the
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -311,6 +381,27 @@ client.insert(
         {"document_content": "information retrieval is a field of research helping users search for relevant information in large datasets"},
     ],
 )
+```
+
+```cpp
+// Insert documents
+milvus::EntityRows rows;
+milvus::EntityRow row;
+row["document_content"] = "information retrieval is a field of study that helps users find relevant information in large datasets";
+rows.emplace_back(std::move(row));
+row["document_content"] = "information retrieval is a research field focused on helping users find relevant data in large collections";
+rows.emplace_back(std::move(row));
+row["document_content"] = "information retrieval is a field of research helping users search for relevant information in large datasets";
+rows.emplace_back(std::move(row));
+
+milvus::InsertResponse resp;
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("dedup_collection")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -338,6 +429,7 @@ Once you have inserted data, search for near-duplicate documents by providing ra
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -363,6 +455,39 @@ for hits in results:
     for hit in hits:
         print(f"ID: {hit['id']}, Distance: {hit['distance']}")
         print(f"Document: {hit['entity']['document_content']}")
+```
+
+```cpp
+// Search with MinHash
+milvus::SearchRequest request;
+request.WithCollectionName("dedup_collection")
+    .WithAnnsField("binary_vector")
+    .WithMetricType(milvus::MetricType::MHJACCARD)
+    .WithLimit(3)
+    .AddEmbeddedText("information retrieval is a research field focused on helping users find relevant data in large collections")
+    .AddOutputField("document_content")
+    .AddExtraParam("mh_search_with_jaccard", "true")
+    .AddExtraParam("refine_k", "3")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+for (auto& result : response.Results().Results()) {
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    for (const auto& row : output_rows) {
+        std::cout << row << std::endl;
+    }
+}
 ```
 
 ```java

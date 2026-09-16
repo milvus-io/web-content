@@ -64,6 +64,7 @@ For example, to use the `standard` built-in analyzer, simply specify its name `s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -91,6 +92,13 @@ const analyzer_params = {
 analyzerParams := map[string]any{"type": "standard", "stop_words": []string{"a", "an", "for"}}
 ```
 
+```cpp
+analyzer_params = {
+    {"type", "standard"},
+    {"stop_words", {"a", "an", "for"}}
+};
+```
+
 ```bash
 export analyzerParams='{
        "type": "standard",
@@ -105,6 +113,7 @@ To check the execution result of an analyzer, use the `run_analyzer` method:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -165,6 +174,43 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    nlohmann::json analyzer_params = {
+        {"type", "standard"},
+        {"stop_words", {"a", "an", "for"}}
+    };
+
+    // Sample text to analyze
+    std::string text = "An efficient system relies on a robust analyzer to correctly process text for various applications.";
+
+    // Run analyzer
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(text)
+        .WithAnalyzerParams(analyzer_params), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 ```
@@ -184,6 +230,7 @@ The configuration of the `standard` built-in analyzer above is equivalent to set
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -232,6 +279,16 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     }}}
 ```
 
+```cpp
+analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        "lowercase",
+        {{"type", "stop"}, {"stop_words", {"a", "an", "for"}}}
+    }}
+};
+```
+
 ```bash
 export analyzerParams='{
        "type": "standard",
@@ -278,6 +335,7 @@ For example, a tokenizer would convert text `"Vector Database Built for Scale"` 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -300,6 +358,12 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "whitespace"}
+```
+
+```cpp
+analyzer_params = {
+    {"tokenizer", "whitespace"}
+};
 ```
 
 ```bash
@@ -339,6 +403,7 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -367,6 +432,13 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
             "filter": []any{"lowercase"}}
     ```
 
+    ```cpp
+    analyzer_params = {
+        {"tokenizer", "standard"},
+        {"filter", {"lowercase"}}
+    };
+    ```
+
     ```bash
     export analyzerParams='{
            "type": "standard",
@@ -389,6 +461,7 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -434,6 +507,15 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         }}}
     ```
 
+    ```cpp
+    analyzer_params = {
+        {"tokenizer", "standard"},
+        {"filter", {
+            {{"type", "stop"}, {"stop_words", {"of", "to"}}}
+        }}
+    };
+    ```
+
     ```bash
     export analyzerParams='{
            "type": "standard",
@@ -469,6 +551,7 @@ Begin by setting up the Milvus client and creating a new schema.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -535,6 +618,12 @@ defer client.Close(ctx)
 schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```
 
+```cpp
+// Create a new schema
+schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+```
+
 ```bash
 # restful
 ```
@@ -552,6 +641,7 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -618,6 +708,25 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     
     ```
 
+    ```cpp
+    // Built-in analyzer configuration for English text processing
+    nlohmann::json analyzer_params_built_in = {
+        {"type", "english"}
+    };
+
+    // Verify built-in analyzer configuration
+    std::string sample_text = "Milvus simplifies text analysis for search.";
+
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params_built_in), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    ```
+
     ```bash
     # restful
     ```
@@ -633,6 +742,7 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -736,6 +846,30 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     }
     ```
 
+    ```cpp
+    // Custom analyzer configuration with a standard tokenizer and custom filters
+    nlohmann::json analyzer_params_custom = {
+        {"tokenizer", "standard"},
+        {"filter", {
+            "lowercase",
+            {{"type", "length"}, {"max", 40}},
+            {{"type", "stop"}, {"stop_words", {"of", "for"}}}
+        }}
+    };
+
+    // Verify custom analyzer configuration
+    std::string sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+
+    milvus::RunAnalyzerResponse run_resp;
+    status = client->RunAnalyzer(milvus::RunAnalyzerRequest()
+        .AddText(sample_text)
+        .WithAnalyzerParams(analyzer_params_custom), run_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    ```
+
     ```bash
     # curl
     ```
@@ -749,6 +883,7 @@ Now that you have verified your analyzer configurations, add them to your schema
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -860,6 +995,40 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+nlohmann::json analyzer_params_built_in = {
+    {"type", "english"}
+};
+nlohmann::json analyzer_params_custom = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        "lowercase",
+        {{"type", "length"}, {"max", 40}},
+        {{"type", "stop"}, {"stop_words", {"of", "for"}}}
+    }}
+};
+
+// Add VARCHAR field 'title_en' using the built-in analyzer configuration
+schema->AddField(milvus::FieldSchema("title_en", milvus::DataType::VARCHAR)
+    .WithMaxLength(1000)
+    .EnableAnalyzer(true)
+    .WithAnalyzerParams(analyzer_params_built_in)
+    .EnableMatch(true));
+
+// Add VARCHAR field 'title' using the custom analyzer configuration
+schema->AddField(milvus::FieldSchema("title", milvus::DataType::VARCHAR)
+    .WithMaxLength(1000)
+    .EnableAnalyzer(true)
+    .WithAnalyzerParams(analyzer_params_custom)
+    .EnableMatch(true));
+
+// Add a vector field for embeddings
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+
+// Add a primary key field
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+```
+
 ```bash
 # restful
 ```
@@ -871,6 +1040,7 @@ schema.WithField(entity.NewField().
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -935,6 +1105,21 @@ err = client.CreateCollection(ctx,
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+// Set up index parameters for the vector field
+milvus::IndexDesc index_embedding("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+// Create the collection with the defined schema and index parameters
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .AddIndex(std::move(index_embedding)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 

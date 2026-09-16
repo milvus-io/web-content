@@ -52,8 +52,8 @@ In this section, you will learn how to conduct a single-vector search. The searc
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -183,6 +183,48 @@ for _, resultSet := range resultSets {
 
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // 4. Single vector search
+    milvus::SearchRequest request;
+    request.WithCollectionName("quick_setup")
+        .WithAnnsField("vector")
+        .WithMetricType(milvus::MetricType::IP)
+        .WithLimit(3);
+    request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+    milvus::SearchResponse response;
+    status = client->Search(request, response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    for (auto& result : response.Results().Results()) {
+        milvus::EntityRows output_rows;
+        status = result.OutputRows(output_rows);
+        for (const auto& row : output_rows) {
+            std::cout << row << std::endl;
+        }
+    }
+
+    return 0;
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -208,44 +250,6 @@ console.log(res.results)
 // ]
 ```
 
-```cpp
-#include <iostream>
-#include <vector>
-
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-auto status = client->Connect(milvus::ConnectParam("http://localhost:19530", "root:Milvus"));
-if (!status.IsOk()) {
-    std::cerr << "Failed to connect: " << status.Message() << std::endl;
-    return;
-}
-
-std::vector<float> queryVector = {
-    0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F
-};
-
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         .WithLimit(3)
-                         .WithMetricType(milvus::MetricType::IP)
-                         .AddFloatVector(queryVector);
-
-milvus::SearchResponse searchResponse;
-status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -329,8 +333,8 @@ Similarly, you can include multiple query vectors in a search request. Milvus wi
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -455,6 +459,29 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+// 7. Search with multiple vectors
+// 7.1. Prepare query vectors
+query_vectors = {
+    {0.041732933f, 0.013779674f, -0.027564144f, -0.013061441f, 0.009748648f},
+    {0.0039737443f, 0.003020432f, -0.0006188639f, 0.03913546f, -0.00089768134f}
+};
+
+// 7.2. Start search
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .WithAnnsField("vector")
+    .WithLimit(3);
+request.WithFloatVectors(std::move(query_vectors));
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // 7. Search with multiple vectors
 const query_vectors = [
@@ -486,33 +513,6 @@ console.log(res.results)
 // ]
 ```
 
-```cpp
-std::vector<std::vector<float>> queryVectors = {
-    {0.041732933F, 0.013779674F, -0.027564144F, -0.013061441F, 0.009748648F},
-    {0.0039737443F, 0.003020432F, -0.0006188639F, 0.03913546F, -0.00089768134F},
-};
-
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         .WithLimit(3)
-                         .WithFloatVectors(std::move(queryVectors));
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    std::cout << "TopK results:" << std::endl;
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -659,29 +659,21 @@ for _, resultSet := range resultSets {
 ```
 
 ```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         // highlight-start
-                         .WithIDs({551, 296, 43})
-                         // highlight-end
-                         .WithLimit(3)
-                         .WithMetricType(milvus::MetricType::IP);
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .WithAnnsField("vector")
+    .WithIDs(std::vector<int64_t>{551, 296, 43})
+    .WithMetricType(milvus::MetricType::IP)
+    .WithLimit(3);
 
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
+milvus::SearchResponse response;
+status = client->Search(request, response);
 if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
+
 
 ```bash
 # restful
@@ -710,8 +702,8 @@ The following code snippet assumes a partition named **PartitionA** in your coll
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -803,6 +795,22 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .AddPartitionName("partitionA")
+    .WithAnnsField("vector")
+    .WithLimit(3);
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -824,29 +832,6 @@ console.log(res.results)
 // ]
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         // highlight-next-line
-                         .AddPartitionName("partitionA")
-                         .WithLimit(3)
-                         .AddFloatVector(queryVector);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -895,20 +880,20 @@ In a search result, Milvus includes the primary field values and similarity dist
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 # 4. Single vector search
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
 
 res = client.search(
     collection_name="quick_setup",
     data=[query_vector],
     limit=3, # The number of results to return
-    search_params={"metric_type": "IP"}，
+    search_params={"metric_type": "IP"},
     # highlight-next-line
     output_fields=["color"]
 )
@@ -994,6 +979,23 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .WithAnnsField("vector")
+    .WithMetricType(milvus::MetricType::IP)
+    .WithLimit(3)
+    .AddOutputField("color");
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -1015,32 +1017,6 @@ console.log(res.results)
 // ]
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         .WithLimit(3)
-                         .WithMetricType(milvus::MetricType::IP)
-                         // highlight-next-line
-                         .AddOutputField("color")
-                         .AddFloatVector(queryVector);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i]
-                  << ", color=" << colors->Data()[i] << std::endl;
-    }
-}
-```
 
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -1191,32 +1167,25 @@ for _, resultSet := range resultSets {
 ```
 
 ```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("product_catalog")
-                         .WithAnnsField("embedding")
-                         .WithLimit(20)
-                         .WithOutputFields({"id", "price", "rating", "category"})
-                         // highlight-start
-                         .AddOrderByField(milvus::OrderByField(
-                             "price", milvus::AggregationDirection::ASC))
-                         // highlight-end
-                         .AddFloatVector(queryVector);
+milvus::SearchRequest request;
+request.WithCollectionName("product_catalog")
+    .WithAnnsField("embedding")
+    .WithLimit(20)
+    .AddOutputField("id")
+    .AddOutputField("price")
+    .AddOutputField("rating")
+    .AddOutputField("category")
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)});
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
+milvus::SearchResponse response;
+status = client->Search(request, response);
 if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto prices = result.OutputField<milvus::Int64FieldData>("price");
-    for (size_t i = 0; i < result.GetRowCount(); ++i) {
-        std::cout << "id=" << ids[i] << ", price=" << prices->Data()[i] << std::endl;
-    }
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
+
 
 ```bash
 # restful
@@ -1330,36 +1299,27 @@ for _, resultSet := range resultSets {
 ```
 
 ```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("product_catalog")
-                         .WithAnnsField("embedding")
-                         .WithLimit(20)
-                         .WithOutputFields({"id", "price", "rating", "category"})
-                         // highlight-start
-                         .WithOrderByFields({
-                             milvus::OrderByField("price", milvus::AggregationDirection::ASC),
-                             milvus::OrderByField("rating", milvus::AggregationDirection::DESC),
-                         })
-                         // highlight-end
-                         .AddFloatVector(queryVector);
+milvus::SearchRequest request;
+request.WithCollectionName("product_catalog")
+    .WithAnnsField("embedding")
+    .WithLimit(20)
+    .AddOutputField("id")
+    .AddOutputField("price")
+    .AddOutputField("rating")
+    .AddOutputField("category")
+    .WithOrderByFields({
+        milvus::OrderByField("price", milvus::AggregationDirection::ASC),
+        milvus::OrderByField("rating", milvus::AggregationDirection::DESC)});
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
+milvus::SearchResponse response;
+status = client->Search(request, response);
 if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto prices = result.OutputField<milvus::Int64FieldData>("price");
-    const auto ratings = result.OutputField<milvus::DoubleFieldData>("rating");
-    for (size_t i = 0; i < result.GetRowCount(); ++i) {
-        std::cout << "id=" << ids[i] << ", price=" << prices->Data()[i]
-                  << ", rating=" << ratings->Data()[i] << std::endl;
-    }
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
+
 
 ```bash
 # restful
@@ -1409,14 +1369,14 @@ Note that, the sum of `limit` and `offset` in a single ANN search should be less
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 # 4. Single vector search
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
 
 res = client.search(
     collection_name="quick_setup",
@@ -1481,6 +1441,23 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .WithAnnsField("vector")
+    .WithMetricType(milvus::MetricType::IP)
+    .WithLimit(3)
+    .WithOffset(10);
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```javascript
 // 4. Single vector search
 var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
@@ -1494,29 +1471,6 @@ res = await client.search({
 })
 ```
 
-```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         .WithLimit(3)
-                         // highlight-next-line
-                         .WithOffset(10)
-                         .AddFloatVector(queryVector);
-
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
-if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    for (size_t i = 0; i < result.Scores().size(); ++i) {
-        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
-    }
-}
-```
 
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -1632,31 +1586,22 @@ for _, resultSet := range resultSets {
 ```
 
 ```cpp
-auto searchRequest = milvus::SearchRequest()
-                         .WithCollectionName("quick_setup")
-                         .WithAnnsField("vector")
-                         .WithLimit(3)
-                         .WithMetricType(milvus::MetricType::IP)
-                         .AddOutputField("event_time")
-                         // highlight-next-line
-                         .WithTimezone("America/Havana")
-                         .AddFloatVector(queryVector);
+milvus::SearchRequest request;
+request.WithCollectionName("quick_setup")
+    .WithAnnsField("vector")
+    .WithMetricType(milvus::MetricType::IP)
+    .WithLimit(3)
+    .WithTimezone("America/Havana");
+request.AddFloatVector(std::vector<float>{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 
-milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
+milvus::SearchResponse response;
+status = client->Search(request, response);
 if (!status.IsOk()) {
-    std::cerr << "Search failed: " << status.Message() << std::endl;
-    return;
-}
-
-for (const auto& result : searchResponse.Results().Results()) {
-    const auto ids = result.Ids().IntIDArray();
-    const auto eventTimes = result.OutputField<milvus::TimestamptzFieldData>("event_time");
-    for (size_t i = 0; i < result.GetRowCount(); ++i) {
-        std::cout << "id=" << ids[i] << ", event_time=" << eventTimes->Data()[i] << std::endl;
-    }
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
+
 
 ```bash
 # restful

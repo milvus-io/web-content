@@ -33,6 +33,7 @@ When creating a collection, Milvus also creates a partition named **_default** i
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -131,6 +132,35 @@ if err != nil {
 fmt.Println(partitionNames)
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::ListPartitionsResponse resp_parts;
+    status = client->ListPartitions(milvus::ListPartitionsRequest().WithCollectionName("my_collection"), resp_parts);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    for (const auto& name : resp_parts.PartitionsNames()) {
+        std::cout << name << std::endl;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -161,6 +191,7 @@ You can add more partitions to the collection and insert entities into these par
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -245,6 +276,26 @@ fmt.Println(partitionNames)
 // ["_default", "partitionA"]
 ```
 
+```cpp
+status = client->CreatePartition(milvus::CreatePartitionRequest()
+    .WithCollectionName("my_collection")
+    .WithPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::ListPartitionsResponse resp_parts;
+status = client->ListPartitions(milvus::ListPartitionsRequest().WithCollectionName("my_collection"), resp_parts);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& name : resp_parts.PartitionsNames()) {
+    std::cout << name << std::endl;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -291,6 +342,7 @@ The following code snippets demonstrate how to check whether a partition exists 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -347,6 +399,18 @@ fmt.Println(result)
 // true
 ```
 
+```cpp
+milvus::HasPartitionResponse has_resp;
+status = client->HasPartition(milvus::HasPartitionRequest()
+    .WithCollectionName("my_collection")
+    .WithPartitionName("partitionA"), has_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << std::boolalpha << has_resp.Has() << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -382,6 +446,7 @@ You can separately load specific partitions in a collection. It is worth noting 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -467,6 +532,26 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+status = client->LoadPartitions(milvus::LoadPartitionsRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -515,6 +600,7 @@ You can also release specific partitions.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -593,6 +679,26 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+status = client->ReleasePartitions(milvus::ReleasePartitionsRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -661,6 +767,7 @@ You can drop partitions that are no longer needed. Before dropping a partition, 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -754,6 +861,34 @@ if err != nil {
     // handle error
 }
 fmt.Println(partitionNames)
+```
+
+```cpp
+status = client->ReleasePartitions(milvus::ReleasePartitionsRequest()
+    .WithCollectionName("my_collection")
+    .AddPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+status = client->DropPartition(milvus::DropPartitionRequest()
+    .WithCollectionName("my_collection")
+    .WithPartitionName("partitionA"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::ListPartitionsResponse resp_parts;
+status = client->ListPartitions(milvus::ListPartitionsRequest().WithCollectionName("my_collection"), resp_parts);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& name : resp_parts.PartitionsNames()) {
+    std::cout << name << std::endl;
+}
 ```
 
 ```bash

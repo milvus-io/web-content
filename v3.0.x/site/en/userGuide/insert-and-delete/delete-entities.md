@@ -17,6 +17,7 @@ When deleting multiple entities that share some attributes in a batch, you can u
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -31,7 +32,7 @@ client = MilvusClient(
 res = client.delete(
     collection_name="quick_setup",
     # highlight-next-line
-    filter="color in ['red_7025', 'purple_4976]"
+    filter="color in ['red_7025', 'purple_4976']"
 )
 
 print(res)
@@ -46,14 +47,14 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.DeleteReq;
 import io.milvus.v2.service.vector.response.DeleteResp;
 
-ilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build());
 
 DeleteResp deleteResp = client.delete(DeleteReq.builder()
         .collectionName("quick_setup")
-        .filter("color in ['red_7025', 'purple_4976]")
+        .filter("color in ['red_7025', 'purple_4976']")
         .build());
 
 ```
@@ -69,7 +70,7 @@ const client = new MilvusClient({address, token});
 res = await client.delete({
     collection_name: "quick_setup",
     // highlight-next-line
-    filter: "color in ['red_7025', 'purple_4976]"
+    filter: "color in ['red_7025', 'purple_4976']"
 })
 
 console.log(res.delete_cnt)
@@ -110,6 +111,35 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    milvus::DeleteResponse delete_resp;
+    status = client->Delete(milvus::DeleteRequest()
+        .WithCollectionName("quick_setup")
+        .WithFilter("color in ['red_7025', 'purple_4976']"), delete_resp);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+    std::cout << delete_resp.Results().DeleteCount() << std::endl;
+
+    return 0;
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -134,6 +164,7 @@ In most cases, a primary key uniquely identifies an Entity. You can delete Entit
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -187,6 +218,18 @@ if err != nil {
 }
 ```
 
+```cpp
+// Delete entities by primary keys
+status = client->Delete(milvus::DeleteRequest()
+    .WithCollectionName("quick_setup")
+    .WithIDs(std::vector<int64_t>{18, 19}), delete_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << delete_resp.Results().DeleteCount() << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -212,6 +255,7 @@ You can also delete entities stored in specific partitions. The following code s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -266,6 +310,19 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+// Delete entities from a specific partition
+status = client->Delete(milvus::DeleteRequest()
+    .WithCollectionName("quick_setup")
+    .WithPartitionName("partitionA")
+    .WithIDs(std::vector<int64_t>{18, 19}), delete_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << delete_resp.Results().DeleteCount() << std::endl;
 ```
 
 ```bash

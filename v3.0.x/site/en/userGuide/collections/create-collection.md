@@ -39,6 +39,7 @@ You can set default values for any scalar field and make it nullable. For detail
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -61,6 +62,35 @@ schema = MilvusClient.create_schema(
 schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
 schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 schema.add_field(field_name="my_varchar", datatype=DataType.VARCHAR, max_length=512)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // 3. Create a collection in customized setup mode
+    // 3.1 Create schema
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+
+    // 3.2 Add fields to schema
+    schema->AddField(milvus::FieldSchema("my_id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("my_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+    schema->AddField(milvus::FieldSchema("my_varchar", milvus::DataType::VARCHAR).WithMaxLength(512));
+
+    return 0;
+}
 ```
 
 ```java
@@ -208,6 +238,7 @@ For details, refer to [Index Vector Fields](index-vector-fields.md) and [Index S
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -275,6 +306,13 @@ indexOptions := []milvusclient.CreateIndexOption{
 }
 ```
 
+```cpp
+// 3.3 Prepare index parameters
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back("my_id", "", milvus::IndexType::AUTOINDEX);
+index_params.emplace_back("my_vector", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+```
+
 ```bash
 export indexParams='[
         {
@@ -302,6 +340,7 @@ The following code snippets demonstrate how to create the collection with index 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -388,6 +427,27 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
+```cpp
+// 3.4 Create a collection with schema and index parameters
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_1")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+// 3.5 Get load state of the collection
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest().WithCollectionName("customized_setup_1"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -413,6 +473,7 @@ The following code snippet demonstrates how to create a collection without an in
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -498,6 +559,25 @@ if err != nil {
 fmt.Println(state.State)
 ```
 
+```cpp
+// 3.6 Create a collection and index it separately
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_2")
+    .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+
+milvus::GetLoadStateResponse load_state_resp;
+status = client->GetLoadState(milvus::GetLoadStateRequest().WithCollectionName("customized_setup_2"), load_state_resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+std::cout << static_cast<int>(load_state_resp.State()) << std::endl;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -541,6 +621,7 @@ The following code snippet demonstrates how to set the shard number when you cre
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -583,6 +664,18 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
+```cpp
+// With shard number
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_3")
+    .WithCollectionSchema(schema)
+    .WithNumShards(1));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 export params='{
     "shardsNum": 1
@@ -612,6 +705,7 @@ Milvus enables mmap on all collections by default, allowing Milvus to map raw fi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#plaintext">plaintext</a>
 </div>
 
@@ -658,6 +752,18 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
+```cpp
+// With mmap
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_4")
+    .WithCollectionSchema(schema)
+    .AddProperty(milvus::MMAP_ENABLED, "false"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 export params='{
     "mmap.enabled": True
@@ -689,6 +795,7 @@ The following code snippet sets the TTL to one day (86400 seconds). You are advi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -740,6 +847,18 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
+```cpp
+// With TTL
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_5")
+    .WithCollectionSchema(schema)
+    .AddProperty(milvus::COLLECTION_TTL_SECONDS, "86400"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 export params='{
     "ttlSeconds": 86400
@@ -769,6 +888,7 @@ When creating a collection, you can set the consistency level for searches and q
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -815,6 +935,18 @@ if err != nil {
     // handle error
 }
 fmt.Println("collection created")
+```
+
+```cpp
+// With consistency level
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+    .WithCollectionName("customized_setup_6")
+    .WithCollectionSchema(schema)
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```bash

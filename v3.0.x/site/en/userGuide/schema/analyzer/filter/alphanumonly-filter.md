@@ -17,6 +17,7 @@ The `alphanumonly` filter is built into Milvus. To use it, simply specify its na
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -42,6 +43,31 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"alphanumonly"}}
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Analyzer parameters
+    nlohmann::json analyzer_params = {
+        {"tokenizer", "standard"},
+        {"filter", {"alphanumonly"}},
+    };
+
+    return 0;
+}
 ```
 
 ```bash
@@ -70,6 +96,7 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -94,6 +121,14 @@ analyzerParams.put("filter", Collections.singletonList("alphanumonly"));
 analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"alphanumonly"}}
 ```
 
+```cpp
+// Analyzer parameters
+analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"alphanumonly"}},
+};
+```
+
 ```bash
 # restful
 ```
@@ -105,6 +140,7 @@ analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"alphan
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -175,6 +211,26 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+// Sample text to analyze
+std::string sample_text = "Milvus 2.0 @ Scale! #AI #Vector_Databasé";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest request;
+request.AddText(sample_text).WithAnalyzerParams(analyzer_params).WithDetail(true);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << std::endl;
+    }
 }
 ```
 

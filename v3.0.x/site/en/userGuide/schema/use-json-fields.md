@@ -58,6 +58,7 @@ The example below creates a collection with its schema containing these fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -189,6 +190,41 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create schema with a JSON field
+    milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+    schema->SetEnableDynamicField(true);
+    schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::INT64, "", true, false));
+    schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+    // JSON field that allows null values
+    schema->AddField(milvus::FieldSchema("metadata", milvus::DataType::JSON).WithNullable(true));
+
+    status = client->CreateCollection(milvus::CreateCollectionRequest()
+        .WithCollectionName("product_catalog")
+        .WithCollectionSchema(schema));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -255,6 +291,7 @@ Once the collection is created, insert entities that contain structured JSON obj
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -379,6 +416,36 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("product_cat
 ))
 if err != nil {
     return err
+}
+```
+
+```cpp
+row["product_id"] = 1;
+row["vector"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+row["metadata"] = nlohmann::json{
+    {"category", "electronics"},
+    {"brand", "BrandA"},
+    {"in_stock", true},
+    {"price", 99.99},
+    {"string_price", "99.99"},
+    {"tags", std::vector<std::string>{"clearance", "summer_sale"}},
+    {"supplier", nlohmann::json{
+        {"name", "SupplierX"},
+        {"country", "USA"},
+        {"contact", nlohmann::json{
+            {"email", "support@supplierx.com"},
+            {"phone", "+1-800-555-0199"}
+        }}
+    }}
+};
+rows.emplace_back(std::move(row));
+
+status = client->Insert(milvus::InsertRequest()
+    .WithCollectionName("product_catalog")
+    .WithRowsData(std::move(rows)), resp);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
 }
 ```
 
@@ -572,6 +639,7 @@ Using the `metadata` JSON structure from our introduction, here are examples of 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -671,6 +739,18 @@ indexOpt1 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", js
 indexOpt2 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex2)
 ```
 
+```cpp
+// Index the category field as a string
+index_params.emplace_back("metadata", "category_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "metadata[\"category\"]");
+index_params.back().AddExtraParam("json_cast_type", "varchar");
+
+// Index the tags array as string array
+index_params.emplace_back("metadata", "tags_array_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "metadata[\"tags\"]");
+index_params.back().AddExtraParam("json_cast_type", "array_varchar");
+```
+
 ```bash
 # restful
 export categoryIndex='{
@@ -722,6 +802,7 @@ Cast functions are case-insensitive. The following types are supported:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -775,6 +856,14 @@ jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `metadata["strin
 
 indexOpt3 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex3)
 
+```
+
+```cpp
+// Convert string numbers to double for indexing
+index_params.emplace_back("metadata", "string_to_double_index", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "metadata[\"string_price\"]");
+index_params.back().AddExtraParam("json_cast_type", "double");
+index_params.back().AddExtraParam("json_cast_function", "STRING_TO_DOUBLE");
 ```
 
 ```bash
@@ -852,6 +941,7 @@ When you create a JSON flat index on an object path, Milvus will:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -893,6 +983,18 @@ index_params.add_index(
 // go
 ```
 
+```cpp
+// Create a flat index on the root object of the JSON column (covers the entire JSON subtree)
+index_params.emplace_back("metadata", "metadata_flat", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "metadata");
+index_params.back().AddExtraParam("json_cast_type", "JSON");
+
+// Create a flat index on a sub-object (e.g., supplier subtree)
+index_params.emplace_back("metadata", "metadata_supplier_flat", milvus::IndexType::AUTOINDEX);
+index_params.back().AddExtraParam("json_path", "metadata[\"supplier\"]");
+index_params.back().AddExtraParam("json_cast_type", "JSON");
+```
+
 ```bash
 # restful
 ```
@@ -906,6 +1008,7 @@ After defining the index parameters, you can apply them to the collection using 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -944,6 +1047,16 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->CreateIndex(milvus::CreateIndexRequest()
+    .WithCollectionName("product_catalog")
+    .WithIndexes(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
+```
+
 ```bash
 # restful
 export indexParams="[
@@ -973,6 +1086,7 @@ For example:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -998,6 +1112,12 @@ let filter = 'json_contains(metadata["tags"], "featured")'
 filter := 'metadata["category"] == "electronics"'
 filter := 'metadata["price"] > 50'
 filter := 'json_contains(metadata["tags"], "featured")'
+```
+
+```cpp
+filter = "metadata[\"category\"] == \"electronics\"";
+filter = "metadata[\"price\"] > 50";
+filter = "json_contains(metadata[\"tags\"], \"featured\")";
 ```
 
 ```bash

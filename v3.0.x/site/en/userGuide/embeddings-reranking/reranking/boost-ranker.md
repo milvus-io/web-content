@@ -392,6 +392,7 @@ Before passing a Boost Ranker as the reranker of a search request, you should pr
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -413,6 +414,32 @@ ranker = Function(
         "weight": 0.5
     }
 )
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+int main() {
+    auto client = milvus::MilvusClientV2::Create();
+    auto status = client->Connect(milvus::ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return 1;
+    }
+
+    // Create a Boost Ranker
+    auto boost_reranker = std::make_shared<milvus::BoostRerank>("boost");
+    boost_reranker->SetFilter("doctype == 'abstract'");
+    boost_reranker->SetRandomScoreField("id");
+    boost_reranker->SetRandomScoreSeed(126);
+    boost_reranker->SetWeight(0.5);
+
+    return 0;
+}
 ```
 
 ```java
@@ -514,6 +541,7 @@ Once the Boost Ranker function is ready, you can reference it in a search reques
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -538,6 +566,33 @@ client.search(
     output_field=["doctype"],
     ranker=ranker
 )
+```
+
+```cpp
+// Create a Boost Ranker
+auto boost_reranker = std::make_shared<milvus::BoostRerank>("boost");
+boost_reranker->SetFilter("doctype == 'abstract'");
+boost_reranker->SetWeight(0.5);
+
+// Conduct a similarity search using the created ranker
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(boost_reranker);
+
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    .WithRerank(function_score)
+    .AddOutputField("doctype")
+    .AddFloatVector(std::vector<float>{-0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f, -0.4248030059917294f, -0.8648452746018911f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
@@ -605,6 +660,7 @@ The following example shows how to modify the scores of all identified entities 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -658,6 +714,41 @@ client.search(
     output_field=["doctype"],
     ranker=ranker
 )
+```
+
+```cpp
+// Create a Boost Ranker with a fixed weight
+auto fix_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+fix_weight_ranker->SetWeight(0.8);
+
+// Create a Boost Ranker with a randomly generated weight between 0 and 0.4
+auto random_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+random_weight_ranker->SetRandomScoreSeed(126);
+random_weight_ranker->SetWeight(0.4);
+
+// Create a Function Score
+auto ranker = std::make_shared<milvus::FunctionScore>();
+ranker->AddFunction(fix_weight_ranker);
+ranker->AddFunction(random_weight_ranker);
+ranker->AddParam("boost_mode", "Multiply");
+ranker->AddParam("function_mode", "Sum");
+
+// Conduct a similarity search using the created Function Score
+milvus::SearchRequest request;
+request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    .WithRerank(ranker)
+    .AddOutputField("doctype")
+    .AddFloatVector(std::vector<float>{-0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f, -0.4248030059917294f, -0.8648452746018911f})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return 1;
+}
 ```
 
 ```java
