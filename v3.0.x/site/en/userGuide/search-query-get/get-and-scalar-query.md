@@ -86,6 +86,7 @@ You can get entities by their IDs as follows.
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -206,6 +207,31 @@ curl --request POST \
 # {"code":0,"cost":0,"data":[{"color":"pink_8682","id":0,"vector":[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{"color":"red_7025","id":1,"vector":[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{"color":"orange_6781","id":2,"vector":[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::GetRequest()
+                   .WithCollectionName("my_collection")
+                   .WithIDs({0, 1, 2})
+                   .AddOutputField("vector")
+                   .AddOutputField("color");
+
+milvus::GetResponse response;
+status = client->Get(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ## Use Query
 
 ### Basic Query
@@ -218,6 +244,7 @@ When you need to find entities by custom filtering conditions, use the **Query**
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -308,6 +335,32 @@ curl --request POST \
 #{"code":0,"cost":0,"data":[{"color":"red_7025","id":1,"vector":[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{"color":"red_4794","id":4,"vector":[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{"color":"red_9392","id":6,"vector":[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("color like \"red%\"")
+                   .WithLimit(3)
+                   .AddOutputField("vector")
+                   .AddOutputField("color");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 <a id="Sort-Query-Results"></a>
 
 ### Sort Query Results | Milvus 3.0.x
@@ -330,6 +383,7 @@ Pass a list of `"field_name:direction"` strings to the `order_by` parameter, whe
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -367,6 +421,34 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Sort results by id in ascending order
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("color like \"red%\"")
+                   .WithLimit(3)
+                   .WithOrderBy("id:asc")
+                   .AddOutputField("vector")
+                   .AddOutputField("color");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 #### Multi-field Sort
 
 You can sort by multiple fields at once. Results are first ordered by the first field in the list. When two rows have the same value in that field, the second field determines their order, and so on.
@@ -377,6 +459,7 @@ You can sort by multiple fields at once. Results are first ordered by the first 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -407,6 +490,36 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Sort by rating descending, then by price ascending for ties
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("")
+                   .WithLimit(10)
+                   .WithOrderBy("rating:desc")
+                   .WithOrderBy("price:asc")
+                   .AddOutputField("color")
+                   .AddOutputField("rating")
+                   .AddOutputField("price");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 #### Pagination with Sort
 
 Use `order_by` together with `limit` and `offset` to paginate through sorted results. For example, to display a product list sorted by price across multiple pages, each page shows the next batch of items in the correct price order without duplicates or gaps.
@@ -417,6 +530,7 @@ Use `order_by` together with `limit` and `offset` to paginate through sorted res
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -459,6 +573,51 @@ page2 = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Page 1
+auto request1 = milvus::QueryRequest()
+                    .WithCollectionName("my_collection")
+                    .WithFilter("color like \"red%\"")
+                    .WithLimit(5)
+                    .WithOffset(0)
+                    .WithOrderBy("price:asc")
+                    .AddOutputField("color")
+                    .AddOutputField("price");
+
+milvus::QueryResponse response1;
+status = client->Query(request1, response1);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Page 2
+auto request2 = milvus::QueryRequest()
+                    .WithCollectionName("my_collection")
+                    .WithFilter("color like \"red%\"")
+                    .WithLimit(5)
+                    .WithOffset(5)
+                    .WithOrderBy("price:asc")
+                    .AddOutputField("color")
+                    .AddOutputField("price");
+
+milvus::QueryResponse response2;
+status = client->Query(request2, response2);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ### Aggregate Query Results | Milvus 3.0.x
 
 You can group query results by one or more scalar fields and compute aggregations per group. The supported aggregation operators are `count`, `min`, `max`, `sum`, and `avg`.
@@ -479,6 +638,7 @@ The following example groups entities by the `color` field and returns the numbe
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -521,6 +681,32 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("")
+                   .WithGroupByFields({"color"})
+                   .AddOutputField("color")
+                   .AddOutputField("count(*)");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 You can request several aggregation expressions in a single call. The following example groups by `color` and returns the entity count, average price, and maximum rating for each group:
 
 <div class="multipleCode">
@@ -529,6 +715,7 @@ You can request several aggregation expressions in a single call. The following 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -564,6 +751,34 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("")
+                   .WithGroupByFields({"color"})
+                   .AddOutputField("color")
+                   .AddOutputField("count(*)")
+                   .AddOutputField("avg(price)")
+                   .AddOutputField("max(rating)");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 Pass more than one field to `group_by_fields` to compute composite groups. The following example groups by `(color, rating)` and computes the price range in each group:
 
 <div class="multipleCode">
@@ -572,6 +787,7 @@ Pass more than one field to `group_by_fields` to compute composite groups. The f
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -608,6 +824,34 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("")
+                   .WithGroupByFields({"color", "rating"})
+                   .AddOutputField("color")
+                   .AddOutputField("rating")
+                   .AddOutputField("min(price)")
+                   .AddOutputField("max(price)");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 You can also combine `group_by_fields` with `limit` to cap how many groups come back. This is useful when a field has high cardinality and you only need a sample of groups:
 
 <div class="multipleCode">
@@ -616,6 +860,7 @@ You can also combine `group_by_fields` with `limit` to cap how many groups come 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -651,6 +896,34 @@ res = client.query(
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("")
+                   .WithGroupByFields({"color"})
+                   .AddOutputField("color")
+                   .AddOutputField("avg(price)")
+                   .AddOutputField("count(*)")
+                   .WithLimit(5);
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ## Use QueryIterator
 
 When you need to find entities by custom filtering conditions through paginated queries, create a **QueryIterator** and use its **next()** method to iterate over all entities to find those meeting the filtering conditions. The following code examples assume that there are three fields named `id`, `vector`, and `color` and return all entities that hold a `color` value starting with `red`.
@@ -661,6 +934,7 @@ When you need to find entities by custom filtering conditions through paginated 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -740,6 +1014,10 @@ for await (const value of iterator) {
 # Not available
 ```
 
+```cpp
+// C++ QueryIterator is not supported in the current SDK.
+```
+
 ## Queries in Partitions
 
 You can also perform queries within one or multiple partitions by including the partition names in the Get, Query, or QueryIterator request. The following code examples assume that there is a partition named **PartitionA** in the collection.
@@ -750,6 +1028,7 @@ You can also perform queries within one or multiple partitions by including the 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -919,6 +1198,48 @@ curl --request POST \
 }'
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Get entities from a partition
+auto getRequest = milvus::GetRequest()
+                      .WithCollectionName("my_collection")
+                      .WithPartitionNames({"partitionA"})
+                      .WithIDs({10, 11, 12})
+                      .AddOutputField("vector")
+                      .AddOutputField("color");
+
+milvus::GetResponse getResponse;
+status = client->Get(getRequest, getResponse);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Query a partition
+auto queryRequest = milvus::QueryRequest()
+                        .WithCollectionName("my_collection")
+                        .WithPartitionNames({"partitionA"})
+                        .WithFilter("color like \"red%\"")
+                        .WithLimit(3)
+                        .AddOutputField("vector")
+                        .AddOutputField("color");
+
+milvus::QueryResponse queryResponse;
+status = client->Query(queryRequest, queryResponse);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ## Random Sampling with Query
 
 To extract a representative subset of data from your collection for data exploration or development testing, use the `RANDOM_SAMPLE(sampling_factor)` expression, where the `sampling_factor` is a float between 0 and 1 representing the percentage of data to sample.
@@ -935,6 +1256,7 @@ For detailed usage, advanced examples, and best practices, refer to [Random Samp
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -1025,6 +1347,46 @@ if err != nil {
 # restful
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Sample 1% of the entire collection
+auto request1 = milvus::QueryRequest()
+                    .WithCollectionName("my_collection")
+                    .WithFilter("RANDOM_SAMPLE(0.01)")
+                    .AddOutputField("vector")
+                    .AddOutputField("color");
+
+milvus::QueryResponse response1;
+status = client->Query(request1, response1);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Combine with other filters - first filter, then sample
+auto request2 = milvus::QueryRequest()
+                    .WithCollectionName("my_collection")
+                    .WithFilter("color like \"red%\" AND RANDOM_SAMPLE(0.005)")
+                    .WithLimit(10)
+                    .AddOutputField("vector")
+                    .AddOutputField("color");
+
+milvus::QueryResponse response2;
+status = client->Query(request2, response2);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ## Temporarily Set a Timezone for a Query
 
 If your collection has a `TIMESTAMPTZ` field, you can temporarily override the database or collection default timezone for a single operation by setting the `timezone` parameter in the query call. This controls how `TIMESTAMPTZ` values are displayed and compared during the operation.
@@ -1039,6 +1401,7 @@ The example below shows how to temporarily set a timezone for a query operation:
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -1054,17 +1417,125 @@ results = client.query(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.QueryReq
+import io.milvus.v2.service.vector.request.QueryResp
+import java.util.*;
+
+// Query data and display the tsz field converted to "America/Havana"
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("id <= 10")
+        .outputFields(Arrays.asList("id", "tsz", "vec"))
+        .limit(2)
+        .timeZone("America/Havana")
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+
+List<QueryResp.QueryResult> results = queryResp.getQueryResults();
+for (QueryResp.QueryResult result : results) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```javascript
-// js
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const address = "http://localhost:19530";
+const token = "root:Milvus";
+const client = new MilvusClient({address, token});
+
+// Query data and display the tsz field converted to "America/Havana"
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: 'id <= 10',
+    output_fields: ["id", "tsz", "vec"],
+    limit: 2,
+    timezone: "America/Havana"
+});
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+// Query data and display the tsz field converted to "America/Havana"
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("id <= 10").
+    WithLimit(2).
+    WithTimeZone("America/Havana").
+    WithOutputFields("id", "tsz", "vec"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
+fmt.Println("tsz: ", resultSet.GetColumn("tsz").FieldData().GetScalars())
+fmt.Println("vec: ", resultSet.GetColumn("vec").FieldData().GetVectors())
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# Query data and display the tsz field converted to "America/Havana"
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "id <= 10",
+    "limit": 2,
+    "outputFields": ["id", "tsz", "vec"],
+    "timezone": "America/Havana"
+}'
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Query data and display the tsz field converted to "America/Havana"
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   .WithFilter("id <= 10")
+                   .WithLimit(2)
+                   .WithTimeZone("America/Havana")
+                   .AddOutputField("id")
+                   .AddOutputField("tsz")
+                   .AddOutputField("vec");
+
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
