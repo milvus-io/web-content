@@ -46,6 +46,10 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         The ID of the collection to which the current segment belongs.
 
+    - **collectionName** (*String*) -
+
+        The name of the collection to which the current segment belongs.
+
     - **partitionID** (*Long*) -
 
         The ID of the partition to which the current segment belongs.

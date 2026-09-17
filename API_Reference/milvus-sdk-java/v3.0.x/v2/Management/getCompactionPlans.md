@@ -27,7 +27,7 @@ getCompactionPlans(GetCompactionPlansReq.builder()
 
 *GetCompactionPlansResp*
 
-The response contains the compaction state and merge plans.
+The response contains the compaction state, the compaction ID, and the merge plans.
 
 **EXCEPTIONS:**
 

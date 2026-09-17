@@ -188,6 +188,14 @@ ConnectConfig.builder()
 
     Returns the proxy server's address specified in **[ConnectConfig](ConnectConfig.md)**.
 
+- `getTelemetry()`
+
+    Returns the client telemetry manager, a `ClientTelemetryManager` used for diagnostics. See ClientTelemetryManager.
+
+- `startTelemetry()`
+
+    Starts client telemetry reporting manually. Only needed when `deferTelemetryStart(true)` was set in **[ConnectConfig](ConnectConfig.md)**.
+
 ## Examples
 
 ```java

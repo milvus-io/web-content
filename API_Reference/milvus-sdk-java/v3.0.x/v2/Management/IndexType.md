@@ -92,6 +92,10 @@ Sets the index type to TRIE. This applies to VarChar fields only.
 
 Sets the index type to NGRAM. This applies to VarChar fields and JSON Path indexes.
 
+### FMINDEX
+
+Sets the index type to FMINDEX. This applies to VarChar fields; it is an exact byte-level substring index.
+
 ### RTREE
 
 Sets the index type to RTREE. This applies to geometry fields only.

@@ -44,6 +44,10 @@ A **ListAliasResp** object containing a list of aliases for the specified collec
 
     The name of the collection.
 
+- **dbName** (*String*)
+
+    The name of the database.
+
 **EXCEPTIONS:**
 
 - **MilvusClientExceptions**

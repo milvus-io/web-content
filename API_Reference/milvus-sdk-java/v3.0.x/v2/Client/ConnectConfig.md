@@ -24,6 +24,9 @@ ConnectConfig.builder()
     .serverName(String serverName)
     .proxyAddress(String proxyAddress)
     .option(Map<String, String> option)
+    .telemetryConfig(TelemetryConfig telemetryConfig)
+    .telemetryClientId(String telemetryClientId)
+    .deferTelemetryStart(boolean deferTelemetryStart)
     .build()
 ```
 
@@ -110,6 +113,18 @@ ConnectConfig.builder()
 - `option(Map<String, String> option)` -
 
     Arbitrary key-value pairs that are forwarded to the server in the `ClientInfo.reserved` field on connect. Useful for passing client-side metadata or feature flags that the server understands. The default value is an empty map.
+
+- `telemetryConfig(TelemetryConfig telemetryConfig)` -
+
+    The client telemetry configuration. Defaults to `TelemetryConfig.defaults()`.
+
+- `telemetryClientId(String telemetryClientId)` -
+
+    An optional client identifier for telemetry. Default: `""`.
+
+- `deferTelemetryStart(boolean deferTelemetryStart)` -
+
+    When `true`, telemetry is not started automatically on connect; call `MilvusClientV2.startTelemetry()` manually. Default: `false`.
 
 ## Example
 

@@ -25,6 +25,7 @@ queryIterator(QueryIteratorReq.builder()
     .batchSize(long batchSize)
     .reduceStopForBest(boolean reduceStopForBest)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .cursor(QueryIteratorCursor cursor)
     .build()
 );
 ```
@@ -83,11 +84,44 @@ queryIterator(QueryIteratorReq.builder()
 
     A map of template variable values for parameterized filters.
 
+- `cursor(QueryIteratorCursor cursor)`
+
+    A previously captured cursor used to resume pagination from its position. When set, iteration continues from the cursor's session timestamp and primary-key/element position instead of starting over; the offset is ignored.
+
 **RETURNS:**
 
 *QueryIterator*
 
-*QueryIterator*
+### QueryIteratorCursor
+
+A serializable pagination snapshot used to resume a query iterator from a saved position. Build one with `QueryIteratorCursor.builder()`, or capture it from an active iterator via `QueryIterator.getCursor()`.
+
+```java
+QueryIteratorCursor.builder()
+    .sessionTs(long sessionTs)
+    .intPk(Long intPk)
+    .strPk(String strPk)
+    .lastElementOffset(Long lastElementOffset)
+    .build();
+```
+
+**BUILDER METHODS:**
+
+- `sessionTs(long sessionTs)`
+
+    The session timestamp recorded when the cursor was captured.
+
+- `intPk(Long intPk)`
+
+    The integer primary key of the last returned row.
+
+- `strPk(String strPk)`
+
+    The string primary key of the last returned row.
+
+- `lastElementOffset(Long lastElementOffset)`
+
+    The element offset within the last returned row.
 
 **EXCEPTIONS:**
 

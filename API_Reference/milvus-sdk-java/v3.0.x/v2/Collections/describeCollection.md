@@ -35,7 +35,7 @@ describeCollection(DescribeCollectionReq.builder()
 
 *DescribeCollectionResp*
 
-A **DescribeCollectionResp** object that contains detailed information about the specified collection.
+A **DescribeCollectionResp** object that contains detailed information about the specified collection, including its aliases, the schema update timestamp, whether namespace is enabled, and the schema version.
 
 **EXCEPTIONS:**
 

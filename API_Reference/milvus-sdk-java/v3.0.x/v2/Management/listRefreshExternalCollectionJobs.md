@@ -30,7 +30,7 @@ listRefreshExternalCollectionJobs(ListRefreshExternalCollectionJobsReq.builder()
 
 *ListRefreshExternalCollectionJobsResp*
 
-The response wraps `List<RefreshExternalCollectionJobInfo>` accessible via `getJobs()`. Each job info entry exposes `jobId`, `collectionName`, `state`, `progress`, `reason`, `externalSource`, `startTime`, and `endTime` — the same shape as the entry returned by `getRefreshExternalCollectionProgress()`.
+The response wraps `List<RefreshExternalCollectionJobInfo>` accessible via `getJobs()`. Each job info entry exposes `jobId`, `collectionName`, `state`, `progress`, `reason`, `externalSource`, `externalSpec`, `startTime`, and `endTime` — the same shape as the entry returned by `getRefreshExternalCollectionProgress()`.
 
 **EXCEPTIONS:**
 

@@ -13,6 +13,7 @@ get(GetReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
+    .partitionNames(List<String> partitionNames)
     .ids(List<Object> ids)
     .outputFields(List<String> outputFields)
     .build()
@@ -33,6 +34,10 @@ get(GetReq.builder()
 
     The name of a partition.
 
+- `partitionNames(List<String> partitionNames)`
+
+    Additional partitions to read from, merged with `partitionName`.
+
 - `ids(List<Object> ids)`
 
     A specific entity ID or a list of entity IDs.
@@ -47,7 +52,7 @@ get(GetReq.builder()
 
 **RETURNS:**
 
-A **GetResp** object representing one or more queried entities.
+A **GetResp** object representing one or more queried entities. As a subclass of **QueryResp**, it also exposes cost, scanned byte counts, and cache hit ratio.
 
 **PARAMETERS:**
 

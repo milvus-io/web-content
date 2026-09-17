@@ -17,6 +17,9 @@ CreateCollectionReq.Function.builder()
     .functionType(FunctionType functionType)
     .inputFieldNames(List<String> inputFieldNames)
     .outputFieldNames(List<String> outputFieldNames)
+    .id(Long id)
+    .inputFieldIds(List<Long> inputFieldIds)
+    .outputFieldIds(List<Long> outputFieldIds)
     .params(Map<String, String> params)
     .build()
 ```
@@ -44,6 +47,18 @@ CreateCollectionReq.Function.builder()
 - `outputFieldNames(List<String> outputFieldNames)`
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
+- `id(Long id)`
+
+    The function ID, only populated by `describeCollection()`.
+
+- `inputFieldIds(List<Long> inputFieldIds)`
+
+    The IDs of the input fields.
+
+- `outputFieldIds(List<Long> outputFieldIds)`
+
+    The IDs of the output fields.
 
 - `params(Map<String, String> params)`
 

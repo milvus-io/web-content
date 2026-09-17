@@ -52,6 +52,10 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Geometry**.
 
+- Text(25)
+
+    Sets the data type to **Text**, which supports full-text search.
+
 - Timestamptz(26)
 
     Sets the data type to **Timestamptz**.

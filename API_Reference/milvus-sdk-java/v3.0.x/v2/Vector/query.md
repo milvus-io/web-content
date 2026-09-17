@@ -110,7 +110,7 @@ QueryReq.builder()
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided.
+Contains query rows ordered according to orderByFields when provided, along with execution metrics: `cost`, `scannedRemoteBytes`, `scannedTotalBytes`, and `cacheHitRatio`. Each returned `QueryResult` also exposes `elementOffset`, the matched element index within the array for element-level (`element_filter`) queries, or `null` otherwise.
 
 **EXCEPTIONS:**
 

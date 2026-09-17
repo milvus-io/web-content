@@ -37,6 +37,7 @@ SearchReq.builder()
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
+    .functionChains(functionChains)
     .build();
 // include-end
 // include-start zilliz
@@ -68,6 +69,7 @@ SearchReq.builder()
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
+    .functionChains(functionChains)
     .build();
 // include-end
 ```
@@ -177,6 +179,10 @@ SearchReq.builder()
 - `searchAggregation(SearchAggregation searchAggregation)`
 
     Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration.
+
+- `functionChains(List<FunctionChain> functionChains)`
+
+    Function chains applied to the ordinary search. Mutually exclusive with `functionScore`. See [FunctionChain](FunctionChain/FunctionChain.md).
 
 **RETURNS:**
 
