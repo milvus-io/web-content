@@ -15,6 +15,7 @@ SearchReq.builder()
     .collectionName(collectionName)
     .partitionNames(partitionNames)
     .annsField(annsField)
+    .metricType(metricType)
     .topK(topK)
     .filter(filter)
     .outputFields(outputFields)
@@ -33,7 +34,9 @@ SearchReq.builder()
     .groupByFieldName(groupByFieldName)
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
+    .ranker(ranker)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -46,6 +49,7 @@ SearchReq.builder()
     .clusterId(clusterId)
     .partitionNames(partitionNames)
     .annsField(annsField)
+    .metricType(metricType)
     .topK(topK)
     .filter(filter)
     .outputFields(outputFields)
@@ -64,7 +68,9 @@ SearchReq.builder()
     .groupByFieldName(groupByFieldName)
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
+    .ranker(ranker)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -89,6 +95,10 @@ SearchReq.builder()
 - `annsField(String annsField)`
 
     The vector field used for approximate nearest-neighbor search.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used for the search.
 
 - `topK(int topK)`
 
@@ -162,9 +172,17 @@ SearchReq.builder()
 
     Whether every returned group must contain groupSize entities.
 
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    Deprecated. The ranker used to rerank the search results. Use `functionScore` instead.
+
 - `functionScore(FunctionScore functionScore)`
 
     The scoring functions applied to the search results.
+
+- `functionChains(List<FunctionChain> functionChains)`
+
+    Function chains applied to an ordinary search. Mutually exclusive with `ranker` and `functionScore`.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 

@@ -110,7 +110,7 @@ QueryReq.builder()
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided.
+Contains query rows ordered according to orderByFields when provided, plus execution metadata such as `cost`, `scannedTotalBytes`, `scannedRemoteBytes`, and `cacheHitRatio`.
 
 **EXCEPTIONS:**
 

@@ -41,6 +41,8 @@ The response wraps a single `RefreshExternalCollectionJobInfo` accessible via `g
 
 - `externalSource` (*String*) - The external source used by the job.
 
+- `externalSpec` (*String*) - The external specification used by the job.
+
 - `startTime` (*long*) - The job start timestamp (epoch milliseconds).
 
 - `endTime` (*long*) - The job end timestamp (epoch milliseconds), or 0 if still running.

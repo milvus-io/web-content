@@ -35,7 +35,49 @@ describeCollection(DescribeCollectionReq.builder()
 
 *DescribeCollectionResp*
 
-A **DescribeCollectionResp** object that contains detailed information about the specified collection.
+A **DescribeCollectionResp** object that contains detailed information about the specified collection, including its aliases, schema version, and namespace-enabling state.
+
+**PARAMETERS:**
+
+- **collectionName** (*String*) - The name of the collection.
+
+- **collectionID** (*Long*) - The numeric ID of the collection.
+
+- **databaseName** (*String*) - The name of the database to which the collection belongs.
+
+- **description** (*String*) - The description of the collection.
+
+- **numOfPartitions** (*Long*) - The number of partitions in the collection.
+
+- **fieldNames** (*List\<String\>*) - The names of the fields in the collection.
+
+- **vectorFieldNames** (*List\<String\>*) - The names of the vector fields in the collection.
+
+- **primaryFieldName** (*String*) - The name of the primary-key field.
+
+- **enableDynamicField** (*Boolean*) - Whether dynamic fields are enabled.
+
+- **autoID** (*Boolean*) - Whether the primary key is auto-generated.
+
+- **collectionSchema** (*CreateCollectionReq.CollectionSchema*) - The schema of the collection.
+
+- **createTime** (*Long*) - The creation time of the collection.
+
+- **createUtcTime** (*Long*) - The creation time of the collection in UTC.
+
+- **consistencyLevel** (*ConsistencyLevel*) - The consistency level of the collection.
+
+- **shardsNum** (*Integer*) - The number of shards in the collection.
+
+- **properties** (*Map\<String,String\>*) - The properties of the collection.
+
+- **aliases** (*List\<String\>*) - The aliases of the collection.
+
+- **updateTimestamp** (*Long*) - The timestamp of the last update to the collection.
+
+- **enableNamespace** (*Boolean*) - Whether the namespace feature is enabled.
+
+- **schemaVersion** (*Integer*) - The version of the collection schema.
 
 **EXCEPTIONS:**
 

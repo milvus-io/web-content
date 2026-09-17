@@ -1,7 +1,5 @@
 # queryIterator()
 
-# queryIterator()
-
 This method returns a query iterator to iterate data.
 
 ```java
@@ -25,6 +23,7 @@ queryIterator(QueryIteratorReq.builder()
     .batchSize(long batchSize)
     .reduceStopForBest(boolean reduceStopForBest)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .cursor(QueryIteratorCursor cursor)
     .build()
 );
 ```
@@ -83,11 +82,15 @@ queryIterator(QueryIteratorReq.builder()
 
     A map of template variable values for parameterized filters.
 
+- `cursor(QueryIteratorCursor cursor)`
+
+    A previously captured cursor used to resume pagination from its position. When set, the iterator continues from the cursor's session timestamp and primary-key or element position.
+
 **RETURNS:**
 
 *QueryIterator*
 
-*QueryIterator*
+A **QueryIterator** object to iterate over the query results.
 
 **EXCEPTIONS:**
 

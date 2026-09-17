@@ -4,6 +4,10 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
+### None
+
+Sets the index type to None.
+
 ### FLAT
 
 Sets the index type to FLAT.
@@ -116,6 +120,6 @@ Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors onl
 
 Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
 
-### EMB_LIST_HNSW
+### FMINDEX
 
-Sets the index type to EMB_LIST_HNSW. This applies to an Array of Structs field.
+Sets the index type to FMINDEX. This applies to VarChar fields only.

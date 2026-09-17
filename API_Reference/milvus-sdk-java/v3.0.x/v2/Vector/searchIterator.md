@@ -1,7 +1,5 @@
 # searchIterator()
 
-# searchIterator()
-
 This method returns a search iterator to iterate search results.
 
 ```java

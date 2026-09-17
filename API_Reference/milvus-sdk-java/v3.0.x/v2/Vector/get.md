@@ -13,6 +13,7 @@ get(GetReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
+    .partitionNames(List<String> partitionNames)
     .ids(List<Object> ids)
     .outputFields(List<String> outputFields)
     .build()
@@ -33,6 +34,10 @@ get(GetReq.builder()
 
     The name of a partition.
 
+- `partitionNames(List<String> partitionNames)`
+
+    A list of partition names to target. Use this instead of `partitionName` to query multiple partitions.
+
 - `ids(List<Object> ids)`
 
     A specific entity ID or a list of entity IDs.
@@ -51,11 +56,11 @@ A **GetResp** object representing one or more queried entities.
 
 **PARAMETERS:**
 
-- **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
+- **queryResults** (*List\<QueryResult\>*)
 
-    A list of **QueryResp.QueryResult** objects.
+    A list of **QueryResult** objects. `getGetResults()` is deprecated; use `getQueryResults()` instead.
 
-- **fields** (*Map\\\\<String,Object\\\\>*)
+- **fields** (*Map\<String,Object\>*)
 
     A map that contains key-value pairs of field names and their values.
 
