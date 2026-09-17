@@ -51,6 +51,8 @@ auto request = SearchRequest()
     .WithRadius(radius)
     .WithRangeFilter(filter)
     .WithRerank(ranker)
+    .WithFunctionChains(function_chains)
+    .AddFunctionChain(function_chain)
     .WithTimezone(timezone)
     .WithHighlighter(highlighter)
     .WithSearchAggregation(aggregation)
@@ -70,7 +72,7 @@ auto request = SearchRequest()
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Set the partition names. If partition names are empty, will query in the entire collection.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -223,6 +225,14 @@ auto request = SearchRequest()
 - `WithRerank(const FunctionScorePtr& ranker)`
 
     Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read the doc for more info: https://milvus.io/docs/boost-ranker.md.
+
+- `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Set the function chains used to post-process search results. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+
+- `AddFunctionChain(const FunctionChain& function_chain)`
+
+    Add a function chain used to post-process search results. Function chains and rerank cannot be used together.
 
 - `WithTimezone(const std::string& timezone)`
 
@@ -476,6 +486,28 @@ explicit SearchResults(std::vector<SingleResult>&& results);
 - `const std::vector<float>& Recalls() const`
 
     Recall values per query vector. Populated only when the search is run on a Zilliz Cloud instance with `enable_recall_calculation` set to `true`. Otherwise the vector is empty.
+
+#### SearchResponse statistics
+
+The `SearchResponse` object exposes execution statistics that describe the cost of the search.
+
+**METHODS:**
+
+- `int64_t Cost() const`
+
+    Returns the cost of the search in milliseconds.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of bytes scanned from remote storage.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio as a value between 0.0 and 1.0.
 
 #### SingleResult
 

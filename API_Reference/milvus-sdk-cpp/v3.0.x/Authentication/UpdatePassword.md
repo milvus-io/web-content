@@ -12,7 +12,9 @@ Status UpdatePassword(const UpdatePasswordRequest& request)
 auto request = UpdatePasswordRequest()
     .WithUserName(name)
     .WithOldPassword(password1)
-    .WithNewPassword(password2);
+    .WithNewPassword(password2)
+    .WithDescription(description)
+    .WithResetConnection(reset_connection);
 ```
 
 **REQUEST METHODS:**
@@ -28,6 +30,14 @@ auto request = UpdatePasswordRequest()
 - `WithNewPassword(const std::string& password)`
 
     Sets the user's new password.
+
+- `WithDescription(const std::string& description)`
+
+    Sets the description of the user.
+
+- `WithResetConnection(bool reset_connection)`
+
+    Whether to reset the client connection after the password is updated. The password is updated on the server before the reconnect is attempted. If the reconnect fails, the returned Status reports that the password was updated but the connection must be re-established manually with the new credentials.
 
 **RETURNS:**
 
