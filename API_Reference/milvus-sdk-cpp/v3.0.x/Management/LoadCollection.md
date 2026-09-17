@@ -18,7 +18,8 @@ auto request = LoadCollectionRequest()
     .WithRefresh(refresh)
     .WithLoadFields(load_fields)
     .WithSkipDynamicField(skip_dynamic_field)
-    .WithTargetResourceGroups(target_resource_groups);
+    .WithTargetResourceGroups(target_resource_groups)
+    .WithLoadPriority(load_priority);
 ```
 
 **REQUEST METHODS:**
@@ -72,6 +73,10 @@ auto request = LoadCollectionRequest()
 - `WithTargetResourceGroups(const std::set<std::string>& target_resource_groups)`
 
     Sets the target resource groups.
+
+- `WithLoadPriority(const std::string& load_priority)`
+
+    Sets the load priority.
 
 **RETURNS:**
 

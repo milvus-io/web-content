@@ -2,6 +2,12 @@
 
 This operation returns the Milvus server version.
 
+<div class="alert note">
+
+This method is deprecated. Use [GetServerVersionV2()](GetServerVersionV2.md) instead.
+
+</div>
+
 ```cpp
 Status GetServerVersion(std::string& version)
 ```

@@ -9,6 +9,7 @@ enum class IndexType {
     FLAT = 1, IVF_FLAT = 2, IVF_SQ8 = 3, IVF_PQ = 4,
     HNSW = 5, DISKANN = 6, AUTOINDEX = 7, SCANN = 8,
     HNSW_SQ = 9, HNSW_PQ = 10, HNSW_PRQ = 11, IVF_RABITQ = 12,
+    AISAQ = 13,
     // Dense float — GPU
     GPU_IVF_FLAT = 201, GPU_IVF_PQ = 202,
     GPU_BRUTE_FORCE = 203, GPU_CAGRA = 204,
@@ -16,9 +17,11 @@ enum class IndexType {
     BIN_FLAT = 1001, BIN_IVF_FLAT = 1002, MINHASH_LSH = 1003,
     // Scalar fields
     TRIE = 1101, STL_SORT = 1102, INVERTED = 1103,
-    BITMAP = 1104, NGRAM = 1105,
+    BITMAP = 1104, NGRAM = 1105, FMINDEX = 1106,
     // Sparse vectors
     SPARSE_INVERTED_INDEX = 1201, SPARSE_WAND = 1202,
+    // Geometry
+    RTREE = 1301,
 };
 ```
 
@@ -50,6 +53,8 @@ enum class IndexType {
 
 - **IVF_RABITQ** (12) - IVF with RaBitQ binary quantization. Very low memory; competitive recall.
 
+- **AISAQ** (13) - Approximate inverted index using additive quantization. This applies to dense float vectors on GPU.
+
 *Dense float vectors — GPU:*
 
 - **GPU_IVF_FLAT** (201) - GPU-accelerated `IVF_FLAT`. Requires NVIDIA GPU with CUDA.
@@ -80,11 +85,17 @@ enum class IndexType {
 
 - **NGRAM** (1105) - N-gram index. **VARCHAR or JSON path only.** Enables fast infix (`LIKE '%keyword%'`) and tokenized text search.
 
+- **FMINDEX** (1106) - Exact byte-level substring index. **VARCHAR only.** Answers anchored `LIKE` (prefix/infix/suffix) queries without candidate recheck.
+
 *Sparse vectors (`SPARSE_FLOAT_VECTOR`):*
 
 - **SPARSE_INVERTED_INDEX** (1201) - Inverted index for sparse float vectors. Highest recall; recommended default for sparse vectors.
 
 - **SPARSE_WAND** (1202) - Weak AND (WAND) algorithm for sparse vectors. Faster than `SPARSE_INVERTED_INDEX` for large result sets at a small recall cost.
+
+*Geometry fields (`GEOMETRY`):*
+
+- **RTREE** (1301) - R-tree index for geometry fields. Enables spatial queries such as intersections and contains.
 
 *Internal:*
 

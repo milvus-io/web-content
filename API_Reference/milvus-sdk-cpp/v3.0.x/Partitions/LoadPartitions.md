@@ -19,7 +19,8 @@ auto request = LoadPartitionsRequest()
     .WithRefresh(refresh)
     .WithLoadFields(load_fields)
     .WithSkipDynamicField(skip_dynamic_field)
-    .WithTargetResourceGroups(target_resource_groups);
+    .WithTargetResourceGroups(target_resource_groups)
+    .WithLoadPriority(load_priority);
 ```
 
 **REQUEST METHODS:**
@@ -85,6 +86,10 @@ auto request = LoadPartitionsRequest()
 - `AddTargetResourceGroups(const std::string& target_resource_group)`
 
     Adds a target resource group.
+
+- `WithLoadPriority(const std::string& load_priority)`
+
+    Sets the load priority.
 
 **RETURNS:**
 

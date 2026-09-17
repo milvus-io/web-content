@@ -27,7 +27,8 @@ auto request = QueryIteratorRequest()
     .WithTimezone(timezone)
     .WithOrderByFields(order_by_fields)
     .AddOrderByField(order_by_field)
-    .WithReduceStopForBest(reduce_stop_for_best);
+    .WithReduceStopForBest(reduce_stop_for_best)
+    .WithIDs(id_array);
 ```
 
 **REQUEST METHODS:**
@@ -103,6 +104,14 @@ auto request = QueryIteratorRequest()
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
 
     Set the flag of internal retrieve strategy.
+
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys to query. Note: IDs and filter cannot be set at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys to query. Note: IDs and filter cannot be set at the same time.
 
 **RETURNS:**
 

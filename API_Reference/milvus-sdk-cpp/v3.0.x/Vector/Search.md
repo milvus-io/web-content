@@ -55,7 +55,8 @@ auto request = SearchRequest()
     .WithHighlighter(highlighter)
     .WithSearchAggregation(aggregation)
     .WithOrderByFields(order_by_fields)
-    .AddOrderByField(order_by_field);
+    .AddOrderByField(order_by_field)
+    .WithFunctionChains(function_chains);
 ```
 
 **REQUEST METHODS:**
@@ -244,6 +245,14 @@ auto request = SearchRequest()
 
     Add a field used to order search results.
 
+- `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Set function chains. Function chains and rerank cannot be used together.
+
+- `AddFunctionChain(const FunctionChain& function_chain)`
+
+    Add a function chain. Function chains and rerank cannot be used together.
+
 ### Query vector types
 
 The request accepts one query-vector representation matching the target field's [DataType](../Collections/DataType.md). Use the corresponding add or batch builder method; these are query inputs, not collection column payloads.
@@ -304,6 +313,38 @@ The request accepts one query-vector representation matching the target field's 
 *Status*
 
 Returns a status indicating whether the operation succeeded.
+
+### SearchResponse
+
+The `SearchResponse` object returned via the `response` argument exposes the search results and execution metadata:
+
+- `const SearchResults& Results() const`
+
+    Returns one `SearchResults` object for the complete search call.
+
+- `uint64_t SessionTs() const`
+
+    Returns the session timestamp of the search.
+
+- `int64_t Cost() const`
+
+    Returns the operation cost in milliseconds.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of remote bytes scanned by the search.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned by the search.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio of the search.
+
+- `const std::vector<AggregationBucket>& AggregationBuckets() const`
+
+    Returns the aggregation buckets when search aggregation is enabled.
 
 ### FieldData
 

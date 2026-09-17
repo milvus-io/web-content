@@ -26,7 +26,8 @@ auto request = QueryRequest()
     .AddExtraParam(key, value)
     .WithTimezone(timezone)
     .WithOrderByFields(order_by_fields)
-    .AddOrderByField(order_by_field);
+    .AddOrderByField(order_by_field)
+    .WithIDs(id_array);
 ```
 
 **REQUEST METHODS:**
@@ -99,11 +100,43 @@ auto request = QueryRequest()
 
     Add a field used to order query results.
 
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys to query. Note: IDs and filter cannot be set at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys to query. Note: IDs and filter cannot be set at the same time.
+
 **RETURNS:**
 
 *Status*
 
 Returns a status indicating whether the operation succeeded.
+
+### QueryResponse
+
+The `QueryResponse` object returned via the `response` argument exposes the result data and execution metadata:
+
+- `const QueryResults& Results() const`
+
+    Returns the query result rows.
+
+- `int64_t Cost() const`
+
+    Returns the operation cost in milliseconds.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of remote bytes scanned by the query.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned by the query.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio of the query.
 
 ### FieldData
 
