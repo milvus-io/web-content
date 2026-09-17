@@ -39,7 +39,7 @@ InsertReq.builder()
 
 *InsertResp*
 
-Contains the number of inserted entities and generated primary keys when applicable.
+Contains the number of inserted entities, generated primary keys when applicable, and the operation cost (`getCost()`).
 
 **EXCEPTIONS:**
 

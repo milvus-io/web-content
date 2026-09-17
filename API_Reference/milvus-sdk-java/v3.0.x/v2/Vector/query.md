@@ -110,7 +110,9 @@ QueryReq.builder()
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided.
+Contains query rows ordered according to orderByFields when provided, along with execution metrics (`getCost()`, `getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`).
+
+For struct-array element-level queries (via `element_filter`), each returned `QueryResult` carries the matched element's index through `getElementOffset()`.
 
 **EXCEPTIONS:**
 

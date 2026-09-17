@@ -34,6 +34,7 @@ SearchReq.builder()
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -65,6 +66,7 @@ SearchReq.builder()
     .groupSize(groupSize)
     .strictGroupSize(strictGroupSize)
     .functionScore(functionScore)
+    .functionChains(functionChains)
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
@@ -89,6 +91,10 @@ SearchReq.builder()
 - `annsField(String annsField)`
 
     The vector field used for approximate nearest-neighbor search.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity.
 
 - `topK(int topK)`
 
@@ -165,6 +171,18 @@ SearchReq.builder()
 - `functionScore(FunctionScore functionScore)`
 
     The scoring functions applied to the search results.
+
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`.
+
+- `functionChains(List<FunctionChain> functionChains)`
+
+    The function chains applied to post-process the search results. Function chains and rerank (`ranker()`/`functionScore()`) cannot be used together. See [FunctionChain](FunctionChain/FunctionChain.md).
+
+- `addFunctionChain(FunctionChain functionChain)`
+
+    Appends one function chain to the search request. Function chains and rerank (`ranker()`/`functionScore()`) cannot be used together. See [FunctionChain](FunctionChain/FunctionChain.md).
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
