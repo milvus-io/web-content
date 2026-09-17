@@ -75,7 +75,7 @@ auto request = SearchIteratorRequest()
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Set the partition names. If partition names are empty, will query in the entire collection.
 
 - `AddPartitionName(const std::string& partition_name)`
 

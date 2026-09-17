@@ -20,6 +20,8 @@ auto request = QueryRequest()
     .WithFilter(filter)
     .AddFilterTemplate(key, filter_template)
     .WithFilterTemplates(filter_templates)
+    .WithIDs(int64_id_array)
+    .WithIDs(string_id_array)
     .WithLimit(limit)
     .WithOffset(offset)
     .WithIgnoreGrowing(ignore_growing)
@@ -41,7 +43,7 @@ auto request = QueryRequest()
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Set the partition names. If partition names are empty, will query in the entire collection.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -71,13 +73,21 @@ auto request = QueryRequest()
 
     Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
 
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys whose records are returned. Note: IDs and filter cannot be set at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys whose records are returned. Note: IDs and filter cannot be set at the same time.
+
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
@@ -173,6 +183,28 @@ const QueryResults& results = response.Results();
 - `uint64_t GetRowCount() const`
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+
+#### QueryResponse statistics
+
+The `QueryResponse` object exposes execution statistics that describe the cost of the query.
+
+**METHODS:**
+
+- `int64_t Cost() const`
+
+    Returns the cost of the query in milliseconds.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of bytes scanned from remote storage.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio as a value between 0.0 and 1.0.
 
 #### Output field types
 
