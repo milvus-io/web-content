@@ -17,6 +17,7 @@ auto request = LoadCollectionRequest()
     .WithTimeoutMs(timeout_ms)
     .WithRefresh(refresh)
     .WithLoadFields(load_fields)
+    .WithLoadPriority(load_priority)
     .WithSkipDynamicField(skip_dynamic_field)
     .WithTargetResourceGroups(target_resource_groups);
 ```
@@ -64,6 +65,10 @@ auto request = LoadCollectionRequest()
 - `AddLoadField(const std::string& field_name)`
 
     Adds a field to be loaded.
+
+- `WithLoadPriority(const std::string& load_priority)`
+
+    Sets the load priority of the collection. Set `"low"` to select low priority; any other value (including `"high"`) defaults to high priority.
 
 - `WithSkipDynamicField(bool skip_dynamic_field)`
 

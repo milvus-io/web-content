@@ -17,6 +17,7 @@ auto request = QueryRequest()
     .WithOutputFields(output_field_names)
     .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
+    .WithIDs(id_array)
     .WithFilter(filter)
     .AddFilterTemplate(key, filter_template)
     .WithFilterTemplates(filter_templates)
@@ -58,6 +59,14 @@ auto request = QueryRequest()
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
     Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer IDs to query. Note: IDs and filter cannot be set at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Set string IDs to query. Note: IDs and filter cannot be set at the same time.
 
 - `WithFilter(std::string filter)`
 
@@ -179,6 +188,35 @@ const QueryResults& results = response.Results();
 Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
 
 The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. This result representation is shared by search and query interfaces and does not make the pointer aliases separate API pages.
+
+### QueryResponse
+
+This class holds the metadata returned by a `Query()` call in addition to the result rows.
+
+```cpp
+int64_t cost = response.Cost();
+int64_t scanned_remote_bytes = response.ScannedRemoteBytes();
+int64_t scanned_total_bytes = response.ScannedTotalBytes();
+float cache_hit_ratio = response.CacheHitRatio();
+```
+
+**METHODS:**
+
+- `int64_t Cost() const`
+
+    Returns the execution cost of the query in cost units, or `-1` when not reported.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of bytes read from remote storage during the query, or `-1` when not reported.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned by the query, or `-1` when not reported.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio of the query (0.0 to 1.0), or `-1.0` when not reported.
 
 **ERROR HANDLING:**
 

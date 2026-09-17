@@ -38,7 +38,7 @@ auto request = DeleteRequest()
 
 - `AddFilterTemplate(std::string key, nlohmann::json&& filter_template)`
 
-    Adds a filter template. This takes effect only if `WithFilter()` is set.  Read this page for more about [filter templating](https://milvus.io/docs/filtering-templating.md).
+    Adds a filter template. This takes effect only if `WithFilter()` is set. Valid template values include boolean, numeric, string, array, and binary data; a binary value is a client-built membership blob (see `RoaringBitmapBuilder::BuildTemplate()`) used by `roaring_match`, which is exact and therefore permitted in a delete expression.  Read this page for more about [filter templating](https://milvus.io/docs/filtering-templating.md).
 
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
@@ -83,6 +83,10 @@ const DmlResults& results = response.Results();
 - `uint64_t UpsertCount() const`
 
     Number of rows that were upserted (inserted as new or replaced existing). Populated for `UpsertResponse`.
+
+- `int64_t Cost() const`
+
+    The operation cost in VCU reported by the server, `-1` when unavailable.
 
 **EXCEPTIONS:**
 

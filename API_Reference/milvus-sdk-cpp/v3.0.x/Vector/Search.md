@@ -51,6 +51,8 @@ auto request = SearchRequest()
     .WithRadius(radius)
     .WithRangeFilter(filter)
     .WithRerank(ranker)
+    .WithFunctionChains(function_chains)
+    .AddFunctionChain(function_chain)
     .WithTimezone(timezone)
     .WithHighlighter(highlighter)
     .WithSearchAggregation(aggregation)
@@ -223,6 +225,14 @@ auto request = SearchRequest()
 - `WithRerank(const FunctionScorePtr& ranker)`
 
     Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read the doc for more info: https://milvus.io/docs/boost-ranker.md.
+
+- `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Set function chains. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+
+- `AddFunctionChain(const FunctionChain& function_chain)`
+
+    Add a function chain. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
 
 - `WithTimezone(const std::string& timezone)`
 
@@ -528,6 +538,10 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 - `Status OutputRow(int i, EntityRow& row) const`
 
     Materializes one hit by zero-based index.
+
+- `Status FilterRows(const std::vector<uint64_t>& keep_indices)`
+
+    Keeps only the rows whose indices are in `keep_indices`, dropping the rest. Used by the client-side page filter of the search iterator to prune hits fetched from the server; the order of the kept rows follows `keep_indices`.
 
 - `uint64_t GetRowCount() const`
 

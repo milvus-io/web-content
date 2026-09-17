@@ -48,6 +48,14 @@ const CollectionDesc& desc = response.Desc();
 
     Collection-level properties as key-value pairs (e.g., TTL settings).
 
+- `ConsistencyLevel GetConsistencyLevel() const`
+
+    Consistency level of the collection. The default is `BOUNDED`.
+
+- `int64_t NumPartitions() const`
+
+    Number of partitions of the collection. Only valid when the collection is created with a partition key.
+
 ## Example
 
 ```cpp

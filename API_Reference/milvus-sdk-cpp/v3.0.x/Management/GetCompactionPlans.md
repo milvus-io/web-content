@@ -25,6 +25,18 @@ auto request = GetCompactionPlansRequest()
 
 Check `status.IsOk()` to confirm success.
 
+- `int64_t CompactionID() const`
+
+    Returns the ID of the compaction job.
+
+- `CompactionStateCode State() const`
+
+    Returns the state of the compaction job.
+
+- `Plans()`
+
+    Returns the plans of the compaction job.
+
 **EXCEPTIONS:**
 
 - **StatusCode**

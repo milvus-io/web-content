@@ -28,7 +28,7 @@ auto request = GetCollectionStatsRequest()
 
 *Status* with *GetCollectionStatsResponse*
 
-Check `status.IsOk()` to confirm success.
+Check `status.IsOk()` to confirm success. The response's `Stats()` returns a `CollectionStat` object; use `RowCount()` for the row count, or `Statistics()` to access the raw key/value statistics map.
 
 **EXCEPTIONS:**
 

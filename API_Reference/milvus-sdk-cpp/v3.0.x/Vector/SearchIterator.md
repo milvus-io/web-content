@@ -245,6 +245,10 @@ auto request = SearchIteratorRequest()
 
     Add a field used to order search results.
 
+- `SetExternalFilterFunc(const std::function<Status(SingleResult&)>& func)`
+
+    Sets a client-side page filter for the search iterator. The callback filters each page of search hits before they are returned (for example via `SingleResult::FilterRows`); returning a non-OK status aborts iteration. This is a no-op for query iterators.
+
 ### Query vector types
 
 The request accepts one query-vector representation matching the target field's [DataType](../Collections/DataType.md). Use the corresponding add or batch builder method; these are query inputs, not collection column payloads.

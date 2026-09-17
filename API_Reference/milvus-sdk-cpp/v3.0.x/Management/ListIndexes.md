@@ -11,7 +11,8 @@ Status ListIndexes(const ListIndexesRequest& request, ListIndexesResponse& respo
 ```cpp
 auto request = ListIndexesRequest()
     .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name);
+    .WithCollectionName(collection_name)
+    .WithFieldName(field_name);
 ```
 
 **REQUEST METHODS:**
@@ -23,6 +24,10 @@ auto request = ListIndexesRequest()
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `WithFieldName(const std::string& field_name)`
+
+    Sets the field name. If it is empty, indexes of all fields are returned.
 
 **RETURNS:**
 

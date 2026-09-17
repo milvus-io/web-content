@@ -12,7 +12,9 @@ Status UpdatePassword(const UpdatePasswordRequest& request)
 auto request = UpdatePasswordRequest()
     .WithUserName(name)
     .WithOldPassword(password1)
-    .WithNewPassword(password2);
+    .WithNewPassword(password2)
+    .WithDescription(description)
+    .WithResetConnection(reset_connection);
 ```
 
 **REQUEST METHODS:**
@@ -28,6 +30,14 @@ auto request = UpdatePasswordRequest()
 - `WithNewPassword(const std::string& password)`
 
     Sets the user's new password.
+
+- `WithDescription(const std::string& description)`
+
+    Sets the description of the user.
+
+- `WithResetConnection(bool reset_connection)`
+
+    Sets whether to reset the current connection with the new credentials after the password is updated. When **True**, the client reconnects using the new password so subsequent RPCs keep working. Note that the password is updated on the server before the reconnect is attempted; if the reconnect fails, the returned status reports that the password was updated but the connection must be re-established manually with the new credentials. The default value is **False**.
 
 **RETURNS:**
 

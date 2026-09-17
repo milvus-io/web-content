@@ -18,6 +18,7 @@ auto request = LoadPartitionsRequest()
     .WithTimeoutMs(timeout_ms)
     .WithRefresh(refresh)
     .WithLoadFields(load_fields)
+    .WithLoadPriority(load_priority)
     .WithSkipDynamicField(skip_dynamic_field)
     .WithTargetResourceGroups(target_resource_groups);
 ```
@@ -73,6 +74,10 @@ auto request = LoadPartitionsRequest()
 - `AddLoadField(const std::string& load_field)`
 
     Adds the name of a field to load.
+
+- `WithLoadPriority(const std::string& load_priority)`
+
+    Sets the load priority of the partitions. Set `"low"` to select low priority; any other value (including `"high"`) defaults to high priority.
 
 - `WithSkipDynamicField(bool skip_dynamic_field)`
 

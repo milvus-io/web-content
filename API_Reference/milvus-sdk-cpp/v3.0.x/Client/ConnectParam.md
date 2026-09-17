@@ -104,6 +104,10 @@ ConnectParam param(uri, token)
 
     Sets the default database to use after connecting. Default: `"default"`.
 
+- `WithTelemetryConfig(const TelemetryConfig& config)`
+
+    Sets the telemetry configuration. See [TelemetryConfig](TelemetryConfig.md) for the available settings.
+
 ## Example
 
 ```cpp

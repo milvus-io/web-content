@@ -106,6 +106,10 @@ auto request = HybridSearchRequest()
 
     Set strict group size flag.
 
+- `Validate() const`
+
+    Validates the hybrid search request before sending it to the server. Returns `Status::OK` when the request is valid, otherwise an `INVALID_ARGUMENT` error.
+
 ### SubSearchRequest
 
 ```cpp

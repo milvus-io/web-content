@@ -13,7 +13,9 @@ auto request = CompactRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithClusteringCompaction(clustering_compaction)
-    .WithTargetSize(target_size);
+    .WithTargetSize(target_size)
+    .WithTargetSizeUnit(target_size_unit)
+    .WithIsL0(is_l0);
 ```
 
 **REQUEST METHODS:**
@@ -36,7 +38,19 @@ auto request = CompactRequest()
 
 - `WithTargetSize(int64_t target_size)`
 
-    Sets the target segment size in bytes for compaction planning. Use values greater than 0 to guide output segment sizing.
+    Sets the target segment size for compaction planning, expressed in the unit returned by `TargetSizeUnit()`. Zero means use the server default; when set it must be a positive integer.
+
+- `WithTargetSizeUnit(const std::string& unit)`
+
+    Sets the unit of the target segment size. Supported values are `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, `"pb"`. The default is `"mb"`.
+
+- `WithIsL0(bool is_l0)`
+
+    Sets the L0 compaction flag.
+
+    - **True**: Compacts L0 segments only.
+
+    - **False**: Conducts normal compaction.
 
 **RETURNS:**
 
