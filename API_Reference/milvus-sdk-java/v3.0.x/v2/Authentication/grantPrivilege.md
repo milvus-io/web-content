@@ -11,6 +11,7 @@ public void grantPrivilege(GrantPrivilegeReq request)
 ```java
 grantPrivilege(GrantPrivilegeReq.builder()
     .roleName(String roleName)
+    .dbName(String dbName)
     .objectType(String objectType)
     .privilege(String privilege)
     .objectName(String objectName)
@@ -23,6 +24,10 @@ grantPrivilege(GrantPrivilegeReq.builder()
 - `roleName(String roleName)`
 
     The name of the role to assign privileges to.
+
+- `dbName(String dbName)`
+
+    The name of the database in which the privilege applies. Defaults to the current database when omitted.
 
 - `objectType(String objectType)`
 

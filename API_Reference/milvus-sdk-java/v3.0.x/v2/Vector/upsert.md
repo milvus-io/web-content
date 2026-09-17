@@ -49,7 +49,7 @@ UpsertReq.builder()
 
 *UpsertResp*
 
-Contains the number of inserted or updated entities.
+Contains the number of inserted or updated entities and the operation cost (`getCost()`).
 
 **EXCEPTIONS:**
 

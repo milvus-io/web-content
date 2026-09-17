@@ -50,7 +50,7 @@ delete(DeleteReq.builder()
 
 *DeleteResp*
 
-A **DeleteResp** object contains the number of deleted entities.
+A **DeleteResp** object contains the number of deleted entities and the operation cost (`getCost()`).
 
 **EXCEPTIONS:**
 
