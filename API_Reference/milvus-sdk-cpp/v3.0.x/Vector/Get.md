@@ -127,6 +127,28 @@ const QueryResults& results = response.Results();
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
 
+#### GetResponse statistics
+
+The `GetResponse` object exposes execution statistics that describe the cost of the operation.
+
+**METHODS:**
+
+- `int64_t Cost() const`
+
+    Returns the cost of the operation in milliseconds.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of bytes scanned from remote storage.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio as a value between 0.0 and 1.0.
+
 **EXCEPTIONS:**
 
 - **StatusCode**

@@ -183,6 +183,10 @@ const DmlResults& results = response.Results();
 
     Number of rows that were upserted (inserted as new or replaced existing). Populated for `UpsertResponse`.
 
+- `int64_t Cost() const`
+
+    Returns the cost of the operation in milliseconds.
+
 **ERROR HANDLING:**
 
 - **std::exception**
