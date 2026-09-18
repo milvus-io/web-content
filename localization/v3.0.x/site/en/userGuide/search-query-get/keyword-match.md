@@ -91,6 +91,7 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -208,6 +209,12 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Optional: Configure an analyzer<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,6 +239,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -316,6 +324,9 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>}};
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">200</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params).<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));
+<button class="copy-code-btn"></button></code></pre>
 <p>Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Use text match<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -351,6 +362,10 @@ schema.WithField(entity.NewField().
     </button></h3><p>The <code translate="no">TEXT_MATCH</code> expression is used to specify the field and the terms to search for. Its syntax is as follows:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(field_name, text)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(field_name, text)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: The name of the match-enabled <code translate="no">VARCHAR</code> or <code translate="no">TEXT</code> field to search for.</p></li>
 <li><p><code translate="no">text</code>: The terms to search for. Multiple terms can be separated by spaces or other appropriate delimiters based on the language and configured analyzer.</p></li>
@@ -362,6 +377,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -373,6 +389,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <p>You can also combine multiple <code translate="no">TEXT_MATCH</code> expressions using logical operators to perform <strong>AND</strong> matching.</p>
 <ul>
 <li><p>To search for documents containing both <code translate="no">machine</code> and <code translate="no">deep</code> in the <code translate="no">text</code> field, use the following expression:</p>
@@ -382,6 +400,7 @@ schema.WithField(entity.NewField().
 <a href="#go">Go</a>
 <a href="#javascript">NodeJS</a>
 <a href="#bash">cURL</a>
+<a href="#cpp">C++</a>
 </div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -392,6 +411,8 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>To search for documents containing both <code translate="no">machine</code> and <code translate="no">learning</code> but without <code translate="no">deep</code> in the <code translate="no">text</code> field, use the following expressions:</p>
 <p><div class="multipleCode">
@@ -400,6 +421,7 @@ schema.WithField(entity.NewField().
 <a href="#go">Go</a>
 <a href="#javascript">NodeJS</a>
 <a href="#bash">cURL</a>
+<a href="#cpp">C++</a>
 </div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -410,6 +432,8 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="TEXTMATCHFUZZY-expression-syntax" class="common-anchor-header">TEXT_MATCH_FUZZY expression syntax<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax" class="anchor-icon" translate="no">
@@ -431,6 +455,10 @@ schema.WithField(entity.NewField().
 <p>The syntax is as follows:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: The name of the match-enabled <code translate="no">VARCHAR</code> or <code translate="no">TEXT</code> field to search for.</p></li>
 <li><p><code translate="no">text</code>: The query text to analyze and match against indexed tokens.</p></li>
@@ -443,6 +471,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -453,6 +482,8 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">TEXT_MATCH_FUZZY</code> is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same <code translate="no">filter</code> parameter used for <code translate="no">TEXT_MATCH</code> in search or query operations.</p>
 <h3 id="Search-with-text-match" class="common-anchor-header">Search with text match<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
@@ -481,6 +512,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>
@@ -559,6 +591,26 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match entities with `keyword1` or `keyword2`</span>
+std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
+
+<span class="hljs-comment">// Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithFilter</span>(filter)</span>
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Query-with-text-match" class="common-anchor-header">Query with text match<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -582,6 +634,7 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
@@ -635,6 +688,21 @@ curl --request POST \
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match entities with both `keyword1` and `keyword2`</span>
+std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithFilter</span>(filter)</span>
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::QueryResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
