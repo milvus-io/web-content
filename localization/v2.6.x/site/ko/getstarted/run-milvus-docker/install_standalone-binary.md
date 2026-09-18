@@ -2,10 +2,10 @@
 id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
-summary: 사전 빌드된 RPM/DEB 패키지를 사용하여 Milvus 독립 실행형 버전을 설치하는 방법을 알아보세요.
-title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
+summary: 사전 빌드된 RPM/DEB 패키지를 사용하여 Milvus 독립 실행형을 설치하는 방법을 알아보세요.
+title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치하기
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치하기<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +37,7 @@ title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
         ></path>
       </svg>
     </button></h2><ul>
-<li>이미 libstdc++ 8.5.0 이상 버전이 설치되어 있어야 합니다.</li>
+<li>이미 libstdc++ 8.5.0 이상 버전을 설치해 두어야 합니다.</li>
 <li>설치 전에<a href="/docs/ko/v2.6.x/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하십시오</a>.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">RPM/DEB 패키지 다운로드<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -133,7 +133,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 해당 내용을 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
+    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 적절히 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Milvus Standalone 중지<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,7 +167,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone을 제거하려면 다음 명령을 사용할 수 있습니다:</p>
+    </button></h2><p>Milvus Standalone을 제거하려면 다음 명령어를 사용할 수 있습니다:</p>
 <p>RPM 기반 시스템의 경우:</p>
 <pre><code translate="no" class="language-shell">rpm -e milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -191,8 +191,8 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Milvus Standalone을 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>'빠른 시작( <a href="/docs/ko/v2.6.x/quickstart.md">Quickstart</a> )'을 확인하여 Milvus의 기능을 살펴보세요.</p></li>
-<li><p>Milvus의 기본 사용법을 알아보세요:</p>
+<li><p><a href="/docs/ko/v2.6.x/quickstart.md">'빠른 시작'을</a> 확인하여 Milvus의 기능을 살펴보세요.</p></li>
+<li><p>Milvus의 기본 작동 방식을 알아보세요:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
@@ -201,8 +201,8 @@ dpkg -l | grep milvus
 <li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a></p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>

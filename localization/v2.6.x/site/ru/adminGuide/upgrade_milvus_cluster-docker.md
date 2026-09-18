@@ -20,7 +20,7 @@ title: Обновление кластера Milvus с помощью Docker Com
         ></path>
       </svg>
     </button></h1><p>В этом разделе описано, как обновить Milvus с помощью Docker Compose.</p>
-<p>В обычных случаях <a href="#Upgrade-Milvus-by-changing-its-image">обновление Milvus</a> можно <a href="#Upgrade-Milvus-by-changing-its-image">выполнить путем смены образа</a>. Однако перед любым обновлением с версии v2.1.x до v2.6.17 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
+<p>В обычных случаях <a href="#Upgrade-Milvus-by-changing-its-image">обновление Milvus</a> можно <a href="#Upgrade-Milvus-by-changing-its-image">выполнить путем замены образа</a>. Однако перед обновлением с версии v2.1.x до v2.6.17 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
 <div class="alert note">
 <p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v2.6.17 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очереди сообщений будет доступна в будущих версиях.</p>
 </div>
@@ -42,7 +42,7 @@ title: Обновление кластера Milvus с помощью Docker Com
     </button></h2><p>В обычных случаях обновление Milvus можно выполнить следующим образом:</p>
 <ol>
 <li><p>Измените теги образа Milvus в файле <code translate="no">docker-compose.yaml</code>.</p>
-<p>Обратите внимание, что необходимо изменить теги образов для прокси-сервера, всех координаторов и всех рабочих узлов.</p>
+<p>Обратите внимание, что необходимо изменить теги образов для прокси, всех координаторов и всех рабочих узлов.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>Остановите все компоненты Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Подготовьте файл конфигурации <code translate="no">migrate.yaml</code> для миграции метаданных.</p>
+<li><p>Подготовьте конфигурационный файл <code translate="no">migrate.yaml</code> для миграции метаданных.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>

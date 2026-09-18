@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース情報",
+        "label": "リリース",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "GPUでMilvusを実行する",
+            "label": "GPUを使用してMilvusを実行する",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "コレクションについて",
+            "label": "コレクションの解説",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "主フィールドと自動ID",
+            "label": "主フィールドとAutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "NULL許容フィールド",
+            "label": "NULLが許容されるフィールド",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "組み込みアナライザ",
+                "label": "内蔵アナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "ピントを解除",
+                    "label": "ピントを取り除く",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "アップサートされるエンティティ",
+            "label": "Upsertエンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -990,7 +990,7 @@
             ]
           },
           {
-            "label": "GPU対応インデックス",
+            "label": "GPU対応のインデックス",
             "id": "gpu-enabled-indexes",
             "order": 6,
             "children": [
@@ -1059,7 +1059,7 @@
             "children": []
           },
           {
-            "label": "検索の集計",
+            "label": "検索の集約",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "フィルタリングとテンプレート",
+                "label": "フィルタリングとテンプレート処理",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1168,7 +1168,7 @@
             "children": []
           },
           {
-            "label": "StructArray を使った検索",
+            "label": "StructArray を使用した検索",
             "id": "search-with-structarray",
             "order": 13,
             "children": [
@@ -1209,7 +1209,7 @@
                 "children": []
               },
               {
-                "label": "EmbeddingList の検索戦略を選択する",
+                "label": "EmbeddingList の検索戦略を選択してください",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1439,7 +1439,7 @@
                     "children": []
                   },
                   {
-                    "label": "SiliconFlow ランカー",
+                    "label": "SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
                     "children": []
@@ -1475,13 +1475,13 @@
             "children": []
           },
           {
-            "label": "クラスタリングによる圧縮",
+            "label": "クラスタリング・コンパクテーション",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "強制マージ・コンパクテーション",
+            "label": "強制マージ・コンパクション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1648,7 +1648,7 @@
     "order": 9,
     "children": [
       {
-        "label": "展開",
+        "label": "導入",
         "id": "deployment",
         "order": 0,
         "isMenu": true,
@@ -1944,7 +1944,7 @@
             "children": []
           },
           {
-            "label": "スタンドアロン版",
+            "label": "スケール スタンドアロン",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -1956,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "スケール依存関係",
+            "label": "スケール依存性",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -2096,7 +2096,7 @@
             "children": []
           },
           {
-            "label": "RBACを有効にする",
+            "label": "RBAC を有効にする",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "コマンド",
-            "id": "milvus_backup_cli.md",
+            "label": "コマンド (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP API (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "よくある事例",
-            "id": "common-cases",
+            "label": "スナップショットによるバックアップと復元",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "1つのインスタンスでのバックアップと復元",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "コマンド (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "1つのバケット内のインスタンス間で移行する",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP API (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "バケットをまたぐインスタンス間の移行",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "よくあるケース (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "1つのインスタンスでのバックアップと復元",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "1つのバケット内のインスタンス間で移行する",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "バケットをまたぐインスタンス間の移行",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "S3環境間のインスタンス間での移行",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "S3環境間のインスタンス間での移行",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "0.6.0 にアップグレードする",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2269,7 +2301,7 @@
         ]
       },
       {
-        "label": "野鳥観察者",
+        "label": "バードウォッチャー",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2386,7 +2418,7 @@
                 "children": []
               },
               {
-                "label": "文トランスフォーマー",
+                "label": "文変換モデル",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []
@@ -2460,7 +2492,7 @@
             ]
           },
           {
-            "label": "リランカー",
+            "label": "再ランク付け者",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2506,7 +2538,7 @@
         ]
       },
       {
-        "label": "SDKコードヘルパー (MCP)",
+        "label": "SDKコードヘルパー（MCP）",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -2609,7 +2641,7 @@
                 "children": []
               },
               {
-                "label": "メタデータのフィルタリング",
+                "label": "メタデータによるフィルタリング",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -2886,7 +2918,7 @@
             "children": []
           },
           {
-            "label": "サンバノヴァ",
+            "label": "SambaNova",
             "id": "use_milvus_with_sambanova.md",
             "order": 5,
             "children": []
@@ -2912,12 +2944,12 @@
         ]
       },
       {
-        "label": "ナレッジ・エンジニアリング",
+        "label": "知識工学",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [
           {
-            "label": "WhyHow",
+            "label": "なぜ・どのように",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -3079,7 +3111,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使って RAG を構築する",
+        "label": "Milvusを使ってRAGを構築する",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3257,7 +3289,7 @@
         "children": []
       },
       {
-        "label": "Milvus Limits",
+        "label": "Milvus リミッツ",
         "id": "limitations.md",
         "order": 3,
         "children": []

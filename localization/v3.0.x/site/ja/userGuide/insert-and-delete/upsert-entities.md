@@ -34,7 +34,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">upsert</code> を使用すると、upsert リクエストで指定された主キーがコレクション内に存在するかどうかによって、新しいエンティティを挿入するか、既存のエンティティを更新するかを選択できます。主キーが見つからない場合は、挿入操作が行われます。それ以外の場合は、更新操作が行われます。</p>
+    </button></h2><p><code translate="no">upsert</code> を使用すると、upsert リクエストで指定された主キーがコレクション内に存在するかどうかによって、新しいエンティティを挿入するか、既存のエンティティを更新するかを選択できます。主キーが見つからない場合は、挿入操作が行われます。それ以外の場合は、更新操作が実行されます。<code translate="no">autoID</code> コレクションに対する部分更新は例外であり、後述するように、既存のエンティティのみを更新します。</p>
 <p>Milvus におけるアップサートは、<strong>オーバーライドモード</strong>または<strong>マージ</strong>モードのいずれかで動作します。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">オーバーライドモードでのアップサート<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,16 +75,23 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">partial_update</code> フラグを使用することで、アップサートリクエストをマージモードで実行することもできます。これにより、リクエストペイロードには更新が必要なフィールドのみを含めることが可能になります。</p>
+    </button></h3><p>マージモードを使用すると、他のフィールドを変更せずに、既存エンティティの特定のフィールドのみを更新できます。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" /> 
    <span>マージモードでのアップサート</span>
   
  </span></p>
-<p>マージを実行するには、<code translate="no">upsert</code> リクエスト内で、<code translate="no">partial_update</code> を<code translate="no">True</code> に設定し、プライマリキーと更新対象のフィールドおよびその新しい値を指定します。</p>
-<p>このようなリクエストを受信すると、Milvusはストロング一貫性でクエリを実行してエンティティを取得し、リクエスト内のデータに基づいてフィールド値を更新し、変更されたデータを挿入した後、リクエストに含まれる元のプライマリキーを持つ既存のエンティティを削除します。</p>
-<p><code translate="no">ARRAY</code> フィールドの場合、マージモードではMilvus v2.6.17以降で「<code translate="no">ARRAY_APPEND</code> 」および「<code translate="no">ARRAY_REMOVE</code> 」の2つの演算子がサポートされています。これらの演算子を使用すると、エンティティをクエリして現在の値を取得することなく、既存の<code translate="no">ARRAY</code> フィールドに要素を追加したり、一致する要素を削除したりできます。詳細については、<a href="/docs/ja/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">「マージモードでのARRAYフィールドのアップサート」</a>を参照してください。</p>
+<p><code translate="no">partial_update=True</code> を設定し、主キーと更新したいフィールドを指定します。</p>
+<p>Milvus は、強一貫性クエリを使用して既存エンティティを取得し、変更内容を保存済みのデータとマージして、マージされたエンティティを挿入し、古いエンティティを削除します。</p>
+<p>プライマリキーが存在しない場合、結果は `<code translate="no">autoID</code> ` が有効かどうかに依存します：</p>
+<ul>
+<li><strong> <code translate="no">autoID</code> が無効な場合</strong>、Milvusは指定された主キーを持つ新しいエンティティの挿入を試みます。通常の挿入要件を満たしていれば、リクエストは成功します。必須フィールドが欠落している場合、リクエストはフィールド欠落エラーで失敗します。Null許容フィールドやデフォルト値を持つフィールドは、通常の挿入と同様に省略可能です。</li>
+<li><strong> <code translate="no">autoID</code> が有効な場合</strong>、リクエスト内のすべての主キーは既に存在している必要があります。挿入に必要なすべてのフィールドを指定していたとしても、主キーのいずれかが欠けていると、Milvusはリクエストを拒否します。既存のエンティティの場合、マージモードでは主キーは変更されません。</li>
+</ul>
+<p>部分更新が「フィールド欠落エラー」で失敗した場合は、対象エンティティが存在するかどうかを確認してください。既存のエンティティがない場合、Milvusは省略したフィールドの値を取得できません。</p>
+<p>新規エンティティの場合は、<code translate="no">insert</code> またはオーバーライドモードでのアップサートを使用してください。個々のフィールドに対するその後の更新には、マージモードを使用してください。</p>
+<p><code translate="no">ARRAY</code> フィールドの場合、Milvus v2.6.17以降では、マージモードで<code translate="no">ARRAY_APPEND</code> および<code translate="no">ARRAY_REMOVE</code> の2つの演算子がサポートされています。これらの演算子を使用すると、エンティティをクエリして現在の値を取得することなく、既存の<code translate="no">ARRAY</code> フィールドに要素を追加したり、一致する要素を削除したりできます。詳細については、<a href="/docs/ja/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">「マージモードでのARRAYフィールドのアップサート」</a>を参照してください。</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsertの動作：特記事項<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,32 +110,32 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
     </button></h3><p>マージ機能を使用する前に、考慮すべきいくつかの特別な注意事項があります。以下のケースでは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラーフィールド、プライマリキー<code translate="no">id</code> 、および<code translate="no">vector</code> というベクトルフィールドを持つコレクションが存在することを前提としています。</p>
 <ul>
 <li><p><code translate="no">nullable</code> <strong>が</strong> <strong>有効な</strong><strong>フィールドのアップサート</strong> <strong>。</strong></p>
-<p><code translate="no">issue</code> フィールドがNULLになり得ると仮定します。これらのフィールドをアップサートする際は、以下の点に注意してください：</p>
+<p><code translate="no">issue</code> フィールドがNULL可能であると仮定します。これらのフィールドをアップサートする際は、以下の点に注意してください：</p>
 <ul>
 <li><p><code translate="no">upsert</code> リクエストで<code translate="no">issue</code> フィールドを省略し、<code translate="no">partial_update</code> を無効にした場合、<code translate="no">issue</code> フィールドは元の値を保持するのではなく、<code translate="no">null</code> に更新されます。</p></li>
 <li><p><code translate="no">issue</code> フィールドの元の値を保持するには、<code translate="no">partial_update</code> を有効にして<code translate="no">issue</code> フィールドを省略するか、<code translate="no">upsert</code> リクエストに元の値を持つ<code translate="no">issue</code> フィールドを含める必要があります。</p></li>
 </ul></li>
-<li><p><strong>動的フィールドのアップサートキー</strong>。</p>
+<li><p><strong>動的フィールドのキーをアップサートします</strong>。</p>
 <p>サンプルコレクションで動的キーを有効にしており、エンティティの動的フィールド内のキーと値のペアが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> のようなものであると仮定します。</p>
 <p><code translate="no">author</code> 、<code translate="no">year</code> 、<code translate="no">tags</code> などのキーを使用してエンティティをアップサートする場合、または他のキーを追加する場合は、次の点に注意してください。</p>
 <ul>
-<li><p><code translate="no">partial_update</code> が無効な状態でアップサートを行う場合、デフォルトの動作は<strong>上書き</strong>となります。つまり、リクエストに含まれるスキーマで定義されていないすべてのフィールドとその値によって、動的フィールドの値が上書きされます。</p>
-<p>たとえば、リクエストに含まれるデータが `<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>` である場合、ターゲットエンティティの動的フィールド内のキーと値のペアは、その値に更新されます。</p></li>
+<li><p><code translate="no">partial_update</code> が無効な状態でアップサートを行う場合、デフォルトの動作は<strong>上書き</strong>となります。つまり、動的フィールドの値は、リクエストに含まれるスキーマで定義されていないすべてのフィールドとその値によって上書きされます。</p>
+<p>たとえば、リクエストに含まれるデータが `<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>` である場合、対象エンティティの動的フィールド内のキーと値のペアは、その値に更新されます。</p></li>
 <li><p><code translate="no">partial_update</code> を有効にして upsert を行う場合、デフォルトの動作は<strong>マージ</strong>です。つまり、動的フィールドの値は、リクエストに含まれるスキーマで定義されていないすべてのフィールドとその値とマージされます。</p>
 <p>たとえば、リクエストに含まれるデータが `<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>` である場合、アップサート後のターゲットエンティティの動的フィールド内のキーと値のペアは `<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> ` になります。</p></li>
 </ul></li>
 <li><p><strong>JSONフィールドのアップサート。</strong></p>
 <p>例として、コレクションに<code translate="no">extras</code> という名前のスキーマ定義済み JSON フィールドがあり、エンティティのこの JSON フィールド内のキーと値のペアが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> のようなものであるとします。</p>
-<p>エンティティの<code translate="no">extras</code> フィールドに、変更された JSON データをアップサートする場合、JSON フィールドは全体として扱われるため、個々のキーを選択的に更新することはできない点に注意してください。つまり、JSON フィールドは<strong>マージモードでの</strong>アップサートを<strong>サポートしていません</strong>。</p></li>
+<p>変更された JSON データを使用してエンティティの<code translate="no">extras</code> フィールドをアップサートする場合、JSON フィールドは全体として扱われるため、個々のキーを選択的に更新することはできない点に注意してください。つまり、JSON フィールドは<strong>マージモードでの</strong>アップサートを<strong>サポートしていません</strong>。</p></li>
 <li><p><code translate="no">ARRAY</code> <strong>フィールド</strong><strong>のアップサート</strong> <strong>。</strong></p>
-<p>デフォルトでは、マージモードの<code translate="no">ARRAY</code> フィールドは<strong>REPLACE</strong>セマンティクスに従います。つまり、リクエストで渡された値が既存の配列を上書きします。よりきめ細かな更新を行うために、Milvus v2.6.17以降では以下の2つの演算子もサポートされています：</p>
+<p>デフォルトでは、マージモードの<code translate="no">ARRAY</code> フィールドは<strong>REPLACE</strong>セマンティクスに従います。つまり、リクエストに含まれる値が既存の配列を上書きします。よりきめ細かな更新を行うために、Milvus v2.6.17以降では以下の2つの演算子もサポートされています：</p>
 <ul>
-<li><p><code translate="no">ARRAY_APPEND</code> リクエストペイロード内の要素を既存の配列に追加します。</p></li>
+<li><p><code translate="no">ARRAY_APPEND</code> リクエストペイロード内の要素を既存の配列の末尾に追加します。</p></li>
 <li><p><code translate="no">ARRAY_REMOVE</code> リクエストペイロード内の値と一致する要素を、既存の配列からすべて削除します。</p></li>
 </ul>
 <p>演算子の構文、サポートされる要素型、およびその他の制約については、「<a href="/docs/ja/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">マージモードでの ARRAY フィールドのアップサート</a>」を参照してください。</p></li>
-<li><p><strong>StructArrayフィールドのアップサート。</strong></p>
-<p>エンティティ内の StructArray フィールドをアップサートすると、フィールドの値が上書きされます。これを行うには、マージモードでアップサートを実行する場合であっても、構造体スキーマで定義されたすべてのサブフィールドを含む辞書のリストを指定する必要があります。</p>
+<li><p><strong>StructArray フィールドのアップサート。</strong></p>
+<p>エンティティ内の StructArray フィールドをアップサートすると、フィールドの値が上書きされます。これを行うには、マージモードでアップサートを実行する場合でも、構造体スキーマで定義されたすべてのサブフィールドを含む辞書のリストを指定する必要があります。</p>
 <p>詳細については、「<a href="/docs/ja/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">マージモードでの StructArray フィールドのアップサート</a>」を参照してください。</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">制限事項<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
@@ -146,11 +153,11 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>上記の内容に基づき、以下の制限事項に従う必要があります。</p>
+    </button></h3><p>上記の内容に基づき、遵守すべき制限事項がいくつかあります:</p>
 <ul>
-<li><p><code translate="no">upsert</code> リクエストには、常にターゲットエンティティのプライマリキーを含める必要があります。</p></li>
+<li><p><code translate="no">upsert</code> リクエストには、必ずターゲットエンティティのプライマリキーを含める必要があります。</p></li>
 <li><p>ターゲットコレクションは読み込まれており、クエリが可能である必要があります。</p></li>
-<li><p>リクエストで指定されたすべてのフィールドは、ターゲットコレクションのスキーマに存在している必要があります。</p></li>
+<li><p>リクエストで指定されたすべてのフィールドは、対象コレクションのスキーマに存在している必要があります。</p></li>
 <li><p>リクエストで指定されたすべてのフィールドの値は、スキーマで定義されたデータ型と一致している必要があります。</p></li>
 <li><p>関数を使用して別のフィールドから派生したフィールドについては、再計算を可能にするため、Milvusはアップサート処理中にその派生フィールドを削除します。</p></li>
 </ul>
@@ -509,10 +516,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコード例は、部分更新を伴うエンティティのアップサートを示しています。更新が必要なフィールドとその新しい値のみを指定し、明示的な部分更新フラグを指定してください。</p>
-<p>次の例では、アップサートリクエストで指定されたエンティティの `<code translate="no">issue</code> ` フィールドが、リクエストに含まれる値に更新されます。</p>
+    </button></h2><p>次の例では、<code translate="no">my_collection</code> 内のプライマリキーが<code translate="no">1</code> および<code translate="no">2</code> であるエンティティについて、<code translate="no">issue</code> フィールドのみを更新します。実行する前に、両方のエンティティがすでに存在していることを確認してください。その他のフィールドは現在の値のまま保持されます。</p>
 <div class="alert note">
-<p>マージモードでアップサートを実行する際は、リクエストの対象となるエンティティが同一のフィールドセットを持っていることを確認してください。次のコードスニペットに示すように、アップサートするエンティティが2つ以上ある場合、エラーを防ぎデータの整合性を維持するために、それらが同一のフィールドを含んでいることが重要です。</p>
+<p>マージモードでアップサートを実行する際は、リクエストの対象となるエンティティが同一のフィールドセットを持っていることを確認してください。次のコードスニペットに示すように、アップサート対象となるエンティティが2つ以上ある場合、エラーを防ぎデータの整合性を維持するために、それらが同一のフィールドを含んでいることが重要です。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -652,8 +658,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus v2.6.17 以前では、<code translate="no">ARRAY</code> フィールドの一部を更新するには、クライアント側での「読み取り-変更-書き込み」のフローが必要でした。つまり、既存のアレイをクエリで取得し、アプリケーションコード内で変更を加え、置き換え用の値全体をアップサートする必要がありました。 部分更新演算子（<code translate="no">ARRAY_APPEND</code> および<code translate="no">ARRAY_REMOVE</code> ）を使用すると、追加または削除する要素のみを送信できるため、クライアント側のロジックを削減し、アップサート前の余分な読み取りを回避できます。</p>
-<p>主キーが `<code translate="no">1</code> ` のエンティティに、すでに `<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>` が格納されていると仮定します。部分更新演算子が導入される前は、配列に要素 `<code translate="no">&quot;premium&quot;</code> ` を追加するには、置き換え用の配列全体をアップサートする必要がありました：</p>
+    </button></h2><p>Milvus v2.6.17 以前では、<code translate="no">ARRAY</code> フィールドの一部を更新するには、クライアント側での「読み取り-変更-書き込み」のフローが必要でした。具体的には、既存のアレイをクエリで取得し、アプリケーションコード内で変更を加え、置き換える値全体をアップサートする必要がありました。 部分更新演算子（<code translate="no">ARRAY_APPEND</code> および<code translate="no">ARRAY_REMOVE</code> ）を使用すると、追加または削除する要素のみを送信できるため、クライアント側のロジックを削減し、アップサート前の余分な読み取りを回避できます。</p>
+<p>主キーが `<code translate="no">1</code> ` であるエンティティに、すでに `<code translate="no">tags = [&quot;new&quot;, &quot;trial&quot;]</code>` が存在すると仮定します。部分更新演算子が導入される前は、配列に要素 `<code translate="no">&quot;premium&quot;</code> ` を追加するには、置き換え用の配列全体をアップサートする必要がありました：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -772,7 +778,7 @@ client.upsert(UpsertReq.builder()
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>ペイロードの値は、対象の<code translate="no">ARRAY</code> フィールドの<code translate="no">element_type</code> と一致する必要があります。たとえば、対象フィールドが<code translate="no">ARRAY&lt;VARCHAR&gt;</code> の場合、ペイロードには文字列値が含まれている必要があります。</p></li>
+<li><p>ペイロードの値は、対象の<code translate="no">ARRAY</code> フィールドの<code translate="no">element_type</code> と一致している必要があります。たとえば、対象フィールドが<code translate="no">ARRAY&lt;VARCHAR&gt;</code> の場合、ペイロードには文字列値が含まれている必要があります。</p></li>
 <li><p>Milvus v2.6.17 以降では、<code translate="no">ARRAY_APPEND</code> および<code translate="no">ARRAY_REMOVE</code> は、<code translate="no">element_type</code> が<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、または<code translate="no">VARCHAR</code> のいずれかである<code translate="no">ARRAY</code> フィールドをサポートしています。</p></li>
 <li><p><code translate="no">ARRAY_APPEND</code> 操作の後、結果の配列の長さは、そのフィールドの<code translate="no">max_capacity</code> を超えてはなりません。</p></li>
 <li><p>同一エンティティに対する並行したアップサートは、リクエスト間でアトミックではありません。2つのリクエストが同時に同じ<code translate="no">ARRAY</code> フィールドを更新した場合、後に行われた書き込みが先行する書き込みを上書きする可能性があります。すべての並行変更を保持する必要がある場合は、アプリケーションレベルでの調整を行ってください。</p></li>
@@ -911,7 +917,7 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>エンティティ内の StructArray フィールドをアップサートすると、そのフィールドの値が上書きされます。つまり、StructArray フィールドをアップサートする際には、構造体スキーマで定義されているすべてのサブフィールドを含める必要があります。</p>
-<p>以下の例は、6つのサブフィールドを持つStructArrayフィールドである<code translate="no">chunks</code> フィールドを、マージモードでアップサートする方法を示しています。操作が完了すると、IDが1のエンティティの<code translate="no">chunks</code> フィールドは、リクエストで指定された2つの要素を持つ構造体を含む配列に設定されます。</p>
+<p>以下の例は、6つのサブフィールドを持つStructArrayフィールドである<code translate="no">chunks</code> フィールドを、マージモードでアップサートする方法を示しています。操作が完了すると、IDが1のエンティティの<code translate="no">chunks</code> フィールドは、リクエストで指定された2つの要素を含むstructからなる配列に設定されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

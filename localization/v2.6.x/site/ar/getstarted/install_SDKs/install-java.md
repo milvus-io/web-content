@@ -2,7 +2,9 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: تعرف على كيفية تثبيت حزمة تطوير تطبيقات جافا (Java SDK) الخاصة بـ Milvus.
+summary: >-
+  تعرف على كيفية تثبيت حزمة أدوات تطوير تطبيقات جافا (Java SDK) الخاصة بـ
+  Milvus.
 title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java
 ---
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
@@ -41,7 +43,7 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
 <li>Java (الإصدار 8 أو أحدث)</li>
 <li>Apache Maven أو Gradle/Grails</li>
 </ul>
-<h2 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة تطوير البرامج (SDK) لـ Milvus بلغة Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +96,7 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث عن متجه واحد</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p>استكشاف <a href="/api-reference/java/v2.4.x/About.md">مرجع واجهة برمجة تطبيقات Milvus لـ Java</a></p></li>
 </ul>

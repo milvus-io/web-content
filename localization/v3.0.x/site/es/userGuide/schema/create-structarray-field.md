@@ -68,7 +68,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Un campo vectorial o un subcampo vectorial solo admite un índice. Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, define dos subcampos vectoriales independientes. En este ejemplo, « <code translate="no">chunks[emb_list_vector]</code> » se utiliza para la búsqueda en EmbeddingList, y « <code translate="no">chunks[emb]</code> » para la búsqueda a nivel de elemento.</p>
+<p>Un campo vectorial o un subcampo vectorial solo admite un índice. Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, define dos subcampos vectoriales independientes. En este ejemplo, « <code translate="no">chunks[emb_list_vector]</code> » es para la búsqueda en EmbeddingList y « <code translate="no">chunks[emb]</code> » es para la búsqueda a nivel de elemento.</p>
 </div>
 <h2 id="Supported-subfield-data-types" class="common-anchor-header">Tipos de datos admitidos para los subcampos<button data-href="#Supported-subfield-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +109,7 @@ summary: >-
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> o <code translate="no">ArrayOfStruct</code></td><td>No compatible</td><td>Un campo StructArray no puede contener matrices anidadas, matrices vectoriales anidadas, campos Struct anidados ni campos Array-of-Struct anidados.</td></tr>
 </tbody>
 </table>
-<p>Para obtener información sobre la compatibilidad específica de cada versión, el comportamiento de los valores nulos y otras restricciones, consulta <a href="/docs/es/structarray-limits.md">Restricciones de StructArray</a>.</p>
+<p>Para obtener información sobre la compatibilidad específica de cada versión, el comportamiento de los valores nulos y otras restricciones, consulte <a href="/docs/es/structarray-limits.md">Restricciones de StructArray</a>.</p>
 <h2 id="Create-a-collection-with-a-StructArray-field" class="common-anchor-header">Crear una colección con un campo StructArray<button data-href="#Create-a-collection-with-a-StructArray-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para crear un campo StructArray, defina primero el esquema Struct utilizado por cada elemento. A continuación, añada un campo Array y establezca su tipo de elemento en Struct.</p>
+    </button></h2><p>Para crear un campo StructArray, primero defina el esquema Struct utilizado por cada elemento. A continuación, añada un campo Array y establezca su tipo de elemento en Struct.</p>
 <ol>
 <li><p>Crea el esquema de la colección.</p></li>
 <li><p>Añade campos a nivel de colección, como la clave principal y los campos a nivel de artículo.</p></li>
@@ -246,8 +246,8 @@ client.create_collection(
 <tr><td><code translate="no">chunks[text]</code></td><td>El subcampo « <code translate="no">text</code> » dentro de cada elemento Struct.</td><td>Campo de salida o filtrado escalar.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td>La etiqueta de sección de cada fragmento.</td><td>Filtrado escalar.</td></tr>
 <tr><td><code translate="no">chunks[quality_score]</code></td><td>La puntuación de calidad a nivel de fragmento.</td><td>Filtrado escalar o índice escalar.</td></tr>
-<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>El subcampo vectorial utilizado como lista de incrustaciones.</td><td>Búsqueda en EmbeddingList con « <code translate="no">MAX_SIM*</code> ».</td></tr>
-<tr><td><code translate="no">chunks[emb]</code></td><td>El subcampo vectorial utilizado por cada elemento de Struct de forma independiente.</td><td>Búsqueda vectorial a nivel de elemento.</td></tr>
+<tr><td><code translate="no">chunks[emb_list_vector]</code></td><td>El subcampo vectorial utilizado como lista de incrustación.</td><td>Búsqueda en EmbeddingList con « <code translate="no">MAX_SIM*</code> ».</td></tr>
+<tr><td><code translate="no">chunks[emb]</code></td><td>El subcampo vectorial utilizado de forma independiente por cada elemento de Struct.</td><td>Búsqueda vectorial a nivel de elemento.</td></tr>
 </tbody>
 </table>
 <h2 id="Make-a-StructArray-field-nullable" class="common-anchor-header">Hacer que un campo StructArray sea nulo<button data-href="#Make-a-StructArray-field-nullable" class="anchor-icon" translate="no">
@@ -380,7 +380,7 @@ client.add_collection_struct_field(
 <tr><td>Los subcampos vectoriales necesitan índices antes de la búsqueda.</td><td>Crea índices en rutas como <code translate="no">chunks[emb_list_vector]</code> o <code translate="no">chunks[emb]</code> antes de ejecutar una búsqueda vectorial.</td></tr>
 <tr><td>Cada subcampo vectorial tiene un índice.</td><td>Si necesitas tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, crea dos subcampos vectoriales independientes.</td></tr>
 <tr><td>Los subcampos StructArray existentes son fijos.</td><td>Una vez creado un campo StructArray, no se pueden añadir más subcampos a ese mismo campo StructArray.</td></tr>
-<tr><td>No se admiten funciones dentro de Struct.</td><td>No definas funciones para campos o subcampos dentro de un campo StructArray.</td></tr>
+<tr><td>No se admiten funciones dentro de Struct.</td><td>No defina funciones para campos o subcampos dentro de un campo StructArray.</td></tr>
 <tr><td>Los subcampos escalares deben ajustarse a las necesidades de filtrado.</td><td>Añade campos como « <code translate="no">section</code> », « <code translate="no">quality_score</code> » o « <code translate="no">has_code</code> » solo cuando necesites filtrarlos, agruparlos o mostrarlos posteriormente.</td></tr>
 </tbody>
 </table>
@@ -406,8 +406,8 @@ client.add_collection_struct_field(
 <li><p>Utilizar « <code translate="no">String</code> » como tipo de subcampo. Utiliza « <code translate="no">VARCHAR</code> » y establece « <code translate="no">max_length</code> ».</p></li>
 <li><p>Utilizar un único subcampo vectorial tanto para la búsqueda en EmbeddingList como para la búsqueda a nivel de elemento.</p></li>
 <li><p>Añadir únicamente subcampos vectoriales y omitir los subcampos escalares necesarios para el filtrado, como <code translate="no">section</code>, <code translate="no">quality_score</code> o <code translate="no">has_code</code>.</p></li>
-<li><p>Tratar los subcampos vectoriales como entradas de predicados escalares de tipo <code translate="no">$[...]</code>. Utilizar los subcampos vectoriales para la búsqueda vectorial y los subcampos escalares para los predicados escalares.</p></li>
-<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray ya existente una vez creado dicho campo.</p></li>
+<li><p>Tratar los subcampos vectoriales como entradas de predicados escalares de tipo « <code translate="no">$[...]</code> ». Utilizar subcampos vectoriales para la búsqueda vectorial y subcampos escalares para los predicados escalares.</p></li>
+<li><p>Suponer que se pueden añadir nuevos subcampos a un campo StructArray existente una vez creado dicho campo.</p></li>
 <li><p>Utilizar <code translate="no">chunks.emb</code> o <code translate="no">chunks.emb_list_vector</code> en lugar de la sintaxis de ruta requerida <code translate="no">chunks[emb]</code> o <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Tratar el comportamiento de los StructArray nulos como si estuviera disponible en todas las versiones de destino.</p></li>
 </ul>
@@ -429,6 +429,6 @@ client.add_collection_struct_field(
     </button></h2><ol>
 <li><p>Para insertar datos anidados en el campo StructArray, consulta <a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos StructArray</a>.</p></li>
 <li><p>Para crear índices vectoriales y escalares, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos StructArray</a>».</p></li>
-<li><p>Para buscar en los subcampos vectoriales de StructArray, consulta «Búsqueda vectorial básica con StructArray».</p></li>
+<li><p>Para buscar en subcampos vectoriales de StructArray, consulta <a href="/docs/es/basic-vector-search-with-structarray.md">«Búsqueda vectorial básica con StructArray</a>».</p></li>
 <li><p>Para consultar los tipos de datos admitidos, el comportamiento de los valores nulos y las limitaciones específicas de cada versión, consulta <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
 </ol>

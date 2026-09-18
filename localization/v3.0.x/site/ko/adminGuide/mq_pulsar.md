@@ -42,7 +42,7 @@ title: 펄서
 <tr><td>2.4.x 및 이전 버전</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5부터 Milvus Helm 차트 및 Milvus Operator는 기본적으로 <strong>Pulsar v3를</strong> 배포하며, Pulsar <a href="/docs/ko/upgrade-pulsar-v3.md">v2와의</a> 호환성은 유지됩니다. <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar v2에서 v3로 업그레이드’</a> 및 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용’을</a> 참조하십시오.</p>
+<p>Milvus 2.5부터 Milvus Helm 차트 및 Milvus Operator는 기본적으로 <strong>Pulsar v3를</strong> 배포하며, Pulsar v2와의 호환성은 유지됩니다. <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar를 v2에서 v3로 업그레이드하고</a> <a href="/docs/ko/use-pulsar-v2.md">Pulsar v2 계속 사용하기’를</a> 참조하십시오.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Helm을 사용하여 Pulsar가 포함된 Milvus 클러스터 배포<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ title: 펄서
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kubernetes v1.25 이상에서 번들된 Pulsar 하위 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
+<p>Kubernetes v1.25 이상에서 번들된 Pulsar 서브 차트로 인해 PodDisruptionBudget(PDB) API 문제가 발생하는 경우, Pulsar PDB 정책을 비활성화하십시오:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -133,7 +133,7 @@ title: 펄서
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>번들된 Pulsar를 사용했고 그 영구 저장 데이터를 제거하려면, Pulsar PVC( <code translate="no">my-release-pulsarv3-*</code>)를 삭제하십시오:</p>
+<p>번들된 Pulsar를 사용했으며 해당 데이터가 저장된 데이터를 제거하려면, Pulsar PVC(이름: <code translate="no">my-release-pulsarv3-*</code>)를 삭제하십시오:</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
@@ -263,9 +263,9 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0-beta로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 서로 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.
 Pulsar를 실행 중이며 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
-<li><strong>Pulsar v2 → v3:</strong> <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar v2에서 v3로 업그레이드’를</a> 참조하십시오. v2를 계속 사용하려면 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용’을</a> 참조하십시오.</li>
+<li><strong>Pulsar v2 → v3:</strong> <a href="/docs/ko/upgrade-pulsar-v3.md">‘v2에서 v3으로 Pulsar 업그레이드’를</a> 참조하십시오. v2를 계속 사용하려면 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용하기’를</a> 참조하십시오.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

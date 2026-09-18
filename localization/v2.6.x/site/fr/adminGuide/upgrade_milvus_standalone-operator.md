@@ -59,7 +59,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
     </button></h3><p>La mise à niveau de Milvus 2.5.x vers la version 2.6.17 implique des changements architecturaux importants :</p>
 <ul>
 <li><strong>Consolidation des coordinateurs</strong>: les anciens coordinateurs distincts (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) ont été regroupés en un seul <code translate="no">mixCoord</code></li>
-<li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
+<li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement des données amélioré</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
 <p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture Milvus</a>.</p>
@@ -87,10 +87,10 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
 <p><strong>Exigences de compatibilité :</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à jour directes à partir de versions candidates ne sont pas prises en charge.</li>
-<li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous souhaitez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide concernant la migration.</li>
+<li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous devez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide communautaire</a> pour obtenir de l'aide concernant la migration.</li>
 <li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou une version ultérieure avant de passer à la version v2.6.17.</li>
 </ul>
-<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les prochaines versions.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

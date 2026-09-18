@@ -2,10 +2,10 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: تعرف على كيفية تثبيت حزمة تطوير تطبيقات جافا (Java SDK) الخاصة بـ Milvus.
-title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java
+summary: تعرف على كيفية تثبيت حزمة أدوات تطوير تطبيقات Java (SDK) الخاصة بـ Milvus.
+title: تثبيت حزمة أدوات تطوير البرامج (SDK) الخاصة بـ Milvus بلغة Java
 ---
-<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) الخاصة بـ Milvus بلغة Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

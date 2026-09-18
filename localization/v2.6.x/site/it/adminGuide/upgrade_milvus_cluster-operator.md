@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: Scopri come aggiornare il cluster Milvus con Milvus Operator.
+summary: Scopri come eseguire l'aggiornamento di un cluster Milvus con Milvus Operator.
 title: Aggiornamento del cluster Milvus con Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
@@ -56,7 +56,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
       </svg>
     </button></h3><p>L'aggiornamento da Milvus 2.5.x alla versione 2.6.17 comporta modifiche architetturali significative:</p>
 <ul>
-<li><strong>Consolidamento dei coordinatori</strong>: i coordinatori separati legacy (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) sono stati consolidati in un unico <code translate="no">mixCoord</code></li>
+<li><strong>Consolidamento del coordinatore</strong>: i coordinatori separati legacy (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) sono stati consolidati in un unico <code translate="no">mixCoord</code></li>
 <li><strong>Nuovi componenti</strong>: introduzione dello Streaming Node per un’elaborazione dei dati potenziata</li>
 <li><strong>Rimozione di componenti</strong>: <code translate="no">indexNode</code> è stato rimosso e consolidato</li>
 </ul>
@@ -85,10 +85,10 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
 <p><strong>Requisiti di compatibilità:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni candidate (release candidate) non sono supportati.</li>
-<li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
+<li>Se attualmente si sta utilizzando la v2.6.0-rc1 e si desidera conservare i propri dati, si prega di fare riferimento a <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
 <li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoord</code> " abilitata prima di passare alla versione v2.6.17.</li>
 </ul>
-<p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere l’attuale scelta della coda dei messaggi. Il passaggio da un sistema di coda dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Procedura di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,10 +124,10 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifica l'aggiornamento dell'Operator:</p>
+<p>Verifica l’aggiornamento dell’Operator:</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-cluster" class="common-anchor-header">Passaggio 2: Aggiornamento del cluster Milvus<button data-href="#Step-2-Upgrade-your-Milvus-cluster" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-cluster" class="common-anchor-header">Passaggio 2: aggiornamento del cluster Milvus<button data-href="#Step-2-Upgrade-your-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,7 +147,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <button class="copy-code-btn"></button></code></pre>
 <p>Se invece vedi pod coordinatori separati (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), devi abilitare <code translate="no">mixCoord</code> nel passaggio successivo.</p>
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Aggiornamento alla versione v2.5.16 con mixCoord</h4><div class="alert-note">
-<p>Salta questo passaggio se il tuo cluster è già in esecuzione con la versione v2.5.16 o superiore e con l’opzione <code translate="no">mixCoord</code> abilitata.</p>
+<p>Salta questo passaggio se il tuo cluster è già in esecuzione con la versione v2.5.16 o successive e con l’opzione <code translate="no">mixCoord</code> abilitata.</p>
 </div>
 <p>Creare un file di configurazione denominato ` <code translate="no">milvusupgrade.yaml</code> ` per abilitare ` <code translate="no">mixCoord</code> ` ed eseguire l'aggiornamento alla versione v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -167,7 +167,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Aggiornamento alla versione v2.6.17</h4><p>Una volta che la versione 2.5.16 è in esecuzione con successo con l'<code translate="no">mixCoord</code>, eseguire l'aggiornamento alla versione 2.6.17:</p>
+<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Aggiornamento alla versione v2.6.17</h4><p>Una volta che la versione 2.5.16 è in esecuzione corretta con l'<code translate="no">mixCoord</code>, esegui l'aggiornamento alla versione 2.6.17:</p>
 <p>Aggiornare il file di configurazione (in questo esempio<code translate="no">milvusupgrade.yaml</code> ):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -195,7 +195,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verifica che il tuo cluster stia utilizzando la nuova versione:</p>
+    </button></h2><p>Verifica che il cluster stia utilizzando la nuova versione:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>

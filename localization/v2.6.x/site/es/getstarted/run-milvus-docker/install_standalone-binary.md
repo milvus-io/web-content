@@ -59,7 +59,7 @@ title: Instalar Milvus en modo autónomo con un paquete RPM/DEB
       </svg>
     </button></h2><p>Puede descargar el paquete RPM/DEB adecuado a la arquitectura de su sistema desde la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">página de versiones de Milvus</a>.</p>
 <ul>
-<li>Para x86_64/amd64, descarga el paquete <strong>milvus_2.6.9-1_amd64.deb</strong> o <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
+<li>Para x86_64/amd64, descargue el paquete <strong>milvus_2.6.9-1_amd64.deb</strong> o <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Para ARM64, descargue el paquete <strong>milvus_2.6.9-1_arm64.deb</strong> o <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
 <p>El siguiente comando da por hecho que vas a ejecutar Milvus Standalone en un equipo x86_64/amd64.</p>
@@ -85,11 +85,11 @@ title: Instalar Milvus en modo autónomo con un paquete RPM/DEB
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>En los sistemas basados en DEB (como Ubuntu y Debian), utiliza el comando « <code translate="no">apt</code> » para instalar el paquete.</p>
+<p>Para sistemas basados en DEB (como Ubuntu y Debian), utiliza el comando « <code translate="no">apt</code> » para instalar el paquete.</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus en modo autónomo<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus de forma independiente<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,7 +107,7 @@ dpkg -l | grep milvus
     </button></h2><p>Una vez completada la instalación, Milvus queda instalado como un servicio de systemd y se puede iniciar mediante el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede comprobar el estado del servicio Milvus mediante el siguiente comando:</p>
+<p>Puede comprobar el estado del servicio de Milvus mediante el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Si Milvus se está ejecutando correctamente, deberías ver el siguiente resultado:</p>
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede modificar la configuración de Milvus en el archivo <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por ejemplo, para cambiar <code translate="no">proxy.healthCheckTimeout</code> por <code translate="no">1000</code> ms, busque el parámetro «target» y modifíquelo según corresponda. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p>
+    </button></h2><p>Puede modificar la configuración de Milvus en el archivo <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por ejemplo, para cambiar <code translate="no">proxy.healthCheckTimeout</code> por <code translate="no">1000</code> ms, puede buscar el parámetro «target» y modificarlo según corresponda. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/v2.6.x/system_configuration.md">«Configuración del sistema</a>».</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Detener Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/v2.6.x/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

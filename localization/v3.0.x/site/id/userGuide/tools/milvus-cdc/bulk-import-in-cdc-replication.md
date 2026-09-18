@@ -1,7 +1,7 @@
 ---
 id: bulk-import-in-cdc-replication.md
 summary: >-
-  Pelajari cara melakukan impor massal ke kluster Milvus yang menggunakan
+  Pelajari cara melakukan impor massal ke klaster Milvus yang menggunakan
   replikasi CDC.
 title: Impor Massal dalam Replikasi CDC
 ---
@@ -20,7 +20,7 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara menjalankan impor massal pada kluster Milvus yang merupakan bagian dari topologi replikasi CDC. Dalam kluster yang direplikasi, impor massal harus menggunakan dua-fase komit (2PC) agar impor tersebut dikonfirmasi sebagai satu titik yang terurut di seluruh kluster primer dan kluster cadangan.</p>
+    </button></h1><p>Panduan ini menjelaskan cara menjalankan impor massal pada kluster Milvus yang merupakan bagian dari topologi replikasi CDC. Dalam kluster replikasi, impor massal harus menggunakan dua-fase komit (2PC) agar impor tersebut dikonfirmasi sebagai satu titik yang terurut di seluruh kluster primer dan kluster cadangan.</p>
 <p>Dalam panduan ini, kluster primer adalah kluster Milvus sumber, sedangkan kluster siaga adalah kluster Milvus tujuan.</p>
 <p>Sebelum memulai, pastikan replikasi CDC telah dikonfigurasi di antara kluster Anda. Untuk detailnya, lihat <a href="/docs/id/set_up_cdc_replication.md">Mengatur Replikasi CDC</a>.</p>
 <h2 id="Why-2PC-is-required" class="common-anchor-header">Mengapa 2PC Diperlukan<button data-href="#Why-2PC-is-required" class="anchor-icon" translate="no">
@@ -38,13 +38,13 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Impor massal biasa secara otomatis dikonfirmasi saat pekerjaan impor selesai, yang membuat data yang diimpor langsung terlihat. Dalam topologi replikasi CDC, perilaku ini tidak diperbolehkan karena kluster primer dan siaga harus menampilkan data yang diimpor pada titik logis yang sama.</p>
-<p>Sebagai gantinya, jalankan impor dalam mode dua fase komit dengan mengatur ` <code translate="no">auto_commit=false</code>`:</p>
+    </button></h2><p>Impor massal biasa secara otomatis dikonfirmasi saat pekerjaan impor selesai, sehingga data yang diimpor langsung terlihat. Dalam topologi replikasi CDC, perilaku ini tidak diperbolehkan karena kluster primer dan siaga harus menampilkan data yang diimpor pada titik logis yang sama.</p>
+<p>Sebagai gantinya, jalankan impor dalam mode komit dua fase dengan mengatur ` <code translate="no">auto_commit=false</code>`:</p>
 <ol>
-<li><p><strong>Fase impor</strong>: Milvus memuat data di kluster primer dan mereplikasi impor ke kluster cadangan, tetapi data yang diimpor tetap tidak terlihat. Tugas impor berhenti pada status " <code translate="no">Uncommitted</code> " dan menunggu.</p></li>
-<li><p><strong>Fase komit</strong>: Anda secara eksplisit mengkomit pekerjaan impor pada klaster utama. Komit direplikasi ke klaster siaga sebagai satu pagar terurut, sehingga kedua klaster menampilkan data yang diimpor pada titik logis yang sama.</p></li>
+<li><p><strong>Fase impor</strong>: Milvus memuat data pada kluster primer dan mereplikasi impor ke kluster cadangan, tetapi data yang diimpor tetap tidak terlihat. Tugas impor berhenti pada status " <code translate="no">Uncommitted</code> " dan menunggu.</p></li>
+<li><p><strong>Fase komit</strong>: Anda secara eksplisit mengkomit pekerjaan impor di kluster primer. Komit direplikasi ke kluster siaga sebagai satu pagar terurut, sehingga kedua kluster membuat data yang diimpor terlihat pada titik logis yang sama.</p></li>
 </ol>
-<h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">Langkah 1: Aktifkan impor di kluster yang direplikasi<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
+<h2 id="Step-1-Enable-import-in-a-replicating-cluster" class="common-anchor-header">Langkah 1: Aktifkan impor pada kluster replikasi<button data-href="#Step-1-Enable-import-in-a-replicating-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,8 +59,8 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Impor di kluster replikasi dinonaktifkan secara default. Aktifkan dengan mengatur ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` menjadi ` <code translate="no">true</code> ` pada kluster primer dan kluster siaga.</p>
-<p>Jika Anda mengimplementasikan Milvus dengan Milvus Operator, tambahkan pengaturan berikut ke ` <code translate="no">spec.config</code> ` pada setiap sumber daya ` <code translate="no">Milvus</code> `:</p>
+    </button></h2><p>Impor dalam kluster replikasi dinonaktifkan secara default. Aktifkan dengan mengatur ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` menjadi ` <code translate="no">true</code> ` pada kluster primer dan kluster siaga.</p>
+<p>Jika Anda menerapkan Milvus dengan Milvus Operator, tambahkan pengaturan berikut ke <code translate="no">spec.config</code> pada setiap sumber daya <code translate="no">Milvus</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
     <span class="hljs-attr">dataCoord:</span>
@@ -72,7 +72,7 @@ title: Impor Massal dalam Replikasi CDC
   <span class="hljs-attr">import:</span>
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pengaturan ini dapat diperbarui, sehingga dapat berlaku tanpa perlu melakukan restart penuh.</p>
+<p>Pengaturan ini dapat diperbarui, sehingga dapat berlaku tanpa perlu me-restart secara penuh.</p>
 <p>Saat pengaturan ini diaktifkan, kluster replikasi hanya menerima impor dengan ` <code translate="no">auto_commit=false</code>`. Tabel berikut mencantumkan permintaan yang umumnya ditolak:</p>
 <table>
 <thead>
@@ -80,7 +80,7 @@ title: Impor Massal dalam Replikasi CDC
 </thead>
 <tbody>
 <tr><td><code translate="no">dataCoord.import.enableInReplicatingCluster</code> belum diaktifkan</td><td><code translate="no">import in replicating cluster is not supported yet</code></td></tr>
-<tr><td><code translate="no">auto_commit=true</code> dikirim</td><td><code translate="no">auto_commit=true import in replicating cluster is not supported</code></td></tr>
+<tr><td><code translate="no">auto_commit=true</code> telah dikirim</td><td><code translate="no">auto_commit=true import in replicating cluster is not supported</code></td></tr>
 </tbody>
 </table>
 <h2 id="Step-2-Run-a-2PC-import" class="common-anchor-header">Langkah 2: Jalankan impor 2PC<button data-href="#Step-2-Run-a-2PC-import" class="anchor-icon" translate="no">
@@ -98,9 +98,9 @@ title: Impor Massal dalam Replikasi CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jalankan semua panggilan impor pada kluster utama. Data yang diimpor dan keputusan komit akan direplikasi ke kluster cadangan secara otomatis, jadi jangan mengirimkan atau mengonfirmasi impor di kluster cadangan secara manual.</p>
-<p>Setiap kluster membaca berkas impor dari penyimpanan objeknya masing-masing. Pastikan berkas yang akan diimpor tersedia di penyimpanan objek kluster utama dan kluster cadangan. Anda dapat mengunggah berkas ke kedua kluster, atau menggunakan penyimpanan objek yang dapat diakses oleh kedua kluster. Jika berkas tidak ada di kluster cadangan, proses impor yang direplikasi akan gagal di sana dengan pesan kesalahan "objek tidak ditemukan".</p>
-<p>Contoh berikut menggunakan helper impor berbasis REST dari <code translate="no">pymilvus.bulk_writer</code>. Nilai ` <code translate="no">url</code> ` adalah alamat Milvus yang sama yang Anda gunakan untuk panggilan API lainnya.</p>
+    </button></h2><p>Jalankan semua panggilan impor ke kluster primer. Data yang diimpor dan keputusan komit akan direplikasi ke kluster cadangan secara otomatis, jadi jangan kirimkan atau lakukan komit impor di kluster cadangan sendiri.</p>
+<p>Setiap klaster membaca berkas impor dari penyimpanan objeknya sendiri. Pastikan berkas yang akan diimpor ada di penyimpanan objek primer dan cadangan. Anda dapat mengunggah berkas ke kedua klaster, atau menggunakan penyimpanan objek yang dapat diakses oleh kedua klaster. Jika berkas tidak ditemukan di klaster cadangan, proses impor yang direplikasi akan gagal di sana dengan kesalahan "objek tidak ditemukan".</p>
+<p>Contoh berikut menggunakan pembantu impor berbasis REST dari <code translate="no">pymilvus.bulk_writer</code>. Nilai ` <code translate="no">url</code> ` adalah alamat Milvus yang sama yang Anda gunakan untuk panggilan API lainnya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import, commit_import, get_import_progress
@@ -177,7 +177,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Melakukan commit sebelum kluster siaga selesai mengimpor tidak akan merusak data, tetapi kluster siaga masih dalam proses mengejar ketertinggalan saat commit diterapkan. Menunggu hingga kluster utama dan siaga sama-sama melaporkan " <code translate="no">Uncommitted</code> " memastikan bahwa data yang diimpor telah direplikasi sepenuhnya dan kedua kluster siap menampilkannya secara bersamaan.</p>
+    </button></h3><p>Melakukan komit sebelum kluster siaga selesai mengimpor tidak akan merusak data, tetapi kluster siaga masih dalam proses mengejar ketertinggalan saat komit diterapkan. Menunggu hingga kluster utama dan kluster siaga sama-sama melaporkan " <code translate="no">Uncommitted</code> " memastikan bahwa data yang diimpor telah direplikasi sepenuhnya dan kedua kluster siap menampilkannya secara bersamaan.</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">Langkah 3: Verifikasi data<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,8 +193,8 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah pekerjaan mencapai status " <code translate="no">Completed</code>", entitas yang diimpor akan terlihat di kedua kluster. Muat dan jalankan kueri pada koleksi di kluster primer, lalu jalankan kueri yang sama di kluster cadangan tanpa memuat koleksi tersebut secara manual di sana, dan pastikan entitas yang diimpor terdapat di kedua kluster.</p>
-<p>Cluster siaga bersifat read-only selama masih berstatus siaga. Jangan mengirimkan impor, komit, atau operasi DDL atau DCL lainnya secara langsung ke cluster siaga. Lakukan operasi ini di cluster utama dan biarkan replikasi CDC menerapkannya ke cluster siaga.</p>
+    </button></h2><p>Setelah pekerjaan mencapai status " <code translate="no">Completed</code>", entitas yang diimpor akan terlihat di kedua kluster. Muat dan jalankan kueri pada koleksi di kluster primer, lalu jalankan kueri yang sama di kluster standby tanpa memuat koleksi tersebut secara manual di sana, dan pastikan entitas yang diimpor terdapat di kedua kluster.</p>
+<p>Cluster siaga bersifat hanya baca selama masih berstatus siaga. Jangan mengirimkan impor, komit, atau operasi DDL atau DCL lainnya secara langsung ke cluster siaga. Lakukan operasi ini di cluster utama dan biarkan replikasi CDC menerapkannya ke cluster siaga.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jalankan impor dan komit di klaster utama. Klaster siaga menerima data yang diimpor dan komit melalui replikasi CDC.</p>
+    </button></h3><p>Jalankan impor dan commit di klaster utama. Klaster siaga menerima baik data yang diimpor maupun commit melalui replikasi CDC.</p>
 <h3 id="Do-I-need-to-commit-on-the-standby-cluster" class="common-anchor-header">Apakah saya perlu melakukan commit di kluster standby?<button data-href="#Do-I-need-to-commit-on-the-standby-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,7 +257,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> tidak diaktifkan pada cluster tersebut. Atur menjadi " <code translate="no">true</code> " pada cluster utama dan cluster cadangan.</p>
+    </button></h3><p><code translate="no">dataCoord.import.enableInReplicatingCluster</code> tidak diaktifkan di cluster tersebut. Atur ke " <code translate="no">true</code> " pada cluster primer dan cluster standby.</p>
 <h3 id="Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="common-anchor-header">Mengapa impor saya gagal dengan pesan " <code translate="no">auto_commit=true import in replicating cluster is not supported</code>"?<button data-href="#Why-does-my-import-fail-with-autocommittrue-import-in-replicating-cluster-is-not-supported" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,4 +273,4 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dalam kluster yang melakukan replikasi, hanya impor 2PC dengan opsi ` <code translate="no">auto_commit=false</code> ` yang diterima. Atur ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` pada permintaan impor.</p>
+    </button></h3><p>Dalam kluster yang melakukan replikasi, hanya impor 2PC dengan ` <code translate="no">auto_commit=false</code> ` yang diterima. Tetapkan ` <code translate="no">options={&quot;auto_commit&quot;: &quot;false&quot;}</code> ` pada permintaan impor.</p>

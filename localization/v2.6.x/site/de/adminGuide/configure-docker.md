@@ -57,7 +57,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Konfigurieren Sie Ihre Milvus-Instanz entsprechend Ihren Anwendungsszenarien, indem Sie die entsprechenden Parameter in „ <code translate="no">milvus.yaml</code> “ anpassen.</p>
+    </button></h2><p>Konfigurieren Sie Ihre Milvus-Instanz entsprechend Ihren Anwendungsszenarien, indem Sie die entsprechenden Parameter in der Datei „ <code translate="no">milvus.yaml</code> “ anpassen.</p>
 <p>Weitere Informationen zu den einzelnen Parametern finden Sie unter den folgenden Links.</p>
 <p>Sortiert nach:</p>
 <div class="filter">
@@ -101,7 +101,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/v2.6.x/configure_mq.md">Nachrichtenwarteschlange</a></li>
             <li><a href="/docs/de/v2.6.x/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/de/v2.6.x/configure_trace.md">Trace</a></li>
-            <li><a href="/docs/de/v2.6.x/configure_quotaandlimits.md">Kontingente und Grenzwerte</a></li>
+            <li><a href="/docs/de/v2.6.x/configure_quotaandlimits.md">Kontingente und Limits</a></li>
         </ul>
     </td>
   </tr>
@@ -254,7 +254,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Die Daten werden gemäß der Standardkonfiguration in <code translate="no">docker-compose.yml</code> im Ordner „ <code translate="no">/volumes</code> “ gespeichert. Um den Ordner für die Datenspeicherung zu ändern, bearbeiten Sie „ <code translate="no">docker-compose.yml</code> “ oder führen Sie „ <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> “ aus.
+Die Daten werden gemäß der Standardkonfiguration in „ <code translate="no">docker-compose.yml</code> “ im Ordner „ <code translate="no">/volumes</code> “ gespeichert. Um den Ordner für die Datenspeicherung zu ändern, bearbeiten Sie „ <code translate="no">docker-compose.yml</code> “ oder führen Sie „ <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> “ aus.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Milvus starten<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -294,6 +294,6 @@ Die Daten werden gemäß der Standardkonfiguration in <code translate="no">docke
 <ul>
 <li><a href="/docs/de/v2.6.x/deploy_s3.md">Objektspeicher mit Docker Compose oder Helm konfigurieren</a></li>
 <li><a href="/docs/de/v2.6.x/deploy_etcd.md">Meta-Speicher mit Docker Compose oder Helm konfigurieren</a></li>
-<li><a href="/docs/de/v2.6.x/deploy_pulsar.md">Konfigurieren des Nachrichtenspeichers mit Docker Compose oder Helm</a></li>
+<li><a href="/docs/de/v2.6.x/deploy_pulsar.md">Konfigurieren Sie den Nachrichtenspeicher mit Docker Compose oder Helm</a></li>
 </ul></li>
 </ul>

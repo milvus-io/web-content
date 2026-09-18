@@ -233,7 +233,7 @@ title: Docker Compose를 사용하여 Milvus 구성하기
         ></path>
       </svg>
     </button></h2><p><code translate="no">docker-compose.yml</code> 파일에서 각 <code translate="no">milvus-standalone</code> 아래에 <code translate="no">volumes</code> 섹션을 추가하십시오.</p>
-<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래에 있는 구성 파일 <code translate="no">/milvus/configs/milvus.yaml</code> 에 해당하는 Docker 컨테이너 경로에 매핑하십시오.</p>
+<p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래의 <code translate="no">/milvus/configs/milvus.yaml</code> 에 있는 구성 파일에 해당하는 Docker 컨테이너 경로로 매핑하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -292,8 +292,8 @@ title: Docker Compose를 사용하여 Milvus 구성하기
     </button></h2><ul>
 <li>Docker Compose 또는 Helm을 사용하여 다음 Milvus 종속성을 관리하는 방법을 알아보세요:
 <ul>
-<li><a href="/docs/ko/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 오브젝트 스토리지 구성</a></li>
-<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성</a></li>
+<li><a href="/docs/ko/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 객체 스토리지 구성</a></li>
+<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성하기</a></li>
 <li><a href="/docs/ko/deploy_pulsar.md">Docker Compose 또는 Helm을 사용하여 메시지 스토리지 구성하기</a></li>
 </ul></li>
 </ul>

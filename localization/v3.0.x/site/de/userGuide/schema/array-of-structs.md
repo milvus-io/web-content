@@ -2,10 +2,10 @@
 id: array-of-structs.md
 title: StructArray – Überblick
 summary: >-
-  Verwenden Sie StructArray, wenn eine Entität eine geordnete Liste
-  strukturierter Elemente speichern muss, beispielsweise ein Dokument mit vielen
-  Abschnitten, eine Seite mit vielen visuellen Elementen oder ein Video mit
-  vielen Clips. StructArray speichert diese Elemente innerhalb der
+  Verwenden Sie „StructArray“, wenn eine Entität eine geordnete Liste
+  strukturierter Elemente speichern muss, wie beispielsweise ein Dokument mit
+  vielen Abschnitten, eine Seite mit vielen visuellen Elementen oder ein Video
+  mit vielen Clips. „StructArray“ speichert diese Elemente innerhalb der
   übergeordneten Entität und ermöglicht dennoch die Vektorsuche sowie die
   skalare Filterung nach Feldern innerhalb jedes einzelnen Elements.
 ---
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Verwenden Sie StructArray, wenn eine Entität eine geordnete Liste strukturierter Elemente speichern muss, wie beispielsweise ein Dokument mit vielen Abschnitten, eine Seite mit vielen visuellen Elementen oder ein Video mit vielen Clips. StructArray speichert diese Elemente innerhalb der übergeordneten Entität und ermöglicht dennoch die Vektorsuche sowie die skalare Filterung nach Feldern innerhalb jedes Elements.</p>
+    </button></h1><p>Verwenden Sie StructArray, wenn eine Entität eine geordnete Liste strukturierter Elemente speichern muss, wie beispielsweise ein Dokument mit vielen Abschnitten, eine Seite mit vielen visuellen Elementen oder ein Video mit vielen Clips. StructArray speichert diese Elemente innerhalb der übergeordneten Entität und ermöglicht dennoch die Vektorsuche und skalare Filterung nach Feldern innerhalb jedes Elements.</p>
 <h2 id="What-is-StructArray" class="common-anchor-header">Was ist StructArray?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,8 +40,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, vektorielle Unterfelder oder beides enthalten.</p>
-<p>Beispielsweise kann eine Sammlung einen Artikel als Entität speichern und dessen Chunks in einem StructArray-Feld namens „ <code translate="no">chunks</code> “ ablegen. Jeder Chunk kann Text, Abschnittsmetadaten, Qualitätsbewertungen und eine oder mehrere Vektor-Embeddings enthalten.</p>
+    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, Vektor-Unterfelder oder beides enthalten.</p>
+<p>Beispielsweise kann eine Sammlung einen Artikel als Entität speichern und dessen Chunks in einem StructArray-Feld namens „ <code translate="no">chunks</code> “ ablegen. Jeder Chunk kann Text, Abschnittsmetadaten, Qualitätsbewertungen und eine oder mehrere Vektor-Einbettungen enthalten.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -70,7 +70,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Die beiden Vektor-Unterfelder in diesem Beispiel repräsentieren denselben Chunk aus zwei Suchperspektiven. „ <code translate="no">chunks[emb_list_vector]</code> “ ist für die „EmbeddingList“-Suche mit „ <code translate="no">MAX_SIM*</code> “-Metriken vorgesehen, während „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene mit regulären Vektormetriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “ gedacht ist.</p>
+<p>Die beiden Vektor-Unterfelder in diesem Beispiel repräsentieren denselben Chunk aus zwei Suchperspektiven. „ <code translate="no">chunks[emb_list_vector]</code> “ ist für die Suche mit „EmbeddingList“ und „ <code translate="no">MAX_SIM*</code> “-Metriken vorgesehen, während „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene mit regulären Vektormetriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “ gedacht ist.</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">Wann sollte StructArray verwendet werden?<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,9 +94,9 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Dokumentenabruf</td><td>Speichern Sie ein Dokument als Entität, während Sie dessen Chunks durchsuchen.</td><td><code translate="no">chunks</code></td></tr>
-<tr><td>Abruf bei späterer Interaktion</td><td>Speichern Sie ein Dokument oder eine Seite als Einbettungsliste und bewerten Sie es/sie mit „ <code translate="no">MAX_SIM*</code> “.</td><td><code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">patches[emb]</code></td></tr>
+<tr><td>Abruf bei späterer Interaktion</td><td>Speichern Sie ein Dokument oder eine Seite als Einbettungsliste und bewerten Sie diese mit „ <code translate="no">MAX_SIM*</code> “.</td><td><code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">patches[emb]</code></td></tr>
 <tr><td>Abruf auf Elementebene</td><td>Geben Sie den relevantesten Chunk, Clip, Patch oder die relevanteste Beobachtung zurück, einschließlich des Array-Offsets.</td><td><code translate="no">chunks[emb]</code></td></tr>
-<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von „Struct“-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
+<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von Struct-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
 <tr><td>Reduzierung doppelter übergeordneter Ergebnisse</td><td>Behalten Sie untergeordnete Elemente unter derselben übergeordneten Entität bei, anstatt jedes untergeordnete Element als separate Zeile zu speichern.</td><td><code translate="no">chunks</code>, <code translate="no">clips</code>, <code translate="no">patches</code></td></tr>
 </tbody>
 </table>
@@ -122,14 +122,14 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Modellieren Sie ein übergeordnetes Objekt mit vielen strukturierten untergeordneten Objekten.</td><td>Erstellen Sie ein StructArray-Feld.</td><td>Die Entität enthält geordnete Struct-Elemente.</td><td><a href="/docs/de/create-structarray-field.md">Erstellen Sie ein StructArray-Feld</a></td></tr>
-<tr><td>Fügen Sie übergeordnete Datensätze mit verschachtelten untergeordneten Daten ein.</td><td>Fügen Sie Entitäten ein, deren StructArray-Feld eine Liste von Struct-Objekten ist.</td><td>Einfügen auf Entitätsebene.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
-<tr><td>Führen Sie ColBERT, ColPali oder die späte Interaktionssuche auf Dokumentebene durch.</td><td>Verwenden Sie die EmbeddingList-Suche mit einem „ <code translate="no">MAX_SIM*</code> “-Index.</td><td>Entitäts-Ebene.</td><td><a href="/docs/de/search-with-embedding-lists.md">Suche mit Embedding-Listen</a></td></tr>
-<tr><td>Durchsuchen Sie einzelne Chunks, Clips oder Patches.</td><td>Verwenden Sie die Suche auf Elementebene mit einer regulären Vektormetrik.</td><td>Strukturelementebene, mit Offset, sofern verfügbar.</td><td>Einfache Vektorsuche mit StructArray</td></tr>
-<tr><td>Beschränken Sie die Vektorsuche auf Elementebene auf Elemente, die skalaren Bedingungen entsprechen.</td><td>Verwenden Sie „ <code translate="no">element_filter</code> “.</td><td>Filterung auf Elementebene; die Form des Ergebnisses hängt vom Suchtyp ab.</td><td>Gefilterte Suche mit StructArray</td></tr>
+<tr><td>Fügen Sie übergeordnete Datensätze mit verschachtelten untergeordneten Daten ein.</td><td>Entitäten einfügen, deren StructArray-Feld eine Liste von Struct-Objekten ist.</td><td>Einfügen auf Entity-Ebene.</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in „StructArray“-Felder einfügen</a></td></tr>
+<tr><td>Führen Sie ColBERT, ColPali oder die späte Interaktionssuche auf Dokumentebene aus.</td><td>Verwenden Sie die EmbeddingList-Suche mit einem „ <code translate="no">MAX_SIM*</code> “-Index.</td><td>Entitäts-Ebene.</td><td><a href="/docs/de/search-with-embedding-lists.md">Suche mit Embedding-Listen</a></td></tr>
+<tr><td>Durchsuchen Sie einzelne Chunks, Clips oder Patches.</td><td>Verwenden Sie die Suche auf Elementebene mit einer regulären Vektormetrik.</td><td>Ebene der Struktur-Elemente, mit Offset, sofern verfügbar.</td><td><a href="/docs/de/basic-vector-search-with-structarray.md">Einfache Vektorsuche mit StructArray</a></td></tr>
+<tr><td>Beschränken Sie die Vektorsuche auf Elementebene auf Elemente, die skalare Bedingungen erfüllen.</td><td>Verwenden Sie „ <code translate="no">element_filter</code> “.</td><td>Filterung auf Elementebene; die Form des Ergebnisses hängt vom Suchtyp ab.</td><td><a href="/docs/de/filtered-search-with-structarray.md">Gefilterte Suche mit StructArray</a></td></tr>
 <tr><td>Wählen Sie Entitäten danach aus, wie viele Struct-Elemente eine Bedingung erfüllen.</td><td>Verwenden Sie „ <code translate="no">MATCH_ANY</code> “, „ <code translate="no">MATCH_ALL</code> “, „ <code translate="no">MATCH_LEAST</code> “, „ <code translate="no">MATCH_MOST</code> “ oder „ <code translate="no">MATCH_EXACT</code> “.</td><td>Entitäts-Ebene.</td><td><a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a></td></tr>
-<tr><td>Verwenden Sie Score- oder Distanzgrenzen für StructArray-Vektor-Teilfelder.</td><td>Verwenden Sie die Bereichssuche auf Elementebene.</td><td>Struct-Elementebene.</td><td>Bereichssuche mit StructArray</td></tr>
-<tr><td>Geben Sie nach der Suche auf Elementebene höchstens ein Ergebnis pro übergeordneter Entität zurück.</td><td>Verwenden Sie die Gruppierungssuche nach Primärschlüssel.</td><td>Entitätsebene nach der Gruppierung.</td><td>Gruppierte Suche mit StructArray</td></tr>
-<tr><td>Kombinieren Sie die StructArray-Element-Suche mit einem anderen Vektorfeld.</td><td>Verwenden Sie eine hybride Suche mit einem AnnSearchRequest, der auf ein StructArray-Vektor-Unterfeld abzielt.</td><td>Teilsuche auf Elementebene, Neuordnung auf Entitätsebene.</td><td>Hybride Suche mit StructArray</td></tr>
+<tr><td>Verwenden Sie Score- oder Distanzgrenzen für StructArray-Vektor-Teilfelder.</td><td>Verwenden Sie die Bereichssuche auf Elementebene.</td><td>Struct-Ebenen-Ebene.</td><td><a href="/docs/de/range-search-with-structarray.md">Bereichssuche mit StructArray</a></td></tr>
+<tr><td>Geben Sie nach der Suche auf Elementebene höchstens ein Ergebnis pro übergeordneter Entität zurück.</td><td>Verwenden Sie die Gruppierungssuche nach Primärschlüssel.</td><td>Entitätsebene nach der Gruppierung.</td><td><a href="/docs/de/grouping-search-with-structarray.md">Gruppierte Suche mit StructArray</a></td></tr>
+<tr><td>Kombinieren Sie die StructArray-Element-Suche mit einem anderen Vektorfeld.</td><td>Verwenden Sie eine hybride Suche mit einem AnnSearchRequest, der auf ein StructArray-Vektor-Unterfeld abzielt.</td><td>Teilsuche auf Elementebene, Neureihenung auf Entitätsebene.</td><td><a href="/docs/de/hybrid-search-with-structarray.md">Hybride Suche mit StructArray</a></td></tr>
 </tbody>
 </table>
 <h2 id="Understand-the-two-search-models" class="common-anchor-header">Die beiden Suchmodelle verstehen<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
@@ -148,11 +148,34 @@ summary: >-
         ></path>
       </svg>
     </button></h2><table>
-<thead>
-<tr><th>### EmbeddingList-Suche Bei der EmbeddingList-Suche werden die Vektoren innerhalb eines StructArray-Vektor-Unterfelds als eine Embedding-Liste für die übergeordnete Entität behandelt. Die Abfrage ist ebenfalls eine Embedding-Liste. Milvus vergleicht die Embedding-Liste der Abfrage mit der gespeicherten Embedding-Liste unter Verwendung einer „ <code translate="no">MAX_SIM*</code> “-Metrik und gibt übereinstimmende Entitäten zurück. - Abfragedaten: Embedding-Liste. - Metrikfamilie: „ <code translate="no">MAX_SIM*</code> “. - Ergebnisgranularität: Entitätsebene. - Am besten geeignet für: Abruf mit später Interaktion auf Dokument- oder Seitenebene.</th><th>### Suche auf Elementebene Bei der Suche auf Elementebene wird jedes Struct-Element als eigenständiger Kandidat für die Vektorsuche behandelt. Jeder Treffer stellt ein übereinstimmendes Element innerhalb des StructArray-Feldes dar, und bei nicht gruppierten Ergebnissen kann der Element-Offset angezeigt werden. - Abfragedaten: regulärer Vektor. - Metrikfamilie: reguläre Vektormetriken. - Ergebnisgranularität: Struct-Element-Ebene. - Am besten geeignet für: Abruf auf Chunk-, Clip- oder Patch-Ebene.</th></tr>
-</thead>
-<tbody>
-</tbody>
+  <thead>
+    <tr>
+      <th scope="col"><h3>EmbeddingList-Suche</h3></th>
+      <th scope="col"><h3>Suche auf Elementebene</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>Bei der EmbeddingList-Suche werden die Vektoren innerhalb eines StructArray-Vektor-Unterfelds als eine Embedding-Liste für die übergeordnete Entität behandelt. Die Abfrage ist ebenfalls eine Embedding-Liste. Milvus vergleicht die Embedding-Liste der Abfrage mit der gespeicherten Embedding-Liste unter Verwendung einer „ <code translate="no">MAX_SIM*</code> “-Metrik und gibt übereinstimmende Entitäten zurück.</p>
+        <ul>
+          <li>Abfragedaten: Einbettungsliste.</li>
+          <li>Metrikfamilie: „ <code translate="no">MAX_SIM*</code> “.</li>
+          <li>Ergebnisgranularität: Entitätsebene.</li>
+          <li>Am besten geeignet für: Abfrage auf Dokument- oder Seitenebene im späten Interaktionsverlauf.</li>
+        </ul>
+      </td>
+      <td>
+        <p>Bei der Suche auf Elementebene wird jedes Struct-Element als eigenständiger Kandidat für die Vektorsuche behandelt. Jeder Treffer stellt ein übereinstimmendes Element innerhalb des StructArray-Feldes dar, und bei nicht gruppierten Ergebnissen kann der Element-Offset angezeigt werden.</p>
+        <ul>
+          <li>Abfragedaten: regulärer Vektor.</li>
+          <li>Metrikfamilie: reguläre Vektormetriken.</li>
+          <li>Ergebnisgranularität: Struct-Ebene.</li>
+          <li>Am besten geeignet für: Abruf auf Chunk-, Clip- oder Patch-Ebene.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <div class="alert note">
 <p>Warnung</p>
@@ -173,26 +196,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die StructArray-Dokumentation ist in Modellierungs- und Suchseiten unterteilt. Verwenden Sie die Modellierungsseiten, um Daten zu definieren und vorzubereiten. Verwenden Sie die Suchseiten, um das richtige Abruf- und Filterverhalten auszuwählen.</p>
+    </button></h2><p>Die Dokumentation zu „StructArray“ ist in Modellierungs- und Suchseiten unterteilt. Verwenden Sie die Modellierungsseiten, um Daten zu definieren und vorzubereiten. Verwenden Sie die Suchseiten, um das richtige Abruf- und Filterverhalten auszuwählen.</p>
 <table>
 <thead>
-<tr><th>Bereich</th><th>Seite</th><th>Verwenden Sie sie für</th></tr>
+<tr><th>Bereich</th><th>Seite</th><th>Verwendung für</th></tr>
 </thead>
 <tbody>
 <tr><td>Modellierung</td><td><a href="/docs/de/create-structarray-field.md">Erstellen eines StructArray-Feldes</a></td><td>Definieren Sie ein Struct-Schema und fügen Sie ein StructArray-Feld hinzu.</td></tr>
-<tr><td>Modellierung</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in StructArray-Felder einfügen</a></td><td>Bereiten Sie verschachtelte StructArray-Daten vor und fügen Sie sie ein.</td></tr>
+<tr><td>Modellierung</td><td><a href="/docs/de/insert-data-into-structarray-fields.md">Daten in StructArray-Felder einfügen</a></td><td>Bereiten Sie verschachtelte StructArray-Daten vor und fügen Sie diese ein.</td></tr>
 <tr><td>Modellierung</td><td><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></td><td>Erstellen Sie Vektor- und Skalarindizes für StructArray-Unterfelder.</td></tr>
 <tr><td>Referenz</td><td><a href="/docs/de/structarray-limits.md">StructArray-Beschränkungen</a></td><td>Überprüfen Sie die Beschränkungen hinsichtlich Schema, Datentyp, Index, Suche, Filter und Version.</td></tr>
-<tr><td>Suche</td><td>Einfache Vektorsuche mit StructArray</td><td>Vergleichen Sie die Suche mit „EmbeddingList“ und die Vektorsuche auf Elementebene.</td></tr>
-<tr><td>Suche</td><td>Bereichssuche mit StructArray</td><td>Verwenden Sie Bereichsbeschränkungen mit StructArray-Vektor-Unterfeldern.</td></tr>
-<tr><td>Suche</td><td>Gruppierte Suche mit StructArray</td><td>Gruppieren Sie Suchergebnisse auf Elementebene nach Primärschlüssel.</td></tr>
-<tr><td>Suche</td><td>Hybride Suche mit StructArray</td><td>Kombinieren Sie die Suche auf StructArray-Ebene mit anderen Vektorsuchen.</td></tr>
-<tr><td>Suche</td><td>Gefilterte Suche mit StructArray</td><td>Verwenden Sie StructArray-Filter bei der Suche, Abfrage und hybriden Suche.</td></tr>
+<tr><td>Suche</td><td><a href="/docs/de/basic-vector-search-with-structarray.md">Einfache Vektorsuche mit StructArray</a></td><td>Vergleichen Sie die Suche mit „EmbeddingList“ und die Vektorsuche auf Elementebene.</td></tr>
+<tr><td>Suche</td><td><a href="/docs/de/range-search-with-structarray.md">Bereichssuche mit StructArray</a></td><td>Verwenden Sie Bereichsbeschränkungen mit StructArray-Vektor-Unterfeldern.</td></tr>
+<tr><td>Suche</td><td><a href="/docs/de/grouping-search-with-structarray.md">Gruppierte Suche mit StructArray</a></td><td>Gruppieren Sie Suchergebnisse auf Elementebene nach Primärschlüssel.</td></tr>
+<tr><td>Suche</td><td><a href="/docs/de/hybrid-search-with-structarray.md">Hybride Suche mit StructArray</a></td><td>Kombinieren Sie die Suche auf Elementebene mit StructArray mit anderen Vektorsuchen.</td></tr>
+<tr><td>Suche</td><td><a href="/docs/de/filtered-search-with-structarray.md">Gefilterte Suche mit StructArray</a></td><td>Verwenden Sie StructArray-Filter bei der Suche, Abfrage und hybriden Suche.</td></tr>
 <tr><td>Suche</td><td><a href="/docs/de/search-with-embedding-lists.md">Suche mit Einbettungslisten</a></td><td>Erstellen Sie mit StructArray Retrieval-Systeme im Stil von ColBERT und ColPali.</td></tr>
 <tr><td>Filter</td><td><a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a></td><td>Referenzsyntax für die Operatoren „ <code translate="no">element_filter</code> “ und „ <code translate="no">MATCH_*</code> “.</td></tr>
 </tbody>
 </table>
-<h2 id="Key-limits-to-check-first" class="common-anchor-header">Zuerst zu prüfende Schlüsselbeschränkungen<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
+<h2 id="Key-limits-to-check-first" class="common-anchor-header">Zu prüfende Schlüsselbeschränkungen<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,11 +231,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>„Struct“ kann als Elementtyp eines Array-Feldes verwendet werden. Es wird nicht als Sammlungsfeld auf oberster Ebene verwendet.</p></li>
+<li><p>„Struct“ kann als Elementtyp eines Array-Feldes verwendet werden. Es wird nicht als Sammelfeld auf oberster Ebene verwendet.</p></li>
 <li><p>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Schema.</p></li>
-<li><p>Vektor-Unterfelder erfordern Indizes. Die „EmbeddingList“-Suche verwendet „ <code translate="no">MAX_SIM*</code> “-Metriken, während die Suche auf Elementebene reguläre Vektormetriken nutzt.</p></li>
+<li><p>Vektor-Unterfelder erfordern Indizes. Die Suche mit „EmbeddingList“ verwendet „ <code translate="no">MAX_SIM*</code> “-Metriken, während die Suche auf Elementebene reguläre Vektormetriken nutzt.</p></li>
 <li><p><code translate="no">element_filter</code> und „ <code translate="no">MATCH_*</code> “ gelten für skalare Unterfelder innerhalb von „StructArray“-Feldern. Verwenden Sie „ <code translate="no">$[subfield]</code> “ nur innerhalb dieser Operatoren.</p></li>
-<li><p>Einige Suchkombinationen sind versionsabhängig oder modusspezifisch. Überprüfen Sie <a href="/docs/de/structarray-limits.md">die „StructArray-Einschränkungen“</a>, bevor Sie auf Bereichssuche, Gruppensuche, Hybridsuche, nullfähige Felder oder dynamisch hinzugefügte Felder zurückgreifen.</p></li>
+<li><p>Einige Suchkombinationen sind versionsabhängig oder modusspezifisch. Überprüfen Sie <a href="/docs/de/structarray-limits.md">die „StructArray-Einschränkungen“</a>, bevor Sie sich auf Bereichssuche, Gruppensuche, hybride Suche, nullfähige Felder oder dynamisch hinzugefügte Felder verlassen.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,9 +253,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Um ein Schema zu entwerfen, lesen Sie <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“.</p></li>
+<li><p>Um ein Schema zu entwerfen, lesen Sie <a href="/docs/de/create-structarray-field.md">„Ein StructArray-Feld erstellen</a>“.</p></li>
 <li><p>Informationen zur Datenaufbereitung finden Sie unter <a href="/docs/de/insert-data-into-structarray-fields.md">„Daten in StructArray-Felder einfügen</a>“.</p></li>
 <li><p>Informationen zur Auswahl von Indizes finden Sie unter <a href="/docs/de/index-structarray-fields.md">„StructArray-Felder indizieren</a>“.</p></li>
-<li><p>Um StructArray-Vektor-Unterfelder zu durchsuchen, beginnen Sie mit „Grundlegende Vektorsuche mit StructArray“.</p></li>
-<li><p>Informationen zum Filtern von StructArray-Skalar-Unterfeldern finden Sie unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a> “ und „Gefilterte Suche mit StructArray“.</p></li>
+<li><p>Um StructArray-Vektor-Unterfelder zu durchsuchen, beginnen Sie mit <a href="/docs/de/basic-vector-search-with-structarray.md">„Grundlegende Vektorsuche mit StructArray</a>“.</p></li>
+<li><p>Informationen zum Filtern von StructArray-Skalar-Unterfeldern finden Sie unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a> “ und <a href="/docs/de/filtered-search-with-structarray.md">„Gefilterte Suche mit StructArray</a>“.</p></li>
 </ol>

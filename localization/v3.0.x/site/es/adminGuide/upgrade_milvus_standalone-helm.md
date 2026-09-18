@@ -4,10 +4,10 @@ label: Helm
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Descubre cómo actualizar la versión independiente de Milvus con Helm Chart.
+summary: Descubre cómo actualizar Milvus en modo autónomo con Helm Chart.
 title: Actualizar Milvus Standalone con Helm Chart
 ---
-<div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/es/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm y Docker<a href="/docs/es/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_standalone-operator.md" class=''>Milvus,</a><a href="/docs/es/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/es/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Actualizar Milvus Standalone con Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -25,7 +25,7 @@ title: Actualizar Milvus Standalone con Helm Chart
       </svg>
     </button></h1><p>Esta guía describe cómo actualizar tu implementación independiente de Milvus 2.6.x a la versión v3.0-beta utilizando Helm.</p>
 <div class="alert note">
-<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0-beta con el Helm Chart de Milvus 5.0.22. Si utilizas otra versión de parche de Milvus 2.6.x o otra versión del Helm Chart, comprueba primero la actualización en un entorno que no sea de producción.</p>
+<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0-beta con el Helm Chart de Milvus 5.0.22. Si utilizas otra versión de parche de Milvus 2.6.x u otra versión del Helm Chart, comprueba primero la actualización en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,10 +48,10 @@ title: Actualizar Milvus Standalone con Helm Chart
 <li>Los valores de Helm utilizados para la implementación existente</li>
 <li>Una copia de seguridad actualizada de los metadatos y los datos persistentes de Milvus</li>
 </ul>
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para cambiar de sistema de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener la opción de cola de mensajes actual. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para cambiar de sistema de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
 <p>No modifique ni revierta la versión del Helm Chart como parte de este procedimiento. Mantenga la versión del Chart ya instalada para su versión de Helm. La línea base probada conservó el Helm Chart 5.0.22 y solo cambió la etiqueta de la imagen de Milvus a <code translate="no">v3.0-beta</code>.</p>
-<p>Este procedimiento no valida una degradación o una reversión que implique cambiar la imagen de Milvus de nuevo a la versión 2.6.x. Después de que la versión v3.0-beta escriba datos, una reversión que afecte únicamente a la imagen puede no leer correctamente el estado actualizado. Si la actualización falla, detén las operaciones de escritura y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Este procedimiento no valida una degradación o una reversión que consista en cambiar la imagen de Milvus de nuevo a la versión 2.6.x. Después de que la v3.0-beta escriba datos, una reversión que afecte únicamente a la imagen puede no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +141,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Comprueba que todas las cargas de trabajo necesarias estén listas, que Milvus utilice « <code translate="no">v3.0-beta</code> » y que tus colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión v3.0-beta.</p>
+<p>Comprueba que todas las cargas de trabajo necesarias estén listas, que Milvus utilice « <code translate="no">v3.0-beta</code> » y que tus colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier característica específica de la versión v3.0-beta.</p>
 <div class="alert note">
 <p>La actualización a Milvus 3.0 no habilita Storage V3. Una vez verificada la actualización, revisa <a href="/docs/es/storage-v3.md">Storage V3</a> antes de habilitar las funciones que dependen de él. Una vez que Milvus haya escrito datos en Storage V3, no se admite la vuelta a una versión anterior de Milvus que no pueda leer Storage V3.</p>
 </div>

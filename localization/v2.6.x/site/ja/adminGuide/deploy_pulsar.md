@@ -22,7 +22,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
     </button></h1><p>Milvus は、最近の変更履歴のログ管理、ストリームログの出力、およびログのサブスクリプションの提供に Pulsar または Kafka を使用します。Pulsar がデフォルトのメッセージストレージシステムです。このトピックでは、Docker Compose または Helm を使用したメッセージストレージの設定方法について説明します。</p>
 <p>Pulsar は<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>または K8s 上で設定でき、Kafka は K8s 上で設定できます。</p>
 <div class="alert note">
-<p><strong>メッセージキューの制限事項</strong>：Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>：Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose を使用した Pulsar の設定<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Pulsar の設定<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Pulsarの設定<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +60,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細については、「<a href="/docs/ja/v2.6.x/configure_pulsar.md">Pulsar 関連の設定</a>」を参照してください。</p>
+<p>詳細については、<a href="/docs/ja/v2.6.x/configure_pulsar.md">Pulsar 関連の設定を</a>参照してください。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvusの実行<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Pulsarの設定を使用するMilvusをインストールします。</li>
+<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Pulsarの設定を使用したMilvusをインストールします。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -147,7 +147,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         ></path>
       </svg>
     </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でWoodpeckerを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してWoodpeckerを設定することもできます。</p>
-<p>Helm を使用した Milvus の設定方法の詳細については、<a href="/docs/ja/v2.6.x/configure-helm.md">「Helm チャートによる Milvus の設定</a>」を参照してください。Woodpecker に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker 関連の設定</a>」を参照してください。
+<p>Helm を使用した Milvus の設定方法の詳細については、「<a href="/docs/ja/v2.6.x/configure-helm.md">Helm チャートによる Milvus の設定</a>」を参照してください。Woodpecker に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker 関連の設定</a>」を参照してください。
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML ファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -255,7 +255,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
       securityProtocol: SASL_SSL    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行して、Kafkaの設定を使用したMilvusをインストールします。</li>
+<li>前述のセクションの設定を行い、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Kafkaの設定を使用したMilvusをインストールします。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -277,7 +277,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
     </button></h2><p>Milvus スタンドアロン版では、デフォルトのメッセージストレージとして RocksMQ を使用します。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/v2.6.x/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/configure_rocksmq.md">RocksMQ に関連する設定</a>」を参照してください。</p>
 <ul>
 <li><p>RocksMQ を使用して Milvus を起動し、その設定を変更したい場合は、変更後の設定を以下の YAML ファイルに記述して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
-<li><p>Helm を使用して RocksMQ 以外のメッセージストアで Milvus をスタンドアロンでインストールしており、これを RocksMQ に戻したい場合は、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
+<li><p>Helm を使用して RocksMQ 以外のメッセージストアで Milvus をスタンドアロンとしてインストールしており、これを RocksMQ に戻したい場合は、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -296,7 +296,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>メッセージストアの変更は推奨されません。どうしても変更する必要がある場合は、すべての DDL 操作を停止し、FlushAll API を呼び出してすべてのコレクションをフラッシュした後、実際にメッセージストアを変更する前に Milvus を停止してください。</p>
+<p>メッセージストアの変更は推奨されません。どうしても変更する必要がある場合は、すべての DDL 操作を停止し、FlushAll API を呼び出してすべてのコレクションをフラッシュした後、最後に Milvus を停止してから、実際にメッセージストアを変更してください。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -41,7 +41,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В приведенной ниже таблице указано, поддерживаются ли RocksMQ, Pulsar, Kafka и Woodpecker в автономном и кластерном режимах Milvus.</p>
+    </button></h2><p>В таблице ниже указано, поддерживаются ли RocksMQ, Pulsar, Kafka и Woodpecker в автономном и кластерном режимах Milvus.</p>
 <table>
 <thead>
 <tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th><th style="text-align:center">Woodpecker</th></tr>
@@ -53,7 +53,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 </table>
 <p>Существуют также другие ограничения при указании хранилища сообщений:</p>
 <ul>
-<li>Поддерживается только одно хранилище сообщений для одного экземпляра Milvus. Однако мы по-прежнему обеспечиваем обратную совместимость с несколькими хранилищами сообщений, настроенными для одного экземпляра. Приоритет определяется следующим образом:
+<li>Поддерживается только одно хранилище сообщений для одного экземпляра Milvus. Однако мы по-прежнему обеспечиваем обратную совместимость с настройкой нескольких хранилищ сообщений для одного экземпляра. Приоритет определяется следующим образом:
 <ul>
 <li>автономный режим: Woodpecker (по умолчанию) &gt; RocksMQ &gt; Pulsar &gt; Kafka</li>
 <li>кластерный режим: Woodpecker (по умолчанию) &gt; Pulsar &gt; Kafka</li>
@@ -107,9 +107,9 @@ summary: 'Узнайте, как настроить хранилище сооб�
 <h5 id="Key-configuration-options" class="common-anchor-header">Ключевые параметры конфигурации:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: явно задаёт RocksMQ в качестве очереди сообщений</li>
 <li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удален при удалении экземпляра Milvus</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удалено при удалении экземпляра Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация PVC в Kubernetes</li>
-<li><code translate="no">accessModes</code>: Обычно используется « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
+<li><code translate="no">accessModes</code>: Обычно используется класс хранения « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
 <li><code translate="no">storageClassName</code>: Класс хранения вашего кластера</li>
 <li><code translate="no">storage</code>: Размер постоянного тома</li>
 </ul>
@@ -128,7 +128,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker — это облачный журнал предварительной записи (WAL), разработанный для объектного хранилища. Он обеспечивает высокую пропускную способность, низкие эксплуатационные затраты и плавную масштабируемость. Подробнее см. в разделе <a href="/docs/ru/woodpecker.md">«Woodpecker</a>».</p>
+    </button></h2><p>Woodpecker — это облачный журнал записи с опережением (WAL), разработанный для объектного хранилища. Он обеспечивает высокую пропускную способность, низкие эксплуатационные затраты и плавную масштабируемость. Подробнее см. в разделе <a href="/docs/ru/woodpecker.md">«Woodpecker</a>».</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Настройка Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,9 +144,9 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища сообщений), чтобы настроить Pulsar.</p>
+    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономной версии Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Управление хранением), чтобы настроить Pulsar.</p>
 <p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+<h3 id="External-Pulsar" class="common-anchor-header">«External Pulsar»<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,7 +242,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">В этом примере указано количество реплик каждого компонента Pulsar, вычислительные ресурсы Pulsar BookKeeper и другие параметры конфигурации.</div>
-<div class="alert note">Полный список элементов конфигурации для настройки внутренней службы Pulsar см. в <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">файле values.yaml</a>. Добавьте необходимые элементы конфигурации в раздел « <code translate="no">pulsar.inCluster.values</code> », как показано в предыдущем примере.</div>
+<div class="alert note">Полный список элементов конфигурации для настройки внутренней службы Pulsar см. в <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">файле values.yaml</a>. Добавьте элементы конфигурации по мере необходимости в раздел « <code translate="no">pulsar.inCluster.values</code> », как показано в предыдущем примере.</div>
 <p>Предполагая, что файл конфигурации называется <code translate="no">milvuscluster.yaml</code>, выполните следующую команду для применения конфигурации.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -261,7 +261,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>До версии 2.5.x Pulsar был хранилищем сообщений по умолчанию в кластере Milvus (начиная с версии 2.6.x его заменил Woodpecker). Если вы хотите использовать Kafka, добавьте дополнительное поле <code translate="no">msgStreamType</code> для настройки Kafka.</p>
+    </button></h2><p>До версии 2.5.x Pulsar являлся хранилищем сообщений по умолчанию в кластере Milvus (начиная с версии 2.6.x его заменил Woodpecker). Если вы хотите использовать Kafka, добавьте опциональное поле <code translate="no">msgStreamType</code> для настройки Kafka.</p>
 <p><code translate="no">kafka</code> Поддерживаются значения <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
 <h3 id="External-Kafka" class="common-anchor-header">Внешний Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -281,7 +281,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
     </button></h3><p><code translate="no">external</code> Указывает на использование внешнего сервиса Kafka.</p>
 <p>Поля, используемые для настройки внешнего сервиса Kafka, включают:</p>
 <ul>
-<li><code translate="no">external</code>: Значение <code translate="no">true</code> указывает, что Milvus использует внешний сервис Kafka.</li>
+<li><code translate="no">external</code>: Значение « <code translate="no">true</code> » указывает, что Milvus использует внешний сервис Kafka.</li>
 <li><code translate="no">brokerList</code>: Список брокеров, которым будут отправляться сообщения.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается внешний сервис Kafka.</p>
@@ -312,7 +312,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Настройки SASL поддерживаются в версии оператора v0.8.5 и выше.</p>
+<p>Настройки SASL поддерживаются в версии operator v0.8.5 и выше.</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Внутренний Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -329,8 +329,8 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> означает, что при запуске кластера Milvus сервис Kafka запускается в кластере автоматически.</p>
-<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере показана настройка внутреннего сервиса Kafka.</p>
+    </button></h3><p><code translate="no">inCluster</code> означает, что при запуске кластера Milvus служба Kafka запускается в кластере автоматически.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В приведённом ниже примере показана настройка внутреннего сервиса Kafka.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -346,7 +346,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле ` <code translate="no">kafka.inCluster.values</code>`.</p>
 <p>Предполагая, что файл конфигурации называется « <code translate="no">milvuscluster.yaml</code> », выполните следующую команду для применения конфигурации.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

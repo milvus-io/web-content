@@ -46,7 +46,7 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>使用常規向量指標進行元素層級搜尋。</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>類別篩選。</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>數值篩選與範圍型謂詞。</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>數值篩選與範圍式謂詞。</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>布林篩選。</td></tr>
 </tbody>
 </table>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用搜尋模式來選擇向量度量家族。</p>
+    </button></h2><p>請使用搜尋模式來選擇向量度量族。</p>
 <table>
 <thead>
 <tr><th>搜尋或篩選目標</th><th>目標路徑</th><th>應如何選擇</th></tr>
@@ -76,7 +76,7 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList 搜尋</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">MAX_SIM*</code> 度量族。</td></tr>
 <tr><td>元素層級向量搜尋</td><td><code translate="no">chunks[emb]</code></td><td>常規向量度量族，例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 。</td></tr>
-<tr><td>依字串或類別篩選</td><td><code translate="no">chunks[section]</code></td><td>您的目標所支援的標量索引。</td></tr>
+<tr><td>依字串或類別篩選</td><td><code translate="no">chunks[section]</code></td><td>目標所支援的標量索引。</td></tr>
 <tr><td>依數值範圍篩選</td><td><code translate="no">chunks[quality_score]</code>,<code translate="no">chunks[page]</code></td><td>目標所支援的標量索引。</td></tr>
 <tr><td>依布林值篩選</td><td><code translate="no">chunks[has_code]</code></td><td>您的目標所支援的標量索引。</td></tr>
 </tbody>
@@ -138,7 +138,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-請勿在同一個向量子字段上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個獨立的向量子字段，並分別針對每個子字段建立一個索引。</p>
+請勿在同一個向量子字段上建立<code translate="no">MAX_SIM*</code> 索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個不同的向量子字段，並分別針對每個子字段建立一個索引。</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">建立標量索引<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ client.create_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>標量索引雖屬選用，但在 StructArray 標量子場頻繁出現在篩選器中時（例如<code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> 或<code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> ），此功能相當實用。</p>
-<h2 id="Index-metric-compatibility" class="common-anchor-header">索引指標的相容性<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
+<h2 id="Index-metric-compatibility" class="common-anchor-header">索引度量單位的相容性<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,7 +203,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請參照以下表格，為 StructArray 向量子欄位選擇索引類型與度量類型。請從目標開始，然後根據搜尋模式選擇度量家族。</p>
+    </button></h2><p>請參閱以下表格，為 StructArray 向量子欄位選擇索引類型與度量類型。請從目標開始，然後根據搜尋模式選擇度量家族。</p>
 <p>請從以下相容性表格中選擇 Milvus 索引類型與度量類型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜尋<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,10 +220,10 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>EmbeddingList 搜尋使用<code translate="no">MAX_SIM*</code> 指標。它將 StructArray 向量子欄位中的向量視為嵌入清單，並返回實體層級的結果。</p>
+    </button></h3><p>EmbeddingList 搜尋使用<code translate="no">MAX_SIM*</code> 度量。它將 StructArray 向量子欄位中的向量視為嵌入清單，並返回實體層級的結果。</p>
 <table>
 <thead>
-<tr><th>向量子欄位資料型別</th><th>索引類型</th><th>度量類型</th></tr>
+<tr><th>向量子欄位資料類型</th><th>索引類型</th><th>度量類型</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>,<code translate="no">FLOAT16_VECTOR</code>,<code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">IVF_FLAT</code>,<code translate="no">IVF_FLAT_CC</code>,<code translate="no">HNSW</code>,<code translate="no">HNSW_SQ</code>,<code translate="no">HNSW_PQ</code>,<code translate="no">HNSW_PRQ</code>,<code translate="no">DISKANN</code></td><td><code translate="no">MAX_SIM</code>,<code translate="no">MAX_SIM_COSINE</code>,<code translate="no">MAX_SIM_IP</code>,<code translate="no">MAX_SIM_L2</code></td></tr>
@@ -246,7 +246,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>元素層級搜尋採用標準向量度量。它會獨立搜尋每個 Struct 元素，並能回傳匹配元素的偏移量。</p>
+    </button></h3><p>元素層級搜尋採用標準向量度量。它會獨立搜尋每個 Struct 元素，並可回傳匹配元素的偏移量。</p>
 <table>
 <thead>
 <tr><th>向量子欄位資料型別</th><th>索引類型</th><th>度量類型</th></tr>
@@ -259,7 +259,7 @@ client.create_index(
 <tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">BIN_IVF_FLAT</code></td><td><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code></td></tr>
 </tbody>
 </table>
-<p>有關特定版本的支援及其他限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p>
+<p>有關特定版本的支援及其他限制，請參閱<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>。</p>
 <h2 id="Verify-indexes" class="common-anchor-header">驗證索引<button data-href="#Verify-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引後，請描述集合或清單索引，以確認預期的子欄位路徑已納入索引。</p>
+    </button></h2><p>建立索引後，請描述集合或清單中的索引，以確認預期的子欄位路徑已納入索引。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -310,12 +310,12 @@ client.create_index(
 <tr><th>規則</th><th>說明</th></tr>
 </thead>
 <tbody>
-<tr><td>請使用路徑語法來建立子欄位索引。</td><td>請使用<code translate="no">chunks[emb]</code> 來建立索引，而非<code translate="no">emb</code> 或<code translate="no">chunks.emb</code> 。</td></tr>
-<tr><td>一個向量子欄位僅接受一個索引。</td><td>若需使用不同的指標家族，請使用獨立的向量子欄位。</td></tr>
-<tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 指標建立的索引。</td></tr>
-<tr><td>請使用一般向量指標進行元素層級搜尋。</td><td>元素層級搜尋使用一般向量查詢資料，以及諸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等指標。</td></tr>
+<tr><td>請對子欄位索引使用路徑語法。</td><td>請使用索引<code translate="no">chunks[emb]</code> ，而非<code translate="no">emb</code> 或<code translate="no">chunks.emb</code> 。</td></tr>
+<tr><td>一個向量子欄位僅接受一個索引。</td><td>若需使用不同的度量族，請使用獨立的向量子欄位。</td></tr>
+<tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 度量建立的索引。</td></tr>
+<tr><td>請使用一般向量指標進行元素層級搜尋。</td><td>元素層級搜尋使用一般向量查詢資料以及諸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等指標。</td></tr>
 <tr><td>請為出現在篩選器中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。</td></tr>
-<tr><td>請留意向量欄位的限制。</td><td>向量場和向量子場的總數受到限制。在新增大量向量子場之前，請參閱《StructArray 限制》。</td></tr>
+<tr><td>請注意向量欄位的限制。</td><td>向量欄位和向量子欄位的總數受到限制。在新增大量向量子欄位之前，請參閱 StructArray 限制。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -335,8 +335,8 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上建立索引，而非在 `<code translate="no">chunks[emb]</code>` 上建立索引。</p></li>
-<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，隨後卻嘗試在同一子場上執行元素層級搜尋。</p></li>
-<li><p>僅建立一般向量索引，隨後卻嘗試在同一子欄位上執行 EmbeddingList 搜尋。</p></li>
+<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，然後嘗試在同一子場上執行元素層級搜尋。</p></li>
+<li><p>僅建立一般向量索引，隨後卻嘗試在同一子場上執行 EmbeddingList 搜尋。</p></li>
 <li><p>將同一個向量子欄位同時用於<code translate="no">MAX_SIM*</code> 和一般向量指標。</p></li>
 <li><p>遺漏針對使用頻率極高的 StructArray 篩選條件所建立的標量索引。</p></li>
 <li><p>為 Struct 模式中不存在的 StructArray 子欄位建立索引。</p></li>
@@ -357,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要執行實體層級的 EmbeddingList 搜尋或元素層級的向量搜尋，請參閱《使用 StructArray 進行基本向量搜尋》。</p></li>
-<li><p>若要在搜尋過程中篩選 StructArray 的標量子欄位，請參閱《使用 StructArray 進行篩選搜尋》。</p></li>
+<li><p>若要執行實體層級的 EmbeddingList 搜尋或元素層級的向量搜尋，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
+<li><p>若要在搜尋過程中篩選 StructArray 的標量子字段，請參閱《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 <li><p>若要檢視索引和指標限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ol>

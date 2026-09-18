@@ -106,7 +106,7 @@
             ]
           },
           {
-            "label": "Executar o Milvus Distribuído",
+            "label": "Executar o Milvus Distributed",
             "id": "run_milvus_k8s",
             "order": 3,
             "isMenu": true,
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico do leme",
+                "label": "Gráfico de leme",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -160,7 +160,7 @@
         ]
       },
       {
-        "label": "Instalar SDKs",
+        "label": "Instalar os SDKs",
         "id": "install_sdks",
         "order": 2,
         "children": [
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "Definir o TTL da coleção",
+            "label": "TTL da coleção de conjuntos",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Recolha de encomendas",
+            "label": "Recolha em ponto de entrega",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e AutoID",
+            "label": "Campo primário e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -575,7 +575,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tailandês",
+                    "label": "tailandês",
                     "id": "thai-analyzer.md",
                     "order": 4,
                     "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tailandês",
+                    "label": "tailandês",
                     "id": "thai-tokenizer.md",
                     "order": 3,
                     "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Alfanumérico",
+                    "label": "Apenas alfanumérico",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Descomponedor",
+                    "label": "Descompostação",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "Remover Punct",
+                    "label": "Remover ponto",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externo",
+            "label": "Alterar o esquema de recolha externo",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -779,7 +779,7 @@
                 "children": []
               },
               {
-                "label": "Conceção de modelos de dados com um conjunto de estruturas",
+                "label": "Conceção de modelos de dados com um array de estruturas",
                 "id": "best-practices-for-array-of-structs.md",
                 "order": 1,
                 "children": []
@@ -789,7 +789,7 @@
         ]
       },
       {
-        "label": "Inserir e Eliminar",
+        "label": "Inserir e Apagar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Entidades Upsert",
+            "label": "Entidades «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtragem e modelos",
+                "label": "Filtragem e criação de modelos",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1347,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador Ponderado",
+                "label": "Classificador ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1365,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "Classificação de Decay",
+                "label": "Classificação de Decadência",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Forçar a compactação da fusão",
+            "label": "Forçar a compactação por fusão",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1605,7 +1605,7 @@
             "children": []
           },
           {
-            "label": "Seleção do Índice",
+            "label": "Seleção do índice",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1633,7 +1633,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o Código Claude",
+        "label": "Servidor MCP para o código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1808,7 +1808,7 @@
             "children": []
           },
           {
-            "label": "QueryNode utilizando o disco local",
+            "label": "QueryNode a utilizar o disco local",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1932,7 +1932,7 @@
         ]
       },
       {
-        "label": "Escalabilidade",
+        "label": "Dimensionamento",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2013,7 +2013,7 @@
                 "children": []
               },
               {
-                "label": "Painel de Controlo da Milvus Metrics",
+                "label": "Painel de controlo da Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2096,7 +2096,7 @@
             "children": []
           },
           {
-            "label": "Ativar RBAC",
+            "label": "Ativar o RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2120,7 +2120,7 @@
                 "children": []
               },
               {
-                "label": "Conceder Privilégios",
+                "label": "Conceder privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -2140,7 +2140,7 @@
             ]
           },
           {
-            "label": "Criptografia em trânsito",
+            "label": "Encriptação em trânsito",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Comandos",
-            "id": "milvus_backup_cli.md",
+            "label": "Comandos (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casos comuns",
-            "id": "common-cases",
+            "label": "Cópia de segurança e restauração por instantâneo",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Cópia de segurança e restauração numa única instância",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandos (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias num único bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias em diferentes buckets",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casos comuns (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Cópia de segurança e recuperação numa única instância",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias num único bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias em diferentes buckets",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias em diferentes ambientes S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrar entre instâncias em diferentes ambientes S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Atualizar para a versão 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2243,7 +2275,7 @@
             "children": []
           },
           {
-            "label": "Configurar a replicação do CDC",
+            "label": "Configurar a replicação CDC",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2261,7 +2293,7 @@
             "children": []
           },
           {
-            "label": "Importação em massa na replicação CDC",
+            "label": "Importação em massa na replicação do CDC",
             "id": "bulk-import-in-cdc-replication.md",
             "order": 4,
             "children": []
@@ -2355,7 +2387,7 @@
         "children": []
       },
       {
-        "label": "Registo de exportação",
+        "label": "Registo de Exportação",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2410,7 +2442,7 @@
                 "children": []
               },
               {
-                "label": "Jina IA",
+                "label": "Jina AI",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
@@ -2496,7 +2528,7 @@
                 "children": []
               },
               {
-                "label": "Jina IA",
+                "label": "Jina AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -2831,7 +2863,7 @@
             "children": []
           },
           {
-            "label": "Jina IA",
+            "label": "Jina AI",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
@@ -3079,7 +3111,7 @@
         "children": []
       },
       {
-        "label": "Criar um RAG com o Milvus",
+        "label": "Criar o RAG com o Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3152,7 +3184,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com incorporações Matryoshka",
+        "label": "Pesquisa em funil com representações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3205,7 +3237,7 @@
             "children": []
           },
           {
-            "label": "Pesquisa por semelhança de áudio",
+            "label": "Pesquisa por semelhança áudio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -3217,7 +3249,7 @@
             "children": []
           },
           {
-            "label": "Motor de pesquisa de texto",
+            "label": "Motor de busca de texto",
             "id": "text_search_engine.md",
             "order": 10,
             "children": []

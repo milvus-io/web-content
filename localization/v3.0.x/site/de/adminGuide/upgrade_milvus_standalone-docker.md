@@ -52,10 +52,10 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 </ul>
 <p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alert warning">
-<p>Ersetzen Sie im Rahmen dieses Vorgangs nicht Ihre aktuelle Compose-Datei und ändern Sie keine Abhängigkeitsversionen. Behalten Sie das vorhandene etcd, den Objektspeicher, die Nachrichtenwarteschlange, die Volumes und die Konfiguration bei. Aktualisieren Sie lediglich das Milvus-Image-Tag.</p>
-<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch die Rückstellung des Milvus-Images auf 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die vor dem Upgrade erstellten Metadaten und Backups der persistenten Daten wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
+<p>Ersetzen Sie im Rahmen dieses Vorgangs nicht Ihre aktuelle Compose-Datei und ändern Sie keine Abhängigkeitsversionen. Behalten Sie die vorhandenen etcd-, Objektspeicher-, Nachrichtenwarteschlangen-, Volume- und Konfigurationsdaten bei. Aktualisieren Sie lediglich das Milvus-Image-Tag.</p>
+<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch die Rückkehr des Milvus-Images zur Version 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback zu Fehlern beim Einlesen des aktualisierten Zustands kommen. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die Metadaten und die Backups der persistenten Daten vor dem Upgrade wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgang<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,7 +88,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
     </button></h3><p>Speichern Sie eine Kopie der aktuellen Compose-Datei und aller eingebundenen Milvus-Konfigurationsdateien:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cp</span> docker-compose.yml docker-compose-before-upgrade.yml
 <button class="copy-code-btn"></button></code></pre>
-<p>Stellen Sie vor Beginn des Upgrades sicher, dass die aktuellen Container fehlerfrei sind:</p>
+<p>Vergewissern Sie sich vor Beginn des Upgrades, dass die aktuellen Container fehlerfrei sind:</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Update-the-Milvus-image" class="common-anchor-header">Schritt 2: Milvus-Image aktualisieren<button data-href="#Step-2-Update-the-Milvus-image" class="anchor-icon" translate="no">
@@ -115,7 +115,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <pre><code translate="no" class="language-bash">docker compose pull standalone
 docker compose up --detach standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Docker Compose hält die bestehenden etcd- und Object-Storage-Container am Laufen und verwendet die konfigurierten Datenverzeichnisse weiter.</p>
+<p>Docker Compose hält die vorhandenen etcd- und Object-Storage-Container am Laufen und verwendet die konfigurierten Datenverzeichnisse weiter.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Überprüfen Sie das Upgrade<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,4 +138,4 @@ docker compose images standalone
 
 docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Stellen Sie sicher, dass der Dienst „ <code translate="no">standalone</code> “ ordnungsgemäß funktioniert, sein Image „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ lautet und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie Funktionen aktivieren, die spezifisch für die Version v3.0-beta sind.</p>
+<p>Stellen Sie sicher, dass der Dienst „ <code translate="no">standalone</code> “ ordnungsgemäß funktioniert, sein Image „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ lautet und die vorhandenen Sammlungen weiterhin abgefragt und durchsucht werden können. Führen Sie diese Überprüfungen durch, bevor Sie Funktionen aktivieren, die spezifisch für die Version v3.0-beta sind.</p>

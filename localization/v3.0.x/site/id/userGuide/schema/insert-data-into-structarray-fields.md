@@ -25,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>Masukkan data ke dalam bidang StructArray ketika setiap entitas berisi daftar terurut dari elemen-elemen terstruktur. Dalam payload penyisipan, bidang StructArray direpresentasikan sebagai array objek. Setiap objek mewakili satu elemen Struct dan menggunakan nama subbidang Struct yang didefinisikan dalam skema koleksi.</p>
 <p>Halaman ini menggunakan koleksi ` <code translate="no">tech_articles</code> ` dari <a href="/docs/id/create-structarray-field.md">"Membuat Bidang StructArray</a>". Setiap entitas adalah artikel teknis, dan bidang ` <code translate="no">chunks</code> ` menyimpan potongan artikel sebagai elemen Struct.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Sebelum memulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<h2 id="Before-you-begin" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,13 +56,13 @@ summary: >-
 <p>Setiap objek dalam ` <code translate="no">chunks</code> ` harus mengikuti skema Struct.</p>
 <table>
 <thead>
-<tr><th>Subbidang</th><th>Tipe</th><th>Nilai sisipan</th></tr>
+<tr><th>Subbidang</th><th>Jenis</th><th>Nilai sisipan</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Teks chunk.</td></tr>
 <tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nama bagian, seperti <code translate="no">index</code>, <code translate="no">search</code>, atau <code translate="no">filter</code>.</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Nomor halaman atau posisi logis.</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat chunk.</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Skor tingkat potongan.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Apakah potongan tersebut berisi kode.</td></tr>
 <tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vektor yang ditulis untuk pencarian EmbeddingList.</td></tr>
 <tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vektor yang ditulis untuk pencarian tingkat elemen.</td></tr>
@@ -86,7 +86,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nilai ` <code translate="no">chunks</code> ` adalah array elemen `Struct`. Setiap elemen adalah objek yang kuncinya berupa nama subbidang.</p>
+    </button></h2><p>Nilai ` <code translate="no">chunks</code> ` adalah array elemen `Struct`. Setiap elemen adalah objek yang kuncinya merupakan nama subbidang.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -232,7 +232,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika bidang ` <code translate="no">chunks</code> ` bersifat nullable, sebuah entitas dapat menetapkan seluruh bidang ` <code translate="no">chunks</code> ` ke `null`. Dalam Python, gunakan ` <code translate="no">None</code> ` untuk mewakili nilai `null`.</p>
+    </button></h2><p>Jika bidang ` <code translate="no">chunks</code> ` bersifat nullable, sebuah entitas dapat menetapkan seluruh bidang ` <code translate="no">chunks</code> ` ke null. Dalam Python, gunakan ` <code translate="no">None</code> ` untuk mewakili nilai null.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -246,12 +246,12 @@ result = client.insert(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ketika bidang StructArray yang dapat bernilai null berisi nilai StructArray yang valid, semua subbidang dalam nilai tersebut harus bernilai null atau memiliki nilai yang valid. Menyisipkan entitas dengan beberapa subbidang yang ditetapkan ke null dan yang lainnya ditetapkan ke nilai yang valid akan mengakibatkan kesalahan.</p>
+<p>Ketika bidang StructArray yang dapat bernilai null berisi nilai StructArray yang valid, semua subbidang dalam nilai tersebut harus bernilai null atau memiliki nilai yang valid. Menyisipkan entitas dengan beberapa subbidang yang disetel ke null dan yang lainnya disetel ke nilai yang valid akan mengakibatkan kesalahan.</p>
 <div class="alert note">
 <p>Peringatan
 Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jika Anda menambahkan bidang StructArray secara dinamis ke koleksi yang sudah ada, bidang yang ditambahkan harus dapat bernilai null, dan entitas yang sudah ada akan mengembalik <code translate="no">null</code> untuk bidang baru tersebut di seluruh subbidangnya.</p>
 </div>
-<h2 id="Validate-inserted-data" class="common-anchor-header">Memvalidasi data yang dimasukkan<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+<h2 id="Validate-inserted-data" class="common-anchor-header">Memvalidasi data yang disisipkan<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -282,7 +282,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan jalur bidang StructArray, seperti <code translate="no">chunks[text]</code>, hanya saat Anda melakukan kueri, pencarian, penyaringan, atau pembuatan indeks. Payload yang disisipkan tetap harus menggunakan objek bersarang di bawah <code translate="no">chunks</code>.</p>
+<p>Gunakan jalur bidang StructArray, seperti <code translate="no">chunks[text]</code>, hanya saat Anda menanyakan, mencari, menyaring, atau membuat indeks. Payload yang disisipkan tetap harus menggunakan objek bersarang di bawah <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Aturan penyisipan<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -306,8 +306,8 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <tr><td>Gunakan array objek untuk bidang StructArray.</td><td>Nilai <code translate="no">chunks</code> adalah daftar, dan setiap item dalam daftar tersebut merupakan elemen Struct.</td></tr>
 <tr><td>Gunakan nama subbidang di dalam setiap elemen Struct.</td><td>Masukkan ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` di dalam ` <code translate="no">chunks</code>`, bukan ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
 <tr><td>Sesuaikan dengan skema Struct.</td><td>Setiap elemen Struct harus menggunakan subfield yang didefinisikan dalam skema Struct.</td></tr>
-<tr><td>Sesuaikan dimensi vektor.</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subbidang vektornya.</td></tr>
-<tr><td>Patuhi batasan ukuran ( <code translate="no">max_capacity</code>).</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi batas maksimum ( <code translate="no">max_capacity</code> ) dari bidang StructArray.</td></tr>
+<tr><td>Sesuaikan dimensi vektor.</td><td>Nilai vektor harus sesuai dengan <code translate="no">dim</code> yang dikonfigurasi untuk subfield vektornya.</td></tr>
+<tr><td>Patuhi <code translate="no">max_capacity</code>.</td><td>Jumlah elemen Struct dalam satu entitas tidak boleh melebihi batas maksimum ( <code translate="no">max_capacity</code> ) dari bidang StructArray.</td></tr>
 <tr><td>Gunakan subbidang vektor terpisah untuk mode pencarian yang berbeda.</td><td>Jika pencarian EmbeddingList dan pencarian tingkat elemen diperlukan, tulis nilai vektor ke kedua subbidang vektor tersebut.</td></tr>
 <tr><td>Gunakan <code translate="no">null</code> hanya jika bidang tersebut dapat bernilai null.</td><td>Bidang StructArray yang tidak boleh bernilai null memerlukan nilai StructArray yang valid.</td></tr>
 </tbody>
@@ -333,7 +333,7 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
 <li><p>Menyisipkan vektor dengan dimensi yang salah.</p></li>
 <li><p>Menyisipkan elemen Struct lebih banyak daripada yang diizinkan oleh <code translate="no">max_capacity</code>.</p></li>
 <li><p>Hanya menetapkan satu subfield ke <code translate="no">null</code> sementara subfield lain dalam nilai StructArray yang sama valid.</p></li>
-<li><p>Menulis vektor hanya ke ` <code translate="no">emb_list_vector</code> ` dan kemudian mencoba menjalankan pencarian tingkat elemen pada ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Menulis vektor hanya ke ` <code translate="no">emb_list_vector</code> `, lalu mencoba menjalankan pencarian tingkat elemen pada ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Menulis vektor hanya ke ` <code translate="no">emb</code> ` dan kemudian mencoba menjalankan pencarian EmbeddingList pada ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -353,6 +353,6 @@ Bidang StructArray yang dapat bernilai null hanya tersedia di Milvus v3.0.x. Jik
       </svg>
     </button></h2><ol>
 <li><p>Untuk membuat indeks untuk <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, dan subbidang skalar, baca <a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a>.</p></li>
-<li><p>Untuk melakukan pencarian pada subbidang vektor StructArray, baca "Basic Vector Search with StructArray".</p></li>
+<li><p>Untuk mencari subbidang vektor StructArray, baca " <a href="/docs/id/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>".</p></li>
 <li><p>Untuk meninjau perilaku nullable dan batasan khusus versi, baca " <a href="/docs/id/structarray-limits.md">StructArray Limits</a>".</p></li>
 </ol>

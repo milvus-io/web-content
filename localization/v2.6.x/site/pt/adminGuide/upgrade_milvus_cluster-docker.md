@@ -22,7 +22,7 @@ title: Atualizar o cluster Milvus com o Docker Compose
     </button></h1><p>Este tópico descreve como atualizar o seu Milvus utilizando o Docker Compose.</p>
 <p>Normalmente, pode <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando a sua imagem</a>. No entanto, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes de qualquer atualização da versão v2.1.x para a v2.6.17.</p>
 <div class="alert note">
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.17, deve manter a sua escolha atual de fila de mensagens. A mudança entre diferentes sistemas de fila de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de fila de mensagens estará disponível em versões futuras.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Atualizar o Milvus alterando a sua imagem<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ title: Atualizar o cluster Milvus com o Docker Compose
     </button></h2><p>Em condições normais, pode atualizar o Milvus da seguinte forma:</p>
 <ol>
 <li><p>Altere as etiquetas da imagem do Milvus em <code translate="no">docker-compose.yaml</code>.</p>
-<p>Note que é necessário alterar as etiquetas de imagem do Proxy, de todos os coordenadores e de todos os nós de trabalho.</p>
+<p>Note que é necessário alterar as etiquetas da imagem para o Proxy, todos os coordenadores e todos os nós de trabalho.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -76,7 +76,7 @@ title: Atualizar o cluster Milvus com o Docker Compose
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.17</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Execute os seguintes comandos para realizar a atualização.</p>
+<li><p>Execute os seguintes comandos para efetuar a atualização.</p>
 <pre><code translate="no" class="language-shell">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
@@ -146,13 +146,13 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>Talvez também queira saber como:
+<li>Talvez também queira aprender a:
 <ul>
 <li><a href="/docs/pt/v2.6.x/scaleout.md">Escalar um cluster do Milvus</a></li>
 </ul></li>
-<li>Se estiver pronto para implementar o seu cluster nas nuvens:
+<li>Se estiver pronto para implementar o seu cluster em ambientes de nuvem:
 <ul>
-<li>Saiba como <a href="/docs/pt/v2.6.x/eks.md">implementar o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Aprenda a <a href="/docs/pt/v2.6.x/eks.md">implementar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Aprenda a <a href="/docs/pt/v2.6.x/gcp.md">implementar um cluster Milvus no GCP com o Kubernetes</a></li>
 <li>Aprenda a <a href="/docs/pt/v2.6.x/azure.md">implementar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>

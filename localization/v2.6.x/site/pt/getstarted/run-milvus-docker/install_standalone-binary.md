@@ -81,7 +81,7 @@ title: Instalar o Milvus Standalone com um pacote RPM/DEB
         ></path>
       </svg>
     </button></h2><p>Para instalar o pacote RPM/DEB, pode utilizar o gestor de pacotes do seu sistema.</p>
-<p>Para sistemas baseados em RPM (como o CentOS, o Fedora e o RHEL), utilize o comando « <code translate="no">yum</code> » para instalar o pacote.</p>
+<p>Para sistemas baseados em RPM (como o CentOS, o Fedora e o RHEL), utilize o comando ` <code translate="no">yum</code> ` para instalar o pacote.</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -104,7 +104,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após a conclusão da instalação, o Milvus fica instalado como um serviço do systemd e pode ser iniciado utilizando o seguinte comando:</p>
+    </button></h2><p>Após a conclusão da instalação, o Milvus fica instalado como um serviço do systemd e pode ser iniciado através do seguinte comando:</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode verificar o estado do serviço Milvus utilizando o seguinte comando:</p>
@@ -205,7 +205,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/pt/v2.6.x/upgrade_milvus_cluster-helm.md">Atualizar o Milvus utilizando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/v2.6.x/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
+<li><p>Implemente o seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
-<li><p>Explore <a href="/docs/pt/v2.6.x/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
+<li><p>Explore <a href="/docs/pt/v2.6.x/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para a depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>
 <li><p><a href="/docs/pt/v2.6.x/monitor.md">Monitorize o Milvus com o Prometheus</a>.</p></li>
 </ul>

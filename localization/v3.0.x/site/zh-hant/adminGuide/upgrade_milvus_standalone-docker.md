@@ -4,10 +4,10 @@ label: Docker Compose
 order: 2
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 瞭解如何使用 Docker Compose 升級 Milvus 獨立執行版本。
+summary: 了解如何使用 Docker Compose 升級 Milvus 獨立執行版本。
 title: 使用 Docker Compose 升級 Milvus 獨立部署
 ---
-<div class="tab-wrapper"><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>、Helm、Docker<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>操作員</a>、Helm、<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>D</a>ocker<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 獨立部署<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,10 +48,10 @@ title: 使用 Docker Compose 升級 Milvus 獨立部署
 <li>現有部署所使用的 Docker Compose 檔案及設定</li>
 <li>Milvus 元資料與持久化資料的最新備份</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，必須維持您目前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，您必須維持目前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert warning">
-<p>執行此程序時，請勿替換目前的 Compose 檔案或變更依賴項版本。請保留現有的 etcd、物件儲存、訊息佇列、卷宗及設定。僅需更新 Milvus 映像標籤。</p>
-<p>此程序不支援透過將 Milvus 映像檔降級回 2.6.x 版本來進行降級或回滾。 當 v3.0-beta 寫入資料後，若僅還原映像檔，還原過程可能無法讀取已更新的狀態。若升級失敗，請停止寫入操作，並採用能還原升級前元資料及持久化資料備份的復原方案。請先在非生產環境中驗證該復原方案。</p>
+<p>請勿在此程序中替換您目前的 Compose 檔案或變更依賴項版本。請保留現有的 etcd、物件儲存、訊息佇列、卷宗及設定。僅需更新 Milvus 映像標籤。</p>
+<p>此程序不支援透過將 Milvus 映像檔降級回 2.6.x 版本來進行降級或回滾。 當 v3.0-beta 寫入資料後，僅還原映像檔的回滾操作可能會無法讀取更新後的狀態。若升級失敗，請停止寫入操作，並採用能還原升級前元資料及持久化資料備份的復原方案。請先在非生產環境中驗證該復原方案。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,4 +136,4 @@ docker compose images standalone
 
 docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>確認<code translate="no">standalone</code> 服務狀態正常，其映像為<code translate="no">milvusdb/milvus:v3.0-beta</code> ，且現有的集合仍可進行查詢與搜尋。在啟用任何 v3.0-beta 專屬功能之前，請先完成這些檢查。</p>
+<p>確認<code translate="no">standalone</code> 服務運作正常，其映像檔為<code translate="no">milvusdb/milvus:v3.0-beta</code> ，且現有的集合仍可進行查詢與搜尋。在啟用任何 v3.0-beta 專屬功能之前，請先完成這些檢查。</p>

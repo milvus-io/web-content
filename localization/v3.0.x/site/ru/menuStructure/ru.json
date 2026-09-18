@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Новости",
+        "label": "Пресс-релизы",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -346,7 +346,7 @@
             "children": []
           },
           {
-            "label": "Загрузка и освобождение",
+            "label": "Загрузка и выгрузка",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "Редкий вектор",
+            "label": "Разреженный вектор",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
@@ -425,13 +425,13 @@
             "children": []
           },
           {
-            "label": "Поле ввода текста",
+            "label": "Текстовое поле",
             "id": "text.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "Поле «Число»",
+            "label": "Числовое поле",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Разделение JSON",
+                "label": "Разбор JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдер",
+                    "label": "Линдэра",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабоязычных текстов",
+                    "label": "Нормализация арабоского языка",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Только буквы и цифры",
+                    "label": "Только буквенно-цифровые символы",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Декомпоундер",
+                    "label": "Устройство для удаления смеси",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "Удалить прокол",
+                    "label": "Удалить пробел",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Объекты с операцией «Upsert»",
+            "label": "Объекты для вставки или обновления",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1059,7 +1059,7 @@
             "children": []
           },
           {
-            "label": "Агрегирование результатов поиска",
+            "label": "Агрегация результатов поиска",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1144,7 +1144,7 @@
             ]
           },
           {
-            "label": "Полнотекстовый поиск",
+            "label": "Поиск по полному тексту",
             "id": "full-text-search.md",
             "order": 9,
             "children": []
@@ -1162,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Совпадение по фразе",
+            "label": "Совпадение фразы",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1249,7 +1249,7 @@
             "children": []
           },
           {
-            "label": "Функции встраивания на основе моделей",
+            "label": "Функции вложения на основе моделей",
             "id": "embedding-function",
             "order": 1,
             "isMenu": true,
@@ -1347,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг по взвешенным оценкам",
+                "label": "Рейтинг с учетом весов",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1389,13 +1389,13 @@
                     "children": []
                   },
                   {
-                    "label": "Линейное затухание",
+                    "label": "Линейный спад",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "Руководство: Реализация ранжирования по времени в Milvus",
+                    "label": "Руководство: реализация ранжирования по времени в Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1469,7 +1469,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Используйте mmap",
+            "label": "Использовать mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Принудительная уплотнение при слиянии",
+            "label": "Принудительная уплотнение слияния",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1493,7 +1493,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Обзор многоуровневого хранения данных",
+                "label": "Обзор многоуровневого хранения",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1716,7 +1716,7 @@
                 "children": []
               },
               {
-                "label": "Балансировка нагрузки на уровне 7",
+                "label": "Распределение нагрузки на уровне 7",
                 "id": "layer-7-lb",
                 "order": 5,
                 "isMenu": true,
@@ -1938,19 +1938,19 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Кластер масштабирования",
+            "label": "Кластер Scale",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Масштаб «Автономный»",
+            "label": "Автономный масштаб",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Масштаб с HPA",
+            "label": "Масштабирование с помощью HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -2132,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Удаление пользователей и ролей",
+                "label": "Удалить пользователей и роли",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2168,7 +2168,7 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu (графический интерфейс Milvus)",
+        "label": "Атту (графический интерфейс Milvus)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Команды",
-            "id": "milvus_backup_cli.md",
+            "label": "Команды (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP API (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Распространенные случаи",
-            "id": "common-cases",
+            "label": "Резервное копирование и восстановление с помощью моментальных снимков",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Резервное копирование 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Резервное копирование и восстановление в одном экземпляре",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Команды (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном бакете",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP API (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в разных корзинах",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Типичные случаи (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Резервное копирование и восстановление в одном экземпляре",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос данных между экземплярами в одном хранилище",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос между экземплярами в разных корзинах",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос данных между экземплярами в различных средах S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Перенос данных между экземплярами в различных средах S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Обновите версию до 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2348,14 +2380,14 @@
         "children": []
       },
       {
-        "label": "Клиент Milvus для PowerShell",
+        "label": "Клиент PowerShell Milvus",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
         "children": []
       },
       {
-        "label": "Журнал экспорта",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2591,7 +2623,7 @@
                 "children": []
               },
               {
-                "label": "Async API Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2764,7 +2796,7 @@
             "children": []
           },
           {
-            "label": "FiftyOne",
+            "label": "Пятьдесят один",
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
@@ -2819,7 +2851,7 @@
             "children": []
           },
           {
-            "label": "Преобразователи предложений",
+            "label": "SentenceTransformers",
             "id": "integrate_with_sentencetransformers.md",
             "order": 4,
             "children": []
@@ -2978,7 +3010,7 @@
             "children": []
           },
           {
-            "label": "Маскировщик персональных данных",
+            "label": "Маска PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3020,7 +3052,7 @@
             "children": []
           },
           {
-            "label": "Доклинг",
+            "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
             "children": []
@@ -3121,7 +3153,7 @@
         "children": []
       },
       {
-        "label": "Контекстный поиск",
+        "label": "Контекстуальный поиск",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3146,7 +3178,7 @@
         "children": []
       },
       {
-        "label": "Рекомендация фильма",
+        "label": "Рекомендация по фильмам",
         "id": "movie_recommendation_with_milvus.md",
         "order": 12,
         "children": []

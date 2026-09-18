@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 了解如何使用 Milvus Operator 升级 Milvus Standalone。
+summary: 了解如何使用 Milvus Operator 对 Milvus Standalone 进行升级。
 title: 使用 Milvus Operator 升级 Milvus Standalone
 ---
 <div class="tab-wrapper"><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>、Helm、Docker<a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
@@ -56,11 +56,11 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
       </svg>
     </button></h3><p>从 Milvus 2.5.x 升级到 2.6.17 涉及重大的架构变更：</p>
 <ul>
-<li><strong>协调器整合</strong>：旧版中独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单一<code translate="no">mixCoord</code></li>
+<li><strong>协调器整合</strong>：旧版独立的协调器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合为单个<code translate="no">mixCoord</code></li>
 <li><strong>新组件</strong>：引入流式处理节点（Streaming Node）以增强数据处理能力</li>
 <li><strong>组件移除</strong>：已移除并整合<code translate="no">indexNode</code> </li>
 </ul>
-<p>此升级流程可确保顺利迁移至新架构。有关架构变更的更多信息，请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">Milvus 架构概述</a>》。</p>
+<p>此升级流程可确保向新架构的顺利迁移。有关架构变更的更多信息，请参阅《<a href="/docs/zh/v2.6.x/architecture_overview.md">Milvus 架构概述</a>》。</p>
 <h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,10 +85,10 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
 <p><strong>兼容性要求：</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 与 v2.6.17<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
-<li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
+<li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>获取迁移帮助。</li>
 <li>在升级至 v2.6.17 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本。</li>
 </ul>
-<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 升级至 v2.5.16</h4><div class="alert-note">
 <p>如果您的独立部署已运行 v2.5.16 或更高版本，请跳过此步骤。</p>
 </div>
-<p>创建配置文件<code translate="no">milvusupgrade.yaml</code> 以升级至v2.5.16：</p>
+<p>创建配置文件 `<code translate="no">milvusupgrade.yaml</code> ` 以升级至 v2.5.16：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

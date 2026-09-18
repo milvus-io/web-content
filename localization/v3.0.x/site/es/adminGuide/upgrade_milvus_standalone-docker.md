@@ -4,13 +4,11 @@ label: Docker Compose
 order: 2
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: >-
-  Descubre cómo actualizar la versión independiente de Milvus con Docker
-  Compose.
-title: Actualizar Milvus Standalone con Docker Compose
+summary: Descubre cómo actualizar Milvus en modo autónomo con Docker Compose.
+title: Actualización de Milvus Standalone con Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_standalone-operator.md" class=''>Milvus,</a><a href="/docs/es/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>, Helm, Docker<a href="/docs/es/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Actualizar Milvus Standalone con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Actualización de Milvus Standalone con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,13 +45,13 @@ title: Actualizar Milvus Standalone con Docker Compose
     </button></h2><ul>
 <li>Docker Engine y Docker Compose V2</li>
 <li>Una implementación independiente existente de Milvus 2.6.x gestionada por Docker Compose</li>
-<li>El archivo y la configuración de Docker Compose utilizados para la implementación existente</li>
+<li>El archivo Docker Compose y la configuración utilizados para la implementación existente</li>
 <li>Una copia de seguridad actualizada de los metadatos y los datos persistentes de Milvus</li>
 </ul>
 <p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
 <p>No sustituya su archivo Compose actual ni modifique las versiones de las dependencias como parte de este procedimiento. Mantenga el etcd, el almacenamiento de objetos, la cola de mensajes, los volúmenes y la configuración existentes. Actualice únicamente la etiqueta de la imagen de Milvus.</p>
-<p>Este procedimiento no valida una degradación o una reversión que implique volver a la imagen de Milvus 2.6.x. Una vez que la versión v3.0-beta haya escrito los datos, una reversión que afecte únicamente a la imagen podría no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Este procedimiento no valida una degradación o una reversión al cambiar la imagen de Milvus de nuevo a la versión 2.6.x. Una vez que la versión v3.0-beta haya escrito los datos, es posible que una reversión que afecte únicamente a la imagen no pueda leer el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +68,7 @@ title: Actualizar Milvus Standalone con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Back-up-the-current-configuration" class="common-anchor-header">Paso 1: Realiza una copia de seguridad de la configuración actual<button data-href="#Step-1-Back-up-the-current-configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-configuration" class="common-anchor-header">Paso 1: Realizar una copia de seguridad de la configuración actual<button data-href="#Step-1-Back-up-the-current-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

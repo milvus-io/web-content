@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: تعرف على كيفية ترقية مجموعة Milvus باستخدام Docker Compose.
 title: ترقية مجموعة Milvus باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/configure_operator.md" class=''>مشغل Milvus مشغل</a><a href="/docs/ar/v2.6.x/configure-docker.md" class=''>Milvus Helm Docker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>Helm Docker Compose Helm</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ar/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/ar/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">ترقية مجموعة Milvus باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +20,7 @@ title: ترقية مجموعة Milvus باستخدام Docker Compose
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية ترقية Milvus باستخدام Docker Compose.</p>
-<p>في الحالات العادية، يمكنك <a href="#Upgrade-Milvus-by-changing-its-image">ترقية Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار v2.1.x إلى الإصدار v2.6.17.</p>
+<p>في الحالات العادية، يمكنك <a href="#Upgrade-Milvus-by-changing-its-image">ترقية Milvus عن طريق تغيير صورته</a>. ومع ذلك، يجب عليك <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار v2.1.x إلى الإصدار v2.6.17.</p>
 <div class="alert note">
 <p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.17، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 </div>
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>أعد تشغيل مكونات Milvus مرة أخرى باستخدام الصورة الجديدة لـ Milvus.</p>
+<li><p>ابدأ تشغيل مكونات Milvus مرة أخرى باستخدام الصورة الجديدة لـ Milvus.</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d

@@ -85,7 +85,7 @@ title: Instalar o Milvus Standalone com um pacote RPM/DEB
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Para sistemas baseados em DEB (como o Ubuntu e o Debian), utilize o comando ` <code translate="no">apt</code> ` para instalar o pacote.</p>
+<p>Para sistemas baseados em DEB (como o Ubuntu e o Debian), utilize o comando « <code translate="no">apt</code> » para instalar o pacote.</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -121,7 +121,7 @@ dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode encontrar o binário do Milvus em <code translate="no">/usr/bin/milvus</code>, o ficheiro do serviço systemd em <code translate="no">/lib/systemd/system/milvus.service</code> e as dependências em <code translate="no">/usr/lib/milvus/</code>.</p>
 <div class="alert note">
-<p>Por predefinição, o Milvus Standalone executa <strong>o Woodpecker</strong> (sistema de ficheiros local) como a sua fila de mensagens com o etcd incorporado, pelo que não é necessário qualquer serviço externo de mensagens ou metadados. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</p>
+<p>Por predefinição, o Milvus Standalone executa <strong>o Woodpecker</strong> (sistema de ficheiros local) como a sua fila de mensagens com o etcd incorporado, pelo que não é necessário qualquer serviço externo de mensagens ou de metadados. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Atualizar as configurações do Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,8 +138,8 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por exemplo, para alterar o <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode procurar o parâmetro «target» e modificá-lo em conformidade. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">«Configuração do Sistema</a>».</p>
-<h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Encerrar o Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
+    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por exemplo, para alterar o <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode procurar o parâmetro «target» e modificá-lo em conformidade. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">«Configuração do sistema</a>».</p>
+<h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Parar o Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus utilizando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
+<li><p>Implemente o seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

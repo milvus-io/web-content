@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Asegúrate de que el esquema de la colección ya contiene el campo StructArray « <code translate="no">chunks</code> ».</p>
+    </button></h2><p>Asegúrate de que el esquema de la colección ya contenga el campo StructArray « <code translate="no">chunks</code> ».</p>
 <table>
 <thead>
 <tr><th>Campo</th><th>Tipo</th><th>Valor de inserción</th></tr>
@@ -53,14 +53,14 @@ summary: >-
 <tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>Una lista de objetos «chunk».</td></tr>
 </tbody>
 </table>
-<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema «Struct».</p>
+<p>Cada objeto de « <code translate="no">chunks</code> » debe seguir el esquema Struct.</p>
 <table>
 <thead>
 <tr><th>Subcampo</th><th>Tipo</th><th>Valor de inserción</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Texto del fragmento.</td></tr>
-<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nombre de la sección, como « <code translate="no">index</code> », « <code translate="no">search</code> » o « <code translate="no">filter</code> ».</td></tr>
+<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Nombre de la sección, como <code translate="no">index</code>, <code translate="no">search</code> o <code translate="no">filter</code>.</td></tr>
 <tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Número de página o posición lógica.</td></tr>
 <tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Puntuación a nivel de fragmento.</td></tr>
 <tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Si el fragmento contiene código.</td></tr>
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten modos de búsqueda diferentes. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, puedes almacenar las mismas representaciones en ambos subcampos cuando ambos modos de búsqueda utilicen la misma representación de fragmentos, o almacenar representaciones diferentes cuando los dos modos de búsqueda utilicen representaciones distintas.</p>
+<p><code translate="no">emb_list_vector</code> y <code translate="no">emb</code> son subcampos vectoriales independientes, ya que admiten diferentes modos de búsqueda. La búsqueda de EmbeddingList trata todos los vectores de un campo StructArray como una única lista de incrustaciones y devuelve resultados a nivel de entidad con métricas de <code translate="no">MAX_SIM*</code>. La búsqueda a nivel de elemento busca cada elemento Struct de forma independiente y puede devolver el desplazamiento del elemento coincidente. En este ejemplo, para simplificar, se almacenan los mismos valores vectoriales en ambos campos. En una aplicación de producción, puedes almacenar las mismas incrustaciones en ambos subcampos cuando ambos modos de búsqueda utilicen la misma incrustación de fragmentos, o almacenar incrustaciones diferentes cuando los dos modos de búsqueda utilicen representaciones distintas.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Insertar filas<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utiliza « <code translate="no">client.insert()</code> » para insertar filas que contengan valores de StructArray.</p>
+    </button></h2><p>Utiliza ` <code translate="no">client.insert()</code> ` para insertar filas que contengan valores de `StructArray`.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -217,7 +217,7 @@ result = client.insert(
 
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">Insertar en campos StructArray nulos<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
+<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">Insertar en campos StructArray que admiten valores nulos<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -232,7 +232,7 @@ result = client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` en nulo. En Python, utilice ` <code translate="no">None</code> ` para representar un valor nulo.</p>
+    </button></h2><p>Si el campo ` <code translate="no">chunks</code> ` es nulo, una entidad puede establecer todo el campo ` <code translate="no">chunks</code> ` como nulo. En Python, utiliza ` <code translate="no">None</code> ` para representar un valor nulo.</p>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     data=[
@@ -282,7 +282,7 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice rutas de campos StructArray, como <code translate="no">chunks[text]</code>, únicamente al consultar, buscar, filtrar o crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
+<p>Utilice rutas de campo StructArray, como <code translate="no">chunks[text]</code>, únicamente al realizar consultas, búsquedas, filtrados o al crear índices. Las cargas útiles de inserción deben seguir utilizando objetos anidados bajo <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Reglas de inserción<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,9 +305,9 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
 <tbody>
 <tr><td>Utilice una matriz de objetos para un campo StructArray.</td><td>El valor de <code translate="no">chunks</code> es una lista, y cada elemento de la lista es un elemento Struct.</td></tr>
 <tr><td>Utiliza nombres de subcampos dentro de cada elemento Struct.</td><td>Inserta « <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> » dentro de « <code translate="no">chunks</code> », no en « <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> ».</td></tr>
-<tr><td>Cumpla con el esquema de Struct.</td><td>Cada elemento de Struct debe utilizar los subcampos definidos en el esquema de Struct.</td></tr>
-<tr><td>Las dimensiones de los vectores deben coincidir.</td><td>Los valores de los vectores deben coincidir con los « <code translate="no">dim</code> » configurados para sus subcampos vectoriales.</td></tr>
-<tr><td>Respetar el « <code translate="no">max_capacity</code> ».</td><td>El número de elementos Struct en una entidad no debe superar el número de elementos <code translate="no">max_capacity</code> del campo StructArray.</td></tr>
+<tr><td>Cumpla con el esquema de Struct.</td><td>Cada elemento de la estructura (Struct) debe utilizar los subcampos definidos en el esquema de la estructura.</td></tr>
+<tr><td>Las dimensiones del vector deben coincidir.</td><td>Los valores de los vectores deben coincidir con los « <code translate="no">dim</code> » configurados para sus subcampos vectoriales.</td></tr>
+<tr><td>Respetar el « <code translate="no">max_capacity</code> ».</td><td>El número de elementos Struct en una entidad no debe superar el número de elementos de StructArray ( <code translate="no">max_capacity</code> ) del campo StructArray.</td></tr>
 <tr><td>Utilice subcampos vectoriales independientes para los distintos modos de búsqueda.</td><td>Si se requieren tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, escriba los valores vectoriales en ambos subcampos vectoriales.</td></tr>
 <tr><td>Utilice « <code translate="no">null</code> » solo cuando el campo sea nulo.</td><td>Los campos StructArray no nulos requieren valores StructArray válidos.</td></tr>
 </tbody>
@@ -328,12 +328,12 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizar rutas de campo como « <code translate="no">chunks[text]</code> » en las cargas útiles de inserción.</p></li>
+<li><p>Utilizar rutas de campo como <code translate="no">chunks[text]</code> en las cargas útiles de inserción.</p></li>
 <li><p>Omitir subcampos obligatorios de un elemento Struct.</p></li>
 <li><p>Insertar vectores con una dimensión incorrecta.</p></li>
-<li><p>Insertar más elementos Struct de los que permite <code translate="no">max_capacity</code>.</p></li>
-<li><p>Establecer solo un subcampo como « <code translate="no">null</code> », mientras que otros subcampos del mismo valor de StructArray son válidos.</p></li>
-<li><p>Escribir vectores únicamente en ` <code translate="no">emb_list_vector</code> ` y, a continuación, intentar ejecutar una búsqueda a nivel de elemento en ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Insertar más elementos Struct de los que permite « <code translate="no">max_capacity</code> ».</p></li>
+<li><p>Establecer solo un subcampo como « <code translate="no">null</code> », mientras que otros subcampos del mismo valor de «StructArray» son válidos.</p></li>
+<li><p>Escribir vectores únicamente en ` <code translate="no">emb_list_vector</code> ` y, a continuación, intentar realizar una búsqueda a nivel de elemento en ` <code translate="no">chunks[emb]</code>`.</p></li>
 <li><p>Escribir vectores únicamente en « <code translate="no">emb</code> » y, a continuación, intentar realizar una búsqueda en «EmbeddingList» en « <code translate="no">chunks[emb_list_vector]</code> ».</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -353,6 +353,6 @@ Los campos StructArray nulos solo están disponibles en Milvus v3.0.x. Si añade
       </svg>
     </button></h2><ol>
 <li><p>Para crear índices para los subcampos « <code translate="no">chunks[emb_list_vector]</code> », « <code translate="no">chunks[emb]</code> » y los subcampos escalares, consulta <a href="/docs/es/index-structarray-fields.md">«Indexar campos de StructArray</a>».</p></li>
-<li><p>Para realizar búsquedas en subcampos vectoriales de StructArray, consulte «Búsqueda vectorial básica con StructArray».</p></li>
+<li><p>Para realizar búsquedas en subcampos vectoriales de StructArray, consulta <a href="/docs/es/basic-vector-search-with-structarray.md">«Búsqueda vectorial básica con StructArray</a>».</p></li>
 <li><p>Para revisar el comportamiento de los valores nulos y las limitaciones específicas de cada versión, consulta <a href="/docs/es/structarray-limits.md">«Límites de StructArray</a>».</p></li>
 </ol>

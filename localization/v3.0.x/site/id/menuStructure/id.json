@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Pengambilan Barang",
+            "label": "Pengambilan Barang yang Ditinggalkan",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Normalisasi Bahasa Arab",
+                    "label": "Normalisasi Hubungan dengan Negara-Negara Arab",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -667,7 +667,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Hanya Cnalphanum",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Mengelola Sumber Daya Berkas",
+                "label": "Mengelola Sumber Daya File",
                 "id": "manage-file-resources.md",
                 "order": 6,
                 "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "SPARSE_INVERTED_INDEX",
+                "label": "INDEKS TERBALIK YANG JARANG",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Pencarian Jaringan Saraf Tiruan Dasar",
+            "label": "Pencarian ANN Dasar",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1162,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Pencocokan Frasa",
+            "label": "Kecocokan Frasa",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1237,7 +1237,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi dan Model",
+        "label": "Inferensi Fungsi &amp; Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1341,7 +1341,7 @@
             "children": []
           },
           {
-            "label": "Fungsi Penilaian Ulang",
+            "label": "Fungsi Penataan Ulang Peringkat",
             "id": "reranking",
             "order": 3,
             "isMenu": true,
@@ -1377,7 +1377,7 @@
                     "children": []
                   },
                   {
-                    "label": "Peluruhan Gauss",
+                    "label": "Peluruhan Gaussian",
                     "id": "gaussian-decay.md",
                     "order": 1,
                     "children": []
@@ -1445,7 +1445,7 @@
                     "children": []
                   },
                   {
-                    "label": "DashScope Peringkat",
+                    "label": "DashScope Ranker",
                     "id": "dashscope-ranker.md",
                     "order": 6,
                     "children": []
@@ -1533,7 +1533,7 @@
             "children": []
           },
           {
-            "label": "Kasus Penggunaan",
+            "label": "Contoh Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1698,13 +1698,13 @@
                 "children": []
               },
               {
-                "label": "Melakukan deployment di GCP",
+                "label": "Melakukan penerapan di GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Lakukan penyebaran di Azure",
+                "label": "Lakukan penerapan di Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []
@@ -1790,7 +1790,7 @@
             "children": []
           },
           {
-            "label": "Membatasi Jumlah Koleksi",
+            "label": "Membatasi Jumlah Pengumpulan",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1969,7 +1969,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Meningkatkan Kapasitas Kluster Milvus",
+            "label": "Meningkatkan Kluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -2076,7 +2076,7 @@
         "order": 9,
         "children": [
           {
-            "label": "Mengelola Kelompok Sumber Daya",
+            "label": "Kelola Kelompok Sumber Daya",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -2114,7 +2114,7 @@
                 "children": []
               },
               {
-                "label": "Kelompok Privilege",
+                "label": "Grup Privilege",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Perintah",
-            "id": "milvus_backup_cli.md",
+            "label": "Perintah (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Kasus-Kasus Umum",
-            "id": "common-cases",
+            "label": "Pencadangan dan Pemulihan Snapshot",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Cadangan 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Pencadangan dan Pemulihan dalam Satu Instansi",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Perintah (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrasi Antar Instansi dalam Satu Bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Lintas Bucket",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Kasus Umum (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Pencadangan dan Pemulihan dalam Satu Instansi",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrasi Antar Instansi dalam Satu Bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrasi Antar-Instan di Berbagai Bucket",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrasi Antar-Instan di Berbagai Lingkungan S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Lingkungan S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Perbarui ke versi 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2460,7 +2492,7 @@
             ]
           },
           {
-            "label": "Para Pengubah Peringkat",
+            "label": "Pemeringkat Ulang",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2591,7 +2623,7 @@
                 "children": []
               },
               {
-                "label": "API Asinkron Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -3051,7 +3083,7 @@
         "order": 8,
         "children": [
           {
-            "label": "Bunga salju",
+            "label": "Bunga Salju",
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
@@ -3164,7 +3196,7 @@
         "children": []
       },
       {
-        "label": "Gunakan AsyncMilvusClient bersama asyncio",
+        "label": "Gunakan AsyncMilvusClient dengan asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []
@@ -3176,7 +3208,7 @@
         "children": []
       },
       {
-        "label": "Pembuatan Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
+        "label": "Membuat Ekspresi Filter Kueri Milvus dengan Model Bahasa Besar",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3251,7 +3283,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum (FAQ) Operasional",
+        "label": "Pertanyaan Umum tentang Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

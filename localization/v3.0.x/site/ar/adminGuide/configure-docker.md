@@ -24,7 +24,7 @@ title: تكوين Milvus باستخدام Docker Compose
 <div class="alert note">
 في الإصدار الحالي، لا تصبح جميع المعلمات سارية المفعول إلا بعد إعادة تشغيل Milvus.
 </div>
-<h2 id="Download-a-configuration-file" class="common-anchor-header">تنزيل ملف التكوين<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Download-a-configuration-file" class="common-anchor-header">تنزيل ملف التهيئة<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ title: تكوين Milvus باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قم بتكوين مثيل Milvus الخاص بك ليتناسب مع سيناريوهات التطبيق الخاصة بك عن طريق تعديل المعلمات المقابلة في ملف <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>قم بتكوين مثيل Milvus الخاص بك ليتناسب مع سيناريوهات التطبيق الخاصة بك عن طريق تعديل المعلمات المقابلة في <code translate="no">milvus.yaml</code>.</p>
 <p>راجع الروابط التالية لمزيد من المعلومات حول كل معلمة.</p>
 <p>مرتبة حسب:</p>
 <div class="filter">
@@ -83,7 +83,7 @@ title: تكوين Milvus باستخدام Docker Compose
     </td>
     <td>
         <ul>
-            <li><a href="/docs/ar/configure_rootcoord.md">تنسيق الجذر</a></li>
+            <li><a href="/docs/ar/configure_rootcoord.md">Root coord</a></li>
             <li><a href="/docs/ar/configure_proxy.md">الوكيل</a></li>
             <li><a href="/docs/ar/configure_querycoord.md">تنسيق الاستعلام</a></li>
             <li><a href="/docs/ar/configure_querynode.md">عقدة الاستعلام</a></li>
@@ -118,7 +118,7 @@ title: تكوين Milvus باستخدام Docker Compose
 </thead>
 <tbody>
   <tr>
-    <td>تحسين الأداء</td>
+    <td>ضبط الأداء</td>
     <td>
         <ul>
             <li><a href="/docs/ar/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
@@ -254,9 +254,9 @@ title: تكوين Milvus باستخدام Docker Compose
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-يتم تخزين البيانات في مجلد <code translate="no">/volumes</code> وفقًا للتكوين الافتراضي في <code translate="no">docker-compose.yml</code>. لتغيير المجلد المخصص لتخزين البيانات، قم بتحرير <code translate="no">docker-compose.yml</code> أو قم بتشغيل <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
+يتم تخزين البيانات في المجلد <code translate="no">/volumes</code> وفقًا للتكوين الافتراضي في <code translate="no">docker-compose.yml</code>. لتغيير المجلد المخصص لتخزين البيانات، قم بتحرير <code translate="no">docker-compose.yml</code> أو قم بتشغيل <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
-<h2 id="Start-Milvus" class="common-anchor-header">بدء تشغيل Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+<h2 id="Start-Milvus" class="common-anchor-header">تشغيل Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,7 +271,7 @@ title: تكوين Milvus باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد الانتهاء من تعديل ملف التكوين وملف التثبيت، يمكنك عندئذٍ تشغيل Milvus.</p>
+    </button></h2><p>بعد الانتهاء من تعديل ملف التكوين وملف التثبيت، يمكنك عندئذٍ بدء تشغيل Milvus.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -290,10 +290,10 @@ title: تكوين Milvus باستخدام Docker Compose
         ></path>
       </svg>
     </button></h2><ul>
-<li>تعرف على كيفية إدارة التبعيات التالية لـ Milvus باستخدام Docker Compose أو Helm:
+<li>تعرف على كيفية إدارة تبعيات Milvus التالية باستخدام Docker Compose أو Helm:
 <ul>
 <li><a href="/docs/ar/deploy_s3.md">تكوين تخزين الكائنات باستخدام Docker Compose أو Helm</a></li>
-<li><a href="/docs/ar/deploy_etcd.md">تكوين تخزين البيانات الوصفية باستخدام Docker Compose أو Helm</a></li>
+<li><a href="/docs/ar/deploy_etcd.md">تكوين التخزين الوصفي باستخدام Docker Compose أو Helm</a></li>
 <li><a href="/docs/ar/deploy_pulsar.md">تكوين تخزين الرسائل باستخدام Docker Compose أو Helm</a></li>
 </ul></li>
 </ul>

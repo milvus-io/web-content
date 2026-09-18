@@ -67,11 +67,11 @@ title: Executar o Milvus no Docker (Linux)
 <ul>
 <li><strong>Nó de streaming</strong>: Capacidades de processamento de dados melhoradas</li>
 <li><strong>Woodpecker MQ (predefinição)</strong>: Esta implementação no Docker executa o Woodpecker como fila de mensagens, utilizando o <strong>sistema de ficheiros local</strong> como backend WAL, pelo que não é necessário qualquer serviço externo de fila de mensagens. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>Arquitetura otimizada</strong>: componentes consolidados para um melhor desempenho</li>
+<li><strong>Arquitetura otimizada</strong>: Componentes consolidados para um melhor desempenho</li>
 </ul>
 <p>Descarregue sempre o script mais recente para garantir que obtém as configurações e melhorias de arquitetura mais recentes.</p>
 <p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p>
+<p>Se tiver alguma dificuldade ao obter a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p>
 </div>
 <p>Após executar o script de instalação:</p>
 <ul>
@@ -80,7 +80,7 @@ title: Executar o Milvus no Docker (Linux)
 <li>Para alterar a configuração predefinida do Milvus, adicione as suas definições ao ficheiro <strong>user.yaml</strong> na pasta atual e, em seguida, reinicie o serviço.</li>
 <li>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul>
-<p>Pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/milvus-webui.md">interface Web do Milvus</a>.</p>
+<p>Pode aceder à interface web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/milvus-webui.md">interface web do Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Atualizar as configurações do Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ EOF
 <p>Em seguida, reinicie o serviço da seguinte forma:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">«Configuração do sistema</a>».</p>
+<p>Para os itens de configuração aplicáveis, consulte a <a href="/docs/pt/system_configuration.md">Configuração do Sistema</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Atualizar o Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por predefinição, esta implementação executa <strong>o Woodpecker</strong> (WAL no sistema de ficheiros local) como fila de mensagens e um <strong>etcd incorporado</strong> para metadados — não é necessário instalar mais nada. Para utilizar uma fila de mensagens diferente ou ligar armazenamento de objetos/metadados externos, consulte:</p>
+    </button></h2><p>Por predefinição, esta implementação executa <strong>o Woodpecker</strong> (WAL no sistema de ficheiros local) como fila de mensagens e um <strong>etcd incorporado</strong> para metadados — não é necessário instalar mais nada. Para utilizar uma fila de mensagens diferente ou ligar armazenamento de objetos/metadados externo, consulte:</p>
 <ul>
 <li>Fila de mensagens: <a href="/docs/pt/woodpecker.md">Woodpecker</a> (padrão) · <a href="/docs/pt/mq_pulsar.md">Pulsar</a> · <a href="/docs/pt/mq_kafka.md">Kafka</a> · <a href="/docs/pt/mq_rocksmq.md">RocksMQ</a></li>
 <li>Armazenamento de objetos: <a href="/docs/pt/deploy_s3.md">MinIO</a> (padrão) · <a href="/docs/pt/deploy_s3.md">AWS S3</a> · <a href="/docs/pt/abs.md">Azure Blob</a> · <a href="/docs/pt/gcs.md">GCP Cloud Storage</a> · <a href="/docs/pt/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/pt/deploy_s3.md">Tencent COS</a> · <a href="/docs/pt/deploy_s3.md">Huawei OBS</a> · <a href="/docs/pt/deploy_s3.md">Compatível com S3</a></li>
@@ -199,7 +199,7 @@ EOF
       </svg>
     </button></h2><p>Depois de instalar o Milvus no Docker, pode:</p>
 <ul>
-<li><p>Consultar <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consulte <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>

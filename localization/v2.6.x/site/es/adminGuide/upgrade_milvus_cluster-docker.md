@@ -19,10 +19,10 @@ title: Actualizar el clúster de Milvus con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En este tema se describe cómo actualizar Milvus mediante Docker Compose.</p>
+    </button></h1><p>En este apartado se describe cómo actualizar Milvus mediante Docker Compose.</p>
 <p>En condiciones normales, puede <a href="#Upgrade-Milvus-by-changing-its-image">actualizar Milvus cambiando su imagen</a>. Sin embargo, es necesario <a href="#Migrate-the-metadata">migrar los metadatos</a> antes de cualquier actualización de la versión v2.1.x a la v2.6.17.</p>
 <div class="alert note">
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.17, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de las colas de mensajes</strong>: al actualizar a Milvus v2.6.17, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Actualizar Milvus cambiando su imagen<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ title: Actualizar el clúster de Milvus con Docker Compose
     </button></h2><p>En condiciones normales, puede actualizar Milvus de la siguiente manera:</p>
 <ol>
 <li><p>Modifica las etiquetas de la imagen de Milvus en <code translate="no">docker-compose.yaml</code>.</p>
-<p>Tenga en cuenta que debe cambiar las etiquetas de imagen del proxy, de todos los coordinadores y de todos los nodos de trabajo.</p>
+<p>Ten en cuenta que debes cambiar las etiquetas de imagen del proxy, de todos los coordinadores y de todos los nodos de trabajo.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>Detenga todos los componentes de Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Prepara el archivo de configuración <code translate="no">migrate.yaml</code> para la migración de metadatos.</p>
+<li><p>Prepare el archivo de configuración <code translate="no">migrate.yaml</code> para la migración de metadatos.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -124,7 +124,7 @@ docker compose up -d
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Inicie de nuevo los componentes de Milvus con la nueva imagen de Milvus.</p>
+<li><p>Inicia de nuevo los componentes de Milvus con la nueva imagen de Milvus.</p>
 <pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d

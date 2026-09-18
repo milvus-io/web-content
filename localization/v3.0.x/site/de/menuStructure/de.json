@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Nutzer",
+        "label": "Milvus-Anwender",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Steuerhauskarte",
+                "label": "Kompasskarte",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Steuerhauskarte",
+                "label": "Kompasskarte",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -291,7 +291,7 @@
         "children": []
       },
       {
-        "label": "Begriffsbestimmungen",
+        "label": "Begriffsbestand",
         "id": "glossary.md",
         "order": 9,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "TTL der Set-Sammlung",
+            "label": "TTL der Mengenauswahl",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Abgabe der Abholware",
+            "label": "Abgabestelle",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "Felder, die den Wert „Null“ annehmen können",
+            "label": "Felder, die den Wert „null“ annehmen können",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "Integrierte Analysatoren",
+                "label": "Integrierte Analysegeräte",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Entmischungsanlage",
+                    "label": "Entmischgerät",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Schema der Alter-Kollektion ändern",
+            "label": "Schema der „Alter“-Kollektion ändern",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -938,7 +938,7 @@
             ]
           },
           {
-            "label": "Spärliche Vektorindizes",
+            "label": "Indizes für spärliche Vektoren",
             "id": "sparse-vector-indexes",
             "order": 4,
             "isMenu": true,
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Gruppensuche",
+            "label": "Gruppierte Suche",
             "id": "grouping-search.md",
             "order": 3,
             "children": []
@@ -1088,7 +1088,7 @@
             "order": 8,
             "children": [
               {
-                "label": "Erläuterung zur Filterung",
+                "label": "Erläuterungen zur Filterung",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1487,13 +1487,13 @@
             "children": []
           },
           {
-            "label": "Mehrstufige Speicherung",
+            "label": "Stufenweise Speicherung",
             "id": "tiered_storage",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über die mehrstufige Speicherung",
+                "label": "Übersicht über mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1505,7 +1505,7 @@
                 "children": []
               },
               {
-                "label": "Räumung",
+                "label": "Zwangsräumung",
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
@@ -1877,7 +1877,7 @@
                     "children": []
                   },
                   {
-                    "label": "Pulsar v2 weiterhin verwenden",
+                    "label": "Pulsar v2 weiterhin nutzen",
                     "id": "use-pulsar-v2.md",
                     "order": 1,
                     "children": []
@@ -2154,7 +2154,7 @@
         ]
       },
       {
-        "label": "Milvus-WebUI",
+        "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Befehle",
-            "id": "milvus_backup_cli.md",
+            "label": "Befehle (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful-API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP-API (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Häufige Fälle",
-            "id": "common-cases",
+            "label": "Snapshot-Sicherung und -Wiederherstellung",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Sicherung und Wiederherstellung in einer Instanz",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Befehle (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen innerhalb eines Buckets",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP-API (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen über verschiedene Buckets hinweg",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Häufige Fälle (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Sicherung und Wiederherstellung in einer Instanz",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen innerhalb eines Buckets",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen über verschiedene Buckets hinweg",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migration zwischen Instanzen über S3-Umgebungen hinweg",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Auf 0.6.0 aktualisieren",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2460,7 +2492,7 @@
             ]
           },
           {
-            "label": "Neubewertungen",
+            "label": "Reranker",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -3152,7 +3184,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Embeddings",
+        "label": "Trichter-Suche mit Matryoshka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

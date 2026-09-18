@@ -40,7 +40,7 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
       </svg>
     </button></h2><ul>
 <li>È necessario aver già installato libstdc++ 8.5.0 o una versione successiva.</li>
-<li><a href="/docs/it/v2.6.x/prerequisite-docker.md">Verificare i requisiti hardware e software</a> prima dell'installazione.</li>
+<li><a href="/docs/it/v2.6.x/prerequisite-docker.md">Verificare i requisiti hardware e software</a> prima dell’installazione.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Scaricare il pacchetto RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all'architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">pagina delle versioni di Milvus</a>.</p>
+    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all’architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">pagina delle versioni di Milvus</a>.</p>
 <ul>
 <li>Per x86_64/amd64, scaricare il pacchetto <strong>milvus_2.6.9-1_amd64.deb</strong> o <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Per ARM64, scaricare il pacchetto <strong>milvus_2.6.9-1_arm64.deb</strong> o <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare l'<code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare l'<code translate="no">proxy.healthCheckTimeout</code> da a <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Arrestare Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,7 +203,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornare Milvus utilizzando Helm Chart</a>.</p></li>
 <li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/it/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/it/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per il monitoraggio e la gestione di Milvus.</p></li>
+<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open source per il backup dei dati di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Scopri <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento GUI open source per una gestione intuitiva di Milvus.</p></li>

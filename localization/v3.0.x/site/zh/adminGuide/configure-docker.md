@@ -39,7 +39,7 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>可直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> ，或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml">下载</a>。</p>
+    </button></h2><p>可直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> ，或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml">进行下载</a>。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 使用 Docker Compose 配置 Milvus
         ></path>
       </svg>
     </button></h2><p>通过调整<code translate="no">milvus.yaml</code> 中的相应参数，根据您的应用场景配置Milvus实例。</p>
-<p>有关各参数的更多信息，请查阅以下链接。</p>
+<p>有关各参数的更多信息，请参阅以下链接。</p>
 <p>按以下类别排序：</p>
 <div class="filter">
 <a href="#component">组件或依赖项</a> <a href="#purpose">配置目的</a>
@@ -97,7 +97,7 @@ title: 使用 Docker Compose 配置 Milvus
             <li><a href="/docs/zh/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/zh/configure_grpc.md">GRPC</a></li>
             <li><a href="/docs/zh/configure_indexcoord.md">索引坐标</a></li>
-            <li><a href="/docs/zh/configure_metastore.md">元数据存储库</a></li>
+            <li><a href="/docs/zh/configure_metastore.md">元数据存储</a></li>
             <li><a href="/docs/zh/configure_mq.md">消息队列</a></li>
             <li><a href="/docs/zh/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh/configure_trace.md">跟踪</a></li>
@@ -112,7 +112,7 @@ title: 使用 Docker Compose 配置 Milvus
 <table id="purpose">
 <thead>
   <tr>
-    <th>用途</th>
+    <th>目的</th>
     <th>参数</th>
   </tr>
 </thead>
@@ -212,7 +212,7 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml">Standalone</a> 安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
+    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml">Standalone</a> 版的安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
 <p>您也可以直接运行以下命令。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
@@ -233,7 +233,7 @@ title: 使用 Docker Compose 配置 Milvus
         ></path>
       </svg>
     </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，在每个<code translate="no">milvus-standalone</code> 下方添加一个<code translate="no">volumes</code> 部分。</p>
-<p>将<code translate="no">milvus.yaml</code> 文件的本地路径映射到所有<code translate="no">volumes</code> 部分下的<code translate="no">/milvus/configs/milvus.yaml</code> 配置文件对应的 Docker 容器路径。</p>
+<p>将本地路径映射到您的<code translate="no">milvus.yaml</code> 文件，并将其映射到所有<code translate="no">volumes</code> 部分下的<code translate="no">/milvus/configs/milvus.yaml</code> 配置文件的相应 Docker 容器路径。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

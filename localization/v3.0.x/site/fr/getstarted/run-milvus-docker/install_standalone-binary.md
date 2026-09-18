@@ -39,8 +39,8 @@ title: Installation de Milvus en mode autonome à l'aide d'un paquet RPM/DEB
         ></path>
       </svg>
     </button></h2><ul>
-<li>Vous avez déjà installé libstdc++ 8.5.0 ou une version ultérieure.</li>
-<li><a href="/docs/fr/prerequisite-docker.md">Vérifiez la configuration matérielle et logicielle requise</a> avant l'installation.</li>
+<li>Vous avez déjà installé libstdc++ 8.5.0 ou une version plus récente.</li>
+<li><a href="/docs/fr/prerequisite-docker.md">Vérifiez la configuration matérielle et logicielle requise</a> avant de procéder à l'installation.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Télécharger le paquet RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Installation de Milvus en mode autonome à l'aide d'un paquet RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez télécharger le paquet RPM/DEB correspondant à l'architecture de votre système depuis la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">page « Milvus Releases</a> ».</p>
+    </button></h2><p>Vous pouvez télécharger le paquet RPM/DEB adapté à l'architecture de votre système depuis la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">page « Milvus Releases</a> ».</p>
 <ul>
 <li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.9-1_amd64.deb</strong> ou <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Pour ARM64, téléchargez le paquet <strong>milvus_2.6.9-1_arm64.deb</strong> ou <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
@@ -104,7 +104,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois l'installation terminée, Milvus est configuré en tant que service systemd et peut être lancé à l'aide de la commande suivante :</p>
+    </button></h2><p>Une fois l'installation terminée, Milvus est installé en tant que service systemd et peut être lancé à l'aide de la commande suivante :</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez vérifier l’état du service Milvus à l’aide de la commande suivante :</p>
@@ -121,7 +121,7 @@ dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous trouverez le binaire Milvus à l'adresse <code translate="no">/usr/bin/milvus</code>, le fichier de service systemd à l'adresse <code translate="no">/lib/systemd/system/milvus.service</code> et les dépendances à l'adresse <code translate="no">/usr/lib/milvus/</code>.</p>
 <div class="alert note">
-<p>Par défaut, Milvus Standalone utilise <strong>Woodpecker</strong> (système de fichiers local) comme file d’attente de messages avec etcd intégré ; aucun service externe de messagerie ou de métadonnées n’est donc nécessaire. Voir <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
+<p>Par défaut, Milvus Standalone utilise <strong>Woodpecker</strong> (système de fichiers local) comme file d'attente de messages avec etcd intégré ; aucun service externe de messagerie ou de métadonnées n'est donc nécessaire. Voir <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,7 +199,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Une fois Milvus Standalone installé, vous pouvez :</p>
 <ul>
-<li><p>Consultez <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
+<li><p>Consulter <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
@@ -209,7 +209,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/fr/single-vector-search.md">Recherche sur un seul vecteur</a></li>
 <li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mettre à niveau Milvus à l'aide d'un Helm Chart</a>.</p></li>
+<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mettre à niveau Milvus à l’aide d’un Helm Chart</a>.</p></li>
 <li><p><a href="/docs/fr/scaleout.md">Faites évoluer votre cluster Milvus</a>.</p></li>
 <li><p>Déployez votre cluster Milvus sur le cloud :</p>
 <ul>

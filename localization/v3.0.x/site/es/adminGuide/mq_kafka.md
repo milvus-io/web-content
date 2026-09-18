@@ -35,7 +35,7 @@ title: Kafka
       </svg>
     </button></h2><ul>
 <li>Milvus solo es compatible con <strong>Kafka 2.x y 3.x</strong>.</li>
-<li>Kafka se configura para Milvus Distributed (clúster) mediante Helm o Milvus Operator.</li>
+<li>Kafka se configura para Milvus Distributed (clúster) a través de Helm o Milvus Operator.</li>
 </ul>
 <h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Implementar un clúster de Milvus con Kafka mediante Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para utilizar un servicio externo de Kafka, desactiva el Pulsar integrado y habilita <code translate="no">externalKafka</code> en una configuración de « <code translate="no">values.yaml</code> », y a continuación instala Milvus con ello:</p>
+    </button></h3><p>Para utilizar un servicio externo de Kafka, desactiva el Pulsar integrado y habilita <code translate="no">externalKafka</code> en una sustitución de <code translate="no">values.yaml</code>; a continuación, instala Milvus con ello:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -186,7 +186,7 @@ title: Kafka
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Aplica la configuración (suponiendo que el archivo es <code translate="no">milvuscluster.yaml</code>):</p>
+<p>Aplica la configuración (suponiendo que el archivo sea <code translate="no">milvuscluster.yaml</code>):</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">Desinstalar<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
+<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
 Si utilizas Kafka y deseas mantenerlo, no cambies la cola de mensajes durante la actualización.</li>
 <li>Solo se admiten las versiones <strong>2.x y 3.x de Kafka</strong>.</li>
 <li>Para la conectividad SASL/SSL, consulta <a href="/docs/es/connect_kafka_ssl.md">«Conectarse a Kafka con SASL/SSL</a>».</li>

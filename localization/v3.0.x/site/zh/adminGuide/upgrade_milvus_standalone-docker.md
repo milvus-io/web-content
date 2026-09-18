@@ -25,7 +25,7 @@ title: 使用 Docker Compose 升级 Milvus Standalone
       </svg>
     </button></h1><p>本指南介绍了如何使用 Docker Compose 将 Milvus 2.6.x Standalone 部署升级至 v3.0-beta 版本。</p>
 <div class="alert note">
-<p>本操作流程已通过官方 Milvus 2.6.20 Standalone 部署版 Docker Compose 配置验证。升级过程中保留了 etcd、MinIO、Woodpecker 以及现有数据目录，仅将 Milvus 镜像更换为<code translate="no">milvusdb/milvus:v3.0-beta</code> 。</p>
+<p>此流程已通过官方 Milvus 2.6.20 Standalone 部署版 Docker Compose 配置验证。升级过程中保留了 etcd、MinIO、Woodpecker 以及现有的数据目录，仅将 Milvus 镜像更换为<code translate="no">milvusdb/milvus:v3.0-beta</code> 。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ title: 使用 Docker Compose 升级 Milvus Standalone
 <p><strong>消息队列限制</strong>：升级至 Milvus v3.0-beta 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <div class="alert warning">
 <p>请勿在此过程中替换当前的 Compose 文件或更改依赖项版本。请保留现有的 etcd、对象存储、消息队列、卷和配置。仅更新 Milvus 镜像标签。</p>
-<p>本操作流程不支持通过将 Milvus 镜像降级回 2.6.x 版本来执行降级或回滚。 在 v3.0-beta 写入数据后，仅回滚镜像的操作可能无法读取更新后的状态。如果升级失败，请停止写入操作，并使用恢复方案来还原升级前的元数据和持久化数据备份。请先在非生产环境中验证该恢复方案。</p>
+<p>本操作流程不支持通过将 Milvus 镜像降级回 2.6.x 版本来执行降级或回滚。 在 v3.0-beta 写入数据后，仅恢复镜像的回滚操作可能无法读取更新后的状态。如果升级失败，请停止写入操作，并使用恢复方案来还原升级前的元数据和持久化数据备份。请先在非生产环境中验证该恢复方案。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ title: 使用 Docker Compose 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>保存当前 Compose 文件以及任何已挂载的 Milvus 配置文件的副本：</p>
+    </button></h3><p>保存当前 Compose 文件以及所有已挂载的 Milvus 配置文件的副本：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cp</span> docker-compose.yml docker-compose-before-upgrade.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>在开始升级前，请确认当前容器状态正常：</p>
@@ -136,4 +136,4 @@ docker compose images standalone
 
 docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>验证<code translate="no">standalone</code> 服务状态正常，其镜像为<code translate="no">milvusdb/milvus:v3.0-beta</code> ，且现有Collections仍可进行查询和搜索。在启用任何v3.0-beta专属功能之前，请先完成这些检查。</p>
+<p>验证<code translate="no">standalone</code> 服务状态正常，其镜像为<code translate="no">milvusdb/milvus:v3.0-beta</code> ，且现有Collections仍可查询和搜索。在启用任何v3.0-beta专属功能之前，请先完成这些检查。</p>

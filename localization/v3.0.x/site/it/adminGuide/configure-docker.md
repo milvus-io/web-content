@@ -42,7 +42,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
     </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml">Scaricare</a> direttamente il file ` <code translate="no">milvus.yaml</code> ` oppure utilizzare il seguente comando.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0-beta/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">Modifica il file di configurazione<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">Modifica del file di configurazione<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,7 +58,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         ></path>
       </svg>
     </button></h2><p>Configurare l’istanza di Milvus in base alle proprie esigenze applicative regolando i parametri corrispondenti nel file ` <code translate="no">milvus.yaml</code>`.</p>
-<p>Per ulteriori informazioni su ciascun parametro, consultare i link seguenti.</p>
+<p>Per ulteriori informazioni su ciascun parametro, consulta i link seguenti.</p>
 <p>Ordinati per:</p>
 <div class="filter">
 <a href="#component">Componenti o dipendenze</a> <a href="#purpose">Finalità di configurazione</a> 
@@ -233,7 +233,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         ></path>
       </svg>
     </button></h2><p>Nel file ` <code translate="no">docker-compose.yml</code>`, aggiungi una sezione ` <code translate="no">volumes</code> ` sotto ogni ` <code translate="no">milvus-standalone</code>`.</p>
-<p>Mappa il percorso locale del tuo file <code translate="no">milvus.yaml</code> ai percorsi corrispondenti dei file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> all’interno di tutte le sezioni <code translate="no">volumes</code> del container Docker.</p>
+<p>Mappa il percorso locale del tuo file <code translate="no">milvus.yaml</code> sui percorsi corrispondenti all’interno del container Docker per i file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> presenti in tutte le sezioni <code translate="no">volumes</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -254,7 +254,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-I dati vengono memorizzati nella cartella <code translate="no">/volumes</code> in base alla configurazione predefinita in <code translate="no">docker-compose.yml</code>. Per modificare la cartella in cui memorizzare i dati, modificare <code translate="no">docker-compose.yml</code> oppure eseguire <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
+I dati vengono memorizzati nella cartella <code translate="no">/volumes</code> in base alla configurazione predefinita in <code translate="no">docker-compose.yml</code>. Per modificare la cartella in cui memorizzare i dati, modificare <code translate="no">docker-compose.yml</code> o eseguire <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Avvio di Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -292,8 +292,8 @@ I dati vengono memorizzati nella cartella <code translate="no">/volumes</code> i
     </button></h2><ul>
 <li>Scopri come gestire le seguenti dipendenze di Milvus con Docker Compose o Helm:
 <ul>
-<li><a href="/docs/it/deploy_s3.md">Configurare l’Object Storage con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_etcd.md">Configurare Meta Storage con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_pulsar.md">Configurare l'archivio dei messaggi con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_s3.md">Configurare l'Object Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_etcd.md">Configurare l'archiviazione dei metadati con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_pulsar.md">Configurare l'archiviazione dei messaggi con Docker Compose o Helm</a></li>
 </ul></li>
 </ul>

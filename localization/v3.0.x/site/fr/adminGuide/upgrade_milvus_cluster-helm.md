@@ -50,7 +50,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 </ul>
 <p><strong>Limitations relatives à la file d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alert warning">
-<p>Ne modifiez pas et ne rétrogradez pas le Helm Chart dans le cadre de cette procédure. Conservez la version du Chart déjà installée pour votre version Helm. La configuration de référence testée a conservé le Helm Chart 5.0.22 et n’a modifié que le tag de l’image Milvus pour le remplacer par <code translate="no">v3.0-beta</code>.</p>
+<p>Ne modifiez pas et ne rétrogradez pas le Helm Chart dans le cadre de cette procédure. Conservez la version du Chart déjà installée pour votre version Helm. La configuration de référence testée a conservé le Helm Chart 5.0.22 et n’a modifié que le tag de l’image Milvus pour <code translate="no">v3.0-beta</code>.</p>
 <p>Cette procédure ne valide pas de retour à une version antérieure ni de restauration consistant à ramener l’image Milvus à la version 2.6.x. Une fois que la version v3.0-beta a écrit des données, une restauration portant uniquement sur l’image peut ne pas parvenir à lire l’état mis à jour. Si la mise à niveau échoue, arrêtez les écritures et utilisez un plan de reprise qui restaure les métadonnées antérieures à la mise à niveau ainsi que les sauvegardes des données persistantes. Validez d’abord le plan de reprise dans un environnement hors production.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
@@ -142,7 +142,7 @@ Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https
   --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
 <p>L’option ` <code translate="no">--reset-then-reuse-values</code> ` conserve les valeurs de la version précédente tout en appliquant la substitution explicite d’image par rapport aux valeurs par défaut du Chart sélectionné.</p>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérification de la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

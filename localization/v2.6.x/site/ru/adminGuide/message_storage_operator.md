@@ -41,7 +41,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В приведенной ниже таблице указано, поддерживаются ли RocksMQ, Pulsar, Kafka и Woodpecker в автономном и кластерном режимах Milvus.</p>
+    </button></h2><p>В приведенной ниже таблице указано, поддерживаются ли RocksMQ, Pulsar, Kafka и Woodpecker в автономном режиме и в режиме кластера Milvus.</p>
 <table>
 <thead>
 <tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th><th style="text-align:center">Woodpecker</th></tr>
@@ -53,14 +53,14 @@ summary: 'Узнайте, как настроить хранилище сооб�
 </table>
 <p>Существуют также другие ограничения при указании хранилища сообщений:</p>
 <ul>
-<li>Поддерживается только одно хранилище сообщений для одного экземпляра Milvus. Однако мы по-прежнему обеспечиваем обратную совместимость с настройкой нескольких хранилищ сообщений для одного экземпляра. Приоритет определяется следующим образом:
+<li>Поддерживается только одно хранилище сообщений для одного экземпляра Milvus. Однако мы по-прежнему обеспечиваем обратную совместимость с несколькими хранилищами сообщений, настроенными для одного экземпляра. Приоритет определяется следующим образом:
 <ul>
 <li>автономный режим:  RocksMQ (по умолчанию) &gt; Pulsar &gt; Kafka</li>
 <li>кластерный режим: Pulsar (по умолчанию) &gt; Kafka</li>
 </ul></li>
 <li>Хранилище сообщений нельзя изменить во время работы системы Milvus.</li>
 <li>Поддерживаются только версии Kafka 2.x или 3.x.</li>
-<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v2.6.17 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</li>
+<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные <strong>с очередями сообщений</strong>: при обновлении до Milvus v2.6.17 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены системы очередей сообщений будет доступна в будущих версиях.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Настройка RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,13 +104,13 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Ключевые параметры конфигурации:</h5><ul>
+<h5 id="Key-configuration-options" class="common-anchor-header">Ключевые параметры настройки:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: явно задаёт RocksMQ в качестве очереди сообщений</li>
 <li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удален при удалении экземпляра Milvus</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удалён при удалении экземпляра Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация PVC в Kubernetes</li>
-<li><code translate="no">accessModes</code>: Обычно используется « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
-<li><code translate="no">storageClassName</code>: Класс хранения вашего кластера</li>
+<li><code translate="no">accessModes</code>: Обычно используется класс хранения « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
+<li><code translate="no">storageClassName</code>: Класс хранилища вашего кластера</li>
 <li><code translate="no">storage</code>: Размер постоянного тома</li>
 </ul>
 <h2 id="Configure-Woodpecker" class="common-anchor-header">Настройка Woodpecker<button data-href="#Configure-Woodpecker" class="anchor-icon" translate="no">
@@ -144,9 +144,9 @@ summary: 'Узнайте, как настроить хранилище сооб�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища), чтобы настроить Pulsar.</p>
+    </button></h2><p>Pulsar управляет журналами недавних изменений, генерирует потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища), чтобы настроить Pulsar.</p>
 <p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+<h3 id="External-Pulsar" class="common-anchor-header">«External Pulsar»<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,7 +242,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">В этом примере указано количество реплик каждого компонента Pulsar, вычислительные ресурсы Pulsar BookKeeper и другие параметры конфигурации.</div>
-<div class="alert note">Полный список элементов конфигурации для настройки внутренней службы Pulsar см. в <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">файле values.yaml</a>. Добавьте необходимые элементы конфигурации в раздел « <code translate="no">pulsar.inCluster.values</code> », как показано в предыдущем примере.</div>
+<div class="alert note">Полный список элементов конфигурации для настройки внутренней службы Pulsar см. в <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">файле values.yaml</a>. Добавляйте элементы конфигурации по мере необходимости в раздел « <code translate="no">pulsar.inCluster.values</code> », как показано в предыдущем примере.</div>
 <p>Предполагая, что файл конфигурации называется <code translate="no">milvuscluster.yaml</code>, выполните следующую команду для применения конфигурации.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -330,7 +330,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> означает, что при запуске кластера Milvus сервис Kafka запускается в кластере автоматически.</p>
-<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере показана настройка внутреннего сервиса Kafka.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В приведённом ниже примере показана настройка внутреннего сервиса Kafka.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

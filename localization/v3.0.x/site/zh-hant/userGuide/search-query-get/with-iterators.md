@@ -2,8 +2,9 @@
 id: with-iterators.md
 title: 搜尋迭代器
 summary: >-
-  ANN Search 對於單一查詢可召回的實體數量有最大限制，單純使用基本 ANN Search 可能無法滿足大規模檢索的需求。對於 topK 超過
-  16,384 的 ANN Search 請求，建議考慮使用 SearchIterator。本節將介紹如何使用 SearchIterator 及相關注意事項。
+  ANN Search 對單次查詢中可檢索到的實體數量設有上限，僅使用基本的 ANN Search 可能無法滿足大規模檢索的需求。 對於 topK 超過
+  16,384 的 ANN Search 請求，建議考慮使用 SearchIterator。本節將介紹如何使用 SearchIterator
+  以及相關注意事項。
 ---
 <h1 id="Search-Iterator" class="common-anchor-header">搜尋迭代器<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ANN Search 對於單一查詢可回收的實體數量有最大限制，單純使用基本 ANN Search 可能無法滿足大規模檢索的需求。對於 topK 超過 16,384 的 ANN Search 請求，建議考慮使用 SearchIterator。本節將介紹如何使用 SearchIterator 及相關注意事項。</p>
+    </button></h1><p>ANN Search 對單次查詢中可檢索的實體數量設有上限，若僅使用基礎的 ANN Search，可能無法滿足大規模檢索的需求。 對於 topK 超過 16,384 的 ANN Search 請求，建議考慮使用 SearchIterator。本節將介紹如何使用 SearchIterator 以及相關注意事項。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,12 +37,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Search 請求會返回搜尋結果，而 SearchIterator 會返回一個迭代器。您可以呼叫這個迭代器的<strong>next()</strong>方法來取得搜尋結果。</p>
-<p>具體而言，您可以如下方式使用 SearchIterator：</p>
+    </button></h2><p>Search 請求會回傳搜尋結果，而 SearchIterator 則會回傳一個迭代器。您可以呼叫此迭代器的<strong>next()</strong>方法來取得搜尋結果。</p>
+<p>具體而言，您可以按照以下方式使用 SearchIterator：</p>
 <ol>
-<li><p>建立一個 SearchIterator，並設定<strong>每個搜尋要求要傳回的實體數量</strong>，以及<strong>要傳回的實體總數</strong>。</p></li>
-<li><p>在循環中呼叫 SearchIterator 的<strong>next()</strong>方法，以分頁方式取得搜尋結果。</p></li>
-<li><p>如果<strong>next()</strong>方法返回空結果，則呼叫迭代器的<strong>close()</strong>方法結束循環。</p></li>
+<li><p>建立一個 SearchIterator，並設定<strong>每次搜尋請求要回傳的實體數量</strong>以及<strong>總共要回傳的實體數量</strong>。</p></li>
+<li><p>在迴圈中呼叫 SearchIterator 的<strong>next()</strong>方法，以分頁方式取得搜尋結果。</p></li>
+<li><p>若<strong>next()</strong>方法傳回空結果，請呼叫迭代器的<strong>close()</strong>方法以結束迴圈。</p></li>
 </ol>
 <h2 id="Create-SearchIterator" class="common-anchor-header">建立 SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +61,13 @@ summary: >-
       </svg>
     </button></h2><p>以下程式碼片段示範如何建立 SearchIterator。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -132,9 +139,65 @@ iterator = collection.search_iterator(
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;iterator_collection&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    &quot;searchParams&quot;: {
+        &quot;metricType&quot;: &quot;L2&quot;,
+        &quot;params&quot;: {
+            &quot;nprobe&quot;: 16
+        }
+    },
+    &quot;limit&quot;: 50,
+    &quot;offset&quot;: 0,
+    &quot;outputFields&quot;: [&quot;color&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述範例中，您將每次搜尋要返回的實體數量<strong>(</strong><strong>batch_size/batchSize</strong>) 設定為 50，並將要返回的實體總數<strong>(topK</strong>) 設定為 20,000。</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-comment">// create iterator</span>
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+milvus::SearchIteratorRequest request;
+request.<span class="hljs-built_in">SetCollectionName</span>(<span class="hljs-string">&quot;iterator_collection&quot;</span>);
+request.<span class="hljs-built_in">SetAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>);
+request.<span class="hljs-built_in">SetMetricType</span>(milvus::MetricType::L2);
+request.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;16&quot;</span>);
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetBatchSize</span>(<span class="hljs-number">50</span>);</span>
+request.<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetLimit</span>(<span class="hljs-number">20000</span>);</span>
+<span class="hljs-comment">// SearchIterator only accepts one vector</span>
+request.<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchIteratorPtr iterator;
+status = client-&gt;<span class="hljs-built_in">SearchIterator</span>(request, iterator);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to create search iterator: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>在上述範例中，您已將每次搜尋要回傳的實體數量（<strong>batch_size/batchSize</strong>）設定為 50，並將要回傳的實體總數（<strong>topK</strong>）設定為 20,000。</p>
 <h2 id="Use-SearchIterator" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -150,9 +213,15 @@ iterator = collection.search_iterator(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦 SearchIterator 準備就緒，您就可以呼叫它的 next() 方法，以分頁方式取得搜尋結果。</p>
+    </button></h2><p>當 SearchIterator 準備就緒後，您可以呼叫其 next() 方法，以分頁方式取得搜尋結果。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -184,6 +253,67 @@ iterator = collection.search_iterator(
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+batch_size=50
+<span class="hljs-built_in">limit</span>=20000
+offset=0
+
+<span class="hljs-comment"># Paginate with offset until an empty page is returned. Note that the sum of</span>
+<span class="hljs-comment"># offset and limit in each request must not exceed the server-side result</span>
+<span class="hljs-comment"># window (16,384 by default); SDK search iterators do not have this limit.</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$offset</span>&quot;</span> -lt <span class="hljs-string">&quot;<span class="hljs-variable">$limit</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+<span class="highlighted-wrapper-line">    response=$(curl --silent --request POST \</span>
+        --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+        --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+        --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+        --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+        -d <span class="hljs-string">&#x27;{
+            &quot;collectionName&quot;: &quot;iterator_collection&quot;,
+            &quot;annsField&quot;: &quot;vector&quot;,
+            &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+            &quot;searchParams&quot;: {
+                &quot;metricType&quot;: &quot;L2&quot;,
+                &quot;params&quot;: {
+                    &quot;nprobe&quot;: 16
+                }
+            },
+            &quot;limit&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$batch_size</span>&quot;</span><span class="hljs-string">&#x27;,
+            &quot;offset&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$offset</span>&quot;</span><span class="hljs-string">&#x27;,
+            &quot;outputFields&quot;: [&quot;color&quot;]
+        }&#x27;</span>)
+
+    count=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$response</span>&quot;</span> | jq -r <span class="hljs-string">&#x27;.data | length&#x27;</span>)
+    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$count</span>&quot;</span> -eq 0 ]; <span class="hljs-keyword">then</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-built_in">break</span></span>
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$response</span>&quot;</span> | jq -r <span class="hljs-string">&#x27;.data[]&#x27;</span>
+    offset=$((offset + batch_size))
+<span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的程式碼範例中，您建立了一個無限循環，並在循環中呼叫<strong>next(</strong> <strong>)</strong>方法，將搜尋結果儲存在變數中，並在<strong>next()</strong>沒有回傳任何結果時關閉迭代器。</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    milvus::SingleResult result;
+<span class="highlighted-wrapper-line">    status = iterator-&gt;<span class="hljs-built_in">Next</span>(result);</span>
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Iterator next failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+        <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-built_in">GetRowCount</span>() == <span class="hljs-number">0</span>) {
+<span class="highlighted-wrapper-line">        <span class="hljs-keyword">break</span>;</span>
+    }
+
+    milvus::EntityRows rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to get output rows: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+        <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : rows) {
+        std::cout &lt;&lt; row.<span class="hljs-built_in">dump</span>() &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>在上述程式碼範例中，您已建立一個無限迴圈，並在迴圈中呼叫<strong>next()</strong>方法，將搜尋結果儲存至變數中，並在<strong>next()</strong>返回空值時關閉迭代器。</p>

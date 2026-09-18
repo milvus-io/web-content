@@ -1,11 +1,11 @@
 ---
 id: grouping-search.md
-title: Группировочный поиск
+title: Групповой поиск
 summary: >-
-  Используйте группирующий поиск, чтобы объединить результаты поиска ANN по
-  значению поля и уменьшить количество дублирующихся сущностей.
+  Используйте групповой поиск, чтобы сгруппировать результаты поиска ANN по
+  значению поля и сократить количество дубликатов сущностей.
 ---
-<h1 id="Grouping-Search" class="common-anchor-header">Группировочный поиск<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
+<h1 id="Grouping-Search" class="common-anchor-header">Групповой поиск<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Группировочный поиск позволяет Milvus группировать результаты поиска по значениям в указанном поле, чтобы собрать данные на более высоком уровне. Например, вы можете использовать базовый поиск ANN, чтобы найти книги, похожие на ту, которую вы рассматриваете, но вы можете использовать группирующий поиск, чтобы найти категории книг, которые могут быть связаны с темами, обсуждаемыми в этой книге. В этой теме описывается использование группирующего поиска, а также основные моменты.</p>
+    </button></h1><p>Групповой поиск позволяет Milvus группировать результаты поиска по значениям в указанном поле для агрегирования данных на более высоком уровне. Например, с помощью базового поиска ANN можно найти книги, похожие на рассматриваемую, а с помощью группированного поиска — категории книг, которые могут касаться тем, обсуждаемых в этой книге. В данной статье описывается, как использовать группированный поиск, а также приводятся ключевые моменты, которые следует учитывать.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,27 +36,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда сущности в результатах поиска имеют одинаковое значение в скалярном поле, это указывает на то, что они похожи по определенному атрибуту, что может негативно повлиять на результаты поиска.</p>
-<p>Предположим, что в коллекции хранится несколько документов (обозначаемых <strong>docId</strong>). Чтобы сохранить как можно больше семантической информации при преобразовании документов в векторы, каждый документ разбивается на более мелкие, управляемые абзацы (или <strong>куски</strong>) и хранится как отдельные сущности. Даже если документ разделен на более мелкие части, пользователи часто заинтересованы в том, чтобы определить, какие документы наиболее релевантны их потребностям.</p>
-<p>
+    </button></h2><p>Когда объекты в результатах поиска имеют одинаковое значение в скалярном поле, это указывает на их сходство по определенному атрибуту, что может негативно повлиять на результаты поиска.</p>
+<p>Предположим, что коллекция хранит несколько документов (обозначенных <strong>docId</strong>). Чтобы сохранить как можно больше семантической информации при преобразовании документов в векторы, каждый документ разбивается на более мелкие, удобные для работы абзацы (или <strong>фрагменты</strong>) и хранится в виде отдельных объектов. Несмотря на то что документ разбит на более мелкие части, пользователи часто по-прежнему заинтересованы в том, чтобы определить, какие документы наиболее соответствуют их потребностям.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
-   </span> <span class="img-wrapper"> <span>Поиск по аннам</span> </span></p>
-<p>При выполнении поиска по приближенным ближайшим соседям (ANN) в такой коллекции результаты поиска могут включать несколько абзацев из одного и того же документа, что может привести к пропуску других документов, что может не соответствовать предполагаемому сценарию использования.</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" /> 
+   <span>Поиск по Ann</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-   </span> <span class="img-wrapper"> <span>Группировка поиска</span> </span></p>
-<p>Чтобы улучшить разнообразие результатов поиска, можно добавить параметр <code translate="no">group_by_field</code> в запрос на поиск, чтобы включить группировочный поиск. Как показано на рисунке, можно установить <code translate="no">group_by_field</code> на <code translate="no">docId</code>. Получив этот запрос, Milvus:</p>
+ </span></p>
+<p>При выполнении поиска по методу приближенного ближайшего соседа (ANN) в такой коллекции результаты поиска могут включать несколько абзацев из одного и того же документа, что потенциально может привести к пропуску других документов, что может не соответствовать предполагаемому сценарию использования.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" /> 
+   <span>Групповой поиск</span>
+  
+ </span></p>
+<p>Чтобы повысить разнообразие результатов поиска, в запросе на поиск можно добавить параметр « <code translate="no">group_by_field</code> » для включения группового поиска. Как показано на схеме, можно установить значение « <code translate="no">group_by_field</code> » на « <code translate="no">docId</code> ». Получив такой запрос, Milvus:</p>
 <ul>
-<li><p>Выполнит ANN-поиск на основе предоставленного вектора запроса, чтобы найти все сущности, наиболее похожие на запрос.</p></li>
-<li><p>Сгруппирует результаты поиска по указанному <code translate="no">group_by_field</code>, например <code translate="no">docId</code>.</p></li>
-<li><p>Вернет верхние результаты для каждой группы, как определено параметром <code translate="no">limit</code>, с наиболее похожими сущностями из каждой группы.</p></li>
+<li><p>Выполнит поиск по искусственной нейронной сети (ANN) на основе предоставленного вектора запроса, чтобы найти все объекты, наиболее похожие на запрос.</p></li>
+<li><p>Сгруппирует результаты поиска по указанному параметру « <code translate="no">group_by_field</code> », например <code translate="no">docId</code>.</p></li>
+<li><p>Вернет лучшие результаты для каждой группы, как определено параметром <code translate="no">limit</code>, с наиболее похожим объектом из каждой группы.</p></li>
 </ul>
 <div class="alert note">
-<p>По умолчанию группировочный поиск возвращает только одну сущность на группу. Если вы хотите увеличить количество результатов, возвращаемых для каждой группы, вы можете управлять этим с помощью параметров <code translate="no">group_size</code> и <code translate="no">strict_group_size</code>.</p>
+<p>По умолчанию поиск с группировкой возвращает только одну сущность на группу. Если вы хотите увеличить количество результатов, возвращаемых на группу, вы можете настроить это с помощью параметров « <code translate="no">group_size</code> » и « <code translate="no">strict_group_size</code> ».</p>
 </div>
-<h2 id="Perform-Grouping-Search" class="common-anchor-header">Выполнение группировочного поиска<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Grouping-Search" class="common-anchor-header">Выполнение группового поиска<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе приведены примеры кода, демонстрирующие использование группировочного поиска. В следующем примере предполагается, что коллекция включает поля <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code> и <code translate="no">docId</code>.</p>
+    </button></h2><p>В этом разделе приведен пример кода, демонстрирующий использование группового поиска. В следующем примере предполагается, что коллекция содержит поля <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code> и <code translate="no">docId</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">1</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">5</span>},
@@ -86,9 +90,15 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>В поисковом запросе установите значения <code translate="no">group_by_field</code> и <code translate="no">output_fields</code> на <code translate="no">docId</code>. Milvus сгруппирует результаты по указанному полю и вернет наиболее похожую сущность из каждой группы, включая значение <code translate="no">docId</code> для каждой возвращенной сущности.</p>
+<p>В запросе на поиск установите для полей <code translate="no">group_by_field</code> и <code translate="no">output_fields</code> значение <code translate="no">docId</code>. Milvus сгруппирует результаты по указанному полю и вернет наиболее похожую сущность из каждой группы, включая значение <code translate="no">docId</code> для каждой возвращаемой сущности.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -213,7 +223,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -225,7 +234,47 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше запросе <code translate="no">limit=3</code> указывает на то, что система вернет результаты поиска из трех групп, причем каждая группа будет содержать одну наиболее похожую на вектор запроса сущность.</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>В приведённом выше запросе параметр <code translate="no">limit=3</code> указывает, что система вернёт результаты поиска из трёх групп, причём каждая группа будет содержать единственный объект, наиболее схожий с вектором запроса.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Настройка размера группы<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -241,9 +290,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>По умолчанию группировочный поиск возвращает только одну сущность на группу. Если вы хотите получить несколько результатов на группу, настройте параметры <code translate="no">group_size</code> и <code translate="no">strict_group_size</code>.</p>
+    </button></h2><p>По умолчанию поиск с группировкой возвращает только один объект в каждой группе. Если вам нужно несколько результатов в каждой группе, настройте параметры <code translate="no">group_size</code> и <code translate="no">strict_group_size</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
 res = client.search(
@@ -353,7 +408,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -367,13 +421,55 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В примере выше:</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>В приведенном выше примере:</p>
 <ul>
-<li><p><code translate="no">group_size</code>: Указывает желаемое количество сущностей, возвращаемых в каждой группе. Например, если задать <code translate="no">group_size=2</code>, то каждая группа (или каждый <code translate="no">docId</code>) в идеале должна возвращать два наиболее похожих абзаца (или <strong>фрагмента</strong>). Если <code translate="no">group_size</code> не задан, система по умолчанию возвращает один результат на группу.</p></li>
-<li><p><code translate="no">strict_group_size</code>: Этот булевский параметр управляет тем, должна ли система строго придерживаться подсчета, заданного <code translate="no">group_size</code>. Если задан <code translate="no">strict_group_size=True</code>, система попытается включить в каждую группу точное количество сущностей, заданное <code translate="no">group_size</code> (например, два абзаца), если только в этой группе не будет достаточно данных. По умолчанию (<code translate="no">strict_group_size=False</code>), системе приоритетнее удовлетворить количество групп, заданное параметром <code translate="no">limit</code>, чем гарантировать, что каждая группа содержит сущности <code translate="no">group_size</code>. Такой подход обычно более эффективен в случаях, когда распределение данных неравномерно.</p></li>
+<li><p><code translate="no">group_size</code>: Указывает желаемое количество объектов, которые должны возвращаться в каждой группе. Например, установка значения <code translate="no">group_size=2</code> означает, что каждая группа (или каждый <code translate="no">docId</code>) в идеале должна возвращать два наиболее похожих абзаца (или <strong>фрагмента</strong>). Если параметр <code translate="no">group_size</code> не задан, система по умолчанию возвращает один результат на группу.</p></li>
+<li><p><code translate="no">strict_group_size</code>: Этот булевый параметр определяет, должна ли система строго соблюдать количество, заданное параметром <code translate="no">group_size</code>. При значении <code translate="no">strict_group_size=True</code> система будет пытаться включить в каждую группу точное количество элементов, указанное параметром <code translate="no">group_size</code> (например, два абзаца), за исключением случаев, когда в данной группе недостаточно данных. По умолчанию (<code translate="no">strict_group_size=False</code>) система уделяет приоритетное внимание соблюдению количества групп, указанного параметром <code translate="no">limit</code>, а не обеспечению того, чтобы каждая группа содержала <code translate="no">group_size</code> элементов. Такой подход, как правило, более эффективен в случаях, когда распределение данных неравномерно.</p></li>
 </ul>
-<p>Дополнительные сведения о параметре см. в разделе <a href="https://docs.zilliz.com/reference/python/python/Vector-search">Поиск</a>.</p>
-<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Упорядочивание групп по скалярному полю<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+<p>Дополнительные сведения о параметрах см. в разделе <a href="https://docs.zilliz.com/reference/python/python/Vector-search">«search</a>».</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Сортировка групп по скалярному полю<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -388,10 +484,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете объединить поиск по группировке с <code translate="no">order_by_fields</code>, чтобы упорядочить группы по скалярному полю. Это удобно, когда вы хотите получить разнообразные результаты по группам, но при этом хотите, чтобы группы следовали какому-то важному для бизнеса порядку, например по цене или рейтингу.</p>
-<p>Следующий пример группирует результаты поиска по <code translate="no">category</code>, возвращает до трех объектов в группу и упорядочивает полученные группы по <code translate="no">price</code> от низкого к высокому.</p>
+    </button></h2><p>Вы можете объединить «Групповой поиск» (Grouping Search) с «Поиском по скалярному полю» ( <code translate="no">order_by_fields</code> ), чтобы упорядочить группы по скалярному полю. Это полезно, когда вам нужны разнообразные результаты в разных группах, но при этом вы хотите, чтобы группы следовали порядку, значимому для бизнеса, например, по цене или рейтингу.</p>
+<p>В следующем примере результаты поиска сгруппированы по параметру « <code translate="no">category</code> », в каждую группу входит не более трёх объектов, а возвращённые группы отсортированы по значению « <code translate="no">price</code> » от наименьшего к наибольшему.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -406,17 +508,118 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> SearchReq.builder()
+    .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .data(List.of(queryVector))
+    .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .topK(<span class="hljs-number">20</span>)
+    .groupByFieldName(<span class="hljs-string">&quot;category&quot;</span>)
+    .groupSize(<span class="hljs-number">3</span>)
+    .strictGroupSize(<span class="hljs-literal">true</span>)
+    .outputFields(List.of(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
+    .orderByFields(List.of(OrderByField.builder()
+        .fieldName(<span class="hljs-string">&quot;price&quot;</span>).direction(AggDirection.ASC).build()))
+    .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> client.search(request);
+System.out.println(response.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>];
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+  <span class="hljs-attr">data</span>: [queryVector],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+  <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;category&quot;</span>,
+  <span class="hljs-attr">group_size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">strict_group_size</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+  <span class="hljs-attr">order_by_fields</span>: [{ <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> }],
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">results</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>}
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-number">20</span>, []entity.Vector{entity.FloatVector(queryVector)},
+).
+    WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithGroupByField(<span class="hljs-string">&quot;category&quot;</span>).
+    WithGroupSize(<span class="hljs-number">3</span>).
+    WithStrictGroupSize(<span class="hljs-literal">true</span>).
+    WithOutputFields(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">for</span> _, result := <span class="hljs-keyword">range</span> results {
+    fmt.Println(result.IDs, result.Scores)
+    fmt.Println(result.GetColumn(<span class="hljs-string">&quot;category&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;price&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>))
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.</span>
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_catalog&quot;,
+    &quot;data&quot;: [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 20,
+    &quot;groupingField&quot;: &quot;category&quot;,
+    &quot;groupSize&quot;: 3,
+    &quot;strictGroupSize&quot;: true,
+    &quot;outputFields&quot;: [&quot;category&quot;, &quot;price&quot;, &quot;rating&quot;],
+    &quot;orderByFields&quot;: [&quot;price:asc&quot;]
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше запросе <code translate="no">limit=20</code> означает, что Milvus выбирает до 20 групп, а не 20 сущностей. Поскольку <code translate="no">group_size=3</code>, плоский список результатов может содержать до 60 сущностей в целом.</p>
-<p>Когда вы используете <code translate="no">order_by_fields</code> с <code translate="no">group_by_field</code>, Milvus упорядочивает группы по указанному значению скалярного поля верхней сущности каждой группы. Внутри каждой группы сущности остаются упорядоченными по их сходству с вектором запроса.</p>
-<h2 id="Considerations" class="common-anchor-header">Соображения<button data-href="#Considerations" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+    .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">3</span>)
+    .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+    .<span class="hljs-built_in">AddOrderByField</span>(milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC));
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+    std::cout &lt;&lt; rows &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>В приведённом выше запросе параметр ` <code translate="no">limit=20</code> ` означает, что Milvus выбирает до 20 групп, а не 20 объектов. Поскольку ` <code translate="no">group_size=3</code>`, плоский список результатов может содержать в общей сложности до 60 объектов.</p>
+<p>При использовании <code translate="no">order_by_fields</code> вместе с <code translate="no">group_by_field</code> Milvus сортирует группы по указанному значению скалярного поля ведущего объекта каждой группы. Внутри каждой группы объекты остаются отсортированными по степени сходства с вектором запроса.</p>
+<h2 id="Considerations" class="common-anchor-header">Рекомендации<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -432,9 +635,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Индексирование</strong>: Эта функция группировки работает только для коллекций, проиндексированных этими типами индексов: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ,</strong> <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Количество групп</strong>: Параметр <code translate="no">limit</code> управляет количеством групп, из которых возвращаются результаты поиска, а не конкретным количеством сущностей в каждой группе. Установка подходящего значения <code translate="no">limit</code> помогает контролировать разнообразие поиска и производительность запросов. Уменьшение <code translate="no">limit</code> может снизить затраты на вычисления, если данные распределены плотно или производительность вызывает беспокойство.</p></li>
-<li><p><strong>Сущности на группу</strong>: Параметр <code translate="no">group_size</code> управляет количеством сущностей, возвращаемых на группу. Настройка параметра <code translate="no">group_size</code> в зависимости от конкретного случая использования может повысить насыщенность результатов поиска. Однако если данные распределены неравномерно, некоторые группы могут возвращать меньше сущностей, чем указано на <code translate="no">group_size</code>, особенно в сценариях с ограниченным количеством данных.</p></li>
-<li><p><strong>Строгий размер группы</strong>: При использовании <code translate="no">strict_group_size=True</code> система будет пытаться вернуть указанное количество сущностей (<code translate="no">group_size</code>) для каждой группы, если только в этой группе нет достаточного количества данных. Эта настройка обеспечивает постоянное количество сущностей в группе, но может привести к снижению производительности при неравномерном распределении данных или ограниченных ресурсах. Если строгий подсчет сущностей не требуется, установка <code translate="no">strict_group_size=False</code> может повысить скорость выполнения запросов.</p></li>
-<li><p>Если векторы запроса уже существуют в целевой коллекции, используйте <code translate="no">ids</code>, чтобы не извлекать их перед поиском. Подробнее см. в разделе <a href="/docs/ru/primary-key-search.md">Поиск по первичному ключу</a>.</p></li>
+<li><p><strong>Индексирование</strong>: Эта функция группировки работает только для коллекций, проиндексированных с использованием следующих типов индексов: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Количество групп</strong>: Параметр « <code translate="no">limit</code> » (<strong>Количество групп</strong>) определяет количество групп, из которых возвращаются результаты поиска, а не конкретное количество объектов в каждой группе. Установка подходящего значения параметра « <code translate="no">limit</code> » (Количество групп) помогает контролировать разнообразие результатов поиска и производительность запроса. Уменьшение значения параметра « <code translate="no">limit</code> » (Количество групп) может снизить вычислительные затраты, если данные распределены плотно или существует необходимость в обеспечении высокой производительности.</p></li>
+<li><p><strong>Количество объектов в группе</strong>: Параметр <code translate="no">group_size</code> управляет количеством объектов, возвращаемых в каждой группе. Настройка параметра <code translate="no">group_size</code> в соответствии с вашим сценарием использования может повысить насыщенность результатов поиска. Однако при неравномерном распределении данных некоторые группы могут возвращать меньшее количество объектов, чем указано в параметре <code translate="no">group_size</code>, особенно в условиях ограниченного объема данных.</p></li>
+<li><p><strong>Строгий размер группы</strong>: при значении <code translate="no">strict_group_size=True</code> система будет пытаться возвращать указанное количество сущностей (<code translate="no">group_size</code>) для каждой группы, за исключением случаев, когда в данной группе недостаточно данных. Этот параметр обеспечивает постоянное количество сущностей в каждой группе, но может привести к снижению производительности при неравномерном распределении данных или ограниченных ресурсах. Если строгое количество сущностей не требуется, установка значения <code translate="no">strict_group_size=False</code> может повысить скорость выполнения запросов.</p></li>
+<li><p>Если векторы запроса уже существуют в целевой коллекции, рассмотрите возможность использования <code translate="no">ids</code> вместо их извлечения перед поиском. Подробности см. в разделе <a href="/docs/ru/primary-key-search.md">«Поиск по первичному ключу</a>».</p></li>
 </ul>

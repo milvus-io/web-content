@@ -92,7 +92,7 @@ title: Milvus Java SDK 설치
 <ul>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 업데이트 및 삭제</a></li>
 <li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>

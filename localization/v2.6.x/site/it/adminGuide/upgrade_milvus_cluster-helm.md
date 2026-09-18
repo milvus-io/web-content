@@ -23,7 +23,7 @@ title: Aggiornamento del cluster Milvus con Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida descrive come aggiornare il cluster Milvus dalla versione v2.5.x alla v2.6.17 utilizzando Helm Chart.</p>
+    </button></h1><p>Questa guida descrive come aggiornare il cluster Milvus dalla versione 2.5.x alla versione 2.6.17 utilizzando Helm Chart.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ title: Aggiornamento del cluster Milvus con Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'aggiornamento da Milvus 2.5.x alla versione 2.6.17 comporta modifiche architetturali significative:</p>
+    </button></h3><p>L’aggiornamento da Milvus 2.5.x a 2.6.17 comporta modifiche architetturali significative:</p>
 <ul>
 <li><strong>Consolidamento dei coordinatori</strong>: i coordinatori separati legacy (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) sono stati consolidati in un unico <code translate="no">mixCoord</code></li>
 <li><strong>Nuovi componenti</strong>: introduzione dello Streaming Node per un’elaborazione dei dati potenziata</li>
@@ -86,9 +86,9 @@ title: Aggiornamento del cluster Milvus con Helm Chart
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni candidate al rilascio non sono supportati.</li>
 <li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di fare riferimento a <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
-<li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoordinator</code> " abilitata prima di passare alla versione v2.6.17.</li>
+<li><strong>È necessario</strong> eseguire l'aggiornamento alla versione v2.5.16 o successive con l'opzione " <code translate="no">mixCoordinator</code> " abilitata prima di passare alla v2.6.17.</li>
 </ul>
-<p><strong>Limitazioni relative alle code dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda dei messaggi. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti delle code di messaggi</strong>: durante l'aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio tra diversi sistemi di code di messaggi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 <div class="alert note">
 A partire dalla versione 4.2.21 del chart Helm di Milvus, abbiamo introdotto il chart pulsar-v3.x come dipendenza. Per garantire la retrocompatibilità, si prega di aggiornare Helm alla versione 3.14 o successive e di assicurarsi di aggiungere l’opzione <code translate="no">--reset-then-reuse-values</code> ogni volta che si utilizza <code translate="no">helm upgrade</code>.
 </div>
@@ -122,18 +122,18 @@ A partire dalla versione 4.2.21 del chart Helm di Milvus, abbiamo introdotto il 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per prima cosa, aggiornare il chart Helm di Milvus alla versione 5.0.0:</p>
+    </button></h3><p>Per prima cosa, aggiorna il chart Helm di Milvus alla versione 5.0.0:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Il repository dei chart Helm di Milvus all'indirizzo <code translate="no">https://milvus-io.github.io/milvus-helm/</code> è stato archiviato. Utilizzate il nuovo repository <code translate="no">https://zilliztech.github.io/milvus-helm/</code> per le versioni 4.0.31 e successive dei chart.
+Il repository dei chart Helm di Milvus all’indirizzo <code translate="no">https://milvus-io.github.io/milvus-helm/</code> è stato archiviato. Utilizzare il nuovo repository <code translate="no">https://zilliztech.github.io/milvus-helm/</code> per le versioni del chart 4.0.31 e successive.
 </div>
 <p>Per verificare la compatibilità della versione del chart Helm con le versioni di Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Questa guida presuppone che si stia installando l’ultima versione. Se è necessario installare una versione specifica, specificare il parametro <code translate="no">--version</code> di conseguenza.</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Passaggio 2: Aggiornamento alla v2.5.16 con mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Passaggio 2: aggiornamento alla v2.5.16 con mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,7 +151,7 @@ Il repository dei chart Helm di Milvus all'indirizzo <code translate="no">https:
     </button></h3><p>Verifica se il tuo cluster utilizza attualmente coordinatori separati:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Se sono presenti pod di coordinatori separati (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), eseguire l'aggiornamento alla v2.5.16 e abilitare <code translate="no">mixCoordinator</code>:</p>
+<p>Se si notano pod coordinatori separati (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), eseguire l'aggiornamento alla v2.5.16 e abilitare <code translate="no">mixCoordinator</code>:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
@@ -163,7 +163,7 @@ Il repository dei chart Helm di Milvus all'indirizzo <code translate="no">https:
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert-note">
-<p>Se il tuo cluster utilizza già <code translate="no">mixCoordinator</code>, aggiorna semplicemente l'immagine:</p>
+<p>Se il cluster utilizza già <code translate="no">mixCoordinator</code>, è sufficiente aggiornare l'immagine:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
@@ -174,7 +174,7 @@ Il repository dei chart Helm di Milvus all'indirizzo <code translate="no">https:
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passaggio 3: Aggiornamento alla versione v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Passaggio 3: Effettuare l’aggiornamento alla versione v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

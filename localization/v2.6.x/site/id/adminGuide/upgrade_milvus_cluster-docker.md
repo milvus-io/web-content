@@ -1,7 +1,7 @@
 ---
 id: upgrade_milvus_cluster-docker.md
 summary: >-
-  Pelajari cara melakukan upgrade pada kluster Milvus menggunakan Docker
+  Pelajari cara melakukan upgrade pada klaster Milvus menggunakan Docker
   Compose.
 title: Memperbarui Kluster Milvus dengan Docker Compose
 ---
@@ -24,7 +24,7 @@ title: Memperbarui Kluster Milvus dengan Docker Compose
     </button></h1><p>Topik ini menjelaskan cara memperbarui Milvus Anda menggunakan Docker Compose.</p>
 <p>Dalam kondisi normal, Anda dapat <a href="#Upgrade-Milvus-by-changing-its-image">memperbarui Milvus dengan mengganti gambarnya</a>. Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pembaruan dari v2.1.x ke v2.6.17.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memperbarui Milvus dengan mengganti gambarnya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,12 +150,12 @@ docker compose up -d
     </button></h2><ul>
 <li>Anda mungkin juga ingin mempelajari cara:
 <ul>
-<li><a href="/docs/id/v2.6.x/scaleout.md">Menskalakan kluster Milvus</a></li>
+<li><a href="/docs/id/v2.6.x/scaleout.md">Menskala kluster Milvus</a></li>
 </ul></li>
 <li>Jika Anda siap untuk menerapkan kluster Anda di cloud:
 <ul>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">mengimplementasikan Milvus di Amazon EKS dengan Terraform</a></li>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/gcp.md">mengimplementasikan kluster Milvus di GCP dengan Kubernetes</a></li>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/azure.md">mengimplementasikan Milvus di Microsoft Azure dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">menyebarkan Milvus di Amazon EKS menggunakan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/gcp.md">Deploy Kluster Milvus di GCP dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/azure.md">menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>
 </ul>

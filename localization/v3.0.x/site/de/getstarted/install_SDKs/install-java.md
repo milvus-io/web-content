@@ -2,7 +2,7 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das Java-SDK von Milvus installieren.'
+summary: 'Erfahren Sie, wie Sie das Java SDK von Milvus installieren.'
 title: Milvus Java SDK installieren
 ---
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDK installieren<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ title: Milvus Java SDK installieren
 </ul>
 <pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.18&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Was nun<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Was als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,5 +96,5 @@ title: Milvus Java SDK installieren
 <li><a href="/docs/de/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/api-reference/java/v2.4.x/About.md">die Milvus-Java-API-Referenz</a></p></li>
+<li><p>Entdecken Sie <a href="/api-reference/java/v2.4.x/About.md">die Milvus Java-API-Referenz</a></p></li>
 </ul>

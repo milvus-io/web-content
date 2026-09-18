@@ -48,10 +48,10 @@ title: Atualizar o cluster Milvus com o Helm Chart
 <li>Os valores do Helm utilizados na implementação existente</li>
 <li>Uma cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte para a alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
 <p>Não altere nem faça o downgrade do Helm Chart como parte deste procedimento. Mantenha a versão do Chart já instalada para a sua versão do Helm. A linha de base testada manteve o Helm Chart 5.0.22 e alterou apenas a etiqueta da imagem do Milvus para <code translate="no">v3.0-beta</code>.</p>
-<p>Este procedimento não valida um downgrade ou reversão que consista em alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0-beta gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Este procedimento não valida um downgrade ou uma reversão que implique alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0-beta gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados pré-atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +141,7 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
-<p>A opção « <code translate="no">--reset-then-reuse-values</code> » mantém os valores da versão anterior, aplicando simultaneamente a substituição explícita da imagem em relação aos valores predefinidos do Chart selecionado.</p>
+<p>A opção « <code translate="no">--reset-then-reuse-values</code> » mantém os valores da versão anterior, ao mesmo tempo que aplica a substituição explícita da imagem em relação aos valores predefinidos do Chart selecionado.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Verifique a atualização<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

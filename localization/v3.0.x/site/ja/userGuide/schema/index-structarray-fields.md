@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArray のサブフィールドにインデックスを作成してください。StructArray フィールドの場合、インデックスのターゲットは、<code translate="no">chunks[emb_list_vector]</code> 、<code translate="no">chunks[emb]</code> 、<code translate="no">chunks[section]</code> などのサブフィールドパスになります。</p>
+    </button></h1><p>ベクトル検索を実行したり、スカラーフィルタリングを高速化したりする前に、StructArray のサブフィールドにインデックスを作成してください。StructArray フィールドの場合、インデックスのターゲットは、<code translate="no">chunks[emb_list_vector]</code> 、<code translate="no">chunks[emb]</code> 、または<code translate="no">chunks[section]</code> などのサブフィールドパスになります。</p>
 <p>このページでは、「<a href="/docs/ja/create-structarray-field.md">StructArray フィールドの作成</a>」の<code translate="no">tech_articles</code> コレクションを使用しています。<code translate="no">chunks</code> StructArray フィールドには、フィルタリング用のスカラーサブフィールドと、検索用のベクトルサブフィールドが含まれています。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始する前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションスキーマに「<code translate="no">chunks</code> 」StructArrayフィールドがすでに含まれており、データが挿入されていることを確認してください。</p>
+    </button></h2><p>コレクションスキーマに<code translate="no">chunks</code> StructArrayフィールドがすでに含まれており、データが挿入されていることを確認してください。</p>
 <table>
 <thead>
 <tr><th>サブフィールドのパス</th><th>タイプ</th><th>インデックスの目的</th></tr>
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例では、2つのベクトルインデックスを作成します。1つ目のインデックスは、EmbeddingList検索用に<code translate="no">MAX_SIM*</code> メトリックを使用します。2つ目のインデックスは、要素レベル検索用に通常のベクトルメトリックを使用します。</p>
+    </button></h2><p>次の例では、2つのベクトルインデックスを作成します。1つ目のインデックスは、EmbeddingList検索用に<code translate="no">MAX_SIM*</code> メトリックを使用します。2つ目のインデックスは、要素レベルの検索用に通常のベクトルメトリックを使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -203,7 +203,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArrayのベクトルサブフィールドに対するインデックス型およびメトリック型を選択する際は、以下の表を参照してください。対象から始め、検索モードに応じてメトリックファミリーを選択してください。</p>
+    </button></h2><p>StructArray のベクトルサブフィールドに対するインデックス型およびメトリック型を選択する際は、以下の表を参照してください。対象から始め、検索モードに応じてメトリックファミリーを選択します。</p>
 <p>以下の互換性表から、Milvus インデックス型とメトリック型を選択してください。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 検索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ client.create_index(
     </button></h3><p>EmbeddingList 検索では、<code translate="no">MAX_SIM*</code> メトリックが使用されます。StructArray ベクトルサブフィールド内のベクトルをエンベディングリストとして扱い、エンティティレベルの結果を返します。</p>
 <table>
 <thead>
-<tr><th>ベクトルサブフィールドのデータ型</th><th>インデックス型</th><th>メトリックタイプ</th></tr>
+<tr><th>ベクトルサブフィールドのデータ型</th><th>インデックス・タイプ</th><th>メトリックタイプ</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code>,<code translate="no">FLOAT16_VECTOR</code>,<code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">IVF_FLAT</code>,<code translate="no">IVF_FLAT_CC</code>,<code translate="no">HNSW</code>,<code translate="no">HNSW_SQ</code>,<code translate="no">HNSW_PQ</code>,<code translate="no">HNSW_PRQ</code>,<code translate="no">DISKANN</code></td><td><code translate="no">MAX_SIM</code>,<code translate="no">MAX_SIM_COSINE</code>,<code translate="no">MAX_SIM_IP</code>,<code translate="no">MAX_SIM_L2</code></td></tr>
@@ -231,7 +231,7 @@ client.create_index(
 <tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HNSW</code></td><td><code translate="no">MAX_SIM_HAMMING</code>,<code translate="no">MAX_SIM_JACCARD</code></td></tr>
 </tbody>
 </table>
-<h3 id="Element-level-search" class="common-anchor-header">要素レベルの検索<button data-href="#Element-level-search" class="anchor-icon" translate="no">
+<h3 id="Element-level-search" class="common-anchor-header">要素単位の検索<button data-href="#Element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,7 +275,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスの作成後、コレクションまたはリストのインデックスを記述して、期待されるサブフィールドパスがインデックス化されていることを確認してください。</p>
+    </button></h2><p>インデックスを作成した後、コレクションまたはリストのインデックスを記述して、期待されるサブフィールドパスがインデックス化されていることを確認してください。</p>
 <pre><code translate="no" class="language-python">indexes = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
 )
@@ -290,7 +290,7 @@ client.create_index(
 
 <span class="hljs-built_in">print</span>(index)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-rules" class="common-anchor-header">インデックス規則<button data-href="#Index-rules" class="anchor-icon" translate="no">
+<h2 id="Index-rules" class="common-anchor-header">インデックスルール<button data-href="#Index-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -312,8 +312,8 @@ client.create_index(
 <tbody>
 <tr><td>サブフィールドインデックスにはパス構文を使用してください。</td><td>インデックスは `<code translate="no">chunks[emb]</code>` とし、`<code translate="no">emb</code> ` や `<code translate="no">chunks.emb</code>` とはしないでください。</td></tr>
 <tr><td>1 つのベクトルサブフィールドには 1 つのインデックスしか指定できません。</td><td>異なるメトリックファミリーが必要な場合は、別々のベクトルサブフィールドを使用してください。</td></tr>
-<tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリクスを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
-<tr><td>要素レベルの検索には、通常のベクトルメトリクスを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
+<tr><td>EmbeddingList 検索には、<code translate="no">MAX_SIM*</code> メトリックを使用してください。</td><td>EmbeddingList クエリデータには、<code translate="no">MAX_SIM*</code> メトリックを使用して構築されたインデックスが必要です。</td></tr>
+<tr><td>要素レベルの検索には、通常のベクトルメトリックを使用してください。</td><td>要素レベルの検索では、通常のベクトルクエリデータと、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、<code translate="no">L2</code> などのメトリックが使用されます。</td></tr>
 <tr><td>フィルタに現れるスカラーサブフィールドをインデックス化してください。</td><td>ターゲットでサポートされているスカラーインデックス型を使用してください。</td></tr>
 <tr><td>ベクトルフィールドの制限に注意してください。</td><td>ベクトルフィールドとベクトルサブフィールドの合計数には制限があります。多数のベクトルサブフィールドを追加する前に、「StructArray の制限」を参照してください。</td></tr>
 </tbody>
@@ -334,11 +334,11 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><code translate="no">chunks[emb]</code> ではなく、<code translate="no">chunks.emb</code> にインデックスを作成してしまう。</p></li>
-<li><p><code translate="no">MAX_SIM*</code> インデックスのみを作成し、その同じサブフィールドに対して要素レベルの検索を実行しようとすること。</p></li>
+<li><p><code translate="no">chunks[emb]</code> ではなく、<code translate="no">chunks.emb</code> にインデックスを作成してしまうこと。</p></li>
+<li><p><code translate="no">MAX_SIM*</code> インデックスのみを作成し、その同じサブフィールドに対して要素レベルの検索を実行しようとする。</p></li>
 <li><p>通常のベクトルインデックスのみを作成し、その後、同じサブフィールドで EmbeddingList 検索を実行しようとする。</p></li>
 <li><p>1つのベクトルサブフィールドを、<code translate="no">MAX_SIM*</code> メトリクスと通常のベクトルメトリクスの両方で再利用すること。</p></li>
-<li><p>頻繁に使用される StructArray フィルター用のスカラーインデックスを作成し忘れる。</p></li>
+<li><p>頻繁に使用される StructArray フィルターに対するスカラーインデックスの作成を忘れている。</p></li>
 <li><p>Structスキーマに存在しないStructArrayサブフィールドにインデックスを付与している。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -357,7 +357,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「StructArray を使用した基本的なベクトル検索」を参照してください。</p></li>
-<li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「StructArray を使用したフィルタ検索」を参照してください。</p></li>
-<li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p></li>
+<li><p>エンティティレベルの EmbeddingList 検索または要素レベルのベクトル検索を実行するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」を参照してください。</p></li>
+<li><p>検索時に StructArray のスカラーサブフィールドをフィルタリングするには、「<a href="/docs/ja/filtered-search-with-structarray.md">StructArray を使用したフィルタ付き検索</a>」を参照してください。</p></li>
+<li><p>インデックスおよびメトリックの制限を確認するには、「<a href="/docs/ja/structarray-limits.md">StructArray の制限</a>」を参照してください。</p></li>
 </ol>

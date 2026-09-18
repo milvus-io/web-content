@@ -2,7 +2,7 @@
 id: switch-pulsar-woodpecker.md
 title: Passaggio da Pulsar a Woodpecker
 summary: >-
-  Passare dalla coda dei messaggi di un cluster Milvus da Pulsar a Woodpecker,
+  Passare dalla coda di messaggi di un cluster Milvus da Pulsar a Woodpecker,
   utilizzando Helm o Milvus Operator.
 ---
 <h1 id="Switch-between-Pulsar-and-Woodpecker" class="common-anchor-header">Passaggio da Pulsar a Woodpecker<button data-href="#Switch-between-Pulsar-and-Woodpecker" class="anchor-icon" translate="no">
@@ -25,7 +25,7 @@ summary: >-
 <p><strong>Prerequisito:</strong> la funzionalità "Cambio della coda dei messaggi" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>. Aggiornare l’istanza di Milvus a Milvus 3.0 o versioni successive prima di iniziare: la funzionalità non è disponibile nelle versioni precedenti.</p>
 </div>
 <div class="alert warning">
-<p>Il cambio della coda dei messaggi è <strong>un'operazione ad alto rischio</strong>. Scegli la sezione corrispondente <strong>al tuo</strong> metodo di distribuzione — <strong>Con Helm</strong> o <strong>Con Milvus Operator</strong> — e seguila dall’inizio alla fine. Non mescolare i comandi di Helm e Operator.</p>
+<p>Il cambio della coda dei messaggi è <strong>un’operazione ad alto rischio</strong>. Scegli la sezione corrispondente <strong>al tuo</strong> metodo di distribuzione — <strong>Con Helm</strong> o <strong>Con Milvus Operator</strong> — e seguila dall’inizio alla fine. Non mescolare i comandi di Helm e Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Con Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Passaggio 1: Verifica che l’istanza di Milvus sia in esecuzione.</strong> Assicurati che il tuo cluster Milvus funzioni correttamente — ad esempio, creando una raccolta di prova, inserendo dati ed eseguendo una query.</p>
+    </button></h3><p><strong>Passaggio 1: Verifica che l’istanza Milvus sia in esecuzione.</strong> Assicurati che il tuo cluster Milvus funzioni correttamente — ad esempio, creando una raccolta di prova, inserendo dati ed eseguendo una query.</p>
 <p><strong>Passaggio 2: Eseguire il cambio di MQ.</strong> Esporre l’interfaccia di gestione MixCoord, quindi chiamare l’API di cambio:</p>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -66,7 +66,7 @@ summary: >-
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Passaggio 3: Verifica che il passaggio sia stato completato.</strong></p>
+<p><strong>Passaggio 3: verificare che il passaggio sia stato completato.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Se il passaggio va a buon fine, viene registrato il messaggio " <code translate="no">[mqTypeValue=woodpecker]</code>".</p>
@@ -81,9 +81,9 @@ summary: >-
 <pre><code translate="no" class="language-shell">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<p>Per Pulsar <strong>esterno</strong>, ripulire gli argomenti Milvus nell’istanza Pulsar esterna. Gli argomenti Milvus seguono il formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (ad esempio, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
+<p>Per Pulsar <strong>esterno</strong>, ripulire gli argomenti Milvus nell'istanza Pulsar esterna. Gli argomenti Milvus seguono il formato <code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> (ad esempio, <code translate="no">by-dev-rootcoord-dml_10_464633776992639586v0</code>).</p>
 <div class="alert note">
-<p>Se si prevede di tornare a Pulsar in un secondo momento, ripulire prima i dati/argomenti per evitare conflitti. A causa delle limitazioni dei chart Helm, al momento non è possibile tornare a un’istanza di Pulsar <strong>integrata</strong>.</p>
+<p>Se si prevede di tornare a Pulsar in un secondo momento, ripulire prima i dati/argomenti per evitare conflitti. A causa delle limitazioni dei chart Helm, al momento non è possibile tornare a un’istanza Pulsar <strong>integrata</strong>.</p>
 </div>
 <h3 id="Switch-from-Woodpecker-to-Pulsar-Helm" class="common-anchor-header">Passaggio da Woodpecker a Pulsar (Helm)<button data-href="#Switch-from-Woodpecker-to-Pulsar-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Attendere che tutti i pod siano pronti, quindi verificare che la configurazione di accesso a Pulsar sia stata incorporata nella configurazione di Milvus.</p>
 <p><strong>Passaggio 3: Eseguire il passaggio a MQ.</strong></p>
 <div class="alert note">
-<p>Assicurarsi che il Pulsar di destinazione non contenga argomenti Milvus provenienti da una configurazione precedente. Se si tratta del primo passaggio a Pulsar, ignorare questa nota; in caso contrario, eliminare prima gli argomenti Milvus residui con gli stessi nomi.</p>
+<p>Assicurarsi che il Pulsar di destinazione non contenga argomenti Milvus provenienti da una configurazione precedente. Se si tratta del primo passaggio a Pulsar, ignorare questa nota; altrimenti, eliminare prima gli argomenti Milvus residui con gli stessi nomi.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -130,7 +130,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Passaggio 4: verificare che il passaggio sia stato completato.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Se il passaggio ha esito positivo, viene registrato il messaggio " <code translate="no">[mqTypeValue=pulsar]</code>".</p>
+<p>Se il passaggio va a buon fine, viene registrato il messaggio " <code translate="no">[mqTypeValue=pulsar]</code>".</p>
 <p><strong>Passaggio 5: (Facoltativo) Eliminare i dati di Woodpecker.</strong> Eliminare i dati di Woodpecker su MinIO/S3 (nella directory <code translate="no">&lt;rootPath&gt;/wp/...</code>, in genere <code translate="no">files/wp/...</code>) e i metadati di Woodpecker in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Se si prevede di tornare a Woodpecker in un secondo momento, eliminare prima questi file.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Con Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Passaggio 1: Verificare che l’istanza di Milvus sia in esecuzione.</strong></p>
-<p><strong>Passaggio 2: Eseguire il passaggio a MQ.</strong> Il servizio MixCoord non è esposto, quindi eseguire l’API di passaggio dall’interno del pod MixCoord:</p>
+<p><strong>Passaggio 2: eseguire il passaggio a MQ.</strong> Il servizio MixCoord non è esposto, quindi eseguire l’API di passaggio dall’interno del pod MixCoord:</p>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
@@ -210,7 +210,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Passaggio 1: Verificare che l’istanza di Milvus sia in esecuzione.</strong></p>
+    </button></h3><p><strong>Passaggio 1: verificare che l’istanza di Milvus sia in esecuzione.</strong></p>
 <p><strong>Passaggio 2: configurare la connessione Pulsar di destinazione e riavviare Milvus.</strong> Inserire la connessione Pulsar in <code translate="no">spec.config</code> (l’Operator converte <code translate="no">spec.config</code> in <code translate="no">user.yaml</code>) e impostare il tipo di MQ; l’applicazione del CR aggiorna i pod con la nuova configurazione.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -229,21 +229,21 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 </span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p>Attendere che tutti i pod siano pronti, quindi verificare che la configurazione di accesso a Pulsar sia stata applicata alla configurazione di Milvus.</p>
+<p>Attendere che tutti i pod siano pronti, quindi verificare che la configurazione di accesso a Pulsar sia stata integrata nella configurazione di Milvus.</p>
 <p><strong>Passaggio 3: Eseguire il passaggio a MQ.</strong></p>
 <div class="alert note">
-<p>Assicurarsi che il Pulsar di destinazione non contenga argomenti Milvus provenienti da una configurazione precedente. Se si tratta del primo passaggio a Pulsar, ignorare questa nota; in caso contrario, eliminare prima gli argomenti Milvus residui con gli stessi nomi.</p>
+<p>Assicurarsi che il Pulsar di destinazione non contenga argomenti Milvus provenienti da una configurazione precedente. Se questo è il primo passaggio a Pulsar, ignorare questa nota; altrimenti, eliminare prima gli argomenti Milvus residui con gli stessi nomi.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;pulsar&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Passaggio 4: Verificare che il passaggio sia stato completato.</strong></p>
+<p><strong>Passaggio 4: verificare che il passaggio sia stato completato.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Se il passaggio ha esito positivo, viene registrato il messaggio <code translate="no">[mqTypeValue=pulsar]</code>.</p>
-<p><strong>Passaggio 5: (Facoltativo) Eliminare i dati di Woodpecker.</strong> Eliminare i dati di Woodpecker su MinIO/S3 (nella directory <code translate="no">&lt;rootPath&gt;/wp/...</code>, in genere <code translate="no">files/wp/...</code>) e i metadati di Woodpecker in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Se si prevede di tornare a Woodpecker in un secondo momento, eliminare prima questi file.</p>
+<p>Se il passaggio ha esito positivo, viene registrato il messaggio “ <code translate="no">[mqTypeValue=pulsar]</code> ”.</p>
+<p><strong>Passaggio 5: (Facoltativo) Rimuovere i dati di Woodpecker.</strong> Eliminare i dati di Woodpecker su MinIO/S3 (nella directory <code translate="no">&lt;rootPath&gt;/wp/...</code>, in genere <code translate="no">files/wp/...</code>) e i metadati di Woodpecker in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Se si prevede di tornare a Woodpecker in un secondo momento, rimuovere prima questi file.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Scenari supportati<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

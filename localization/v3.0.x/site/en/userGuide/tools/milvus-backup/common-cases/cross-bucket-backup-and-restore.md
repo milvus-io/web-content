@@ -20,7 +20,10 @@ title: Migrate Between Instances Across Buckets
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic details the process of backing up a collection from one
+    </button></h1><div class="alert note">
+<p>This page covers <strong>Milvus Backup 0.5.x</strong>, with downloads and examples pinned to <strong>0.5.16</strong>. Check the <a href="/docs/milvus_backup_overview.md#Compatibility-matrix">Milvus compatibility matrix</a> for supported server versions. For Backup 0.6.0, use the <a href="/docs/milvus_backup_0_6_cli.md">0.6.0 guide</a> or <a href="/docs/milvus_backup_upgrade.md">upgrade from 0.5.x</a>.</p>
+</div>
+<p>This topic details the process of backing up a collection from one
 Milvus instance and restoring it to another, with each instance using
 different buckets within the same object storage.</p>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -55,7 +58,7 @@ tasks:</p>
 <li><p>Create a backup (<code translate="no">my_backup</code>) for collection <code translate="no">coll</code> in <code translate="no">bucket_A</code> and store the backup in <code translate="no">bucket_B</code>.</p></li>
 <li><p>In <code translate="no">bucket_B</code>, restore from the backup and name the restored collection <code translate="no">coll_bak</code>.</p></li>
 </ol>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites**<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +74,7 @@ tasks:</p>
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Ensure the <strong>milvus-backup</strong> tool is installed.</p></li>
+<li><p>Install <strong>Milvus Backup 0.5.16</strong> using the <a href="/docs/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x CLI guide</a>.</p></li>
 <li><p>Familiarize yourself with configuring Milvus object storage settings.
 For details, refer to <a href="https://milvus.io/docs/deploy_s3.md">Object
 Storage</a>.</p></li>
@@ -107,12 +110,11 @@ Storage</a>.</p></li>
         ></path>
       </svg>
     </button></h3><p>Go to the directory of the milvus-backup project and create a directory
-named configs:</p>
-<pre><code translate="no" class="language-shell">mkdir configs
-cd configs
+named <code translate="no">configs</code>. Run the following commands from the directory containing <code translate="no">milvus-backup</code>:</p>
+<pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
 <p>Download the backup config file <code translate="no">backup.yaml</code>:</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+<pre><code translate="no" class="language-shell">wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>The file structure looks like this:</p>
 <pre><code translate="no">├── configs
@@ -135,7 +137,8 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Modify the backup.yaml file to set the appropriate configurations for
+    </button></h3><p>The YAML below shows fields to edit in the downloaded v1 file. Keep the other required settings. Point <code translate="no">milvus.address</code> and <code translate="no">milvus.port</code> to the instance being backed up or restored. Set <code translate="no">minio.backupAddress</code>, <code translate="no">minio.backupPort</code>, and <code translate="no">minio.backupStorageType</code> to the backup destination, and <code translate="no">backup.gcPause.address</code> to the source Milvus management endpoint (port 9091 by default). Replace all example addresses, bucket names, paths, and credentials with your deployment settings.</p>
+<p>Modify the backup.yaml file to set the appropriate configurations for
 <code translate="no">milvus_A</code>:</p>
 <ul>
 <li><p>Connection configs</p>
@@ -172,7 +175,7 @@ cd configs
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
@@ -201,7 +204,7 @@ cd configs
         ></path>
       </svg>
     </button></h3><p>Once backup.yaml is saved, create a backup named <code translate="no">my_backup</code>:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
+<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>This command creates the backup <code translate="no">bucket_B/backup/my_backup</code> in object
 storage for the collection coll.</p>
@@ -266,7 +269,7 @@ storage for the collection coll.</p>
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
@@ -290,6 +293,8 @@ storage for the collection coll.</p>
         ></path>
       </svg>
     </button></h3><p>Restore the backup to <code translate="no">milvus_B</code>:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
+<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>This command restores the backup into a new collection named <code translate="no">coll_bak</code> in <code translate="no">milvus_B</code>, with data stored in <code translate="no">bucket_B/files/insert_log/[ID of new collection]</code>.</p>
+<p>This command restores the backup into a new collection named <code translate="no">coll_bak</code> in <code translate="no">milvus_B</code>, using the target instance’s configured storage root <code translate="no">bucket_B/files</code>.</p>
+<p>In Backup 0.5.16, the deprecated <code translate="no">-c</code> option selects the collection name in the backup, before <code translate="no">_bak</code> is applied. The 0.6.0 <code translate="no">--filter</code> replacement uses the target name instead; see <a href="/docs/milvus_backup_upgrade.md#Update-CLI-commands">Update CLI commands</a>.</p>
+<p>After restoring, confirm that <code translate="no">coll_bak</code> exists, create an appropriate vector index if needed, and compare its entity count, representative values, and search results against a baseline captured before backup. A successful command alone does not verify the data.</p>

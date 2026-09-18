@@ -25,7 +25,7 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署版本
       </svg>
     </button></h1><p>本指南說明如何使用 Helm 將您的 Milvus 2.6.x 獨立部署升級至 v3.0-beta 版本。</p>
 <div class="alert note">
-<p>此程序已針對從 Milvus 2.6.20 升級至 Milvus v3.0-beta（搭配 Milvus Helm Chart 5.0.22）進行驗證。若您使用其他 Milvus 2.6.x 修補版本或 Helm Chart 版本，請先在非生產環境中驗證升級流程。</p>
+<p>此程序已針對從 Milvus 2.6.20 升級至 Milvus v3.0-beta（使用 Milvus Helm Chart 5.0.22）進行驗證。若您使用其他 Milvus 2.6.x 修補版本或 Helm Chart 版本，請先在非生產環境中驗證升級流程。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,8 +50,8 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署版本
 </ul>
 <p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0-beta 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <div class="alert warning">
-<p>請勿在此程序中變更或降級 Helm Chart。請保留您 Helm 發行版中已安裝的 Chart 版本。經測試的基準配置保留了 Helm Chart 5.0.22，僅將 Milvus 映像標籤變更為<code translate="no">v3.0-beta</code> 。</p>
-<p>此程序未驗證將 Milvus 映像降級回 2.6.x 的操作。 在 v3.0-beta 寫入資料後，僅還原映像檔的回滾操作可能會無法讀取更新後的狀態。若升級失敗，請停止寫入操作，並採用能還原升級前元資料及持久化資料備份的復原方案。請先在非生產環境中驗證該復原方案。</p>
+<p>請勿在此程序中變更或降級 Helm Chart。請保留您 Helm 發行版中已安裝的 Chart 版本。經測試的基準配置保留了 Helm Chart 5.0.22 版本，僅將 Milvus 映像標籤變更為<code translate="no">v3.0-beta</code> 。</p>
+<p>此程序未驗證將 Milvus 映像降級回 2.6.x 的操作。 在 v3.0-beta 寫入資料後，僅還原映像檔的回滾操作可能會無法讀取更新後的狀態。若升級失敗，請停止寫入操作，並採用能還原升級前元資料及持久化資料備份的恢復方案。請先在非生產環境中驗證該恢復方案。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ title: 使用 Helm Chart 升級 Milvus 獨立部署版本
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 儲存庫已歸檔。請使用新儲存庫<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 來取得 4.0.31 及後續版本的圖表。
+位於<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 儲存庫已歸檔。請使用新儲存庫<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 來取得 4.0.31 及之後版本的圖表。
 </div>
 <h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">步驟 2：升級 Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ helm repo update zilliztech
     </button></h3><p>檢查您的 Helm 發行版所安裝的 Charts 版本：</p>
 <pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>在「<code translate="no">CHART</code> 」欄位中，從值中移除「<code translate="no">milvus-</code> 」前綴，並將剩餘的版本號以「<code translate="no">&lt;current-chart-version&gt;</code> 」的形式使用。接著執行升級指令：</p>
+<p>在「<code translate="no">CHART</code> 」欄位中，從值中移除「<code translate="no">milvus-</code> 」前綴，並將剩餘的版本號以「<code translate="no">&lt;current-chart-version&gt;</code> 」的形式呈現。接著執行升級指令：</p>
 <pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
   --namespace &lt;namespace&gt; \
   --version &lt;current-chart-version&gt; \
@@ -117,7 +117,7 @@ helm repo update zilliztech
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 20m
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">--reset-then-reuse-values</code> 選項在套用針對所選 Chart 預設值的明確映像覆寫時，會保留前一版本的值。</p>
+<p><code translate="no">--reset-then-reuse-values</code> 選項在套用對所選 Chart 預設值的明確映像覆寫時，會保留前一版本的值。</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">驗證升級<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,7 +141,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>確認所有必要的工作負載均已就緒，Milvus 已採用<code translate="no">v3.0-beta</code> ，且現有集合仍可進行查詢與搜尋。在啟用任何 v3.0-beta 專屬功能之前，請先完成這些檢查。</p>
+<p>請確認所有必要的工作負載均已就緒，Milvus 已採用<code translate="no">v3.0-beta</code> ，且現有集合仍可進行查詢與搜尋。在啟用任何 v3.0-beta 專屬功能之前，請先完成這些檢查。</p>
 <div class="alert note">
-<p>升級至 Milvus 3.0 並不會啟用 Storage V3。在驗證升級完成後，請先審閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>的相關說明，再啟用依賴於它的功能。一旦 Milvus 寫入 Storage V3 資料，便不支援降級至無法讀取 Storage V3 的舊版 Milvus。</p>
+<p>升級至 Milvus 3.0 並不會啟用 Storage V3。驗證升級完成後，請先審閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>相關資訊，再啟用依賴該功能的特性。一旦 Milvus 寫入 Storage V3 資料，便不支援降級至無法讀取 Storage V3 的舊版 Milvus。</p>
 </div>

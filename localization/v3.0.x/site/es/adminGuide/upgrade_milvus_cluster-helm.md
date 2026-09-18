@@ -4,7 +4,7 @@ label: Helm
 order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: Aprende a actualizar un clúster de Milvus con Helm Chart.
+summary: Descubre cómo actualizar un clúster de Milvus con Helm Chart.
 title: Actualizar el clúster de Milvus con Helm Chart
 ---
 <div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/es/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
@@ -51,7 +51,7 @@ title: Actualizar el clúster de Milvus con Helm Chart
 <p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
 <p>No modifique ni revierta la versión del Helm Chart como parte de este procedimiento. Mantenga la versión del Chart ya instalada para su versión de Helm. La línea base probada conservó el Helm Chart 5.0.22 y solo cambió la etiqueta de la imagen de Milvus a <code translate="no">v3.0-beta</code>.</p>
-<p>Este procedimiento no valida una degradación o una reversión que consista en volver a la imagen de Milvus 2.6.x. Después de que la versión v3.0-beta escriba datos, una reversión que afecte únicamente a la imagen puede no leer correctamente el estado actualizado. Si la actualización falla, detén las operaciones de escritura y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Este procedimiento no valida una degradación o una reversión que consista en volver a la imagen de Milvus 2.6.x. Después de que la v3.0-beta escriba datos, una reversión que afecte solo a la imagen puede no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: Actualizar el clúster de Milvus con Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La implementación validada de Milvus 2.6.20 creada con Helm Chart 5.0.22 utilizaba MixCoord y StreamingNode, y no ejecutaba IndexNode. No es necesario realizar un paso de migración del coordinador por separado cuando la implementación utiliza la misma topología.</p>
+    </button></h2><p>La implementación validada de Milvus 2.6.20, creada con Helm Chart 5.0.22, utilizaba MixCoord y StreamingNode y no ejecutaba IndexNode. No es necesario realizar un paso de migración del coordinador por separado cuando la implementación utiliza la misma topología.</p>
 <h3 id="Step-1-Confirm-the-current-topology" class="common-anchor-header">Paso 1: Confirmar la topología actual<button data-href="#Step-1-Confirm-the-current-topology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +91,7 @@ title: Actualizar el clúster de Milvus con Helm Chart
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Confirma que el clúster utiliza MixCoord y StreamingNode y que no hay ningún pod de IndexNode en ejecución. El comando de actualización que aparece más adelante en esta guía conserva los valores de Helm existentes. Si tus valores actuales habilitan IndexNode o utilizan otra topología de componentes, no ejecutes esta actualización «solo de imagen». Reproduce la topología en un entorno que no sea de producción y obtén primero un plan de migración aprobado por el equipo de ingeniería.</p>
+<p>Confirma que el clúster utiliza MixCoord y StreamingNode y que no hay ningún pod de IndexNode en ejecución. El comando de actualización que aparece más adelante en esta guía conserva los valores de Helm existentes. Si tus valores actuales habilitan IndexNode o utilizan otra topología de componentes, no realices esta actualización que solo afecta a la imagen. Reproduce la topología en un entorno que no sea de producción y obtén primero un plan de migración aprobado por el equipo de ingeniería.</p>
 <h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Paso 2: Actualizar el repositorio de Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +112,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-El repositorio de gráficos Helm de Milvus en <code translate="no">https://milvus-io.github.io/milvus-helm/</code> ha sido archivado. Utiliza el nuevo repositorio <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para las versiones 4.0.31 y posteriores de los gráficos.
+El repositorio de gráficos Helm de Milvus en <code translate="no">https://milvus-io.github.io/milvus-helm/</code> ha sido archivado. Utilice el nuevo repositorio <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para las versiones 4.0.31 y posteriores de los gráficos.
 </div>
 <h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Paso 3: Actualizar Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

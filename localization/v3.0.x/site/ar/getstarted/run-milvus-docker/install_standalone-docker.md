@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: تعرف على كيفية تثبيت Milvus بشكل مستقل باستخدام Docker.
-title: تشغيل Milvus في Docker (Linux)
+title: تشغيل Milvus في Docker (لينكس)
 ---
-<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">تشغيل Milvus في Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">تشغيل Milvus في Docker (لينكس)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: تشغيل Milvus في Docker (Linux)
         ></path>
       </svg>
     </button></h1><p>توضح هذه الصفحة كيفية تشغيل مثيل Milvus في Docker.</p>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات المسبقة<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +55,7 @@ title: تشغيل Milvus في Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت كحاوية Docker. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
+    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -66,8 +66,8 @@ title: تشغيل Milvus في Docker (Linux)
 <p><strong>ما الجديد في الإصدار v3.0-beta:</strong></p>
 <ul>
 <li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
-<li><strong>Woodpecker MQ (الافتراضي)</strong>: يعمل هذا النشر في Docker على تشغيل Woodpecker كقائمة انتظار الرسائل مع استخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، وبالتالي لا توجد حاجة لخدمة قائمة انتظار رسائل خارجية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>البنية المُحسَّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
+<li><strong>Woodpecker MQ (الافتراضي)</strong>: يعمل هذا النشر في Docker على تشغيل Woodpecker كقائمة انتظار الرسائل مع استخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، لذلك لا يلزم وجود خدمة خارجية لقائمة انتظار الرسائل. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</li>
+<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
 </ul>
 <p>قم دائمًا بتنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
 <p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
@@ -132,7 +132,7 @@ EOF
 <li>تنزيل أحدث برنامج نصي للتثبيت مع التكوينات المحدثة</li>
 <li>سحب أحدث صورة Docker لـ Milvus</li>
 <li>إعادة تشغيل الحاوية بالإصدار الجديد</li>
-<li>يحتفظ ببياناتك وإعداداتك الحالية</li>
+<li>يحتفظ ببياناتك وتكويناتك الحالية</li>
 </ul>
 <p>هذه هي الطريقة الموصى بها لترقية النشر المستقل لـ Milvus.</p>
 </div>
@@ -173,14 +173,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يوجد شيء آخر لتثبيته. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية خارجية، انظر:</p>
+    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يوجد شيء آخر لتثبيته. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية، انظر:</p>
 <ul>
 <li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (افتراضي) · <a href="/docs/ar/mq_pulsar.md">Pulsar</a> · <a href="/docs/ar/mq_kafka.md">Kafka</a> · <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></li>
 <li>تخزين الكائنات: <a href="/docs/ar/deploy_s3.md">MinIO</a> (افتراضي) · <a href="/docs/ar/deploy_s3.md">AWS S3</a> · <a href="/docs/ar/abs.md">Azure Blob</a> · <a href="/docs/ar/gcs.md">GCP Cloud Storage</a> · <a href="/docs/ar/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/ar/deploy_s3.md">Tencent COS</a> · <a href="/docs/ar/deploy_s3.md">Huawei OBS</a> · <a href="/docs/ar/deploy_s3.md">متوافق مع S3</a></li>
 <li>البيانات الوصفية: <a href="/docs/ar/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>يتم تعطيل التخزين V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">التخزين V3</a>.</p>
+<p>يتم تعطيل «التخزين V3» افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، انظر <a href="/docs/ar/storage-v3.md">«التخزين V3</a>».</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,7 +199,7 @@ EOF
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>راجع <a href="/docs/ar/quickstart.md">«البدء السريع</a> » لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/quickstart.md">«البدء السريع»</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -217,7 +217,7 @@ EOF
 <li><a href="/docs/ar/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/ar/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/milvus-webui.md">Milvus WebUI،</a> واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>

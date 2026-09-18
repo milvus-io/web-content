@@ -21,7 +21,7 @@ title: تثبيت Milvus المستقل باستخدام حزمة RPM/DEB
         ></path>
       </svg>
     </button></h1><p>توضح هذه الصفحة كيفية تثبيت Milvus المستقل باستخدام حزمة RPM/DEB جاهزة.</p>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات المسبقة<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ title: تثبيت Milvus المستقل باستخدام حزمة RPM/DEB
       </svg>
     </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقًا لهيكل نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.17">صفحة إصدارات Milvus</a>.</p>
 <ul>
-<li>بالنسبة لـ x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.9-1_amd64.deb</strong> أو <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
+<li>بالنسبة إلى x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.9-1_amd64.deb</strong> أو <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>بالنسبة لنظام ARM64، قم بتنزيل حزمة <strong>milvus_2.6.9-1_arm64.deb</strong> أو <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
@@ -79,7 +79,7 @@ title: تثبيت Milvus المستقل باستخدام حزمة RPM/DEB
         ></path>
       </svg>
     </button></h2><p>لتثبيت حزمة RPM/DEB، يمكنك استخدام مدير الحزم في نظامك.</p>
-<p>بالنسبة للأنظمة القائمة على RPM (مثل CentOS وFedora وRHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
+<p>بالنسبة للأنظمة القائمة على RPM (مثل CentOS و Fedora و RHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -191,15 +191,15 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>بعد تثبيت Milvus Standalone، يمكنك:</p>
 <ul>
-<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">«البدء السريع»</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/v2.6.x/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
-<li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
+<li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث عن متجه واحد</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>

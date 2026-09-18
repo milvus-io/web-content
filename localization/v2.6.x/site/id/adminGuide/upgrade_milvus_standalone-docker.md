@@ -57,7 +57,7 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
     </button></h3><p>Memperbarui dari Milvus 2.5.x ke 2.6.17 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
 <li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang lama (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
-<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang lebih baik</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> dihapus dan digabungkan</li>
 </ul>
 <p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut mengenai perubahan arsitektur, lihat <a href="/docs/id/v2.6.x/architecture_overview.md">Ikhtisar Arsitektur Milvus</a>.</p>
@@ -78,20 +78,20 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
       </svg>
     </button></h3><p><strong>Persyaratan sistem:</strong></p>
 <ul>
-<li>Docker dan Docker Compose telah terinstal</li>
-<li>Milvus standalone telah diimplementasikan melalui Docker Compose</li>
+<li>Docker dan Docker Compose telah terpasang</li>
+<li>Milvus standalone telah diterapkan melalui Docker Compose</li>
 </ul>
 <p><strong>Persyaratan kompatibilitas:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan langsung dari kandidat rilis tidak didukung.</li>
-<li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> melakukan upgrade ke v2.5.16 atau yang lebih baru sebelum melakukan upgrade ke v2.6.17.</li>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan versi langsung dari rilis kandidat tidak didukung.</li>
+<li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan lihat <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
+<li>Anda <strong>harus</strong> melakukan pembaruan ke v2.5.16 atau yang lebih baru sebelum melakukan pembaruan ke v2.6.17.</li>
 </ul>
-<p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
 <div class="alter note">
 <p>Karena pertimbangan keamanan, Milvus memperbarui MinIO-nya ke RELEASE.2024-12-18T13-15-44Z bersamaan dengan rilis v2.6.17.</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan versi<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,7 +132,7 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Terapkan pembaruan ke v2.5.16:</p>
+<li><p>Terapkan peningkatan ke v2.5.16:</p>
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
@@ -140,7 +140,7 @@ docker compose up -d
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-2-Upgrade-to-v2617" class="common-anchor-header">Langkah 2: Perbarui ke v2.6.17<button data-href="#Step-2-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2617" class="common-anchor-header">Langkah 2: Memperbarui ke v2.6.17<button data-href="#Step-2-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,9 +155,9 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah v2.5.16 berhasil berjalan, lakukan pembaruan ke v2.6.17:</p>
+    </button></h3><p>Setelah v2.5.16 berhasil berjalan, lakukan peningkatan ke v2.6.17:</p>
 <ol>
-<li><p>Edit file <code translate="no">docker-compose.yaml</code> yang sudah ada dan perbarui tag gambar Milvus dan MinIO:</p>
+<li><p>Edit file ` <code translate="no">docker-compose.yaml</code> ` yang sudah ada dan perbarui tag gambar Milvus dan MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -213,12 +213,12 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
     </button></h2><ul>
 <li>Anda mungkin juga ingin mempelajari cara:
 <ul>
-<li><a href="/docs/id/v2.6.x/scaleout.md">Menskalakan kluster Milvus</a></li>
+<li><a href="/docs/id/v2.6.x/scaleout.md">Menskala kluster Milvus</a></li>
 </ul></li>
 <li>Jika Anda siap untuk mengimplementasikan kluster Anda di cloud:
 <ul>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">mengimplementasikan Milvus di Amazon EKS dengan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/eks.md">Deploy Milvus di Amazon EKS dengan Terraform</a></li>
 <li>Pelajari cara <a href="/docs/id/v2.6.x/gcp.md">mengimplementasikan kluster Milvus di GCP dengan Kubernetes</a></li>
-<li>Pelajari cara <a href="/docs/id/v2.6.x/azure.md">mengimplementasikan Milvus di Microsoft Azure dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.6.x/azure.md">mengimplementasikan Milvus di Microsoft Azure menggunakan Kubernetes</a></li>
 </ul></li>
 </ul>

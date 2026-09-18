@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>모든 Milvus 구성 요소를 중지합니다.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>메타 마이그레이션을 위해 <code translate="no">migrate.yaml</code> 구성 파일을 준비하십시오.</p>
+<li><p>메타 데이터 마이그레이션을 위해 <code translate="no">migrate.yaml</code> 구성 파일을 준비하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -146,7 +146,7 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>다음과 같은 내용도 알아보시기 바랍니다:
+<li>다음과 같은 방법도 알아두시면 좋습니다:
 <ul>
 <li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>

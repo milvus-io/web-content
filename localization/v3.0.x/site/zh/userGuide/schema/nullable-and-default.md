@@ -1,9 +1,9 @@
 ---
 id: nullable-and-default.md
-title: 可空字段
-summary: 配置可空字段和默认值，包括 Schema、插入、索引、搜索和过滤行为。
+title: 可为空字段
+summary: 配置可为空字段及其默认值，包括Schema、插入、索引、搜索和过滤行为。
 ---
-<h1 id="Nullable-Fields" class="common-anchor-header">可空字段<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
+<h1 id="Nullable-Fields" class="common-anchor-header">可为空字段<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,12 +18,12 @@ summary: 配置可空字段和默认值，包括 Schema、插入、索引、搜�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支持可空字段，允许字段值缺失或显式设置为空。可空字段在 Schema 层面进行定义，并一致适用于数据摄取、索引、搜索和查询操作。</p>
-<p>在以下情况下使用可空字段</p>
+    </button></h1><p>Milvus 支持可为空字段，允许字段值为空或显式设置为 NULL。可为空性在 Schema 级别进行定义，并在数据摄入、索引、搜索和查询操作中保持一致。</p>
+<p>在以下情况下请使用可空字段：</p>
 <ul>
-<li>从允许缺失值的外部系统摄取数据。</li>
-<li>某些元数据是可选的，或仅适用于部分数据集。</li>
-<li>以异步方式生成向量 Embeddings，并在稍后插入。</li>
+<li>从允许缺失值的外部系统摄取数据时。</li>
+<li>部分元数据为可选，或仅在数据集的某一部分中可用。</li>
+<li>向量Embeddings是异步生成的，并在稍后插入。</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,10 +41,10 @@ summary: 配置可空字段和默认值，包括 Schema、插入、索引、搜�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>允许 NULL 值的向量字段不支持<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 过滤表达式。不能根据向量字段值是否为 NULL 来显式过滤实体。</p></li>
-<li><p><a href="/docs/zh/array-of-structs.md">结构体数组字段</a>不支持 NULL 值。您不能将 "结构数组 "字段或嵌套在其中的任何字段标记为可空。</p></li>
-<li><p>nullable 属性是在创建字段时定义的，之后不能修改。无法为现有字段启用或禁用可归零属性。</p></li>
-<li><p>标记为可归零的字段不能用作分区键。Partition Key 字段必须始终包含有效的非空值。有关详细信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
+<li><p>允许 NULL 值的向量字段不支持 `<code translate="no">IS NULL</code> ` 或 `<code translate="no">IS NOT NULL</code> ` 过滤表达式。您无法根据向量字段值是否为 NULL 来显式过滤实体。</p></li>
+<li><p><a href="/docs/zh/array-of-structs.md">“结构体数组”</a>字段不支持 NULL 值。您无法将“结构体数组”字段或其内部嵌套的任何字段标记为可为空。</p></li>
+<li><p>可空属性在字段创建时定义，此后无法修改。您无法对现有字段启用或禁用可空性。</p></li>
+<li><p>标记为可空的字段不能用作Partition Key。Partition Key字段必须始终包含有效的、非空的值。有关更多信息，请参阅<a href="/docs/zh/use-partition-key.md">“使用Partition Key”</a>。</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">什么是可空字段？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,22 +61,22 @@ summary: 配置可空字段和默认值，包括 Schema、插入、索引、搜�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，一个字段是否允许存储 NULL 值由名为<code translate="no">nullable</code> 的 Schema 级字段属性控制。</p>
-<p>当使用<code translate="no">nullable=True</code> 定义字段时，Milvus 允许在数据摄取过程中字段值缺失。在实际操作中，Milvus 将以下两种输入视为等价，并将字段值存储为 NULL：</p>
+    </button></h2><p>在 Milvus 中，字段是否允许存储 NULL 值由一个名为 `<code translate="no">nullable</code>` 的 Schema 级字段属性控制。</p>
+<p>当字段定义为<code translate="no">nullable=True</code> 时，Milvus允许在数据加载过程中该字段值缺失。实际上，Milvus将以下两种输入视为等效，并将其字段值存储为NULL：</p>
 <ul>
-<li>输入实体中省略了字段。</li>
-<li>字段被明确设置为 NULL（例如，Python 中的<code translate="no">None</code> ）。</li>
+<li>输入实体中省略了该字段。</li>
+<li>该字段被显式设置为 NULL（例如，在 Python 中使用 `<code translate="no">None</code> `）。</li>
 </ul>
-<p>如果字段未定义为可空（默认行为），则每个实体都必须为该字段提供一个有效值。省略字段或显式赋值为 NULL 会导致插入或导入操作失败。</p>
-<p>在 Collections 模式中，<strong>标量字段和向量字段</strong>都支持 nullable 属性。但是，结构数组字段不支持 nullable 属性。</p>
+<p>如果字段未被定义为可为空（默认行为），则每个实体都必须为该字段提供有效值。省略该字段或显式赋值为 NULL 都会导致插入或导入操作失败。</p>
+<p>Collection 模式中的<strong>标量字段和向量字段</strong>均支持 nullable 属性。但是，“结构数组”字段不支持 nullable 属性。</p>
 <div class="alert note">
-<p>可归零属性决定了字段值是否可能丢失，但并不定义字段丢失时使用的值。</p>
+<p>可空性决定字段值是否可以缺失；它并不定义当字段缺失时使用何种值。</p>
 <ul>
-<li>如果配置的可归零字段没有默认值，则省略该字段会导致存储 NULL 值。</li>
-<li>如果配置了默认值，Milvus 可能会存储默认值。详情请参阅<a href="/docs/zh/default-values.md">默认值</a>。</li>
+<li>如果配置了可空字段但未指定默认值，则省略该字段将导致存储 NULL 值。</li>
+<li>如果配置了默认值，Milvus 可能会存储该默认值。有关详细信息，请参阅<a href="/docs/zh/default-values.md">“默认值”</a>。</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">在 Collections Schema 中定义可空字段<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">在Collection Schema中定义可空字段<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,10 +91,15 @@ summary: 配置可空字段和默认值，包括 Schema、插入、索引、搜�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用可空字段，必须在定义 Collections 模式时启用可空属性。</p>
-<p>在本例中，Collection 模式定义了一个名为<code translate="no">embedding</code> 的向量字段，其属性为<code translate="no">nullable=True</code> 。这样，在数据采集过程中，Collection 中的实体就可以省略向量值或显式将其设置为 NULL。</p>
+    </button></h2><p>要使用可空字段，您必须在定义Collection Schema时启用可空属性。</p>
+<p>在此示例中，Collection Schema定义了一个名为<code translate="no">embedding</code> 的向量字段，其<code translate="no">nullable=True</code> 。这允许Collection中的实体在数据摄入过程中省略向量值或将其显式设置为NULL。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -244,18 +249,23 @@ curl --request POST \
     }
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此 Schema 中：</p>
+<p>在此Schema中：</p>
 <ul>
-<li><code translate="no">embedding</code> 字段被明确标记为可为空。</li>
-<li>实体可省略<code translate="no">embedding</code> 字段或在插入时为其赋值为 NULL。</li>
-<li>是否允许 NULL 值在创建 Collections 时就已决定。</li>
+<li><code translate="no">embedding</code> 字段被显式标记为可为空。</li>
+<li>实体在插入时可以省略<code translate="no">embedding</code> 字段，或将其赋值为 NULL。</li>
+<li>是否允许 NULL 值的决定在 Collection 创建时即已确定。</li>
 </ul>
-<p>为清楚起见，下面的示例主要针对可空向量字段 (<code translate="no">embedding</code>)。定义可空标量字段是可选项，并非本指南其余部分所要求的。</p>
+<p>为清晰起见，以下示例重点介绍可为空的向量字段（<code translate="no">embedding</code> ）。定义可为空的标量字段是可选的，且无需遵循本指南的其余内容。</p>
 <p><details>
-<summary>可选：定义可空标量域</summary></p>
-<p>标量字段也可以使用相同的<code translate="no">nullable</code> 属性定义为可归零字段，并在输入时遵循相同的规则。例如</p>
+<summary>可选：定义可为空的标量字段</summary></p>
+<p>标量字段也可以使用相同的 `<code translate="no">nullable</code> ` 属性定义为可为空，并在数据导入过程中遵循相同的规则。例如：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;age&quot;</span>,
     datatype=DataType.INT64,
@@ -281,7 +291,7 @@ curl --request POST \
 <span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">缺失值或空值的插入行为<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
+<h2 id="Insert-behavior-with-missing-or-NULL-values" class="common-anchor-header">存在缺失值或NULL值时的插入行为<button data-href="#Insert-behavior-with-missing-or-NULL-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -296,10 +306,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦在 Collections Schema 中将字段定义为可归零，Milvus 就允许在数据摄取过程中将字段值缺失或显式设置为 NULL。</p>
-<p>下面的示例将三个实体插入在<a href="#define-a-nullable-field-in-the-collection-schema">集合模式中定义可空字段</a>时创建的 Collection 中，演示了这些不同的情况。</p>
+    </button></h2><p>一旦在 Schema 中将字段定义为可空，Milvus 便允许该字段在数据摄入过程中值为空或显式设置为 NULL。</p>
+<p>下面的示例将三个实体插入到<a href="#define-a-nullable-field-in-the-collection-schema">“在Collection Schema中定义可为空字段</a>”中创建的Collection中，演示了这些不同情况。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
@@ -383,13 +398,13 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
     ]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中</p>
+<p>在此示例中：</p>
 <ul>
 <li>实体<strong>id = 1</strong>提供了一个有效的向量值。</li>
-<li>实体<strong>id = 2</strong>明确地为<code translate="no">embedding</code> 字段指定了一个空值。</li>
-<li>实体<strong>id = 3</strong>完全省略了<code translate="no">embedding</code> 字段；Milvus 将其存储为 NULL。</li>
+<li>实体<strong>id = 2</strong>将 NULL 值显式赋值给 `<code translate="no">embedding</code> ` 字段。</li>
+<li>实体<strong>id = 3</strong>完全省略了 `<code translate="no">embedding</code> ` 字段；Milvus 将其存储为 NULL。</li>
 </ul>
-<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">可空字段的索引行为<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">可为空字段的索引行为<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -404,14 +419,19 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>插入数据后，你可以像往常一样在可空字段上建立索引。关键区别在于 Milvus 在索引构建过程中如何处理 NULL 值：</p>
+    </button></h2><p>插入数据后，您可以照常在可为空字段上构建索引。主要区别在于 Milvus 在构建索引时如何处理 NULL 值：</p>
 <ul>
-<li>只有具有非空值的实体才会被添加到索引中。</li>
+<li>只有具有非NULL值的实体才会被添加到索引中。</li>
 <li>具有 NULL 值的实体将被跳过，不参与索引构建。</li>
 </ul>
-<p>对于可空向量字段，这意味着只有具有有效向量的实体才能通过向量相似性进行搜索。</p>
+<p>对于可为空的向量字段，这意味着只有具有有效向量的实体才能通过向量相似度进行搜索。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
 index_params = client.prepare_index_params()
 index_params.add_index(
@@ -514,10 +534,10 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>此时：</p>
 <ul>
-<li>具有有效嵌入值的实体已编入索引并可供搜索。</li>
-<li>嵌入值为 NULL 的实体仍保留在 Collections 中，但它们不会包含在向量索引中。</li>
+<li>具有有效Embeddings值的实体已被索引，并可供搜索。</li>
+<li>Embeddings whose value is NULL remain in the Collection, but they are not included in the vector index.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">可空字段的搜索行为<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">可为空字段的搜索行为<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -532,16 +552,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对可空字段执行搜索操作时，Milvus 只评估搜索中使用的字段的非空值实体。向量字段为空的实体会被自动跳过。</p>
-<p>对于可空向量字段，例如本例中的<code translate="no">embedding</code> ：</p>
+    </button></h2><p>当您对可为空字段执行搜索操作时，Milvus 仅评估该字段值为非空的实体。向量字段为 NULL 的实体将被自动跳过。</p>
+<p>以本例中的<code translate="no">embedding</code> 等可为空的向量字段为例：</p>
 <ul>
-<li>只对具有有效向量值的实体进行评估和排序。</li>
-<li>向量为空的实体不会导致错误。</li>
-<li>如果有效向量的数量小于所请求的<code translate="no">topK</code> (<code translate="no">limit</code>) ，Milvus 返回的结果可能少于<code translate="no">limit</code> 。</li>
+<li>只有具有有效向量值的实体才会被评估和排序。</li>
+<li>向量值为NULL的实体不会引发错误。</li>
+<li>如果有效向量数量少于请求的<code translate="no">topK</code> （<code translate="no">limit</code> ），Milvus 返回的结果可能少于<code translate="no">limit</code> 。</li>
 </ul>
-<p>下面的示例对可空向量域<code translate="no">embedding</code> 执行了向量搜索：</p>
+<p>以下示例对可为空的向量字段<code translate="no">embedding</code> 执行向量搜索：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
@@ -622,13 +647,13 @@ fmt.Println(resultSets)
     &quot;outputFields&quot;: [&quot;embedding&quot;]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此搜索中</p>
+<p>在此搜索中：</p>
 <ul>
-<li>只有具有非空<code translate="no">embedding</code> 值的实体才被视为候选实体。</li>
-<li><code translate="no">embedding</code> 的空值实体将被排除在评估之外。</li>
-<li>返回结果的数量取决于 Collections 中存在多少有效向量。</li>
+<li>仅将<code translate="no">embedding</code> 字段值为非空的实体视为候选对象。</li>
+<li><code translate="no">embedding</code> 值为 NULL 的实体将被排除在评估之外。</li>
+<li>返回的结果数量取决于Collection中存在的有效向量数量。</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">查询和过滤的影响<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">查询与过滤的注意事项<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -643,11 +668,16 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>前面的示例主要针对向量字段。本节将介绍 NULL 值在<strong>标量过滤表达式</strong>中的表现。</p>
-<p>标量字段可以用<code translate="no">nullable=True</code> 定义，并遵循与向量字段相同的摄取规则。不过，<strong>NULL 标量值在过滤表达式中的值总是 false</strong>。</p>
-<p>例如，给定一个可为空的标量字段<code translate="no">age</code> ，下面的过滤器会选择年龄大于 18 岁的实体：</p>
+    </button></h2><p>前面的示例侧重于向量字段。本节将说明 NULL 值在<strong>标量过滤表达式中的</strong>行为。</p>
+<p>标量字段可以使用<code translate="no">nullable=True</code> 进行定义，并遵循与向量字段相同的摄入规则。但是，<strong>在过滤表达式中</strong>，<strong>NULL 标量值始终被评估为 false</strong>。</p>
+<p>例如，假设有一个允许为NULL的标量字段<code translate="no">age</code> ，以下筛选条件将选出年龄大于18岁的实体：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
@@ -659,10 +689,15 @@ fmt.Println(resultSets)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">age</code> 为 NULL 的实体将被排除在结果之外，因为 NULL 值不满足筛选条件。</p>
-<p>同样，相等检查也不匹配 NULL 值。例如</p>
+<p><code translate="no">age</code> 为 NULL 的实体将被排除在结果之外，因为 NULL 值不符合筛选条件。</p>
+<p>同样地，等值检查也不会与 NULL 值匹配。例如：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">expr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
@@ -673,8 +708,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">status</code> 为 NULL 的实体不会出现在结果中。</p>
-<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">可空字段和默认值<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
+<p><code translate="no">status</code> 为 NULL 的实体将被排除在结果之外。</p>
+<h2 id="Nullable-fields-and-default-values" class="common-anchor-header">可为空字段与默认值<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -689,24 +724,24 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当<code translate="no">nullable</code> 和<code translate="no">default_value</code> 都为一个字段配置时，以下规则决定了 Milvus 在插入过程中如何处理 NULL 输入或丢失的字段值。</p>
+    </button></h2><p>当某个字段同时配置了<code translate="no">nullable</code> 和<code translate="no">default_value</code> 时，以下规则将决定Milvus在插入过程中如何处理NULL输入或缺失的字段值。</p>
 <table>
 <thead>
-<tr><th>已启用</th><th>默认值</th><th>用户输入（NULL 或省略）</th><th>结果</th></tr>
+<tr><th>启用可为空</th><th>默认值</th><th>用户输入（NULL 或省略）</th><th>结果</th></tr>
 </thead>
 <tbody>
-<tr><td>是</td><td>是（非空）</td><td>空值或省略</td><td>使用默认值</td></tr>
-<tr><td>使用默认值</td><td>无</td><td>NULL 或省略</td><td>存储为 NULL</td></tr>
-<tr><td>无</td><td>是（非空）</td><td>空或省略</td><td>使用默认值</td></tr>
-<tr><td>无</td><td>无</td><td>空或省略</td><td>抛出错误</td></tr>
-<tr><td>无</td><td>是（默认为空）</td><td>NULL 或省略</td><td>抛出错误</td></tr>
+<tr><td>是</td><td>是（非NULL）</td><td>NULL 或省略</td><td>使用默认值</td></tr>
+<tr><td>是</td><td>否</td><td>NULL 或省略</td><td>存储为 NULL</td></tr>
+<tr><td>否</td><td>是（非NULL）</td><td>NULL 或省略</td><td>使用默认值</td></tr>
+<tr><td>否</td><td>否</td><td>NULL 或省略</td><td>抛出错误</td></tr>
+<tr><td>否</td><td>是（默认值为NULL）</td><td>NULL 或省略</td><td>会引发错误</td></tr>
 </tbody>
 </table>
-<p><strong>主要启示</strong></p>
+<p><strong>要点：</strong></p>
 <ul>
-<li>当字段具有非空默认值时，无论是否启用<code translate="no">nullable</code> ，都会使用该值。</li>
-<li>当<code translate="no">nullable=True</code> 但未设置默认值时，字段存储 NULL。</li>
-<li>当<code translate="no">nullable=False</code> 但未设置默认值时，插入失败并显示错误。</li>
-<li>在不可为空的字段上设置 NULL 默认值是无效的，会导致错误。</li>
+<li>当字段具有非NULL默认值时，无论是否启用了<code translate="no">nullable</code> ，都会使用该默认值。</li>
+<li>当启用<code translate="no">nullable=True</code> 但未设置默认值时，该字段将存储NULL。</li>
+<li>当启用<code translate="no">nullable=False</code> 但未设置默认值时，插入操作将因错误而失败。</li>
+<li>在不可为 NULL 的字段上设置 NULL 默认值是无效的，并将引发错误。</li>
 </ul>
-<p>有关默认值的完整示例和 API 使用，请参阅<a href="/docs/zh/default-values.md">默认值</a>。</p>
+<p>有关默认值的完整示例和 API 使用方法，请参阅<a href="/docs/zh/default-values.md">“默认值”</a>。</p>

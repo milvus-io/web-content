@@ -2,7 +2,7 @@
 id: install_standalone-docker.md
 label: Docker
 related_key: Docker
-summary: Pelajari cara menginstal Milvus versi mandiri menggunakan Docker.
+summary: Pelajari cara menginstal Milvus versi standalone menggunakan Docker.
 title: Menjalankan Milvus di Docker (Linux)
 ---
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Menjalankan Milvus di Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
@@ -66,8 +66,8 @@ title: Menjalankan Milvus di Docker (Linux)
 <p><strong>Apa yang baru di v2.6.17:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
-<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat " <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> " untuk detailnya</li>
-<li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang dikonsolidasikan untuk kinerja yang lebih baik</li>
+<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat <a href="/docs/id/v2.6.x/use-woodpecker.md">Panduan Penggunaan Woodpecker</a> untuk detailnya</li>
+<li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang digabungkan untuk kinerja yang lebih baik</li>
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
 <p>Jika Anda ingin menggunakan <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> dalam mode penyebaran mandiri, disarankan untuk menggunakan metode penyebaran <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
@@ -76,7 +76,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>
 <li>Sebuah kontainer Docker bernama milvus telah dimulai di port <strong>19530</strong>.</li>
-<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan beroperasi di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
+<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
 <li>Untuk mengubah konfigurasi default Milvus, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
@@ -122,7 +122,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat melakukan pembaruan ke versi terbaru Milvus menggunakan perintah pembaruan bawaan. Perintah ini secara otomatis mengunduh konfigurasi terbaru dan gambar Milvus:</p>
+    </button></h2><p>Anda dapat memutakhirkan ke versi terbaru Milvus menggunakan perintah pemutakhiran bawaan. Perintah ini secara otomatis mengunduh konfigurasi terbaru dan gambar Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -130,7 +130,7 @@ EOF
 <p>Perintah upgrade secara otomatis:</p>
 <ul>
 <li>Mengunduh skrip instalasi terbaru dengan konfigurasi yang diperbarui</li>
-<li>Mengunduh gambar Docker Milvus terbaru</li>
+<li>Mengambil gambar Docker Milvus terbaru</li>
 <li>Memulai ulang kontainer dengan versi baru</li>
 <li>Menjaga data dan konfigurasi yang sudah ada</li>
 </ul>
@@ -181,12 +181,12 @@ EOF
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, dan Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Helm Chart</a>.</p></li>
-<li><p><a href="/docs/id/v2.6.x/scaleout.md">Skalakan kluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/v2.6.x/scaleout.md">Skalakan klaster Milvus Anda</a>.</p></li>
 <li><p>Terapkan kluster Milvus Anda di cloud:</p>
 <ul>
 <li><a href="/docs/id/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk mendebug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

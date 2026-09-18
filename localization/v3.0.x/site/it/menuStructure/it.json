@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "Cos’è Milvus",
+        "label": "Che cos’è Milvus?",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Tabella delle elme",
+                "label": "Mappa di Helm",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Tabella delle elme",
+                "label": "Mappa di Helm",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -540,7 +540,7 @@
             "order": 16,
             "children": [
               {
-                "label": "Panoramica sull'analizzatore",
+                "label": "Panoramica sull’analizzatore",
                 "id": "analyzer-overview.md",
                 "order": 0,
                 "children": []
@@ -637,7 +637,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Minuscolo",
+                    "label": "Minuscole",
                     "id": "lowercase-filter.md",
                     "order": 0,
                     "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Basta",
                     "id": "stop-filter.md",
                     "order": 9,
                     "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali (ANN)",
+            "label": "Ricerca di base con reti neurali artificiali",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtraggio e modelli",
+                "label": "Filtraggio e creazione di modelli",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1124,7 +1124,7 @@
                 "children": []
               },
               {
-                "label": "Operatori StructArray",
+                "label": "Operatori di StructArray",
                 "id": "struct-array-operators.md",
                 "order": 6,
                 "children": []
@@ -1162,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Corrispondenza delle frasi",
+            "label": "Corrispondenza di frasi",
             "id": "phrase-match.md",
             "order": 12,
             "children": []
@@ -1229,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "Utilizza la chiave di partizione",
+            "label": "Usa chiave di partizione",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1415,7 +1415,7 @@
                     "children": []
                   },
                   {
-                    "label": "Classificatore vLLM",
+                    "label": "vLLM Ranker",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1469,7 +1469,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Utilizza mmap",
+            "label": "Utilizzare mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
@@ -1569,7 +1569,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "Milvus per agenti di intelligenza artificiale",
+        "label": "Milvus per gli agenti di intelligenza artificiale",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
@@ -2126,7 +2126,7 @@
                 "children": []
               },
               {
-                "label": "Assegnazione dei ruoli",
+                "label": "Ruoli di sovvenzione",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2168,7 +2168,7 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu (interfaccia grafica di Milvus)",
+        "label": "Attu (interfaccia grafica Milvus)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Comandi",
-            "id": "milvus_backup_cli.md",
+            "label": "Comandi (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casi più comuni",
-            "id": "common-cases",
+            "label": "Backup e ripristino istantanei",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un'unica istanza",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandi (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze all’interno di un unico bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in diversi bucket",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casi comuni (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Backup e ripristino in un'unica istanza",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze all’interno di un unico bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze in diversi bucket",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze in diversi ambienti S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrazione tra istanze in diversi ambienti S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Aggiornamento alla versione 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2355,7 +2387,7 @@
         "children": []
       },
       {
-        "label": "Registro delle esportazioni",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2591,7 +2623,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "API asincrona di Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2790,7 +2822,7 @@
         ]
       },
       {
-        "label": "Incorporazione dei modelli",
+        "label": "Incorporamento dei modelli",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [
@@ -3046,7 +3078,7 @@
         ]
       },
       {
-        "label": "Altri",
+        "label": "Altro",
         "id": "other-integrations",
         "order": 8,
         "children": [
@@ -3251,7 +3283,7 @@
         "children": []
       },
       {
-        "label": "Domande frequenti sull'operatività",
+        "label": "Domande frequenti sull’operatività",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

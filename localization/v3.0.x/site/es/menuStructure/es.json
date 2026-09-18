@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Usuarios de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Comunicados",
+        "label": "Comunicados de prensa",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Ejecuta Milvus con la GPU",
+            "label": "Ejecutar Milvus con la GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -211,7 +211,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Resumen",
+            "label": "Resumen general",
             "id": "architecture_overview.md",
             "order": 0,
             "children": []
@@ -370,7 +370,7 @@
             "children": []
           },
           {
-            "label": "Gestionar alias",
+            "label": "Gestionar aliases",
             "id": "manage-aliases.md",
             "order": 9,
             "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_DISPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESPARSO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales",
+            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1229,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "Utilizar clave de partición",
+            "label": "Utilizar la clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1365,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de decadencia",
+                "label": "Clasificación de la descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1433,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "Ranker de Voyage AI",
+                    "label": "Ranker de IA de Voyage",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1469,7 +1469,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Utilizar mmap",
+            "label": "Utiliza mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
@@ -1619,7 +1619,7 @@
         ]
       },
       {
-        "label": "Habilidad de Milvus",
+        "label": "Habilidad Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1790,7 +1790,7 @@
             "children": []
           },
           {
-            "label": "Limitar el número de recogidas",
+            "label": "Limitar el número de recopilaciones",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1866,7 +1866,7 @@
                 "children": []
               },
               {
-                "label": "Púlsar",
+                "label": "Pulsar",
                 "id": "mq_pulsar.md",
                 "order": 2,
                 "children": [
@@ -1950,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "Ampliar con HPA",
+            "label": "Escala con HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -2055,7 +2055,7 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "Traza",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -2146,7 +2146,7 @@
             "children": []
           },
           {
-            "label": "Conectarse a Kafka mediante SASL/SSL",
+            "label": "Conectarse a Kafka con SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Comandos",
-            "id": "milvus_backup_cli.md",
+            "label": "Comandos (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casos habituales",
-            "id": "common-cases",
+            "label": "Copia de seguridad y restauración mediante instantáneas",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Copia de seguridad 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Copia de seguridad y restauración en una sola instancia",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandos (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de un mismo depósito",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de distintos depósitos",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casos habituales (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Copia de seguridad y restauración en una sola instancia",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias de un mismo depósito",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias de distintos depósitos",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias en distintos entornos de S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrar entre instancias en distintos entornos de S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Actualizar a la versión 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2368,7 +2400,7 @@
         "order": 10,
         "children": [
           {
-            "label": "Incrustaciones",
+            "label": "Representaciones",
             "id": "embeddings",
             "order": 0,
             "isMenu": true,
@@ -2460,7 +2492,7 @@
             ]
           },
           {
-            "label": "Reclasificadores",
+            "label": "Reordenadores",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2978,7 +3010,7 @@
             "children": []
           },
           {
-            "label": "Enmascarador de datos personales",
+            "label": "Enmascarador de datos de carácter personal (PII)",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3121,7 +3153,7 @@
         "children": []
       },
       {
-        "label": "Recuperación contextual",
+        "label": "Búsqueda contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3158,7 +3190,7 @@
         "children": []
       },
       {
-        "label": "Introducción rápida a Attu",
+        "label": "Guía de inicio rápido con Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []

@@ -42,7 +42,7 @@ title: Pulsar
 <tr><td>2.4.x dan versi sebelumnya</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Sejak Milvus 2.5, chart Helm Milvus dan Milvus Operator secara default melakukan deployment <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
+<p>Sejak Milvus 2.5, Milvus Helm chart dan Milvus Operator secara default menerapkan <strong>Pulsar v3</strong>; Pulsar v2 tetap kompatibel. Lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a> dan <a href="/docs/id/use-pulsar-v2.md">Tetap Menggunakan Pulsar v2</a>.</p>
 <h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Deploy kluster Milvus dengan Pulsar menggunakan Helm<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengimplementasikan kluster Milvus yang menggunakan Pulsar yang disertakan (bukan Woodpecker), instal chart Helm dengan Streaming Node diaktifkan:</p>
+    </button></h3><p>Untuk mengimplementasikan klaster Milvus yang menggunakan Pulsar yang disertakan (bukan Woodpecker), instal bagan Helm dengan Streaming Node diaktifkan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
@@ -116,7 +116,7 @@ title: Pulsar
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Uninstall" class="common-anchor-header">Hapus<button data-href="#Uninstall" class="anchor-icon" translate="no">
+<h3 id="Uninstall" class="common-anchor-header">Hapus Instalasi<button data-href="#Uninstall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,7 +183,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Pulsar" class="common-anchor-header">Pulsar Internal (di dalam kluster)<button data-href="#Internal-in-cluster-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
+<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
 Jika Anda menjalankan Pulsar dan ingin tetap menggunakannya, jangan ubah antrian pesan selama proses peningkatan versi.</li>
 <li><strong>Pulsar v2 → v3:</strong> lihat <a href="/docs/id/upgrade-pulsar-v3.md">Memutakhirkan Pulsar dari v2 ke v3</a>; untuk tetap menggunakan v2, lihat <a href="/docs/id/use-pulsar-v2.md">Terus Menggunakan Pulsar v2</a>.</li>
 </ul>

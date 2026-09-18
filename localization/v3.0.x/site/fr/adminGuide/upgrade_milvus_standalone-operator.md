@@ -27,7 +27,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
       </svg>
     </button></h1><p>Ce guide décrit comment mettre à niveau un déploiement autonome de Milvus 2.6.x vers la version v3.0-beta à l'aide de Milvus Operator.</p>
 <div class="alert note">
-<p>Cette procédure a été validée pour une mise à niveau de Milvus 2.6.20 vers Milvus v3.0-beta avec Milvus Operator 1.3.0, Woodpecker, etcd au sein du cluster et MinIO au sein du cluster. Si vous utilisez une autre version de Milvus 2.6.x, une autre version d’Operator, une autre file d’attente de messages ou une autre configuration des dépendances, testez d’abord la mise à niveau dans un environnement hors production.</p>
+<p>Cette procédure a été validée pour une mise à niveau de Milvus 2.6.20 vers Milvus v3.0-beta avec Milvus Operator 1.3.0, Woodpecker, etcd au sein du cluster et MinIO au sein du cluster. Si vous utilisez une autre version de Milvus 2.6.x, une autre version d’Operator, une autre file d’attente de messages ou une autre configuration des dépendances, validez d’abord la mise à niveau dans un environnement hors production.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,12 +48,12 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
 <li>Un cluster Kubernetes avec un déploiement autonome de Milvus 2.6.x géré par Milvus Operator</li>
 <li><code translate="no">kubectl</code> Accès au cluster</li>
 <li>Le manifeste complet de la ressource personnalisée (CR) Milvus utilisé pour le déploiement existant</li>
-<li>La méthode d’installation et les manifests utilisés pour l’Operator Milvus existant</li>
+<li>La méthode d’installation et les manifestes utilisés pour l’Operator Milvus existant</li>
 <li>Une sauvegarde récente des métadonnées et des données persistantes de Milvus</li>
 </ul>
 <p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alert warning">
-<p>Cette procédure ne prend pas en charge la rétrogradation ou la restauration de l’image Milvus vers la version 2.6.x. Une fois que la version v3.0-beta a écrit des données, une annulation portant uniquement sur l’image peut ne pas parvenir à lire l’état mis à jour. Si la mise à niveau échoue, arrêtez les écritures et utilisez un plan de reprise qui restaure les sauvegardes des métadonnées et des données persistantes antérieures à la mise à niveau. Testez d’abord le plan de reprise dans un environnement hors production.</p>
+<p>Cette procédure ne prend pas en charge une rétrogradation ou une annulation de la mise à jour consistant à revenir à l’image Milvus 2.6.x. Une fois que la version v3.0-beta a écrit des données, une restauration portant uniquement sur l’image peut ne pas parvenir à lire l’état mis à jour. Si la mise à niveau échoue, arrêtez les écritures et utilisez un plan de reprise qui restaure les sauvegardes des métadonnées et des données persistantes antérieures à la mise à niveau. Testez d’abord le plan de reprise dans un environnement hors production.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,7 +111,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>La mise à niveau validée a conservé Milvus Operator à la version 1.3.0. Conservez la version de l’Operator qui gère actuellement votre déploiement Milvus 2.6.x, sauf si votre politique d’assistance exige une mise à niveau distincte de l’Operator. Ne revenez pas à une version antérieure d’un Operator plus récent vers la version testée. Si vous devez changer de version d’Operator, utilisez la même méthode d’installation (Helm ou <code translate="no">kubectl</code> ) ainsi que le même nom de version et le même espace de noms que l’installation existante, puis validez le changement d’Operator avant de mettre à jour le CR Milvus.</p>
+<p>La mise à niveau validée a conservé Milvus Operator à la version 1.3.0. Conservez la version de l’Operator qui gère actuellement votre déploiement Milvus 2.6.x, sauf si votre politique d’assistance nécessite une mise à niveau distincte de l’Operator. Ne revenez pas à une version antérieure de l’Operator par rapport à la version testée. Si vous devez modifier la version de l’Operator, utilisez la même méthode d’installation (Helm ou <code translate="no">kubectl</code> ) ainsi que le même nom de version et le même espace de noms que l’installation existante, puis validez la modification de l’Operator avant de mettre à jour le CR Milvus.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Étape 3 : Mettre à jour l’image Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,4 +165,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Vérifiez que le CR Milvus indique <code translate="no">Healthy</code>, que l’image actuelle est <code translate="no">milvusdb/milvus:v3.0-beta</code> et que les collections existantes restent consultables et recherchables. Effectuez ces vérifications avant d’activer toute fonctionnalité spécifique à la version v3.0-beta.</p>
+<p>Vérifiez que le CR Milvus indique <code translate="no">Healthy</code>, que l’image actuelle est <code translate="no">milvusdb/milvus:v3.0-beta</code> et que les collections existantes restent consultables et recherchables. Effectuez ces vérifications avant d’activer toute fonctionnalité spécifique à la version 3.0-beta.</p>

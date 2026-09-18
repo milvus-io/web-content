@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Exécuter Milvus avec un GPU",
+            "label": "Exécuter Milvus avec le GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -177,7 +177,7 @@
             "children": []
           },
           {
-            "label": "Go SDK",
+            "label": "SDK Go",
             "id": "install-go.md",
             "order": 2,
             "children": []
@@ -431,7 +431,7 @@
             "children": []
           },
           {
-            "label": "Champ « Nombre »",
+            "label": "Champ numérique",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Alphanumonly",
+                    "label": "Uniquement alphanumérique",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Modifier le schéma de collecte externe",
+            "label": "Modifier le schéma de collection externe",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtrage et modèles",
+                "label": "Filtrage et création de modèles",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1156,7 +1156,7 @@
             "children": []
           },
           {
-            "label": "Surligneur de texte",
+            "label": "Surligneuse de texte",
             "id": "text-highlighter.md",
             "order": 11,
             "children": []
@@ -1365,13 +1365,13 @@
                 "children": []
               },
               {
-                "label": "Classement de la dégradation",
+                "label": "Classement de la désintégration",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du classement « Decay »",
+                    "label": "Présentation de Decay Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Forcer la compaction par fusion",
+            "label": "Forcer la compactation par fusion",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1493,7 +1493,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Présentation du stockage à plusieurs niveaux",
+                "label": "Présentation du stockage hiérarchisé",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1790,7 +1790,7 @@
             "children": []
           },
           {
-            "label": "Limiter le nombre d'enregistrements",
+            "label": "Limiter le nombre de collectes",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1964,7 +1964,7 @@
         ]
       },
       {
-        "label": "Mise à niveau",
+        "label": "Mise à jour",
         "id": "upgrade_milvus",
         "order": 7,
         "children": [
@@ -2186,44 +2186,76 @@
             "children": []
           },
           {
-            "label": "Commandes",
-            "id": "milvus_backup_cli.md",
+            "label": "Commandes (0.6.0)",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP (0.6.0)",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Cas courants",
-            "id": "common-cases",
+            "label": "Sauvegarde et restauration par instantané",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Sauvegarde 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration dans une seule instance",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Commandes (0.5.x)",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migration entre instances d'un même compartiment",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP (0.5.x)",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migration entre instances au sein de différents compartiments",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Cas courants (0.5.x)",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Sauvegarde et restauration dans une seule instance",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances d'un même compartiment",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances au sein de différents compartiments",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances dans différents environnements S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migration entre instances dans différents environnements S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Passer à la version 0.6.0",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2249,7 +2281,7 @@
             "children": []
           },
           {
-            "label": "Passage",
+            "label": "Passage au numérique",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -2355,7 +2387,7 @@
         "children": []
       },
       {
-        "label": "Journal d'exportation",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2591,7 +2623,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "API asynchrone Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -3079,7 +3111,7 @@
         "children": []
       },
       {
-        "label": "Développer RAG avec Milvus",
+        "label": "Créer un RAG avec Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3152,7 +3184,7 @@
         "children": []
       },
       {
-        "label": "Recherche en entonnoir avec les représentations « matriochka »",
+        "label": "Recherche en entonnoir avec des représentations de type « matriochka »",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3164,7 +3196,7 @@
         "children": []
       },
       {
-        "label": "Utilisation d'AsyncMilvusClient avec asyncio",
+        "label": "Utilisation de AsyncMilvusClient avec asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []
@@ -3176,7 +3208,7 @@
         "children": []
       },
       {
-        "label": "Génération d'expressions de filtrage de requêtes Milvus à l'aide de grands modèles linguistiques",
+        "label": "Génération d'expressions de filtrage de requêtes Milvus à l'aide de modèles linguistiques de grande envergure",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3251,7 +3283,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelles",
+        "label": "FAQ opérationnelle",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -2,7 +2,7 @@
 id: index-structarray-fields.md
 title: StructArray 필드 인덱싱
 summary: >-
-  벡터 검색을 실행하거나 스칼라 필터링 속도를 높이기 전에 StructArray의 하위 필드에 인덱스를 생성하십시오. StructArray
+  벡터 검색을 실행하거나 스칼라 필터링 속도를 높이기 전에 StructArray 하위 필드에 인덱스를 생성하십시오. StructArray
   필드의 경우, 인덱스 대상은 chunks[emb_list_vector], chunks[emb] 또는 chunks[section]과 같은 하위
   필드 경로입니다.
 ---
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>벡터 검색을 실행하거나 스칼라 필터링 속도를 높이기 전에 StructArray 하위 필드에 인덱스를 생성하십시오. StructArray 필드의 경우 인덱스 대상은 <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> 또는 <code translate="no">chunks[section]</code> 와 같은 하위 필드 경로입니다.</p>
+    </button></h1><p>벡터 검색을 실행하거나 스칼라 필터링을 가속화하기 전에 StructArray 하위 필드에 인덱스를 생성하십시오. StructArray 필드의 경우 인덱스 대상은 <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> 또는 <code translate="no">chunks[section]</code> 와 같은 하위 필드 경로입니다.</p>
 <p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. <code translate="no">chunks</code> StructArray 필드에는 필터링용 스칼라 하위 필드와 검색용 벡터 하위 필드가 포함되어 있습니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각에 대해 별도로 인덱싱하십시오. 이 페이지에서는 EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 인덱싱하고, 요소 수준 검색을 위해 <code translate="no">chunks[emb]</code> 에 인덱싱합니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각 별도로 인덱싱하십시오. 이 페이지에서는 EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 이 인덱싱되고, 요소 수준 검색을 위해 <code translate="no">chunks[emb]</code> 이 인덱싱됩니다.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">인덱스 선택<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,13 +76,13 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>EmbeddingList 검색</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">MAX_SIM*</code> 메트릭 패밀리.</td></tr>
-<tr><td>요소 수준 벡터 검색</td><td><code translate="no">chunks[emb]</code></td><td><code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 과 같은 일반 벡터 메트릭 계열입니다.</td></tr>
+<tr><td>요소 수준 벡터 검색</td><td><code translate="no">chunks[emb]</code></td><td><code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 과 같은 일반 벡터 메트릭 패밀리입니다.</td></tr>
 <tr><td>문자열 또는 범주별로 필터링</td><td><code translate="no">chunks[section]</code></td><td>대상에서 지원하는 스칼라 인덱스입니다.</td></tr>
 <tr><td>숫자 범위별로 필터링</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>대상에서 지원하는 스칼라 인덱스.</td></tr>
 <tr><td>부울 값으로 필터링</td><td><code translate="no">chunks[has_code]</code></td><td>대상에서 지원하는 스칼라 인덱스입니다.</td></tr>
 </tbody>
 </table>
-<p>EmbeddingList 검색은 StructArray 벡터 하위 필드의 벡터들을 임베딩 목록으로 취급하여 엔티티 수준의 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
+<p>EmbeddingList 검색은 StructArray 벡터 하위 필드의 벡터들을 임베딩 목록으로 처리하여 엔티티 수준 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">벡터 인덱스 생성<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +139,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>경고
-동일한 벡터 하위 필드에 ‘ <code translate="no">MAX_SIM*</code> ’ 인덱스와 일반 벡터 메트릭 인덱스를 함께 생성하지 마십시오. 두 검색 모드가 모두 필요한 경우, 벡터를 두 개의 별도 벡터 하위 필드에 저장하고 각 하위 필드에 대해 하나의 인덱스를 생성하십시오.</p>
+동일한 벡터 하위 필드에 ‘ <code translate="no">MAX_SIM*</code> ’ 인덱스와 일반 벡터 메트릭 인덱스를 함께 생성하지 마십시오. 두 가지 검색 모드가 모두 필요한 경우, 벡터를 서로 다른 두 개의 벡터 하위 필드에 저장하고 각 하위 필드에 대해 하나의 인덱스를 생성하십시오.</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">스칼라 인덱스 생성<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +156,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터에서 StructArray 스칼라 하위 필드를 사용할 때는 해당 필드에 대한 스칼라 인덱스를 생성하십시오. <code translate="no">structArray[subfield]</code> 경로 구문을 동일하게 사용하십시오.</p>
+    </button></h2><p>필터에서 StructArray 스칼라 서브필드를 사용할 때는 해당 서브필드에 대한 스칼라 인덱스를 생성하십시오. <code translate="no">structArray[subfield]</code> 경로 구문을 동일하게 사용하십시오.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -188,7 +188,7 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같은 필터에서 StructArray 스칼라 하위 필드가 자주 등장할 때 유용합니다.</p>
+<p>스칼라 인덱스는 선택 사항이지만, ` <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> `이나 ` <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>`과 같이 필터에서 StructArray 스칼라 하위 필드가 자주 나타나는 경우 유용합니다.</p>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">인덱스 메트릭 호환성<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +221,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>EmbeddingList 검색은 <code translate="no">MAX_SIM*</code> 메트릭을 사용합니다. 이 검색은 StructArray 벡터 하위 필드의 벡터를 임베딩 목록으로 취급하며, 엔티티 수준의 결과를 반환합니다.</p>
+    </button></h3><p>EmbeddingList 검색은 <code translate="no">MAX_SIM*</code> 메트릭을 사용합니다. 이 검색은 StructArray 벡터 하위 필드의 벡터를 임베딩 리스트로 처리하며, 엔티티 수준의 결과를 반환합니다.</p>
 <table>
 <thead>
 <tr><th>벡터 하위 필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
@@ -283,7 +283,7 @@ client.create_index(
 
 <span class="hljs-built_in">print</span>(indexes)
 <button class="copy-code-btn"></button></code></pre>
-<p>SDK 버전에 인덱스 설명 API가 제공되는 경우, 특정 인덱스를 설명할 수도 있습니다.</p>
+<p>SDK 버전에 인덱스 설명 API가 제공되는 경우 특정 인덱스를 설명할 수도 있습니다.</p>
 <pre><code translate="no" class="language-python">index = client.describe_index(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     index_name=<span class="hljs-string">&quot;chunks_emb_cosine&quot;</span>,
@@ -311,11 +311,11 @@ client.create_index(
 <tr><th>규칙</th><th>설명</th></tr>
 </thead>
 <tbody>
-<tr><td>서브필드 인덱스에는 경로 구문을 사용하십시오.</td><td><code translate="no">emb</code> 이나 <code translate="no">chunks.emb</code> 대신 <code translate="no">chunks[emb]</code> 을 인덱스로 지정하십시오.</td></tr>
+<tr><td>서브필드 인덱스에는 경로 구문을 사용하세요.</td><td>인덱스는 <code translate="no">chunks[emb]</code> 의 형식을 사용해야 하며, <code translate="no">emb</code> 또는 <code translate="no">chunks.emb</code> 의 형식은 사용해서는 안 됩니다.</td></tr>
 <tr><td>하나의 벡터 하위 필드에는 하나의 인덱스만 사용할 수 있습니다.</td><td>서로 다른 메트릭 계열이 필요한 경우 별도의 벡터 서브필드를 사용하십시오.</td></tr>
 <tr><td>EmbeddingList 검색에는 <code translate="no">MAX_SIM*</code> 메트릭을 사용하십시오.</td><td>EmbeddingList 쿼리 데이터에는 <code translate="no">MAX_SIM*</code> 메트릭으로 구축된 인덱스가 필요합니다.</td></tr>
 <tr><td>요소 수준 검색에는 일반 벡터 메트릭을 사용하십시오.</td><td>요소 수준 검색은 일반 벡터 쿼리 데이터와 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 메트릭을 사용합니다.</td></tr>
-<tr><td>필터에 나타나는 스칼라 하위 필드는 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오.</td></tr>
+<tr><td>필터에 나타나는 스칼라 하위 필드를 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오.</td></tr>
 <tr><td>벡터 필드 제한 사항을 염두에 두십시오.</td><td>벡터 필드와 벡터 하위 필드의 총 개수에는 제한이 있습니다. 벡터 하위 필드를 많이 추가하기 전에 StructArray 제한 사항을 참조하십시오.</td></tr>
 </tbody>
 </table>
@@ -337,10 +337,10 @@ client.create_index(
     </button></h2><ul>
 <li><p><code translate="no">chunks[emb]</code> 대신 <code translate="no">chunks.emb</code> 에 인덱스를 생성하는 경우.</p></li>
 <li><p><code translate="no">MAX_SIM*</code> 인덱스만 생성한 후, 동일한 서브필드에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
-<li><p>일반 벡터 인덱스만 생성한 후, 동일한 서브필드에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
+<li><p>일반 벡터 인덱스만 생성한 후, 동일한 하위 필드에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
 <li><p><code translate="no">MAX_SIM*</code> 와 일반 벡터 메트릭 모두에 하나의 벡터 하위 필드를 재사용하는 경우.</p></li>
 <li><p>자주 사용되는 StructArray 필터에 대한 스칼라 인덱스를 생략하는 경우.</p></li>
-<li><p>Struct 스키마에 존재하지 않는 StructArray 서브필드에 인덱싱을 수행하는 경우.</p></li>
+<li><p>Struct 스키마에 존재하지 않는 StructArray 하위 필드를 인덱싱하는 경우.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -358,7 +358,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>엔티티 수준 EmbeddingList 검색 또는 요소 수준 벡터 검색을 실행하려면 ‘StructArray를 사용한 기본 벡터 검색’을 참조하십시오.</p></li>
-<li><p>검색 중에 StructArray 스칼라 하위 필드를 필터링하려면 ‘StructArray를 사용한 필터링 검색’을 참조하십시오.</p></li>
+<li><p>엔티티 수준 EmbeddingList 검색이나 요소 수준 벡터 검색을 실행하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
+<li><p>검색 중에 StructArray 스칼라 하위 필드를 필터링하려면 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>
 <li><p>인덱스 및 메트릭 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
 </ol>

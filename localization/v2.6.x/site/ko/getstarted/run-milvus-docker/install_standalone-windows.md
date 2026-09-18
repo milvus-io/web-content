@@ -2,7 +2,7 @@
 id: install_standalone-windows.md
 label: Docker
 related_key: Docker
-summary: Windows용 Docker Desktop을 사용하여 Milvus 독립 실행형 버전을 설치하는 방법을 알아보세요.
+summary: Windows용 Docker Desktop을 사용하여 Milvus 독립 실행형을 설치하는 방법을 알아보세요.
 title: Docker에서 Milvus 실행하기 (Linux)
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Docker에서 Milvus 실행하기 (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
         ></path>
       </svg>
     </button></h1><p>이 페이지에서는 Windows용 Docker Desktop을 사용하여 Windows에서 Milvus를 실행하는 방법을 설명합니다.​</p>
-<h2 id="Prerequisites​" class="common-anchor-header">필수 준비 사항​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
+<h2 id="Prerequisites​" class="common-anchor-header">필수 조건​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,7 +74,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
       </svg>
     </button></h3><p>PowerShell이나 Windows 명령 프롬프트에 더 익숙하다면, 명령 프롬프트 사용 방법은 다음과 같습니다.​</p>
 <ol>
-<li><p>Docker Desktop을 마우스 오른쪽 버튼으로 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하여 관리자 모드로 엽니다.​</p></li>
+<li><p>마우스 오른쪽 버튼을 클릭하고 <strong>‘관리자 권한으로 실행’을</strong> 선택하여 Docker Desktop을 <strong>관리자</strong> 모드로 엽니다.​</p></li>
 <li><p>설치 스크립트를 다운로드하여 <code translate="no">standalone.bat</code> 로 저장합니다.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
@@ -86,11 +86,11 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
-<p>설치 스크립트 실행 후:​</p>
+<p>설치 스크립트를 실행한 후:​</p>
 <ul>
 <li><p><strong>milvus-standalone이라는</strong> 이름의 Docker 컨테이너가 포트 <strong>19530</strong>에서 시작되었습니다.​</p></li>
 <li><p>Milvus와 함께 동일한 컨테이너 내에 임베디드 etcd가 설치되었으며, 포트 <strong>2379</strong>에서 서비스를 제공합니다. 해당 구성 파일은 현재 폴더의 <strong>embedEtcd.yaml</strong> 에 매핑되어 있습니다.​</p></li>
-<li><p>Milvus 데이터 볼륨은 현재 폴더의 ` <strong>volumes/milvus</strong> `에 매핑됩니다.​</p></li>
+<li><p>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus</strong> 에 매핑됩니다.​</p></li>
 </ul>
 <p>다음 명령어를 사용하여 Milvus 컨테이너와 저장된 데이터를 관리할 수 있습니다.​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
@@ -233,7 +233,7 @@ Starting Ubuntu...​
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus를 실행합니다.</p>
+<li><p>Milvus를 시작합니다.​</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
 Creating milvus-etcd  ... done​
@@ -257,7 +257,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 해결할 수 있나요?​<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 해결하나요?​<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,7 +272,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Windows에 Docker Desktop을 설치한 후, 컴퓨터가 올바르게 구성되지 않은 경우 ' <code translate="no">Docker Engine stopped</code> ' 오류가 발생할 수 있습니다. 이 경우 다음 사항을 확인해 보시기 바랍니다:​</p>
+    </button></h3><p>Windows에 Docker Desktop을 설치한 후, 컴퓨터가 제대로 구성되지 않은 경우 ' <code translate="no">Docker Engine stopped</code> ' 오류가 발생할 수 있습니다. 이 경우 다음 사항을 확인해 보시기 바랍니다:​</p>
 <ol>
 <li><p>가상화가 활성화되어 있는지 확인하십시오.​</p>
 <p><strong>작업 관리자의</strong> <strong>‘성능’</strong> 탭을 확인하여 가상화가 활성화되어 있는지 확인할 수 있습니다.​</p>
@@ -292,7 +292,7 @@ The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
 <li><p>WSL이 제대로 설치되었는지 확인하십시오.</p>
-<p>다음 명령을 실행하여 WSL 2를 설치하거나 업데이트할 수 있습니다.</p>
+<p>다음 명령을 실행하여 WSL 2를 설치하거나 업데이트할 수 있습니다.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
@@ -329,9 +329,9 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 Docker Desktop이 WSL 2 기반 엔진을 사용하도록 설정되어 있는지 확인해야 할 수 있습니다:​</p>
+    </button></h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 Docker Desktop이 WSL 2 기반 엔진을 사용하도록 구성되어 있는지 확인해야 할 수 있습니다:​</p>
 <ol>
-<li><p><strong>설정</strong> &gt; <strong>일반에서</strong> “WSL 2 기반 엔진 사용”이 선택되어 있는지 확인하십시오. ​</p>
+<li><p><strong>'설정</strong> &gt; <strong>일반</strong>'에서 'WSL 2 기반 엔진 사용' 항목이 선택되어 있는지 확인하십시오. ​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
@@ -346,7 +346,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvus 시작 시 “ <code translate="no">Read config failed</code> ”라는 볼륨 관련 오류 메시지가 표시되면 어떻게 해결해야 하나요?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvus 시작 시 “ <code translate="no">Read config failed</code> ”라는 볼륨 관련 오류가 표시되면 어떻게 해결해야 하나요?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -367,11 +367,11 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Milvus 시작 시 발생하는 ‘Read config failed’ 오류 메시지</span>
   
  </span></p>
-<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너에 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
+<p>Milvus 시작 시 “Read config failed”라는 오류가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
-   <span>Milvus 구성 파일 열거</span>
+   <span>Milvus 구성 파일 나열</span>
   
  </span></p>
 <p>​</p>
@@ -398,12 +398,12 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 업삽(Upsert) 및 삭제</a></li>
 <li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>

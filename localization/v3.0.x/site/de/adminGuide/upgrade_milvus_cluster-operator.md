@@ -51,10 +51,10 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
 <li>Die für den bestehenden Milvus-Operator verwendete Installationsmethode und die entsprechenden Manifeste</li>
 <li>Eine aktuelle Sicherung der Milvus-Metadaten und persistenten Daten</li>
 </ul>
-<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alert warning">
 <p>Wenden Sie für dieses Upgrade die vollständige Milvus-CR an. Verwenden Sie keinen reinen Image-Merge-Patch. Der Operator kann ausgelassene Komponentenfelder mit null Replikaten standardmäßig wiederherstellen, wodurch eine Komponente wieder aktiviert werden kann, die in der bestehenden 2.6.x-Bereitstellung deaktiviert wurde.</p>
-<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch das Zurücksetzen des Milvus-Images auf 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die vor dem Upgrade erstellten Metadaten und Backups der persistenten Daten wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
+<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch die Rückführung des Milvus-Images auf 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und verwenden Sie einen Wiederherstellungsplan, der die Metadaten und persistenten Datensicherungen vor dem Upgrade wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Schritt 1: Sichern Sie den aktuellen Milvus-CR<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Schritt 1: Sichern Sie die aktuelle Milvus-CR<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,7 +128,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ändern Sie im vollständigen Milvus-CR-Manifest „ <code translate="no">spec.components.image</code> “ in die Zielversion. Behalten Sie den aktuellen Modus, die Komponententopologie, die Nachrichtenwarteschlange, etcd, den Speicher sowie andere Abhängigkeitseinstellungen bei. Der folgende Auszug zeigt die zu überprüfenden Felder; ersetzen Sie Ihre vollständige CR nicht durch diesen Auszug.</p>
+    </button></h3><p>Ändern Sie im vollständigen Milvus-CR-Manifest „ <code translate="no">spec.components.image</code> “ in die Zielversion. Behalten Sie den aktuellen Modus, die Komponententopologie, die Nachrichtenwarteschlange, etcd, den Speicher und andere Abhängigkeitseinstellungen bei. Der folgende Auszug zeigt die zu überprüfenden Felder; ersetzen Sie Ihre vollständige CR nicht durch diesen Auszug.</p>
 <p>Vergewissern Sie sich vor dem Anwenden des Ziel-CR, dass „ <code translate="no">indexNode.replicas</code> “ auf „ <code translate="no">0</code> “ gesetzt ist. Die validierte Milvus 2.6.20-Konfiguration verwendete bereits diese Einstellung. Behalten Sie die explizite Einstellung „zero-replica“ im Ziel-CR bei.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -169,4 +169,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Stellen Sie sicher, dass die Milvus-CR „ <code translate="no">Healthy</code> “ meldet, alle Milvus-Komponenten „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ verwenden, kein IndexNode-Pod ausgeführt wird und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie v3.0-Beta-spezifische Funktionen aktivieren.</p>
+<p>Stellen Sie sicher, dass der Milvus-CR „ <code translate="no">Healthy</code> “ meldet, alle Milvus-Komponenten „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ verwenden, kein IndexNode-Pod ausgeführt wird und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie v3.0-Beta-spezifische Funktionen aktivieren.</p>

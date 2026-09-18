@@ -1,6 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: Docker Compose を使用して Milvus クラスターをアップグレードする方法について学びましょう。
+summary: Docker Compose を使用して Milvus クラスタをアップグレードする方法について学びましょう。
 title: Docker Compose を使用した Milvus クラスタのアップグレード
 ---
 <div class="tab-wrapper"><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ja/v2.6.x/configure_operator.md" class=''>OperatorMilvus</a><a href="/docs/ja/v2.6.x/configure-docker.md" class=''>OperatorHelmDocker</a><a href="/docs/ja/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>ComposeHelmDocker</a><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -20,7 +20,7 @@ title: Docker Compose を使用した Milvus クラスタのアップグレー�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Docker Compose を使用して Milvus をアップグレードする方法について説明します。</p>
-<p>通常、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusはイメージを変更することでアップグレード</a>できます。ただし、v2.1.xからv2.6.17へのアップグレードを行う前には、<a href="#Migrate-the-metadata">メタデータの移行を行う</a>必要があります。</p>
+<p>通常、<a href="#Upgrade-Milvus-by-changing-its-image">Milvus はイメージを変更することでアップグレード</a>できます。ただし、v2.1.x から v2.6.17 へのアップグレードを行う前には、<a href="#Migrate-the-metadata">メタデータの移行を行う</a>必要があります。</p>
 <div class="alert note">
 <p><strong>メッセージキューの制限事項</strong>：Milvus v2.6.17 へアップグレードする際は、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 </div>
@@ -39,7 +39,7 @@ title: Docker Compose を使用した Milvus クラスタのアップグレー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通常の場合、Milvusは次のようにアップグレードできます:</p>
+    </button></h2><p>通常の場合、Milvusは次のようにアップグレードできます。</p>
 <ol>
 <li><p><code translate="no">docker-compose.yaml</code> 内の Milvus イメージタグを変更します。</p>
 <p>プロキシ、すべてのコーディネーター、およびすべてのワーカーノードのイメージタグを変更する必要がある点に注意してください。</p>

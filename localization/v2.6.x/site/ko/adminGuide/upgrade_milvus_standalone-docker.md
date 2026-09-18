@@ -4,11 +4,11 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Docker Compose를 사용하여 Milvus 독립 실행형 버전을 업그레이드하는 방법을 알아보세요.
-title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
+summary: Docker Compose를 사용하여 Milvus 독립형 버전을 업그레이드하는 방법을 알아보세요.
+title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드하기
 ---
 <div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>, Helm, Docker<a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드하기<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.x에서 2.6.17로 업그레이드하는 과정에는 다음과 같은 주요 아키텍처 변경 사항이 포함됩니다:</p>
+    </button></h3><p>Milvus 2.5.x에서 2.6.17로 업그레이드하는 과정에는 다음과 같은 중대한 아키텍처 변경 사항이 포함됩니다:</p>
 <ul>
 <li><strong>코디네이터 통합</strong>: 기존에 별도로 운영되던 코디네이터(<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>)가 단일 코디네이터로 통합되었습니다. <code translate="no">mixCoord</code></li>
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
@@ -87,7 +87,7 @@ title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
 <li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우, 마이그레이션 지원을 위해 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드를</a> 참조하십시오.</li>
 <li>v2.6.17로 업그레이드하기 전에 <strong>반드시</strong> v2.5.16 이상으로 먼저 업그레이드해야 <strong>합니다</strong>.</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.17로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alter note">
 <p>보안상의 이유로, Milvus는 v2.6.17 릴리스와 함께 MinIO를 RELEASE.2024-12-18T13-15-44Z로 업그레이드합니다.</p>
 </div>
@@ -122,7 +122,7 @@ title: Docker Compose를 사용하여 Milvus 독립형 버전 업그레이드
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>독립형 배포 환경이 이미 v2.5.16 이상을 실행 중인 경우 이 단계를 건너뛰십시오.</p>
+<p>독립형 배포 환경이 이미 v2.5.16 이상을 실행 중이라면 이 단계를 건너뛰십시오.</p>
 </div>
 <ol>
 <li><p>기존 ` <code translate="no">docker-compose.yaml</code> ` 파일을 편집하고 Milvus 이미지 태그를 v2.5.16으로 업데이트하십시오:</p>
@@ -211,11 +211,11 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
         ></path>
       </svg>
     </button></h2><ul>
-<li>다음과 같은 내용도 알아보시기 바랍니다:
+<li>다음과 같은 방법도 알아보시기 바랍니다:
 <ul>
 <li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
-<li>클라우드로 클러스터를 배포할 준비가 되셨다면:
+<li>클라우드에 클러스터를 배포할 준비가 되셨다면:
 <ul>
 <li><a href="/docs/ko/v2.6.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/v2.6.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>

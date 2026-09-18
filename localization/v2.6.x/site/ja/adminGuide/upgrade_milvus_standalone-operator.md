@@ -54,7 +54,7 @@ title: Milvus Operator を使用した Milvus スタンドアロンのアップ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.x から 2.6.17 へのアップグレードには、以下の重要なアーキテクチャの変更が含まれます：</p>
+    </button></h3><p>Milvus 2.5.x から 2.6.17 へのアップグレードには、次のような重要なアーキテクチャの変更が含まれます。</p>
 <ul>
 <li><strong>コーディネーターの統合</strong>：従来の個別のコーディネーター（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）が単一の<code translate="no">mixCoord</code></li>
 <li><strong>新コンポーネント</strong>：データ処理機能を強化するためのストリーミングノードの導入</li>
@@ -79,16 +79,16 @@ title: Milvus Operator を使用した Milvus スタンドアロンのアップ�
     </button></h3><p><strong>システム要件：</strong></p>
 <ul>
 <li>Milvus Operator を通じて Milvus スタンドアロンがデプロイされた Kubernetes クラスター</li>
-<li><code translate="no">kubectl</code> クラスターにアクセスできるよう設定済み</li>
+<li><code translate="no">kubectl</code> クラスタにアクセスできるよう設定済み</li>
 <li>Helm 3.x がインストールされていること</li>
 </ul>
 <p><strong>互換性に関する要件：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 は v2.6.17<strong>と互換性がありません</strong>。リリース候補版からの直接アップグレードはサポートされていません。</li>
-<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の支援について<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
+<li>Milvus v2.6.0-rc1はv2.6.<strong>17と互換性がありません</strong>。リリース候補版からの直接アップグレードはサポートされていません。</li>
+<li>現在 v2.6.0-rc1 を実行しており、データを保持する必要がある場合は、移行の参考として<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">こちらのコミュニティガイド</a>を参照してください。</li>
 <li>v2.6.17 にアップグレードする前に、v2.5.16 以降にアップグレード<strong>する必要があります</strong>。</li>
 </ul>
-<p><strong>メッセージキューの制限事項</strong>:Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>:Milvus v2.6.17 へのアップグレード時には、現在のメッセージキューの設定を維持する必要があります。アップグレード中に異なるメッセージキューシステムへの切り替えはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">アップグレード手順<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,12 +119,12 @@ title: Milvus Operator を使用した Milvus スタンドアロンのアップ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>まず、Milvus Operator を v1.3.0 にアップグレードします：</p>
+    </button></h3><p>まず、Milvus Operator を v1.3.0 にアップグレードします:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>オペレーターのアップグレードを確認します：</p>
+<p>Operatorのアップグレードを確認します：</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">ステップ 2: Milvus スタンドアロンのアップグレード<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
@@ -145,7 +145,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 v2.5.16 へのアップグレード</h4><div class="alert-note">
 <p>スタンドアロン環境がすでに v2.5.16 以降を実行している場合は、この手順をスキップしてください。</p>
 </div>
-<p>v2.5.16 にアップグレードするための設定ファイル `<code translate="no">milvusupgrade.yaml</code> ` を作成します:</p>
+<p>v2.5.16 にアップグレードするための設定ファイル `<code translate="no">milvusupgrade.yaml</code> ` を作成してください:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -161,7 +161,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="22-Upgrade-to-v2617" class="common-anchor-header">2.2 v2.6.17 へのアップグレード</h4><p>v2.5.16が正常に動作したら、v2.6.17にアップグレードします:</p>
+<h4 id="22-Upgrade-to-v2617" class="common-anchor-header">2.2 v2.6.17 へのアップグレード</h4><p>v2.5.16が正常に動作していることを確認したら、v2.6.17にアップグレードします:</p>
 <p>設定ファイルを更新します（この例では<code translate="no">milvusupgrade.yaml</code> ）：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

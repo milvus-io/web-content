@@ -20,7 +20,7 @@ title: 使用 RPM/DEB 软件包安装 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍了如何使用预编译的 RPM/DEB 软件包安装 Milvus Standalone。</p>
+    </button></h1><p>本页面介绍如何使用预编译的 RPM/DEB 软件包安装 Milvus Standalone。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ title: 使用 RPM/DEB 软件包安装 Milvus Standalone
       </svg>
     </button></h2><p>您可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">Milvus 发布页面</a>根据您的系统架构下载相应的 RPM/DEB 软件包。</p>
 <ul>
-<li>对于 x86_64/amd64 架构，请下载<strong>milvus_2.6.9-1_amd64.deb</strong>或<strong>milvus_2.6.9-1_amd64.rpm</strong>软件包。</li>
+<li>对于 x86_64/amd64，请下载<strong>milvus_2.6.9-1_amd64.deb</strong>或<strong>milvus_2.6.9-1_amd64.rpm</strong>软件包。</li>
 <li>对于 ARM64，请下载<strong>milvus_2.6.9-1_arm64.deb</strong>或<strong>milvus_2.6.9-1_arm64.rpm</strong>软件包。</li>
 </ul>
 <p>以下命令假设您将在 x86_64/amd64 机器上运行 Milvus Standalone。</p>
@@ -119,7 +119,7 @@ dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以在<code translate="no">/usr/bin/milvus</code> 找到 Milvus 二进制文件，在<code translate="no">/lib/systemd/system/milvus.service</code> 找到 systemd 服务文件，并在<code translate="no">/usr/lib/milvus/</code> 找到依赖项。</p>
 <div class="alert note">
-<p>默认情况下，Milvus Standalone 会使用<strong>Woodpecker</strong>（本地文件系统）作为其消息队列，并内置 etcd，因此无需外部消息或元数据服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
+<p>默认情况下，Milvus Standalone 使用内置 etcd 的<strong>Woodpecker</strong>（本地文件系统）作为消息队列，因此无需外部消息传递或元数据服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
 </div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在<code translate="no">/etc/milvus/configs/milvus.yaml</code> 文件中修改 Milvus 配置。例如，若要将<code translate="no">proxy.healthCheckTimeout</code> 更改为<code translate="no">1000</code> 消息队列，可搜索 target 参数并相应修改。有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">《系统配置》</a>。</p>
+    </button></h2><p>您可以在<code translate="no">/etc/milvus/configs/milvus.yaml</code> 文件中修改 Milvus 配置。例如，若要将<code translate="no">proxy.healthCheckTimeout</code> 更改为<code translate="no">1000</code> ，请搜索 target 参数并相应修改。有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">《系统配置》</a>。</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">停止 Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,11 +170,11 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要卸载 Milvus Standalone，请使用以下命令：</p>
+    </button></h2><p>要卸载 Milvus Standalone，可使用以下命令：</p>
 <p>对于基于 RPM 的系统：</p>
 <pre><code translate="no" class="language-shell">rpm -e milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>对于基于 DEB 的系统：</p>
+<p>针对基于 DEB 的系统：</p>
 <pre><code translate="no" class="language-shell">apt remove milvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>安装 Milvus Standalone 后，您可以：</p>
 <ul>
-<li><p>查阅<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
@@ -217,7 +217,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并更新动态配置的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
+<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源 GUI 工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

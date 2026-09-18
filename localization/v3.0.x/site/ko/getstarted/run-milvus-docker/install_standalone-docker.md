@@ -2,7 +2,7 @@
 id: install_standalone-docker.md
 label: Docker
 related_key: Docker
-summary: Docker를 사용하여 Milvus 독립 실행형 버전을 설치하는 방법을 알아보세요.
+summary: Docker를 사용하여 Milvus 독립 실행형을 설치하는 방법을 알아보세요.
 title: Docker에서 Milvus 실행하기 (Linux)
 ---
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Docker에서 Milvus 실행하기 (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
 <li><strong>Woodpecker MQ (기본값)</strong>: 이 Docker 배포 환경은 Woodpecker를 메시지 큐로 실행하며, <strong>로컬 파일 시스템을</strong> WAL 백엔드로 사용하므로 별도의 외부 메시지 큐 서비스가 필요하지 않습니다. <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 참조하십시오.</li>
 <li><strong>최적화된 아키텍처</strong>: 성능 향상을 위한 구성 요소 통합</li>
 </ul>
-<p>최신 구성 및 아키텍처 개선 사항을 적용하려면 항상 최신 스크립트를 다운로드하십시오.</p>
+<p>최신 구성 및 아키텍처 개선 사항을 확실히 적용하려면 항상 최신 스크립트를 다운로드하십시오.</p>
 <p><a href="https://milvus.io/docs/milvus_backup_overview.md">백업을</a> 독립형 배포 모드에서 사용하려는 경우, <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> 배포 방법을 사용하는 것이 좋습니다.</p>
 <p>이미지 가져오기 과정에서 문제가 발생하면, 문제 세부 정보를 기재하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
 </div>
@@ -96,7 +96,7 @@ title: Docker에서 Milvus 실행하기 (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>현재 폴더에 있는 <strong>user.yaml</strong> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 파일을 다음과 같이 수정하면 됩니다.</p>
+    </button></h2><p>현재 폴더에 있는 <strong>user.yaml</strong> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 파일을 다음과 같이 수정하면 됩니다:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -127,14 +127,14 @@ EOF
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>업그레이드 명령어는 다음 작업을 자동으로 수행합니다:</p>
+<p>업그레이드 명령어는 다음을 자동으로 수행합니다:</p>
 <ul>
 <li>업데이트된 구성이 포함된 최신 설치 스크립트를 다운로드합니다</li>
 <li>최신 Milvus Docker 이미지를 가져옵니다</li>
 <li>새로운 버전으로 컨테이너를 재시작합니다</li>
 <li>기존 데이터와 구성을 보존합니다</li>
 </ul>
-<p>이는 Milvus 독립형 배포 환경을 업그레이드하는 권장 방법입니다.</p>
+<p>이는 Milvus 독립형 배포 환경을 업그레이드하는 데 권장되는 방법입니다.</p>
 </div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus 중지 및 삭제<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같이 이 컨테이너를 중지하고 삭제할 수 있습니다</p>
+    </button></h2><p>다음과 같이 이 컨테이너를 중지하고 삭제할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
 <span class="hljs-meta prompt_">
@@ -173,14 +173,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본적으로 이 배포 환경은 메시지 큐로 <strong>Woodpecker</strong> (로컬 파일 시스템 WAL) <strong>를</strong>, 메타데이터용으로 <strong>임베디드 etcd를</strong> 실행하며, 별도로 설치할 항목은 없습니다. 다른 메시지 큐를 사용하거나 외부 객체 스토리지/메타데이터를 연결하려면 다음을 참조하십시오.</p>
+    </button></h2><p>기본적으로 이 배포 환경은 메시지 큐로 <strong>Woodpecker</strong> (로컬 파일 시스템 WAL)를, 메타데이터용으로 <strong>임베디드 etcd를</strong> 실행하며, 추가로 설치해야 할 사항은 없습니다. 다른 메시지 큐를 사용하거나 외부 객체 스토리지/메타데이터를 연결하려면 다음을 참조하십시오.</p>
 <ul>
 <li>메시지 큐: <a href="/docs/ko/woodpecker.md">Woodpecker</a> (기본값) · <a href="/docs/ko/mq_pulsar.md">Pulsar</a> · <a href="/docs/ko/mq_kafka.md">Kafka</a> · <a href="/docs/ko/mq_rocksmq.md">RocksMQ</a></li>
 <li>오브젝트 스토리지: <a href="/docs/ko/deploy_s3.md">MinIO</a> (기본값) · <a href="/docs/ko/deploy_s3.md">AWS S3</a> · <a href="/docs/ko/abs.md">Azure Blob</a> · <a href="/docs/ko/gcs.md">GCP Cloud Storage</a> · <a href="/docs/ko/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/ko/deploy_s3.md">Tencent COS</a> · <a href="/docs/ko/deploy_s3.md">Huawei OBS</a> · <a href="/docs/ko/deploy_s3.md">S3 호환</a></li>
 <li>메타데이터: <a href="/docs/ko/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 활성화하십시오. 요구 사항 및 호환성 고려 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
+<p>Storage V3는 기본적으로 비활성화되어 있습니다. 이에 의존하는 기능을 사용하기 전에 활성화하십시오. 요구 사항 및 호환성 고려 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

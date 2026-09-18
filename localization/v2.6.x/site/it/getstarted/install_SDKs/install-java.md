@@ -93,7 +93,7 @@ title: Installazione dell'SDK Java di Milvus
 <li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserire, aggiornare o eliminare</a></li>
-<li><a href="/docs/it/v2.6.x/single-vector-search.md">Effettuare ricerche su singoli vettori</a></li>
+<li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p>Esplora <a href="/api-reference/java/v2.4.x/About.md">la documentazione di riferimento dell'API Java di Milvus</a></p></li>

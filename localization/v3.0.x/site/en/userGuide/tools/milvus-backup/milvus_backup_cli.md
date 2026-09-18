@@ -18,7 +18,10 @@ title: Back up and Restore Data Using Commands
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data.</p>
+    </button></h1><div class="alert note">
+<p>This page covers <strong>Milvus Backup 0.5.x</strong>, with downloads and examples pinned to <strong>0.5.16</strong>. Check the <a href="/docs/milvus_backup_overview.md#Compatibility-matrix">Milvus compatibility matrix</a> for supported server versions. For Backup 0.6.0, use the <a href="/docs/milvus_backup_0_6_cli.md">0.6.0 guide</a> or <a href="/docs/milvus_backup_upgrade.md">upgrade from 0.5.x</a>.</p>
+</div>
+<p>Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data.</p>
 <h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Obtain Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,10 +38,10 @@ title: Back up and Restore Data Using Commands
         ></path>
       </svg>
     </button></h2><p>You can either download the compiled binary or build from the source.</p>
-<p>To download the compiled binary, go to the <a href="https://github.com/zilliztech/milvus-backup/releases">release</a> page, where you can find all official releases. Remember, always use the binaries in the release marked as <strong>Latest</strong>.</p>
-<p>To compile from the source, do as follows:</p>
-<pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
-go get
+<p>Download the binary for your operating system and architecture from the <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.16">0.5.16 release</a>. Use the matching 0.5.16 configuration and examples on this page.</p>
+<p>To build 0.5.16 from source, install Go 1.25 or later and run:</p>
+<pre><code translate="no" class="language-shell">git clone --branch v0.5.16 --depth 1 https://github.com/zilliztech/milvus-backup.git
+cd milvus-backup
 go build
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-configuration-file" class="common-anchor-header">Prepare configuration file<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
@@ -56,7 +59,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Download the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">example configuration file</a> and tailor it to fit your needs.</p>
+    </button></h2><p>Download the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml">example configuration file</a> and tailor it to fit your needs.</p>
 <p>Then create a folder alongside the downloaded or built Milvus Backup binary, name the folder <code translate="no">configs</code>, and place the configuration file inside the <code translate="no">configs</code> folder.</p>
 <p>Your folder structure should be similar to the following:</p>
 <pre>
@@ -67,7 +70,7 @@ go build
       └── backup.yaml
   </code>
 </pre>
-<p>Because Milvus Backup cannot back up your data to a local path, ensure that Minio settings are correct when tailoring the configuration file.</p>
+<p>This example uses MinIO for backup storage. Set <code translate="no">minio.*</code> to match your Milvus storage and backup destination, including the addresses, credentials, bucket names, and root paths.</p>
 <div class="alert note">
 <p>The name of the default Minio bucket varies with the way you install Milvus. When making changes to Minio settings, do refer to the following table.</p>
 <table>
@@ -96,8 +99,10 @@ go build
         ></path>
       </svg>
     </button></h2><p>If you run an empty local Milvus instance at the default port, use the example Python scripts to generate some data in your instance. Feel free to make necessary changes to the scripts to fit your needs.</p>
-<p>Obtain the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">scripts</a>. Then run the scripts to generate the data. Ensure that <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, the official Milvus Python SDK, has been installed.</p>
-<pre><code translate="no" class="language-shell">python example/prepare_data.py
+<p>Obtain the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/prepare_data.py">scripts</a>. Then run the scripts to generate the data. Ensure that <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, the official Milvus Python SDK, has been installed.</p>
+<pre><code translate="no" class="language-shell">mkdir -p example
+curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/prepare_data.py -o example/prepare_data.py
+python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>This step is optional. If you skip this, ensure that you already have some data in your Milvus instance.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Back up data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
@@ -118,10 +123,10 @@ go build
     </button></h2><p>Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.</p>
 <div class="tab-wrapper"></div>
 <p>Run the following command to create a backup.</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -n &lt;backup_name&gt;
+<pre><code translate="no" class="language-shell">./milvus-backup create -n my_backup
 <button class="copy-code-btn"></button></code></pre>
 <p>Once the command is executed, you can check the backup files in the bucket specified in the Minio settings. Specifically, you can download them using <strong>Minio Console</strong> or the <strong>mc</strong> client.</p>
-<p>To download from <a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">Minio Console</a>, log into Minio Console, locate the bucket specified in <code translate="no">minio.address</code>, select the files in the bucket, and click <strong>Download</strong> to download them.</p>
+<p>To download from <a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">Minio Console</a>, log into Minio Console, locate the bucket specified in <code translate="no">minio.backupBucketName</code>, select the files in the bucket, and click <strong>Download</strong> to download them.</p>
 <p>If you prefer <a href="https://min.io/docs/minio/linux/reference/minio-mc.html#mc-install">the mc client</a>, do as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">configure a Minio host</span>
 mc alias set my_minio https://&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;
@@ -154,7 +159,8 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p>The <code translate="no">-s</code> flag allows you to set a suffix for the new collection to be created. The above command will create a new collection called <strong>hello_milvus_recover</strong> in your Milvus instance.</p>
 <p>If you prefer to restore the backed-up collection without changing its name, drop the collection before restoring it from the backup. You can now clean the data generated in <a href="#Prepare-data">Prepare data</a> by running the following command.</p>
-<pre><code translate="no" class="language-shell">python example/clean_data.py
+<pre><code translate="no" class="language-shell">curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/clean_data.py -o example/clean_data.py
+python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Then run the following command to restore the data from the backup.</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -n my_backup
@@ -174,7 +180,8 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the restore completes, you can verify the restored data by indexing the restored collection as follows:</p>
-<pre><code translate="no" class="language-shell">python example/verify_data.py
+    </button></h2><p>For the disposable sample data created above, the upstream script indexes and queries <code translate="no">hello_milvus_recover</code> and <code translate="no">hello_milvus2_recover</code>, then <strong>deletes both restored collections</strong>. Run it only after restoring both sample collections with <code translate="no">_recover</code>. For your own data, compare against your backup-time baseline without using this cleanup script.</p>
+<pre><code translate="no" class="language-shell">curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/verify_data.py -o example/verify_data.py
+python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that the above script assumes that you have run the <code translate="no">restore</code> command with the <code translate="no">-s</code> flag and the suffix is set to <code translate="no">-recover</code>. Feel free to make necessary changes to the script to fit your need.</p>
+<p>Note that the above script assumes that you have run the <code translate="no">restore</code> command with the <code translate="no">-s</code> flag and the suffix is set to <code translate="no">_recover</code>. Feel free to make necessary changes to the script to fit your need.</p>

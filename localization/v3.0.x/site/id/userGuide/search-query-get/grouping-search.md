@@ -1,11 +1,11 @@
 ---
 id: grouping-search.md
-title: Pencarian Pengelompokan
+title: Pencarian Berbasis Pengelompokan
 summary: >-
-  Gunakan pencarian pengelompokan untuk mengumpulkan hasil pencarian ANN
-  berdasarkan nilai bidang dan mengurangi entitas duplikat.
+  Gunakan pencarian berkelompok untuk mengelompokkan hasil pencarian ANN
+  berdasarkan nilai bidang tertentu dan mengurangi entitas yang berulang.
 ---
-<h1 id="Grouping-Search" class="common-anchor-header">Pencarian Pengelompokan<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
+<h1 id="Grouping-Search" class="common-anchor-header">Pencarian Berbasis Pengelompokan<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencarian pengelompokan memungkinkan Milvus mengelompokkan hasil pencarian berdasarkan nilai dalam bidang tertentu untuk mengumpulkan data pada tingkat yang lebih tinggi. Sebagai contoh, Anda dapat menggunakan pencarian ANN dasar untuk menemukan buku yang mirip dengan buku yang sedang dicari, tetapi Anda dapat menggunakan pencarian pengelompokan untuk menemukan kategori buku yang mungkin melibatkan topik-topik yang dibahas dalam buku tersebut. Topik ini menjelaskan cara menggunakan Pencarian Pengelompokan bersama dengan pertimbangan-pertimbangan utama.</p>
-<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Pencarian berkelompok memungkinkan Milvus untuk mengelompokkan hasil pencarian berdasarkan nilai-nilai dalam bidang yang ditentukan guna mengagregasi data pada tingkat yang lebih tinggi. Misalnya, Anda dapat menggunakan pencarian ANN dasar untuk menemukan buku yang mirip dengan buku yang sedang dibahas, tetapi Anda dapat menggunakan pencarian berkelompok untuk menemukan kategori buku yang mungkin mencakup topik-topik yang dibahas dalam buku tersebut. Topik ini menjelaskan cara menggunakan Pencarian Berkelompok beserta pertimbangan utamanya.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,27 +36,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika entitas dalam hasil pencarian memiliki nilai yang sama dalam bidang skalar, hal ini mengindikasikan bahwa entitas tersebut memiliki kemiripan dalam atribut tertentu, yang dapat berdampak negatif pada hasil pencarian.</p>
-<p>Anggaplah sebuah koleksi menyimpan beberapa dokumen (dilambangkan dengan <strong>docId</strong>). Untuk mempertahankan informasi semantik sebanyak mungkin saat mengubah dokumen menjadi vektor, setiap dokumen dipecah menjadi paragraf yang lebih kecil dan mudah diatur (atau <strong>potongan</strong>) dan disimpan sebagai entitas terpisah. Meskipun dokumen dibagi menjadi bagian yang lebih kecil, pengguna sering kali masih tertarik untuk mengidentifikasi dokumen mana yang paling relevan dengan kebutuhan mereka.</p>
-<p>
+    </button></h2><p>Ketika entitas dalam hasil pencarian memiliki nilai yang sama dalam bidang skalar, hal ini menunjukkan bahwa entitas tersebut serupa dalam atribut tertentu, yang dapat berdampak negatif pada hasil pencarian.</p>
+<p>Asumsikan sebuah koleksi menyimpan beberapa dokumen (dilambangkan dengan <strong>docId</strong>). Untuk mempertahankan informasi semantik sebanyak mungkin saat mengonversi dokumen menjadi vektor, setiap dokumen dibagi menjadi paragraf (atau <strong>potongan</strong>) yang lebih kecil dan mudah dikelola, lalu disimpan sebagai entitas terpisah. Meskipun dokumen dibagi menjadi bagian-bagian yang lebih kecil, pengguna sering kali tetap tertarik untuk mengidentifikasi dokumen mana yang paling relevan dengan kebutuhan mereka.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
-   </span> <span class="img-wrapper"> <span>Pencarian Ann</span> </span></p>
-<p>Ketika melakukan pencarian Approximate Nearest Neighbor (ANN) pada koleksi seperti itu, hasil pencarian dapat mencakup beberapa paragraf dari dokumen yang sama, yang berpotensi menyebabkan dokumen lain terlewatkan, yang mungkin tidak selaras dengan kasus penggunaan yang dimaksudkan.</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" /> 
+   <span>Pencarian Ann</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-   </span> <span class="img-wrapper"> <span>Mengelompokkan Pencarian</span> </span></p>
-<p>Untuk meningkatkan keragaman hasil pencarian, Anda dapat menambahkan parameter <code translate="no">group_by_field</code> dalam permintaan pencarian untuk mengaktifkan Pencarian Pengelompokan. Seperti yang ditunjukkan pada diagram, Anda dapat mengatur <code translate="no">group_by_field</code> ke <code translate="no">docId</code>. Setelah menerima permintaan ini, Milvus akan:</p>
+ </span></p>
+<p>Saat melakukan pencarian Approximate Nearest Neighbor (ANN) pada koleksi semacam itu, hasil pencarian mungkin mencakup beberapa paragraf dari dokumen yang sama, yang berpotensi menyebabkan dokumen lain terlewatkan, sehingga mungkin tidak sesuai dengan kasus penggunaan yang dimaksudkan.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" /> 
+   <span>Pencarian Berkelompok</span>
+  
+ </span></p>
+<p>Untuk meningkatkan keragaman hasil pencarian, Anda dapat menambahkan parameter ` <code translate="no">group_by_field</code> ` dalam permintaan pencarian untuk mengaktifkan Pencarian Berkelompok. Seperti yang ditunjukkan pada diagram, Anda dapat mengatur ` <code translate="no">group_by_field</code> ` menjadi ` <code translate="no">docId</code>`. Setelah menerima permintaan ini, Milvus akan:</p>
 <ul>
-<li><p>Melakukan pencarian ANN berdasarkan vektor kueri yang disediakan untuk menemukan semua entitas yang paling mirip dengan kueri.</p></li>
-<li><p>Mengelompokkan hasil pencarian berdasarkan <code translate="no">group_by_field</code> yang ditentukan, seperti <code translate="no">docId</code>.</p></li>
-<li><p>Mengembalikan hasil teratas untuk setiap kelompok, seperti yang ditentukan oleh parameter <code translate="no">limit</code>, dengan entitas yang paling mirip dari setiap kelompok.</p></li>
+<li><p>Melakukan pencarian ANN berdasarkan vektor kueri yang diberikan untuk menemukan semua entitas yang paling mirip dengan kueri tersebut.</p></li>
+<li><p>Mengelompokkan hasil pencarian berdasarkan parameter ` <code translate="no">group_by_field</code>` yang ditentukan, seperti ` <code translate="no">docId</code>`.</p></li>
+<li><p>Mengembalikan hasil teratas untuk setiap kelompok, sebagaimana ditentukan oleh parameter <code translate="no">limit</code>, dengan entitas yang paling mirip dari setiap kelompok.</p></li>
 </ul>
 <div class="alert note">
-<p>Secara default, Pencarian Pengelompokan hanya mengembalikan satu entitas per grup. Jika Anda ingin menambah jumlah hasil yang dikembalikan per grup, Anda dapat mengontrolnya dengan parameter <code translate="no">group_size</code> dan <code translate="no">strict_group_size</code>.</p>
+<p>Secara default, Pencarian Pengelompokan hanya mengembalikan satu entitas per kelompok. Jika Anda ingin meningkatkan jumlah hasil yang akan dikembalikan per kelompok, Anda dapat mengontrolnya dengan parameter ` <code translate="no">group_size</code> ` dan ` <code translate="no">strict_group_size</code> `.</p>
 </div>
-<h2 id="Perform-Grouping-Search" class="common-anchor-header">Melakukan Pencarian Pengelompokan<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Grouping-Search" class="common-anchor-header">Melakukan Pencarian Berkelompok<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bagian ini memberikan contoh kode untuk mendemonstrasikan penggunaan Pencarian Pengelompokan. Contoh berikut ini mengasumsikan koleksi mencakup bidang untuk <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code>, dan <code translate="no">docId</code>.</p>
+    </button></h2><p>Bagian ini menyediakan kode contoh untuk mendemonstrasikan penggunaan Pencarian Berkelompok. Contoh berikut mengasumsikan koleksi tersebut mencakup bidang-bidang untuk <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code>, dan <code translate="no">docId</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">1</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">5</span>},
@@ -86,9 +90,15 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam permintaan pencarian, setel <code translate="no">group_by_field</code> dan <code translate="no">output_fields</code> ke <code translate="no">docId</code>. Milvus akan mengelompokkan hasil berdasarkan bidang yang ditentukan dan mengembalikan entitas yang paling mirip dari setiap kelompok, termasuk nilai <code translate="no">docId</code> untuk setiap entitas yang dikembalikan.</p>
+<p>Dalam permintaan pencarian, atur baik <code translate="no">group_by_field</code> maupun <code translate="no">output_fields</code> menjadi <code translate="no">docId</code>. Milvus akan mengelompokkan hasil berdasarkan bidang yang ditentukan dan mengembalikan entitas yang paling mirip dari setiap kelompok, termasuk nilai <code translate="no">docId</code> untuk setiap entitas yang dikembalikan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -213,7 +223,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -225,8 +234,48 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada permintaan di atas, <code translate="no">limit=3</code> menunjukkan bahwa sistem akan mengembalikan hasil pencarian dari tiga grup, dengan masing-masing grup berisi satu entitas yang paling mirip dengan vektor kueri.</p>
-<h2 id="Configure-group-size" class="common-anchor-header">Mengonfigurasi ukuran grup<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Dalam permintaan di atas, ` <code translate="no">limit=3</code> ` menunjukkan bahwa sistem akan mengembalikan hasil pencarian dari tiga kelompok, dengan setiap kelompok berisi satu entitas yang paling mirip dengan vektor kueri.</p>
+<h2 id="Configure-group-size" class="common-anchor-header">Konfigurasi ukuran grup<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,9 +290,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Secara default, Pencarian Pengelompokan hanya mengembalikan satu entitas per grup. Jika Anda menginginkan beberapa hasil per grup, sesuaikan parameter <code translate="no">group_size</code> dan <code translate="no">strict_group_size</code>.</p>
+    </button></h2><p>Secara default, Pencarian Berkelompok hanya mengembalikan satu entitas per kelompok. Jika Anda ingin mendapatkan beberapa hasil per kelompok, sesuaikan parameter ` <code translate="no">group_size</code> ` dan ` <code translate="no">strict_group_size</code> `.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
 res = client.search(
@@ -353,7 +408,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -367,13 +421,55 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <p>Dalam contoh di atas:</p>
 <ul>
-<li><p><code translate="no">group_size</code>: Menentukan jumlah entitas yang diinginkan untuk dikembalikan per grup. Misalnya, pengaturan <code translate="no">group_size=2</code> berarti setiap grup (atau setiap <code translate="no">docId</code>) idealnya mengembalikan dua paragraf (atau <strong>potongan</strong>) yang paling mirip. Jika <code translate="no">group_size</code> tidak disetel, sistem secara default mengembalikan satu hasil per grup.</p></li>
-<li><p><code translate="no">strict_group_size</code>: Parameter boolean ini mengontrol apakah sistem harus secara ketat memberlakukan hitungan yang ditetapkan oleh <code translate="no">group_size</code>. Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha memasukkan jumlah entitas yang tepat yang ditentukan oleh <code translate="no">group_size</code> dalam setiap grup (misalnya, dua paragraf), kecuali jika tidak ada cukup data dalam grup tersebut. Secara default (<code translate="no">strict_group_size=False</code>), sistem akan memprioritaskan untuk memenuhi jumlah grup yang ditentukan oleh parameter <code translate="no">limit</code>, daripada memastikan setiap grup berisi entitas <code translate="no">group_size</code>. Pendekatan ini umumnya lebih efisien dalam kasus-kasus di mana distribusi data tidak merata.</p></li>
+<li><p><code translate="no">group_size</code>: Menentukan jumlah entitas yang diinginkan untuk dikembalikan per grup. Misalnya, mengatur ` <code translate="no">group_size=2</code> ` berarti setiap grup (atau setiap ` <code translate="no">docId</code>`) idealnya harus mengembalikan dua paragraf (atau <strong>potongan</strong>) yang paling mirip. Jika ` <code translate="no">group_size</code> ` tidak diatur, sistem secara default akan mengembalikan satu hasil per grup.</p></li>
+<li><p><code translate="no">strict_group_size</code>: Parameter boolean ini mengontrol apakah sistem harus secara ketat menerapkan jumlah yang ditetapkan oleh <code translate="no">group_size</code>. Saat <code translate="no">strict_group_size=True</code>, sistem akan berusaha menyertakan jumlah entitas yang tepat seperti yang ditentukan oleh <code translate="no">group_size</code> di setiap grup (misalnya, dua paragraf), kecuali jika tidak ada cukup data dalam grup tersebut. Secara default (<code translate="no">strict_group_size=False</code>), sistem memprioritaskan pemenuhan jumlah grup yang ditentukan oleh parameter <code translate="no">limit</code>, daripada memastikan setiap grup berisi <code translate="no">group_size</code> entitas. Pendekatan ini umumnya lebih efisien dalam kasus di mana distribusi data tidak merata.</p></li>
 </ul>
-<p>Untuk detail parameter tambahan, lihat <a href="https://docs.zilliz.com/reference/python/python/Vector-search">pencarian</a>.</p>
-<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Mengurutkan grup berdasarkan bidang skalar<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+<p>Untuk detail parameter tambahan, lihat <a href="https://docs.zilliz.com/reference/python/python/Vector-search">search</a>.</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">Mengurutkan kelompok berdasarkan bidang skalar<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -388,10 +484,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat menggabungkan Pencarian Pengelompokan dengan <code translate="no">order_by_fields</code> untuk mengurutkan grup berdasarkan bidang skalar. Hal ini berguna saat Anda menginginkan hasil yang beragam di seluruh grup, namun tetap ingin grup mengikuti urutan yang relevan dengan bisnis, seperti harga atau peringkat.</p>
-<p>Contoh berikut mengelompokkan hasil pencarian dengan <code translate="no">category</code>, mengembalikan hingga tiga entitas per grup, dan mengurutkan grup yang dikembalikan oleh <code translate="no">price</code> dari rendah ke tinggi.</p>
+    </button></h2><p>Anda dapat menggabungkan Pencarian Pengelompokan (Grouping Search) dengan Pengelompokan Berdasarkan Bidang Skalar ( <code translate="no">order_by_fields</code> ) untuk mengurutkan kelompok berdasarkan bidang skalar. Hal ini berguna ketika Anda menginginkan hasil yang beragam di antara kelompok-kelompok, namun tetap ingin kelompok-kelompok tersebut mengikuti urutan yang relevan secara bisnis, seperti harga atau peringkat.</p>
+<p>Contoh berikut mengelompokkan hasil pencarian berdasarkan ` <code translate="no">category</code>`, mengembalikan hingga tiga entitas per kelompok, dan mengurutkan kelompok yang dikembalikan berdasarkan ` <code translate="no">price</code> ` dari rendah ke tinggi.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -406,16 +508,117 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> SearchReq.builder()
+    .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .data(List.of(queryVector))
+    .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .topK(<span class="hljs-number">20</span>)
+    .groupByFieldName(<span class="hljs-string">&quot;category&quot;</span>)
+    .groupSize(<span class="hljs-number">3</span>)
+    .strictGroupSize(<span class="hljs-literal">true</span>)
+    .outputFields(List.of(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
+    .orderByFields(List.of(OrderByField.builder()
+        .fieldName(<span class="hljs-string">&quot;price&quot;</span>).direction(AggDirection.ASC).build()))
+    .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> client.search(request);
+System.out.println(response.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>];
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+  <span class="hljs-attr">data</span>: [queryVector],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+  <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;category&quot;</span>,
+  <span class="hljs-attr">group_size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">strict_group_size</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+  <span class="hljs-attr">order_by_fields</span>: [{ <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> }],
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">results</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>}
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-number">20</span>, []entity.Vector{entity.FloatVector(queryVector)},
+).
+    WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithGroupByField(<span class="hljs-string">&quot;category&quot;</span>).
+    WithGroupSize(<span class="hljs-number">3</span>).
+    WithStrictGroupSize(<span class="hljs-literal">true</span>).
+    WithOutputFields(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">for</span> _, result := <span class="hljs-keyword">range</span> results {
+    fmt.Println(result.IDs, result.Scores)
+    fmt.Println(result.GetColumn(<span class="hljs-string">&quot;category&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;price&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>))
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.</span>
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_catalog&quot;,
+    &quot;data&quot;: [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 20,
+    &quot;groupingField&quot;: &quot;category&quot;,
+    &quot;groupSize&quot;: 3,
+    &quot;strictGroupSize&quot;: true,
+    &quot;outputFields&quot;: [&quot;category&quot;, &quot;price&quot;, &quot;rating&quot;],
+    &quot;orderByFields&quot;: [&quot;price:asc&quot;]
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada permintaan di atas, <code translate="no">limit=20</code> berarti Milvus memilih hingga 20 grup, bukan 20 entitas. Karena <code translate="no">group_size=3</code>, daftar hasil datar dapat berisi hingga 60 entitas secara total.</p>
-<p>Ketika Anda menggunakan <code translate="no">order_by_fields</code> dengan <code translate="no">group_by_field</code>, Milvus mengurutkan grup berdasarkan nilai bidang skalar yang ditentukan dari setiap entitas teratas grup. Di dalam setiap kelompok, entitas tetap diurutkan berdasarkan nilai kemiripannya dengan vektor kueri.</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+    .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">3</span>)
+    .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+    .<span class="hljs-built_in">AddOrderByField</span>(milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC));
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+    std::cout &lt;&lt; rows &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Dalam permintaan di atas, ` <code translate="no">limit=20</code> ` berarti Milvus memilih hingga 20 grup, bukan 20 entitas. Karena ` <code translate="no">group_size=3</code>`, daftar hasil datar dapat berisi hingga 60 entitas secara keseluruhan.</p>
+<p>Saat Anda menggunakan ` <code translate="no">order_by_fields</code> ` dengan ` <code translate="no">group_by_field</code>`, Milvus mengurutkan grup berdasarkan nilai bidang skalar yang ditentukan dari entitas teratas di setiap grup. Di dalam setiap grup, entitas tetap diurutkan berdasarkan skor kemiripannya dengan vektor kueri.</p>
 <h2 id="Considerations" class="common-anchor-header">Pertimbangan<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,8 +636,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><ul>
 <li><p><strong>Pengindeksan</strong>: Fitur pengelompokan ini hanya berfungsi untuk koleksi yang diindeks dengan jenis indeks berikut: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Jumlah kelompok</strong>: Parameter <code translate="no">limit</code> mengontrol jumlah grup dari mana hasil pencarian dikembalikan, dan bukan jumlah spesifik entitas dalam setiap grup. Menetapkan <code translate="no">limit</code> yang tepat membantu mengontrol keragaman pencarian dan kinerja kueri. Mengurangi <code translate="no">limit</code> dapat mengurangi biaya komputasi jika data terdistribusi secara padat atau kinerja menjadi perhatian.</p></li>
-<li><p><strong>Entitas per grup</strong>: Parameter <code translate="no">group_size</code> mengontrol jumlah entitas yang dikembalikan per grup. Menyesuaikan <code translate="no">group_size</code> berdasarkan kasus penggunaan Anda dapat meningkatkan kekayaan hasil pencarian. Namun, jika data tidak terdistribusi secara merata, beberapa grup mungkin mengembalikan lebih sedikit entitas daripada yang ditentukan oleh <code translate="no">group_size</code>, terutama dalam skenario data terbatas.</p></li>
-<li><p><strong>Ukuran kelompok yang ketat</strong>: Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha mengembalikan jumlah entitas yang ditentukan (<code translate="no">group_size</code>) untuk setiap grup, kecuali jika tidak ada cukup data dalam grup tersebut. Pengaturan ini memastikan jumlah entitas yang konsisten per grup, tetapi dapat menyebabkan penurunan kinerja dengan distribusi data yang tidak merata atau sumber daya yang terbatas. Jika jumlah entitas yang ketat tidak diperlukan, pengaturan <code translate="no">strict_group_size=False</code> dapat meningkatkan kecepatan kueri.</p></li>
-<li><p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> daripada mengambilnya sebelum pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
+<li><p><strong>Jumlah kelompok</strong>: Parameter ` <code translate="no">limit</code> ` mengontrol jumlah kelompok yang digunakan untuk mengembalikan hasil pencarian, bukan jumlah entitas spesifik di dalam setiap kelompok. Menetapkan nilai ` <code translate="no">limit</code> ` yang tepat membantu mengontrol keragaman hasil pencarian dan kinerja kueri. Mengurangi nilai ` <code translate="no">limit</code> ` dapat mengurangi beban komputasi jika data tersebar secara padat atau kinerja menjadi pertimbangan.</p></li>
+<li><p><strong>Entitas per grup</strong>: Parameter <code translate="no">group_size</code> mengontrol jumlah entitas yang dikembalikan per grup. Menyesuaikan <code translate="no">group_size</code> berdasarkan kasus penggunaan Anda dapat meningkatkan kekayaan hasil pencarian. Namun, jika data terdistribusi secara tidak merata, beberapa grup mungkin mengembalikan entitas yang lebih sedikit daripada yang ditentukan oleh <code translate="no">group_size</code>, terutama dalam skenario data yang terbatas.</p></li>
+<li><p><strong>Ukuran grup yang ketat</strong>: Saat <code translate="no">strict_group_size=True</code>, sistem akan berusaha mengembalikan jumlah entitas yang ditentukan (<code translate="no">group_size</code>) untuk setiap grup, kecuali jika data dalam grup tersebut tidak mencukupi. Pengaturan ini memastikan jumlah entitas yang konsisten per grup, tetapi dapat menyebabkan penurunan kinerja jika distribusi data tidak merata atau sumber daya terbatas. Jika jumlah entitas yang ketat tidak diperlukan, mengatur <code translate="no">strict_group_size=False</code> dapat meningkatkan kecepatan kueri.</p></li>
+<li><p>Jika vektor kueri sudah ada di koleksi tujuan, pertimbangkan untuk menggunakan ` <code translate="no">ids</code> ` alih-alih mengambilnya sebelum melakukan pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
 </ul>

@@ -67,7 +67,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>La implementación predeterminada (v3.0-beta):</strong> <code translate="no">docker compose up -d</code> inicia tres contenedores: <code translate="no">milvus-etcd</code> (metadatos), <code translate="no">milvus-minio</code> (almacenamiento de objetos) y <code translate="no">milvus-standalone</code>. La cola de mensajes es <strong>Woodpecker (integrada, con MinIO / almacenamiento de objetos como backend de WAL)</strong>, por lo que no se requiere un contenedor de cola de mensajes independiente.</p>
+<p><strong>La implementación predeterminada (v3.0-beta):</strong> <code translate="no">docker compose up -d</code> inicia tres contenedores: <code translate="no">milvus-etcd</code> (metadatos), <code translate="no">milvus-minio</code> (almacenamiento de objetos) y <code translate="no">milvus-standalone</code>. La cola de mensajes es <strong>Woodpecker (integrada, con MinIO/almacenamiento de objetos como backend de WAL)</strong>, por lo que no se requiere un contenedor de cola de mensajes independiente.</p>
 <p><strong>Cola de mensajes predeterminada según la versión:</strong></p>
 <ul>
 <li><strong>2.5.x</strong>: la cola de mensajes predeterminada es <strong>RocksMQ</strong>.</li>
@@ -84,8 +84,8 @@ Creating milvus-standalone ... done
 <li>los contenedores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> y <strong>milvus-etcd</strong> estarán en funcionamiento.
 <ul>
 <li>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>milvus-minio</strong> atiende los puertos <strong>9000</strong> y <strong>9001</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>volumes/minio</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>la carpeta «volumes/milvus»</strong> de la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-minio»</strong> atiende los puertos <strong>9000</strong> y <strong>9001</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-standalone»</strong> da servicio a los puertos <strong>19530</strong> de forma local con la configuración predeterminada y asigna sus datos a <strong>la carpeta «volumes/milvus»</strong> de la carpeta actual.</li>
 </ul></li>
 </ul>
 <p>Puedes comprobar si los contenedores están en funcionamiento mediante el siguiente comando:</p>
@@ -118,14 +118,14 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Añade configuraciones adicionales para anular las predeterminadas.
-A continuación se da por supuesto que necesitas anular la configuración predeterminada de <code translate="no">proxy.healthCheckTimeout</code>. Para conocer los elementos de configuración aplicables, consulta <a href="/docs/es/system_configuration.md">«Configuración del sistema</a>».</p>
+A continuación se da por supuesto que necesitas anular la configuración predeterminada de <code translate="no">proxy.healthCheckTimeout</code>. Para conocer los elementos de configuración aplicables, consulta <a href="/docs/es/system_configuration.md">Configuración del sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Reinicie el contenedor « <code translate="no">milvus-standalone</code> » para aplicar los cambios.</p>
+<li><p>Reinicie el contenedor <code translate="no">milvus-standalone</code> para aplicar los cambios.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -167,12 +167,12 @@ EOF
         ></path>
       </svg>
     </button></h2><p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
-<p>Dado que la versión 2.6.x cambia la cola de mensajes predeterminada a Woodpecker, una instancia que ejecute <strong>RocksMQ</strong> en la versión 2.5.x debe <strong>fijar explícitamente RocksMQ antes de actualizar</strong>; de lo contrario, la actualización intentaría cambiar la cola de mensajes, lo cual no está admitido. Tras descargar el archivo Docker Compose de la versión 2.6.x, vuelve a establecer el tipo de cola de mensajes en « <code translate="no">rocksmq</code> » en tu archivo de configuración de Docker Compose ( <code translate="no">user.yaml</code> ) y, a continuación, realiza la actualización:</p>
+<p>Dado que la versión 2.6.x cambia la cola de mensajes predeterminada a Woodpecker, una instancia que ejecute <strong>RocksMQ</strong> en la versión 2.5.x debe <strong>fijar explícitamente RocksMQ antes de actualizar</strong>; de lo contrario, la actualización intentaría cambiar la cola de mensajes, lo cual no es compatible. Tras descargar el archivo Docker Compose de la versión 2.6.x, vuelve a establecer el tipo de cola de mensajes en « <code translate="no">rocksmq</code> » en tu archivo de sobrescritura ` <code translate="no">user.yaml</code> ` y, a continuación, realiza la actualización:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para cambiar la cola de mensajes <em>tras</em> la actualización, consulta <a href="/docs/es/switch-mq-type.md">Cambiar la cola de mensajes</a>.</p>
+<p>Para cambiar la cola de mensajes <em>tras</em> la actualización, consulta <a href="/docs/es/switch-mq-type.md">«Cambiar la cola de mensajes</a>».</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dependencias opcionales<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +190,7 @@ EOF
       </svg>
     </button></h2><p>Esta implementación utiliza <strong>Woodpecker</strong> (integrado, backend WAL de MinIO) para la mensajería, <strong>etcd</strong> para los metadatos y <strong>MinIO</strong> para el almacenamiento de objetos. Para utilizar una cola de mensajes diferente o conectar almacenamiento de objetos o metadatos externos, consulta:</p>
 <ul>
-<li>Cola de mensajes: <a href="/docs/es/woodpecker.md">Woodpecker</a> (predeterminada) · <a href="/docs/es/mq_pulsar.md">Pulsar</a> · <a href="/docs/es/mq_kafka.md">Kafka</a> · <a href="/docs/es/mq_rocksmq.md">RocksMQ</a></li>
+<li>Cola de mensajes: <a href="/docs/es/woodpecker.md">Woodpecker</a> (predeterminado) · <a href="/docs/es/mq_pulsar.md">Pulsar</a> · <a href="/docs/es/mq_kafka.md">Kafka</a> · <a href="/docs/es/mq_rocksmq.md">RocksMQ</a></li>
 <li>Almacenamiento de objetos: <a href="/docs/es/deploy_s3.md">MinIO</a> (predeterminado) · <a href="/docs/es/deploy_s3.md">AWS S3</a> · <a href="/docs/es/abs.md">Azure Blob</a> · <a href="/docs/es/gcs.md">GCP Cloud Storage</a> · <a href="/docs/es/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/es/deploy_s3.md">Tencent COS</a> · <a href="/docs/es/deploy_s3.md">Huawei OBS</a> · <a href="/docs/es/deploy_s3.md">Compatible con S3</a></li>
 <li>Metadatos: <a href="/docs/es/deploy_etcd.md">etcd</a></li>
 </ul>
@@ -220,7 +220,7 @@ EOF
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o eliminar</a></li>
 <li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
@@ -234,7 +234,7 @@ EOF
 </ul></li>
 <li><p>Descubre <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
+<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

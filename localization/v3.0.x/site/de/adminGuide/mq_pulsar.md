@@ -17,7 +17,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Pulsar ist eines der von Milvus unterstützten Backends für Nachrichtenwarteschlangen (WAL). In Milvus 3.x ist <a href="/docs/de/woodpecker.md">Woodpecker</a> die Standard-Nachrichtenwarteschlange; Pulsar wird jedoch weiterhin vollständig unterstützt, falls Nutzer dies bevorzugen. Pulsar wird in erster Linie mit Milvus Distributed (Cluster) verwendet; bei eigenständigen Bereitstellungen kommen in der Regel das eingebettete Woodpecker oder <a href="/docs/de/mq_rocksmq.md">RocksMQ</a> zum Einsatz.</p>
+    </button></h1><p>Apache Pulsar ist eines der von Milvus unterstützten Backends für Nachrichtenwarteschlangen (WAL). In Milvus 3.x ist <a href="/docs/de/woodpecker.md">Woodpecker</a> die Standard-Nachrichtenwarteschlange; Pulsar wird jedoch weiterhin vollständig unterstützt, falls Nutzer diese Lösung bevorzugen. Pulsar wird in erster Linie mit Milvus Distributed (Cluster) verwendet; bei eigenständigen Bereitstellungen kommen in der Regel das eingebettete Woodpecker oder <a href="/docs/de/mq_rocksmq.md">RocksMQ</a> zum Einsatz.</p>
 <h2 id="Version-compatibility" class="common-anchor-header">Versionskompatibilität<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,8 +42,8 @@ title: Pulsar
 <tr><td>2.4.x und früher</td><td>Pulsar v2</td><td>Pulsar v2</td></tr>
 </tbody>
 </table>
-<p>Seit Milvus 2.5 stellen das Milvus-Helm-Chart und der Milvus-Operator standardmäßig <strong>Pulsar v3</strong> bereit; Pulsar v2 bleibt weiterhin kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar über Helm bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
+<p>Seit Milvus 2.5 werden <strong>Pulsar v3</strong> standardmäßig über das Milvus-Helm-Chart und den Milvus-Operator bereitgestellt; Pulsar v2 bleibt weiterhin kompatibel. Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Pulsar von v2 auf v3 aktualisieren</a> “ und <a href="/docs/de/use-pulsar-v2.md">„Pulsar v2 weiterhin verwenden</a>“.</p>
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe von Helm bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +73,7 @@ title: Pulsar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um einen Milvus-Cluster bereitzustellen, der das mitgelieferte Pulsar (anstelle von Woodpecker) verwendet, installieren Sie das Helm-Chart mit aktiviertem Streaming-Knoten:</p>
+    </button></h3><p>Um einen Milvus-Cluster bereitzustellen, der das mitgelieferte Pulsar (anstelle von Woodpecker) verwendet, installieren Sie das Helm-Chart mit aktiviertem Streaming Node:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0-beta \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
@@ -81,7 +81,7 @@ title: Pulsar
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn bei Kubernetes v1.25 und höher Probleme mit der PodDisruptionBudget-API durch das mitgelieferte Pulsar-Sub-Chart auftreten, deaktivieren Sie die Pulsar-PDB-Richtlinien:</p>
+<p>Wenn unter Kubernetes v1.25 und höher Probleme mit der PodDisruptionBudget-API durch das mitgelieferte Pulsar-Sub-Chart auftreten, deaktivieren Sie die Pulsar-PDB-Richtlinien:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -137,7 +137,7 @@ title: Pulsar
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Bereitstellung eines Milvus-Clusters mit Pulsar mithilfe des Milvus-Operators<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="common-anchor-header">Stellen Sie einen Milvus-Cluster mit Pulsar mithilfe des Milvus Operators bereit<button data-href="#Deploy-a-Milvus-cluster-with-Pulsar-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><p>Konfigurieren Sie Pulsar mit dem Milvus Operator unter „ <code translate="no">spec.dependencies.pulsar</code> “ (wird nur für Milvus-Cluster unterstützt). „ <code translate="no">pulsar</code> “ unterstützt „ <code translate="no">external</code> “ und „ <code translate="no">inCluster</code> “.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">Externer Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+<h3 id="External-Pulsar" class="common-anchor-header">Externes Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,7 +227,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenden Sie die Konfiguration an (vorausgesetzt, die Datei lautet „ <code translate="no">milvuscluster.yaml</code> “):</p>
+<p>Wenden Sie die Konfiguration an (vorausgesetzt, die Datei heißt „ <code translate="no">milvuscluster.yaml</code> “):</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">Deinstallieren<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -264,7 +264,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
       </svg>
     </button></h2><ul>
 <li><strong>Upgrade von 2.5.x auf 2.6.x:</strong> <strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.
-Wenn Sie Pulsar einsetzen und weiterhin nutzen möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
+Wenn Sie Pulsar einsetzen und weiterhin verwenden möchten, ändern Sie die Nachrichtenwarteschlange während des Upgrades nicht.</li>
 <li><strong>Pulsar v2 → v3:</strong> Siehe <a href="/docs/de/upgrade-pulsar-v3.md">„Upgrade von Pulsar von v2 auf v3</a>“; um bei v2 zu bleiben, siehe <a href="/docs/de/use-pulsar-v2.md">„Weiterverwendung von Pulsar v2</a>“.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -284,5 +284,5 @@ Wenn Sie Pulsar einsetzen und weiterhin nutzen möchten, ändern Sie die Nachric
       </svg>
     </button></h2><ul>
 <li><a href="/docs/de/woodpecker.md">Woodpecker (Standard-Nachrichtenwarteschlange)</a></li>
-<li><a href="/docs/de/switch-pulsar-woodpecker.md">Wechseln zwischen Pulsar und Woodpecker</a></li>
+<li><a href="/docs/de/switch-pulsar-woodpecker.md">Wechseln Sie zwischen Pulsar und Woodpecker</a></li>
 </ul>

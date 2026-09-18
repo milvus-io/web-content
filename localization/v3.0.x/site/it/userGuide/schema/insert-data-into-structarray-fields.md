@@ -1,6 +1,6 @@
 ---
 id: insert-data-into-structarray-fields.md
-title: Inserimento di dati nei campi StructArray
+title: Inserimento dei dati nei campi StructArray
 summary: >-
   Inserire i dati in un campo StructArray quando ciascuna entità contiene un
   elenco ordinato di elementi strutturati. Nel payload di inserimento, un campo
@@ -8,7 +8,7 @@ summary: >-
   rappresenta un elemento Struct e utilizza i nomi dei sottocampi Struct
   definiti nello schema della raccolta.
 ---
-<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">Inserimento di dati nei campi StructArray<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
+<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">Inserimento dei dati nei campi StructArray<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Inserire dati in un campo StructArray quando ogni entità contiene un elenco ordinato di elementi strutturati. Nel payload di inserimento, un campo StructArray è rappresentato come un array di oggetti. Ogni oggetto rappresenta un elemento Struct e utilizza i nomi dei sottocampi Struct definiti nello schema della raccolta.</p>
-<p>Questa pagina utilizza la collezione " <code translate="no">tech_articles</code> " descritta nella sezione <a href="/docs/it/create-structarray-field.md">"Creazione di un campo StructArray</a>". Ogni entità è un articolo tecnico e il campo " <code translate="no">chunks</code> " memorizza i segmenti dell'articolo come elementi Struct.</p>
+<p>Questa pagina utilizza la collezione « <code translate="no">tech_articles</code> » descritta in <a href="/docs/it/create-structarray-field.md">«Creare un campo StructArray</a>». Ogni entità è un articolo tecnico e il campo « <code translate="no">chunks</code> » memorizza i segmenti dell’articolo come elementi Struct.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assicurarsi che lo schema della raccolta contenga già il campo StructArray denominato " <code translate="no">chunks</code> ".</p>
+    </button></h2><p>Assicurarsi che lo schema della collezione contenga già il campo StructArray denominato " <code translate="no">chunks</code> ".</p>
 <table>
 <thead>
 <tr><th>Campo</th><th>Tipo</th><th>Valore di inserimento</th></tr>
@@ -56,7 +56,7 @@ summary: >-
 <p>Ogni oggetto in <code translate="no">chunks</code> deve seguire lo schema Struct.</p>
 <table>
 <thead>
-<tr><th>Sottocampo</th><th>Tipo</th><th>Inserisci valore</th></tr>
+<tr><th>Sottocampo</th><th>Tipo</th><th>Inserire valore</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Testo del chunk.</td></tr>
@@ -69,7 +69,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>In un payload di inserimento, " <code translate="no">chunks</code> " è un campo regolare il cui valore è un array di oggetti Struct. All'interno di ciascun oggetto, utilizzare nomi di sottocampi come " <code translate="no">text</code> " e " <code translate="no">emb</code>". Utilizzare la sintassi del percorso, come " <code translate="no">chunks[text]</code> " o " <code translate="no">chunks[emb]</code>", solo dopo l'inserimento quando si creano indici, si eseguono ricerche, si creano filtri o si specificano campi di output.</p>
+<p>In un payload di inserimento, " <code translate="no">chunks</code> " è un campo regolare il cui valore è un array di oggetti Struct. All'interno di ciascun oggetto, utilizzare nomi di sottocampi come " <code translate="no">text</code> " e " <code translate="no">emb</code>". Utilizzare la sintassi del percorso, come " <code translate="no">chunks[text]</code> " o " <code translate="no">chunks[emb]</code>", solo dopo l'inserimento quando si creano indici, si eseguono ricerche, si costruiscono filtri o si specificano campi di output.</p>
 </div>
 <h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Comprendere la struttura del payload di inserimento<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il valore di ` <code translate="no">chunks</code> ` è un array di elementi `Struct`. Ogni elemento è un oggetto le cui chiavi sono nomi di sottocampi.</p>
+    </button></h2><p>Il valore di ` <code translate="no">chunks</code> ` è un array di elementi Struct. Ogni elemento è un oggetto le cui chiavi sono nomi di sottocampi.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -114,7 +114,7 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali separati poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l’offset dell’elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding a blocchi, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
+<p><code translate="no">emb_list_vector</code> e <code translate="no">emb</code> sono sottocampi vettoriali distinti poiché supportano modalità di ricerca diverse. La ricerca EmbeddingList tratta tutti i vettori in un campo StructArray come un unico elenco di embedding e restituisce risultati a livello di entità con metriche <code translate="no">MAX_SIM*</code>. La ricerca a livello di elemento esegue la ricerca su ciascun elemento Struct in modo indipendente e può restituire l'offset dell'elemento corrispondente. Per semplicità, questo esempio memorizza gli stessi valori vettoriali in entrambi i campi. In un’applicazione di produzione, è possibile memorizzare gli stessi embedding in entrambi i sottocampi quando entrambe le modalità di ricerca utilizzano lo stesso embedding di chunk, oppure memorizzare embedding diversi quando le due modalità di ricerca utilizzano rappresentazioni diverse.</p>
 <h2 id="Insert-rows" class="common-anchor-header">Inserimento di righe<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizzare ` <code translate="no">client.insert()</code> ` per inserire righe contenenti valori `StructArray`.</p>
+    </button></h2><p>Utilizzare ` <code translate="no">client.insert()</code> ` per inserire righe contenenti valori StructArray.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -249,7 +249,7 @@ result = client.insert(
 <p>Quando un campo StructArray nullabile contiene un valore StructArray valido, tutti i sottocampi di quel valore devono essere null o avere valori validi. L'inserimento di un'entità con alcuni sottocampi impostati su null e altri su valori validi genera un errore.</p>
 <div class="alert note">
 <p>Avviso
-I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggiunge dinamicamente un campo StructArray a una collezione esistente, il campo aggiunto deve essere nullabile e le entità esistenti devono restituire " <code translate="no">null</code> " per il nuovo campo in tutti i suoi sottocampi.</p>
+I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggiunge dinamicamente un campo StructArray a una collezione esistente, il campo aggiunto deve essere nullabile e le entità esistenti restituiscono <code translate="no">null</code> per il nuovo campo in tutti i suoi sottocampi.</p>
 </div>
 <h2 id="Validate-inserted-data" class="common-anchor-header">Convalida dei dati inseriti<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -282,7 +282,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
 <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:
     <span class="hljs-built_in">print</span>(row)
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizzare i percorsi dei campi StructArray, come <code translate="no">chunks[text]</code>, solo quando si eseguono interrogazioni, ricerche, filtri o si creano indici. I payload di inserimento devono comunque utilizzare oggetti annidati sotto <code translate="no">chunks</code>.</p>
+<p>Utilizzare i percorsi dei campi StructArray, come <code translate="no">chunks[text]</code>, solo quando si eseguono query, ricerche, filtri o si creano indici. I payload di inserimento devono comunque utilizzare oggetti annidati sotto <code translate="no">chunks</code>.</p>
 <h2 id="Insert-rules" class="common-anchor-header">Regole di inserimento<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,12 +303,12 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
 <tr><th>Regola</th><th>Spiegazione</th></tr>
 </thead>
 <tbody>
-<tr><td>Utilizzare un array di oggetti per un campo StructArray.</td><td>Il valore di <code translate="no">chunks</code> è un elenco e ogni elemento dell'elenco è un elemento Struct.</td></tr>
-<tr><td>Utilizzare i nomi dei sottocampi all'interno di ciascun elemento Struct.</td><td>Inserire ` <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` all'interno di ` <code translate="no">chunks</code>`, non in ` <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`.</td></tr>
+<tr><td>Utilizzare un array di oggetti per un campo StructArray.</td><td>Il valore di <code translate="no">chunks</code> è un elenco e ogni elemento dell’elenco è un elemento Struct.</td></tr>
+<tr><td>Utilizzare i nomi dei sottocampi all’interno di ciascun elemento Struct.</td><td>Inserire <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> all'interno di <code translate="no">chunks</code>, non in <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
 <tr><td>Rispettare lo schema della Struct.</td><td>Ogni elemento Struct deve utilizzare i sottocampi definiti nello schema Struct.</td></tr>
 <tr><td>Rispettare le dimensioni dei vettori.</td><td>I valori dei vettori devono corrispondere a <code translate="no">dim</code> configurati per i relativi sottocampi vettoriali.</td></tr>
 <tr><td>Rispettare l’ <code translate="no">max_capacity</code>.</td><td>Il numero di elementi Struct in un'entità non deve superare l'<code translate="no">max_capacity</code> del campo StructArray.</td></tr>
-<tr><td>Utilizzare sottocampi vettoriali separati per le diverse modalità di ricerca.</td><td>Se sono richieste sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i valori vettoriali in entrambi i sottocampi vettoriali.</td></tr>
+<tr><td>Utilizzare sottocampi vettoriali separati per modalità di ricerca distinte.</td><td>Se sono richieste sia la ricerca EmbeddingList che quella a livello di elemento, scrivere i valori vettoriali in entrambi i sottocampi vettoriali.</td></tr>
 <tr><td>Utilizzare <code translate="no">null</code> solo quando il campo è nullable.</td><td>I campi StructArray non nullabili richiedono valori StructArray validi.</td></tr>
 </tbody>
 </table>
@@ -329,12 +329,12 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
       </svg>
     </button></h2><ul>
 <li><p>Utilizzo di percorsi di campo come <code translate="no">chunks[text]</code> nei payload di inserimento.</p></li>
-<li><p>Omissione di sottocampi obbligatori da un elemento Struct.</p></li>
+<li><p>Omettendo i sottocampi obbligatori da un elemento Struct.</p></li>
 <li><p>Inserimento di vettori con la dimensione errata.</p></li>
 <li><p>Inserimento di un numero di elementi Struct superiore a quello consentito da <code translate="no">max_capacity</code>.</p></li>
-<li><p>Impostare un solo sottocampo su <code translate="no">null</code> mentre altri sottocampi nello stesso valore StructArray sono validi.</p></li>
-<li><p>Scrittura di vettori solo su <code translate="no">emb_list_vector</code> e successivo tentativo di eseguire una ricerca a livello di elemento su <code translate="no">chunks[emb]</code>.</p></li>
-<li><p>Scrittura di vettori solo in ` <code translate="no">emb</code> `, seguita dal tentativo di eseguire una ricerca EmbeddingList su ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
+<li><p>Impostazione di un solo sottocampo su <code translate="no">null</code> mentre altri sottocampi nello stesso valore StructArray sono validi.</p></li>
+<li><p>Scrittura di vettori solo in ` <code translate="no">emb_list_vector</code> ` e successivo tentativo di eseguire una ricerca a livello di elemento su ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Scrivere vettori solo in ` <code translate="no">emb</code> ` e poi tentare di eseguire una ricerca EmbeddingList su ` <code translate="no">chunks[emb_list_vector]</code>`.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prossimi passi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -352,7 +352,7 @@ I campi StructArray nullabili sono disponibili solo in Milvus v3.0.x. Se si aggi
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Per creare indici per <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e i sottocampi scalari, consultare la sezione " <a href="/docs/it/index-structarray-fields.md">Indicizzazione dei campi StructArray</a>".</p></li>
-<li><p>Per effettuare ricerche nei sottocampi vettoriali di StructArray, consultare Ricerca vettoriale di base con StructArray.</p></li>
+<li><p>Per creare indici per <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> e i sottocampi scalari, consultare la sezione <a href="/docs/it/index-structarray-fields.md">“Indice dei campi StructArray</a>”.</p></li>
+<li><p>Per effettuare ricerche nei sottocampi vettoriali di StructArray, consultare <a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a>.</p></li>
 <li><p>Per esaminare il comportamento dei valori null e le limitazioni specifiche della versione, consultare <a href="/docs/it/structarray-limits.md">Limiti di StructArray</a>.</p></li>
 </ol>

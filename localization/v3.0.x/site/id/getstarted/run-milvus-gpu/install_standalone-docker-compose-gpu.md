@@ -77,9 +77,9 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
     </button></h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan mandiri di berkas YAML sebagai berikut:</p>
+<p>Anda perlu melakukan beberapa perubahan pada variabel lingkungan layanan standalone dalam berkas YAML sebagai berikut:</p>
 <ul>
-<li>Untuk menetapkan perangkat GPU tertentu ke Milvus, temukan bidang ` <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` dalam definisi layanan ` <code translate="no">standalone</code> ` dan ganti nilainya dengan ID GPU yang diinginkan. Anda dapat menggunakan alat ` <code translate="no">nvidia-smi</code> `, yang disertakan dalam driver tampilan GPU NVIDIA, untuk menentukan ID perangkat GPU. Milvus mendukung beberapa perangkat GPU.</li>
+<li>Untuk menetapkan perangkat GPU tertentu ke Milvus, cari bidang ` <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` dalam definisi layanan ` <code translate="no">standalone</code> ` dan ganti nilainya dengan ID GPU yang diinginkan. Anda dapat menggunakan alat ` <code translate="no">nvidia-smi</code> `, yang disertakan dalam driver tampilan GPU NVIDIA, untuk menentukan ID perangkat GPU. Milvus mendukung beberapa perangkat GPU.</li>
 </ul>
 <p>Menetapkan satu perangkat GPU ke Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -141,7 +141,7 @@ Creating milvus-standalone ... done
 <li>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.</li>
 </ul></li>
 </ul>
-<p>Anda dapat memeriksa apakah kontainer-kontainer tersebut aktif dan berjalan menggunakan perintah berikut:</p>
+<p>Anda dapat memeriksa apakah kontainer-kontainer tersebut sudah aktif dan berjalan menggunakan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -180,13 +180,13 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Milvus berjalan, Anda dapat menyesuaikan pool memori dengan mengubah pengaturan <code translate="no">initMemSize</code> dan <code translate="no">maxMemSize</code> di berkas <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>Setelah Milvus berjalan, Anda dapat menyesuaikan pool memori dengan mengubah pengaturan ` <code translate="no">initMemSize</code> ` dan ` <code translate="no">maxMemSize</code> ` di berkas ` <code translate="no">milvus.yaml</code> `.</p>
 <div class="alert note">
 <p>Berkas <code translate="no">milvus.yaml</code> terletak di direktori <code translate="no">/milvus/configs/</code> di dalam kontainer Milvus.</p>
 </div>
 <p>Untuk mengonfigurasi pool memori, ubah pengaturan <code translate="no">initMemSize</code> dan <code translate="no">maxMemSize</code> dalam berkas <code translate="no">milvus.yaml</code> sebagai berikut.</p>
 <ol>
-<li><p>Gunakan perintah berikut untuk menyalin ` <code translate="no">milvus.yaml</code> ` dari kontainer Milvus ke mesin lokal Anda. Ganti ` <code translate="no">&lt;milvus_container_id&gt;</code> ` dengan ID kontainer Milvus Anda yang sebenarnya.</p>
+<li><p>Gunakan perintah berikut untuk menyalin <code translate="no">milvus.yaml</code> dari kontainer Milvus ke mesin lokal Anda. Ganti <code translate="no">&lt;milvus_container_id&gt;</code> dengan ID kontainer Milvus Anda yang sebenarnya.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Buka berkas <code translate="no">milvus.yaml</code> yang telah disalin menggunakan editor teks pilihan Anda. Misalnya, menggunakan vim:</p>
@@ -200,7 +200,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">initMemSize</code>: Ukuran awal kolam memori. Nilai defaultnya adalah 1024.</li>
+<li><code translate="no">initMemSize</code>: Ukuran awal pool memori. Nilai defaultnya adalah 1024.</li>
 <li><code translate="no">maxMemSize</code>: Ukuran maksimum kolam memori. Nilai defaultnya adalah 2048.</li>
 </ul></li>
 <li><p>Gunakan perintah berikut untuk menyalin berkas ` <code translate="no">milvus.yaml</code> ` yang telah dimodifikasi kembali ke kontainer Milvus. Ganti ` <code translate="no">&lt;milvus_container_id&gt;</code> ` dengan ID kontainer Milvus Anda yang sebenarnya.</p>
@@ -214,7 +214,7 @@ docker start &lt;milvus_container_id&gt;
 <div class="alert note">
 <p>Storage V3 dinonaktifkan secara default. Aktifkan fitur ini sebelum menggunakan fitur-fitur yang bergantung padanya. Untuk persyaratan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">Langkah selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Langkah Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Lihat <a href="/docs/id/quickstart.md">Panduan Cepat</a> untuk mengetahui apa saja yang dapat dilakukan Milvus.</p></li>
+<li><p>Lihat <a href="/docs/id/quickstart.md">Panduan Cepat</a> untuk mengetahui apa saja yang dapat dilakukan oleh Milvus.</p></li>
 <li><p>Lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a> untuk mempelajari lebih lanjut tentang instance Milvus.</p></li>
 <li><p>Pelajari operasi dasar Milvus:</p>
 <ul>

@@ -1,7 +1,7 @@
 ---
 id: grouping-search.md
 title: 分組搜尋
-summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複的實體。
+summary: 使用分組搜尋功能，可依據欄位值彙總 ANN 搜尋結果，並減少重複實體。
 ---
 <h1 id="Grouping-Search" class="common-anchor-header">分組搜尋<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>分組搜尋允許 Milvus 根據指定欄位的值對搜尋結果進行分組，以便在更高層次聚合資料。例如，您可以使用基本的 ANN 搜尋來尋找與手邊的書籍相似的書籍，但您可以使用分組搜尋來尋找可能涉及該書籍所討論主題的書籍類別。本主題將說明如何使用群組搜尋以及主要注意事項。</p>
+    </button></h1><p>分組搜尋可讓 Milvus 根據指定欄位的值將搜尋結果分組，以便在更高層級彙總資料。 例如，您可以使用基本的 ANN 搜尋來尋找與當前書籍相似的書籍，但若要找出可能涉及該書所討論主題的書籍類別，則可使用分組搜尋。本主題將說明如何使用分組搜尋，並列出相關的重要考量事項。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,27 +34,31 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當搜尋結果中的實體在標量欄位中具有相同值時，這表示它們在特定屬性上相似，這可能會對搜尋結果造成負面影響。</p>
-<p>假設一個集合儲存了多個文件（以<strong>docId</strong> 表示）。在將文件轉換為向量時，為了盡可能保留語義資訊，每份文件都會被分割成較小的、可管理的段落 (<strong>或小塊</strong>)，並儲存為獨立的實體。即使文件被分割成較小的段落，使用者通常仍有興趣辨識哪些文件與他們的需求最相關。</p>
-<p>
+    </button></h2><p>當搜尋結果中的實體在某個標量欄位中具有相同的值時，這表示它們在特定屬性上相似，這可能會對搜尋結果產生負面影響。</p>
+<p>假設某個集合儲存了多個文件（以<strong>docId</strong> 表示）。 為了在將文件轉換為向量時盡可能保留語義資訊，每份文件都會被分割成較小且易於管理的段落（<strong>或片段</strong>），並作為獨立實體儲存。即使文件已被分割成較小的部分，使用者通常仍希望識別出哪些文件最符合其需求。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
-    近似 </span> <span class="img-wrapper"> <span>搜索</span> </span></p>
-<p>對這樣的文集執行近似最近鄰 (ANN) 搜尋時，搜尋結果可能會包含來自同一個文件的數個段落，有可能導致其他文件被忽略，這可能與預期的使用個案不符。</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" /> 
+   <span>Ann 搜尋</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-   </span> <span class="img-wrapper"> <span>群組搜尋</span> </span></p>
-<p>為了改善搜尋結果的多樣性，您可以在搜尋請求中加入<code translate="no">group_by_field</code> 參數，以啟用群組搜尋。如圖所示，您可以將<code translate="no">group_by_field</code> 設為<code translate="no">docId</code> 。收到此請求後，Milvus 會</p>
+ </span></p>
+<p>當對此類文檔集合執行「近似最近鄰」（ANN）搜尋時，搜尋結果可能會包含來自同一份文檔的數個段落，這可能導致其他文檔被忽略，進而與預期的使用情境不符。</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" /> 
+   <span>分組搜尋</span>
+  
+ </span></p>
+<p>為提升搜尋結果的多樣性，您可在搜尋請求中加入<code translate="no">group_by_field</code> 參數以啟用分組搜尋。如圖所示，您可以將<code translate="no">group_by_field</code> 設定為<code translate="no">docId</code> 。收到此請求後，Milvus將：</p>
 <ul>
-<li><p>根據提供的查詢向量執行 ANN 搜尋，找出與查詢最相似的所有實體。</p></li>
-<li><p>根據指定的<code translate="no">group_by_field</code> 對搜尋結果進行分組，例如<code translate="no">docId</code> 。</p></li>
-<li><p>根據<code translate="no">limit</code> 參數的定義，傳回每個群組的頂端結果，並從每個群組中選取最相似的實體。</p></li>
+<li><p>根據提供的查詢向量執行人工神經網路（ANN）搜尋，找出與查詢最相似的所有實體。</p></li>
+<li><p>根據指定的「<code translate="no">group_by_field</code> 」（例如 `<code translate="no">docId</code>`）對搜尋結果進行分組。</p></li>
+<li><p>根據「<code translate="no">limit</code> 」參數的定義，針對每個群組返回頂端結果，並包含該群組中最相似的實體。</p></li>
 </ul>
 <div class="alert note">
-<p>預設情況下，「群組搜尋」只會回傳每個群組的一個實體。如果要增加每個群組返回的結果數量，可以使用<code translate="no">group_size</code> 和<code translate="no">strict_group_size</code> 參數來控制。</p>
+<p>預設情況下，分組搜尋每組僅返回一個實體。若要增加每組返回的結果數量，可透過「<code translate="no">group_size</code> 」和「<code translate="no">strict_group_size</code> 」參數進行控制。</p>
 </div>
-<h2 id="Perform-Grouping-Search" class="common-anchor-header">執行群組搜尋<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Grouping-Search" class="common-anchor-header">執行分組搜尋<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +73,7 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節提供範例程式碼來示範如何使用 Grouping Search。以下範例假設集合包含<code translate="no">id</code>,<code translate="no">vector</code>,<code translate="no">chunk</code>, 和<code translate="no">docId</code> 的欄位。</p>
+    </button></h2><p>本節提供範例程式碼，用以示範分組搜尋的使用方式。以下範例假設該集合包含<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">chunk</code> 及<code translate="no">docId</code> 等欄位。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">1</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">5</span>},
@@ -84,9 +88,15 @@ summary: 使用分組搜尋，依欄位值彙整 ANN 搜尋結果，減少重複
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>在搜索請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 都設為<code translate="no">docId</code> 。Milvus 會根據指定欄位將結果分組，並從每個組中返回最相似的實體，包括每個返回實體的<code translate="no">docId</code> 值。</p>
+<p>在搜尋請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 兩者皆設定為<code translate="no">docId</code> 。Milvus 會根據指定的欄位對結果進行分組，並從每個分組中返回最相似的實體，同時包含每個返回實體的<code translate="no">docId</code> 值。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -211,7 +221,6 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -223,7 +232,47 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述請求中，<code translate="no">limit=3</code> 表示系統將從三個群組傳回搜尋結果，每個群組包含與查詢向量最相似的單一實體。</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>在上述請求中，<code translate="no">limit=3</code> 表示系統將從三個群組中返回搜尋結果，每個群組皆包含一個與查詢向量最相似的實體。</p>
 <h2 id="Configure-group-size" class="common-anchor-header">設定群組大小<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,9 +288,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>預設情況下，「群組搜尋」每個群組只會傳回一個實體。如果您想要每個群組有多個結果，請調整<code translate="no">group_size</code> 和<code translate="no">strict_group_size</code> 參數。</p>
+    </button></h2><p>預設情況下，分組搜尋每組僅返回一個實體。若需每組返回多個結果，請調整<code translate="no">group_size</code> 和<code translate="no">strict_group_size</code> 參數。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
 res = client.search(
@@ -351,7 +406,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -365,13 +419,55 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的範例中</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;docId&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;docId&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>在上述範例中：</p>
 <ul>
-<li><p><code translate="no">group_size</code>:指定每個群組想要傳回的實體數量。例如，設定<code translate="no">group_size=2</code> 表示每個群組 (或每個<code translate="no">docId</code>) 最好能傳回兩個最相似的段落 (<strong>或小塊</strong>)。如果<code translate="no">group_size</code> 未設定，系統預設為每組傳回一個結果。</p></li>
-<li><p><code translate="no">strict_group_size</code>:這個布林參數控制系統是否應該嚴格執行<code translate="no">group_size</code> 所設定的計數。當<code translate="no">strict_group_size=True</code> 時，系統會嘗試在每個群組中包含<code translate="no">group_size</code> 所指定的精確實體數目 (例如，兩個段落)，除非該群組中沒有足夠的資料。根據預設 (<code translate="no">strict_group_size=False</code>)，系統會優先滿足<code translate="no">limit</code> 參數所指定的群組數目，而不是確保每個群組都包含<code translate="no">group_size</code> 實體。在資料分佈不平均的情況下，此方法通常較有效率。</p></li>
+<li><p><code translate="no">group_size</code>: 指定每組期望回傳的實體數量。例如，設定<code translate="no">group_size=2</code> 表示每組（或每個<code translate="no">docId</code> ）理想上應回傳兩個最相似的段落（或<strong>片段</strong>）。若未設定<code translate="no">group_size</code> ，系統預設每組回傳一個結果。</p></li>
+<li><p><code translate="no">strict_group_size</code>: 此布林參數用於控制系統是否應嚴格執行由<code translate="no">group_size</code> 設定的數量。當<code translate="no">strict_group_size=True</code> 時，系統將嘗試在每個群組中包含<code translate="no">group_size</code> 所指定的精確實體數量（例如兩個段落），除非該群組中的資料不足。 預設情況下（<code translate="no">strict_group_size=False</code> ），系統會優先確保符合由<code translate="no">limit</code> 參數所指定的群組數量，而非確保每個群組都包含<code translate="no">group_size</code> 個實體。在資料分佈不均勻的情況下，此方法通常較為有效率。</p></li>
 </ul>
-<p>有關其他參數的詳細資訊，請參閱<a href="https://docs.zilliz.com/reference/python/python/Vector-search">搜尋</a>。</p>
-<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">依標量欄位排序群組<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
+<p>有關參數的詳細資訊，請參閱<a href="https://docs.zilliz.com/reference/python/python/Vector-search">search</a>。</p>
+<h2 id="Order-groups-by-a-scalar-field--Milvus-30x" class="common-anchor-header">依標量欄位對群組排序<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Order-groups-by-a-scalar-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -386,10 +482,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以結合群組搜尋與<code translate="no">order_by_fields</code> ，以標量欄位排序群組。當您想要各個群組有不同的結果，但仍希望群組遵循業務相關的順序 (如價格或評等)時，此功能非常有用。</p>
-<p>以下範例依<code translate="no">category</code> 來對搜尋結果進行群組，每個群組最多會傳回三個實體，並依<code translate="no">price</code> 從低到高對傳回的群組進行排序。</p>
+    </button></h2><p>您可以將「分組搜尋」與「<code translate="no">order_by_fields</code> 」結合使用，以標量欄位為依據對群組進行排序。當您希望各群組的結果各不相同，但仍希望群組遵循與業務相關的排序（例如價格或評分）時，此方法非常實用。</p>
+<p>以下範例會根據「<code translate="no">category</code> 」對搜尋結果進行分組，每組最多返回三個實體，並根據「<code translate="no">price</code> 」將返回的分組從低到高排序。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=query_vectors,
@@ -404,16 +506,117 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-comment-line">    ],</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.AggDirection;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.aggregation.OrderByField;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> SearchReq.builder()
+    .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .data(List.of(queryVector))
+    .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .topK(<span class="hljs-number">20</span>)
+    .groupByFieldName(<span class="hljs-string">&quot;category&quot;</span>)
+    .groupSize(<span class="hljs-number">3</span>)
+    .strictGroupSize(<span class="hljs-literal">true</span>)
+    .outputFields(List.of(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
+    .orderByFields(List.of(OrderByField.builder()
+        .fieldName(<span class="hljs-string">&quot;price&quot;</span>).direction(AggDirection.ASC).build()))
+    .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> client.search(request);
+System.out.println(response.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+<span class="hljs-keyword">const</span> queryVector = [<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>];
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+  <span class="hljs-attr">data</span>: [queryVector],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+  <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;category&quot;</span>,
+  <span class="hljs-attr">group_size</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">strict_group_size</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+  <span class="hljs-attr">order_by_fields</span>: [{ <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;asc&quot;</span> }],
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">results</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.14529211512077012</span>, <span class="hljs-number">0.9147257273453546</span>, <span class="hljs-number">0.7965055218724449</span>, <span class="hljs-number">0.7009258593102812</span>, <span class="hljs-number">0.5605206522382088</span>}
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-number">20</span>, []entity.Vector{entity.FloatVector(queryVector)},
+).
+    WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithGroupByField(<span class="hljs-string">&quot;category&quot;</span>).
+    WithGroupSize(<span class="hljs-number">3</span>).
+    WithStrictGroupSize(<span class="hljs-literal">true</span>).
+    WithOutputFields(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>).
+    WithSearchParam(<span class="hljs-string">&quot;order_by_fields&quot;</span>, <span class="hljs-string">&quot;price:asc&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">for</span> _, result := <span class="hljs-keyword">range</span> results {
+    fmt.Println(result.IDs, result.Scores)
+    fmt.Println(result.GetColumn(<span class="hljs-string">&quot;category&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;price&quot;</span>), result.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>))
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.</span>
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_catalog&quot;,
+    &quot;data&quot;: [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 20,
+    &quot;groupingField&quot;: &quot;category&quot;,
+    &quot;groupSize&quot;: 3,
+    &quot;strictGroupSize&quot;: true,
+    &quot;outputFields&quot;: [&quot;category&quot;, &quot;price&quot;, &quot;rating&quot;],
+    &quot;orderByFields&quot;: [&quot;price:asc&quot;]
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的請求中，<code translate="no">limit=20</code> 表示 Milvus 最多選擇 20 個群組，而不是 20 個實體。因為<code translate="no">group_size=3</code> ，平面結果清單總共可以包含多達 60 個實體。</p>
-<p>當您使用<code translate="no">order_by_fields</code> 與<code translate="no">group_by_field</code> 時，Milvus 會依據每個群組最頂端實體的指定標量值來排序群組。在每個群組中，實體仍依其與查詢向量的相似度得分排序。</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+
+<span class="hljs-comment">// Prerequisite: client is connected to Milvus and product_catalog is loaded.</span>
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.14529211512077012f</span>, <span class="hljs-number">0.9147257273453546f</span>, <span class="hljs-number">0.7965055218724449f</span>, <span class="hljs-number">0.7009258593102812f</span>, <span class="hljs-number">0.5605206522382088f</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+    .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">20</span>)
+    .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">WithGroupSize</span>(<span class="hljs-number">3</span>)
+    .<span class="hljs-built_in">WithStrictGroupSize</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+    .<span class="hljs-built_in">AddOrderByField</span>(milvus::<span class="hljs-built_in">OrderByField</span>(<span class="hljs-string">&quot;price&quot;</span>, milvus::AggregationDirection::ASC));
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+    std::cout &lt;&lt; rows &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>在上述請求中，<code translate="no">limit=20</code> 表示 Milvus 最多會選取 20 個群組，而非 20 個實體。由於<code translate="no">group_size=3</code> ，因此平鋪的結果清單總計最多可包含 60 個實體。</p>
+<p>當您將 `<code translate="no">order_by_fields</code> ` 與 `<code translate="no">group_by_field</code>` 搭配使用時，Milvus 會根據每個群組中頂端實體的指定標量欄位值來排序群組。在每個群組內，實體仍會依據其與查詢向量的相似度分數進行排序。</p>
 <h2 id="Considerations" class="common-anchor-header">注意事項<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -430,9 +633,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型建立索引的集合：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
-<li><p><strong>群組數</strong>：<code translate="no">limit</code> 參數控制返回搜尋結果的群組數目，而非每個群組內實體的特定數目。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性和查詢效能。如果資料分佈密集或效能是考量因素，減少<code translate="no">limit</code> 可以降低計算成本。</p></li>
-<li><p><strong>每個群組的實體</strong>：<code translate="no">group_size</code> 參數控制每個群組返回的實體數量。根據您的使用情況調整<code translate="no">group_size</code> 可以增加搜尋結果的豐富性。但是，如果資料分佈不均勻，某些群組返回的實體可能少於<code translate="no">group_size</code> 指定的數目，尤其是在資料有限的情況下。</p></li>
-<li><p><strong>嚴格的群組大小</strong>：當<code translate="no">strict_group_size=True</code> 時，系統會嘗試為每個群組傳回指定數量的實體 (<code translate="no">group_size</code>)，除非該群組沒有足夠的資料。此設定可確保每個群組的實體數量一致，但在資料分布不均或資源有限的情況下，可能會導致效能下降。如果不需要嚴格的實體數量，設定<code translate="no">strict_group_size=False</code> 可以提高查詢速度。</p></li>
-<li><p>如果查詢向量已經存在於目標資料集中，請考慮使用<code translate="no">ids</code> ，而不是在搜尋前擷取它們。如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-key-search.md">Primary-Key Search</a>。</p></li>
+<li><p><strong>索引</strong>： 此分組功能僅適用於使用以下索引類型建立索引的集合：<strong>FLAT</strong>、<strong>IVF_FLAT</strong>、<strong>IVF_SQ8</strong>、<strong>HNSW</strong>、<strong>HNSW_PQ</strong>、<strong>HNSW_PRQ</strong>、<strong>HNSW_SQ</strong>、<strong>DISKANN</strong>、<strong>SPARSE_INVERTED_INDEX</strong>。</p></li>
+<li><p><strong>群組數量</strong>：<code translate="no">limit</code> 參數用來控制搜尋結果所來自的群組數量，而非各群組內的具體實體數量。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性與查詢效能。若資料分佈密集或需考量效能，降低<code translate="no">limit</code> 可減少運算成本。</p></li>
+<li><p><strong>每組實體數</strong>：<code translate="no">group_size</code> 參數控制每組返回的實體數量。根據您的使用情境調整<code translate="no">group_size</code> ，可增加搜尋結果的豐富度。然而，若資料分布不均，某些組別返回的實體數可能會少於<code translate="no">group_size</code> 所指定的數量，特別是在資料有限的情境下。</p></li>
+<li><p><strong>嚴格的分組大小</strong>：當設定為<code translate="no">strict_group_size=True</code> 時，系統將嘗試為每個分組返回指定數量的實體（<code translate="no">group_size</code> ），除非該分組中的資料不足。此設定可確保每個分組的實體數量一致，但在資料分佈不均或資源有限的情況下，可能會導致效能下降。若無需嚴格控制實體數量，設定<code translate="no">strict_group_size=False</code> 可提升查詢速度。</p></li>
+<li><p>若查詢向量已存在於目標集合中，請考慮使用<code translate="no">ids</code> ，而非在搜尋前先擷取它們。詳情請參閱「<a href="/docs/zh-hant/primary-key-search.md">主鍵搜尋</a>」。</p></li>
 </ul>

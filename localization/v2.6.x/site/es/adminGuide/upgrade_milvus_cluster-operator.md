@@ -86,9 +86,9 @@ title: Actualizar el clúster de Milvus con Milvus Operator
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>no</strong> es <strong>compatible</strong> con la versión v2.6.17. No se admiten actualizaciones directas desde versiones candidatas.</li>
 <li>Si actualmente estás ejecutando la versión v2.6.0-rc1 y necesitas conservar tus datos, consulta <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">esta guía</a> de <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">la comunidad</a> para obtener ayuda con la migración.</li>
-<li><strong>Debes</strong> actualizar a la versión v2.5.16 o posterior con la opción « <code translate="no">mixCoord</code> » habilitada antes de actualizar a la versión v2.6.17.</li>
+<li><strong>Debe</strong> actualizar a la versión v2.5.16 o posterior con la función « <code translate="no">mixCoord</code> » activada antes de actualizar a la versión v2.6.17.</li>
 </ul>
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.17, debes mantener tu opción actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.17, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,9 +145,9 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
     </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 Comprueba la configuración actual del coordinador</h4><p>Comprueba si tu clúster ya utiliza <code translate="no">mixCoord</code>:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Si, en cambio, ves pods de coordinador independientes (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), debes habilitar <code translate="no">mixCoord</code> en el siguiente paso.</p>
+<p>Si, en cambio, ves pods de coordinador independientes (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), deberás habilitar <code translate="no">mixCoord</code> en el siguiente paso.</p>
 <h4 id="22-Upgrade-to-v2516-with-mixCoord" class="common-anchor-header">2.2 Actualización a la versión 2.5.16 con mixCoord</h4><div class="alert-note">
-<p>Omite este paso si tu clúster ya ejecuta la versión v2.5.16 o superior con <code translate="no">mixCoord</code> habilitado.</p>
+<p>Omite este paso si tu clúster ya está ejecutando la versión v2.5.16 o superior con <code translate="no">mixCoord</code> habilitado.</p>
 </div>
 <p>Crea un archivo de configuración <code translate="no">milvusupgrade.yaml</code> para habilitar <code translate="no">mixCoord</code> y actualizar a la versión v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>

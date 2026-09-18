@@ -87,9 +87,9 @@ title: 使用 Docker Compose 升级 Milvus Standalone
 <li>如果您当前正在运行 v2.6.0-rc1 且需要保留数据，请参阅<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社区指南</a>以获取迁移帮助。</li>
 <li>在升级至 v2.6.17 之前，您<strong>必须先</strong>升级至 v2.5.16 或更高版本。</li>
 </ul>
-<p><strong>消息队列限制</strong>：升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p><strong>消息队列限制</strong>：在升级至 Milvus v2.6.17 时，您必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <div class="alter note">
-<p>出于安全考虑，Milvus 将在 v2.6.17 版本发布时将 MinIO 升级至 RELEASE.2024-12-18T13-15-44Z。</p>
+<p>出于安全考虑，Milvus 将在发布 v2.6.17 时将其 MinIO 升级至 RELEASE.2024-12-18T13-15-44Z 版本。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ title: 使用 Docker Compose 升级 Milvus Standalone
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>验证 v2.5.16 升级：</p>
+<li><p>验证 v2.5.16 升级是否成功：</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -157,7 +157,7 @@ docker compose up -d
       </svg>
     </button></h3><p>一旦 v2.5.16 成功运行，请升级至 v2.6.17：</p>
 <ol>
-<li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，并将 Milvus 和 MinIO 的镜像标签均更新为 v2.6.17：</p>
+<li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，并将Milvus和MinIO的镜像标签均更新为v2.6.17：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -215,7 +215,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 <ul>
 <li><a href="/docs/zh/v2.6.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
-<li>如果您已准备好在云端部署集群：
+<li>如果您准备在云端部署集群：
 <ul>
 <li>了解如何<a href="/docs/zh/v2.6.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
 <li>了解如何<a href="/docs/zh/v2.6.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
