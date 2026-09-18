@@ -30,6 +30,7 @@ The following code snippet demonstrates how to create a SearchIterator.
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -114,7 +115,67 @@ const iterator = milvusClient.searchIterator({
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "iterator_collection",
+    "annsField": "vector",
+    "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    "searchParams": {
+        "metricType": "L2",
+        "params": {
+            "nprobe": 16
+        }
+    },
+    "limit": 50,
+    "offset": 0,
+    "outputFields": ["color"]
+}'
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+auto status = client->Connect(milvus::ConnectParam("http://localhost:19530", "root:Milvus"));
+if (!status.IsOk()) {
+    std::cerr << "Failed to connect: " << status.Message() << std::endl;
+    return;
+}
+
+// create iterator
+std::vector<float> queryVector = {
+    0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F
+};
+
+milvus::SearchIteratorRequest request;
+request.SetCollectionName("iterator_collection");
+request.SetAnnsField("vector");
+request.SetMetricType(milvus::MetricType::L2);
+request.AddExtraParam("nprobe", "16");
+// highlight-next-line
+request.SetBatchSize(50);
+request.AddOutputField("color");
+// highlight-next-line
+request.SetLimit(20000);
+// SearchIterator only accepts one vector
+request.AddFloatVector(queryVector);
+
+milvus::SearchIteratorPtr iterator;
+status = client->SearchIterator(request, iterator);
+if (!status.IsOk()) {
+    std::cerr << "Failed to create search iterator: " << status.Message() << std::endl;
+    return;
+}
 ```
 
 In the above examples, you have set the number of entities to return per search (**batch_size**/**batchSize**) to 50, and the total number of entities to return (**topK**) to 20,000.
@@ -129,6 +190,7 @@ Once the SearchIterator is ready, you can call its next() method to get the sear
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -173,7 +235,74 @@ for await (const result of iterator) {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+batch_size=50
+limit=20000
+offset=0
+
+# Paginate with offset until an empty page is returned. Note that the sum of
+# offset and limit in each request must not exceed the server-side result
+# window (16,384 by default); SDK search iterators do not have this limit.
+while [ "$offset" -lt "$limit" ]; do
+    # highlight-next-line
+    response=$(curl --silent --request POST \
+        --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+        --header "Authorization: Bearer ${TOKEN}" \
+        --header "Content-Type: application/json" \
+        --header "Request-Timeout: 10" \
+        -d '{
+            "collectionName": "iterator_collection",
+            "annsField": "vector",
+            "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+            "searchParams": {
+                "metricType": "L2",
+                "params": {
+                    "nprobe": 16
+                }
+            },
+            "limit": '"$batch_size"',
+            "offset": '"$offset"',
+            "outputFields": ["color"]
+        }')
+
+    count=$(echo "$response" | jq -r '.data | length')
+    if [ "$count" -eq 0 ]; then
+        # highlight-next-line
+        break
+    fi
+
+    echo "$response" | jq -r '.data[]'
+    offset=$((offset + batch_size))
+done
+```
+
+```cpp
+while (true) {
+    milvus::SingleResult result;
+    // highlight-next-line
+    status = iterator->Next(result);
+    if (!status.IsOk()) {
+        std::cerr << "Iterator next failed: " << status.Message() << std::endl;
+        break;
+    }
+    if (result.GetRowCount() == 0) {
+        // highlight-next-line
+        break;
+    }
+
+    milvus::EntityRows rows;
+    status = result.OutputRows(rows);
+    if (!status.IsOk()) {
+        std::cerr << "Failed to get output rows: " << status.Message() << std::endl;
+        break;
+    }
+
+    for (const auto& row : rows) {
+        std::cout << row.dump() << std::endl;
+    }
+}
 ```
 
 In the above code examples, you have created an infinite loop and called the **next()** method in the loop to store the search results in a variable and closed the iterator when the **next()** returns nothing.

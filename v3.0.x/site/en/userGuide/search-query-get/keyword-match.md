@@ -10,7 +10,7 @@ Text match in Milvus enables precise document retrieval based on specific terms.
 
 <div class="alert note">
 
-Text match focuses on finding exact occurrences of the query terms, without scoring the relevance of the matched documents. If you want to retrieve the most relevant documents based on the semantic meaning and importance of the query terms, we recommend you use [Full Text Search](full-text-search.md).
+`TEXT_MATCH` finds exact analyzed terms, while `TEXT_MATCH_FUZZY` can tolerate a small edit distance between query tokens and indexed tokens. Both are Boolean filtering operations and do not score the relevance of matched documents. If you want to retrieve the most relevant documents based on the semantic meaning and importance of the query terms, we recommend you use [Full Text Search](full-text-search.md).
 
 </div>
 
@@ -28,7 +28,7 @@ When a user performs a text match, the inverted index is used to quickly retriev
 
 ## Enable text match
 
-Text match works on the [`VARCHAR`](string.md) field type, which is essentially the string data type in Milvus. To enable text match, set both `enable_analyzer` and `enable_match` to `True` and then optionally configure an [analyzer](analyzer-overview.md) for text analysis when defining your collection schema.
+Text match works on match-enabled string fields. The examples on this page use [`VARCHAR`](string.md), which is supported across client SDKs. In Milvus 3.0.x, [`TEXT`](text.md) fields also support text match when Storage V3 is enabled. For either field type, set both `enable_analyzer` and `enable_match` to `True`, and then optionally configure an [analyzer](analyzer-overview.md) when defining your collection schema.
 
 ### Set `enable_analyzer` and `enable_match`
 
@@ -40,6 +40,7 @@ To enable text match for a specific `VARCHAR` field, set both the `enable_analyz
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -168,6 +169,14 @@ export schema='{
     }'
 ```
 
+```cpp
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true).EnableMatch(true));
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+```
+
 ### Optional: Configure an analyzer
 
 The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.
@@ -182,6 +191,7 @@ In cases where a different analyzer is required, you can configure one using the
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -277,11 +287,16 @@ export schema='{
     }'
 ```
 
+```cpp
+nlohmann::json analyzer_params = {{"type", "english"}};
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
+```
+
 Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
 
 ## Use text match
 
-Once you have enabled text match for a VARCHAR field in your collection schema, you can perform text matches using the `TEXT_MATCH` expression.
+Once you have enabled text match for a `VARCHAR` or `TEXT` field in your collection schema, you can perform text matches using the `TEXT_MATCH` expression.
 
 ### TEXT_MATCH expression syntax
 
@@ -291,7 +306,15 @@ The `TEXT_MATCH` expression is used to specify the field and the terms to search
 TEXT_MATCH(field_name, text)
 ```
 
-- `field_name`: The name of the VARCHAR field to search for.
+```cpp
+std::string filter = "TEXT_MATCH(field_name, text)";
+```
+
+```bash
+export filter="\"TEXT_MATCH(field_name, text)\""
+```
+
+- `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
 - `text`: The terms to search for. Multiple terms can be separated by spaces or other appropriate delimiters based on the language and configured analyzer.
 
@@ -303,6 +326,7 @@ By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -325,6 +349,10 @@ const filter = "TEXT_MATCH(text, 'machine deep')";
 export filter="\"TEXT_MATCH(text, 'machine deep')\""
 ```
 
+```cpp
+std::string filter = "TEXT_MATCH(text, 'machine deep')";
+```
+
 You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching. 
 
 - To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:
@@ -335,6 +363,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
+        <a href="#cpp">C++</a>
     </div>
 
     ```python
@@ -357,6 +386,10 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
     ```
 
+    ```cpp
+    std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
+
 - To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
 
     <div class="multipleCode">
@@ -365,6 +398,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
+        <a href="#cpp">C++</a>
     </div>
 
     ```python
@@ -387,6 +421,71 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
     ```
 
+    ```cpp
+    std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
+### TEXT_MATCH_FUZZY expression syntax | Milvus 3.0.0+
+
+Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. Milvus analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
+
+The syntax is as follows:
+
+```python
+TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)
+```
+
+```cpp
+std::string filter = "TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)";
+```
+
+```bash
+export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
+```
+
+- `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
+
+- `text`: The query text to analyze and match against indexed tokens.
+
+- `max_edit_distance`: The maximum edit distance allowed for each query token. The option name must be exactly `max_edit_distance`, and its value must be `0`, `1`, or `2`. A value of `0` performs exact token matching, equivalent to `TEXT_MATCH`.
+
+For example, the following expression matches tokens within one edit of `machne`, including `machine`:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
+</div>
+
+```python
+filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
+```
+
+```java
+String filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+```go
+filter := "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
+```
+
+```javascript
+const filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+```bash
+export filter="\"TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)\""
+```
+
+```cpp
+std::string filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+`TEXT_MATCH_FUZZY` is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same `filter` parameter used for `TEXT_MATCH` in search or query operations.
+
 ### Search with text match
 
 Text match can be used in combination with vector similarity search to narrow the search scope and improve search performance. By filtering the collection using text match before vector similarity search, you can reduce the number of documents that need to be searched, resulting in faster query times.
@@ -405,6 +504,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -481,6 +581,7 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "annsField": "embeddings",
@@ -496,6 +597,29 @@ curl --request POST \
 }'
 ```
 
+```cpp
+// Match entities with `keyword1` or `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
+
+// Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("embeddings")
+                   .AddFloatVector(query_vector)
+                   // highlight-next-line
+                   .WithFilter(filter)
+                   .AddExtraParam("nprobe", "10")
+                   .WithLimit(10)
+                   .AddOutputField("id")
+                   .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ### Query with text match
 
 Text match can also be used for scalar filtering in query operations. By specifying a `TEXT_MATCH` expression in the `expr` parameter of the `query()` method, you can retrieve documents that match the given terms.
@@ -508,6 +632,7 @@ The example below retrieves documents where the `text` field contains both terms
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -568,11 +693,30 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "filter": '"$filter"',
     "outputFields": ["id", "text"]
 }'
+```
+
+```cpp
+// Match entities with both `keyword1` and `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   // highlight-next-line
+                   .WithFilter(filter)
+                   .AddOutputField("id")
+                   .AddOutputField("text");
+
+milvus::QueryResponse response;
+auto status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Considerations
@@ -588,4 +732,3 @@ curl --request POST \
     - If a string constant is enclosed by single quotes, a single quote within the constant should be represented as `\\'` while a double quote can be represented as either `"` or `\\"`. Example: `'It\\'s milvus'`.
 
     - If a string constant is enclosed by double quotes, a double quote within the constant should be represented as `\\"` while a single quote can be represented as either `'` or `\\'`. Example: `"He said \\"Hi\\""`.
-
