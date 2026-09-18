@@ -6,6 +6,12 @@ title: Migrate Between Instances in One Bucket (Different Root Paths)
 
 # Migrate Between Instances in One Bucket (Different Root Paths)
 
+<div class="alert note">
+
+This page covers **Milvus Backup 0.5.x**, with downloads and examples pinned to **0.5.16**. Check the [Milvus compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported server versions. For Backup 0.6.0, use the [0.6.0 guide](milvus_backup_0_6_cli.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md).
+
+</div>
+
 This topic details the process of backing up a collection from one
 Milvus instance and restoring it to another while using a shared bucket
 for object storage, with distinct root paths for each instance.
@@ -30,7 +36,7 @@ our goal is to complete the following tasks:
 
 ## Prerequisites
 
-- Ensure the **milvus-backup** tool is installed.
+- Install **Milvus Backup 0.5.16** using the [0.5.x CLI guide](milvus_backup_cli.md#Obtain-Milvus-Backup).
 
 - Familiarize yourself with configuring Milvus object storage settings.
 For details, refer to [Object
@@ -41,17 +47,16 @@ Storage](https://milvus.io/docs/deploy_s3.md).
 ### Step 1: Prepare configuration
 
 Go to the directory of the milvus-backup project and create a directory
-named configs:
+named `configs`. Run the following commands from the directory containing `milvus-backup`:
 
 ```shell
-mkdir configs
-cd configs
+mkdir -p configs
 ```
 
 Download the backup config file backup.yaml:
 
 ```shell
-wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 ```
 
 The file structure looks like this:
@@ -64,6 +69,8 @@ The file structure looks like this:
 ```
 
 ### Step 2: Edit configuration file
+
+The YAML below shows fields to edit in the downloaded v1 file. Keep the other required settings. Point `milvus.address` and `milvus.port` to the instance being backed up or restored. Set `minio.backupAddress`, `minio.backupPort`, and `minio.backupStorageType` to the backup destination, and `backup.gcPause.address` to the source Milvus management endpoint (port 9091 by default). Replace all example addresses, bucket names, paths, and credentials with your deployment settings.
 
 Modify the backup.yaml file to set the appropriate configurations for
 `milvus_A`:
@@ -107,7 +114,7 @@ Modify the backup.yaml file to set the appropriate configurations for
     bucketName: "bucket_A" # Milvus Bucket name in MinIO/S3, make it the same as your milvus instance
     rootPath: "files_A" # Milvus storage root path in MinIO/S3, make it the same as your milvus instance
 
-    # only for azure
+    # Backup storage credentials
     backupAccessKeyID: minioadmin  # accessKeyID of MinIO/S3
     backupSecretAccessKey: minioadmin # MinIO/S3 encryption string
     
@@ -131,7 +138,7 @@ Modify the backup.yaml file to set the appropriate configurations for
 Once `backup.yaml` is saved, create a backup named my_backup:
 
 ```shell
-./milvus-backup create -c coll -n my_backup
+./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 ```
 
 This command creates the backup `bucket_A/backup/my_backup` in object
@@ -182,7 +189,11 @@ minio:
 Restore the backup to `milvus_B`:
 
 ```shell
-./milvus-backup restore -c coll -n my_backup -s _bak
+./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 ```
 
-This command restores the backup into a new collection named `coll_bak` in `milvus_B`, with data stored in `bucket_A/files_B/insert_log/[ID of new collection]`.
+This command restores the backup into a new collection named `coll_bak` in `milvus_B`, using the target instance's configured storage root `bucket_A/files_B`.
+
+In Backup 0.5.16, the deprecated `-c` option selects the collection name in the backup, before `_bak` is applied. The 0.6.0 `--filter` replacement uses the target name instead; see [Update CLI commands](milvus_backup_upgrade.md#Update-CLI-commands).
+
+After restoring, confirm that `coll_bak` exists, create an appropriate vector index if needed, and compare its entity count, representative values, and search results against a baseline captured before backup. A successful command alone does not verify the data.

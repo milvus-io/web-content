@@ -6,25 +6,31 @@ title: Back up and Restore Data Using Commands
 
 # Back up and Restore Data Using Commands
 
+<div class="alert note">
+
+This page covers **Milvus Backup 0.5.x**, with downloads and examples pinned to **0.5.16**. Check the [Milvus compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported server versions. For Backup 0.6.0, use the [0.6.0 guide](milvus_backup_0_6_cli.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md).
+
+</div>
+
 Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data. 
 
 ## Obtain Milvus Backup
 
 You can either download the compiled binary or build from the source.
 
-To download the compiled binary, go to the [release](https://github.com/zilliztech/milvus-backup/releases) page, where you can find all official releases. Remember, always use the binaries in the release marked as **Latest**.
+Download the binary for your operating system and architecture from the [0.5.16 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.16). Use the matching 0.5.16 configuration and examples on this page.
 
-To compile from the source, do as follows:
+To build 0.5.16 from source, install Go 1.25 or later and run:
 
 ```shell
-git clone git@github.com:zilliztech/milvus-backup.git
-go get
+git clone --branch v0.5.16 --depth 1 https://github.com/zilliztech/milvus-backup.git
+cd milvus-backup
 go build
 ```
 
 ## Prepare configuration file
 
-Download the [example configuration file](https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml) and tailor it to fit your needs.
+Download the [example configuration file](https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml) and tailor it to fit your needs.
 
 Then create a folder alongside the downloaded or built Milvus Backup binary, name the folder `configs`, and place the configuration file inside the `configs` folder.
 
@@ -39,7 +45,7 @@ Your folder structure should be similar to the following:
   </code>
 </pre>
 
-Because Milvus Backup cannot back up your data to a local path, ensure that Minio settings are correct when tailoring the configuration file. 
+This example uses MinIO for backup storage. Set `minio.*` to match your Milvus storage and backup destination, including the addresses, credentials, bucket names, and root paths.
 
 <div class="alert note">
 
@@ -56,9 +62,11 @@ The name of the default Minio bucket varies with the way you install Milvus. Whe
 
 If you run an empty local Milvus instance at the default port, use the example Python scripts to generate some data in your instance. Feel free to make necessary changes to the scripts to fit your needs.
 
-Obtain the [scripts](https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py). Then run the scripts to generate the data. Ensure that [PyMilvus](https://pypi.org/project/pymilvus/), the official Milvus Python SDK, has been installed.
+Obtain the [scripts](https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/prepare_data.py). Then run the scripts to generate the data. Ensure that [PyMilvus](https://pypi.org/project/pymilvus/), the official Milvus Python SDK, has been installed.
 
 ```shell
+mkdir -p example
+curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/prepare_data.py -o example/prepare_data.py
 python example/prepare_data.py
 ```
 
@@ -73,12 +81,12 @@ Note that running Milvus Backup against a Milvus instance will not normally affe
 Run the following command to create a backup.
 
 ```shell
-./milvus-backup create -n <backup_name>
+./milvus-backup create -n my_backup
 ```
 
 Once the command is executed, you can check the backup files in the bucket specified in the Minio settings. Specifically, you can download them using **Minio Console** or the **mc** client.
 
-To download from [Minio Console](https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html), log into Minio Console, locate the bucket specified in `minio.address`, select the files in the bucket, and click **Download** to download them.
+To download from [Minio Console](https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html), log into Minio Console, locate the bucket specified in `minio.backupBucketName`, select the files in the bucket, and click **Download** to download them.
 
 If you prefer [the mc client](https://min.io/docs/minio/linux/reference/minio-mc.html#mc-install), do as follows:
 
@@ -110,6 +118,7 @@ The `-s` flag allows you to set a suffix for the new collection to be created. T
 If you prefer to restore the backed-up collection without changing its name, drop the collection before restoring it from the backup. You can now clean the data generated in [Prepare data](#Prepare-data) by running the following command.
 
 ```shell
+curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/clean_data.py -o example/clean_data.py
 python example/clean_data.py
 ```
 
@@ -121,13 +130,11 @@ Then run the following command to restore the data from the backup.
 
 ## Verify restored data
 
-Once the restore completes, you can verify the restored data by indexing the restored collection as follows:
+For the disposable sample data created above, the upstream script indexes and queries `hello_milvus_recover` and `hello_milvus2_recover`, then **deletes both restored collections**. Run it only after restoring both sample collections with `_recover`. For your own data, compare against your backup-time baseline without using this cleanup script.
 
 ```shell
+curl -fL https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/example/verify_data.py -o example/verify_data.py
 python example/verify_data.py
 ```
 
-Note that the above script assumes that you have run the `restore` command with the `-s` flag and the suffix is set to `-recover`. Feel free to make necessary changes to the script to fit your need.
-
-
-
+Note that the above script assumes that you have run the `restore` command with the `-s` flag and the suffix is set to `_recover`. Feel free to make necessary changes to the script to fit your need.
