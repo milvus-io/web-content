@@ -393,6 +393,8 @@ Before passing a Boost Ranker as the reranker of a search request, you should pr
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -449,6 +451,35 @@ const ranker = {
   },
 };
 
+```
+
+```cpp
+auto ranker = std::make_shared<milvus::BoostRerank>("boost");
+ranker->SetFilter("doctype == 'abstract'");
+ranker->SetWeight(0.5f);
+ranker->SetRandomScoreField("id");
+ranker->SetRandomScoreSeed(126);
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let ranker = BoostRerank::new()
+    .name("boost")
+    .filter("doctype == 'abstract'")
+    .weight(0.5)
+    .random_score_field("id")
+    .random_score_seed(126);
+
+let function_score = FunctionScore::new().add_function(ranker);
 ```
 
 ```bash
@@ -515,6 +546,8 @@ Once the Boost Ranker function is ready, you can reference it in a search reques
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -591,6 +624,86 @@ const searchResults = await client.search({
 console.log('Search results:', searchResults);
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Assume you have a collection set up
+
+std::vector<float> query_vector = {
+    -0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f,
+    -0.4248030059917294f, -0.8648452746018911f
+};
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector")
+                   .WithLimit(10)
+                   .AddOutputField("doctype")
+                   // highlight-next-line
+                   .WithRerank(function_score)
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// Assume you have a collection set up
+
+let query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(10)
+            .output_fields(["doctype"])
+            // highlight-next-line
+            .rerank(function_score)
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            _ => continue,
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(value) => value,
+            _ => continue,
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 # restful
 ```
@@ -606,6 +719,8 @@ The following example shows how to modify the scores of all identified entities 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -745,6 +860,84 @@ await client.search({
   ranker: ranker
 });
 
+```
+
+```cpp
+// Create a Boost Ranker with a fixed weight
+auto fix_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+fix_weight_ranker->SetWeight(0.8f);
+
+// Create a Boost Ranker with a randomly generated weight between 0 and 0.4
+auto random_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+random_weight_ranker->SetWeight(0.4f);
+random_weight_ranker->SetRandomScoreSeed(126);
+
+// Create a Function Score
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(fix_weight_ranker);
+function_score->AddFunction(random_weight_ranker);
+function_score->AddParam("boost_mode", "Multiply");
+function_score->AddParam("function_mode", "Sum");
+
+// Conduct a similarity search using the created Function Score
+std::vector<float> query_vector = {
+    -0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f,
+    -0.4248030059917294f, -0.8648452746018911f
+};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector")
+                   .WithLimit(10)
+                   .AddOutputField("doctype")
+                   .WithRerank(function_score)
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use std::collections::HashMap;
+
+// Create a Boost Ranker with a fixed weight
+let fix_weight_ranker = BoostRerank::new().name("boost").weight(0.8);
+
+// Create a Boost Ranker with a randomly generated weight between 0 and 0.4
+let random_weight_ranker = BoostRerank::new()
+    .name("boost")
+    .weight(0.4)
+    .random_score_seed(126);
+
+// Create a Function Score
+let function_score = FunctionScore::new()
+    .add_function(fix_weight_ranker)
+    .add_function(random_weight_ranker)
+    .params(HashMap::from([
+        ("boost_mode".to_string(), serde_json::json!("Multiply")),
+        ("function_mode".to_string(), serde_json::json!("Sum")),
+    ]));
+
+// Conduct a similarity search using the created Function Score
+let query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(10)
+            .output_fields(["doctype"])
+            .rerank(function_score)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

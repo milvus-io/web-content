@@ -70,6 +70,8 @@ In the example below, we add a vector field named `dense_vector` to store dense 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -165,6 +167,57 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+auto schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR)
+    .WithPrimaryKey(true)
+    .WithAutoID(true)
+    .WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("dense_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("pk")
+            .data_type(sdk::DataType::VarChar)
+            .primary_key(true)
+            .auto_id(true)
+            .max_length(100),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("dense_vector")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(4),
+    );
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -226,6 +279,8 @@ To accelerate semantic searches, an index must be created for the vector field. 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -269,6 +324,19 @@ idx := index.NewAutoIndex(index.MetricType(entity.IP))
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
 ```
 
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+indexes.emplace_back(milvus::IndexDesc("dense_vector", "dense_vector_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP));
+```
+
+```rust
+let index_param = sdk::IndexParam::new()
+    .field_name("dense_vector")
+    .index_name("dense_vector_index")
+    .index_type(sdk::IndexType::AutoIndex)
+    .metric_type(sdk::MetricType::Ip);
+```
+
 ```bash
 export indexParams='[
         {
@@ -295,6 +363,8 @@ Once the dense vector and index param settings are complete, you can create a co
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -347,6 +417,30 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(indexes));
+auto status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_param(index_param)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -369,6 +463,8 @@ After creating the collection, use the `insert` method to add data containing de
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -426,6 +522,38 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    nlohmann::json{{"dense_vector", {0.1f, 0.2f, 0.3f, 0.7f}}},
+    nlohmann::json{{"dense_vector", {0.2f, 0.3f, 0.4f, 0.8f}}},
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(rows));
+milvus::InsertResponse insert_response;
+auto status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows: Vec<_> = vec![
+    serde_json::json!({"dense_vector": [0.1f32, 0.2, 0.3, 0.7]}),
+    serde_json::json!({"dense_vector": [0.2f32, 0.3, 0.4, 0.8]}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -452,6 +580,8 @@ Semantic search based on dense vectors is one of the core features of Milvus, al
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -536,6 +666,71 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
+}
+```
+
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.7f};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithOutputFields({"pk"})
+    .AddExtraParam("nprobe", "10")
+    .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto pks = result.OutputField<milvus::VarCharFieldData>("pk");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i]
+                  << ", pk=" << pks->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.7];
+
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("dense_vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .output_fields(["pk"])
+            .extra_params(HashMap::from([("nprobe".into(), "10".into())]))
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
 }
 ```
 

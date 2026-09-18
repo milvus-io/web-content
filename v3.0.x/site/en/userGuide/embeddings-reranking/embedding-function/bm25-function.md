@@ -153,6 +153,8 @@ Your collection schema must include at least three required fields:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -253,6 +255,7 @@ const schema = [
     name: "id",
     data_type: DataType.Int64,
     is_primary_key: true,
+    auto_id: true,
   },
   {
     name: "text",
@@ -268,6 +271,67 @@ const schema = [
 ];
 
 console.log(res.results)
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
+// highlight-start
+milvus::FieldSchema text_field("text", milvus::DataType::VARCHAR);
+text_field.WithMaxLength(1000).EnableAnalyzer(true);
+schema->AddField(text_field);
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+// highlight-end
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    // highlight-start
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("text")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(1000)
+            .enable_analyzer(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("sparse")
+            .data_type(sdk::DataType::SparseFloatVector),
+    );
+// highlight-end
 ```
 
 ```bash
@@ -347,7 +411,25 @@ const functions = [
       output_field_names: ['sparse'],
       params: {},
     },
-]；
+  ];
+```
+
+```cpp
+// highlight-next-line
+auto bm25_function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+bm25_function->AddInputFieldName("text");
+bm25_function->AddOutputFieldName("sparse");
+schema->AddFunction(bm25_function);
+```
+
+```rust
+// highlight-next-line
+let bm25_function = Function::new()
+    .name("text_bm25_emb")
+    .function_type(FunctionType::Bm25)
+    .input_fields(["text"])
+    .output_fields(["sparse"]);
+let schema = schema.add_function(bm25_function);
 ```
 
 ```bash
@@ -446,6 +528,29 @@ const index_params = [
 ];
 ```
 
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+milvus::IndexDesc sparse_index("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+sparse_index.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+sparse_index.AddExtraParam("bm25_k1", "1.2");
+sparse_index.AddExtraParam("bm25_b", "0.75");
+indexes.push_back(sparse_index);
+```
+
+```rust
+let indexes = vec![
+    sdk::IndexParam::new()
+        .field_name("sparse")
+        .index_type(sdk::IndexType::SparseInvertedIndex)
+        .metric_type(sdk::MetricType::Bm25)
+        .extra_params(HashMap::from([
+            ("inverted_index_algo".to_string(), "DAAT_MAXSCORE".to_string()),
+            ("bm25_k1".to_string(), "1.2".to_string()),
+            ("bm25_b".to_string(), "0.75".to_string()),
+        ])),
+];
+```
+
 ```bash
 export indexParams='[
         {
@@ -501,6 +606,30 @@ await client.create_collection(
     index_params: index_params,
     functions: functions
 );
+```
+
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(indexes));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(indexes)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -564,6 +693,37 @@ data: [
     {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
     {'text': 'data mining and information retrieval overlap in research.'},
 ]);
+```
+
+```cpp
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection")
+    .AddRowData({{"text", "information retrieval is a field of study."}})
+    .AddRowData({{"text", "information retrieval focuses on finding relevant information in large datasets."}})
+    .AddRowData({{"text", "data mining and information retrieval overlap in research."}});
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "insert_count=" << insert_response.Results().InsertCount() << std::endl;
+```
+
+```rust
+let rows: Vec<_> = vec![
+    serde_json::json!({"text": "information retrieval is a field of study."}),
+    serde_json::json!({"text": "information retrieval focuses on finding relevant information in large datasets."}),
+    serde_json::json!({"text": "data mining and information retrieval overlap in research."}),
+];
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -654,6 +814,54 @@ await client.search(
     limit: 3,
 
 )
+```
+
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    // highlight-start
+    .WithAnnsField("sparse")
+    .WithEmbeddedTexts({"whats the focus of information retrieval?"})
+    .WithOutputFields({"text"})
+    // highlight-end
+    .WithLimit(3);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto texts = result.OutputField<milvus::VarCharFieldData>("text");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", text=" << texts->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            // highlight-start
+            .vector_field("sparse")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "whats the focus of information retrieval?".into(),
+            ]))
+            .output_fields(["text"])
+            // highlight-end
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```bash

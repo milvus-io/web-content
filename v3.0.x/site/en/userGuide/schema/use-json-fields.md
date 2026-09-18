@@ -58,6 +58,8 @@ The example below creates a collection with its schema containing these fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -189,6 +191,83 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create schema with a JSON field
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+// highlight-next-line
+schema->AddField(milvus::FieldSchema("metadata", milvus::DataType::JSON).WithNullable(true));
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("product_catalog").WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create schema with a JSON field
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("product_id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("vector")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(5),
+    )
+    // highlight-next-line
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("metadata")
+            .data_type(sdk::DataType::Json)
+            .nullable(true),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("product_catalog")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -255,6 +334,8 @@ Once the collection is created, insert entities that contain structured JSON obj
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -380,6 +461,72 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("product_cat
 if err != nil {
     return err
 }
+```
+
+```cpp
+milvus::EntityRows entities = {
+    {{"product_id", 1},
+     {"vector", {0.1f, 0.2f, 0.3f, 0.4f, 0.5f}},
+     {"metadata", {
+         {"category", "electronics"},
+         {"brand", "BrandA"},
+         {"in_stock", true},
+         {"price", 99.99},
+         {"string_price", "99.99"},
+         {"tags", {"clearance", "summer_sale"}},
+         {"supplier", {
+             {"name", "SupplierX"},
+             {"country", "USA"},
+             {"contact", {
+                 {"email", "support@supplierx.com"},
+                 {"phone", "+1-800-555-0199"}
+             }}
+         }}
+     }}}
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("product_catalog").WithRowsData(std::move(entities));
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let entities = vec![
+    serde_json::json!({
+        "product_id": 1,
+        "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "metadata": {
+            "category": "electronics",
+            "brand": "BrandA",
+            "in_stock": true,
+            "price": 99.99,
+            "string_price": "99.99",
+            "tags": ["clearance", "summer_sale"],
+            "supplier": {
+                "name": "SupplierX",
+                "country": "USA",
+                "contact": {
+                    "email": "support@supplierx.com",
+                    "phone": "+1-800-555-0199"
+                }
+            }
+        }
+    }),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("product_catalog")
+            .rows(entities)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -572,6 +719,8 @@ Using the `metadata` JSON structure from our introduction, here are examples of 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -671,6 +820,37 @@ indexOpt1 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", js
 indexOpt2 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex2)
 ```
 
+```cpp
+milvus::IndexDesc category_index("metadata", "category_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT);
+category_index.AddExtraParam("json_path", R"(metadata["category"])");
+category_index.AddExtraParam("json_cast_type", "varchar");
+
+milvus::IndexDesc tags_array_index("metadata", "tags_array_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT);
+tags_array_index.AddExtraParam("json_path", R"(metadata["tags"])");
+tags_array_index.AddExtraParam("json_cast_type", "array_varchar");
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("metadata")
+        .index_name("category_index")
+        .index_type(sdk::IndexType::AutoIndex)
+        .extra_params(HashMap::from([
+            ("json_path".to_string(), "metadata[\"category\"]".to_string()),
+            ("json_cast_type".to_string(), "varchar".to_string()),
+        ])),
+    sdk::IndexParam::new()
+        .field_name("metadata")
+        .index_name("tags_array_index")
+        .index_type(sdk::IndexType::AutoIndex)
+        .extra_params(HashMap::from([
+            ("json_path".to_string(), "metadata[\"tags\"]".to_string()),
+            ("json_cast_type".to_string(), "array_varchar".to_string()),
+        ])),
+];
+```
+
 ```bash
 # restful
 export categoryIndex='{
@@ -722,6 +902,8 @@ Cast functions are case-insensitive. The following types are supported:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -775,6 +957,27 @@ jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `metadata["strin
 
 indexOpt3 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex3)
 
+```
+
+```cpp
+milvus::IndexDesc string_to_double_index("metadata", "string_to_double_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT);
+string_to_double_index.AddExtraParam("json_path", R"(metadata["string_price"])");
+string_to_double_index.AddExtraParam("json_cast_type", "double");
+string_to_double_index.AddExtraParam("json_cast_function", "STRING_TO_DOUBLE");
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("metadata")
+        .index_name("string_to_double_index")
+        .index_type(sdk::IndexType::AutoIndex)
+        .extra_params(HashMap::from([
+            ("json_path".to_string(), "metadata[\"string_price\"]".to_string()),
+            ("json_cast_type".to_string(), "double".to_string()),
+            ("json_cast_function".to_string(), "STRING_TO_DOUBLE".to_string()),
+        ])),
+];
 ```
 
 ```bash
@@ -852,6 +1055,8 @@ When you create a JSON flat index on an object path, Milvus will:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -893,6 +1098,37 @@ index_params.add_index(
 // go
 ```
 
+```cpp
+milvus::IndexDesc metadata_flat("metadata", "metadata_flat", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT);
+metadata_flat.AddExtraParam("json_path", "metadata");
+metadata_flat.AddExtraParam("json_cast_type", "JSON");
+
+milvus::IndexDesc metadata_supplier_flat("metadata", "metadata_supplier_flat", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT);
+metadata_supplier_flat.AddExtraParam("json_path", R"(metadata["supplier"])");
+metadata_supplier_flat.AddExtraParam("json_cast_type", "JSON");
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("metadata")
+        .index_name("metadata_flat")
+        .index_type(sdk::IndexType::AutoIndex)
+        .extra_params(HashMap::from([
+            ("json_path".to_string(), "metadata".to_string()),
+            ("json_cast_type".to_string(), "JSON".to_string()),
+        ])),
+    sdk::IndexParam::new()
+        .field_name("metadata")
+        .index_name("metadata_supplier_flat")
+        .index_type(sdk::IndexType::AutoIndex)
+        .extra_params(HashMap::from([
+            ("json_path".to_string(), "metadata[\"supplier\"]".to_string()),
+            ("json_cast_type".to_string(), "JSON".to_string()),
+        ])),
+];
+```
+
 ```bash
 # restful
 ```
@@ -906,6 +1142,8 @@ After defining the index parameters, you can apply them to the collection using 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -944,6 +1182,32 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithCollectionName("product_catalog")
+    .AddIndex(std::move(category_index))
+    .AddIndex(std::move(tags_array_index))
+    .AddIndex(std::move(string_to_double_index))
+    .AddIndex(std::move(metadata_flat))
+    .AddIndex(std::move(metadata_supplier_flat));
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("product_catalog")
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 export indexParams="[
@@ -973,6 +1237,8 @@ For example:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -983,21 +1249,33 @@ filter = 'json_contains(metadata["tags"], "featured")'
 ```
 
 ```java
-String filter = 'metadata["category"] == "electronics"';
-String filter = 'metadata["price"] > 50';
-String filter = 'json_contains(metadata["tags"], "featured")';
+String filter = "metadata[\"category\"] == \"electronics\"";
+String filterPrice = "metadata[\"price\"] > 50";
+String filterTags = "json_contains(metadata[\"tags\"], \"featured\")";
 ```
 
 ```javascript
 let filter = 'metadata["category"] == "electronics"'
-let filter = 'metadata["price"] > 50'
-let filter = 'json_contains(metadata["tags"], "featured")'
+let filterPrice = 'metadata["price"] > 50'
+let filterTags = 'json_contains(metadata["tags"], "featured")'
 ```
 
 ```go
-filter := 'metadata["category"] == "electronics"'
-filter := 'metadata["price"] > 50'
-filter := 'json_contains(metadata["tags"], "featured")'
+filter := `metadata["category"] == "electronics"`
+filterPrice := `metadata["price"] > 50`
+filterTags := `json_contains(metadata["tags"], "featured")`
+```
+
+```cpp
+std::string filter_category = R"(metadata["category"] == "electronics")";
+std::string filter_price = R"(metadata["price"] > 50)";
+std::string filter_tags = R"(json_contains(metadata["tags"], "featured"))";
+```
+
+```rust
+let filter = r#"metadata["category"] == "electronics""#;
+let filter = r#"metadata["price"] > 50"#;
+let filter = r#"json_contains(metadata["tags"], "featured")"#;
 ```
 
 ```bash

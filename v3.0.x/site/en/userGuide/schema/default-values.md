@@ -29,6 +29,8 @@ The following example creates a collection with two scalar fields that have defa
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -40,7 +42,7 @@ client = MilvusClient(uri='http://localhost:19530')
 # Define collection schema
 schema = client.create_schema(
     auto_id=False,
-    enable_dynamic_schema=True,
+    enable_dynamic_field=True,
 )
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
@@ -70,6 +72,106 @@ client.create_collection(collection_name="my_collection", schema=schema, index_p
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Define collection schema
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+
+schema->AddField({"id", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+// highlight-start
+schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64).WithDefaultValue(18));
+schema->AddField(milvus::FieldSchema("status", milvus::DataType::VARCHAR).WithDefaultValue("active").WithMaxLength(10));
+// highlight-end
+
+// Set index params
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back("vector", "vector", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+
+// Create collection
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+// Define collection schema
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("vector")
+            .data_type(DataType::FloatVector)
+            .dimension(5),
+    )
+    // highlight-start
+    .add_field(
+        FieldSchema::new()
+            .name("age")
+            .data_type(DataType::Int64)
+            .default_value(DefaultValue::Int64(18)),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("status")
+            .data_type(DataType::VarChar)
+            .default_value(DefaultValue::String("active".to_string()))
+            .max_length(10),
+    );
+// highlight-end
+
+// Set index params
+let index_params = vec![IndexParam::new()
+    .field_name("vector")
+    .index_type(IndexType::AutoIndex)
+    .metric_type(MetricType::L2)];
+
+// Create collection
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
+
+
 ```bash
 # restful
 ```
@@ -83,6 +185,8 @@ When inserting data, if you omit a field that has a default value or explicitly 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -113,6 +217,52 @@ client.insert(collection_name="my_collection", data=data)
 // go
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    // All fields provided explicitly
+    {{"id", 1}, {"vector", std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f}}, {"age", 30}, {"status", "premium"}},
+    // age and status omitted → both use default values (18 and "active")
+    {{"id", 2}, {"vector", std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f, 0.6f}}},
+    // status set to null → uses default value "active"
+    {{"id", 3}, {"vector", std::vector<float>{0.3f, 0.4f, 0.5f, 0.6f, 0.7f}}, {"age", 25}, {"status", nullptr}},
+    // age set to null → uses default value 18
+    {{"id", 4}, {"vector", std::vector<float>{0.4f, 0.5f, 0.6f, 0.7f, 0.8f}}, {"age", nullptr}, {"status", "inactive"}},
+};
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows = vec![
+    // All fields provided explicitly
+    serde_json::json!({"id": 1, "vector": [0.1, 0.2, 0.3, 0.4, 0.5], "age": 30, "status": "premium"}),
+    // age and status omitted → both use default values (18 and "active")
+    serde_json::json!({"id": 2, "vector": [0.2, 0.3, 0.4, 0.5, 0.6]}),
+    // status set to None → uses default value "active"
+    serde_json::json!({"id": 3, "vector": [0.3, 0.4, 0.5, 0.6, 0.7], "age": 25, "status": null}),
+    // age set to None → uses default value 18
+    serde_json::json!({"id": 4, "vector": [0.4, 0.5, 0.6, 0.7, 0.8], "age": null, "status": "inactive"}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
+
+
 ```bash
 # restful
 ```
@@ -128,6 +278,8 @@ The following example searches for entities where `age` equals the default value
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -158,6 +310,59 @@ for hit in res[0]:
 // go
 ```
 
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.4f, 0.3f, 0.5f};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithFilter("age == 18")
+    .WithLimit(10)
+    .WithOutputFields({"id", "age", "status"})
+    .AddFloatVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto ages = result.OutputField<milvus::Int64FieldData>("age");
+    const auto statuses = result.OutputField<milvus::VarCharFieldData>("status");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "  id: " << ids[i] << ", age: " << ages->Data()[i]
+                  << ", status: " << statuses->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.4, 0.3, 0.5]]))
+            .filter("age == 18")
+            .output_fields(["id", "age", "status"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+println!("Search results (age == 18):");
+for result in search.results() {
+    for row in result.rows()? {
+        let id = row.get_i64("id")?;
+        let age = row.get_i64("age")?;
+        let status = row.get_str("status")?;
+        println!("  id: {id}, age: {age}, status: {status}");
+    }
+}
+```
+
+
+
 ```bash
 # restful
 ```
@@ -182,6 +387,8 @@ You can also query entities by matching default values directly:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -220,6 +427,65 @@ for r in default_status_results:
 ```go
 // go
 ```
+
+```cpp
+// Query entities where age equals the default value (18)
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("age == 18")
+    .WithOutputFields({"id", "age", "status"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (size_t i = 0; i < query_response.Results().GetRowCount(); ++i) {
+    milvus::EntityRow row;
+    query_response.Results().OutputRow(i, row);
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+// Query entities where age equals the default value (18)
+let default_age_results = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("age == 18")
+            .output_fields(["id", "age", "status"])
+            .build()?,
+    )
+    .await?;
+println!("\nQuery results (age == 18):");
+for row in default_age_results.results().rows()? {
+    let id = row.get_i64("id")?;
+    let age = row.get_i64("age")?;
+    let status = row.get_str("status")?;
+    println!("  id: {id}, age: {age}, status: {status}");
+}
+
+// Query entities where status equals the default value ("active")
+let default_status_results = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("status == \"active\"")
+            .output_fields(["id", "age", "status"])
+            .build()?,
+    )
+    .await?;
+println!("\nQuery results (status == 'active'):");
+for row in default_status_results.results().rows()? {
+    let id = row.get_i64("id")?;
+    let age = row.get_i64("age")?;
+    let status = row.get_str("status")?;
+    println!("  id: {id}, age: {age}, status: {status}");
+}
+```
+
+
 
 ```bash
 # restful

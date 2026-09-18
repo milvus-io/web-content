@@ -84,6 +84,8 @@ Enable `auto_id=True` in your primary field definition. Milvus will handle ID ge
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -197,6 +199,114 @@ await client.createCollection({
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+// Define primary field with AutoID enabled
+// highlight-start
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
+// highlight-end
+
+// Define the other fields
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+schema->AddField(milvus::FieldSchema("category", milvus::DataType::VARCHAR).WithMaxLength(1000));
+
+// Create the collection
+milvus::HasCollectionResponse has_response;
+status = client->HasCollection(milvus::HasCollectionRequest().WithCollectionName("demo_autoid"), has_response);
+if (has_response.Has()) {
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName("demo_autoid"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+}
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("demo_autoid")
+    .WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    // Define primary field with AutoID enabled
+    // highlight-start
+    .add_field(
+        FieldSchema::new()
+            .name("id") // Primary field name
+            .data_type(DataType::Int64)
+            .primary_key(true)
+            .auto_id(true), // Milvus generates IDs automatically; Defaults to false
+    )
+    // highlight-end
+    // Define the other fields
+    .add_field(
+        FieldSchema::new()
+            .name("embedding")
+            .data_type(DataType::FloatVector)
+            .dimension(4),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("category")
+            .data_type(DataType::VarChar)
+            .max_length(1000),
+    );
+
+// Create the collection
+if client
+    .has_collection(
+        sdk::request::collection::HasCollectionRequest::builder()
+            .collection_name("demo_autoid")
+            .build()?,
+    )
+    .await?
+    .exists()
+{
+    client
+        .drop_collection(
+            sdk::request::collection::DropCollectionRequest::builder()
+                .collection_name("demo_autoid")
+                .build()?,
+        )
+        .await?;
+}
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("demo_autoid")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
+
+
 ```bash
 # restful
 export SCHEMA='{
@@ -245,6 +355,8 @@ curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -303,6 +415,46 @@ console.log(res);
 // go
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    {{"embedding", std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f}}, {"category", "book"}},
+    {{"embedding", std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f}}, {"category", "toy"}},
+};
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("demo_autoid")
+                            .WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Generated IDs: ";
+for (const auto& id : insert_response.Results().IdArray().IntIDArray()) {
+    std::cout << id << " ";
+}
+std::cout << std::endl;
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({"embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"}),
+    serde_json::json!({"embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"}),
+];
+
+let res = client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("demo_autoid")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+println!("Generated IDs: {:?}", res.ids());
+```
+
+
+
 ```bash
 # restful
 export INSERT_DATA='[
@@ -342,6 +494,8 @@ If you need to control IDs manually, disable AutoID and provide your own values.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -445,7 +599,7 @@ const schema = [
 ];
 
 const res = await client.createCollection({
-  collection_name: "demo_autoid",
+  collection_name: "demo_manual_ids",
   schema: schema,
 });
 
@@ -454,6 +608,94 @@ const res = await client.createCollection({
 ```go
 // go
 ```
+
+```cpp
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+// Define the primary field without AutoID
+// highlight-start
+schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::VARCHAR).WithPrimaryKey(true).WithAutoID(false).WithMaxLength(100));  // max_length is required when datatype is VARCHAR
+// highlight-end
+
+// Define the other fields
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+schema->AddField(milvus::FieldSchema("category", milvus::DataType::VARCHAR).WithMaxLength(1000));
+
+// Create the collection
+milvus::HasCollectionResponse has_response;
+status = client->HasCollection(milvus::HasCollectionRequest().WithCollectionName("demo_manual_ids"), has_response);
+if (has_response.Has()) {
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName("demo_manual_ids"));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+}
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("demo_manual_ids")
+    .WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let schema = CollectionSchema::new()
+    // Define the primary field without AutoID
+    // highlight-start
+    .add_field(
+        FieldSchema::new()
+            .name("product_id")
+            .data_type(DataType::VarChar)
+            .primary_key(true)
+            .auto_id(false) // You'll provide IDs manually at data ingestion
+            .max_length(100), // Required when datatype is VARCHAR
+    )
+    // highlight-end
+    .add_field(
+        FieldSchema::new()
+            .name("embedding")
+            .data_type(DataType::FloatVector)
+            .dimension(4),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("category")
+            .data_type(DataType::VarChar)
+            .max_length(1000),
+    );
+
+// Create the collection
+if client
+    .has_collection(
+        sdk::request::collection::HasCollectionRequest::builder()
+            .collection_name("demo_manual_ids")
+            .build()?,
+    )
+    .await?
+    .exists()
+{
+    client
+        .drop_collection(
+            sdk::request::collection::DropCollectionRequest::builder()
+                .collection_name("demo_manual_ids")
+                .build()?,
+        )
+        .await?;
+}
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("demo_manual_ids")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
+
 
 ```bash
 # restful
@@ -505,6 +747,8 @@ You must include the primary field column in every insert operation.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -556,7 +800,7 @@ const data = [
 ];
 
 const insert = await client.insert({
-    collection_name: "demo_autoid",
+    collection_name: "demo_manual_ids",
     fields_data: data,
 });
 
@@ -566,6 +810,48 @@ console.log(insert);
 ```go
 // go
 ```
+
+```cpp
+// Each entity must contain the primary field `product_id`
+milvus::EntityRows rows = {
+    {{"product_id", "PROD-001"}, {"embedding", std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f}}, {"category", "book"}},
+    {{"product_id", "PROD-002"}, {"embedding", std::vector<float>{0.2f, 0.3f, 0.4f, 0.5f}}, {"category", "toy"}},
+};
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("demo_manual_ids")
+                            .WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Generated IDs: ";
+for (const auto& id : insert_response.Results().IdArray().StrIDArray()) {
+    std::cout << id << " ";
+}
+std::cout << std::endl;
+```
+
+```rust
+// Each entity must contain the primary field `product_id`
+let rows = vec![
+    serde_json::json!({"product_id": "PROD-001", "embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"}),
+    serde_json::json!({"product_id": "PROD-002", "embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"}),
+];
+
+let res = client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("demo_manual_ids")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+println!("Generated IDs: {:?}", res.ids());
+```
+
+
 
 ```bash
 # restful

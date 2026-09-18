@@ -138,6 +138,8 @@ After your collection is set up with a numeric field (in this example, `event_da
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -202,6 +204,71 @@ const ranker = {
 // go
 ```
 
+```cpp
+#include <ctime>
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Calculate current time
+int64_t current_time = static_cast<int64_t>(time(nullptr));
+
+// Create a linear decay ranker for event listings
+auto ranker = std::make_shared<milvus::DecayRerank>("event_relevance");
+ranker->SetFunction("linear");
+ranker->SetOrigin(current_time);
+ranker->SetOffset(12 * 60 * 60);
+ranker->SetDecay(0.5);
+ranker->SetScale(7 * 24 * 60 * 60);
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Calculate current time
+let current_time = std::time::SystemTime::now()
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap()
+    .as_secs() as i64;
+
+// Create a linear decay ranker for event listings
+let ranker = sdk::Function::new()
+    .name("event_relevance")
+    .function_type(sdk::FunctionType::Rerank)
+    .input_fields(["event_date"])
+    .params(HashMap::from([
+        ("reranker".to_string(), "decay".to_string()),
+        ("function".to_string(), "linear".to_string()),
+        ("origin".to_string(), current_time.to_string()),
+        ("offset".to_string(), (12 * 60 * 60).to_string()),
+        ("decay".to_string(), "0.5".to_string()),
+        ("scale".to_string(), (7 * 24 * 60 * 60).to_string()),
+    ]));
+
+let your_query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+```
+
 ```bash
 # restful
 ```
@@ -215,6 +282,8 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -267,6 +336,44 @@ const result = await milvusClient.search({
 
 ```go
 // go
+```
+
+```cpp
+milvus::FunctionScorePtr function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("collection_name")
+                          .WithAnnsField("dense")
+                          .WithLimit(10)
+                          .WithOutputFields({"title", "venue", "event_date"})
+                          // highlight-next-line
+                          .WithRerank(function_score)
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("collection_name")
+            .vector_field("dense")
+            .vectors(SearchVectors::Float(vec![your_query_vector]))
+            .limit(10)
+            .output_fields(["title", "venue", "event_date"])
+            // highlight-next-line
+            .rerank(sdk::FunctionScore::new().add_function(ranker))
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

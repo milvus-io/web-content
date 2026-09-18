@@ -55,6 +55,8 @@ To use binary vectors in Milvus, first define a vector field for storing binary 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -149,6 +151,59 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <memory>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR)
+                     .WithPrimaryKey(true)
+                     .WithAutoID(true)
+                     .WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("binary_vector", milvus::DataType::BINARY_VECTOR)
+                     .WithDimension(128));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        FieldSchema::new()
+            .name("pk")
+            .data_type(DataType::VarChar)
+            .primary_key(true)
+            .auto_id(true)
+            .max_length(100),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("binary_vector")
+            .data_type(DataType::BinaryVector)
+            .dimension(128),
+    );
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -189,6 +244,8 @@ To speed up searches, an index must be created for the binary vector field. Inde
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -233,6 +290,36 @@ idx := index.NewAutoIndex(entity.HAMMING)
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "binary_vector", idx)
 ```
 
+```cpp
+milvus::IndexDesc index_desc("binary_vector", "binary_vector_index",
+                             milvus::IndexType::AUTOINDEX, milvus::MetricType::HAMMING);
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithCollectionName("my_collection")
+    .WithIndexes({std::move(index_desc)});
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        CreateIndexRequest::builder()
+            .collection_name("my_collection")
+            .index_params(vec![
+                IndexParam::new()
+                    .field_name("binary_vector")
+                    .index_name("binary_vector_index")
+                    .index_type(IndexType::AutoIndex)
+                    .metric_type(MetricType::Hamming),
+            ])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export indexParams='[
         {
@@ -259,6 +346,8 @@ Once the binary vector and index settings are complete, create a collection that
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -310,6 +399,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -334,6 +445,8 @@ For example, for a 128-dimensional binary vector, a 16-byte array is required (s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -427,6 +540,51 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows;
+{
+    milvus::EntityRow row;
+    row["binary_vector"] = std::vector<uint8_t>{
+        0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["binary_vector"] = std::vector<uint8_t>{
+        0b10011011, 0b01010101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    rows.emplace_back(std::move(row));
+}
+
+milvus::InsertResponse insert_response;
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(rows));
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({"binary_vector": vec![
+        0b10011011u8, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ]}),
+    serde_json::json!({"binary_vector": vec![
+        0b10011011u8, 0b01010101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ]}),
+];
+
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -450,6 +608,8 @@ During search operations, binary vectors must also be provided in the form of a 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -538,6 +698,58 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
+}
+```
+
+```cpp
+std::vector<uint8_t> query_vector = {
+    0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("binary_vector")
+    .WithLimit(5)
+    .AddOutputField("pk")
+    .AddExtraParam("nprobe", "10")
+    .AddBinaryVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+use std::collections::HashMap;
+
+let query_vector = vec![
+    0b10011011u8, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("binary_vector")
+            .vectors(SearchVectors::Binary(vec![query_vector]))
+            .output_fields(["pk"])
+            .limit(5)
+            .extra_params(HashMap::from([("nprobe".to_string(), "10".to_string())]))
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 

@@ -40,6 +40,8 @@ To use Cohere Ranker in your Milvus application, create a Function object that s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -90,6 +92,51 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
                        .param("max_client_batch_size", "128")
                        .param("max_tokens_per_doc", "4096")
                        .build();
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Configure Cohere Ranker
+auto cohere_ranker = std::make_shared<milvus::ModelRerank>("cohere_semantic_ranker");  // Unique identifier for your ranker
+cohere_ranker->AddInputFieldName("document");  // VARCHAR field containing text to rerank
+cohere_ranker->SetProvider("cohere");  // Specifies Cohere as the service provider
+cohere_ranker->SetQueries({"renewable energy developments"});  // Query text for relevance evaluation
+cohere_ranker->AddParam("model_name", "rerank-english-v3.0");  // Cohere rerank model to use
+cohere_ranker->AddParam("max_client_batch_size", "128");  // Optional: batch size for model service requests
+cohere_ranker->AddParam("max_tokens_per_doc", "4096");  // Optional: max tokens per document
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+// Configure Cohere Ranker
+let cohere_ranker = sdk::Function::new()
+    .name("cohere_semantic_ranker") // Unique identifier for your ranker
+    .function_type(sdk::FunctionType::Rerank) // Must be RERANK for reranking functions
+    .input_fields(["document"]) // VARCHAR field containing text to rerank
+    .param("reranker", "model") // Enables model-based reranking
+    .param("provider", "cohere") // Specifies Cohere as the service provider
+    .param("model_name", "rerank-english-v3.0") // Cohere rerank model to use
+    .param("queries", serde_json::json!(["renewable energy developments"]).to_string()) // Query text for relevance evaluation
+    .param("max_client_batch_size", "128") // Optional: batch size for model service requests
+    .param("max_tokens_per_doc", "4096"); // Optional: max tokens per document
 ```
 
 ```javascript
@@ -174,6 +221,8 @@ To apply Cohere Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -209,6 +258,51 @@ SearchReq searchReq = SearchReq.builder()
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 SearchResp searchResp = client.search(searchReq);
+```
+
+```cpp
+std::vector<float> your_query_vector = {0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F};
+
+milvus::FunctionScorePtr function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(cohere_ranker);
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("your_collection")
+    .WithAnnsField("dense_vector")
+    .WithLimit(5)
+    .WithOutputFields({"document"})
+    //  highlight-next-line
+    .WithRerank(function_score)  // Apply Cohere reranking
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED)
+    .AddFloatVector(your_query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let your_query_vector = vec![0.35803764f32, -0.60234958, 0.18414013, -0.26286206, 0.90294385];
+
+let function_score = FunctionScore::new().add_function(cohere_ranker);
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("your_collection")
+            .vector_field("dense_vector")
+            .vectors(SearchVectors::Float(vec![your_query_vector]))
+            .output_fields(["document"])
+            .limit(5)
+            //  highlight-next-line
+            .rerank(function_score) // Apply Cohere reranking
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript

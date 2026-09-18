@@ -40,6 +40,8 @@ To use SiliconFlow Ranker in your Milvus application, create a Function object t
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -90,8 +92,8 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
                        .param("endpoint", "http://localhost:8080")
                        .param("max_client_batch_size", "32")
                        .param("max_chunks_per_doc", "5")
-                       .param("overlap_tokens", "50")
-                       .build();
+                        .param("overlap_tokens", "50")
+                        .build();
 ```
 
 ```javascript
@@ -100,6 +102,63 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Configure SiliconFlow Ranker
+auto siliconflow_ranker = std::make_shared<milvus::ModelRerank>("siliconflow_semantic_ranker");
+siliconflow_ranker->AddInputFieldName("document");
+siliconflow_ranker->SetProvider("siliconflow");
+siliconflow_ranker->SetQueries({"renewable energy developments"});
+siliconflow_ranker->AddParam("model_name", "BAAI/bge-reranker-v2-m3");
+siliconflow_ranker->SetMaxClientBatchSize(128);
+siliconflow_ranker->AddParam("max_chunks_per_doc", "5");
+siliconflow_ranker->AddParam("overlap_tokens", "50");
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let your_query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+
+// Configure SiliconFlow Ranker
+let siliconflow_ranker = {
+    let ranker = sdk::ModelRerank::new()
+        .name("siliconflow_semantic_ranker")
+        .provider("siliconflow")
+        .queries(["renewable energy developments"])
+        .max_client_batch_size(128);
+    let value = ranker
+        .get_function()
+        .clone()
+        .input_fields(["document"])
+        .param("model_name", "BAAI/bge-reranker-v2-m3")
+        .param("max_chunks_per_doc", "5")
+        .param("overlap_tokens", "50");
+    ranker.function(value)
+};
 ```
 
 ```bash
@@ -184,6 +243,8 @@ To apply SiliconFlow Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,6 +288,45 @@ SearchResp searchResp = client.search(searchReq);
 
 ```go
 // go
+```
+
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("your_collection")
+    .WithAnnsField("vector_field")
+    .WithLimit(10)
+    .WithOutputFields({"document"});
+
+auto score = std::make_shared<milvus::FunctionScore>();
+score->AddFunction(siliconflow_ranker);
+// highlight-next-line
+search_request.WithRerank(score);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// highlight-next-line
+let rerank = sdk::FunctionScore::new().add_function(siliconflow_ranker.clone());
+
+let results = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("your_collection")
+            .vector_field("vector_field")
+            .vectors(sdk::SearchVectors::Float(vec![your_query_vector]))
+            .limit(10)
+            .output_fields(["document"])
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .rerank(rerank)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

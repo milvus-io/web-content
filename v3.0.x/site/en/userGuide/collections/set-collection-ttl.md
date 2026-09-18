@@ -128,6 +128,8 @@ Pass `collection.ttl.seconds` (integer, in seconds) through the `properties` map
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,6 +229,86 @@ if err != nil {
 }
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(128));
+
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back("vector", "vector", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+// highlight-start
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params))
+    .WithProperties({{"collection.ttl.seconds", "1209600"}});  // 14 days
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("vector")
+            .data_type(DataType::FloatVector)
+            .dimension(128),
+    );
+
+let index_params = vec![IndexParam::new()
+    .field_name("vector")
+    .index_type(IndexType::AutoIndex)
+    .metric_type(MetricType::Cosine)];
+
+// highlight-start
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema.clone())
+            .index_params(index_params.clone())
+            .properties(HashMap::from([(
+                "collection.ttl.seconds".to_string(),
+                "1209600".to_string(),
+            )])) // 14 days
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```bash
 export params='{
     "ttlSeconds": 1209600
@@ -256,6 +338,8 @@ Call `alter_collection_properties` with `collection.ttl.seconds` in the `propert
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -337,6 +421,71 @@ if err != nil {
 }
 ```
 
+```cpp
+// Assumes "my_collection" was created earlier without TTL.
+milvus::HasCollectionResponse has_response;
+status = client->HasCollection(milvus::HasCollectionRequest().WithCollectionName("my_collection"), has_response);
+if (!has_response.Has()) {
+    milvus::CreateCollectionRequest create_request;
+    create_request.WithCollectionName("my_collection")
+        .WithCollectionSchema(schema)
+        .WithIndexes(std::move(index_params));
+    status = client->CreateCollection(create_request);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+}
+
+// highlight-start
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"collection.ttl.seconds", "1209600"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// Assumes "my_collection" was created earlier without TTL.
+if !client
+    .has_collection(
+        sdk::request::collection::HasCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?
+    .exists()
+{
+    client
+        .create_collection(
+            sdk::request::collection::CreateCollectionRequest::builder()
+                .collection_name("my_collection")
+                .schema(schema.clone())
+                .index_params(index_params.clone())
+                .build()?,
+        )
+        .await?;
+}
+
+// highlight-start
+client
+    .alter_collection_properties(
+        sdk::request::collection::AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .properties(HashMap::from([(
+                "collection.ttl.seconds".to_string(),
+                "1209600".to_string(),
+            )]))
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
@@ -360,6 +509,8 @@ If you decide to keep the data in a collection indefinitely, you can simply drop
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -416,6 +567,32 @@ if err != nil {
 }
 ```
 
+```cpp
+// highlight-start
+milvus::DropCollectionPropertiesRequest drop_request;
+drop_request.WithCollectionName("my_collection")
+    .AddPropertyKey("collection.ttl.seconds");
+status = client->DropCollectionProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// highlight-start
+client
+    .drop_collection_properties(
+        sdk::request::collection::DropCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property_keys(["collection.ttl.seconds"])
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/drop_properties" \
@@ -443,6 +620,8 @@ Enabling entity-level TTL at creation time takes two additions in the same `crea
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -533,6 +712,69 @@ await client.createCollection({
 });
 ```
 
+```cpp
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, false});
+// highlight-next-line
+schema->AddField(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(128));
+
+std::vector<milvus::IndexDesc> index_params;
+index_params.emplace_back("vector", "vector", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(index_params))
+    // highlight-next-line
+    .WithProperties({{"ttl_field", "expire_at"}});
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    // highlight-next-line
+    .add_field(
+        FieldSchema::new()
+            .name("expire_at")
+            .data_type(DataType::Timestamptz)
+            .nullable(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("vector")
+            .data_type(DataType::FloatVector)
+            .dimension(128),
+    );
+
+let index_params = vec![IndexParam::new()
+    .field_name("vector")
+    .index_type(IndexType::AutoIndex)
+    .metric_type(MetricType::Cosine)];
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(index_params)
+            // highlight-next-line
+            .properties(HashMap::from([("ttl_field".to_string(), "expire_at".to_string())]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```go
 // go
 ```
@@ -548,6 +790,8 @@ Once the collection exists, insert entities with [ISO 8601](https://en.wikipedia
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -653,6 +897,53 @@ await client.insert({
 // highlight-end
 ```
 
+```cpp
+// Assumes "my_collection" was created earlier with `ttl_field`: "expire_at".
+// highlight-start
+milvus::EntityRows rows = {
+    // Never expires
+    {{"id", 1}, {"expire_at", nullptr}, {"vector", std::vector<float>(128, 0.1f)}},
+    // Expires at 2026-12-31 UTC midnight
+    {{"id", 2}, {"expire_at", "2026-12-31T00:00:00Z"}, {"vector", std::vector<float>(128, 0.2f)}},
+    // Shanghai local time — normalized to UTC internally
+    {{"id", 3}, {"expire_at", "2027-01-01T00:00:00+08:00"}, {"vector", std::vector<float>(128, 0.3f)}},
+};
+
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// Assumes "my_collection" was created earlier with `ttl_field`: "expire_at".
+// highlight-start
+let rows = vec![
+    // Never expires
+    serde_json::json!({"id": 1, "expire_at": null, "vector": vec![0.1f32; 128]}),
+    // Expires at 2026-12-31 UTC midnight
+    serde_json::json!({"id": 2, "expire_at": "2026-12-31T00:00:00Z", "vector": vec![0.2f32; 128]}),
+    // Shanghai local time — normalized to UTC internally
+    serde_json::json!({"id": 3, "expire_at": "2027-01-01T00:00:00+08:00", "vector": vec![0.3f32; 128]}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```go
 // go
 ```
@@ -668,6 +959,8 @@ On every query and vector search, the server auto-injects the TTL filter — you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -738,6 +1031,63 @@ console.log(results.data);
 // highlight-end
 ```
 
+```cpp
+milvus::LoadCollectionRequest load_request;
+load_request.WithCollectionName("my_collection");
+status = client->LoadCollection(load_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// highlight-start
+// Expired rows are filtered out automatically
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("id >= 0")
+    .WithOutputFields({"id", "expire_at"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (size_t i = 0; i < query_response.Results().GetRowCount(); ++i) {
+    milvus::EntityRow row;
+    query_response.Results().OutputRow(i, row);
+    std::cout << row << std::endl;
+}
+// highlight-end
+```
+
+```rust
+client
+    .load_collection(
+        sdk::request::collection::LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+// highlight-start
+// Expired rows are filtered out automatically
+let results = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("id >= 0")
+            .output_fields(["id", "expire_at"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+for row in results.results().rows()? {
+    println!("{:?}", row);
+}
+// highlight-end
+```
+
 ```go
 // go
 ```
@@ -755,6 +1105,8 @@ To extend an entity's lifetime before compaction physically removes it, upsert w
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -825,6 +1177,44 @@ await client.upsert({
 // highlight-end
 ```
 
+```cpp
+// highlight-start
+milvus::EntityRows rows = {
+    {{"id", 2}, {"vector", std::vector<float>(128, 0.5f)}, {"expire_at", "2028-01-01T00:00:00Z"}},
+};
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows)),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// highlight-start
+client
+    .upsert(
+        UpsertRequest::builder()
+            .insert(
+                InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .rows(vec![serde_json::json!({
+                        "id": 2,
+                        "vector": vec![0.5f32; 128],
+                        "expire_at": "2028-01-01T00:00:00Z",
+                    })])
+                    .build()?,
+            )
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```go
 // go
 ```
@@ -842,6 +1232,8 @@ If the collection already exists and does not have `collection.ttl.seconds` set,
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -962,6 +1354,91 @@ await client.upsert({
 // highlight-end
 ```
 
+```cpp
+// highlight-start
+// Step 1 — add a TIMESTAMPTZ column to the schema
+milvus::AddCollectionFieldRequest add_field_request;
+add_field_request.WithCollectionName("my_collection")
+    .WithField(std::move(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true)));
+status = client->AddCollectionField(add_field_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Step 2 — mark the new column as the TTL field
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"ttl_field", "expire_at"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Step 3 (optional) — backfill expiration timestamps for historical rows
+milvus::EntityRows rows = {
+    {{"id", 1}, {"vector", std::vector<float>(128, 0.4f)}, {"expire_at", "2026-12-31T00:00:00Z"}},
+};
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows)),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// highlight-start
+// Step 1 — add a TIMESTAMPTZ column to the schema
+client
+    .add_collection_field(
+        sdk::request::collection::AddCollectionFieldRequest::builder()
+            .collection_name("my_collection")
+            .field(
+                FieldSchema::new()
+                    .name("expire_at")
+                    .data_type(DataType::Timestamptz)
+                    .nullable(true),
+            )
+            .build()?,
+    )
+    .await?;
+
+// Step 2 — mark the new column as the TTL field
+client
+    .alter_collection_properties(
+        sdk::request::collection::AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .properties(HashMap::from([("ttl_field".to_string(), "expire_at".to_string())]))
+            .build()?,
+    )
+    .await?;
+
+// Step 3 (optional) — backfill expiration timestamps for historical rows
+client
+    .upsert(
+        UpsertRequest::builder()
+            .insert(
+                InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .rows(vec![serde_json::json!({
+                        "id": 1,
+                        "vector": vec![0.4f32; 128],
+                        "expire_at": "2026-12-31T00:00:00Z",
+                    })])
+                    .build()?,
+            )
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```go
 // go
 ```
@@ -979,6 +1456,8 @@ Call `drop_collection_properties` with `ttl_field` in `property_keys` to stop pe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1027,6 +1506,32 @@ await client.dropCollectionProperties({
 // highlight-end
 ```
 
+```cpp
+// highlight-start
+milvus::DropCollectionPropertiesRequest drop_request;
+drop_request.WithCollectionName("my_collection")
+    .AddPropertyKey("ttl_field");
+status = client->DropCollectionProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// highlight-start
+client
+    .drop_collection_properties(
+        sdk::request::collection::DropCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property_keys(["ttl_field"])
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```go
 // go
 ```
@@ -1050,6 +1555,8 @@ If your collection was created with `collection.ttl.seconds` and you want to swi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1155,6 +1662,113 @@ client.upsert(UpsertReq.builder()
 // highlight-end
 ```
 
+```cpp
+// Assumes "my_collection" already exists with `collection.ttl.seconds` set.
+// highlight-start
+// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)
+milvus::DropCollectionPropertiesRequest drop_request;
+drop_request.WithCollectionName("my_collection")
+    .AddPropertyKey("collection.ttl.seconds");
+status = client->DropCollectionProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Step 2 — add a TIMESTAMPTZ column to the schema
+milvus::AddCollectionFieldRequest add_field_request;
+add_field_request.WithCollectionName("my_collection")
+    .WithField(std::move(milvus::FieldSchema("expire_at", milvus::DataType::TIMESTAMPTZ).WithNullable(true)));
+status = client->AddCollectionField(add_field_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Step 3 — set the ttl_field property on the column you just added
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"ttl_field", "expire_at"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Step 4 (optional) — backfill expiration timestamps for historical entities
+milvus::EntityRows rows = {
+    {{"id", 1}, {"vector", std::vector<float>(128, 0.4f)}, {"expire_at", "2026-12-31T00:00:00Z"}},
+};
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows)),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// Assumes "my_collection" already exists with `collection.ttl.seconds` set.
+// highlight-start
+// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)
+client
+    .drop_collection_properties(
+        sdk::request::collection::DropCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property_keys(["collection.ttl.seconds"])
+            .build()?,
+    )
+    .await?;
+
+// Step 2 — add a TIMESTAMPTZ column to the schema
+client
+    .add_collection_field(
+        sdk::request::collection::AddCollectionFieldRequest::builder()
+            .collection_name("my_collection")
+            .field(
+                FieldSchema::new()
+                    .name("expire_at")
+                    .data_type(DataType::Timestamptz)
+                    .nullable(true),
+            )
+            .build()?,
+    )
+    .await?;
+
+// Step 3 — set the ttl_field property on the column you just added
+client
+    .alter_collection_properties(
+        sdk::request::collection::AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .properties(HashMap::from([("ttl_field".to_string(), "expire_at".to_string())]))
+            .build()?,
+    )
+    .await?;
+
+// Step 4 (optional) — backfill expiration timestamps for historical entities
+client
+    .upsert(
+        UpsertRequest::builder()
+            .insert(
+                InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .rows(vec![serde_json::json!({
+                        "id": 1,
+                        "vector": vec![0.4f32; 128],
+                        "expire_at": "2026-12-31T00:00:00Z",
+                    })])
+                    .build()?,
+            )
+            .build()?,
+    )
+    .await?;
+// highlight-end
+```
+
 ```javascript
 // nodejs
 ```
@@ -1178,6 +1792,8 @@ To move in the other direction, drop `ttl_field` and set `collection.ttl.seconds
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1226,6 +1842,55 @@ client.alterCollectionProperties(AlterCollectionPropertiesReq.builder()
         .collectionName("my_collection")
         .properties(properties)
         .build());
+// highlight-end
+```
+
+```cpp
+// Assumes "my_collection" already exists with `ttl_field` set.
+// highlight-start
+milvus::DropCollectionPropertiesRequest drop_request;
+drop_request.WithCollectionName("my_collection")
+    .AddPropertyKey("ttl_field");
+status = client->DropCollectionProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"collection.ttl.seconds", "1209600"}});  // 14 days
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+// highlight-end
+```
+
+```rust
+// Assumes "my_collection" already exists with `ttl_field` set.
+// highlight-start
+client
+    .drop_collection_properties(
+        sdk::request::collection::DropCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property_keys(["ttl_field"])
+            .build()?,
+    )
+    .await?;
+
+client
+    .alter_collection_properties(
+        sdk::request::collection::AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .properties(HashMap::from([(
+                "collection.ttl.seconds".to_string(),
+                "1209600".to_string(),
+            )])) // 14 days
+            .build()?,
+    )
+    .await?;
 // highlight-end
 ```
 

@@ -17,6 +17,8 @@ To configure an analyzer using the `standard` tokenizer, set `tokenizer` to `sta
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -41,6 +43,39 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "standard"}
 ```
 
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"}
+};
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard"
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -55,6 +90,8 @@ The `standard` tokenizer can work in conjunction with one or more filters. For e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -80,6 +117,20 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+});
 ```
 
 ```bash
@@ -111,6 +162,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -135,6 +188,20 @@ analyzerParams.put("filter", Collections.singletonList("lowercase"));
 analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+});
+```
+
 ```bash
 # restful
 ```
@@ -146,6 +213,8 @@ analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowerc
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -220,6 +289,43 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+milvus::RunAnalyzerRequest run_analyzer_request;
+run_analyzer_request.WithTexts({"The Milvus vector database is built for scale!"});
+run_analyzer_request.WithAnalyzerParams({{"tokenizer", "standard"}, {"filter", {"lowercase"}}});
+milvus::RunAnalyzerResponse run_analyzer_response;
+status = client->RunAnalyzer(run_analyzer_request, run_analyzer_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : run_analyzer_response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << std::endl;
+    }
+}
+```
+
+```rust
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(["The Milvus vector database is built for scale!"])
+            .analyzer_params(serde_json::json!({
+                "tokenizer": "standard",
+                "filter": ["lowercase"]
+            }))
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
 }
 ```
 

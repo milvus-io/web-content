@@ -37,6 +37,8 @@ The code examples below assume that you already have a collection named `my_coll
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -87,6 +89,71 @@ createOpt := milvusclient.NewCreateSnapshotOption("backup_20240101", "my_collect
 err = client.CreateSnapshot(context.Background(), createOpt)
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Recommended: Flush data before creating snapshot to ensure all data is included
+milvus::FlushRequest flush_request;
+flush_request.WithCollectionNames({"my_collection"});
+status = client->Flush(flush_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create snapshot for entire collection
+milvus::CreateSnapshotRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithSnapshotName("backup_20240101")
+    .WithDescription("Daily backup for January 1st, 2024");
+status = client->CreateSnapshot(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Recommended: Flush data before creating snapshot to ensure all data is included
+client
+    .flush(
+        sdk::request::utility::FlushRequest::builder()
+            .collection_names(["my_collection"])
+            .build()?,
+    )
+    .await?;
+
+// Create snapshot for entire collection
+client
+    .create_snapshot(
+        sdk::request::snapshot::CreateSnapshotRequest::builder()
+            .collection_name("my_collection")
+            .snapshot_name("backup_20240101")
+            .description("Daily backup for January 1st, 2024")
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 // node.js
 ```
@@ -104,6 +171,8 @@ You can list the names of existing snapshots.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -126,6 +195,35 @@ listOpt := milvusclient.NewListSnapshotsOption().
 snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 ```
 
+```cpp
+// List all snapshots for a collection
+milvus::ListSnapshotsRequest list_request;
+list_request.WithCollectionName("my_collection");
+milvus::ListSnapshotsResponse list_response;
+auto status = client->ListSnapshots(list_request, list_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& name : list_response.Snapshots()) {
+    std::cout << name << std::endl;
+}
+```
+
+```rust
+// List all snapshots for a collection
+let snapshots = client
+    .list_snapshots(
+        sdk::request::snapshot::ListSnapshotsRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+for name in snapshots.snapshots() {
+    println!("{name}");
+}
+```
+
 ```javascript
 // node.js
 ```
@@ -143,6 +241,8 @@ You can get the detailed information about a specific snapshot.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -170,6 +270,36 @@ fmt.Printf("Snapshot ID: %d\n", resp.GetSnapshotInfo().GetId())
 fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
 ```
 
+```cpp
+milvus::DescribeSnapshotRequest describe_request;
+describe_request.WithCollectionName("my_collection").WithSnapshotName("backup_20240101");
+milvus::DescribeSnapshotResponse describe_response;
+auto status = client->DescribeSnapshot(describe_request, describe_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+std::cout << describe_response.Name() << std::endl;
+std::cout << describe_response.CollectionName() << std::endl;
+std::cout << describe_response.CreateTs() << std::endl;
+std::cout << describe_response.Description() << std::endl;
+```
+
+```rust
+let snapshot_info = client
+    .describe_snapshot(
+        sdk::request::snapshot::DescribeSnapshotRequest::builder()
+            .collection_name("my_collection")
+            .snapshot_name("backup_20240101")
+            .build()?,
+    )
+    .await?;
+println!("Snapshot ID: {}", snapshot_info.create_ts());
+println!("Collection: {}", snapshot_info.collection_name());
+println!("Created: {}", snapshot_info.create_ts());
+println!("Description: {}", snapshot_info.description());
+```
 ```javascript
 // node.js
 ```
@@ -189,6 +319,8 @@ You can also set a time-to-live (TTL) duration for the pin operation so that the
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,6 +359,47 @@ defer func() {
 // Do work with pinned snapshot data.
 ```
 
+```cpp
+milvus::PinSnapshotDataRequest pin_request;
+pin_request.WithSnapshotName("backup_20240101")
+    .WithCollectionName("my_collection")
+    .WithTtlSeconds(3600);
+milvus::PinSnapshotDataResponse pin_response;
+auto status = client->PinSnapshotData(pin_request, pin_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::UnpinSnapshotDataRequest unpin_request;
+unpin_request.WithPinID(pin_response.PinID());
+status = client->UnpinSnapshotData(unpin_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let pin = client
+    .pin_snapshot_data(
+        sdk::request::snapshot::PinSnapshotDataRequest::builder()
+            .snapshot_name("backup_20240101")
+            .collection_name("my_collection")
+            .ttl_seconds(3600)
+            .build()?,
+    )
+    .await?;
+
+client
+    .unpin_snapshot_data(
+        sdk::request::snapshot::UnpinSnapshotDataRequest::builder()
+            .pin_id(pin.pin_id())
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 // node.js
 ```
@@ -253,6 +426,8 @@ To restore a snapshot, do as follows:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -271,13 +446,41 @@ job_id = client.restore_snapshot(
 ```go
 restoreOpt := milvusclient.NewRestoreSnapshotOption(
     "backup_20240101",
-    "restored_collection"
+    "restored_collection",
 )
 
 jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 if err != nil {
     log.Fatal(err)
 }
+```
+
+```cpp
+milvus::RestoreSnapshotRequest restore_request;
+restore_request.WithSnapshotName("backup_20240101")
+    .WithSourceCollectionName("my_collection")
+    .WithTargetCollectionName("restored_collection");
+milvus::RestoreSnapshotResponse restore_response;
+auto status = client->RestoreSnapshot(restore_request, restore_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << restore_response.JobID() << std::endl;
+```
+
+```rust
+// Restore snapshot to new collection
+let restore = client
+    .restore_snapshot(
+        sdk::request::snapshot::RestoreSnapshotRequest::builder()
+            .snapshot_name("backup_20240101")
+            .source_collection_name("my_collection")
+            .target_collection_name("restored_collection")
+            .build()?,
+    )
+    .await?;
+println!("job_id={}", restore.job_id());
 ```
 
 ```javascript
@@ -299,6 +502,8 @@ You can drop a snapshot if it is no longer needed. You are advised to remove old
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -315,6 +520,27 @@ client.drop_snapshot(
 ```go
 dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101")
 err := client.DropSnapshot(context.Background(), dropOpt)
+```
+
+```cpp
+milvus::DropSnapshotRequest drop_request;
+drop_request.WithCollectionName("my_collection").WithSnapshotName("backup_20240101");
+auto status = client->DropSnapshot(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .drop_snapshot(
+        sdk::request::snapshot::DropSnapshotRequest::builder()
+            .collection_name("my_collection")
+            .snapshot_name("backup_20240101")
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -334,6 +560,8 @@ You can use this API to get a list of snapshots already created for the target c
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -374,6 +602,64 @@ listOpt = milvusclient.NewListRestoreSnapshotJobsOption().
 jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 ```
 
+```cpp
+// List all restore jobs
+milvus::ListRestoreSnapshotJobsRequest list_jobs_request;
+milvus::ListRestoreSnapshotJobsResponse list_jobs_response;
+auto status = client->ListRestoreSnapshotJobs(list_jobs_request, list_jobs_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& job : list_jobs_response.Jobs()) {
+    std::cout << "Job " << job.JobID() << ": " << job.SnapshotName()
+              << " -> Collection " << job.CollectionName() << std::endl;
+    std::cout << "  State: " << static_cast<int>(job.State())
+              << ", Progress: " << job.Progress() << "%" << std::endl;
+}
+
+// List restore jobs for a specific collection
+milvus::ListRestoreSnapshotJobsRequest list_jobs_request2;
+list_jobs_request2.WithCollectionName("my_collection");
+status = client->ListRestoreSnapshotJobs(list_jobs_request2, list_jobs_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// List all restore jobs
+let jobs = client
+    .list_restore_snapshot_jobs(
+        sdk::request::snapshot::ListRestoreSnapshotJobsRequest::builder().build()?,
+    )
+    .await?;
+for job in jobs.jobs() {
+    println!(
+        "Job {}: {} -> Collection {}",
+        job.get_job_id(),
+        job.get_snapshot_name(),
+        job.get_collection_name()
+    );
+    println!(
+        "  State: {:?}, Progress: {}%",
+        job.get_state(),
+        job.get_progress()
+    );
+}
+
+// List restore jobs for a specific collection
+let jobs = client
+    .list_restore_snapshot_jobs(
+        sdk::request::snapshot::ListRestoreSnapshotJobsRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 // node.js
 ```
@@ -391,6 +677,8 @@ Once you have a restoration job ID, you can use it to retrieve restoration progr
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -427,6 +715,39 @@ if state.GetState() == milvuspb.RestoreSnapshotState_RestoreSnapshotFailed {
     fmt.Printf("Failure Reason: %s\n", state.GetReason())
 }
 fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
+```
+
+```cpp
+milvus::GetRestoreSnapshotStateRequest state_request;
+state_request.WithJobID(12345);
+milvus::GetRestoreSnapshotStateResponse state_response;
+auto status = client->GetRestoreSnapshotState(state_request, state_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+const auto& job_info = state_response.JobInfo();
+std::cout << "Job ID: " << job_info.JobID() << std::endl;
+std::cout << "Snapshot Name: " << job_info.SnapshotName() << std::endl;
+std::cout << "Collection: " << job_info.CollectionName() << std::endl;
+std::cout << "State: " << static_cast<int>(job_info.State()) << std::endl;
+std::cout << "Progress: " << job_info.Progress() << "%" << std::endl;
+```
+
+```rust
+let state = client
+    .get_restore_snapshot_state(
+        sdk::request::snapshot::GetRestoreSnapshotStateRequest::builder()
+            .job_id(12345)
+            .build()?,
+    )
+    .await?;
+let job_info = state.job_info();
+println!("Job ID: {}", job_info.get_job_id());
+println!("Snapshot Name: {}", job_info.get_snapshot_name());
+println!("State: {:?}", job_info.get_state());
+println!("Progress: {}%", job_info.get_progress());
 ```
 
 ```javascript

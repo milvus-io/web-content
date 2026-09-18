@@ -17,6 +17,8 @@ The `lowercase` filter is built into Milvus. To use it, simply specify its name 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -44,6 +46,30 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"],
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -69,6 +95,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -93,6 +121,20 @@ analyzerParams.put("filter", Collections.singletonList("lowercase"));
 analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase"}}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": ["lowercase"],
+});
+```
+
 ```bash
 # restful
 ```
@@ -104,6 +146,8 @@ analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lower
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -174,6 +218,59 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::string sample_text = "The Lowercase Filter Ensures Uniformity In Text Processing.";
+
+// Run the standard analyzer with the defined configuration
+auto request = milvus::RunAnalyzerRequest()
+                   .AddText(sample_text)
+                   .WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << std::endl;
+    }
+}
+```
+
+```rust
+// Sample text to analyze
+let sample_text = "The Lowercase Filter Ensures Uniformity In Text Processing.";
+
+// Run the standard analyzer with the defined configuration
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts([sample_text])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
 }
 ```
 

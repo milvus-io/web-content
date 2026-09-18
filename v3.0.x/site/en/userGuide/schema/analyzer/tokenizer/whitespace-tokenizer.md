@@ -17,6 +17,8 @@ To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `w
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -41,6 +43,18 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "whitespace"}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "whitespace"},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "whitespace"
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -55,6 +69,8 @@ The whitespace tokenizer can work in conjunction with one or more filters. For e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -80,6 +96,20 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "whitespace"},
+    {"filter", {"lowercase"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "whitespace",
+    "filter": ["lowercase"]
+});
 ```
 
 ```bash
@@ -105,6 +135,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -129,6 +161,20 @@ analyzerParams.put("filter", Collections.singletonList("lowercase"));
 analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "whitespace"},
+    {"filter", {"lowercase"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "whitespace",
+    "filter": ["lowercase"]
+});
+```
+
 ```bash
 # restful
 ```
@@ -140,6 +186,8 @@ analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -210,6 +258,69 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::string sample_text = "The Milvus vector database is built for scale!";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest request;
+request.AddText(sample_text).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+}
+std::cout << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Sample text to analyze
+let sample_text = "The Milvus vector database is built for scale!";
+
+// Run the standard analyzer with the defined configuration
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts([sample_text])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        print!("{} ", token.get_text());
+    }
+    println!();
 }
 ```
 

@@ -35,6 +35,8 @@ In this section, you will insert entities into a Collection created in the quick
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -195,6 +197,73 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("quick_setup")
+    .AddRowData({{"id", 0}, {"vector", std::vector<float>{0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F}}, {"color", "pink_8682"}})
+    .AddRowData({{"id", 1}, {"vector", std::vector<float>{0.19886813F, 0.06023561F, 0.69769633F, 0.26144746F, 0.8387295F}}, {"color", "red_7025"}})
+    .AddRowData({{"id", 2}, {"vector", std::vector<float>{0.43742132F, -0.55975026F, 0.6457888F, 0.7894059F, 0.20785794F}}, {"color", "orange_6781"}})
+    .AddRowData({{"id", 3}, {"vector", std::vector<float>{0.31720054F, 0.9719045F, -0.36981147F, -0.48608947F, 0.9579189F}}, {"color", "pink_9298"}})
+    .AddRowData({{"id", 4}, {"vector", std::vector<float>{0.44523495F, -0.8757027F, 0.82207793F, 0.4640629F, 0.30337483F}}, {"color", "red_4794"}})
+    .AddRowData({{"id", 5}, {"vector", std::vector<float>{0.9858251F, -0.81446517F, 0.6299267F, 0.12069069F, -0.14462778F}}, {"color", "yellow_4222"}})
+    .AddRowData({{"id", 6}, {"vector", std::vector<float>{0.8371978F, -0.01576437F, -0.31062937F, -0.56266695F, -0.8984948F}}, {"color", "red_9392"}})
+    .AddRowData({{"id", 7}, {"vector", std::vector<float>{-0.3344515F, -0.2567135F, 0.898754F, 0.9402996F, 0.5378065F}}, {"color", "grey_8510"}})
+    .AddRowData({{"id", 8}, {"vector", std::vector<float>{0.39524718F, 0.40002573F, -0.5890507F, -0.8650502F, -0.6140361F}}, {"color", "white_9381"}})
+    .AddRowData({{"id", 9}, {"vector", std::vector<float>{0.57182807F, 0.24070317F, -0.37379134F, -0.06726932F, -0.6980532F}}, {"color", "purple_4976"}});
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "insert_count=" << insert_response.Results().InsertCount() << std::endl;
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let rows: Vec<_> = vec![
+    serde_json::json!({"id": 0, "vector": [0.35803764, -0.60234958, 0.18414013, -0.26286206, 0.90294385], "color": "pink_8682"}),
+    serde_json::json!({"id": 1, "vector": [0.19886813, 0.06023561, 0.69769633, 0.26144746, 0.8387295], "color": "red_7025"}),
+    serde_json::json!({"id": 2, "vector": [0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794], "color": "orange_6781"}),
+    serde_json::json!({"id": 3, "vector": [0.31720054, 0.9719045, -0.36981147, -0.48608947, 0.9579189], "color": "pink_9298"}),
+    serde_json::json!({"id": 4, "vector": [0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.30337483], "color": "red_4794"}),
+    serde_json::json!({"id": 5, "vector": [0.9858251, -0.81446517, 0.6299267, 0.12069069, -0.14462778], "color": "yellow_4222"}),
+    serde_json::json!({"id": 6, "vector": [0.8371978, -0.01576437, -0.31062937, -0.56266695, -0.8984948], "color": "red_9392"}),
+    serde_json::json!({"id": 7, "vector": [-0.3344515, -0.2567135, 0.898754, 0.9402996, 0.5378065], "color": "grey_8510"}),
+    serde_json::json!({"id": 8, "vector": [0.39524718, 0.40002573, -0.5890507, -0.8650502, -0.6140361], "color": "white_9381"}),
+    serde_json::json!({"id": 9, "vector": [0.57182807, 0.24070317, -0.37379134, -0.06726932, -0.6980532], "color": "purple_4976"}),
+];
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("quick_setup")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -248,6 +317,8 @@ You can also insert entities into a specified partition. The following code snip
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -373,6 +444,55 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("quick_setup")
+    // highlight-next-line
+    .WithPartitionName("partitionA")
+    .AddRowData({{"id", 10}, {"vector", std::vector<float>{0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F}}, {"color", "pink_8682"}})
+    .AddRowData({{"id", 11}, {"vector", std::vector<float>{0.19886813F, 0.06023561F, 0.69769633F, 0.26144746F, 0.8387295F}}, {"color", "red_7025"}})
+    .AddRowData({{"id", 12}, {"vector", std::vector<float>{0.43742132F, -0.55975026F, 0.6457888F, 0.7894059F, 0.20785794F}}, {"color", "orange_6781"}})
+    .AddRowData({{"id", 13}, {"vector", std::vector<float>{0.31720054F, 0.9719045F, -0.36981147F, -0.48608947F, 0.9579189F}}, {"color", "pink_9298"}})
+    .AddRowData({{"id", 14}, {"vector", std::vector<float>{0.44523495F, -0.8757027F, 0.82207793F, 0.4640629F, 0.30337483F}}, {"color", "red_4794"}})
+    .AddRowData({{"id", 15}, {"vector", std::vector<float>{0.9858251F, -0.81446517F, 0.6299267F, 0.12069069F, -0.14462778F}}, {"color", "yellow_4222"}})
+    .AddRowData({{"id", 16}, {"vector", std::vector<float>{0.8371978F, -0.01576437F, -0.31062937F, -0.56266695F, -0.8984948F}}, {"color", "red_9392"}})
+    .AddRowData({{"id", 17}, {"vector", std::vector<float>{-0.3344515F, -0.2567135F, 0.898754F, 0.9402996F, 0.5378065F}}, {"color", "grey_8510"}})
+    .AddRowData({{"id", 18}, {"vector", std::vector<float>{0.39524718F, 0.40002573F, -0.5890507F, -0.8650502F, -0.6140361F}}, {"color", "white_9381"}})
+    .AddRowData({{"id", 19}, {"vector", std::vector<float>{0.57182807F, 0.24070317F, -0.37379134F, -0.06726932F, -0.6980532F}}, {"color", "purple_4976"}});
+milvus::InsertResponse insert_response;
+auto status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "insert_count=" << insert_response.Results().InsertCount() << std::endl;
+```
+
+```rust
+let rows: Vec<_> = vec![
+    serde_json::json!({"id": 10, "vector": [0.35803764, -0.60234958, 0.18414013, -0.26286206, 0.90294385], "color": "pink_8682"}),
+    serde_json::json!({"id": 11, "vector": [0.19886813, 0.06023561, 0.69769633, 0.26144746, 0.8387295], "color": "red_7025"}),
+    serde_json::json!({"id": 12, "vector": [0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794], "color": "orange_6781"}),
+    serde_json::json!({"id": 13, "vector": [0.31720054, 0.9719045, -0.36981147, -0.48608947, 0.9579189], "color": "pink_9298"}),
+    serde_json::json!({"id": 14, "vector": [0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.30337483], "color": "red_4794"}),
+    serde_json::json!({"id": 15, "vector": [0.9858251, -0.81446517, 0.6299267, 0.12069069, -0.14462778], "color": "yellow_4222"}),
+    serde_json::json!({"id": 16, "vector": [0.8371978, -0.01576437, -0.31062937, -0.56266695, -0.8984948], "color": "red_9392"}),
+    serde_json::json!({"id": 17, "vector": [-0.3344515, -0.2567135, 0.898754, 0.9402996, 0.5378065], "color": "grey_8510"}),
+    serde_json::json!({"id": 18, "vector": [0.39524718, 0.40002573, -0.5890507, -0.8650502, -0.6140361], "color": "white_9381"}),
+    serde_json::json!({"id": 19, "vector": [0.57182807, 0.24070317, -0.37379134, -0.06726932, -0.6980532], "color": "purple_4976"}),
+];
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("quick_setup")
+            // highlight-next-line
+            .partition_name("partitionA")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

@@ -122,6 +122,8 @@ The three entities, if exists in the collection, will be overridden by those inc
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -180,7 +182,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
 
 Gson gson = new Gson();
 List<JsonObject> data = Arrays.asList(
-        gson.fromJson("{\"id\": 0, \"vector\": [-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911], \"title\": \"Artificial Intelligence in Real Life\", \"issue\": \"\vol.12\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 0, \"vector\": [-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911], \"title\": \"Artificial Intelligence in Real Life\", \"issue\": \"vol.12\"}", JsonObject.class),
         gson.fromJson("{\"id\": 1, \"vector\": [0.4762662251462588, -0.6942502138717026, -0.4490002642657902, -0.628696575798281, 0.9660395877041965], \"title\": \"Hollow Man\", \"issue\": \"vol.19\"}", JsonObject.class),
         gson.fromJson("{\"id\": 2, \"vector\": [-0.8864122635045097, 0.9260170474445351, 0.801326976181461, 0.6383943392381306, 0.7563037341572827], \"title\": \"Treasure Hunt in Missouri\", \"issue\": \"vol.12\"}", JsonObject.class),
 );
@@ -269,6 +271,89 @@ if err != nil {
 }
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{
+    {"id", 0}, {"vector", std::vector<float>{-0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f,
+                                             -0.4248030059917294f, -0.8648452746018911f}},
+    {"title", "Artificial Intelligence in Real Life"}, {"issue", "vol.12"}});
+rows.emplace_back(milvus::EntityRow{
+    {"id", 1}, {"vector", std::vector<float>{0.4762662251462588f, -0.6942502138717026f, -0.4490002642657902f,
+                                             -0.628696575798281f, 0.9660395877041965f}},
+    {"title", "Hollow Man"}, {"issue", "vol.19"}});
+rows.emplace_back(milvus::EntityRow{
+    {"id", 2}, {"vector", std::vector<float>{-0.8864122635045097f, 0.9260170474445351f, 0.801326976181461f,
+                                             0.6383943392381306f, 0.7563037341572827f}},
+    {"title", "Treasure Hunt in Missouri"}, {"issue", "vol.12"}});
+
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest().WithCollectionName("my_collection").WithRowsData(std::move(rows)),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "upsert_count: " << upsert_response.Results().UpsertCount() << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let rows = vec![
+    serde_json::json!({
+        "id": 0,
+        "vector": vec![-0.619954382375778f32, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
+        "title": "Artificial Intelligence in Real Life",
+        "issue": "vol.12",
+    }),
+    serde_json::json!({
+        "id": 1,
+        "vector": vec![0.4762662251462588f32, -0.6942502138717026, -0.4490002642657902, -0.628696575798281, 0.9660395877041965],
+        "title": "Hollow Man",
+        "issue": "vol.19",
+    }),
+    serde_json::json!({
+        "id": 2,
+        "vector": vec![-0.8864122635045097f32, 0.9260170474445351, 0.801326976181461, 0.6383943392381306, 0.7563037341572827],
+        "title": "Treasure Hunt in Missouri",
+        "issue": "vol.12",
+    }),
+];
+
+let upsert = client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .rows(rows)
+                    .build()?,
+            )
+            .build()?,
+    )
+    .await?;
+println!("upsert_count: {}", upsert.upsert_count());
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -311,6 +396,8 @@ The three entities, if exists in the partition, will be overridden by those incl
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -421,6 +508,72 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{
+    {"id", 10}, {"vector", std::vector<float>{0.06998888224297328f, 0.8582816610326578f, -0.9657938677934292f,
+                                              0.6527905683627726f, -0.8668460657158576f}},
+    {"title", "Layour Design Reference"}, {"issue", "vol.34"}});
+rows.emplace_back(milvus::EntityRow{
+    {"id", 11}, {"vector", std::vector<float>{0.6060703043917468f, -0.3765080534566074f, -0.7710758854987239f,
+                                              0.36993888322346136f, 0.5507513364206531f}},
+    {"title", "Doraemon and His Friends"}, {"issue", "vol.2"}});
+rows.emplace_back(milvus::EntityRow{
+    {"id", 12}, {"vector", std::vector<float>{-0.9041813104515337f, -0.9610546012461163f, 0.20033003106083358f,
+                                              0.11842506351635174f, 0.8327356724591011f}},
+    {"title", "Pikkachu and Pokemon"}, {"issue", "vol.12"}});
+
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithPartitionName("partitionA")
+                            .WithRowsData(std::move(rows)),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "upsert_count: " << upsert_response.Results().UpsertCount() << std::endl;
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({
+        "id": 10,
+        "vector": vec![0.06998888224297328f32, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576],
+        "title": "Layour Design Reference",
+        "issue": "vol.34",
+    }),
+    serde_json::json!({
+        "id": 11,
+        "vector": vec![0.6060703043917468f32, -0.3765080534566074, -0.7710758854987239, 0.36993888322346136, 0.5507513364206531],
+        "title": "Doraemon and His Friends",
+        "issue": "vol.2",
+    }),
+    serde_json::json!({
+        "id": 12,
+        "vector": vec![-0.9041813104515337f32, -0.9610546012461163, 0.20033003106083358, 0.11842506351635174, 0.8327356724591011],
+        "title": "Pikkachu and Pokemon",
+        "issue": "vol.12",
+    }),
+];
+
+let upsert = client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .partition_name("partitionA")
+                    .rows(rows)
+                    .build()?,
+            )
+            .build()?,
+    )
+    .await?;
+println!("upsert_count: {}", upsert.upsert_count());
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -468,6 +621,8 @@ When performing an upsert in merge mode, ensure that the entities involved in th
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -532,6 +687,46 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{{"id", 1}, {"issue", "vol.14"}});
+rows.emplace_back(milvus::EntityRow{{"id", 2}, {"issue", "vol.7"}});
+
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(milvus::UpsertRequest()
+                            .WithCollectionName("my_collection")
+                            .WithRowsData(std::move(rows))
+                            .WithPartialUpdate(true),
+                        upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "upsert_count: " << upsert_response.Results().UpsertCount() << std::endl;
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({"id": 1, "issue": "vol.14"}),
+    serde_json::json!({"id": 2, "issue": "vol.7"}),
+];
+
+let upsert = client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("my_collection")
+                    .rows(rows)
+                    .build()?,
+            )
+            .partial_update(true)
+            .build()?,
+    )
+    .await?;
+println!("upsert_count: {}", upsert.upsert_count());
 ```
 
 ```javascript
@@ -609,6 +804,8 @@ Suppose the entity with primary key `1` already has `tags = ["new", "trial"]`. B
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -636,6 +833,43 @@ client.upsert(UpsertReq.builder()
         .build());
 ```
 
+```cpp
+milvus::EntityRows replacement_data;
+replacement_data.emplace_back(milvus::EntityRow{{"pk", 1}, {"tags", std::vector<std::string>{"new", "trial", "premium"}}});
+
+milvus::UpsertResponse upsert_response;
+milvus::UpsertRequest upsert_request;
+upsert_request.WithCollectionName("users");
+// highlight-start
+upsert_request.WithRowsData(std::move(replacement_data)).WithPartialUpdate(true);
+// highlight-end
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let replacement_data = vec![serde_json::json!({"pk": 1, "tags": ["new", "trial", "premium"]})];
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("users")
+                    .rows(replacement_data)
+                    .build()?,
+            )
+            // highlight-start
+            .partial_update(true)
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 // nodejs
 ```
@@ -655,6 +889,8 @@ With `ARRAY_APPEND`, send only the element to add:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -687,6 +923,49 @@ client.upsert(UpsertReq.builder()
         .build());
 ```
 
+```cpp
+milvus::EntityRows append_data;
+append_data.emplace_back(milvus::EntityRow{{"pk", 1}, {"tags", std::vector<std::string>{"premium"}}});
+
+milvus::FieldPartialUpdateOp append_tags("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_APPEND);
+
+milvus::UpsertResponse upsert_response;
+milvus::UpsertRequest upsert_request;
+upsert_request.WithCollectionName("users");
+// highlight-start
+upsert_request.WithRowsData(std::move(append_data)).WithFieldOps({std::move(append_tags)});
+// highlight-end
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let append_data = vec![serde_json::json!({"pk": 1, "tags": ["premium"]})];
+
+let append_tags = FieldPartialUpdateOp::new()
+    .field_name("tags")
+    .op_type(FieldPartialUpdateOpType::ArrayAppend);
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("users")
+                    .rows(append_data)
+                    .build()?,
+            )
+            // highlight-start
+            .field_ops(vec![append_tags])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 // nodejs
 ```
@@ -706,6 +985,8 @@ With `ARRAY_REMOVE`, send only the matching element to remove:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -736,6 +1017,49 @@ client.upsert(UpsertReq.builder()
         .fieldOps(Collections.singletonList(removeTags))
         // highlight-end
         .build());
+```
+
+```cpp
+milvus::EntityRows remove_data;
+remove_data.emplace_back(milvus::EntityRow{{"pk", 1}, {"tags", std::vector<std::string>{"trial"}}});
+
+milvus::FieldPartialUpdateOp remove_tags("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_REMOVE);
+
+milvus::UpsertResponse upsert_response;
+milvus::UpsertRequest upsert_request;
+upsert_request.WithCollectionName("users");
+// highlight-start
+upsert_request.WithRowsData(std::move(remove_data)).WithFieldOps({std::move(remove_tags)});
+// highlight-end
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let remove_data = vec![serde_json::json!({"pk": 1, "tags": ["trial"]})];
+
+let remove_tags = FieldPartialUpdateOp::new()
+    .field_name("tags")
+    .op_type(FieldPartialUpdateOpType::ArrayRemove);
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("users")
+                    .rows(remove_data)
+                    .build()?,
+            )
+            // highlight-start
+            .field_ops(vec![remove_tags])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -775,6 +1099,8 @@ The following example uses a small `users` collection with a primary key `pk`, a
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -871,6 +1197,249 @@ print(res)
 # ]
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// 1. Create a collection with an ARRAY<VARCHAR> field
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+schema->AddField(milvus::FieldSchema("tags", milvus::DataType::ARRAY)
+                     .WithElementType(milvus::DataType::VARCHAR)
+                     .WithMaxCapacity(8)
+                     .WithMaxLength(32));
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("users")
+                                      .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::IndexDesc index_desc("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+status = client->CreateIndex(milvus::CreateIndexRequest().WithCollectionName("users").AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// 2. Seed two entities
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{{"pk", 1}, {"embedding", std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f}},
+                                    {"tags", std::vector<std::string>{"new"}}});
+rows.emplace_back(milvus::EntityRow{{"pk", 2}, {"embedding", std::vector<float>{0.6f, 0.7f, 0.8f, 0.9f, 1.0f}},
+                                    {"tags", std::vector<std::string>{"new", "trial"}}});
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest().WithCollectionName("users").WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// 3. Append tags without reading the existing ARRAY values
+milvus::EntityRows append_data;
+append_data.emplace_back(milvus::EntityRow{{"pk", 1}, {"tags", std::vector<std::string>{"premium", "vip"}}});
+append_data.emplace_back(milvus::EntityRow{{"pk", 2}, {"tags", std::vector<std::string>{"premium"}}});
+
+milvus::FieldPartialUpdateOp append_tags("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_APPEND);
+
+milvus::UpsertRequest upsert_request;
+upsert_request.WithCollectionName("users");
+// highlight-start
+upsert_request.WithRowsData(std::move(append_data)).WithFieldOps({std::move(append_tags)});
+// highlight-end
+milvus::UpsertResponse upsert_response;
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryResponse query_response;
+status = client->Query(milvus::QueryRequest()
+                           .WithCollectionName("users")
+                           .WithFilter("pk in [1, 2]")
+                           .WithOutputFields({"pk", "tags"}),
+                       query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// 4. Remove matching tags without replacing the full ARRAY field
+milvus::EntityRows remove_data;
+remove_data.emplace_back(milvus::EntityRow{{"pk", 1}, {"tags", std::vector<std::string>{"new"}}});
+remove_data.emplace_back(milvus::EntityRow{{"pk", 2}, {"tags", std::vector<std::string>{"trial"}}});
+
+milvus::FieldPartialUpdateOp remove_tags("tags", milvus::FieldPartialUpdateOp::OpType::ARRAY_REMOVE);
+
+upsert_request.WithRowsData(std::move(remove_data)).WithFieldOps({std::move(remove_tags)});
+// highlight-end
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+status = client->Query(milvus::QueryRequest()
+                           .WithCollectionName("users")
+                           .WithFilter("pk in [1, 2]")
+                           .WithOutputFields({"pk", "tags"}),
+                       query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// 1. Create a collection with an ARRAY<VARCHAR> field
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("pk")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(5),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("tags")
+            .data_type(sdk::DataType::Array)
+            .element_type(sdk::DataType::VarChar)
+            .max_capacity(8)
+            .max_length(32),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("users")
+            .schema(schema)
+            .index_params(vec![
+                sdk::IndexParam::new()
+                    .field_name("embedding")
+                    .index_type(sdk::IndexType::AutoIndex)
+                    .metric_type(sdk::MetricType::L2),
+            ])
+            .build()?,
+    )
+    .await?;
+
+// 2. Seed two entities
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("users")
+            .rows(vec![
+                serde_json::json!({"pk": 1, "embedding": [0.1, 0.2, 0.3, 0.4, 0.5], "tags": ["new"]}),
+                serde_json::json!({"pk": 2, "embedding": [0.6, 0.7, 0.8, 0.9, 1.0], "tags": ["new", "trial"]}),
+            ])
+            .build()?,
+    )
+    .await?;
+
+// 3. Append tags without reading the existing ARRAY values
+let append_tags = FieldPartialUpdateOp::new()
+    .field_name("tags")
+    .op_type(FieldPartialUpdateOpType::ArrayAppend);
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("users")
+                    .rows(vec![
+                        serde_json::json!({"pk": 1, "tags": ["premium", "vip"]}),
+                        serde_json::json!({"pk": 2, "tags": ["premium"]}),
+                    ])
+                    .build()?,
+            )
+            // highlight-start
+            .field_ops(vec![append_tags])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("users")
+            .filter("pk in [1, 2]")
+            .output_fields(["pk", "tags"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+
+// 4. Remove matching tags without replacing the full ARRAY field
+let remove_tags = FieldPartialUpdateOp::new()
+    .field_name("tags")
+    .op_type(FieldPartialUpdateOpType::ArrayRemove);
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("users")
+                    .rows(vec![
+                        serde_json::json!({"pk": 1, "tags": ["new"]}),
+                        serde_json::json!({"pk": 2, "tags": ["trial"]}),
+                    ])
+                    .build()?,
+            )
+            // highlight-start
+            .field_ops(vec![remove_tags])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("users")
+            .filter("pk in [1, 2]")
+            .output_fields(["pk", "tags"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```java
 // java
 ```
@@ -898,6 +1467,8 @@ The following example demonstrates how to upsert the `chunks` field in merge mod
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -941,6 +1512,79 @@ client.upsert(
 
 ```go
 // go
+```
+
+```cpp
+milvus::EntityRows data;
+milvus::EntityRow row;
+row["id"] = 1;
+row["chunks"] = nlohmann::json::array({
+    {{"text", "Use HNSW efSearch to trade recall for latency."},
+     {"section", "index"},
+     {"page", 1},
+     {"quality_score", 0.92},
+     {"has_code", true},
+     {"emb_list_vector", std::vector<float>{0.11f, 0.21f, 0.31f, 0.41f}}},
+    {{"text", "Range search returns vectors within a distance boundary."},
+     {"section", "search"},
+     {"page", 2},
+     {"quality_score", 0.86},
+     {"has_code", false},
+     {"emb_list_vector", std::vector<float>{0.18f, 0.23f, 0.29f, 0.36f}}},
+});
+data.emplace_back(std::move(row));
+
+milvus::UpsertResponse upsert_response;
+milvus::UpsertRequest upsert_request;
+upsert_request.WithCollectionName("books");
+// highlight-start
+upsert_request.WithRowsData(std::move(data)).WithPartialUpdate(true);
+// highlight-end
+status = client->Upsert(upsert_request, upsert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let data = vec![serde_json::json!({
+    "id": 1,
+    "chunks": [
+        {
+            "text": "Use HNSW efSearch to trade recall for latency.",
+            "section": "index",
+            "page": 1,
+            "quality_score": 0.92,
+            "has_code": true,
+            "emb_list_vector": [0.11, 0.21, 0.31, 0.41]
+        },
+        {
+            "text": "Range search returns vectors within a distance boundary.",
+            "section": "search",
+            "page": 2,
+            "quality_score": 0.86,
+            "has_code": false,
+            "emb_list_vector": [0.18, 0.23, 0.29, 0.36]
+        }
+    ]
+})];
+
+client
+    .upsert(
+        sdk::request::dml::UpsertRequest::builder()
+            .insert(
+                sdk::request::dml::InsertRequest::builder()
+                    .collection_name("books")
+                    .rows(data)
+                    .build()?,
+            )
+            // highlight-start
+            .partial_update(true)
+            // highlight-end
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

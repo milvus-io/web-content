@@ -41,6 +41,8 @@ If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -189,6 +191,77 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+
+milvus::FieldSchema varchar_field1("varchar_field1", milvus::DataType::VARCHAR);
+varchar_field1.WithMaxLength(100).WithNullable(true).WithDefaultValue("Unknown");
+schema->AddField(varchar_field1);
+
+milvus::FieldSchema varchar_field2("varchar_field2", milvus::DataType::VARCHAR);
+varchar_field2.WithMaxLength(200).WithNullable(true);
+schema->AddField(varchar_field2);
+
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("varchar_field1")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(100)
+            .nullable(true)
+            .default_value(sdk::DefaultValue::String("Unknown".into())),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("varchar_field2")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(200)
+            .nullable(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("pk")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(3),
+    );
+```
+
 ```bash
 export varcharField1='{
     "fieldName": "varchar_field1",
@@ -250,6 +323,8 @@ You can also builds an `NGRAM` index to accelerate `LIKE` filtering on `VARCHAR`
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -298,12 +373,35 @@ indexOption2 := milvusclient.NewCreateIndexOption("my_collection", "varchar_fiel
     index.NewInvertedIndex())
 ```
 
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+
+milvus::IndexDesc varchar_index("varchar_field1", "varchar_index", milvus::IndexType::AUTOINDEX);
+indexes.push_back(varchar_index);
+
+milvus::IndexDesc embedding_index("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+indexes.push_back(embedding_index);
+```
+
+```rust
+let index_params = vec![
+    IndexParam::new()
+        .field_name("varchar_field1")
+        .index_name("varchar_index")
+        .index_type(IndexType::AutoIndex),
+    IndexParam::new()
+        .field_name("embedding")
+        .index_type(IndexType::AutoIndex)
+        .metric_type(MetricType::Cosine),
+];
+```
+
 ```javascript
 const indexParams = [{
     index_name: 'varchar_index',
     field_name: 'varchar_field1',
     index_type: IndexType.AUTOINDEX,
-)];
+}];
 
 indexParams.push({
     index_name: 'embedding_index',
@@ -345,6 +443,8 @@ Once the schema and index are defined, create a collection that includes string 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -374,6 +474,30 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(indexes));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -407,6 +531,8 @@ After creating the collection, insert entities that match the schema.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -478,6 +604,45 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection")
+    .AddRowData({{"varchar_field1", "Product A"}, {"varchar_field2", "High quality product"}, {"pk", 1}, {"embedding", std::vector<float>{0.1f, 0.2f, 0.3f}}})
+    .AddRowData({{"varchar_field1", "Product B"}, {"pk", 2}, {"embedding", std::vector<float>{0.4f, 0.5f, 0.6f}}})
+    .AddRowData({{"varchar_field1", nullptr}, {"varchar_field2", nullptr}, {"pk", 3}, {"embedding", std::vector<float>{0.2f, 0.3f, 0.1f}}})
+    .AddRowData({{"varchar_field1", "Product C"}, {"varchar_field2", nullptr}, {"pk", 4}, {"embedding", std::vector<float>{0.5f, 0.7f, 0.2f}}})
+    .AddRowData({{"varchar_field1", nullptr}, {"varchar_field2", "Exclusive deal"}, {"pk", 5}, {"embedding", std::vector<float>{0.6f, 0.4f, 0.8f}}})
+    .AddRowData({{"varchar_field1", "Unknown"}, {"varchar_field2", nullptr}, {"pk", 6}, {"embedding", std::vector<float>{0.8f, 0.5f, 0.3f}}})
+    .AddRowData({{"varchar_field1", ""}, {"varchar_field2", "Best seller"}, {"pk", 7}, {"embedding", std::vector<float>{0.8f, 0.5f, 0.3f}}});
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "insert_count=" << insert_response.Results().InsertCount() << std::endl;
+```
+
+```rust
+let rows: Vec<_> = vec![
+    serde_json::json!({"varchar_field1": "Product A", "varchar_field2": "High quality product", "pk": 1, "embedding": [0.1, 0.2, 0.3]}),
+    serde_json::json!({"varchar_field1": "Product B", "pk": 2, "embedding": [0.4, 0.5, 0.6]}),
+    serde_json::json!({"varchar_field1": null, "varchar_field2": null, "pk": 3, "embedding": [0.2, 0.3, 0.1]}),
+    serde_json::json!({"varchar_field1": "Product C", "varchar_field2": null, "pk": 4, "embedding": [0.5, 0.7, 0.2]}),
+    serde_json::json!({"varchar_field1": null, "varchar_field2": "Exclusive deal", "pk": 5, "embedding": [0.6, 0.4, 0.8]}),
+    serde_json::json!({"varchar_field1": "Unknown", "varchar_field2": null, "pk": 6, "embedding": [0.8, 0.5, 0.3]}),
+    serde_json::json!({"varchar_field1": "", "varchar_field2": "Best seller", "pk": 7, "embedding": [0.8, 0.5, 0.3]}),
+];
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 const data = [
   {
@@ -540,6 +705,8 @@ To retrieve entities where the `varchar_field1` matches the string `"Product A"`
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -597,6 +764,39 @@ fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2").FieldData(
 // varchar_field2 string_data:{data:"High quality product"}
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("varchar_field1 == \"Product A\"")
+    .WithOutputFields({"varchar_field1", "varchar_field2"});
+milvus::QueryResponse query_response;
+auto status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows rows;
+query_response.Results().OutputRows(rows);
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("varchar_field1 == \"Product A\"")
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```javascript
 await client.query({
     collection_name: 'my_collection',
@@ -626,6 +826,8 @@ To retrieve entities where the `varchar_field2` is null:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -683,6 +885,39 @@ fmt.Println("varchar_field1", queryResult.GetColumn("varchar_field1"))
 fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2"))
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("varchar_field2 is null")
+    .WithOutputFields({"varchar_field1", "varchar_field2"});
+milvus::QueryResponse query_response;
+auto status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows rows;
+query_response.Results().OutputRows(rows);
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("varchar_field2 is null")
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```javascript
 await client.query({
     collection_name: 'my_collection',
@@ -712,6 +947,8 @@ To retrieve entities where `varchar_field1` has the value `"Unknown"`, use the f
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -767,6 +1004,39 @@ fmt.Println("varchar_field1", queryResult.GetColumn("varchar_field1"))
 fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2"))
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("varchar_field1 == \"Unknown\"")
+    .WithOutputFields({"varchar_field1", "varchar_field2"});
+milvus::QueryResponse query_response;
+auto status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows rows;
+query_response.Results().OutputRows(rows);
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("varchar_field1 == \"Unknown\"")
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```javascript
 // node
 await client.query({
@@ -799,6 +1069,8 @@ In addition to basic scalar field filtering, you can combine vector similarity s
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -870,6 +1142,57 @@ for _, resultSet := range resultSets {
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("varchar_field1: ", resultSet.GetColumn("varchar_field1"))
     fmt.Println("varchar_field2: ", resultSet.GetColumn("varchar_field2"))
+}
+```
+
+```cpp
+std::vector<float> query_vector = {0.3f, -0.6f, 0.1f};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("embedding")
+    .WithFilter("varchar_field2 == \"Best seller\"")
+    .WithOutputFields({"varchar_field1", "varchar_field2"})
+    .WithLimit(5)
+    .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto field1 = result.OutputField<milvus::VarCharFieldData>("varchar_field1");
+    const auto field2 = result.OutputField<milvus::VarCharFieldData>("varchar_field2");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", varchar_field1=" << field1->Data()[i]
+                  << ", varchar_field2=" << field2->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let query_vector = vec![0.3f32, -0.6, 0.1];
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .vector_field("embedding")
+            .filter("varchar_field2 == \"Best seller\"")
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .limit(5)
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
 }
 ```
 

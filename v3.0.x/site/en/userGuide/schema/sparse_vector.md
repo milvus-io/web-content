@@ -82,6 +82,8 @@ To use sparse vectors in Milvus, you need to create a collection with a schema i
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -203,6 +205,66 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+auto schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR)
+    .WithPrimaryKey(true)
+    .WithAutoID(true)
+    .WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("sparse_vector", milvus::DataType::SPARSE_FLOAT_VECTOR));
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)
+    .WithMaxLength(65535)
+    .EnableAnalyzer(true));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("pk")
+            .data_type(sdk::DataType::VarChar)
+            .primary_key(true)
+            .auto_id(true)
+            .max_length(100),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("sparse_vector")
+            .data_type(sdk::DataType::SparseFloatVector),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("text")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(65535)
+            .enable_analyzer(true),
+    );
+```
+
 ```bash
 export primaryField='{
     "fieldName": "pk",
@@ -260,6 +322,8 @@ The process of creating an index for sparse vectors is similar to that for [dens
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -314,6 +378,20 @@ idx := index.NewSparseInvertedIndex(entity.IP, 0.2)
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse_vector", idx)
 ```
 
+```cpp
+milvus::IndexDesc sparse_index("sparse_vector", "sparse_inverted_index", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::IP);
+sparse_index.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+```
+
+```rust
+let index_param = sdk::IndexParam::new()
+    .field_name("sparse_vector")
+    .index_name("sparse_inverted_index")
+    .index_type(sdk::IndexType::SparseInvertedIndex)
+    .metric_type(sdk::MetricType::Ip)
+    .extra_params(HashMap::from([("inverted_index_algo".into(), "DAAT_MAXSCORE".into())]));
+```
+
 ```bash
 
 export indexParams='[
@@ -345,6 +423,8 @@ Once the sparse vector and index settings are complete, you can create a collect
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -389,6 +469,30 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes({milvus::IndexDesc("sparse_vector", "sparse_inverted_index", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::IP)});
+auto status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_param(index_param)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -411,6 +515,8 @@ You must provide data for all fields defined during collection creation, except 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -480,6 +586,7 @@ const data = [
     {
         text: 'information retrieval is a field of study.',
         sparse_vector: {1: 0.5, 100: 0.3, 500: 0.8}
+    },
     {
         text: 'information retrieval focuses on finding relevant information in large datasets.',
         sparse_vector: {10: 0.1, 200: 0.7, 1000: 0.9}
@@ -510,13 +617,56 @@ sparseVectorColumn := entity.NewColumnSparseVectors("sparse_vector", sparseVecto
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithColumns(
         sparseVectorColumn,
-        textColumn
-        
+        textColumn,
     ))
 if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+milvus::EntityRows rows = {
+    nlohmann::json{
+        {"text", "information retrieval is a field of study."},
+        {"sparse_vector", nlohmann::json{{"1", 0.5}, {"100", 0.3}, {"500", 0.8}}}
+    },
+    nlohmann::json{
+        {"text", "information retrieval focuses on finding relevant information in large datasets."},
+        {"sparse_vector", nlohmann::json{{"10", 0.1}, {"200", 0.7}, {"1000", 0.9}}}
+    },
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(rows));
+milvus::InsertResponse insert_response;
+auto status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows: Vec<_> = vec![
+    serde_json::json!({
+        "text": "information retrieval is a field of study.",
+        "sparse_vector": {"1": 0.5, "100": 0.3, "500": 0.8},
+    }),
+    serde_json::json!({
+        "text": "information retrieval focuses on finding relevant information in large datasets.",
+        "sparse_vector": {"10": 0.1, "200": 0.7, "1000": 0.9},
+    }),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -549,6 +699,8 @@ To perform a similarity search using sparse vectors, prepare both the query data
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -587,6 +739,26 @@ annSearchParams.WithExtraParam("drop_ratio_search", 0.2)
 queryData, _ := entity.NewSliceSparseEmbedding([]uint32{1, 50, 1000}, []float32{0.2, 0.4, 0.7})
 ```
 
+```cpp
+// Prepare search parameters
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("sparse_vector")
+    .WithLimit(3)
+    .WithOutputFields({"pk"})
+    .AddExtraParam("drop_ratio_search", "0.2")
+    // Query with the sparse vector
+    .AddSparseVector(nlohmann::json{{"1", 0.2}, {"50", 0.4}, {"1000", 0.7}});
+```
+
+```rust
+// Prepare search parameters
+let search_params = HashMap::from([("drop_ratio_search".into(), "0.2".into())]);
+
+// Query with the sparse vector
+let query_data = sdk::SparseVector::from([(1, 0.2f32), (50, 0.4), (1000, 0.7)]);
+```
+
 ```javascript
 // Prepare search parameters
 const searchParams = {drop_ratio_search: 0.2}
@@ -610,6 +782,8 @@ Then, execute the similarity search using the `search` method:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -681,12 +855,68 @@ for _, resultSet := range resultSets {
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
 }
+```
 
-// Results:
-//   IDs:  string_data:{data:"457270974427187705"  data:"457270974427187704"}
-//   Scores:  [0.63 0.1]
-//   Pks:  string_data:{data:"457270974427187705"  data:"457270974427187704"}
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("sparse_vector")
+    .WithLimit(3)
+    .WithOutputFields({"pk"})
+    .AddExtraParam("drop_ratio_search", "0.2")
+    .AddSparseVector(nlohmann::json{{"1", 0.2}, {"50", 0.4}, {"1000", 0.7}});
 
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto pks = result.OutputField<milvus::VarCharFieldData>("pk");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i]
+                  << ", pk=" << pks->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("sparse_vector")
+            .vectors(sdk::SearchVectors::SparseFloat(vec![query_data]))
+            .limit(3)
+            .output_fields(["pk"])
+            .extra_params(search_params)
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
 ```
 
 ```bash

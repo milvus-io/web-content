@@ -29,6 +29,8 @@ The functionality of the `english` analyzer is equivalent to the following custo
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -83,6 +85,25 @@ analyzerParams = map[string]any{"tokenizer": "standard",
         }}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {"lowercase", {{"type", "stemmer"}, {"language", "english"}},
+                {{"type", "stop"}, {"stop_words", "_english_"}}}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        "lowercase",
+        {"type": "stemmer", "language": "english"},
+        {"type": "stop", "stop_words": "_english_"}
+    ]
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -111,6 +132,8 @@ To apply the `english` analyzer to a field, simply set `type` to `english` in `a
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -133,6 +156,18 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"type": "english"}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"type", "english"},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "type": "english"
+});
 ```
 
 ```bash
@@ -162,6 +197,8 @@ Example configuration with custom stop words:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -187,6 +224,20 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"type", "english"},
+    {"stop_words", {"a", "an", "the"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "type": "english",
+    "stop_words": ["a", "an", "the"]
+});
 ```
 
 ```bash
@@ -215,6 +266,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -239,6 +292,20 @@ analyzerParams.put("stop_words", Arrays.asList("a", "an", "the"));
 analyzerParams = map[string]any{"type": "english", "stop_words": []string{"a", "an", "the"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"type", "english"},
+    {"stop_words", {"a", "an", "the"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "type": "english",
+    "stop_words": ["a", "an", "the"]
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -259,6 +326,8 @@ analyzerParams='{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -329,6 +398,69 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::string sample_text = "Milvus is a vector database built for scale!";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest request;
+request.AddText(sample_text).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+}
+std::cout << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Sample text to analyze
+let sample_text = "Milvus is a vector database built for scale!";
+
+// Run the standard analyzer with the defined configuration
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts([sample_text])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        print!("{} ", token.get_text());
+    }
+    println!();
 }
 ```
 

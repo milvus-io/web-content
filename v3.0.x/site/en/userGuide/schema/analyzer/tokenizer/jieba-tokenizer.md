@@ -27,6 +27,8 @@ With the simple configuration, you only need to set the tokenizer to `"jieba"`. 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -52,6 +54,42 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "jieba"}
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Simple configuration: only specifying the tokenizer name
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"}  // Use the default settings: dict=["_default_"], mode="search", hmm=True
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+// Simple configuration: only specifying the tokenizer name
+let analyzer_params = serde_json::json!({
+    "tokenizer": "jieba", // Use the default settings: dict=["_default_"], mode="search", hmm=True
+});
+```
+
+
+
 ```bash
 # restful
 analyzerParams='{
@@ -66,6 +104,8 @@ This simple configuration is equivalent to the following custom configuration:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -95,6 +135,28 @@ analyzerParams.put("hmm", true);
 analyzerParams = map[string]any{"type": "jieba", "dict": []any{"_default_"}, "mode": "search", "hmm": true}
 ```
 
+```cpp
+// Custom configuration equivalent to the simple configuration above
+nlohmann::json analyzer_params = {
+    {"type", "jieba"},            // Tokenizer type, fixed as "jieba"
+    {"dict", {"_default_"}},      // Use the default dictionary
+    {"mode", "search"},           // Use search mode for improved recall (see mode details below)
+    {"hmm", true}                 // Enable HMM for probabilistic segmentation
+};
+```
+
+```rust
+// Custom configuration equivalent to the simple configuration above
+let analyzer_params = serde_json::json!({
+    "type": "jieba",         // Tokenizer type, fixed as "jieba"
+    "dict": ["_default_"],   // Use the default dictionary
+    "mode": "search",        // Use search mode for improved recall (see mode details below)
+    "hmm": true,             // Enable HMM for probabilistic segmentation
+});
+```
+
+
+
 ```bash
 # restful
 ```
@@ -110,6 +172,8 @@ For more control, you can provide a custom configuration that allows you to spec
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -150,6 +214,32 @@ analyzerParams := map[string]interface{}{
   },
 }
 ```
+
+```cpp
+// Custom configuration with user-defined settings
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},                     // Fixed tokenizer type
+        {"dict", {"customDictionary"}},        // Custom dictionary list; replace with your own terms
+        {"mode", "exact"},                     // Use exact mode (non-overlapping tokens)
+        {"hmm", false}                         // Disable HMM; unmatched text will be split into individual characters
+    }}
+};
+```
+
+```rust
+// Custom configuration with user-defined settings
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "jieba",              // Fixed tokenizer type
+        "dict": ["customDictionary"], // Custom dictionary list; replace with your own terms
+        "mode": "exact",              // Use exact mode (non-overlapping tokens)
+        "hmm": false,                 // Disable HMM; unmatched text will be split into individual characters
+    },
+});
+```
+
+
 
 ```bash
 # restful
@@ -205,6 +295,8 @@ Upload the file to the object store that your Milvus cluster is configured to us
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -232,6 +324,32 @@ client.add_file_resource(
 // go
 ```
 
+```cpp
+// Register the uploaded file under a name you'll reference from analyzer configs.
+milvus::AddFileResourceRequest add_resource_request;
+add_resource_request.WithName("zh_terms")
+    .WithPath("file/zh_terms.txt");  // full S3 object key, including the rootPath prefix
+status = client->AddFileResource(add_resource_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Register the uploaded file under a name you'll reference from analyzer configs.
+client
+    .add_file_resource(
+        AddFileResourceRequest::builder()
+            .name("zh_terms")
+            .path("file/zh_terms.txt") // full S3 object key, including the rootPath prefix
+            .build()?,
+    )
+    .await?;
+```
+
+
+
 ```bash
 # restful
 ```
@@ -243,6 +361,8 @@ Reference the registered resource in the tokenizer via `extra_dict_file`:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -276,6 +396,70 @@ client.run_analyzer(["milvus结巴分词器中文测试"], analyzer_params)
 ```go
 // go
 ```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"_default_"}},  // keep the built-in dictionary
+        {"mode", "exact"},
+        {"hmm", false},
+        {"extra_dict_file", {
+            {"type", "remote"},
+            {"resource_name", "zh_terms"},
+            {"file_name", "zh_terms.txt"}
+        }}
+    }}
+};
+
+milvus::RunAnalyzerRequest run_analyzer_request;
+run_analyzer_request.WithTexts({"milvus结巴分词器中文测试"});
+run_analyzer_request.WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_analyzer_response;
+status = client->RunAnalyzer(run_analyzer_request, run_analyzer_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : run_analyzer_response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+    std::cout << std::endl;
+}
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["_default_"], // keep the built-in dictionary
+        "mode": "exact",
+        "hmm": false,
+        "extra_dict_file": {
+            "type": "remote",
+            "resource_name": "zh_terms",
+            "file_name": "zh_terms.txt",
+        },
+    },
+});
+
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts(["milvus结巴分词器中文测试"])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
+}
+```
+
+
 
 ```bash
 # restful
@@ -315,6 +499,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -354,6 +540,30 @@ analyzerParams := map[string]interface{}{
 }
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"结巴分词器"}},
+        {"mode", "exact"},
+        {"hmm", false}
+    }}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["结巴分词器"],
+        "mode": "exact",
+        "hmm": false,
+    },
+});
+```
+
+
+
 ```bash
 # restful
 ```
@@ -365,6 +575,8 @@ analyzerParams := map[string]interface{}{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -441,6 +653,50 @@ if err != nil {
     // handle error
 }
 ```
+
+```cpp
+// Sample text to analyze
+std::string sample_text = "milvus结巴分词器中文测试";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest run_analyzer_request;
+run_analyzer_request.WithTexts({sample_text});
+run_analyzer_request.WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_analyzer_response;
+status = client->RunAnalyzer(run_analyzer_request, run_analyzer_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : run_analyzer_response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+    std::cout << std::endl;
+}
+```
+
+```rust
+// Sample text to analyze
+let sample_text = "milvus结巴分词器中文测试";
+
+// Run the standard analyzer with the defined configuration
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts([sample_text])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
+}
+```
+
+
 
 ```bash
 # restful

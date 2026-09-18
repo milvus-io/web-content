@@ -17,6 +17,8 @@ You can rename a collection as follows.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -102,6 +104,49 @@ if err != nil {
 }
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::RenameCollectionRequest rename_request;
+rename_request.WithCollectionName("my_collection")
+    .WithNewCollectionName("my_new_collection");
+status = client->RenameCollection(rename_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+client
+    .rename_collection(
+        RenameCollectionRequest::builder()
+            .collection_name("my_collection")
+            .new_collection_name("my_new_collection")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -169,6 +214,8 @@ The following code snippet demonstrates how to set collection TTL.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -210,6 +257,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"collection.ttl.seconds", "60"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property("collection.ttl.seconds", "60")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -238,6 +307,8 @@ For the full entity-level TTL workflow (schema setup, insert, query, refresh, dr
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -263,6 +334,30 @@ client.alter_collection_properties(
 // go
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithProperties({{"ttl_field", "expire_at"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .property("ttl_field", "expire_at")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -276,6 +371,8 @@ The following code snippet demonstrates how to enable mmap.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -314,6 +411,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"mmap.enabled", "true"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property("mmap.enabled", "true")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -336,6 +455,8 @@ The following code snippet demonstrates how to enable the partition key.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -374,6 +495,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"partitionkey.isolation", "true"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property("partitionkey.isolation", "true")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -397,6 +540,8 @@ The following code snippet demonstrates how to enable the dynamic field.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -435,6 +580,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"dynamicfield.enabled", "true"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property("dynamicfield.enabled", "true")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -460,6 +627,8 @@ The example below shows how to enable `allow_insert_auto_id`:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -498,6 +667,30 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithProperties({{"allow_insert_auto_id", "true"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .property("allow_insert_auto_id", "true")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -525,6 +718,8 @@ The example below shows how to set the collection time zone to **Asia/Shanghai**
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -557,6 +752,30 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithProperties({{"timezone", "Asia/Shanghai"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .property("timezone", "Asia/Shanghai")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
@@ -580,6 +799,8 @@ You can also reset a collection property by dropping it as follows.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -612,6 +833,28 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+milvus::DropCollectionPropertiesRequest drop_request;
+drop_request.WithCollectionName("my_collection")
+    .WithPropertyKeys({"collection.ttl.seconds"});
+status = client->DropCollectionProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .drop_collection_properties(
+        DropCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property_keys(["collection.ttl.seconds"])
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

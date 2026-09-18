@@ -91,6 +91,8 @@ The following example demonstrates how to configure field-specific mmap when you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -222,6 +224,93 @@ await client.alterCollectionFieldProperties({
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <map>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+// Add a scalar field and enable mmap
+milvus::FieldSchema doc_chunk("doc_chunk", milvus::DataType::VARCHAR);
+doc_chunk.WithMaxLength(512);
+doc_chunk.SetTypeParams({{"mmap.enabled", "false"}});
+schema->AddField(doc_chunk);
+
+// Alter mmap settings on a specific field
+milvus::AlterCollectionFieldPropertiesRequest alter_field_request;
+alter_field_request.WithCollectionName("my_collection")
+    .WithFieldName("doc_chunk")
+    .WithProperties({{"mmap.enabled", "true"}});
+status = client->AlterCollectionFieldProperties(alter_field_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("vector")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(5),
+    )
+    // Add a scalar field and enable mmap
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("doc_chunk")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(512)
+            .type_params(HashMap::from([
+                ("mmap.enabled".to_string(), "false".to_string()),
+            ])),
+    );
+
+// Alter mmap settings on a specific field
+client
+    .alter_collection_field_properties(
+        AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("doc_chunk")
+            .properties(HashMap::from([
+                ("mmap.enabled".to_string(), "true".to_string()),
+            ]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 #restful
 export TOKEN="root:Milvus"
@@ -307,6 +396,8 @@ The following example demonstrates how to configure index-specific mmap when you
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -382,6 +473,62 @@ await client.alterIndexProperties({
 // go
 ```
 
+```cpp
+milvus::FieldSchema title_field("title", milvus::DataType::VARCHAR);
+title_field.WithMaxLength(512);
+schema->AddField(title_field);
+
+std::vector<milvus::IndexDesc> indexes;
+milvus::IndexDesc title_index("title", "", milvus::IndexType::AUTOINDEX);
+// highlight-next-line
+title_index.AddExtraParam("mmap.enabled", "false");
+indexes.push_back(title_index);
+
+// Change mmap settings for an index
+milvus::AlterIndexPropertiesRequest alter_index_request;
+alter_index_request.WithCollectionName("my_collection")
+    .WithIndexName("title")
+    .WithProperties({{"mmap.enabled", "true"}});
+auto status = client->AlterIndexProperties(alter_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let schema = schema.add_field(
+    sdk::FieldSchema::new()
+        .name("title")
+        .data_type(sdk::DataType::VarChar)
+        .max_length(512),
+);
+
+// Create index on the varchar field with mmap settings
+let index_params = vec![
+    IndexParam::new()
+        .field_name("title")
+        .index_type(IndexType::AutoIndex)
+        // highlight-next-line
+        .extra_params(HashMap::from([
+            ("mmap.enabled".to_string(), "false".to_string()),
+        ])),
+];
+
+// Change mmap settings for an index
+client
+    .alter_index_properties(
+        AlterIndexPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .index_name("title")
+            .properties(HashMap::from([
+                ("mmap.enabled".to_string(), "true".to_string()),
+            ]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -437,6 +584,8 @@ The following example demonstrates how to enable mmap in a collection named **my
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -470,6 +619,32 @@ await client.createCollection({
 // go
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithProperties({{"mmap.enabled", "true"}});
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .properties(HashMap::from([
+                ("mmap.enabled".to_string(), "true".to_string()),
+            ]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -492,6 +667,8 @@ You can also change the mmap settings of an existing collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -551,6 +728,68 @@ await client.loadCollection({
 
 ```go
 // go
+```
+
+```cpp
+// Release collection before change mmap settings
+milvus::ReleaseCollectionRequest release_request;
+release_request.WithCollectionName("my_collection");
+status = client->ReleaseCollection(release_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Alter mmap settings on the collection
+milvus::AlterCollectionPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithProperties({{"mmap.enabled", "false"}});
+status = client->AlterCollectionProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Load the collection to make the above change take effect
+milvus::LoadCollectionRequest load_request;
+load_request.WithCollectionName("my_collection");
+status = client->LoadCollection(load_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Release collection before change mmap settings
+client
+    .release_collection(
+        ReleaseCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+// Alter mmap settings on the collection
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .properties(HashMap::from([
+                ("mmap.enabled".to_string(), "false".to_string()),
+            ]))
+            .build()?,
+    )
+    .await?;
+
+// Load the collection to make the above change take effect
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

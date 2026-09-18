@@ -56,6 +56,8 @@ To use a `GEOMETRY` field, explicitly define it in your collection schema when c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -146,6 +148,89 @@ await milvusClient.createCollection({
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+const std::string collection_name = "geo_collection";
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create schema with a GEOMETRY field
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(8));
+// highlight-next-line
+schema->AddField(milvus::FieldSchema("geo", milvus::DataType::GEOMETRY).WithNullable(true));
+schema->AddField(milvus::FieldSchema("name", milvus::DataType::VARCHAR).WithMaxLength(128));
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName(collection_name)
+                                      .WithCollectionSchema(schema)
+                                      .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create schema with a GEOMETRY field
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embeddings")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(8),
+    )
+    // highlight-next-line
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("geo")
+            .data_type(sdk::DataType::Geometry)
+            .nullable(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("name")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(128),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("geo_collection")
+            .schema(schema)
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 
@@ -166,6 +251,8 @@ Insert entities with geometry data in [WKT](https://en.wikipedia.org/wiki/Well-k
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -262,6 +349,70 @@ console.log(insert_result);
 // go
 ```
 
+```cpp
+std::vector<std::string> geo_points = {
+    "POINT(13.399710 52.518010)",
+    "POINT(13.403934 52.522877)",
+    "POINT(13.405088 52.521124)",
+    "POINT(13.408223 52.516876)",
+    "POINT(13.400092 52.521507)",
+    "POINT(13.408529 52.519274)",
+};
+std::vector<std::string> names = {"Shop A", "Shop B", "Shop C", "Shop D", "Shop E", "Shop F"};
+
+milvus::EntityRows rows;
+for (size_t i = 0; i < geo_points.size(); ++i) {
+    milvus::EntityRow row;
+    row["id"] = static_cast<int64_t>(i + 1);
+    row["name"] = names[i];
+    row["embeddings"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f};
+    row["geo"] = geo_points[i];
+    rows.emplace_back(std::move(row));
+}
+
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest().WithCollectionName(collection_name).WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let geo_points = [
+    "POINT(13.399710 52.518010)",
+    "POINT(13.403934 52.522877)",
+    "POINT(13.405088 52.521124)",
+    "POINT(13.408223 52.516876)",
+    "POINT(13.400092 52.521507)",
+    "POINT(13.408529 52.519274)",
+];
+let names = ["Shop A", "Shop B", "Shop C", "Shop D", "Shop E", "Shop F"];
+
+let rows: Vec<_> = geo_points
+    .iter()
+    .enumerate()
+    .map(|(i, geo)| {
+        serde_json::json!({
+            "id": i as i64 + 1,
+            "name": names[i],
+            "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+            "geo": geo,
+        })
+    })
+    .collect();
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("geo_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -283,6 +434,8 @@ Before you can perform filtering operations on `GEOMETRY` fields, make sure:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -334,6 +487,46 @@ await milvusClient.loadCollection({
 // go
 ```
 
+```cpp
+milvus::IndexDesc index_desc("embeddings", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::L2);
+status = client->CreateIndex(
+    milvus::CreateIndexRequest().WithCollectionName(collection_name).AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName(collection_name));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("geo_collection")
+            .index_param(
+                sdk::IndexParam::new()
+                    .field_name("embeddings")
+                    .index_type(sdk::IndexType::AutoIndex)
+                    .metric_type(sdk::MetricType::L2),
+            )
+            .build()?,
+    )
+    .await?;
+
+client
+    .load_collection(
+        sdk::request::collection::LoadCollectionRequest::builder()
+            .collection_name("geo_collection")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -369,6 +562,8 @@ The following examples demonstrate how to use different geometry-specific operat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -444,6 +639,65 @@ for (const ret of query_results.data) {
 // go
 ```
 
+```cpp
+float top_left_lon = 13.403683f;
+float top_left_lat = 52.520711f;
+float bottom_right_lon = 13.455868f;
+float bottom_right_lat = 52.495862f;
+char bounding_box_wkt[256];
+std::snprintf(bounding_box_wkt, sizeof(bounding_box_wkt),
+              "POLYGON((%f %f, %f %f, %f %f, %f %f, %f %f))", top_left_lon, top_left_lat, bottom_right_lon,
+              top_left_lat, bottom_right_lon, bottom_right_lat, top_left_lon, bottom_right_lat, top_left_lon,
+              top_left_lat);
+
+std::string filter = "st_within(geo, '" + std::string(bounding_box_wkt) + "')";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName(collection_name)
+    // highlight-next-line
+    .WithFilter(filter)
+    .WithOutputFields({"name", "geo"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows output_rows;
+status = query_response.Results().OutputRows(output_rows);
+for (const auto& row : output_rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let top_left_lon = 13.403683f64;
+let top_left_lat = 52.520711f64;
+let bottom_right_lon = 13.455868f64;
+let bottom_right_lat = 52.495862f64;
+let bounding_box_wkt = format!(
+    "POLYGON(({} {}, {} {}, {} {}, {} {}, {} {}))",
+    top_left_lon, top_left_lat, bottom_right_lon, top_left_lat, bottom_right_lon, bottom_right_lat, top_left_lon,
+    bottom_right_lat, top_left_lon, top_left_lat
+);
+
+let filter = format!("st_within(geo, '{bounding_box_wkt}')");
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("geo_collection")
+            // highlight-next-line
+            .filter(filter)
+            .output_fields(["name", "geo"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 # restful
 ```
@@ -455,6 +709,8 @@ for (const ret of query_results.data) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -518,6 +774,57 @@ for (const ret of query_results_dwithin.data) {
 // go
 ```
 
+```cpp
+float center_point_lon = 13.403683f;
+float center_point_lat = 52.520711f;
+float radius_meters = 1000.0f;
+char central_point_wkt[128];
+std::snprintf(central_point_wkt, sizeof(central_point_wkt), "POINT(%f %f)", center_point_lon, center_point_lat);
+
+std::string dwithin_filter = std::string("st_dwithin(geo, '") + central_point_wkt + "', " +
+                                        std::to_string(radius_meters) + ")";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName(collection_name)
+    // highlight-next-line
+    .WithFilter(dwithin_filter)
+    .WithOutputFields({"name", "geo"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows output_rows;
+status = query_response.Results().OutputRows(output_rows);
+for (const auto& row : output_rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let center_point_lon = 13.403683f64;
+let center_point_lat = 52.520711f64;
+let radius_meters = 1000.0f64;
+let central_point_wkt = format!("POINT({center_point_lon} {center_point_lat})");
+
+let filter = format!("st_dwithin(geo, '{central_point_wkt}', {radius_meters})");
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("geo_collection")
+            // highlight-next-line
+            .filter(filter)
+            .output_fields(["name", "geo"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 # restful
 ```
@@ -529,6 +836,8 @@ for (const ret of query_results_dwithin.data) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -596,6 +905,72 @@ for (const hits of search_results.results) {
 
 ```go
 // go
+```
+
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f};
+
+std::string spatial_filter = "st_within(geo, '" + std::string(bounding_box_wkt) + "')";
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName(collection_name)
+    .WithAnnsField("embeddings")
+    .WithLimit(3)
+    // highlight-next-line
+    .WithFilter(spatial_filter)
+    .WithOutputFields({"name", "geo"})
+    .AddFloatVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8];
+
+let spatial_filter = format!("st_within(geo, '{bounding_box_wkt}')");
+
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("geo_collection")
+            .vector_field("embeddings")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            // highlight-next-line
+            .filter(spatial_filter)
+            .output_fields(["name", "geo"])
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id value: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score value: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
 ```
 
 ```bash

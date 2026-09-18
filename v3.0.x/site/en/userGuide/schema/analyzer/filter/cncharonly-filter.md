@@ -17,6 +17,8 @@ The `cncharonly` filter is built into Milvus. To use it, simply specify its name
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -42,6 +44,41 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cncharonly"}}
+```
+
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cncharonly"}}
+};
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "jieba",
+    "filter": ["cncharonly"]
+});
 ```
 
 ```bash
@@ -70,6 +107,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -94,6 +133,20 @@ analyzerParams.put("filter", Collections.singletonList("cncharonly"));
 analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cncharonly"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cncharonly"}}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "jieba",
+    "filter": ["cncharonly"]
+});
+```
+
 ```bash
 # restful
 ```
@@ -105,6 +158,8 @@ analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cncharonl
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -175,6 +230,43 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+milvus::RunAnalyzerRequest run_analyzer_request;
+run_analyzer_request.WithTexts({"Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。"});
+run_analyzer_request.WithAnalyzerParams({{"tokenizer", "jieba"}, {"filter", {"cncharonly"}}});
+milvus::RunAnalyzerResponse run_analyzer_response;
+status = client->RunAnalyzer(run_analyzer_request, run_analyzer_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : run_analyzer_response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << std::endl;
+    }
+}
+```
+
+```rust
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(["Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。"])
+            .analyzer_params(serde_json::json!({
+                "tokenizer": "jieba",
+                "filter": ["cncharonly"]
+            }))
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
 }
 ```
 

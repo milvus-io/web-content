@@ -24,7 +24,7 @@ Pattern matching expressions are written in the `filter` parameter. For example,
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -105,6 +105,51 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("log_events")
+    // highlight-next-line
+    .WithFilter("message =~ \"E[0-9]{4}\"")
+    .WithOutputFields({"message", "severity"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let res = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("log_events")
+            // highlight-next-line
+            .filter("message =~ \"E[0-9]{4}\"")
+            .output_fields(["message", "severity"])
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -237,7 +282,7 @@ For example:
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -254,6 +299,14 @@ filter := `filename =~ r"\.json$"`
 
 ```javascript
 const filter = 'filename =~ r"\\.json$"';
+```
+
+```cpp
+std::string filter = "filename =~ r\"\\.json$\"";
+```
+
+```rust
+let filter = r#"filename =~ r"\.json$""#;
 ```
 
 ```bash
@@ -291,7 +344,7 @@ To match one of several words, use alternation with `|`:
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -310,6 +363,14 @@ filter := `message =~ "error|failed|timeout"`
 const filter = 'message =~ "error|failed|timeout"';
 ```
 
+```cpp
+std::string filter = "message =~ \"error|failed|timeout\"";
+```
+
+```rust
+let filter = r#"message =~ "error|failed|timeout""#;
+```
+
 ```bash
 filter='message =~ "error|failed|timeout"'
 ```
@@ -326,7 +387,7 @@ When matching regex metacharacters literally, escape them in the regex pattern. 
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -343,6 +404,14 @@ filter := `email =~ "@gmail\\.com$"`
 
 ```javascript
 const filter = 'email =~ "@gmail\\.com$"';
+```
+
+```cpp
+std::string filter = "email =~ \"@gmail\\.com$\"";
+```
+
+```rust
+let filter = r#"email =~ "@gmail\.com$""#;
 ```
 
 ```bash
@@ -367,7 +436,7 @@ Milvus regex matching uses substring semantics. The pattern does not need to mat
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -386,6 +455,14 @@ filter := `message =~ "E[0-9]{4}"`
 const filter = 'message =~ "E[0-9]{4}"';
 ```
 
+```cpp
+std::string filter = "message =~ \"E[0-9]{4}\"";
+```
+
+```rust
+let filter = r#"message =~ "E[0-9]{4}""#;
+```
+
 ```bash
 filter='message =~ "E[0-9]{4}"'
 ```
@@ -402,7 +479,7 @@ To match the entire field value, use the `^` and `$` anchors:
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -425,6 +502,16 @@ filter := `code =~ "^E[0-9]{4}$"`
 const filter = 'code =~ "^E[0-9]{4}$"';
 ```
 
+```cpp
+// Match only values that are exactly E followed by four digits
+std::string filter = "code =~ \"^E[0-9]{4}$\"";
+```
+
+```rust
+// Match only values that are exactly E followed by four digits
+let filter = r#"code =~ "^E[0-9]{4}$""#;
+```
+
 ```bash
 # Match only values that are exactly E followed by four digits
 filter='code =~ "^E[0-9]{4}$"'
@@ -444,7 +531,7 @@ Regex filters do not match null values. This applies to both `=~` and `!~`. If y
   <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
   <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+  <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -461,6 +548,14 @@ filter := `message !~ "^DEBUG" OR message IS NULL`
 
 ```javascript
 const filter = 'message !~ "^DEBUG" OR message IS NULL';
+```
+
+```cpp
+std::string filter = "message !~ \"^DEBUG\" OR message IS NULL";
+```
+
+```rust
+let filter = r#"message !~ "^DEBUG" OR message IS NULL"#;
 ```
 
 ```bash

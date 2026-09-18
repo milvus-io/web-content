@@ -64,6 +64,8 @@ For example, to use the `standard` built-in analyzer, simply specify its name `s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -91,6 +93,30 @@ const analyzer_params = {
 analyzerParams := map[string]any{"type": "standard", "stop_words": []string{"a", "an", "for"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"type", "standard"},                                     // Uses the standard built-in analyzer
+    {"stop_words", {"a", "an", "for"}}                        // Defines a list of common words (stop words) to exclude from tokenization
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "type": "standard",                                       // Uses the standard built-in analyzer
+    "stop_words": ["a", "an", "for"]                          // Defines a list of common words (stop words) to exclude from tokenization
+});
+```
+
 ```bash
 export analyzerParams='{
        "type": "standard",
@@ -105,6 +131,8 @@ To check the execution result of an analyzer, use the `run_analyzer` method:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -165,6 +193,36 @@ if err != nil {
 }
 ```
 
+```cpp
+// Sample text to analyze
+std::string text = "An efficient system relies on a robust analyzer to correctly process text for various applications.";
+
+// Run analyzer
+milvus::RunAnalyzerRequest run_request;
+run_request.WithTexts({text}).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_response;
+auto status = client->RunAnalyzer(run_request, run_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Sample text to analyze
+let text = "An efficient system relies on a robust analyzer to correctly process text for various applications.";
+
+// Run analyzer
+let result = client
+    .run_analyzer(
+        sdk::request::utility::RunAnalyzerRequest::builder()
+            .texts([text])
+            .analyzer_params(analyzer_params.clone())
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -184,6 +242,8 @@ The configuration of the `standard` built-in analyzer above is equivalent to set
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -232,6 +292,32 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     }}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        "lowercase",
+        {
+            {"type", "stop"},
+            {"stop_words", {"a", "an", "for"}}
+        }
+    }}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        "lowercase",
+        {
+            "type": "stop",
+            "stop_words": ["a", "an", "for"]
+        }
+    ]
+});
+```
+
 ```bash
 export analyzerParams='{
        "type": "standard",
@@ -278,6 +364,8 @@ For example, a tokenizer would convert text `"Vector Database Built for Scale"` 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -300,6 +388,18 @@ const analyzer_params = {
 
 ```go
 analyzerParams = map[string]any{"tokenizer": "whitespace"}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "whitespace"},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "whitespace",
+});
 ```
 
 ```bash
@@ -339,6 +439,8 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -367,6 +469,20 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
             "filter": []any{"lowercase"}}
     ```
 
+    ```cpp
+    nlohmann::json analyzer_params = {
+        {"tokenizer", "standard"}, // Mandatory: Specifies tokenizer
+        {"filter", {"lowercase"}}, // Optional: Built-in filter that converts text to lowercase
+    };
+    ```
+
+    ```rust
+    let analyzer_params = serde_json::json!({
+        "tokenizer": "standard",   // Mandatory: Specifies tokenizer
+        "filter": ["lowercase"],   // Optional: Built-in filter that converts text to lowercase
+    });
+    ```
+
     ```bash
     export analyzerParams='{
            "type": "standard",
@@ -389,6 +505,8 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -434,6 +552,30 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         }}}
     ```
 
+    ```cpp
+    nlohmann::json analyzer_params = {
+        {"tokenizer", "standard"}, // Mandatory: Specifies tokenizer
+        {"filter", {
+            {
+                {"type", "stop"},           // Specifies 'stop' as the filter type
+                {"stop_words", {"of", "to"}} // Customizes stop words for this filter type
+            }
+        }}
+    };
+    ```
+
+    ```rust
+    let analyzer_params = serde_json::json!({
+        "tokenizer": "standard", // Mandatory: Specifies tokenizer
+        "filter": [
+            {
+                "type": "stop",              // Specifies 'stop' as the filter type
+                "stop_words": ["of", "to"], // Customizes stop words for this filter type
+            }
+        ]
+    });
+    ```
+
     ```bash
     export analyzerParams='{
            "type": "standard",
@@ -469,6 +611,8 @@ Begin by setting up the Milvus client and creating a new schema.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -535,6 +679,28 @@ defer client.Close(ctx)
 schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create a new schema
+auto schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+```
+
+```rust
+// Create a new schema
+let schema = sdk::CollectionSchema::new().enable_dynamic_field(false);
+```
+
 ```bash
 # restful
 ```
@@ -552,6 +718,8 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -576,9 +744,7 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     analyzerParamsBuiltin.put("type", "english");
 
     List<String> texts = new ArrayList<>();
-    texts.add("Milvus simplifies text ana
-    
-    lysis for search.");
+    texts.add("Milvus simplifies text analysis for search.");
     
     RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
             .texts(texts)
@@ -618,6 +784,42 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     
     ```
 
+    ```cpp
+    // Built-in analyzer configuration for English text processing
+    nlohmann::json analyzer_params_built_in = {
+        {"type", "english"}
+    };
+
+    // Verify built-in analyzer configuration
+    std::string sample_text = "Milvus simplifies text analysis for search.";
+    milvus::RunAnalyzerRequest run_request;
+    run_request.WithTexts({sample_text}).WithAnalyzerParams(analyzer_params_built_in);
+    milvus::RunAnalyzerResponse run_response;
+    auto status = client->RunAnalyzer(run_request, run_response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+    ```
+
+    ```rust
+    // Built-in analyzer configuration for English text processing
+    let analyzer_params_built_in = serde_json::json!({
+        "type": "english"
+    });
+
+    // Verify built-in analyzer configuration
+    let sample_text = "Milvus simplifies text analysis for search.";
+    let result = client
+        .run_analyzer(
+            sdk::request::utility::RunAnalyzerRequest::builder()
+                .texts([sample_text])
+                .analyzer_params(analyzer_params_built_in.clone())
+                .build()?,
+        )
+        .await?;
+    ```
+
     ```bash
     # restful
     ```
@@ -633,6 +835,8 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         <a href="#java">Java</a>
         <a href="#javascript">NodeJS</a>
         <a href="#go">Go</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
     </div>
 
@@ -715,14 +919,15 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 
     ```go
     analyzerParams = map[string]any{"tokenizer": "standard",
-        "filter": []any{"lowercase", 
-        map[string]any{
-            "type": "length",
-            "max":  40,
-        map[string]any{
-            "type": "stop",
-            "stop_words": []string{"of", "to"},
-        }}}
+        "filter": []any{"lowercase",
+            map[string]any{
+                "type": "length",
+                "max":  40,
+            },
+            map[string]any{
+                "type":       "stop",
+                "stop_words": []string{"of", "to"},
+            }}}
         
     bs, _ := json.Marshal(analyzerParams)
     texts := []string{"Milvus provides flexible, customizable analyzers for robust text processing."}
@@ -734,6 +939,50 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         fmt.Println(err.Error())
         // handle error
     }
+    ```
+
+    ```cpp
+    // Configure a custom analyzer
+    nlohmann::json analyzer_params_custom = {
+        {"tokenizer", "standard"},
+        {"filter", {
+            "lowercase",                                            // Built-in filter: convert tokens to lowercase
+            {{"type", "length"}, {"max", 40}},                      // Custom filter: restrict token length
+            {{"type", "stop"}, {"stop_words", {"of", "for"}}}       // Custom filter: remove specified stop words
+        }}
+    };
+
+    std::string sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+    milvus::RunAnalyzerRequest run_request;
+    run_request.WithTexts({sample_text}).WithAnalyzerParams(analyzer_params_custom);
+    milvus::RunAnalyzerResponse run_response;
+    auto status = client->RunAnalyzer(run_request, run_response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+    ```
+
+    ```rust
+    // Configure a custom analyzer
+    let analyzer_params_custom = serde_json::json!({
+        "tokenizer": "standard",
+        "filter": [
+            "lowercase",                            // Built-in filter: convert tokens to lowercase
+            {"type": "length", "max": 40},          // Custom filter: restrict token length
+            {"type": "stop", "stop_words": ["of", "for"]} // Custom filter: remove specified stop words
+        ]
+    });
+
+    let sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+    let result = client
+        .run_analyzer(
+            sdk::request::utility::RunAnalyzerRequest::builder()
+                .texts([sample_text])
+                .analyzer_params(analyzer_params_custom.clone())
+                .build()?,
+        )
+        .await?;
     ```
 
     ```bash
@@ -749,6 +998,8 @@ Now that you have verified your analyzer configurations, add them to your schema
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -860,6 +1111,67 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+// Add VARCHAR field 'title_en' using the built-in analyzer configuration
+schema->AddField(milvus::FieldSchema("title_en", milvus::DataType::VARCHAR)
+    .WithMaxLength(1000)
+    .EnableAnalyzer(true)
+    .WithAnalyzerParams(analyzer_params_built_in)
+    .EnableMatch(true));
+
+// Add VARCHAR field 'title' using the custom analyzer configuration
+schema->AddField(milvus::FieldSchema("title", milvus::DataType::VARCHAR)
+    .WithMaxLength(1000)
+    .EnableAnalyzer(true)
+    .WithAnalyzerParams(analyzer_params_custom)
+    .EnableMatch(true));
+
+// Add a vector field for embeddings
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+
+// Add a primary key field
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false).WithAutoID(true));
+```
+
+```rust
+// Add VARCHAR field 'title_en' using the built-in analyzer configuration
+let schema = schema
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("title_en")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(1000)
+            .enable_analyzer(true)
+            .analyzer_params(analyzer_params_built_in)
+            .enable_match(true),
+    )
+    // Add VARCHAR field 'title' using the custom analyzer configuration
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("title")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(1000)
+            .enable_analyzer(true)
+            .analyzer_params(analyzer_params_custom)
+            .enable_match(true),
+    )
+    // Add a vector field for embeddings
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(3),
+    )
+    // Add a primary key field
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    );
+```
+
 ```bash
 # restful
 ```
@@ -871,6 +1183,8 @@ schema.WithField(entity.NewField().
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -936,6 +1250,42 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+// Set up index params for vector field
+std::vector<milvus::IndexDesc> indexes;
+indexes.emplace_back(milvus::IndexDesc("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE));
+
+// Create collection with defined schema
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    .WithIndexes(std::move(indexes));
+auto status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Set up index params for vector field
+let index_param = sdk::IndexParam::new()
+    .field_name("embedding")
+    .index_type(sdk::IndexType::AutoIndex)
+    .metric_type(sdk::MetricType::Cosine);
+
+// Create collection with defined schema
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_param(index_param)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

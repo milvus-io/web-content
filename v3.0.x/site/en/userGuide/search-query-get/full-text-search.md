@@ -62,7 +62,7 @@ Your collection schema must include at least three required fields:
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -176,6 +176,62 @@ const schema = [
 console.log(schema);
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
+// highlight-start
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField({"sparse", milvus::DataType::SPARSE_FLOAT_VECTOR});
+// highlight-end
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    // highlight-start
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("text")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(1000)
+            .enable_analyzer(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("sparse")
+            .data_type(sdk::DataType::SparseFloatVector),
+    );
+// highlight-end
+```
+
 ```bash
 export schema='{
         "autoId": true,
@@ -238,7 +294,7 @@ Define the function and add it to your schema:
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -274,6 +330,22 @@ function := entity.NewFunction().
     WithOutputFields("sparse").
     WithType(entity.FunctionTypeBM25)
 schema.WithFunction(function)
+```
+
+```cpp
+milvus::FunctionPtr bm25_function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+bm25_function->AddInputFieldName("text");
+bm25_function->AddOutputFieldName("sparse");
+schema->AddFunction(bm25_function);
+```
+
+```rust
+let bm25_function = sdk::Function::new()
+    .name("text_bm25_emb")
+    .function_type(sdk::FunctionType::Bm25)
+    .input_fields(["text"])
+    .output_fields(["sparse"]);
+let schema = schema.add_function(bm25_function);
 ```
 
 ```javascript
@@ -369,7 +441,7 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -412,6 +484,40 @@ indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
     .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
     .WithExtraParam("bm25_k1", 1.2)
     .WithExtraParam("bm25_b", 0.75)
+```
+
+```cpp
+milvus::IndexDesc sparse_index("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+sparse_index.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+sparse_index.AddExtraParam("bm25_k1", "1.2");
+sparse_index.AddExtraParam("bm25_b", "0.75");
+status = client->CreateIndex(
+    milvus::CreateIndexRequest().WithCollectionName("my_collection").AddIndex(std::move(sparse_index)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("my_collection")
+            .index_param(
+                sdk::IndexParam::new()
+                    .field_name("sparse")
+                    .index_type(sdk::IndexType::SparseInvertedIndex)
+                    .metric_type(sdk::MetricType::Bm25)
+                    .extra_params(HashMap::from([
+                        ("inverted_index_algo".into(), "DAAT_MAXSCORE".into()),
+                        ("bm25_k1".into(), "1.2".into()),
+                        ("bm25_b".into(), "0.75".into()),
+                    ])),
+            )
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -495,7 +601,7 @@ Now create the collection using the schema and index parameters defined.
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -525,6 +631,27 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("my_collection")
+                                      .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -571,7 +698,7 @@ After setting up your collection and index, you're ready to insert text data. In
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -615,7 +742,36 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{{"text", "information retrieval is a field of study."}});
+rows.emplace_back(milvus::EntityRow{{"text", "information retrieval focuses on finding relevant information in large datasets."}});
+rows.emplace_back(milvus::EntityRow{{"text", "data mining and information retrieval overlap in research."}});
 
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest().WithCollectionName("my_collection").WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({"text": "information retrieval is a field of study."}),
+    serde_json::json!({"text": "information retrieval focuses on finding relevant information in large datasets."}),
+    serde_json::json!({"text": "data mining and information retrieval overlap in research."}),
+];
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
 ```javascript
 await client.insert({
     collection_name: 'my_collection',
@@ -676,7 +832,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -729,6 +885,76 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("text: ", resultSet.GetColumn("text").FieldData().GetScalars())
+}
+```
+
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    // highlight-start
+    .WithAnnsField("sparse")
+    .AddEmbeddedText("whats the focus of information retrieval?")
+    .WithOutputFields({"text"})
+    // highlight-end
+    .WithLimit(3);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto texts = result.OutputField<milvus::VarCharFieldData>("text");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << ", text=" << texts->Data()[i]
+                  << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("my_collection")
+            // highlight-start
+            .vector_field("sparse")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "whats the focus of information retrieval?".into(),
+            ]))
+            .output_fields(["text"])
+            // highlight-end
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for (query_index, result) in search.results().iter().enumerate() {
+    println!("Query vector {query_index}:");
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id value: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score value: {value:?}");
+                continue;
+            }
+        };
+        let text = match row.get("text")? {
+            ResultValue::String(value) => value,
+            value => {
+                println!("  unexpected text value: {value:?}");
+                continue;
+            }
+        };
+        println!("  id={id}, score={score}, text={text}");
+    }
 }
 ```
 
@@ -888,6 +1114,48 @@ await client.search({
 });
 ```
 
+```cpp
+// ❌ This throws an error - you cannot output the sparse field
+milvus::SearchRequest bad_request;
+bad_request.WithCollectionName("my_collection")
+    .WithAnnsField("sparse")
+    .AddEmbeddedText("query text")
+    // highlight-next-line
+    .WithOutputFields({"text", "sparse"})  // 'sparse' causes an error
+    .WithLimit(3);
+
+// ✅ This works - output text fields only
+milvus::SearchRequest good_request;
+good_request.WithCollectionName("my_collection")
+    .WithAnnsField("sparse")
+    .AddEmbeddedText("query text")
+    // highlight-next-line
+    .WithOutputFields({"text"})
+    .WithLimit(3);
+```
+
+```rust
+// ❌ This throws an error - you cannot output the sparse field
+let _bad = SearchRequest::builder()
+    .collection_name("my_collection")
+    .vector_field("sparse")
+    .vectors(SearchVectors::EmbeddedText(vec!["query text".into()]))
+    // highlight-next-line
+    .output_fields(["text", "sparse"])  // 'sparse' causes an error
+    .limit(3)
+    .build()?;
+
+// ✅ This works - output text fields only
+let _good = SearchRequest::builder()
+    .collection_name("my_collection")
+    .vector_field("sparse")
+    .vectors(SearchVectors::EmbeddedText(vec!["query text".into()]))
+    // highlight-next-line
+    .output_fields(["text"])
+    .limit(3)
+    .build()?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -901,17 +1169,6 @@ curl --request POST \
     "limit": 3,
     "outputFields": ["text"]
 }'
-```
-
-```cpp
-// Searching with the sparse field in output_fields throws an error.
-// Only output the original text and metadata fields.
-milvus::SearchRequest request = milvus::SearchRequest()
-    .WithCollectionName("my_collection")
-    .AddEmbeddedText("query text")
-    .WithLimit(3)
-    .WithAnnsField("sparse")
-    .AddOutputField("text");
 ```
 
 ### Why do I need to define a sparse vector field if I can't access it?

@@ -134,6 +134,8 @@ After your collection is set up with a numeric field (in this example, `publish_
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -197,6 +199,59 @@ const ranker = {
 // go
 ```
 
+```cpp
+#include <ctime>
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create an exponential decay ranker for news recency
+auto ranker = std::make_shared<milvus::DecayRerank>("news_recency");
+ranker->AddInputFieldName("publish_time");
+ranker->SetFunction("exp");
+ranker->SetOrigin(static_cast<int64_t>(time(nullptr)));
+ranker->SetOffset(3 * 60 * 60);
+ranker->SetDecay(0.5f);
+ranker->SetScale(24 * 60 * 60);
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create an exponential decay ranker for news recency
+let now_ts = std::time::SystemTime::now()
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap()
+    .as_secs() as i64;
+let ranker = {
+    let rerank = DecayRerank::new()
+        .name("news_recency")
+        .decay_function("exp")
+        .origin(now_ts)
+        .offset(3 * 60 * 60)
+        .decay(0.5)
+        .scale(24 * 60 * 60);
+    let value = rerank.get_function().clone().input_fields(["publish_time"]);
+    rerank.function(value)
+};
+```
+
 ```bash
 # restful
 ```
@@ -210,6 +265,8 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -266,6 +323,49 @@ const result = await milvusClient.search({
 
 ```go
 // go
+```
+
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.4f}; // Replace with your query vector
+
+milvus::FunctionScorePtr function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("collection_name")
+                         .WithAnnsField("dense")
+                         .WithLimit(10)
+                         .WithOutputFields({"title", "publish_time"})
+                         //  highlight-next-line
+                         .WithRerank(function_score)
+                         .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(searchRequest, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4]; // Replace with your query vector
+
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("collection_name")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .vector_field("dense")
+            .limit(10)
+            .output_fields(["title", "publish_time"])
+            //  highlight-next-line
+            .rerank(FunctionScore::new().add_function(ranker))
+            .consistency_level(ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
+println!("{:?}", result);
 ```
 
 ```bash

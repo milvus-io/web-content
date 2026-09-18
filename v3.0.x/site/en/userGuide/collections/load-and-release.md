@@ -19,6 +19,8 @@ The following code snippets demonstrate how to load a collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -156,6 +158,68 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// 7. Load the collection
+milvus::LoadCollectionRequest load_request;
+load_request.WithCollectionName("my_collection");
+status = client->LoadCollection(load_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::GetLoadStateRequest get_load_state_request;
+get_load_state_request.WithCollectionName("my_collection");
+milvus::GetLoadStateResponse load_state_response;
+status = client->GetLoadState(get_load_state_request, load_state_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "load_state=" << static_cast<int>(load_state_response.State()) << std::endl;
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// 7. Load the collection
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+let state = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -210,6 +274,8 @@ The following code snippet assumes that you have created a collection named **my
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,8 +283,8 @@ The following code snippet assumes that you have created a collection named **my
 client.load_collection(
     collection_name="my_collection",
     # highlight-next-line
-    load_fields=["my_id", "my_vector"] # Load only the specified fields
-    skip_load_dynamic_field=True # Skip loading the dynamic field
+    load_fields=["my_id", "my_vector"], # Load only the specified fields
+    skip_load_dynamic_field=True, # Skip loading the dynamic field
 )
 
 res = client.get_load_state(
@@ -289,6 +355,51 @@ if err != nil {
 fmt.Println(state)
 ```
 
+```cpp
+milvus::LoadCollectionRequest load_request;
+load_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithLoadFields({"my_id", "my_vector"})
+    .WithSkipDynamicField(true);
+auto status = client->LoadCollection(load_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::GetLoadStateRequest get_load_state_request;
+get_load_state_request.WithCollectionName("my_collection");
+milvus::GetLoadStateResponse load_state_response;
+status = client->GetLoadState(get_load_state_request, load_state_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "load_state=" << static_cast<int>(load_state_response.State()) << std::endl;
+```
+
+```rust
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .load_fields(["my_id", "my_vector"])
+            .skip_load_dynamic_field(true)
+            .build()?,
+    )
+    .await?;
+
+let state = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
+```
+
 ```bash
 # REST
 Not support yet
@@ -311,6 +422,8 @@ The following code snippet demonstrates how to release a collection.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -391,6 +504,47 @@ if err != nil {
     // handle error
 }
 fmt.Println(state)
+```
+
+```cpp
+// 8. Release the collection
+milvus::ReleaseCollectionRequest release_request;
+release_request.WithCollectionName("my_collection");
+auto status = client->ReleaseCollection(release_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::GetLoadStateRequest get_load_state_request;
+get_load_state_request.WithCollectionName("my_collection");
+milvus::GetLoadStateResponse load_state_response;
+status = client->GetLoadState(get_load_state_request, load_state_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "load_state=" << static_cast<int>(load_state_response.State()) << std::endl;
+```
+
+```rust
+// 8. Release the collection
+client
+    .release_collection(
+        ReleaseCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+
+let state = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
 ```
 
 ```bash

@@ -41,6 +41,8 @@ As with creating a managed collection, you also need to create a schema before c
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -86,6 +88,29 @@ schema := entity.NewSchema().
 
 ```javascript
 // node
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->WithExternalSource("s3://s3.<region-id>.amazonaws.com/<bucket>/");
+schema->WithExternalSpec({
+    {"format", "parquet"},
+    {"extfs", nlohmann::json::object()}
+});
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let schema = sdk::CollectionSchema::new()
+    .external_source("s3://s3.<region-id>.amazonaws.com/<bucket>/")
+    .external_spec(serde_json::json!({
+        "format": "parquet",
+        "extfs": {}
+    }));
 ```
 
 ```bash
@@ -393,6 +418,8 @@ Once the schema is ready, you can add fields as follows:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -475,6 +502,41 @@ schema = schema.
 // node
 ```
 
+```cpp
+schema->AddField(milvus::FieldSchema("product_id", milvus::DataType::INT64)
+                     .WithExternalField("id"));
+schema->AddField(milvus::FieldSchema("product_name", milvus::DataType::VARCHAR)
+                     .WithMaxLength(512)
+                     .WithExternalField("name"));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR)
+                     .WithDimension(768)
+                     .WithExternalField("vector"));
+```
+
+```rust
+let schema = schema
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("product_id")
+            .data_type(sdk::DataType::Int64)
+            .external_field("id"),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("product_name")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(512)
+            .external_field("name"),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(768)
+            .external_field("vector"),
+    );
+```
+
 ```bash
 export schema="{
     \"externalSource\": \"volume://my_volume/path/to/a/folder\",
@@ -492,6 +554,8 @@ After adding all the fields to the schema, you can create the external collectio
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -554,6 +618,43 @@ if err != nil {
 // node
 ```
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("test_collection")
+    .WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("test_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${PROJECT_ENDPOINT}/v2/vectordb/collections/create" \
@@ -576,6 +677,8 @@ You can create indexes for external collection fields as you do in managed colle
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -661,6 +764,42 @@ client.createIndex({
 })
 ```
 
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+indexes.emplace_back(milvus::IndexDesc(
+    "embedding", "my_vector", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE));
+indexes.emplace_back(milvus::IndexDesc(
+    "product_name", "my_id", milvus::IndexType::AUTOINDEX));
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithDatabaseName("my_database")
+    .WithCollectionName("test_collection")
+    .WithIndexes(std::move(indexes));
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        CreateIndexRequest::builder()
+            .collection_name("test_collection")
+            .index_params(vec![
+                IndexParam::new()
+                    .field_name("embedding")
+                    .index_type(IndexType::AutoIndex)
+                    .metric_type(MetricType::Cosine),
+                IndexParam::new()
+                    .field_name("product_name")
+                    .index_type(IndexType::AutoIndex),
+            ])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export indexParams='[
         {
@@ -696,6 +835,8 @@ Once the collection is ready, refresh it to create the metadata and indexes for 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -765,6 +906,80 @@ for {
 
 ```javascript
 // node
+```
+
+```cpp
+milvus::RefreshExternalCollectionRequest refresh_request;
+refresh_request.WithDatabaseName("my_database")
+    .WithCollectionName("test_collection");
+milvus::RefreshExternalCollectionResponse refresh_response;
+status = client->RefreshExternalCollection(refresh_request, refresh_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+int64_t job_id = refresh_response.JobID();
+
+while (true) {
+    milvus::GetRefreshExternalCollectionProgressRequest progress_request;
+    progress_request.WithJobID(job_id);
+    milvus::GetRefreshExternalCollectionProgressResponse progress_response;
+    status = client->GetRefreshExternalCollectionProgress(progress_request, progress_response);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+    const auto& job_info = progress_response.JobInfo();
+    std::cout << "  " << std::to_string(job_info.State()) << ": " << job_info.Progress() << "%" << std::endl;
+    if (job_info.State() == milvus::RefreshExternalCollectionStateCode::COMPLETED) {
+        auto elapsed = job_info.EndTime() - job_info.StartTime();
+        std::cout << "  Completed in " << elapsed << "ms" << std::endl;
+        break;
+    } else if (job_info.State() == milvus::RefreshExternalCollectionStateCode::FAILED) {
+        std::cout << "  Failed: " << job_info.Reason() << std::endl;
+        break;
+    }
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}
+```
+
+```rust
+let refresh = client
+    .refresh_external_collection(
+        RefreshExternalCollectionRequest::builder()
+            .database_name("my_database")
+            .collection_name("test_collection")
+            .build()?,
+    )
+    .await?;
+let job_id = refresh.job_id();
+loop {
+    let progress = client
+        .get_refresh_external_collection_progress(
+            GetRefreshExternalCollectionProgressRequest::builder()
+                .job_id(job_id)
+                .build()?,
+        )
+        .await?;
+    let job_info = progress.job_info();
+    println!(
+        "  {}: {}%",
+        job_info.get_state().as_str(),
+        job_info.get_progress()
+    );
+    match job_info.get_state() {
+        RefreshExternalCollectionStateCode::Completed => {
+            let elapsed = job_info.get_end_time() - job_info.get_start_time();
+            println!("  Completed in {}ms", elapsed);
+            break;
+        }
+        RefreshExternalCollectionStateCode::Failed => {
+            println!("  Failed: {}", job_info.get_reason());
+            break;
+        }
+        _ => tokio::time::sleep(std::time::Duration::from_secs(2)).await,
+    }
+}
 ```
 
 ```bash

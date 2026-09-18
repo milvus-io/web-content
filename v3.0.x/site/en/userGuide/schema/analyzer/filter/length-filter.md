@@ -17,6 +17,8 @@ The `length` filter is a custom filter in Milvus, specified by setting `"type": 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -41,11 +43,11 @@ analyzerParams.put("filter",
 ```
 
 ```javascript
-cosnt analyzer_params = {
+const analyzer_params = {
     "tokenizer": "standard",
     "filter":[{
-        "type": "length", # Specifies the filter type as length
-        "max": 10, # Sets the maximum token length to 10 characters
+        "type": "length", // Specifies the filter type as length
+        "max": 10, // Sets the maximum token length to 10 characters
     }],
 };
 ```
@@ -56,6 +58,34 @@ analyzerParams = map[string]any{"tokenizer": "standard",
         "type": "length",
         "max":  10,
     }}}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        {{"type", "length"}, {"max", 10}}
+    }}
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        {"type": "length", "max": 10}
+    ]
+});
 ```
 
 ```bash
@@ -100,6 +130,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -135,6 +167,24 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     }}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        {{"type", "length"}, {"max", 10}}
+    }}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        {"type": "length", "max": 10}
+    ]
+});
+```
+
 ```bash
 # restful
 ```
@@ -146,6 +196,8 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,6 +269,54 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::vector<std::string> texts = {"The length filter allows control over token length requirements for text processing."};
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest request;
+request.WithTexts(texts).WithAnalyzerParams(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+}
+std::cout << std::endl;
+```
+
+```rust
+let result = client
+    .run_analyzer(
+        sdk::request::utility::RunAnalyzerRequest::builder()
+            .texts(["The length filter allows control over token length requirements for text processing."])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+println!("Standard analyzer output: {:?}", result.results());
 ```
 
 ```bash

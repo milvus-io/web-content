@@ -235,6 +235,8 @@ Once your MinHash vectors and original token sets are ready, you can store, inde
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -254,6 +256,31 @@ client = MilvusClient(uri="http://localhost:19530")  # Update if your URI is dif
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
 ```
 
 ```bash
@@ -277,6 +304,8 @@ Define a schema with:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -304,6 +333,43 @@ schema.add_field("document", DataType.VARCHAR, max_length=1000)
 // go
 ```
 
+```cpp
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"doc_id", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("minhash_signature", milvus::DataType::BINARY_VECTOR).WithDimension(8192));
+schema->AddField(milvus::FieldSchema("token_set", milvus::DataType::VARCHAR).WithMaxLength(1000));  // required for refinement
+schema->AddField(milvus::FieldSchema("document", milvus::DataType::VARCHAR).WithMaxLength(1000));
+```
+
+```rust
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("doc_id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("minhash_signature")
+            .data_type(DataType::BinaryVector)
+            .dimension(8192),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("token_set")
+            .data_type(DataType::VarChar)
+            .max_length(1000), // required for refinement
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("document")
+            .data_type(DataType::VarChar)
+            .max_length(1000),
+    );
+```
+
 ```bash
 # restful
 ```
@@ -317,6 +383,8 @@ Build a `MINHASH_LSH` index with Jaccard refinement enabled:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -348,6 +416,43 @@ client.create_collection("minhash_demo", schema=schema, index_params=index_param
 // go
 ```
 
+```cpp
+milvus::IndexDesc index_desc("minhash_signature", "minhash_signature", milvus::IndexType::MINHASH_LSH, milvus::MetricType::MHJACCARD);
+index_desc.AddExtraParam("mh_element_bit_width", "64");  // Must match signature bit width
+index_desc.AddExtraParam("mh_lsh_band", "16");           // Band count
+index_desc.AddExtraParam("with_raw_data", "true");       // Required for Jaccard refinement
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("minhash_demo")
+    .WithCollectionSchema(schema)
+    .AddIndex(std::move(index_desc));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("minhash_demo")
+            .schema(schema)
+            .index_params(vec![IndexParam::new()
+                .field_name("minhash_signature")
+                .index_type(IndexType::MinhashLsh)
+                .metric_type(MetricType::MhJaccard)
+                .extra_params(HashMap::from([
+                    ("mh_element_bit_width".to_string(), "64".to_string()),
+                    ("mh_lsh_band".to_string(), "16".to_string()),
+                    ("with_raw_data".to_string(), "true".to_string()),
+                ]))])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -369,6 +474,8 @@ For each document, prepare:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -405,6 +512,66 @@ client.flush("minhash_demo")
 // go
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    {{"doc_id", 0}, {"minhash_signature", std::vector<uint8_t>(2048, 0)}, {"token_set", "algorithms automatically data learning machine process"}, {"document", "machine learning algorithms process data automatically"}},
+    {{"doc_id", 1}, {"minhash_signature", std::vector<uint8_t>(2048, 0)}, {"token_set", "deep learning models networks neural patterns use"}, {"document", "deep learning uses neural networks to model patterns"}},
+};
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest()
+                            .WithCollectionName("minhash_demo")
+                            .WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+status = client->Flush(milvus::FlushRequest().AddCollectionName("minhash_demo"));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("minhash_demo")
+            .columns(vec![
+                FieldData::int64("doc_id", vec![0, 1]),
+                FieldData::binary_vector(
+                    "minhash_signature",
+                    vec![vec![0u8; 2048], vec![0u8; 2048]],
+                ),
+                FieldData::varchar(
+                    "token_set",
+                    vec![
+                        "algorithms automatically data learning machine process".to_string(),
+                        "deep learning models networks neural patterns use".to_string(),
+                    ],
+                ),
+                FieldData::varchar(
+                    "document",
+                    vec![
+                        "machine learning algorithms process data automatically".to_string(),
+                        "deep learning uses neural networks to model patterns".to_string(),
+                    ],
+                ),
+            ])
+            .build()?,
+    )
+    .await?;
+
+client
+    .flush(
+        sdk::request::utility::FlushRequest::builder()
+            .collection_names(["minhash_demo"])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -426,6 +593,8 @@ To perform a similarity search, generate a MinHash signature for the query docum
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -446,6 +615,16 @@ query_sig = generate_minhash_signature(query_text)
 // go
 ```
 
+```cpp
+std::string query_text = "neural networks model patterns in data";
+std::vector<uint8_t> query_sig(2048, 0);  // Replace with generate_minhash_signature(query_text)
+```
+
+```rust
+let query_text = "neural networks model patterns in data";
+let query_sig: Vec<u8> = vec![0u8; 2048]; // Replace with generate_minhash_signature(query_text)
+```
+
 ```bash
 # restful
 ```
@@ -459,6 +638,8 @@ This is fast and scalable but may miss close matches or include false positives:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -498,6 +679,64 @@ for i, hit in enumerate(approx_results[0]):
 // go
 ```
 
+```cpp
+// highlight-start
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("minhash_demo")
+    .WithAnnsField("minhash_signature")
+    // highlight-next-line
+    .AddBinaryVector(std::string(reinterpret_cast<const char*>(query_sig.data()), query_sig.size()))
+    .WithLimit(3)
+    .WithOutputFields({"doc_id", "document"})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+// highlight-end
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto documents = result.OutputField<milvus::VarCharFieldData>("document");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << i + 1 << ". Similarity: " << 1.0 - result.Scores()[i]
+                  << " | " << documents->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// highlight-start
+let approx_results = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("minhash_demo")
+            .vector_field("minhash_signature")
+            // highlight-next-line
+            .vectors(SearchVectors::Binary(vec![query_sig.clone()]))
+            .output_fields(["doc_id", "document"])
+            .limit(3)
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
+// highlight-end
+for result in approx_results.results() {
+    for row in result.rows()? {
+        let doc = match row.get("document")? {
+            ResultValue::String(v) => v,
+            _ => continue,
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(v) => v,
+            _ => continue,
+        };
+        println!("Similarity: {:.3} | {doc}", 1.0 - score);
+    }
+}
+```
+
 ```bash
 # restful
 ```
@@ -511,6 +750,8 @@ This enables accurate Jaccard comparison using the original token sets stored in
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -551,6 +792,69 @@ for i, hit in enumerate(refined_results[0]):
 
 ```go
 // go
+```
+
+```cpp
+// highlight-start
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("minhash_demo")
+    .WithAnnsField("minhash_signature")
+    // highlight-next-line
+    .AddBinaryVector(std::string(reinterpret_cast<const char*>(query_sig.data()), query_sig.size()))
+    .WithLimit(3)
+    .WithOutputFields({"doc_id", "document"})
+    .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+search_request.AddExtraParam("mh_search_with_jaccard", "true");  // Enable real Jaccard computation
+search_request.AddExtraParam("refine_k", "5");                   // Refine top 5 candidates
+// highlight-end
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto documents = result.OutputField<milvus::VarCharFieldData>("document");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << i + 1 << ". Similarity: " << 1.0 - result.Scores()[i]
+                  << " | " << documents->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// highlight-start
+let refined_results = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("minhash_demo")
+            .vector_field("minhash_signature")
+            // highlight-next-line
+            .vectors(SearchVectors::Binary(vec![query_sig]))
+            .output_fields(["doc_id", "document"])
+            .limit(3)
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .extra_params(HashMap::from([                ("mh_search_with_jaccard".to_string(), "true".to_string()), // Enable real Jaccard computation
+                ("refine_k".to_string(), "5".to_string()), // Refine top 5 candidates
+            ]))
+            .build()?,
+    )
+    .await?;
+// highlight-end
+for result in refined_results.results() {
+    for row in result.rows()? {
+        let doc = match row.get("document")? {
+            ResultValue::String(v) => v,
+            _ => continue,
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(v) => v,
+            _ => continue,
+        };
+        println!("Similarity: {:.3} | {doc}", 1.0 - score);
+    }
+}
 ```
 
 ```bash

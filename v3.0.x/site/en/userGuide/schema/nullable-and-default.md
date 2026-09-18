@@ -57,6 +57,8 @@ In this example, the collection schema defines a vector field named `embedding` 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -187,6 +189,75 @@ if err != nil {
 }
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Define schema fields
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(4)
+                     // highlight-next-line
+                     .WithNullable(true));
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection").WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Define schema fields
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(4)
+            // highlight-next-line
+            .nullable(true),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema.clone())
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export TOKEN="root:Milvus"
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -238,6 +309,8 @@ Scalar fields can also be defined as nullable using the same `nullable` attribut
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -272,6 +345,22 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64)
+                     // highlight-next-line
+                     .WithNullable(true));
+```
+
+```rust
+let schema = schema.add_field(
+    sdk::FieldSchema::new()
+        .name("age")
+        .data_type(sdk::DataType::Int64)
+        // highlight-next-line
+        .nullable(true),
+);
+```
+
 ```bash
 # Add another field object to the schema "fields" array, for example:
 # { "fieldName": "age", "dataType": "Int64", "nullable": true }
@@ -290,6 +379,8 @@ The example below inserts three entities into the collection created in [Define 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -380,6 +471,40 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows data = {
+    {{"id", 1}, {"embedding", {0.1f, 0.2f, 0.3f, 0.4f}}},
+    {{"id", 2}, {"embedding", nullptr}},
+    {{"id", 3}}
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(data));
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let data = vec![
+    serde_json::json!({"id": 1, "embedding": [0.1, 0.2, 0.3, 0.4]}),
+    serde_json::json!({"id": 2, "embedding": null}),
+    serde_json::json!({"id": 3}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(data)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -416,6 +541,8 @@ For a nullable vector field, this means only entities with valid vectors become 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -503,6 +630,51 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::IndexDesc index_desc("embedding", "embedding_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithCollectionName("my_collection").AddIndex(std::move(index_desc));
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::LoadCollectionRequest load_request;
+load_request.WithCollectionName("my_collection");
+status = client->LoadCollection(load_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("my_collection")
+            .index_param(
+                sdk::IndexParam::new()
+                    .field_name("embedding")
+                    .index_name("embedding_index")
+                    .index_type(sdk::IndexType::AutoIndex)
+                    .metric_type(sdk::MetricType::Cosine),
+            )
+            .build()?,
+    )
+    .await?;
+
+client
+    .load_collection(
+        sdk::request::collection::LoadCollectionRequest::builder()
+            .collection_name("my_collection")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
@@ -550,6 +722,8 @@ The following example performs a vector search on the nullable vector field `emb
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -623,6 +797,52 @@ if err != nil {
 fmt.Println(resultSets)
 ```
 
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.4f};
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("my_collection")
+                          .WithAnnsField("embedding")
+                          .WithLimit(3)
+                          .WithMetricType(milvus::MetricType::COSINE)
+                          .WithOutputFields({"embedding"})
+                          .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3, 0.4]]))
+            .metric_type(MetricType::Cosine)
+            .limit(3)
+            .output_fields(["embedding"])
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
+```
+
 ```bash
 curl --request POST \
   --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -658,6 +878,8 @@ For example, given a nullable scalar field `age`, the following filter selects e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -677,6 +899,14 @@ const expr = "age > 18";
 filter := "age > 18"
 ```
 
+```cpp
+std::string expr = "age > 18";
+```
+
+```rust
+let expr = "age > 18";
+```
+
 ```bash
 # Use in query/search filter parameter, for example:
 # "filter": "age > 18"
@@ -691,6 +921,8 @@ Similarly, equality checks do not match NULL values. For example:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -708,6 +940,14 @@ const expr = 'status == "active"';
 
 ```go
 filter := `status == "active"`
+```
+
+```cpp
+std::string expr = R"(status == "active")";
+```
+
+```rust
+let expr = r#"status == "active""#;
 ```
 
 ```bash

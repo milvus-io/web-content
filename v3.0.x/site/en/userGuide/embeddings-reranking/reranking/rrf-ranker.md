@@ -230,6 +230,8 @@ Milvus 2.6.x and later let you configure reranking strategies directly via the `
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -263,16 +265,48 @@ CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
 const ranker = {
-  name: "weight",
+  name: "rrf",
   input_field_names: [],
   function_type: FunctionType.RERANK,
   params: {
-    reranker: "weighted",
-    weights: [0.1, 0.9],
-    norm_score: true,
+    reranker: "rrf",
+    k: 100, // Optional
   },
 };
 
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <memory>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+auto ranker = std::make_shared<milvus::RRFRerank>(100);  // Optional
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+let collection_name = "my_collection";
+let image_embedding = vec![
+    0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835,
+    -0.26286205330961354, 0.9029438446296592,
+];
+let ranker = RRFRerank::new().k(100); // Optional
 ```
 
 ```go
@@ -331,6 +365,8 @@ RRF Ranker is designed specifically for hybrid search operations that combine mu
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -425,13 +461,12 @@ const image_search = {
 };
 
 const ranker = {
-  name: "weight",
+  name: "rrf",
   input_field_names: [],
   function_type: FunctionType.RERANK,
   params: {
-    reranker: "weighted",
-    weights: [0.1, 0.9],
-    norm_score: true,
+    reranker: "rrf",
+    k: 100, // Optional
   },
 };
 
@@ -442,6 +477,61 @@ const search = await milvusClient.search({
   limit: 10,
   rerank: ranker,
 });
+```
+
+```cpp
+auto text_search = std::make_shared<milvus::SubSearchRequest>();
+text_search->WithAnnsField("text_vector")
+    .WithLimit(10)
+    .AddEmbeddedText("modern dining table");
+
+auto image_search = std::make_shared<milvus::SubSearchRequest>();
+image_search->WithAnnsField("image_vector")
+    .WithLimit(10)
+    .AddFloatVector(image_embedding);
+
+milvus::HybridSearchRequest hybrid_request;
+hybrid_request.WithCollectionName(collection_name)
+    .AddSubRequest(text_search)
+    .AddSubRequest(image_search)
+    // highlight-next-line
+    .WithRerank(ranker)  // Apply the RRF ranker
+    .WithLimit(10)
+    .WithOutputFields({"product_name", "price", "category"});
+
+milvus::HybridSearchResponse hybrid_response;
+status = client->HybridSearch(hybrid_request, hybrid_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let text_search = SubSearchRequest::builder()
+    .vector_field("text_vector")
+    .vectors(SearchVectors::EmbeddedText(vec!["modern dining table".to_string()]))
+    .limit(10)
+    .build()?;
+
+let image_search = SubSearchRequest::builder()
+    .vector_field("image_vector")
+    .vectors(SearchVectors::Float(vec![image_embedding]))
+    .limit(10)
+    .build()?;
+
+let hybrid_results = client
+    .hybrid_search(
+        HybridSearchRequest::builder()
+            .collection_name(collection_name)
+            .sub_requests(vec![text_search, image_search])
+            // highlight-next-line
+            .rerank(ranker) // Apply the RRF ranker
+            .output_fields(["product_name", "price", "category"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```go

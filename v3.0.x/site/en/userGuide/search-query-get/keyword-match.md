@@ -39,6 +39,8 @@ To enable text match for a specific `VARCHAR` field, set both the `enable_analyz
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -117,6 +119,65 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)
+                     .WithMaxLength(1000)
+                     .EnableAnalyzer(true)  // Whether to enable text analysis for this field
+                     .EnableMatch(true));   // Whether to enable text match
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(false)
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("text")
+            .data_type(DataType::VarChar)
+            .max_length(1000)
+            .enable_analyzer(true) // Whether to enable text analysis for this field
+            .enable_match(true), // Whether to enable text match
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("embeddings")
+            .data_type(DataType::FloatVector)
+            .dimension(5),
+    );
+```
+
+
+
 ```javascript
 const schema = [
   {
@@ -190,6 +251,8 @@ In cases where a different analyzer is required, you can configure one using the
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -232,6 +295,35 @@ schema.WithField(entity.NewField().
     WithMaxLength(200),
 )
 ```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"type", "english"}
+};
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)
+                     .WithMaxLength(200)
+                     .EnableAnalyzer(true)
+                     .WithAnalyzerParams(analyzer_params)
+                     .EnableMatch(true));
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "type": "english",
+});
+
+let schema = schema.add_field(
+    FieldSchema::new()
+        .name("text")
+        .data_type(DataType::VarChar)
+        .max_length(200)
+        .enable_analyzer(true)
+        .analyzer_params(analyzer_params)
+        .enable_match(true),
+);
+```
+
+
 
 ```javascript
 const schema = [
@@ -325,6 +417,8 @@ By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -340,6 +434,16 @@ String filter = "TEXT_MATCH(text, 'machine deep')";
 ```go
 filter := "TEXT_MATCH(text, 'machine deep')"
 ```
+
+```cpp
+std::string filter = "TEXT_MATCH(text, 'machine deep')";
+```
+
+```rust
+let filter = "TEXT_MATCH(text, 'machine deep')";
+```
+
+
 
 ```javascript
 const filter = "TEXT_MATCH(text, 'machine deep')";
@@ -362,6 +466,8 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#java">Java</a>
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
         <a href="#cpp">C++</a>
     </div>
@@ -377,6 +483,16 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     ```go
     filter := "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
     ```
+
+    ```cpp
+    std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
+
+    ```rust
+    let filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
+
+
 
     ```javascript
     const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
@@ -397,6 +513,8 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#java">Java</a>
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
+        <a href="#cpp">C++</a>
+        <a href="#rust">Rust</a>
         <a href="#bash">cURL</a>
         <a href="#cpp">C++</a>
     </div>
@@ -412,6 +530,16 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     ```go
     filter := "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
     ```
+
+    ```cpp
+    std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
+    ```rust
+    let filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
+
 
     ```javascript
     const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
@@ -456,6 +584,8 @@ For example, the following expression matches tokens within one edit of `machne`
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -471,6 +601,16 @@ String filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 ```go
 filter := "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)"
 ```
+
+```cpp
+std::string filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+```rust
+let filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
+
 
 ```javascript
 const filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
@@ -503,6 +643,8 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -553,6 +695,51 @@ if err != nil {
     // handle error
 }
 ```
+
+```cpp
+// Match entities with `keyword1` or `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
+
+// Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("embeddings")
+    // highlight-next-line
+    .WithFilter(filter)
+    .WithLimit(10)
+    .WithOutputFields({"id", "text"})
+    .AddFloatVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Match entities with `keyword1` or `keyword2`
+let filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
+
+let query_vector = vec![0.35803764f32, -0.60234958, 0.18414013, -0.26286206, 0.90294385];
+
+// Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection") // Your collection name
+            .vector_field("embeddings") // Vector field name
+            .vectors(SearchVectors::Float(vec![query_vector])) // Query vector
+            // highlight-next-line
+            .filter(filter)
+            .output_fields(["id", "text"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+```
+
+
 
 ```javascript
 // Match entities with `keyword1` or `keyword2`
@@ -631,6 +818,8 @@ The example below retrieves documents where the `text` field contains both terms
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -670,6 +859,41 @@ if err != nil {
 }
 
 ```
+
+```cpp
+// Match entities with both `keyword1` and `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithFilter(filter)
+    .WithOutputFields({"id", "text"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Match entities with both `keyword1` and `keyword2`
+let filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
+
+let result = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .filter(filter)
+            .output_fields(["id", "text"])
+            .build()?,
+    )
+    .await?;
+```
+
+
 
 ```javascript
 // Match entities with both `keyword1` and `keyword2`
