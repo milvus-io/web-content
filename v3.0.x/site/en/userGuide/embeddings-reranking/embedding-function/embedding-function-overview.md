@@ -211,6 +211,8 @@ The following example defines a schema with one scalar field `"document"` for st
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -250,6 +252,66 @@ schema.add_field("dense", DataType.FLOAT_VECTOR, dim=1536)
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create a new schema for the collection
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+
+// Add primary field "id"
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+
+// Add scalar field "document" for storing textual data
+schema->AddField(milvus::FieldSchema("document", milvus::DataType::VARCHAR).WithMaxLength(9000));
+
+// Add vector field "dense" for storing embeddings.
+// IMPORTANT: Set dim to match the exact output dimension of the embedding model.
+// For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
+schema->AddField(milvus::FieldSchema("dense", milvus::DataType::FLOAT_VECTOR).WithDimension(1536));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create a new schema for the collection
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("document")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(9000),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("dense")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(1536),
+    );
+```
+
 ```bash
 # restful
 ```
@@ -265,6 +327,8 @@ The example below adds a Function module (`openai_embedding`) that converts the 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -299,6 +363,37 @@ schema.add_function(text_embedding_function)
 
 ```go
 // go
+```
+
+```cpp
+// Define embedding function (example: OpenAI provider)
+milvus::FunctionPtr text_embedding_function = std::make_shared<milvus::Function>(
+    "openai_embedding", milvus::FunctionType::TEXTEMBEDDING);
+text_embedding_function->AddInputFieldName("document");
+text_embedding_function->AddOutputFieldName("dense");
+text_embedding_function->AddParam("provider", "openai");
+text_embedding_function->AddParam("model_name", "text-embedding-3-small");
+
+// Add the embedding function to your schema
+schema->AddFunction(text_embedding_function);
+```
+
+```rust
+// Define embedding function (example: OpenAI provider)
+let text_embedding_function = sdk::Function::new()
+    .name("openai_embedding")
+    .function_type(sdk::FunctionType::TextEmbedding)
+    .input_fields(["document"])
+    .output_fields(["dense"])
+    .params(
+        [("provider", "openai"), ("model_name", "text-embedding-3-small")]
+            .into_iter()
+            .map(|(k, v)| (k.to_string(), v.to_string()))
+            .collect(),
+    );
+
+// Add the embedding function to your schema
+let schema = schema.add_function(text_embedding_function);
 ```
 
 ```bash
@@ -378,6 +473,8 @@ After defining the schema with necessary fields and the built-in function, set u
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -405,6 +502,36 @@ index_params.add_index(
 // go
 ```
 
+```cpp
+// Prepare index parameters
+milvus::IndexDesc index_desc("dense", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithCollectionName("demo").WithIndexes({std::move(index_desc)});
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Prepare index parameters
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("dense")
+        .index_type(sdk::IndexType::AutoIndex)
+        .metric_type(sdk::MetricType::Cosine),
+];
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("demo")
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -418,6 +545,8 @@ Now create the collection using the schema and index parameters defined.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -442,6 +571,29 @@ client.create_collection(
 // go
 ```
 
+```cpp
+// Create collection named "demo"
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("demo")
+                                      .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Create collection named "demo"
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("demo")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -455,6 +607,8 @@ After setting up your collection and index, you're ready to insert your raw data
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -479,6 +633,42 @@ client.insert('demo', [
 // go
 ```
 
+```cpp
+// Insert sample documents
+milvus::EntityRows rows;
+rows.emplace_back(milvus::EntityRow{{"id", 1},
+                                    {"document", "Milvus simplifies semantic search through embeddings."}});
+rows.emplace_back(milvus::EntityRow{{"id", 2},
+                                    {"document", "Vector embeddings convert text into searchable numeric data."}});
+rows.emplace_back(milvus::EntityRow{{"id", 3},
+                                    {"document", "Semantic search helps users find relevant information quickly."}});
+
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest().WithCollectionName("demo").WithRowsData(std::move(rows)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Insert sample documents
+let rows = vec![
+    serde_json::json!({"id": 1, "document": "Milvus simplifies semantic search through embeddings."}),
+    serde_json::json!({"id": 2, "document": "Vector embeddings convert text into searchable numeric data."}),
+    serde_json::json!({"id": 3, "document": "Semantic search helps users find relevant information quickly."}),
+];
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("demo")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -492,6 +682,8 @@ After data insertion, perform a semantic search using raw query text. Milvus aut
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -521,6 +713,66 @@ print(results)
 
 ```go
 // go
+```
+
+```cpp
+// Perform semantic search
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("demo")
+    .WithAnnsField("dense")
+    .AddEmbeddedText("How does Milvus handle semantic search?")
+    .WithLimit(1)
+    .AddOutputField("document");
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto documents = result.OutputField<milvus::VarCharFieldData>("document");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", document=" << documents->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// Perform semantic search
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("demo")
+            .vector_field("dense")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "How does Milvus handle semantic search?".into(),
+            ]))
+            .limit(1)
+            .output_fields(["document"])
+            .build()?,
+    )
+    .await?;
+for (query_index, result) in search.results().iter().enumerate() {
+    println!("Query vector {query_index}:");
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id value: {value:?}");
+                continue;
+            }
+        };
+        let document = match row.get("document")? {
+            ResultValue::String(value) => value,
+            value => {
+                println!("  unexpected document value: {value:?}");
+                continue;
+            }
+        };
+        println!("  id={id}, document={document}");
+    }
+}
 ```
 
 ```bash
@@ -562,6 +814,8 @@ Yes, you can use pre-computed query vectors instead of raw text for similarity s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -594,6 +848,59 @@ results = client.search(
 
 ```go
 // go
+```
+
+```cpp
+// Using raw text (Function module converts automatically)
+milvus::SearchRequest text_search_request;
+text_search_request.WithCollectionName("demo")
+    .WithAnnsField("dense")
+    .AddEmbeddedText("How does Milvus handle semantic search?")
+    .WithLimit(1);
+milvus::SearchResponse search_response;
+status = client->Search(text_search_request, search_response);
+
+// Using pre-computed query vector (must match stored vector dimensions)
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f};  // Must be same dimension as stored embeddings
+milvus::SearchRequest vector_search_request;
+vector_search_request.WithCollectionName("demo")
+    .WithAnnsField("dense")
+    .AddFloatVector(query_vector)
+    .WithLimit(1);
+status = client->Search(vector_search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Using raw text (Function module converts automatically)
+client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("demo")
+            .vector_field("dense")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "How does Milvus handle semantic search?".into(),
+            ]))
+            .limit(1)
+            .build()?,
+    )
+    .await?;
+
+// Using pre-computed query vector (must match stored vector dimensions)
+let query_vector = vec![0.1f32, 0.2, 0.3];  // Must be same dimension as stored embeddings
+client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("demo")
+            .vector_field("dense")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(1)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

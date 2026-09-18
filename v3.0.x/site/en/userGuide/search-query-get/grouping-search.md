@@ -61,8 +61,9 @@ In the search request, set both `group_by_field` and `output_fields` to `docId`.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -192,27 +193,6 @@ res = await client.search({
 var docIds = res.results.map(result => result.entity.docId)
 ```
 
-```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
-
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
--d '{
-    "collectionName": "my_collection",
-    "data": [
-        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-    ],
-    "annsField": "vector",
-    "limit": 3,
-    "groupingField": "docId",
-    "outputFields": ["docId"]
-}'
-```
-
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include <iostream>
@@ -255,6 +235,66 @@ for (auto& result : response.Results().Results()) {
 }
 ```
 
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let query_vector = vec![
+    0.14529211512077012f32, 0.9147257273453546, 0.7965055218724449,
+    0.7009258593102812, 0.5605206522382088,
+];
+
+// Group search results
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .group_by_field("docId")
+            .output_fields(["docId"])
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        let doc_id = match row.get("docId")? {
+            ResultValue::Int64(value) => value,
+            _ => continue,
+        };
+        println!("docId={doc_id}");
+    }
+}
+```
+
+```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "data": [
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+    ],
+    "annsField": "vector",
+    "limit": 3,
+    "groupingField": "docId",
+    "outputFields": ["docId"]
+}'
+```
+
 In the request above, `limit=3` indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.
 
 ## Configure group size
@@ -266,8 +306,9 @@ By default, Grouping Search returns only one entity per group. If you want multi
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -385,26 +426,6 @@ res = await client.search({
 var docIds = res.results.map(result => result.entity.docId)
 ```
 
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
--d '{
-    "collectionName": "my_collection",
-    "data": [
-        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-    ],
-    "annsField": "vector",
-    "limit": 5,
-    "groupingField": "docId",
-    "groupSize":2,
-    "strictGroupSize":true,
-    "outputFields": ["docId"]
-}'
-```
-
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include <iostream>
@@ -449,6 +470,57 @@ for (auto& result : response.Results().Results()) {
 }
 ```
 
+```rust
+let query_vector = vec![
+    0.14529211512077012f32, 0.9147257273453546, 0.7965055218724449,
+    0.7009258593102812, 0.5605206522382088,
+];
+
+// Group search results
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .group_by_field("docId")
+            .group_size(2)
+            .strict_group_size(true)
+            .output_fields(["docId"])
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        let doc_id = match row.get("docId")? {
+            ResultValue::Int64(value) => value,
+            _ => continue,
+        };
+        println!("docId={doc_id}");
+    }
+}
+```
+
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "data": [
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+    ],
+    "annsField": "vector",
+    "limit": 5,
+    "groupingField": "docId",
+    "groupSize":2,
+    "strictGroupSize":true,
+    "outputFields": ["docId"]
+}'
+```
+
 In the example above:
 
 - `group_size`: Specifies the desired number of entities to return per group. For instance, setting `group_size=2` means each group (or each `docId`) should ideally return two of the most similar paragraphs (or **chunks**). If `group_size` is not set, the system defaults to returning one result per group.
@@ -468,8 +540,9 @@ The following example groups search results by `category`, returns up to three e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -560,25 +633,6 @@ for _, result := range results {
 }
 ```
 
-```bash
-# Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.
-curl --request POST \
-  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
-  --header "Authorization: Bearer ${TOKEN}" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "collectionName": "product_catalog",
-    "data": [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
-    "annsField": "embedding",
-    "limit": 20,
-    "groupingField": "category",
-    "groupSize": 3,
-    "strictGroupSize": true,
-    "outputFields": ["category", "price", "rating"],
-    "orderByFields": ["price:asc"]
-  }'
-```
-
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include <iostream>
@@ -607,6 +661,57 @@ for (const auto& result : response.Results().Results()) {
     if (!status.IsOk()) { throw std::runtime_error(status.Message()); }
     std::cout << rows << std::endl;
 }
+```
+
+```rust
+// Prerequisite: client is connected to Milvus and product_catalog is loaded.
+let query_vector = vec![
+    0.14529211512077012f32, 0.9147257273453546, 0.7965055218724449,
+    0.7009258593102812, 0.5605206522382088,
+];
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .vector_field("embedding")
+            .limit(20)
+            .group_by_field("category")
+            .group_size(3)
+            .strict_group_size(true)
+            .output_fields(["category", "price", "rating"])
+            // highlight-start
+            .order_by_fields([OrderByField::new()
+                .field_name("price")
+                .direction(AggDirection::Asc)])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
+```
+
+```bash
+# Prerequisite: set CLUSTER_ENDPOINT and TOKEN for your Milvus instance.
+curl --request POST \
+  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "collectionName": "product_catalog",
+    "data": [[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]],
+    "annsField": "embedding",
+    "limit": 20,
+    "groupingField": "category",
+    "groupSize": 3,
+    "strictGroupSize": true,
+    "outputFields": ["category", "price", "rating"],
+    "orderByFields": ["price:asc"]
+  }'
 ```
 
 In the request above, `limit=20` means Milvus selects up to 20 groups, not 20 entities. Because `group_size=3`, the flat result list can contain up to 60 entities in total.

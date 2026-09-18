@@ -21,6 +21,8 @@ The `decompounder` filter is a custom filter in Milvus. To use it, specify `"typ
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -63,6 +65,36 @@ analyzerParams = map[string]any{"tokenizer": "standard",
         "type":       "decompounder",
         "word_list": []string{"dampf", "schiff", "fahrt", "brot", "backen", "automat"},
     }}}
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {{{"type", "decompounder"},
+                 {"word_list", {"dampf", "schiff", "fahrt", "brot", "backen", "automat"}}}}},
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        {
+            "type": "decompounder",
+            "word_list": ["dampf", "schiff", "fahrt", "brot", "backen", "automat"]
+        }
+    ]
+});
 ```
 
 ```bash
@@ -132,6 +164,38 @@ client.add_file_resource(
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::AddFileResourceRequest add_request;
+add_request.WithName("de_components").WithPath("file/decompounder.txt");
+status = client->AddFileResource(add_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .add_file_resource(
+        AddFileResourceRequest::builder()
+            .name("de_components")
+            .path("file/decompounder.txt")
+            .build()?,
+    )
+    .await?;
+```
+
 Reference the registered resource in the filter via `word_list_file`:
 
 ```python
@@ -146,6 +210,32 @@ analyzer_params = {
         },
     }],
 }
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {{{"type", "decompounder"},
+                 {"word_list_file", {{"type", "remote"},
+                                     {"resource_name", "de_components"},
+                                     {"file_name", "decompounder.txt"}}}}}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        {
+            "type": "decompounder",
+            "word_list_file": {
+                "type": "remote",
+                "resource_name": "de_components",
+                "file_name": "decompounder.txt"
+            }
+        }
+    ]
+});
 ```
 
 The `word_list_file` parameter accepts an object with the following fields:
@@ -180,6 +270,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -218,6 +310,26 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     }}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {{{"type", "decompounder"},
+                 {"word_list", {"dampf", "schiff", "fahrt", "brot", "backen", "automat"}}}}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [
+        {
+            "type": "decompounder",
+            "word_list": ["dampf", "schiff", "fahrt", "brot", "backen", "automat"]
+        }
+    ]
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -245,6 +357,8 @@ analyzerParams='{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -315,6 +429,69 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::string sample_text = "dampfschifffahrt brotbackautomat";
+
+// Run the standard analyzer with the defined configuration
+milvus::RunAnalyzerRequest request;
+request.AddText(sample_text).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << " ";
+    }
+}
+std::cout << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Sample text to analyze
+let sample_text = "dampfschifffahrt brotbackautomat";
+
+// Run the standard analyzer with the defined configuration
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .analyzer_params(analyzer_params)
+            .texts([sample_text])
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        print!("{} ", token.get_text());
+    }
+    println!();
 }
 ```
 

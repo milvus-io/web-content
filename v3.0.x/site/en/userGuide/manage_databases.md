@@ -21,6 +21,8 @@ You can use the Milvus RESTful API or SDKs to create data programmatically.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -82,6 +84,47 @@ if err != nil {
 }
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CreateDatabaseRequest create_db_request;
+create_db_request.WithDatabaseName("my_database_1");
+status = client->CreateDatabase(create_db_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+client
+    .create_database(
+        CreateDatabaseRequest::builder()
+            .database_name("my_database_1")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -103,6 +146,8 @@ You can also set properties for the database when you create it. The following e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -141,6 +186,33 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateDatabaseRequest create_db_request;
+create_db_request.WithDatabaseName("my_database_2")
+    .WithProperties({{"database.replica.number", "3"}});
+status = client->CreateDatabase(create_db_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use std::collections::HashMap;
+
+client
+    .create_database(
+        CreateDatabaseRequest::builder()
+            .database_name("my_database_2")
+            .properties(HashMap::from([(
+                "database.replica.number".to_string(),
+                "3".to_string(),
+            )]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -167,6 +239,8 @@ You can use the Milvus RESTful API or SDKs to list all existing databases and vi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -215,6 +289,49 @@ if err != nil {
     // handle err
 }
 log.Println(db)
+```
+
+```cpp
+// List all existing databases
+milvus::ListDatabasesRequest list_request;
+milvus::ListDatabasesResponse list_response;
+status = client->ListDatabases(list_request, list_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& db_name : list_response.DatabaseNames()) {
+    std::cout << db_name << std::endl;
+}
+
+// Check database details
+milvus::DescribeDatabaseRequest describe_request;
+describe_request.WithDatabaseName("default");
+milvus::DescribeDatabaseResponse describe_response;
+status = client->DescribeDatabase(describe_request, describe_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << describe_response.Desc().Name() << std::endl;
+```
+
+```rust
+// List all existing databases
+let databases = client
+    .list_databases(ListDatabasesRequest::builder().build()?)
+    .await?;
+println!("{}", databases.database_names().join(", "));
+
+// Check database details
+let description = client
+    .describe_database(
+        DescribeDatabaseRequest::builder()
+            .database_name("default")
+            .build()?,
+    )
+    .await?;
+println!("{}", description.database_name());
 ```
 
 ```bash
@@ -289,6 +406,8 @@ You can alter the properties of an existing database as follows. The following e
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -323,6 +442,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterDatabasePropertiesRequest alter_request;
+alter_request.WithDatabaseName("my_database_1")
+    .WithProperties({{"database.max.collections", "10"}});
+status = client->AlterDatabaseProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_database_properties(
+        AlterDatabasePropertiesRequest::builder()
+            .database_name("my_database_1")
+            .property("database.max.collections", "10")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -349,6 +490,8 @@ You can also reset a database property by dropping it as follows. The following 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -380,6 +523,28 @@ err := cli.DropDatabaseProperties(ctx, milvusclient.NewDropDatabasePropertiesOpt
 if err != nil {
     // handle err
 }
+```
+
+```cpp
+milvus::DropDatabasePropertiesRequest drop_request;
+drop_request.WithDatabaseName("my_database_1")
+    .WithPropertyKeys({"database.max.collections"});
+status = client->DropDatabaseProperties(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .drop_database_properties(
+        DropDatabasePropertiesRequest::builder()
+            .database_name("my_database_1")
+            .property_keys(["database.max.collections"])
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash
@@ -414,6 +579,8 @@ RESTful API does not support this operation.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -440,6 +607,18 @@ if err != nil {
 }
 ```
 
+```cpp
+status = client->UseDatabase("my_database_2");
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client.use_database("my_database_2").await?;
+```
+
 ```bash
 # This operation is unsupported because RESTful does not provide a persistent connection.
 # As a workaround, initiate the required request again with the target database.
@@ -460,6 +639,8 @@ You can use the Milvus RESTful API or SDKs to create data programmatically.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -486,6 +667,26 @@ err = cli.DropDatabase(ctx, milvusclient.NewDropDatabaseOption("my_database_2"))
 if err != nil {
     // handle err
 }
+```
+
+```cpp
+milvus::DropDatabaseRequest drop_request;
+drop_request.WithDatabaseName("my_database_2");
+status = client->DropDatabase(drop_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .drop_database(
+        DropDatabaseRequest::builder()
+            .database_name("my_database_2")
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

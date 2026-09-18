@@ -59,6 +59,8 @@ To use vLLM Ranker in your Milvus application, create a Function object that spe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -115,6 +117,55 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create a vLLM Ranker function
+auto vllm_ranker = std::make_shared<milvus::ModelRerank>("vllm_semantic_ranker");
+vllm_ranker->AddInputFieldName("document");
+vllm_ranker->SetProvider("vllm");
+vllm_ranker->SetQueries({"renewable energy developments"});
+vllm_ranker->SetEndpoint("http://localhost:8080");
+vllm_ranker->SetMaxClientBatchSize(32);
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(vllm_ranker);
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create a vLLM Ranker function
+let vllm_ranker = {
+    let rerank = ModelRerank::new()
+        .name("vllm_semantic_ranker")
+        .provider("vllm")
+        .queries(["renewable energy developments"])
+        .endpoint("http://localhost:8080")
+        .max_client_batch_size(32);
+    let value = rerank.get_function().clone().input_fields(["document"]);
+    rerank.function(value)
+};
+let function_score = FunctionScore::new().add_function(vllm_ranker);
 ```
 
 ```bash
@@ -185,6 +236,8 @@ To apply vLLM Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -228,6 +281,73 @@ SearchResp searchResp = client.search(searchReq);
 
 ```go
 // go
+```
+
+```cpp
+// Execute search with vLLM reranking
+std::vector<float> query_vector = {0.35803764f, -0.60234958f, 0.18414013f, -0.26286206f, 0.90294385f};
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("your_collection")
+                          .WithAnnsField("dense_vector")
+                          .WithLimit(5)
+                          .WithOutputFields({"document"})
+                          // highlight-next-line
+                          .WithRerank(function_score)
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED)
+                          .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// Execute search with vLLM reranking
+let query_vector = vec![0.35803764f32, -0.60234958, 0.18414013, -0.26286206, 0.90294385];
+let results = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("your_collection")
+            .vector_field("dense_vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .output_fields(["document"])
+            // highlight-next-line
+            .rerank(function_score.clone())
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
+for (query_index, result) in results.results().iter().enumerate() {
+    println!("Query vector {query_index}:");
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id value: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score value: {value:?}");
+                continue;
+            }
+        };
+        println!("  id={id}, score={score}");
+    }
+}
 ```
 
 ```bash

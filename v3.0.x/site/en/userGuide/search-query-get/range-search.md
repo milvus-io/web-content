@@ -68,6 +68,8 @@ In the following code snippets, set `radius` to `0.4` and `range_filter` to `0.6
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -206,6 +208,84 @@ res = await client.search({
     }
     // highlight-end
 })
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+std::vector<float> query_vector = {
+    0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f,
+    -0.26286205330961354f, 0.9029438446296592f
+};
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector")
+                   .WithLimit(3)
+                   // highlight-start
+                   .WithRadius(0.4)
+                   .WithRangeFilter(0.6)
+                   // highlight-end
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let query_vector = vec![
+    0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835,
+    -0.26286205330961354, 0.9029438446296592,
+];
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            // highlight-start
+            .radius(0.4)
+            .range_filter(0.6)
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    println!("TopK results:");
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
 ```
 
 ```bash

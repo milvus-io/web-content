@@ -72,6 +72,8 @@ The following code snippets demonstrate a search with standard filtering, and th
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -153,7 +155,7 @@ defer cancel()
 milvusAddr := "localhost:19530"
 token := "root:Milvus"
 
-client, err := client.New(ctx, &client.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
@@ -185,6 +187,84 @@ for _, resultSet := range resultSets {
     fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
 }
 
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+std::vector<float> query_vector = {0.35803764F, -0.60234958F, 0.18414013F, -0.26286206F, 0.90294385F};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    // highlight-start
+    .WithFilter("color like \"red%\" and likes > 50")
+    .WithOutputFields({"color", "likes"})
+    // highlight-end
+    .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
+    const auto likes = result.OutputField<milvus::Int64FieldData>("likes");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", color=" << colors->Data()[i]
+                  << ", likes=" << likes->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let query_vector = vec![0.35803764f32, -0.60234958, 0.18414013, -0.26286206, 0.90294385];
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vectors(SearchVectors::Float(vec![query_vector.clone()]))
+            .vector_field("vector")
+            .limit(5)
+            // highlight-start
+            .filter("color like \"red%\" and likes > 50")
+            .output_fields(["color", "likes"])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```javascript
@@ -265,6 +345,8 @@ To conduct a filtered search with iterative filtering, you can do as follows:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -350,7 +432,7 @@ defer cancel()
 milvusAddr := "localhost:19530"
 token := "root:Milvus"
 
-client, err := client.New(ctx, &client.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
@@ -383,6 +465,61 @@ for _, resultSet := range resultSets {
     fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
 }
 
+```
+
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("vector")
+    .WithLimit(5)
+    // highlight-start
+    .WithFilter("color like \"red%\" and likes > 50")
+    .WithOutputFields({"color", "likes"})
+    .WithExtraParams({{"hints", "iterative_filter"}})
+    // highlight-end
+    .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto colors = result.OutputField<milvus::VarCharFieldData>("color");
+    const auto likes = result.OutputField<milvus::Int64FieldData>("likes");
+    for (size_t i = 0; i < result.GetRowCount(); ++i) {
+        std::cout << "id=" << ids[i] << ", color=" << colors->Data()[i]
+                  << ", likes=" << likes->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .vector_field("vector")
+            .limit(5)
+            // highlight-start
+            .filter("color like \"red%\" and likes > 50")
+            .output_fields(["color", "likes"])
+            .extra_params(HashMap::from([
+                ("hints".to_string(), "iterative_filter".to_string()),
+            ]))
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```javascript

@@ -118,6 +118,8 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -188,6 +190,36 @@ const analyzer_params = {
 };
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "lindera"},
+        {"dict_kind", "ko-dic"},
+        {"filter", {
+            {
+                {"kind", "korean_stop_tags"},
+                {"tags", {"SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"}}
+            }
+        }}
+    }}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "lindera",
+        "dict_kind": "ko-dic",
+        "filter": [
+            {
+                "kind": "korean_stop_tags",
+                "tags": ["SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"]
+            }
+        ]
+    }
+});
+```
+
 ```bash
 # restful
 ```
@@ -224,6 +256,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -382,6 +416,81 @@ console.log("Analyzer output:", result);
 
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "lindera"},
+        {"dict_kind", "ko-dic"},
+        {"filter", {
+            {
+                {"kind", "korean_stop_tags"},
+                {"tags", {"SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"}}
+            }
+        }}
+    }}
+};
+
+// Sample Korean text: "서울에서 맛있는 음식을 먹었습니다" (I ate delicious food in Seoul)
+std::string sample_text = "서울에서 맛있는 음식을 먹었습니다";
+
+milvus::RunAnalyzerRequest run_request;
+run_request.WithTexts({sample_text}).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_response;
+status = client->RunAnalyzer(run_request, run_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "lindera",
+        "dict_kind": "ko-dic",
+        "filter": [
+            {
+                "kind": "korean_stop_tags",
+                "tags": ["SP", "SSC", "SSO", "SC", "SE", "SF", "JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC", "UNK", "EP", "ETM"]
+            }
+        ]
+    }
+});
+
+// Sample Korean text: "서울에서 맛있는 음식을 먹었습니다" (I ate delicious food in Seoul)
+let sample_text = "서울에서 맛있는 음식을 먹었습니다";
+
+let result = client
+    .run_analyzer(
+        sdk::request::utility::RunAnalyzerRequest::builder()
+            .texts([sample_text])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -401,6 +510,8 @@ Without `korean_stop_tags`, the output would include particles like `에서` (in
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -463,6 +574,60 @@ const sample_text = "東京スカイツリーの最寄り駅はとうきょう�
 
 const result = await client.run_analyzer(sample_text, analyzer_params);
 console.log("Analyzer output:", result);
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "lindera"},
+        {"dict_kind", "ipadic"},
+        {"filter", {
+            {
+                {"kind", "japanese_stop_tags"},
+                {"tags", {"接続詞", "助詞,格助詞", "助詞,格助詞,一般", "助詞,格助詞,引用", "助詞,格助詞,連語", "助詞,係助詞", "助詞,終助詞", "助詞,接続助詞", "助詞,特殊", "助詞,副助詞", "助詞,副助詞／並立助詞／終助詞", "助詞,連体化", "助詞,副詞化", "助詞,並立助詞", "助動詞", "記号,一般", "記号,読点", "記号,句点", "記号,空白", "記号,括弧閉", "記号,括弧開", "その他,間投", "フィラー", "非言語音"}}
+            }
+        }}
+    }}
+};
+
+// Sample Japanese text: "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です"
+std::string sample_text = "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です";
+
+milvus::RunAnalyzerRequest run_request;
+run_request.WithTexts({sample_text}).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_response;
+auto status = client->RunAnalyzer(run_request, run_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "lindera",
+        "dict_kind": "ipadic",
+        "filter": [
+            {
+                "kind": "japanese_stop_tags",
+                "tags": ["接続詞", "助詞,格助詞", "助詞,格助詞,一般", "助詞,格助詞,引用", "助詞,格助詞,連語", "助詞,係助詞", "助詞,終助詞", "助詞,接続助詞", "助詞,特殊", "助詞,副助詞", "助詞,副助詞／並立助詞／終助詞", "助詞,連体化", "助詞,副詞化", "助詞,並立助詞", "助動詞", "記号,一般", "記号,読点", "記号,句点", "記号,空白", "記号,括弧閉", "記号,括弧開", "その他,間投", "フィラー", "非言語音"]
+            }
+        ]
+    }
+});
+
+// Sample Japanese text: "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です"
+let sample_text = "東京スカイツリーの最寄り駅はとうきょうスカイツリー駅です";
+
+let result = client
+    .run_analyzer(
+        sdk::request::utility::RunAnalyzerRequest::builder()
+            .texts([sample_text])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

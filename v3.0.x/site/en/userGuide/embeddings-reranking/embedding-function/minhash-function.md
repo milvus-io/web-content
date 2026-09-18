@@ -90,6 +90,8 @@ Your collection schema must include at least three fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -117,6 +119,61 @@ schema.add_field(field_name="binary_vector", datatype=DataType.BINARY_VECTOR, di
 // go
 ```
 
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
+schema->AddField(milvus::FieldSchema("document_content", milvus::DataType::VARCHAR).WithMaxLength(9000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("binary_vector", milvus::DataType::BINARY_VECTOR).WithDimension(8192));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("document_content")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(9000)
+            .enable_analyzer(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("binary_vector")
+            .data_type(sdk::DataType::BinaryVector)
+            .dimension(8192),
+    );
+```
+
 ```bash
 # restful
 ```
@@ -132,6 +189,8 @@ Define the function and add it to your schema:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -160,6 +219,29 @@ schema.add_function(minhash_function)
 
 ```go
 // go
+```
+
+```cpp
+auto minhash_function = std::make_shared<milvus::Function>("minhash_function", milvus::FunctionType::MINHASH);
+minhash_function->AddInputFieldName("document_content");
+minhash_function->AddOutputFieldName("binary_vector");
+minhash_function->AddParam("num_hashes", "256");
+minhash_function->AddParam("shingle_size", "3");
+schema->AddFunction(minhash_function);
+```
+
+```rust
+let schema = schema.add_function(
+    sdk::Function::new()
+        .name("minhash_function")
+        .function_type(sdk::FunctionType::MinHash)
+        .input_fields(["document_content"])
+        .output_fields(["binary_vector"])
+        .params(HashMap::from([
+            ("num_hashes".to_string(), "256".to_string()),
+            ("shingle_size".to_string(), "3".to_string()),
+        ])),
+);
 ```
 
 ```bash
@@ -218,6 +300,8 @@ The recommended index type for MinHash binary vectors is `MINHASH_LSH`, with met
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -248,6 +332,27 @@ index_params.add_index(
 // go
 ```
 
+```cpp
+milvus::IndexDesc index_desc("binary_vector", "binary_vector_index", milvus::IndexType::MINHASH_LSH, milvus::MetricType::MHJACCARD);
+index_desc.AddExtraParam("mh_lsh_band", "128");
+index_desc.AddExtraParam("mh_element_bit_width", "32");
+index_desc.AddExtraParam("with_raw_data", "true");
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("binary_vector")
+        .index_type(sdk::IndexType::MinhashLsh)
+        .metric_type(sdk::MetricType::MhJaccard)
+        .extra_params(HashMap::from([
+            ("mh_lsh_band".to_string(), "128".to_string()),
+            ("mh_element_bit_width".to_string(), "32".to_string()),
+            ("with_raw_data".to_string(), "true".to_string()),
+        ])),
+];
+```
+
 ```bash
 # restful
 ```
@@ -263,6 +368,8 @@ Create the collection using the schema and index parameters defined above:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -286,6 +393,38 @@ client.create_collection(
 // go
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("dedup_collection")
+    .WithCollectionSchema(schema)
+    .AddIndex(std::move(index_desc));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("dedup_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("dedup_collection")
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -299,6 +438,8 @@ After setting up your collection, insert text data. You only need to provide the
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -325,6 +466,40 @@ client.insert(
 // go
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    {{"document_content", "information retrieval is a field of study that helps users find relevant information in large datasets"}},
+    {{"document_content", "information retrieval is a research field focused on helping users find relevant data in large collections"}},
+    {{"document_content", "information retrieval is a field of research helping users search for relevant information in large datasets"}},
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("dedup_collection").WithRowsData(std::move(rows));
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let rows = vec![
+    serde_json::json!({"document_content": "information retrieval is a field of study that helps users find relevant information in large datasets"}),
+    serde_json::json!({"document_content": "information retrieval is a research field focused on helping users find relevant data in large collections"}),
+    serde_json::json!({"document_content": "information retrieval is a field of research helping users search for relevant information in large datasets"}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("dedup_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -338,6 +513,8 @@ Once you have inserted data, search for near-duplicate documents by providing ra
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -375,6 +552,60 @@ for hits in results:
 
 ```go
 // go
+```
+
+```cpp
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("dedup_collection")
+                          .WithAnnsField("binary_vector")
+                          .WithMetricType(milvus::MetricType::MHJACCARD)
+                          .AddEmbeddedText("information retrieval is a research field focused on helping users find relevant data in large collections")
+                          .WithOutputFields({"document_content"})
+                          .AddExtraParam("mh_search_with_jaccard", "true")
+                          .AddExtraParam("refine_k", "3")
+                          .WithLimit(3);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto documents = result.OutputField<milvus::VarCharFieldData>("document_content");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", distance=" << result.Scores()[i]
+                  << ", document=" << documents->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("dedup_collection")
+            .vector_field("binary_vector")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "information retrieval is a research field focused on helping users find relevant data in large collections".to_string(),
+            ]))
+            .metric_type(MetricType::MhJaccard)
+            .extra_params(HashMap::from([
+                ("mh_search_with_jaccard".to_string(), "true".to_string()),
+                ("refine_k".to_string(), "3".to_string()),
+            ]))
+            .limit(3)
+            .output_fields(["document_content"])
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```bash

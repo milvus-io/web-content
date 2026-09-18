@@ -42,6 +42,8 @@ To use a `TIMESTAMPTZ` field, explicitly define it in your collection schema whe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -84,6 +86,111 @@ print(f"Collection '{collection_name}' with a TimestampTz field created successf
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+const std::string collection_name = "timestamptz_test123";
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::HasCollectionResponse has_response;
+if (client->HasCollection(milvus::HasCollectionRequest().WithCollectionName(collection_name), has_response).IsOk() &&
+    has_response.Has()) {
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName(collection_name));
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+// Add a primary key field
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+// Add a TIMESTAMPTZ field that allows null values
+// highlight-next-line
+schema->AddField(milvus::FieldSchema("tsz", milvus::DataType::TIMESTAMPTZ).WithNullable(true));
+// Add a vector field
+schema->AddField(milvus::FieldSchema("vec", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName(collection_name)
+                                      .WithCollectionSchema(schema)
+                                      .WithConsistencyLevel(milvus::ConsistencyLevel::SESSION));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Collection '" << collection_name << "' with a TimestampTz field created successfully." << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let has = client
+    .has_collection(
+        sdk::request::collection::HasCollectionRequest::builder()
+            .collection_name("timestamptz_test123")
+            .build()?,
+    )
+    .await?;
+if has.exists() {
+    client
+        .drop_collection(
+            sdk::request::collection::DropCollectionRequest::builder()
+                .collection_name("timestamptz_test123")
+                .build()?,
+        )
+        .await?;
+}
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    // highlight-next-line
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("tsz")
+            .data_type(sdk::DataType::Timestamptz)
+            .nullable(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("vec")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(4),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("timestamptz_test123")
+            .schema(schema)
+            .consistency_level(sdk::ConsistencyLevel::Session)
+            .build()?,
+    )
+    .await?;
+println!("Collection 'timestamptz_test123' with a TimestampTz field created successfully.");
+```
+
 ```bash
 # restful
 ```
@@ -105,6 +212,8 @@ The example below inserts 8,193 rows of sample data into the collection. Each ro
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -148,6 +257,68 @@ print("Data inserted successfully.")
 // go
 ```
 
+```cpp
+const int64_t data_size = 8193;
+
+// Get the Asia/Shanghai time zone using a fixed UTC+08:00 offset
+// You can use any valid IANA time zone identifier such as:
+//   "Asia/Tokyo", "America/New_York", "Europe/London", "UTC", etc.
+milvus::EntityRows data;
+for (int64_t i = 0; i < data_size; ++i) {
+    // 2025-01-01 00:00:00 +08:00 is 2024-12-31 16:00:00 UTC
+    std::time_t ts = 1735660800 + i * 86400;
+    char buf[64];
+    std::tm utc_tm;
+    gmtime_r(&ts, &utc_tm);
+    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%SZ", &utc_tm);
+
+    milvus::EntityRow row;
+    row["id"] = i + 1;
+    row["tsz"] = std::string(buf);
+    row["vec"] = std::vector<float>{0.0f, 0.1f, 0.2f, 0.3f};
+    data.emplace_back(std::move(row));
+}
+
+milvus::InsertResponse insert_response;
+status = client->Insert(milvus::InsertRequest().WithCollectionName(collection_name).WithRowsData(std::move(data)),
+                        insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Data inserted successfully." << std::endl;
+```
+
+```rust
+const DATA_SIZE: i64 = 8193;
+
+// Get the Asia/Shanghai time zone using a fixed UTC+08:00 offset
+// You can use any valid IANA time zone identifier such as:
+//   "Asia/Tokyo", "America/New_York", "Europe/London", "UTC", etc.
+let data: Vec<_> = (0..DATA_SIZE)
+    .map(|i| {
+        // 2025-01-01 00:00:00 +08:00 is 2024-12-31 16:00:00 UTC
+        let timestamp = chrono::DateTime::from_timestamp(1_735_660_800 + i * 86400, 0)
+            .expect("valid timestamp");
+        serde_json::json!({
+            "id": i + 1,
+            "tsz": timestamp.to_rfc3339(),
+            "vec": [0.0, 0.1, 0.2, 0.3],
+        })
+    })
+    .collect();
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("timestamptz_test123")
+            .rows(data)
+            .build()?,
+    )
+    .await?;
+println!("Data inserted successfully.");
+```
+
 ```bash
 # restful
 ```
@@ -171,6 +342,8 @@ Before you can perform filtering operations on `TIMESTAMPTZ` fields, make sure:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -203,6 +376,55 @@ print(f"Collection '{collection_name}' loaded successfully.")
 // go
 ```
 
+```cpp
+// Create index on vector field
+milvus::IndexDesc index_desc("vec", "vec_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+status = client->CreateIndex(
+    milvus::CreateIndexRequest().WithCollectionName(collection_name).AddIndex(std::move(index_desc)));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Index created successfully." << std::endl;
+
+// Load the collection
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName(collection_name));
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Collection '" << collection_name << "' loaded successfully." << std::endl;
+```
+
+```rust
+// Create index on vector field
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("timestamptz_test123")
+            .index_param(
+                sdk::IndexParam::new()
+                    .field_name("vec")
+                    .index_name("vec_index")
+                    .index_type(sdk::IndexType::AutoIndex)
+                    .metric_type(sdk::MetricType::Cosine),
+            )
+            .build()?,
+    )
+    .await?;
+println!("Index created successfully.");
+
+// Load the collection
+client
+    .load_collection(
+        sdk::request::collection::LoadCollectionRequest::builder()
+            .collection_name("timestamptz_test123")
+            .build()?,
+    )
+    .await?;
+println!("Collection 'timestamptz_test123' loaded successfully.");
+```
+
 ```bash
 # restful
 ```
@@ -220,6 +442,8 @@ The example below filters entities with timestamps (`tsz`) that are not equal to
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -253,6 +477,49 @@ print("Query result: ", results)
 // go
 ```
 
+```cpp
+// Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
+// highlight-next-line
+std::string expr = "tsz != ISO '2025-01-03T00:00:00+08:00'";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName(collection_name)
+    .WithFilter(expr)
+    .WithOutputFields({"id", "tsz"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows rows;
+status = query_response.Results().OutputRows(rows);
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+// Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
+// highlight-next-line
+let expr = "tsz != ISO '2025-01-03T00:00:00+08:00'";
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("timestamptz_test123")
+            .filter(expr)
+            .output_fields(["id", "tsz"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 # restful
 ```
@@ -276,6 +543,8 @@ For example, the following query filters entities where the timestamp (`tsz`) pl
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -306,6 +575,47 @@ print("Query result: ", results)
 
 ```go
 // go
+```
+
+```cpp
+// highlight-next-line
+std::string expr = "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName(collection_name)
+    .WithFilter(expr)
+    .WithOutputFields({"id", "tsz"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows rows;
+status = query_response.Results().OutputRows(rows);
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+// highlight-next-line
+let expr = "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'";
+
+let query = client
+    .query(
+        sdk::request::dql::QueryRequest::builder()
+            .collection_name("timestamptz_test123")
+            .filter(expr)
+            .output_fields(["id", "tsz"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
 ```
 
 ```bash
@@ -339,6 +649,8 @@ You can combine `TIMESTAMPTZ` filtering with vector similarity search to narrow 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -371,6 +683,71 @@ print("Search result: ", res)
 
 ```go
 // go
+```
+
+```cpp
+// Define a time-based filter expression
+std::string time_filter = "tsz > ISO '2025-01-05T00:00:00+08:00'";
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName(collection_name)
+    .WithAnnsField("vec")
+    .WithLimit(5)
+    // highlight-next-line
+    .WithFilter(time_filter)
+    .WithOutputFields({"id", "tsz"})
+    .AddFloatVector(std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f});
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto tsz = result.OutputField<milvus::VarCharFieldData>("tsz");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", tsz=" << tsz->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+// Define a time-based filter expression
+let time_filter = "tsz > ISO '2025-01-05T00:00:00+08:00'";
+
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("timestamptz_test123")
+            .vector_field("vec")
+            .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3, 0.4]]))
+            .limit(5)
+            // highlight-next-line
+            .filter(time_filter)
+            .output_fields(["id", "tsz"])
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id value: {value:?}");
+                continue;
+            }
+        };
+        let tsz = match row.get("tsz")? {
+            ResultValue::String(value) => value,
+            value => {
+                println!("  unexpected tsz value: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, tsz={tsz}");
+    }
+}
 ```
 
 ```bash

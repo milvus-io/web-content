@@ -48,6 +48,8 @@ If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -197,6 +199,74 @@ const schema = [
 ];
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("tags", milvus::DataType::ARRAY).WithElementType(milvus::DataType::VARCHAR).WithMaxCapacity(10).WithMaxLength(65535).WithNullable(true));
+schema->AddField(milvus::FieldSchema("ratings", milvus::DataType::ARRAY).WithElementType(milvus::DataType::INT64).WithMaxCapacity(5).WithNullable(true));
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("tags")
+            .data_type(sdk::DataType::Array)
+            .element_type(sdk::DataType::VarChar)
+            .max_capacity(10)
+            .max_length(65535)
+            .nullable(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("ratings")
+            .data_type(sdk::DataType::Array)
+            .element_type(sdk::DataType::Int64)
+            .max_capacity(5)
+            .nullable(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("pk")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("embedding")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(3),
+    );
+```
+
 ```bash
 export arrayField1='{
     "fieldName": "tags",
@@ -253,6 +323,8 @@ The following example creates indexes on the vector field `embedding` and the AR
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -304,13 +376,32 @@ const indexParams = [{
     index_name: 'inverted_index',
     field_name: 'tags',
     index_type: IndexType.AUTOINDEX,
-)];
+}];
 
 indexParams.push({
     index_name: 'embedding_index',
     field_name: 'embedding',
     index_type: IndexType.AUTOINDEX,
 });
+```
+
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+indexes.emplace_back(milvus::IndexDesc("tags", "tags_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::DEFAULT));
+indexes.emplace_back(milvus::IndexDesc("embedding", "embedding_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE));
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("tags")
+        .index_name("tags_index")
+        .index_type(sdk::IndexType::AutoIndex),
+    sdk::IndexParam::new()
+        .field_name("embedding")
+        .index_type(sdk::IndexType::AutoIndex)
+        .metric_type(sdk::MetricType::Cosine),
+];
 ```
 
 ```bash
@@ -337,6 +428,8 @@ Once the schema and index are defined, create a collection that includes ARRAY f
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -374,6 +467,36 @@ client.create_collection({
 })
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection").WithCollectionSchema(schema).WithIndexes(std::move(indexes));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("my_collection")
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -396,6 +519,8 @@ After creating the collection, you can insert data that includes ARRAY fields.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -495,6 +620,40 @@ client.insert({
 });
 ```
 
+```cpp
+milvus::EntityRows data = {
+    {{"tags", {"pop", "rock", "classic"}}, {"ratings", {5, 4, 3}}, {"pk", 1}, {"embedding", {0.12f, 0.34f, 0.56f}}},
+    {{"tags", nullptr}, {"ratings", {4, 5}}, {"pk", 2}, {"embedding", {0.78f, 0.91f, 0.23f}}},
+    {{"ratings", {9, 5}}, {"pk", 3}, {"embedding", {0.18f, 0.11f, 0.23f}}}
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(data));
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let data = vec![
+    serde_json::json!({"tags": ["pop", "rock", "classic"], "ratings": [5, 4, 3], "pk": 1, "embedding": [0.12, 0.34, 0.56]}),
+    serde_json::json!({"tags": null, "ratings": [4, 5], "pk": 2, "embedding": [0.78, 0.91, 0.23]}),
+    serde_json::json!({"ratings": [9, 5], "pk": 3, "embedding": [0.18, 0.11, 0.23]}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(data)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -543,6 +702,8 @@ To retrieve entities where the `tags` is not null:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -606,6 +767,42 @@ client.query({
 });
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection").WithFilter("tags IS NOT NULL").WithOutputFields({"tags", "ratings", "pk"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::EntityRows rows;
+status = query_response.Results().OutputRows(rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("tags IS NOT NULL")
+            .output_fields(["tags", "ratings", "pk"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
@@ -627,6 +824,8 @@ To retrieve entities where the value of the first element of `ratings` is greate
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -700,6 +899,42 @@ console.log(res)
 // ]
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection").WithFilter("ratings[0] > 4").WithOutputFields({"tags", "ratings", "embedding"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::EntityRows rows;
+status = query_response.Results().OutputRows(rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("ratings[0] > 4")
+            .output_fields(["tags", "ratings", "embedding"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -723,6 +958,8 @@ In addition to basic scalar field filtering, you can combine vector similarity s
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -800,9 +1037,57 @@ client.search({
     collection_name: 'my_collection',
     data: [0.3, -0.6, 0.1],
     limit: 5,
-    output_fields: ['tags', 'ratings', 'embdding'],
+    output_fields: ['tags', 'ratings', 'embedding'],
     filter: 'tags[0] == "pop"'
 });
+```
+
+```cpp
+std::vector<float> query_vector = {0.3f, -0.6f, 0.1f};
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("my_collection")
+                          .WithAnnsField("embedding")
+                          .WithLimit(5)
+                          .WithFilter(R"(tags[0] == "pop")")
+                          .WithOutputFields({"tags", "ratings", "embedding"})
+                          .AddExtraParam("nprobe", "10")
+                          .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![vec![0.3f32, -0.6, 0.1]]))
+            .limit(5)
+            .filter(r#"tags[0] == "pop""#)
+            .extra_params(HashMap::from([("nprobe".to_string(), "10".to_string())]))
+            .output_fields(["tags", "ratings", "embedding"])
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```bash

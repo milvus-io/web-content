@@ -17,6 +17,8 @@ The `cnalphanumonly` filter is built into Milvus. To use it, simply specify its 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -44,6 +46,20 @@ const analyzer_params = {
 analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cnalphanumonly"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "jieba",
+    "filter": ["cnalphanumonly"],
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -69,6 +85,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -93,6 +111,20 @@ analyzerParams.put("filter", Collections.singletonList("cnalphanumonly"));
 analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cnalphanumonly"}},
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "jieba",
+    "filter": ["cnalphanumonly"],
+});
+```
+
 ```bash
 # restful
 ```
@@ -104,6 +136,8 @@ analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanu
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -175,6 +209,57 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample text to analyze
+std::string sample_text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+
+// Run the jieba tokenizer with the defined configuration
+milvus::RunAnalyzerRequest run_request;
+run_request.WithTexts({sample_text}).WithAnalyzerParams(analyzer_params);
+milvus::RunAnalyzerResponse run_response;
+status = client->RunAnalyzer(run_request, run_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Sample text to analyze
+let sample_text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+
+// Run the jieba tokenizer with the defined configuration
+let result = client
+    .run_analyzer(
+        sdk::request::utility::RunAnalyzerRequest::builder()
+            .texts([sample_text])
+            .analyzer_params(analyzer_params.clone())
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

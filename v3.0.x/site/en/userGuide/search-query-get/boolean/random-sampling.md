@@ -26,6 +26,8 @@ Random sampling operates at the segment level, ensuring efficient performance wh
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -34,12 +36,22 @@ filter = "RANDOM_SAMPLE(sampling_factor)"
 ```
 
 ```java
-String filter = "RANDOM_SAMPLE(sampling_factor)"
+String filter = "RANDOM_SAMPLE(sampling_factor)";
 ```
 
 ```go
 filter := "RANDOM_SAMPLE(sampling_factor)"
 ```
+
+```cpp
+std::string filter = "RANDOM_SAMPLE(sampling_factor)";
+```
+
+```rust
+let filter = "RANDOM_SAMPLE(sampling_factor)";
+```
+
+
 
 ```javascript
 // node
@@ -68,6 +80,8 @@ The random sampling operator must be combined with other filtering expressions u
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -83,22 +97,44 @@ filter = 'color == "red" OR RANDOM_SAMPLE(0.001)'  # ❌ Invalid logic
 
 ```java
 // Correct: Filter first, then sample
-String filter = 'color == "red" AND RANDOM_SAMPLE(0.001)';
+String filter = "color == \"red\" AND RANDOM_SAMPLE(0.001)";
 // Processing: Find all red items → Sample 0.1% of those red items
 
 // Incorrect: OR doesn't make logical sense
-String filter = 'color == "red" OR RANDOM_SAMPLE(0.001)';  // ❌ Invalid logic
+String invalidFilter = "color == \"red\" OR RANDOM_SAMPLE(0.001)";  // Invalid logic
 // This would mean: "Either red items OR sample everything" - which is meaningless
 ```
 
 ```go
 // Correct: Filter first, then sample
-filter := 'color == "red" AND RANDOM_SAMPLE(0.001)'
+filter := "color == \"red\" AND RANDOM_SAMPLE(0.001)"
 // Processing: Find all red items → Sample 0.1% of those red items
 
-filter := 'color == "red" OR RANDOM_SAMPLE(0.001)' // ❌ Invalid logic
+invalidFilter := "color == \"red\" OR RANDOM_SAMPLE(0.001)" // Invalid logic
 // This would mean: "Either red items OR sample everything" - which is meaningless
 ```
+
+```cpp
+// Correct: Filter first, then sample
+std::string filter = "color == \"red\" AND RANDOM_SAMPLE(0.001)";
+// Processing: Find all red items → Sample 0.1% of those red items
+
+// Incorrect: OR doesn't make logical sense
+std::string invalid_filter = "color == \"red\" OR RANDOM_SAMPLE(0.001)";  // Invalid logic
+// This would mean: "Either red items OR sample everything" - which is meaningless
+```
+
+```rust
+// Correct: Filter first, then sample
+let filter = "color == \"red\" AND RANDOM_SAMPLE(0.001)";
+// Processing: Find all red items → Sample 0.1% of those red items
+
+// Incorrect: OR doesn't make logical sense
+let invalid_filter = "color == \"red\" OR RANDOM_SAMPLE(0.001)"; // Invalid logic
+// This would mean: "Either red items OR sample everything" - which is meaningless
+```
+
+
 
 ```javascript
 // node
@@ -119,6 +155,8 @@ Quickly preview your collection structure:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -198,6 +236,64 @@ fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
 fmt.Println("product_name: ", resultSet.GetColumn("product_name").FieldData().GetScalars())
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Sample approximately 1% of the entire collection
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("product_catalog")
+    // highlight-next-line
+    .WithFilter("RANDOM_SAMPLE(0.01)")
+    .WithOutputFields({"id", "product_name"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Sampled " << query_response.Results().GetRowCount() << " products from collection" << std::endl;
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new().uri("http://localhost:19530"),
+)
+.await?;
+
+// Sample approximately 1% of the entire collection
+let result = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("product_catalog")
+            // highlight-next-line
+            .filter("RANDOM_SAMPLE(0.01)")
+            .output_fields(["id", "product_name"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+println!(
+    "Sampled {} products from collection",
+    result.results().rows()?.count()
+);
+```
+
+
+
 ```javascript
 // node
 ```
@@ -215,6 +311,8 @@ Test filtering logic on a manageable subset:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -258,6 +356,48 @@ if err != nil {
 }
 ```
 
+```cpp
+// First filter by category and price, then sample 0.5% of results
+std::string filter_expression = "category == \"electronics\" AND price > 100 AND RANDOM_SAMPLE(0.005)";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("product_catalog")
+    // highlight-next-line
+    .WithFilter(filter_expression)
+    .WithOutputFields({"product_name", "price", "rating"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << "Found " << query_response.Results().GetRowCount() << " electronics products in sample" << std::endl;
+```
+
+```rust
+// First filter by category and price, then sample 0.5% of results
+let filter_expression = "category == \"electronics\" AND price > 100 AND RANDOM_SAMPLE(0.005)";
+
+let result = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("product_catalog")
+            // highlight-next-line
+            .filter(filter_expression)
+            .output_fields(["product_name", "price", "rating"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+println!(
+    "Found {} electronics products in sample",
+    result.results().rows()?.count()
+);
+```
+
+
+
 ```javascript
 // node
 ```
@@ -275,12 +415,14 @@ Perform rapid statistical analysis on filtered data:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 # Get insights from ~0.1% of premium customer data
-filter_expression = 'customer_tier == "premium" AND region == 'North America' AND RANDOM_SAMPLE(0.001)'
+filter_expression = 'customer_tier == "premium" AND region == "North America" AND RANDOM_SAMPLE(0.001)'
 
 result = client.query(
     collection_name="customer_profiles",
@@ -325,6 +467,43 @@ if err != nil {
 }
 ```
 
+```cpp
+// Get insights from ~0.1% of premium customer data
+std::string filter_expression = "customer_tier == \"premium\" AND region == \"North America\" AND RANDOM_SAMPLE(0.001)";
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("customer_profiles")
+    // highlight-next-line
+    .WithFilter(filter_expression)
+    .WithOutputFields({"purchase_amount", "satisfaction_score", "last_purchase_date"})
+    .WithLimit(10);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Get insights from ~0.1% of premium customer data
+let filter_expression = "customer_tier == \"premium\" AND region == \"North America\" AND RANDOM_SAMPLE(0.001)";
+
+let result = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("customer_profiles")
+            // highlight-next-line
+            .filter(filter_expression)
+            .output_fields(["purchase_amount", "satisfaction_score", "last_purchase_date"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+```
+
+
+
 ```javascript
 // node
 ```
@@ -342,6 +521,8 @@ Use random sampling in filtered search scenarios:
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -407,6 +588,47 @@ for _, resultSet := range resultSets {
     fmt.Println("price: ", resultSet.GetColumn("price").FieldData().GetScalars())
 }
 ```
+
+```cpp
+// Search for similar products within a sampled subset
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("product_catalog")
+    .WithAnnsField("vector")
+    .WithMetricType(milvus::MetricType::L2)
+    // highlight-next-line
+    .WithFilter("category == \"books\" AND RANDOM_SAMPLE(0.01)")
+    .WithOutputFields({"title", "author", "price"})
+    .WithLimit(10)
+    .AddFloatVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Search for similar products within a sampled subset
+let search_results = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3, 0.4, 0.5]]))
+            .metric_type(MetricType::L2)
+            // highlight-next-line
+            .filter("category == \"books\" AND RANDOM_SAMPLE(0.01)")
+            .output_fields(["title", "author", "price"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+```
+
+
 
 ```javascript
 // node

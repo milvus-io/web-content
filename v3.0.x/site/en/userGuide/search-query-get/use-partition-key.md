@@ -49,6 +49,8 @@ When you set a scalar field as the Partition Key, the field values cannot be emp
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -160,6 +162,68 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+// Add the partition key
+milvus::FieldSchema my_varchar("my_varchar", milvus::DataType::VARCHAR);
+my_varchar.WithMaxLength(512);
+// highlight-next-line
+my_varchar.WithPartitionKey(true);
+schema->AddField(my_varchar);
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("vector")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(5),
+    )
+    // Add the partition key
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("my_varchar")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(512)
+            // highlight-next-line
+            .partition_key(true),
+    );
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -220,6 +284,8 @@ You can also determine the number of partitions to create along with the collect
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -251,6 +317,32 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    // highlight-next-line
+    .WithNumPartitions(128);
+auto status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema.clone())
+            // highlight-next-line
+            .num_partitions(128)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript
@@ -294,6 +386,8 @@ The following examples demonstrate Partition-Key-based filtering based on a spec
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -327,6 +421,22 @@ const filter = 'partition_key == "x" && <other conditions>'
 
 // Filter based on multiple partition key values
 const filter = 'partition_key in ["x", "y", "z"] && <other conditions>'
+```
+
+```cpp
+// Filter based on a single partition key value, or
+std::string filter_1 = "partition_key == \"x\" && <other conditions>";
+
+// Filter based on multiple partition key values
+std::string filter_2 = "partition_key in [\"x\", \"y\", \"z\"] && <other conditions>";
+```
+
+```rust
+// Filter based on a single partition key value, or
+let filter_1 = "partition_key == \"x\" && <other conditions>";
+
+// Filter based on multiple partition key values
+let filter_2 = "partition_key in [\"x\", \"y\", \"z\"] && <other conditions>";
 ```
 
 ```bash
@@ -368,6 +478,8 @@ The following code examples demonstrate how to enable Partition Key Isolation.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -402,6 +514,34 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema)
+    // highlight-next-line
+    .WithProperties({{"partitionkey.isolation", "true"}});
+auto status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            // highlight-next-line
+            .properties(HashMap::from([
+                ("partitionkey.isolation".to_string(), "true".to_string()),
+            ]))
+            .build()?,
+    )
+    .await?;
 ```
 
 ```javascript

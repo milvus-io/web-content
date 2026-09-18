@@ -52,8 +52,9 @@ To conduct a basic primary-key search, simply replace the query vectors with pri
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -170,6 +171,51 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            // highlight-start
+            .ids(Ids::Int64(vec![551, 296, 43])) // a list of primary keys
+            // highlight-end
+            .metric_type(MetricType::Ip)
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            ResultValue::Int64(value) => value,
+            value => {
+                println!("unexpected primary-key value: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            ResultValue::Float(value) => value,
+            value => {
+                println!("unexpected score value: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -185,6 +231,18 @@ curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
 ```
 
 ```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
 auto searchRequest = milvus::SearchRequest()
                          .WithCollectionName("quick_setup")
                          .WithAnnsField("vector")
@@ -195,7 +253,7 @@ auto searchRequest = milvus::SearchRequest()
                          .WithMetricType(milvus::MetricType::IP);
 
 milvus::SearchResponse searchResponse;
-auto status = client->Search(searchRequest, searchResponse);
+status = client->Search(searchRequest, searchResponse);
 if (!status.IsOk()) {
     std::cerr << "Search failed: " << status.Message() << std::endl;
     return;
@@ -218,8 +276,9 @@ The following example assumes that color and likes are two schema-defined fields
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -289,6 +348,27 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            // highlight-start
+            .ids(Ids::Int64(vec![551, 296, 43]))
+            .filter(r#"color like "red%" and likes > 50"#)
+            .output_fields(["color", "likes"])
+            // highlight-end
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -342,8 +422,9 @@ for (const auto& result : searchResponse.Results().Results()) {
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -430,6 +511,27 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            // highlight-start
+            .ids(Ids::Int64(vec![551, 296, 43]))
+            .radius(0.4)
+            .range_filter(0.6)
+            // highlight-end
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -485,8 +587,9 @@ The following example assumes `docId` is a schema-defined fields in the target c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -552,6 +655,27 @@ for _, resultSet := range resultSets {
     fmt.Println("IDs: ", resultSet.IDs)
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("docId: ", resultSet.GetColumn("docId"))
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            // highlight-start
+            .ids(Ids::Int64(vec![551, 296, 43]))
+            .group_by_field("docId")
+            .output_fields(["docId"])
+            // highlight-end
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
 }
 ```
 

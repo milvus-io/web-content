@@ -17,6 +17,8 @@ When deleting multiple entities that share some attributes in a batch, you can u
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -31,7 +33,7 @@ client = MilvusClient(
 res = client.delete(
     collection_name="quick_setup",
     # highlight-next-line
-    filter="color in ['red_7025', 'purple_4976]"
+    filter="color in ['red_7025', 'purple_4976']"
 )
 
 print(res)
@@ -53,7 +55,7 @@ ilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
 
 DeleteResp deleteResp = client.delete(DeleteReq.builder()
         .collectionName("quick_setup")
-        .filter("color in ['red_7025', 'purple_4976]")
+        .filter("color in ['red_7025', 'purple_4976']")
         .build());
 
 ```
@@ -69,7 +71,7 @@ const client = new MilvusClient({address, token});
 res = await client.delete({
     collection_name: "quick_setup",
     // highlight-next-line
-    filter: "color in ['red_7025', 'purple_4976]"
+    filter: "color in ['red_7025', 'purple_4976']"
 })
 
 console.log(res.delete_cnt)
@@ -110,6 +112,52 @@ if err != nil {
 }
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::DeleteRequest delete_request;
+delete_request.WithCollectionName("quick_setup")
+    // highlight-next-line
+    .WithFilter("color in ['red_7025', 'purple_4976']");
+milvus::DeleteResponse delete_response;
+status = client->Delete(delete_request, delete_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+client
+    .delete(
+        sdk::request::dml::DeleteRequest::builder()
+            .collection_name("quick_setup")
+            // highlight-next-line
+            .filter("color in ['red_7025', 'purple_4976']")
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -134,6 +182,8 @@ In most cases, a primary key uniquely identifies an Entity. You can delete Entit
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -187,6 +237,31 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::DeleteRequest delete_request;
+delete_request.WithCollectionName("quick_setup")
+    // highlight-next-line
+    .WithIDs({18, 19});
+milvus::DeleteResponse delete_response;
+auto status = client->Delete(delete_request, delete_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .delete(
+        sdk::request::dml::DeleteRequest::builder()
+            .collection_name("quick_setup")
+            // highlight-next-line
+            .ids(sdk::Ids::Int64(vec![18, 19]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -212,6 +287,8 @@ You can also delete entities stored in specific partitions. The following code s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -266,6 +343,33 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+```
+
+```cpp
+milvus::DeleteRequest delete_request;
+delete_request.WithCollectionName("quick_setup")
+    .WithIDs({18, 19})
+    // highlight-next-line
+    .WithPartitionName("partitionA");
+milvus::DeleteResponse delete_response;
+auto status = client->Delete(delete_request, delete_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .delete(
+        sdk::request::dml::DeleteRequest::builder()
+            .collection_name("quick_setup")
+            .ids(sdk::Ids::Int64(vec![18, 19]))
+            // highlight-next-line
+            .partition_name("partitionA")
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

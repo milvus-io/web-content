@@ -29,6 +29,8 @@ The following code snippet demonstrates how to create a SearchIterator.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -113,6 +115,79 @@ const iterator = milvusClient.searchIterator({
 
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// create iterator
+std::vector<float> query_vector = {
+    0.3580376395471989F, -0.6023495712049978F, 0.18414012509913835F, -0.26286205330961354F, 0.9029438446296592F};
+
+milvus::SearchIteratorRequest request;
+request.WithCollectionName("iterator_collection")
+    .WithAnnsField("vector")
+    .WithMetricType(milvus::MetricType::L2)
+    .AddFloatVector(query_vector)
+    // highlight-next-line
+    .WithLimit(20000);
+request.SetBatchSize(50);
+request.AddOutputField("color");
+
+milvus::SearchIteratorPtr iterator;
+status = client->SearchIterator(request, iterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// create iterator
+let query_vectors = vec![
+    vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
+];
+
+let search = SearchRequest::builder()
+    .collection_name("iterator_collection")
+    .vector_field("vector")
+    .vectors(SearchVectors::Float(query_vectors))
+    .output_fields(["color"])
+    .limit(50)
+    .consistency_level(sdk::ConsistencyLevel::Bounded)
+    .build()?;
+
+let mut iterator = client
+    .search_iterator(
+        SearchIteratorRequest::builder()
+            .search(search)
+            // highlight-next-line
+            .batch_size(50)
+            // highlight-next-line
+            .limit(20000)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -128,6 +203,8 @@ Once the SearchIterator is ready, you can call its next() method to get the sear
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -164,6 +241,35 @@ while (true) {
 
 ```go
 // go
+```
+
+```cpp
+milvus::SingleResult batch;
+while (true) {
+    // highlight-next-line
+    status = iterator->Next(batch);
+    if (!status.IsOk()) {
+        std::cerr << status.Message() << std::endl;
+        return;
+    }
+    if (batch.GetRowCount() == 0) {
+        break;
+    }
+    milvus::EntityRows rows;
+    status = batch.OutputRows(rows);
+    for (const auto& row : rows) {
+        std::cout << row << std::endl;
+    }
+}
+```
+
+```rust
+while let Some(page) = iterator.next().await? {
+    let result = page.results().iter().next().unwrap();
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
+}
 ```
 
 ```javascript

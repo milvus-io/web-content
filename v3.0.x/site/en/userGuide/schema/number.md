@@ -72,6 +72,8 @@ If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -211,6 +213,80 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <memory>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Define the collection schema
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+
+// Add an INT64 field `age` that supports null values with default value 18
+schema->AddField(milvus::FieldSchema("age", milvus::DataType::INT64)
+                     .WithNullable(true)
+                     .WithDefaultValue(18));
+// Add a FLOAT field `price` that supports null values without default value
+schema->AddField(milvus::FieldSchema("price", milvus::DataType::FLOAT)
+                     .WithNullable(true));
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::INT64)
+                     .WithPrimaryKey(true));
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR)
+                     .WithDimension(3));
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Define the collection schema
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(true)
+    // Add an INT64 field `age` that supports null values with default value 18
+    .add_field(
+        FieldSchema::new()
+            .name("age")
+            .data_type(DataType::Int64)
+            .nullable(true)
+            .default_value(DefaultValue::Int64(18)),
+    )
+    // Add a FLOAT field `price` that supports null values without default value
+    .add_field(
+        FieldSchema::new()
+            .name("price")
+            .data_type(DataType::Float)
+            .nullable(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("pk")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("embedding")
+            .data_type(DataType::FloatVector)
+            .dimension(3),
+    );
+```
+
 ```bash
 export int64Field='{
     "fieldName": "age",
@@ -258,6 +334,8 @@ The following example creates indexes on the vector field `embedding` and the sc
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -321,6 +399,46 @@ indexOption2 := milvusclient.NewCreateIndexOption("my_collection", "age",
     index.NewInvertedIndex())
 ```
 
+```cpp
+std::vector<milvus::IndexDesc> indexes;
+// Index `age` with AUTOINDEX
+indexes.emplace_back(milvus::IndexDesc("age", "age_index", milvus::IndexType::AUTOINDEX));
+// Index `embedding` with AUTOINDEX and specify similarity metric type
+indexes.emplace_back(milvus::IndexDesc(
+    "embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE));
+
+milvus::CreateIndexRequest create_index_request;
+create_index_request.WithCollectionName("my_collection")
+    .WithIndexes(std::move(indexes));
+status = client->CreateIndex(create_index_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_index(
+        CreateIndexRequest::builder()
+            .collection_name("my_collection")
+            .index_params(vec![
+                // Index `age` with AUTOINDEX
+                IndexParam::new()
+                    .field_name("age")
+                    .index_name("age_index")
+                    .index_type(IndexType::AutoIndex),
+                // Index `embedding` with AUTOINDEX and specify similarity metric type
+                IndexParam::new()
+                    .field_name("embedding")
+                    .index_type(IndexType::AutoIndex)
+                    .metric_type(MetricType::Cosine),
+            ])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 export indexParams='[
         {
@@ -345,6 +463,8 @@ Once the schema and indexes are defined, create a collection that includes numbe
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -384,6 +504,28 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("my_collection")
+    .WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
@@ -406,6 +548,8 @@ After creating the collection, insert entities that match the schema.
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -488,6 +632,87 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows;
+{
+    milvus::EntityRow row;
+    row["age"] = 25;
+    row["price"] = 99.99f;
+    row["pk"] = 1;
+    row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["age"] = 30;
+    row["pk"] = 2;
+    row["embedding"] = std::vector<float>{0.4f, 0.5f, 0.6f};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["age"] = nullptr;
+    row["price"] = nullptr;
+    row["pk"] = 3;
+    row["embedding"] = std::vector<float>{0.2f, 0.3f, 0.1f};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["age"] = 45;
+    row["price"] = nullptr;
+    row["pk"] = 4;
+    row["embedding"] = std::vector<float>{0.9f, 0.1f, 0.4f};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["age"] = nullptr;
+    row["price"] = 59.99f;
+    row["pk"] = 5;
+    row["embedding"] = std::vector<float>{0.8f, 0.5f, 0.3f};
+    rows.emplace_back(std::move(row));
+}
+{
+    milvus::EntityRow row;
+    row["age"] = 60;
+    row["price"] = nullptr;
+    row["pk"] = 6;
+    row["embedding"] = std::vector<float>{0.1f, 0.6f, 0.9f};
+    rows.emplace_back(std::move(row));
+}
+
+milvus::InsertResponse insert_response;
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("my_collection").WithRowsData(std::move(rows));
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Sample data
+let rows = vec![
+    serde_json::json!({"age": 25, "price": 99.99, "pk": 1, "embedding": [0.1, 0.2, 0.3]}),
+    serde_json::json!({"age": 30, "pk": 2, "embedding": [0.4, 0.5, 0.6]}),
+    serde_json::json!({"age": null, "price": null, "pk": 3, "embedding": [0.2, 0.3, 0.1]}),
+    serde_json::json!({"age": 45, "price": null, "pk": 4, "embedding": [0.9, 0.1, 0.4]}),
+    serde_json::json!({"age": null, "price": 59.99, "pk": 5, "embedding": [0.8, 0.5, 0.3]}),
+    serde_json::json!({"age": 60, "price": null, "pk": 6, "embedding": [0.1, 0.6, 0.9]}),
+];
+
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
@@ -515,6 +740,8 @@ To retrieve entities where the `age` is greater than 30:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -579,6 +806,45 @@ fmt.Println("age", queryResult.GetColumn("age").FieldData().GetScalars())
 fmt.Println("price", queryResult.GetColumn("price").FieldData().GetScalars())
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("age > 30")
+    .WithOutputFields({"age", "price", "pk"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows output_rows;
+status = query_response.Results().OutputRows(output_rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : output_rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let filter = "age > 30";
+
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(filter)
+            .output_fields(["age", "price", "pk"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
@@ -601,6 +867,8 @@ To retrieve entities where the `price` is null:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -676,6 +944,45 @@ fmt.Println("age", queryResult.GetColumn("age"))
 fmt.Println("price", queryResult.GetColumn("price"))
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("price is null")
+    .WithOutputFields({"age", "price", "pk"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows output_rows;
+status = query_response.Results().OutputRows(output_rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : output_rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let filter = "price is null";
+
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(filter)
+            .output_fields(["age", "price", "pk"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -697,6 +1004,8 @@ To retrieve entities where `age` has the value `18`, use the following expressio
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -768,6 +1077,45 @@ fmt.Println("age", queryResult.GetColumn("age"))
 fmt.Println("price", queryResult.GetColumn("price"))
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("age == 18")
+    .WithOutputFields({"age", "price", "pk"});
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+milvus::EntityRows output_rows;
+status = query_response.Results().OutputRows(output_rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : output_rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let filter = "age == 18";
+
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(filter)
+            .output_fields(["age", "price", "pk"])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -791,6 +1139,8 @@ In addition to basic number field filtering, you can combine vector similarity s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -876,6 +1226,56 @@ for _, resultSet := range resultSets {
     fmt.Println("Scores: ", resultSet.Scores)
     fmt.Println("age: ", resultSet.GetColumn("age"))
     fmt.Println("price: ", resultSet.GetColumn("price"))
+}
+```
+
+```cpp
+std::vector<float> query_vector = {0.3f, -0.6f, 0.1f};
+
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("my_collection")
+    .WithAnnsField("embedding")
+    .WithLimit(5)
+    .WithFilter("25 <= age <= 35")
+    .WithOutputFields({"age", "price"})
+    .AddExtraParam("nprobe", "10")
+    .AddFloatVector(query_vector);
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "id=" << ids[i] << ", score=" << result.Scores()[i] << std::endl;
+    }
+}
+```
+
+```rust
+use std::collections::HashMap;
+
+let query_vector = vec![0.3f32, -0.6, 0.1];
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .filter("25 <= age <= 35")
+            .output_fields(["age", "price"])
+            .limit(5)
+            .extra_params(HashMap::from([("nprobe".to_string(), "10".to_string())]))
+            .build()?,
+    )
+    .await?;
+for result in search.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 

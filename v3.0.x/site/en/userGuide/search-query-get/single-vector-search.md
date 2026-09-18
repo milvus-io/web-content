@@ -54,6 +54,7 @@ In this section, you will learn how to conduct a single-vector search. The searc
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -247,6 +248,52 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .metric_type(sdk::MetricType::Ip)
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -331,6 +378,7 @@ Similarly, you can include multiple query vectors in a search request. Milvus wi
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -514,6 +562,48 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+// 7. Search with multiple vectors
+// 7.1. Prepare query vectors
+let query_vectors = vec![
+    vec![0.041732933f32, 0.013779674, -0.027564144, -0.013061441, 0.009748648],
+    vec![0.0039737443f32, 0.003020432, -0.0006188639, 0.03913546, -0.00089768134],
+];
+
+// 7.2. Start search
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(query_vectors))
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    println!("TopK results:");
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -579,6 +669,7 @@ Instead of setting query vectors, you can use primary keys if the query vectors 
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -683,6 +774,42 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            // highlight-start
+            .ids(sdk::Ids::Int64(vec![551, 296, 43]))
+            // highlight-end
+            .limit(3)
+            .metric_type(sdk::MetricType::Ip)
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 # restful
 curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
@@ -712,6 +839,7 @@ The following code snippet assumes a partition named **PartitionA** in your coll
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -848,6 +976,44 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            // highlight-next-line
+            .partition_names(["partitionA"])
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    println!("TopK results:");
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -897,6 +1063,7 @@ In a search result, Milvus includes the primary field values and similarity dist
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -908,7 +1075,7 @@ res = client.search(
     collection_name="quick_setup",
     data=[query_vector],
     limit=3, # The number of results to return
-    search_params={"metric_type": "IP"}，
+    search_params={"metric_type": "IP"},
     # highlight-next-line
     output_fields=["color"]
 )
@@ -1042,6 +1209,50 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            // highlight-next-line
+            .output_fields(["color"])
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        let color = match row.get("color")? {
+            sdk::ResultValue::String(value) => value,
+            value => {
+                println!("  unexpected color: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}, color={color}");
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -1098,6 +1309,7 @@ The following example sorts search results by `price` from low to high. Include 
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1218,6 +1430,48 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+let query_vectors = vec![
+    vec![0.35803764f32, -0.6023496, 0.18414013, -0.26286206, 0.90294385],
+];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vector_field("embedding")
+            .vectors(sdk::SearchVectors::Float(query_vectors))
+            .limit(20)
+            .output_fields(["id", "price", "rating", "category"])
+            // highlight-start
+            .order_by_fields([sdk::OrderByField::new()
+                .field_name("price")
+                .direction(sdk::AggDirection::Asc)])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let price = match row.get("price")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected price: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, price={price}");
+    }
+}
+```
+
 ```bash
 # restful
 ```
@@ -1230,6 +1484,7 @@ You can also sort by multiple scalar fields. Milvus applies the fields in the or
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1361,6 +1616,60 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+let query_vectors = vec![
+    vec![0.35803764f32, -0.6023496, 0.18414013, -0.26286206, 0.90294385],
+];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("product_catalog")
+            .vector_field("embedding")
+            .vectors(sdk::SearchVectors::Float(query_vectors))
+            .limit(20)
+            .output_fields(["id", "price", "rating", "category"])
+            // highlight-start
+            .order_by_fields([
+                sdk::OrderByField::new()
+                    .field_name("price")
+                    .direction(sdk::AggDirection::Asc),
+                sdk::OrderByField::new()
+                    .field_name("rating")
+                    .direction(sdk::AggDirection::Desc),
+            ])
+            // highlight-end
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let price = match row.get("price")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected price: {value:?}");
+                continue;
+            }
+        };
+        let rating = match row.get("rating")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected rating: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, price={price}, rating={rating}");
+    }
+}
+```
+
 ```bash
 # restful
 ```
@@ -1411,6 +1720,7 @@ Note that, the sum of `limit` and `offset` in a single ANN search should be less
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1518,6 +1828,43 @@ for (const auto& result : searchResponse.Results().Results()) {
 }
 ```
 
+```rust
+// 4. Single vector search
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            // highlight-next-line
+            .offset(10) // The record to skip
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let score = match row.get("score")? {
+            sdk::ResultValue::Float(value) => value,
+            value => {
+                println!("  unexpected score: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, score={score}");
+    }
+}
+```
+
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -1552,6 +1899,7 @@ The example below shows how to temporarily set a timezone for a search operation
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1654,6 +2002,43 @@ for (const auto& result : searchResponse.Results().Results()) {
     const auto eventTimes = result.OutputField<milvus::TimestamptzFieldData>("event_time");
     for (size_t i = 0; i < result.GetRowCount(); ++i) {
         std::cout << "id=" << ids[i] << ", event_time=" << eventTimes->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let query_vector = vec![0.35803764f32, -0.6023496, 0.18414013, -0.26286206, 0.90294385];
+let search = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("quick_setup")
+            .vector_field("vector")
+            .vectors(sdk::SearchVectors::Float(vec![query_vector]))
+            .limit(3)
+            .output_fields(["event_time"])
+            // highlight-next-line
+            .timezone("America/Havana")
+            .build()?,
+    )
+    .await?;
+
+for result in search.results() {
+    for row in result.rows()? {
+        let id = match row.get("id")? {
+            sdk::ResultValue::Int64(value) => value,
+            value => {
+                println!("  unexpected id: {value:?}");
+                continue;
+            }
+        };
+        let event_time = match row.get("event_time")? {
+            sdk::ResultValue::String(value) => value,
+            value => {
+                println!("  unexpected event_time: {value:?}");
+                continue;
+            }
+        };
+        println!("id={id}, event_time={event_time}");
     }
 }
 ```

@@ -220,6 +220,8 @@ Milvus 2.6.x and later let you configure reranking strategies directly via the `
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -268,6 +270,21 @@ const rerank = {
 
 ```go
 // Go
+```
+
+```cpp
+auto rerank = std::make_shared<milvus::WeightedRerank>(std::vector<float>{0.1f, 0.9f});
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let rerank = WeightedRerank::new().weights(vec![0.1, 0.9]);
 ```
 
 ```bash
@@ -328,6 +345,8 @@ Weighted Ranker is designed specifically for hybrid search operations that combi
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -443,6 +462,86 @@ const search = await milvusClient.search({
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+#include <memory>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Assume you have a collection setup
+
+// Define text vector search request
+auto text_search = std::make_shared<milvus::SubSearchRequest>();
+text_search->WithAnnsField("text_vector")
+    .WithLimit(10);
+
+// Define image vector search request
+auto image_search = std::make_shared<milvus::SubSearchRequest>();
+image_search->WithAnnsField("image_vector")
+    .WithLimit(10);
+
+// Apply Weighted Ranker to product hybrid search
+auto hybrid_request = milvus::HybridSearchRequest()
+                          .WithCollectionName("my_collection")
+                          .AddSubRequest(text_search)
+                          .AddSubRequest(image_search)
+                          // highlight-next-line
+                          .WithRerank(rerank)
+                          .WithLimit(10)
+                          .WithOutputFields({"product_name", "price", "category"});
+
+milvus::SearchResponse response;
+status = client->HybridSearch(hybrid_request, response);
+if (!status.IsOk()) {
+    std::cerr << "Hybrid search failed: " << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// Assume you have a collection setup
+
+// Define text vector search request
+let text_search = SubSearchRequest::builder()
+    .vector_field("text_vector")
+    .vectors(SearchVectors::Float(vec![vec![
+        0.1f32, 0.2, 0.3, 0.4,
+    ]]))
+    .limit(10)
+    .build()?;
+
+// Define image vector search request
+let image_search = SubSearchRequest::builder()
+    .vector_field("image_vector")
+    .vectors(SearchVectors::Float(vec![vec![
+        0.5f32, 0.6, 0.7, 0.8,
+    ]]))
+    .limit(10)
+    .build()?;
+
+// Apply Weighted Ranker to product hybrid search
+client
+    .hybrid_search(
+        HybridSearchRequest::builder()
+            .collection_name("my_collection")
+            .sub_requests(vec![text_search, image_search])
+            // highlight-next-line
+            .rerank(rerank)
+            .limit(10)
+            .output_fields(["product_name", "price", "category"])
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

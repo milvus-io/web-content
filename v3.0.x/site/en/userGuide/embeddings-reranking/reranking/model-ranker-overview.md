@@ -135,6 +135,8 @@ To implement model reranking, first define a Function object with the appropriat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -185,6 +187,51 @@ ModelRanker ranker = ModelRanker.builder()
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <memory>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+auto model_ranker = std::make_shared<milvus::ModelRerank>("semantic_ranker");
+model_ranker->AddInputFieldName("document");
+model_ranker->SetProvider("tei");
+model_ranker->SetQueries({"machine learning for time series"});
+model_ranker->SetEndpoint("http://model-service:8080");
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(model_ranker);
+```
+
+```rust
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let model_ranker = ModelRerank::new()
+    .name("semantic_ranker")
+    .provider("tei")
+    .queries(["machine learning for time series"])
+    .endpoint("http://model-service:8080");
+
+let model_function = model_ranker
+    .get_function()
+    .clone()
+    .input_fields(["document"]);
+let function_score = FunctionScore::new().add_function(model_function);
 ```
 
 ```bash
@@ -263,6 +310,8 @@ After defining your model ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -306,6 +355,48 @@ SearchResp searchResp = client.search(searchReq);
 
 ```go
 // go
+```
+
+```cpp
+std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector_field")
+                   .WithLimit(10)
+                   .AddOutputField("document")
+                   // highlight-next-line
+                   .WithRerank(function_score)
+                   .AddFloatVector(query_vector)
+                   .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cerr << "Search failed: " << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query_vector = vec![
+    0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835,
+    -0.26286205330961354, 0.9029438446296592,
+];
+
+let results = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector_field")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(10)
+            .output_fields(["document"])
+            // highlight-next-line
+            .rerank(function_score)
+            .consistency_level(ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

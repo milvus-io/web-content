@@ -68,6 +68,8 @@ The `multi_analyzer_params` is a single JSON object that determines how Milvus s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -125,18 +127,18 @@ const multi_analyzer_params = {
   // Define language-specific analyzers
   // Each analyzer follows this format: <analyzer_name>: <analyzer_params>
   "analyzers": {
-    "english": {"type": "english"},          # English-optimized analyzer
-    "chinese": {"type": "chinese"},          # Chinese-optimized analyzer
-    "arabic": {"type": "arabic"},            # Arabic-optimized analyzer
-    "thai": {"type": "thai"},                # Thai-optimized analyzer
-    "default": {"tokenizer": "icu"}          # Required fallback analyzer
+    "english": {"type": "english"},          // English-optimized analyzer
+    "chinese": {"type": "chinese"},          // Chinese-optimized analyzer
+    "arabic": {"type": "arabic"},            // Arabic-optimized analyzer
+    "thai": {"type": "thai"},                // Thai-optimized analyzer
+    "default": {"tokenizer": "icu"}          // Required fallback analyzer
   },
-  "by_field": "language",                    # Field determining analyzer selection
+  "by_field": "language",                    // Field determining analyzer selection
   "alias": {
-    "ar": "arabic",                          # Use "ar" as shorthand for Arabic
-    "cn": "chinese",                         # Use "cn" as shorthand for Chinese
-    "en": "english",                         # Use "en" as shorthand for English
-    "th": "thai"                             # Use "th" as shorthand for Thai
+    "ar": "arabic",                          // Use "ar" as shorthand for Arabic
+    "cn": "chinese",                         // Use "cn" as shorthand for Chinese
+    "en": "english",                         // Use "en" as shorthand for English
+    "th": "thai"                             // Use "th" as shorthand for Thai
   }
 }
 ```
@@ -158,6 +160,55 @@ multiAnalyzerParams := map[string]any{
         "th": "thai",
     },
 }
+```
+
+```cpp
+nlohmann::json multi_analyzer_params = {
+    {"analyzers", {
+        {"english", {{"type", "english"}}},
+        {"chinese", {{"type", "chinese"}}},
+        {"arabic", {{"type", "arabic"}}},
+        {"thai", {{"type", "thai"}}},
+        {"default", {{"tokenizer", "icu"}}}
+    }},
+    {"by_field", "language"},
+    {"alias", {
+        {"ar", "arabic"},
+        {"cn", "chinese"},
+        {"en", "english"},
+        {"th", "thai"}
+    }}
+};
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let multi_analyzer_params = serde_json::json!({
+    "analyzers": {
+        "english": {"type": "english"},
+        "chinese": {"type": "chinese"},
+        "arabic": {"type": "arabic"},
+        "thai": {"type": "thai"},
+        "default": {"tokenizer": "icu"}
+    },
+    "by_field": "language",
+    "alias": {
+        "ar": "arabic",
+        "cn": "chinese",
+        "en": "english",
+        "th": "thai"
+    }
+});
 ```
 
 ```bash
@@ -247,6 +298,8 @@ In this step, define the collection schema with four essential fields:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -423,6 +476,58 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64).WithPrimaryKey(true).WithAutoID(true));
+schema->AddField(milvus::FieldSchema("language", milvus::DataType::VARCHAR).WithMaxLength(255));
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(8192).EnableAnalyzer(true).WithMultiAnalyzerParams(multi_analyzer_params));
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+```
+
+```rust
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("language")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(255),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("text")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(8192)
+            .enable_analyzer(true)
+            .multi_analyzer_params(multi_analyzer_params),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("sparse")
+            .data_type(sdk::DataType::SparseFloatVector),
+    );
+```
+
 ```bash
 # restful
 export TOKEN="root:Milvus"
@@ -448,7 +553,7 @@ export textField='{
   "dataType": "VarChar",
   "elementTypeParams": {
     "max_length": 8192,
-    "enable_analyzer": true，
+    "enable_analyzer": true,
     "multiAnalyzerParam": '"$multi_analyzer_params"'
   },
 }'
@@ -468,6 +573,8 @@ Define a BM25 function to generate sparse vector representations from your raw t
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -515,6 +622,23 @@ schema.WithFunction(function.WithName("text_to_vector").
     WithOutputFields("sparse"))
 ```
 
+```cpp
+auto bm25_function = std::make_shared<milvus::Function>("text_to_vector", milvus::FunctionType::BM25);
+bm25_function->AddInputFieldName("text");
+bm25_function->AddOutputFieldName("sparse");
+schema->AddFunction(bm25_function);
+```
+
+```rust
+let schema = schema.add_function(
+    sdk::Function::new()
+        .name("text_to_vector")
+        .function_type(sdk::FunctionType::Bm25)
+        .input_fields(["text"])
+        .output_fields(["sparse"]),
+);
+```
+
 ```bash
 # restful
 export function='{
@@ -549,6 +673,8 @@ To allow efficient searching, create an index on the sparse vector field:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -586,6 +712,19 @@ idx := index.NewAutoIndex(index.MetricType(entity.BM25))
 indexOption := milvusclient.NewCreateIndexOption("multilingual_documents", "sparse", idx)
 ```
 
+```cpp
+milvus::IndexDesc index_desc("sparse", "sparse_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::BM25);
+```
+
+```rust
+let index_params = vec![
+    sdk::IndexParam::new()
+        .field_name("sparse")
+        .index_type(sdk::IndexType::AutoIndex)
+        .metric_type(sdk::MetricType::Bm25),
+];
+```
+
 ```bash
 # restful
 export IndexParams='[
@@ -615,6 +754,8 @@ This final creation step brings together all your previous configurations:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -671,6 +812,38 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("multilingual_documents")
+    .WithCollectionSchema(schema)
+    .AddIndex(std::move(index_desc));
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("multilingual_documents")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+
+client
+    .create_index(
+        sdk::request::index::CreateIndexRequest::builder()
+            .collection_name("multilingual_documents")
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -697,6 +870,8 @@ When adding documents to your multi-language collection, each must include both 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -820,6 +995,42 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::EntityRows rows = {
+    {{"text", "Artificial intelligence is transforming technology"}, {"language", "english"}},
+    {{"text", "Machine learning models require large datasets"}, {"language", "en"}},
+    {{"text", "人工智能正在改变技术领域"}, {"language", "chinese"}},
+    {{"text", "机器学习模型需要大型数据集"}, {"language", "cn"}},
+};
+
+milvus::InsertRequest insert_request;
+insert_request.WithCollectionName("multilingual_documents").WithRowsData(std::move(rows));
+milvus::InsertResponse insert_response;
+status = client->Insert(insert_request, insert_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let documents = vec![
+    serde_json::json!({"text": "Artificial intelligence is transforming technology", "language": "english"}),
+    serde_json::json!({"text": "Machine learning models require large datasets", "language": "en"}),
+    serde_json::json!({"text": "人工智能正在改变技术领域", "language": "chinese"}),
+    serde_json::json!({"text": "机器学习模型需要大型数据集", "language": "cn"}),
+];
+
+client
+    .insert(
+        sdk::request::dml::InsertRequest::builder()
+            .collection_name("multilingual_documents")
+            .rows(documents)
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -883,6 +1094,8 @@ When searching with multi-language analyzers, `search_params` contains crucial c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -992,6 +1205,64 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```cpp
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("multilingual_documents")
+                          .WithAnnsField("sparse")
+                          .WithLimit(3)
+                          .WithMetricType(milvus::MetricType::BM25)
+                          .AddEmbeddedText("artificial intelligence")
+                          .WithOutputFields({"text", "language"})
+                          .AddExtraParam("analyzer_name", "english")
+                          .AddExtraParam("drop_ratio_search", "0")
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto ids = result.Ids().IntIDArray();
+    const auto texts = result.OutputField<milvus::VarCharFieldData>("text");
+    const auto languages = result.OutputField<milvus::VarCharFieldData>("language");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "Score: " << result.Scores()[i]
+                  << ", Text: " << texts->Data()[i]
+                  << ", Language: " << languages->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("multilingual_documents")
+            .vector_field("sparse")
+            .vectors(SearchVectors::EmbeddedText(vec![
+                "artificial intelligence".to_string(),
+            ]))
+            .metric_type(MetricType::Bm25)
+            .extra_params(HashMap::from([
+                ("analyzer_name".to_string(), "english".to_string()),
+                ("drop_ratio_search".to_string(), "0".to_string()),
+            ]))
+            .limit(3)
+            .output_fields(["text", "language"])
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -1023,6 +1294,8 @@ This example demonstrates switching to the Chinese analyzer (using its alias `"c
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1120,6 +1393,60 @@ for _, resultSet := range resultSets {
     }
 }
 
+```
+
+```cpp
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("multilingual_documents")
+                          .WithAnnsField("sparse")
+                          .WithLimit(3)
+                          .WithMetricType(milvus::MetricType::BM25)
+                          .AddEmbeddedText("人工智能")
+                          .WithOutputFields({"text", "language"})
+                          .AddExtraParam("analyzer_name", "cn")
+                          .AddExtraParam("drop_ratio_search", "0")
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : search_response.Results().Results()) {
+    const auto texts = result.OutputField<milvus::VarCharFieldData>("text");
+    const auto languages = result.OutputField<milvus::VarCharFieldData>("language");
+    for (size_t i = 0; i < result.Scores().size(); ++i) {
+        std::cout << "Score: " << result.Scores()[i]
+                  << ", Text: " << texts->Data()[i]
+                  << ", Language: " << languages->Data()[i] << std::endl;
+    }
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("multilingual_documents")
+            .vector_field("sparse")
+            .vectors(SearchVectors::EmbeddedText(vec!["人工智能".to_string()]))
+            .metric_type(MetricType::Bm25)
+            .extra_params(HashMap::from([
+                ("analyzer_name".to_string(), "cn".to_string()),
+            ]))
+            .limit(3)
+            .output_fields(["text", "language"])
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
+for result in search.results().iter() {
+    for row in result.rows()? {
+        println!("{row:?}");
+    }
+}
 ```
 
 ```bash

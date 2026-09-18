@@ -43,6 +43,9 @@ edition = "2021"
 [dependencies]
 milvus-sdk-rust = "{version}"
 tokio = {{ version = "1", features = ["macros", "rt-multi-thread"] }}
+serde_json = "1"
+rand = "0.8"
+chrono = "0.4"
 """
 
 

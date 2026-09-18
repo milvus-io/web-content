@@ -17,6 +17,8 @@ The following example demonstrates how to obtain the name list of all collection
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -93,6 +95,50 @@ if err != nil {
 fmt.Println(collectionNames)
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::ListCollectionsRequest list_request;
+milvus::ListCollectionsResponse list_response;
+status = client->ListCollections(list_request, list_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& name : list_response.CollectionNames()) {
+    std::cout << name << std::endl;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let collections = client
+    .list_collections(sdk::request::collection::ListCollectionsRequest::builder().build()?)
+    .await?;
+for name in collections.collection_names() {
+    println!("{name}");
+}
+```
+
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
@@ -117,6 +163,8 @@ You can also obtain the details of a specific collection. The following example 
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -155,6 +203,30 @@ if err != nil {
 }
 
 fmt.Println(collection)
+```
+
+```cpp
+milvus::DescribeCollectionRequest describe_request;
+describe_request.WithCollectionName("quick_setup");
+milvus::DescribeCollectionResponse describe_response;
+auto status = client->DescribeCollection(describe_request, describe_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+std::cout << describe_response.Desc().CollectionName() << std::endl;
+```
+
+```rust
+let collection = client
+    .describe_collection(
+        sdk::request::collection::DescribeCollectionRequest::builder()
+            .collection_name("quick_setup")
+            .build()?,
+    )
+    .await?;
+println!("{}", collection.description().get_collection_name());
 ```
 
 ```bash

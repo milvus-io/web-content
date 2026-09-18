@@ -17,6 +17,8 @@ The `stemmer` filter is a custom filter in Milvus. To use it, specify `"type": "
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -59,6 +61,41 @@ analyzerParams = map[string]any{"tokenizer": "standard",
         "type":     "stemmer",
         "language": "english",
     }}}
+```
+
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {{{"type", "stemmer"}, {"language", "english"}}}}
+};
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [{"type": "stemmer", "language": "english"}]
+});
 ```
 
 ```bash
@@ -105,6 +142,8 @@ Before applying the analyzer configuration to your collection schema, verify its
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -143,6 +182,20 @@ analyzerParams = map[string]any{"tokenizer": "standard",
     }}}
 ```
 
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {{{"type", "stemmer"}, {"language", "english"}}}}
+};
+```
+
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [{"type": "stemmer", "language": "english"}]
+});
+```
+
 ```bash
 # restful
 analyzerParams='{
@@ -164,6 +217,8 @@ analyzerParams='{
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -233,6 +288,44 @@ result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
+}
+```
+
+```cpp
+milvus::RunAnalyzerRequest run_analyzer_request;
+run_analyzer_request.WithTexts({"running runs looked ran runner"});
+run_analyzer_request.WithAnalyzerParams({{"tokenizer", "standard"},
+                                         {"filter", {{{"type", "stemmer"}, {"language", "english"}}}}});
+milvus::RunAnalyzerResponse run_analyzer_response;
+status = client->RunAnalyzer(run_analyzer_request, run_analyzer_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& result : run_analyzer_response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << token.token_ << std::endl;
+    }
+}
+```
+
+```rust
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(["running runs looked ran runner"])
+            .analyzer_params(serde_json::json!({
+                "tokenizer": "standard",
+                "filter": [{"type": "stemmer", "language": "english"}]
+            }))
+            .build()?,
+    )
+    .await?;
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("{}", token.get_text());
+    }
 }
 ```
 

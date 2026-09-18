@@ -27,6 +27,8 @@ The following example assumes the collection has a VarChar field named `varchar`
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
 </div>
 
 ```python
@@ -62,6 +64,54 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .fieldName("varchar")
         .property("max_length", "1024")
         .build());
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::AlterCollectionFieldPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithFieldName("varchar")
+    .WithProperties({{"max_length", "1024"}});
+status = client->AlterCollectionFieldProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use std::collections::HashMap;
+
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+client
+    .alter_collection_field_properties(
+        sdk::request::collection::AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("varchar")
+            .properties(HashMap::from([("max_length".to_string(), "1024".to_string())]))
+            .build()?,
+    )
+    .await?;
 ```
 
 <div class="multipleCode">
@@ -136,6 +186,8 @@ The following example assumes the collection has an array field named `array` an
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -176,6 +228,30 @@ if err != nil {
 }
 ```
 
+```cpp
+milvus::AlterCollectionFieldPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithFieldName("array")
+    .WithProperties({{"max_capacity", "64"}});
+status = client->AlterCollectionFieldProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_field_properties(
+        sdk::request::collection::AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("array")
+            .properties(HashMap::from([("max_capacity".to_string(), "64".to_string())]))
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 curl --request POST \
@@ -202,6 +278,8 @@ The following example assumes the collection has a field named `doc_chunk` and s
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -222,7 +300,7 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
 ```
 
 ```javascript
-await client.alterCollectionProperties({
+await client.alterCollectionFieldProperties({
   collection_name: "my_collection",
   field_name: 'doc_chunk',
   properties: { 
@@ -238,6 +316,30 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```cpp
+milvus::AlterCollectionFieldPropertiesRequest alter_request;
+alter_request.WithCollectionName("my_collection")
+    .WithFieldName("doc_chunk")
+    .WithProperties({{"mmap.enabled", "true"}});
+status = client->AlterCollectionFieldProperties(alter_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+client
+    .alter_collection_field_properties(
+        sdk::request::collection::AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("doc_chunk")
+            .properties(HashMap::from([("mmap.enabled".to_string(), "true".to_string())]))
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

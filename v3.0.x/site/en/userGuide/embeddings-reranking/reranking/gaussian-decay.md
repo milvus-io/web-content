@@ -118,6 +118,8 @@ After your collection is set up with a numeric field (in this example, `distance
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -177,6 +179,58 @@ const ranker = {
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create a Gaussian decay ranker for location-based restaurant search
+auto ranker = std::make_shared<milvus::DecayRerank>("restaurant_distance_decay");
+ranker->AddInputFieldName("distance");
+ranker->SetFunction("gauss");
+ranker->SetOrigin(0);
+ranker->SetOffset(300);
+ranker->SetDecay(0.5);
+ranker->SetScale(2000);
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(ranker);
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Create a Gaussian decay ranker for location-based restaurant search
+let collection_name = "my_collection";
+let ranker = {
+    let rerank = DecayRerank::new()
+        .name("restaurant_distance_decay")
+        .decay_function("gauss")
+        .origin(0)
+        .offset(300)
+        .decay(0.5)
+        .scale(2000);
+    let value = rerank.get_function().clone().input_fields(["distance"]);
+    rerank.function(value)
+};
+let function_score = FunctionScore::new().add_function(ranker);
+```
+
 ```bash
 # restful
 ```
@@ -190,6 +244,8 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -241,6 +297,60 @@ const result = await milvusClient.search({
 
 ```go
 // go
+```
+
+```cpp
+// Apply decay ranker to restaurant vector search
+std::vector<float> your_query_vector = {0.35803764f, -0.60234958f, 0.18414013f, -0.26286206f, 0.90294385f};
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName(collection_name)
+                          .WithAnnsField("dense")
+                          .WithLimit(10)
+                          .WithOutputFields({"name", "cuisine", "distance"})
+                          // highlight-next-line
+                          .WithRerank(function_score)
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG)
+                          .AddFloatVector(your_query_vector);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& result : search_response.Results().Results()) {
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << row << std::endl;
+    }
+}
+```
+
+```rust
+// Apply decay ranker to restaurant vector search
+let your_query_vector = vec![0.35803764f32, -0.60234958, 0.18414013, -0.26286206, 0.90294385];
+let result = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name(collection_name)
+            .vector_field("dense")
+            .vectors(SearchVectors::Float(vec![your_query_vector]))
+            .limit(10)
+            .output_fields(["name", "cuisine", "distance"])
+            // highlight-next-line
+            .rerank(function_score.clone())
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .build()?,
+    )
+    .await?;
+for (query_index, result) in result.results().iter().enumerate() {
+    println!("Query vector {query_index}:");
+    for row in result.rows()? {
+        println!("  {:?}", row.to_entity_row()?);
+    }
+}
 ```
 
 ```bash

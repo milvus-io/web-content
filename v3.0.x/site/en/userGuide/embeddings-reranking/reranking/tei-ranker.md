@@ -26,6 +26,8 @@ To use TEI Ranker in your Milvus application, create a Function object that spec
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -85,6 +87,54 @@ searchWithRanker(scientists, ranker);
 
 ```go
 // go
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Configure TEI Ranker
+auto tei_ranker = std::make_shared<milvus::ModelRerank>("tei_semantic_ranker");
+tei_ranker->AddInputFieldName("document");
+tei_ranker->SetProvider("tei");
+tei_ranker->SetQueries({"renewable energy developments"});
+tei_ranker->SetEndpoint("http://localhost:8080");
+tei_ranker->SetMaxClientBatchSize(32);
+tei_ranker->AddParam("truncate", "true");
+tei_ranker->AddParam("truncation_direction", "Right");
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// Configure TEI Ranker
+let tei_ranker = {
+    let rerank = ModelRerank::new()
+        .name("tei_semantic_ranker")
+        .provider("tei")
+        .queries(["renewable energy developments"])
+        .endpoint("http://localhost:8080")
+        .max_client_batch_size(32);
+    let value = rerank.get_function().clone().input_fields(["document"]);
+    rerank.function(value)
+};
 ```
 
 ```bash
@@ -161,6 +211,8 @@ To apply TEI Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -204,6 +256,49 @@ SearchResp searchResp = client.search(searchReq);
 
 ```go
 // go
+```
+
+```cpp
+std::vector<float> query_vector = {0.1f, 0.2f, 0.3f, 0.4f}; // Replace with your query vector
+
+milvus::FunctionScorePtr function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(tei_ranker);
+
+auto searchRequest = milvus::SearchRequest()
+                         .WithCollectionName("your_collection")
+                         .WithAnnsField("dense_vector")
+                         .WithLimit(5)
+                         .WithOutputFields({"document"})
+                         //  highlight-next-line
+                         .WithRerank(function_score)
+                         .AddFloatVector(query_vector);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(searchRequest, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4]; // Replace with your query vector
+
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("your_collection")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .vector_field("dense_vector")
+            .limit(5)
+            .output_fields(["document"])
+            //  highlight-next-line
+            .rerank(FunctionScore::new().add_function(tei_ranker))
+            .consistency_level(ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
+println!("{:?}", result);
 ```
 
 ```bash

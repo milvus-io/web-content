@@ -205,6 +205,8 @@ To implement decay ranking, first define a `Function` object with the appropriat
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -270,6 +272,60 @@ const decayRanker = {
 
 ```go
 // go
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Create a decay function for timestamp-based decay
+// Note: All time parameters must use the same unit as your collection data
+auto decay_ranker = std::make_shared<milvus::DecayRerank>("time_decay");
+decay_ranker->AddInputFieldName("timestamp");
+decay_ranker->SetFunction("gauss");
+decay_ranker->SetOrigin(1736870400);              // Reference point (seconds)
+decay_ranker->SetScale(7 * 24 * 60 * 60);         // 7 days in seconds (must match collection data unit)
+decay_ranker->SetOffset(24 * 60 * 60);            // 1 day no-decay zone (must match collection data unit)
+decay_ranker->SetDecay(0.5f);                     // Half score at scale distance
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let your_query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+
+// Create a decay function for timestamp-based decay
+// Note: All time parameters must use the same unit as your collection data
+let decay_ranker = {
+    let rerank = sdk::DecayRerank::new()
+        .name("time_decay")
+        .decay_function("gauss")
+        .origin(1736870400_i64)          // Reference point (seconds)
+        .scale(7 * 24 * 60 * 60)         // 7 days in seconds (must match collection data unit)
+        .offset(24 * 60 * 60)            // 1 day no-decay zone (must match collection data unit)
+        .decay(0.5);                     // Half score at scale distance
+    let value = rerank.get_function().clone().input_fields(["timestamp"]);
+    rerank.function(value)
+};
 ```
 
 ```bash
@@ -348,6 +404,8 @@ After defining your decay ranker, you can apply it during search operations by p
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -397,6 +455,45 @@ const result = await milvusClient.search({
 
 ```go
 // go
+```
+
+```cpp
+milvus::SearchRequest search_request;
+search_request.WithCollectionName("collection_name")
+    .WithAnnsField("vector_field")
+    .WithLimit(10)
+    .WithOutputFields({"document", "timestamp"});
+
+auto score = std::make_shared<milvus::FunctionScore>();
+score->AddFunction(decay_ranker);
+// highlight-next-line
+search_request.WithRerank(score);
+
+milvus::SearchResponse search_response;
+auto status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+// highlight-next-line
+let rerank = sdk::FunctionScore::new().add_function(decay_ranker.clone());
+
+let results = client
+    .search(
+        sdk::request::dql::SearchRequest::builder()
+            .collection_name("collection_name")
+            .vector_field("vector_field")
+            .vectors(sdk::SearchVectors::Float(vec![your_query_vector]))
+            .limit(10)
+            .output_fields(["document", "timestamp"])
+            .consistency_level(sdk::ConsistencyLevel::Strong)
+            .rerank(rerank)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

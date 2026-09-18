@@ -85,6 +85,8 @@ You can get entities by their IDs as follows.
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -182,10 +184,70 @@ const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
 const res = client.get({
-    collection_name="my_collection",
-    ids=[0,1,2],
-    output_fields=["vector", "color"]
+    collection_name: "my_collection",
+    ids: [0,1,2],
+    output_fields: ["vector", "color"]
 })
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::GetRequest get_request;
+get_request.WithCollectionName("my_collection").WithIDs(std::vector<int64_t>{0, 1, 2}).WithOutputFields({"vector", "color"});
+
+milvus::GetResponse get_response;
+status = client->Get(get_request, get_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::EntityRows rows;
+status = get_response.Results().OutputRows(rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let get = client
+    .get(
+        GetRequest::builder()
+            .collection_name("my_collection")
+            .ids(Ids::Int64(vec![0, 1, 2]))
+            .output_fields(["vector", "color"])
+            .build()?,
+    )
+    .await?;
+for row in get.results().rows()? {
+    println!("{row:?}");
+}
 ```
 
 ```bash
@@ -217,6 +279,8 @@ When you need to find entities by custom filtering conditions, use the **Query**
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -283,11 +347,49 @@ const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
 const res = client.query({
-    collection_name="my_collection",
-    filter='color like "red%"',
-    output_fields=["vector", "color"],
-    limit(3)
+    collection_name: "my_collection",
+    filter: 'color like "red%"',
+    output_fields: ["vector", "color"],
+    limit: 3
 })
+```
+
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection").WithFilter("color like \"red%\"").WithOutputFields({"vector", "color"}).WithLimit(3);
+
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::EntityRows rows;
+status = query_response.Results().OutputRows(rows);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+for (const auto& row : rows) {
+    std::cout << row << std::endl;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"color like "red%""#)
+            .output_fields(["vector", "color"])
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
 ```
 
 ```bash
@@ -329,6 +431,8 @@ Pass a list of `"field_name:direction"` strings to the `order_by` parameter, whe
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -363,6 +467,41 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithOutputFields({"vector", "color"})
+    .WithLimit(3)
+    // highlight-next-line
+    .AddOrderByField(milvus::OrderByField("id", milvus::AggregationDirection::ASC));
+
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"color like "red%""#)
+            .output_fields(["vector", "color"])
+            .limit(3)
+            // highlight-next-line
+            .order_by_fields([OrderByField::new().field_name("id").direction(AggDirection::Asc)])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```bash
 # restful
 ```
@@ -376,6 +515,8 @@ You can sort by multiple fields at once. Results are first ordered by the first 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -403,6 +544,47 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("")
+    .WithOutputFields({"color", "rating", "price"})
+    .WithLimit(10)
+    // highlight-next-line
+    .WithOrderByFields({
+        milvus::OrderByField("rating", milvus::AggregationDirection::DESC),
+        milvus::OrderByField("price", milvus::AggregationDirection::ASC),
+    });
+
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("")
+            .output_fields(["color", "rating", "price"])
+            .limit(10)
+            // highlight-next-line
+            .order_by_fields([
+                OrderByField::new().field_name("rating").direction(AggDirection::Desc),
+                OrderByField::new().field_name("price").direction(AggDirection::Asc),
+            ])
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
+```
+
 ```bash
 # restful
 ```
@@ -416,6 +598,8 @@ Use `order_by` together with `limit` and `offset` to paginate through sorted res
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -455,6 +639,68 @@ page2 = client.query(
 // nodejs
 ```
 
+```cpp
+milvus::QueryRequest page1_request;
+page1_request.WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithOutputFields({"color", "price"})
+    .WithLimit(5)
+    .WithOffset(0)
+    // highlight-next-line
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)});
+milvus::QueryResponse page1_response;
+status = client->Query(page1_request, page1_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryRequest page2_request;
+page2_request.WithCollectionName("my_collection")
+    .WithFilter("color like \"red%\"")
+    .WithOutputFields({"color", "price"})
+    .WithLimit(5)
+    .WithOffset(5)
+    // highlight-next-line
+    .WithOrderByFields({milvus::OrderByField("price", milvus::AggregationDirection::ASC)});
+milvus::QueryResponse page2_response;
+status = client->Query(page2_request, page2_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let page1 = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"color like "red%""#)
+            .output_fields(["color", "price"])
+            .limit(5)
+            .offset(0)
+            // highlight-next-line
+            .order_by_fields([OrderByField::new().field_name("price").direction(AggDirection::Asc)])
+            .build()?,
+    )
+    .await?;
+
+let page2 = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"color like "red%""#)
+            .output_fields(["color", "price"])
+            .limit(5)
+            .offset(5)
+            // highlight-next-line
+            .order_by_fields([OrderByField::new().field_name("price").direction(AggDirection::Asc)])
+            .build()?,
+    )
+    .await?;
+```
+
 ```bash
 # restful
 ```
@@ -478,6 +724,8 @@ The following example groups entities by the `color` field and returns the numbe
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -517,6 +765,14 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+// Note: Not yet supported in milvus-sdk-cpp as of v3.0.3.
+```
+
+```rust
+// Note: Not yet supported in milvus-sdk-rust as of v3.0.2.
+```
+
 ```bash
 # restful
 ```
@@ -528,6 +784,8 @@ You can request several aggregation expressions in a single call. The following 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -560,6 +818,14 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+// Note: Not yet supported in milvus-sdk-cpp as of v3.0.3.
+```
+
+```rust
+// Note: Not yet supported in milvus-sdk-rust as of v3.0.2.
+```
+
 ```bash
 # restful
 ```
@@ -571,6 +837,8 @@ Pass more than one field to `group_by_fields` to compute composite groups. The f
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -604,6 +872,14 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+// Note: Not yet supported in milvus-sdk-cpp as of v3.0.3.
+```
+
+```rust
+// Note: Not yet supported in milvus-sdk-rust as of v3.0.2.
+```
+
 ```bash
 # restful
 ```
@@ -615,6 +891,8 @@ You can also combine `group_by_fields` with `limit` to cap how many groups come 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -647,6 +925,14 @@ res = client.query(
 // nodejs
 ```
 
+```cpp
+// Note: Not yet supported in milvus-sdk-cpp as of v3.0.3.
+```
+
+```rust
+// Note: Not yet supported in milvus-sdk-rust as of v3.0.2.
+```
+
 ```bash
 # restful
 ```
@@ -660,6 +946,8 @@ When you need to find entities by custom filtering conditions through paginated 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -736,6 +1024,54 @@ for await (const value of iterator) {
 }
 ```
 
+```cpp
+milvus::QueryIteratorRequest request;
+request.WithCollectionName("my_collection").WithFilter("color like \"red%\"").WithOutputFields({"color"});
+request.SetBatchSize(10);
+
+milvus::QueryIteratorPtr iterator;
+status = client->QueryIterator(request, iterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryResults results;
+while (iterator->Next(results).IsOk() && results.GetRowCount() > 0) {
+    milvus::EntityRows rows;
+    results.OutputRows(rows);
+    for (const auto& row : rows) {
+        std::cout << row << std::endl;
+    }
+}
+```
+
+```rust
+let query = QueryRequest::builder()
+    .collection_name("my_collection")
+    .filter(r#"color like "red%""#)
+    .output_fields(["color"])
+    .build()?;
+let mut iterator = client
+    .query_iterator(
+        QueryIteratorRequest::builder()
+            .query(query)
+            .batch_size(10)
+            .build()?,
+    )
+    .await?;
+
+while let Some(page) = iterator.next().await? {
+    let rows: Vec<_> = page.results().rows()?.collect::<Vec<_>>();
+    if rows.is_empty() {
+        break;
+    }
+    for row in rows {
+        println!("{row:?}");
+    }
+}
+```
+
 ```bash
 # Not available
 ```
@@ -749,6 +1085,8 @@ You can also perform queries within one or multiple partitions by including the 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -853,21 +1191,21 @@ fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 ```javascript
 // Use get
 var res = client.get({
-    collection_name="my_collection",
+    collection_name: "my_collection",
     // highlight-next-line
-    partition_names=["partitionA"],
-    ids=[10,11,12],
-    output_fields=["vector", "color"]
+    partition_names: ["partitionA"],
+    ids: [10,11,12],
+    output_fields: ["vector", "color"]
 })
 
 // Use query
 res = client.query({
-    collection_name="my_collection",
+    collection_name: "my_collection",
     // highlight-next-line
-    partition_names=["partitionA"],
-    filter="color like \"red%\"",
-    output_fields=["vector", "color"],
-    limit(3)
+    partition_names: ["partitionA"],
+    filter: 'color like "red%"',
+    output_fields: ["vector", "color"],
+    limit: 3
 })
 
 // Use queryiterator
@@ -883,6 +1221,110 @@ const results = [];
 for await (const value of iterator) {
   results.push(...value);
   page += 1;
+}
+```
+
+```cpp
+milvus::GetRequest get_request;
+get_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithPartitionNames({"partitionA"})
+    .WithIDs(std::vector<int64_t>{10, 11, 12})
+    .WithOutputFields({"vector", "color"});
+milvus::GetResponse get_response;
+status = client->Get(get_request, get_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithPartitionNames({"partitionA"})
+    .WithFilter("color like \"red%\"")
+    .WithOutputFields({"vector", "color"})
+    .WithLimit(3);
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryIteratorRequest iterator_request;
+iterator_request.WithCollectionName("my_collection")
+    .WithPartitionNames({"partitionA"})
+    .WithFilter("color like \"red%\"")
+    .WithOutputFields({"color"});
+iterator_request.SetBatchSize(10);
+
+milvus::QueryIteratorPtr iterator;
+status = client->QueryIterator(iterator_request, iterator);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::QueryResults results;
+while (iterator->Next(results).IsOk() && results.GetRowCount() > 0) {
+    milvus::EntityRows rows;
+    results.OutputRows(rows);
+    for (const auto& row : rows) {
+        std::cout << row << std::endl;
+    }
+}
+```
+
+```rust
+let get = client
+    .get(
+        GetRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .partition_names(["partitionA"])
+            .ids(Ids::Int64(vec![10, 11, 12]))
+            .output_fields(["vector", "color"])
+            .build()?,
+    )
+    .await?;
+
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .partition_names(["partitionA"])
+            .filter(r#"color like "red%""#)
+            .output_fields(["vector", "color"])
+            .limit(3)
+            .build()?,
+    )
+    .await?;
+
+let query_iter = QueryRequest::builder()
+    .collection_name("my_collection")
+    .partition_names(["partitionA"])
+    .filter(r#"color like "red%""#)
+    .output_fields(["color"])
+    .build()?;
+let mut iterator = client
+    .query_iterator(
+        QueryIteratorRequest::builder()
+            .query(query_iter)
+            .batch_size(10)
+            .build()?,
+    )
+    .await?;
+
+while let Some(page) = iterator.next().await? {
+    let rows: Vec<_> = page.results().rows()?.collect::<Vec<_>>();
+    if rows.is_empty() {
+        break;
+    }
+    for row in rows {
+        println!("{row:?}");
+    }
 }
 ```
 
@@ -934,6 +1376,8 @@ For detailed usage, advanced examples, and best practices, refer to [Random Samp
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1021,6 +1465,58 @@ if err != nil {
 // node
 ```
 
+```cpp
+milvus::QueryRequest request;
+request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithFilter("RANDOM_SAMPLE(0.01)")
+    .WithOutputFields({"vector", "color"});
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+request.WithCollectionName("my_collection")
+    // highlight-next-line
+    .WithFilter("color like \"red%\" AND RANDOM_SAMPLE(0.005)")
+    .WithOutputFields({"vector", "color"})
+    .WithLimit(10);
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .filter("RANDOM_SAMPLE(0.01)")
+            .output_fields(["vector", "color"])
+            .build()?,
+    )
+    .await?;
+println!("Sampled {} entities from collection", query.results().rows()?.count());
+
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            // highlight-next-line
+            .filter(r#"color like "red%" AND RANDOM_SAMPLE(0.005)"#)
+            .output_fields(["vector", "color"])
+            .limit(10)
+            .build()?,
+    )
+    .await?;
+println!("Found {} red items in sample", query.results().rows()?.count());
+```
+
 ```bash
 # restful
 ```
@@ -1036,8 +1532,10 @@ The example below shows how to temporarily set a timezone for a query operation:
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -1063,6 +1561,41 @@ results = client.query(
 
 ```go
 // go
+```
+
+```cpp
+milvus::QueryRequest query_request;
+query_request.WithCollectionName("my_collection")
+    .WithFilter("id <= 10")
+    .WithOutputFields({"id", "tsz", "vec"})
+    .WithLimit(2)
+    // highlight-next-line
+    .WithTimezone("America/Havana");
+
+milvus::QueryResponse query_response;
+status = client->Query(query_request, query_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let query = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("id <= 10")
+            .output_fields(["id", "tsz", "vec"])
+            .limit(2)
+            // highlight-next-line
+            .timezone("America/Havana")
+            .build()?,
+    )
+    .await?;
+for row in query.results().rows()? {
+    println!("{row:?}");
+}
 ```
 
 ```bash

@@ -139,6 +139,8 @@ For clustering compacting in a specific collection, you should select a scalar f
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -215,6 +217,80 @@ client.createCollection(requestCreate);
 // go
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+auto schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+schema->AddField(milvus::FieldSchema("key", milvus::DataType::INT64).WithClusteringKey(true));
+schema->AddField(milvus::FieldSchema("var", milvus::DataType::VARCHAR).WithMaxLength(1000));
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+
+milvus::CreateCollectionRequest create_request;
+create_request.WithCollectionName("clustering_test").WithCollectionSchema(schema);
+status = client->CreateCollection(create_request);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = sdk::CollectionSchema::new()
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("id")
+            .data_type(sdk::DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("key")
+            .data_type(sdk::DataType::Int64)
+            .clustering_key(true),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("var")
+            .data_type(sdk::DataType::VarChar)
+            .max_length(1000),
+    )
+    .add_field(
+        sdk::FieldSchema::new()
+            .name("vector")
+            .data_type(sdk::DataType::FloatVector)
+            .dimension(5),
+    );
+
+client
+    .create_collection(
+        sdk::request::collection::CreateCollectionRequest::builder()
+            .collection_name("clustering_test")
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
 ```javascript
 import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 
@@ -274,6 +350,8 @@ If you have enabled automatic clustering compaction, Milvus automatically trigge
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -310,6 +388,52 @@ System.out.println(stateResp.getState());
 
 ```go
 // go
+```
+
+```cpp
+// trigger a manual compaction
+milvus::CompactRequest compact_request;
+compact_request.WithCollectionName("clustering_test")
+    .WithClusteringCompaction(true);
+milvus::CompactResponse compact_response;
+auto status = client->Compact(compact_request, compact_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// get the compaction state
+milvus::GetCompactionStateRequest state_request;
+state_request.WithCompactionID(compact_response.CompactionID());
+milvus::GetCompactionStateResponse state_response;
+status = client->GetCompactionState(state_request, state_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+std::cout << static_cast<int>(state_response.State().State()) << std::endl;
+```
+
+```rust
+// trigger a manual compaction
+let compact = client
+    .compact(
+        sdk::request::utility::CompactRequest::builder()
+            .collection_name("clustering_test")
+            .clustering_compaction(true)
+            .build()?,
+    )
+    .await?;
+
+// get the compaction state
+let state = client
+    .get_compaction_state(
+        sdk::request::utility::GetCompactionStateRequest::builder()
+            .compaction_id(compact.compaction_id())
+            .build()?,
+    )
+    .await?;
+println!("{:?}", state.state());
 ```
 
 ```javascript

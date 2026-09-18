@@ -40,6 +40,8 @@ To use Voyage AI Ranker in your Milvus application, create a Function object tha
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -98,6 +100,64 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 
 ```go
 // go
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+// Configure Voyage AI Ranker
+auto voyageai_ranker = std::make_shared<milvus::ModelRerank>("voyageai_semantic_ranker");
+voyageai_ranker->SetProvider("voyageai");
+voyageai_ranker->AddParam("model_name", "rerank-2.5");
+voyageai_ranker->SetQueries({"renewable energy developments"});
+voyageai_ranker->SetMaxClientBatchSize(128);
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let your_query_vector = vec![
+    -0.619954382375778f32, 0.4479436794798608, -0.17493894838751745,
+    -0.4248030059917294, -0.8648452746018911,
+];
+
+// Configure Voyage AI Ranker
+let voyageai_ranker = sdk::Function::new()
+    .name("voyageai_semantic_ranker")
+    .function_type(sdk::FunctionType::Rerank)
+    .input_fields(["document"])
+    .params(HashMap::from([
+        ("reranker".to_string(), "model".to_string()),
+        ("provider".to_string(), "voyageai".to_string()),
+        ("model_name".to_string(), "rerank-2.5".to_string()),
+        (
+            "queries".to_string(),
+            "[\"renewable energy developments\"]".to_string(),
+        ),
+        ("max_client_batch_size".to_string(), "128".to_string()),
+        ("truncation".to_string(), "true".to_string()),
+    ]));
 ```
 
 ```bash
@@ -174,6 +234,8 @@ To apply Voyage AI Ranker to a standard vector search:
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#cpp">C++</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,6 +279,44 @@ SearchResp searchResp = client.search(searchReq);
 
 ```go
 // go
+```
+
+```cpp
+milvus::FunctionScorePtr function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(voyageai_ranker);
+
+auto search_request = milvus::SearchRequest()
+                          .WithCollectionName("your_collection")
+                          .WithAnnsField("dense_vector")
+                          .WithLimit(5)
+                          .WithOutputFields({"document"})
+                          // highlight-next-line
+                          .WithRerank(function_score)
+                          .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse search_response;
+status = client->Search(search_request, search_response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+```
+
+```rust
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("your_collection")
+            .vector_field("dense_vector")
+            .vectors(SearchVectors::Float(vec![your_query_vector]))
+            .limit(5)
+            .output_fields(["document"])
+            // highlight-next-line
+            .rerank(sdk::FunctionScore::new().add_function(voyageai_ranker))
+            .consistency_level(sdk::ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
 ```
 
 ```bash

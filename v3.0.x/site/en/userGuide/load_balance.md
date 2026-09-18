@@ -23,6 +23,8 @@ Get the `segmentID` of the sealed segment that you expect to transfer and the `n
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
+  <a href="#rust">Rust</a>
   <a href="#shell">CLI</a>
   <a href="#curl">Curl</a>
 </div>
@@ -49,6 +51,57 @@ milvusClient.getQuerySegmentInfo(
 await getQuerySegmentInfo({
     collectionName: "book",
 });
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+milvus::ListQuerySegmentsRequest request;
+request.WithCollectionName("book");
+
+milvus::ListQuerySegmentsResponse response;
+status = client->ListQuerySegments(request, response);
+if (!status.IsOk()) {
+    std::cerr << status.Message() << std::endl;
+    return;
+}
+
+for (const auto& segment : response.Result()) {
+    std::cout << "segmentID=" << segment.SegmentID()
+              << ", nodeID=" << segment.NodeID() << std::endl;
+}
+```
+
+```rust
+use milvus::v2 as sdk;
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let segments = client
+    .list_query_segments(
+        sdk::request::utility::ListQuerySegmentsRequest::builder()
+            .collection_name("book")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", segments.segments());
 ```
 
 ```shell
@@ -125,6 +178,8 @@ Transfer the sealed segment(s) with the `segmentID` and the `nodeID` of the curr
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#cpp">C++</a>
+  <a href="#rust">Rust</a>
   <a href="#shell">CLI</a>
   <a href="#curl">Curl</a>
 </div>
@@ -158,6 +213,14 @@ await loadBalance({
   dst_nodeIDs: [4],
   sealed_segmentIDs: [431067441441538050]
 });
+```
+
+```cpp
+// Note: Not yet supported in milvus-sdk-cpp as of v3.0.3.
+```
+
+```rust
+// Note: Not yet supported in milvus-sdk-rust as of v3.0.2.
 ```
 
 ```shell
