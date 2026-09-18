@@ -40,6 +40,7 @@ To enable text match for a specific `VARCHAR` field, set both the `enable_analyz
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -168,6 +169,14 @@ export schema='{
     }'
 ```
 
+```cpp
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true).EnableMatch(true));
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+```
+
 ### Optional: Configure an analyzer
 
 The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.
@@ -182,6 +191,7 @@ In cases where a different analyzer is required, you can configure one using the
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -277,6 +287,11 @@ export schema='{
     }'
 ```
 
+```cpp
+nlohmann::json analyzer_params = {{"type", "english"}};
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(200).EnableAnalyzer(true).WithAnalyzerParams(analyzer_params).EnableMatch(true));
+```
+
 Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to [Analyzer Overview](analyzer-overview.md).
 
 ## Use text match
@@ -291,6 +306,14 @@ The `TEXT_MATCH` expression is used to specify the field and the terms to search
 TEXT_MATCH(field_name, text)
 ```
 
+```cpp
+std::string filter = "TEXT_MATCH(field_name, text)";
+```
+
+```bash
+export filter="\"TEXT_MATCH(field_name, text)\""
+```
+
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
 
 - `text`: The terms to search for. Multiple terms can be separated by spaces or other appropriate delimiters based on the language and configured analyzer.
@@ -303,6 +326,7 @@ By default, `TEXT_MATCH` uses the **OR** matching logic, meaning it will return 
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -325,6 +349,10 @@ const filter = "TEXT_MATCH(text, 'machine deep')";
 export filter="\"TEXT_MATCH(text, 'machine deep')\""
 ```
 
+```cpp
+std::string filter = "TEXT_MATCH(text, 'machine deep')";
+```
+
 You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching. 
 
 - To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:
@@ -335,6 +363,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
+        <a href="#cpp">C++</a>
     </div>
 
     ```python
@@ -357,6 +386,10 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
     ```
 
+    ```cpp
+    std::string filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
+
 - To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
 
     <div class="multipleCode">
@@ -365,6 +398,7 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
         <a href="#go">Go</a>
         <a href="#javascript">NodeJS</a>
         <a href="#bash">cURL</a>
+        <a href="#cpp">C++</a>
     </div>
 
     ```python
@@ -387,6 +421,10 @@ You can also combine multiple `TEXT_MATCH` expressions using logical operators t
     export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
     ```
 
+    ```cpp
+    std::string filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
 ### TEXT_MATCH_FUZZY expression syntax | Milvus 3.0.0+
 
 Use `TEXT_MATCH_FUZZY` to tolerate spelling differences between query tokens and indexed tokens. Milvus analyzes the query text with the field's analyzer and applies fuzzy matching to each resulting token. If the query produces multiple tokens, the expression matches an entity when any token satisfies the configured edit distance.
@@ -395,6 +433,14 @@ The syntax is as follows:
 
 ```python
 TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)
+```
+
+```cpp
+std::string filter = "TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)";
+```
+
+```bash
+export filter="\"TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\""
 ```
 
 - `field_name`: The name of the match-enabled `VARCHAR` or `TEXT` field to search for.
@@ -411,6 +457,7 @@ For example, the following expression matches tokens within one edit of `machne`
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -433,6 +480,10 @@ const filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
 export filter="\"TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)\""
 ```
 
+```cpp
+std::string filter = "TEXT_MATCH_FUZZY(text, 'machne', max_edit_distance = 1)";
+```
+
 `TEXT_MATCH_FUZZY` is part of the filter-expression syntax, so client SDKs do not require a dedicated fuzzy-match method. Pass the expression through the same `filter` parameter used for `TEXT_MATCH` in search or query operations.
 
 ### Search with text match
@@ -453,6 +504,7 @@ You can highlight the matched terms in search results by configuring a text high
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -545,6 +597,29 @@ curl --request POST \
 }'
 ```
 
+```cpp
+// Match entities with `keyword1` or `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1 keyword2')";
+
+// Assuming 'embeddings' is the vector field and 'text' is the VARCHAR field
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("embeddings")
+                   .AddFloatVector(query_vector)
+                   // highlight-next-line
+                   .WithFilter(filter)
+                   .AddExtraParam("nprobe", "10")
+                   .WithLimit(10)
+                   .AddOutputField("id")
+                   .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ### Query with text match
 
 Text match can also be used for scalar filtering in query operations. By specifying a `TEXT_MATCH` expression in the `expr` parameter of the `query()` method, you can retrieve documents that match the given terms.
@@ -557,6 +632,7 @@ The example below retrieves documents where the `text` field contains both terms
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#cpp">C++</a>
 </div>
 
 ```python
@@ -623,6 +699,24 @@ curl --request POST \
     "filter": '"$filter"',
     "outputFields": ["id", "text"]
 }'
+```
+
+```cpp
+// Match entities with both `keyword1` and `keyword2`
+std::string filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName("my_collection")
+                   // highlight-next-line
+                   .WithFilter(filter)
+                   .AddOutputField("id")
+                   .AddOutputField("text");
+
+milvus::QueryResponse response;
+auto status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Considerations
