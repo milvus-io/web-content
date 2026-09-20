@@ -1,11 +1,12 @@
 ---
 id: milvus_backup_upgrade.md
 summary: >-
-  Upgrade Milvus Backup from 0.5.x to 0.6.0, update configuration and commands,
+  Upgrade Milvus Backup from 0.5.x to 0.6.x, update configuration and commands,
   and validate backup and restore.
-title: Upgrade Milvus Backup to 0.6.0
+title: Upgrade Milvus Backup to 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Upgrade-Milvus-Backup-to-060" class="common-anchor-header">Upgrade Milvus Backup to 0.6.0<button data-href="#Upgrade-Milvus-Backup-to-060" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Backup-to-06x" class="common-anchor-header">Upgrade Milvus Backup to 0.6.x<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Upgrade-Milvus-Backup-to-06x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +21,7 @@ title: Upgrade Milvus Backup to 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Use this guide when upgrading the <strong>Milvus Backup tool</strong> from 0.5.x to 0.6.0. It does not upgrade your Milvus server. If you are staying on 0.5.x, continue using the <a href="/docs/milvus_backup_cli.md">0.5.x CLI</a> or <a href="/docs/milvus_backup_api.md">API</a> guide. For a new installation, use the <a href="/docs/milvus_backup_0_6_cli.md">0.6.0 guide</a>.</p>
+    </button></h1><p>Use this guide when upgrading the <strong>Milvus Backup tool</strong> from 0.5.x to 0.6.x. The procedure below uses 0.6.0 as the validated target version. It does not upgrade your Milvus server. If you are staying on 0.5.x, continue using the <a href="/docs/milvus_backup_cli.md">0.5.x CLI</a> or <a href="/docs/milvus_backup_api.md">API</a> guide. For a new installation, use the <a href="/docs/milvus_backup_0_6_cli.md">CLI guide</a>.</p>
 <p>V1 YAML configurations still load through automatic translation. However, deprecated CLI flags are rejected in 0.6.0, and the default backup format changes on Milvus 3.0. Review both configuration and commands before switching scheduled jobs or services.</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">Check the starting point<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,7 +116,7 @@ title: Upgrade Milvus Backup to 0.6.0
 <pre><code translate="no" class="language-shell">./milvus-backup create --filter coll -n my_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API’s <code translate="no">collection_names</code> still selects source names in the backup; see the <a href="/docs/milvus_backup_0_6_api.md#Restore-data">0.6.0 API guide</a>.</p>
+<p>A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API’s <code translate="no">collection_names</code> still selects source names in the backup; see the <a href="/docs/milvus_backup_0_6_api.md#Restore-data">HTTP API guide</a>.</p>
 <h2 id="Choose-the-backup-behavior" class="common-anchor-header">Choose the backup behavior<button data-href="#Choose-the-backup-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,4 +166,4 @@ title: Upgrade Milvus Backup to 0.6.0
 ./milvus-backup restore --filter coll_legacy_check -n legacy_backup -s _legacy_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>These upgrade paths were validated with <strong>Milvus 2.6.11</strong>, Backup <strong>0.5.16 → 0.6.0</strong>, and binlog backups in MinIO. Both newly created and existing backups restored with matching entity values and vector-search results. This does not establish compatibility for every historical backup or for Milvus 2.x-to-3.0 restoration. It also does not establish that 0.5.x can read backups created by 0.6.0.</p>
-<p>Once validation succeeds, update jobs to use the new binary, checked configuration, environment settings, and replacement flags together. For API deployments, start the new service with the checked configuration and verify task completion through the <a href="/docs/milvus_backup_0_6_api.md">0.6.0 HTTP API</a>. To adopt snapshots on Milvus 3.0.1 or later, follow <a href="/docs/snapshot-backup-and-restore.md">Snapshot Backup and Restore in One Instance</a>.</p>
+<p>Once validation succeeds, update jobs to use the new binary, checked configuration, environment settings, and replacement flags together. For API deployments, start the new service with the checked configuration and verify task completion through the <a href="/docs/milvus_backup_0_6_api.md">HTTP API</a>. To adopt snapshots on Milvus 3.0.1 or later, follow <a href="/docs/snapshot-backup-and-restore.md">Snapshot Backup and Restore in One Instance</a>.</p>

@@ -1,11 +1,12 @@
 ---
 id: milvus_backup_0_6_cli.md
 summary: >-
-  Configure Milvus Backup 0.6.0, create a backup, and verify restored data using
-  the CLI.
-title: Use Milvus Backup 0.6.0
+  Configure Milvus Backup, create a backup, and verify restored data using the
+  CLI.
+title: Back up and Restore Data Using Commands
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Use-Milvus-Backup-060" class="common-anchor-header">Use Milvus Backup 0.6.0<button data-href="#Use-Milvus-Backup-060" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-Commands" class="common-anchor-header">Back up and Restore Data Using Commands<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-Commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +21,7 @@ title: Use Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Use Milvus Backup to back up collections and restore them in the same or another Milvus instance. This guide covers <strong>Milvus Backup 0.6.0</strong>. Backup and restore on Milvus 3.0 is officially supported starting with <strong>Milvus 3.0.1</strong>. Backup 0.6.0 also supports binlog workflows on supported Milvus 2.x versions; check <a href="/docs/milvus_backup_overview.md#Compatibility-matrix">Milvus Backup compatibility</a>.</p>
+    </button></h1><p>Use Milvus Backup to back up collections and restore them in the same or another Milvus instance. Backup and restore on Milvus 3.0 is officially supported starting with <strong>Milvus 3.0.1</strong>. Milvus Backup also supports binlog workflows on supported Milvus 2.x versions; check <a href="/docs/milvus_backup_overview.md#Compatibility-matrix">Milvus Backup compatibility</a>.</p>
 <p>If you are keeping Backup 0.5.x, use the <a href="/docs/milvus_backup_cli.md">0.5.x CLI guide</a>. If you are upgrading, follow <a href="/docs/milvus_backup_upgrade.md">Upgrade Milvus Backup</a> first.</p>
 <h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Obtain Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +38,7 @@ title: Use Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Download the binary for your operating system and architecture from the <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0 release</a>, then extract it. Keep the binary and configuration examples on the same release.</p>
+    </button></h2><p>The examples below were validated with <strong>Milvus Backup 0.6.0</strong>. Download the binary for your operating system and architecture from the <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0 release</a>, then extract it. Keep the binary and configuration examples on the same release.</p>
 <p>To build from source instead, install <strong>Go 1.26 or later</strong>, then run:</p>
 <pre><code translate="no" class="language-shell">git clone --branch v0.6.0 --depth 1 https://github.com/zilliztech/milvus-backup.git
 cd milvus-backup

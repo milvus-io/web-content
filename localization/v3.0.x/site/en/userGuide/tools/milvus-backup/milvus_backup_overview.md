@@ -37,15 +37,15 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Backup has its own release version, separate from the Milvus server version. Choose instructions for the Backup binary you run, then check the supported source and target Milvus versions.</p>
+    </button></h2><p>Milvus Backup has its own release version, separate from the Milvus server version. The current guides cover the 0.6.x series; the Backup 0.5.x section preserves the earlier workflows. Page-title labels identify the applicable Backup series. Installation instructions and examples use a specific validated release. Check source and target Milvus server compatibility separately.</p>
 <table>
 <thead>
 <tr><th>Your task</th><th>Guide</th></tr>
 </thead>
 <tbody>
 <tr><td>Continue using Backup 0.5.x</td><td><a href="/docs/milvus_backup_cli.md">0.5.x commands</a> and <a href="/docs/milvus_backup_api.md">HTTP API</a>, with examples pinned to 0.5.16</td></tr>
-<tr><td>Upgrade an existing Backup installation</td><td><a href="/docs/milvus_backup_upgrade.md">Upgrade from 0.5.x to 0.6.0</a></td></tr>
-<tr><td>Install and use Backup 0.6.0</td><td><a href="/docs/milvus_backup_0_6_cli.md">0.6.0 commands and configuration</a>, or <a href="/docs/milvus_backup_0_6_api.md">HTTP API</a></td></tr>
+<tr><td>Upgrade an existing Backup installation</td><td><a href="/docs/milvus_backup_upgrade.md">Upgrade from 0.5.x to 0.6.x</a></td></tr>
+<tr><td>Install and use Backup 0.6.x</td><td><a href="/docs/milvus_backup_0_6_cli.md">commands and configuration</a>, or <a href="/docs/milvus_backup_0_6_api.md">HTTP API</a></td></tr>
 <tr><td>Back up and restore a snapshot on Milvus 3.0.1 or later</td><td><a href="/docs/snapshot-backup-and-restore.md">Snapshot Backup and Restore in One Instance</a></td></tr>
 </tbody>
 </table>
@@ -66,7 +66,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Use a Backup binary and configuration examples from the same release. The <a href="/docs/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x guide</a> pins 0.5.16; the <a href="/docs/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">0.6.0 guide</a> pins 0.6.0.</li>
+<li>Use a Backup binary and configuration examples from the same release. The <a href="/docs/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x guide</a> pins 0.5.16; the <a href="/docs/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">current guide</a> pins 0.6.0.</li>
 <li>Provide network access to Milvus, its storage, and the backup destination. Snapshot operations also require the Milvus server to reach the backup store.</li>
 <li>Check server compatibility below. Go is required only when building from source: 1.25 or later for Backup 0.5.16, and 1.26 or later for 0.6.0.</li>
 </ul>

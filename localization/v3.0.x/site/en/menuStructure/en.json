@@ -2186,13 +2186,13 @@
             "children": []
           },
           {
-            "label": "Commands (0.6.0)",
+            "label": "Commands",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "HTTP API (0.6.0)",
+            "label": "HTTP API",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2210,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Commands (0.5.x)",
+                "label": "Commands",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "HTTP API (0.5.x)",
+                "label": "HTTP API",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Common Cases (0.5.x)",
+                "label": "Common Cases",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2254,7 +2254,7 @@
                 ]
               },
               {
-                "label": "Upgrade to 0.6.0",
+                "label": "Upgrade to 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
