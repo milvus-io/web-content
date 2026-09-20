@@ -1,0 +1,12 @@
+filters:
+  ".*":
+    reviewers:
+      - shanghaikid
+      - AnthonyTsu1984
+      - YiyunNi
+      - yhmo
+    approvers:
+      - shanghaikid
+      - AnthonyTsu1984
+      - YiyunNi
+      - yhmo
