@@ -1,6 +1,6 @@
 # dump_messages()
 
-Adds message dumping for data-salvage workflows. Async variant shares the sync method contract.
+This operation dumps messages from a WAL range for data salvage.
 
 ## Request Syntax
 

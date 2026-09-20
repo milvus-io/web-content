@@ -1,6 +1,6 @@
 # alter_role()
 
-New public helper for changing a role description. Async variant shares the sync method parameter and response contract.
+This operation updates the description of an existing role.
 
 ## Request Syntax
 
