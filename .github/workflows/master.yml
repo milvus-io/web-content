@@ -8,6 +8,13 @@ on:
       - master
     paths-ignore:
       - "preview/**.md"
+      - "skills/**"
+      - ".codex/**"
+      - ".opencode/**"
+      - ".claude/**"
+      - "AGENTS.md"
+      - ".gitignore"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 jobs:
