@@ -1,12 +1,13 @@
 ---
 id: milvus_backup_upgrade.md
-summary: Upgrade Milvus Backup from 0.5.x to 0.6.0, update configuration and commands, and validate backup and restore.
-title: Upgrade Milvus Backup to 0.6.0
+summary: Upgrade Milvus Backup from 0.5.x to 0.6.x, update configuration and commands, and validate backup and restore.
+title: Upgrade Milvus Backup to 0.6.x
+beta: Milvus Backup 0.6.x
 ---
 
-# Upgrade Milvus Backup to 0.6.0
+# Upgrade Milvus Backup to 0.6.x
 
-Use this guide when upgrading the **Milvus Backup tool** from 0.5.x to 0.6.0. It does not upgrade your Milvus server. If you are staying on 0.5.x, continue using the [0.5.x CLI](milvus_backup_cli.md) or [API](milvus_backup_api.md) guide. For a new installation, use the [0.6.0 guide](milvus_backup_0_6_cli.md).
+Use this guide when upgrading the **Milvus Backup tool** from 0.5.x to 0.6.x. The procedure below uses 0.6.0 as the validated target version. It does not upgrade your Milvus server. If you are staying on 0.5.x, continue using the [0.5.x CLI](milvus_backup_cli.md) or [API](milvus_backup_api.md) guide. For a new installation, use the [CLI guide](milvus_backup_0_6_cli.md).
 
 V1 YAML configurations still load through automatic translation. However, deprecated CLI flags are rejected in 0.6.0, and the default backup format changes on Milvus 3.0. Review both configuration and commands before switching scheduled jobs or services.
 
@@ -73,7 +74,7 @@ Their 0.6.0 replacements use the target name for restore:
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 ```
 
-A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API's `collection_names` still selects source names in the backup; see the [0.6.0 API guide](milvus_backup_0_6_api.md#Restore-data).
+A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API's `collection_names` still selects source names in the backup; see the [HTTP API guide](milvus_backup_0_6_api.md#Restore-data).
 
 ## Choose the backup behavior
 
@@ -105,4 +106,4 @@ Also test a representative existing backup before relying on it with the new too
 
 These upgrade paths were validated with **Milvus 2.6.11**, Backup **0.5.16 → 0.6.0**, and binlog backups in MinIO. Both newly created and existing backups restored with matching entity values and vector-search results. This does not establish compatibility for every historical backup or for Milvus 2.x-to-3.0 restoration. It also does not establish that 0.5.x can read backups created by 0.6.0.
 
-Once validation succeeds, update jobs to use the new binary, checked configuration, environment settings, and replacement flags together. For API deployments, start the new service with the checked configuration and verify task completion through the [0.6.0 HTTP API](milvus_backup_0_6_api.md). To adopt snapshots on Milvus 3.0.1 or later, follow [Snapshot Backup and Restore in One Instance](snapshot-backup-and-restore.md).
+Once validation succeeds, update jobs to use the new binary, checked configuration, environment settings, and replacement flags together. For API deployments, start the new service with the checked configuration and verify task completion through the [HTTP API](milvus_backup_0_6_api.md). To adopt snapshots on Milvus 3.0.1 or later, follow [Snapshot Backup and Restore in One Instance](snapshot-backup-and-restore.md).

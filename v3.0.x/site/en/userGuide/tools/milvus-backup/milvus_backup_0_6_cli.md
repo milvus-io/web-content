@@ -1,18 +1,19 @@
 ---
 id: milvus_backup_0_6_cli.md
-summary: Configure Milvus Backup 0.6.0, create a backup, and verify restored data using the CLI.
-title: Use Milvus Backup 0.6.0
+summary: Configure Milvus Backup, create a backup, and verify restored data using the CLI.
+title: Back up and Restore Data Using Commands
+beta: Milvus Backup 0.6.x
 ---
 
-# Use Milvus Backup 0.6.0
+# Back up and Restore Data Using Commands
 
-Use Milvus Backup to back up collections and restore them in the same or another Milvus instance. This guide covers **Milvus Backup 0.6.0**. Backup and restore on Milvus 3.0 is officially supported starting with **Milvus 3.0.1**. Backup 0.6.0 also supports binlog workflows on supported Milvus 2.x versions; check [Milvus Backup compatibility](milvus_backup_overview.md#Compatibility-matrix).
+Use Milvus Backup to back up collections and restore them in the same or another Milvus instance. Backup and restore on Milvus 3.0 is officially supported starting with **Milvus 3.0.1**. Milvus Backup also supports binlog workflows on supported Milvus 2.x versions; check [Milvus Backup compatibility](milvus_backup_overview.md#Compatibility-matrix).
 
 If you are keeping Backup 0.5.x, use the [0.5.x CLI guide](milvus_backup_cli.md). If you are upgrading, follow [Upgrade Milvus Backup](milvus_backup_upgrade.md) first.
 
 ## Obtain Milvus Backup
 
-Download the binary for your operating system and architecture from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0), then extract it. Keep the binary and configuration examples on the same release.
+The examples below were validated with **Milvus Backup 0.6.0**. Download the binary for your operating system and architecture from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0), then extract it. Keep the binary and configuration examples on the same release.
 
 To build from source instead, install **Go 1.26 or later**, then run:
 

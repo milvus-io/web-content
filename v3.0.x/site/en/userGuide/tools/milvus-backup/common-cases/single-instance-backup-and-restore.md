@@ -2,15 +2,12 @@
 id: single-instance-backup-and-restore.md
 summary: This topic details the process of backing up a collection and restoring it from the backup within the same Milvus instance
 title: Backup and Restore in One Instance
+beta: Milvus Backup 0.5.x
 ---
 
 # Backup and Restore in One Instance
 
-<div class="alert note">
-
-This page covers **Milvus Backup 0.5.x**, with downloads and examples pinned to **0.5.16**. Check the [Milvus compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported server versions. For Backup 0.6.0, use the [0.6.0 guide](milvus_backup_0_6_cli.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md).
-
-</div>
+For current workflows, see the [CLI guide](milvus_backup_0_6_cli.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md). Check the [compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported Milvus server versions.
 
 This topic details the process of backing up a collection and restoring
 it from the backup within the same Milvus instance.

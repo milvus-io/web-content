@@ -2,11 +2,12 @@
 id: snapshot-backup-and-restore.md
 summary: Back up a collection and restore it with a new name in the same Milvus instance.
 title: Snapshot Backup and Restore in One Instance
+beta: Milvus Backup 0.6.x
 ---
 
 # Snapshot Backup and Restore in One Instance
 
-Back up a collection and restore it with a new name in the same Milvus instance. This example uses **Milvus Backup 0.6.0** to create a snapshot of `coll` and restore it as `coll_bak` on **Milvus 3.0.1 or later**. For Backup 0.5.x, use [Backup and Restore in One Instance](single-instance-backup-and-restore.md).
+Back up a collection and restore it with a new name in the same Milvus instance. This example creates a snapshot of `coll` and restores it as `coll_bak` on **Milvus 3.0.1 or later**. For Backup 0.5.x, use [Backup and Restore in One Instance](single-instance-backup-and-restore.md).
 
 ## Overview
 
@@ -18,7 +19,7 @@ Back up a collection and restore it with a new name in the same Milvus instance.
 
 ## Prerequisites
 
-- Use Milvus Backup 0.6.0 and Milvus 3.0.1 or later. Install the tool as described in [Back up and Restore Data Using Commands](milvus_backup_0_6_cli.md).
+- Use Milvus 3.0.1 or later. This example was validated with Milvus Backup 0.6.0 and Milvus 3.0.1. Install the tool as described in [Back up and Restore Data Using Commands](milvus_backup_0_6_cli.md).
 - Use an existing collection named `coll`, or create the optional sample collection below. Keep its data unchanged while comparing source and restored results.
 - Make the Milvus gRPC port (19530), management port (9091), and object storage accessible to Milvus Backup. The Milvus server must also be able to access the backup storage for snapshot export and import.
 - Replace the example hostnames, bucket names, root paths, and credentials with your deployment settings. Milvus storage settings must match the running instance; changing the backup configuration does not reconfigure Milvus.

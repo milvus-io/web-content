@@ -1,16 +1,17 @@
 ---
 id: milvus_backup_0_6_api.md
-summary: Create and monitor Milvus Backup 0.6.0 backup and restore tasks through the HTTP API.
-title: Use the Milvus Backup 0.6.0 HTTP API
+summary: Create and monitor backup and restore tasks through the Milvus Backup HTTP API.
+title: Back up and Restore Data Using APIs
+beta: Milvus Backup 0.6.x
 ---
 
-# Use the Milvus Backup 0.6.0 HTTP API
+# Back up and Restore Data Using APIs
 
-Use the Milvus Backup HTTP API to create backups, restore collections, and monitor asynchronous tasks. The snapshot example below uses **Milvus Backup 0.6.0** with **Milvus 3.0.1 or later**. For Backup 0.5.x, use the [0.5.x API guide](milvus_backup_api.md). For an existing installation, see [Upgrade Milvus Backup](milvus_backup_upgrade.md).
+Use the Milvus Backup HTTP API to create backups, restore collections, and monitor asynchronous tasks. The snapshot example below requires **Milvus 3.0.1 or later**. For Backup 0.5.x, use the [0.5.x API guide](milvus_backup_api.md). For an existing installation, see [Upgrade Milvus Backup](milvus_backup_upgrade.md).
 
 ## Obtain Milvus Backup
 
-Download and extract the appropriate binary from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0). To build from source instead, follow [Obtain Milvus Backup](milvus_backup_0_6_cli.md#Obtain-Milvus-Backup); building requires Go 1.26 or later.
+The examples below were validated with **Milvus Backup 0.6.0**. Download and extract the appropriate binary from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0). To build from source instead, follow [Obtain Milvus Backup](milvus_backup_0_6_cli.md#Obtain-Milvus-Backup); building requires Go 1.26 or later.
 
 ## Prepare configuration file
 

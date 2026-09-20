@@ -2,15 +2,12 @@
 id: milvus_backup_api.md
 summary: Learn how to use Milvus Backup through API
 title: Back up and Restore Data Using APIs
+beta: Milvus Backup 0.5.x
 ---
 
 # Back up and Restore Data Using APIs
 
-<div class="alert note">
-
-This page covers **Milvus Backup 0.5.x**, with downloads and examples pinned to **0.5.16**. Check the [Milvus compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported server versions. For Backup 0.6.0, use the [0.6.0 HTTP API guide](milvus_backup_0_6_api.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md).
-
-</div>
+For current workflows, see the [HTTP API guide](milvus_backup_0_6_api.md) or [upgrade from 0.5.x](milvus_backup_upgrade.md). Check the [compatibility matrix](milvus_backup_overview.md#Compatibility-matrix) for supported Milvus server versions.
 
 Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data. 
 
