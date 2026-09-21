@@ -1,1 +1,1 @@
-../../../skills/update-milvus-sdk-docs/SKILL.md
+../../../.skills/update-milvus-sdk-docs/SKILL.md

@@ -1,1 +1,0 @@
-../../../skills/update-user-guide-snippet/SKILL.md

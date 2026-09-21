@@ -23,7 +23,7 @@ line), the **mode** (below), and — if you want the result on the remote — th
 - **One SDK, one version line**: name the SDK and the version-line directory,
   e.g. `API_Reference/milvus-sdk-java/v3.0.x/`.
 - **All SDKs**: "update all SDKs to latest" — iterates every SDK in
-  `skills/update-milvus-sdk-docs/references/sdk-map.md`.
+  `.skills/update-milvus-sdk-docs/references/sdk-map.md`.
 
 ### Modes (diff and reconciliation can be combined)
 
@@ -155,7 +155,7 @@ methods. Cross-page links are relative (e.g. `../Collections/DataType.md`).
 > at once — that risks mixing edits across branches. This applies from the very
 > first analysis step, not just at push time.
 
-> **Before starting**: read `skills/update-milvus-sdk-docs/references/sdk-map.md` and follow the section for the
+> **Before starting**: read `.skills/update-milvus-sdk-docs/references/sdk-map.md` and follow the section for the
 > SDK you are working on (repo path, public API surface, page-mapping rules,
 > extraction/validation commands, version-pin conventions, known pitfalls). This
 > file holds the universal workflow; all per-SDK details live in `sdk-map.md`.
@@ -265,7 +265,7 @@ git -C sdk-tmp/sdks/<sdk-repo> tag --sort=-v:refname | head
      creating it.
    - For **"update all SDKs to latest"** (or a single SDK "update X to latest"):
       iterate every SDK section in
-      `skills/update-milvus-sdk-docs/references/sdk-map.md`, run the above per SDK,
+      `.skills/update-milvus-sdk-docs/references/sdk-map.md`, run the above per SDK,
       and decide **per SDK** whether it actually changes:
       - **already current** (documented version equals the latest stable tag) →
         **no branch**, report "already up to date";
@@ -287,7 +287,7 @@ git -C sdk-tmp/sdks/<sdk-repo> tag --sort=-v:refname | head
 ### Step 2 — Diff and extract API changes (deterministic)
 
 Diff the two tags restricted to the SDK's **public API surface** (paths per
-`skills/update-milvus-sdk-docs/references/sdk-map.md`):
+`.skills/update-milvus-sdk-docs/references/sdk-map.md`):
 
 ```bash
 git -C sdk-tmp/sdks/<sdk-repo> diff --stat <old-tag>..<new-tag> -- <public-api-path>
@@ -300,7 +300,7 @@ Categorize each changed symbol:
   naming pattern differs **per SDK** — C++ uses `WithXxx`/`SetXxx`/`AddXxx`,
   java uses Lombok `@Builder` (an added `private` field = a new builder method),
   Python uses new `def` params, Go uses new `XxxOption` members. Always use the
-  per-SDK extraction commands in `skills/update-milvus-sdk-docs/references/sdk-map.md` — do NOT assume every SDK
+  per-SDK extraction commands in `.skills/update-milvus-sdk-docs/references/sdk-map.md` — do NOT assume every SDK
   exposes `WithXxx` methods.
 - **Enum values**: added/removed enum entries (e.g. `IndexType`, `DataType`).
 - **Doc-comment changes**: only prose was rewritten — decide whether the page
@@ -339,7 +339,7 @@ machinery.
 
 ### Step 3 — Map changes to pages
 
-Follow the page-mapping rules for the SDK in `skills/update-milvus-sdk-docs/references/sdk-map.md`. The general
+Follow the page-mapping rules for the SDK in `.skills/update-milvus-sdk-docs/references/sdk-map.md`. The general
 shape: operation pages ↔ request/operation classes; type pages ↔ public types;
 `About.md` ↔ version stamp + compatibility table + install commands.
 
@@ -571,7 +571,7 @@ wrong. Do this in two passes.
 
 For every operation page, extract the documented builder/getter surface and
 compare it against the actual class at the target tag. Use the side-A/side-B
-extraction commands for the SDK in `skills/update-milvus-sdk-docs/references/sdk-map.md`. **Include inherited
+extraction commands for the SDK in `.skills/update-milvus-sdk-docs/references/sdk-map.md`. **Include inherited
 members from base classes** (e.g. for C++: `RequestBase.h`,
 `CollectionRequestBase.h`, `DMLRequestBase.h`, `DQLRequestBase.h`,
 `SearchRequestBase.h`, `IndexRequestBase.h`, ...), not just the header that
@@ -597,7 +597,7 @@ empty"). For each page, feed the AI:
 
 1. the current page Markdown (its prose is the style baseline),
 2. the doc comments for the corresponding class/methods at the target tag (use
-   `git show <tag>:<path>` per `skills/update-milvus-sdk-docs/references/sdk-map.md`),
+   `git show <tag>:<path>` per `.skills/update-milvus-sdk-docs/references/sdk-map.md`),
 3. the **Doc style guide** below,
 4. for new pages, 1–2 sibling pages from the same category as style exemplars,
 

@@ -50,7 +50,7 @@ Milvus user-guide and SDK reference content; markdown here is consumed by the
 
 When the user asks to **update, bump, or audit the SDK API reference docs** in
 `API_Reference/`, load the `update-milvus-sdk-docs` skill. Canonical files live
-in `skills/update-milvus-sdk-docs/` (`SKILL.md` + `references/sdk-map.md`) and
+ in `.skills/update-milvus-sdk-docs/` (`SKILL.md` + `references/sdk-map.md`) and
 are mirrored by symlink into `.opencode/`, `.claude/`, and `.codex/` so every
 agent tool discovers it.
 
@@ -99,40 +99,6 @@ Purpose and rules:
 - Example prompts: "Update the Java SDK docs to v3.0.9", "Update all SDKs to
   latest and push to the remote", or "Update the cpp SDK docs to v3.0.2 and
   reconcile for omissions and errors."
-
-## update-user-guide-snippet skill
-
-When the user asks to **update, fix, or check the code snippets in the Milvus
-user guide**, load the `update-user-guide-snippet` skill. Canonical files live in
-`skills/update-user-guide-snippet/` (`SKILL.md` + `references/snippet-conventions.md`),
-mirrored by symlink into `.opencode/`, `.claude/`, and `.codex/`.
-
-Purpose and rules:
-
-- The user guide is versioned by **Milvus major version**: `v3.0.x/site/en/userGuide/`
-  (Milvus 3.0), `v2.6.x/site/en/userGuide/` (Milvus 2.6), etc.
-- Without a version, the skill updates only the **latest major version line**
-  (currently `v3.0.x`). Naming a version (e.g. "更新2.6的user guide脚本") limits it
-  to that line.
-- It detects each SDK's latest API, checks the guide's snippets against it, adds
-  missing SDK snippets (notably **cpp**, currently absent), and fixes
-  syntax/usage errors. The **pymilvus snippet is the reference baseline** for the
-  operation flow; other SDKs mirror it.
-- Every written/edited snippet is **syntax-checked** (parse-only, no execution):
-  `py_compile`, `node --check`, `g++ -fsyntax-only`, `gofmt -e`, `javac`,
-  `bash -n`.
-- After updating, it **runs the pymilvus snippets for real** (mandatory when a
-  Milvus server is reachable at localhost:19530). It never starts a Milvus
-  server itself; if none is running it explicitly says the pymilvus snippets
-  were NOT executed.
-- Snippet language mapping: `python` = pymilvus (baseline), `java` =
-  milvus-sdk-java, `javascript` = milvus-sdk-node, `go` = milvus-sdk-go, `cpp` =
-  milvus-sdk-cpp, `bash` = REST (kept, not an SDK).
-- Push/PR behavior matches the other skill: only when the user explicitly asks
-  ("commit and push to the remote" / "提交到远程仓库", or "open a PR" / "提交 PR");
-  branch `docs/user-guide-snippets`, one **signed** commit.
-- Example prompts: "Update the user guide scripts" / "更新user guide里的脚本",
-  or "更新2.6的user guide脚本".
 
 ## Agent rules
 
