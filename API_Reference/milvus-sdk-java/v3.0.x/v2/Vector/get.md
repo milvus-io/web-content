@@ -12,7 +12,9 @@ public GetResp get(GetReq request)
 get(GetReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
+    .clusterId(String clusterId)
     .partitionName(String partitionName)
+    .partitionNames(List<String> partitionNames)
     .ids(List<Object> ids)
     .outputFields(List<String> outputFields)
     .build()
@@ -29,9 +31,17 @@ get(GetReq.builder()
 
     The name of an existing collection.
 
+- `clusterId(String clusterId)`
+
+    The ID of the cluster to query. Applies to global-cluster deployments.
+
 - `partitionName(String partitionName)`
 
     The name of a partition.
+
+- `partitionNames(List<String> partitionNames)`
+
+    A list of partition names to query.
 
 - `ids(List<Object> ids)`
 
@@ -47,7 +57,7 @@ get(GetReq.builder()
 
 **RETURNS:**
 
-A **GetResp** object representing one or more queried entities.
+A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.
 
 **PARAMETERS:**
 

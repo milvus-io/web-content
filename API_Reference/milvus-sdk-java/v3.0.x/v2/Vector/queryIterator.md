@@ -1,7 +1,5 @@
 # queryIterator()
 
-# queryIterator()
-
 This method returns a query iterator to iterate data.
 
 ```java
@@ -24,6 +22,7 @@ queryIterator(QueryIteratorReq.builder()
     .timezone(String timezone)
     .batchSize(long batchSize)
     .reduceStopForBest(boolean reduceStopForBest)
+    .cursor(QueryIteratorCursor cursor)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
     .build()
 );
@@ -78,6 +77,10 @@ queryIterator(QueryIteratorReq.builder()
 - `reduceStopForBest(boolean reduceStopForBest)`
 
     Whether to stop iteration when the best result is found.
+
+- `cursor(QueryIteratorCursor cursor)`
+
+    A previously captured cursor to resume pagination from. When set, the iterator continues from the cursor's session timestamp and position instead of starting over; `offset()` is ignored in that case.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
