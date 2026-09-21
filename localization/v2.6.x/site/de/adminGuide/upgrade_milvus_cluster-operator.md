@@ -25,7 +25,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie Ihren Milvus-Cluster mithilfe von Milvus Operator von Version 2.5.x auf Version 2.6.23 aktualisieren.</p>
+    </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie Ihren Milvus-Cluster mithilfe von Milvus Operator von Version 2.5.x auf Version 2.6.24 aktualisieren.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2623" class="common-anchor-header">Neuerungen in Version 2.6.23<button data-href="#Whats-new-in-v2623" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2624" class="common-anchor-header">Neuerungen in Version 2.6.24<button data-href="#Whats-new-in-v2624" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,11 +56,11 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.23 bringt wesentliche architektonische Änderungen mit sich:</p>
+    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.24 bringt erhebliche architektonische Änderungen mit sich:</p>
 <ul>
-<li><strong>Konsolidierung der Koordinatoren</strong>: Die bisher separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen zusammengefasst <code translate="no">mixCoord</code></li>
+<li><strong>Konsolidierung der Koordinatoren</strong>: Die bisherigen separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen zusammengefasst <code translate="no">mixCoord</code></li>
 <li><strong>Neue Komponenten</strong>: Einführung des Streaming-Knotens für eine verbesserte Datenverarbeitung</li>
-<li><strong>Entfernung von Komponenten</strong>: Der <code translate="no">indexNode</code> wurde entfernt und konsolidiert</li>
+<li><strong>Entfernung von Komponenten</strong>: „ <code translate="no">indexNode</code> “ wurde entfernt und konsolidiert</li>
 </ul>
 <p>Dieser Upgrade-Prozess gewährleistet eine ordnungsgemäße Migration zur neuen Architektur. Weitere Informationen zu den Architekturänderungen finden Sie in <a href="/docs/de/v2.6.x/architecture_overview.md">der Milvus-Architekturübersicht</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Anforderungen<button data-href="#Requirements" class="anchor-icon" translate="no">
@@ -80,17 +80,17 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
       </svg>
     </button></h3><p><strong>Systemanforderungen:</strong></p>
 <ul>
-<li>Kubernetes-Cluster mit Milvus, bereitgestellt über den „Milvus Operator“</li>
+<li>Kubernetes-Cluster mit Milvus, bereitgestellt über den Milvus Operator</li>
 <li><code translate="no">kubectl</code> konfiguriert für den Zugriff auf Ihren Cluster</li>
 <li>Helm 3.x installiert</li>
 </ul>
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.23 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">dieser Community-Anleitung</a> Hilfe zur Migration.</li>
-<li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.23 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoord</code> “ aktiviert sein muss.</li>
+<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.24 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
+<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
+<li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.24 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoord</code> “ aktiviert sein muss.</li>
 </ul>
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.23 müssen Sie Ihre aktuelle Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel zwischen Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.24 müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Vorgang<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,7 +121,7 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Führen Sie zunächst ein Upgrade Ihres Milvus-Operators auf Version 1.3.7 durch:</p>
+    </button></h3><p>Aktualisieren Sie zunächst Ihren Milvus Operator auf Version 1.3.7:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
@@ -144,7 +144,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 Aktuelle Koordinator-Konfiguration prüfen</h4><p>Überprüfen Sie, ob Ihr Cluster bereits „ <code translate="no">mixCoord</code> “ verwendet:</p>
+    </button></h3><h4 id="21-Check-current-coordinator-configuration" class="common-anchor-header">2.1 Aktuelle Koordinator-Konfiguration überprüfen</h4><p>Überprüfen Sie, ob Ihr Cluster bereits „ <code translate="no">mixCoord</code> “ verwendet:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn stattdessen separate Koordinator-Pods (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>) angezeigt werden, müssen Sie im nächsten Schritt „ <code translate="no">mixCoord</code> “ aktivieren.</p>
@@ -169,7 +169,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2623" class="common-anchor-header">2.3 Upgrade auf Version 2.6.23</h4><p>Sobald Version 2.5.16 erfolgreich mit „ <code translate="no">mixCoord</code> “ läuft, führen Sie ein Upgrade auf Version 2.6.23 durch:</p>
+<h4 id="23-Upgrade-to-v2624" class="common-anchor-header">2.3 Upgrade auf Version 2.6.24</h4><p>Sobald Version 2.5.16 erfolgreich mit „ <code translate="no">mixCoord</code> “ läuft, führen Sie ein Upgrade auf Version 2.6.24 durch:</p>
 <p>Aktualisieren Sie Ihre Konfigurationsdatei (in diesem Beispiel „<code translate="no">milvusupgrade.yaml</code> “):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -177,7 +177,7 @@ kubectl get pods
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Führen Sie das abschließende Upgrade durch:</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge

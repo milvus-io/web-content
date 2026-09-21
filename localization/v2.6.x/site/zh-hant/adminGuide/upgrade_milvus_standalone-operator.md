@@ -23,7 +23,7 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南說明如何使用 Milvus Operator，將您的 Milvus 獨立部署從 v2.5.x 升級至 v2.6.23。</p>
+    </button></h1><p>本指南說明如何使用 Milvus Operator 將您的 Milvus 獨立部署從 v2.5.x 升級至 v2.6.24。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2623" class="common-anchor-header">v2.6.23 的新功能<button data-href="#Whats-new-in-v2623" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2624" class="common-anchor-header">v2.6.24 的新功能<button data-href="#Whats-new-in-v2624" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,13 +54,13 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>從 Milvus 2.5.x 升級至 2.6.23 涉及重大的架構變更：</p>
+    </button></h3><p>從 Milvus 2.5.x 升級至 2.6.24 涉及重大的架構變更：</p>
 <ul>
 <li><strong>協調器整合</strong>：舊版獨立的協調器（<code translate="no">dataCoord</code> 、<code translate="no">queryCoord</code> 、<code translate="no">indexCoord</code> ）已整合為單一<code translate="no">mixCoord</code></li>
-<li><strong>新元件</strong>：引入「串流節點」（Streaming Node）以強化資料處理能力</li>
+<li><strong>新元件</strong>：引入串流節點（Streaming Node）以強化資料處理能力</li>
 <li><strong>元件移除</strong>：已移除並整合<code translate="no">indexNode</code> </li>
 </ul>
-<p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概覽</a>》。</p>
+<p>此升級流程可確保順利遷移至新架構。有關架構變更的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/architecture_overview.md">Milvus 架構概述</a>》。</p>
 <h3 id="Requirements" class="common-anchor-header">需求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,17 +78,17 @@ title: 使用 Milvus Operator 升級 Milvus 獨立部署
       </svg>
     </button></h3><p><strong>系統需求：</strong></p>
 <ul>
-<li>已透過 Milvus Operator 部署 Milvus 獨立版之 Kubernetes 叢集</li>
+<li>已透過 Milvus Operator 部署 Milvus 獨立執行模式的 Kubernetes 叢集</li>
 <li><code translate="no">kubectl</code> 並已設定可存取您的叢集</li>
 <li>已安裝 Helm 3.x</li>
 </ul>
-<p><strong>相容性要求：</strong></p>
+<p><strong>相容性需求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 與 v2.6.23<strong>不相容</strong>。不支援直接從候選版本（release candidates）進行升級。</li>
-<li>若您目前正在運行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
-<li>在升級至 v2.6.23 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本。</li>
+<li>Milvus v2.6.0-rc1 與 v2.6.24<strong>不相容</strong>。不支援直接從候選版本（release candidates）進行升級。</li>
+<li>若您目前正在執行 v2.6.0-rc1 且需要保留資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以獲取遷移協助。</li>
+<li>在升級至 v2.6.24 之前，您<strong>必須先</strong>升級至 v2.5.16 或更新版本。</li>
 </ul>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.23 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將提供變更訊息佇列系統的功能。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.24 時，您必須維持當前的訊息佇列選項。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將提供變更訊息佇列系統的功能。</p>
 <h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <p>驗證操作員升級狀態：</p>
 <pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步驟 2：升級您的 Milvus 獨立執行個體<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">步驟 2：升級您的 Milvus 獨立版<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -161,15 +161,15 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="22-Upgrade-to-v2623" class="common-anchor-header">2.2 升級至 v2.6.23</h4><p>當 v2.5.16 成功運行後，請升級至 v2.6.23：</p>
-<p>更新您的設定檔（此範例中為<code translate="no">milvusupgrade.yaml</code> ）：</p>
+<h4 id="22-Upgrade-to-v2624" class="common-anchor-header">2.2 升級至 v2.6.24</h4><p>當 v2.5.16 成功執行後，請升級至 v2.6.24：</p>
+<p>更新您的設定檔（本例中為<code translate="no">milvusupgrade.yaml</code> ）：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>套用最終升級：</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
@@ -189,7 +189,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>確認您的獨立部署環境已運行新版本：</p>
+    </button></h2><p>確認您的獨立部署環境已執行新版本：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>

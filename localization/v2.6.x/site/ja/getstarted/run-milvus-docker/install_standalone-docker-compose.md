@@ -57,7 +57,7 @@ title: Docker Compose を使用して Milvus を実行する（Linux）
       </svg>
     </button></h2><p>Milvusのリポジトリには、Docker Compose用の設定ファイルが用意されています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.24/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,16 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.23の新機能：</strong></p>
+<p><strong>v2.6.24の新機能：</strong></p>
 <ul>
 <li><strong>アーキテクチャの強化</strong>：新しいストリーミングノードと最適化されたコンポーネントを搭載</li>
 <li><strong>依存関係の更新</strong>：最新の MinIO および etcd バージョンが含まれています</li>
-<li><strong>設定の改善</strong>：パフォーマンス向上のための設定を最適化しました</li>
+<li><strong>設定の改善</strong>：パフォーマンス向上のための最適化が施されました</li>
 </ul>
-<p>v2.6.23の機能との互換性を確保するため、常に最新のDocker Compose設定ファイルをダウンロードしてください。</p>
+<p>v2.6.24の機能との互換性を確保するため、常に最新のDocker Compose設定ファイルをダウンロードしてください。</p>
 <ul>
-<li><p>上記のコマンドの実行に失敗した場合は、お使いのシステムに Docker Compose V1 がインストールされていないかご確認ください。インストールされている場合は、<a href="https://docs.docker.com/compose/">このページ</a>に記載されている注意事項に基づき、Docker Compose V2 への移行をお勧めします。</p></li>
-<li><p>イメージの取得に問題が発生した場合は、問題の詳細を記載の上、<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p></li>
+<li><p>上記のコマンドの実行に失敗した場合は、お使いのシステムに Docker Compose V1 がインストールされていないかご確認ください。インストールされている場合は、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に基づき、Docker Compose V2 への移行をお勧めします。</p></li>
+<li><p>イメージの取得で問題が発生した場合は、問題の詳細を記載の上、<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p></li>
 </ul>
 </div>
 <p>Milvusの起動後、</p>
@@ -85,10 +85,10 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされます。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9090</strong>および<strong>9091</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
-<li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
+<li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でポート<strong>19530</strong>をローカルで公開し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
 </ul></li>
 </ul>
-<p>以下のコマンドを使用して、コンテナが起動して稼働しているかどうかを確認できます。</p>
+<p>以下のコマンドを使用して、コンテナが起動して実行中かどうかを確認できます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -97,7 +97,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスに関する詳細を確認することもできます。詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスの詳細を確認することもできます。詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +126,7 @@ proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>変更を反映させるには、<code translate="no">milvus-standalone</code> コンテナを再起動します。</p>
+<li><p>変更を適用するために、<code translate="no">milvus-standalone</code> コンテナを再起動します。</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -169,19 +169,19 @@ EOF
       </svg>
     </button></h2><p>Docker に Milvus をインストールしたら、次のことができます:</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、Upsert、削除</a></li>
 <li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
 <li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helm チャートを使用した Milvus のアップグレード</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタのスケーリング</a></p></li>
-<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
+<li><p>クラウド上に Milvus クラスタをデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -189,7 +189,7 @@ EOF
 </ul></li>
 <li><p>Milvusの可観測性と管理のための直感的なWebインターフェース「<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUI</a>」をご覧ください。</p></li>
 <li><p>Milvusデータのバックアップを行うオープンソースツール「<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>」をご覧ください。</p></li>
-<li><p>Milvusのデバッグや動的な構成更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
-<li><p>Milvus を直感的に管理できるオープンソースの GUI ツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
+<li><p>Milvusのデバッグや動的な設定更新を行うためのオープンソースツール「<a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>」をご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するためのオープンソースGUIツール「<a href="https://github.com/zilliztech/attu">Attu</a>」をご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/monitor.md">Prometheus を使用して Milvus を監視しましょう</a>。</p></li>
 </ul>

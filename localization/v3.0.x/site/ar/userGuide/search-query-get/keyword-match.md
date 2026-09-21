@@ -3,9 +3,9 @@ id: keyword-match.md
 title: مطابقة النص
 summary: >-
   تتيح ميزة «مطابقة النص» في Milvus استرجاع المستندات بدقة استنادًا إلى مصطلحات
-  محددة. تُستخدم هذه الميزة في المقام الأول لإجراء عمليات بحث مُصفاة تفي بشروط
-  محددة، ويمكن أن تتضمن تصفية قياسية لتحسين نتائج الاستعلام، مما يتيح إجراء
-  عمليات بحث عن التشابه ضمن المتجهات التي تستوفي المعايير القياسية.
+  محددة. تُستخدم هذه الميزة في المقام الأول للبحث المُصفى لتلبية شروط محددة،
+  ويمكن أن تتضمن تصفية قياسية لتحسين نتائج الاستعلام، مما يتيح إجراء عمليات بحث
+  عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.
 ---
 <h1 id="Text-Match" class="common-anchor-header">مطابقة النص<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
       </svg>
     </button></h1><p>تتيح ميزة "مطابقة النص" في Milvus استرجاع المستندات بدقة استنادًا إلى مصطلحات محددة. تُستخدم هذه الميزة في المقام الأول للبحث المُصفى لتلبية شروط محددة، ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يتيح إجراء عمليات بحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> تقوم ميزة «مطابقة النص» (Text Match) بالبحث عن المصطلحات التي تم تحليلها بالضبط، بينما يمكن لميزة «البحث عن التشابه» ( <code translate="no">TEXT_MATCH_FUZZY</code> ) أن تتسامح مع مسافة تحرير صغيرة بين رموز الاستعلام والرموز المفهرسة. وكلاهما عمليات تصفية منطقية ولا تقوم بتقييم مدى صلة المستندات المتطابقة. إذا كنت ترغب في استرجاع المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، فننصحك باستخدام <a href="/docs/ar/full-text-search.md">«البحث عن النص الكامل» (Full Text Search)</a>.</p>
+<p><code translate="no">TEXT_MATCH</code> تقوم ميزة «مطابقة النص» (Text Match) بالبحث عن المصطلحات التي تم تحليلها بدقة، بينما يمكن لميزة «البحث عن التشابه» ( <code translate="no">TEXT_MATCH_FUZZY</code> ) أن تتسامح مع مسافة تحرير صغيرة بين رموز الاستعلام والرموز المفهرسة. وكلاهما عمليات تصفية منطقية ولا تقيم مدى صلة المستندات المتطابقة. إذا كنت ترغب في استرجاع المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، نوصيك باستخدام <a href="/docs/ar/full-text-search.md">«البحث عن النص الكامل» (Full Text Search)</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يدمج Milvus <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> لتشغيل الفهرس المقلوب الأساسي والبحث النصي القائم على المصطلحات. يقوم Milvus بفهرسة كل إدخال نصي باتباع الإجراء التالي:</p>
+    </button></h2><p>يدمج Milvus <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> لتشغيل الفهرس المقلوب الأساسي والبحث النصي القائم على المصطلحات. بالنسبة لكل إدخال نصي، يقوم Milvus بفهرسته باتباع الإجراء التالي:</p>
 <ol>
 <li><p><a href="/docs/ar/analyzer-overview.md">المحلل</a>: يعالج المحلل النص المدخل عن طريق تقسيمه إلى كلمات فردية، أو رموز، ثم تطبيق المرشحات حسب الحاجة. وهذا يسمح لـ Milvus بإنشاء فهرس بناءً على هذه الرموز.</p></li>
 <li><p><a href="/docs/ar/index-explained.md">الفهرسة</a>: بعد تحليل النص، يقوم Milvus بإنشاء فهرس معكوس يربط كل وحدة فريدة بالوثائق التي تحتوي عليها.</p></li>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل مطابقة النص على حقول السلاسل التي تم تمكين المطابقة فيها. تستخدم الأمثلة الواردة في هذه الصفحة <a href="/docs/ar/string.md"><code translate="no">VARCHAR</code></a>، وهو مدعوم عبر حزم SDK الخاصة بالعملاء. في Milvus 3.0.x، <a href="/docs/ar/text.md"><code translate="no">TEXT</code></a> تدعم الحقول أيضًا مطابقة النص عند تمكين Storage V3. بالنسبة لأي من نوعي الحقول، قم بتعيين كل من <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> ، ثم قم اختياريًا بتكوين <a href="/docs/ar/analyzer-overview.md">محلل</a> عند تعريف مخطط المجموعة الخاص بك.</p>
+    </button></h2><p>تعمل مطابقة النص على حقول السلاسل التي تم تمكين المطابقة لها. تستخدم الأمثلة الواردة في هذه الصفحة <a href="/docs/ar/string.md"><code translate="no">VARCHAR</code></a>، وهو مدعوم عبر حزم SDK الخاصة بالعملاء. في Milvus 3.0.x، <a href="/docs/ar/text.md"><code translate="no">TEXT</code></a> تدعم الحقول أيضًا مطابقة النص عند تمكين Storage V3. بالنسبة لأي من نوعي الحقول، قم بتعيين كل من <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على <code translate="no">True</code> ، ثم قم اختياريًا بتكوين <a href="/docs/ar/analyzer-overview.md">محلل</a> عند تعريف مخطط المجموعة الخاص بك.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">اضبط كل من <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,6 +91,7 @@ summary: >-
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -208,6 +209,12 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">اختياري: تكوين محلل<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -223,8 +230,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يعتمد أداء ودقة مطابقة الكلمات الرئيسية على المحلل المحدد. تم تصميم المحللات المختلفة لتناسب اللغات وهياكل النصوص المتنوعة، لذا فإن اختيار المحلل المناسب يمكن أن يؤثر بشكل كبير على نتائج البحث لحالة الاستخدام الخاصة بك.</p>
-<p>بشكل افتراضي، يستخدم Milvus محلل « <code translate="no">standard</code> »، الذي يقوم بتقسيم النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد حاجة إلى معلمات إضافية لتطبيق هذا الإعداد الافتراضي. لمزيد من المعلومات، راجع <a href="/docs/ar/standard-analyzer.md">«Standard</a>».</p>
+    </button></h3><p>يعتمد أداء ودقة مطابقة الكلمات المفتاحية على المحلل المحدد. تم تصميم المحللات المختلفة لتناسب اللغات وهياكل النصوص المتنوعة، لذا فإن اختيار المحلل المناسب يمكن أن يؤثر بشكل كبير على نتائج البحث لحالة الاستخدام المحددة الخاصة بك.</p>
+<p>بشكل افتراضي، يستخدم Milvus محلل « <code translate="no">standard</code> »، الذي يقوم بتجزئة النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد حاجة إلى معلمات إضافية لتطبيق هذا الإعداد الافتراضي. لمزيد من المعلومات، راجع <a href="/docs/ar/standard-analyzer.md">«Standard</a>».</p>
 <p>في الحالات التي تتطلب محللًا مختلفًا، يمكنك تكوين واحد باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، لتطبيق محلل <code translate="no">english</code> لمعالجة النص باللغة الإنجليزية:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -232,6 +239,7 @@ schema.WithField(entity.NewField().
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -316,6 +324,9 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>}};
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">200</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params).<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));
+<button class="copy-code-btn"></button></code></pre>
 <p>يوفر Milvus أيضًا العديد من المحللات الأخرى المناسبة للغات والسيناريوهات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحللات</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">استخدام مطابقة النص<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -351,17 +362,22 @@ schema.WithField(entity.NewField().
     </button></h3><p>يُستخدم التعبير <code translate="no">TEXT_MATCH</code> لتحديد الحقل والمصطلحات المطلوب البحث عنها. وصيغته هي كما يلي:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(field_name, text)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(field_name, text)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: اسم الحقل <code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code> الذي تم تمكين المطابقة فيه والمراد البحث فيه.</p></li>
 <li><p><code translate="no">text</code>: المصطلحات المطلوب البحث عنها. يمكن فصل المصطلحات المتعددة بمسافات أو فواصل أخرى مناسبة بناءً على اللغة والمحلل المُهيأ.</p></li>
 </ul>
-<p>بشكل افتراضي، يستخدم <code translate="no">TEXT_MATCH</code> منطق المطابقة <strong>«أو» (OR)</strong> ، مما يعني أنه سيعرض المستندات التي تحتوي على أي من المصطلحات المحددة. على سبيل المثال، للبحث عن المستندات التي تحتوي على المصطلح <code translate="no">machine</code> أو <code translate="no">deep</code> في حقل <code translate="no">text</code> ، استخدم التعبير التالي:</p>
+<p>بشكل افتراضي، يستخدم <code translate="no">TEXT_MATCH</code> منطق المطابقة <strong>«أو» (OR)</strong> ، مما يعني أنه سيعرض المستندات التي تحتوي على أي من المصطلحات المحددة. على سبيل المثال، للبحث عن المستندات التي تحتوي على المصطلح « <code translate="no">machine</code> » أو « <code translate="no">deep</code> » في حقل « <code translate="no">text</code> »، استخدم التعبير التالي:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -373,6 +389,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <p>يمكنك أيضًا دمج عدة تعبيرات <code translate="no">TEXT_MATCH</code> باستخدام العوامل المنطقية لإجراء مطابقة <strong>AND</strong>.</p>
 <ul>
 <li><p>للبحث عن المستندات التي تحتوي على كل من <code translate="no">machine</code> و <code translate="no">deep</code> في حقل <code translate="no">text</code> ، استخدم التعبير التالي:</p>
@@ -382,6 +400,7 @@ schema.WithField(entity.NewField().
 <a href="#go">Go</a>
 <a href="#javascript">NodeJS</a>
 <a href="#bash">cURL</a>
+<a href="#cpp">C++</a>
 </div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -392,6 +411,8 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>للبحث عن المستندات التي تحتوي على كل من <code translate="no">machine</code> و <code translate="no">learning</code> دون وجود <code translate="no">deep</code> في حقل <code translate="no">text</code> ، استخدم التعبيرات التالية:</p>
 <p><div class="multipleCode">
@@ -400,6 +421,7 @@ schema.WithField(entity.NewField().
 <a href="#go">Go</a>
 <a href="#javascript">NodeJS</a>
 <a href="#bash">cURL</a>
+<a href="#cpp">C++</a>
 </div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -410,9 +432,11 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="common-anchor-header">صيغة تعبير TEXT_MATCH_FUZZY<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax--Milvus-300+" class="anchor-icon" translate="no">
+<h3 id="TEXTMATCHFUZZY-expression-syntax" class="common-anchor-header">بناء جملة تعبير TEXT_MATCH_FUZZY<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -428,21 +452,26 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>استخدم <code translate="no">TEXT_MATCH_FUZZY</code> للتغاضي عن الاختلافات الإملائية بين رموز الاستعلام والرموز المفهرسة. يقوم Milvus بتحليل نص الاستعلام باستخدام محلل الحقل ويطبق المطابقة غير الدقيقة على كل رمز ناتج. إذا أنتج الاستعلام رموزًا متعددة، فإن التعبير يطابق كيانًا عندما يستوفي أي رمز مسافة التحرير المكونة.</p>
-<p>وصيغة التعبير هي كما يلي:</p>
+<p>صيغة التعبير هي كما يلي:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: اسم الحقل <code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code> الذي تم تمكين المطابقة فيه للبحث عنه.</p></li>
+<li><p><code translate="no">field_name</code>: اسم الحقل <code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code> الذي تم تمكين المطابقة فيه والمراد البحث فيه.</p></li>
 <li><p><code translate="no">text</code>: نص الاستعلام المراد تحليله ومطابقته مع الرموز المفهرسة.</p></li>
-<li><p><code translate="no">max_edit_distance</code>: أقصى مسافة تحرير مسموح بها لكل رمز استعلام. يجب أن يكون اسم الخيار هو <code translate="no">max_edit_distance</code> بالضبط، ويجب أن تكون قيمته <code translate="no">0</code> أو <code translate="no">1</code> أو <code translate="no">2</code>. تؤدي القيمة <code translate="no">0</code> إلى إجراء مطابقة دقيقة للرموز، وهو ما يعادل <code translate="no">TEXT_MATCH</code>.</p></li>
+<li><p><code translate="no">max_edit_distance</code>: الحد الأقصى لمسافة التعديل المسموح بها لكل رمز استعلام. يجب أن يكون اسم الخيار هو <code translate="no">max_edit_distance</code> بالضبط، ويجب أن تكون قيمته <code translate="no">0</code> أو <code translate="no">1</code> أو <code translate="no">2</code>. تؤدي القيمة <code translate="no">0</code> إلى إجراء مطابقة دقيقة للرموز، وهو ما يعادل <code translate="no">TEXT_MATCH</code>.</p></li>
 </ul>
-<p>على سبيل المثال، يطابق التعبير التالي الرموز التي تختلف بمقدار حرف واحد عن <code translate="no">machne</code> ، بما في ذلك <code translate="no">machine</code>:</p>
+<p>على سبيل المثال، يتطابق التعبير التالي مع الرموز التي تختلف بمقدار حرف واحد عن <code translate="no">machne</code> ، بما في ذلك <code translate="no">machine</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -453,6 +482,8 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">TEXT_MATCH_FUZZY</code> هو جزء من صيغة تعبير التصفية، لذا لا تتطلب حزم SDK الخاصة بالعملاء طريقة مخصصة للمطابقة التقريبية. قم بتمرير التعبير عبر نفس المعلمة <code translate="no">filter</code> المستخدمة لـ <code translate="no">TEXT_MATCH</code> في عمليات البحث أو الاستعلام.</p>
 <h3 id="Search-with-text-match" class="common-anchor-header">البحث باستخدام مطابقة النص<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
@@ -481,6 +512,7 @@ schema.WithField(entity.NewField().
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>
@@ -559,6 +591,26 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match entities with `keyword1` or `keyword2`</span>
+std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
+
+<span class="hljs-comment">// Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithFilter</span>(filter)</span>
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Query-with-text-match" class="common-anchor-header">الاستعلام باستخدام مطابقة النص<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -575,13 +627,14 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>يمكن أيضًا استخدام مطابقة النص للتصفية القياسية في عمليات الاستعلام. من خلال تحديد تعبير <code translate="no">TEXT_MATCH</code> في المعلمة <code translate="no">expr</code> الخاصة بالطريقة <code translate="no">query()</code> ، يمكنك استرداد المستندات التي تتطابق مع المصطلحات المحددة.</p>
-<p>يسترد المثال أدناه المستندات التي يحتوي حقل <code translate="no">text</code> فيها على المصطلحين <code translate="no">keyword1</code> و <code translate="no">keyword2</code>.</p>
+<p>يسترد المثال أدناه المستندات التي يحتوي حقل <code translate="no">text</code> فيها على المصطلحين <code translate="no">keyword1</code> و <code translate="no">keyword2</code> معًا.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
@@ -636,6 +689,21 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match entities with both `keyword1` and `keyword2`</span>
+std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithFilter</span>(filter)</span>
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::QueryResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Considerations" class="common-anchor-header">اعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -654,7 +722,7 @@ curl --request POST \
     </button></h2><ul>
 <li><p>يؤدي تمكين مطابقة المصطلحات لحقل ما إلى إنشاء فهرس معكوس، مما يستهلك موارد التخزين. ضع في اعتبارك تأثير ذلك على التخزين عند اتخاذ قرار بتمكين هذه الميزة، حيث يختلف هذا التأثير بناءً على حجم النص والرموز الفريدة والمحلل المستخدم.</p></li>
 <li><p>بمجرد تعريف محلل في مخططك، تصبح إعداداته دائمة لتلك المجموعة. إذا قررت أن محللًا مختلفًا يناسب احتياجاتك بشكل أفضل، فيمكنك التفكير في حذف المجموعة الحالية وإنشاء مجموعة جديدة بتكوين المحلل المطلوب.</p></li>
-<li><p>قواعد الهروب في تعبيرات « <code translate="no">filter</code> »:</p>
+<li><p>قواعد الهروب في تعبيرات <code translate="no">filter</code>:</p>
 <ul>
 <li><p>يتم تفسير الأحرف المحاطة بعلامات اقتباس مزدوجة أو مفردة داخل التعبيرات على أنها ثوابت سلاسل. إذا كانت ثابتة السلسلة تتضمن أحرف الهروب، فيجب تمثيل أحرف الهروب باستخدام تسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> ، و <code translate="no">\\t</code> لتمثيل علامة الجدولة <code translate="no">\t</code> ، و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
 <li><p>إذا كانت ثابتة السلسلة محاطة بعلامات اقتباس مفردة، فيجب تمثيل علامة الاقتباس المفردة داخل الثابتة على أنها <code translate="no">\\'</code> بينما يمكن تمثيل علامة الاقتباس المزدوجة إما على أنها <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>

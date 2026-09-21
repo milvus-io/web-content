@@ -51,8 +51,8 @@ summary: >-
    <tr>
      <td><p>Применимые сценарии</p></td>
      <td><p>Для поиска сущностей, имеющих указанные первичные ключи.</p></td>
-     <td><p>Для поиска всех или заданного количества сущностей, удовлетворяющих пользовательским условиям фильтрации</p></td>
-     <td><p>Для поиска всех сущностей, соответствующих пользовательским условиям фильтрации, в запросах с пагинацией.</p></td>
+     <td><p>Для поиска всех или заданного количества сущностей, удовлетворяющих условиям настраиваемой фильтрации</p></td>
+     <td><p>Для поиска всех сущностей, соответствующих пользовательским условиям фильтрации в запросах с пагинацией.</p></td>
    </tr>
    <tr>
      <td><p>Метод фильтрации</p></td>
@@ -116,6 +116,7 @@ summary: >-
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -225,6 +226,29 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">GetRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithIDs</span>({<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::GetResponse response;
+status = client-&gt;<span class="hljs-built_in">Get</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Use-Query" class="common-anchor-header">Использование запроса<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,13 +279,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>Query</strong>. В приведенных ниже примерах кода предполагается, что в коллекции имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращается указанное количество сущностей, содержащих значение <code translate="no">color</code>, начинающееся с <code translate="no">red</code>.</p>
+    </button></h3><p>Если вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>«Query</strong> ». В приведённых ниже примерах кода предполагается, что в коллекции имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращается указанное количество сущностей, содержащих значение « <code translate="no">color</code> », начинающееся с « <code translate="no">red</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -341,8 +366,32 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <p><a id="Sort-Query-Results"></a></p>
-<h3 id="Sort-Query-Results--Milvus-30x" class="common-anchor-header">Сортировка результатов запроса<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Sort-Query-Results" class="common-anchor-header">Сортировка результатов запроса<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Query-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -357,19 +406,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>По умолчанию Query возвращает результаты в произвольном порядке. Используйте параметр <code translate="no">order_by</code> для сортировки результатов по одному или нескольким скалярным полям. При использовании <code translate="no">order_by</code> обратите внимание на следующее:</p>
+    </button></h3><p>По умолчанию функция Query возвращает результаты в произвольном порядке. Используйте параметр <code translate="no">order_by</code> для сортировки результатов по одному или нескольким скалярным полям. При использовании параметра <code translate="no">order_by</code> обратите внимание на следующее:</p>
 <ul>
 <li><p><code translate="no">order_by</code> должен использоваться вместе с <code translate="no">limit</code>.</p></li>
 <li><p>Поддерживаемые типы полей: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> и <code translate="no">VARCHAR</code>. Сортировка по векторным полям, полям типа <code translate="no">JSON</code> или <code translate="no">ARRAY</code> не поддерживается.</p></li>
-<li><p>При сортировке по полю, допускающему значение NULL, значения NULL помещаются в конец списка при восходящем порядке (NULLS LAST) и в начало списка при нисходящем порядке (NULLS FIRST).</p></li>
+<li><p>При сортировке по полю, допускающему значение NULL, значения NULL помещаются в конец списка при восходящем порядке (NULLS LAST) и в начало при нисходящем порядке (NULLS FIRST).</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">Базовая сортировка</h4><p>Передайте список строк формата <code translate="no">&quot;field_name:direction&quot;</code> в параметр <code translate="no">order_by</code>, где <code translate="no">direction</code> может принимать значения <code translate="no">asc</code> (по возрастанию) или <code translate="no">desc</code> (по убыванию). Обратите внимание, что в строках <code translate="no">asc</code> и <code translate="no">desc</code> учитывается регистр.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">Базовая сортировка</h4><p>Передайте список строк в формате <code translate="no">&quot;field_name:direction&quot;</code> в параметр <code translate="no">order_by</code>, где <code translate="no">direction</code> может принимать значения <code translate="no">asc</code> (по возрастанию) или <code translate="no">desc</code> (по убыванию). Обратите внимание, что <code translate="no">asc</code> и <code translate="no">desc</code> чувствительны к регистру.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -395,6 +445,32 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Sort results by id in ascending order</span>
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithOrderBy</span>(<span class="hljs-string">&quot;id:asc&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Multi-field-Sort" class="common-anchor-header">Сортировка по нескольким полям</h4><p>Вы можете сортировать по нескольким полям одновременно. Результаты сначала упорядочиваются по первому полю в списке. Если две строки имеют одинаковое значение в этом поле, их порядок определяется вторым полем и так далее.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -402,6 +478,7 @@ res = client.query(
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sort by rating descending, then by price ascending for ties</span>
 res = client.query(
@@ -420,13 +497,42 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Пагинация с сортировкой</h4><p>Используйте <code translate="no">order_by</code> вместе с <code translate="no">limit</code> и <code translate="no">offset</code> для пагинации отсортированных результатов. Например, чтобы отобразить список товаров, отсортированный по цене на нескольких страницах, каждая страница показывает следующую партию товаров в правильном порядке по цене без дубликатов и пропусков.</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Sort by rating descending, then by price ascending for ties</span>
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">WithOrderBy</span>(<span class="hljs-string">&quot;rating:desc&quot;</span>)
+                   .<span class="hljs-built_in">WithOrderBy</span>(<span class="hljs-string">&quot;price:asc&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Пагинация с сортировкой</h4><p>Используйте <code translate="no">order_by</code> вместе с <code translate="no">limit</code> и <code translate="no">offset</code> для пагинации отсортированных результатов. Например, чтобы отобразить список товаров, отсортированный по цене, на нескольких страницах, на каждой странице будет показана следующая партия товаров в правильном порядке по цене без дубликатов и пропусков.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Page 1</span>
 page1 = client.query(
@@ -456,7 +562,50 @@ page2 = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Aggregate-Query-Results--Milvus-30x" class="common-anchor-header">Агрегирование результатов запроса<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results--Milvus-30x" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Page 1</span>
+<span class="hljs-keyword">auto</span> request1 = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                    .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                    .<span class="hljs-built_in">WithOffset</span>(<span class="hljs-number">0</span>)
+                    .<span class="hljs-built_in">WithOrderBy</span>(<span class="hljs-string">&quot;price:asc&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>);
+
+milvus::QueryResponse response1;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request1, response1);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Page 2</span>
+<span class="hljs-keyword">auto</span> request2 = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                    .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                    .<span class="hljs-built_in">WithOffset</span>(<span class="hljs-number">5</span>)
+                    .<span class="hljs-built_in">WithOrderBy</span>(<span class="hljs-string">&quot;price:asc&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>);
+
+milvus::QueryResponse response2;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Aggregate-Query-Results" class="common-anchor-header">Агрегирование результатов запроса<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Aggregate-Query-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -471,11 +620,11 @@ page2 = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Вы можете группировать результаты запроса по одному или нескольким скалярным полям и вычислять агрегаты по каждой группе. Поддерживаемые операторы агрегации: <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> и <code translate="no">avg</code>.</p>
-<p>При использовании <code translate="no">group_by_fields</code> следует учитывать следующее:</p>
+    </button></h3><p>Вы можете группировать результаты запроса по одному или нескольким скалярным полям и вычислять агрегаты по каждой группе. Поддерживаются следующие операторы агрегации: <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> и <code translate="no">avg</code>.</p>
+<p>При использовании оператора <code translate="no">group_by_fields</code> следует учитывать следующее:</p>
 <ul>
-<li><p>Поддерживаемые типы полей для функции <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code> и <code translate="no">TIMESTAMPTZ</code>. Группировка по полям <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code> или <code translate="no">ARRAY</code> приводит к ошибке.</p></li>
-<li><p><code translate="no">sum</code> а <code translate="no">avg</code> — исключительно числовые. Их можно применять к числовым полям, включая <code translate="no">FLOAT</code> и <code translate="no">DOUBLE</code>, но применение их к полю <code translate="no">VARCHAR</code> приводит к ошибке.</p></li>
+<li><p>Поддерживаемые типы полей для <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code> и <code translate="no">TIMESTAMPTZ</code>. Группировка по полям <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code> или <code translate="no">ARRAY</code> приводит к ошибке.</p></li>
+<li><p><code translate="no">sum</code> а также <code translate="no">avg</code> — исключительно числовые. Их можно применять к числовым полям, включая <code translate="no">FLOAT</code> и <code translate="no">DOUBLE</code>, но применение их к полю <code translate="no">VARCHAR</code> возвращает ошибку.</p></li>
 </ul>
 <p>Чтобы включить агрегирование, передайте <code translate="no">group_by_fields</code> в <code translate="no">query()</code> и добавьте выражения агрегирования (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) в <code translate="no">output_fields</code>.</p>
 <p>В следующем примере сущности группируются по полю « <code translate="no">color</code> » и возвращается количество сущностей в каждой цветовой группе:</p>
@@ -485,6 +634,7 @@ page2 = client.query(
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -514,13 +664,38 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы можете запросить несколько выражений агрегации в одном вызове. В следующем примере выполняется группировка по полю « <code translate="no">color</code> », и для каждой группы возвращаются количество сущностей, средняя цена и максимальный рейтинг:</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByFields</span>({<span class="hljs-string">&quot;color&quot;</span>})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;count(*)&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Вы можете запросить несколько выражений агрегации в одном вызове. В следующем примере объекты группируются по полю « <code translate="no">color</code> », и для каждой группы возвращаются количество объектов, средняя цена и максимальный рейтинг:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -543,13 +718,40 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Передайте несколько полей в ` <code translate="no">group_by_fields</code> `, чтобы вычислить составные группы. В следующем примере выполняется группировка по ` <code translate="no">(color, rating)</code> ` и вычисляется диапазон цен в каждой группе:</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByFields</span>({<span class="hljs-string">&quot;color&quot;</span>})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;count(*)&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;avg(price)&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;max(rating)&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Передайте несколько полей в ` <code translate="no">group_by_fields</code> `, чтобы вычислить составные группы. В следующем примере выполняется группировка по ` <code translate="no">(color, rating)</code> `, и вычисляется диапазон цен в каждой группе:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -573,13 +775,40 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете совместить <code translate="no">group_by_fields</code> с <code translate="no">limit</code>, чтобы ограничить количество возвращаемых групп. Это полезно, когда поле имеет высокую кардинальность, а вам нужна лишь выборка групп:</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByFields</span>({<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;min(price)&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;max(price)&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Вы также можете комбинировать <code translate="no">group_by_fields</code> с <code translate="no">limit</code>, чтобы ограничить количество возвращаемых групп. Это полезно, когда поле имеет высокую кардинальность, а вам нужна только выборка групп:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -603,6 +832,32 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;&quot;</span>)
+                   .<span class="hljs-built_in">WithGroupByFields</span>({<span class="hljs-string">&quot;color&quot;</span>})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;avg(price)&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;count(*)&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Use-QueryIterator" class="common-anchor-header">Используйте QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -618,13 +873,14 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью запросов с пагинацией, создайте объект <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong>, чтобы пройти по всем сущностям и найти те, которые соответствуют условиям фильтрации. В приведенных ниже примерах кода предполагается, что имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, в которых значение <code translate="no">color</code> начинается с <code translate="no">red</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью запросов с пагинацией, создайте объект <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong>, чтобы пройти по всем сущностям и найти те, которые соответствуют условиям фильтрации. В приведенных ниже примерах кода предполагается, что имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, содержащие значение <code translate="no">color</code>, начинающееся с <code translate="no">red</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">iterator = client.query_iterator(
     <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -693,6 +949,8 @@ results = []
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Not available</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// C++ QueryIterator is not supported in the current SDK.</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Queries-in-Partitions" class="common-anchor-header">Запросы в разделах<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -715,6 +973,7 @@ results = []
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -869,6 +1128,46 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Get entities from a partition</span>
+<span class="hljs-keyword">auto</span> getRequest = milvus::<span class="hljs-built_in">GetRequest</span>()
+                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                      .<span class="hljs-built_in">WithPartitionNames</span>({<span class="hljs-string">&quot;partitionA&quot;</span>})
+                      .<span class="hljs-built_in">WithIDs</span>({<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>})
+                      .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                      .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::GetResponse getResponse;
+status = client-&gt;<span class="hljs-built_in">Get</span>(getRequest, getResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Query a partition</span>
+<span class="hljs-keyword">auto</span> queryRequest = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                        .<span class="hljs-built_in">WithPartitionNames</span>({<span class="hljs-string">&quot;partitionA&quot;</span>})
+                        .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
+                        .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                        .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                        .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::QueryResponse queryResponse;
+status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, queryResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Random-Sampling-with-Query" class="common-anchor-header">Случайная выборка с помощью запроса<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -884,7 +1183,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из вашей коллекции для исследования данных или тестирования разработки, используйте выражение ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, где ` <code translate="no">sampling_factor</code> ` — это число с плавающей запятой от 0 до 1, представляющее процент данных, которые необходимо отобрать.</p>
+    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из коллекции для исследования данных или тестирования разработки, используйте выражение ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, где ` <code translate="no">sampling_factor</code> ` — это число с плавающей запятой от 0 до 1, представляющее процент данных для выборки.</p>
 <div class="alert note">
 <p>Подробные сведения об использовании, примеры для продвинутых пользователей и рекомендации см. в разделе <a href="/docs/ru/random-sampling.md">«Случайная выборка</a>».</p>
 </div>
@@ -894,6 +1193,7 @@ curl --request POST \
  <a href="#go">   Go</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample 1% of the entire collection</span>
 res = client.query(
@@ -971,6 +1271,44 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Sample 1% of the entire collection</span>
+<span class="hljs-keyword">auto</span> request1 = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                    .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::QueryResponse response1;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request1, response1);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Combine with other filters - first filter, then sample</span>
+<span class="hljs-keyword">auto</span> request2 = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                    .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;color like \&quot;red%\&quot; AND RANDOM_SAMPLE(0.005)&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+
+milvus::QueryResponse response2;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Temporarily-Set-a-Timezone-for-a-Query" class="common-anchor-header">Временная настройка часового пояса для запроса<button data-href="#Temporarily-Set-a-Timezone-for-a-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -986,15 +1324,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если в вашей коллекции есть поле ` <code translate="no">TIMESTAMPTZ</code> `, вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр ` <code translate="no">timezone</code> ` в вызове запроса. Это определяет, как значения ` <code translate="no">TIMESTAMPTZ</code> ` будут отображаться и сравниваться во время операции.</p>
+    </button></h2><p>Если в вашей коллекции есть поле ` <code translate="no">TIMESTAMPTZ</code> `, вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, указав параметр ` <code translate="no">timezone</code> ` в вызове запроса. Это определяет, как значения ` <code translate="no">TIMESTAMPTZ</code> ` будут отображаться и сравниваться во время операции.</p>
 <p>Значение <code translate="no">timezone</code> должно быть допустимым <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в <a href="/docs/ru/timestamptz-field.md">разделе «Поле TIMESTAMPTZ</a>».</p>
-<p>В примере ниже показано, как временно установить часовой пояс для операции запроса:</p>
+<p>В приведенном ниже примере показано, как временно установить часовой пояс для операции запроса:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
  <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
@@ -1005,11 +1344,117 @@ results = client.query(
 <span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-comment">// Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;id &lt;= 10&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>))
+        .limit(<span class="hljs-number">2</span>)
+        .timeZone(<span class="hljs-string">&quot;America/Havana&quot;</span>)
+        .build();
+
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
+
+List&lt;QueryResp.QueryResult&gt; results = queryResp.getQueryResults();
+<span class="hljs-keyword">for</span> (QueryResp.QueryResult result : results) {
+    System.out.println(result.getEntity());
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+<span class="hljs-comment">// Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;id &lt;= 10&#x27;</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span>
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+<span class="hljs-comment">// Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;id &lt;= 10&quot;</span>).
+    WithLimit(<span class="hljs-number">2</span>).
+    WithTimeZone(<span class="hljs-string">&quot;America/Havana&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;tsz: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;tsz&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;vec: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;vec&quot;</span>).FieldData().GetVectors())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;id &lt;= 10&quot;,
+    &quot;limit&quot;: 2,
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;tsz&quot;, &quot;vec&quot;],
+    &quot;timezone&quot;: &quot;America/Havana&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;id &lt;= 10&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">WithTimeZone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;tsz&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;vec&quot;</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>

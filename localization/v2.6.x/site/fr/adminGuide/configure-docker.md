@@ -20,9 +20,9 @@ title: Configurer Milvus avec Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette rubrique explique comment configurer les composants de Milvus et ses dépendances tierces avec Docker Compose.</p>
+    </button></h1><p>Cette rubrique décrit comment configurer les composants de Milvus et ses dépendances tierces avec Docker Compose.</p>
 <div class="alert note">
-Dans la version actuelle, tous les paramètres ne prennent effet qu’après le redémarrage de Milvus.
+Dans la version actuelle, tous les paramètres ne prennent effet qu'après le redémarrage de Milvus.
 </div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">Télécharger un fichier de configuration<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,8 +39,8 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.23/configs/milvus.yaml">Téléchargez</a> directement le fichier « <code translate="no">milvus.yaml</code> » ou utilisez la commande suivante.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.23/configs/milvus.yaml</span>
+    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.6.24/configs/milvus.yaml">Téléchargez</a> directement le fichier « <code translate="no">milvus.yaml</code> » ou utilisez la commande suivante.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.6.24/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">Modifier le fichier de configuration<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
             <li><a href="/docs/fr/v2.6.x/configure_querycoord.md">Coordonnateur de requêtes</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_querynode.md">Nœud de requête</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_indexnode.md">Nœud d'index</a></li>
-            <li><a href="/docs/fr/v2.6.x/configure_datacoord.md">Coordonnées des données</a></li>
+            <li><a href="/docs/fr/v2.6.x/configure_datacoord.md">Coordonnées de données</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_datanode.md">Nœud de données</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_localstorage.md">Stockage local</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_log.md">Journal</a></li>
@@ -96,7 +96,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
             <li><a href="/docs/fr/v2.6.x/configure_common.md">Commun</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/fr/v2.6.x/configure_indexcoord.md">Coordonnées d’index</a></li>
+            <li><a href="/docs/fr/v2.6.x/configure_indexcoord.md">Coordonnées d'index</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_metastore.md">Métastore</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_mq.md">File d'attente de messages</a></li>
             <li><a href="/docs/fr/v2.6.x/configure_tikv.md">Tikv</a></li>
@@ -212,12 +212,12 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Téléchargez le fichier d'installation de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml">standalone</a> et enregistrez-le sous le nom « <code translate="no">docker-compose.yml</code> ».</p>
+    </button></h2><p>Téléchargez le fichier d'installation de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.24/milvus-standalone-docker-compose.yml">en version autonome</a> et enregistrez-le sous le nom « <code translate="no">docker-compose.yml</code> ».</p>
 <p>Vous pouvez également exécuter simplement la commande suivante.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.24/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-installation-file" class="common-anchor-header">Modifier le fichier d’installation<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-installation-file" class="common-anchor-header">Modifier le fichier d'installation<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +233,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
         ></path>
       </svg>
     </button></h2><p>Dans le fichier « <code translate="no">docker-compose.yml</code> », ajoutez une section « <code translate="no">volumes</code> » sous chaque « <code translate="no">milvus-standalone</code> ».</p>
-<p>Faites correspondre le chemin d’accès local à votre fichier « <code translate="no">milvus.yaml</code> » aux chemins d’accès correspondants des conteneurs Docker vers les fichiers de configuration « <code translate="no">/milvus/configs/milvus.yaml</code> » dans toutes les sections « <code translate="no">volumes</code> ».</p>
+<p>Faites correspondre le chemin d'accès local à votre fichier « <code translate="no">milvus.yaml</code> » aux chemins d'accès correspondants des conteneurs Docker vers les fichiers de configuration « <code translate="no">/milvus/configs/milvus.yaml</code> » dans toutes les sections « <code translate="no">volumes</code> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -271,7 +271,7 @@ Les données sont stockées dans le dossier <code translate="no">/volumes</code>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois les modifications apportées au fichier de configuration et au fichier d'installation, vous pouvez démarrer Milvus.</p>
+    </button></h2><p>Une fois les modifications apportées au fichier de configuration et au fichier d'installation terminées, vous pouvez démarrer Milvus.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Étapes suivantes<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -292,8 +292,8 @@ Les données sont stockées dans le dossier <code translate="no">/volumes</code>
     </button></h2><ul>
 <li>Découvrez comment gérer les dépendances suivantes de Milvus avec Docker Compose ou Helm :
 <ul>
-<li><a href="/docs/fr/v2.6.x/deploy_s3.md">Configurer le stockage d’objets avec Docker Compose ou Helm</a></li>
-<li><a href="/docs/fr/v2.6.x/deploy_etcd.md">Configurer le stockage de métadonnées avec Docker Compose ou Helm</a></li>
+<li><a href="/docs/fr/v2.6.x/deploy_s3.md">Configurer le stockage d'objets avec Docker Compose ou Helm</a></li>
+<li><a href="/docs/fr/v2.6.x/deploy_etcd.md">Configurer le stockage des métadonnées avec Docker Compose ou Helm</a></li>
 <li><a href="/docs/fr/v2.6.x/deploy_pulsar.md">Configurer le stockage des messages avec Docker Compose ou Helm</a></li>
 </ul></li>
 </ul>

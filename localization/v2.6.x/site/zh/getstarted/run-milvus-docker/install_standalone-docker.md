@@ -63,7 +63,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.23 版本更新内容：</strong></p>
+<p><strong>v2.6.24 版本的新功能：</strong></p>
 <ul>
 <li><strong>流式处理节点</strong>：增强了数据处理能力</li>
 <li><strong>Woodpecker MQ</strong>：改进的消息队列，降低了维护开销，详情请参阅《<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
@@ -75,10 +75,10 @@ title: 在 Docker 中运行 Milvus（Linux）
 </div>
 <p>运行安装脚本后：</p>
 <ul>
-<li>一个名为 milvus 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在端口<strong>2379</strong> 上提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
-<li>若要修改 Milvus 的默认配置，请在当前文件夹的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
-<li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
+<li>一个名为 milvus 的 Docker 容器已在<strong>19530</strong> 端口启动。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射至当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>若要修改 Milvus 的默认配置，请将您的设置添加到当前文件夹中的<strong>user.yaml</strong>文件中，然后重启服务。</li>
+<li>Milvus 数据卷已映射到当前目录下的<strong>volumes/milvus</strong>目录中。</li>
 </ul>
 <p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -106,7 +106,7 @@ EOF
 <p>然后按以下方式重启服务：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关适用的配置项，请参阅《<a href="/docs/zh/v2.6.x/system_configuration.md">系统配置》</a>。</p>
+<p>有关适用的配置项，请参阅<a href="/docs/zh/v2.6.x/system_configuration.md">系统配置</a>。</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">升级 Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用内置的升级命令将 Milvus 升级到最新版本。这会自动下载最新的配置和 Milvus 镜像：</p>
+    </button></h2><p>您可以使用内置的升级命令将 Milvus 升级到最新版本。这将自动下载最新的配置和 Milvus 镜像：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -151,7 +151,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以按照以下步骤停止并删除此容器</p>
+    </button></h2><p>您可以按以下步骤停止并删除该容器</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
 <span class="hljs-meta prompt_">
@@ -196,6 +196,6 @@ EOF
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

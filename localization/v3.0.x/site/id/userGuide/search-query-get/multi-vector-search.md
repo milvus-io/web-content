@@ -2,17 +2,18 @@
 id: multi-vector-search.md
 title: Pencarian Hibrida Multi-Vektor
 summary: >-
-  Di banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi yang
-  kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti teks,
-  gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan
-  gambar akan dicari jika teks atau gambar tersebut sesuai dengan semantik
-  permintaan pencarian. Pencarian hibrida meningkatkan pengalaman pencarian
-  dengan menggabungkan pencarian di berbagai bidang ini. Milvus mendukung hal
-  ini dengan memungkinkan pencarian pada beberapa bidang vektor, melakukan
-  beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan.
-  Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan
-  gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor
-  yang padat dan jarang untuk meningkatkan kualitas pencarian.
+  Dalam banyak aplikasi, suatu objek dapat dicari berdasarkan serangkaian
+  informasi yang beragam, seperti judul dan deskripsi, atau menggunakan berbagai
+  jenis data seperti teks, gambar, dan audio. Misalnya, sebuah tweet yang berisi
+  teks dan gambar akan muncul dalam hasil pencarian jika baik teks maupun
+  gambarnya sesuai dengan makna kueri pencarian. Pencarian hibrida meningkatkan
+  pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang yang
+  beragam ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada
+  beberapa bidang vektor, serta melakukan beberapa pencarian Approximate Nearest
+  Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna
+  jika Anda ingin mencari teks dan gambar sekaligus, beberapa bidang teks yang
+  mendeskripsikan objek yang sama, atau vektor padat dan jarang untuk
+  meningkatkan kualitas pencarian.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">Pencarian Hibrida Multi-Vektor<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -29,15 +30,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi yang kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti teks, gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan gambar akan dicari jika teks atau gambar tersebut sesuai dengan semantik permintaan pencarian. Pencarian hibrida meningkatkan pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada beberapa bidang vektor, melakukan beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor yang padat dan jarang untuk meningkatkan kualitas pencarian.</p>
-<p>
+    </button></h1><p>Dalam banyak aplikasi, suatu objek dapat dicari berdasarkan kumpulan informasi yang beragam seperti judul dan deskripsi, atau dengan berbagai jenis data seperti teks, gambar, dan audio. Misalnya, sebuah tweet yang berisi teks dan gambar akan ditemukan jika baik teks maupun gambarnya sesuai dengan makna kueri pencarian. Pencarian hibrida meningkatkan pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang yang beragam ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada beberapa bidang vektor, serta melakukan beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor padat dan jarang untuk meningkatkan kualitas pencarian.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>Alur Kerja Pencarian Hibrida</span> </span></p>
-<p>Pencarian hibrida multi-vektor mengintegrasikan berbagai metode pencarian atau menjangkau sematan dari berbagai modalitas:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>Alur Kerja Pencarian Hibrida</span>
+  
+ </span></p>
+<p>Pencarian hibrida multi-vektor mengintegrasikan berbagai metode pencarian atau mencakup embedding dari berbagai modalitas:</p>
 <ul>
-<li><p><strong>Pencarian Vektor Jarang-Padat</strong>: <a href="/docs/id/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/sparse_vector.md">Vektor</a> Jarang sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan ini untuk memberikan pemahaman konseptual yang luas dan relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kekuatan dari masing-masing metode, pencarian hybrid mengatasi keterbatasan pendekatan individual, menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut ini adalah <a href="/docs/id/full_text_search_with_milvus.md">panduan</a> lebih rinci tentang pencarian hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
-<li><p><strong>Pencarian Vektor Multimodal</strong>: Pencarian vektor multimodal adalah teknik canggih yang memungkinkan Anda untuk mencari di berbagai jenis data, termasuk teks, gambar, audio, dan lainnya. Keuntungan utama dari pendekatan ini adalah kemampuannya untuk menyatukan modalitas yang berbeda ke dalam pengalaman pencarian yang mulus dan kohesif. Misalnya, dalam pencarian produk, pengguna dapat memasukkan kueri teks untuk menemukan produk yang dideskripsikan dengan teks dan gambar. Dengan menggabungkan modalitas ini melalui metode pencarian hibrida, Anda dapat meningkatkan akurasi pencarian atau memperkaya hasil pencarian.</p></li>
+<li><p><strong>Pencarian Vektor Langka-Padat</strong>: <a href="/docs/id/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/sparse_vector.md">Vektor Langka</a> sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan-pendekatan ini untuk memberikan pemahaman konseptual yang luas sekaligus relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kelebihan masing-masing metode, pencarian hibrida mengatasi keterbatasan pendekatan individu, sehingga menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut adalah <a href="/docs/id/full_text_search_with_milvus.md">panduan</a> lebih rinci mengenai pengambilan hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
+<li><p><strong>Pencarian Vektor Multimodal</strong>: Pencarian vektor multimodal adalah teknik yang kuat yang memungkinkan Anda melakukan pencarian di berbagai jenis data, termasuk teks, gambar, audio, dan lainnya. Keunggulan utama pendekatan ini adalah kemampuannya untuk menyatukan berbagai modalitas menjadi pengalaman pencarian yang mulus dan terpadu. Misalnya, dalam pencarian produk, pengguna mungkin memasukkan kueri teks untuk menemukan produk yang dijelaskan baik dengan teks maupun gambar. Dengan menggabungkan modalitas-modalitas ini melalui metode pencarian hibrida, Anda dapat meningkatkan akurasi pencarian atau memperkaya hasil pencarian.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,12 +59,12 @@ summary: >-
       </svg>
     </button></h2><p>Mari kita pertimbangkan kasus penggunaan di dunia nyata di mana setiap produk menyertakan deskripsi teks dan gambar. Berdasarkan data yang tersedia, kita dapat melakukan tiga jenis pencarian:</p>
 <ul>
-<li><p><strong>Pencarian Teks Semantik:</strong> Pencarian ini melibatkan kueri deskripsi teks produk menggunakan vektor padat. Penyematan teks dapat dibuat dengan menggunakan model seperti <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> dan <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> atau layanan seperti <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>Pencarian Teks Lengkap</strong>: Di sini, kami menanyakan deskripsi teks produk menggunakan kata kunci yang cocok dengan vektor jarang. Algoritme seperti <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> atau model penyematan jarang seperti <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> atau <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> dapat digunakan untuk tujuan ini.</p></li>
-<li><p><strong>Pencarian Gambar Multimodal:</strong> Metode ini menanyakan gambar menggunakan kueri teks dengan vektor padat. Penyematan gambar dapat dibuat dengan model seperti <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
+<li><p><strong>Pencarian Teks Semantik:</strong> Ini melibatkan pencarian deskripsi teks produk menggunakan vektor padat. Embedding teks dapat dihasilkan menggunakan model seperti <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> dan <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> atau layanan seperti <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
+<li><p><strong>Pencarian Teks Penuh</strong>: Di sini, kita melakukan pencarian terhadap deskripsi teks produk menggunakan pencocokan kata kunci dengan vektor jarang. Algoritma seperti <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> atau model embedding jarang seperti <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> atau <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> dapat digunakan untuk tujuan ini.</p></li>
+<li><p><strong>Pencarian Gambar Multimodal:</strong> Metode ini melakukan pencarian pada gambar menggunakan kueri teks dengan vektor padat. Embedding gambar dapat dihasilkan dengan model seperti <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>Panduan ini akan memandu Anda melalui contoh pencarian hibrida multimodal yang menggabungkan metode pencarian di atas, dengan deskripsi teks mentah dan sematan gambar produk. Kami akan mendemonstrasikan cara menyimpan data multi-vektor dan melakukan pencarian hibrida dengan strategi pemeringkatan ulang.</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Membuat koleksi dengan beberapa bidang vektor<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>Panduan ini akan memandu Anda melalui contoh pencarian hibrida multimodal yang menggabungkan metode pencarian di atas, dengan menggunakan deskripsi teks mentah dan embedding gambar produk. Kami akan mendemonstrasikan cara menyimpan data multi-vektor dan melakukan pencarian hibrida dengan strategi peranking ulang.</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Buat koleksi dengan beberapa bidang vektor<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Proses membuat koleksi melibatkan tiga langkah utama: mendefinisikan skema koleksi, mengonfigurasi parameter indeks, dan membuat koleksi.</p>
+    </button></h2><p>Proses pembuatan koleksi melibatkan tiga langkah utama: mendefinisikan skema koleksi, mengonfigurasi parameter indeks, dan membuat koleksi.</p>
 <h3 id="Define-schema" class="common-anchor-header">Tentukan skema<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,18 +95,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus menentukan beberapa bidang vektor dalam skema koleksi. Untuk detail tentang batasan jumlah bidang vektor yang diizinkan dalam koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batas Zilliz Cloud</a>.  Namun, jika perlu, Anda dapat menyesuaikan parameter <a href="/docs/id/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
-<p>Contoh ini memasukkan bidang berikut ke dalam skema:</p>
+    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus mendefinisikan beberapa bidang vektor dalam skema koleksi. Untuk detail mengenai batasan jumlah bidang vektor yang diperbolehkan dalam sebuah koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batasan Zilliz Cloud</a>. Namun, jika diperlukan, Anda dapat menyesuaikan <a href="/docs/id/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam sebuah koleksi sesuai kebutuhan.</p>
+<p>Contoh ini memasukkan bidang-bidang berikut ke dalam skema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Berfungsi sebagai kunci utama untuk menyimpan ID teks. Bidang ini bertipe data <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten tekstual. Bidang ini bertipe data <code translate="no">VARCHAR</code> dengan panjang maksimum 1000 byte. Opsi <code translate="no">enable_analyzer</code> diatur ke <code translate="no">True</code> untuk memfasilitasi pencarian teks lengkap.</p></li>
-<li><p><code translate="no">text_dense</code>: Digunakan untuk menyimpan vektor teks yang padat. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor jarang dari teks. Field ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VETOR</code> dengan dimensi vektor 512.</p></li>
+<li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten teks. Bidang ini bertipe data ` <code translate="no">VARCHAR</code> ` dengan panjang maksimum 1.000 byte. Opsi ` <code translate="no">enable_analyzer</code> ` diatur ke ` <code translate="no">True</code> ` untuk memfasilitasi pencarian teks lengkap.</p></li>
+<li><p><code translate="no">text_dense</code>: Digunakan untuk menyimpan vektor padat dari teks-teks tersebut. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor sebesar 768.</p></li>
+<li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor langka dari teks-teks tersebut. Bidang ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VETOR</code> dengan dimensi vektor sebesar 512.</p></li>
 </ul>
-<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/full-text-search.md">Pencarian Teks Penuh</a>.</p>
+<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan " <code translate="no">Function</code> " Milvus ke dalam skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/full-text-search.md">Full Text Search</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -240,7 +249,7 @@ schema.WithField(entity.NewField().
     WithDim(<span class="hljs-number">512</span>),
 ).WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
@@ -258,7 +267,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>,
-        <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>
+        <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
@@ -267,7 +276,7 @@ schema.WithField(entity.NewField().
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SPARSE_FLOAT_VECTOR</span>
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SparseFloatVector</span>
     },
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
@@ -288,17 +297,17 @@ schema.WithField(entity.NewField().
     },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> bm25Function=<span class="hljs-string">&#x27;{
-    &quot;name&quot;: &quot;text_bm25_emb&quot;,
-    &quot;type&quot;: &quot;BM25&quot;,
-    &quot;inputFieldNames&quot;: [&quot;text&quot;],
-    &quot;outputFieldNames&quot;: [&quot;text_sparse&quot;],
-    &quot;params&quot;: {}
-}&#x27;</span>
-
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: false,
-        &quot;functions&quot;: [$bm25Function],
+        &quot;functions&quot;: [
+            {
+                &quot;name&quot;: &quot;text_bm25_emb&quot;,
+                &quot;type&quot;: &quot;BM25&quot;,
+                &quot;inputFieldNames&quot;: [&quot;text&quot;],
+                &quot;outputFieldNames&quot;: [&quot;text_sparse&quot;],
+                &quot;params&quot;: {}
+            }
+        ],
         &quot;fields&quot;: [
             {
                 &quot;fieldName&quot;: &quot;id&quot;,
@@ -334,7 +343,29 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Membuat indeks<button data-href="#Create-index" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25, <span class="hljs-string">&quot;text bm25 function&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>);
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text_dense&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">768</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;text_sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;image_dense&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">512</span>));
+schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Create-index" class="common-anchor-header">Buat indeks<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,15 +380,21 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah mendefinisikan skema koleksi, langkah selanjutnya adalah mengonfigurasi indeks vektor dan menentukan metrik kemiripan. Dalam contoh yang diberikan:</p>
+    </button></h3><p>Setelah mendefinisikan skema koleksi, langkah selanjutnya adalah mengonfigurasi indeks vektor dan menentukan metrik kesamaan. Dalam contoh berikut:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: sebuah indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat teks.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: indeks bertipe<code translate="no">SPARSE_INVERTED_INDEX</code>dengan tipe metrik <code translate="no">BM25</code> digunakan untuk bidang vektor teks jarang.</p></li>
-<li><p><code translate="no">image_dense_index</code>indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat gambar.</p></li>
+<li><p><code translate="no">text_dense_index</code>: indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor teks padat.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: indeks bertipe `<code translate="no">SPARSE_INVERTED_INDEX</code>` dengan jenis metrik ` <code translate="no">BM25</code> ` digunakan untuk bidang vektor teks yang padat.</p></li>
+<li><p><code translate="no">image_dense_index</code>: indeks bertipe ` <code translate="no">AUTOINDEX</code> ` dengan tipe metrik ` <code translate="no">IP</code> ` dibuat untuk bidang vektor gambar padat.</p></li>
 </ul>
-<p>Anda dapat memilih jenis indeks lain yang diperlukan untuk menyesuaikan dengan kebutuhan dan jenis data Anda. Untuk informasi lebih lanjut tentang jenis indeks yang didukung, silakan lihat dokumentasi tentang <a href="/docs/id/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
+<p>Anda dapat memilih jenis indeks lain sesuai kebutuhan agar paling sesuai dengan kebutuhan dan tipe data Anda. Untuk informasi lebih lanjut mengenai jenis indeks yang didukung, silakan merujuk ke dokumentasi mengenai <a href="/docs/id/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -397,7 +434,7 @@ Map&lt;String, Object&gt; denseParams = <span class="hljs-keyword">new</span> <s
         .build();
 
 Map&lt;String, Object&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
 <span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForTextSparse</span> <span class="hljs-operator">=</span> IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .indexName(<span class="hljs-string">&quot;text_sparse_index&quot;</span>)
@@ -424,7 +461,6 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
     index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.2</span>))
 indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;image_dense&quot;</span>,
     index.NewAutoIndex(index.MetricType(entity.IP)))
-)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
@@ -434,7 +470,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
 },{
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;text_sparse_index&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;IndexType.SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
     <span class="hljs-attr">params</span>: {
       <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, 
@@ -468,7 +504,16 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">text_sparse_index</span><span class="hljs-params">(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-string">&quot;text_sparse_index&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25)</span></span>;
+text_sparse_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+
+std::vector&lt;milvus::IndexDesc&gt; indexes = {
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-string">&quot;text_dense_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+    text_sparse_index,
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-string">&quot;image_dense_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::IP),
+};
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,9 +528,15 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasikan di dua langkah sebelumnya.</p>
+    </button></h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasi pada dua langkah sebelumnya.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -501,7 +552,7 @@ client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-        WithIndexOptions(indexOption1, indexOption2))
+        WithIndexOptions(indexOption1, indexOption2, indexOption3))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
@@ -510,6 +561,7 @@ client.createCollection(createCollectionReq);
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">fields</span>: fields,
+    <span class="hljs-attr">functions</span>: functions,
     <span class="hljs-attr">index_params</span>: index_params,
 })
 <button class="copy-code-btn"></button></code></pre>
@@ -527,7 +579,15 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Insert-data" class="common-anchor-header">Sisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,17 +602,23 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bagian ini menyisipkan data ke dalam koleksi <code translate="no">my_collection</code> berdasarkan skema yang telah ditentukan sebelumnya. Selama penyisipan, pastikan semua bidang, kecuali bidang dengan nilai yang dibuat secara otomatis, disediakan dengan data dalam format yang benar. Dalam contoh ini:</p>
+    </button></h2><p>Bagian ini menyisipkan data ke dalam koleksi ` <code translate="no">my_collection</code> ` berdasarkan skema yang telah ditentukan sebelumnya. Selama proses penyisipan, pastikan semua bidang, kecuali yang memiliki nilai yang dihasilkan secara otomatis, diisi dengan data dalam format yang benar. Dalam contoh ini:</p>
 <ul>
-<li><p><code translate="no">id</code>: sebuah bilangan bulat yang mewakili ID produk</p></li>
+<li><p><code translate="no">id</code>: bilangan bulat yang mewakili ID produk</p></li>
 <li><p><code translate="no">text</code>: string yang berisi deskripsi produk</p></li>
-<li><p><code translate="no">text_dense</code>: daftar 768 nilai floating-point yang mewakili penyematan deskripsi teks yang padat</p></li>
-<li><p><code translate="no">image_dense</code>: daftar 512 nilai floating-point yang mewakili penyematan padat gambar produk</p></li>
+<li><p><code translate="no">text_dense</code>: daftar berisi 768 nilai bilangan floating-point yang mewakili embedding padat dari deskripsi teks</p></li>
+<li><p><code translate="no">image_dense</code>: daftar 512 nilai floating-point yang mewakili embedding padat dari gambar produk</p></li>
 </ul>
-<p>Anda dapat menggunakan model yang sama atau berbeda untuk menghasilkan sematan padat untuk setiap bidang. Dalam contoh ini, dua sematan padat memiliki dimensi yang berbeda, yang menunjukkan bahwa keduanya dihasilkan oleh model yang berbeda. Saat menentukan setiap pencarian nanti, pastikan untuk menggunakan model yang sesuai untuk menghasilkan sematan kueri yang sesuai.</p>
-<p>Karena contoh ini menggunakan fungsi BM25 bawaan untuk menghasilkan sematan jarang dari bidang teks, Anda tidak perlu memasok vektor jarang secara manual. Namun, jika Anda memilih untuk tidak menggunakan BM25, Anda harus melakukan prakomputasi dan menyediakan sematan jarang sendiri.</p>
+<p>Anda dapat menggunakan model yang sama atau berbeda untuk menghasilkan embedding padat untuk setiap bidang. Dalam contoh ini, kedua embedding padat tersebut memiliki dimensi yang berbeda, yang menunjukkan bahwa keduanya dihasilkan oleh model yang berbeda. Saat mendefinisikan setiap pencarian nanti, pastikan untuk menggunakan model yang sesuai guna menghasilkan embedding kueri yang tepat.</p>
+<p>Karena contoh ini menggunakan fungsi BM25 bawaan untuk menghasilkan embedding jarang dari bidang teks, Anda tidak perlu menyediakan vektor jarang secara manual. Namun, jika Anda memilih untuk tidak menggunakan BM25, Anda harus menghitung terlebih dahulu dan menyediakan embedding jarang tersebut sendiri.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -589,25 +655,26 @@ res = client.insert(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">0</span>);
 row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>);
-row1.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense1));
-row1.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense));
+row1.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, ...}));
+row1.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.6366019600530924f</span>, -<span class="hljs-number">0.09323198122475052f</span>, ...}));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
 row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>);
-row2.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense2));
-row2.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense2));
+row2.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.19886812562848388f</span>, <span class="hljs-number">0.06023560599112088f</span>, <span class="hljs-number">0.6976963061752597f</span>, ...}));
+row2.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.6414180010301553f</span>, <span class="hljs-number">0.8976979978567611f</span>, ...}));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
 row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
 row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>);
-row3.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(dense3));
-row3.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(sparse3));
+row3.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.43742130801983836f</span>, -<span class="hljs-number">0.5597502546264526f</span>, <span class="hljs-number">0.6457887650909682f</span>, ...}));
+row3.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.6901259768402174f</span>, <span class="hljs-number">0.6100500332193755f</span>, ...}));
 
 List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
@@ -633,7 +700,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         {<span class="hljs-number">0.6366019600530924</span>, <span class="hljs-number">-0.09323198122475052</span>, ...},
         {<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...},
         {<span class="hljs-number">-0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...},
-    }).
+    }))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
@@ -666,6 +733,35 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;random&gt;</span></span>
+
+<span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt;
+<span class="hljs-title">GenerateFloatVector</span><span class="hljs-params">(<span class="hljs-type">int</span> dimension)</span> </span>{
+    std::random_device rd;
+    <span class="hljs-function">std::mt19937 <span class="hljs-title">ran</span><span class="hljs-params">(rd())</span></span>;
+    <span class="hljs-function">std::uniform_real_distribution&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">float_gen</span><span class="hljs-params">(<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>)</span></span>;
+    <span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">vector</span><span class="hljs-params">(dimension)</span></span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> d = <span class="hljs-number">0</span>; d &lt; dimension; ++d) {
+        vector[d] = <span class="hljs-built_in">float_gen</span>(ran);
+    }
+    <span class="hljs-keyword">return</span> vector;
+}
+
+milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">0</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>}, {<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>}, {<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>)}, {<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>)}}
+};
+
+milvus::InsertResponse response;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                        response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Perform-Hybrid-Search" class="common-anchor-header">Melakukan Pencarian Hibrida<button data-href="#Perform-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -696,19 +792,25 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
-<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/boolean.md">Penjelasan Pemfilteran</a>.</p>
+    </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa objek ` <code translate="no">AnnSearchRequest</code> ` dalam fungsi ` <code translate="no">hybrid_search()</code> `, di mana setiap objek ` <code translate="no">AnnSearchRequest</code> ` mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, Anda perlu membuat objek ` <code translate="no">AnnSearchRequest</code> ` untuk setiap bidang vektor.</p>
+<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> dalam <code translate="no">AnnSearchRequest</code>, Anda dapat menetapkan kondisi penyaringan untuk pencarian hibrida Anda. Silakan merujuk ke <a href="/docs/id/boolean.md">Penjelasan tentang</a> <a href="/docs/id/filtered-search.md">Pencarian yang Disaring</a> dan <a href="/docs/id/boolean.md">Penyaringan</a>.</p>
 <div class="alert note">
-<p>Dalam Pencarian Hibrid, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
+<p>Dalam Pencarian Hibrida, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
 </div>
-<p>Untuk mendemonstrasikan kemampuan berbagai bidang vektor pencarian, kami akan membuat tiga permintaan pencarian <code translate="no">AnnSearchRequest</code> menggunakan contoh kueri. Kami juga akan menggunakan vektor padat yang telah dihitung sebelumnya untuk proses ini. Permintaan pencarian akan menargetkan bidang vektor berikut ini:</p>
+<p>Untuk mendemonstrasikan kemampuan berbagai bidang vektor pencarian, kami akan membuat tiga permintaan pencarian " <code translate="no">AnnSearchRequest</code> " menggunakan kueri contoh. Kami juga akan menggunakan vektor padat yang telah dihitung sebelumnya untuk proses ini. Permintaan pencarian tersebut akan menargetkan bidang vektor berikut:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> untuk pencarian teks semantik, yang memungkinkan pemahaman kontekstual dan pengambilan berdasarkan makna daripada pencocokan kata kunci secara langsung.</p></li>
-<li><p><code translate="no">text_sparse</code>untuk pencarian teks lengkap atau pencocokan kata kunci, dengan fokus pada pencocokan kata atau frasa yang tepat di dalam teks.</p></li>
-<li><p><code translate="no">image_dense</code>untuk pencarian teks-ke-gambar multimodal, untuk mengambil gambar produk yang relevan berdasarkan konten semantik kueri.</p></li>
+<li><p><code translate="no">text_dense</code> untuk pencarian teks semantik, yang memungkinkan pemahaman kontekstual dan pengambilan berdasarkan makna, bukan pencocokan kata kunci secara langsung.</p></li>
+<li><p><code translate="no">text_sparse</code>untuk pencarian teks lengkap atau pencocokan kata kunci, yang berfokus pada pencocokan kata atau frasa yang tepat di dalam teks.</p></li>
+<li><p><code translate="no">image_dense</code>untuk pencarian teks-ke-gambar multimodal, guna mengambil gambar produk yang relevan berdasarkan konten semantik dari kueri.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -728,6 +830,7 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -751,9 +854,9 @@ reqs = [request_1, request_2, request_3]
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">float</span>[] queryDense = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.0475336798f</span>,  <span class="hljs-number">0.0521207601f</span>,  <span class="hljs-number">0.0904406682f</span>, ...};
-<span class="hljs-type">float</span>[] queryMultimodal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.0158298651f</span>, <span class="hljs-number">0.5264158340f</span>, ...}
+<span class="hljs-type">float</span>[] queryMultimodal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.0158298651f</span>, <span class="hljs-number">0.5264158340f</span>, ...};
 
-List&lt;BaseVector&gt; queryTexts = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>);)
+List&lt;BaseVector&gt; queryTexts = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>));
 List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryDense));
 List&lt;BaseVector&gt; queryMultimodalVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryMultimodal));
 
@@ -776,7 +879,7 @@ searchRequests.add(AnnSearchReq.builder()
         .topK(<span class="hljs-number">2</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryText := entity.Text({<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>})
+<pre><code translate="no" class="language-go">queryText := entity.Text(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>)
 queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...}
 queryMultimodalVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...}
 
@@ -798,7 +901,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_1 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -811,7 +914,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_3 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_multimodal_vector, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -835,8 +938,32 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dengan parameter <code translate="no">limit</code> yang disetel ke 2, setiap <code translate="no">AnnSearchRequest</code> mengembalikan 2 hasil pencarian. Dalam contoh ini, 3 contoh <code translate="no">AnnSearchRequest</code> dibuat, menghasilkan total 6 hasil pencarian.</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Langkah 2: Konfigurasikan strategi perankingan ulang<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>;
+<span class="hljs-keyword">auto</span> query_dense_vector = <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">768</span>);
+<span class="hljs-keyword">auto</span> query_multimodal_vector = <span class="hljs-built_in">GenerateFloatVector</span>(<span class="hljs-number">512</span>);
+
+<span class="hljs-comment">// text semantic search (dense)</span>
+<span class="hljs-keyword">auto</span> sub_req1 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddFloatVector</span>(query_dense_vector)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_dense&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+sub_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-comment">// full-text search (sparse)</span>
+<span class="hljs-keyword">auto</span> sub_req2 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddEmbeddedText</span>(query_text)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// text-to-image search (multimodal)</span>
+<span class="hljs-keyword">auto</span> sub_req3 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                    .<span class="hljs-built_in">AddFloatVector</span>(query_multimodal_vector)
+                    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;image_dense&quot;</span>)
+                    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<p>Mengingat parameter ` <code translate="no">limit</code> ` diatur ke 2, setiap ` <code translate="no">AnnSearchRequest</code> ` mengembalikan 2 hasil pencarian. Dalam contoh ini, 3 instance ` <code translate="no">AnnSearchRequest</code> ` dibuat, sehingga menghasilkan total 6 hasil pencarian.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Langkah 2: Konfigurasikan strategi pengurutan ulang<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -851,10 +978,16 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi peringkat ulang yang sesuai sangatlah penting. Milvus menawarkan beberapa jenis strategi pemeringkatan ulang. Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat Pemeringkat <a href="/docs/id/weighted-ranker.md">Tertimbang</a> atau Pemeringkat <a href="/docs/id/rrf-ranker.md">RRF</a>.</p>
-<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kita akan melanjutkan dengan strategi RRFRanker.</p>
+    </button></h3><p>Untuk menggabungkan dan menyusun ulang urutan kumpulan hasil pencarian ANN, pemilihan strategi penyusun ulang urutan yang tepat sangatlah penting. Milvus menawarkan beberapa jenis strategi penyusun ulang urutan. Untuk detail lebih lanjut mengenai mekanisme penyusun ulang urutan ini, silakan lihat <a href="/docs/id/weighted-ranker.md">Weighted Ranker</a> atau <a href="/docs/id/rrf-ranker.md">RRF Ranker</a>.</p>
+<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri pencarian tertentu, kami akan melanjutkan dengan strategi RRFRanker.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -873,7 +1006,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
         .functionType(FunctionType.RERANK)
         .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
         .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
-        .build()
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> rerank = {
   <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rrf&#x27;</span>,
@@ -886,31 +1019,13 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
   },
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-)
-
-ranker := entity.NewFunction().
-    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
-    WithType(entity.FunctionTypeRerank).
-    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
-    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Restful</span>
-<span class="hljs-built_in">export</span> functionScore=<span class="hljs-string">&#x27;{
-    &quot;functions&quot;: [
-        {
-            &quot;name&quot;: &quot;rrf&quot;,
-            &quot;type&quot;: &quot;Rerank&quot;,
-            &quot;inputFieldNames&quot;: [],
-            &quot;params&quot;: {
-                &quot;reranker&quot;: &quot;rrf&quot;,
-                &quot;k&quot;: 100
-            }
-        }
-    ]
-}&#x27;</span>
+<span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{&quot;k&quot;: 100}&#x27;</span>
 
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> ranker = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::RRFRerank&gt;(<span class="hljs-number">100</span>);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Langkah 3: Lakukan Pencarian Hibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -927,9 +1042,15 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sebelum memulai Pencarian Hibrida, pastikan koleksi sudah dimuat. Jika ada bidang vektor di dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, maka akan terjadi kesalahan saat menjalankan metode Pencarian Hibrida.</p>
+    </button></h3><p>Sebelum memulai Pencarian Hibrida, pastikan koleksi telah dimuat. Jika ada bidang vektor dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, kesalahan akan terjadi saat menjalankan metode Pencarian Hibrida.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -948,7 +1069,7 @@ ranker := entity.NewFunction().
 <span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .searchRequests(searchRequests)
-        .ranker(reranker)
+        .ranker(ranker)
         .topK(<span class="hljs-number">2</span>)
         .build();
 
@@ -1001,10 +1122,33 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Berikut ini adalah keluarannya:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">HybridSearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req1)))
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req2)))
+                   .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(sub_req3)))
+                   .<span class="hljs-built_in">WithRerank</span>(ranker)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;TopK results:&quot;</span> &lt;&lt; std::endl;
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
-<p>Dengan parameter <code translate="no">limit=2</code> yang ditentukan untuk Pencarian Hibrida, Milvus akan mengurutkan ulang enam hasil yang diperoleh dari tiga pencarian. Pada akhirnya, Milvus hanya akan mengembalikan dua hasil yang paling mirip.</p>
+<p>Berikut adalah hasilnya:</p>
+<pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Dengan parameter ` <code translate="no">limit=2</code> ` yang ditentukan untuk Pencarian Hibrida, Milvus akan menyusun ulang peringkat enam hasil yang diperoleh dari tiga pencarian. Pada akhirnya, Milvus hanya akan mengembalikan dua hasil teratas yang paling mirip.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Penggunaan lanjutan<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1020,7 +1164,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Menetapkan zona waktu untuk sementara untuk pencarian gabungan<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Menetapkan zona waktu sementara untuk pencarian hybrid<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1035,9 +1179,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti sementara zona waktu default basis data atau koleksi untuk satu operasi dengan menetapkan parameter <code translate="no">timezone</code> dalam panggilan pencarian hibrida. Ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
-<p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi pencarian gabungan:</p>
+    </button></h3><p>Jika koleksi Anda memiliki bidang ` <code translate="no">TIMESTAMPTZ</code> `, Anda dapat mengganti zona waktu default basis data atau koleksi secara sementara untuk satu operasi dengan mengatur parameter ` <code translate="no">timezone</code> ` dalam panggilan pencarian hibrida. Hal ini mengontrol bagaimana nilai ` <code translate="no">TIMESTAMPTZ</code> ` ditampilkan dan dibandingkan selama operasi.</p>
+<p>Nilai ` <code translate="no">timezone</code> ` harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> `, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Contoh di bawah ini menunjukkan cara mengatur zona waktu sementara untuk operasi pencarian hibrida:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -1045,4 +1197,134 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     limit=<span class="hljs-number">2</span>,
 <span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">List&lt;AnnSearchReq&gt; tzRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;text_dense&quot;</span>)
+        .vectors(queryDenseVectors)
+        .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+        .vectors(queryTexts)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+tzRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;image_dense&quot;</span>)
+        .vectors(queryMultimodalVectors)
+        .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
+        .topK(<span class="hljs-number">2</span>)
+<span class="highlighted-wrapper-line">        .timezone(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">tzHybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .searchRequests(tzRequests)
+        .ranker(ranker)
+        .topK(<span class="hljs-number">2</span>)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">tzSearchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(tzHybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">tzRequest1 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>)).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+tzRequest2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-number">2</span>, queryText).
+    WithAnnParam(annParam).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+tzRequest3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryMultimodalVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>)).
+<span class="highlighted-wrapper-line">    WithSearchParam(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+
+resultSets, err = client.HybridSearch(ctx, milvusclient.NewHybridSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-number">2</span>,
+    tzRequest1,
+    tzRequest2,
+    tzRequest3,
+).WithReranker(reranker))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [
+    { ...search_param_1, <span class="hljs-attr">params</span>: { <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+    { ...search_param_2, <span class="hljs-attr">params</span>: { <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+    { ...search_param_3, <span class="hljs-attr">params</span>: { <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">timezone</span>: <span class="hljs-string">&quot;America/Havana&quot;</span> } },
+  ],
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">rerank</span>: rerank
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;search&quot;: [
+        {
+            &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]],
+            &quot;annsField&quot;: &quot;text_dense&quot;,
+            &quot;params&quot;: {&quot;nprobe&quot;: 10, &quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        },
+        {
+            &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
+            &quot;annsField&quot;: &quot;text_sparse&quot;,
+            &quot;params&quot;: {&quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        },
+        {
+            &quot;data&quot;: [[0.015829865178701663, 0.5264158340734488, ...]],
+            &quot;annsField&quot;: &quot;image_dense&quot;,
+            &quot;params&quot;: {&quot;nprobe&quot;: 10, &quot;timezone&quot;: &quot;America/Havana&quot;},
+            &quot;limit&quot;: 2
+        }
+    ],
+    &quot;rerank&quot;: {
+        &quot;strategy&quot;: &quot;rrf&quot;,
+        &quot;params&quot;: {&quot;k&quot;: 100}
+    },
+    &quot;limit&quot;: 2
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> tz_req1 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_dense_vector)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_dense&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+tz_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-keyword">auto</span> tz_req2 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddEmbeddedText</span>(query_text)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+<span class="hljs-keyword">auto</span> tz_req3 = milvus::<span class="hljs-built_in">SubSearchRequest</span>()
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_multimodal_vector)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;image_dense&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithTimezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)</span>
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+tz_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+
+<span class="hljs-keyword">auto</span> tz_request = milvus::<span class="hljs-built_in">HybridSearchRequest</span>()
+                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req1)))
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req2)))
+                      .<span class="hljs-built_in">AddSubRequest</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;(std::<span class="hljs-built_in">move</span>(tz_req3)))
+                      .<span class="hljs-built_in">WithRerank</span>(ranker)
+                      .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
+
+milvus::SearchResponse tz_response;
+status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(tz_request, tz_response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>

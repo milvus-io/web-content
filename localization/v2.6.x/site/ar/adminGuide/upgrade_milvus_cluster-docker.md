@@ -20,9 +20,9 @@ title: ترقية مجموعة Milvus باستخدام Docker Compose
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية ترقية Milvus باستخدام Docker Compose.</p>
-<p>في الحالات العادية، يمكنك <a href="#Upgrade-Milvus-by-changing-its-image">ترقية Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار v2.1.x إلى الإصدار v2.6.23.</p>
+<p>في الحالات العادية، يمكنك <a href="#Upgrade-Milvus-by-changing-its-image">ترقية Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار v2.1.x إلى الإصدار v2.6.24.</p>
 <div class="alert note">
-<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.23، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قائمة انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قائمة انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v2.6.24، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">ترقية Milvus عن طريق تغيير صورته<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,39 +42,39 @@ title: ترقية مجموعة Milvus باستخدام Docker Compose
     </button></h2><p>في الحالات العادية، يمكنك ترقية Milvus على النحو التالي:</p>
 <ol>
 <li><p>قم بتغيير علامات صورة Milvus في <code translate="no">docker-compose.yaml</code>.</p>
-<p>لاحظ أنه يتعين عليك تغيير علامات الصورة للوكيل (Proxy) وجميع المنسقين وجميع العقد العاملة.</p>
+<p>لاحظ أنه يتعين عليك تغيير علامات الصورة للوكيل (Proxy) وجميع المنسقين (coordinators) وجميع العقد العاملة (worker nodes).</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.23</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.24</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل الأوامر التالية لإجراء الترقية.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -100,7 +100,7 @@ docker compose up -d
 <li><p>أوقف جميع مكونات Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>قم بإعداد ملف التكوين <code translate="no">migrate.yaml</code> لترحيل البيانات الوصفية.</p>
+<li><p>قم بإعداد ملف التكوين <code translate="no">migrate.yaml</code> من أجل ترحيل البيانات الوصفية.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -108,7 +108,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.23</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.24</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -154,6 +154,6 @@ docker compose up -d
 <ul>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
 <li>تعرف على كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus على GCP باستخدام Kubernetes</a></li>
-<li>تعلم كيفية <a href="/docs/ar/v2.6.x/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.6.x/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

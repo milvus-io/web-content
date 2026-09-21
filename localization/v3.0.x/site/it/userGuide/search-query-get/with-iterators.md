@@ -2,12 +2,13 @@
 id: with-iterators.md
 title: Iteratore di ricerca
 summary: >-
-  La ricerca ANN ha un limite massimo al numero di entità che possono essere
-  richiamate in una singola query e il semplice utilizzo della ricerca ANN di
-  base potrebbe non soddisfare le esigenze di un recupero su larga scala. Per le
-  richieste di ricerca ANN in cui topK supera i 16.384, è consigliabile
-  considerare l'uso del SearchIterator. Questa sezione illustra come utilizzare
-  il SearchIterator e le relative considerazioni.
+  La ricerca ANN prevede un limite massimo al numero di entità che possono
+  essere recuperate in una singola query e il semplice utilizzo della ricerca
+  ANN di base potrebbe non soddisfare le esigenze di un recupero su larga scala.
+  Per le richieste di ricerca ANN in cui il valore di topK supera 16.384, è
+  consigliabile prendere in considerazione l'utilizzo di SearchIterator. In
+  questa sezione verrà illustrato come utilizzare SearchIterator e quali sono le
+  considerazioni correlate.
 ---
 <h1 id="Search-Iterator" class="common-anchor-header">Iteratore di ricerca<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca ANN ha un limite massimo al numero di entità che possono essere richiamate in una singola query e il semplice utilizzo della ricerca ANN di base potrebbe non soddisfare le esigenze di un recupero su larga scala. Per le richieste di ricerca ANN in cui topK supera i 16.384, è consigliabile considerare l'uso del SearchIterator. Questa sezione presenta come utilizzare il SearchIterator e le relative considerazioni.</p>
+    </button></h1><p>La ricerca ANN prevede un limite massimo al numero di entità che possono essere recuperate in una singola query e l'utilizzo della ricerca ANN di base potrebbe non soddisfare le esigenze di recupero su larga scala. Per le richieste di ricerca ANN in cui il valore di topK supera 16.384, è consigliabile prendere in considerazione l'utilizzo di SearchIterator. Questa sezione illustrerà come utilizzare SearchIterator e le relative considerazioni.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,13 +42,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Una richiesta di ricerca restituisce i risultati della ricerca, mentre un SearchIterator restituisce un iteratore. È possibile chiamare il metodo <strong>next()</strong> di questo iteratore per ottenere i risultati della ricerca.</p>
-<p>In particolare, si possono usare i SearchIterator come segue:</p>
+<p>Nello specifico, è possibile utilizzare gli SearchIterator come segue:</p>
 <ol>
-<li><p>Creare un SearchIterator e impostare <strong>il numero di entità da restituire per ogni richiesta di ricerca</strong> e il <strong>numero totale di entità da restituire</strong>.</p></li>
-<li><p>Chiamare il metodo <strong>next()</strong> del SearchIterator in un ciclo per ottenere i risultati della ricerca in modo impaginato.</p></li>
-<li><p>Chiamare il metodo <strong>close()</strong> dell'iteratore per terminare il ciclo se il metodo <strong>next()</strong> restituisce un risultato vuoto.</p></li>
+<li><p>Creare un SearchIterator e impostare <strong>il numero di entità da restituire per ogni richiesta di ricerca</strong> e <strong>il numero totale di entità da restituire</strong>.</p></li>
+<li><p>Chiamare il metodo <strong>next()</strong> di SearchIterator in un ciclo per ottenere i risultati della ricerca in modo impaginato.</p></li>
+<li><p>Chiamare il metodo <strong>close()</strong> dell’iteratore per terminare il ciclo se il metodo <strong>next()</strong> restituisce un risultato vuoto.</p></li>
 </ol>
-<h2 id="Create-SearchIterator" class="common-anchor-header">Creare un iteratore di ricerca<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">Creazione di un SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,7 +65,13 @@ summary: >-
       </svg>
     </button></h2><p>Il seguente frammento di codice mostra come creare un SearchIterator.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -136,10 +143,66 @@ iterator = collection.search_iterator(
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;iterator_collection&quot;,
+    &quot;annsField&quot;: &quot;vector&quot;,
+    &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    &quot;searchParams&quot;: {
+        &quot;metricType&quot;: &quot;L2&quot;,
+        &quot;params&quot;: {
+            &quot;nprobe&quot;: 16
+        }
+    },
+    &quot;limit&quot;: 50,
+    &quot;offset&quot;: 0,
+    &quot;outputFields&quot;: [&quot;color&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Negli esempi precedenti, si è impostato il numero di entità da restituire per ogni ricerca<strong>(</strong><strong>batch_size/batchSize</strong>) a 50 e il numero totale di entità da restituire<strong>(topK</strong>) a 20.000.</p>
-<h2 id="Use-SearchIterator" class="common-anchor-header">Utilizzare SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-comment">// create iterator</span>
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+milvus::SearchIteratorRequest request;
+request.<span class="hljs-built_in">SetCollectionName</span>(<span class="hljs-string">&quot;iterator_collection&quot;</span>);
+request.<span class="hljs-built_in">SetAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>);
+request.<span class="hljs-built_in">SetMetricType</span>(milvus::MetricType::L2);
+request.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;16&quot;</span>);
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetBatchSize</span>(<span class="hljs-number">50</span>);</span>
+request.<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;color&quot;</span>);
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetLimit</span>(<span class="hljs-number">20000</span>);</span>
+<span class="hljs-comment">// SearchIterator only accepts one vector</span>
+request.<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchIteratorPtr iterator;
+status = client-&gt;<span class="hljs-built_in">SearchIterator</span>(request, iterator);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to create search iterator: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Negli esempi sopra riportati, è stato impostato il numero di entità da restituire per ogni ricerca (<strong>batch_size/batchSize</strong>) a 50 e il numero totale di entità da restituire (<strong>topK</strong>) a 20.000.</p>
+<h2 id="Use-SearchIterator" class="common-anchor-header">Utilizzo di SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,9 +217,15 @@ iterator = collection.search_iterator(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta che il SearchIterator è pronto, si può chiamare il suo metodo next() per ottenere i risultati della ricerca in modo impaginato.</p>
+    </button></h2><p>Una volta che SearchIterator è pronto, è possibile chiamare il suo metodo next() per ottenere i risultati della ricerca in modo impaginato.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -188,6 +257,67 @@ iterator = collection.search_iterator(
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+batch_size=50
+<span class="hljs-built_in">limit</span>=20000
+offset=0
+
+<span class="hljs-comment"># Paginate with offset until an empty page is returned. Note that the sum of</span>
+<span class="hljs-comment"># offset and limit in each request must not exceed the server-side result</span>
+<span class="hljs-comment"># window (16,384 by default); SDK search iterators do not have this limit.</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$offset</span>&quot;</span> -lt <span class="hljs-string">&quot;<span class="hljs-variable">$limit</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+<span class="highlighted-wrapper-line">    response=$(curl --silent --request POST \</span>
+        --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+        --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+        --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+        --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+        -d <span class="hljs-string">&#x27;{
+            &quot;collectionName&quot;: &quot;iterator_collection&quot;,
+            &quot;annsField&quot;: &quot;vector&quot;,
+            &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+            &quot;searchParams&quot;: {
+                &quot;metricType&quot;: &quot;L2&quot;,
+                &quot;params&quot;: {
+                    &quot;nprobe&quot;: 16
+                }
+            },
+            &quot;limit&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$batch_size</span>&quot;</span><span class="hljs-string">&#x27;,
+            &quot;offset&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$offset</span>&quot;</span><span class="hljs-string">&#x27;,
+            &quot;outputFields&quot;: [&quot;color&quot;]
+        }&#x27;</span>)
+
+    count=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$response</span>&quot;</span> | jq -r <span class="hljs-string">&#x27;.data | length&#x27;</span>)
+    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$count</span>&quot;</span> -eq 0 ]; <span class="hljs-keyword">then</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-built_in">break</span></span>
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$response</span>&quot;</span> | jq -r <span class="hljs-string">&#x27;.data[]&#x27;</span>
+    offset=$((offset + batch_size))
+<span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Negli esempi di codice precedenti, si è creato un ciclo infinito e si è chiamato il metodo <strong>next()</strong> nel ciclo per memorizzare i risultati della ricerca in una variabile e chiudere l'iteratore quando <strong>next()</strong> non restituisce nulla.</p>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    milvus::SingleResult result;
+<span class="highlighted-wrapper-line">    status = iterator-&gt;<span class="hljs-built_in">Next</span>(result);</span>
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Iterator next failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+        <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">if</span> (result.<span class="hljs-built_in">GetRowCount</span>() == <span class="hljs-number">0</span>) {
+<span class="highlighted-wrapper-line">        <span class="hljs-keyword">break</span>;</span>
+    }
+
+    milvus::EntityRows rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to get output rows: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+        <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : rows) {
+        std::cout &lt;&lt; row.<span class="hljs-built_in">dump</span>() &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<p>Negli esempi di codice sopra riportati, è stato creato un ciclo infinito e il metodo <strong>next()</strong> è stato chiamato all’interno del ciclo per memorizzare i risultati della ricerca in una variabile; l’iteratore è stato chiuso quando <strong>next()</strong> non ha restituito alcun risultato.</p>

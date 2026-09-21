@@ -55,7 +55,7 @@ title: 在 Docker 中執行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一個安裝腳本，可將其安裝為 Docker 容器。該腳本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 儲存庫中</a>取得。若要在 Docker 中安裝 Milvus，只需執行</p>
+    </button></h2><p>Milvus 提供了一個安裝腳本，可用於將其安裝為 Docker 容器。該腳本可於<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 儲存庫中</a>取得。若要在 Docker 中安裝 Milvus，只需執行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -63,10 +63,10 @@ title: 在 Docker 中執行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.23 的新功能：</strong></p>
+<p><strong>v2.6.24 的新功能：</strong></p>
 <ul>
 <li><strong>串流節點</strong>：增強資料處理能力</li>
-<li><strong>Woodpecker MQ</strong>：改進訊息佇列並降低維護負擔，詳情請參閱「<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>」</li>
+<li><strong>Woodpecker MQ</strong>：改進訊息佇列並降低維護負擔，詳情請參閱《<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
 <li><strong>架構優化</strong>：整合組件以提升效能</li>
 </ul>
 <p>請務必下載最新版本的腳本，以確保您能獲得最新的配置與架構改進。</p>
@@ -76,9 +76,9 @@ title: 在 Docker 中執行 Milvus（Linux）
 <p>執行安裝腳本後：</p>
 <ul>
 <li>一個名為 milvus 的 Docker 容器已於<strong>19530</strong> 埠啟動。</li>
-<li>嵌入式 etcd 已與 Milvus 一同安裝在同一個容器中，並於<strong>2379</strong> 埠提供服務。其設定檔對應至當前資料夾中的<strong>embedEtcd.yaml</strong>檔案。</li>
+<li>嵌入式 etcd 已與 Milvus 一同安裝在同一容器中，並在<strong>2379</strong> 埠提供服務。其設定檔對應至當前資料夾中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要變更預設的 Milvus 設定，請將您的設定新增至當前資料夾中的<strong>user.yaml</strong>檔案，然後重新啟動服務。</li>
-<li>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。</li>
+<li>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul>
 <p>您可以透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 執行個體。詳細資訊請參閱<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可選）更新 Milvus 設定<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -96,7 +96,7 @@ title: 在 Docker 中執行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可修改當前資料夾中<strong>user.yaml</strong>檔案內的 Milvus 設定。例如，若要將<code translate="no">proxy.healthCheckTimeout</code> 變更為<code translate="no">1000</code> ms，可依下列方式修改該檔案：</p>
+    </button></h2><p>您可修改當前資料夾中的<strong>user.yaml</strong>檔案來調整 Milvus 設定。例如，若要將<code translate="no">proxy.healthCheckTimeout</code> 變更為<code translate="no">1000</code> ms，請依下列方式修改該檔案：</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -106,7 +106,7 @@ EOF
 <p>接著請依照以下步驟重新啟動服務：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關適用的設定項目，請參閱「<a href="/docs/zh-hant/v2.6.x/system_configuration.md">系統設定</a>」。</p>
+<p>有關適用的配置項目，請參閱《<a href="/docs/zh-hant/v2.6.x/system_configuration.md">系統配置》</a>。</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">升級 Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,19 +122,19 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用內建的升級指令將 Milvus 升級至最新版本。此操作會自動下載最新的配置檔和 Milvus 映像檔：</p>
+    </button></h2><p>您可以使用內建的升級指令將 Milvus 升級至最新版本。此操作會自動下載最新的配置檔與 Milvus 映像檔：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>此升級命令會自動：</p>
+<p>此升級指令會自動：</p>
 <ul>
 <li>下載包含更新設定的最新安裝腳本</li>
 <li>拉取最新的 Milvus Docker 映像檔</li>
 <li>使用新版本重新啟動容器</li>
 <li>保留您現有的資料與設定</li>
 </ul>
-<p>這是升級您的 Milvus 獨立部署環境的建議方式。</p>
+<p>這是升級您的 Milvus 獨立部署環境的建議方法。</p>
 </div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止並刪除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +181,7 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/manage-collections.md">管理集合</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/manage-partitions.md">管理分區</a></li>
-<li><a href="/docs/zh-hant/v2.6.x/insert-update-delete.md">插入、Upsert 與刪除</a></li>
+<li><a href="/docs/zh-hant/v2.6.x/insert-update-delete.md">插入、更新或插入（Upsert）及刪除</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
@@ -193,9 +193,9 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化使用者介面 (GUI) 工具。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

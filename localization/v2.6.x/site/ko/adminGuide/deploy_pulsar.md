@@ -1,10 +1,10 @@
 ---
 id: deploy_pulsar.md
-title: Docker Compose 또는 Helm을 사용하여 메시지 저장소 구성
+title: Docker Compose 또는 Helm을 사용하여 메시지 스토리지 구성
 related_key: 'Pulsar, storage'
 summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구성하는 방법을 알아보세요.
 ---
-<h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Docker Compose 또는 Helm을 사용하여 메시지 저장소 구성<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
+<h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Docker Compose 또는 Helm을 사용하여 메시지 스토리지 구성<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
     </button></h1><p>Milvus는 최근 변경 내역의 로그 관리, 스트림 로그 출력 및 로그 구독 제공을 위해 Pulsar 또는 Kafka를 사용합니다. Pulsar는 기본 메시지 저장소 시스템입니다. 이 항목에서는 Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구성하는 방법을 소개합니다.</p>
 <p>Pulsar는 <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> 또는 K8s에서 구성할 수 있으며, Kafka는 K8s에서 구성할 수 있습니다.</p>
 <div class="alert note">
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.23으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 그대로 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v2.6.24로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Pulsar 구성<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>앞서 설명한 섹션을 구성하고 ` <code translate="no">values.yaml</code> ` 파일을 저장한 후, 다음 명령어를 실행하여 Woodpecker 구성을 사용하는 Milvus를 설치하십시오.</li>
+<li>앞서 설명한 섹션을 구성하고 <code translate="no">values.yaml</code> 파일을 저장한 후, 다음 명령어를 실행하여 Woodpecker 구성을 사용하는 Milvus를 설치하십시오.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -277,7 +277,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
     </button></h2><p>Milvus 스탠드얼론은 기본적으로 RocksMQ를 메시지 저장소로 사용합니다. Helm을 사용하여 Milvus를 구성하는 자세한 단계는 <a href="/docs/ko/v2.6.x/configure-helm.md">‘Helm 차트를 사용하여 Milvus 구성’을</a> 참조하십시오. RocksMQ 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/configure_rocksmq.md">‘RocksMQ 관련 구성’을</a> 참조하십시오.</p>
 <ul>
 <li><p>RocksMQ와 함께 Milvus를 시작했고 설정을 변경하려는 경우, 다음 YAML 파일에 변경된 설정을 포함하여 ` <code translate="no">helm upgrade -f</code> `를 실행할 수 있습니다.</p></li>
-<li><p>Helm을 사용하여 RocksMQ 이외의 메시지 저장소를 사용하여 Milvus를 독립형으로 설치한 경우, 이를 다시 RocksMQ로 변경하려면 모든 컬렉션을 플러시하고 Milvus를 중지한 후 다음 YAML 파일을 사용하여 ` <code translate="no">helm upgrade -f</code> `을 실행하십시오.</p></li>
+<li><p>Helm을 사용하여 RocksMQ 이외의 메시지 저장소를 지정해 Milvus를 독립형으로 설치한 경우, 이를 다시 RocksMQ로 변경하려면 모든 컬렉션을 플러시하고 Milvus를 중지한 후 다음 YAML 파일을 사용하여 ` <code translate="no">helm upgrade -f</code> `를 실행하십시오.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -296,7 +296,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>메시지 저장소를 변경하는 것은 권장되지 않습니다. 그래도 변경을 원하신다면, 모든 DDL 작업을 중지한 후 FlushAll API를 호출하여 모든 컬렉션을 플러시하고, 마지막으로 Milvus를 중지한 다음 메시지 저장소를 변경하십시오.</p>
+<p>메시지 저장소를 변경하는 것은 권장되지 않습니다. 그래도 변경을 원하신다면, 모든 DDL 작업을 중지한 후 FlushAll API를 호출하여 모든 컬렉션을 플러시하고, 마지막으로 Milvus를 중지한 다음 메시지 저장소를 실제로 변경하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -315,6 +315,6 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
       </svg>
     </button></h2><p>Docker Compose 또는 Helm을 사용하여 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 객체 스토리지 구성</a></li>
-<li><a href="/docs/ko/v2.6.x/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토어 구성</a></li>
+<li><a href="/docs/ko/v2.6.x/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 오브젝트 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.6.x/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성하기</a></li>
 </ul>

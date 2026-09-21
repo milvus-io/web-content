@@ -40,7 +40,7 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
       </svg>
     </button></h2><ul>
 <li>È necessario aver già installato libstdc++ 8.5.0 o una versione successiva.</li>
-<li><a href="/docs/it/v2.6.x/prerequisite-docker.md">Verificare i requisiti hardware e software</a> prima dell'installazione.</li>
+<li><a href="/docs/it/v2.6.x/prerequisite-docker.md">Verificare i requisiti hardware e software</a> prima dell’installazione.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Scaricare il pacchetto RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,13 +57,13 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all'architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.23">pagina delle versioni di Milvus</a>.</p>
+    </button></h2><p>È possibile scaricare il pacchetto RPM/DEB in base all'architettura del proprio sistema dalla <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.24">pagina delle versioni di Milvus</a>.</p>
 <ul>
-<li>Per x86_64/amd64, scaricare il pacchetto <strong>milvus_2.6.23-1_amd64.deb</strong> o <strong>milvus_2.6.23-1_amd64.rpm</strong>.</li>
-<li>Per ARM64, scaricare il pacchetto <strong>milvus_2.6.23-1_arm64.deb</strong> o <strong>milvus_2.6.23-1_arm64.rpm</strong>.</li>
+<li>Per x86_64/amd64, scaricare il pacchetto <strong>milvus_2.6.24-1_amd64.deb</strong> o <strong>milvus_2.6.24-1_amd64.rpm</strong>.</li>
+<li>Per ARM64, scaricare il pacchetto <strong>milvus_2.6.24-1_arm64.deb</strong> o <strong>milvus_2.6.24-1_arm64.rpm</strong>.</li>
 </ul>
 <p>Il comando seguente presuppone che si intenda eseguire Milvus Standalone su una macchina x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.23/milvus_2.6.23-1_amd64.rpm -O milvus_2.6.23-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.24/milvus_2.6.24-1_amd64.rpm -O milvus_2.6.24-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installazione del pacchetto RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,12 +81,12 @@ title: Installazione di Milvus in modalità standalone con pacchetto RPM/DEB
         ></path>
       </svg>
     </button></h2><p>Per installare il pacchetto RPM/DEB, è possibile utilizzare il gestore di pacchetti del proprio sistema.</p>
-<p>Per i sistemi basati su RPM (come CentOS, Fedora e RHEL), utilizzare il comando <code translate="no">yum</code> per installare il pacchetto.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.23-1_amd64.rpm
+<p>Per i sistemi basati su RPM (come CentOS, Fedora e RHEL), utilizzare il comando ` <code translate="no">yum</code> ` per installare il pacchetto.</p>
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.24-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Per i sistemi basati su DEB (come Ubuntu e Debian), utilizzare il comando ` <code translate="no">apt</code> ` per installare il pacchetto.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.23-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.24-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Avvio di Milvus in modalità standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -104,13 +104,13 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta completata l’installazione, Milvus è installato come servizio systemd e può essere avviato utilizzando il seguente comando:</p>
+    </button></h2><p>Una volta completata l’installazione, Milvus è configurato come servizio systemd e può essere avviato utilizzando il seguente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl start milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>È possibile verificare lo stato del servizio Milvus utilizzando il seguente comando:</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Se Milvus è in esecuzione corretta, dovrebbe apparire il seguente output:</p>
+<p>Se Milvus è in esecuzione correttamente, dovrebbe apparire il seguente output:</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>
@@ -119,7 +119,7 @@ dpkg -l | grep milvus
    <span class="hljs-attr">CGroup:</span> <span class="hljs-string">/system.slice/milvus.service</span>
            <span class="hljs-string">└─1044122</span> <span class="hljs-string">/usr/bin/milvus</span> <span class="hljs-string">run</span> <span class="hljs-string">standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>È possibile trovare il binario di Milvus all'indirizzo <code translate="no">/usr/bin/milvus</code>, il file di servizio systemd all'indirizzo <code translate="no">/lib/systemd/system/milvus.service</code> e le dipendenze all'indirizzo <code translate="no">/usr/lib/milvus/</code>.</p>
+<p>È possibile trovare il binario di Milvus all’indirizzo <code translate="no">/usr/bin/milvus</code>, il file di servizio systemd all’indirizzo <code translate="no">/lib/systemd/system/milvus.service</code> e le dipendenze all’indirizzo <code translate="no">/usr/lib/milvus/</code>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare il <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
+    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Ad esempio, per cambiare l’ <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile cercare il parametro target e modificarlo di conseguenza. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/v2.6.x/system_configuration.md">Configurazione di sistema</a>.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Arrestare Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,13 +193,13 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Una volta installato Milvus Standalone, è possibile:</p>
 <ul>
-<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire le funzionalità di Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">la Guida rapida</a> per scoprire cosa può fare Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>
 <li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le raccolte</a></li>
 <li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
+<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserimento, aggiornamento con inserimento (upsert) ed eliminazione</a></li>
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/it/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/it/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per il monitoraggio e la gestione di Milvus.</p></li>
+<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open source per il backup dei dati di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Scopri <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento GUI open source per una gestione intuitiva di Milvus.</p></li>
