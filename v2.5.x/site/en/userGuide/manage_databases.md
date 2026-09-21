@@ -286,8 +286,8 @@ You can alter the properties of an existing database as follows. The following e
 
 ```python
 client.alter_database_properties(
-    db_name: "my_database_1",
-    properties: {
+    db_name="my_database_1",
+    properties={
         "database.max.collections": 10
     }
 )
@@ -345,8 +345,8 @@ You can also reset a database property by dropping it as follows. The following 
 
 ```python
 client.drop_database_properties(
-    db_name: "my_database_1",
-    property_keys: [
+    db_name="my_database_1",
+    property_keys=[
         "database.max.collections"
     ]
 )
