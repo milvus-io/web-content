@@ -12,7 +12,8 @@ Status RenameCollection(const RenameCollectionRequest& request)
 auto request = RenameCollectionRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name1)
-    .WithNewCollectionName(collection_name2);
+    .WithNewCollectionName(collection_name2)
+    .WithTargetDatabaseName(db_name2);
 ```
 
 **REQUEST METHODS:**
@@ -28,6 +29,10 @@ auto request = RenameCollectionRequest()
 - `WithNewCollectionName(const std::string& collection_name)`
 
     Set the new name of the collection.
+
+- `WithTargetDatabaseName(const std::string& db_name)`
+
+    Set the name of the target database. The renamed collection is moved to this database. The default database applies if it is empty.
 
 **RETURNS:**
 

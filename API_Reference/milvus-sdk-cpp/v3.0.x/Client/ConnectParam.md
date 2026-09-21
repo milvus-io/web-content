@@ -51,7 +51,8 @@ ConnectParam param(uri, token)
     .WithKeepaliveWithoutCalls(keepalive_without_calls)
     .WithRpcDeadlineMs(rpc_deadline_ms)
     .WithTls()
-    .WithDbName(db_name);
+    .WithDbName(db_name)
+    .WithTelemetryConfig(telemetry_config);
 ```
 
 **REQUEST METHODS:**
@@ -103,6 +104,10 @@ ConnectParam param(uri, token)
 - `WithDbName(const std::string& db_name)`
 
     Sets the default database to use after connecting. Default: `"default"`.
+
+- `WithTelemetryConfig(const TelemetryConfig& config)`
+
+    Sets the client telemetry configuration. See [TelemetryConfig](TelemetryConfig.md) for the available settings.
 
 ## Example
 

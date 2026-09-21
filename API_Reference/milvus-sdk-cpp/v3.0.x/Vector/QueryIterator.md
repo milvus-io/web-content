@@ -42,7 +42,7 @@ auto request = QueryIteratorRequest()
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Set the partition names. If partition names are empty, will query in the entire collection.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -74,11 +74,11 @@ auto request = QueryIteratorRequest()
 
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
