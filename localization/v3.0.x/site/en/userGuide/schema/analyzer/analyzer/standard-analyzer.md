@@ -3,8 +3,8 @@ id: standard-analyzer.md
 title: Standard Analyzer
 summary: >-
   The standard analyzer is the default analyzer in Milvus, which is
-  automatically applied to text fields if no analyzer is specified. It uses
-  grammar-based tokenization, making it effective for most languages.
+  automatically applied to text fields if no analyzer is specified. It combines
+  the standard tokenizer with the lowercase filter.
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">Standard Analyzer<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">standard</code> analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages.</p>
+    </button></h1><p>The <code translate="no">standard</code> analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It combines the standard tokenizer with the lowercase filter.</p>
 <div class="alert note">
 <p>The <code translate="no">standard</code> analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Arabic, Thai, Japanese, and Korean need language-specific tokenization or normalization. In such cases, use a language-specific analyzer such as <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/arabic-analyzer.md"><code translate="no">arabic</code></a>, or <a href="/docs/thai-analyzer.md"><code translate="no">thai</code></a>, or custom analyzers with specialized tokenizers such as <a href="/docs/lindera-tokenizer.md"><code translate="no">lindera</code></a> and <a href="/docs/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
 </div>
@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>The <code translate="no">standard</code> analyzer consists of:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to split text into discrete word units based on grammar rules. For more information, refer to <a href="/docs/standard-tokenizer.md">Standard Tokenizer</a>.</p></li>
+<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to keep consecutive Unicode letters and numeric characters in tokens and split at other characters. For the exact character rules, refer to <a href="/docs/standard-tokenizer.md#Tokenization-rules">Standard Tokenizer</a>.</p></li>
 <li><p><strong>Filter</strong>: Uses the <code translate="no">lowercase</code> filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to <a href="/docs/lowercase-filter.md">Lowercase</a>.</p></li>
 </ul>
 <p>The functionality of the <code translate="no">standard</code> analyzer is equivalent to the following custom analyzer configuration:</p>

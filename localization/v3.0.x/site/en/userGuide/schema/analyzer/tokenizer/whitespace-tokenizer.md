@@ -2,8 +2,8 @@
 id: whitespace-tokenizer.md
 title: Whitespace
 summary: >-
-  The whitespace tokenizer divides text into terms whenever there is a space
-  between words.
+  The whitespace tokenizer splits text at five ASCII whitespace characters: tab,
+  line feed, form feed, carriage return, and space.
 ---
 <h1 id="Whitespace" class="common-anchor-header">Whitespace<button data-href="#Whitespace" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">whitespace</code> tokenizer divides text into terms whenever there is a space between words.</p>
+    </button></h1><p>The <code translate="no">whitespace</code> tokenizer splits text at five ASCII whitespace characters: tab, line feed, form feed, carriage return, and space.</p>
+<h2 id="Tokenization-rules" class="common-anchor-header">Tokenization rules<button data-href="#Tokenization-rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>The <code translate="no">whitespace</code> tokenizer splits text only at the following five ASCII whitespace characters:</p>
+<table>
+<thead>
+<tr><th>Character</th><th>Name</th><th>Unicode code point</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">\t</code></td><td>Horizontal tab</td><td>U+0009</td></tr>
+<tr><td><code translate="no">\n</code></td><td>Line feed</td><td>U+000A</td></tr>
+<tr><td><code translate="no">\x0C</code> or <code translate="no">\f</code></td><td>Form feed</td><td>U+000C</td></tr>
+<tr><td><code translate="no">\r</code></td><td>Carriage return</td><td>U+000D</td></tr>
+<tr><td><code translate="no">' '</code></td><td>Space</td><td>U+0020</td></tr>
+</tbody>
+</table>
+<p>These separators are discarded, and consecutive separators do not produce empty tokens. Punctuation and other characters remain in the tokens. In particular, vertical tab (<code translate="no">\x0B</code>, U+000B), no-break space (<code translate="no">\u00A0</code>), and ideographic space (<code translate="no">\u3000</code>) do not trigger splitting.</p>
+<p>This set follows Rust’s <a href="https://doc.rust-lang.org/std/primitive.char.html#method.is_ascii_whitespace"><code translate="no">char::is_ascii_whitespace()</code></a>, which excludes other Unicode whitespace characters.</p>
+<p>The following examples use <code translate="no">{&quot;tokenizer&quot;: &quot;whitespace&quot;}</code> with no filters. Inputs and outputs use Python string notation: escape sequences such as <code translate="no">\t</code> and <code translate="no">\u00A0</code> represent the actual characters.</p>
+<table>
+<thead>
+<tr><th>Input</th><th>Output tokens</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">&quot;a\tb\nc\x0Cd\re f&quot;</code></td><td><code translate="no">[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;Hello,World! foo_bar&quot;</code></td><td><code translate="no">[&quot;Hello,World!&quot;, &quot;foo_bar&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\x0Bb&quot;</code></td><td><code translate="no">[&quot;a\x0Bb&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\u00A0b&quot;</code></td><td><code translate="no">[&quot;a\u00A0b&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\u3000b&quot;</code></td><td><code translate="no">[&quot;a\u3000b&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot; a b &quot;</code></td><td><code translate="no">[&quot;a&quot;, &quot;b&quot;]</code></td></tr>
+</tbody>
+</table>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,9 +223,9 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>
 
-<span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
+<span class="hljs-comment"># Run the whitespace analyzer with the defined configuration</span>
 result = client.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Whitespace analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -206,12 +250,12 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
 
+ctx := context.Background()
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
     APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
@@ -221,10 +265,9 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     <span class="hljs-comment">// handle error</span>
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {

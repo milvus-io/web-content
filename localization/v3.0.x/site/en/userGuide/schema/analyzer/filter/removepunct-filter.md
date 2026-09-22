@@ -2,10 +2,9 @@
 id: removepunct-filter.md
 title: Remove Punct
 summary: >-
-  The removepunct filter strips away punctuation marks, spaces, and line breaks
-  that some tokenizers—such as jieba, lindera, and icu—normally keep. Use it
-  when you want a cleaner token stream that contains only meaningful text
-  tokens, free of commas, periods, and other punctuation.
+  The removepunct filter removes tokens that contain punctuation or whitespace.
+  With tokenizers that retain punctuation inside words, it removes the entire
+  affected token.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">Remove Punct<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -23,9 +22,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">removepunct</code> filter removes standalone punctuation tokens from the token stream. Use it when you want cleaner text processing that focuses on meaningful content words rather than punctuation marks.</p>
+    </button></h1><p>The <code translate="no">removepunct</code> filter removes tokens that contain punctuation or whitespace from the token stream. Use it when you want cleaner text processing that focuses on meaningful content words rather than punctuation marks.</p>
 <div class="alert note">
-<p>This filter is most effective with <code translate="no">jieba</code>, <code translate="no">lindera</code>, and <code translate="no">icu</code> tokenizers, which preserve punctuation as separate tokens (e.g., <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Other tokenizers like <code translate="no">standard</code> and <code translate="no">whitespace</code> discard punctuation during tokenization, so <code translate="no">removepunct</code> has no effect on them.</p>
+<p>This filter is most effective with <code translate="no">jieba</code>, <code translate="no">lindera</code>, and <code translate="no">icu</code> tokenizers, which preserve punctuation as separate tokens (e.g., <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). The <code translate="no">standard</code> tokenizer discards punctuation during tokenization. The <code translate="no">whitespace</code> tokenizer preserves punctuation, including punctuation within a token. When combined with <code translate="no">whitespace</code>, <code translate="no">removepunct</code> removes the entire token if it contains punctuation or whitespace; it does not strip individual characters from the token.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
