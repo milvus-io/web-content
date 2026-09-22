@@ -1,12 +1,39 @@
 ---
 id: standard-tokenizer.md
 title: "Standard Tokenizer"
-summary: "The standard tokenizer in Milvus splits text based on spaces and punctuation marks, making it suitable for most languages."
+summary: "The standard tokenizer in Milvus groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters."
 ---
 
 # Standard Tokenizer
 
-The `standard` tokenizer in Milvus splits text based on spaces and punctuation marks, making it suitable for most languages.
+The `standard` tokenizer in Milvus groups consecutive Unicode letters and numeric characters into tokens, splitting at other characters.
+
+## Tokenization rules
+
+The `standard` tokenizer keeps consecutive characters that belong to the following sets in the same token:
+
+- **ASCII characters:** letters `A-Z` and `a-z`, and digits `0-9`.
+- **Non-ASCII characters:** characters with the Unicode `Alphabetic` property or one of the numeric general categories `Nd`, `Nl`, or `No`.
+
+| Unicode property or category | Meaning | Examples of characters retained in tokens |
+| --- | --- | --- |
+| `Alphabetic` | Letters across writing systems, including Chinese characters and Japanese kana, and some combining marks | `中文测试`, `カタカナ` |
+| `Nd` (`Decimal_Number`) | Decimal digits | `٣` |
+| `Nl` (`Letter_Number`) | Letter-like numeric characters | `Ⅷ` |
+| `No` (`Other_Number`) | Other numeric characters, such as circled numbers, superscripts, and fractions | `①²¾` |
+
+Characters outside these sets separate tokens and are discarded. These include whitespace, punctuation, underscores (`_`), hyphens (`-`), apostrophes (`'`), and symbols such as `+`, `$`, and `😀`. Consecutive separators do not produce empty tokens.
+
+Character classification follows Rust's [`char::is_alphanumeric()`](https://doc.rust-lang.org/std/primitive.char.html#method.is_alphanumeric). For property definitions, see [Unicode Standard Annex #44](https://www.unicode.org/reports/tr44/). The complete Unicode 17.0 character lists are available in [`DerivedCoreProperties.txt`](https://www.unicode.org/Public/17.0.0/ucd/DerivedCoreProperties.txt) for `Alphabetic` and [`DerivedGeneralCategory.txt`](https://www.unicode.org/Public/17.0.0/ucd/extracted/DerivedGeneralCategory.txt) for `Nd`, `Nl`, and `No`. Character membership depends on the Unicode data used by the deployed version.
+
+The following examples use `{"tokenizer": "standard"}` with no filters. The tokenizer preserves letter case and does not segment continuous Chinese text into individual words.
+
+| Input | Output tokens |
+| --- | --- |
+| `foo_bar-can't😀123` | `["foo", "bar", "can", "t", "123"]` |
+| `中文测试` | `["中文测试"]` |
+| `version①.¾` | `["version①", "¾"]` |
+| `Hello,World!` | `["Hello", "World"]` |
 
 ## Configuration
 
@@ -164,7 +191,7 @@ sample_text = "The Milvus vector database is built for scale!"
 
 # Run the standard analyzer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
-print("English analyzer output:", result)
+print("Standard analyzer output:", result)
 ```
 
 ```java
@@ -196,12 +223,12 @@ List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```go
 import (
     "context"
-    "encoding/json"
     "fmt"
 
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
+ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
     APIKey:  "root:Milvus",
@@ -211,10 +238,9 @@ if err != nil {
     // handle error
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []string{"The Milvus vector database is built for scale!"}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
