@@ -1,12 +1,39 @@
 ---
 id: whitespace-tokenizer.md
 title: "Whitespace"
-summary: "The whitespace tokenizer divides text into terms whenever there is a space between words."
+summary: "The whitespace tokenizer splits text at five ASCII whitespace characters: tab, line feed, form feed, carriage return, and space."
 ---
 
 # Whitespace
 
-The `whitespace` tokenizer divides text into terms whenever there is a space between words.
+The `whitespace` tokenizer splits text at five ASCII whitespace characters: tab, line feed, form feed, carriage return, and space.
+
+## Tokenization rules
+
+The `whitespace` tokenizer splits text only at the following five ASCII whitespace characters:
+
+| Character | Name | Unicode code point |
+| --- | --- | --- |
+| `\t` | Horizontal tab | U+0009 |
+| `\n` | Line feed | U+000A |
+| `\x0C` or `\f` | Form feed | U+000C |
+| `\r` | Carriage return | U+000D |
+| `' '` | Space | U+0020 |
+
+These separators are discarded, and consecutive separators do not produce empty tokens. Punctuation and other characters remain in the tokens. In particular, vertical tab (`\x0B`, U+000B), no-break space (`\u00A0`), and ideographic space (`\u3000`) do not trigger splitting.
+
+This set follows Rust's [`char::is_ascii_whitespace()`](https://doc.rust-lang.org/std/primitive.char.html#method.is_ascii_whitespace), which excludes other Unicode whitespace characters.
+
+The following examples use `{"tokenizer": "whitespace"}` with no filters. Inputs and outputs use Python string notation: escape sequences such as `\t` and `\u00A0` represent the actual characters.
+
+| Input | Output tokens |
+| --- | --- |
+| `"a\tb\nc\x0Cd\re f"` | `["a", "b", "c", "d", "e", "f"]` |
+| `"Hello,World! foo_bar"` | `["Hello,World!", "foo_bar"]` |
+| `"a\x0Bb"` | `["a\x0Bb"]` |
+| `"a\u00A0b"` | `["a\u00A0b"]` |
+| `"a\u3000b"` | `["a\u3000b"]` |
+| `" a  b "` | `["a", "b"]` |
 
 ## Configuration
 
@@ -153,9 +180,9 @@ client = MilvusClient(uri="http://localhost:19530")
 # Sample text to analyze
 sample_text = "The Milvus vector database is built for scale!"
 
-# Run the standard analyzer with the defined configuration
+# Run the whitespace analyzer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
-print("Standard analyzer output:", result)
+print("Whitespace analyzer output:", result)
 ```
 
 ```java
@@ -186,12 +213,12 @@ List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```go
 import (
     "context"
-    "encoding/json"
     "fmt"
 
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
+ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
     APIKey:  "root:Milvus",
@@ -201,10 +228,9 @@ if err != nil {
     // handle error
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []string{"The Milvus vector database is built for scale!"}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 if err != nil {

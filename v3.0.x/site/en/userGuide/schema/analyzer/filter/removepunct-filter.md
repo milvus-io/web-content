@@ -1,17 +1,17 @@
 ---
 id: removepunct-filter.md
 title: "Remove Punct"
-summary: "The removepunct filter strips away punctuation marks, spaces, and line breaks that some tokenizers—such as jieba, lindera, and icu—normally keep. Use it when you want a cleaner token stream that contains only meaningful text tokens, free of commas, periods, and other punctuation."
+summary: "The removepunct filter removes tokens that contain punctuation or whitespace. With tokenizers that retain punctuation inside words, it removes the entire affected token."
 beta: Milvus 2.5.11+
 ---
 
 # Remove Punct
 
-The `removepunct` filter removes standalone punctuation tokens from the token stream. Use it when you want cleaner text processing that focuses on meaningful content words rather than punctuation marks.
+The `removepunct` filter removes tokens that contain punctuation or whitespace from the token stream. Use it when you want cleaner text processing that focuses on meaningful content words rather than punctuation marks.
 
 <div class="alert note">
 
-This filter is most effective with `jieba`, `lindera`, and `icu` tokenizers, which preserve punctuation as separate tokens (e.g., `"Hello!"` → `["Hello", "!"]`). Other tokenizers like `standard` and `whitespace` discard punctuation during tokenization, so `removepunct` has no effect on them.
+This filter is most effective with `jieba`, `lindera`, and `icu` tokenizers, which preserve punctuation as separate tokens (e.g., `"Hello!"` → `["Hello", "!"]`). The `standard` tokenizer discards punctuation during tokenization. The `whitespace` tokenizer preserves punctuation, including punctuation within a token. When combined with `whitespace`, `removepunct` removes the entire token if it contains punctuation or whitespace; it does not strip individual characters from the token.
 
 </div>
 

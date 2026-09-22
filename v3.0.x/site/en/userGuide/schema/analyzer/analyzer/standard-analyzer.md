@@ -1,12 +1,12 @@
 ---
 id: standard-analyzer.md
 title: "Standard Analyzer"
-summary: "The standard analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages."
+summary: "The standard analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It combines the standard tokenizer with the lowercase filter."
 ---
 
 # Standard Analyzer
 
-The `standard` analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages.
+The `standard` analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It combines the standard tokenizer with the lowercase filter.
 
 <div class="alert note">
 
@@ -18,7 +18,7 @@ The `standard` analyzer is suitable for languages that rely on separators (such 
 
 The `standard` analyzer consists of:
 
-- **Tokenizer**: Uses the `standard` tokenizer to split text into discrete word units based on grammar rules. For more information, refer to [Standard Tokenizer](standard-tokenizer.md).
+- **Tokenizer**: Uses the `standard` tokenizer to keep consecutive Unicode letters and numeric characters in tokens and split at other characters. For the exact character rules, refer to [Standard Tokenizer](standard-tokenizer.md#Tokenization-rules).
 
 - **Filter**: Uses the `lowercase` filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to [Lowercase](lowercase-filter.md).
 
