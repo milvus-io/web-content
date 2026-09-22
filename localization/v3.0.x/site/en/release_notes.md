@@ -19,6 +19,108 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v302" class="common-anchor-header">v3.0.2<button data-href="#v302" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: September 20, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>3.0.2</td><td>3.0.2</td><td>3.0.6</td><td>3.0.10</td><td>3.0.2</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v3.0.2! This release focuses on search and query performance — removing hot-path contention in filtered search, group-by, and index building — along with stronger external collection and Storage V2 support, and a broad set of stability fixes across streaming, compaction, and index management.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Optimized ARRAY filtering by merging chained contains predicates into a single <code translate="no">ContainsAny</code>/<code translate="no">ContainsAll</code> expression in the query planner (<a href="https://github.com/milvus-io/milvus/pull/52365">#52365</a>)</li>
+<li>Added support for custom S3-compatible endpoints in external collections via the <code translate="no">extfs.endpoint_url</code> option, with validation of unsafe or conflicting endpoint settings (<a href="https://github.com/milvus-io/milvus/pull/52814">#52814</a>)</li>
+<li>Unified Bloom and Roaring membership filters behind a single <code translate="no">membership_match</code> expression, with matching Go client support for building and querying both filter types (<a href="https://github.com/milvus-io/milvus/pull/53019">#53019</a>)</li>
+<li>Reduced write amplification during Tantivy-based index building, lowering disk I/O for text match, NGRAM, and JSON key stats indexes (<a href="https://github.com/milvus-io/milvus/pull/53057">#53057</a>)</li>
+<li>Added admission control on RESTful v2 DQL endpoints that returns HTTP 429 with <code translate="no">Retry-After</code> before request decoding when the proxy query queue is full (<a href="https://github.com/milvus-io/milvus/pull/53111">#53111</a>)</li>
+<li>Reduced an atomic refcount hotspot in the scalar filter evaluation path that accounted for ~48% of leaf CPU time in search, improving filtered search throughput (<a href="https://github.com/milvus-io/milvus/pull/53167">#53167</a>)</li>
+<li>Improved storage thread pool scalability by replacing the hand-rolled implementation with <code translate="no">folly::CPUThreadPoolExecutor</code> and restoring elastic worker scaling (<a href="https://github.com/milvus-io/milvus/pull/53184">#53184</a>)</li>
+<li>Improved REST access log matching so formatters are matched against the parsed URL path, and configured methods now apply to requests carrying query parameters (<a href="https://github.com/milvus-io/milvus/pull/53147">#53147</a>)</li>
+<li>Added idempotent broadcast support so retried requests no longer create duplicate tasks, with <code translate="no">BulkImport</code> as the first adopter (<a href="https://github.com/milvus-io/milvus/pull/53228">#53228</a>)</li>
+<li>Added configurable sentence split characters for the Lindera tokenizer, allowing user dictionary entries containing punctuation to match as a single token (<a href="https://github.com/milvus-io/milvus/pull/53287">#53287</a>)</li>
+<li>Added a cluster-version gate that automatically enables write-before function materialization only after all nodes finish upgrading, avoiding mixed-version inconsistency during rolling upgrades (<a href="https://github.com/milvus-io/milvus/pull/53261">#53261</a>)</li>
+<li>Upgraded Woodpecker to v0.1.42, fixing WAL recovery failures on finalized empty segments and improving append-path stability and metrics (<a href="https://github.com/milvus-io/milvus/pull/53295">#53295</a>)</li>
+<li>Reduced per-chunk atomic and reference-count overhead in the search and query hot path by pinning a sealed segment snapshot once per request (<a href="https://github.com/milvus-io/milvus/pull/53301">#53301</a>)</li>
+<li>Improved partial update latency by replacing TimeTick waits with snapshot-based optimistic locking, and refined AutoID handling so existing primary keys are preserved and returned IDs keep the input order (<a href="https://github.com/milvus-io/milvus/pull/53337">#53337</a>)</li>
+<li>Reduced redundant row-view construction when grouping search results by VARCHAR or JSON fields on sealed segments, lowering group-by search overhead (<a href="https://github.com/milvus-io/milvus/pull/53500">#53500</a>)</li>
+<li>Added a compliance API that reports load configuration convergence globally and per resource group, covering replica serviceability, query visibility, residual resources and WAL placement (<a href="https://github.com/milvus-io/milvus/pull/53517">#53517</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where queries could return incorrect results after a struct array field was dropped and re-added (<a href="https://github.com/milvus-io/milvus/pull/52921">#52921</a>)</li>
+<li>Fixed SASL/SCRAM-SHA-256 authentication failures when connecting to Apache Kafka 4.x brokers by upgrading librdkafka to 2.6.1 (<a href="https://github.com/milvus-io/milvus/pull/53086">#53086</a>)</li>
+<li>Fixed an issue where all channels of a replica were assigned to a single query node, causing repeated out-of-memory kills and leaving the replica unserviceable (<a href="https://github.com/milvus-io/milvus/pull/53094">#53094</a>)</li>
+<li>Fixed repeated WAL fencing that stalled writes on a PChannel for 45-60 seconds every few minutes under sustained ingest (<a href="https://github.com/milvus-io/milvus/pull/53118">#53118</a>)</li>
+<li>Fixed Storage V2 compaction dropping valid physical group paths, which could misalign packed column indexes in compacted segments (<a href="https://github.com/milvus-io/milvus/pull/53202">#53202</a>)</li>
+<li>Fixed compaction logs printing collection encryption keys and object storage credentials (<a href="https://github.com/milvus-io/milvus/pull/53226">#53226</a>)</li>
+<li>Fixed stale struct array offset aliases that could surface incorrect data after a sealed segment was reopened (<a href="https://github.com/milvus-io/milvus/pull/53154">#53154</a>)</li>
+<li>Fixed file resource synchronization running before any resource was added, which could clear node-local files on startup or node registration (<a href="https://github.com/milvus-io/milvus/pull/53170">#53170</a>)</li>
+<li>Fixed an issue where an incomplete binlog chunk could be silently treated as fully read, risking missing data in query and compaction results (<a href="https://github.com/milvus-io/milvus/pull/53263">#53263</a>)</li>
+<li>Fixed an issue where storage of dropped segments was never reclaimed for collections without any active index (<a href="https://github.com/milvus-io/milvus/pull/53252">#53252</a>)</li>
+<li>Fixed inaccurate resource estimation when loading sparse vector indexes, which could lead to incorrect raw-data handling and repeated warnings on QueryNode (<a href="https://github.com/milvus-io/milvus/pull/53249">#53249</a>)</li>
+<li>Fixed an issue where a frozen streaming node outside the primary resource group could be unfrozen unexpectedly during rebalancing (<a href="https://github.com/milvus-io/milvus/pull/53229">#53229</a>)</li>
+<li>Fixed a failure to connect to Google Cloud Storage where GCP credentials (IAM and HMAC) were not registered before the chunk manager pre-check (<a href="https://github.com/milvus-io/milvus/pull/53288">#53288</a>)</li>
+<li>Fixed an issue where C++ logs were unexpectedly written to the <code translate="no">/tmp</code> directory instead of being forwarded to the unified log output (<a href="https://github.com/milvus-io/milvus/pull/53293">#53293</a>)</li>
+<li>Fixed backfill commits failing with an HTTP 500 error when a Spark result spanned multiple partitions (<a href="https://github.com/milvus-io/milvus/pull/53346">#53346</a>)</li>
+<li>Fixed a memory leak in DataNode where a canceled index-build or analyze task never released the native memory of the object it had already built (<a href="https://github.com/milvus-io/milvus/pull/53348">#53348</a>)</li>
+<li>Fixed an issue where binlog import failed when a nullable vector field had no binlog files (<a href="https://github.com/milvus-io/milvus/pull/53363">#53363</a>)</li>
+<li>Fixed incomplete or incorrect output fields when search and query requests read external table data (<a href="https://github.com/milvus-io/milvus/pull/53372">#53372</a>, <a href="https://github.com/milvus-io/milvus/pull/53385">#53385</a>)</li>
+<li>Fixed duplicated sparse-vector rows and partition IDs in REST requests, plus memory ownership and cleanup issues that could cause crashes or leaks when queries exited early (<a href="https://github.com/milvus-io/milvus/pull/53402">#53402</a>)</li>
+<li>Fixed an issue where a compaction reporting completion without a result payload could crash DataCoord or leave the compaction task stuck instead of being cleanly retried (<a href="https://github.com/milvus-io/milvus/pull/53443">#53443</a>)</li>
+<li>Fixed an issue where properties of external data files were dropped when building segment manifests, causing external collections to lose source file metadata (<a href="https://github.com/milvus-io/milvus/pull/53444">#53444</a>)</li>
+<li>Fixed a QueryNode crash that could occur when handling <code translate="no">count(*)</code> requests at debug log level, notably during rolling upgrades (<a href="https://github.com/milvus-io/milvus/pull/53474">#53474</a>)</li>
+<li>Fixed an issue where index and stats build tasks kept consuming worker resources after their segment, index, or collection had been dropped, and improved cleanup of orphaned index files (<a href="https://github.com/milvus-io/milvus/pull/53515">#53515</a>)</li>
+<li>Fixed local storage path handling so that data written by different components always lands where readers and garbage collection expect it, with automatic upgrade for existing local deployments (<a href="https://github.com/milvus-io/milvus/pull/53530">#53530</a>)</li>
+<li>Fixed index build tasks retrying forever when a segment contained malformed JSON documents; such builds now fail fast instead of consuming worker resources indefinitely (<a href="https://github.com/milvus-io/milvus/pull/53531">#53531</a>)</li>
+<li>Fixed concurrent snapshot restores targeting the same collection: restores are now serialized and a restore to an existing target is rejected with a clear “already exists in database” error instead of racing or leaking resources (<a href="https://github.com/milvus-io/milvus/pull/53586">#53586</a>)</li>
+<li>Fixed binary encryption keys being corrupted across storage interfaces and misaligned cursors in projected Storage V2 packed readers by upgrading milvus-storage (<a href="https://github.com/milvus-io/milvus/pull/53569">#53569</a>)</li>
+</ul>
 <h2 id="v301" class="common-anchor-header">v3.0.1<button data-href="#v301" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
