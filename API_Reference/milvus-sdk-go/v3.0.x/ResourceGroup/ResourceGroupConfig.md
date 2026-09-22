@@ -40,8 +40,8 @@ type ResourceGroupConfig struct {
 import (
     "context"
 
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -59,13 +59,14 @@ if err != nil {
 defer cli.Close(ctx)
 
 // Create a resource group with a fixed node allocation
-cfg := &entity.ResourceGroupConfig{
-    Requests: &entity.ResourceGroupLimit{NodeNum: 2},
-    Limits:   &entity.ResourceGroupLimit{NodeNum: 4},
+cfg := entity.ResourceGroupConfig{
+    Requests: entity.ResourceGroupLimit{NodeNum: 2},
+    Limits:   entity.ResourceGroupLimit{NodeNum: 4},
 }
 
 err = cli.CreateResourceGroup(ctx, milvusclient.NewCreateResourceGroupOption("my_rg").
-    WithConfig(cfg))
+    WithNodeRequest(2).
+    WithNodeLimit(4))
 if err != nil {
     // handle error
 }

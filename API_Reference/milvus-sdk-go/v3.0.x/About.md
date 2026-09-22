@@ -1,6 +1,63 @@
 # About Milvus GO SDK
 
-Milvus GO SDK is an open-source project and its source code is hosted on [GitHub](https://github.com/milvus-io/milvus/tree/master/client).
+Milvus GO SDK is the official Go SDK of Milvus. Its source code is open-sourced and hosted on [GitHub](https://github.com/milvus-io/milvus/tree/master/client).
+
+## Installation
+
+Install via `go get`.
+
+```shell
+$ go get -u github.com/milvus-io/milvus/client/v3
+```
+
+<div class="alert note">
+
+To install the Go SDK before v2.5.x, use the following command:
+
+```shell
+$ go get -u github.com/milvus-io/milvus-sdk-go/v2
+```
+
+</div>
+
+## Quick Start
+
+Connect to Milvus and create a collection:
+
+```go
+import (
+	"context"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v3/entity"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+token := "root:Milvus"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+	APIKey:  token,
+})
+if err != nil {
+	log.Fatal("failed to connect to milvus server: ", err.Error())
+}
+
+defer cli.Close(ctx)
+
+schema := entity.NewSchema().
+	WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+	WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("quick_setup", schema))
+if err != nil {
+	log.Fatal("failed to create collection: ", err.Error())
+}
+```
 
 ## Compatibility
 
@@ -17,64 +74,12 @@ Milvus GO SDK is an open-source project and its source code is hosted on [GitHub
 | 2.6.x	| [2.6.2](https://github.com/milvus-io/milvus/tree/client/v2.6.2/client)|
 | 3.0.x	| [3.0.0](https://github.com/milvus-io/milvus/tree/client/v3.0.0/client)|
 
-Note: Milvus and GO SDK are NOT compatible across major versions.
-
-## Installation
-
-Install via `go get`.
-
-```shell
-$ go get -u github.com/milvus-io/milvus/client/v2
-```
-
-<div class="alert note">
-
-To install go sdk before v2.5.x, please use the following command:
-
-```shell
-$ go get -u github.com/milvus-io/milvus-sdk-go/v2
-```
-
-</div>
-
-To include the Go MilvusClient in your application, you can use the following code snippet:
-
-```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
-
- //...other snippet ...
- ctx, cancel := context.WithCancel(context.Background())
- defer cancel()
-
- milvusAddr := "YOUR_MILVUS_ENDPOINT"
-
- cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
- 	Address: milvusAddr,
- })
- if err != nil {
- 	// handle error
- }
-
- // Do your work with milvus client
-```
-
-<div class="alert note">
-
-If you are using versions earlier than v2.5.x, you can use the following code snippet to connect to Milvus:
-
-```go
-import "github.com/milvus-io/milvus-sdk-go/v2/client"
-
-//...other snippet ...
-client, err := client.NewGrpcClient(context.Background(), "address_of_milvus")
-if err != nil {
-    // handle error
-}
-client.HasCollection(context.Background(), "YOUR_COLLECTION_NAME")
-```
-
-</div>
+Note: Milvus and the GO SDK are NOT compatible across major versions.
 
 ## Contributing
 
-We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to Milvus GO SDK are welcome from everyone. Refer to [Contributing Guideline](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus/issues/new/choose) if you need any assistance or want to propose your ideas.
+We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to the Milvus GO SDK are welcome from everyone. Refer to the [Contributing Guideline](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus/issues/new/choose) if you need any assistance or want to propose your ideas.
+
+## License
+
+[Apache License 2.0](LICENSE)

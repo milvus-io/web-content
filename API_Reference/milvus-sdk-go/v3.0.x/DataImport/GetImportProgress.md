@@ -4,7 +4,7 @@ This function retrieves detailed progress for a single bulk import job via the R
 
 <div class="alert note">
 
-`GetImportProgress()` is a package-level function in `github.com/milvus-io/milvus/client/v2/bulkwriter`. It calls the REST `/v2/vectordb/jobs/import/describe` endpoint and works with both Milvus open-source clusters (use `NewGetImportProgressOption`) and Zilliz Cloud (use `NewCloudGetImportProgressOption`).
+`GetImportProgress()` is a package-level function in `github.com/milvus-io/milvus/client/v3/bulkwriter`. It calls the REST `/v2/vectordb/jobs/import/describe` endpoint and works with both Milvus open-source clusters (use `NewGetImportProgressOption`) and Zilliz Cloud (use `NewCloudGetImportProgressOption`).
 
 </div>
 
@@ -52,7 +52,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/milvus-io/milvus/client/v2/bulkwriter"
+	"github.com/milvus-io/milvus/client/v3/bulkwriter"
 )
 
 ctx, cancel := context.WithCancel(context.Background())

@@ -34,8 +34,5 @@ A list of *entity.RefreshExternalCollectionJobInfo* struct, each recording the d
 // List refresh jobs of a specified collection
 option := client.NewListRefreshExternalCollectionJobsOption("test_collection")
 
-// List refresh jobs of all external collections
-option = client.NewListRefreshExternalCollectionJobsOption()
-
 result, err = client.ListRefreshExternalCollectionJobs(option)
 ```

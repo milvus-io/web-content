@@ -4,7 +4,7 @@ This function submits a bulk import job to a Milvus or Zilliz Cloud cluster via 
 
 <div class="alert note">
 
-`BulkImport()` is a package-level function in `github.com/milvus-io/milvus/client/v2/bulkwriter`, not a method on `*milvusclient.Client`. It speaks the REST `/v2/vectordb/jobs/import/create` endpoint directly, so it works with both Milvus open-source clusters (use `NewBulkImportOption`) and Zilliz Cloud (use `NewCloudBulkImportOption`).
+`BulkImport()` is a package-level function in `github.com/milvus-io/milvus/client/v3/bulkwriter`, not a method on `*milvusclient.Client`. It speaks the REST `/v2/vectordb/jobs/import/create` endpoint directly, so it works with both Milvus open-source clusters (use `NewBulkImportOption`) and Zilliz Cloud (use `NewCloudBulkImportOption`).
 
 </div>
 
@@ -52,7 +52,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/milvus-io/milvus/client/v2/bulkwriter"
+	"github.com/milvus-io/milvus/client/v3/bulkwriter"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
