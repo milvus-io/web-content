@@ -86,6 +86,7 @@ type DescribeSnapshotResponse struct {
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 

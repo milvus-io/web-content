@@ -49,6 +49,7 @@ Returns nil on success. Returns an error if the snapshot does not exist or the o
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 

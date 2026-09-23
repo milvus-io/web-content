@@ -54,6 +54,7 @@ Returns nil on success. Returns an error if the collection does not exist, the s
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 

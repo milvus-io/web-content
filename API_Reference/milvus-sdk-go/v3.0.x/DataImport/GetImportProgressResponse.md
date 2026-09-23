@@ -5,30 +5,30 @@ This class represents the response returned by the `GetImportProgress()` package
 ```go
 type GetImportProgressResponse struct {
     ResponseBase
-    Data *ImportProgressData \`json:"data"\`
+    Data *ImportProgressData `json:"data"`
 }
 
 type ImportProgressData struct {
-    CollectionName string                  \`json:"collectionName"\`
-    JobID          string                  \`json:"jobId"\`
-    CompleteTime   string                  \`json:"completeTime"\`
-    State          string                  \`json:"state"\`
-    Progress       int64                   \`json:"progress"\`
-    ImportedRows   int64                   \`json:"importedRows"\`
-    TotalRows      int64                   \`json:"totalRows"\`
-    Reason         string                  \`json:"reason"\`
-    FileSize       int64                   \`json:"fileSize"\`
-    Details        []*ImportProgressDetail \`json:"details"\`
+    CollectionName string                  `json:"collectionName"`
+    JobID          string                  `json:"jobId"`
+    CompleteTime   string                  `json:"completeTime"`
+    State          string                  `json:"state"`
+    Progress       int64                   `json:"progress"`
+    ImportedRows   int64                   `json:"importedRows"`
+    TotalRows      int64                   `json:"totalRows"`
+    Reason         string                  `json:"reason"`
+    FileSize       int64                   `json:"fileSize"`
+    Details        []*ImportProgressDetail `json:"details"`
 }
 
 type ImportProgressDetail struct {
-    FileName     string \`json:"fileName"\`
-    FileSize     int64  \`json:"fileSize"\`
-    Progress     int64  \`json:"progress"\`
-    CompleteTime string \`json:"completeTime"\`
-    State        string \`json:"state"\`
-    ImportedRows int64  \`json:"importedRows"\`
-    TotalRows    int64  \`json:"totalRows"\`
+    FileName     string `json:"fileName"`
+    FileSize     int64  `json:"fileSize"`
+    Progress     int64  `json:"progress"`
+    CompleteTime string `json:"completeTime"`
+    State        string `json:"state"`
+    ImportedRows int64  `json:"importedRows"`
+    TotalRows    int64  `json:"totalRows"`
 }
 ```
 

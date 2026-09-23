@@ -45,6 +45,7 @@ A list of snapshot names. Returns an error if the operation fails.
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 

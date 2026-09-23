@@ -96,6 +96,7 @@ type RestoreSnapshotInfo struct {
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 

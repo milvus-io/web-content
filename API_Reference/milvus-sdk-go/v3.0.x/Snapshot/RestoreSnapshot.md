@@ -58,6 +58,7 @@ The restore job ID. Use this ID with `GetRestoreSnapshotState()` to track the re
 
 ```go
 import (
+	"log"
 	"context"
 	"fmt"
 
