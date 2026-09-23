@@ -2,11 +2,9 @@
 id: boolean.md
 title: Filtering Explained
 summary: >-
-  Milvus provides powerful filtering capabilities that enable precise querying
-  of your data. Filter expressions allow you to target specific scalar fields
-  and refine search results with different conditions. This guide explains how
-  to use filter expressions in Milvus, with examples focused on query
-  operations. You can also apply these filters in search and delete requests.
+  Filter expressions select entities using conditions on supported fields. This
+  guide introduces Milvus filter operators and links to their supported types,
+  version requirements, and examples.
 ---
 <h1 id="Filtering-Explained" class="common-anchor-header">Filtering Explained<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides powerful filtering capabilities that enable precise querying of your data. Filter expressions allow you to target specific scalar fields and refine search results with different conditions. This guide explains how to use filter expressions in Milvus, with examples focused on query operations. You can also apply these filters in search and delete requests.</p>
+    </button></h1><p>Filter expressions select entities using conditions on supported fields. This guide introduces filter expressions, with examples focused on query operations. For each operator’s supported types, version requirements, and usage, follow the links below.</p>
 <h2 id="Basic-operators" class="common-anchor-header">Basic operators<button data-href="#Basic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +44,7 @@ summary: >-
 <li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.</p></li>
 <li><p><strong>Bitwise Operators</strong>: In Milvus 3.0.0 and later, <code translate="no">&amp;</code>, <code translate="no">|</code>, and <code translate="no">^</code> filter integer fields that encode multiple flags, such as permissions or status bits. For details, refer to <a href="/docs/basic-operators.md#Bitwise-operators">Basic Operators</a>.</p></li>
 <li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.</p></li>
-<li><p><strong>IS NULL and IS NOT NULL Operators</strong>: The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Basic Operators</a>.</p></li>
+<li><p><strong>IS NULL and IS NOT NULL Operators</strong>: Select entities based on whether a field is NULL or non-NULL. For scalar and vector field support, version requirements, and examples, refer to <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Basic Operators</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Example: Filtering by Color<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
       <svg translate="no"

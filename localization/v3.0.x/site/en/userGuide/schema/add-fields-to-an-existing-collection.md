@@ -239,6 +239,11 @@ client.create_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Existing entities have <code translate="no">NULL</code> for <code translate="no">embedding_v2</code> and are skipped when you search on this field. To make existing entities searchable through <code translate="no">embedding_v2</code>, write non-NULL vector values through upsert or a backfill workflow. New entities can include <code translate="no">embedding_v2</code> during insert.</p>
+<div class="alert note">
+<p>Starting in Milvus 3.0.3, you can use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.</p>
+<p>To find entities whose <code translate="no">embedding</code> field is NULL, use <code translate="no">query()</code> with the filter <code translate="no">embedding IS NULL</code>. This filter is also valid in <code translate="no">search()</code>. However, searching on <code translate="no">embedding</code> with this filter returns no hits: entities without an <code translate="no">embedding</code> value have no vector to compare with the query vector.</p>
+<p>For supported types, syntax, and examples, see <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL and IS NOT NULL operators</a>.</p>
+</div>
 <p><a id="add-vector-fields-generated-by-functions--milvus-30x"></a></p>
 <h3 id="Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">Add a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
       <svg translate="no"

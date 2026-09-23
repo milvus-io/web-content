@@ -69,6 +69,11 @@ summary: >-
 <li><p>Conduct the ANN search within the filtered entities.</p></li>
 <li><p>Returns top-K entities.</p></li>
 </ul>
+<div class="alert note">
+<p>Starting in Milvus 3.0.3, you can use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.</p>
+<p>To find entities whose <code translate="no">embedding</code> field is NULL, use <code translate="no">query()</code> with the filter <code translate="no">embedding IS NULL</code>. This filter is also valid in <code translate="no">search()</code>. However, searching on <code translate="no">embedding</code> with this filter returns no hits: entities without an <code translate="no">embedding</code> value have no vector to compare with the query vector.</p>
+<p>For supported types, syntax, and examples, see <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL and IS NOT NULL operators</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Iterative filtering<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

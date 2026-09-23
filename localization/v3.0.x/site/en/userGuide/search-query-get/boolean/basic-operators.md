@@ -2,11 +2,9 @@
 id: basic-operators.md
 title: Basic Operators
 summary: >-
-  Milvus provides a rich set of basic operators to help you filter and query
-  data efficiently. These operators allow you to refine your search conditions
-  based on scalar fields, numeric calculations, logical conditions, and more.
-  Understanding how to use these operators is crucial for building precise
-  queries and maximizing the efficiency of your searches.
+  Use comparison, range, arithmetic, logical, and NULL operators to filter
+  entities. Starting in Milvus 3.0.3, IS NULL and IS NOT NULL also support
+  ordinary vector fields.
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">Basic Operators<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.</p>
+    </button></h1><p>Milvus provides comparison, range, arithmetic, logical, and NULL operators for filtering entities. Each operator supports specific field types.</p>
 <h2 id="Comparison-operators" class="common-anchor-header">Comparison operators<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -484,15 +482,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data).</p>
-<ul>
-<li><p><code translate="no">IS NULL</code>: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.</p></li>
-</ul>
-<div class="alert note">
-<p>The operators are case-insensitive, so you can use <code translate="no">IS NULL</code> or <code translate="no">is null</code>, and <code translate="no">IS NOT NULL</code> or <code translate="no">is not null</code>.</p>
-</div>
-<h3 id="Regular-scalar-fields-with-null-values" class="common-anchor-header">Regular scalar fields with null values<button data-href="#Regular-scalar-fields-with-null-values" class="anchor-icon" translate="no">
+    </button></h2><p>Use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> to find entities with missing or available field values. For example, you can find products without a category or entities whose embeddings are ready for search. Both operators work on supported scalar and vector fields, with the same meaning:</p>
+<table>
+<thead>
+<tr><th>Operator</th><th>Matches</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">&lt;field&gt; IS NULL</code></td><td>Entities whose specified field has a NULL value</td></tr>
+<tr><td><code translate="no">&lt;field&gt; IS NOT NULL</code></td><td>Entities whose specified field has a non-NULL value</td></tr>
+</tbody>
+</table>
+<p>Supported scalar fields include Boolean, numeric, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, and <code translate="no">ARRAY</code> fields. These operators do not support <a href="/docs/text.md">TEXT fields</a>.</p>
+<p>Starting in Milvus 3.0.3, the operators also support ordinary vector fields: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code>, and <code translate="no">INT8_VECTOR</code>.</p>
+<p>The operators are case-insensitive: <code translate="no">IS NULL</code> and <code translate="no">is null</code> are equivalent, as are <code translate="no">IS NOT NULL</code> and <code translate="no">is not null</code>.</p>
+<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Example: Find entities with missing or available values<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -507,20 +510,49 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.</p>
-<div class="alert note">
-<p>An empty string <code translate="no">&quot;&quot;</code> is not treated as a null value for a <code translate="no">VARCHAR</code> field.</p>
-</div>
-<p>To retrieve entities where the <code translate="no">description</code> field is null:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+    </button></h3><p>Assume a collection named <code translate="no">products</code> is indexed and loaded on Milvus 3.0.3 or later. The collection has an <code translate="no">INT64</code> primary key named <code translate="no">id</code>, a nullable <code translate="no">VARCHAR</code> field named <code translate="no">category</code>, and a nullable, three-dimensional <code translate="no">FLOAT_VECTOR</code> field named <code translate="no">embedding</code>. It already contains the following entities:</p>
+<table>
+<thead>
+<tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">1</code></td><td><code translate="no">&quot;book&quot;</code></td><td><code translate="no">[0.1, 0.2, 0.3]</code></td></tr>
+<tr><td><code translate="no">2</code></td><td>NULL</td><td><code translate="no">[0.4, 0.5, 0.6]</code></td></tr>
+<tr><td><code translate="no">3</code></td><td><code translate="no">&quot;book&quot;</code></td><td>NULL</td></tr>
+</tbody>
+</table>
+<p>Collection creation and data insertion are omitted. For those steps, see <a href="/docs/nullable-and-default.md">Nullable Fields</a>.</p>
+<p>To find entities that still need an embedding, query for <code translate="no">embedding IS NULL</code>. Adjust the connection settings for your server.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+results = client.query(
+    collection_name=<span class="hljs-string">&quot;products&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;embedding IS NULL&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
+    limit=<span class="hljs-number">10</span>,
+)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(entity[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> entity <span class="hljs-keyword">in</span> results))
+<span class="hljs-comment"># Expected: [3]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null and the <code translate="no">price</code> field is higher than 10:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-fields-with-null-values" class="common-anchor-header">JSON fields with null values<button data-href="#JSON-fields-with-null-values" class="anchor-icon" translate="no">
+<p>Replace the <code translate="no">filter</code> in the same query to check either field or combine conditions:</p>
+<table>
+<thead>
+<tr><th>Filter expression</th><th>Matching IDs</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>Find entities without a category</td></tr>
+<tr><td><code translate="no">category IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">3</code></td><td>Find entities with a category</td></tr>
+<tr><td><code translate="no">embedding IS NULL</code></td><td><code translate="no">3</code></td><td>Find entities without an embedding</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Find entities with an embedding</td></tr>
+<tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Find entities with both values</td></tr>
+</tbody>
+</table>
+<p><a id="Regular-scalar-fields-with-null-values"></a>
+<a id="JSON-fields-with-null-values"></a>
+<a id="ARRAY-fields-with-null-values"></a></p>
+<h3 id="How-field-values-are-treated" class="common-anchor-header">How field values are treated<button data-href="#How-field-values-are-treated" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -535,58 +567,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:</p>
-<ul>
-<li><p>The entire JSON object is explicitly set to None (null), for example, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
-<li><p>The JSON field itself is completely missing from the entity.</p></li>
-</ul>
-<div class="alert note">
-<p>If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> is not treated as null, even though the <code translate="no">category</code> key is null.</p>
-</div>
-<p>To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field <code translate="no">metadata</code>:</p>
-<pre><code translate="no" class="language-python">data = [
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
-  },
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
-  },
-  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
-  },
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
-  }
-]
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where metadata is null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is either missing or explicitly set to None:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where metadata is not null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is not null:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-fields-with-null-values" class="common-anchor-header">ARRAY fields with null values<button data-href="#ARRAY-fields-with-null-values" class="anchor-icon" translate="no">
+    </button></h3><p>The operators check the stored field value. For a nullable field without a default value, omitting the field during insertion or explicitly setting it to NULL stores NULL. A configured default value can change what is stored. For details, see <a href="/docs/nullable-and-default.md">Nullable Fields</a> and <a href="/docs/default-values.md">Default Values</a>.</p>
+<table>
+<thead>
+<tr><th>Field type</th><th>NULL behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">VARCHAR</code></td><td>An empty string <code translate="no">&quot;&quot;</code> is a non-NULL value.</td></tr>
+<tr><td><code translate="no">JSON</code></td><td>A NULL value for the entire field matches <code translate="no">IS NULL</code>. A JSON object such as <code translate="no">{&quot;category&quot;: null}</code> is non-NULL, even though a value inside it is NULL.</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>A NULL value for the entire field matches <code translate="no">IS NULL</code>. Individual elements cannot be NULL, and <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> do not support array element access such as <code translate="no">tags[0]</code>. See <a href="/docs/array_data_type.md">Array Field</a>.</td></tr>
+<tr><td>Ordinary vector types</td><td>NULL means the vector value is absent. A vector whose components are zero is not NULL.</td></tr>
+</tbody>
+</table>
+<p>For a supported field defined with <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> matches no entities and <code translate="no">IS NOT NULL</code> matches all visible entities. Other conditions in the filter still apply.</p>
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Use NULL filters in vector search<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -601,55 +595,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:</p>
-<ul>
-<li><p>The entire ARRAY field is explicitly set to None (null), for example, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
-<li><p>The ARRAY field is completely missing from the entity.</p></li>
-</ul>
-<div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
-</div>
-<p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
-<pre><code translate="no" class="language-python">data = [
-  {
-      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
-  },
-  {
-      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
-  },
-  {  <span class="hljs-comment"># The tags field is completely missing</span>
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
-  }
-]
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where tags is null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is either missing or explicitly set to <code translate="no">None</code>:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where tags is not null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is not null:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
+    </button></h3><p>The same operators can be used in search filters, but an entity also needs a vector in the field being searched to participate in similarity search.</p>
+<p>Using the example data above, consider a search with <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
+<table>
+<thead>
+<tr><th>Filter expression</th><th>Entities eligible for similarity search</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>Entity <code translate="no">2</code> has no category, but has an <code translate="no">embedding</code> vector.</td></tr>
+<tr><td><code translate="no">embedding IS NULL</code></td><td>None</td><td>Entity <code translate="no">3</code> matches the filter, but has no <code translate="no">embedding</code> vector to compare with the query vector.</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Both entities have an <code translate="no">embedding</code> vector.</td></tr>
+</tbody>
+</table>
+<p>All three filters are valid. A search on <code translate="no">embedding</code> with <code translate="no">embedding IS NULL</code> returns no hits because no entity can satisfy both requirements. To retrieve the entities with missing embeddings, use <code translate="no">query()</code> as shown above.</p>
+<p>Vector search already skips entities whose searched vector field is NULL, so <code translate="no">embedding IS NOT NULL</code> does not further narrow the candidates for a search on <code translate="no">embedding</code>. Ranking, other filters, and the search limit still determine which candidates are returned.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Tips on using basic operators with JSON and ARRAY fields<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

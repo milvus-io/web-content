@@ -43,7 +43,6 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Vector fields that allow NULL values do not support <code translate="no">IS NULL</code> or <code translate="no">IS NOT NULL</code> filter expressions. You cannot explicitly filter entities based on whether a vector field value is NULL.</p></li>
 <li><p><a href="/docs/array-of-structs.md">Array of Structs</a> fields do not support NULL values. You cannot mark an Array of Structs field or any field nested inside it as nullable.</p></li>
 <li><p>The nullable attribute is defined when a field is created and cannot be modified afterward. You cannot enable or disable nullability for an existing field.</p></li>
 <li><p>Fields marked as nullable cannot be used as partition keys. Partition key fields must always contain valid, non-null values. For more information, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
@@ -670,8 +669,12 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The previous examples focus on vector fields. This section describes how NULL values behave in <strong>scalar filter expressions</strong>.</p>
-<p>Scalar fields can be defined with <code translate="no">nullable=True</code> and follow the same ingestion rules as vector fields. However, <strong>NULL scalar values always evaluate to false in filter expressions</strong>.</p>
+    </button></h2><div class="alert note">
+<p>Starting in Milvus 3.0.3, you can use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.</p>
+<p>To find entities whose <code translate="no">embedding</code> field is NULL, use <code translate="no">query()</code> with the filter <code translate="no">embedding IS NULL</code>. This filter is also valid in <code translate="no">search()</code>. However, searching on <code translate="no">embedding</code> with this filter returns no hits: entities without an <code translate="no">embedding</code> value have no vector to compare with the query vector.</p>
+<p>For supported types, syntax, and examples, see <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL and IS NOT NULL operators</a>.</p>
+</div>
+<p>For scalar fields defined with <code translate="no">nullable=True</code>, comparison conditions such as <code translate="no">age &gt; 18</code> or <code translate="no">status == &quot;active&quot;</code> do not match entities where the compared field is NULL.</p>
 <p>For example, given a nullable scalar field <code translate="no">age</code>, the following filter selects entities whose age is greater than 18:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
