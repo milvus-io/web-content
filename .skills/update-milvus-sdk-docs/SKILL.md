@@ -96,7 +96,7 @@ run with a clarification instead of downgrading.
 
 ```
 API_Reference/<sdk>/<version-line>/
-  About.md                          # intro, compatibility table, install commands, license
+  About.md                          # canonical structure: see "About.md — canonical structure" under Doc style guide
   <Category>/<Operation>.md         # one file per operation, e.g. Vector/Search.md
   <Category>/<Type>.md              # class/struct pages, e.g. Collections/CollectionSchema.md
 ```
@@ -392,10 +392,58 @@ For each affected page:
    "IDs and filter cannot be set at the same time"). After editing, the page
    should read as if the new content had always been there — a reader should not
    notice a density difference.
-6. Add "Since vX.Y.Z or later" notes for newly introduced features (follow the
-   existing convention; skip if the SDK pages don't use such notes).
-7. For a new builder method, also update the `## Request Syntax` chain block to
-   match reality.
+ 6. Add "Since vX.Y.Z or later" notes for newly introduced features (follow the
+    existing convention; skip if the SDK pages don't use such notes).
+ 7. For a new builder method, also update the `## Request Syntax` chain block to
+    match reality.
+
+### Step 4b — Compile-verify the code snippets (mandatory)
+
+After updating pages, run the bundled compile-level verifier so every *complete,
+compilable* code block is actually compiled with the SDK's language toolchain.
+This catches real syntax and API errors that the static pass (Step 5) cannot see
+(e.g. a stray backslash before a Go raw string backtick, a missing comma in a
+Python keyword argument list, a missing `entity` import).
+
+```bash
+python3 .skills/update-milvus-sdk-docs/scripts/verify-snippets.py API_Reference/<sdk>/<version-line>/ [--language <lang>] [--verbose]
+# verify every SDK at once:
+python3 .skills/update-milvus-sdk-docs/scripts/verify-snippets.py --all --verbose
+```
+
+Behavior and conventions:
+
+- **Which blocks are compiled**: only *complete* blocks — ones that carry a full
+  import/setup and a runnable body. Partial fragments (bare method signatures,
+  isolated type definitions, `Request Syntax` option chains, one-liner
+  expressions, indented function-body excerpts) are **skipped**, not failed; they
+  cannot compile standalone and are already covered by the static signature pass.
+  Per-language completeness heuristics live in `verify-snippets.py`
+  (`is_complete_block`); review them if a language's doc style changes.
+- **Focused fragments vs real errors**: a complete block that fails *only*
+  because it references variables the page assumes are defined (`client`,
+  `milvusAddr`, `limit`, `schema`, `jobID`, ...) is treated as a **context-dependent
+  fragment** and skipped — it is not an API error. A failure that names a
+  nonexistent symbol, a type mismatch, or a syntax error is a **real finding** and
+  must be fixed.
+- **Per-language toolchain / dependency resolution**:
+  - `python` → `python3 -m py_compile` (no deps needed).
+  - `go` → builds against a **local** `sdk-tmp/sdks/milvus` checkout extracted at
+    `client/v3.0.0` via `git archive` (with `replace`), using
+    `GOPROXY=https://goproxy.cn,direct` for transitive deps and
+    `GOTOOLCHAIN=go1.25.8`. The setup dir `sdk-tmp/snippet-verify/go/` is reused
+    so subsequent runs are fast.
+  - `node` → `node --check`.
+  - `java` → `javac -proc:none` (SDK jars on classpath if available).
+  - `cpp` → `g++ -fsyntax-only` with the SDK include path
+    (`sdk-tmp/sdks/milvus-sdk-cpp/src/include`).
+  - `rust` → `cargo check`.
+  - `bash` (REST) → `bash -n`.
+- **Exit code** is non-zero when any compilable snippet failed. Report a per-file
+  pass/fail/skip summary and fix every real finding before proceeding.
+- **Prerequisites**: Step 0b (SDK clone in `sdk-tmp/sdks/`) and the language
+  toolchain must be present; if a toolchain is missing, the verifier reports the
+  SDK as skipped rather than failing.
 
 ### Step 5 — Validate (deterministic)
 
@@ -670,6 +718,69 @@ whose API semantics are uncertain from the source alone.
   itself.
 - Keep `About.md` compatibility table and install commands accurate for the new
   version (watch for `v`-prefix vs plain version differences between SDKs).
+
+### About.md — canonical structure
+
+Every SDK's `About.md` (root of `API_Reference/<sdk>/<version-line>/`) follows
+the same canonical structure so the SDK landing pages are consistent across
+languages. This applies both when bumping an existing SDK's version and when
+bootstrap-creating a new SDK's doc tree.
+
+````markdown
+# About <SDK>
+
+One-sentence positioning: "The <lang> SDK of Milvus" + a link to the SDK
+repository on GitHub.
+
+## Installation
+
+The package-manager install command pinned to the documented version, e.g.:
+
+- python: `pip install --upgrade pymilvus==v3.0.1`
+- go: `go get -u github.com/milvus-io/milvus/client/v3`
+- node: `npm install @zilliz/milvus2-sdk-node` (or `yarn add`)
+- rust: `cargo add milvus-sdk-rust@3.0.2`
+- java: Maven/Gradle coordinates with the version literal
+- cpp/csharp: install-from-source / `dotnet add package` with the version
+
+## Quick Start
+
+A MINIMAL runnable example (5-10 lines): connect to Milvus + one small
+operation (e.g. create a collection and insert/search). The goal is a
+copy-paste snippet a reader can run in under a minute — NOT a full tutorial.
+Keep it short; move any lengthy walkthrough to the user guide / guides pages.
+
+## Compatibility
+
+The Milvus-version ↔ recommended-SDK-version table (present in every SDK
+About page; Milvus SDKs are NOT compatible across major versions).
+
+## Contributing (optional)
+
+Short community/feedback section with links (Slack, GitHub issues,
+CONTRIBUTING guideline).
+
+## License
+
+`[Apache License 2.0](LICENSE)` — same relative link as the other SDK trees.
+````
+
+Notes:
+
+- **Keep the Quick Start minimal.** If the About page's example grows past
+  ~10 lines, split it: keep a connect + one-op snippet here and leave the full
+  CRUD walkthrough to the user guide. (The node About page was previously a
+  200+-line tutorial — do not reproduce that.)
+- **Order matters**: Installation → Quick Start → Compatibility → Contributing →
+  License. Compatibility comes after Quick Start because getting the reader
+  running is more important than the version matrix.
+- **Keep it consistent**: the same section headings (wording, casing) across all
+  SDK trees; only the language-specific code blocks and package manager differ.
+- `## Dependencies` is only needed where the SDK has notable runtime
+  prerequisites (e.g. node needs `Node: v14+`); omit when there is nothing to
+  list.
+- Watch the `v`-prefix convention per SDK (e.g. pymilvus uses `==v3.0.1` with a
+  `v`; go links use `tree/client/v3.0.0/client`).
 
 ## Edge cases & decisions to confirm with the user
 
