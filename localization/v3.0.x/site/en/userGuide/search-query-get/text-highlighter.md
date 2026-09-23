@@ -57,6 +57,12 @@ beta: Milvus 2.6.8+
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighter configuration</strong></p>
 <p>To highlight search terms in BM25 full text search, create a <code translate="no">LexicalHighlighter</code> and enable search term highlighting for BM25 full text search:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> LexicalHighlighter
 
 highlighter = LexicalHighlighter(
@@ -65,17 +71,66 @@ highlighter = LexicalHighlighter(
     highlight_search_text=<span class="hljs-literal">True</span>   <span class="hljs-comment"># Enable search term highlighting for BM25 full text search</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))          <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))         <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+        .highlightSearchText(<span class="hljs-literal">true</span>)      <span class="hljs-comment">// Enable search term highlighting for BM25 full text search</span>
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],             <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],            <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enable search term highlighting for BM25 full text search</span>
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})             <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})            <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// Enable search term highlighting for BM25 full text search</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>In this example:</p>
 <ul>
 <li><p><code translate="no">pre_tags</code> and <code translate="no">post_tags</code> control how highlighted text appears in the output. In this case, matched terms are wrapped by <code translate="no">{}</code> (for example, <code translate="no">{term}</code>). You can also provide multiple tags as a list (for example, <code translate="no">[&quot;&lt;b&gt;&quot;, &quot;&lt;i&gt;&quot;]</code>). When multiple terms are highlighted, tags are applied in order and rotated by match sequence.</p></li>
 <li><p><code translate="no">highlight_search_text=True</code> tells Milvus to use the search terms in BM25 full text search as the source of highlighted terms.</p></li>
 </ul>
 <p>Once the Highlighter object is created, apply its configuration to your BM25 full text search request:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python">results = client.search(
     ...,
     data=[<span class="hljs-string">&quot;BM25&quot;</span>],      <span class="hljs-comment"># Search term used in BM25 full text search</span>
 <span class="highlighted-wrapper-line">    highlighter=highlighter <span class="hljs-comment"># Pass highlighter config here</span></span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        <span class="hljs-comment">// ...</span>
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;BM25&quot;</span>))) <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">        .highlighter(highlighter) <span class="hljs-comment">// Pass highlighter config here</span></span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;BM25&quot;</span>], <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter, <span class="hljs-comment">// Pass highlighter config here</span></span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>();
+<span class="hljs-comment">// ...</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;BM25&quot;</span>); <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetHighlighter</span>(highlighter); <span class="hljs-comment">// Pass highlighter config here</span></span>
+milvus::SearchResponse results;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, results);
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighting output</strong></p>
 <p>When highlighting is enabled, Milvus returns highlighted text in a dedicated <code translate="no">highlight</code> field. By default, highlighted output is returned as a fragment starting from the first matched term.</p>
@@ -111,10 +166,16 @@ highlighter = LexicalHighlighter(
 </div>
 <p>In this scenario, highlighted terms come from text-based filtering expressions. Filtering determines which documents match, while the Highlighter annotates the matched text spans.</p>
 <p>Assume the following content is stored in a text field:</p>
-<pre><code translate="no" class="language-python">This document explains how text filtering works <span class="hljs-keyword">in</span> Milvus.
+<pre><code translate="no" class="language-plaintext">This document explains how text filtering works in Milvus.
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighter configuration</strong></p>
 <p>To highlight query terms used in filtering, create a <code translate="no">LexicalHighlighter</code> and define a <code translate="no">highlight_query</code> that corresponds to the filtering condition:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> LexicalHighlighter
 
 highlighter = LexicalHighlighter(
@@ -127,17 +188,76 @@ highlighter = LexicalHighlighter(
     }]
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))          <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))         <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+        .addHighlightQuery(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.HighlightQuery(
+                <span class="hljs-string">&quot;TextMatch&quot;</span>,  <span class="hljs-comment">// Text filtering type</span>
+                <span class="hljs-string">&quot;text&quot;</span>,       <span class="hljs-comment">// Target text field</span>
+                <span class="hljs-string">&quot;text filtering&quot;</span>)) <span class="hljs-comment">// Terms to highlight</span>
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],             <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],            <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+  <span class="hljs-attr">highlight_query</span>: [{
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;TextMatch&quot;</span>,         <span class="hljs-comment">// Text filtering type</span>
+    <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;text&quot;</span>,             <span class="hljs-comment">// Target text field</span>
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;text filtering&quot;</span>     <span class="hljs-comment">// Terms to highlight</span>
+  }],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})                 <span class="hljs-comment">// Tag inserted before each highlighted term</span>
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})                <span class="hljs-comment">// Tag inserted after each highlighted term</span>
+    .<span class="hljs-built_in">AddHighlightQuery</span>(
+        <span class="hljs-string">&quot;TextMatch&quot;</span>,       <span class="hljs-comment">// Text filtering type</span>
+        <span class="hljs-string">&quot;text&quot;</span>,            <span class="hljs-comment">// Target text field</span>
+        <span class="hljs-string">&quot;text filtering&quot;</span>); <span class="hljs-comment">// Terms to highlight</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">pre_tags</code> and <code translate="no">post_tags</code> control how highlighted text appears in the output. In this case, matched terms are wrapped by <code translate="no">{}</code> (for example, <code translate="no">{term}</code>). You can also provide multiple tags as a list (for example, <code translate="no">[&quot;&lt;b&gt;&quot;, &quot;&lt;i&gt;&quot;]</code>). When multiple terms are highlighted, tags are applied in order and rotated by match sequence.</p></li>
 <li><p><code translate="no">highlight_query</code> defines which filtering terms should be highlighted.</p></li>
 </ul>
 <p>Once the Highlighter object is created, apply the same filtering expression and the highlighter configuration to your search request:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python">results = client.search(
     ...,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;TEXT_MATCH(text, &quot;text filtering&quot;)&#x27;</span>,
 <span class="highlighted-wrapper-line">    highlighter=highlighter <span class="hljs-comment"># Pass highlighter config here</span></span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        <span class="hljs-comment">// ...</span>
+        .filter(<span class="hljs-string">&quot;TEXT_MATCH(text, \&quot;text filtering\&quot;)&quot;</span>)
+<span class="highlighted-wrapper-line">        .highlighter(highlighter) <span class="hljs-comment">// Pass highlighter config here</span></span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;TEXT_MATCH(text, &quot;text filtering&quot;)&#x27;</span>,
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter, <span class="hljs-comment">// Pass highlighter config here</span></span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>();
+<span class="hljs-comment">// ...</span>
+request.<span class="hljs-built_in">SetFilter</span>(<span class="hljs-string">&quot;TEXT_MATCH(text, \&quot;text filtering\&quot;)&quot;</span>);
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetHighlighter</span>(highlighter); <span class="hljs-comment">// Pass highlighter config here</span></span>
+milvus::SearchResponse results;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, results);
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighting output</strong></p>
 <p>When query term highlighting is enabled for filtering, Milvus returns highlighted text in a dedicated <code translate="no">highlight</code> field. By default, highlighted output is returned as a fragment starting from the first matched term.</p>
@@ -173,6 +293,12 @@ highlighter = LexicalHighlighter(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighter configuration</strong></p>
 <p>To control the shape of highlighted fragments, configure fragment-related options in the <code translate="no">LexicalHighlighter</code>:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> LexicalHighlighter
 
 highlighter = LexicalHighlighter(
@@ -184,6 +310,39 @@ highlighter = LexicalHighlighter(
     num_of_fragments=<span class="hljs-number">1</span>     <span class="hljs-comment"># Max. number of fragments to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)
+        .fragmentOffset(<span class="hljs-number">5</span>)     <span class="hljs-comment">// Number of characters to reserve before the first matched term</span>
+        .fragmentSize(<span class="hljs-number">60</span>)      <span class="hljs-comment">// Max. length of each fragment to return</span>
+        .numOfFragments(<span class="hljs-number">1</span>)     <span class="hljs-comment">// Max. number of fragments to return</span>
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">fragment_offset</span>: <span class="hljs-number">5</span>,    <span class="hljs-comment">// Number of characters to reserve before the first matched term</span>
+  <span class="hljs-attr">fragment_size</span>: <span class="hljs-number">60</span>,     <span class="hljs-comment">// Max. length of each fragment to return</span>
+  <span class="hljs-attr">num_of_fragments</span>: <span class="hljs-number">1</span>,   <span class="hljs-comment">// Max. number of fragments to return</span>
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-built_in">WithFragmentOffset</span>(<span class="hljs-number">5</span>)     <span class="hljs-comment">// Number of characters to reserve before the first matched term</span>
+    .<span class="hljs-built_in">WithFragmentSize</span>(<span class="hljs-number">60</span>)      <span class="hljs-comment">// Max. length of each fragment to return</span>
+    .<span class="hljs-built_in">WithNumOfFragments</span>(<span class="hljs-number">1</span>);    <span class="hljs-comment">// Max. number of fragments to return</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">fragment_offset</code> reserves leading context before the first highlighted term.</p></li>
@@ -191,11 +350,36 @@ highlighter = LexicalHighlighter(
 <li><p><code translate="no">num_of_fragments</code> controls how many fragments are returned.</p></li>
 </ul>
 <p>Once the Highlighter object is created, apply the highlighter configuration to your search request:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python">results = client.search(
     ...,
     data=[<span class="hljs-string">&quot;BM25&quot;</span>],
 <span class="highlighted-wrapper-line">    highlighter=highlighter <span class="hljs-comment"># Pass highlighter config here</span></span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        <span class="hljs-comment">// ...</span>
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;BM25&quot;</span>))) <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">        .highlighter(highlighter) <span class="hljs-comment">// Pass highlighter config here</span></span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;BM25&quot;</span>], <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter, <span class="hljs-comment">// Pass highlighter config here</span></span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>();
+<span class="hljs-comment">// ...</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;BM25&quot;</span>); <span class="hljs-comment">// Search term used in BM25 full text search</span>
+<span class="highlighted-wrapper-line">request.<span class="hljs-built_in">SetHighlighter</span>(highlighter); <span class="hljs-comment">// Pass highlighter config here</span></span>
+milvus::SearchResponse results;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, results);
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighting output</strong></p>
 <p>With fragment-based highlighting enabled, Milvus returns highlighted text as fragments in the <code translate="no">highlight</code> field:</p>
@@ -248,6 +432,12 @@ highlighter = LexicalHighlighter(
 <p>The example below creates a collection that supports BM25 full text search and <code translate="no">TEXT_MATCH</code> queries, then inserts sample documents.</p>
 <p><details></p>
 <p><summary><strong>Prepare your collection</strong></summary></p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
     DataType,
@@ -311,6 +501,227 @@ SEARCH_PARAMS = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span
 <span class="hljs-comment"># Expected output:</span>
 <span class="hljs-comment"># ✓ Collection created with 4 documents</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+<span class="hljs-type">String</span> <span class="hljs-variable">COLLECTION_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;highlighter_demo&quot;</span>;
+
+<span class="hljs-comment">// Clean up existing collection</span>
+<span class="hljs-keyword">if</span> (client.hasCollection(HasCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .build())) {
+    client.dropCollection(DropCollectionReq.builder()
+            .collectionName(COLLECTION_NAME)
+            .build());
+}
+
+<span class="hljs-comment">// Define schema</span>
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema(<span class="hljs-literal">false</span>);
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">true</span>)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">2000</span>)
+        .enableAnalyzer(<span class="hljs-literal">true</span>)  <span class="hljs-comment">// Required for BM25</span>
+        .enableMatch(<span class="hljs-literal">true</span>)     <span class="hljs-comment">// Required for TEXT_MATCH</span>
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .dataType(DataType.SparseFloatVector)
+        .build());
+
+<span class="hljs-comment">// Add BM25 function</span>
+schema.addFunction(CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;text_bm25&quot;</span>)
+        .functionType(io.milvus.v2.common.FunctionType.BM25)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse_vector&quot;</span>))
+        .build());
+
+<span class="hljs-comment">// Create index</span>
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .extraParams(Map.of(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>, <span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>))
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build());
+
+<span class="hljs-comment">// Insert sample documents</span>
+List&lt;String&gt; docs = Arrays.asList(
+        <span class="hljs-string">&quot;my first test doc&quot;</span>,
+        <span class="hljs-string">&quot;my second test doc&quot;</span>,
+        <span class="hljs-string">&quot;my first test doc. Milvus is an open-source vector database built for GenAI applications.&quot;</span>,
+        <span class="hljs-string">&quot;my second test doc. Milvus is an open-source vector database that suits AI applications of every size from running a demo chatbot to building web-scale search.&quot;</span>);
+List&lt;Map&lt;String, Object&gt;&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-keyword">for</span> (String t : docs) {
+    rows.add(Collections.singletonMap(<span class="hljs-string">&quot;text&quot;</span>, t));
+}
+client.insert(InsertReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(rows)
+        .build());
+System.out.printf(<span class="hljs-string">&quot;Collection created with %d documents%n&quot;</span>, docs.size());
+
+<span class="hljs-comment">// Helper for search params</span>
+Map&lt;String, Object&gt; SEARCH_PARAMS = Map.of(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>, Map.of(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.0</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;highlighter_demo&quot;</span>;
+
+<span class="hljs-comment">// Clean up existing collection</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span> })) {
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span> });
+}
+
+<span class="hljs-comment">// Define schema</span>
+<span class="hljs-keyword">const</span> schema = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">true</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">2000</span>,
+    <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Required for BM25</span>
+    <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>,    <span class="hljs-comment">// Required for TEXT_MATCH</span>
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SparseFloatVector</span>,
+  },
+];
+
+<span class="hljs-comment">// Add BM25 function</span>
+<span class="hljs-keyword">const</span> functions = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_bm25&quot;</span>,
+    <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">BM25</span>,
+    <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+    <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;sparse_vector&quot;</span>],
+  },
+];
+
+<span class="hljs-comment">// Create index</span>
+<span class="hljs-keyword">const</span> index_params = [
+  {
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-attr">bm25_k1</span>: <span class="hljs-number">1.2</span>, <span class="hljs-attr">bm25_b</span>: <span class="hljs-number">0.75</span> },
+  },
+];
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">fields</span>: schema,
+  <span class="hljs-attr">functions</span>: functions,
+  <span class="hljs-attr">index_params</span>: index_params,
+});
+
+<span class="hljs-comment">// Insert sample documents</span>
+<span class="hljs-keyword">const</span> docs = [
+  <span class="hljs-string">&quot;my first test doc&quot;</span>,
+  <span class="hljs-string">&quot;my second test doc&quot;</span>,
+  <span class="hljs-string">&quot;my first test doc. Milvus is an open-source vector database built for GenAI applications.&quot;</span>,
+  <span class="hljs-string">&quot;my second test doc. Milvus is an open-source vector database that suits AI applications of every size from running a demo chatbot to building web-scale search.&quot;</span>,
+];
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: docs.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> ({ <span class="hljs-attr">text</span>: t })),
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Collection created with <span class="hljs-subst">${docs.length}</span> documents`</span>);
+
+<span class="hljs-comment">// Helper for search params</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SEARCH_PARAMS</span> = { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>, <span class="hljs-attr">params</span>: { <span class="hljs-attr">drop_ratio_search</span>: <span class="hljs-number">0.0</span> } };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/CollectionSchema.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/IndexDesc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;&quot;</span>));
+<span class="hljs-type">const</span> std::string COLLECTION_NAME = <span class="hljs-string">&quot;highlighter_demo&quot;</span>;
+
+<span class="hljs-comment">// Clean up existing collection</span>
+<span class="hljs-type">bool</span> has = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">HasCollection</span>(milvus::<span class="hljs-built_in">HasCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME), has);
+<span class="hljs-keyword">if</span> (has) {
+    client-&gt;<span class="hljs-built_in">DropCollection</span>(milvus::<span class="hljs-built_in">DropCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME));
+}
+
+<span class="hljs-comment">// Define schema</span>
+<span class="hljs-function">milvus::CollectionSchema <span class="hljs-title">schema</span><span class="hljs-params">(COLLECTION_NAME)</span></span>;
+schema.<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>));
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">2000</span>)
+                    .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)  <span class="hljs-comment">// Required for BM25</span>
+                    .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));   <span class="hljs-comment">// Required for TEXT_MATCH</span>
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR));
+
+<span class="hljs-comment">// Add BM25 function</span>
+<span class="hljs-function">milvus::Function <span class="hljs-title">bm25_func</span><span class="hljs-params">(<span class="hljs-string">&quot;text_bm25&quot;</span>, milvus::FunctionType::BM25)</span></span>;
+bm25_func.<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+bm25_func.<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>);
+schema.<span class="hljs-built_in">AddFunction</span>(bm25_func);
+
+<span class="hljs-comment">// Create index</span>
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">index</span><span class="hljs-params">(<span class="hljs-string">&quot;sparse_vector&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25)</span></span>;
+index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-string">&quot;1.2&quot;</span>);
+index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-string">&quot;0.75&quot;</span>);
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(
+    milvus::<span class="hljs-built_in">CreateCollectionRequest</span>().<span class="hljs-built_in">WithCollectionSchema</span>(schema).<span class="hljs-built_in">AddIndex</span>(index),
+    milvus::<span class="hljs-built_in">CreateCollectionResponse</span>());
+
+<span class="hljs-comment">// Insert sample documents</span>
+std::vector&lt;std::string&gt; docs = {
+    <span class="hljs-string">&quot;my first test doc&quot;</span>,
+    <span class="hljs-string">&quot;my second test doc&quot;</span>,
+    <span class="hljs-string">&quot;my first test doc. Milvus is an open-source vector database built for GenAI applications.&quot;</span>,
+    <span class="hljs-string">&quot;my second test doc. Milvus is an open-source vector database that suits AI applications of every size from running a demo chatbot to building web-scale search.&quot;</span>,
+};
+milvus::EntityRows rows;
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; t : docs) {
+    nlohmann::json row;
+    row[<span class="hljs-string">&quot;text&quot;</span>] = t;
+    rows.<span class="hljs-built_in">push_back</span>(row);
+}
+milvus::InsertResponse insert_resp;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME).<span class="hljs-built_in">WithRows</span>(rows), insert_resp);
+std::cout &lt;&lt; <span class="hljs-string">&quot;Collection created with &quot;</span> &lt;&lt; docs.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-string">&quot; documents&quot;</span> &lt;&lt; std::endl;
+
+<span class="hljs-comment">// Helper for search params</span>
+<span class="hljs-comment">// SEARCH_PARAMS: metric_type=BM25, params={&quot;drop_ratio_search&quot;: 0.0}</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h3 id="Example-1-Highlight-search-terms-in-BM25-full-text-search" class="common-anchor-header">Example 1: Highlight search terms in BM25 full text search<button data-href="#Example-1-Highlight-search-terms-in-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -332,6 +743,12 @@ SEARCH_PARAMS = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span
 <li><p>BM25 full text search uses <code translate="no">&quot;test&quot;</code> as the search term</p></li>
 <li><p>The highlighter wraps all occurrences of “test” with <code translate="no">{</code> and <code translate="no">}</code> tags</p></li>
 </ul>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>
 <span class="highlighted-comment-line">    pre_tags=[<span class="hljs-string">&quot;{&quot;</span>],</span>
 <span class="highlighted-comment-line">    post_tags=[<span class="hljs-string">&quot;}&quot;</span>],</span>
@@ -351,6 +768,80 @@ results = client.search(
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)  <span class="hljs-comment">// Highlight BM25 query terms</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(SEARCH_PARAMS)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+<span class="highlighted-wrapper-line">        .highlighter(highlighter)</span>
+        .build());
+
+<span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : results.getSearchResults().get(<span class="hljs-number">0</span>)) {
+    System.out.println(<span class="hljs-string">&quot;  &quot;</span> + hit.getHighlight().get(<span class="hljs-string">&quot;text&quot;</span>));
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Highlight BM25 query terms</span>
+};
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;test&quot;</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">search_params</span>: <span class="hljs-variable constant_">SEARCH_PARAMS</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter,</span>
+});
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> hit <span class="hljs-keyword">of</span> results.<span class="hljs-property">results</span>[<span class="hljs-number">0</span>]) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;  &quot;</span>, hit.<span class="hljs-property">highlight</span>?.<span class="hljs-property">text</span> ?? []);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// Highlight BM25 query terms</span>
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-string">&quot;0.0&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithHighlighter</span>(highlighter);</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hit : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">front</span>()) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; frag : hit.<span class="hljs-built_in">Highlight</span>().<span class="hljs-built_in">at</span>(<span class="hljs-string">&quot;text&quot;</span>)) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;  &quot;</span> &lt;&lt; frag &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Expected output</summary></p>
@@ -381,6 +872,12 @@ results = client.search(
 <li><p>The <code translate="no">queries</code> parameter adds <code translate="no">&quot;my doc&quot;</code> to the highlight list</p></li>
 <li><p>The highlighter wraps all matched terms (<code translate="no">&quot;my&quot;</code>, <code translate="no">&quot;test&quot;</code>, <code translate="no">&quot;doc&quot;</code>) with <code translate="no">{</code> and <code translate="no">}</code></p></li>
 </ul>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>
 <span class="highlighted-comment-line">    pre_tags=[<span class="hljs-string">&quot;{&quot;</span>],</span>
 <span class="highlighted-comment-line">    post_tags=[<span class="hljs-string">&quot;}&quot;</span>],</span>
@@ -403,6 +900,87 @@ results = client.search(
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Also highlight BM25 term</span>
+        .addHighlightQuery(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.HighlightQuery(
+                <span class="hljs-string">&quot;TextMatch&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;my doc&quot;</span>))  <span class="hljs-comment">// Additional TEXT_MATCH terms to highlight</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(SEARCH_PARAMS)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+<span class="highlighted-wrapper-line">        .highlighter(highlighter)</span>
+        .build());
+
+<span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : results.getSearchResults().get(<span class="hljs-number">0</span>)) {
+    System.out.println(<span class="hljs-string">&quot;  &quot;</span> + hit.getHighlight().get(<span class="hljs-string">&quot;text&quot;</span>));
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Also highlight BM25 term</span>
+  <span class="hljs-attr">highlight_query</span>: [           <span class="hljs-comment">// Additional TEXT_MATCH terms to highlight</span>
+    { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;TextMatch&quot;</span>, <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;my doc&quot;</span> },
+  ],
+};
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;test&quot;</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">search_params</span>: <span class="hljs-variable constant_">SEARCH_PARAMS</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter,</span>
+});
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> hit <span class="hljs-keyword">of</span> results.<span class="hljs-property">results</span>[<span class="hljs-number">0</span>]) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;  &quot;</span>, hit.<span class="hljs-property">highlight</span>?.<span class="hljs-property">text</span> ?? []);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>)        <span class="hljs-comment">// Also highlight BM25 term</span>
+    .<span class="hljs-built_in">AddHighlightQuery</span>(
+        <span class="hljs-string">&quot;TextMatch&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;my doc&quot;</span>);   <span class="hljs-comment">// Additional TEXT_MATCH terms to highlight</span>
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-string">&quot;0.0&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithHighlighter</span>(highlighter);</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hit : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">front</span>()) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; frag : hit.<span class="hljs-built_in">Highlight</span>().<span class="hljs-built_in">at</span>(<span class="hljs-string">&quot;text&quot;</span>)) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;  &quot;</span> &lt;&lt; frag &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Expected output</summary></p>
@@ -433,6 +1011,12 @@ results = client.search(
 <li><p><code translate="no">fragment_size</code> limits each fragment to approximately 60 characters (default is 100).</p></li>
 <li><p><code translate="no">num_of_fragments</code> limits the number of returned fragments per text value (default is 5).</p></li>
 </ul>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>
 <span class="highlighted-comment-line">    pre_tags=[<span class="hljs-string">&quot;{&quot;</span>],</span>
 <span class="highlighted-comment-line">    post_tags=[<span class="hljs-string">&quot;}&quot;</span>],</span>
@@ -455,6 +1039,89 @@ results = client.search(
     frags = hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}).get(<span class="hljs-string">&#x27;text&#x27;</span>, [])
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Doc <span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>: <span class="hljs-subst">{frags}</span>&quot;</span>)
 <span class="hljs-built_in">print</span>()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)
+        .fragmentOffset(<span class="hljs-number">20</span>)  <span class="hljs-comment">// Keep 20 chars before match</span>
+        .fragmentSize(<span class="hljs-number">60</span>)    <span class="hljs-comment">// Max ~60 chars per fragment</span>
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;Milvus&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .searchParams(SEARCH_PARAMS)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+<span class="highlighted-wrapper-line">        .highlighter(highlighter)</span>
+        .build());
+
+<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : results.getSearchResults().get(<span class="hljs-number">0</span>)) {
+    System.out.printf(<span class="hljs-string">&quot;  Doc %d: %s%n&quot;</span>, ++i, hit.getHighlight().get(<span class="hljs-string">&quot;text&quot;</span>));
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">fragment_offset</span>: <span class="hljs-number">20</span>, <span class="hljs-comment">// Keep 20 chars before match</span>
+  <span class="hljs-attr">fragment_size</span>: <span class="hljs-number">60</span>,   <span class="hljs-comment">// Max ~60 chars per fragment</span>
+};
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;Milvus&quot;</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">search_params</span>: <span class="hljs-variable constant_">SEARCH_PARAMS</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter,</span>
+});
+
+results.<span class="hljs-property">results</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">hit, i</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  Doc <span class="hljs-subst">${i + <span class="hljs-number">1</span>}</span>:`</span>, hit.<span class="hljs-property">highlight</span>?.<span class="hljs-property">text</span> ?? []);
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-built_in">WithFragmentOffset</span>(<span class="hljs-number">20</span>)  <span class="hljs-comment">// Keep 20 chars before match</span>
+    .<span class="hljs-built_in">WithFragmentSize</span>(<span class="hljs-number">60</span>);   <span class="hljs-comment">// Max ~60 chars per fragment</span>
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-string">&quot;0.0&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithHighlighter</span>(highlighter);</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;Milvus&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hit : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">front</span>()) {
+    ++i;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; frag : hit.<span class="hljs-built_in">Highlight</span>().<span class="hljs-built_in">at</span>(<span class="hljs-string">&quot;text&quot;</span>)) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;  Doc &quot;</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot;: &quot;</span> &lt;&lt; frag &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Expected output</summary></p>
@@ -483,6 +1150,12 @@ Doc 2: [&#x27;my second test doc. {Milvus} is an open-source vector database&#x2
 <li><p>First query highlights <code translate="no">&quot;test&quot;</code> in its result set</p></li>
 <li><p>Second query highlights <code translate="no">&quot;Milvus&quot;</code> in its result set</p></li>
 </ul>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>
 <span class="highlighted-comment-line">    pre_tags=[<span class="hljs-string">&quot;{&quot;</span>],</span>
 <span class="highlighted-comment-line">    post_tags=[<span class="hljs-string">&quot;}&quot;</span>],</span>
@@ -505,6 +1178,99 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;    <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;{&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;}&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)
+        .build();
+
+List&lt;EmbeddedText&gt; queries = Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;Milvus&quot;</span>)); <span class="hljs-comment">// Two queries</span>
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data((List) queries)
+        .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .limit(<span class="hljs-number">2</span>)
+        .searchParams(SEARCH_PARAMS)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+<span class="highlighted-wrapper-line">        .highlighter(highlighter)</span>
+        .build());
+
+String[] terms = {<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Milvus&quot;</span>};
+<span class="hljs-type">int</span> <span class="hljs-variable">nqIdx</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; hits : results.getSearchResults()) {
+    System.out.println(<span class="hljs-string">&quot;  Query &#x27;&quot;</span> + terms[nqIdx] + <span class="hljs-string">&quot;&#x27;:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : hits) {
+        System.out.println(<span class="hljs-string">&quot;    &quot;</span> + hit.getHighlight().get(<span class="hljs-string">&quot;text&quot;</span>));
+    }
+    nqIdx++;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;{&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;}&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>,
+};
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Milvus&quot;</span>], <span class="hljs-comment">// Two queries</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">search_params</span>: <span class="hljs-variable constant_">SEARCH_PARAMS</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter,</span>
+});
+
+<span class="hljs-keyword">const</span> terms = [<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Milvus&quot;</span>];
+results.<span class="hljs-property">results</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">hits, nqIdx</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  Query &#x27;<span class="hljs-subst">${terms[nqIdx]}</span>&#x27;:`</span>);
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> hit <span class="hljs-keyword">of</span> hits) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;    &quot;</span>, hit.<span class="hljs-property">highlight</span>?.<span class="hljs-property">text</span> ?? []);
+  }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;{&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;}&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>);
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-string">&quot;0.0&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithHighlighter</span>(highlighter);</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>);   <span class="hljs-comment">// Two queries</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;Milvus&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+std::vector&lt;std::string&gt; terms = {<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Milvus&quot;</span>};
+<span class="hljs-type">int</span> nq_idx = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hits : response.<span class="hljs-built_in">Results</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;  Query &#x27;&quot;</span> &lt;&lt; terms[nq_idx] &lt;&lt; <span class="hljs-string">&quot;&#x27;:&quot;</span> &lt;&lt; std::endl;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hit : hits) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; frag : hit.<span class="hljs-built_in">Highlight</span>().<span class="hljs-built_in">at</span>(<span class="hljs-string">&quot;text&quot;</span>)) {
+            std::cout &lt;&lt; <span class="hljs-string">&quot;    &quot;</span> &lt;&lt; frag &lt;&lt; std::endl;
+        }
+    }
+    ++nq_idx;
+}
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Expected output</summary></p>
@@ -532,6 +1298,12 @@ Query &#x27;Milvus&#x27;:
         ></path>
       </svg>
     </button></h3><p>You can use any tags for highlighting, such as HTML-safe tags for web UIs. This is useful when rendering search results in a browser.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">highlighter = LexicalHighlighter(</span>
 <span class="highlighted-comment-line">    pre_tags=[<span class="hljs-string">&quot;&lt;mark&gt;&quot;</span>],</span>
 <span class="highlighted-comment-line">    post_tags=[<span class="hljs-string">&quot;&lt;/mark&gt;&quot;</span>],</span>
@@ -551,6 +1323,80 @@ results = client.search(
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">LexicalHighlighter</span> <span class="hljs-variable">highlighter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LexicalHighlighter</span>.LexicalHighlighterBuilder()
+        .preTags(List.of(<span class="hljs-string">&quot;&lt;mark&gt;&quot;</span>))
+        .postTags(List.of(<span class="hljs-string">&quot;&lt;/mark&gt;&quot;</span>))
+        .highlightSearchText(<span class="hljs-literal">true</span>)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .limit(<span class="hljs-number">2</span>)
+        .searchParams(SEARCH_PARAMS)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+<span class="highlighted-wrapper-line">        .highlighter(highlighter)</span>
+        .build());
+
+<span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : results.getSearchResults().get(<span class="hljs-number">0</span>)) {
+    System.out.println(<span class="hljs-string">&quot;  &quot;</span> + hit.getHighlight().get(<span class="hljs-string">&quot;text&quot;</span>));
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> highlighter = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;Lexical&quot;</span>,
+  <span class="hljs-attr">pre_tags</span>: [<span class="hljs-string">&quot;&lt;mark&gt;&quot;</span>],
+  <span class="hljs-attr">post_tags</span>: [<span class="hljs-string">&quot;&lt;/mark&gt;&quot;</span>],
+  <span class="hljs-attr">highlight_search_text</span>: <span class="hljs-literal">true</span>,
+};
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;test&quot;</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">search_params</span>: <span class="hljs-variable constant_">SEARCH_PARAMS</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">highlighter</span>: highlighter,</span>
+});
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> hit <span class="hljs-keyword">of</span> results.<span class="hljs-property">results</span>[<span class="hljs-number">0</span>]) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;  &quot;</span>, hit.<span class="hljs-property">highlight</span>?.<span class="hljs-property">text</span> ?? []);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/Highlighter.h&quot;</span></span>
+
+milvus::LexicalHighlighter highlighter;
+highlighter
+    .<span class="hljs-built_in">WithPreTags</span>({<span class="hljs-string">&quot;&lt;mark&gt;&quot;</span>})
+    .<span class="hljs-built_in">WithPostTags</span>({<span class="hljs-string">&quot;&lt;/mark&gt;&quot;</span>})
+    .<span class="hljs-built_in">WithHighlightSearchText</span>(<span class="hljs-literal">true</span>);
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(COLLECTION_NAME)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-string">&quot;0.0&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>)
+<span class="highlighted-wrapper-line">                   .<span class="hljs-built_in">WithHighlighter</span>(highlighter);</span>
+request.<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;test&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; hit : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">front</span>()) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; frag : hit.<span class="hljs-built_in">Highlight</span>().<span class="hljs-built_in">at</span>(<span class="hljs-string">&quot;text&quot;</span>)) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;  &quot;</span> &lt;&lt; frag &lt;&lt; std::endl;
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
 <p><summary>Expected output</summary></p>

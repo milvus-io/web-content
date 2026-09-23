@@ -105,6 +105,7 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
@@ -250,6 +251,38 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Zilliz CLI</span>
+<span class="hljs-comment"># Prerequisite: run zilliz login and select your cluster with zilliz context set.</span>
+
+zilliz collection create --name my_collection --body <span class="hljs-string">&#x27;{
+    &quot;schema&quot;: {
+        &quot;autoId&quot;: true,
+        &quot;enabledDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;5&quot;
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;my_varchar&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;isPartitionKey&quot;: true,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 512
+                }
+            }
+        ]
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers" class="common-anchor-header">Set Partition Numbers<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,6 +306,7 @@ schema.WithField(entity.NewField().
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -314,11 +348,47 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Zilliz CLI</span>
+<span class="hljs-comment"># Prerequisite: run zilliz login and select your cluster with zilliz context set.</span>
+
+zilliz collection create --name my_collection --body <span class="hljs-string">&#x27;{
+    &quot;schema&quot;: {
+        &quot;autoId&quot;: true,
+        &quot;enabledDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;5&quot;
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;my_varchar&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;isPartitionKey&quot;: true,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 512
+                }
+            }
+        ]
+    },
+    &quot;params&quot;: {
+        &quot;partitionsNum&quot;: 128
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-Filtering-Condition" class="common-anchor-header">Create Filtering Condition<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -344,6 +414,7 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
@@ -374,6 +445,15 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Zilliz CLI</span>
+<span class="hljs-comment"># Prerequisite: run zilliz login and select your cluster with zilliz context set.</span>
+
+<span class="hljs-comment"># Filter based on a single partition key value, or</span>
+zilliz vector query --collection my_collection --filter <span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span> --output-fields <span class="hljs-string">&#x27;[&quot;id&quot;, &quot;partition_key&quot;]&#x27;</span>
+
+<span class="hljs-comment"># Filter based on multiple partition key values</span>
+zilliz vector query --collection my_collection --filter <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span> --output-fields <span class="hljs-string">&#x27;[&quot;id&quot;, &quot;partition_key&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>You have to replace <code translate="no">partition_key</code> with the name of the field that is designated as the partition key.</p>
@@ -427,6 +507,7 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -472,10 +553,46 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Zilliz CLI</span>
+<span class="hljs-comment"># Prerequisite: run zilliz login and select your cluster with zilliz context set.</span>
+
+zilliz collection create --name my_collection --body <span class="hljs-string">&#x27;{
+    &quot;schema&quot;: {
+        &quot;autoId&quot;: true,
+        &quot;enabledDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;5&quot;
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;my_varchar&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;isPartitionKey&quot;: true,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 512
+                }
+            }
+        ]
+    },
+    &quot;params&quot;: {
+        &quot;partitionKeyIsolation&quot;: true
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in <a href="/docs/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers</a>. Note that the Partition-Key-based filter should include only a specific Partition Key value.</p>
