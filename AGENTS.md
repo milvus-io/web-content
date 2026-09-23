@@ -40,11 +40,14 @@ Milvus user-guide and SDK reference content; markdown here is consumed by the
   submodule and reads specific paths only (`localization/`, `API_Reference/`,
   `API_Reference_MDX/`, version dirs' `site/en`, `version.json`, menu structures).
   Extra top-level directories are ignored by the site build.
-- **Note**: `.github/workflows/publish-ref-docs.yml` is **schedule-disabled** —
-  it no longer runs weekly from Feishu (only manual `workflow_dispatch` remains).
-  SDK reference docs are now maintained directly in this repo via the
-  `update-milvus-sdk-docs` skill, so its auto-PR can no longer overwrite manual
-  edits.
+- **Note**: `.github/workflows/publish-ref-docs.yml` stays **disabled** —
+  there is no scheduled or CI-triggered Feishu refresh. SDK manuals are
+  refreshed locally via `scripts/refresh-sdk-docs.js` (`--sdk` + `--version`,
+  or `-d <title>` for a single page): it pulls the manual from Feishu and
+  lands a single signed commit on a `feishu/<sdk>-<version>-<date>` branch
+  for a manual PR. Nothing publishes until the PR merges. Day-to-day SDK
+  reference maintenance stays with the `update-milvus-sdk-docs` skill; this
+  is the on-demand Feishu refresh path.
 
 ## update-milvus-sdk-docs skill
 

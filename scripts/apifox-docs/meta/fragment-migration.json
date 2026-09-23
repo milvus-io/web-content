@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "1.0",
+  "legacyRoot": "packages/docs-tooling/src/reference/rest/meta/openapi",
+  "canonicalContract": "packages/docs-tooling/src/reference/rest/contracts/rest-fragment-collection.schema.json",
+  "allowedStates": [
+    "legacy-shadow-required",
+    "shadow-equivalent",
+    "canonical"
+  ],
+  "fragments": [
+    {
+      "file": "01-import-operations.json",
+      "apiSurface": "data-plane",
+      "service": "imports-v1",
+      "operationCount": 3,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "02-collection-operations.json",
+      "apiSurface": "data-plane",
+      "service": "collections-v1",
+      "operationCount": 4,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "03-vector-operations.json",
+      "apiSurface": "data-plane",
+      "service": "vectors-v1",
+      "operationCount": 6,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "04-vector-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "vectors-v2",
+      "operationCount": 7,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "05-collection-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "collections-v2",
+      "operationCount": 30,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "06-database-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "databases-v2",
+      "operationCount": 7,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "07-index-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "indexes-v2",
+      "operationCount": 6,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "08-partition-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "partitions-v2",
+      "operationCount": 7,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "09-role-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "roles-v2",
+      "operationCount": 9,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "10-resource-group-v2.json",
+      "apiSurface": "data-plane",
+      "service": "resource-groups-v2",
+      "operationCount": 6,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "11-import-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "imports-v2",
+      "operationCount": 6,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "12-alias-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "aliases-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "13-user-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "users-v2",
+      "operationCount": 7,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "14-privilege-group-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "privilege-groups-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "15-cloud-meta.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-meta-v1",
+      "operationCount": 2,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "16-cluster-operations.json",
+      "apiSurface": "control-plane",
+      "service": "clusters-v1",
+      "operationCount": 10,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "17-pipeline-operations.json",
+      "apiSurface": "control-plane",
+      "service": "pipelines-v1",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "18-cloud-meta-v2.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-meta-v2",
+      "operationCount": 2,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "19-extract-load-and-transform-v2.json",
+      "apiSurface": "control-plane",
+      "service": "etl-v2",
+      "operationCount": 1,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "20-volume-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "volumes-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "21-project-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "projects-v2",
+      "operationCount": 8,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "22-cluster-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "clusters-v2",
+      "operationCount": 11,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "23-cloud-migration-v2.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-migration-v2",
+      "operationCount": 3,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "24-backup-and-restore-v2.json",
+      "apiSurface": "control-plane",
+      "service": "backup-restore-v2",
+      "operationCount": 9,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "25-metrics-and-alerts-v2.json",
+      "apiSurface": "control-plane",
+      "service": "metrics-alerts-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "26-cloud-job-v2.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-jobs-v2",
+      "operationCount": 1,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "27-invoices-v2.json",
+      "apiSurface": "control-plane",
+      "service": "invoices-v2",
+      "operationCount": 2,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "28-usage-v2.json",
+      "apiSurface": "control-plane",
+      "service": "usage-v2",
+      "operationCount": 1,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "29-on-demand-compute-v2.json",
+      "apiSurface": "control-plane",
+      "service": "on-demand-compute-v2",
+      "operationCount": 2,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "30-global-clusters.json",
+      "apiSurface": "control-plane",
+      "service": "global-clusters",
+      "operationCount": 12,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "31-storage-integration-v2.json",
+      "apiSurface": "control-plane",
+      "service": "storage-integrations-v2",
+      "operationCount": 6,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "32-spark-job-v2.json",
+      "apiSurface": "control-plane",
+      "service": "spark-jobs-v2",
+      "operationCount": 10,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "33-on-demand-cluster-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "on-demand-clusters-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "34-cloud-access-control-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-access-control-v2",
+      "operationCount": 15,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "35-cloud-api-key-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "cloud-api-keys-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "36-private-endpoint-operations-v2.json",
+      "apiSurface": "control-plane",
+      "service": "private-endpoints-v2",
+      "operationCount": 5,
+      "migrationState": "legacy-shadow-required"
+    },
+    {
+      "file": "37-file-resource-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "file-resources-v2",
+      "operationCount": 3,
+      "migrationState": "canonical"
+    },
+    {
+      "file": "38-snapshot-operations-v2.json",
+      "apiSurface": "data-plane",
+      "service": "snapshots-v2",
+      "operationCount": 4,
+      "migrationState": "canonical"
+    }
+  ]
+}

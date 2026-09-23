@@ -1,4 +1,13 @@
 {
+  "dataPlaneKeywords": {
+    "zilliz": [
+      "cluster-role-operations-v2",
+      "cluster-user-operations-v2",
+      "/v2/vectordb/roles",
+      "/v2/vectordb/users"
+    ],
+    "milvus": []
+  },
   "controlPlaneKeywords": {
     "zilliz": [
       "cloud",
@@ -22,7 +31,13 @@
       "etl",
       "stage",
       "storage-integration",
-      "storageIntegrations"
+      "storageIntegrations",
+      "/v2/roles",
+      "/v2/members",
+      "/v2/groups",
+      "/v2/api-keys",
+      "private-endpoint",
+      "privateEndpoint"
     ],
     "milvus": []
   }

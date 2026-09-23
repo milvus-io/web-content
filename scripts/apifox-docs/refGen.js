@@ -5,10 +5,24 @@ const { resolveRefs } = require('./specLoader')
 
 const META_DIR = path.join(__dirname, 'meta')
 const TEMPLATES_DIR = path.join(__dirname, 'templates')
+const I18N_LOCALE = /^[a-z]{2}(?:-[A-Z]{2})?$/
+const I18N_FIELDS = new Set([
+  'content',
+  'description',
+  'enum',
+  'example',
+  'label',
+  'name',
+  'prompt',
+  'summary',
+  'title',
+  'url',
+])
 
 const planeConfig = JSON.parse(fs.readFileSync(path.join(META_DIR, 'plane-config.json'), 'utf-8'))
 
 const CONFIG = {
+  dataPlaneKeywords: planeConfig.dataPlaneKeywords || {},
   controlPlaneKeywords: planeConfig.controlPlaneKeywords,
   betaDefaults: { v1: 'DEPRECATED', v2: 'FALSE' },
   betaOverrides: { extract: 'PRIVATE', merge: 'PRIVATE' },
@@ -19,6 +33,7 @@ class refGen {
   constructor(options) {
     this.options = options
     this.options.parents = []
+    this.routeRegistry = new Map()
 
     this.validateSpec(options.specifications)
 
@@ -44,6 +59,40 @@ class refGen {
   }
 
   validateSpec(spec) {
+    const validateI18n = (value, jsonPath) => {
+      if (!value || typeof value !== 'object') {
+        return
+      }
+      if (Object.hasOwn(value, 'x-i18n')) {
+        const i18n = value['x-i18n']
+        if (!i18n || typeof i18n !== 'object' || Array.isArray(i18n)) {
+          throw new Error(`Invalid x-i18n at ${jsonPath}["x-i18n"]: expected an object keyed by locale`)
+        }
+        for (const [locale, localized] of Object.entries(i18n)) {
+          const localePath = `${jsonPath}["x-i18n"][${JSON.stringify(locale)}]`
+          if (!I18N_LOCALE.test(locale)) {
+            throw new Error(`Invalid x-i18n locale at ${localePath}: expected a language tag such as zh-CN`)
+          }
+          if (!localized || typeof localized !== 'object' || Array.isArray(localized)) {
+            throw new Error(`Invalid x-i18n value at ${localePath}: expected an object of localized fields`)
+          }
+          for (const field of Object.keys(localized)) {
+            if (!I18N_FIELDS.has(field)) {
+              throw new Error(`Invalid x-i18n field at ${localePath}[${JSON.stringify(field)}]: unsupported localized field`)
+            }
+          }
+        }
+      }
+      if (Array.isArray(value)) {
+        value.forEach((child, index) => validateI18n(child, `${jsonPath}[${index}]`))
+        return
+      }
+      for (const [key, child] of Object.entries(value)) {
+        if (key !== 'x-i18n') validateI18n(child, `${jsonPath}[${JSON.stringify(key)}]`)
+      }
+    }
+
+    validateI18n(spec, '$')
     if (!spec.tags || !Array.isArray(spec.tags) || spec.tags.length === 0) {
       throw new Error('OpenAPI spec must have a non-empty "tags" array')
     }
@@ -69,8 +118,15 @@ class refGen {
   }
 
   getPlane(slug, target) {
-    const keywords = CONFIG.controlPlaneKeywords[target] || CONFIG.controlPlaneKeywords.zilliz
-    return keywords.some(k => slug.includes(k)) ? 'control-plane' : 'data-plane'
+    if (this.options.apiSurface) return this.options.apiSurface
+    const normalizedSlug = slug.toLowerCase()
+    const dataKeywords = CONFIG.dataPlaneKeywords[target] || CONFIG.dataPlaneKeywords.zilliz || []
+    if (dataKeywords.some(k => normalizedSlug.includes(k.toLowerCase()))) {
+      return 'data-plane'
+    }
+
+    const controlKeywords = CONFIG.controlPlaneKeywords[target] || CONFIG.controlPlaneKeywords.zilliz || []
+    return controlKeywords.some(k => normalizedSlug.includes(k.toLowerCase())) ? 'control-plane' : 'data-plane'
   }
 
   getBetaTag(slug, version) {
@@ -96,7 +152,7 @@ class refGen {
       console.warn(`Warning: No description entry for slug "${slug}", falling back to spec description`)
       return specDescription || ''
     }
-    return entry.description
+    return entry?.["x-i18n"]?.[this.options.lang]?.description || entry.description
   }
 
   lookupMilvusName(slug) {
@@ -140,8 +196,9 @@ class refGen {
         }
 
         const i18n = specification?.["x-i18n"]?.[lang]
-        const page_title = lang === "zh-CN" ? (i18n?.summary || specification.summary) : specification.summary
-        const rawDescription = lang === "zh-CN" ? (i18n?.description || specification.description) : specification.description
+        const localized = lang === "zh-CN" || lang === "ja-JP"
+        const page_title = localized ? (i18n?.summary || specification.summary) : specification.summary
+        const rawDescription = localized ? (i18n?.description || specification.description) : specification.description
         const page_excerpt = this.__filter_content(rawDescription ?? '', target).split('<')[0]
         var page_parent = parents.filter(x => x === specification.tags[0])[0]
         if (!page_parent) {
@@ -164,7 +221,21 @@ class refGen {
         }
         var upper_folder = this.getPlane(page_parent, target)
 
-        var page_slug = (this.get_slug(page_title, target)) + slug_suffix
+        const slug_title = lang === "zh-CN" ? page_title : specification.summary
+        var page_slug = (this.get_slug(slug_title, target)) + slug_suffix
+        const page_route = `/restful/${page_slug}`
+        // zdoc sites publish every page under a flat /restful/<slug> URL, so
+        // slug uniqueness is enforced there. milvus.io namespaces pages by
+        // version and group folder — its slug convention drops the -v2 suffix
+        // on purpose, so same-verb v1/v2 pages (List, Get, Insert, ...) are
+        // expected, and its real URL space is the physical page path. Only
+        // collisions within that path would overwrite an actual file.
+        const route_key = target === 'milvus'
+            ? `${version}/${upper_folder}/${page_parent}/${page_slug}`
+            : page_route
+        const existingRoute = this.routeRegistry.get(route_key)
+        if (existingRoute) throw new Error(`REST_PAGE_ROUTE_CONFLICT: ${route_key} for ${existingRoute} and ${method}`)
+        this.routeRegistry.set(route_key, `${method.toUpperCase()} ${page_url}`)
 
         // Check x-beta on operation, then tag, then fall back to defaults
         let beta_tag = specification['x-beta']
@@ -261,6 +332,7 @@ class refGen {
           page_title: page_title + (version === 'v2' ? ' (V2)' : ' (V1)'),
           page_excerpt,
           page_slug,
+          page_route,
           beta_tag,
           page_url,
           page_method,
@@ -316,7 +388,8 @@ class refGen {
         position,
         slug,
         beta_tag,
-        description
+        description,
+        group_route: `/restful/${slug}`
       })
 
       var folder_path = `${target_path}/${version}/${upper_folder}/${slug}`
@@ -338,8 +411,9 @@ class refGen {
             group_name: version === 'v2' ? 'V2' : 'V1',
             position: version === 'v2' ? 1 : 2,
             slug: version,
+            group_route: `/restful/${version}`,
             beta_tag: CONFIG.betaDefaults[version],
-            description: ''
+            description: this.lookupDescription(version)
           }))
         }
 
@@ -352,6 +426,7 @@ class refGen {
             group_name: title + (version === 'v2' ? ' (V2)' : ' (V1)'),
             position: pos,
             slug: `${upper_folder}-${version}`,
+            group_route: `/restful/${upper_folder}-${version}`,
             beta_tag: CONFIG.betaDefaults[version],
             description: desc
           }))

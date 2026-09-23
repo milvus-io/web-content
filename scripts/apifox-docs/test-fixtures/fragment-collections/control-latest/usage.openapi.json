@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Zilliz control-plane fixture", "version": "latest"},
+  "x-zdoc-fragment": {"schemaVersion": "1.0", "apiSurface": "control-plane", "service": "usage"},
+  "tags": [{"name": "Usage", "x-i18n": {"zh-CN": {"name": "用量"}}}],
+  "paths": {
+    "/v2/usage": {
+      "get": {
+        "operationId": "getUsageFixture",
+        "summary": "Get usage",
+        "x-i18n": {"zh-CN": {"summary": "获取用量"}},
+        "tags": ["Usage"],
+        "responses": {"200": {"description": "Success", "x-i18n": {"zh-CN": {"description": "成功"}}}}
+      }
+    }
+  }
+}

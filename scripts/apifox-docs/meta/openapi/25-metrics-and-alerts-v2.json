@@ -12,7 +12,9 @@
         "zilliz"
       ],
       "x-i18n": {
-        "zh-CN": "Metrics & Alerts (V2)"
+        "zh-CN": {
+          "name": "Metrics & Alerts (V2)"
+        }
       }
     }
   ],
@@ -26,6 +28,10 @@
           "zh-CN": {
             "summary": "查看告警规则列表",
             "description": "本接口列出指定项目的所有告警规则。当前用户须为项目管理员。"
+          },
+          "ja-JP": {
+            "summary": "アラートルールを一覧表示",
+            "description": "指定したプロジェクト内のすべてのアラートルールを一覧表示します。現在のユーザーはプロジェクト管理者である必要があります。"
           }
         },
         "tags": [
@@ -44,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -61,6 +70,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "告警规则所属项目 ID。"
+              },
+              "ja-JP": {
+                "description": "アラートルールが属するプロジェクトの ID。"
               }
             },
             "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
@@ -79,6 +91,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每页返回的项目数量。"
+              },
+              "ja-JP": {
+                "description": "各ページで返される項目数。"
               }
             },
             "example": 10
@@ -96,6 +111,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要返回的页码。"
+              },
+              "ja-JP": {
+                "description": "返されるページ番号。"
               }
             },
             "example": 1
@@ -107,6 +125,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定项目的所有告警规则列表。"
+              },
+              "ja-JP": {
+                "description": "指定したプロジェクト内のアラートルールの一覧を返します。"
               }
             },
             "content": {
@@ -119,6 +140,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回告警规则列表。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールの一覧を返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -132,6 +156,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -144,6 +171,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの総数。"
                                 }
                               }
                             },
@@ -153,6 +183,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
                                 }
                               }
                             },
@@ -162,6 +195,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "每页记录数。"
+                                },
+                                "ja-JP": {
+                                  "description": "各ページのレコード数。"
                                 }
                               }
                             },
@@ -171,6 +207,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの一覧。"
                                 }
                               },
                               "items": {
@@ -182,6 +221,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールの ID。"
                                       }
                                     }
                                   },
@@ -191,6 +233,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则所属项目 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが属するプロジェクトの ID。"
                                       }
                                     }
                                   },
@@ -200,6 +245,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールの名前。"
                                       }
                                     }
                                   },
@@ -209,6 +257,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则级别。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールのレベル。"
                                       }
                                     },
                                     "enum": [
@@ -222,6 +273,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则监控的指标名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが監視するメトリクスの名前。"
                                       }
                                     }
                                   },
@@ -231,6 +285,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则阈值。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールのしきい値。"
                                       }
                                     }
                                   },
@@ -240,6 +297,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则的时间窗口，单位为分钟。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールの時間ウィンドウ（分）。"
                                       }
                                     }
                                   },
@@ -249,6 +309,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则是否启用。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが有効かどうかを示します。"
                                       }
                                     }
                                   },
@@ -258,6 +321,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则是否发送已解决的通知。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが解決されたときに通知を送信するかどうかを示します。"
                                       }
                                     }
                                   },
@@ -267,6 +333,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "触发告警规则时采取的操作列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールがトリガーされたときに実行するアクション。"
                                       }
                                     },
                                     "items": {
@@ -275,6 +344,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "触发告警规则时采取的操作。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "アラートルールがトリガーされたときに実行するアクション。"
                                         }
                                       },
                                       "properties": {
@@ -284,6 +356,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "操作类型。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "アクションのタイプ。"
                                             }
                                           },
                                           "enum": [
@@ -303,6 +378,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "操作配置。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "アクションの設定。"
                                             }
                                           },
                                           "properties": {
@@ -312,6 +390,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
                                                 }
                                               },
                                               "properties": {
@@ -321,6 +402,9 @@
                                                   "x-i18n": {
                                                     "zh-CN": {
                                                       "description": "用于接收通知的邮件地址列表。"
+                                                    },
+                                                    "ja-JP": {
+                                                      "description": "アラート通知を受信するメールアドレスの一覧。"
                                                     }
                                                   },
                                                   "items": {
@@ -329,6 +413,9 @@
                                                     "x-i18n": {
                                                       "zh-CN": {
                                                         "description": "用于接收通知的邮件地址。"
+                                                      },
+                                                      "ja-JP": {
+                                                        "description": "アラート通知を受信するメールアドレス。"
                                                       }
                                                     }
                                                   }
@@ -339,6 +426,9 @@
                                                   "x-i18n": {
                                                     "zh-CN": {
                                                       "description": "用于接收通知的组织角色列表。"
+                                                    },
+                                                    "ja-JP": {
+                                                      "description": "アラート通知を受信する組織ロールの一覧。"
                                                     }
                                                   },
                                                   "items": {
@@ -347,6 +437,9 @@
                                                     "x-i18n": {
                                                       "zh-CN": {
                                                         "description": "用于接收通知的组织角色。"
+                                                      },
+                                                      "ja-JP": {
+                                                        "description": "アラート通知を受信する組織ロール。"
                                                       }
                                                     },
                                                     "enum": [
@@ -362,6 +455,9 @@
                                                   "x-i18n": {
                                                     "zh-CN": {
                                                       "description": "用于接收通知的项目角色列表。"
+                                                    },
+                                                    "ja-JP": {
+                                                      "description": "アラート通知を受信するプロジェクトロールの一覧。"
                                                     }
                                                   },
                                                   "items": {
@@ -370,6 +466,9 @@
                                                     "x-i18n": {
                                                       "zh-CN": {
                                                         "description": "用于接收通知的项目角色。"
+                                                      },
+                                                      "ja-JP": {
+                                                        "description": "アラート通知を受信するプロジェクトロール。"
                                                       }
                                                     },
                                                     "enum": [
@@ -386,6 +485,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
                                                 }
                                               }
                                             },
@@ -395,6 +497,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
                                                 }
                                               }
                                             },
@@ -404,6 +509,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                                 }
                                               }
                                             },
@@ -413,6 +521,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "PagerDuty または OpsGenie サービス用の API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                                 }
                                               }
                                             }
@@ -427,6 +538,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则使用的比较运算符。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールで使用される比較演算子。"
                                       }
                                     },
                                     "enum": [
@@ -443,6 +557,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则适用的集群 ID 列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが適用されるクラスターの ID。"
                                       }
                                     },
                                     "items": {
@@ -451,6 +568,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "集群 ID。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "クラスターの ID。"
                                         }
                                       }
                                     }
@@ -468,6 +588,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -481,6 +604,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -490,6 +616,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -627,6 +756,10 @@
           "zh-CN": {
             "summary": "创建告警规则",
             "description": "本接口在指定项目中创建新的告警规则。当前用户须为项目管理员。"
+          },
+          "ja-JP": {
+            "summary": "アラートルールを作成する",
+            "description": "指定したプロジェクトに新しいアラートルールを作成します。現在のユーザーはプロジェクト管理者である必要があります。"
           }
         },
         "tags": [
@@ -645,6 +778,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -658,6 +794,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "使用 `application/json`。"
+              },
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
               }
             },
             "required": false,
@@ -680,6 +819,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则所属项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが属するプロジェクトの ID。"
                       }
                     }
                   },
@@ -689,6 +831,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则名称。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールの名前。"
                       }
                     }
                   },
@@ -698,6 +843,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则级别。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールのレベル。"
                       }
                     },
                     "enum": [
@@ -711,6 +859,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则监控的指标名称。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが監視するメトリクスの名前。"
                       }
                     }
                   },
@@ -720,6 +871,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则阈值。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールのしきい値。"
                       }
                     }
                   },
@@ -729,6 +883,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则的时间窗口，单位为分钟。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールの時間ウィンドウ（分）。"
                       }
                     }
                   },
@@ -738,6 +895,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则是否启用。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが有効かどうかを示します。"
                       }
                     }
                   },
@@ -747,6 +907,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则是否发送已解决的通知。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが解決されたときに通知を送信するかどうかを示します。"
                       }
                     }
                   },
@@ -756,6 +919,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "触发告警规则时采取的操作列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールがトリガーされたときに実行するアクション。"
                       }
                     },
                     "items": {
@@ -764,6 +930,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "触发告警规则时采取的操作。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールがトリガーされたときに実行するアクション。"
                         }
                       },
                       "properties": {
@@ -773,6 +942,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作类型。"
+                            },
+                            "ja-JP": {
+                              "description": "アクションのタイプ。"
                             }
                           },
                           "enum": [
@@ -792,6 +964,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作配置。"
+                            },
+                            "ja-JP": {
+                              "description": "アクションの設定。"
                             }
                           },
                           "properties": {
@@ -801,6 +976,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
                                 }
                               },
                               "properties": {
@@ -810,6 +988,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的邮件地址列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信するメールアドレスの一覧。"
                                     }
                                   },
                                   "items": {
@@ -818,6 +999,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的邮件地址。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信するメールアドレス。"
                                       }
                                     }
                                   }
@@ -828,6 +1012,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的组织角色列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信する組織ロールの一覧。"
                                     }
                                   },
                                   "items": {
@@ -836,6 +1023,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的组织角色。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信する組織ロール。"
                                       }
                                     },
                                     "enum": [
@@ -851,6 +1041,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的项目角色列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信するプロジェクトロールの一覧。"
                                     }
                                   },
                                   "items": {
@@ -859,6 +1052,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的项目角色。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信するプロジェクトロール。"
                                       }
                                     },
                                     "enum": [
@@ -875,6 +1071,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -884,6 +1083,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -893,6 +1095,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -902,6 +1107,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                 }
                               }
                             }
@@ -920,6 +1128,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则使用的比较运算符。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールで使用される比較演算子。"
                       }
                     },
                     "enum": [
@@ -936,6 +1147,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则适用的集群 ID 列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが適用されるクラスターの ID。"
                       }
                     },
                     "items": {
@@ -944,6 +1158,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "集群 ID。"
+                        },
+                        "ja-JP": {
+                          "description": "クラスターの ID。"
                         }
                       }
                     }
@@ -954,6 +1171,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标单位（如 \"bytes\"、\"percent\"）。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスの単位（例: \"bytes\"、\"percent\"）。"
                       }
                     }
                   },
@@ -963,6 +1183,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "重复告警通知的间隔时间（秒）。"
+                      },
+                      "ja-JP": {
+                        "description": "アラート通知を繰り返し送信する間隔（秒）。"
                       }
                     }
                   }
@@ -1163,6 +1386,11 @@
                 "comparisonMethod": "GREATER_THAN"
               }
             }
+          },
+          "x-i18n": {
+            "ja-JP": {
+              "description": "作成するアラートルールの詳細です。"
+            }
           }
         },
         "responses": {
@@ -1171,6 +1399,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定项目的所有告警规则列表。"
+              },
+              "ja-JP": {
+                "description": "指定したプロジェクト内のアラートルールの一覧を返します。"
               }
             },
             "content": {
@@ -1183,6 +1414,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回告警规则列表。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールの一覧を返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1196,6 +1430,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1208,6 +1445,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの ID。"
                                 }
                               }
                             },
@@ -1217,6 +1457,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则所属项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが属するプロジェクトの ID。"
                                 }
                               }
                             },
@@ -1226,6 +1469,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの名前。"
                                 }
                               }
                             },
@@ -1235,6 +1481,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则级别。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのレベル。"
                                 }
                               },
                               "enum": [
@@ -1248,6 +1497,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则监控的指标名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが監視するメトリクスの名前。"
                                 }
                               }
                             },
@@ -1257,6 +1509,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则阈值。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのしきい値。"
                                 }
                               }
                             },
@@ -1266,6 +1521,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则的时间窗口，单位为分钟。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの時間ウィンドウ（分）。"
                                 }
                               }
                             },
@@ -1275,6 +1533,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则是否启用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが有効かどうかを示します。"
                                 }
                               }
                             },
@@ -1284,6 +1545,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则是否发送已解决的通知。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが解決されたときに通知を送信するかどうかを示します。"
                                 }
                               }
                             },
@@ -1293,6 +1557,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "触发告警规则时采取的操作列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
                                 }
                               },
                               "items": {
@@ -1301,6 +1568,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "触发告警规则时采取的操作。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
                                   }
                                 },
                                 "properties": {
@@ -1310,6 +1580,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "操作类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションのタイプ。"
                                       }
                                     },
                                     "enum": [
@@ -1329,6 +1602,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "操作配置。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションの設定。"
                                       }
                                     },
                                     "properties": {
@@ -1338,6 +1614,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
                                           }
                                         },
                                         "properties": {
@@ -1347,6 +1626,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的邮件地址列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信するメールアドレスの一覧。"
                                               }
                                             },
                                             "items": {
@@ -1355,6 +1637,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的邮件地址。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信するメールアドレス。"
                                                 }
                                               }
                                             }
@@ -1365,6 +1650,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的组织角色列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信する組織ロールの一覧。"
                                               }
                                             },
                                             "items": {
@@ -1373,6 +1661,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的组织角色。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信する組織ロール。"
                                                 }
                                               },
                                               "enum": [
@@ -1388,6 +1679,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的项目角色列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信するプロジェクトロールの一覧。"
                                               }
                                             },
                                             "items": {
@@ -1396,6 +1690,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的项目角色。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信するプロジェクトロール。"
                                                 }
                                               },
                                               "enum": [
@@ -1412,6 +1709,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -1421,6 +1721,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -1430,6 +1733,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -1439,6 +1745,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                           }
                                         }
                                       }
@@ -1453,6 +1762,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则使用的比较运算符。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールで使用される比較演算子。"
                                 }
                               },
                               "enum": [
@@ -1469,6 +1781,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则适用的集群 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが適用されるクラスターの ID。"
                                 }
                               },
                               "items": {
@@ -1477,6 +1792,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの ID。"
                                   }
                                 }
                               }
@@ -1491,6 +1809,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1504,6 +1825,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1513,6 +1837,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1645,6 +1972,10 @@
           "zh-CN": {
             "summary": "更新告警规则",
             "description": "本接口通过 ID 更新现有的告警规则。当前用户须为项目管理员。"
+          },
+          "ja-JP": {
+            "summary": "アラートルールを更新",
+            "description": "既存のアラートルールを ID で更新します。現在のユーザーはプロジェクト管理者である必要があります。"
           }
         },
         "tags": [
@@ -1663,6 +1994,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -1680,6 +2014,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要更新的告警规则 ID。"
+              },
+              "ja-JP": {
+                "description": "更新するアラートルールの ID。"
               }
             },
             "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -1690,6 +2027,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "要更新的告警规则详细信息。您需要提供更新后的整个规则对象，而不仅仅是要更新的字段。"
+            },
+            "ja-JP": {
+              "description": "更新するアラートルールの詳細。更新するフィールドだけでなく、ルールオブジェクト全体を指定する必要があります。"
             }
           },
           "content": {
@@ -1703,6 +2043,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则名称。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールの名前。"
                       }
                     }
                   },
@@ -1712,6 +2055,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则级别。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールのレベル。"
                       }
                     },
                     "enum": [
@@ -1725,6 +2071,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则监控的指标名称。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが監視するメトリクスの名前。"
                       }
                     }
                   },
@@ -1734,6 +2083,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则阈值。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールのしきい値。"
                       }
                     }
                   },
@@ -1743,6 +2095,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则的时间窗口，单位为分钟。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールの時間ウィンドウ（分）。"
                       }
                     }
                   },
@@ -1752,6 +2107,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则是否启用。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが有効かどうかを示します。"
                       }
                     }
                   },
@@ -1761,6 +2119,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则是否发送已解决的通知。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが解決されたときに通知を送信するかどうかを示します。"
                       }
                     }
                   },
@@ -1770,6 +2131,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "触发告警规则时采取的操作列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールがトリガーされたときに実行するアクション。"
                       }
                     },
                     "items": {
@@ -1778,6 +2142,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "触发告警规则时采取的操作。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールがトリガーされたときに実行するアクション。"
                         }
                       },
                       "properties": {
@@ -1787,6 +2154,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作类型。"
+                            },
+                            "ja-JP": {
+                              "description": "アクションのタイプ。"
                             }
                           },
                           "enum": [
@@ -1806,6 +2176,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作配置。"
+                            },
+                            "ja-JP": {
+                              "description": "アクションの設定。"
                             }
                           },
                           "properties": {
@@ -1815,6 +2188,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
                                 }
                               },
                               "properties": {
@@ -1824,6 +2200,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的邮件地址列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信するメールアドレスのリスト。"
                                     }
                                   },
                                   "items": {
@@ -1832,6 +2211,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的邮件地址。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信するメールアドレス。"
                                       }
                                     }
                                   }
@@ -1842,6 +2224,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的组织角色列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信する組織ロールのリスト。"
                                     }
                                   },
                                   "items": {
@@ -1850,6 +2235,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的组织角色。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信する組織ロール。"
                                       }
                                     },
                                     "enum": [
@@ -1865,6 +2253,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "用于接收通知的项目角色列表。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "アラート通知を受信するプロジェクトロールのリスト。"
                                     }
                                   },
                                   "items": {
@@ -1873,6 +2264,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于接收通知的项目角色。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知を受信するプロジェクトロール。"
                                       }
                                     },
                                     "enum": [
@@ -1889,6 +2283,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -1898,6 +2295,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -1907,6 +2307,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                 }
                               }
                             },
@@ -1916,6 +2319,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                },
+                                "ja-JP": {
+                                  "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                 }
                               }
                             }
@@ -1934,6 +2340,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则使用的比较运算符。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールで使用される比較演算子。"
                       }
                     },
                     "enum": [
@@ -1950,6 +2359,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则适用的集群 ID 列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールが適用されるクラスターの ID。"
                       }
                     },
                     "items": {
@@ -1958,6 +2370,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "集群 ID。"
+                        },
+                        "ja-JP": {
+                          "description": "クラスターの ID。"
                         }
                       }
                     }
@@ -1968,6 +2383,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标单位（如 \"bytes\"、\"percent\"）。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスの単位（例: \"bytes\"、\"percent\"）。"
                       }
                     }
                   },
@@ -1977,6 +2395,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "重复告警通知的间隔时间（秒）。"
+                      },
+                      "ja-JP": {
+                        "description": "繰り返し送信されるアラート通知の間隔（秒）。"
                       }
                     }
                   }
@@ -2176,6 +2597,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定项目的所有告警规则列表。"
+              },
+              "ja-JP": {
+                "description": "指定したプロジェクト内のアラートルールのリストを返します。"
               }
             },
             "content": {
@@ -2188,6 +2612,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回告警规则列表。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールのリストを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2201,6 +2628,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2213,6 +2643,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの ID。"
                                 }
                               }
                             },
@@ -2222,6 +2655,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则所属项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが属するプロジェクトの ID。"
                                 }
                               }
                             },
@@ -2231,6 +2667,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの名前。"
                                 }
                               }
                             },
@@ -2240,6 +2679,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则级别。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのレベル。"
                                 }
                               },
                               "enum": [
@@ -2253,6 +2695,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则监控的指标名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが監視するメトリクスの名前。"
                                 }
                               }
                             },
@@ -2262,6 +2707,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则阈值。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのしきい値。"
                                 }
                               }
                             },
@@ -2271,6 +2719,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则的时间窗口，单位为分钟。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの時間ウィンドウ（分）。"
                                 }
                               }
                             },
@@ -2280,6 +2731,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则是否启用。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが有効かどうかを示します。"
                                 }
                               }
                             },
@@ -2289,6 +2743,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则是否发送已解决的通知。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが解決されたときに通知を送信するかどうかを示します。"
                                 }
                               }
                             },
@@ -2298,6 +2755,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "触发告警规则时采取的操作列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
                                 }
                               },
                               "items": {
@@ -2306,6 +2766,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "触发告警规则时采取的操作。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
                                   }
                                 },
                                 "properties": {
@@ -2315,6 +2778,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "操作类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションのタイプ。"
                                       }
                                     },
                                     "enum": [
@@ -2334,6 +2800,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "操作配置。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションの設定。"
                                       }
                                     },
                                     "properties": {
@@ -2343,6 +2812,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
                                           }
                                         },
                                         "properties": {
@@ -2352,6 +2824,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的邮件地址列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信するメールアドレスのリスト。"
                                               }
                                             },
                                             "items": {
@@ -2360,6 +2835,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的邮件地址。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信するメールアドレス。"
                                                 }
                                               }
                                             }
@@ -2370,6 +2848,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的组织角色列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信する組織ロールのリスト。"
                                               }
                                             },
                                             "items": {
@@ -2378,6 +2859,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的组织角色。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信する組織ロール。"
                                                 }
                                               },
                                               "enum": [
@@ -2393,6 +2877,9 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "用于接收通知的项目角色列表。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "アラート通知を受信するプロジェクトロールのリスト。"
                                               }
                                             },
                                             "items": {
@@ -2401,6 +2888,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "用于接收通知的项目角色。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "アラート通知を受信するプロジェクトロール。"
                                                 }
                                               },
                                               "enum": [
@@ -2417,6 +2907,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -2426,6 +2919,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -2435,6 +2931,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                           }
                                         }
                                       },
@@ -2444,6 +2943,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
                                           }
                                         }
                                       }
@@ -2458,6 +2960,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则使用的比较运算符。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールで使用される比較演算子。"
                                 }
                               },
                               "enum": [
@@ -2474,6 +2979,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则适用的集群 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが適用されるクラスターの ID。"
                                 }
                               },
                               "items": {
@@ -2482,6 +2990,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの ID。"
                                   }
                                 }
                               }
@@ -2496,6 +3007,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2509,6 +3023,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2518,6 +3035,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2648,6 +3168,10 @@
           "zh-CN": {
             "summary": "删除告警规则",
             "description": "本接口通过 ID 删除现有的告警规则。当前用户须为项目管理员。"
+          },
+          "ja-JP": {
+            "summary": "アラートルールを削除",
+            "description": "既存のアラートルールを ID で削除します。現在のユーザーはプロジェクト管理者である必要があります。"
           }
         },
         "tags": [
@@ -2666,6 +3190,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -2683,6 +3210,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要删除的告警规则 ID。"
+              },
+              "ja-JP": {
+                "description": "削除するアラートルールの ID。"
               }
             }
           }
@@ -2693,6 +3223,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回一个空响应，表示告警规则已成功删除。"
+              },
+              "ja-JP": {
+                "description": "アラートルールが正常に削除されたことを示す空のレスポンスを返します。"
               }
             },
             "content": {
@@ -2705,6 +3238,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回一个空响应。"
+                        },
+                        "ja-JP": {
+                          "description": "空のレスポンスを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2718,6 +3254,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         }
@@ -2729,6 +3268,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2742,6 +3284,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2751,6 +3296,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2791,6 +3339,10 @@
           "zh-CN": {
             "summary": "查询集群指标",
             "description": "本接口可以查询指定集群的统计指标。"
+          },
+          "ja-JP": {
+            "summary": "クラスターメトリクスを照会します",
+            "description": "特定のクラスタのメトリクスを照会します。"
           }
         },
         "tags": [
@@ -2804,6 +3356,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "目标集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象クラスタの ID。"
               }
             },
             "required": true,
@@ -2824,6 +3379,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -2840,6 +3398,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标报告期间的起始日期和时间，以 UTC 时间格式的 ISO 8601 时间戳表示。当 `period` 参数未设置时，需同时包含 `start` 和 `end` 参数。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスレポート期間の開始日時。UTC の ISO 8601 タイムスタンプ形式で指定します。`period` パラメータが設定されていない場合は、このパラメータと `end` を含めてください。"
                       }
                     }
                   },
@@ -2849,6 +3410,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标报告期间的结束日期和时间，以 UTC 时间格式的 ISO 8601 时间戳表示。当 `period` 参数未设置时，需同时包含 `start` 和 `end` 参数。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスレポート期間の終了日時。UTC の ISO 8601 タイムスタンプ形式で指定します。`period` パラメータが設定されていない場合は、このパラメータと `start` を含めてください。"
                       }
                     }
                   },
@@ -2858,6 +3422,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Zilliz Cloud 向用户报告指标的持续时间，以 UTC 时间格式的 ISO 8601 持续时间表示。当 `start` 和 `end` 参数未设置时，需同时包含 `period` 参数。"
+                      },
+                      "ja-JP": {
+                        "description": "Zilliz Cloud がメトリクスをレポートする期間。UTC の ISO 8601 duration 形式で指定します。`start` と `end` の両方のパラメータが設定されていない場合は、このパラメータを含めてください。"
                       }
                     }
                   },
@@ -2867,6 +3434,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Zilliz Cloud 向用户报告指标的时间间隔，以 UTC 时间格式的 ISO 8601 持续时间表示。最小粒度为 PT30S。"
+                      },
+                      "ja-JP": {
+                        "description": "Zilliz Cloud がメトリクスをレポートする時間間隔。UTC の ISO 8601 duration 形式で指定します。最小の粒度は PT30S です。"
                       }
                     }
                   },
@@ -2876,6 +3446,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Database 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象データベースの名前。"
                       }
                     }
                   },
@@ -2885,6 +3458,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象コレクションの名前。"
                       }
                     }
                   },
@@ -2899,6 +3475,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "指标名称。<br/>可选值请参考枚举。<br/>关于这些指标的详细信息，请参考[指标与告警参考](/docs/metrics-alerts-reference)章节。"
+                            },
+                            "ja-JP": {
+                              "description": "メトリクスの名前。<br/>指定可能な値については、列挙値を参照してください。<br/>これらのメトリクスの詳細については、[Metrics & Alerts Reference](/docs/metrics-alerts-reference) を参照してください。"
                             }
                           },
                           "enum": [
@@ -2952,6 +3531,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "一个 **MetricQuery** 对象。"
+                        },
+                        "ja-JP": {
+                          "description": "**MetricQuery** オブジェクト。"
                         }
                       }
                     },
@@ -2959,6 +3541,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "一个 **MetricQuery** 对象列表。"
+                      },
+                      "ja-JP": {
+                        "description": "**MetricQuery** オブジェクトのリスト。"
                       }
                     }
                   }
@@ -2987,6 +3572,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定指标的相关统计信息。"
+              },
+              "ja-JP": {
+                "description": "指定したメトリクスについて収集された統計情報の詳細を返します。"
               }
             },
             "content": {
@@ -3003,6 +3591,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -3020,6 +3611,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "指标名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メトリクス名。"
                                       }
                                     }
                                   },
@@ -3029,6 +3623,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "统计值单位。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "統計情報内の値の単位。"
                                       }
                                     }
                                   },
@@ -3043,6 +3640,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "ISO 8601 格式的数据点时间戳。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "ISO 8601 形式のデータポイントのタイムスタンプ。"
                                             }
                                           }
                                         },
@@ -3060,6 +3660,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "在采集周期内收集到的统计信息。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "ある間隔期間内に収集された統計情報。"
                                         }
                                       }
                                     },
@@ -3067,6 +3670,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "在采集周期内收集到的统计信息列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "各間隔で収集された統計情報のリスト。"
                                       }
                                     }
                                   }
@@ -3075,6 +3681,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "采集到的统计信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "収集された統計情報のセット。"
                                   }
                                 }
                               },
@@ -3082,6 +3691,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "对指定指标采集到的统计信息列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "指定したメトリクスについて収集された統計情報のリスト。"
                                 }
                               }
                             }
@@ -3090,6 +3702,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。"
                             }
                           }
                         }
@@ -3101,6 +3716,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -3114,6 +3732,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -3123,6 +3744,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }

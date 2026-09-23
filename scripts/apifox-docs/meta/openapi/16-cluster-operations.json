@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "查看集群列表",
             "description": "本接口可列出指定云区域中的所有集群相关信息。"
+          },
+          "ja-JP": {
+            "summary": "クラスターを一覧表示",
+            "description": "指定したクラウドリージョン内のすべてのクラスターを一覧表示します。"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每次返回的记录数。"
+              },
+              "ja-JP": {
+                "description": "各ページで返されるレコード数。"
               }
             }
           },
@@ -61,6 +68,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
             }
           },
@@ -76,6 +86,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -89,6 +102,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回集群名称列表。"
+              },
+              "ja-JP": {
+                "description": "クラスターの一覧を返します。"
               }
             },
             "x-i18n-langs": [
@@ -109,6 +125,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -121,6 +140,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "返回的集群总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "返されるクラスターの総数。"
                                 }
                               }
                             },
@@ -130,6 +152,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "結果内の現在のページ。"
                                 }
                               }
                             },
@@ -139,6 +164,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "每页的集群数。"
+                                },
+                                "ja-JP": {
+                                  "description": "結果内の1ページあたりのクラスター数。"
                                 }
                               }
                             },
@@ -153,6 +181,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターの ID。"
                                       }
                                     }
                                   },
@@ -162,6 +193,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスター名。"
                                       }
                                     }
                                   },
@@ -171,6 +205,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的描述。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターに関する任意の説明。"
                                       }
                                     }
                                   },
@@ -180,6 +217,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的地域 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターが存在するリージョンの ID。"
                                       }
                                     }
                                   },
@@ -194,6 +234,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的 CU 类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターに関連付けられた CU のタイプ。"
                                       }
                                     }
                                   },
@@ -214,6 +257,9 @@
                                           "Enterprise",
                                           "Serverless"
                                         ]
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターに関連付けられたサブスクリプションプラン。"
                                       }
                                     }
                                   },
@@ -223,6 +269,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的 CU 大小。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターに関連付けられた CU のサイズ。"
                                       }
                                     }
                                   },
@@ -244,6 +293,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターの現在のステータス。"
                                       }
                                     }
                                   },
@@ -253,6 +305,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的公网地址。你可以从公网连接到集群。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターのパブリックエンドポイント。パブリックネットワークからこのエンドポイントを使用してクラスターに接続できます。"
                                       }
                                     }
                                   },
@@ -262,6 +317,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的私网地址。你可以设置私有连接，使你的 VPS 同属于同一云区域的用户可以访问你的集群。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターのプライベートエンドポイント。プライベートリンクを設定して、同じクラウドリージョン内の VPS からクラスターへアクセスできるようにできます。"
                                       }
                                     }
                                   },
@@ -271,6 +329,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群所在项目的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターが存在するプロジェクトの ID。"
                                       }
                                     }
                                   },
@@ -280,6 +341,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群的创建时间。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターが作成された時刻。"
                                       }
                                     }
                                   }
@@ -288,6 +352,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "集群相关信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスター。"
                                   }
                                 }
                               },
@@ -295,6 +362,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群详细信息。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの詳細を含む配列。"
                                 }
                               }
                             }
@@ -303,8 +373,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含集群列表。"
+                            },
+                            "ja-JP": {
+                              "description": "クラスターの一覧を含むレスポンスペイロード。"
                             }
                           }
+                        }
+                      },
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "クラスターの一覧を返します。"
                         }
                       }
                     },
@@ -314,6 +392,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -327,6 +408,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -336,6 +420,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -455,6 +542,10 @@
           "zh-CN": {
             "summary": "查看集群指标",
             "description": "本接口查询指定集群的指标统计信息。"
+          },
+          "ja-JP": {
+            "summary": "メトリクスを照会します",
+            "description": "クラスターのメトリクスを照会します。"
           }
         },
         "tags": [
@@ -473,6 +564,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "集群 ID。"
+              },
+              "ja-JP": {
+                "description": "クラスターの ID。"
               }
             }
           },
@@ -488,6 +582,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -504,6 +601,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "开始时间，格式为 ISO 8601 时间戳格式（UTC）。当 `period` 参数未设置时，需要包含此参数。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスレポート期間の開始日時です。UTC の ISO 8601 タイムスタンプ形式で指定します。`period` パラメータが設定されていない場合にこのパラメータを使用します。"
                       }
                     },
                     "example": "2023-12-31T23:59:59Z"
@@ -514,6 +614,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "结束时间，格式为 ISO 8601 时间戳格式（UTC）。当 `period` 参数未设置时，需要包含此参数。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスレポート期間の終了日時です。UTC の ISO 8601 タイムスタンプ形式で指定します。`period` パラメータが設定されていない場合にこのパラメータを使用します。"
                       }
                     },
                     "example": "2024-07-01T08:15:30Z"
@@ -524,6 +627,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标报告期间的持续时间，格式为 [ISO 8601 持续时间](https://datatracker.ietf.org/doc/html/rfc3339#page-12)格式（UTC）。当 `start` 和 `end` 参数都未设置时，需要包含此参数。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスがレポートされる期間です。UTC の [ISO 8601 duration](https://datatracker.ietf.org/doc/html/rfc3339#page-12) 形式で指定します。`start` パラメータと `end` パラメータのいずれも設定されていない場合にこのパラメータを使用します。"
                       }
                     },
                     "enum": [
@@ -537,6 +643,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "系统向用户报告指标的时间间隔，格式为 ISO 8601 持续时间格式（UTC）。最小粒度为 PT30S。"
+                      },
+                      "ja-JP": {
+                        "description": "メトリクスがレポートされる時間間隔です。UTC の ISO 8601 duration 形式で指定します。最小の granularity は PT30S です。"
                       }
                     }
                   },
@@ -591,6 +700,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "待查询的指标名称。有关可用指标的详细信息，请参阅[指标与告警快速参考](/docs/metrics-alerts-reference#cluster-metrics)。"
+                            },
+                            "ja-JP": {
+                              "description": "照会するメトリクスの名前です。使用可能なメトリクスの詳細については、[Metrics & Alerts Reference](/docs/metrics-alerts-reference#cluster-metrics) を参照してください。"
                             }
                           }
                         },
@@ -604,6 +716,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "用于对指标进行统计的方法。**AVG** 表示计算平均值，对所有指标都适用； **P99** 表示计算 99 百分位值，对时延相关指标适用。"
+                            },
+                            "ja-JP": {
+                              "description": "メトリクスに適用する統計手法です。**AVG** は各メトリクスで利用可能な平均値、**P99** はレイテンシ関連メトリクスの 99 パーセンタイル値です。"
                             }
                           }
                         }
@@ -616,6 +731,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "关于指标的信息。"
+                        },
+                        "ja-JP": {
+                          "description": "メトリクスに関する情報です。"
                         }
                       }
                     },
@@ -623,6 +741,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指标查询对象数组。"
+                      },
+                      "ja-JP": {
+                        "description": "MetricQuery オブジェクトの配列。"
                       }
                     }
                   }
@@ -664,6 +785,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定指标的相关统计信息。"
+              },
+              "ja-JP": {
+                "description": "照会したメトリクスの統計情報を返します。"
               }
             },
             "content": {
@@ -680,6 +804,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -697,6 +824,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "指标名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メトリクスの名前です。"
                                       }
                                     }
                                   },
@@ -706,6 +836,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "用于计算指标的统计方法。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メトリクスに適用された統計関数です。"
                                       }
                                     }
                                   },
@@ -715,6 +848,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "指标的计量单位，如百分比。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メトリクスの測定単位です（例: percent）。"
                                       }
                                     }
                                   },
@@ -726,6 +862,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "一个数据点的详细信息。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "データポイントの詳細です。"
                                         }
                                       },
                                       "properties": {
@@ -735,6 +874,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "数据点的时间戳，格式为 ISO 8601。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "データポイントのタイムスタンプです。ISO 8601 形式で指定されます。"
                                             }
                                           }
                                         },
@@ -753,6 +895,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "一组数据点。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "データポイントの配列。"
                                       }
                                     }
                                   }
@@ -761,6 +906,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "关于指标的信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メトリクスに関する情報です。"
                                   }
                                 }
                               },
@@ -768,6 +916,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "结果对象数组。"
+                                },
+                                "ja-JP": {
+                                  "description": "結果オブジェクトの配列。"
                                 }
                               }
                             }
@@ -776,11 +927,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，是一个包含查询指标信息的对象。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロードです。照会したメトリクスに関する情報を含むオブジェクトです。"
                             }
                           }
                         }
                       },
-                      "description": "A success response."
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -792,6 +951,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -801,11 +963,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
                       },
-                      "description": "A failure response."
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      }
                     }
                   ]
                 },
@@ -865,6 +1035,10 @@
           "zh-CN": {
             "summary": "创建集群",
             "description": "创建一个 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "クラスターを作成します",
+            "description": "新しいクラスターを作成します。"
           }
         },
         "tags": [
@@ -883,6 +1057,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -903,6 +1080,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群所属的订阅计划。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するクラスターのサブスクリプションプラン。"
                       }
                     }
                   },
@@ -912,6 +1092,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するクラスターの名前。"
                       }
                     },
                     "maxLength": 32
@@ -922,6 +1105,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群使用的 CU 大小。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターで使用される CU のサイズ。"
                       }
                     },
                     "minimum": 1,
@@ -933,6 +1119,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群使用的 CU 类型。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターで使用される CU のタイプ。"
                       }
                     },
                     "enum": [
@@ -946,6 +1135,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群所属项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターを作成するプロジェクトの ID。"
                       }
                     },
                     "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
@@ -978,6 +1170,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已创建的集群的详细信息。"
+              },
+              "ja-JP": {
+                "description": "作成されたクラスターの詳細を含むオブジェクトを返します。"
               }
             },
             "content": {
@@ -995,6 +1190,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1007,6 +1205,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "受此操作影响的集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "この操作の対象となるクラスターの ID。"
                                 }
                               }
                             },
@@ -1016,6 +1217,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "访问此集群的默认用户名。此用户拥有此集群的管理权限。"
+                                },
+                                "ja-JP": {
+                                  "description": "デフォルトで生成されるクラスターユーザー名。"
                                 }
                               }
                             },
@@ -1025,6 +1229,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "访问此集群的默认用户密码。此密码仅展示一次，请务必记录并安全保存。"
+                                },
+                                "ja-JP": {
+                                  "description": "デフォルトで生成されるクラスターユーザーのパスワード。再度表示されないため、記録して安全に保管してください。"
                                 }
                               }
                             },
@@ -1034,6 +1241,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "表明此操作成功的声明信息。"
+                                },
+                                "ja-JP": {
+                                  "description": "この操作が成功したことを示す文。"
                                 }
                               }
                             }
@@ -1042,13 +1252,21 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为一个包含 Dedicated 集群相关信息的对象。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された専用クラスターに関する情報を含むオブジェクトであるレスポンスペイロード。"
                             }
                           }
                         }
                       },
                       "x-i18n-langs": [
                         "zh-CN"
-                      ]
+                      ],
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1056,6 +1274,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1069,6 +1290,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1078,6 +1302,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1124,6 +1351,10 @@
           "zh-CN": {
             "summary": "查看集群详情",
             "description": "本接口可查看指定 Cluster 的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "Cluster を説明します",
+            "description": "Cluster の詳細を説明します。"
           }
         },
         "tags": [
@@ -1137,6 +1368,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "指定集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "Cluster の ID。"
               }
             },
             "required": true,
@@ -1152,6 +1386,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             },
             "required": true,
@@ -1167,6 +1404,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定集群的详细信息。"
+              },
+              "ja-JP": {
+                "description": "Cluster の詳細を返します。"
               }
             },
             "content": {
@@ -1184,6 +1424,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1196,6 +1439,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster の ID。"
                                 }
                               }
                             },
@@ -1205,6 +1451,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster の名前。"
                                 }
                               }
                             },
@@ -1214,6 +1463,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群所在项目的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster が属するプロジェクトの ID。"
                                 }
                               }
                             },
@@ -1223,6 +1475,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的描述。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster の任意の説明。"
                                 }
                               }
                             },
@@ -1232,6 +1487,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的地域 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster が存在するクラウドリージョンの ID。"
                                 }
                               }
                             },
@@ -1245,6 +1503,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的 CU 类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster に関連付けられた CU のタイプ。"
                                 }
                               }
                             },
@@ -1265,6 +1526,9 @@
                                     "Enterprise",
                                     "Serverless"
                                   ]
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster のサブスクリプションプラン。"
                                 }
                               }
                             },
@@ -1286,6 +1550,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster の現在のステータス。"
                                 }
                               }
                             },
@@ -1295,6 +1562,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的公网地址。你可以从公网连接到集群。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster のパブリックエンドポイント。パブリックネットワークからこのエンドポイントを使用して Cluster に接続できます。"
                                 }
                               }
                             },
@@ -1304,6 +1574,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的私网地址。你可以设置私有连接，使你的 VPS 同属于同一云区域的用户可以访问你的集群。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster のプライベートエンドポイント。プライベートリンクを設定することで、同じクラウドリージョン内の VPS から Cluster にアクセスできるようになります。"
                                 }
                               }
                             },
@@ -1313,6 +1586,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的创建时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster が作成された時刻。"
                                 }
                               }
                             },
@@ -1322,6 +1598,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的副本数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster で使用されるレプリカ数。"
                                 }
                               }
                             },
@@ -1331,6 +1610,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的 CU 大小。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster で使用される CU のサイズ。"
                                 }
                               }
                             },
@@ -1340,6 +1622,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群的存储大小。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster のストレージサイズ。"
                                 }
                               },
                               "format": "sint64"
@@ -1350,6 +1635,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群创建的快照数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster から作成されたスナップショットの数。"
                                 }
                               }
                             },
@@ -1359,6 +1647,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群创建进度。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster の作成進行状況。"
                                 }
                               },
                               "minimum": 0,
@@ -1369,13 +1660,21 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含集群详情。"
+                            },
+                            "ja-JP": {
+                              "description": "Cluster の詳細を含むレスポンスペイロード。"
                             }
                           }
                         }
                       },
                       "x-i18n-langs": [
                         "zh-CN"
-                      ]
+                      ],
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failures",
@@ -1383,6 +1682,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1396,6 +1698,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1405,6 +1710,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1463,6 +1771,10 @@
           "zh-CN": {
             "summary": "删除集群",
             "description": "本接口删除一个集群。该操作将集群移入回收站，30 天后将永久删除该集群。"
+          },
+          "ja-JP": {
+            "summary": "Clusterの削除",
+            "description": "clusterを削除します。この操作により、clusterはごみ箱に移動されます。ごみ箱内のすべてのclusterは、30日後に完全削除される予定です。"
           }
         },
         "tags": [
@@ -1476,6 +1788,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "待删除集群 ID。"
+              },
+              "ja-JP": {
+                "description": "削除するclusterのID。"
               }
             },
             "required": true,
@@ -1490,6 +1805,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つAPI keyである必要があります。"
               }
             },
             "required": true,
@@ -1505,6 +1823,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已删除集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "削除されたclusterのIDを返します。"
               }
             },
             "content": {
@@ -1522,6 +1843,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1530,6 +1854,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含已操作集群的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "clusterのIDを含むobjectであるレスポンスペイロード。"
                             }
                           },
                           "type": "object",
@@ -1540,6 +1867,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "clusterのID。"
                                 }
                               }
                             },
@@ -1549,6 +1879,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "提示信息，表示当前操作成功。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在の操作が成功したことを示す文。"
                                 }
                               }
                             }
@@ -1560,7 +1893,12 @@
                       },
                       "x-i18n-langs": [
                         "zh-CN"
-                      ]
+                      ],
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1568,6 +1906,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1581,6 +1922,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1590,6 +1934,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1634,6 +1981,10 @@
           "zh-CN": {
             "summary": "修改集群配置",
             "description": "修改指定 Dedicated 集群的配置。您可以根据需要增加或减少分配给指定集群的 CUs 的数量。"
+          },
+          "ja-JP": {
+            "summary": "Cluster を変更します",
+            "description": "専用クラスターを変更します。クラスターに割り当てられた CU 数を増減できます。"
           }
         },
         "tags": [
@@ -1647,6 +1998,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要修改配置的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "設定を変更するクラスターの ID。"
               }
             },
             "required": true,
@@ -1667,6 +2021,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -1683,6 +2040,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群修改后关联的 CU 大小。<br/>对于 Free 和 Serverless 集群，该值始终为 `0`。<br/>对于 Standard 计划的 Dedicated 集群，该值取值范围为 `1` 到 `32`，可能的值为1、2、4、8、12、16、20、24、28、32。<br/>对于 Enterprise 计划的 Dedicated 集群，该值取值范围为 `1` 到 `1024`，可能的值为1、2、4、8、12、16、20、24、28、32、...、64、72、80、88、...、256、272、288、...、1024。<br/>关于 CU 大小的增量规则，请参阅 [详细计划对比](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) 中的 `Deployment` 部分。"
+                      },
+                      "ja-JP": {
+                        "description": "変更後にクラスターに関連付けられる CU サイズ。<br/>free および serverless クラスターでは、値は常に `0` です。<br/>Standard plan の dedicated クラスターでは、値は `1` ～ `32` で、指定可能な値は 1, 2, 4, 8, 12, 16, 20, 24, 28, 32 です。<br/>Enterprise plan の dedicated クラスターでは、値は `1` ～ `1,024` で、指定可能な値は 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024 です。<br/>CU サイズの増分ルールの詳細については、[Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) の `Deployment` セクションを参照してください。"
                       }
                     },
                     "minimum": 1,
@@ -1708,6 +2068,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回受此操作影响的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "対象クラスターの ID を返します。"
               }
             },
             "content": {
@@ -1725,6 +2088,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1733,6 +2099,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含已操作集群的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "クラスターの ID を含むオブジェクトであるレスポンスペイロード。"
                             }
                           },
                           "type": "object",
@@ -1743,6 +2112,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの ID。"
                                 }
                               }
                             },
@@ -1752,6 +2124,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "提示信息，表示当前操作成功。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在の操作が成功したことを示す文言。"
                                 }
                               }
                             }
@@ -1763,7 +2138,12 @@
                       },
                       "x-i18n-langs": [
                         "zh-CN"
-                      ]
+                      ],
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1771,6 +2151,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1784,6 +2167,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1793,6 +2179,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1837,6 +2226,10 @@
           "zh-CN": {
             "summary": "恢复集群",
             "description": "本接口可以恢复处于暂停状态的集群。"
+          },
+          "ja-JP": {
+            "summary": "Clusterを再開",
+            "description": "一時停止中のclusterを再開します。"
           }
         },
         "tags": [
@@ -1850,6 +2243,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要恢复的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "再開するclusterのID。"
               }
             },
             "required": true,
@@ -1865,6 +2261,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つAPI keyである必要があります。"
               }
             },
             "required": true,
@@ -1880,6 +2279,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回受此操作影响的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "対象clusterのIDを返します。"
               }
             },
             "content": {
@@ -1892,6 +2294,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1902,6 +2307,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1910,6 +2318,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含受此操作影响的集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "clusterのIDを含むオブジェクトであるレスポンスペイロード。"
                             }
                           },
                           "type": "object",
@@ -1920,6 +2331,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "clusterのID。"
                                 }
                               }
                             },
@@ -1929,6 +2343,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "提示信息，表示当前操作成功。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在の操作が成功したことを示す文。"
                                 }
                               }
                             }
@@ -1948,6 +2365,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1961,6 +2381,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1970,6 +2393,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2014,6 +2440,10 @@
           "zh-CN": {
             "summary": "挂起集群",
             "description": "本接口可以挂起指定的集群。挂起集群后，集群将停止运行，但不影响集群中存储的数据。"
+          },
+          "ja-JP": {
+            "summary": "Cluster を一時停止",
+            "description": "指定した cluster を一時停止します。この操作では cluster のみが停止され、データはそのまま保持されます。"
           }
         },
         "tags": [
@@ -2027,6 +2457,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "待挂起的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "一時停止する cluster の ID。"
               }
             },
             "required": true,
@@ -2042,6 +2475,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "required": true,
@@ -2057,6 +2493,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回受此操作影响的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "影響を受けた cluster の ID を返します。"
               }
             },
             "content": {
@@ -2074,6 +2513,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2082,6 +2524,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含已操作集群的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "cluster の ID を含むオブジェクトであるレスポンスペイロード。"
                             }
                           },
                           "type": "object",
@@ -2092,6 +2537,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "cluster の ID。"
                                 }
                               }
                             },
@@ -2101,6 +2549,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "提示信息，表示当前操作成功。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在の操作が成功したことを示す文言。"
                                 }
                               }
                             }
@@ -2112,7 +2563,12 @@
                       },
                       "x-i18n-langs": [
                         "zh-CN"
-                      ]
+                      ],
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -2120,6 +2576,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2133,6 +2592,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2142,6 +2604,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2186,6 +2651,10 @@
           "zh-CN": {
             "summary": "创建 Serverless 集群",
             "description": "本接口可以创建一个 Serverless 集群。"
+          },
+          "ja-JP": {
+            "summary": "Serverless Cluster を作成",
+            "description": "serverless cluster を作成します。"
           }
         },
         "tags": [
@@ -2199,6 +2668,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             },
             "required": true,
@@ -2220,6 +2692,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群的订阅计划。"
+                      },
+                      "ja-JP": {
+                        "description": "作成する cluster のサブスクリプションプラン。"
                       }
                     },
                     "enum": [
@@ -2233,6 +2708,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群名称。值为长度不超过32个字符的字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "作成する cluster の名前。32 文字以内の文字列です。"
                       }
                     },
                     "maxLength": 32
@@ -2243,6 +2721,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群所属项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "cluster を作成する project の ID。"
                       }
                     },
                     "example": "proj-xxxxxxxxxxxxxxxxxxxxxx"
@@ -2280,6 +2761,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2292,6 +2776,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "受此操作影响的集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "この操作の対象となる cluster の ID。"
                                 }
                               }
                             },
@@ -2301,6 +2788,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "访问此集群的默认用户名。此用户拥有此集群的管理权限。"
+                                },
+                                "ja-JP": {
+                                  "description": "デフォルトで生成される cluster user の名前。"
                                 }
                               }
                             },
@@ -2310,6 +2800,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "访问此集群的默认用户密码。此密码仅展示一次，请务必记录并安全保存。"
+                                },
+                                "ja-JP": {
+                                  "description": "デフォルトで生成される cluster user のパスワード。再表示されないため、控えて安全に保管してください。"
                                 }
                               }
                             },
@@ -2319,6 +2812,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "表明此操作成功的声明信息。"
+                                },
+                                "ja-JP": {
+                                  "description": "この操作が成功したことを示す文言。"
                                 }
                               }
                             }
@@ -2327,6 +2823,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为一个包含 Serverless 集群相关信息的对象。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された serverless cluster の情報を含むオブジェクトのレスポンスペイロード。"
                             }
                           }
                         }
@@ -2335,6 +2834,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回已创建的 Serverless 集群相关信息。"
+                        },
+                        "ja-JP": {
+                          "description": "作成された serverless cluster の情報を返します。"
                         }
                       }
                     },
@@ -2349,6 +2851,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2358,6 +2863,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2366,6 +2874,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       }
                     }
@@ -2395,6 +2906,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功"
+              }
             }
           }
         },
@@ -2410,6 +2926,10 @@
           "zh-CN": {
             "summary": "查看项目列表",
             "description": "本接口用于查看当前用户所属的所有项目。"
+          },
+          "ja-JP": {
+            "summary": "プロジェクトを一覧表示",
+            "description": "既存のプロジェクトを一覧表示します。"
           }
         },
         "tags": [
@@ -2423,6 +2943,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             },
             "required": true,
@@ -2438,6 +2961,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回项目详情列表。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの一覧を返します。"
               }
             },
             "content": {
@@ -2455,6 +2981,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2469,6 +2998,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "一个数字值，代表项目创建的时间，单位为毫秒，起始时间为 1970 年 1 月 1 日 00:00:00 UTC。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "Unix epoch からの経過時間をミリ秒で表した、プロジェクトの作成時刻を示す数値です。"
                                   }
                                 }
                               },
@@ -2478,6 +3010,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "项目中已创建的集群数量。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクト内に作成されたクラスターの数です。"
                                   }
                                 }
                               },
@@ -2487,6 +3022,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "项目的 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクトの ID。"
                                   }
                                 }
                               },
@@ -2496,6 +3034,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "项目的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクト名。"
                                   }
                                 }
                               }
@@ -2504,6 +3045,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "项目的相关信息。"
+                              },
+                              "ja-JP": {
+                                "description": "プロジェクト。"
                               }
                             }
                           },
@@ -2511,11 +3055,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应返回项目列表。"
+                            },
+                            "ja-JP": {
+                              "description": "プロジェクトの一覧であるレスポンスペイロード。"
                             }
                           }
                         }
                       },
-                      "description": "Returns a list of projects."
+                      "description": "Returns a list of projects.",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "プロジェクトの一覧を返します。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -2528,6 +3080,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2537,11 +3092,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
                       },
-                      "description": "Returns an error message."
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      }
                     }
                   ]
                 },

@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "创建资源组",
             "description": "本操作创建资源组。Milvus 实例在启动后创建一个默认资源组，包含所有可用的 QueryNodes。您可以创建其他资源组，将部分 QueryNodes 从默认组重新分配到这些新配置的组中，并将 Collection 加载到这些新配置的组中的 QueryNodes 上。无论资源组是否存在，此操作都始终成功。"
+          },
+          "ja-JP": {
+            "summary": "リソースグループを作成します",
+            "description": "この操作は、リソースグループを作成します。Milvus インスタンスには、利用可能なすべての query node を含むデフォルトのリソースグループがあります。追加のリソースグループを作成し、デフォルトグループの特定の query node を再割り当てして、コレクションを新しく構成されたグループの query node にロードできます。この操作は、リソースグループが存在するかどうかに関係なく、常に成功します。"
           }
         },
         "x-include-target": [
@@ -44,13 +48,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -65,8 +78,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "资源组名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するリソースグループの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "config": {
                     "type": "object",
@@ -74,6 +93,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "资源组配置。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するリソースグループの構成。"
                       }
                     },
                     "properties": {
@@ -83,6 +105,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "资源组中需要的 QueryNodes 的数量。"
+                          },
+                          "ja-JP": {
+                            "description": "リソースグループに割り当てる query node の数。"
                           }
                         },
                         "properties": {
@@ -92,10 +117,19 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "资源组中需要的 QueryNodes 的数量。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てる query node の数。"
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           }
-                        }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       },
                       "limits": {
                         "type": "object",
@@ -103,6 +137,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "资源组中需要的 QueryNodes 的最大数量。"
+                          },
+                          "ja-JP": {
+                            "description": "リソースグループに割り当てる query node の最大数。"
                           }
                         },
                         "properties": {
@@ -112,10 +149,19 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "资源组中需要的 QueryNodes 的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てる query node の最大数。"
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           }
-                        }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       },
                       "transfer_from": {
                         "type": "array",
@@ -123,6 +169,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "需要从哪些源资源组中转移 QueryNodes。"
+                          },
+                          "ja-JP": {
+                            "description": "query node の転送元となるソースリソースグループのリスト。"
                           }
                         },
                         "items": {
@@ -131,6 +180,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "当前源资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "query node の転送元となるソースリソースグループ。"
                             }
                           },
                           "properties": {
@@ -140,11 +192,23 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前源资源组名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "query node の転送元となるソースリソースグループの名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
-                        }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       },
                       "transfer_to": {
                         "type": "array",
@@ -152,6 +216,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                          },
+                          "ja-JP": {
+                            "description": "query node の転送先となるターゲットリソースグループのリスト。"
                           }
                         },
                         "items": {
@@ -160,6 +227,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "当前目标资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "query node の転送先となるターゲットリソースグループ。"
                             }
                           },
                           "properties": {
@@ -169,18 +239,36 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前目标资源组名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "query node の転送先となるターゲットリソースグループの名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
-                        }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "name"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "name": "group1",
@@ -204,7 +292,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -212,6 +303,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
               }
             },
             "content": {
@@ -224,6 +318,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -236,10 +333,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -248,10 +351,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -259,6 +371,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -269,8 +384,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -278,12 +399,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -305,9 +438,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/resource_groups/alter": {
@@ -319,6 +458,10 @@
           "zh-CN": {
             "summary": "更新资源组",
             "description": "本操作更新指定资源组的配置。"
+          },
+          "ja-JP": {
+            "summary": "リソースグループを更新",
+            "description": "この操作は、指定されたリソースグループの構成を更新します。"
           }
         },
         "x-include-target": [
@@ -335,13 +478,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -356,6 +508,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要更新的资源组配置。请求体中可以包含多个资源组的配置，每个资源组的名称作为键，其配置作为值。"
+                      },
+                      "ja-JP": {
+                        "description": "更新するリソースグループの構成。リクエストボディには複数のリソースグループを含めることができ、各リソースグループの名前をキー、その構成を値として指定します。"
                       }
                     },
                     "properties": {
@@ -365,6 +520,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "指定资源组的更新配置。"
+                          },
+                          "ja-JP": {
+                            "description": "キーで指定されたリソースグループの更新後の構成。"
                           }
                         },
                         "properties": {
@@ -374,6 +532,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "资源组中需要的 QueryNodes 的数量。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てる query node の数。"
                               }
                             },
                             "properties": {
@@ -383,10 +544,19 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "资源组中需要的 QueryNodes 的数量。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "リソースグループに割り当てる query node の数。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "limits": {
                             "type": "object",
@@ -394,6 +564,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "资源组中需要的 QueryNodes 的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てる query node の最大数。"
                               }
                             },
                             "properties": {
@@ -403,10 +576,19 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "リソースグループに割り当てる query node の最大数。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "transfer_from": {
                             "type": "array",
@@ -414,6 +596,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "需要从哪些源资源组中转移 QueryNodes。"
+                              },
+                              "ja-JP": {
+                                "description": "query node の転送元となるソースリソースグループのリスト。"
                               }
                             },
                             "items": {
@@ -422,6 +607,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前源资源组。"
+                                },
+                                "ja-JP": {
+                                  "description": "query node の転送元となるソースリソースグループ。"
                                 }
                               },
                               "properties": {
@@ -431,11 +619,23 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "当前源资源组名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "query node の転送元となるソースリソースグループの名前。"
                                     }
-                                  }
+                                  },
+                                  "x-added-at": "2.6.x",
+                                  "x-last-modified": "2.6.x",
+                                  "x-deprecated-since": null
                                 }
-                              }
-                            }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "transfer_to": {
                             "type": "array",
@@ -443,6 +643,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                              },
+                              "ja-JP": {
+                                "description": "query node の転送先となるターゲットリソースグループのリスト。"
                               }
                             },
                             "items": {
@@ -451,6 +654,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前目标资源组。"
+                                },
+                                "ja-JP": {
+                                  "description": "query node の転送先となるターゲットリソースグループ。"
                                 }
                               },
                               "properties": {
@@ -460,20 +666,41 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "当前目标资源组名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "query node の転送先となるターゲットリソースグループの名前。"
                                     }
-                                  }
+                                  },
+                                  "x-added-at": "2.6.x",
+                                  "x-last-modified": "2.6.x",
+                                  "x-deprecated-since": null
                                 }
-                              }
-                            }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           }
-                        }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "resource_groups"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "resource_groups": {
@@ -498,7 +725,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -506,6 +736,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
               }
             },
             "content": {
@@ -518,6 +751,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -530,10 +766,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -542,10 +784,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -553,6 +804,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -563,8 +817,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -572,12 +832,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -598,9 +870,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/resource_groups/describe": {
@@ -612,6 +890,10 @@
           "zh-CN": {
             "summary": "查看资源组详情",
             "description": "本操作返回指定资源组的配置。"
+          },
+          "ja-JP": {
+            "summary": "リソースグループの詳細を取得",
+            "description": "この操作は、指定されたリソースグループの構成を返します。"
           }
         },
         "x-include-target": [
@@ -628,13 +910,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -649,19 +940,31 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要查看详情的资源组名称。"
+                      },
+                      "ja-JP": {
+                        "description": "詳細を取得するリソースグループの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "name"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "name": "group1"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -669,6 +972,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定资源组的配置。"
+              },
+              "ja-JP": {
+                "description": "指定されたリソースグループの構成を返します。"
               }
             },
             "content": {
@@ -681,6 +987,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "type": "object",
@@ -690,10 +999,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -704,6 +1019,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "需要更新的资源组配置。请求体中可以包含多个资源组的配置，每个资源组的名称作为键，其配置作为值。"
+                                },
+                                "ja-JP": {
+                                  "description": "更新するリソースグループの構成。リクエストボディには複数のリソースグループを含めることができ、各リソースグループの名前をキー、その構成を値として指定します。"
                                 }
                               },
                               "properties": {
@@ -713,6 +1031,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "指定资源组的更新配置。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "キーで指定されたリソースグループの更新後の構成。"
                                     }
                                   },
                                   "properties": {
@@ -722,6 +1043,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "资源组中需要的 QueryNodes 的数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "リソースグループに割り当てる query node の数。"
                                         }
                                       },
                                       "properties": {
@@ -731,10 +1055,19 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "资源组中需要的 QueryNodes 的数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "リソースグループに割り当てる query node の数。"
                                             }
-                                          }
+                                          },
+                                          "x-added-at": "2.6.x",
+                                          "x-last-modified": "2.6.x",
+                                          "x-deprecated-since": null
                                         }
-                                      }
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
                                     },
                                     "limits": {
                                       "type": "object",
@@ -742,6 +1075,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "リソースグループに割り当てる query node の最大数。"
                                         }
                                       },
                                       "properties": {
@@ -751,10 +1087,19 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "资源组中需要的 QueryNodes 的最大数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "リソースグループに割り当てる query node の最大数。"
                                             }
-                                          }
+                                          },
+                                          "x-added-at": "2.6.x",
+                                          "x-last-modified": "2.6.x",
+                                          "x-deprecated-since": null
                                         }
-                                      }
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
                                     },
                                     "transfer_from": {
                                       "type": "array",
@@ -762,6 +1107,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "需要从哪些源资源组中转移 QueryNodes。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "query node の転送元となるソースリソースグループのリスト。"
                                         }
                                       },
                                       "items": {
@@ -770,6 +1118,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "当前源资源组。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "query node の転送元となるソースリソースグループ。"
                                           }
                                         },
                                         "properties": {
@@ -779,11 +1130,23 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "当前源资源组名称。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "query node の転送元となるソースリソースグループの名前。"
                                               }
-                                            }
+                                            },
+                                            "x-added-at": "2.6.x",
+                                            "x-last-modified": "2.6.x",
+                                            "x-deprecated-since": null
                                           }
-                                        }
-                                      }
+                                        },
+                                        "x-added-at": "2.6.x",
+                                        "x-last-modified": "2.6.x",
+                                        "x-deprecated-since": null
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
                                     },
                                     "transfer_to": {
                                       "type": "array",
@@ -791,6 +1154,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "query node の転送先となるターゲットリソースグループのリスト。"
                                         }
                                       },
                                       "items": {
@@ -799,6 +1165,9 @@
                                         "x-i18n": {
                                           "zh-CN": {
                                             "description": "当前目标资源组。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "query node の転送先となるターゲットリソースグループ。"
                                           }
                                         },
                                         "properties": {
@@ -808,19 +1177,43 @@
                                             "x-i18n": {
                                               "zh-CN": {
                                                 "description": "当前目标资源组名称。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "query node の転送先となるターゲットリソースグループの名前。"
                                               }
-                                            }
+                                            },
+                                            "x-added-at": "2.6.x",
+                                            "x-last-modified": "2.6.x",
+                                            "x-deprecated-since": null
                                           }
-                                        }
-                                      }
+                                        },
+                                        "x-added-at": "2.6.x",
+                                        "x-last-modified": "2.6.x",
+                                        "x-deprecated-since": null
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
                                     }
-                                  }
+                                  },
+                                  "x-added-at": "2.6.x",
+                                  "x-last-modified": "2.6.x",
+                                  "x-deprecated-since": null
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -828,6 +1221,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -838,8 +1234,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -847,12 +1249,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -894,9 +1308,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/resource_groups/list": {
@@ -908,6 +1328,10 @@
           "zh-CN": {
             "summary": "查看资源组列表",
             "description": "本操作返回资源组名称列表。"
+          },
+          "ja-JP": {
+            "summary": "リソースグループを一覧表示",
+            "description": "この操作は、リソースグループ名のリストを返します。"
           }
         },
         "x-include-target": [
@@ -924,13 +1348,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -938,11 +1371,17 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {},
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {}
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -950,6 +1389,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回资源组名称列表。"
+              },
+              "ja-JP": {
+                "description": "リソースグループ名のリストを返します。"
               }
             },
             "content": {
@@ -962,6 +1404,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "type": "object",
@@ -971,10 +1416,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "array",
@@ -982,6 +1433,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "资源组名称列表。"
+                            },
+                            "ja-JP": {
+                              "description": "リソースグループ名のリスト。"
                             }
                           },
                           "items": {
@@ -990,11 +1444,23 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "资源组名称。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループの名前。"
                               }
-                            }
-                          }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1002,6 +1468,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -1012,8 +1481,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1021,12 +1496,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1050,9 +1537,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/resource_groups/drop": {
@@ -1064,6 +1557,10 @@
           "zh-CN": {
             "summary": "删除资源组",
             "description": "本操作删除指定资源组。"
+          },
+          "ja-JP": {
+            "summary": "リソースグループを削除",
+            "description": "この操作は、指定されたリソースグループを削除します。"
           }
         },
         "x-include-target": [
@@ -1080,13 +1577,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1101,19 +1607,31 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要删除的资源组名称。"
+                      },
+                      "ja-JP": {
+                        "description": "削除するリソースグループの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "name"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "name": "group1"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1121,6 +1639,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
               }
             },
             "content": {
@@ -1133,6 +1654,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -1145,10 +1669,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -1157,10 +1687,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1168,6 +1707,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -1178,8 +1720,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1187,12 +1735,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1213,9 +1773,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/resource_groups/transfer_replica": {
@@ -1227,6 +1793,10 @@
           "zh-CN": {
             "summary": "转移 Collection 副本",
             "description": "本操作将指定 Collection 的副本从源资源组转移到目标资源组。"
+          },
+          "ja-JP": {
+            "summary": "Collection レプリカを転送",
+            "description": "この操作は、指定されたコレクションのレプリカをソースリソースグループからターゲットリソースグループへ転送します。"
           }
         },
         "x-include-target": [
@@ -1243,13 +1813,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1264,8 +1843,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "源资源组名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ソースリソースグループの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "targetRgName": {
                     "type": "string",
@@ -1273,8 +1858,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标资源组名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ターゲットリソースグループの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -1282,8 +1873,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象コレクションの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "replicaNum": {
                     "type": "integer",
@@ -1291,8 +1888,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要转移的副本数量。"
+                      },
+                      "ja-JP": {
+                        "description": "転送するレプリカの数。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -1300,7 +1903,10 @@
                   "targetRgName",
                   "collectionName",
                   "replicaNum"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "sourceRgName": "__default_resource_group",
@@ -1309,7 +1915,10 @@
                 "replicaNum": 1
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1317,6 +1926,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
               }
             },
             "content": {
@@ -1329,6 +1941,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -1341,10 +1956,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -1353,10 +1974,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1364,6 +1994,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -1374,8 +2007,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1383,12 +2022,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1410,9 +2061,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },

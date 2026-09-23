@@ -1,0 +1,1427 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Snapshot Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "x-zdoc-fragment": {
+    "schemaVersion": "1.0",
+    "apiSurface": "data-plane",
+    "service": "snapshots-v2"
+  },
+  "tags": [
+    {
+      "name": "Snapshot Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "快照 (V2)"
+        }
+      },
+      "x-include-target": [
+        "milvus"
+      ]
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/v2/vectordb/jobs/snapshot/describe": {
+      "post": {
+        "operationId": "getRestoreSnapshotState",
+        "summary": "Get Restore Snapshot Job State",
+        "deprecated": false,
+        "description": "Retrieves the current state of a restore snapshot job.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看恢复快照任务详情",
+            "description": "获取恢复快照任务的当前状态。"
+          },
+          "ja-JP": {
+            "summary": "スナップショット復元ジョブの状態を取得",
+            "description": "スナップショット復元ジョブの現在の状態を取得します。"
+          }
+        },
+        "tags": [
+          "Snapshot Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobId": {
+                    "type": "string",
+                    "description": "The ID of the restore snapshot job.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复快照任务 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "スナップショット復元ジョブの ID。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "jobId"
+                ],
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "jobId": "451799928999570161"
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Retrieves the current state of a restore snapshot job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "获取恢复快照任务的当前状态。"
+              },
+              "ja-JP": {
+                "description": "スナップショット復元ジョブの現在の状態を取得します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/RestoreSnapshotJobInfo",
+                          "x-tab-label": "success",
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": 451799928999570200,
+                        "snapshotName": "snapshot_2026_01",
+                        "dbName": "default",
+                        "collectionName": "my_collection",
+                        "state": "RestoreSnapshotCompleted",
+                        "progress": 100,
+                        "reason": "",
+                        "startTime": "2026-01-01T00:00:00Z",
+                        "timeCost": 1200
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "snapshot operation failed"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    },
+    "/v2/vectordb/jobs/snapshot/export": {
+      "post": {
+        "operationId": "exportSnapshot",
+        "summary": "Export Snapshot",
+        "deprecated": false,
+        "description": "Exports a collection snapshot to the configured object storage.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "导出快照",
+            "description": "将 Collection 快照导出到已配置的对象存储。"
+          },
+          "ja-JP": {
+            "summary": "スナップショットのエクスポート",
+            "description": "コレクションのスナップショットを、設定済みのオブジェクトストレージにエクスポートします。"
+          }
+        },
+        "tags": [
+          "Snapshot Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database that contains the collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 所属数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションを含むデータベースの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to snapshot.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要创建快照的 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "スナップショットを作成するコレクションの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "snapshotName": {
+                    "type": "string",
+                    "description": "The name of the snapshot.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "快照名称。"
+                      },
+                      "ja-JP": {
+                        "description": "スナップショットの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "targetS3Path": {
+                    "type": "string",
+                    "description": "The root path in S3-compatible object storage under which Milvus writes the exported snapshot data and metadata. It must be a writable URI such as `s3://bucket-name/export-root`. Milvus appends snapshot-specific metadata paths below this root; the response returns the generated `snapshotMetadataURI`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Milvus 写入导出快照数据和元数据的 S3 兼容对象存储根路径。该值应为可写的 URI，例如 `s3://bucket-name/export-root`。Milvus 会在此根路径下追加快照专属的元数据路径；响应中返回生成的 `snapshotMetadataURI`。"
+                      },
+                      "ja-JP": {
+                        "description": "Milvus がエクスポートしたスナップショットデータとメタデータを書き込む、S3 互換オブジェクトストレージ内のルートパス。`s3://bucket-name/export-root` のような書き込み可能な URI である必要があります。Milvus はこのルートの下にスナップショット固有のメタデータパスを追加します。レスポンスでは、生成された `snapshotMetadataURI` が返されます。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "externalSpec": {
+                    "type": "string",
+                    "description": "Optional JSON configuration for external object storage. When `targetS3Path` points to storage outside the Milvus-managed bucket, pass an `extfs` object to override how Milvus accesses that bucket. Supported JSON fields:\n\n- `format`: `\"parquet\"`, `\"lance-table\"`, or `\"vortex\"`; defaults to `\"parquet\"` when omitted or when the whole value is empty.\n- `columns`: optional array of column names to load.\n- `extfs`: optional map of object-storage overrides. Allowed keys are `cloud_provider`, `region`, `use_iam`, `use_ssl`, `use_virtual_host`, `iam_endpoint`, `storage_type`, `ssl_ca_cert`, `access_key_id`, and `access_key_value`.\n\nRequirements:\n\n- The value must be valid JSON.\n- `format` must be one of the supported values above.\n- `extfs` keys are allowlisted; unsupported keys are rejected.\n- `use_iam`, `use_ssl`, and `use_virtual_host` must be the strings `\"true\"` or `\"false\"`.\n- Use `extfs` only when the target bucket requires credentials or connectivity settings different from the Milvus-managed bucket. Omit `externalSpec` or pass an empty string to use the default Milvus-managed storage.\n\nExample: `{\"format\":\"parquet\",\"extfs\":{\"cloud_provider\":\"aws\",\"region\":\"us-west-2\",\"use_iam\":\"true\"}}`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "可选的外部对象存储配置 JSON。当 `targetS3Path` 指向 Milvus 管理 bucket 之外的存储时，可传入 `extfs` 对象以覆盖 Milvus 访问该 bucket 的方式。支持的 JSON 字段：\n\n- `format`：`\"parquet\"`、`\"lance-table\"` 或 `\"vortex\"`；省略或整个值为空时默认为 `\"parquet\"`。\n- `columns`：可选的要加载的列名数组。\n- `extfs`：可选的对象存储覆盖配置。允许的键包括 `cloud_provider`、`region`、`use_iam`、`use_ssl`、`use_virtual_host`、`iam_endpoint`、`storage_type`、`ssl_ca_cert`、`access_key_id` 和 `access_key_value`。\n\n要求：\n\n- 值必须是合法 JSON。\n- `format` 必须是上述支持值之一。\n- `extfs` 的键必须位于允许列表中，不支持的键会被拒绝。\n- `use_iam`、`use_ssl`、`use_virtual_host` 必须是字符串 `\"true\"` 或 `\"false\"`。\n- 仅当目标 bucket 需要与 Milvus 管理 bucket 不同的凭据或连接设置时才使用 `extfs`。如需使用默认的 Milvus 管理存储，请省略 `externalSpec` 或传入空字符串。\n\n示例：`{\"format\":\"parquet\",\"extfs\":{\"cloud_provider\":\"aws\",\"region\":\"us-west-2\",\"use_iam\":\"true\"}}`。"
+                      },
+                      "ja-JP": {
+                        "description": "外部オブジェクトストレージ用のオプションの JSON 設定。`targetS3Path` が Milvus 管理バケットの外部のストレージを指す場合は、`extfs` オブジェクトを渡して、Milvus がそのバケットにアクセスする方法を上書きします。サポートされている JSON フィールド:\n\n- `format`: `\"parquet\"`、`\"lance-table\"`、または `\"vortex\"`。省略時または値全体が空の場合は `\"parquet\"` がデフォルトです。\n- `columns`: 読み込むカラム名のオプションの配列。\n- `extfs`: オブジェクトストレージの上書き設定のオプションのマップ。許可されるキーは `cloud_provider`、`region`、`use_iam`、`use_ssl`、`use_virtual_host`、`iam_endpoint`、`storage_type`、`ssl_ca_cert`、`access_key_id`、`access_key_value` です。\n\n要件:\n\n- 値は有効な JSON である必要があります。\n- `format` は上記のサポート対象の値のいずれかである必要があります。\n- `extfs` のキーは許可リスト方式です。サポートされていないキーは拒否されます。\n- `use_iam`、`use_ssl`、`use_virtual_host` は文字列の `\"true\"` または `\"false\"` である必要があります。\n- `extfs` は、ターゲットバケットが Milvus 管理バケットとは異なる資格情報または接続設定を必要とする場合にのみ使用してください。`externalSpec` を省略するか空文字列を渡すと、デフォルトの Milvus 管理ストレージが使用されます。\n\n例: `{\"format\":\"parquet\",\"extfs\":{\"cloud_provider\":\"aws\",\"region\":\"us-west-2\",\"use_iam\":\"true\"}}`。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "snapshotName",
+                  "targetS3Path"
+                ],
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "dbName": "default",
+                "collectionName": "my_collection",
+                "snapshotName": "snapshot_2026_01",
+                "targetS3Path": "s3://bucket-name/export-root",
+                "externalSpec": ""
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Exports a collection snapshot to the configured object storage.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "将 Collection 快照导出到已配置的对象存储。"
+              },
+              "ja-JP": {
+                "description": "コレクションのスナップショットを、設定済みのオブジェクトストレージにエクスポートします。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "snapshotMetadataURI": {
+                              "type": "string",
+                              "description": "The object-storage URI of the exported snapshot metadata.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "导出快照元数据在对象存储中的 URI。"
+                                },
+                                "ja-JP": {
+                                  "description": "エクスポートされたスナップショットメタデータのオブジェクトストレージ URI。"
+                                }
+                              },
+                              "x-added-at": "3.0.x",
+                              "x-last-modified": "3.0.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "snapshotMetadataURI"
+                          ],
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "snapshotMetadataURI": "s3://bucket/snapshots/snapshot_2026_01"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "snapshot operation failed"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    },
+    "/v2/vectordb/jobs/snapshot/list": {
+      "post": {
+        "operationId": "listRestoreSnapshotJobs",
+        "summary": "List Restore Snapshot Jobs",
+        "deprecated": false,
+        "description": "Lists restore snapshot jobs, optionally filtered by database or collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看恢复快照任务列表",
+            "description": "列出恢复快照任务，可按数据库或 Collection 筛选。"
+          },
+          "ja-JP": {
+            "summary": "スナップショット復元ジョブを一覧表示",
+            "description": "スナップショット復元ジョブを一覧表示します。データベースまたはコレクションでフィルタリングすることもできます。"
+          }
+        },
+        "tags": [
+          "Snapshot Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database to filter by.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于筛选的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "フィルタリングに使用するデータベースの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to filter by.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于筛选的 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "フィルタリングに使用するコレクションの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "dbName": "default",
+                "collectionName": "my_collection"
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Lists restore snapshot jobs, optionally filtered by database or collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "列出恢复快照任务，可按数据库或 Collection 筛选。"
+              },
+              "ja-JP": {
+                "description": "スナップショット復元ジョブを一覧表示します。データベースまたはコレクションでフィルタリングすることもできます。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/RestoreSnapshotJobInfo",
+                                "x-tab-label": "success",
+                                "x-added-at": "3.0.x",
+                                "x-last-modified": "3.0.x",
+                                "x-deprecated-since": null
+                              },
+                              "description": "The restore snapshot jobs matching the request filters.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "符合请求筛选条件的恢复快照任务列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "リクエストのフィルターに一致するスナップショット復元ジョブ。"
+                                }
+                              },
+                              "x-added-at": "3.0.x",
+                              "x-last-modified": "3.0.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "records"
+                          ],
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "records": [
+                          {
+                            "jobId": 451799928999570200,
+                            "snapshotName": "snapshot_2026_01",
+                            "dbName": "default",
+                            "collectionName": "my_collection",
+                            "state": "RestoreSnapshotCompleted",
+                            "progress": 100,
+                            "reason": "",
+                            "startTime": "2026-01-01T00:00:00Z",
+                            "timeCost": 1200
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "snapshot operation failed"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    },
+    "/v2/vectordb/jobs/snapshot/restore_external": {
+      "post": {
+        "operationId": "restoreExternalSnapshot",
+        "summary": "Restore External Snapshot",
+        "deprecated": false,
+        "description": "Restores a collection from an externally stored snapshot.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "从外部存储恢复快照",
+            "description": "从外部存储的快照恢复 Collection。"
+          },
+          "ja-JP": {
+            "summary": "外部スナップショットを復元",
+            "description": "外部ストレージに保存されたスナップショットからコレクションを復元します。"
+          }
+        },
+        "tags": [
+          "Snapshot Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The target database name.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ターゲットデータベース名。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "targetCollectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ターゲットコレクションの名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "snapshotMetadataURI": {
+                    "type": "string",
+                    "description": "The object-storage URI of the snapshot metadata to restore.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要恢复的快照元数据对象存储 URI。"
+                      },
+                      "ja-JP": {
+                        "description": "復元するスナップショットメタデータのオブジェクトストレージ URI。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "externalSpec": {
+                    "type": "string",
+                    "description": "Optional external storage specification.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "可选的外部存储配置。"
+                      },
+                      "ja-JP": {
+                        "description": "オプションの外部ストレージ仕様。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "targetCollectionName",
+                  "snapshotMetadataURI"
+                ],
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "dbName": "default",
+                "targetCollectionName": "restored_collection",
+                "snapshotMetadataURI": "s3://bucket/snapshots/snapshot_2026_01",
+                "externalSpec": ""
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Restores a collection from an externally stored snapshot.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "从外部存储的快照恢复 Collection。"
+              },
+              "ja-JP": {
+                "description": "外部ストレージに保存されたスナップショットからコレクションを復元します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "jobId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "The unique identifier of the created restore job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "创建的恢复任务唯一标识符。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成された復元ジョブの一意の識別子。"
+                                }
+                              },
+                              "x-added-at": "3.0.x",
+                              "x-last-modified": "3.0.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "jobId"
+                          ],
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "jobId": 451799928999570200
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "snapshot operation failed"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmptyResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "data": {
+            "type": "object",
+            "properties": {},
+            "description": "An empty result object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "空结果对象。"
+              },
+              "ja-JP": {
+                "description": "空の結果オブジェクト。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "description": "A successful empty response.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "成功的空响应。"
+          },
+          "ja-JP": {
+            "description": "成功した空のレスポンス。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "错误描述。"
+              },
+              "ja-JP": {
+                "description": "エラーメッセージ。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "description": "Returns an error message.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回错误消息。"
+          },
+          "ja-JP": {
+            "description": "エラーメッセージを返します。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      },
+      "RestoreSnapshotJobInfo": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The unique identifier of the restore job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务的唯一标识符。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブの一意の識別子。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "snapshotName": {
+            "type": "string",
+            "description": "The name of the snapshot being restored.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "正在恢复的快照名称。"
+              },
+              "ja-JP": {
+                "description": "復元中のスナップショットの名前。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "dbName": {
+            "type": "string",
+            "description": "The target database name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标数据库名称。"
+              },
+              "ja-JP": {
+                "description": "ターゲットデータベース名。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The target collection name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标 Collection 名称。"
+              },
+              "ja-JP": {
+                "description": "ターゲットコレクション名。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "state": {
+            "type": "string",
+            "description": "The current state of the restore job.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务的当前状态。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブの現在の状態。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "progress": {
+            "type": "integer",
+            "description": "The progress of the restore job as a percentage.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务的进度百分比。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブの進行状況（パーセント）。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "reason": {
+            "type": "string",
+            "description": "The failure reason when the restore job fails.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务失败时的原因。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブが失敗した場合の失敗理由。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "startTime": {
+            "type": "string",
+            "description": "The timestamp when the restore job started.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务开始的时间戳。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブが開始されたタイムスタンプ。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "timeCost": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The elapsed time of the restore job in milliseconds.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "恢复任务耗时（毫秒）。"
+              },
+              "ja-JP": {
+                "description": "復元ジョブの経過時間（ミリ秒）。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "required": [
+          "jobId",
+          "snapshotName",
+          "dbName",
+          "collectionName",
+          "state",
+          "progress"
+        ],
+        "description": "Detailed information about a restore snapshot job.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "恢复快照任务的详细信息。"
+          },
+          "ja-JP": {
+            "description": "スナップショット復元ジョブの詳細情報。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "x-base-urls": {
+      "ZillizVectorV2": [
+        {
+          "key": "cluster",
+          "label": "Cluster Endpoint",
+          "url": "https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530",
+          "prompt": "Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "集群端点",
+              "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            },
+            "ja-JP": {
+              "label": "クラスターエンドポイント",
+              "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            }
+          },
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+        },
+        {
+          "key": "on-demand-compute",
+          "label": "Project Endpoint (On-Demand)",
+          "url": "https://{project-id}.{region}.api.zillizcloud.com",
+          "prompt": "<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "项目端点（按需）",
+              "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            },
+            "ja-JP": {
+              "label": "プロジェクトエンドポイント（オンデマンド）",
+              "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            }
+          },
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+        }
+      ]
+    }
+  }
+}

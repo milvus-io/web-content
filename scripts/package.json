@@ -23,6 +23,7 @@
     "fetch-sdk-docs:go:v3.0": "node lark-docs/index.js -c config.json -m go-v3.0.x --all",
     "fetch-sdk-docs:cpp:v2.6": "node lark-docs/index.js -c config.json -m cpp-v2.6.x --all",
     "fetch-sdk-docs:cpp:v3.0": "node lark-docs/index.js -c config.json -m cpp-v3.0.x --all",
+    "refresh-sdk-docs": "node refresh-sdk-docs.js",
     "sync:shared-scripts": "node sync-shared-scripts.js",
     "check:shared-scripts": "node sync-shared-scripts.js --check",
     "test:shared-sync": "node --test test/sync-shared-scripts.test.js",
@@ -46,6 +47,7 @@
     "node-fetch": "^2.7.0",
     "nunjucks": "^3.2.4",
     "showdown": "^2.1.0",
-    "slugify": "^1.6.8"
+    "slugify": "^1.6.8",
+    "ajv": "^8.17.1"
   }
 }

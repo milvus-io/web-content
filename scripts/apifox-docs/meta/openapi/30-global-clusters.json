@@ -30,6 +30,10 @@
           "zh-CN": {
             "summary": "列出可用全球集群地域",
             "description": "返回可在同一个全球集群中配合使用的地域组。创建全球集群或添加从集群前可调用此接口。"
+          },
+          "ja-JP": {
+            "summary": "利用可能な Global Cluster リージョンを一覧表示",
+            "description": "Global Cluster で一緒に使用できるリージョングループを返します。Global Cluster を作成する前、またはセカンダリクラスターを追加する前にこの API を使用してください。"
           }
         },
         "parameters": [
@@ -45,6 +49,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -55,6 +62,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回可用全球集群地域组。"
+              },
+              "ja-JP": {
+                "description": "利用可能な Global Cluster のリージョングループを返します。"
               }
             },
             "content": {
@@ -71,6 +81,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "可用于全球集群且成员地域之间可互通的地域组。空数组表示当前组织没有可用的地域组合。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster で使用するために、メンバーリージョン同士が相互に通信できるリージョングループです。空の配列は、現在その組織に対して利用可能なリージョンの組み合わせが公開されていないことを意味します。"
                             }
                           },
                           "items": {
@@ -90,6 +103,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -99,6 +115,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -109,6 +128,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -178,6 +200,10 @@
           "zh-CN": {
             "summary": "列出全球集群",
             "description": "列出账户中的所有全球集群。"
+          },
+          "ja-JP": {
+            "summary": "Global Clusterを一覧表示します",
+            "description": "アカウント内のすべてのグローバルクラスターを一覧表示します。"
           }
         },
         "parameters": [
@@ -188,6 +214,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每次返回的记录数。"
+              },
+              "ja-JP": {
+                "description": "各レスポンスに含めるレコード数。"
               }
             },
             "required": false,
@@ -206,6 +235,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
             },
             "required": false,
@@ -228,6 +260,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -238,6 +273,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群列表。"
+              },
+              "ja-JP": {
+                "description": "グローバルクラスターの一覧。"
               }
             },
             "content": {
@@ -254,6 +292,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群总数。"
+                            },
+                            "ja-JP": {
+                              "description": "グローバルクラスターの総数。"
                             }
                           }
                         },
@@ -263,6 +304,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "当前页码。"
+                            },
+                            "ja-JP": {
+                              "description": "現在のページ番号。"
                             }
                           }
                         },
@@ -272,6 +316,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "每页记录数。"
+                            },
+                            "ja-JP": {
+                              "description": "1 ページあたりのレコード数。"
                             }
                           }
                         },
@@ -281,6 +328,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群列表。"
+                            },
+                            "ja-JP": {
+                              "description": "グローバルクラスターの一覧。"
                             }
                           },
                           "items": {
@@ -292,6 +342,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの ID。"
                                   }
                                 },
                                 "example": "glo-xxxxxxxxxxxxxxx"
@@ -302,6 +355,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの名前。"
                                   }
                                 },
                                 "example": "my-global-cluster"
@@ -312,6 +368,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群所属项目 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このグローバルクラスターが属するプロジェクトの ID。"
                                   }
                                 },
                                 "example": "proj-xxxxxxxxxxxxxxx"
@@ -322,6 +381,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群部署的区域 ID 列表。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このグローバルクラスターがデプロイされているリージョン ID の一覧。"
                                   }
                                 },
                                 "items": {
@@ -330,6 +392,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "区域 ID。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "リージョン ID。"
                                     }
                                   }
                                 }
@@ -340,6 +405,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群的计算单元类型（CU）。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの Compute unit (CU) タイプ。グローバルクラスターのメンバーは同じ CU タイプを共有します。"
                                   }
                                 },
                                 "example": "Performance-optimized",
@@ -355,6 +423,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群的计算单元大小（CU）。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの Compute unit (CU) サイズ。グローバルクラスターのメンバーは同じ CU サイズを共有します。"
                                   }
                                 },
                                 "example": 4
@@ -365,6 +436,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群的连接地址。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの接続アドレス。"
                                   }
                                 }
                               },
@@ -375,6 +449,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "全球集群的创建时间。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスターの作成時刻。"
                                   }
                                 },
                                 "example": "2026-06-01T12:00:00Z"
@@ -390,6 +467,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -403,6 +483,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -412,6 +495,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -496,6 +582,10 @@
           "zh-CN": {
             "summary": "创建全球集群",
             "description": "本接口创建一个全球集群。全球集群由部署在不同区域的多个成员集群组成。全球集群中的成员集群共享相同的计算单元类型和计算单元大小。您可以创建全球集群以提供跨区域的灾难恢复和低延迟访问。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster を作成します",
+            "description": "この操作は global cluster を作成します。global cluster は、異なるリージョンにデプロイされた複数の member cluster で構成されます。global cluster 内の member cluster は同じ CU type と CU size を共有します。global cluster を作成することで、災害復旧とリージョンをまたいだ低レイテンシアクセスを実現できます。"
           }
         },
         "parameters": [
@@ -511,6 +601,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -520,6 +613,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "创建全球集群的参数。"
+            },
+            "ja-JP": {
+              "description": "global cluster を作成するためのパラメーター。"
             }
           },
           "required": true,
@@ -534,6 +630,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群名称。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の名前。"
                       }
                     },
                     "example": "my-global-cluster"
@@ -544,6 +643,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群所属项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster が属する project の ID。"
                       }
                     },
                     "example": "proj-xxxxxxxxxxxxxxx"
@@ -554,6 +656,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群的计算单元类型（CU）。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の Compute unit (CU) type。global cluster のメンバーは同じ CU type を共有します。"
                       }
                     },
                     "example": "Performance-optimized",
@@ -569,6 +674,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群的计算单元大小（CU）。<br/>对于全球集群中的成员集群，该值取值范围为 `1` 到 `1024`，可能的值为1、2、4、8、12、16、20、24、28、32、...、64、72、80、88、...、256、272、288、...、1024。<br/>关于 CU 大小的增量规则，请参阅 [详细计划对比](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) 中的 `Deployment` 部分。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の Compute unit (CU) size。global cluster のメンバーは同じ CU size を共有します。<br/>global cluster 内のメンバーでは、この値は `1` ～ `1,024` を指定でき、使用可能な値は 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024 です。<br/>CU size の増分ルールの詳細については、[Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) の `Deployment` セクションを参照してください。"
                       }
                     },
                     "example": 4
@@ -579,6 +687,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群的主集群参数。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の primary cluster のパラメーター。"
                       }
                     },
                     "properties": {
@@ -588,6 +699,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "主集群名称。"
+                          },
+                          "ja-JP": {
+                            "description": "primary cluster の名前。"
                           }
                         },
                         "example": "my-primary-cluster"
@@ -598,6 +712,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "主集群部署的区域 ID。该区域必须是指定项目中适用的区域之一。"
+                          },
+                          "ja-JP": {
+                            "description": "primary cluster がデプロイされるリージョン ID。リージョンは、指定された project で利用可能なリージョンのいずれかである必要があります。"
                           }
                         }
                       }
@@ -613,6 +730,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群的从集群参数。您可以指定一个或多个从集群。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の secondary cluster のパラメーター。1 つ以上の secondary cluster を指定できます。"
                       }
                     },
                     "items": {
@@ -624,6 +744,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群名称。"
+                            },
+                            "ja-JP": {
+                              "description": "secondary cluster の名前。"
                             }
                           },
                           "example": "my-secondary-cluster-1"
@@ -634,6 +757,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群部署的区域 ID。该区域必须是指定项目中适用的区域之一，并且必须与主集群部署的区域不同。"
+                            },
+                            "ja-JP": {
+                              "description": "secondary cluster がデプロイされるリージョン ID。リージョンは、指定された project で利用可能なリージョンのいずれかである必要があり、かつ primary cluster がデプロイされるリージョンとは異なる必要があります。"
                             }
                           }
                         }
@@ -715,6 +841,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回创建的全球集群的信息。"
+              },
+              "ja-JP": {
+                "description": "作成された global cluster の情報を返します。"
               }
             },
             "content": {
@@ -731,6 +860,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "创建的全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された global cluster の ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -741,6 +873,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "访问全球集群的用户名。"
+                            },
+                            "ja-JP": {
+                              "description": "global cluster へのアクセスに使用するユーザー名。"
                             }
                           },
                           "example": "admin"
@@ -751,6 +886,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "访问全球集群的密码。"
+                            },
+                            "ja-JP": {
+                              "description": "global cluster へのアクセスに使用するパスワード。"
                             }
                           },
                           "example": "Passw0rd!"
@@ -761,6 +899,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "创建全球集群的任务 ID。您可以使用此 ID 查询创建任务的进度。"
+                            },
+                            "ja-JP": {
+                              "description": "global cluster 作成ジョブの ID。この ID を使用して作成ジョブの進行状況を照会できます。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -774,6 +915,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -783,6 +927,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -792,6 +939,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -836,6 +986,10 @@
           "zh-CN": {
             "summary": "查看全球集群",
             "description": "返回全球集群的基础拓扑和连接信息。本接口不返回复制延迟。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster を記述する",
+            "description": "Global Cluster の基本トポロジーと接続情報を返します。レプリケーションラグは意図的にこのエンドポイントから除外されています。"
           }
         },
         "parameters": [
@@ -851,6 +1005,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要查看的全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "記述する Global Cluster の ID。"
               }
             }
           },
@@ -866,6 +1023,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API キーである必要があります。"
               }
             }
           }
@@ -876,6 +1036,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回全球集群信息。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster に関する情報を返します。"
               }
             },
             "content": {
@@ -891,6 +1054,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -901,6 +1067,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群显示名称。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster の表示名。"
                             }
                           },
                           "example": "my-global-cluster"
@@ -911,6 +1080,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "项目 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Project ID。"
                             }
                           },
                           "example": "proj-xxxxxxxxxxxxxxx"
@@ -921,6 +1093,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "成员集群的区域 ID。取值保留成员顺序且不会去重。"
+                            },
+                            "ja-JP": {
+                              "description": "メンバークラスターの Region ID。値はメンバーの順序を保持し、重複排除はされません。"
                             }
                           },
                           "items": {
@@ -934,6 +1109,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "成员集群共享的 CU 类型。"
+                            },
+                            "ja-JP": {
+                              "description": "メンバークラスター間で共有される CU type。"
                             }
                           },
                           "enum": [
@@ -949,6 +1127,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "成员集群共享的 CU 大小。"
+                            },
+                            "ja-JP": {
+                              "description": "メンバークラスター間で共有される CU size。"
                             }
                           },
                           "example": 4
@@ -959,6 +1140,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球端点地址。"
+                            },
+                            "ja-JP": {
+                              "description": "グローバルエンドポイントアドレス。"
                             }
                           },
                           "example": "https://glo-xxxxxxxx.global-cluster.vectordb.zillizcloud.com"
@@ -969,6 +1153,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "ISO 8601 格式的创建时间。"
+                            },
+                            "ja-JP": {
+                              "description": "ISO 8601 形式の作成時刻。"
                             }
                           },
                           "format": "date-time",
@@ -980,6 +1167,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群中的成员集群。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster 内のメンバークラスター。"
                             }
                           },
                           "items": {
@@ -991,6 +1181,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "成员集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メンバークラスター ID。"
                                   }
                                 },
                                 "example": "in01-xxxxxxxxxxxxxxx"
@@ -1001,6 +1194,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "成员集群名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メンバークラスター名。"
                                   }
                                 },
                                 "example": "primary-cluster"
@@ -1011,6 +1207,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "成员集群部署的区域 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メンバークラスターがデプロイされている Region ID。"
                                   }
                                 },
                                 "example": "aws-us-west-2"
@@ -1021,6 +1220,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "成员角色。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メンバーロール。"
                                   }
                                 },
                                 "enum": [
@@ -1035,6 +1237,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "成员集群状态。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "メンバークラスターのステータス。"
                                   }
                                 },
                                 "example": "RUNNING"
@@ -1052,6 +1257,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -1061,6 +1269,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -1071,6 +1282,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -1174,6 +1388,10 @@
           "zh-CN": {
             "summary": "获取全球集群复制延迟",
             "description": "返回主集群到各个从集群的复制延迟。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster のレプリケーションラグを取得します",
+            "description": "プライマリクラスターから各セカンダリクラスターへのレプリケーションラグを返します。"
           }
         },
         "parameters": [
@@ -1189,6 +1407,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster の ID。"
               }
             }
           },
@@ -1204,6 +1425,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -1214,6 +1438,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回复制延迟信息。"
+              },
+              "ja-JP": {
+                "description": "レプリケーションラグ情報を返します。"
               }
             },
             "content": {
@@ -1230,6 +1457,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -1240,6 +1470,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "主集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "プライマリクラスター ID。"
                             }
                           },
                           "example": "in01-primary"
@@ -1250,6 +1483,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "主集群区域 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "プライマリクラスターのリージョン ID。"
                             }
                           },
                           "example": "aws-us-west-2"
@@ -1260,6 +1496,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "主集群到各个从集群的复制延迟。"
+                            },
+                            "ja-JP": {
+                              "description": "プライマリクラスターから各セカンダリクラスターへのレプリケーションラグ。"
                             }
                           },
                           "items": {
@@ -1271,6 +1510,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "从集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "セカンダリクラスター ID。"
                                   }
                                 },
                                 "example": "in01-secondary-eu"
@@ -1281,6 +1523,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "从集群区域 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "セカンダリクラスターのリージョン ID。"
                                   }
                                 },
                                 "example": "aws-eu-west-1"
@@ -1291,6 +1536,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "复制延迟，单位为毫秒。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "ミリ秒単位のレプリケーションラグ。"
                                   }
                                 },
                                 "example": 120
@@ -1307,6 +1555,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -1316,6 +1567,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -1326,6 +1580,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -1377,6 +1634,10 @@
           "zh-CN": {
             "summary": "添加从集群",
             "description": "添加一个或多个从集群。新增从集群使用现有全球集群的 CU 规格。"
+          },
+          "ja-JP": {
+            "summary": "セカンダリクラスターを追加",
+            "description": "1 つ以上のセカンダリクラスターを追加します。新しいセカンダリクラスターには、既存の Global Cluster CU 仕様が使用されます。"
           }
         },
         "parameters": [
@@ -1392,6 +1653,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster の ID。"
               }
             }
           },
@@ -1407,6 +1671,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -1416,6 +1683,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "添加从集群的参数。"
+            },
+            "ja-JP": {
+              "description": "セカンダリクラスターを追加するためのパラメーター。"
             }
           },
           "required": true,
@@ -1430,6 +1700,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要添加的从集群。"
+                      },
+                      "ja-JP": {
+                        "description": "追加するセカンダリクラスター。"
                       }
                     },
                     "items": {
@@ -1441,6 +1714,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群显示名称。"
+                            },
+                            "ja-JP": {
+                              "description": "セカンダリクラスターの表示名。"
                             }
                           },
                           "example": "secondary-cluster-ap"
@@ -1451,6 +1727,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群区域 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "セカンダリクラスターのリージョン ID。"
                             }
                           },
                           "example": "aws-ap-southeast-1"
@@ -1491,6 +1770,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回添加从集群任务。"
+              },
+              "ja-JP": {
+                "description": "add-secondary-cluster ジョブを返します。"
               }
             },
             "content": {
@@ -1507,6 +1789,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "异步操作的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期操作のジョブ ID。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -1520,6 +1805,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -1529,6 +1817,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -1539,6 +1830,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -1581,6 +1875,10 @@
           "zh-CN": {
             "summary": "删除全球集群成员集群",
             "description": "从全球集群中删除成员集群。从集群可直接删除；主集群只有在同一全球集群中的所有从集群均已删除后才能删除。"
+          },
+          "ja-JP": {
+            "summary": "Global Member Clusterを削除します",
+            "description": "Global Clusterからメンバークラスタを削除します。セカンダリメンバークラスタは直接削除できます。プライマリメンバークラスタは、同じGlobal Cluster内のすべてのセカンダリメンバークラスタが削除された後にのみ削除できます。"
           }
         },
         "parameters": [
@@ -1596,6 +1894,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global ClusterのID。"
               }
             }
           },
@@ -1611,6 +1912,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要删除的成员集群 ID，可以是主集群或从集群 ID。"
+              },
+              "ja-JP": {
+                "description": "削除するメンバークラスタID。プライマリまたはセカンダリのいずれのメンバークラスタIDでも指定できます。"
               }
             }
           },
@@ -1626,6 +1930,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つAPI keyを使用する必要があります。"
               }
             }
           }
@@ -1636,6 +1943,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已删除成员集群的信息。"
+              },
+              "ja-JP": {
+                "description": "削除されたメンバークラスタの情報を返します。"
               }
             },
             "content": {
@@ -1652,6 +1962,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -1662,6 +1975,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "已删除成员集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "削除されたメンバークラスタID。"
                             }
                           },
                           "example": "in01-xxxxxxxxxxxxxxx"
@@ -1672,6 +1988,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "展示给用户的删除提示。"
+                            },
+                            "ja-JP": {
+                              "description": "ユーザーに表示される削除プロンプト。"
                             }
                           },
                           "example": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
@@ -1685,6 +2004,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -1694,6 +2016,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -1704,6 +2029,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -1748,6 +2076,10 @@
           "zh-CN": {
             "summary": "切换全球集群",
             "description": "执行计划内切换，将当前主集群切换到指定从集群。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster の切り替え",
+            "description": "現在のプライマリクラスターから、指定されたセカンダリクラスターへの計画切り替えを実行します。"
           }
         },
         "parameters": [
@@ -1763,6 +2095,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster の ID。"
               }
             }
           },
@@ -1778,6 +2113,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -1787,6 +2125,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "切换全球集群的参数。"
+            },
+            "ja-JP": {
+              "description": "Global Cluster を切り替えるためのパラメーター。"
             }
           },
           "required": true,
@@ -1801,6 +2142,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要提升为新主集群的从集群 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "新しいプライマリクラスターとして昇格させるセカンダリクラスターの ID。"
                       }
                     },
                     "example": "in01-secondary"
@@ -1828,6 +2172,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回切换任务。"
+              },
+              "ja-JP": {
+                "description": "切り替えジョブを返します。"
               }
             },
             "content": {
@@ -1844,6 +2191,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -1854,6 +2204,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "原主集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "以前のプライマリクラスター ID。"
                             }
                           },
                           "example": "in01-primary"
@@ -1864,6 +2217,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "新主集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "新しいプライマリクラスター ID。"
                             }
                           },
                           "example": "in01-secondary"
@@ -1874,6 +2230,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "异步操作的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期操作の Job ID。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -1887,6 +2246,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -1896,6 +2258,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -1906,6 +2271,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -1951,6 +2319,10 @@
           "zh-CN": {
             "summary": "故障转移全球集群",
             "description": "强制提升指定从集群为新的主集群。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster のフェイルオーバー",
+            "description": "指定したセカンダリクラスターを新しいプライマリクラスターとして強制昇格します。"
           }
         },
         "parameters": [
@@ -1966,6 +2338,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster の ID。"
               }
             }
           },
@@ -1981,6 +2356,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -1990,6 +2368,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "故障转移全球集群的参数。"
+            },
+            "ja-JP": {
+              "description": "Global Cluster をフェイルオーバーするためのパラメーター。"
             }
           },
           "required": true,
@@ -2004,6 +2385,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要提升为新主集群的从集群 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "新しいプライマリクラスターとして昇格するセカンダリクラスターの ID。"
                       }
                     },
                     "example": "in01-secondary"
@@ -2031,6 +2415,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回故障转移任务。"
+              },
+              "ja-JP": {
+                "description": "フェイルオーバージョブを返します。"
               }
             },
             "content": {
@@ -2047,6 +2434,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "Global Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -2057,6 +2447,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "原主集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "以前のプライマリクラスター ID。"
                             }
                           },
                           "example": "in01-primary"
@@ -2067,6 +2460,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "新主集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "新しいプライマリクラスター ID。"
                             }
                           },
                           "example": "in01-secondary"
@@ -2077,6 +2473,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "异步操作的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期操作の Job ID。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -2090,6 +2489,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -2099,6 +2501,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -2109,6 +2514,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -2154,6 +2562,10 @@
           "zh-CN": {
             "summary": "修改全球集群 CU",
             "description": "在全球集群级别修改 CU 大小或 CU 自动扩缩容策略。CU 设置会应用于所有成员集群。"
+          },
+          "ja-JP": {
+            "summary": "Global Cluster の CU を変更します",
+            "description": "Global Cluster レベルで CU サイズまたは CU オートスケーリングポリシーを変更します。CU 設定はすべてのメンバークラスターに適用されます。"
           }
         },
         "parameters": [
@@ -2169,6 +2581,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global Cluster の ID。"
               }
             }
           },
@@ -2184,6 +2599,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -2193,6 +2611,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "修改全球集群 CU 设置的参数。"
+            },
+            "ja-JP": {
+              "description": "Global Cluster の CU 設定を変更するためのパラメータ。"
             }
           },
           "required": true,
@@ -2207,6 +2628,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 CU 大小。与 autoscaling.cu 互斥。"
+                      },
+                      "ja-JP": {
+                        "description": "対象の CU サイズ。autoscaling.cu と相互排他的です。"
                       }
                     },
                     "example": 8
@@ -2217,6 +2641,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "全球集群自动扩缩容策略。"
+                      },
+                      "ja-JP": {
+                        "description": "Global Cluster のオートスケーリングポリシー。"
                       }
                     },
                     "properties": {
@@ -2226,6 +2653,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "CU 自动扩缩容策略。可配置 min 和 max 进行动态扩缩容，或配置 schedules 进行定时扩缩容。"
+                          },
+                          "ja-JP": {
+                            "description": "CU オートスケーリングポリシー。動的スケーリングには min と max を設定するか、スケジュールスケーリングには schedules を設定します。"
                           }
                         },
                         "properties": {
@@ -2235,6 +2665,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "动态扩缩容的最小 CU，必须与 max 同时设置。"
+                              },
+                              "ja-JP": {
+                                "description": "動的スケーリングの最小 CU。max とあわせて設定する必要があります。"
                               }
                             },
                             "example": 4
@@ -2245,6 +2678,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "动态扩缩容的最大 CU，必须与 min 同时设置。"
+                              },
+                              "ja-JP": {
+                                "description": "動的スケーリングの最大 CU。min とあわせて設定する必要があります。"
                               }
                             },
                             "example": 16
@@ -2255,6 +2691,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "定时扩缩容规则。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールスケーリングルール。"
                               }
                             },
                             "items": {
@@ -2266,6 +2705,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "定时扩缩容的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールスケーリング用の Cron 式。"
                                     }
                                   },
                                   "example": "0 9 * * 1-4"
@@ -2276,6 +2718,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "该定时规则的目标 CU 大小。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "このスケジュールの対象 CU サイズ。"
                                     }
                                   },
                                   "example": 8
@@ -2340,6 +2785,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回 CU 修改任务。"
+              },
+              "ja-JP": {
+                "description": "CU 変更ジョブを返します。"
               }
             },
             "content": {
@@ -2356,6 +2804,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "异步操作的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期操作の Job ID。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -2369,6 +2820,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -2378,6 +2832,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -2388,6 +2845,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -2430,6 +2890,10 @@
           "zh-CN": {
             "summary": "移除全球端点",
             "description": "在所有从集群均已删除后解散全球集群端点。剩余主集群会继续作为普通 Dedicated 集群运行。"
+          },
+          "ja-JP": {
+            "summary": "Global Endpointを削除",
+            "description": "すべてのセカンダリクラスターが削除された後、Global Cluster endpointを解体します。残ったプライマリクラスターは通常の専用クラスターとして継続されます。"
           }
         },
         "parameters": [
@@ -2445,6 +2909,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "全球集群 ID。"
+              },
+              "ja-JP": {
+                "description": "Global ClusterのID。"
               }
             }
           },
@@ -2460,6 +2927,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つAPI keyである必要があります。"
               }
             }
           }
@@ -2470,6 +2940,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已移除全球集群端点的信息。"
+              },
+              "ja-JP": {
+                "description": "削除されたGlobal Cluster endpointの情報を返します。"
               }
             },
             "content": {
@@ -2486,6 +2959,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "已移除全球集群端点的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "削除されたGlobal Cluster endpointのID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -2499,6 +2975,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -2508,6 +2987,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -2518,6 +3000,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."
@@ -2560,6 +3045,10 @@
           "zh-CN": {
             "summary": "转换集群为全球集群",
             "description": "将现有 Dedicated 集群转换为新全球集群的主成员，并创建一个或多个从成员集群。"
+          },
+          "ja-JP": {
+            "summary": "ClusterをGlobal Clusterに変換",
+            "description": "既存の専用クラスターを新しいGlobal Clusterのプライマリメンバーに変換し、1つ以上のセカンダリメンバークラスターを作成します。"
           }
         },
         "parameters": [
@@ -2575,6 +3064,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つAPI keyを使用する必要があります。"
               }
             }
           }
@@ -2584,6 +3076,9 @@
           "x-i18n": {
             "zh-CN": {
               "description": "将 Dedicated 集群转换为全球集群的参数。"
+            },
+            "ja-JP": {
+              "description": "専用クラスターをGlobal Clusterに変換するためのパラメーター。"
             }
           },
           "required": true,
@@ -2598,6 +3093,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要转换为全球集群主成员的现有 Dedicated 集群 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "Global Clusterのプライマリメンバーに変換する既存の専用クラスターID。"
                       }
                     },
                     "example": "in01-xxxxxxxxxxxxxxx"
@@ -2608,6 +3106,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "新全球集群显示名称。"
+                      },
+                      "ja-JP": {
+                        "description": "新しいGlobal Clusterの表示名。"
                       }
                     },
                     "example": "my-global-cluster"
@@ -2618,6 +3119,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要创建为全球集群成员的从集群，至少需要一个。"
+                      },
+                      "ja-JP": {
+                        "description": "Global Clusterメンバーとして作成するセカンダリクラスター。少なくとも1つの項目が必要です。"
                       }
                     },
                     "items": {
@@ -2629,6 +3133,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群显示名称。"
+                            },
+                            "ja-JP": {
+                              "description": "セカンダリクラスターの表示名。"
                             }
                           },
                           "example": "secondary-cluster-ap"
@@ -2639,6 +3146,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "从集群区域 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "セカンダリクラスターのリージョンID。"
                             }
                           },
                           "example": "aws-ap-southeast-1"
@@ -2699,6 +3209,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回转换任务。"
+              },
+              "ja-JP": {
+                "description": "変換ジョブを返します。"
               }
             },
             "content": {
@@ -2715,6 +3228,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "新的全球集群 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "新しいGlobal Cluster ID。"
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
@@ -2725,6 +3241,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "异步转换操作的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期変換操作のジョブID。"
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
@@ -2738,6 +3257,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "properties": {
@@ -2747,6 +3269,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 400
@@ -2757,6 +3282,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "Invalid request parameters."

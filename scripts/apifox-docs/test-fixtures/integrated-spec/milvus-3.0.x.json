@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "Milvus REST", "version": "3.0.0" },
+  "tags": [{ "name": "Vector Operations" }],
+  "paths": {
+    "/v2/vectordb/entities/search": {
+      "post": {
+        "tags": ["Vector Operations"],
+        "summary": "Search",
+        "x-added-at": "2.6.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "schema": {
+              "type": "integer",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            }
+          }
+        ],
+        "requestBody": {
+          "x-added-at": "2.6.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SearchRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-added-at": "2.6.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null,
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SearchResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchRequest": {
+        "type": "object",
+        "x-added-at": "2.6.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "required": ["collectionName", "functionChains"],
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "functionChains": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    }
+  }
+}

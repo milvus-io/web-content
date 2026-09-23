@@ -14,7 +14,7 @@
         "name": "Delete",
         "match": "endsWith"
     },
-    {   
+    {
         "path": "get",
         "name": "Get",
         "match": "endsWith"
@@ -88,7 +88,7 @@
         "path": "-user",
         "name": "-",
         "match": "removeAndCapitalize"
-    },    
+    },
     {
         "path": "-to-role",
         "name": "-",
@@ -143,7 +143,7 @@
         "path": "-databases",
         "name": "-",
         "match": "removeAndCapitalize"
-    },    
+    },
     {
         "path": "-resource-group",
         "name": "-",
@@ -173,5 +173,40 @@
         "path": "-from-group",
         "name": "-",
         "match": "removeAndCapitalize"
+    },
+    {
+        "path": "add-file-resource",
+        "name": "Add File Resource",
+        "match": "endsWith"
+    },
+    {
+        "path": "list-file-resources",
+        "name": "List File Resources",
+        "match": "endsWith"
+    },
+    {
+        "path": "remove-file-resource",
+        "name": "Remove File Resource",
+        "match": "endsWith"
+    },
+    {
+        "path": "get-restore-snapshot-job-state",
+        "name": "Get Restore Snapshot Job State",
+        "match": "endsWith"
+    },
+    {
+        "path": "export-snapshot",
+        "name": "Export Snapshot",
+        "match": "endsWith"
+    },
+    {
+        "path": "list-restore-snapshot-jobs",
+        "name": "List Restore Snapshot Jobs",
+        "match": "endsWith"
+    },
+    {
+        "path": "restore-external-snapshot",
+        "name": "Restore External Snapshot",
+        "match": "endsWith"
     }
 ]

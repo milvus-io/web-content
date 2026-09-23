@@ -3,7 +3,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 
 const collectionSpecPath = path.join(__dirname, 'meta/openapi/05-collection-operations-v2.json')
-const clusterSpecPath = path.join(__dirname, 'meta/openapi/22-cluster-operations-v2.json')
+const onDemandClusterSpecPath = path.join(__dirname, 'meta/openapi/33-on-demand-cluster-operations-v2.json')
 
 function loadJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
@@ -42,7 +42,7 @@ function testListCollectionsAuthorizationVariesByEndpointTab() {
 }
 
 function testCreateOnDemandClusterHasZhCnSuccessResponseExample() {
-  const spec = loadJson(clusterSpecPath)
+  const spec = loadJson(onDemandClusterSpecPath)
   const examples = spec.paths['/v2/clusters/createOnDemandCluster']
     .post.responses['200'].content['application/json'].examples
 

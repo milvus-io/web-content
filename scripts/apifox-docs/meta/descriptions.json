@@ -1,169 +1,521 @@
 [
-    {
-        "name": "cloud-meta",
-        "description": "This set of APIs provides a way to view cloud providers and regions."
-    },
-    {
-        "name": "cluster-operations",
-        "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider."
-    },
-    {
-        "name": "collection-operations",
-        "description": "This set of APIs provides a way to manage collections",
-        "milvus": {
-            "name": "Collection (v1)"
-        }
-    },
-    {
-        "name": "import-operations",
-        "description": "This set of APIs provides a way to import data."
-    },
-    {
-        "name": "pipeline-operations",
-        "description": "This set of APIs provides a way to manage Zilliz Cloud Pipelines."
-    },
-    {
-        "name": "vector-operations",
-        "description": "This set of APIs provides a way to perform CRUD operations.",
-        "milvus": {
-            "name": "Vector (v1)"
-        }
-    },
-    {
-        "name": "collection-operations-v2",
-        "description": "This set of APIs provides a way to manage collections.",
-        "milvus": {
-            "name": "Collection (v2)"
-        }
-    },
-    {
-        "name": "vector-operations-v2",
-        "description": "This set of APIs provides a way to perform CRUD operations",
-        "milvus": {
-            "name": "Vector (v2)"
-        }
-    },
-    {
-        "name": "partition-operations-v2",
-        "description": "This set of APIs provides a way to manage partitions.",
-        "milvus": {
-            "name": "Partition (v2)"
-        }
-    },
-    {
-        "name": "user-operations-v2",
-        "description": "This set of APIs provides a way to manage the users.",
-        "milvus": {
-            "name": "User (v2)"
-        }
-    },
-    {
-        "name": "role-operations-v2",
-        "description": "This set of APIs provides a way to manage roles.",
-        "milvus": {
-            "name": "Role (v2)"
-        }
-    },
-    {
-        "name": "index-operations-v2",
-        "description": "This set of APIs provides a way to manage indexes.",
-        "milvus": {
-            "name": "Index (v2)"
-        }
-    },
-    {
-        "name": "alias-operations-v2",
-        "description": "This set of APIs provides a way to manage collection aliases.",
-        "milvus": {
-            "name": "Alias (v2)"
-        }
-    },
-    {
-        "name": "cloud-meta-v2",
-        "description": "This set of APIs provides a way to view cloud providers and regions."
-    },
-    {
-        "name": "cluster-operations-v2",
-        "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider."
-    },
-    {
-        "name": "import-operations-v2",
-        "description": "This set of APIs provides a way to import data.",
-        "milvus": {
-            "name": "Import (v2)"
-        }
-    },
-    {
-        "name": "cloud-migration-v2",
-        "description": "This set of APIs provides a way to migration data into Zilliz Cloud clusters."
-    },
-    {
-        "name": "cloud-job-v2",
-        "description": "This set of APIs provides a way to manipulate control plane jobs in Zilliz Cloud."
-    },
-    {
-        "name": "backup-and-restore-v2",
-        "description": "This set of APIs provides a way to backup and restore data in Zilliz Cloud."
-    },
-    {
-        "name": "database-operations-v2",
-        "description": "This set of APIs provides a way to manage databases.",
-        "milvus": {
-            "name": "Database (v2)"
-        }
-    },
-    {
-        "name": "resource-group-v2",
-        "description": "This set of APIs provides a way to manage resource groups.",
-        "milvus": {
-            "name": "Resource Group (v2)"
-        }
-    },
-    {
-        "name": "invoices-v2",
-        "description": "This set of APIs provides a way to list invoices and their details."
-    },
-    {
-        "name": "usage-v2",
-        "description": "This set of APIs provides a way to list usage details."
-    },
-    {
-        "name": "metrics-and-alerts-v2",
-        "description": "This set of APIs provides a way to manage metrics and alerts."
-    },
-    {
-        "name": "extract-load-and-transform-v2",
-        "description": "This set of APIs provides a way to extract, load, and transform data."
-    },
-    {
-        "name": "volume-operations-v2",
-        "description": "This set of APIs provides a way to manage volumes."
-    },
-    {
-        "name": "project-operations-v2",
-        "description": "This set of APIs provides a way to manage projects."
-    },
-    {
-        "name": "privilege-group-operations-v2",
-        "description": "This set of APIs provides a way to manage privilege groups.",
-        "milvus": {
-            "name": "Privilege Group (v2)"
-        }
-    },
-    {
-        "name": "on-demand-compute-v2",
-        "description": "This set of APIs provides a way to manage on-demand compute for projects."
-    },
-    {
-        "name": "global-clusters-v2",
-        "description": "This set of APIs provides a way to manage Global Clusters in Zilliz Cloud."
-    },
-    {
-        "name": "storage-integration-operations-v2",
-        "description": "This set of APIs provides a way to manage storage integrations."
-    },
-    {
-        "name": "spark-job-v2",
-        "description": "This set of APIs provides a way to create, list, describe, validate, and cancel Spark batch jobs in Zilliz Cloud."
+  {
+    "name": "cloud-meta",
+    "description": "This set of APIs provides a way to view cloud providers and regions.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于查看云服务提供商和云地域。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、クラウドプロバイダーとリージョンを表示する方法を提供します。"
+      }
     }
+  },
+  {
+    "name": "cluster-operations",
+    "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于管理由指定云服务提供商托管的 Zilliz Cloud 集群。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、クラウドプロバイダー内で Zilliz Cloud クラスターを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "collection-operations",
+    "description": "This set of APIs provides a way to manage collections",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于管理 Zilliz Cloud 中的 Collection。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、コレクションを管理する方法を提供します"
+      }
+    },
+    "milvus": {
+      "name": "Collection (v1)"
+    }
+  },
+  {
+    "name": "import-operations",
+    "description": "This set of APIs provides a way to import data.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于大规模数据导入。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、データをインポートする方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "pipeline-operations",
+    "description": "This set of APIs provides a way to manage Zilliz Cloud Pipelines.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于管理 Zilliz Cloud Pipelines。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、Zilliz Cloud Pipelines を管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "vector-operations",
+    "description": "This set of APIs provides a way to perform CRUD operations.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了向量检索操作相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、CRUD 操作を実行する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Vector (v1)"
+    }
+  },
+  {
+    "name": "collection-operations-v2",
+    "description": "This set of APIs provides a way to manage collections.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了用于管理 Collection 的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、コレクションを管理するための方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Collection (v2)"
+    }
+  },
+  {
+    "name": "vector-operations-v2",
+    "description": "This set of APIs provides a way to perform CRUD operations",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了向量检索操作相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは CRUD 操作を実行する方法を提供します"
+      }
+    },
+    "milvus": {
+      "name": "Vector (v2)"
+    }
+  },
+  {
+    "name": "partition-operations-v2",
+    "description": "This set of APIs provides a way to manage partitions.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Partition 的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API はパーティションを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Partition (v2)"
+    }
+  },
+  {
+    "name": "cluster-user-operations-v2",
+    "description": "This set of APIs provides a way to manage users within a cluster.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud 集群用户的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、クラスター内のユーザーを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "User (v2)"
+    }
+  },
+  {
+    "name": "cluster-role-operations-v2",
+    "description": "This set of APIs provides a way to manage roles and privileges within a cluster.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud 集群角色的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、クラスター内のロールと権限を管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Role (v2)"
+    }
+  },
+  {
+    "name": "index-operations-v2",
+    "description": "This set of APIs provides a way to manage indexes.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Collection 索引的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連のAPIは、インデックスを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Index (v2)"
+    }
+  },
+  {
+    "name": "alias-operations-v2",
+    "description": "This set of APIs provides a way to manage collection aliases.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Collection 别名的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、collection alias を管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Alias (v2)"
+    }
+  },
+  {
+    "name": "cloud-meta-v2",
+    "description": "This set of APIs provides a way to view cloud providers and regions.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了查看云服务提供商和云地域的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、クラウドプロバイダーとリージョンを表示する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "cluster-operations-v2",
+    "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理托管在指定云服务上的 Zilliz Cloud 集群。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、クラウドプロバイダー上の Zilliz Cloud クラスターを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "import-operations-v2",
+    "description": "This set of APIs provides a way to import data.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了大规模数据导入的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、データをインポートする方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Import (v2)"
+    }
+  },
+  {
+    "name": "cloud-migration-v2",
+    "description": "This set of APIs provides a way to migration data into Zilliz Cloud clusters.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了向 Zilliz Cloud 集群迁移数据的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、データを Zilliz Cloud クラスターに移行する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "cloud-job-v2",
+    "description": "This set of APIs provides a way to manipulate control plane jobs in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了获取 Zilliz Cloud 上控制面任务执行情况的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、Zilliz Cloud の control plane ジョブを操作する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "backup-and-restore-v2",
+    "description": "This set of APIs provides a way to backup and restore data in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了在 Zilliz Cloud 上备份和恢复数据的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、Zilliz Cloud でデータをバックアップおよび復元する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "database-operations-v2",
+    "description": "This set of APIs provides a way to manage databases.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Database 的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、データベースを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Database (v2)"
+    }
+  },
+  {
+    "name": "resource-group-v2",
+    "description": "This set of APIs provides a way to manage resource groups.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了用于管理资源组的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、リソースグループを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Resource Group (v2)"
+    }
+  },
+  {
+    "name": "invoices-v2",
+    "description": "This set of APIs provides a way to list invoices and their details.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了获取 Zilliz Cloud 账单信息的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、請求書とその詳細を一覧表示する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "usage-v2",
+    "description": "This set of APIs provides a way to list usage details.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了获取 Zilliz Cloud 集群使用情况的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、使用状況の詳細を一覧表示する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "metrics-and-alerts-v2",
+    "description": "This set of APIs provides a way to manage metrics and alerts.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了获取 Zilliz Cloud 集群指标和警报的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、メトリクスとアラートを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "extract-load-and-transform-v2",
+    "description": "This set of APIs provides a way to extract, load, and transform data.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了提取、加载和转换数据的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、データの抽出、ロード、および変換を行う方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "volume-operations-v2",
+    "description": "This set of APIs provides a way to manage volumes.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud Volume 的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、ボリュームを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "project-operations-v2",
+    "description": "This set of APIs provides a way to manage projects.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud 项目的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、プロジェクトを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "privilege-group-operations-v2",
+    "description": "This set of APIs provides a way to manage privilege groups.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理权限组的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、権限グループを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Privilege Group (v2)"
+    }
+  },
+  {
+    "name": "on-demand-compute-v2",
+    "description": "This set of APIs provides a way to manage on-demand compute for projects.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理按需计算的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、プロジェクトの on-demand compute を管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "on-demand-cluster-operations-v2",
+    "description": "This set of APIs provides a way to manage on-demand clusters in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud 按需集群的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、Zilliz Cloud のオンデマンドクラスターを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "global-clusters-v2",
+    "description": "This set of APIs provides a way to manage Global Clusters in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud 全球集群的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、Zilliz Cloud で Global Clusters を管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "storage-integration-operations-v2",
+    "description": "This set of APIs provides a way to manage storage integrations.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理对象存储集成的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、ストレージ統合を管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "spark-job-v2",
+    "description": "This set of APIs provides a way to create, list, describe, validate, and cancel Spark batch jobs in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了在 Zilliz Cloud 中创建、列出、查看、校验和取消 Spark 批处理任务的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この一連の API は、Zilliz Cloud で Spark バッチジョブを作成、一覧表示、詳細表示、検証、キャンセルする方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "cloud-access-control-operations-v2",
+    "description": "This set of APIs provides a way to manage Cloud ACL roles and their assignments to members and groups.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Cloud ACL 角色以及向成员和群组授予角色的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、Cloud ACL ロールと、メンバーおよびグループへの割り当てを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "cloud-api-key-operations-v2",
+    "description": "This set of APIs provides a way to manage customized ACL API keys and their role assignments.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理自定义 ACL API Key 及其角色授权的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、カスタマイズされた ACL API key とそのロール割り当てを管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "private-endpoint-operations-v2",
+    "description": "This set of APIs provides a way to manage private endpoints in Zilliz Cloud.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 提供了管理 Zilliz Cloud Private Endpoint 的相关接口。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、Zilliz Cloud の Private Endpoint を管理する方法を提供します。"
+      }
+    }
+  },
+  {
+    "name": "file-resource-operations-v2",
+    "description": "This set of APIs provides a way to manage file resources.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于管理文件资源。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、ファイルリソースを管理する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "File Resource (v2)"
+    }
+  },
+  {
+    "name": "v1",
+    "description": "Zilliz Cloud RESTful API V1 documentation.",
+    "x-i18n": {
+      "ja-JP": {
+        "description": "Zilliz Cloud RESTful API V1 ドキュメント。"
+      }
+    }
+  },
+  {
+    "name": "v2",
+    "description": "Zilliz Cloud RESTful API V2 documentation.",
+    "x-i18n": {
+      "ja-JP": {
+        "description": "Zilliz Cloud RESTful API V2 ドキュメント。"
+      }
+    }
+  },
+  {
+    "name": "snapshot-operations-v2",
+    "description": "This set of APIs provides a way to export, list, and restore collection snapshots.",
+    "x-i18n": {
+      "zh-CN": {
+        "description": "本系列 API 用于导出、查看和恢复 Collection 快照。"
+      },
+      "ja-JP": {
+        "description": "この API セットは、コレクションのスナップショットをエクスポート、一覧表示、復元する方法を提供します。"
+      }
+    },
+    "milvus": {
+      "name": "Snapshot (v2)"
+    }
+  }
 ]

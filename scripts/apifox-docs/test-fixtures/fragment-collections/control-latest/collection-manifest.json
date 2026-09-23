@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "collectionId": "fixture-control-plane-latest",
+  "apiSurface": "control-plane",
+  "source": {"repository": "fixture/zilliz-cloud", "revision": "6666666666666666666666666666666666666666"},
+  "generator": {
+    "repository": "fixture/feishu-markdown-bridge",
+    "revision": "2222222222222222222222222222222222222222",
+    "configDigest": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+  },
+  "review": {
+    "manifestDigest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+    "approvalDigest": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "services": [
+    {
+      "id": "projects",
+      "fragment": "projects.openapi.json",
+      "sha256": "sha256:e8805850413308c02ce5e29a57bc5a73ba63d655efa785b9ca8770654d75d931",
+      "operationCount": 1
+    },
+    {
+      "id": "usage",
+      "fragment": "usage.openapi.json",
+      "sha256": "sha256:9728f6f4b3defbbed73715c4d6b295f00b5b62d18ca1492ffb6f382a60428fad",
+      "operationCount": 1
+    }
+  ]
+}

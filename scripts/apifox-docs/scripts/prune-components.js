@@ -7,89 +7,11 @@
 
 const fs = require('node:fs')
 const path = require('node:path')
+const { pruneUnreachableComponents } = require('../componentGraph')
 
 const SPECS_DIR = process.argv[2]
   ? path.resolve(process.argv[2])
   : path.join(__dirname, '..', 'meta', 'openapi')
-const REF_PREFIX = '#/components/'
-
-function collectReachableRefs(spec) {
-  const reachable = new Set()
-  const queue = []
-
-  function walk(node) {
-    if (!node || typeof node !== 'object') return
-    if (Array.isArray(node)) {
-      for (const item of node) walk(item)
-      return
-    }
-    for (const [key, value] of Object.entries(node)) {
-      if (key === '$ref' && typeof value === 'string' && value.startsWith(REF_PREFIX)) {
-        if (!reachable.has(value)) {
-          reachable.add(value)
-          queue.push(value)
-        }
-      } else {
-        walk(value)
-      }
-    }
-  }
-
-  walk(spec.paths || {})
-  walk(spec.webhooks || {})
-
-  while (queue.length > 0) {
-    const ref = queue.shift()
-    const parts = ref.substring(2).split('/').map(p => p.replace(/~1/g, '/').replace(/~0/g, '~'))
-    let body = spec
-    for (const p of parts) {
-      if (body && typeof body === 'object' && p in body) {
-        body = body[p]
-      } else {
-        body = undefined
-        break
-      }
-    }
-    if (body !== undefined) walk(body)
-  }
-
-  return reachable
-}
-
-function pruneComponents(spec) {
-  if (!spec.components || typeof spec.components !== 'object') {
-    return { kept: 0, removed: 0 }
-  }
-
-  const reachable = collectReachableRefs(spec)
-  let kept = 0
-  let removed = 0
-
-  for (const category of Object.keys(spec.components)) {
-    if (category === 'securitySchemes') continue
-    const entries = spec.components[category]
-    if (!entries || typeof entries !== 'object') continue
-
-    const pruned = {}
-    for (const [name, body] of Object.entries(entries)) {
-      const refPath = `${REF_PREFIX}${category}/${name}`
-      if (reachable.has(refPath)) {
-        pruned[name] = body
-        kept++
-      } else {
-        removed++
-      }
-    }
-
-    if (Object.keys(pruned).length === 0) {
-      delete spec.components[category]
-    } else {
-      spec.components[category] = pruned
-    }
-  }
-
-  return { kept, removed }
-}
 
 function main() {
   if (!fs.existsSync(SPECS_DIR)) {
@@ -109,8 +31,8 @@ function main() {
     const fullPath = path.join(SPECS_DIR, file)
     const before = fs.readFileSync(fullPath, 'utf-8')
     const spec = JSON.parse(before)
-    const { kept, removed } = pruneComponents(spec)
-    const after = JSON.stringify(spec, null, 2)
+    const { spec: pruned, stats: { kept, removed } } = pruneUnreachableComponents(spec)
+    const after = JSON.stringify(pruned, null, 2)
 
     const beforeBytes = Buffer.byteLength(before, 'utf-8')
     const afterBytes = Buffer.byteLength(after, 'utf-8')

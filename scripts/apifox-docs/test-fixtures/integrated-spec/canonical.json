@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "Zilliz REST", "version": "1.0.0" },
+  "tags": [
+    { "name": "Projects (V2)", "x-include-target": ["zilliz"] },
+    { "name": "Legacy Clusters (V1)" }
+  ],
+  "paths": {
+    "/v2/projects": {
+      "post": {
+        "tags": ["Projects (V2)"],
+        "summary": "Create Project",
+        "x-include-langs": ["en-US", "zh-CN"],
+        "parameters": [
+          { "name": "projectName", "in": "query", "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Project" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clusters": {
+      "get": {
+        "tags": ["Legacy Clusters (V1)"],
+        "summary": "List Clusters",
+        "responses": { "200": { "description": "ok" } }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "x-include-target": ["zilliz"] },
+          "internalNote": { "type": "string", "x-include-target": ["milvus"] }
+        }
+      },
+      "Unused": { "type": "string" }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": { "type": "apiKey", "in": "header", "name": "X-API-Key" }
+    }
+  }
+}
