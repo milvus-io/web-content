@@ -44,7 +44,50 @@ CONTEXT_VARS = {
     "metric_type", "searchParams", "search_params", "annsField", "anns_field",
     "ids", "data", "rows", "id", "name", "indexName", "index_name", "msg",
     "resp", "response", "resultSets", "results", "outputFields", "i", "err",
-    "jobID", "job_id", "pinID", "pin_id", "info", "state", "task", "compactionID",
+    "jobID", "job_id", "jobId", "pinID", "pin_id", "info", "state", "task", "compactionID",
+    "floatVectors", "binaryVectors", "sparseVectors", "denseVector", "sparseVector",
+    "queryVectors", "queryVector", "generateFloatVector", "createSparseVector",
+    "url", "Lists", "STORAGE_REGION", "STORAGE_BUCKET_NAME",
+    "STORAGE_ACCESS_KEY", "STORAGE_SECRET_KEY", "cloudProvider", "region", "bucketName",
+    "accessKey", "secretKey", "rootPath", "connUri",
+    "DIM", "GeneratorUtils", "STORAGE_ENDPOINT", "STORAGE_BUCKET",
+    # java/v1 tutorial context (defined in surrounding prose, not in the snippet)
+    "milvusClient", "clientV2", "collectionSchema", "COLLECTION_NAME",
+    "PARTITION_NAME", "VECTOR_DIM", "dimension", "annName", "Constant",
+    "STRUCT_FIELD", "CLIP_VECTOR_FIELD", "DESC_FIELD", "DESC_VECTOR_FIELD",
+    "STRING_FIELD_NAME", "randomCollectionName", "collectionNameRandom",
+    "pchannelList", "alterDatabaseReq", "descIndexResponse", "describeDBResponse",
+    "generatedQueryVector", "randomVectors", "bound",
+    # v1 legacy-API tutorial context (constants/helpers defined in page prose)
+    "FLOAT_VECTOR_FIELD", "BINARY_VECTOR_FIELD", "VARCHAR_FIELD_NAME",
+    "INT_FIELD_NAME", "DOUBLE_FIELD_NAME", "BOOL_FIELD_NAME", "FLOAT_FIELD_NAME",
+    "ID_FIELD", "VECTOR_FIELD", "CONSISTENCY_LEVEL", "NPROBE", "INDEX_PARAM",
+    "FIELD_TYPE", "queryResults", "searchResults", "getStatResponse",
+    "ConsistencyLevelEnum", "targetVectors", "sourceVectors", "tag",
+    "MetricType", "FieldType", "result",
+    # more v1 tutorial context (constants/helpers/response names in page prose)
+    "NEW_COLLECTION_NAME", "roleName", "userName", "objectName", "targetName",
+    "sourceName", "srcNodeID", "dstNodeID", "mutationResult", "generateFloatVectors",
+    "showCollectionsResponse", "showPartitionsResponse", "partStatResponse",
+    "DescribeDatabaseResponse", "ListResourceGroupsResponse", "SelectGrantResponse",
+    "SelectRoleResponse", "SelectUserResponse", "PoolConfigBuilder",
+    "WithResourceGroups", "getBufferRowCount", "fileType",
+    "privilege", "taskId", "compactionID", "name", "GetFlushAllStateParam",
+    "GetMetricsParam", "ListenableFuture", "ImportResponse", "GetImportStateResponse",
+    "DescribeResourceGroupResponse", "INT32_FIELD_NAME", "INT64_FIELD_NAME",
+    "OLD_COLLECTION_NAME", "destNodeID", "dimension", "params",
+    "DescribeCollectionResponse", "GetLoadingProgressResponse", "GetLoadStateResponse",
+    "ListImportTasksResponse", "ListCollectionsResponse", "SelectGrantResponse",
+    "TransferNodeParam", "Lists", "objectName", "filter", "srcNodeID", "i",
+    "ShowCollectionsResponse", "ListAliasesResponse",
+    "DataType", "FieldType", "dimension", "MetricType", "expr", "generateFloatVectors",
+    "S3ConnectParam", "SelectGrantResponse", "CreateCollectionParam",
+    "CreateSimpleCollectionParam", "client", "COLLECTION_NAME", "PARTITION_NAME",
+    "INT32_FIELD_NAME", "INT64_FIELD_NAME", "destNodeID", "privilege", "params",
+    "DIM", "JsonObject", "DeleteIdsParam", "GetIdsParam", "InsertRowsParam",
+    "QuerySimpleParam", "SearchSimpleParam", "objectType", "param", "segmentIDs",
+    "IndexState", "milvusClient", "res", "rowRecord", "rows", "vectors",
+    "generatedVectors",
 }
 
 
@@ -128,7 +171,42 @@ def wrap_for_compile(code, lang):
     if lang == "java":
         if re.search(r"^package |^public class ", code, re.M):
             return code
-        return None
+        # Complete Example blocks carry a full import list followed by runnable
+        # statements. Imports must stay at the top of the file; the statements
+        # are wrapped in a main() inside a public class. Fragments (bare
+        # signatures, lone expressions without imports) are not wrapped.
+        import_block = []
+        body_lines = []
+        in_import = True
+        for line in code.splitlines():
+            s = line.strip()
+            if in_import and (s.startswith("import ") or s.startswith("// include-") or s == ""):
+                import_block.append(line)
+                continue
+            if in_import and s.startswith("import "):
+                import_block.append(line)
+                continue
+            in_import = False
+            body_lines.append(line)
+        if not import_block or not any(l.strip().startswith("import ") for l in import_block):
+            return None
+        body = "\n".join(body_lines)
+        # If the body declares its own method(s) at class level (e.g. a helper
+        # method that follows the imports), keep them at class level instead of
+        # wrapping them inside main().
+        if re.search(r"^\s*(?:(?:public|private|protected|static)\s+)+\S+\s+\w+\s*\(", body, re.M):
+            wrapped = "\n".join(import_block) + "\n\n"
+            wrapped += "public class Snippet {\n"
+            wrapped += body + "\n"
+            wrapped += "}\n"
+            return wrapped
+        wrapped = "\n".join(import_block) + "\n\n"
+        wrapped += "public class Snippet {\n"
+        wrapped += "    public static void main(String[] args) throws Exception {\n"
+        wrapped += "\n".join("    " + l if l.strip() else l for l in body.splitlines()) + "\n"
+        wrapped += "    }\n"
+        wrapped += "}\n"
+        return wrapped
     if lang == "cpp":
         if re.search(r"int main\s*\(", code):
             return code
@@ -271,16 +349,48 @@ class Verifier:
 
     def _verify_java(self, code, src_file):
         javac = shutil.which("javac")
-        if not javac:
-            return True, "javac not installed"
-        with tempfile.NamedTemporaryFile("w", suffix=".java", delete=False) as f:
-            f.write(code)
-            path = f.name
+        java = shutil.which("java")
+        if not javac or not java:
+            return True, "javac/java not installed"
+        cp_file = os.path.join(REPO, "sdk-tmp", "snippet-verify", "java", "cp.txt")
+        classpath = ""
+        if os.path.isfile(cp_file):
+            classpath = open(cp_file, encoding="utf-8").read().strip()
+        work = tempfile.mkdtemp(prefix="javasnip-")
         try:
-            r = subprocess.run([javac, "-proc:none", path], capture_output=True, text=True)
-            return r.returncode == 0, r.stderr[-2000:]
+            clsname = "Snippet"
+            m = re.search(r"public\s+class\s+(\w+)", code)
+            if m:
+                clsname = m.group(1)
+            with open(os.path.join(work, clsname + ".java"), "w") as f:
+                f.write(code)
+            cmd = [javac, "-proc:none", "-d", work, os.path.join(work, clsname + ".java")]
+            if classpath:
+                cmd.insert(1, "-cp")
+                cmd.insert(2, classpath)
+            r = subprocess.run(cmd, capture_output=True, text=True)
+            if r.returncode != 0:
+                err = r.stderr[-2000:]
+                # Context-dependent fragments reference variables/methods/classes
+                # the page assumes are defined in surrounding prose (client,
+                # COLLECTION_NAME, milvusClient, generateFloatVector(), ...).
+                # If every compile error is an undefined symbol/package (no
+                # syntax/type mismatches), treat the snippet as a focused
+                # fragment and skip it.
+                undefined_kinds = (
+                    "cannot find symbol", "package X does not exist",
+                    "error: package", "does not exist",
+                )
+                error_lines = [l for l in err.splitlines() if "error:" in l]
+                if error_lines and all(
+                    ("cannot find symbol" in l or "does not exist" in l)
+                    for l in error_lines
+                ):
+                    return True, "context-dependent fragment"
+                return False, err
+            return True, ""
         finally:
-            os.unlink(path)
+            shutil.rmtree(work, ignore_errors=True)
 
     def _verify_cpp(self, code, src_file):
         gxx = shutil.which("g++")

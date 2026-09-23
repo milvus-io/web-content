@@ -149,11 +149,11 @@ methods. Cross-page links are relative (e.g. `../Collections/DataType.md`).
 > **Multi-SDK runs are processed STRICTLY one SDK at a time.** When the user
 > asks to update several SDKs (e.g. "update cpp/java sdk docs"), run the whole
 > Steps 1–7 for ONE SDK (analyze → edit → branch → commit → push → PR), then
-> clean the working tree back to `origin/master` (`git checkout origin/master`,
-> which carries any changes; the prior SDK's edits are already committed on its
-> branch), then start the NEXT SDK. Never edit two SDKs' docs in the working tree
-> at once — that risks mixing edits across branches. This applies from the very
-> first analysis step, not just at push time.
+> clean the working tree back to the **upstream base resolved in Step 0**
+> (`git checkout <upstream-master>`, which carries any changes; the prior SDK's
+> edits are already committed on its branch), then start the NEXT SDK. Never edit
+> two SDKs' docs in the working tree at once — that risks mixing edits across
+> branches. This applies from the very first analysis step, not just at push time.
 
 > **Before starting**: read `.skills/update-milvus-sdk-docs/references/sdk-map.md` and follow the section for the
 > SDK you are working on (repo path, public API surface, page-mapping rules,
@@ -163,27 +163,62 @@ methods. Cross-page links are relative (e.g. `../Collections/DataType.md`).
 ### Step 0 — Pre-flight: refresh the local web-content checkout
 
 Before touching any docs, bring the local web-content working copy up to date —
-but **only when it is safe to do so**:
+but **only when it is safe to do so**. **The doc base is ALWAYS the upstream
+repo `milvus-io/web-content`'s `master`, never a fork's `origin/master`.**
+In a fork layout (e.g. `origin` → `yhmo/web-content`, `source`/`upstream` →
+`milvus-io/web-content`) `origin/master` may be stale or the fork's own master,
+so it must not be used as the base.
 
 ```bash
 # any uncommitted/staged changes, or a merge in progress?
 git status --porcelain | wc -l        # expect 0
 git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1 && echo "mid-merge" || true
+
+# which remote is the upstream milvus-io/web-content repo?
+git remote -v
 ```
 
-- If the working tree is **clean** (and not mid-merge): `git fetch origin` so
-  `origin/master` is fresh. The doc updates are based on **`origin/master`**
-  content, regardless of which branch you happen to be on. **Verify the target
-  doc tree matches `origin/master`** before editing:
-  `git diff --stat origin/master -- API_Reference/<sdk>/<version-line>/` should
-  be empty. If the current branch has diverged on those files, stop and ask the
-  user (edits would be based on stale content and the later
-  `git checkout -b ... origin/master` would fail).
+- **Resolve the upstream master**: find the remote whose fetch URL is
+  `git@github.com:milvus-io/web-content.git` (or its https form). It may be
+  named `origin` (when the checkout IS the upstream repo), `source`, or
+  `upstream` (fork layouts). Fetch it and use **that remote's `master`** as the
+  base for all doc work:
+
+  ```bash
+  # e.g. the remote is `source` in a fork layout; use `origin` when it is upstream
+  git fetch source          # or: git fetch origin
+  git rev-parse source/master
+  ```
+
+  Define `BASE=source/master` (or `origin/master` when the checkout is the
+  upstream repo itself) and use `$BASE` everywhere below instead of a
+  hard-coded `origin/master`.
+
+- **If the fork's `origin/master` differs from the upstream `master`**: rebase
+  the current branch onto the upstream master **before** starting any doc edits,
+  so the edits are based on the true latest content:
+
+  ```bash
+  # after confirming the working tree is clean:
+  git checkout <current-branch>
+  git rebase source/master   # or the resolved upstream master
+  ```
+
+  Only rebase when the working tree is clean; if the current branch has
+  diverged on `API_Reference/` files and a rebase would conflict, **stop and ask
+  the user** (edits would be based on stale content and the later
+  `git checkout -b ... <upstream-master>` would fail).
+
+- If the working tree is **clean** (and not mid-merge), and the base is the
+  resolved upstream master: **Verify the target doc tree matches the base**
+  before editing:
+  `git diff --stat <upstream-master> -- API_Reference/<sdk>/<version-line>/`
+  should be empty (or contain only your own prior uncommitted edits).
 - If the working tree has **local changes**: **STOP and do not update.** Tell the
   user the update cannot run because the working tree has uncommitted changes —
   ask them to commit or stash them first, so the doc edits are not mixed with
   (and do not pollute) their work. Do not pull and do not proceed.
-- If `origin/master` cannot be fetched (no network / no remote): note it and
+- If the upstream master cannot be fetched (no network / no remote): note it and
   fall back to the current checkout.
 
 ### Step 0b — Fetch the SDK repo into sdk-tmp/ (once per run)
@@ -491,8 +526,11 @@ the local edits and present them for review.
    If `gh` is not logged in, do NOT push. Tell the user pushing requires
    `gh auth login`, and provide the local branch + commit commands instead.
 
-2. **Create a branch only for SDKs that actually changed.** Base it on
-   **`origin/master`** (NOT the current branch), so the doc branch never carries
+2. **Create a branch only for SDKs that actually changed.** Base it on the
+   **upstream master resolved in Step 0** (the `milvus-io/web-content`
+   remote's `master` — `source/master`/`upstream/master` in a fork layout, or
+   `origin/master` when the checkout IS the upstream repo), NOT on the current
+   branch and NOT on a fork's `origin/master`, so the doc branch never carries
    skill/AGENTS files or other unrelated commits:
    `sdk/<sdk-name>-<version>-doc` where
    `<sdk-name>` is the SDK's **project name** — i.e. its directory name under
@@ -501,15 +539,15 @@ the local edits and present them for review.
    the plain version without the `v` prefix (e.g. `3.0.2`):
 
    ```bash
-   git fetch origin
-   git checkout -b sdk/milvus-sdk-cpp-3.0.2-doc origin/master
+   git fetch source            # or the upstream remote from Step 0
+   git checkout -b sdk/milvus-sdk-cpp-3.0.2-doc source/master
    ```
 
    The uncommitted doc edits carry over from the current working tree (the
-   `API_Reference/` files are identical between your branch and `origin/master`);
-   the skill/AGENTS files that live only on your current branch are left behind,
-   which is what we want. Verify with `git log --oneline -1` that the new branch
-   is rooted at the latest `origin/master`.
+   `API_Reference/` files are identical between your branch and the upstream
+   master); the skill/AGENTS files that live only on your current branch are
+   left behind, which is what we want. Verify with `git log --oneline -1` that
+   the new branch is rooted at the latest upstream master.
 
    For an **"update all SDKs to latest"** (or "update X to latest") run, each SDK
    that has real changes gets **its own branch**; SDKs already current, or with
@@ -530,11 +568,11 @@ the local edits and present them for review.
    ```
 
    Then move on to SDK-B **without destroying uncommitted work**: `git checkout
-   origin/master` (which carries over uncommitted changes that don't conflict).
-   NEVER use `git reset --hard` between SDKs — it would erase SDK-B's edits if
-   they are not yet committed.
+   <upstream-master>` (which carries over uncommitted changes that don't
+   conflict). NEVER use `git reset --hard` between SDKs — it would erase SDK-B's
+   edits if they are not yet committed.
 
-   Because each branch is created with `git checkout -b ... origin/master`,
+   Because each branch is created with `git checkout -b ... <upstream-master>`,
    which carries over *all* uncommitted working-tree changes, `git add` must
    always be scoped to the SDK's own directory — otherwise edits would leak
    into the wrong branch and PR.
