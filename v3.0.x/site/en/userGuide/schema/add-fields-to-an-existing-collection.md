@@ -221,6 +221,17 @@ client.create_index(
 
 Existing entities have `NULL` for `embedding_v2` and are skipped when you search on this field. To make existing entities searchable through `embedding_v2`, write non-NULL vector values through upsert or a backfill workflow. New entities can include `embedding_v2` during insert.
 
+<div class="alert note">
+
+Starting in Milvus 3.0.3, you can use `IS NULL` and `IS NOT NULL` in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.
+
+To find entities whose `embedding` field is NULL, use `query()` with the filter `embedding IS NULL`. This filter is also valid in `search()`. However, searching on `embedding` with this filter returns no hits: entities without an `embedding` value have no vector to compare with the query vector.
+
+For supported types, syntax, and examples, see [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
+
+</div>
+
+
 <a id="add-vector-fields-generated-by-functions--milvus-30x"></a>
 
 ### Add a Function and its generated vector field | Milvus 3.0.x

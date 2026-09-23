@@ -1,12 +1,12 @@
 ---
 id: basic-operators.md
 title: "Basic Operators"
-summary: "Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches."
+summary: "Use comparison, range, arithmetic, logical, and NULL operators to filter entities. Starting in Milvus 3.0.3, IS NULL and IS NOT NULL also support ordinary vector fields."
 ---
 
 # Basic Operators
 
-Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.
+Milvus provides comparison, range, arithmetic, logical, and NULL operators for filtering entities. Each operator supports specific field types.
 
 ## Comparison operators
 
@@ -239,179 +239,90 @@ filter = 'NOT color == "green"'
 
 ## IS NULL and IS NOT NULL operators
 
-The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data).
+Use `IS NULL` and `IS NOT NULL` to find entities with missing or available field values. For example, you can find products without a category or entities whose embeddings are ready for search. Both operators work on supported scalar and vector fields, with the same meaning:
 
-- `IS NULL`: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.
+| Operator | Matches |
+| --- | --- |
+| `<field> IS NULL` | Entities whose specified field has a NULL value |
+| `<field> IS NOT NULL` | Entities whose specified field has a non-NULL value |
 
-- `IS NOT NULL`: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.
+Supported scalar fields include Boolean, numeric, `VARCHAR`, `JSON`, and `ARRAY` fields. These operators do not support [TEXT fields](text.md).
 
-<div class="alert note">
+Starting in Milvus 3.0.3, the operators also support ordinary vector fields: `FLOAT_VECTOR`, `BINARY_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `SPARSE_FLOAT_VECTOR`, and `INT8_VECTOR`.
 
-The operators are case-insensitive, so you can use `IS NULL` or `is null`, and `IS NOT NULL` or `is not null`.
+The operators are case-insensitive: `IS NULL` and `is null` are equivalent, as are `IS NOT NULL` and `is not null`.
 
-</div>
+### Example: Find entities with missing or available values
 
-### Regular scalar fields with null values
+Assume a collection named `products` is indexed and loaded on Milvus 3.0.3 or later. The collection has an `INT64` primary key named `id`, a nullable `VARCHAR` field named `category`, and a nullable, three-dimensional `FLOAT_VECTOR` field named `embedding`. It already contains the following entities:
 
-Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.
+| `id` | `category` | `embedding` |
+| --- | --- | --- |
+| `1` | `"book"` | `[0.1, 0.2, 0.3]` |
+| `2` | NULL | `[0.4, 0.5, 0.6]` |
+| `3` | `"book"` | NULL |
 
-<div class="alert note">
+Collection creation and data insertion are omitted. For those steps, see [Nullable Fields](nullable-and-default.md).
 
-An empty string `""` is not treated as a null value for a `VARCHAR` field.
-
-</div>
-
-To retrieve entities where the `description` field is null:
-
-```python
-filter = 'description IS NULL'
-```
-
-To retrieve entities where the `description` field is not null:
+To find entities that still need an embedding, query for `embedding IS NULL`. Adjust the connection settings for your server.
 
 ```python
-filter = 'description IS NOT NULL'
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530")
+
+results = client.query(
+    collection_name="products",
+    filter="embedding IS NULL",
+    output_fields=["id"],
+    limit=10,
+)
+print(sorted(entity["id"] for entity in results))
+# Expected: [3]
 ```
 
-To retrieve entities where the `description` field is not null and the `price` field is higher than 10:
+Replace the `filter` in the same query to check either field or combine conditions:
 
-```python
-filter = 'description IS NOT NULL AND price > 10'
-```
+| Filter expression | Matching IDs | Purpose |
+| --- | --- | --- |
+| `category IS NULL` | `2` | Find entities without a category |
+| `category IS NOT NULL` | `1`, `3` | Find entities with a category |
+| `embedding IS NULL` | `3` | Find entities without an embedding |
+| `embedding IS NOT NULL` | `1`, `2` | Find entities with an embedding |
+| `category IS NOT NULL AND embedding IS NOT NULL` | `1` | Find entities with both values |
 
-### JSON fields with null values
+<a id="Regular-scalar-fields-with-null-values"></a>
+<a id="JSON-fields-with-null-values"></a>
+<a id="ARRAY-fields-with-null-values"></a>
 
-Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:
+### How field values are treated
 
-- The entire JSON object is explicitly set to None (null), for example, `{"metadata": None}`.
+The operators check the stored field value. For a nullable field without a default value, omitting the field during insertion or explicitly setting it to NULL stores NULL. A configured default value can change what is stored. For details, see [Nullable Fields](nullable-and-default.md) and [Default Values](default-values.md).
 
-- The JSON field itself is completely missing from the entity.
+| Field type | NULL behavior |
+| --- | --- |
+| `VARCHAR` | An empty string `""` is a non-NULL value. |
+| `JSON` | A NULL value for the entire field matches `IS NULL`. A JSON object such as `{"category": null}` is non-NULL, even though a value inside it is NULL. |
+| `ARRAY` | A NULL value for the entire field matches `IS NULL`. Individual elements cannot be NULL, and `IS NULL` / `IS NOT NULL` do not support array element access such as `tags[0]`. See [Array Field](array_data_type.md). |
+| Ordinary vector types | NULL means the vector value is absent. A vector whose components are zero is not NULL. |
 
-<div class="alert note">
+For a supported field defined with `nullable=False`, `IS NULL` matches no entities and `IS NOT NULL` matches all visible entities. Other conditions in the filter still apply.
 
-If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, `\{"metadata": \{"category": None, "price": 99.99}}` is not treated as null, even though the `category` key is null.
+### Use NULL filters in vector search
 
-</div>
+The same operators can be used in search filters, but an entity also needs a vector in the field being searched to participate in similarity search.
 
-To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field `metadata`:
+Using the example data above, consider a search with `anns_field="embedding"`:
 
-```python
-data = [
-  {
-      "metadata": {"category": "electronics", "price": 99.99, "brand": "BrandA"},
-      "pk": 1,
-      "embedding": [0.12, 0.34, 0.56]
-  },
-  {
-      "metadata": None, # Entire JSON object is null
-      "pk": 2,
-      "embedding": [0.56, 0.78, 0.90]
-  },
-  {  # JSON field `metadata` is completely missing
-      "pk": 3,
-      "embedding": [0.91, 0.18, 0.23]
-  },
-  {
-      "metadata": {"category": None, "price": 99.99, "brand": "BrandA"}, # Individual key value is null
-      "pk": 4,
-      "embedding": [0.56, 0.38, 0.21]
-  }
-]
-```
+| Filter expression | Entities eligible for similarity search | Reason |
+| --- | --- | --- |
+| `category IS NULL` | `2` | Entity `2` has no category, but has an `embedding` vector. |
+| `embedding IS NULL` | None | Entity `3` matches the filter, but has no `embedding` vector to compare with the query vector. |
+| `embedding IS NOT NULL` | `1`, `2` | Both entities have an `embedding` vector. |
 
-**Example 1: Retrieve entities where metadata is null**
+All three filters are valid. A search on `embedding` with `embedding IS NULL` returns no hits because no entity can satisfy both requirements. To retrieve the entities with missing embeddings, use `query()` as shown above.
 
-To find entities where the `metadata` field is either missing or explicitly set to None:
-
-```python
-filter = 'metadata IS NULL'
-
-# Example output:
-# data: [
-#     "{'metadata': None, 'pk': 2}",
-#     "{'metadata': None, 'pk': 3}"
-# ]
-```
-
-**Example 2: Retrieve entities where metadata is not null**
-
-To find entities where the `metadata` field is not null:
-
-```python
-filter = 'metadata IS NOT NULL'
-
-# Example output:
-# data: [
-#     "{'metadata': {'category': 'electronics', 'price': 99.99, 'brand': 'BrandA'}, 'pk': 1}",
-#     "{'metadata': {'category': None, 'price': 99.99, 'brand': 'BrandA'}, 'pk': 4}"
-# ]
-```
-
-### ARRAY fields with null values
-
-Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:
-
-- The entire ARRAY field is explicitly set to None (null), for example, `"tags": None`.
-
-- The ARRAY field is completely missing from the entity.
-
-<div class="alert note">
-
-An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to [Array Field](array_data_type.md).
-
-</div>
-
-To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field `tags`:
-
-```python
-data = [
-  {
-      "tags": ["pop", "rock", "classic"],
-      "ratings": [5, 4, 3],
-      "pk": 1,
-      "embedding": [0.12, 0.34, 0.56]
-  },
-  {
-      "tags": None,  # Entire ARRAY is null
-      "ratings": [4, 5],
-      "pk": 2,
-      "embedding": [0.78, 0.91, 0.23]
-  },
-  {  # The tags field is completely missing
-      "ratings": [9, 5],
-      "pk": 3,
-      "embedding": [0.18, 0.11, 0.23]
-  }
-]
-```
-
-**Example 1: Retrieve entities where tags is null**
-
-To retrieve entities where the `tags` field is either missing or explicitly set to `None`:
-
-```python
-filter = 'tags IS NULL'
-
-# Example output:
-# data: [
-#     "{'tags': None, 'ratings': [4, 5], 'embedding': [0.78, 0.91, 0.23], 'pk': 2}",
-#     "{'tags': None, 'ratings': [9, 5], 'embedding': [0.18, 0.11, 0.23], 'pk': 3}"
-# ]
-```
-
-**Example 2: Retrieve entities where tags is not null**
-
-To retrieve entities where the `tags` field is not null:
-
-```python
-filter = 'tags IS NOT NULL'
-
-# Example output:
-# data: [
-#     "{'metadata': {'category': 'electronics', 'price': 99.99, 'brand': 'BrandA'}, 'pk': 1}",
-#     "{'metadata': {'category': None, 'price': 99.99, 'brand': 'BrandA'}, 'pk': 4}"
-# ]
-```
+Vector search already skips entities whose searched vector field is NULL, so `embedding IS NOT NULL` does not further narrow the candidates for a search on `embedding`. Ranking, other filters, and the search limit still determine which candidates are returned.
 
 ## Tips on using basic operators with JSON and ARRAY fields
 

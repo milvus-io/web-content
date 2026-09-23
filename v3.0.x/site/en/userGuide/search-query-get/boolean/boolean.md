@@ -1,12 +1,12 @@
 ---
 id: boolean.md
 title: "Filtering Explained"
-summary: "Milvus provides powerful filtering capabilities that enable precise querying of your data. Filter expressions allow you to target specific scalar fields and refine search results with different conditions. This guide explains how to use filter expressions in Milvus, with examples focused on query operations. You can also apply these filters in search and delete requests."
+summary: "Filter expressions select entities using conditions on supported fields. This guide introduces Milvus filter operators and links to their supported types, version requirements, and examples."
 ---
 
 # Filtering Explained
 
-Milvus provides powerful filtering capabilities that enable precise querying of your data. Filter expressions allow you to target specific scalar fields and refine search results with different conditions. This guide explains how to use filter expressions in Milvus, with examples focused on query operations. You can also apply these filters in search and delete requests.
+Filter expressions select entities using conditions on supported fields. This guide introduces filter expressions, with examples focused on query operations. For each operator's supported types, version requirements, and usage, follow the links below.
 
 ## Basic operators
 
@@ -22,7 +22,7 @@ Milvus supports several basic operators for filtering data:
 
 - **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.
 
-- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
+- **IS NULL and IS NOT NULL Operators**: Select entities based on whether a field is NULL or non-NULL. For scalar and vector field support, version requirements, and examples, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 ### Example: Filtering by Color
 

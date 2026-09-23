@@ -112,7 +112,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only). Before using `IS NULL` / `IS NOT NULL` on vector fields, check the supported types, version requirements, and query/search behavior in [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
