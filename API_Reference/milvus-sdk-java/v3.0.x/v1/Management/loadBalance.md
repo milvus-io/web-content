@@ -19,7 +19,7 @@ R<RpcStatus> loadBalance(LoadBalanceParam requestParam);
 Use the `LoadBalanceParam.Builder` to construct a `LoadBalanceParam` object.
 
 ```java
-import io.milvus.param.LoadBalanceParam;
+import io.milvus.param.control.LoadBalanceParam;
 LoadBalanceParam.Builder builder = LoadBalanceParam.newBuilder();
 ```
 
@@ -86,6 +86,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.control.LoadBalanceParam;
 
 LoadBalanceParam param = LoadBalanceParam.newBuilder()
         .withSegmentIDs(segmentIDs)

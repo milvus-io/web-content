@@ -11,7 +11,7 @@ R<RpcStatus> createResourceGroup(CreateResourceGroupParam requestParam);
 Use the `CreateResourceGroupParam.Builder` to construct a `CreateResourceGroupParam` object.
 
 ```java
-import io.milvus.param.CreateResourceGroupParam;
+import io.milvus.param.resourcegroup.CreateResourceGroupParam;
 CreateResourceGroupParam.Builder builder = CreateResourceGroupParam.newBuilder();
 ```
 
@@ -52,7 +52,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.CreateResourceGroupParam;
+import io.milvus.param.resourcegroup.CreateResourceGroupParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.createResourceGroup(CreateResourceGroupParam.newBuilder()
             .withGroupName(name)

@@ -51,9 +51,17 @@ addCollectionStructField(AddCollectionStructFieldReq.builder()
 
     The scalar or vector fields contained in each struct element.
 
+- `addStructField(AddFieldReq addFieldReq)`
+
+    Converts the given field request into a struct sub-field and appends it to the struct field definition.
+
 - `typeParams(Map<String, String> typeParams)`
 
     Additional type parameters passed to the server for the struct field.
+
+- `typeParam(String key, String value)`
+
+    Adds a single type parameter to the struct field.
 
 **RETURNS:**
 

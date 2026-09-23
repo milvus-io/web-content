@@ -11,7 +11,7 @@ R<RpcStatus> createAlias(CreateAliasParam requestParam);
 Use the `CreateAliasParam.Builder` to construct a `CreateAliasParam` object.
 
 ```java
-import io.milvus.param.CreateAliasParam;
+import io.milvus.param.alias.CreateAliasParam;
 CreateAliasParam.Builder builder = CreateAliasParam.newBuilder();
 ```
 
@@ -63,12 +63,15 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.alias.CreateAliasParam;
 
 CreateAliasParam param = CreateAliasParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withAlias("alias1")
         .build();
-R<RpcStatus> response = client.createAlias(param)
+R<RpcStatus> response = client.createAlias(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

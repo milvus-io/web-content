@@ -73,6 +73,9 @@ import io.milvus.common.resourcegroup.*;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.resourcegroup.request.CreateResourceGroupReq;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -90,7 +93,7 @@ from.add(new ResourceGroupTransfer("DEFAULT_RESOURCE_GROUP"));
 List<ResourceGroupTransfer> to = new ArrayList<>();
 to.add(new ResourceGroupTransfer("DEFAULT_RESOURCE_GROUP"));
 
-ResourceGroupConfig config = ResourceGroupConfig.builder()
+ResourceGroupConfig config = ResourceGroupConfig.newBuilder()
     .withRequests(requests)
     .withLimits(limits)
     .withFrom(from)

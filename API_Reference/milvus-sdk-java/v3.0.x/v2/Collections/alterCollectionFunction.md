@@ -51,6 +51,7 @@ alterCollectionFunction(AlterCollectionFunctionReq.builder()
 import io.milvus.v2.service.collection.request.AlterCollectionFunctionReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.common.clientenum.FunctionType;
+import java.util.Arrays;
 
 CreateCollectionReq.Function updatedFunc = CreateCollectionReq.Function.builder()
     .name("bm25")

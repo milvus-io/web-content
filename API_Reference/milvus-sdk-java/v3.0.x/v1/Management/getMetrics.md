@@ -11,7 +11,7 @@ R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
 Use the `GetMetricsParam.Builder` to construct a `GetMetricsParam` object.
 
 ```java
-import io.milvus.param.GetMetricsParam;
+import io.milvus.param.control.GetMetricsParam;
 GetMetricsParam.Builder builder = GetMetricsParam.newBuilder();
 ```
 
@@ -54,6 +54,8 @@ This method catches all the exceptions and returns an `R<GetMetricsResponse>` ob
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetMetricsResponse;
+import io.milvus.param.R;
+import io.milvus.param.control.GetMetricsParam;
 
 GetMetricsParam param = GetMetricsParam.newBuilder()
         .withRequest("{\"metric_type\":\"system_info\"}")

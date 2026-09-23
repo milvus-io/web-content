@@ -67,9 +67,11 @@ This method catches all the exceptions and returns an `R<DeleteResponse>` object
 #### Example
 
 ```java
-import io.milvus.param.highlevel.*;
-import io.milvus.response.MutationResultWrapper;
-import io.milvus.grpc.MutationResult;
+import io.milvus.param.highlevel.dml.DeleteIdsParam;
+import io.milvus.param.highlevel.dml.response.DeleteResponse;
+import io.milvus.param.R;
+import java.util.List;
+import com.google.common.collect.Lists;
 
 List<String> ids = Lists.newArrayList("441966745769900131", "441966745769900133");
 DeleteIdsParam param = DeleteIdsParam.newBuilder()

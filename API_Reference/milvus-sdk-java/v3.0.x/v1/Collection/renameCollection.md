@@ -3,7 +3,7 @@
 A MilvusClient interface. This method renames the specified collection.
 
 ```java
-R<RpcStatus> renameCollection(RenameCollectionParam requestParam)
+R<RpcStatus> renameCollection(RenameCollectionParam requestParam);
 ```
 
 #### RenameCollectionParam
@@ -11,7 +11,7 @@ R<RpcStatus> renameCollection(RenameCollectionParam requestParam)
 Use the `RenameCollectionParam.Builder` to construct a `RenameCollectionParam` object.
 
 ```java
-import io.milvus.param.RenameCollectionParam;
+import io.milvus.param.collection.RenameCollectionParam;
 RenameCollectionParam.Builder builder = RenameCollectionParam.newBuilder();
 ```
 
@@ -68,6 +68,8 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.collection.RenameCollectionParam;
 
 RenameCollectionParam param = RenameCollectionParam.newBuilder()
         .withOldCollectionName(OLD_COLLECTION_NAME)

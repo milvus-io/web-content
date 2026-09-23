@@ -11,7 +11,7 @@ R<GetReplicasResponse> getReplicas(GetReplicasParam requestParam);
 Use the `GetReplicasParam.Builder` to construct a GetReplicasParam object.
 
 ```java
-import io.milvus.param.GetReplicasParam;
+import io.milvus.param.control.GetReplicasParam;
 GetReplicasParam.Builder builder = GetReplicasParam.newBuilder();
 ```
 
@@ -60,6 +60,8 @@ This method catches all the exceptions and returns an `R<GetReplicasResponse>` o
 import io.milvus.param.*;
 import io.milvus.grpc.GetReplicasResponse;
 import io.milvus.grpc.ReplicaInfo;
+import io.milvus.param.R;
+import io.milvus.param.control.GetReplicasParam;
 
 GetReplicasParam param = GetReplicasParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

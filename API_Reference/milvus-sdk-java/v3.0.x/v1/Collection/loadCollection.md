@@ -11,7 +11,7 @@ R<RpcStatus> loadCollection(LoadCollectionParam requestParam);
 Use the `LoadCollectionParam.Builder` to construct a `LoadCollectionParam` object.
 
 ```java
-import io.milvus.param.LoadCollectionParam;
+import io.milvus.param.collection.LoadCollectionParam;
 LoadCollectionParam.Builder builder = LoadCollectionParam.newBuilder();
 ```
 
@@ -83,6 +83,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.collection.LoadCollectionParam;
 
 LoadCollectionParam param = LoadCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

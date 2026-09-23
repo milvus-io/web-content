@@ -14,6 +14,7 @@ This method uses the same parameter as `query()`, it invokes RPC interface and r
 import io.milvus.param.dml.*;
 import io.milvus.grpc.QueryResults;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.milvus.param.R;
 
 QueryParam param = QueryParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

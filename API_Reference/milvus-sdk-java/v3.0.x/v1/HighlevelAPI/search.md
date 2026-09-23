@@ -85,6 +85,10 @@ This method catches all the exceptions and returns an `R<SearchResponse>` object
 import io.milvus.param.*;
 import io.milvus.response.SearchResultsWrapper;
 import io.milvus.grpc.SearchResults;
+import io.milvus.param.R;
+import io.milvus.param.highlevel.dml.SearchSimpleParam;
+import io.milvus.param.highlevel.dml.response.SearchResponse;
+import com.google.common.collect.Lists;
 
 SearchSimpleParam param = SearchSimpleParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
@@ -94,7 +98,7 @@ SearchSimpleParam param = SearchSimpleParam.newBuilder()
         .withLimit(100L)
         .withOffset(0L)
         .build();
-R<SearchResponse> response = client.search(param)
+R<SearchResponse> response = client.search(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

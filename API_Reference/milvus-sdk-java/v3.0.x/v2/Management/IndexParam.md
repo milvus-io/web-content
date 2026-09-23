@@ -44,10 +44,15 @@ This exception will be raised when any error occurs during this operation.
 ```java
 import io.milvus.v2.common.IndexParam;
 
+import java.util.HashMap;
+
 IndexParam indexParam = IndexParam.builder()
     .fieldName("vector")
     .indexType(IndexParam.IndexType.HNSW)
     .metricType(IndexParam.MetricType.COSINE)
-    .extraParams(Map.of("M", 16, "efConstruction", 256))
+    .extraParams(new HashMap<String, Object>() {{
+        put("M", 16);
+        put("efConstruction", 256);
+    }})
     .build();
 ```

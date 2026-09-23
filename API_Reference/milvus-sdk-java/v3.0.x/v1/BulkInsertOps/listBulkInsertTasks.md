@@ -11,7 +11,7 @@ R<ListImportTasksResponse> listBulkInsertTasks(ListBulkInsertTasksParam requestP
 Use the `ListBulkInsertTasksParam.Builder` to construct a `ListBulkInsertTasksParam` object.
 
 ```java
-import io.milvus.param.ListBulkInsertTasksParam;
+import io.milvus.param.bulkinsert.ListBulkInsertTasksParam;
 ListBulkInsertTasksParam.Builder builder = ListBulkInsertTasksParam.newBuilder();
 ```
 
@@ -59,6 +59,7 @@ The `ListImportTasksResponse` contains a list of `GetImportStateResponse`, which
 
 ```java
 import io.milvus.param.bulkinsert.*;
+import io.milvus.param.R;
 
 R<ListImportTasksResponse> response = milvusClient.listBulkInsertTasks(ListBulkInsertTasksParam.newBuilder()
             .withCollectionName(COLLECTION_NAME)

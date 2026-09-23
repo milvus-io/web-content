@@ -243,6 +243,7 @@ This method catches all the exceptions and returns an `R<SearchResults>` object.
 import io.milvus.param.dml.*;
 import io.milvus.param.dml.ranker.*;
 import io.milvus.grpc.SearchResults;
+import io.milvus.param.R;
 
 AnnSearchParam req1 = AnnSearchParam.newBuilder()
         .withVectorFieldName(FLOAT_VECTOR_FIELD)

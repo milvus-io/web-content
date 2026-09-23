@@ -11,7 +11,7 @@ R<RpcStatus> createCollection(CreateSimpleCollectionParam requestParam);
 Use the `CreateSimpleCollectionParam.Builder` to construct a `CreateSimpleCollectionParam` object.
 
 ```java
-import io.milvus.param.highlevel.collection.CreateCollectionParam;
+import io.milvus.param.highlevel.collection.CreateSimpleCollectionParam;
 CreateSimpleCollectionParam.Builder builder = CreateSimpleCollectionParam.newBuilder();
 ```
 
@@ -103,6 +103,8 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.highlevel.collection.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 CreateSimpleCollectionParam param = CreateSimpleCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

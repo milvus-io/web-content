@@ -33,10 +33,10 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.data.EmbeddingList;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-        
+
 // 1. Initialize an EmbeddingList
 EmbeddingList embeddingList = new EmbeddingList();
 
 // 2. Add vector embedding
-embeddingList.add(new FloatVec[0.1, 0.2, 0.3, 0.4, 0.5])
+embeddingList.add(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f, 0.5f}));
 ```

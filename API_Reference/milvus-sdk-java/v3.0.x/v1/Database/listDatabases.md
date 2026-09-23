@@ -19,7 +19,7 @@ This method catches all the exceptions and returns an `R<ListDatabasesResponse>`
 #### Example
 
 ```java
-R<ListDatabasesResponse> response = client.listDatabases()
+R<ListDatabasesResponse> response = client.listDatabases();
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

@@ -11,7 +11,7 @@ R<DescribeIndexResponse> describeIndex(DescribeIndexParam requestParam);
 Use the `DescribeIndexParam.Builder` to construct a `DescribeIndexParam` object.
 
 ```java
-import io.milvus.param.DescribeIndexParam;
+import io.milvus.param.index.DescribeIndexParam;
 DescribeIndexParam.Builder builder = DescribeIndexParam.newBuilder();
 ```
 
@@ -131,12 +131,14 @@ Methods of `DescIndexResponseWrapper.IndexDesc`
 import io.milvus.param.*;
 import io.milvus.response.DescIndexResponseWrapper;
 import io.milvus.grpc.DescribeIndexResponse;
+import io.milvus.param.R;
+import io.milvus.param.index.DescribeIndexParam;
 
 DescribeIndexParam param = DescribeIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<DescribeIndexResponse> response = client.describeIndex(param)
+R<DescribeIndexResponse> response = client.describeIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

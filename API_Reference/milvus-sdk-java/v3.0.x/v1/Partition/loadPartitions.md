@@ -11,7 +11,7 @@ R<RpcStatus> loadPartitions(LoadPartitionsParam requestParam);
 Use the `LoadPartitionsParam.Builder` to construct a `LoadPartitionsParam` object.
 
 ```java
-import io.milvus.param.LoadPartitionsParam;
+import io.milvus.param.partition.LoadPartitionsParam;
 LoadPartitionsParam.Builder builder = LoadPartitionsParam.newBuilder();
 ```
 
@@ -93,6 +93,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.partition.LoadPartitionsParam;
 
 LoadPartitionsParam param = LoadPartitionsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

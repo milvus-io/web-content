@@ -11,7 +11,7 @@ R<ShowCollectionsResponse> showCollections(ShowCollectionsParam requestParam);
 Use the `ShowCollectionsParam.Builder` to construct a `ShowCollectionsParam` object.
 
 ```java
-import io.milvus.param.ShowCollectionsParam;
+import io.milvus.param.collection.ShowCollectionsParam;
 ShowCollectionsParam.Builder builder = ShowCollectionsParam.newBuilder();
 ```
 
@@ -131,6 +131,9 @@ Methods of `ShowCollResponseWrapper.CollectionInfo`:
 import io.milvus.param.*;
 import io.milvus.response.ShowCollResponseWrapper;
 import io.milvus.grpc.ShowCollectionsResponse;
+import io.milvus.param.R;
+import java.util.List;
+import io.milvus.param.collection.ShowCollectionsParam;
 
 ShowCollectionsParam param = ShowCollectionsParam.newBuilder()
         .addCollectionName(COLLECTION_NAME)

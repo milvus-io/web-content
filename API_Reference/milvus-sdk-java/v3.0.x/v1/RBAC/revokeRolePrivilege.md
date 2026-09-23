@@ -11,7 +11,7 @@ R<RpcStatus> revokeRolePrivilege(RevokeRolePrivilegeParam requestParam);
 Use the `RevokeRolePrivilegeParam.Builder` to construct a `RevokeRolePrivilegeParam` object.
 
 ```java
-import io.milvus.param.RevokeRolePrivilegeParam;
+import io.milvus.param.role.RevokeRolePrivilegeParam;
 RevokeRolePrivilegeParam.Builder builder = RevokeRolePrivilegeParam.newBuilder();
 ```
 
@@ -67,7 +67,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.RevokeRolePrivilegeParam;
+import io.milvus.param.role.RevokeRolePrivilegeParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
         .withRoleName(roleName)

@@ -11,7 +11,7 @@ R<RpcStatus> dropRole(DropRoleParam requestParam);
 Use the `DropRoleParam.Builder` to construct a `DropRoleParam` object.
 
 ```java
-import io.milvus.param.DropRoleParam;
+import io.milvus.param.role.DropRoleParam;
 DropRoleParam.Builder builder = DropRoleParam.newBuilder();
 ```
 
@@ -52,7 +52,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.DropRoleParam;
+import io.milvus.param.role.DropRoleParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.dropRole(DropRoleParam.newBuilder()
             .withRoleName(roleName)

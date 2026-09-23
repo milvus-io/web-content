@@ -14,8 +14,13 @@ This method uses the same parameter as `insert()`, it invokes the RPC interface 
 import io.milvus.param.*;
 import io.milvus.response.MutationResultWrapper;
 import io.milvus.grpc.MutationResult;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.milvus.param.R;
+import java.util.ArrayList;
+import java.util.List;
+import io.milvus.param.dml.InsertParam;
 
 int rowCount = 10000;
 List<List<Float>> vectors = generateFloatVectors(rowCount);
@@ -30,16 +35,16 @@ List<InsertParam.Field> fields = new ArrayList<>();
 fields.add(new InsertParam.Field("id", ids));
 fields.add(new InsertParam.Field("vector", vectors));
 
-ListenableFuture<R<MutationResult>> response = client.insertAsync(InsertParam.newBuilder()
+ListenableFuture<R<MutationResult>> future = client.insertAsync(InsertParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withFields(fields)
         .build());
+R<MutationResult> response = future.get(); // wait for the result to be returned
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
 
-R<MutationResult> result = response.get(); // wait the result retutned
-MutationResultWrapper wrapper = new MutationResultWrapper(result.getData());
+MutationResultWrapper wrapper = new MutationResultWrapper(response.getData());
 System.out.println(wrapper.getInsertCount() + " rows inserted");
 
 // insert data by rows
@@ -52,13 +57,12 @@ for (int i = 1; i <= rowCount; ++i) {
     rows.add(row);
 }
 
-response = client.insertAsync(InsertParam.newBuilder()
+future = client.insertAsync(InsertParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withRows(rows)
         .build());
+response = future.get(); // wait for the result to be returned
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
-
-R<MutationResult> result = response.get(); // wait the result retutned
 ```

@@ -34,6 +34,10 @@ hybridSearch(HybridSearchReq.builder()
 
     The name of the database. Defaults to the current database if not specified.
 
+- `clusterId(String clusterId)`
+
+    **Deprecated.** The ID of the cluster to query. Applies to global-cluster deployments.
+
 - `collectionName(String collectionName)`
 
     The name of the target collection.
@@ -85,6 +89,10 @@ hybridSearch(HybridSearchReq.builder()
 - `functionScore(FunctionScore functionScore)`
 
     A FunctionScore object for custom scoring.
+
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`.
 
 **RETURNS:**
 

@@ -139,10 +139,11 @@ Methods of PoolConfig.PoolConfigBuilder:
 #### Example
 
 ```java
-import io.milvus.param.ConnectParam
-import io.milvus.pool.PoolConfig
-import io.milvus.pool.MilvusClientV1Pool
-import io.milvus.client.MilvusClient
+import io.milvus.param.ConnectParam;
+import io.milvus.pool.PoolConfig;
+import io.milvus.pool.MilvusClientV1Pool;
+import io.milvus.client.MilvusClient;
+import java.time.Duration;
 
 ConnectParam connectConfig = ConnectParam.newBuilder()
         .withHost("localhost")
@@ -155,7 +156,7 @@ PoolConfig poolConfig = PoolConfig.builder()
         .maxBlockWaitDuration(Duration.ofSeconds(5L)) // getClient() will wait 5 seconds if no idle client available
         .minEvictableIdleDuration(Duration.ofSeconds(10L)) // if number of idle clients is larger than maxIdlePerKey, redundant idle clients will be evicted after 10 seconds
         .build();
-MilvusClientV1Pool pool;
+MilvusClientV1Pool pool = new MilvusClientV1Pool(poolConfig, connectConfig);
 
 MilvusClient client = pool.getClient("client_name");
 try {

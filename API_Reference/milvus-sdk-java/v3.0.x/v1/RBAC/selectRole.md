@@ -11,7 +11,7 @@ R<SelectRoleResponse> selectRole(SelectRoleParam requestParam);
 Use the `SelectRoleParam.Builder` to construct a `SelectRoleParam` object.
 
 ```java
-import io.milvus.param.SelectRoleParam;
+import io.milvus.param.role.SelectRoleParam;
 SelectRoleParam.Builder builder = SelectRoleParam.newBuilder();
 ```
 
@@ -57,7 +57,8 @@ This method catches all the exceptions and returns an `R<SelectRoleResponse>` ob
 #### Example
 
 ```java
-import io.milvus.param.SelectRoleParam;
+import io.milvus.param.role.SelectRoleParam;
+import io.milvus.param.R;
 
 R<SelectRoleResponse> response = client.selectRole(SelectRoleParam.newBuilder()
             .withRoleName(roleName)

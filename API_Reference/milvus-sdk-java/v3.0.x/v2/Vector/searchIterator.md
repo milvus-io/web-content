@@ -1,7 +1,5 @@
 # searchIterator()
 
-# searchIterator()
-
 This method returns a search iterator to iterate search results.
 
 ```java
@@ -16,6 +14,7 @@ searchIterator(SearchIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .limit(long limit)
     .expr(String expr)
@@ -37,6 +36,10 @@ searchIterator(SearchIteratorReq.builder()
 
     The name of the database. Defaults to the current database if not specified.
 
+- `clusterId(String clusterId)`
+
+    **Deprecated.** The ID of the cluster to query. Applies to global-cluster deployments.
+
 - `collectionName(String collectionName)`
 
     The name of the target collection.
@@ -48,6 +51,10 @@ searchIterator(SearchIteratorReq.builder()
 - `vectorFieldName(String vectorFieldName)`
 
     The name of the vector field.
+
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity.
 
 - `topK(int topK)`
 
@@ -116,6 +123,11 @@ import io.milvus.v2.common.ConsistencyLevel;
 import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.vector.request.SearchIteratorReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+
+import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

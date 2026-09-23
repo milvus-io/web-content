@@ -180,6 +180,8 @@ Methods of `SearchIterator`:
 import io.milvus.param.dml.*;
 import io.milvus.orm.iterator.*;
 import io.milvus.response.QueryResultsWrapper;
+import io.milvus.param.R;
+import java.util.List;
 
 R<SearchIterator> response = milvusClient.searchIterator(SearchIteratorParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

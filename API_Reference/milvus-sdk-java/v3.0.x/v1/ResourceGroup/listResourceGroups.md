@@ -11,7 +11,7 @@ R<ListResourceGroupsResponse> listResourceGroups(ListResourceGroupsParam request
 Use the `ListResourceGroupsParam.Builder` to construct a `ListResourceGroupsParam` object.
 
 ```java
-import io.milvus.param.ListResourceGroupsParam;
+import io.milvus.param.resourcegroup.ListResourceGroupsParam;
 ListResourceGroupsParam.Builder builder = ListResourceGroupsParam.newBuilder();
 ```
 
@@ -43,7 +43,8 @@ This method catches all the exceptions and returns an `R<ListResourceGroupsRespo
 #### Example
 
 ```java
-import io.milvus.param.ListResourceGroupsParam;
+import io.milvus.param.resourcegroup.ListResourceGroupsParam;
+import io.milvus.param.R;
 
 R<ListResourceGroupsResponse> response = client.listResourceGroups(ListResourceGroupsParam.newBuilder()
             .build());

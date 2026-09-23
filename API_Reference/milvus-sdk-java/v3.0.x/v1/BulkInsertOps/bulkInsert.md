@@ -11,7 +11,7 @@ R<ImportResponse> bulkInsert(BulkInsertParam requestParam);
 Use the `BulkInsertParam.Builder` to construct a `BulkInsertParam` object.
 
 ```java
-import io.milvus.param.BulkInsertParam;
+import io.milvus.param.bulkinsert.BulkInsertParam;
 BulkInsertParam.Builder builder = BulkInsertParam.newBuilder();
 ```
 
@@ -73,6 +73,9 @@ This method catches all the exceptions and returns an `R<ImportResponse>` object
 
 ```java
 import io.milvus.param.bulkinsert.*;
+import io.milvus.param.R;
+import java.util.Arrays;
+import java.util.List;
 
 List<String> files = Arrays.asList("/path_to_bucket/data.json");
 R<ImportResponse> response = milvusClient.bulkInsert(BulkInsertParam.newBuilder()

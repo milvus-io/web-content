@@ -98,6 +98,7 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.ReplicaInfo;
 import io.milvus.v2.service.collection.request.DescribeReplicasReq;
 import io.milvus.v2.service.collection.response.DescribeReplicasResp;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

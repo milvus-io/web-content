@@ -11,7 +11,7 @@ R<RpcStatus> alterAlias(AlterAliasParam requestParam);
 Use the `AlterAliasParam.Builder` to construct an `AlterAliasParam` object.
 
 ```java
-import io.milvus.param.AlterAliasParam;
+import io.milvus.param.alias.AlterAliasParam;
 AlterAliasParam.Builder builder = AlterAliasParam.newBuilder();
 ```
 
@@ -63,12 +63,15 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.alias.AlterAliasParam;
 
 AlterAliasParam param = AlterAliasParam.newBuilder()
         .withCollection(COLLECTION_NAME)
         .withAlias("alias1")
         .build();
-R<RpcStatus> response = client.alterAlias(param)
+R<RpcStatus> response = client.alterAlias(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

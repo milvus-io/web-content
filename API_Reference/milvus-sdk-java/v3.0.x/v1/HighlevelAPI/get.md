@@ -76,6 +76,11 @@ import io.milvus.param.*;
 import io.milvus.response.QueryResultsWrapper;
 import io.milvus.response.FieldDataWrapper;
 import io.milvus.grpc.QueryResults;
+import io.milvus.param.R;
+import java.util.List;
+import io.milvus.param.highlevel.dml.GetIdsParam;
+import io.milvus.param.highlevel.dml.response.GetResponse;
+import com.google.common.collect.Lists;
 
 List<String> ids = Lists.newArrayList("441966745769900131", "441966745769900133");
 GetIdsParam getParam = GetIdsParam.newBuilder()
@@ -84,7 +89,7 @@ GetIdsParam getParam = GetIdsParam.newBuilder()
         .withOutputFields(Lists.newArrayList("*"))
         .build();
 
-R<GetResponse> response = client.get(param)
+R<GetResponse> response = client.get(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

@@ -16,6 +16,7 @@ delete(DeleteReq.builder()
     .filter(String filter)
     .ids(List<Object> ids)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
     .build()
 );
 ```
@@ -46,6 +47,10 @@ delete(DeleteReq.builder()
 
     A map of template variable values for parameterized filters.
 
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+
+    The consistency level for the delete operation. Defaults to the server default when omitted.
+
 **RETURNS:**
 
 *DeleteResp*
@@ -65,6 +70,7 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.DeleteReq;
 import io.milvus.v2.service.vector.response.DeleteResp;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

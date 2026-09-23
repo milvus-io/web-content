@@ -11,7 +11,7 @@ R<RpcStatus> alterIndex(AlterIndexParam requestParam);
 Use the `AlterIndexParam.Builder` to construct an `AlterIndexParam` object.
 
 ```java
-import io.milvus.param.AlterIndexParam;
+import io.milvus.param.index.AlterIndexParam;
 AlterIndexParam.Builder builder = AlterIndexParam.newBuilder();
 ```
 
@@ -63,6 +63,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.index.AlterIndexParam;
 
 AlterIndexParam param = AlterIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

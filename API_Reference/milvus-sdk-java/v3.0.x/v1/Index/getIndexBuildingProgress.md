@@ -11,7 +11,7 @@ R<GetIndexBuildProgressResponse> getIndexBuildProgress(GetIndexBuildProgressPara
 Use the `GetIndexBuildProgressParam.Builder` to construct a `GetIndexBuildProgressParam` object.
 
 ```java
-import io.milvus.param.GetIndexBuildProgressParam;
+import io.milvus.param.index.GetIndexBuildProgressParam;
 GetIndexBuildProgressParam.Builder builder = GetIndexBuildProgressParam.newBuilder();
 ```
 
@@ -64,6 +64,8 @@ This method catches all the exceptions and returns an `R<GetIndexBuildProgressRe
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetIndexBuildProgressResponse;
+import io.milvus.param.R;
+import io.milvus.param.index.GetIndexBuildProgressParam;
 
 GetIndexBuildProgressParam param = GetIndexBuildProgressParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

@@ -11,8 +11,8 @@ R<RpcStatus> createIndex(CreateIndexParam requestParam);
 Use the `CreateIndexParam.Builder` to construct a `CreateIndexParam` object.
 
 ```java
-import io.milvus.param.CreateIndexParam;
-CreateIndexParam.Builder builder = CreateIndexParam.newBuilder()
+import io.milvus.param.index.CreateIndexParam;
+CreateIndexParam.Builder builder = CreateIndexParam.newBuilder();
 ```
 
 Methods of `CreateIndexParam.Builder`:
@@ -98,6 +98,11 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.IndexType;
+import io.milvus.param.MetricType;
+import io.milvus.param.index.CreateIndexParam;
 
 CreateIndexParam param = CreateIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
@@ -106,7 +111,7 @@ CreateIndexParam param = CreateIndexParam.newBuilder()
         .withMetricType(MetricType.L2)
         .withExtraParam("{\"nlist\":64}")
         .build();
-R<RpcStatus> response = client.createIndex(param)
+R<RpcStatus> response = client.createIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

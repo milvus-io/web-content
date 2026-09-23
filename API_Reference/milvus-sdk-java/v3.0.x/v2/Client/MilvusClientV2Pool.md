@@ -126,8 +126,10 @@ Read the description on the **[MilvusClientV2](MilvusClientV2.md)** page.
 
 ```java
 import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.pool.PoolConfig;
 import io.milvus.pool.MilvusClientV2Pool;
+import java.time.Duration;
 
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")

@@ -11,7 +11,7 @@ R<RpcStatus> createRole(CreateRoleParam requestParam);
 Use the `CreateRoleParam.Builder` to construct a `CreateRoleParam` object.
 
 ```java
-import io.milvus.param.CreateRoleParam;
+import io.milvus.param.role.CreateRoleParam;
 CreateRoleParam.Builder builder = CreateRoleParam.newBuilder();
 ```
 
@@ -52,7 +52,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.CreateRoleParam;
+import io.milvus.param.role.CreateRoleParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.createRole(CreateRoleParam.newBuilder()
             .withRoleName(roleName)

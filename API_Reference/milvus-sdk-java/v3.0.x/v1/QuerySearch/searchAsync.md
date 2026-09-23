@@ -14,6 +14,7 @@ This method uses the same parameter as `search()`, it invokes RPC interface and 
 import io.milvus.param.dml.*;
 import io.milvus.grpc.SearchResults;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.milvus.param.R;
 
 SearchParam param = SearchParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

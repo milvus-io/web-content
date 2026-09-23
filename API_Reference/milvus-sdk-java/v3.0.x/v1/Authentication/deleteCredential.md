@@ -11,7 +11,7 @@ R<RpcStatus> deleteCredential(DeleteCredentialParam requestParam);
 Use the `DeleteCredentialParam.Builder` to construct a `DeleteCredentialParam` object.
 
 ```java
-import io.milvus.param.DeleteCredentialParam;
+import io.milvus.param.credential.DeleteCredentialParam;
 DeleteCredentialParam.Builder builder = DeleteCredentialParam.newBuilder();
 ```
 
@@ -53,11 +53,14 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.credential.DeleteCredentialParam;
 
 DeleteCredentialParam param = DeleteCredentialParam.newBuilder()
         .withUsername("user")
         .build();
-R<RpcStatus> response = client.deleteCredential(param)
+R<RpcStatus> response = client.deleteCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

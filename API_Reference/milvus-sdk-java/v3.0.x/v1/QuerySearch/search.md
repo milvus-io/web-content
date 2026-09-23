@@ -227,6 +227,8 @@ Methods of `SearchResultsWrapper.IDScore`:
 import io.milvus.param.dml.*;
 import io.milvus.response.SearchResultsWrapper;
 import io.milvus.grpc.SearchResults;
+import io.milvus.param.R;
+import java.util.List;
 
 SearchParam param = SearchParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
@@ -237,7 +239,7 @@ SearchParam param = SearchParam.newBuilder()
         .withConsistencyLevel(ConsistencyLevelEnum.EVENTUALLY)
         .withParams("{\"nprobe\":10,\"offset\":2, \"limit\":3}")
         .build();
-R<SearchResults> response = client.search(param)
+R<SearchResults> response = client.search(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

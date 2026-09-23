@@ -11,7 +11,7 @@ R<RpcStatus> alterCollection(AlterCollectionParam requestParam);
 Use the `AlterCollectionParam.Builder` to construct an `AlterCollectionParam` object.
 
 ```java
-import io.milvus.param.AlterCollectionParam;
+import io.milvus.param.collection.AlterCollectionParam;
 AlterCollectionParam.Builder builder = AlterCollectionParam.newBuilder();
 ```
 
@@ -73,6 +73,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.collection.AlterCollectionParam;
 
 AlterCollectionParam param = AlterCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

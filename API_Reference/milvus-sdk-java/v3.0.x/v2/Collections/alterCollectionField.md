@@ -58,6 +58,10 @@ alterCollectionField(AlterCollectionFieldReq.builder()
 
         Whether Milvus maps the field data into memory instead of fully loading it. For details, refer to MMap-enabled Data Storage.
 
+- `property(String key, String value)`
+
+    Adds a single property to alter on the field.
+
 **RETURNS:**
 
 *void*
@@ -74,6 +78,9 @@ alterCollectionField(AlterCollectionFieldReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.AlterCollectionFieldReq;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -84,14 +91,14 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Alter the \`max_length\` property of a VarChar field named \`varchar\`
-Map<String, String> properties = new HashMap<>()
-properties.put("max_length", "512")
+Map<String, String> properties = new HashMap<>();
+properties.put("max_length", "512");
 
 AlterCollectionFieldReq alterCollectionFieldReq = AlterCollectionFieldReq.builder()
         .collectionName("test")
         .fieldName("varchar")
         .properties(properties)
         .build();
-client.alterCollectionField(alterCollectionFieldReq)
+client.alterCollectionField(alterCollectionFieldReq);
 ```
 

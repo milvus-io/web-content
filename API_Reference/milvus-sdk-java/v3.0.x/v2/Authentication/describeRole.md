@@ -23,6 +23,10 @@ DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
 
     The name of the role to describe.
 
+- `dbName(String dbName)`
+
+    The name of the database that the role applies to. Defaults to the current database when omitted.
+
 **RETURNS:**
 
 *DescribeRoleResp*

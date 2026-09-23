@@ -12,7 +12,7 @@ Use the `AlterDatabaseParam.Builder` to construct an `AlterDatabaseParam` object
 
 ```java
 import io.milvus.param.collection.AlterDatabaseParam;
-AlterDatabaseParam.Builder builder = AlterDatabaseParam.newBuilder()
+AlterDatabaseParam.Builder builder = AlterDatabaseParam.newBuilder();
 ```
 
 Methods of `AlterDatabaseParam.Builder`:
@@ -59,6 +59,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.collection.AlterDatabaseParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import java.util.Arrays;
 
 AlterDatabaseParam param = AlterDatabaseParam.newBuilder()
         .withDatabaseName("mydnb")
@@ -86,7 +89,7 @@ Use the `DescribeDatabaseParam.Builder` to construct a `DescribeDatabaseParam` o
 
 ```java
 import io.milvus.param.collection.DescribeDatabaseParam;
-DescribeDatabaseParam.Builder builder = DescribeDatabaseParam.newBuilder()
+DescribeDatabaseParam.Builder builder = DescribeDatabaseParam.newBuilder();
 ```
 
 Methods of `DescribeDatabaseParam.Builder`:
@@ -168,6 +171,7 @@ Methods of `DescDBResponseWrapper`:
 ```java
 import io.milvus.param.collection.DescribeDatabaseParam;
 import io.milvus.response.DescDBResponseWrapper;
+import io.milvus.param.R;
 
 DescribeDatabaseParam describeDBParam = DescribeDatabaseParam.newBuilder()
         .withDatabaseName("mydb")

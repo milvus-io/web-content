@@ -65,20 +65,21 @@ A model ranker instance.
 ## Examples:
 
 ```java
-import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.ModelRanker
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.ranker.ModelRanker;
+
 import java.util.Collections;
 
 // use the ModelRanker class
-ModelRanker.builder()
-    .function("tei")
+ModelRanker ranker = ModelRanker.builder()
     .name("TEI ranker")
     .inputFieldNames(Collections.singletonList("document"))
     .provider("tei")
-    .queries("[\"machine learning for time series\"]")
+    .queries(Collections.singletonList("machine learning for time series"))
     .endpoint("http://model-service:8080")
-    .build());
-    
+    .build();
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)

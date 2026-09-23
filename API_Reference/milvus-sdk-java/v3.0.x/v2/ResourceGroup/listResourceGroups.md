@@ -34,6 +34,9 @@ A **ListResourceGroupsResp** object is a list of group names in strings.
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.resourcegroup.request.ListResourceGroupsReq;
+import io.milvus.v2.service.resourcegroup.response.ListResourceGroupsResp;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -46,6 +49,6 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 // 2. List resource groups    
 ListResourceGroupsReq listResourceGroupsReq = ListResourceGroupsReq.builder()
     .build();
-List<String> groupNames = client.listResourceGroups(listResourceGroupsReq);
+ListResourceGroupsResp groupNames = client.listResourceGroups(listResourceGroupsReq);
 ```
 

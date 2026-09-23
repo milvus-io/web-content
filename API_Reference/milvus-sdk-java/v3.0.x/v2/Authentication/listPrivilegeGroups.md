@@ -48,6 +48,8 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.rbac.PrivilegeGroup;
 import io.milvus.v2.service.rbac.request.ListPrivilegeGroupsReq;
 import io.milvus.v2.service.rbac.response.ListPrivilegeGroupsResp;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

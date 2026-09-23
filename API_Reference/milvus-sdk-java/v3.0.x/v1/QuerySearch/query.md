@@ -212,6 +212,8 @@ import io.milvus.param.dml.*;
 import io.milvus.response.QueryResultsWrapper;
 import io.milvus.response.FieldDataWrapper;
 import io.milvus.grpc.QueryResults;
+import io.milvus.param.R;
+import java.util.List;
 
 QueryParam param = QueryParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
@@ -219,7 +221,7 @@ QueryParam param = QueryParam.newBuilder()
         .addOutFields("field1")
         .withConsistencyLevel(ConsistencyLevelEnum.EVENTUALLY)
         .build();
-R<QueryResults> response = client.query(param)
+R<QueryResults> response = client.query(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
