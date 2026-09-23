@@ -10,6 +10,36 @@ from GitHub into `sdk-tmp/sdks/<repo-name>/` by SKILL.md **Step 0** and removed 
 done — never assume a local checkout, and never use one. The only exception is
 milvus-sdk-go, which is a module inside `milvus-io/milvus` (see below).
 
+## Compile-level snippet verification
+
+After any doc update, run the bundled verifier (SKILL.md **Step 4b**) to compile
+the complete code blocks of each SDK with its language toolchain:
+
+```bash
+python3 .skills/update-milvus-sdk-docs/scripts/verify-snippets.py API_Reference/<sdk>/<version-line>/ [--language <lang>]
+```
+
+Only **complete** blocks (full import/setup + runnable body) are compiled; bare
+signatures, option chains, type definitions, and indented excerpts are skipped as
+fragments (they cannot compile standalone and the static pass covers them).
+Per-SDK specifics:
+
+| SDK | verifier language | dependency source | notes |
+|---|---|---|---|
+| pymilvus | `python` | none (`py_compile`) | indented/`return`-top-level blocks are fragments |
+| milvus-sdk-go | `go` | local `sdk-tmp/sdks/milvus` at `client/v3.0.0` (`git archive` + `replace`), `goproxy.cn`, `GOTOOLCHAIN=go1.25.8` | setup cached in `sdk-tmp/snippet-verify/go/` |
+| milvus-sdk-node | `javascript` | none (`node --check`) | TS-style signature blocks (`key: Type`) are fragments |
+| milvus-sdk-java | `java` | SDK jars if available (`javac -proc:none`) | |
+| milvus-sdk-cpp | `cpp` | `sdk-tmp/sdks/milvus-sdk-cpp/src/include` (`g++ -fsyntax-only`) | most Examples are fragments |
+| milvus-sdk-rust | `rust` | crates.io (`cargo check`) | |
+| milvus-restful | `bash` | none (`bash -n`) | |
+
+Known real-error patterns the verifier catches (and that static checks miss):
+stray `\`` before a backtick (Go raw strings, JS template literals, Go struct
+tags), missing commas in Python keyword-arg lists, missing imports (`entity`,
+`log`) used in a snippet, wrong metric-constant package (`index.COSINE` vs
+`entity.COSINE`).
+
 ## Online URL mapping
 
 The live docs are served at `https://milvus.io/api-reference/<route>/<version-line>/<page>.md`.
