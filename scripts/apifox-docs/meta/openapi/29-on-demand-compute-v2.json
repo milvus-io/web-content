@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "启用按需计算",
             "description": "为指定项目的地域启用按需计算。"
+          },
+          "ja-JP": {
+            "summary": "On-Demand Compute を有効化します",
+            "description": "プロジェクトリージョンに対して On-Demand Compute を有効化します。"
           }
         },
         "x-admonition": [
@@ -39,6 +43,10 @@
               "zh-CN": {
                 "title": "注意",
                 "content": "启用按需计算会在内部自动创建一个 VectorLake 实例。该资源由系统自动管理，不会显示在集群列表中。"
+              },
+              "ja-JP": {
+                "title": "注記",
+                "content": "On-Demand Compute を有効にすると、内部的に VectorLake インスタンスがプロビジョニングされます。このリソースは自動的に管理されるため、クラスター一覧には表示されません。"
               }
             }
           }
@@ -59,6 +67,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -75,6 +86,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "プロジェクトの ID。"
                       }
                     }
                   },
@@ -84,6 +98,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "地域 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "リージョンの ID。"
                       }
                     }
                   }
@@ -120,6 +137,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回按需计算状态。"
+              },
+              "ja-JP": {
+                "description": "On-Demand Compute のステータスを返します。"
               }
             },
             "content": {
@@ -132,6 +152,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -144,6 +167,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
@@ -158,6 +184,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクトの ID。"
                                 }
                               }
                             },
@@ -167,6 +196,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "地域 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "リージョンの ID。"
                                 }
                               }
                             },
@@ -182,6 +214,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "按需计算状态。可选值为 `disabled`（已禁用）、`enabling`（启用中）、`enabled`（已启用）或 `abnormal`（异常）。"
+                                },
+                                "ja-JP": {
+                                  "description": "On-Demand Compute のステータス。"
                                 }
                               }
                             }
@@ -190,6 +225,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含按需计算状态。"
+                            },
+                            "ja-JP": {
+                              "description": "On-Demand Compute のステータスを含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -201,6 +239,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -214,6 +255,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -223,6 +267,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -281,6 +328,10 @@
           "zh-CN": {
             "summary": "查看按需计算状态",
             "description": "查看指定项目地域的按需计算状态。"
+          },
+          "ja-JP": {
+            "summary": "On-Demand Compute について説明します",
+            "description": "プロジェクトのリージョンにおける On-Demand Compute のステータスを説明します。"
           }
         },
         "tags": [
@@ -299,6 +350,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -314,6 +368,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -329,6 +386,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。"
               }
             }
           }
@@ -339,6 +399,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回按需计算状态。"
+              },
+              "ja-JP": {
+                "description": "On-Demand Compute のステータスを返します。"
               }
             },
             "content": {
@@ -351,6 +414,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -363,6 +429,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
@@ -377,6 +446,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクトの ID。"
                                 }
                               }
                             },
@@ -386,6 +458,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "地域 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "リージョンの ID。"
                                 }
                               }
                             },
@@ -401,6 +476,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "按需计算状态。可选值为 `disabled`（已禁用）、`enabling`（启用中）、`enabled`（已启用）或 `abnormal`（异常）。"
+                                },
+                                "ja-JP": {
+                                  "description": "On-Demand Compute のステータス。"
                                 }
                               }
                             }
@@ -409,6 +487,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含按需计算状态。"
+                            },
+                            "ja-JP": {
+                              "description": "On-Demand Compute のステータスを含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -420,6 +501,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -433,6 +517,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -442,6 +529,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }

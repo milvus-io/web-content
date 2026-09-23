@@ -12,7 +12,9 @@
         "zilliz"
       ],
       "x-i18n": {
-        "zh-CN": "Usage (V2)"
+        "zh-CN": {
+          "name": "Usage (V2)"
+        }
       }
     }
   ],
@@ -26,6 +28,10 @@
           "zh-CN": {
             "summary": "查询日用量",
             "description": "本接口查询指定组织指定时间段的日用量。当前用户须为组织所有者或计费管理员。"
+          },
+          "ja-JP": {
+            "summary": "日次使用量を照会",
+            "description": "指定した期間における、指定した組織の日次使用量を照会します。現在のユーザーは組織オーナーまたは請求管理者である必要があります。"
           }
         },
         "tags": [
@@ -44,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -65,6 +74,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "查询时间段开始日期，格式为 `YYYY-MM-DD`。"
+                      },
+                      "ja-JP": {
+                        "description": "照会期間の開始時刻です。形式は `YYYY-MM-DD` です。"
                       }
                     }
                   },
@@ -74,6 +86,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "查询时间段结束日期，格式为 `YYYY-MM-DD`。"
+                      },
+                      "ja-JP": {
+                        "description": "照会期間の終了時刻です。形式は `YYYY-MM-DD` です。"
                       }
                     }
                   }
@@ -84,6 +99,11 @@
                 "end": "2024-02-0100:00:00Z"
               }
             }
+          },
+          "x-i18n": {
+            "ja-JP": {
+              "description": "組織の日次使用量を照会するためのリクエスト本文です。"
+            }
           }
         },
         "responses": {
@@ -92,6 +112,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定组织指定时间段的日用量详情。"
+              },
+              "ja-JP": {
+                "description": "指定した期間における、指定した組織の日次使用量の詳細を返します。"
               }
             },
             "content": {
@@ -104,6 +127,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回指定组织指定时间段的日用量详情。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した期間における組織の日次使用量の詳細を返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -117,6 +143,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -134,6 +163,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "查询时间段开始时间，格式为 `YYYY-MM-DDTHH:mm:ssZ`。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "照会する期間の開始時刻です。形式は `YYYY-MM-DDTHH:mm:ssZ` です。"
                                       }
                                     }
                                   },
@@ -143,6 +175,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "查询时间段结束时间，格式为 `YYYY-MM-DDTHH:mm:ssZ`。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "照会する期間の終了時刻です。形式は `YYYY-MM-DDTHH:mm:ssZ` です。"
                                       }
                                     }
                                   },
@@ -152,6 +187,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "指定时间段内的用量总金额。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "指定した期間内の使用量の合計金額です。"
                                       }
                                     }
                                   },
@@ -161,6 +199,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "总金额币种。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "合計金額に適用される通貨です。"
                                       }
                                     }
                                   },
@@ -170,6 +211,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "指定时间段内的用量明细。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "指定した期間内の使用量の内訳です。"
                                       }
                                     },
                                     "items": {
@@ -181,6 +225,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "费用类型。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コストの種類です。"
                                             }
                                           },
                                           "enum": [
@@ -201,6 +248,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项详情。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "現在のコスト項目の詳細です。"
                                             }
                                           },
                                           "properties": {
@@ -210,6 +260,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群所属项目 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターが属するプロジェクトの ID です。"
                                                 }
                                               }
                                             },
@@ -219,6 +272,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群所属区域 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターが属するリージョンの ID です。"
                                                 }
                                               }
                                             },
@@ -228,6 +284,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群的 CU 类型。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターの compute unit (CU) の種類です。"
                                                 }
                                               }
                                             },
@@ -237,6 +296,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群的订阅计划。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターのサブスクリプションプランです。"
                                                 }
                                               }
                                             },
@@ -246,6 +308,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターの ID です。"
                                                 }
                                               }
                                             }
@@ -257,6 +322,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项对应的已使用的资源数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの量です。"
                                             }
                                           }
                                         },
@@ -266,6 +334,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项对应的已使用的资源数量单位。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソース量の単位です。"
                                             }
                                           }
                                         },
@@ -275,6 +346,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项对应的已使用的资源列表价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの定価です。"
                                             }
                                           },
                                           "properties": {
@@ -284,6 +358,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
                                                 }
                                               }
                                             }
@@ -295,6 +372,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项对应的已使用的资源实际价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの実際の価格です。"
                                             }
                                           },
                                           "properties": {
@@ -304,6 +384,9 @@
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
                                                 }
                                               }
                                             }
@@ -315,6 +398,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "当前费用项对应的已使用的资源实际费用。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に記録された実際のコストです。単位はセントです。"
                                             }
                                           }
                                         }
@@ -330,6 +416,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "查询结果当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の現在のページ番号です。"
                                 }
                               },
                               "minimum": 1,
@@ -341,6 +430,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "查询结果每页显示条目数。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の 1 ページあたりの項目数です。"
                                 }
                               },
                               "minimum": 1,
@@ -353,6 +445,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "查询结果总条目数。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の項目総数です。"
                                 }
                               }
                             }
@@ -366,6 +461,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -379,6 +477,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -388,6 +489,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }

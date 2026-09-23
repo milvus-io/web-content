@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "查看云服务提供商",
             "description": "本接口可列出所有可用的云服务提供商的相关信息。"
+          },
+          "ja-JP": {
+            "summary": "クラウドプロバイダーを一覧表示",
+            "description": "Zilliz Cloud で利用可能なすべてのクラウドプロバイダーを一覧表示します。"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -56,6 +63,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回可用的云服务商列表。"
+              },
+              "ja-JP": {
+                "description": "クラウドプロバイダーの詳細なリストを返します。"
               }
             },
             "content": {
@@ -72,6 +82,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -86,6 +99,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "云服务商 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラウドプロバイダーの ID。"
                                   }
                                 }
                               },
@@ -95,6 +111,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "云服务商描述。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラウドプロバイダーの説明。"
                                   }
                                 }
                               }
@@ -103,6 +122,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "当前可用云服务商列表。"
+                              },
+                              "ja-JP": {
+                                "description": "適用可能なクラウドプロバイダーのリスト。"
                               }
                             }
                           },
@@ -110,6 +132,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，是一个包含当前可用云服务商列表的数组。"
+                            },
+                            "ja-JP": {
+                              "description": "適用可能なクラウドプロバイダーのリストであるレスポンスペイロード。"
                             }
                           }
                         }
@@ -121,6 +146,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -134,6 +162,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -143,6 +174,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -216,6 +250,10 @@
           "zh-CN": {
             "summary": "查看云服务区域",
             "description": "本接口列出所有可用的云区域，也可以只列出特定云提供商的适用区域。"
+          },
+          "ja-JP": {
+            "summary": "Cloud Regionを一覧表示",
+            "description": "利用可能なすべてのクラウドリージョンを一覧表示します。特定のクラウドプロバイダーに該当するリージョンのみを一覧表示することもできます。"
           }
         },
         "tags": [
@@ -229,6 +267,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云服务提供商 ID。可使用 [List Cloud Providers](/reference/restful/list-cloud-providers-v2) 接口列出适用云服务提供商。"
+              },
+              "ja-JP": {
+                "description": "クラウドプロバイダーのID。[List Cloud Providers](/reference/restful/list-cloud-providers-v2) を使用して、該当するクラウドプロバイダーを一覧表示できます"
               }
             },
             "required": false,
@@ -260,6 +301,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -270,6 +314,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "使用 `application/json`。"
+              },
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
               }
             },
             "required": false,
@@ -285,6 +332,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定云地域的详细信息。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョンの詳細な一覧を返します。"
               }
             },
             "content": {
@@ -301,6 +351,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -315,6 +368,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "提供指定云地域的云服务商 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このリージョンを提供するクラウドプロバイダーのID。"
                                   }
                                 }
                               },
@@ -324,6 +380,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "云地域 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラウドリージョンのID。"
                                   }
                                 }
                               },
@@ -333,6 +392,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "控制面 V2 API 服务器的 Base URL。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "コントロールプレーン上の V2 API server のベースURL。"
                                   }
                                 }
                               }
@@ -341,6 +403,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "可用云地域列表。"
+                              },
+                              "ja-JP": {
+                                "description": "該当するクラウドリージョンの一覧。"
                               }
                             }
                           },
@@ -348,6 +413,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。"
                             }
                           }
                         }
@@ -359,6 +427,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -372,6 +443,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -381,6 +455,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }

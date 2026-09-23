@@ -1,8 +1,147 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { isDeepStrictEqual } = require('node:util')
 
 const CONFIG = {
     maxRefDepth: 20,
+}
+
+const SINGLETON_FIELDS = new Set(['openapi', 'info', 'externalDocs', 'jsonSchemaDialect'])
+const KEYED_MAP_FIELDS = new Set(['paths', 'webhooks', 'callbacks'])
+
+function clone(value) {
+    return structuredClone(value)
+}
+
+function topLevelConflict(field, left, right) {
+    return new Error(
+        `REST_SPEC_TOP_LEVEL_CONFLICT ${field}: incompatible values ${JSON.stringify(left)} and ${JSON.stringify(right)}`
+    )
+}
+
+function mergeSingleton(spec, content, field) {
+    if (!Object.hasOwn(content, field) || content[field] === undefined) return
+
+    if (!Object.hasOwn(spec, field) || spec[field] === undefined) {
+        spec[field] = clone(content[field])
+        return
+    }
+
+    if (isDeepStrictEqual(spec[field], content[field])) return
+
+    if (field === 'info') {
+        const compatibleInfo =
+            spec.info?.version === content.info?.version &&
+            isDeepStrictEqual(
+                Object.fromEntries(Object.entries(spec.info || {}).filter(([key]) => key !== 'title' && key !== 'description')),
+                Object.fromEntries(Object.entries(content.info || {}).filter(([key]) => key !== 'title' && key !== 'description')),
+            )
+        if (compatibleInfo) return
+    }
+
+    throw topLevelConflict(field, spec[field], content[field])
+}
+
+function mergeKeyedMap(spec, content, field) {
+    if (!content[field] || typeof content[field] !== 'object' || Array.isArray(content[field])) return
+    if (!spec[field] || typeof spec[field] !== 'object' || Array.isArray(spec[field])) {
+        spec[field] = clone(content[field])
+        return
+    }
+
+    for (const [key, value] of Object.entries(content[field])) {
+        if (!Object.hasOwn(spec[field], key)) {
+            spec[field][key] = clone(value)
+            continue
+        }
+        if (!isDeepStrictEqual(spec[field][key], value)) {
+            throw topLevelConflict(`${field}/${key}`, spec[field][key], value)
+        }
+    }
+}
+
+function mergeTags(spec, content) {
+    if (!Array.isArray(content.tags)) return
+    if (!Array.isArray(spec.tags)) {
+        spec.tags = clone(content.tags)
+        return
+    }
+
+    const byName = new Map()
+    for (const tag of spec.tags) byName.set(tag.name, tag)
+    for (const tag of content.tags) {
+        if (!tag || typeof tag.name !== 'string') continue
+        if (!byName.has(tag.name)) {
+            byName.set(tag.name, tag)
+            spec.tags.push(clone(tag))
+            continue
+        }
+        if (!isDeepStrictEqual(byName.get(tag.name), tag)) {
+            throw topLevelConflict(`tags/${tag.name}`, byName.get(tag.name), tag)
+        }
+    }
+}
+
+function mergeSecurity(spec, content) {
+    if (!Array.isArray(content.security)) return
+    if (!Array.isArray(spec.security)) {
+        spec.security = clone(content.security)
+        return
+    }
+
+    for (const requirement of content.security) {
+        if (!spec.security.some(existing => isDeepStrictEqual(existing, requirement))) {
+            spec.security.push(clone(requirement))
+        }
+    }
+}
+
+function mergeServers(spec, content) {
+    if (!Array.isArray(content.servers)) return
+    if (!Array.isArray(spec.servers)) {
+        spec.servers = clone(content.servers)
+        return
+    }
+    if (!isDeepStrictEqual(spec.servers, content.servers)) {
+        throw topLevelConflict('servers', spec.servers, content.servers)
+    }
+}
+
+function mergeComponents(spec, content) {
+    if (!content.components || typeof content.components !== 'object' || Array.isArray(content.components)) return
+    if (!spec.components || typeof spec.components !== 'object' || Array.isArray(spec.components)) {
+        spec.components = clone(content.components)
+        return
+    }
+
+    for (const [category, entries] of Object.entries(content.components)) {
+        if (!Object.hasOwn(spec.components, category)) {
+            spec.components[category] = clone(entries)
+            continue
+        }
+
+        if (category.startsWith('x-') || !entries || typeof entries !== 'object' || Array.isArray(entries)) {
+            if (!isDeepStrictEqual(spec.components[category], entries)) {
+                throw topLevelConflict(`components/${category}`, spec.components[category], entries)
+            }
+            continue
+        }
+
+        if (!spec.components[category] || typeof spec.components[category] !== 'object' || Array.isArray(spec.components[category])) {
+            spec.components[category] = clone(entries)
+            continue
+        }
+
+        for (const [name, value] of Object.entries(entries)) {
+            if (!Object.hasOwn(spec.components[category], name)) {
+                spec.components[category][name] = clone(value)
+                continue
+            }
+            if (!isDeepStrictEqual(spec.components[category][name], value)) {
+                spec.components[category][name] = clone(value)
+            }
+        }
+    }
 }
 
 function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
@@ -91,23 +230,23 @@ function resolveLocalPathRefs(spec) {
 }
 
 function mergeSpecification(spec, content) {
-    if (content.tags) {
-        spec.tags = [...(spec.tags || []), ...content.tags]
-    }
-    if (content.paths) {
-        spec.paths = { ...(spec.paths || {}), ...content.paths }
-    }
-    if (content.components) {
-        spec.components = spec.components || {}
-        for (const key of Object.keys(content.components)) {
-            spec.components[key] = {
-                ...(spec.components[key] || {}),
-                ...content.components[key]
-            }
+    for (const field of Object.keys(content)) {
+        if (content[field] === undefined) continue
+        if (field === 'x-zdoc-fragment') continue
+
+        if (field === 'components') {
+            mergeComponents(spec, content)
+        } else if (field === 'tags') {
+            mergeTags(spec, content)
+        } else if (field === 'security') {
+            mergeSecurity(spec, content)
+        } else if (field === 'servers') {
+            mergeServers(spec, content)
+        } else if (KEYED_MAP_FIELDS.has(field)) {
+            mergeKeyedMap(spec, content, field)
+        } else if (SINGLETON_FIELDS.has(field) || field.startsWith('x-')) {
+            mergeSingleton(spec, content, field)
         }
-    }
-    if (content.servers) {
-        spec.servers = content.servers
     }
 }
 
@@ -135,7 +274,7 @@ function loadSpecifications(inputPath) {
         const content = resolveLocalPathRefs(JSON.parse(fs.readFileSync(path.join(inputPath, file), 'utf-8')))
 
         if (!spec) {
-            spec = { ...content }
+            spec = clone(content)
             continue
         }
 
@@ -147,5 +286,6 @@ function loadSpecifications(inputPath) {
 
 module.exports = {
     loadSpecifications,
+    mergeSpecification,
     resolveRefs,
 }

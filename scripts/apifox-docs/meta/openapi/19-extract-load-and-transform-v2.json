@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "合并数据",
             "description": "您可以使用此接口在指定 Collection 中新增字段并填充数据。<div style=\"padding: 8px;\"><ul style=\"margin-bottom: 0px;\"><li>如果您选择创建字段的同时填充数据，需要将数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume，并确保数据与源 Collection 的合并键相同。合并后的数据将存储在您指定的新 Collection 中。</li><li>如果您选择仅创建字段但不填充数据，则会创建新的字段并填充 null 值。</li></ul></div>您需要是项目管理员或以上权限才能执行此操作。更多详情，可以参考<a href=\"/docs/merge-data\">合并数据</a>。<br/>"
+          },
+          "ja-JP": {
+            "summary": "データのマージ",
+            "description": "このインターフェースを使用すると、既存の collection に対して、データありまたはデータなしで field を追加できます。<div style=\"padding: 8px;\"><ul style=\"margin-bottom: 0px;\"><li>データありで field を追加する場合は、データファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、データがソース collection と同じ merge key を共有していることを確認する必要があります。マージされたデータは、指定した新しい collection に保存されます。</li><li>データなしで追加する場合、新しい field は null 値で作成されます。</li></ul></div>この操作を実行するには、project admin 以上の権限が必要です。詳細については、<a href=\"/docs/merge-data\">Merge Data</a> を参照してください。<br/>"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             },
             "x-i18n-langs": [
@@ -68,6 +75,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 所在集群的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection を保持する cluster の名前。"
                           }
                         },
                         "example": "in00-xxxxxxxxxxxxxxxxxx"
@@ -78,6 +88,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 所在数据库的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection を保持する database の名前。"
                           }
                         }
                       },
@@ -87,6 +100,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection の名前。"
                           }
                         }
                       },
@@ -96,6 +112,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待创建 Collection 所在数据库的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する collection を保持する database の名前。"
                           }
                         }
                       },
@@ -105,6 +124,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待创建 Collection 的名称。该 Collection 将保存合并后的数据。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する collection の名前。この collection にマージされたデータが格納されます。"
                           }
                         }
                       },
@@ -114,6 +136,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
+                          },
+                          "ja-JP": {
+                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
                           }
                         },
                         "properties": {
@@ -123,6 +148,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "数据源的类型。"
+                              },
+                              "ja-JP": {
+                                "description": "データソースの種類。volume を使用する場合、このパラメータを `volume` に設定します。"
                               }
                             },
                             "example": "volume"
@@ -133,6 +161,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "Zilliz Cloud 存储点的名称。此参数仅当您将 `type` 设置为 `volume` 时有效。有关创建存储点的详细信息，请参阅 [Create Volume](/reference/restful/create-volume-v2) 操作的文档。"
+                              },
+                              "ja-JP": {
+                                "description": "PARQUET ファイルを保持する Zilliz Cloud Volume の名前。このパラメータは、`type` を `volume` に設定した場合にのみ適用されます。volume の作成方法の詳細については、[Create Volume](/reference/restful/create-volume-v2) 操作のドキュメントを参照してください。"
                               }
                             }
                           },
@@ -142,6 +173,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "待与指定 Collection 合并的 PARQUET 文件的 URL。"
+                              },
+                              "ja-JP": {
+                                "description": "既存の collection とマージする PARQUET ファイルの URL。"
                               }
                             },
                             "example": "path/to/your/data.parquet"
@@ -154,6 +188,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "数据合并操作类似于关系型数据库中的左连接操作，其合并字段充当源 Collection 和 Parquet 文件之间共享键的角色。您需要提供共享键的名称作为合并字段。合并字段必须在源 Collection 和 Parquet 文件中都存在。在一般情况下，您可以使用主键作为合并字段。"
+                          },
+                          "ja-JP": {
+                            "description": "データマージ操作は、リレーショナルデータベースシステムにおける LEFT JOIN 操作に似ており、merge field はソース collection と列指向データを含む Parquet ファイルの間で共有キーとして機能します。merge field として、この共有キーの名前を指定する必要があります。merge field は、既存の collection と Parquet ファイルの両方に存在している必要があります。一般的なケースでは、primary key を merge field として使用できます。"
                           }
                         }
                       },
@@ -163,6 +200,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待创建 Collection 的各字段数据结构。该参数的值应该为字段数据结构数组。"
+                          },
+                          "ja-JP": {
+                            "description": "新しい collection に作成する field の schema。schema は field schema の配列である必要があります。"
                           }
                         },
                         "items": {
@@ -171,6 +211,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "一个待添加字段的数据结构。"
+                            },
+                            "ja-JP": {
+                              "description": "追加する field の schema。"
                             }
                           },
                           "properties": {
@@ -178,14 +221,24 @@
                               "type": "string",
                               "description": "Name of the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的名称。"
+                                "zh-CN": {
+                                  "description": "待添加字段的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の名前。"
+                                }
                               }
                             },
                             "dataType": {
                               "type": "string",
                               "description": "Data type of the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的数据类型。"
+                                "zh-CN": {
+                                  "description": "待添加字段的数据类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field のデータ型。"
+                                }
                               },
                               "enum": [
                                 "VARCHAR",
@@ -202,7 +255,12 @@
                               "type": "object",
                               "description": "Extra settings for the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的详细设置。"
+                                "zh-CN": {
+                                  "description": "待添加字段的详细设置。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の追加設定。"
+                                }
                               },
                               "properties": {
                                 "maxLength": {
@@ -211,6 +269,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "VARCHAR 字段的最大长度。该参数仅当 `dataType` 设置为 `VARCHAR` 时可用。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "VARCHAR field 値の最大長。このパラメータは、`dataType` が `VARCHAR` に設定されている場合にのみ適用されます。"
                                     }
                                   }
                                 }
@@ -238,6 +299,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 所在集群的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection を保持する cluster の名前。"
                           }
                         },
                         "example": "in00-xxxxxxxxxxxxxxxxxx"
@@ -248,6 +312,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 所在数据库的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection を保持する database の名前。"
                           }
                         }
                       },
@@ -257,6 +324,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "本操作目标 Collection 的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "この操作の対象 collection の名前。"
                           }
                         }
                       },
@@ -266,6 +336,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待创建 Collection 所在数据库的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する collection を保持する database の名前。"
                           }
                         }
                       },
@@ -275,6 +348,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待创建 Collection 的名称。该 Collection 将保存合并后的数据。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する collection の名前。この collection にマージされたデータが格納されます。"
                           }
                         }
                       },
@@ -284,6 +360,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
+                          },
+                          "ja-JP": {
+                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
                           }
                         },
                         "properties": {
@@ -293,6 +372,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "数据源的类型。如果您选择使用阿里云 OSS 存储桶，请设置为 `oss`。"
+                              },
+                              "ja-JP": {
+                                "description": "データソースの種類。AWS S3 bucket を使用する場合は、これを `s3` に設定します"
                               }
                             }
                           },
@@ -302,6 +384,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "待与指定 Collection 合并的 PARQUET 文件的 URL。"
+                              },
+                              "ja-JP": {
+                                "description": "既存の collection とマージする PARQUET ファイルの URL。"
                               }
                             }
                           },
@@ -311,6 +396,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "存放待合并数据文件的存储桶的访问凭据。此参数仅当您将 `type` 设置为 `oss` 时有效。"
+                              },
+                              "ja-JP": {
+                                "description": "PARQUET ファイルを保持する bucket にアクセスするための認証情報。このパラメータは、`type` を `s3` に設定した場合にのみ適用されます。"
                               }
                             },
                             "properties": {
@@ -320,6 +408,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "存放待合并数据文件的存储桶的访问密钥。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "PARQUET ファイルを保持する bucket の access key。"
                                   }
                                 }
                               },
@@ -329,6 +420,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "存放待合并数据文件的存储桶的访问密钥。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "PARQUET ファイルを保持する bucket の secret key。"
                                   }
                                 }
                               }
@@ -342,6 +436,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "数据合并操作类似于关系型数据库中的左连接操作，合并字段充当源 Collection 和 Parquet 文件之间共享键的角色。您需要提供共享键的名称作为合并字段。合并字段必须在源 Collection 和 Parquet 文件中都存在。在一般情况下，您可以使用主键作为合并字段。"
+                          },
+                          "ja-JP": {
+                            "description": "データマージ操作は、リレーショナルデータベースシステムにおける LEFT JOIN 操作に似ており、merge field はソース collection と列指向データを含む Parquet ファイルの間で共有キーとして機能します。merge field として、この共有キーの名前を指定する必要があります。merge field は、既存の collection と Parquet ファイルの両方に存在している必要があります。一般的なケースでは、primary key を merge field として使用できます。"
                           }
                         }
                       },
@@ -351,6 +448,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "待添加字段的 Schema。该参数应为一个字段 Schema 的数组。"
+                          },
+                          "ja-JP": {
+                            "description": "既存の collection に追加する field の schema。schema は field schema の配列である必要があります。"
                           }
                         },
                         "items": {
@@ -359,6 +459,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "一个待添加字段的 Schema。"
+                            },
+                            "ja-JP": {
+                              "description": "追加する field の schema。"
                             }
                           },
                           "properties": {
@@ -366,14 +469,24 @@
                               "type": "string",
                               "description": "Name of the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的名称。"
+                                "zh-CN": {
+                                  "description": "待添加字段的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の名前。"
+                                }
                               }
                             },
                             "dataType": {
                               "type": "string",
                               "description": "Data type of the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的数据类型。"
+                                "zh-CN": {
+                                  "description": "待添加字段的数据类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field のデータ型。"
+                                }
                               },
                               "enum": [
                                 "VARCHAR",
@@ -390,7 +503,12 @@
                               "type": "object",
                               "description": "Extra settings for the current field to add.",
                               "x-i18n": {
-                                "zh-CN": "待添加字段的详细设置。"
+                                "zh-CN": {
+                                  "description": "待添加字段的详细设置。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の追加設定。"
+                                }
                               },
                               "properties": {
                                 "maxLength": {
@@ -399,6 +517,9 @@
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "VARCHAR 字段的最大长度。该参数仅当 `dataType` 设置为 `VARCHAR` 时可用。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "VARCHAR field 値の最大長。このパラメータは、`dataType` が `VARCHAR` に設定されている場合にのみ適用されます。"
                                     }
                                   }
                                 }
@@ -515,6 +636,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "批量导入任务的 ID。"
+              },
+              "ja-JP": {
+                "description": "bulk-import job の ID。"
               }
             },
             "content": {
@@ -530,6 +654,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
@@ -541,6 +668,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含了当前操作创建的数据合并任务的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された data-merge job の ID を含むレスポンス payload。"
                             }
                           },
                           "items": {
@@ -549,6 +679,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "一个已创建的数据合并任务。"
+                              },
+                              "ja-JP": {
+                                "description": "作成された data-merge job。"
                               }
                             },
                             "properties": {
@@ -558,6 +691,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "当前创建的数据合并任务 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "現在の data-merge job の ID。"
                                   }
                                 }
                               }
@@ -572,6 +708,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -585,6 +724,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -594,6 +736,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }

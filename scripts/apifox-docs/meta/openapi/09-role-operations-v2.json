@@ -7,10 +7,10 @@
   },
   "tags": [
     {
-      "name": "Role Operations (V2)",
+      "name": "Cluster Role Operations (V2)",
       "x-i18n": {
         "zh-CN": {
-          "name": "Role (V2)"
+          "name": "Cluster Role (V2)"
         }
       }
     }
@@ -25,10 +25,14 @@
           "zh-CN": {
             "summary": "查看角色列表",
             "description": "本接口可列出所有已创建角色的相关信息。"
+          },
+          "ja-JP": {
+            "summary": "ロールの一覧取得",
+            "description": "この操作は、既存のすべてのロールに関する情報を一覧表示します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -38,13 +42,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -55,19 +68,36 @@
                 "properties": {
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベースの名前。指定されていない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "description": "An empty object.",
                 "x-i18n": {
                   "zh-CN": {
                     "description": "空对象"
+                  },
+                  "ja-JP": {
+                    "description": "空のオブジェクト。"
                   }
-                }
+                },
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {}
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -75,6 +105,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "包含 RoleItem 对象列表的 RoleInfo 对象"
+              },
+              "ja-JP": {
+                "description": "RoleItem オブジェクトのリストを含む RoleInfo オブジェクト。"
               }
             },
             "content": {
@@ -90,25 +123,48 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "array",
                           "items": {
                             "type": "string",
-                            "description": "A list of item objects."
+                            "description": "A list of item objects.",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null,
+                            "x-i18n": {
+                              "ja-JP": {
+                                "description": "item オブジェクトのリスト。"
+                              }
+                            }
                           },
                           "description": "Response payload which is a list of item objects.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为元素对象列表。"
+                            },
+                            "ja-JP": {
+                              "description": "item オブジェクトのリストであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -116,6 +172,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -129,8 +188,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -138,12 +203,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -185,10 +262,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/describe": {
@@ -200,10 +283,14 @@
           "zh-CN": {
             "summary": "查看角色详情",
             "description": "本接口可列出指定角色的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "ロールを説明",
+            "description": "この操作では、指定したロールの詳細を説明します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -213,13 +300,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合したユーザー名とパスワードの組み合わせである必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -234,12 +330,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -247,7 +357,10 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "examples": {
                 "1": {
@@ -270,7 +383,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -278,6 +394,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回一个包含指定角色的详细信息对象。"
+              },
+              "ja-JP": {
+                "description": "ロールの詳細な説明を含むオブジェクト。"
               }
             },
             "content": {
@@ -290,6 +409,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -302,10 +424,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "array",
@@ -319,8 +447,14 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "当前权限所属对象。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "権限が属するオブジェクトのタイプ。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               },
                               "privilege": {
                                 "type": "string",
@@ -328,8 +462,14 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "授予当前角色的权限名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "ロールに付与された権限。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               },
                               "object_name": {
                                 "type": "string",
@@ -337,8 +477,14 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "授予当前角色的权限所属的对象名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "ロールに指定された権限が付与されているオブジェクトの名前。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               },
                               "db_name": {
                                 "type": "string",
@@ -346,11 +492,17 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "当前操作所在数据库名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "この操作が実行されたデータベースの名前。"
                                   }
                                 },
                                 "x-include-target": [
                                   "milvus"
-                                ]
+                                ],
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               },
                               "grantor": {
                                 "type": "string",
@@ -358,8 +510,22 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "被授予当前权限的用户名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "特定のロールをユーザーに付与したユーザーの名前。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null,
+                            "x-i18n": {
+                              "ja-JP": {
+                                "description": "権限項目。"
                               }
                             }
                           },
@@ -367,8 +533,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为权限对象列表。"
+                            },
+                            "ja-JP": {
+                              "description": "権限項目のリストであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "description": {
                           "type": "string",
@@ -376,10 +548,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "角色描述。"
+                            },
+                            "ja-JP": {
+                              "description": "ロールの説明。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -387,6 +568,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -400,8 +584,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -409,12 +599,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -495,10 +697,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/create": {
@@ -510,10 +718,14 @@
           "zh-CN": {
             "summary": "创建角色",
             "description": "本接口创建一个角色。"
+          },
+          "ja-JP": {
+            "summary": "ロールを作成",
+            "description": "この操作はロールを作成します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -523,13 +735,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -544,8 +765,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "description": {
                     "type": "string",
@@ -553,12 +780,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色描述。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの説明。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -566,13 +807,19 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "roleName": "my_role"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -587,6 +834,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -599,10 +849,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -611,10 +867,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -622,6 +887,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -635,8 +903,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -644,12 +918,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -670,25 +956,40 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/grant_privilege": {
       "post": {
-        "summary": "Grant Privilege To Role",
+        "summary": "Grant Object Privilege To Role",
         "deprecated": false,
         "description": "This operation grants a privilege to the current role.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "授予角色权限",
+            "summary": "为角色授予对象权限",
             "description": "本接口将相关权限授予当前角色。"
+          },
+          "ja-JP": {
+            "summary": "ロールに権限を付与",
+            "description": "この操作は、現在のロールに権限を付与します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -698,13 +999,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合した username と password の組み合わせである必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -719,8 +1029,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "objectType": {
                     "type": "string",
@@ -728,8 +1044,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待授予权限所属的对象类型。"
+                      },
+                      "ja-JP": {
+                        "description": "権限が属するオブジェクトのタイプ。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "objectName": {
                     "type": "string",
@@ -737,8 +1059,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待授予权限所属的对象名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールに指定された権限が付与されるオブジェクトの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "privilege": {
                     "type": "string",
@@ -746,12 +1074,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待授予权限。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールに付与される権限。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -759,10 +1101,16 @@
                   "privilege",
                   "objectName",
                   "roleName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -777,6 +1125,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -789,10 +1140,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -801,10 +1158,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -812,6 +1178,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -825,8 +1194,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -834,12 +1209,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -860,25 +1247,40 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/revoke_privilege": {
       "post": {
-        "summary": "Revoke Privilege From Role",
+        "summary": "Revoke Object Privilege From Role",
         "deprecated": false,
         "description": "This operation revokes a privilege granted to the current role.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "撤销角色权限",
+            "summary": "撤销角色的对象权限",
             "description": "本操作可撤销当前角色所授予的权限。"
+          },
+          "ja-JP": {
+            "summary": "ロールから権限を取り消す",
+            "description": "この操作は、現在のロールに付与されている権限を取り消します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -888,13 +1290,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせである必要があります。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -909,8 +1320,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "objectType": {
                     "type": "string",
@@ -918,8 +1335,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指定权限所属的对象类型。"
+                      },
+                      "ja-JP": {
+                        "description": "指定された権限が属するオブジェクトのタイプ。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "objectName": {
                     "type": "string",
@@ -927,8 +1350,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "指定权限所属的对象名称。"
+                      },
+                      "ja-JP": {
+                        "description": "指定された権限が属するオブジェクトの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "privilege": {
                     "type": "string",
@@ -936,12 +1365,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "当前角色需撤销的权限名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールから取り消される権限。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -952,10 +1395,16 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -970,6 +1419,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -982,10 +1434,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -994,10 +1452,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1005,6 +1472,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1018,8 +1488,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1027,12 +1503,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1053,10 +1541,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/drop": {
@@ -1068,10 +1567,14 @@
           "zh-CN": {
             "summary": "删除角色",
             "description": "本接口可以删除指定角色。如果指定的角色存在，操作将成功。否则，操作将失败。"
+          },
+          "ja-JP": {
+            "summary": "ロールを削除",
+            "description": "この操作は既存のロールを削除します。指定したロールが存在する場合、この操作は成功します。存在しない場合、この操作は失敗します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -1081,13 +1584,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結されたユーザー名とパスワードの組である必要があります。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1102,12 +1614,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベースの名前。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1115,13 +1641,19 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "roleName": "admin"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1136,6 +1668,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -1148,10 +1683,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -1160,10 +1701,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1171,6 +1721,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1184,8 +1737,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1193,12 +1752,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1219,25 +1790,40 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/grant_privilege_v2": {
       "post": {
-        "summary": "Grant Privilege To Role (V2)",
+        "summary": "Grant Privilege To Role",
         "deprecated": false,
         "description": "This operation grants a privilege to a role at the global, database, or collection level.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "授予角色权限（V2）",
+            "summary": "授予角色权限",
             "description": "本接口在全局、数据库或 Collection 级别将权限授予指定角色。"
+          },
+          "ja-JP": {
+            "summary": "ロールへの権限付与 (V2)",
+            "description": "この操作は、グローバル、データベース、またはコレクションレベルでロールに権限を付与します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -1256,8 +1842,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "privilege": {
                     "type": "string",
@@ -1265,8 +1857,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待授予或撤销的权限。"
+                      },
+                      "ja-JP": {
+                        "description": "付与または取り消す権限。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
@@ -1274,8 +1872,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "权限适用的数据库名称。使用 `*` 表示所有数据库。"
+                      },
+                      "ja-JP": {
+                        "description": "権限が適用されるデータベースの名前。すべてのデータベースには `*` を使用します。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -1283,14 +1887,23 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "权限适用的 Collection 名称。使用 `*` 表示所有 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "権限が適用されるコレクションの名前。すべてのコレクションには `*` を使用します。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "roleName",
                   "privilege"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "roleName": "my_role",
@@ -1299,7 +1912,10 @@
                 "collectionName": "my_collection"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1314,9 +1930,17 @@
                     },
                     {
                       "$ref": "#/components/schemas/ErrorResponse",
-                      "x-tab-label": "failure"
+                      "x-tab-label": "failure",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      }
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1337,24 +1961,39 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/revoke_privilege_v2": {
       "post": {
-        "summary": "Revoke Privilege From Role (V2)",
+        "summary": "Revoke Privilege From Role",
         "deprecated": false,
         "description": "This operation revokes a privilege from a role at the global, database, or collection level.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "撤销角色权限（V2）",
+            "summary": "撤销角色权限",
             "description": "本接口在全局、数据库或 Collection 级别撤销指定角色的权限。"
+          },
+          "ja-JP": {
+            "summary": "ロールから Privilege を取り消す (V2)",
+            "description": "この操作は、グローバル、データベース、またはコレクションレベルでロールから privilege を取り消します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -1373,8 +2012,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "privilege": {
                     "type": "string",
@@ -1382,8 +2027,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待授予或撤销的权限。"
+                      },
+                      "ja-JP": {
+                        "description": "付与または取り消す privilege。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
@@ -1391,8 +2042,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "权限适用的数据库名称。使用 `*` 表示所有数据库。"
+                      },
+                      "ja-JP": {
+                        "description": "privilege が適用されるデータベースの名前。すべてのデータベースには `*` を使用します。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -1400,14 +2057,23 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "权限适用的 Collection 名称。使用 `*` 表示所有 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "privilege が適用されるコレクションの名前。すべてのコレクションには `*` を使用します。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "roleName",
                   "privilege"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "roleName": "my_role",
@@ -1416,7 +2082,10 @@
                 "collectionName": "my_collection"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1431,9 +2100,17 @@
                     },
                     {
                       "$ref": "#/components/schemas/ErrorResponse",
-                      "x-tab-label": "failure"
+                      "x-tab-label": "failure",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      }
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1454,9 +2131,20 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/roles/alter": {
@@ -1468,10 +2156,14 @@
           "zh-CN": {
             "summary": "修改角色",
             "description": "本接口可更新指定角色的描述。"
+          },
+          "ja-JP": {
+            "summary": "ロールを変更",
+            "description": "この操作は、指定したロールの説明を更新します。"
           }
         },
         "tags": [
-          "Role Operations (V2)"
+          "Cluster Role Operations (V2)"
         ],
         "parameters": [
           {
@@ -1481,13 +2173,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合した username と password のペアを指定する必要があります。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1502,8 +2203,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "description": {
                     "type": "string",
@@ -1511,12 +2218,26 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "角色描述。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの説明。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "dbName": {
                     "type": "string",
-                    "description": "Name of the database. If not specified, the default database is used."
+                    "description": "Name of the database. If not specified, the default database is used.",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1524,7 +2245,10 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "examples": {
                 "1": {
@@ -1536,7 +2260,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1551,6 +2278,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -1563,10 +2293,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -1575,10 +2311,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1586,6 +2331,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1599,8 +2347,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1608,12 +2362,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1634,10 +2400,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },
@@ -1655,6 +2432,9 @@
         "x-i18n": {
           "zh-CN": {
             "description": "返回错误消息。"
+          },
+          "ja-JP": {
+            "description": "エラーメッセージを返します。"
           }
         },
         "x-i18n-langs": [
@@ -1668,8 +2448,14 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           "message": {
             "type": "string",
@@ -1677,10 +2463,19 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "错误描述。"
+              },
+              "ja-JP": {
+                "description": "エラーメッセージ。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       },
       "EmptyResponse": {
         "x-tab-label": "success",
@@ -1692,14 +2487,26 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           "data": {
             "type": "object",
-            "properties": {}
+            "properties": {},
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "parameters": {
@@ -1710,13 +2517,22 @@
         "required": true,
         "example": "Bearer {{TOKEN}}",
         "schema": {
-          "type": "string"
+          "type": "string",
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "x-i18n": {
           "zh-CN": {
             "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"
+          },
+          "ja-JP": {
+            "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合した username と password の組み合わせである必要があります。プロジェクトエンドポイントを使用している場合は、十分な権限を持つ有効な API key のみが適用されます。"
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },

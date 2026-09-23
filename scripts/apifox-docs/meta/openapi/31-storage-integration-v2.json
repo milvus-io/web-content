@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "列出 Storage Integration",
             "description": "本接口用于列出指定项目中的对象存储集成，仅返回可公开展示的集成状态。"
+          },
+          "ja-JP": {
+            "summary": "ストレージ統合の一覧を取得",
+            "description": "この操作は、プロジェクト内のバケットストレージ統合を一覧表示します。公開されているストレージ統合ステータスのみを返します。"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -61,6 +68,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -78,6 +88,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
             }
           },
@@ -96,6 +109,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每次返回的记录数。"
+              },
+              "ja-JP": {
+                "description": "各レスポンスに含めるレコード数。"
               }
             }
           }
@@ -106,6 +122,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回 Storage Integration 列表。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の一覧を返します。"
               }
             },
             "content": {
@@ -118,6 +137,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -128,6 +150,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -138,6 +163,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Storage Integration 列表。"
+                            },
+                            "ja-JP": {
+                              "description": "ストレージ統合の一覧を返します。"
                             }
                           }
                         }
@@ -149,6 +177,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -159,6 +190,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -169,6 +203,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -243,6 +280,10 @@
           "zh-CN": {
             "summary": "创建 Storage Integration",
             "description": "本接口用于创建对象存储集成。创建前，系统会校验提供的凭证是否可以访问目标 bucket 或容器。"
+          },
+          "ja-JP": {
+            "summary": "Storage Integration を作成します",
+            "description": "この操作では、指定された認証情報が対象の bucket または container にアクセスできることを検証した後、bucket storage integration を作成します。"
           }
         },
         "tags": [
@@ -261,6 +302,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -380,6 +424,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回创建的 Storage Integration。"
+              },
+              "ja-JP": {
+                "description": "作成された storage integration を返します。"
               }
             },
             "content": {
@@ -392,6 +439,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -402,6 +452,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -412,6 +465,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回创建的 Storage Integration。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された storage integration を返します。"
                             }
                           }
                         }
@@ -423,6 +479,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -433,6 +492,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -443,6 +505,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -497,6 +562,10 @@
           "zh-CN": {
             "summary": "查看 Storage Integration",
             "description": "本接口用于查看对象存储集成详情。系统会根据集成 ID 解析所属项目。"
+          },
+          "ja-JP": {
+            "summary": "Storage Integration の詳細を取得します",
+            "description": "この操作は、バケットストレージ統合の詳細を取得します。プロジェクトスコープは integration ID から解決されます。"
           }
         },
         "tags": [
@@ -515,6 +584,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -530,6 +602,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration ID。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の ID。"
               }
             }
           }
@@ -540,6 +615,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回 Storage Integration 详情。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の詳細を返します。"
               }
             },
             "content": {
@@ -552,6 +630,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -562,6 +643,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -572,6 +656,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Storage Integration 详情。"
+                            },
+                            "ja-JP": {
+                              "description": "ストレージ統合の詳細を返します。"
                             }
                           }
                         }
@@ -583,6 +670,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -593,6 +683,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -603,6 +696,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -675,6 +771,10 @@
           "zh-CN": {
             "summary": "删除 Storage Integration",
             "description": "本接口用于删除对象存储集成。系统会根据集成 ID 解析所属项目。"
+          },
+          "ja-JP": {
+            "summary": "Storage Integrationを削除します",
+            "description": "この操作はバケットストレージ統合を削除します。プロジェクトスコープは統合IDから解決されます。"
           }
         },
         "tags": [
@@ -693,6 +793,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つAPI keyである必要があります。"
               }
             }
           },
@@ -708,6 +811,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration ID。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合のID。"
               }
             }
           }
@@ -718,6 +824,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回删除的 Storage Integration。"
+              },
+              "ja-JP": {
+                "description": "削除されたストレージ統合を返します。"
               }
             },
             "content": {
@@ -730,6 +839,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -740,6 +852,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -750,6 +865,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回删除的 Storage Integration。"
+                            },
+                            "ja-JP": {
+                              "description": "削除されたストレージ統合を返します。"
                             }
                           }
                         }
@@ -761,6 +879,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -771,6 +892,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -781,6 +905,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -835,6 +962,10 @@
           "zh-CN": {
             "summary": "校验 Storage Integration",
             "description": "本接口用于校验提供的存储凭证是否可以访问目标 bucket 或容器，不会创建集成记录。"
+          },
+          "ja-JP": {
+            "summary": "Storage Integration を検証",
+            "description": "この操作は、指定されたストレージ認証情報が、統合レコードを作成せずに対象の bucket または container にアクセスできるかどうかを検証します。"
           }
         },
         "tags": [
@@ -853,6 +984,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -900,6 +1034,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回校验结果。"
+              },
+              "ja-JP": {
+                "description": "検証結果を返します。"
               }
             },
             "content": {
@@ -912,6 +1049,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -922,6 +1062,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -932,6 +1075,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回校验结果。"
+                            },
+                            "ja-JP": {
+                              "description": "検証結果を返します。"
                             }
                           }
                         }
@@ -943,6 +1089,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -953,6 +1102,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -963,6 +1115,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -1015,6 +1170,10 @@
           "zh-CN": {
             "summary": "生成 Storage Integration 授权材料",
             "description": "本接口用于生成创建或校验 Storage Integration 前所需的云厂商授权材料。"
+          },
+          "ja-JP": {
+            "summary": "Storage Integration 認可マテリアルの生成",
+            "description": "この操作は、storage integration を作成または検証する前に必要な、プロバイダー固有の認可マテリアルを生成します。"
           }
         },
         "tags": [
@@ -1033,6 +1192,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -1099,6 +1261,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回云厂商相关的授权材料。"
+              },
+              "ja-JP": {
+                "description": "プロバイダー固有の認可マテリアルを返します。"
               }
             },
             "content": {
@@ -1111,6 +1276,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "AWS S3 成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "AWS S3 の成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1121,6 +1289,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -1131,6 +1302,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 AWS S3 授权材料。"
+                            },
+                            "ja-JP": {
+                              "description": "AWS S3 の認可マテリアルを返します。"
                             }
                           }
                         }
@@ -1143,6 +1317,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "GCP GCS 成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "GCP GCS の成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1153,6 +1330,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -1163,6 +1343,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 GCP GCS 授权材料。"
+                            },
+                            "ja-JP": {
+                              "description": "GCP GCS の認可マテリアルを返します。"
                             }
                           }
                         }
@@ -1175,6 +1358,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "Azure Blob 成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "Azure Blob の成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1185,6 +1371,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -1195,6 +1384,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Azure Blob 授权材料。"
+                            },
+                            "ja-JP": {
+                              "description": "Azure Blob の認可マテリアルを返します。"
                             }
                           }
                         }
@@ -1207,6 +1399,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "Alibaba Cloud OSS 成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "Alibaba Cloud OSS の成功レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1217,6 +1412,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 0
@@ -1227,6 +1425,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Alibaba Cloud OSS 授权材料。"
+                            },
+                            "ja-JP": {
+                              "description": "Alibaba Cloud OSS の認可マテリアルを返します。"
                             }
                           }
                         }
@@ -1238,6 +1439,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "type": "object",
@@ -1248,6 +1452,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "example": 1800
@@ -1258,6 +1465,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误信息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           },
                           "example": "User hasn't authenticated"
@@ -1354,6 +1564,9 @@
         "x-i18n": {
           "zh-CN": {
             "description": "Storage Integration 的云厂商凭证字段。仅目标云厂商相关字段为必需。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合用の provider 固有の認証情報フィールド。対象の cloud に関連するフィールドのみが必要です。"
           }
         },
         "properties": {
@@ -1363,6 +1576,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "AWS IAM 角色 ARN 或阿里云 RAM 角色 ARN。"
+              },
+              "ja-JP": {
+                "description": "AWS IAM role ARN または Alibaba Cloud RAM role ARN。"
               }
             }
           },
@@ -1372,6 +1588,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "AWS 或阿里云角色扮演使用的 external ID。"
+              },
+              "ja-JP": {
+                "description": "AWS または Alibaba Cloud の role assumption 用 external ID。"
               }
             }
           },
@@ -1381,6 +1600,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Azure 存储账号名称。"
+              },
+              "ja-JP": {
+                "description": "Azure storage account 名。"
               }
             }
           },
@@ -1390,6 +1612,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Azure 联合身份客户端 ID。"
+              },
+              "ja-JP": {
+                "description": "Azure federated identity client ID。"
               }
             }
           },
@@ -1399,6 +1624,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Azure 租户 ID。"
+              },
+              "ja-JP": {
+                "description": "Azure tenant ID。"
               }
             }
           },
@@ -1408,6 +1636,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "用户侧 GCP 项目 ID。"
+              },
+              "ja-JP": {
+                "description": "顧客の GCP project ID。"
               }
             }
           },
@@ -1417,6 +1648,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+              },
+              "ja-JP": {
+                "description": "bucket へのアクセスを許可する、顧客が作成した GCP service account email。"
               }
             }
           }
@@ -1437,6 +1671,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -1446,6 +1683,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 名称。"
+              },
+              "ja-JP": {
+                "description": "storage integration の名前。"
               }
             }
           },
@@ -1455,6 +1695,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 描述。"
+              },
+              "ja-JP": {
+                "description": "storage integration の説明。"
               }
             }
           },
@@ -1464,6 +1707,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。サーバーはこのフィールドを使用して cloud provider を導出します。"
               }
             }
           },
@@ -1473,6 +1719,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              },
+              "ja-JP": {
+                "description": "bucket、container、または storage の名前。Azure Blob Storage の場合、これは container 名です。"
               }
             }
           },
@@ -1486,6 +1735,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "AWS IAM 角色 ARN。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS IAM role の ARN。"
                   }
                 }
               },
@@ -1495,6 +1747,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "AWS 角色扮演使用的 external ID。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS role の引き受けに使用する external ID。"
                   }
                 }
               }
@@ -1502,6 +1757,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商相关的凭证字段。"
+              },
+              "ja-JP": {
+                "description": "provider 固有の認証情報フィールド。"
               }
             }
           }
@@ -1522,6 +1780,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -1531,6 +1792,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 名称。"
+              },
+              "ja-JP": {
+                "description": "storage integration の名前。"
               }
             }
           },
@@ -1540,6 +1804,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 描述。"
+              },
+              "ja-JP": {
+                "description": "storage integration の説明。"
               }
             }
           },
@@ -1549,6 +1816,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。サーバーはこのフィールドを使用して cloud provider を導出します。"
               }
             }
           },
@@ -1558,6 +1828,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              },
+              "ja-JP": {
+                "description": "bucket、container、または storage の名前。Azure Blob Storage の場合、これは container 名です。"
               }
             }
           },
@@ -1571,6 +1844,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "用户侧 GCP 项目 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "顧客の GCP project ID。"
                   }
                 }
               },
@@ -1580,6 +1856,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+                  },
+                  "ja-JP": {
+                    "description": "bucket へのアクセスを許可する、顧客が作成した GCP service account の email。"
                   }
                 }
               }
@@ -1587,6 +1866,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商相关的凭证字段。"
+              },
+              "ja-JP": {
+                "description": "provider 固有の認証情報フィールド。"
               }
             }
           }
@@ -1607,6 +1889,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -1616,6 +1901,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 名称。"
+              },
+              "ja-JP": {
+                "description": "storage integration の名前。"
               }
             }
           },
@@ -1625,6 +1913,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 描述。"
+              },
+              "ja-JP": {
+                "description": "storage integration の説明。"
               }
             }
           },
@@ -1634,6 +1925,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。サーバーはこのフィールドを使用して cloud provider を導出します。"
               }
             }
           },
@@ -1643,6 +1937,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Bucket、容器或存储名称。对于 Azure Blob Storage，该字段表示容器名称。"
+              },
+              "ja-JP": {
+                "description": "bucket、container、または storage の名前。Azure Blob Storage の場合、これは container 名です。"
               }
             }
           },
@@ -1656,6 +1953,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Azure 存储账号名称。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure storage account 名。"
                   }
                 }
               },
@@ -1665,6 +1965,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Azure 联合身份客户端 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure federated identity の client ID。"
                   }
                 }
               },
@@ -1674,6 +1977,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Azure 联合身份租户 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure federated identity の tenant ID。"
                   }
                 }
               }
@@ -1681,6 +1987,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商相关的凭证字段。"
+              },
+              "ja-JP": {
+                "description": "provider 固有の認証情報フィールド。"
               }
             }
           }
@@ -1700,6 +2009,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -1709,6 +2021,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。サーバーはこのフィールドを使用して cloud provider を導出します。"
               }
             }
           },
@@ -1718,6 +2033,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要校验的 bucket、容器或存储名称。"
+              },
+              "ja-JP": {
+                "description": "検証する bucket、container、またはストレージ名。"
               }
             }
           },
@@ -1731,6 +2049,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商相关的凭证字段。"
+              },
+              "ja-JP": {
+                "description": "provider 固有の認証情報フィールド。"
               }
             }
           }
@@ -1750,6 +2071,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
               }
             }
           },
@@ -1759,6 +2083,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。服务器会根据该字段推断云厂商。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。サーバーはこのフィールドを使用して cloud provider を導出します。"
               }
             }
           },
@@ -1768,6 +2095,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "用于生成策略或凭证的 bucket、容器或存储名称。"
+              },
+              "ja-JP": {
+                "description": "ポリシーまたは認証情報の生成に使用される bucket、container、または storage の名前。"
               }
             }
           }
@@ -1782,6 +2112,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration ID。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の ID。"
               }
             }
           },
@@ -1791,6 +2124,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 名称。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の名前。"
               }
             }
           },
@@ -1800,6 +2136,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 的公开状态。"
+              },
+              "ja-JP": {
+                "description": "ストレージ統合の公開ステータス。"
               }
             },
             "enum": [
@@ -1813,6 +2152,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "状态信息。没有状态信息时为空字符串。"
+              },
+              "ja-JP": {
+                "description": "ステータスメッセージ。メッセージがない場合、このフィールドは空です。"
               }
             }
           },
@@ -1822,6 +2164,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "地域 ID。"
+              },
+              "ja-JP": {
+                "description": "リージョンの ID。"
               }
             }
           },
@@ -1831,6 +2176,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Bucket、容器或存储名称。"
+              },
+              "ja-JP": {
+                "description": "バケット、コンテナ、またはストレージの名前。"
               }
             }
           }
@@ -1845,6 +2193,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页的 Storage Integration 概览。"
+              },
+              "ja-JP": {
+                "description": "現在のページのストレージ統合サマリー。"
               }
             },
             "items": {
@@ -1857,6 +2208,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "过滤后的可见 Storage Integration 总数。"
+              },
+              "ja-JP": {
+                "description": "フィルタリング後に表示可能なストレージ統合の総数。"
               }
             }
           },
@@ -1866,6 +2220,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
             }
           },
@@ -1875,6 +2232,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每页数量。"
+              },
+              "ja-JP": {
+                "description": "ページサイズ。"
               }
             }
           }
@@ -1894,6 +2254,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Storage Integration 描述。"
+                  },
+                  "ja-JP": {
+                    "description": "ストレージ統合の説明。"
                   }
                 }
               },
@@ -1907,6 +2270,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "该集成保存的云厂商凭证字段。值为 null 的字段会被省略。"
+                  },
+                  "ja-JP": {
+                    "description": "この統合に保存されるプロバイダー固有の認証情報フィールド。値が null のフィールドは省略されます。"
                   }
                 }
               },
@@ -1916,6 +2282,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "UTC ISO 8601 格式的创建时间。"
+                  },
+                  "ja-JP": {
+                    "description": "UTC ISO 8601 形式の作成時刻。"
                   }
                 },
                 "format": "date-time"
@@ -1933,6 +2302,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration ID。"
+              },
+              "ja-JP": {
+                "description": "storage integration の ID。"
               }
             }
           },
@@ -1942,6 +2314,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Storage Integration 名称。"
+              },
+              "ja-JP": {
+                "description": "storage integration の名前。"
               }
             }
           }
@@ -1956,6 +2331,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "凭证是否可以访问目标存储。"
+              },
+              "ja-JP": {
+                "description": "認証情報が対象ストレージにアクセスできるかどうか。"
               }
             }
           },
@@ -1965,6 +2343,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "校验失败时的原因。校验成功时为空字符串。"
+              },
+              "ja-JP": {
+                "description": "検証に失敗した場合の失敗理由。検証が成功した場合、このフィールドは空です。"
               }
             }
           }
@@ -1979,6 +2360,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "只读 AWS S3 策略。可能的值为 `s3:GetObject`、`s3:ListBucket` 和 `s3:GetBucketLocation`。"
+              },
+              "ja-JP": {
+                "description": "読み取り専用の AWS S3 ポリシー。指定可能な値は `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation` です。"
               }
             }
           },
@@ -1988,6 +2372,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "读写 AWS S3 策略。可能的值为 `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation` 和 `s3:PutObject`。"
+              },
+              "ja-JP": {
+                "description": "読み取り/書き込み可能な AWS S3 ポリシー。指定可能な値は `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation`、`s3:PutObject` です。"
               }
             }
           },
@@ -1997,6 +2384,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "创建流程使用的 AWS IAM 策略。可能的值为 `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation` 和 `s3:PutObject`。"
+              },
+              "ja-JP": {
+                "description": "create workflow で使用される AWS IAM ポリシー。指定可能な値は `s3:GetObject`、`s3:ListBucket`、`s3:GetBucketLocation`、`s3:PutObject` です。"
               }
             }
           },
@@ -2006,6 +2396,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商信任策略。"
+              },
+              "ja-JP": {
+                "description": "プロバイダーの trust policy。"
               }
             }
           },
@@ -2015,6 +2408,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要授权的 Zilliz 云账号或 RAM 主体。"
+              },
+              "ja-JP": {
+                "description": "認可する Zilliz cloud account または RAM principal。"
               }
             }
           },
@@ -2024,6 +2420,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "生成的 external ID。"
+              },
+              "ja-JP": {
+                "description": "生成された external ID。"
               }
             }
           }
@@ -2038,6 +2437,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要授予的 GCP bucket 权限。"
+              },
+              "ja-JP": {
+                "description": "付与する GCP bucket 権限。"
               }
             },
             "items": {
@@ -2050,6 +2452,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Zilliz 托管的 Google Cloud 服务账号邮箱。"
+              },
+              "ja-JP": {
+                "description": "Zilliz が管理する Google Cloud service account のメールアドレス。"
               }
             }
           }
@@ -2064,6 +2469,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Azure 授权凭证信息。"
+              },
+              "ja-JP": {
+                "description": "Azure の認可 credential 情報。"
               }
             },
             "properties": {
@@ -2073,6 +2481,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Azure 联合身份使用的集群 issuer URL。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure federated identity 用の cluster issuer URL。"
                   }
                 }
               },
@@ -2082,6 +2493,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Zilliz 服务账号所在的 Kubernetes 命名空间。"
+                  },
+                  "ja-JP": {
+                    "description": "Zilliz service account が使用する Kubernetes namespace。"
                   }
                 }
               },
@@ -2091,6 +2505,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "Zilliz 服务账号名称。"
+                  },
+                  "ja-JP": {
+                    "description": "Zilliz service account 名。"
                   }
                 }
               }
@@ -2107,6 +2524,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "只读阿里云 OSS 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation` 和 `oss:HeadBucket`。"
+              },
+              "ja-JP": {
+                "description": "Alibaba Cloud OSS ポリシー。指定可能な値は `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss:HeadBucket` です。"
               }
             }
           },
@@ -2116,6 +2536,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "读写阿里云 OSS 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss:HeadBucket` 和 `oss:PutObject`。"
+              },
+              "ja-JP": {
+                "description": "読み取り/書き込み可能な Alibaba Cloud OSS ポリシー。指定可能な値は `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss.HeadBucket`、`oss:PutObject` です。"
               }
             }
           },
@@ -2125,6 +2548,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "创建流程使用的阿里云 RAM 策略。可能的值为 `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss:HeadBucket` 和 `oss:PutObject`。"
+              },
+              "ja-JP": {
+                "description": "create workflow で使用される Alibaba Cloud RAM ポリシー。指定可能な値は `oss:GetObject`、`oss:ListObjects`、`oss:GetBucketLocation`、`oss.HeadBucket`、`oss:PutObject` です。"
               }
             }
           },
@@ -2134,6 +2560,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "云厂商信任策略。"
+              },
+              "ja-JP": {
+                "description": "プロバイダーの trust policy。"
               }
             }
           },
@@ -2143,6 +2572,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要授权的 Zilliz 云账号或 RAM 主体。"
+              },
+              "ja-JP": {
+                "description": "認可する Zilliz cloud account または RAM principal。"
               }
             }
           },
@@ -2152,6 +2584,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "生成的 external ID。"
+              },
+              "ja-JP": {
+                "description": "生成された external ID。"
               }
             }
           }

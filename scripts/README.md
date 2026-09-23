@@ -147,9 +147,19 @@ npm run fetch-sdk-docs:go:v2.6
 npm run fetch-sdk-docs:cpp:v2.6
 ```
 
-The weekly GitHub Action in `.github/workflows/publish-ref-docs.yml` publishes
-SDK reference manuals for the selected version and opens a PR. To run it
-manually, use the `workflow_dispatch` input `version`, for example `v2.6.x`.
+Refresh one SDK manual from Feishu locally — no schedule, no CI trigger:
+
+```bash
+npm run refresh-sdk-docs -- --sdk pymilvus --version v3.0.x
+```
+
+The script wraps `lark-docs/index.js`, then lands the result as a single
+signed commit on `feishu/<sdk>-<version>-<date>` and prints the push/PR
+commands. Add `-d "Title"` (plus optional `-o <path>` and `-r`) to publish a
+single page instead of the whole manual, or `--pr` to push and open the PR
+via `gh` automatically. A run with no content changes leaves master
+untouched. `.github/workflows/publish-ref-docs.yml` stays disabled; merging
+the PR is what publishes (via the existing master.yml chain).
 
 After publishing, review:
 
@@ -201,5 +211,17 @@ npm run check:shared-scripts
 npm run sync:shared-scripts
 ```
 
-`sync:shared-scripts` may need access to adjacent local repositories or GitHub,
-depending on the entries in `sync-shared-scripts.manifest.js`.
+Two sync sources remain:
+
+- `milvus-lib` syncs the `milvus*` files in `scripts/lib` from `../milvus-docs`.
+- `apifox-docs` syncs `scripts/apifox-docs` wholesale from
+  `zilliztech/zdoc` (`packages/docs-tooling/src/reference/rest`). After each
+  sync, delete the synced `on-demand-cluster-segment.test.js` — it requires a
+  zdoc-generated sidebar artifact that does not exist in this repository.
+
+The lark/feishu files under `scripts/lark-docs/`, `scripts/lib`, and
+`scripts/mdx-parse/` are a **frozen in-repo fork**: zdoc moved them into
+`packages/docs-tooling/` and they no longer work as drop-in file copies. Edit
+them in place. See the header of `sync-shared-scripts.manifest.js` for
+details. `sync:shared-scripts` may need access to adjacent local repositories
+or GitHub, depending on the entries in the manifest.

@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "查看 Volume 列表",
             "description": "本接口将列出指定项目下的所有 Volume。"
+          },
+          "ja-JP": {
+            "summary": "ボリュームを一覧表示",
+            "description": "この操作は、指定したプロジェクト内のすべてのボリュームを一覧表示します。"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -56,6 +63,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前操作的目标项目。"
+              },
+              "ja-JP": {
+                "description": "この操作の対象プロジェクト。"
               }
             },
             "required": true,
@@ -71,6 +81,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每次返回的记录数。"
+              },
+              "ja-JP": {
+                "description": "各レスポンスに含めるレコード数。"
               }
             },
             "required": false,
@@ -89,6 +102,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
             },
             "required": false,
@@ -106,6 +122,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Volume 的类别。有效值为 `MANAGED` 和 `EXTERNAL`。"
+              },
+              "ja-JP": {
+                "description": "ボリュームのカテゴリ。有効な値は `MANAGED` および `EXTERNAL` です。"
               }
             },
             "required": false,
@@ -120,6 +139,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回 Volume 列表。"
+              },
+              "ja-JP": {
+                "description": "ボリュームの一覧を返します。"
               }
             },
             "content": {
@@ -136,6 +158,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -148,6 +173,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの総数。"
                                 }
                               }
                             },
@@ -157,6 +185,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
                                 }
                               }
                             },
@@ -166,6 +197,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "每页的 Volume 数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "1 ページあたりのボリューム数。"
                                 }
                               }
                             },
@@ -175,6 +209,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの一覧。"
                                 }
                               },
                               "items": {
@@ -186,6 +223,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "Volume 名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリューム名。"
                                       }
                                     }
                                   },
@@ -195,6 +235,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "Volume 描述。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリュームの説明。"
                                       }
                                     }
                                   },
@@ -204,6 +247,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "Volume 的类别。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリュームのカテゴリ。"
                                       }
                                     }
                                   }
@@ -220,6 +266,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -233,6 +282,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -242,6 +294,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -303,6 +358,10 @@
           "zh-CN": {
             "summary": "创建 Volume",
             "description": "本接口用于在指定项目下创建一个新的 Volume。"
+          },
+          "ja-JP": {
+            "summary": "Volume を作成します",
+            "description": "この操作は、指定したプロジェクトに新しい volume を作成します。"
           }
         },
         "tags": [
@@ -321,6 +380,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -337,6 +399,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "所属项目的 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "volume が属するプロジェクトの ID。"
                       }
                     },
                     "example": "proj-xxxxxxxxxxxxxxxxxxxxxxx"
@@ -347,6 +412,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Volume 所属区域的 ID。您可以使用 [查看云服务区域](/reference/list-cloud-regions-v2) 接口列出可用区域。该区域应与指定项目绑定。"
+                      },
+                      "ja-JP": {
+                        "description": "volume を作成するリージョンの ID。[List Cloud Regions](/reference/list-cloud-regions-v2) を使用して利用可能なリージョンを一覧表示できます。このリージョンは、指定したプロジェクトに関連付けられている必要があります。"
                       }
                     }
                   },
@@ -356,6 +424,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Volume 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成する volume の名前。"
                       }
                     }
                   },
@@ -367,6 +438,9 @@
                       "zh-CN": {
                         "description": "Volume 描述。",
                         "example": "Raw import data for recommendation workloads"
+                      },
+                      "ja-JP": {
+                        "description": "volume の説明。"
                       }
                     }
                   },
@@ -376,6 +450,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Volume 的类别。有效值为 `MANAGED` 和 `EXTERNAL`。默认值为 `MANAGED`。"
+                      },
+                      "ja-JP": {
+                        "description": "volume のカテゴリ。有効な値は `MANAGED` と `EXTERNAL` です。デフォルトは `MANAGED` です。"
                       }
                     }
                   },
@@ -385,6 +462,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "存储集成 ID。当 `type` 为 `EXTERNAL` 时必填。"
+                      },
+                      "ja-JP": {
+                        "description": "storage integration の ID。`type` が `EXTERNAL` の場合は必須です。"
                       }
                     }
                   },
@@ -394,6 +474,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "存储卷内的路径前缀。当 `type` 为 `EXTERNAL` 时必填。"
+                      },
+                      "ja-JP": {
+                        "description": "volume 内のパスプレフィックス。`type` が `EXTERNAL` の場合は必須です。"
                       }
                     }
                   }
@@ -465,6 +548,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已创建的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "作成された volume の名前を返します。"
               }
             },
             "content": {
@@ -477,6 +563,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回已创建的 Volume 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "作成された volume 名を返します。"
                         }
                       },
                       "type": "object",
@@ -487,6 +576,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -499,6 +591,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已创建的 Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成された volume の名前。"
                                 }
                               }
                             }
@@ -512,6 +607,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -525,6 +623,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -534,6 +635,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -576,6 +680,10 @@
           "zh-CN": {
             "summary": "查看 Volume 详情",
             "description": "本接口用于查看指定 Volume 的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "Volume の詳細を取得",
+            "description": "Volume の詳細情報を取得します。"
           }
         },
         "tags": [
@@ -589,6 +697,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "待查看的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "詳細を取得する Volume の名前。"
               }
             },
             "required": true,
@@ -609,6 +720,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
@@ -619,6 +733,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定 Volume 的详细信息。"
+              },
+              "ja-JP": {
+                "description": "指定した Volume の詳細を返します。"
               }
             },
             "content": {
@@ -635,6 +752,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -644,6 +764,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含 Volume 详情。"
+                            },
+                            "ja-JP": {
+                              "description": "Volume の詳細を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -653,6 +776,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の名前。"
                                 }
                               }
                             },
@@ -662,6 +788,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 描述。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の説明。"
                                 }
                               }
                             },
@@ -671,6 +800,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的类别。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume のカテゴリ。"
                                 }
                               }
                             },
@@ -680,6 +812,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 所属区域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume が配置されているリージョンの ID。"
                                 }
                               }
                             },
@@ -689,6 +824,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "存储集成 ID。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合 ID。external volume の場合にのみ返されます。"
                                 }
                               }
                             },
@@ -698,6 +836,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "存储卷内的路径前缀。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume 内のパスプレフィックス。external volume の場合にのみ返されます。"
                                 }
                               }
                             },
@@ -707,6 +848,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の現在のステータス。"
                                 }
                               }
                             },
@@ -716,6 +860,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的创建时间，ISO 8601 格式。"
+                                },
+                                "ja-JP": {
+                                  "description": "ISO 8601 形式の Volume の作成時刻。"
                                 }
                               }
                             }
@@ -733,6 +880,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -742,6 +892,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -750,6 +903,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗時のレスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -849,6 +1005,10 @@
           "zh-CN": {
             "summary": "删除 Volume",
             "description": "本接口用于删除指定项目下的一个 Volume。"
+          },
+          "ja-JP": {
+            "summary": "Volume を削除します",
+            "description": "この操作は、指定されたプロジェクト内の volume を削除します。"
           }
         },
         "tags": [
@@ -862,6 +1022,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "待删除的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "削除する既存の volume の名前。"
               }
             },
             "required": true,
@@ -882,6 +1045,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           }
@@ -892,6 +1058,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已删除的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "削除された volume の名前を返します。"
               }
             },
             "content": {
@@ -904,6 +1073,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回已删除的 Volume 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "削除された volume 名を返します。"
                         }
                       },
                       "type": "object",
@@ -914,6 +1086,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -926,6 +1101,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已删除的 Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除された volume の名前。"
                                 }
                               }
                             }
@@ -939,6 +1117,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -952,6 +1133,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -961,6 +1145,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1001,6 +1188,10 @@
           "zh-CN": {
             "summary": "更新 Volume",
             "description": "更新指定 Volume 的描述。"
+          },
+          "ja-JP": {
+            "summary": "ボリュームを更新",
+            "description": "ボリュームの説明を更新します。"
           }
         },
         "tags": [
@@ -1019,6 +1210,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "待更新的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "更新するボリュームの名前。"
               }
             }
           },
@@ -1034,6 +1228,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -1049,6 +1246,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Volume所属的组织 ID。"
+              },
+              "ja-JP": {
+                "description": "ボリュームの organization ID。"
               }
             }
           }
@@ -1065,6 +1265,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Volume 的新描述。值可以为空字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "ボリュームの新しい説明。値には空文字列を指定できます。"
                       }
                     }
                   }
@@ -1076,6 +1279,9 @@
                 "x-i18n": {
                   "zh-CN": {
                     "description": "更新 Volume 的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "ボリュームを更新するためのリクエストペイロード。"
                   }
                 }
               },
@@ -1096,6 +1302,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回指定 Volume 的详细信息。"
+              },
+              "ja-JP": {
+                "description": "指定されたボリュームの詳細を返します。"
               }
             },
             "content": {
@@ -1112,6 +1321,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1121,6 +1333,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含 Volume 详情。"
+                            },
+                            "ja-JP": {
+                              "description": "ボリュームの詳細を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -1130,6 +1345,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの名前。"
                                 }
                               }
                             },
@@ -1139,6 +1357,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的类别。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームのカテゴリ。"
                                 }
                               }
                             },
@@ -1148,6 +1369,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 所属区域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームが配置されているリージョンの ID。"
                                 }
                               }
                             },
@@ -1157,6 +1381,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "存储集成 ID。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "storage integration ID。external volume の場合にのみ返されます。"
                                 }
                               }
                             },
@@ -1166,6 +1393,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "存储卷内的路径前缀。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリューム内のパスプレフィックス。external volume の場合にのみ返されます。"
                                 }
                               }
                             },
@@ -1175,6 +1405,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの現在のステータス。"
                                 }
                               }
                             },
@@ -1184,6 +1417,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Volume 的创建时间，ISO 8601 格式。"
+                                },
+                                "ja-JP": {
+                                  "description": "ISO 8601 形式のボリューム作成時刻。"
                                 }
                               }
                             }
@@ -1201,6 +1437,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1210,6 +1449,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1218,6 +1460,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [

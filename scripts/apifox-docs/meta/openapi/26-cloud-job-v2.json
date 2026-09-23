@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "查看任务详情",
             "description": "本接口可查看指定控制面任务详情。"
+          },
+          "ja-JP": {
+            "summary": "ジョブの詳細取得",
+            "description": "指定した control-plane ジョブの情報を詳細に一覧表示します"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -57,6 +64,11 @@
             "example": "job-xxxxxxxxxxxxxxxxxx",
             "schema": {
               "type": "string"
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "送信済みのジョブの ID。"
+              }
             }
           }
         ],
@@ -73,7 +85,12 @@
                       "properties": {
                         "jobId": {
                           "type": "string",
-                          "description": "The ID of the job that has been submitted."
+                          "description": "The ID of the job that has been submitted.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "送信済みのジョブの ID。"
+                            }
+                          }
                         },
                         "type": {
                           "type": "string",
@@ -84,7 +101,12 @@
                             "BACKUP",
                             "RESTORE",
                             "CLONE_COLLECTION"
-                          ]
+                          ],
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブのタイプ"
+                            }
+                          }
                         },
                         "status": {
                           "type": "string",
@@ -95,23 +117,48 @@
                             "SUCCESSFUL",
                             "FAILED",
                             "CANCELING"
-                          ]
+                          ],
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブのステータス"
+                            }
+                          }
                         },
                         "progress": {
                           "type": "string",
-                          "description": "The progress of the job"
+                          "description": "The progress of the job",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブの進行状況"
+                            }
+                          }
                         },
                         "startTime": {
                           "type": "string",
-                          "description": "The time at which the job starts."
+                          "description": "The time at which the job starts.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブの開始時刻。"
+                            }
+                          }
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "The time at which the job end."
+                          "description": "The time at which the job end.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブの終了時刻。"
+                            }
+                          }
                         },
                         "reason": {
                           "type": "string",
-                          "description": "The message of why the job failed."
+                          "description": "The message of why the job failed.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "ジョブが失敗した理由を示すメッセージ。"
+                            }
+                          }
                         }
                       }
                     },
@@ -121,6 +168,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -134,6 +184,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -143,6 +196,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -176,6 +232,11 @@
                     }
                   }
                 }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功"
               }
             }
           }

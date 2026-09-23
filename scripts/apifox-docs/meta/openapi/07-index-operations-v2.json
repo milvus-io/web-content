@@ -25,6 +25,10 @@
           "zh-CN": {
             "summary": "创建索引",
             "description": "为指定的向量字段或标量字段创建一个索引并为其命名。"
+          },
+          "ja-JP": {
+            "summary": "インデックスの作成",
+            "description": "対象フィールドに名前付きインデックスを作成します。対象フィールドには、ベクトルフィールドまたはスカラーフィールドを指定できます。"
           }
         },
         "tags": [
@@ -41,13 +45,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結した username と password の組み合わせを指定する必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -62,8 +75,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前です。\n存在しないデータベースを設定するとエラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -71,8 +90,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "対象コレクションの名前です。\n存在しないコレクションを設定するとエラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "indexParams": {
                     "type": "array",
@@ -81,7 +106,10 @@
                       "description": "Index parameters for a specific field.",
                       "x-i18n": {
                         "zh-CN": {
-                          "descripiton": "针对某一字段的索引参数。"
+                          "description": "针对某一字段的索引参数。"
+                        },
+                        "ja-JP": {
+                          "description": "特定のフィールドに対するインデックスパラメータです。"
                         }
                       },
                       "properties": {
@@ -91,6 +119,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "用于构建索引的相似度类型。更多详情，请参考[相似度类型](/docs/search-metrics-explained)。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスの構築に使用する類似度メトリックのタイプです。詳細については、[Similarity Metrics Explained](/docs/search-metrics-explained) を参照してください。"
                             }
                           },
                           "enum": [
@@ -98,7 +129,10 @@
                             "IP",
                             "COSINE"
                           ],
-                          "default": "COSINE"
+                          "default": "COSINE",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "fieldName": {
                           "type": "string",
@@ -106,8 +140,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "要创建索引的目标字段名称。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスを作成する対象フィールドの名前です。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "indexName": {
                           "type": "string",
@@ -115,8 +155,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "要创建的索引的名称，该值默认为目标字段名称。"
+                            },
+                            "ja-JP": {
+                              "description": "作成するインデックスの名前です。デフォルト値は対象フィールド名です。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "indexType": {
                           "type": "string",
@@ -124,14 +170,23 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "要创建的索引类型。"
+                            },
+                            "ja-JP": {
+                              "description": "作成するインデックスのタイプです"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "params": {
                           "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "索引类型及相关设置。详细信息，请参阅 [向量索引](https://milvus.io/docs/index.md)。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスタイプと関連設定です。詳細については、[Vector Indexes](https://milvus.io/docs/index.md) を参照してください。"
                             }
                           },
                           "type": "object",
@@ -142,8 +197,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "数据节点与其他节点连接的边数。此参数仅适用于**索引类型**为 **HNSW** 的情况。"
+                                },
+                                "ja-JP": {
+                                  "description": "ノードの最大次数です。これは **index_type** が **HNSW** に設定されている場合にのみ適用されます。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "efConstruction": {
                               "type": "integer",
@@ -151,8 +212,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "搜索范围。此参数仅适用于**索引类型**为 **HNSW** 的情况。"
+                                },
+                                "ja-JP": {
+                                  "description": "探索範囲です。これは **index_type** が **HNSW** に設定されている場合にのみ適用されます。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "nlist": {
                               "type": "integer",
@@ -160,10 +227,19 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "数据集群单元的数量。此参数仅适用于**索引类型**为 **IVF** 系列索引的情况。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスタユニットの数です。これは **index_type** が **IVF** 関連のインデックスタイプに設定されている場合にのみ適用されます。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
                       },
                       "required": [
@@ -171,14 +247,23 @@
                         "fieldName",
                         "indexName",
                         "indexType"
-                      ]
+                      ],
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     "description": "The parameters that apply to the index-building process.",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "应用于索引构建过程的参数。"
+                      },
+                      "ja-JP": {
+                        "description": "インデックス構築プロセスに適用されるパラメータです。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -187,7 +272,10 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "collectionName": "my_collection",
@@ -211,7 +299,10 @@
                 ]
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -226,6 +317,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -238,9 +332,15 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer"
+                          "type": "integer",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -249,10 +349,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロードです。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -260,6 +369,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -273,8 +385,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -282,12 +400,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -308,10 +438,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/indexes/describe": {
@@ -323,6 +464,10 @@
           "zh-CN": {
             "summary": "查看索引详情",
             "description": "本接口可描述当前索引的相关信息。"
+          },
+          "ja-JP": {
+            "summary": "インデックスを記述",
+            "description": "この操作は現在のインデックスを記述します。"
           }
         },
         "tags": [
@@ -339,13 +484,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -360,8 +514,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 所属的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -369,8 +529,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "索引所属的 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "インデックスが属するコレクションの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "indexName": {
                     "type": "string",
@@ -378,8 +544,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要描述的索引的名称。"
+                      },
+                      "ja-JP": {
+                        "description": "記述するインデックスの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "x-i18n-langs": [
@@ -388,14 +560,20 @@
                 "required": [
                   "indexName",
                   "collectionName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "indexName": "vector",
                 "collectionName": "quick_setup"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -403,6 +581,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回一个包含当前索引详细信息的对象。"
+              },
+              "ja-JP": {
+                "description": "現在のインデックスの詳細な説明を含むオブジェクト。"
               }
             },
             "content": {
@@ -418,16 +599,25 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "description": "Response payload which is detailed information about the index.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为索引详细信息。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスに関する詳細情報を含むレスポンスペイロード。"
                             }
                           },
                           "type": "object",
@@ -438,8 +628,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "索引的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスの名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "fieldName": {
                               "type": "string",
@@ -447,8 +643,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "目标字段的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "対象フィールドの名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "indexType": {
                               "type": "string",
@@ -456,8 +658,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前索引的类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "このインデックスのタイプ。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "metricType": {
                               "type": "string",
@@ -465,8 +673,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "相似度类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "類似度メトリックのタイプ。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "mmap.enabled": {
                               "type": "string",
@@ -474,8 +688,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "是否为当前索引启用内存映射。"
+                                },
+                                "ja-JP": {
+                                  "description": "このインデックスで memory mapping が有効かどうか。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "indexoffsetcache.enabled": {
                               "type": "string",
@@ -483,8 +703,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "是否将索引偏移量缓存在内存中。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスオフセットをメモリにキャッシュするかどうか。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "warmup": {
                               "type": "string",
@@ -492,13 +718,19 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "在创建或更新索引时是否将索引加载到内存中。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスの作成時または更新時に、インデックスをメモリに読み込むかどうか。<ul><li><b>sync</b>: セグメントがロード済みと見なされる前にウォームアップします</li><li><b>async</b>: ロード後にバックグラウンドでウォームアップします</li><li><b>disable</b>: 事前にウォームアップせず、必要に応じてロードします</li></ul>"
                                 }
                               },
                               "enum": [
                                 "sync",
                                 "async",
                                 "disable"
-                              ]
+                              ],
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "totalRows": {
                               "type": "integer",
@@ -506,8 +738,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "Entity 总数或行数。"
+                                },
+                                "ja-JP": {
+                                  "description": "エンティティ/行の総数。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "pendingRows": {
                               "type": "integer",
@@ -515,8 +753,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "等待被索引的 Entity 总数或行数。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックス作成待ちのエンティティ/行の数。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "indexedRows": {
                               "type": "integer",
@@ -524,17 +768,29 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已索引的 Entity 总数或行数。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックス作成済みのエンティティ/行の総数。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "indexState": {
                               "description": "The status of the indexing progress.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "索引当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックス作成の進行状況のステータス。"
                                 }
                               },
-                              "type": "string"
+                              "type": "string",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "failReason": {
                               "type": "string",
@@ -542,8 +798,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "构建索引失败的原因。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスの構築に失敗した理由。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "minIndexVersion": {
                               "type": "string",
@@ -551,8 +813,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "索引的最低版本。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスの最小バージョン。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "maxIndexVersion": {
                               "type": "string",
@@ -560,8 +828,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "索引的最高版本。"
+                                },
+                                "ja-JP": {
+                                  "description": "インデックスの最大バージョン。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "indexParams": {
                               "type": "array",
@@ -569,6 +843,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "用于构建索引的索引参数，以键值对的形式列出。"
+                                },
+                                "ja-JP": {
+                                  "description": "キーと値のペアのリストで示される、インデックスの構築に使用されたインデックスパラメーター。"
                                 }
                               },
                               "items": {
@@ -580,8 +857,14 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "索引参数的名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "インデックスパラメーターの名前。"
                                       }
-                                    }
+                                    },
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
                                   },
                                   "value": {
                                     "type": "string",
@@ -590,20 +873,38 @@
                                       "zh-CN": {
                                         "description": "索引参数的值。"
                                       }
-                                    }
+                                    },
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
                                   }
-                                }
-                              }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
                       },
                       "description": "A success response.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -611,6 +912,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -624,8 +928,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -633,12 +943,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -666,9 +988,18 @@
                           "minIndexVersion": 0,
                           "maxIndexVersion": 0,
                           "indexParams": [
-                            { "key": "index_type", "value": "IVF_FLAT" },
-                            { "key": "metric_type", "value": "L2" },
-                            { "key": "params", "value": "{\"nlist\":128}" }
+                            {
+                              "key": "index_type",
+                              "value": "IVF_FLAT"
+                            },
+                            {
+                              "key": "metric_type",
+                              "value": "L2"
+                            },
+                            {
+                              "key": "params",
+                              "value": "{\"nlist\":128}"
+                            }
                           ]
                         }
                       ]
@@ -699,9 +1030,18 @@
                           "minIndexVersion": 0,
                           "maxIndexVersion": 0,
                           "indexParams": [
-                            { "key": "index_type", "value": "AUTOINDEX" },
-                            { "key": "metric_type", "value": "COSINE" },
-                            { "key": "params", "value": "{}" }
+                            {
+                              "key": "index_type",
+                              "value": "AUTOINDEX"
+                            },
+                            {
+                              "key": "metric_type",
+                              "value": "COSINE"
+                            },
+                            {
+                              "key": "params",
+                              "value": "{}"
+                            }
                           ]
                         }
                       ]
@@ -717,10 +1057,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/indexes/alter_properties": {
@@ -732,6 +1078,10 @@
           "zh-CN": {
             "summary": "修改索引属性",
             "description": "本操作修改索引属性。"
+          },
+          "ja-JP": {
+            "summary": "インデックスプロパティの変更",
+            "description": "この操作は、インデックスのプロパティを変更します。"
           }
         },
         "tags": [
@@ -752,10 +1102,26 @@
                 "type": "object",
                 "properties": {
                   "dbName": {
-                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName"
+                    "$ref": "#/components/schemas/CollectionCommons/properties/dbName",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前です。存在しないデータベースを指定するとエラーになります。指定しない場合は、デフォルトデータベースが適用されます。"
+                      }
+                    }
                   },
                   "collectionName": {
-                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName"
+                    "$ref": "#/components/schemas/CollectionCommons/properties/collectionName",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null,
+                    "x-i18n": {
+                      "ja-JP": {
+                        "description": "対象コレクションの名前です。\n存在しないコレクションを指定するとエラーになります。"
+                      }
+                    }
                   },
                   "indexName": {
                     "type": "string",
@@ -763,8 +1129,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标索引的名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象インデックスの名前です。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "properties": {
                     "type": "object",
@@ -772,6 +1144,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要设置的新索引参数。"
+                      },
+                      "ja-JP": {
+                        "description": "設定する新しいインデックスパラメータです。"
                       }
                     },
                     "properties": {
@@ -781,8 +1156,14 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "是否为当前索引启用内存映射。"
+                          },
+                          "ja-JP": {
+                            "description": "現在のインデックスに対してメモリマッピングを有効にするかどうか。"
                           }
-                        }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       },
                       "indexoffsetcache.enabled": {
                         "type": "boolean",
@@ -790,8 +1171,14 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "是否将索引偏移量缓存在内存中。"
+                          },
+                          "ja-JP": {
+                            "description": "インデックスオフセットをメモリ内にキャッシュするかどうか。"
                           }
-                        }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       },
                       "warmup": {
                         "type": "boolean",
@@ -799,22 +1186,34 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "是否预热索引。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
+                          },
+                          "ja-JP": {
+                            "description": "インデックスをウォームアップするかどうか。<ul><li><b>sync</b>: セグメントがロード済みと見なされる前にウォームアップします</li><li><b>async</b>: ロード後にバックグラウンドでウォームアップします</li><li><b>disable</b>: 事前ウォームアップは行わず、必要時にロードします</li></ul>"
                           }
                         },
                         "enum": [
                           "sync",
                           "async",
                           "disable"
-                        ]
+                        ],
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "indexName",
                   "collectionName",
                   "properties"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "collectionName": "test_collection",
@@ -824,7 +1223,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -832,6 +1234,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空响应。"
+              },
+              "ja-JP": {
+                "description": "空のレスポンスを返します。"
               }
             },
             "content": {
@@ -848,14 +1253,26 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
-                          "properties": {}
+                          "properties": {},
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -863,6 +1280,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -873,8 +1293,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -882,12 +1308,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -909,9 +1347,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/indexes/drop_properties": {
@@ -923,6 +1367,10 @@
           "zh-CN": {
             "summary": "删除索引属性",
             "description": "本操作删除索引属性。"
+          },
+          "ja-JP": {
+            "summary": "インデックスプロパティの削除",
+            "description": "この操作では、インデックスのプロパティを削除します。"
           }
         },
         "tags": [
@@ -932,7 +1380,13 @@
           {
             "type": "info",
             "title": "Note",
-            "content": "Collections for on-demand compute do not support this operation."
+            "content": "Collections for on-demand compute do not support this operation.",
+            "x-i18n": {
+              "ja-JP": {
+                "title": "注記",
+                "content": "オンデマンドコンピュート用のコレクションでは、この操作はサポートされていません。"
+              }
+            }
           }
         ],
         "parameters": [
@@ -943,13 +1397,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -964,8 +1427,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前です。\n存在しないデータベースを設定するとエラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -973,8 +1442,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "対象コレクションの名前です。\n存在しないコレクションを設定するとエラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "indexName": {
                     "type": "string",
@@ -982,8 +1457,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标索引的名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象インデックスの名前です。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "propertyKeys": {
                     "type": "array",
@@ -991,6 +1472,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "要删除的属性名称列表。"
+                      },
+                      "ja-JP": {
+                        "description": "削除するプロパティの名前です。"
                       }
                     },
                     "items": {
@@ -999,21 +1483,33 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "要删除的属性名称。"
+                        },
+                        "ja-JP": {
+                          "description": "削除するプロパティの名前です。"
                         }
                       },
                       "enum": [
                         "mmap.enabled",
                         "indexoffsetcache.enabled",
                         "warmup"
-                      ]
-                    }
+                      ],
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "indexName",
                   "collectionName",
                   "propertyKeys"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "collectionName": "test_collection",
@@ -1023,7 +1519,10 @@
                 ]
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1031,6 +1530,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回空响应。"
+              },
+              "ja-JP": {
+                "description": "空のレスポンスを返します。"
               }
             },
             "content": {
@@ -1047,14 +1549,26 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
-                          "properties": {}
+                          "properties": {},
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1062,6 +1576,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "type": "object",
@@ -1072,8 +1589,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1081,12 +1604,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1108,9 +1643,15 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/indexes/drop": {
@@ -1122,6 +1663,10 @@
           "zh-CN": {
             "summary": "删除索引",
             "description": "本接口从指定 Collection 中删除索引。"
+          },
+          "ja-JP": {
+            "summary": "インデックスの削除",
+            "description": "この操作は、指定したコレクションからインデックスを削除します。"
           }
         },
         "tags": [
@@ -1131,7 +1676,13 @@
           {
             "type": "info",
             "title": "Note",
-            "content": "External collections do not support this operation."
+            "content": "External collections do not support this operation.",
+            "x-i18n": {
+              "ja-JP": {
+                "title": "注意",
+                "content": "External collections はこの操作をサポートしていません。"
+              }
+            }
           }
         ],
         "parameters": [
@@ -1142,13 +1693,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1163,8 +1723,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前です。\nこれを存在しないデータベースに設定すると、エラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -1172,8 +1738,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "対象コレクションの名前です。\nこれを存在しないコレクションに設定すると、エラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "indexName": {
                     "type": "string",
@@ -1181,8 +1753,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标索引的名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象インデックスの名前です。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "x-i18n-langs": [
@@ -1191,14 +1769,20 @@
                 "required": [
                   "indexName",
                   "collectionName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "indexName": "my_vector",
                 "collectionName": "custom_setup_not_indexed"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1213,6 +1797,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -1225,10 +1812,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -1237,10 +1830,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1248,6 +1850,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1261,8 +1866,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1270,12 +1881,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1296,10 +1919,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/indexes/list": {
@@ -1311,6 +1945,10 @@
           "zh-CN": {
             "summary": "查看索引列表",
             "description": "本接口可列出指定 Collection 的所有索引。"
+          },
+          "ja-JP": {
+            "summary": "インデックスを一覧表示",
+            "description": "この操作は、特定のコレクションのすべてのインデックスを一覧表示します。"
           }
         },
         "tags": [
@@ -1327,13 +1965,22 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結された username と password の組み合わせを指定する必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
             },
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -1348,8 +1995,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 所属的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -1357,8 +2010,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "现有 Collection 的名称。设置为一个不存在的 Collection 时会导致报错。 "
+                      },
+                      "ja-JP": {
+                        "description": "既存のコレクションの名前です。存在しないコレクションを設定するとエラーになります。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "x-i18n-langs": [
@@ -1366,13 +2025,19 @@
                 ],
                 "required": [
                   "collectionName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "collectionName": "test_collection"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -1380,6 +2045,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回包含所有已创建索引名称的数组。"
+              },
+              "ja-JP": {
+                "description": "構築済みのすべてのインデックス名を含むオブジェクト。"
               }
             },
             "content": {
@@ -1395,10 +2063,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "array",
@@ -1408,23 +2082,41 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "索引名称。"
+                              },
+                              "ja-JP": {
+                                "description": "インデックス名。"
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "description": "Response payload which is a list of indexes.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为所有索引名称列表。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスの一覧であるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
                       },
                       "description": "A success response.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -1432,6 +2124,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1445,8 +2140,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -1454,12 +2155,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -1482,10 +2195,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },
@@ -1501,6 +2220,10 @@
             "zh-CN": {
               "label": "集群端点",
               "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            },
+            "ja-JP": {
+              "label": "クラスターエンドポイント",
+              "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
             }
           },
           "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
@@ -1514,6 +2237,10 @@
             "zh-CN": {
               "label": "项目端点（按需）",
               "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            },
+            "ja-JP": {
+              "label": "プロジェクトエンドポイント（オンデマンド）",
+              "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
             }
           },
           "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
@@ -1534,13 +2261,22 @@
         "required": true,
         "example": "Bearer {{TOKEN}}",
         "schema": {
-          "type": "string"
+          "type": "string",
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "x-i18n": {
           "zh-CN": {
             "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"
+          },
+          "ja-JP": {
+            "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合された username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみが使用できます。"
           }
-        }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },

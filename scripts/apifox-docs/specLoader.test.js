@@ -157,10 +157,113 @@ function testResolveRefsPreservesSiblingMetadataOnRefWrapper() {
     });
 }
 
+function writeMergeFragment(dir, file, overrides = {}) {
+    const spec = {
+        openapi: '3.0.1',
+        info: { title: file, version: '1.0.0' },
+        tags: [{ name: file }],
+        paths: {
+            [`/${file}/list`]: {
+                post: {
+                    summary: `List ${file}`,
+                    tags: [file],
+                    responses: {},
+                },
+            },
+        },
+        components: {
+            schemas: {
+                [file]: { type: 'string' },
+            },
+        },
+        security: [],
+        externalDocs: { url: 'https://example.com/shared' },
+        webhooks: {
+            [file]: {
+                post: {
+                    responses: { 200: { description: 'ok' } },
+                },
+            },
+        },
+    };
+    Object.assign(spec, overrides);
+    fs.writeFileSync(path.join(dir, file), JSON.stringify(spec, null, 2));
+}
+
+function testPreservesAndMergesCompleteTopLevelObjects() {
+    withTempDir(dir => {
+        writeMergeFragment(dir, '01-first.json');
+        writeMergeFragment(dir, '02-second.json');
+
+        const spec = loadSpecifications(dir);
+
+        assert.equal(spec.openapi, '3.0.1');
+        assert.equal(spec.info.title, '01-first.json');
+        assert.ok(spec.paths['/01-first.json/list']);
+        assert.ok(spec.paths['/02-second.json/list']);
+        assert.ok(spec.webhooks['01-first.json']);
+        assert.ok(spec.webhooks['02-second.json']);
+        assert.ok(spec.components.schemas['01-first.json']);
+        assert.ok(spec.components.schemas['02-second.json']);
+        assert.equal(spec.externalDocs.url, 'https://example.com/shared');
+        assert.deepEqual(spec.tags.map(tag => tag.name), ['01-first.json', '02-second.json']);
+    });
+}
+
+function testDeduplicatesTagsByName() {
+    withTempDir(dir => {
+        writeMergeFragment(dir, '01-first.json', { tags: [{ name: 'shared' }] });
+        writeMergeFragment(dir, '02-second.json', { tags: [{ name: 'shared' }] });
+
+        const spec = loadSpecifications(dir);
+        assert.deepEqual(spec.tags.map(tag => tag.name), ['shared']);
+    });
+}
+
+function testRejectsConflictingOpenApiVersion() {
+    withTempDir(dir => {
+        writeMergeFragment(dir, '01-first.json');
+        writeMergeFragment(dir, '02-second.json', { openapi: '3.1.0' });
+        assert.throws(() => loadSpecifications(dir), /REST_SPEC_TOP_LEVEL_CONFLICT.*openapi/);
+    });
+}
+
+function testRejectsIncompatibleInfoVersion() {
+    withTempDir(dir => {
+        writeMergeFragment(dir, '01-first.json');
+        writeMergeFragment(dir, '02-second.json', { info: { title: 'second', version: '2.0.0' } });
+        assert.throws(() => loadSpecifications(dir), /REST_SPEC_TOP_LEVEL_CONFLICT.*info/);
+    });
+}
+
+function testIgnoresCanonicalFragmentIdentityDuringLegacyMerge() {
+    withTempDir(dir => {
+        writeMergeFragment(dir, '01-legacy.json');
+        writeMergeFragment(dir, '02-canonical.json', {
+            'x-zdoc-fragment': {
+                schemaVersion: '1.0',
+                apiSurface: 'data-plane',
+                service: 'canonical-service',
+            },
+        });
+
+        const spec = loadSpecifications(dir);
+
+        assert.equal(Object.hasOwn(spec, 'x-zdoc-fragment'), false);
+        assert.ok(spec.paths['/01-legacy.json/list']);
+        assert.ok(spec.paths['/02-canonical.json/list']);
+    });
+}
+
 function run() {
     testPathRefsResolveAgainstTheirSourceFileBeforeMerge();
     testPreResolutionLeavesCrossFileRefsForMergedResolutionWithoutWarning();
     testResolveRefsPreservesSiblingMetadataOnRefWrapper();
+    testPreservesAndMergesCompleteTopLevelObjects();
+    testDeduplicatesTagsByName();
+    testRejectsConflictingOpenApiVersion();
+    testRejectsIncompatibleInfoVersion();
+    testIgnoresCanonicalFragmentIdentityDuringLegacyMerge();
     console.log('apifox spec loader tests passed');
 }
 

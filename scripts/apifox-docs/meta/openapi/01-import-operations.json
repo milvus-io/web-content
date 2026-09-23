@@ -25,6 +25,10 @@
           "zh-CN": {
             "summary": "导入",
             "description": "从指定对象存储桶中导入数据。"
+          },
+          "ja-JP": {
+            "summary": "インポート",
+            "description": "指定したオブジェクトストレージバケットに保存されているファイルからデータをインポートします。"
           }
         },
         "tags": [
@@ -38,13 +42,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -59,8 +72,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作が適用されるクラスターの ID。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -68,8 +87,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作が適用されるコレクションの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "partitionName": {
                     "type": "string",
@@ -77,8 +102,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Partition 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作が適用されるパーティションの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "objectUrl": {
                     "type": "string",
@@ -86,8 +117,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "存储待导入数据的对象 URL。"
+                      },
+                      "ja-JP": {
+                        "description": "インポートするデータを格納しているオブジェクトの URL。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "accessKey": {
                     "type": "string",
@@ -95,8 +132,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "用于访问指定对象的 Access Key。"
+                      },
+                      "ja-JP": {
+                        "description": "指定したオブジェクトへのアクセスに使用する access key。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "secretKey": {
                     "type": "string",
@@ -104,15 +147,24 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "用于访问指定对象的 Secret Key。"
+                      },
+                      "ja-JP": {
+                        "description": "指定したオブジェクトへのアクセスに使用する secret access key。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "collectionName",
                   "objectUrl",
                   "clusterId"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "examples": {
                 "1": {
@@ -127,7 +179,10 @@
                 }
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -135,6 +190,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回导入任务 ID。"
+              },
+              "ja-JP": {
+                "description": "インポートタスクのジョブ ID を返します。"
               }
             },
             "content": {
@@ -151,8 +209,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -163,8 +227,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "提交的导入任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "送信されたインポートジョブの ID。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
                           },
                           "required": [
@@ -174,10 +244,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为一个包含导入任务 ID 的对象。"
+                            },
+                            "ja-JP": {
+                              "description": "インポートジョブ ID を含むオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -185,6 +264,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -198,8 +280,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -207,12 +295,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -235,10 +335,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v1/vector/collections/import/get": {
@@ -250,6 +356,10 @@
           "zh-CN": {
             "summary": "查看导入进度",
             "description": "查看指定导入任务的进度。"
+          },
+          "ja-JP": {
+            "summary": "インポートの進行状況を取得",
+            "description": "指定したインポートタスクの進行状況を取得します。"
           }
         },
         "tags": [
@@ -263,13 +373,22 @@
             "required": true,
             "example": "job-xxxxxxxxxxxxxxxxxx",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "导入任务的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象のインポートタスクの ID"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           {
             "name": "clusterId",
@@ -278,13 +397,22 @@
             "required": true,
             "example": "inxx-xxxxxxxxxxxxxxx",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "集群 ID。"
+              },
+              "ja-JP": {
+                "description": "この操作が適用されるクラスターの ID。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           {
             "name": "Authorization",
@@ -293,13 +421,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "responses": {
@@ -308,6 +445,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "以百分比形式返回指定任务 ID 的进度。"
+              },
+              "ja-JP": {
+                "description": "指定したジョブ ID の進行状況をパーセンテージで返します。"
               }
             },
             "content": {
@@ -324,8 +464,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -333,40 +479,99 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "指定导入任务的进度详情。"
+                            },
+                            "ja-JP": {
+                              "description": "インポートタスクの進行状況を含むオブジェクトであるレスポンスペイロード。"
                             }
                           },
                           "properties": {
                             "fileName": {
                               "type": "string",
-                              "description": "The path of the data file object in the object storage."
+                              "description": "The path of the data file object in the object storage.",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "オブジェクトストレージ内のデータファイルオブジェクトのパス。"
+                                }
+                              }
                             },
                             "fileSize": {
                               "type": "integer",
                               "description": "The size of the data file object.",
-                              "format": "int64"
+                              "format": "int64",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "データファイルオブジェクトのサイズ。"
+                                }
+                              }
                             },
                             "readyPercentage": {
                               "type": "number",
                               "description": "The indicator of the import progress",
-                              "format": "float"
+                              "format": "float",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポートの進行状況を示す指標"
+                                }
+                              }
                             },
                             "completeTime": {
                               "type": "string",
                               "description": "The time at which the import task completes. `null` indicates that the file import is going on.",
-                              "nullable": true
+                              "nullable": true,
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポートタスクが完了した時刻。`null` は、ファイルのインポートが進行中であることを示します。"
+                                }
+                              }
                             },
                             "errorMessage": {
                               "type": "string",
                               "description": "The message that explains the reason for an import failure. `null` indicates that no error occurs.",
-                              "nullable": true
+                              "nullable": true,
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポート失敗の理由を説明するメッセージ。`null` は、エラーが発生していないことを示します。"
+                                }
+                              }
                             },
                             "collectionName": {
                               "type": "string",
-                              "description": "The target collection name of the import task."
+                              "description": "The target collection name of the import task.",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポートタスクの対象コレクション名。"
+                                }
+                              }
                             },
                             "jobId": {
                               "type": "string",
-                              "description": "The ID of an import task."
+                              "description": "The ID of an import task.",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポートタスクの ID。"
+                                }
+                              }
                             },
                             "details": {
                               "type": "array",
@@ -376,40 +581,100 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "按数据文件维度分别收集的数据导入进度信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "データファイルごとのインポート進行状況の詳細一覧"
                                   }
                                 },
                                 "properties": {
                                   "fileName": {
                                     "type": "string",
-                                    "description": "The path to a file being imported."
+                                    "description": "The path to a file being imported.",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "x-i18n": {
+                                      "ja-JP": {
+                                        "description": "インポート中のファイルへのパス。"
+                                      }
+                                    }
                                   },
                                   "fileSize": {
                                     "type": "integer",
                                     "description": "The size of a file being imported.",
-                                    "format": "int64"
+                                    "format": "int64",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "x-i18n": {
+                                      "ja-JP": {
+                                        "description": "インポート中のファイルのサイズ。"
+                                      }
+                                    }
                                   },
                                   "readyPercentage": {
                                     "type": "number",
                                     "description": "The import progress of a specific file.",
-                                    "format": "float"
+                                    "format": "float",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "x-i18n": {
+                                      "ja-JP": {
+                                        "description": "特定のファイルのインポート進行状況。"
+                                      }
+                                    }
                                   },
                                   "completeTime": {
                                     "type": "string",
                                     "description": "The time at which the import progress ends for a specific file. `null` indicates that the file import is going on.",
-                                    "nullable": true
+                                    "nullable": true,
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "x-i18n": {
+                                      "ja-JP": {
+                                        "description": "特定のファイルのインポート進行が終了した時刻。`null` は、ファイルのインポートが進行中であることを示します。"
+                                      }
+                                    }
                                   },
                                   "errorMessage": {
                                     "type": "string",
                                     "description": "The message that explains the reason for an import failure. `null` indicates that no error occurs.",
-                                    "nullable": true
+                                    "nullable": true,
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "x-i18n": {
+                                      "ja-JP": {
+                                        "description": "インポート失敗の理由を説明するメッセージ。`null` は、エラーが発生していないことを示します。"
+                                      }
+                                    }
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
                               },
-                              "description": "The import task details"
+                              "description": "The import task details",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "インポートタスクの詳細"
+                                }
+                              }
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -417,6 +682,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -430,8 +698,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -439,12 +713,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -482,10 +768,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v1/vector/collections/import/list": {
@@ -497,6 +789,10 @@
           "zh-CN": {
             "summary": "查看导入任务列表",
             "description": "列出指定集群的导入任务。"
+          },
+          "ja-JP": {
+            "summary": "Import Jobの一覧表示",
+            "description": "クラスターに固有のすべての import job を一覧表示します。"
           }
         },
         "tags": [
@@ -510,13 +806,22 @@
             "required": true,
             "example": "inxx-xxxxxxxxxxxxxxx",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "Zilliz Cloud 上的特定集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "Zilliz Cloud 上の特定のクラスターの ID。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           {
             "name": "pageSize",
@@ -525,13 +830,22 @@
             "required": false,
             "example": "10",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "每页返回记录数。"
+              },
+              "ja-JP": {
+                "description": "リクエストごとに返されるレコード数。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           {
             "name": "currentPage",
@@ -540,13 +854,22 @@
             "required": false,
             "example": "1",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           },
           {
             "name": "Authorization",
@@ -555,13 +878,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "responses": {
@@ -570,6 +902,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回导入任务列表。"
+              },
+              "ja-JP": {
+                "description": "import job の一覧を返します。"
               }
             },
             "content": {
@@ -586,8 +921,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -595,6 +936,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含所有导入任务的详细信息。"
+                            },
+                            "ja-JP": {
+                              "description": "詳細な import job を含むリストであるレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -604,8 +948,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "本次响应中列出的记录总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "このレスポンスに一覧表示されるレコードの総数。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "currentPage": {
                               "type": "string",
@@ -613,8 +963,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "用于参考的当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "参照用の現在のページ番号。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "pageSize": {
                               "type": "string",
@@ -622,8 +978,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "每页返回的最大记录数。"
+                                },
+                                "ja-JP": {
+                                  "description": "各返却に含まれるレコードの最大数。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "tasks": {
                               "type": "array",
@@ -631,6 +993,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "导入任务的详细列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "詳細な import job の一覧。"
                                 }
                               },
                               "items": {
@@ -639,6 +1004,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "某个导入任务的详细信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "1 件の import job の詳細。"
                                   }
                                 },
                                 "properties": {
@@ -648,8 +1016,14 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "导入任务的目标 Collection 名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "import task の対象コレクション名。"
                                       }
-                                    }
+                                    },
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
                                   },
                                   "jobId": {
                                     "type": "string",
@@ -657,8 +1031,14 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "导入任务的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "import task の ID。"
                                       }
-                                    }
+                                    },
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
                                   },
                                   "state": {
                                     "type": "string",
@@ -666,15 +1046,33 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "导入任务的对应状态。可能的值为 <b>ImportRunning</b>、<b>ImportCompleted</b> 和 <b>ImportFailed</b>。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "import task に対応するステータス。指定可能な値は <b>ImportRunning</b>、<b>ImportCompleted</b>、<b>ImportFailed</b> です。"
                                       }
-                                    }
+                                    },
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
                                   }
-                                }
-                              }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -682,6 +1080,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -695,8 +1096,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -704,12 +1111,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -746,10 +1165,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },

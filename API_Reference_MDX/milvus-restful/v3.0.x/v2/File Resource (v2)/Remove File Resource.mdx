@@ -1,0 +1,31 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 2
+slug: /restful/Remove File Resource
+beta: FALSE
+title: "Remove File Resource | RESTful"
+description: "Removes a file resource registered with Milvus. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Remove File Resource"
+sidebar_custom_props:
+  badges:
+    - "post"
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Remove File Resource"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Remove File Resource
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"operationId":"removeFileResource","summary":"Remove File Resource","deprecated":false,"description":"Removes a file resource registered with Milvus.","x-i18n":{"zh-CN":{"summary":"移除文件资源","description":"移除已在 Milvus 中注册的文件资源。"},"ja-JP":{"summary":"File Resource を削除","description":"Milvus に登録されているファイルリソースを削除します。"}},"tags":["File Resource Operations (V2)"],"x-base-urls":[{"key":"cluster","label":"Cluster Endpoint","url":"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530","prompt":"Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>","x-i18n":{"zh-CN":{"label":"集群端点","prompt":"如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"},"ja-JP":{"label":"クラスターエンドポイント","prompt":"サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"}},"shell":"export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""},{"key":"on-demand-compute","label":"Project Endpoint (On-Demand)","url":"https://{project-id}.{region}.api.zillizcloud.com","prompt":"<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>","x-i18n":{"zh-CN":{"label":"项目端点（按需）","prompt":"<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"},"ja-JP":{"label":"プロジェクトエンドポイント（オンデマンド）","prompt":"<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"}},"shell":"export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""}],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be a pair of colon-joined username and password, like `username:password`.","required":false,"example":"Bearer {{TOKEN}}","schema":{"type":"string","x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"x-i18n":{"zh-CN":{"description":"认证令牌，应为用冒号分隔的用户名和密码，如 `username:password`。"},"ja-JP":{"description":"認証トークンは、`username:password` のようにコロンで連結した username と password の組である必要があります。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string","description":"The unique name of the file resource to remove.","x-i18n":{"zh-CN":{"description":"要移除的文件资源的唯一名称。"},"ja-JP":{"description":"削除するファイルリソースの一意の名前。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}},"required":["name"],"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"example":{"name":"synonyms"}}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"},"ja-JP":{"description":"空のオブジェクトを返します。"}},"content":{"application/json":{"schema":{"oneOf":[{"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"},"ja-JP":{"description":"レスポンスコード。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"data":{"type":"object","properties":{},"description":"An empty result object.","x-i18n":{"zh-CN":{"description":"空结果对象。"},"ja-JP":{"description":"空の結果オブジェクト。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}},"description":"A successful empty response.","x-i18n":{"zh-CN":{"description":"成功的空响应。"},"ja-JP":{"description":"成功した空のレスポンス。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-tab-label":"success"},{"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"},"ja-JP":{"description":"レスポンスコード。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"},"ja-JP":{"description":"エラーメッセージ。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}},"description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"},"ja-JP":{"description":"エラーメッセージを返します。"}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-tab-label":"failure"}],"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1100,"message":"file resource not found"}}}}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}},"security":[],"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-include-target":["milvus"]}
+export const endpoint = "/v2/vectordb/file_resources/remove"
+export const method = "post"

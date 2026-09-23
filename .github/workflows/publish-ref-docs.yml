@@ -5,7 +5,6 @@ name: Publish Reference Docs Weekly
 # regenerated from Feishu. Re-enable only if Feishu becomes the source again.
 
 on:
-  schedule: []
   workflow_dispatch:
     inputs:
       version:

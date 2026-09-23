@@ -15,41 +15,95 @@ const {
   runApply,
 } = require('../shared-sync/core');
 
-test('sync manifest keeps scripts/lib ownership split between milvus and zdoc lark files', () => {
+test('sync manifest keeps scripts/lib milvus ownership (milvus* files only)', () => {
   const milvusLib = syncManifest.find((entry) => entry.name === 'milvus-lib');
-  const zdocLib = syncManifest.find((entry) => entry.name === 'zdoc-lib-lark-files');
 
   assert.equal(milvusLib.sourceType, 'local');
   assert.equal(milvusLib.source, '../milvus-docs/scripts/lib');
   assert.equal(milvusLib.target, 'scripts/lib');
   assert.equal(milvusLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), true);
   assert.equal(milvusLib.include.some((pattern) => pattern.test('larkDocWriter.js')), false);
-
-  assert.equal(zdocLib.sourceType, 'local');
-  assert.equal(zdocLib.source, '../zdoc/plugins/lark-docs');
-  assert.equal(zdocLib.target, 'scripts/lib');
-  assert.equal(zdocLib.include.some((pattern) => pattern.test('larkDocWriter.js')), true);
-  assert.equal(zdocLib.include.some((pattern) => pattern.test('feishuFetch.js')), true);
-  assert.equal(zdocLib.include.some((pattern) => pattern.test('milvusDocsGen.js')), false);
 });
 
-test('sync manifest includes the mdx patcher dependency used by larkDocWriter', async () => {
-  const entry = syncManifest.find((item) => item.name === 'zdoc-mdx-parse');
+test('sync manifest freezes the zdoc lark/mdx fork (upstream moved to packages/docs-tooling)', () => {
+  // zdoc deleted plugins/ in commit 1e9ae4723c; the copies under scripts/
+  // are an in-repo fork now (see sync-shared-scripts.manifest.js header).
+  const frozenNames = ['zdoc-lark-docs-lark-files', 'zdoc-lib-lark-files', 'zdoc-mdx-parse'];
+  for (const name of frozenNames) {
+    assert.equal(syncManifest.find((entry) => entry.name === name), undefined, `${name} must stay removed`);
+  }
+  for (const entry of syncManifest) {
+    const source = String(entry.source || '');
+    assert.equal(
+      source.startsWith('../zdoc/plugins/'),
+      false,
+      `entry ${entry.name} points at the removed zdoc plugins/ path`
+    );
+  }
+});
 
-  assert.equal(entry.sourceType, 'local');
-  assert.equal(entry.source, '../zdoc/plugins/mdx-parse');
-  assert.equal(entry.target, 'scripts/mdx-parse');
-  assert.equal(entry.include.some((pattern) => pattern.test('mdxPatcher.js')), true);
+test('frozen zdoc copies are still present in the repo', async () => {
+  const scriptsDir = path.resolve(__dirname, '..');
+  const frozenCopies = [
+    path.join(scriptsDir, 'lark-docs', 'larkDocWriter.js'),
+    path.join(scriptsDir, 'lark-docs', 'feishuFetch.js'),
+    path.join(scriptsDir, 'lib', 'larkDocWriter.js'),
+    path.join(scriptsDir, 'mdx-parse', 'mdxPatcher.js'),
+  ];
+  for (const filePath of frozenCopies) {
+    await fs.access(filePath);
+  }
+});
 
-  const plan = await buildSyncPlan({
-    manifest: [entry],
-    repoRoot: '/tmp/repo',
-    fetchImpl: async () => {
-      throw new Error('fetch should not be called for local entries');
-    },
-  });
+test('apifox-docs sync entry excludes locally-managed deviations', () => {
+  const entry = syncManifest.find((item) => item.name === 'apifox-docs');
+  assert.ok(entry, 'apifox-docs entry must stay in the manifest');
+  assert.equal(entry.source, 'packages/docs-tooling/src/reference/rest');
+  const patterns = entry.exclude.map((pattern) => pattern.source || pattern);
+  assert.equal(
+    patterns.some((source) => source.includes('on-demand-cluster-segment')),
+    true,
+    'must exclude the zdoc-coupled sidebar test'
+  );
+  assert.equal(entry.exclude.length, 1, 'route-scope exclusion was dropped after zdoc#714 — keep it dropped');
+});
 
-  assert.equal(plan[0].targetAbsPath, '/tmp/repo/scripts/mdx-parse');
+test('fetchRemoteTree honors exclude patterns', async () => {
+  const { fetchRemoteTree } = require('../shared-sync/core');
+  const entry = {
+    name: 'exclude-behavior',
+    repo: 'org/repo',
+    ref: 'master',
+    source: 'pkg/rest',
+    exclude: [/^local-patch\.test\.js$/],
+  };
+  const files = {
+    'pkg/rest/kept.js': 'same',
+    'pkg/rest/local-patch.test.js': 'upstream-version',
+  };
+  const fetchImpl = async (url) => {
+    if (url.includes('/contents/pkg/rest?')) {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => Object.keys(files).map((p) => ({
+          name: p.split('/').pop(),
+          path: p,
+          type: 'file',
+          url: `https://api.github.com/file/${p}`,
+        })),
+      };
+    }
+    const filePath = decodeURIComponent(url.split('/file/')[1]);
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ content: Buffer.from(files[filePath]).toString('base64') }),
+    };
+  };
+
+  const tree = await fetchRemoteTree(entry, fetchImpl);
+  assert.deepEqual(Object.keys(tree), ['kept.js']);
 });
 
 test('lark-docs entrypoint imports shared generators and writer imports local lark token fetcher', () => {

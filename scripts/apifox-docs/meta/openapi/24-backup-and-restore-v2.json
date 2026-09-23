@@ -28,6 +28,10 @@
           "zh-CN": {
             "summary": "查看备份列表",
             "description": "本接口可查看所有处于 AVAILABLE 或 CREATING 状态的备份记录。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップを一覧表示",
+            "description": "AVAILABLE または CREATING のすべてのバックアップを一覧表示します。この API は専用クラスターにのみ適用されます。"
           }
         },
         "tags": [
@@ -46,6 +50,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -60,6 +67,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份所属项目的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップが属するプロジェクトの ID。"
               }
             }
           },
@@ -74,6 +84,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份所属集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップが属するクラスターの ID。"
               }
             }
           },
@@ -92,6 +105,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份的创建方式，是手动创建还是自动创建。"
+              },
+              "ja-JP": {
+                "description": "バックアップが手動で作成されたものか、自動で作成されたものかを指定します。"
               }
             }
           },
@@ -110,6 +126,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份文件中包含的资源类型。"
+              },
+              "ja-JP": {
+                "description": "バックアップファイルに含まれるリソースの種類。"
               }
             }
           },
@@ -124,6 +143,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Zilliz Cloud 开始创建该备份的时间。"
+              },
+              "ja-JP": {
+                "description": "Zilliz Cloud がこのバックアップの作成を開始する時刻。"
               }
             }
           },
@@ -138,6 +160,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Zilliz Cloud 完成该备份的时间。"
+              },
+              "ja-JP": {
+                "description": "Zilliz Cloud がこのバックアップの作成を完了する時刻。"
               }
             }
           },
@@ -152,6 +177,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "每页显示的记录数。"
+              },
+              "ja-JP": {
+                "description": "1 ページあたりに表示するレコード数。"
               }
             }
           },
@@ -166,6 +194,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "要显示的页码。"
+              },
+              "ja-JP": {
+                "description": "表示するページ番号。"
               }
             }
           }
@@ -187,6 +218,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -196,6 +230,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，为备份列表。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップのリストを含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -205,6 +242,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "返回的备份总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "返されるバックアップの総数。"
                                 }
                               }
                             },
@@ -214,6 +254,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
                                 }
                               }
                             },
@@ -223,6 +266,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "每页记录数。"
+                                },
+                                "ja-JP": {
+                                  "description": "1 ページあたりのレコード数。"
                                 }
                               }
                             },
@@ -232,6 +278,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップのリスト。"
                                 }
                               },
                               "items": {
@@ -240,6 +289,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "备份的详细信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "バックアップの詳細情報。"
                                   }
                                 },
                                 "properties": {
@@ -249,6 +301,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "包含该备份的项目 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップを保持するプロジェクトの ID。"
                                       }
                                     }
                                   },
@@ -258,6 +313,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップの ID。"
                                       }
                                     }
                                   },
@@ -267,6 +325,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップの名前。"
                                       }
                                     }
                                   },
@@ -280,6 +341,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份中包含的资源类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップに含まれるリソースの種類。"
                                       }
                                     }
                                   },
@@ -293,6 +357,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份的创建方式，是手动创建还是自动创建。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップが手動で作成されたものか、自動で作成されたものかを示します。"
                                       }
                                     }
                                   },
@@ -302,6 +369,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份的大小，单位为字节。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップのサイズ（バイト単位）。"
                                       }
                                     }
                                   },
@@ -311,6 +381,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份将被自动删除的时间。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップが自動的に削除される時刻。"
                                       }
                                     }
                                   },
@@ -320,6 +393,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "数据被备份的集群 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "データがバックアップされたクラスターの ID。"
                                       }
                                     }
                                   },
@@ -329,6 +405,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "数据被备份的集群名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "データがバックアップされたクラスターの名前。"
                                       }
                                     }
                                   },
@@ -338,6 +417,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "集群创建时间。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスターが作成された時刻。"
                                       }
                                     }
                                   },
@@ -351,6 +433,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップのステータス。"
                                       }
                                     }
                                   },
@@ -360,6 +445,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
                                       }
                                     },
                                     "items": {
@@ -368,6 +456,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "从备份恢复新集群的策略。可能的值包括：<ul><li><b>LATEST</b>：恢复集群到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：恢复集群到其原始的兼容 Milvus 版本。</li></ul>"
+                                        },
+                                        "ja-JP": {
+                                          "description": "バックアップから新しいクラスターを復元するためのポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを、利用可能な最新の互換性のある GA Milvus version に復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus version に復元します。</li></ul>"
                                         }
                                       },
                                       "enum": [
@@ -389,6 +480,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -402,6 +496,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -411,6 +508,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -460,6 +560,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "レスポンス"
+              }
             }
           }
         },
@@ -475,6 +580,10 @@
           "zh-CN": {
             "summary": "查看备份详情",
             "description": "本接口查看指定备份记录的详细信息。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップを記述",
+            "description": "指定したバックアップの詳細情報を一覧表示します。この API は専用クラスターにのみ適用されることに注意してください。"
           }
         },
         "tags": [
@@ -493,6 +602,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -503,6 +615,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要备份的集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスターの ID。"
               }
             },
             "example": "inxx-xxxxxxxxxxxxxxx",
@@ -518,6 +633,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要导出的备份的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象のバックアップの ID。"
               }
             },
             "example": "backup-xxxxxxxxxxxxxxx",
@@ -533,6 +651,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "响应"
+              },
+              "ja-JP": {
+                "description": "response"
               }
             },
             "content": {
@@ -549,6 +670,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -558,6 +682,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，为备份的详细信息。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップの詳細情報を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -568,6 +695,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "包含该备份的集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップを保持するクラスターの ID。"
                                 }
                               }
                             },
@@ -577,6 +707,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "包含该备份的集群名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップを保持するクラスターの名前。"
                                 }
                               }
                             },
@@ -586,6 +719,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "包含被备份集群的项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップ対象クラスターを保持するプロジェクトの ID。"
                                 }
                               }
                             },
@@ -596,6 +732,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップの ID。"
                                 }
                               }
                             },
@@ -605,6 +744,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップの名前。"
                                 }
                               }
                             },
@@ -618,6 +760,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的资源类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップされたリソースの種類。"
                                 }
                               }
                             },
@@ -631,6 +776,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的创建方式，是手动创建还是自动创建。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップが手動で作成されたか、自動で作成されたかを示します。"
                                 }
                               }
                             },
@@ -645,6 +793,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップの現在のステータス。"
                                 }
                               }
                             },
@@ -654,6 +805,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的大小，单位为字节。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップのサイズ。単位は bytes。"
                                 }
                               }
                             },
@@ -663,6 +817,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份所在的云区域 ID。该区域应与指定集群所属项目绑定。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップが配置されているクラウドリージョンの ID。このリージョンは、指定したクラスターが属するプロジェクトに関連付けられている必要があります。"
                                 }
                               }
                             },
@@ -672,6 +829,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的过期时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップの有効期限。"
                                 }
                               }
                             },
@@ -681,6 +841,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份中包含的数据库及其集合列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップに含まれるデータベースとそのコレクションの一覧。"
                                 }
                               },
                               "items": {
@@ -693,6 +856,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "数据库名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "データベースの名前。"
                                       }
                                     }
                                   },
@@ -702,6 +868,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份中包含的集合。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップに含まれるコレクション。"
                                       }
                                     },
                                     "items": {
@@ -710,6 +879,9 @@
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "集合信息。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "コレクション情報。"
                                         }
                                       },
                                       "properties": {
@@ -719,6 +891,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "集合名称。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コレクションの名前。"
                                             }
                                           }
                                         },
@@ -728,6 +903,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "集合描述。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コレクションの説明。"
                                             }
                                           }
                                         },
@@ -737,6 +915,9 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "集合的加载状态。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コレクションのロードステータス。"
                                             }
                                           },
                                           "enum": [
@@ -747,12 +928,22 @@
                                       }
                                     }
                                   }
+                                },
+                                "x-i18n": {
+                                  "ja-JP": {
+                                    "description": "バックアップに含まれるデータベースとそのコレクション。"
+                                  }
                                 }
                               }
                             },
                             "createTime": {
                               "type": "string",
-                              "description": "The time at which the backup was created."
+                              "description": "The time at which the backup was created.",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "バックアップが作成された時刻。"
+                                }
+                              }
                             },
                             "restoreNewInstancePolicies": {
                               "type": "array",
@@ -760,6 +951,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
                                 }
                               },
                               "items": {
@@ -768,6 +962,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "从备份恢复新集群的策略。可能的值包括：<ul><li><b>LATEST</b>：恢复集群到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：恢复集群到其原始的兼容 Milvus 版本。</li></ul>"
+                                  },
+                                  "ja-JP": {
+                                    "description": "バックアップから新しいクラスターを復元するためのポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを、利用可能な最新の互換性のある GA Milvus バージョンに復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus バージョンに復元します。</li></ul>"
                                   }
                                 },
                                 "enum": [
@@ -786,6 +983,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -799,6 +999,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -808,6 +1011,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -901,6 +1107,10 @@
           "zh-CN": {
             "summary": "删除备份",
             "description": "本接口删除指定备份记录。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップを削除",
+            "description": "クラスターの指定したバックアップを削除します。この API は専用クラスターにのみ適用されることに注意してください。"
           }
         },
         "tags": [
@@ -919,6 +1129,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -934,6 +1147,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份所属集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップを削除する対象のクラスターの ID。"
               }
             }
           },
@@ -949,6 +1165,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要删除的备份 ID。"
+              },
+              "ja-JP": {
+                "description": "削除するバックアップの ID。"
               }
             }
           }
@@ -970,6 +1189,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -979,6 +1201,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，为已删除备份的信息。"
+                            },
+                            "ja-JP": {
+                              "description": "削除されたバックアップの情報を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -989,6 +1214,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已删除备份的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除されたバックアップの ID。"
                                 }
                               }
                             },
@@ -998,6 +1226,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已删除备份的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除されたバックアップの名前。"
                                 }
                               }
                             }
@@ -1011,6 +1242,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1024,6 +1258,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1033,6 +1270,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1062,6 +1302,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "response"
+              }
             }
           }
         },
@@ -1077,6 +1322,10 @@
           "zh-CN": {
             "summary": "导出备份文件",
             "description": "本接口可将指定集群的备份文件导出到指定的存储中。"
+          },
+          "ja-JP": {
+            "summary": "バックアップファイルのエクスポート",
+            "description": "クラスタから、integration ID で指定されたストレージへバックアップファイルをエクスポートします。"
           }
         },
         "tags": [
@@ -1095,6 +1344,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -1105,6 +1357,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要备份的集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスタの ID。"
               }
             },
             "example": "inxx-xxxxxxxxxxxxxxx",
@@ -1120,6 +1375,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要导出的备份的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象のバックアップの ID。"
               }
             },
             "example": "backup-xxxxxxxxxxxxxxx",
@@ -1141,6 +1399,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份文件导出到的外部存储的 ID。关于如何配置对象存储，请参阅 [文档](https://docs.zilliz.com.cn/docs/integrate-with-storage-bucket)。关于如何获取外部存储桶的集成 ID，可以参考 [文档](https://docs.zilliz.com.cn/docs/integrate-with-storage-bucket#obtain-the-integration-id)。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップファイルのエクスポート先となる、連携済み外部ストレージの ID。AWS S3 ブロックストレージサービスを Zilliz Cloud に統合する方法については、[documentation](https://docs.zilliz.com/docs/integrate-with-aws-s3) を参照してください。integration ID の取得方法については、[documentation](https://docs.zilliz.com/docs/integrate-with-aws-s3#obtain-the-integration-id) を参照してください。"
                       }
                     },
                     "example": "integ-xxxxxxxxxxxxxxxxxxx"
@@ -1151,6 +1412,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份文件导出到的外部存储的目录。"
+                      },
+                      "ja-JP": {
+                        "description": "指定した外部ストレージ内で、バックアップファイルのエクスポート先となるディレクトリ。"
                       }
                     },
                     "example": "destdir/"
@@ -1177,7 +1441,12 @@
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "description": "Response code."
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
                         },
                         "data": {
                           "type": "object",
@@ -1185,6 +1454,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，为导出备份文件的任务 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップファイルをエクスポートするために作成されたエクスポートジョブの ID を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -1194,6 +1466,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "导出备份文件的任务 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップファイルをエクスポートするために作成されたエクスポートジョブの ID。"
                                 }
                               },
                               "example": "job_xxxxxxxxxxxxxxx"
@@ -1208,6 +1483,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1221,6 +1499,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1230,6 +1511,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1258,6 +1542,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "レスポンス"
+              }
             }
           }
         }
@@ -1272,6 +1561,10 @@
           "zh-CN": {
             "summary": "创建备份",
             "description": "本接口可为指定集群或 Collection 创建备份。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップを作成します",
+            "description": "指定したクラスターまたはコレクションをバックアップします。この API は専用クラスターにのみ適用される点に注意してください。"
           }
         },
         "tags": [
@@ -1290,6 +1583,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -1300,6 +1596,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要备份的集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスターの ID。"
               }
             },
             "example": "inxx-xxxxxxxxxxxxxxx",
@@ -1321,6 +1620,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要备份的资源类型。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップするリソースの種類。"
                       }
                     },
                     "enum": [
@@ -1334,6 +1636,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "需要备份的 Collection 列表。当 `backupType` 设置为 `COLLECTION` 时，该字段为必填项。注意，该字段中列出的所有 Collection 必须属于同一个数据库。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップ対象のコレクション。`backupType` が `COLLECTION` に設定されている場合は必須です。このフィールドに記載するすべてのコレクションは、同じデータベースに属している必要がある点に注意してください。"
                       }
                     },
                     "items": {
@@ -1342,6 +1647,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "Collection 信息。"
+                        },
+                        "ja-JP": {
+                          "description": "コレクション情報。"
                         }
                       },
                       "properties": {
@@ -1351,6 +1659,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "包含 `collectionNames` 字段中列出的 Collection 的数据库名称。"
+                            },
+                            "ja-JP": {
+                              "description": "`collectionNames` フィールドに記載されたコレクションを含むデータベースの名前。"
                             }
                           }
                         },
@@ -1360,6 +1671,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "需要备份的 Collection 名称列表。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップ対象のコレクション名。"
                             }
                           },
                           "items": {
@@ -1368,6 +1682,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "Collection 名称"
+                              },
+                              "ja-JP": {
+                                "description": "コレクション名"
                               }
                             }
                           }
@@ -1381,6 +1698,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份将被复制到的云区域列表。注意，Zilliz Cloud 会默认在与集群相同的区域创建备份，因此您只需指定您希望备份复制到的其他区域。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップのコピー先となるクラウドリージョンのリスト。Zilliz Cloud はデフォルトでクラスターと同じリージョンにバックアップを作成するため、バックアップをコピーしたいリージョンのみ指定すればよい点に注意してください。リスト内の各エントリごとに、指定したリージョンに永続バックアップのコピーが 1 つ作成されます。"
                       }
                     },
                     "items": {
@@ -1389,6 +1709,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "目标云区域信息。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップのコピー先となる対象クラウドリージョンの情報。"
                         }
                       },
                       "properties": {
@@ -1400,6 +1723,9 @@
                             "zh-CN": {
                               "description": "目标云区域 ID，当前集群的备份将被复制到该区域。",
                               "example": "ali-cn-hangzhou"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップのコピー先となる対象クラウドリージョンの ID。"
                             }
                           }
                         }
@@ -1502,7 +1828,12 @@
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "description": "Response code"
+                          "description": "Response code",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "レスポンスコード"
+                            }
+                          }
                         },
                         "data": {
                           "type": "object",
@@ -1510,16 +1841,31 @@
                             "backupId": {
                               "type": "string",
                               "description": "The ID of the backup that has been created.",
-                              "example": "backupx_xxxxxxxxxxxxxxx"
+                              "example": "backupx_xxxxxxxxxxxxxxx",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "作成されたバックアップの ID。"
+                                }
+                              }
                             },
                             "backupName": {
                               "type": "string",
-                              "description": "The name of the backup that has been created."
+                              "description": "The name of the backup that has been created.",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "作成されたバックアップの名前。"
+                                }
+                              }
                             },
                             "jobId": {
                               "type": "string",
                               "description": "The ID of the asynchronous job that has created this backup.",
-                              "example": "job-xxxxxxxxxxxxxxxxxxxx"
+                              "example": "job-xxxxxxxxxxxxxxxxxxxx",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "このバックアップを作成した非同期ジョブの ID。"
+                                }
+                              }
                             }
                           }
                         }
@@ -1531,6 +1877,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1544,6 +1893,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1553,6 +1905,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1583,6 +1938,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "レスポンス"
+              }
             }
           }
         },
@@ -1598,6 +1958,10 @@
           "zh-CN": {
             "summary": "获取备份策略",
             "description": "本接口可获取指定集群的自动备份策略。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップポリシーを取得",
+            "description": "指定したクラスターのバックアップポリシーを詳細に一覧表示します。なお、この API は専用クラスターにのみ適用されます。"
           }
         },
         "tags": [
@@ -1616,6 +1980,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -1631,6 +1998,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份所属集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスターの ID。"
               }
             }
           }
@@ -1641,6 +2011,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "响应"
+              },
+              "ja-JP": {
+                "description": "response"
               }
             },
             "content": {
@@ -1657,6 +2030,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1666,6 +2042,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，为指定集群的备份策略。"
+                            },
+                            "ja-JP": {
+                              "description": "指定したクラスターのバックアップポリシーを含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -1675,6 +2054,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份策略所属集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップポリシー対象のクラスターの ID。"
                                 }
                               }
                             },
@@ -1688,6 +2070,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份策略的状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップポリシーのステータス。"
                                 }
                               }
                             },
@@ -1698,6 +2083,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份策略执行的开始时间，为 UTC 时间，格式为 HH:mm-HH:mm。当备份策略被禁用时，该值为 `null`。"
+                                },
+                                "ja-JP": {
+                                  "description": "開始時刻は、バックアップポリシーが実行される 2 時間の期間で、形式は HH:mm-HH:mm UTC time です。バックアップポリシーが無効な場合、値は `null` です。"
                                 }
                               }
                             },
@@ -1708,6 +2096,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份执行的星期几。该值为 1 到 7 之间的逗号分隔数字列表，其中 1 代表星期一，7 代表星期日。当备份策略被禁用时，该值为 `null`。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップが実行される曜日。値は 1 から 7 までの数値をカンマ区切りで並べたリストで、1 は Monday、7 は Sunday を表します。バックアップポリシーが無効な場合、値は `null` です。"
                                 }
                               }
                             },
@@ -1720,6 +2111,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份保留的天数。当备份策略被禁用时，该值为 `0`。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップを保持する日数。バックアップポリシーが無効な場合、値は `0` です。"
                                 }
                               }
                             },
@@ -1729,6 +2123,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "跨区域备份策略列表。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
+                                },
+                                "ja-JP": {
+                                  "description": "クロスリージョンバックアップポリシーのリスト。リスト内の各エントリにより、永続バックアップのコピーが指定したリージョンに 1 つ作成されます。"
                                 }
                               },
                               "items": {
@@ -1737,6 +2134,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "跨区域备份策略信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クロスリージョンバックアップポリシーに関する情報。"
                                   }
                                 },
                                 "properties": {
@@ -1748,6 +2148,9 @@
                                       "zh-CN": {
                                         "description": "目标云区域 ID。",
                                         "example": "ali-cn-hangzhou"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップのコピー先となるターゲットクラウドリージョンの ID。"
                                       }
                                     }
                                   },
@@ -1760,6 +2163,9 @@
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "跨区域备份保留的天数。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クロスリージョンバックアップを保持する日数。"
                                       }
                                     }
                                   },
@@ -1770,6 +2176,9 @@
                                       "zh-CN": {
                                         "description": "区域代码。",
                                         "example": "cn-hangzhou"
+                                      },
+                                      "ja-JP": {
+                                        "description": "リージョンコード。"
                                       }
                                     },
                                     "example": "us-west-2"
@@ -1787,6 +2196,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1800,6 +2212,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -1809,6 +2224,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -1894,6 +2312,10 @@
           "zh-CN": {
             "summary": "创建备份策略",
             "description": "本接口可为指定集群创建自动备份策略。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "バックアップポリシーを設定",
+            "description": "指定したクラスターのバックアップポリシーを設定し、Zilliz Cloud が指定した間隔でクラスターを自動的にバックアップするようにします。なお、この API は dedicated cluster にのみ適用されます。"
           }
         },
         "tags": [
@@ -1912,6 +2334,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -1927,6 +2352,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "备份所属集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスターの ID。"
               }
             }
           }
@@ -1944,6 +2372,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份执行的星期几。该值为 1 到 7 之间的逗号分隔数字列表，其中 1 代表星期一，7 代表星期日。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップを実行する曜日です。値は 1 から 7 までの数値をカンマ区切りで指定します。1 は月曜日、7 は日曜日を表します。"
                       }
                     }
                   },
@@ -1954,6 +2385,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份策略执行的开始时间段，格式为 HH:mm-HH:mm，采用 UTC 时间。"
+                      },
+                      "ja-JP": {
+                        "description": "開始時刻は、バックアップポリシーを実行する 2 時間の時間帯を HH:mm-HH:mm UTC time 形式で指定します。"
                       }
                     }
                   },
@@ -1965,6 +2399,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份保留的天数。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップを保持する日数。"
                       }
                     },
                     "example": 7
@@ -1975,6 +2412,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "是否启用自动备份。"
+                      },
+                      "ja-JP": {
+                        "description": "自動バックアップを有効にするかどうか。"
                       }
                     },
                     "example": true
@@ -1985,6 +2425,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "跨区域备份策略列表。"
+                      },
+                      "ja-JP": {
+                        "description": "クロスリージョンバックアップポリシーの一覧。"
                       }
                     },
                     "items": {
@@ -1993,6 +2436,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "跨区域备份策略信息。"
+                        },
+                        "ja-JP": {
+                          "description": "クロスリージョンバックアップポリシーに関する情報。"
                         }
                       },
                       "properties": {
@@ -2004,6 +2450,9 @@
                             "zh-CN": {
                               "description": "目标云区域 ID。该区域应与指定集群所属项目绑定。",
                               "example": "ali-cn-hangzhou"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップのコピー先となる対象クラウドリージョンの ID。このリージョンは、指定したクラスターが属するプロジェクトに関連付けられている必要があります。"
                             }
                           }
                         },
@@ -2016,6 +2465,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "跨区域备份保留的天数。"
+                            },
+                            "ja-JP": {
+                              "description": "クロスリージョンバックアップを保持する日数。"
                             }
                           }
                         }
@@ -2104,6 +2556,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2116,6 +2571,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份所属集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップポリシーの対象となるクラスターの ID。"
                                 }
                               }
                             },
@@ -2129,6 +2587,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份策略的状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップポリシーのステータス。"
                                 }
                               }
                             }
@@ -2142,6 +2603,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2155,6 +2619,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2164,6 +2631,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2193,6 +2663,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "レスポンス"
+              }
             }
           }
         },
@@ -2208,6 +2683,10 @@
           "zh-CN": {
             "summary": "恢复集群备份",
             "description": "本接口可将指定备份记录恢复到同一云区域内相同 CU 类型的新集群中。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "クラスターバックアップを復元",
+            "description": "同じクラウドリージョン内の同じ CU タイプの新しい専用クラスターにクラスターバックアップを復元します。この API は専用クラスターにのみ適用されることに注意してください。"
           }
         },
         "tags": [
@@ -2226,6 +2705,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
               }
             }
           },
@@ -2236,6 +2718,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要备份的集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "バックアップ対象のクラスターの ID。"
               }
             },
             "example": "inxx-xxxxxxxxxxxxxxx",
@@ -2251,6 +2736,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要导出的备份的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象のバックアップの ID。"
               }
             },
             "example": "backup-xxxxxxxxxxxxxxx",
@@ -2272,6 +2760,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群所属的项目 ID。如果路径中指定的集群不在绑定到该项目的区域内，恢复将失败。"
+                      },
+                      "ja-JP": {
+                        "description": "復元後のクラスターが属するプロジェクトの ID。パスで指定されたクラスターがそのプロジェクトに紐付くリージョン内に存在しない場合、復元は失敗します。"
                       }
                     }
                   },
@@ -2281,6 +2772,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群名称。"
+                      },
+                      "ja-JP": {
+                        "description": "復元後のクラスターの名前。"
                       }
                     }
                   },
@@ -2292,6 +2786,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群的 CU 大小。"
+                      },
+                      "ja-JP": {
+                        "description": "復元後のクラスターに割り当てられる CU サイズ。"
                       }
                     }
                   },
@@ -2305,6 +2802,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群中 Collection 的状态。"
+                      },
+                      "ja-JP": {
+                        "description": "復元後のクラスター内のコレクションのステータス。"
                       }
                     }
                   },
@@ -2318,6 +2818,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群的 Milvus 版本选择策略。可能的值包括：<ul><li><b>LATEST</b>：将集群恢复到最新的兼容 GA Milvus 版本。</li><li><b>ORIGINAL</b>：将集群恢复到原始的兼容 Milvus 版本。</li></ul>"
+                      },
+                      "ja-JP": {
+                        "description": "復元後のクラスターに使用する Milvus バージョンを選択するポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを利用可能な最新の互換性のある GA Milvus バージョンに復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus バージョンに復元します。</li></ul>"
                       }
                     }
                   }
@@ -2356,6 +2859,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2365,6 +2871,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含恢复后的集群信息。"
+                            },
+                            "ja-JP": {
+                              "description": "復元後のクラスター情報を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -2374,6 +2883,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "恢复后的集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "復元後のクラスターの ID。"
                                 }
                               }
                             },
@@ -2383,6 +2895,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "用于访问恢复后集群的用户名。"
+                                },
+                                "ja-JP": {
+                                  "description": "復元後のクラスターへのアクセスに使用するユーザー名。"
                                 }
                               }
                             },
@@ -2392,6 +2907,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "用于访问恢复后集群的密码。该密码仅显示一次，建议您记录该密码并将其保存在安全的地方。"
+                                },
+                                "ja-JP": {
+                                  "description": "復元後のクラスターへのアクセスに使用するパスワード。これは一度だけ表示されます。パスワードは控えて、安全な場所に保存することを推奨します。"
                                 }
                               }
                             },
@@ -2401,6 +2919,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "本次请求创建的集群恢复任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "このリクエストによって作成されるクラスター復元ジョブの ID。"
                                 }
                               }
                             }
@@ -2414,6 +2935,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2427,6 +2951,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2436,6 +2963,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2467,6 +2997,11 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "レスポンス"
+              }
             }
           }
         },
@@ -2482,6 +3017,10 @@
           "zh-CN": {
             "summary": "恢复 Collection 备份",
             "description": "本接口可将指定 Collection 备份恢复到已存在的任一集群。仅适用于 Dedicated 集群。"
+          },
+          "ja-JP": {
+            "summary": "Collection Backup を復元",
+            "description": "既存のクラスターに collection backup を復元します。この API は dedicated cluster にのみ適用されることに注意してください。"
           }
         },
         "tags": [
@@ -2500,6 +3039,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -2515,6 +3057,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "Collection 备份所属集群的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象の collection backup が存在するクラスターの ID。"
               }
             }
           },
@@ -2530,6 +3075,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "需要恢复的备份的 ID。"
+              },
+              "ja-JP": {
+                "description": "対象の backup の ID。"
               }
             }
           }
@@ -2546,6 +3094,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的 Collection 所属集群的 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "復元された collection が属するクラスターの ID。"
                       }
                     }
                   },
@@ -2555,6 +3106,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "Collection 组列表。"
+                      },
+                      "ja-JP": {
+                        "description": "collection group のリスト。"
                       }
                     },
                     "items": {
@@ -2563,6 +3117,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "Collection 组。"
+                        },
+                        "ja-JP": {
+                          "description": "1 つの collection group。"
                         }
                       },
                       "properties": {
@@ -2572,6 +3129,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "包含 `collectionNames` 字段中列出的 Collection 的源数据库名称。"
+                            },
+                            "ja-JP": {
+                              "description": "`collectionNames` フィールドに記載された collections を含むソースデータベースの名前。"
                             }
                           }
                         },
@@ -2581,6 +3141,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "指定 Collection 将被恢复到的目标数据库名称。"
+                            },
+                            "ja-JP": {
+                              "description": "指定された collections の復元先となる宛先データベースの名前。"
                             }
                           }
                         },
@@ -2590,6 +3153,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "目前，Zilliz Cloud 一次仅恢复一个 Collection。因此，在列表中仅包含一个 Collection 名称。如果未指定此项，备份中的所有 Collection 将以未加载状态恢复到目标集群中。"
+                            },
+                            "ja-JP": {
+                              "description": "現在、Zilliz Cloud では一度に 1 つの collection しか復元できません。そのため、このリストには collection 名を 1 つだけ含めてください。未指定の場合、backup 内のすべての collections がアンロードされた状態で target cluster に復元されます。"
                             }
                           },
                           "items": {
@@ -2598,6 +3164,9 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "要恢复的 Collection。"
+                              },
+                              "ja-JP": {
+                                "description": "復元する collection。"
                               }
                             },
                             "properties": {
@@ -2607,6 +3176,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "要恢复的源 Collection 的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "復元するソース collection の名前。"
                                   }
                                 }
                               },
@@ -2616,6 +3188,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "目标 Collection 的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "宛先 collection の名前。"
                                   }
                                 }
                               },
@@ -2629,6 +3204,9 @@
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "目标 Collection 的状态。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "宛先 collection のステータス。"
                                   }
                                 }
                               }
@@ -2677,6 +3255,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2686,6 +3267,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含异步控制平面任务的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "非同期 control-plane ジョブの ID を含むレスポンスペイロード。"
                             }
                           },
                           "properties": {
@@ -2695,6 +3279,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "本次请求创建的 Collection 恢复任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "このリクエストによって作成される collection 復元ジョブの ID。"
                                 }
                               }
                             }
@@ -2708,6 +3295,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -2721,6 +3311,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -2730,6 +3323,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -2757,6 +3353,11 @@
                     }
                   }
                 }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "response"
               }
             }
           }

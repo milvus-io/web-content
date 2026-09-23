@@ -27,6 +27,10 @@
           "zh-CN": {
             "summary": "从远端迁移",
             "description": "本接口用于从远端存储桶迁移数据到指定集群。"
+          },
+          "ja-JP": {
+            "summary": "Remote から移行",
+            "description": "リモートバケットから指定したクラスターへの移行を開始します。"
           }
         },
         "tags": [
@@ -45,6 +49,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           },
@@ -60,6 +67,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "使用 `application/json`。"
+              },
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
               }
             }
           }
@@ -76,6 +86,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "源存储配置。"
+                      },
+                      "ja-JP": {
+                        "description": "ソースストレージの設定。"
                       }
                     },
                     "properties": {
@@ -85,6 +98,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "云提供商。"
+                          },
+                          "ja-JP": {
+                            "description": "クラウドプロバイダー。"
                           }
                         }
                       },
@@ -94,6 +110,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "云地域。"
+                          },
+                          "ja-JP": {
+                            "description": "クラウドリージョン。"
                           }
                         }
                       },
@@ -103,6 +122,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "源存储桶名称。"
+                          },
+                          "ja-JP": {
+                            "description": "ソースバケットの名前。"
                           }
                         }
                       },
@@ -112,6 +134,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "源存储桶内的路径。"
+                          },
+                          "ja-JP": {
+                            "description": "ソースバケット内のパス。"
                           }
                         }
                       },
@@ -121,6 +146,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "对象 URL。"
+                          },
+                          "ja-JP": {
+                            "description": "オブジェクト URL。"
                           }
                         }
                       },
@@ -130,6 +158,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "访问密钥。"
+                          },
+                          "ja-JP": {
+                            "description": "アクセスキー。"
                           }
                         }
                       },
@@ -139,6 +170,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "私有密钥。"
+                          },
+                          "ja-JP": {
+                            "description": "シークレットキー。"
                           }
                         }
                       },
@@ -148,6 +182,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "安全令牌。"
+                          },
+                          "ja-JP": {
+                            "description": "セキュリティトークン。"
                           }
                         }
                       },
@@ -157,6 +194,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "Stage 名称。"
+                          },
+                          "ja-JP": {
+                            "description": "ステージ名。"
                           }
                         }
                       },
@@ -166,6 +206,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "数据路径。"
+                          },
+                          "ja-JP": {
+                            "description": "データパス。"
                           }
                         }
                       }
@@ -177,6 +220,9 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标集群配置。"
+                      },
+                      "ja-JP": {
+                        "description": "宛先クラスターの設定。"
                       }
                     },
                     "properties": {
@@ -186,6 +232,9 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "目标集群 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "宛先クラスターの ID。"
                           }
                         }
                       }
@@ -202,6 +251,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回已创建迁移任务的 ID。"
+              },
+              "ja-JP": {
+                "description": "作成された移行ジョブの ID を返します。"
               }
             },
             "content": {
@@ -218,6 +270,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -230,6 +285,9 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "已创建迁移任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成された移行ジョブの ID。"
                                 }
                               }
                             }
@@ -238,6 +296,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含已创建迁移任务的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "作成された移行ジョブの ID を含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -253,6 +314,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -262,6 +326,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -270,6 +337,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
                         }
                       },
                       "x-i18n-langs": [
@@ -293,6 +363,10 @@
           "zh-CN": {
             "summary": "迁移数据至现有集群",
             "description": "本接口可将数据从一个集群迁移至另一个集群。"
+          },
+          "ja-JP": {
+            "summary": "既存の Cluster へ移行",
+            "description": "ある cluster から別の cluster へデータを移行します。"
           }
         },
         "tags": [
@@ -311,102 +385,13 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "source": {
-                    "type": "object",
-                    "description": "The source cluster information.",
-                    "properties": {
-                      "clusterId": {
-                        "type": "string",
-                        "description": "The ID of the source cluster.",
-                        "example": "inxx-xxxxxxxxxxxxxxxxx"
-                      }
-                    },
-                    "required": [
-                      "clusterId"
-                    ]
-                  },
-                  "destination": {
-                    "type": "object",
-                    "description": "The destination cluster information.",
-                    "properties": {
-                      "clusterId": {
-                        "type": "string",
-                        "description": "The ID of the destination cluster.",
-                        "example": "inxx-xxxxxxxxxxxxxxxxxx"
-                      }
-                    },
-                    "required": [
-                      "clusterId"
-                    ]
-                  },
-                  "dbCollections": {
-                    "type": "array",
-                    "description": "The collections that need to be migrated.",
-                    "items": {
-                      "type": "object",
-                      "description": "Collection information.",
-                      "properties": {
-                        "dbName": {
-                          "type": "string",
-                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies."
-                        },
-                        "destDbName": {
-                          "type": "string",
-                          "description": "The name of the destination database."
-                        },
-                        "collections": {
-                          "type": "array",
-                          "description": "The names of the collections that need to be migrated in the above specified source database. If this is left unspecified, all collections in the source database will be migrated.",
-                          "items": {
-                            "type": "object",
-                            "description": "A list of collection names.",
-                            "properties": {
-                              "collectionName": {
-                                "type": "string",
-                                "description": "A collection name."
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "source",
-                  "destination"
-                ]
-              },
-              "example": {
-                "source": {
-                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
-                },
-                "destination": {
-                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
-                },
-                "dbCollections": [
-                  {
-                    "collections": [
-                      {
-                        "collectionName": "medium_articles"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Returns a job ID.",
@@ -424,6 +409,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -432,7 +420,23 @@
                           "properties": {
                             "jobId": {
                               "type": "string",
-                              "description": "The ID of the job that has been created upon your request."
+                              "description": "The ID of the job that has been created upon your request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "根据请求创建的任务 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "リクエストによって作成された job の ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "任务信息。"
+                            },
+                            "ja-JP": {
+                              "description": "Job の情報。"
                             }
                           }
                         }
@@ -444,6 +448,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -457,6 +464,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           }
                         },
@@ -466,6 +476,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
                           }
                         }
@@ -494,10 +507,198 @@
                   }
                 }
               }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "Job ID を返します。"
+              },
+              "zh-CN": {
+                "description": "返回任务 ID。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "object",
+                    "description": "The source cluster information.",
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the source cluster.",
+                        "example": "inxx-xxxxxxxxxxxxxxxxx",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "源集群 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "移行元 cluster の ID。"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "clusterId"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "源集群信息。"
+                      },
+                      "ja-JP": {
+                        "description": "移行元 cluster の情報。"
+                      }
+                    }
+                  },
+                  "destination": {
+                    "type": "object",
+                    "description": "The destination cluster information.",
+                    "properties": {
+                      "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the destination cluster.",
+                        "example": "inxx-xxxxxxxxxxxxxxxxxx",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "目标集群 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster の ID。"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "clusterId"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标集群信息。"
+                      },
+                      "ja-JP": {
+                        "description": "移行先 cluster の情報。"
+                      }
+                    }
+                  },
+                  "dbCollections": {
+                    "type": "array",
+                    "description": "The collections that need to be migrated.",
+                    "items": {
+                      "type": "object",
+                      "description": "Collection information.",
+                      "properties": {
+                        "dbName": {
+                          "type": "string",
+                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "源数据库名称。该字段可选；未指定时使用默认数据库。"
+                            },
+                            "ja-JP": {
+                              "description": "移行元 database の名前。このフィールドは省略可能です。省略した場合は default database が使用されます。"
+                            }
+                          }
+                        },
+                        "destDbName": {
+                          "type": "string",
+                          "description": "The name of the destination database.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目标数据库名称。"
+                            },
+                            "ja-JP": {
+                              "description": "移行先 database の名前。"
+                            }
+                          }
+                        },
+                        "collections": {
+                          "type": "array",
+                          "description": "The names of the collections that need to be migrated in the above specified source database. If this is left unspecified, all collections in the source database will be migrated.",
+                          "items": {
+                            "type": "object",
+                            "description": "A list of collection names.",
+                            "properties": {
+                              "collectionName": {
+                                "type": "string",
+                                "description": "A collection name.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "Collection 名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "Collection の名前。"
+                                  }
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Collection 名称列表。"
+                              },
+                              "ja-JP": {
+                                "description": "Collection 名の一覧。"
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "上述源数据库中需要迁移的 Collection 名称。未指定时，将迁移源数据库中的所有 Collection。"
+                            },
+                            "ja-JP": {
+                              "description": "上記の移行元 database で移行する collection の名前。省略した場合は、移行元 database 内のすべての collection が移行されます。"
+                            }
+                          }
+                        }
+                      },
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Collection 信息。"
+                        },
+                        "ja-JP": {
+                          "description": "Collection の情報。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "需要迁移的 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "移行する collection。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination"
+                ]
+              },
+              "example": {
+                "source": {
+                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
+                },
+                "destination": {
+                  "clusterId": "inxx-xxxxxxxxxxxxxxx"
+                },
+                "dbCollections": [
+                  {
+                    "collections": [
+                      {
+                        "collectionName": "medium_articles"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "/v2/migrations/toNewDedicated": {
@@ -509,6 +710,10 @@
           "zh-CN": {
             "summary": "迁移数据至新集群",
             "description": "本接口可创建一个新的 Dedicated 集群，并将源集群的数据迁移到新创建的集群。"
+          },
+          "ja-JP": {
+            "summary": "新しい Dedicated Cluster へ移行",
+            "description": "Dedicated Cluster を作成し、ソースクラスターから新しいクラスターへデータを移行します。"
           }
         },
         "tags": [
@@ -527,10 +732,176 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
               }
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "The ID of the destination cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "目标集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "移行先 cluster の ID。"
+                                }
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "The username used to access the destination cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问目标集群所使用的用户名。"
+                                },
+                                "ja-JP": {
+                                  "description": "移行先 cluster へのアクセスに使用する username。"
+                                }
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "The password used to access the destination cluster. This will be shown to you only once. You are advised to note down the password and save it in a secure place.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问目标集群所使用的密码。该密码仅显示一次，请记录并妥善保管。"
+                                },
+                                "ja-JP": {
+                                  "description": "移行先 cluster へのアクセスに使用する password。この password は一度だけ表示されます。記録して安全な場所に保管してください。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "The ID of the job that has been created upon your request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "根据请求创建的任务 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "リクエストによって作成された job の ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目标集群和迁移任务信息。"
+                            },
+                            "ja-JP": {
+                              "description": "移行先 cluster と移行 job の情報。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "clusterId": "inxx-xxxxxxxxxxxxxx",
+                      "username": "db_admin",
+                      "password": "xxxxxxxxx",
+                      "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功。"
+              },
+              "zh-CN": {
+                "description": "成功。"
+              }
+            }
+          }
+        },
+        "security": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -544,27 +915,67 @@
                       "clusterId": {
                         "type": "string",
                         "description": "The ID of the source cluster.",
-                        "example": "inxx-xxxxxxxxxxxxxxxxx"
+                        "example": "inxx-xxxxxxxxxxxxxxxxx",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "源集群 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "移行元 cluster の ID。"
+                          }
+                        }
                       }
                     },
                     "required": [
                       "clusterId"
-                    ]
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "源集群信息。"
+                      },
+                      "ja-JP": {
+                        "description": "移行元 cluster の情報。"
+                      }
+                    }
                   },
                   "destination": {
                     "type": "object",
                     "properties": {
                       "clusterName": {
                         "type": "string",
-                        "description": "The name of the destination cluster to create."
+                        "description": "The name of the destination cluster to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要创建的目标集群名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する移行先 cluster の名前。"
+                          }
+                        }
                       },
                       "projectId": {
                         "type": "string",
-                        "description": "The ID of the project to create the destination cluster in."
+                        "description": "The ID of the project to create the destination cluster in.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "用于创建目标集群的项目 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster を作成する project の ID。"
+                          }
+                        }
                       },
                       "regionId": {
                         "type": "string",
-                        "description": "The ID of the cloud region to create the destination cluster in. The region should be bound to the specified project."
+                        "description": "The ID of the cloud region to create the destination cluster in. The region should be bound to the specified project.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "用于创建目标集群的云地域 ID。该地域应已绑定到指定项目。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster を作成する cloud region の ID。この region は、指定した project に関連付けられている必要があります。"
+                          }
+                        }
                       },
                       "plan": {
                         "type": "string",
@@ -572,7 +983,15 @@
                         "enum": [
                           "Standard",
                           "Enterprise"
-                        ]
+                        ],
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "目标集群使用的订阅方案。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster で使用する subscription plan。"
+                          }
+                        }
                       },
                       "cuType": {
                         "type": "string",
@@ -581,13 +1000,29 @@
                           "Performance-optimized",
                           "Capacity-optimized",
                           "Tiered-storage"
-                        ]
+                        ],
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "目标集群使用的 CU 类型。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster で使用する CU type。"
+                          }
+                        }
                       },
                       "cuSize": {
                         "minimum": 1,
                         "maximum": 1024,
                         "type": "integer",
-                        "description": "The CU size to use for the destination cluster."
+                        "description": "The CU size to use for the destination cluster.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "分配给目标集群的 CU 数量。"
+                          },
+                          "ja-JP": {
+                            "description": "移行先 cluster に割り当てる CU 数。"
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -597,7 +1032,15 @@
                       "plan",
                       "cuType",
                       "cuSize"
-                    ]
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要创建的目标集群信息。"
+                      },
+                      "ja-JP": {
+                        "description": "作成する移行先 cluster の情報。"
+                      }
+                    }
                   },
                   "dbCollections": {
                     "type": "array",
@@ -607,12 +1050,44 @@
                       "properties": {
                         "dbName": {
                           "type": "string",
-                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies."
+                          "description": "The name of the source database. This is optional. If left unspecified, the default database applies.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "源数据库名称。该字段可选；未指定时使用默认数据库。"
+                            },
+                            "ja-JP": {
+                              "description": "移行元 database の名前。このフィールドは省略可能です。省略した場合は default database が使用されます。"
+                            }
+                          }
                         },
                         "destDbName": {
                           "type": "string",
-                          "description": "The name of the destination database."
+                          "description": "The name of the destination database.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "目标数据库名称。"
+                            },
+                            "ja-JP": {
+                              "description": "移行先 database の名前。"
+                            }
+                          }
                         }
+                      },
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "源数据库和目标数据库的配对。"
+                        },
+                        "ja-JP": {
+                          "description": "移行元 database と移行先 database のペア。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "迁移中的源数据库和目标数据库配对列表。"
+                      },
+                      "ja-JP": {
+                        "description": "移行元 database と移行先 database のペアの一覧。"
                       }
                     }
                   }
@@ -660,110 +1135,7 @@
               }
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "x-tab-label": "success",
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "description": "Response code.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "响应码。"
-                            }
-                          }
-                        },
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "clusterId": {
-                              "type": "string",
-                              "description": "The ID of the destination cluster."
-                            },
-                            "username": {
-                              "type": "string",
-                              "description": "The username used to access the destination cluster."
-                            },
-                            "password": {
-                              "type": "string",
-                              "description": "The password used to access the destination cluster. This will be shown to you only once. You are advised to note down the password and save it in a secure place."
-                            },
-                            "jobId": {
-                              "type": "string",
-                              "description": "The ID of the job that has been created upon your request."
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "x-tab-label": "failure",
-                      "description": "Returns an error message.",
-                      "x-i18n": {
-                        "zh-CN": {
-                          "description": "返回错误消息。"
-                        }
-                      },
-                      "x-i18n-langs": [
-                        "zh-CN"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "description": "Response code.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "响应码。"
-                            }
-                          }
-                        },
-                        "message": {
-                          "type": "string",
-                          "description": "Error message.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "错误描述。"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                },
-                "examples": {
-                  "1": {
-                    "summary": "success",
-                    "x-target-response": "OPTION 1",
-                    "value": {
-                      "clusterId": "inxx-xxxxxxxxxxxxxx",
-                      "username": "db_admin",
-                      "password": "xxxxxxxxx",
-                      "jobId": "job-xxxxxxxxxxxxxxxxxxxxxx"
-                    }
-                  },
-                  "2": {
-                    "summary": "failure",
-                    "x-target-response": "OPTION 2",
-                    "value": {
-                      "code": 21119,
-                      "message": "The apikey is illegal."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": []
+        }
       }
     }
   },

@@ -72,6 +72,30 @@ function hasInclude(entry) {
   return !!(entry && entry.include && entry.include.length > 0);
 }
 
+function matchesExclude(entry, rel) {
+  if (!entry || !entry.exclude) {
+    return false;
+  }
+
+  return entry.exclude.some((pattern) => {
+    if (pattern instanceof RegExp) {
+      return pattern.test(rel);
+    }
+    if (typeof pattern === 'string') {
+      return pattern === rel;
+    }
+    if (typeof pattern === 'function') {
+      return pattern(rel);
+    }
+
+    throw new Error(`Unsupported exclude pattern for ${entry.name || entry.target}: ${String(pattern)}`);
+  });
+}
+
+function hasExclude(entry) {
+  return !!(entry && entry.exclude && entry.exclude.length > 0);
+}
+
 async function fetchRemoteTree(entry, fetchImpl) {
   const tree = {};
 
@@ -107,7 +131,7 @@ async function fetchRemoteTree(entry, fetchImpl) {
       const base64Content = (fileData.content || '').replace(/\n/g, '');
       const content = Buffer.from(base64Content, 'base64').toString('utf8');
       const rel = path.posix.relative(entry.source, item.path);
-      if (!matchesInclude(entry, rel)) {
+      if (!matchesInclude(entry, rel) || matchesExclude(entry, rel)) {
         continue;
       }
       tree[rel] = content;
@@ -143,7 +167,7 @@ async function readLocalTree(absTarget, entry = undefined, fsImpl = fs) {
         continue;
       }
       const rel = path.relative(absTarget, absPath).split(path.sep).join('/');
-      if (!matchesInclude(entry, rel)) {
+      if (!matchesInclude(entry, rel) || matchesExclude(entry, rel)) {
         continue;
       }
       tree[rel] = await fsImpl.readFile(absPath, 'utf8');
@@ -284,7 +308,7 @@ async function applyPartialTree(absTarget, remoteTree, entry, fsImpl = fs) {
 }
 
 async function applyTree(absTarget, remoteTree, fsImpl = fs, entry = undefined) {
-  if (hasInclude(entry)) {
+  if (hasInclude(entry) || hasExclude(entry)) {
     await applyPartialTree(absTarget, remoteTree, entry, fsImpl);
     return;
   }
@@ -375,6 +399,9 @@ module.exports = {
   assertAllowedTarget,
   buildSyncPlan,
   fetchRemoteTree,
+  hasExclude,
+  hasInclude,
+  matchesExclude,
   readLocalSourceTree,
   readLocalTree,
   diffTrees,

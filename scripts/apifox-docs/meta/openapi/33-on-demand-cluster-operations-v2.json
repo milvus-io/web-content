@@ -1,0 +1,1584 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "On-Demand Cluster Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "On-Demand Cluster Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "On-Demand Cluster Operations (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/clusters/createOnDemandCluster": {
+      "post": {
+        "summary": "Create On-Demand Cluster",
+        "deprecated": false,
+        "description": "Create an on-demand cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建按需集群",
+            "description": "在当前项目中创建一个按需集群。"
+          },
+          "ja-JP": {
+            "summary": "オンデマンドクラスターの作成",
+            "description": "現在のプロジェクトにオンデマンドクラスターを作成します。"
+          }
+        },
+        "x-beta": "PUBLIC",
+        "tags": [
+          "On-Demand Cluster Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用してください。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project to create the cluster in.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群所属项目 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターを作成するプロジェクトの ID。"
+                      }
+                    }
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "The ID of the cloud region to create the cluster in.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群所属地域。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターを作成するクラウドリージョンの ID。"
+                      }
+                    }
+                  },
+                  "cuSize": {
+                    "type": "integer",
+                    "description": "The CU size to use for the cluster. The minimum CU size is 1.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "分配给待创建集群的 CU 大小。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターに使用する CU サイズ。最小 CU サイズは 1 です。"
+                      }
+                    }
+                  },
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The name of the cluster to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建集群名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するクラスターの名前。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the on-demand cluster.",
+                    "example": "Ad hoc analytics query cluster",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "按需集群描述。",
+                        "example": "Ad hoc analytics query cluster"
+                      },
+                      "ja-JP": {
+                        "description": "オンデマンドクラスターの説明。"
+                      }
+                    }
+                  },
+                  "autoSuspend": {
+                    "type": "integer",
+                    "description": "Auto-suspend idle window. The cluster will be automatically suspended if there is no request within the specified period. The value should be an integer representing the number of seconds. For example, `300` means 5 minutes.",
+                    "default": 60,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "自动挂起空闲时间。如果指定的时间段内无任何请求，集群将自动挂起。该值应为一个整数，表示秒数。例如，`300` 表示 5 分钟。"
+                      },
+                      "ja-JP": {
+                        "description": "自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数を指定します。たとえば、`300` は 5 分を意味します。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "regionId",
+                  "cuSize"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-us-west-2",
+                    "clusterName": "my-on-demand",
+                    "cuSize": 8,
+                    "autoSuspend": 60,
+                    "description": "A cluster for vector search workloads."
+                  }
+                },
+                "2": {
+                  "summary": "example",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxx",
+                    "regionId": "ali-cn-beijing",
+                    "clusterName": "my-on-demand",
+                    "cuSize": 8,
+                    "autoSuspend": 60,
+                    "description": "用于向量搜索工作负载的集群描述。"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns information about the created cluster in detail.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已创建的集群的详细信息。"
+              },
+              "ja-JP": {
+                "description": "作成されたクラスターの詳細情報を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已创建集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成されたクラスターの ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "Prompt messages returned.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "返回的提示消息。"
+                                },
+                                "ja-JP": {
+                                  "description": "返されたプロンプトメッセージ。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "Successfully submitted. The on-demand cluster is being created. Use the Describe On-Demand Cluster API to check its creation progress and status. Once the cluster status is RUNNING, use your API key to access the on-demand cluster."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "已成功提交，按需集群正在创建中。您可以使用 Describe On-Demand Cluster API 查看创建进度和集群状态。集群状态为 RUNNING 后，使用 API 密钥访问按需集群。"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/clusters/onDemandClusters": {
+      "get": {
+        "summary": "List On-Demand Clusters",
+        "deprecated": false,
+        "description": "List all on-demand clusters in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看按需集群列表",
+            "description": "列出当前项目中的所有按需集群。"
+          },
+          "ja-JP": {
+            "summary": "オンデマンドクラスターの一覧表示",
+            "description": "現在のプロジェクト内のすべてのオンデマンドクラスターを一覧表示します。"
+          }
+        },
+        "tags": [
+          "On-Demand Cluster Operations (V2)"
+        ],
+        "x-beta": "PUBLIC",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用してください。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project to list clusters in. If not specified, the clusters in the default project will be listed.",
+            "required": true,
+            "example": "proj-xxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要列出集群的项目 ID。如果未指定，将列出默认项目中的集群。"
+              },
+              "ja-JP": {
+                "description": "クラスターを一覧表示するプロジェクトの ID。指定しない場合は、デフォルトプロジェクトのクラスターが一覧表示されます。"
+              }
+            }
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "description": "The ID of the cloud region to list clusters in. If not specified, the clusters in all regions will be listed.",
+            "required": true,
+            "example": "aws-us-west-2",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要列出集群的云区域 ID。如果未指定，将列出所有区域中的集群。",
+                "example": "ali-cn-hangzhou"
+              },
+              "ja-JP": {
+                "description": "クラスターを一覧表示するクラウドリージョンの ID。指定しない場合は、すべてのリージョンのクラスターが一覧表示されます。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of on-demand clusters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Response code.",
+                      "x-i18n": {
+                        "ja-JP": {
+                          "description": "レスポンスコード。"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer",
+                          "description": "The total number of on-demand clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "按需集群总数。"
+                            },
+                            "ja-JP": {
+                              "description": "オンデマンドクラスターの合計数。"
+                            }
+                          }
+                        },
+                        "onDemandClusters": {
+                          "type": "array",
+                          "description": "List of on-demand clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "按需集群列表。"
+                            },
+                            "ja-JP": {
+                              "description": "オンデマンドクラスターの一覧。"
+                            }
+                          },
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "projectId": {
+                                "type": "string",
+                                "description": "ID of the project to which the cluster belongs.",
+                                "example": "proj-xxxxxxxxxxxxxxx",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群所属项目 ID。",
+                                    "example": "proj-xxxxxxxxxxxxxxx"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターが属するプロジェクトの ID。"
+                                  }
+                                }
+                              },
+                              "clusterId": {
+                                "type": "string",
+                                "description": "ID of the cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの ID。"
+                                  }
+                                },
+                                "example": "inxx-xxxxxxxxxxxxxxx"
+                              },
+                              "clusterName": {
+                                "type": "string",
+                                "description": "Name of the cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの名前。"
+                                  }
+                                }
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "Description of the on-demand cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "按需集群描述。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "オンデマンドクラスターの説明。"
+                                  }
+                                }
+                              },
+                              "regionId": {
+                                "type": "string",
+                                "description": "Cloud region where the cluster is located.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群所处云地域 ID。",
+                                    "example": "ali-cn-hangzhou"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターが配置されているクラウドリージョン。"
+                                  }
+                                },
+                                "example": "aws-us-west-2"
+                              },
+                              "cuSize": {
+                                "type": "integer",
+                                "description": "CU size of the cluster",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "分配给当前集群的 CU 大小。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの CU サイズ。"
+                                  }
+                                }
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "Current cluster status",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前集群所处状态。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "現在のクラスターのステータス。"
+                                  }
+                                },
+                                "enum": [
+                                  "CREATING",
+                                  "SUSPENDED",
+                                  "RESUMING",
+                                  "RUNNING",
+                                  "SUSPENDING"
+                                ]
+                              },
+                              "endpoint": {
+                                "type": "string",
+                                "description": "Cluster public endpoint. For an on-demand cluster, the endpoint is an on-demand compute endpoint, which is shared among all on-demand clusters in the project. Use that with the target cluster ID for searches and queries.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "访问集群时使用的公共端点。注意对于按需集群来说，该端点是一个项目级别的按需计算端点，项目中的所有按需集群共享该端点。在进行搜索和查询时，请和集群 ID 共同使用。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの public endpoint。オンデマンドクラスターの場合、この endpoint はオンデマンドコンピュート endpoint であり、プロジェクト内のすべてのオンデマンドクラスター間で共有されます。検索やクエリでは、ターゲットのクラスター ID とともにこの endpoint を使用します。"
+                                  }
+                                },
+                                "example": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.zillizcloud.com"
+                              },
+                              "privateLink": {
+                                "type": "string",
+                                "description": "Cluster private endpoint. This is an empty string if private link is not enabled.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "访问集群时使用的私有端点。若未开启 Private Link。此参数值为空。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターの private endpoint。private link が有効でない場合は空の文字列です。"
+                                  }
+                                }
+                              },
+                              "createdBy": {
+                                "type": "string",
+                                "description": "Email address of the user who create the cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群创建人的邮箱。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターを作成したユーザーのメールアドレス。"
+                                  }
+                                }
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "description": "Time at which the cluster is created in UTC ISO-8601 format.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群创建时间，UTC ISO-8601 格式。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターが作成された時刻 (UTC ISO-8601 形式)。"
+                                  }
+                                }
+                              },
+                              "autoSuspend": {
+                                "type": "integer",
+                                "description": "Auto-suspend idle window configured for the cluster. The cluster will be automatically suspended if there is no request within the specified period. The value is an integer representing the number of seconds. For example, `300` means 5 minutes.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "自动挂起空闲时间。如果指定的时间段内无任何请求，集群将自动挂起。该值为一个整数，表示秒数。例如，`300` 表示 5 分钟。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターに設定された自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数です。たとえば、`300` は 5 分を意味します。"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "An on-demand cluster.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "一个按需集群。"
+                              },
+                              "ja-JP": {
+                                "description": "オンデマンドクラスター。"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 2,
+                        "onDemandClusters": [
+                          {
+                            "projectId": "proj-xxxxxxxxxxxxxxx",
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Cluster-01",
+                            "regionId": "aws-us-west-2",
+                            "cuSize": 8,
+                            "status": "RUNNING",
+                            "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
+                            "privateLink": "",
+                            "createdBy": "john.doe@zilliz.com",
+                            "createTime": "2024-04-21T10:15:15Z",
+                            "autoSuspend": 60,
+                            "description": "An on-demand cluster for vector search workloads."
+                          },
+                          {
+                            "projectId": "proj-xxxxxxxxxxxxxxx",
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Cluster-02",
+                            "regionId": "aws-us-west-2",
+                            "status": "RUNNING",
+                            "cuSize": 8,
+                            "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
+                            "privateLink": "",
+                            "createdBy": "john.doe@zilliz.com",
+                            "createTime": "2024-04-21T10:15:16Z",
+                            "autoSuspend": 60,
+                            "description": "An on-demand cluster for vector search workloads."
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 2,
+                        "onDemandClusters": [
+                          {
+                            "projectId": "proj-xxxxxxxxxxxxxxx",
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Cluster-01",
+                            "regionId": "ali-cn-beijing",
+                            "cuSize": 8,
+                            "status": "RUNNING",
+                            "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.cloud.zilliz.com.cn",
+                            "privateLink": "",
+                            "createdBy": "john.doe@zilliz.com",
+                            "createTime": "2024-04-21T10:15:15Z",
+                            "autoSuspend": 60,
+                            "description": "用于按需向量搜索工作负载的集群描述。"
+                          },
+                          {
+                            "projectId": "proj-xxxxxxxxxxxxxxx",
+                            "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                            "clusterName": "Cluster-02",
+                            "regionId": "ali-cn-beijing",
+                            "status": "RUNNING",
+                            "cuSize": 8,
+                            "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.cloud.zilliz.com.cn",
+                            "privateLink": "",
+                            "createdBy": "john.doe@zilliz.com",
+                            "createTime": "2024-04-21T10:15:16Z",
+                            "autoSuspend": 60,
+                            "description": "用于按需向量搜索工作负载的集群描述。"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "オンデマンドクラスターの一覧を返します。"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/clusters/onDemandClusters/{CLUSTER_ID}": {
+      "delete": {
+        "summary": "Delete On-Demand Cluster",
+        "deprecated": false,
+        "description": "Delete an on-demand cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除按需集群",
+            "description": "删除当前项目中的一个按需集群。"
+          },
+          "ja-JP": {
+            "summary": "オンデマンドクラスターの削除",
+            "description": "現在のプロジェクト内のオンデマンドクラスターを削除します。"
+          }
+        },
+        "tags": [
+          "On-Demand Cluster Operations (V2)"
+        ],
+        "x-beta": "PUBLIC",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用してください。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster to describe.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标集群。"
+              },
+              "ja-JP": {
+                "description": "説明するクラスターの ID。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the dropped cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已删除的集群 ID。"
+              },
+              "ja-JP": {
+                "description": "削除されたクラスターの ID を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster that has been dropped.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已删除的集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除されたクラスターの ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "Prompt messages returned.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "返回的提示信息。"
+                                },
+                                "ja-JP": {
+                                  "description": "返されたプロンプトメッセージ。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "get": {
+        "summary": "Describe On-Demand Cluster",
+        "deprecated": false,
+        "description": "Describe the details of a specific on-demand cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看按需集群详情",
+            "description": "查看当前项目中的指定按需集群的详细情况。"
+          },
+          "ja-JP": {
+            "summary": "オンデマンドクラスターの説明",
+            "description": "現在のプロジェクト内の特定のオンデマンドクラスターの詳細を説明します。"
+          }
+        },
+        "tags": [
+          "On-Demand Cluster Operations (V2)"
+        ],
+        "x-beta": "PUBLIC",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用してください。"
+              }
+            }
+          },
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the cluster to describe.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标集群。"
+              },
+              "ja-JP": {
+                "description": "説明するクラスターの ID。"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Use `application/json`.",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "`application/json` を使用します。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the details of a specific on-demand cluster.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定按需集群的详细情况。"
+              },
+              "ja-JP": {
+                "description": "特定のオンデマンドクラスターの詳細を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Response code.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应码。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスコード。"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Details of the current cluster",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "当前集群的详细情况。"
+                        },
+                        "ja-JP": {
+                          "description": "現在のクラスターの詳細。"
+                        }
+                      },
+                      "properties": {
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクトの ID。"
+                                }
+                              }
+                            },
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの ID。"
+                                }
+                              },
+                              "example": "inxx-xxxxxxxxxxxxxxx"
+                            },
+                            "clusterName": {
+                              "type": "string",
+                              "description": "Name of the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの名前。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description of the on-demand cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "按需集群描述。"
+                                },
+                                "ja-JP": {
+                                  "description": "オンデマンドクラスターの説明。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "Cloud region where the cluster is located.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群所处云地域 ID。",
+                                  "example": "ali-cn-hangzhou"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターが配置されているクラウドリージョン。"
+                                }
+                              },
+                              "example": "aws-us-west-2"
+                            },
+                            "cuSize": {
+                              "type": "integer",
+                              "description": "CU size of the cluster",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "分配给当前集群的 CU 大小。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの CU サイズ。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Current cluster status",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前集群所处状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のクラスターのステータス。"
+                                }
+                              },
+                              "enum": [
+                                "CREATING",
+                                "SUSPENDED",
+                                "RESUMING",
+                                "RUNNING",
+                                "SUSPENDING"
+                              ]
+                            },
+                            "endpoint": {
+                              "type": "string",
+                              "description": "Cluster public endpoint. For an on-demand cluster, the endpoint is an on-demand compute endpoint, which is shared among all on-demand clusters in the project. Use that with the target cluster ID for searches and queries.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问集群时使用的公共端点。注意对于按需集群来说，该端点是一个项目级别的按需计算端点，项目中的所有按需集群共享该端点。在进行搜索和查询时，请和集群 ID 共同使用。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの public endpoint。オンデマンドクラスターの場合、この endpoint はオンデマンドコンピュート endpoint であり、プロジェクト内のすべてのオンデマンドクラスター間で共有されます。検索やクエリでは、ターゲットのクラスター ID とともにこの endpoint を使用します。"
+                                }
+                              },
+                              "example": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.zillizcloud.com"
+                            },
+                            "privateLink": {
+                              "type": "string",
+                              "description": "Cluster private endpoint. This is an empty string if private link is not enabled.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "访问集群时使用的私有端点。若未开启 Private Link。此参数值为空。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターの private endpoint。private link が有効でない場合は空の文字列です。"
+                                }
+                              }
+                            },
+                            "createdBy": {
+                              "type": "string",
+                              "description": "Email address of the user who create the cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群创建人的邮箱。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターを作成したユーザーのメールアドレス。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "Time at which the cluster is created in UTC ISO-8601 format.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群创建时间，UTC ISO-8601 格式。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターが作成された時刻 (UTC ISO-8601 形式)。"
+                                }
+                              }
+                            },
+                            "autoSuspend": {
+                              "type": "integer",
+                              "description": "Auto-suspend idle window configured for the cluster. The cluster will be automatically suspended if there is no request within the specified period. The value is an integer representing the number of seconds. For example, `300` means 5 minutes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "自动挂起空闲时间。如果指定的时间段内无任何请求，集群将自动挂起。该值为一个整数，表示秒数。例如，`300` 表示 5 分钟。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターに設定された自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数です。たとえば、`300` は 5 分を意味します。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-xxxxxxxxxxxxxxxxxx",
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "clusterName": "Cluster-01",
+                        "regionId": "aws-us-west-2",
+                        "cuSize": 8,
+                        "status": "RUNNING",
+                        "endpoint": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.api.zillizcloud.com",
+                        "privateLink": "",
+                        "createdBy": "john.doe@zilliz.com",
+                        "createTime": "2024-04-21T10:15:15Z",
+                        "autoSuspend": 60
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "projectId": "proj-xxxxxxxxxxxxxxxxxx",
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "clusterName": "Cluster-01",
+                        "regionId": "ali-cn-beijing",
+                        "cuSize": 8,
+                        "status": "RUNNING",
+                        "endpoint": "https://proj-xxxxxxxxxxxxxxx.ali-cn-beijing.api.zilliz.com.cn",
+                        "privateLink": "",
+                        "createdBy": "john.doe@zilliz.com",
+                        "createTime": "2024-04-21T10:15:15Z",
+                        "autoSuspend": 60
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update On-Demand Cluster",
+        "deprecated": false,
+        "description": "Update the name, description, or auto-suspend idle window of an on-demand cluster in the current project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新按需集群",
+            "description": "更新当前项目中一个按需集群的名称、描述或自动挂起空闲时间。"
+          },
+          "ja-JP": {
+            "summary": "オンデマンドクラスターの更新",
+            "description": "現在のプロジェクト内のオンデマンドクラスターの名前、説明、または自動一時停止のアイドルウィンドウを更新します。"
+          }
+        },
+        "tags": [
+          "On-Demand Cluster Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ID",
+            "in": "path",
+            "description": "The ID of the on-demand cluster to update.",
+            "required": true,
+            "example": "inxx-xxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标集群 ID。"
+              },
+              "ja-JP": {
+                "description": "更新するオンデマンドクラスターの ID。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用してください。"
+              }
+            }
+          },
+          {
+            "name": "OrgId",
+            "in": "header",
+            "description": "The organization ID of the cluster.",
+            "required": true,
+            "example": "org-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群所属的组织 ID。"
+              },
+              "ja-JP": {
+                "description": "クラスターの組織 ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clusterName": {
+                    "type": "string",
+                    "description": "The new name of the cluster. The value cannot be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新名称。值不能为空字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターの新しい名前。空の文字列は指定できません。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the cluster. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的新描述。值可以为空字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターの新しい説明。空の文字列を指定できます。"
+                      }
+                    }
+                  },
+                  "autoSuspend": {
+                    "type": "string",
+                    "description": "Auto-suspend idle window. The value must use the `<number><s|m|h>` format, such as `60s`, `5m`, or `1h`, and must be at least 60 seconds.",
+                    "pattern": "^\\d+[smh]$",
+                    "example": "5m",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "自动挂起空闲时间。该值必须使用 `<number><s|m|h>` 格式，例如 `60s`、`5m` 或 `1h`，且至少为 60 秒。",
+                        "example": "5m"
+                      },
+                      "ja-JP": {
+                        "description": "自動一時停止のアイドルウィンドウ。値は `<number><s|m|h>` 形式（`60s`、`5m`、`1h` など）を使用する必要があり、60 秒以上である必要があります。"
+                      }
+                    }
+                  }
+                },
+                "description": "Request payload for updating an on-demand cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "更新按需集群的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "オンデマンドクラスターを更新するためのリクエストペイロード。"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Name, description, and auto-suspend",
+                  "value": {
+                    "clusterName": "New Cluster Name",
+                    "description": "This is the new description of the cluster.",
+                    "autoSuspend": "5m"
+                  }
+                },
+                "2": {
+                  "summary": "Name only",
+                  "value": {
+                    "clusterName": "New Cluster Name"
+                  }
+                },
+                "3": {
+                  "summary": "Description only",
+                  "value": {
+                    "description": ""
+                  }
+                },
+                "4": {
+                  "summary": "Auto-suspend only",
+                  "value": {
+                    "autoSuspend": "5m"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the modified cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "clusterId": {
+                              "type": "string",
+                              "description": "ID of the cluster that has been modified.",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "変更されたクラスターの ID。"
+                                }
+                              }
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "description": "Prompt message returned.",
+                              "x-i18n": {
+                                "ja-JP": {
+                                  "description": "返されたプロンプトメッセージ。"
+                                }
+                              }
+                            }
+                          },
+                          "description": "Response payload.",
+                          "x-i18n": {
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "clusterId": "inxx-xxxxxxxxxxxxxxx",
+                        "prompt": "successfully submitted. Cluster is being upgraded, which is expected to take several minutes. You can access data about the creation progress and status of your cluster by DescribeCluster API. Once the cluster status is RUNNING, you may access your vector database using the SDK."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "変更されたクラスターの ID を返します。"
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

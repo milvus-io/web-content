@@ -25,6 +25,10 @@
           "zh-CN": {
             "summary": "查看 Alias 列表",
             "description": "本接口可列出指定<include target=\"milvus\">数据库</include><include target=\"zilliz\"> Zilliz Cloud 集群</include>中的所有 Collection 别名。"
+          },
+          "ja-JP": {
+            "summary": "エイリアスの一覧を取得",
+            "description": "この操作では、指定した<include target=\"milvus\">データベース</include><include target=\"zilliz\">Zilliz Cloud cluster</include>内の既存のすべての collection alias を一覧表示します。"
           }
         },
         "tags": [
@@ -41,13 +45,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -63,8 +76,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "已存在的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "既存の database の名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -73,16 +92,28 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "已存在的 Collection 名称。若指定，仅返回该 Collection 的所有 Alias。若不指定将返回所有 Alias。"
+                      },
+                      "ja-JP": {
+                        "description": "既存の collection の名前。指定した場合は、その collection の alias のみを返します。指定しない場合は、database 内のすべての collection の alias を返します。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
-                }
+                },
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "dbName": "default"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -90,6 +121,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回 Collection 别名列表。"
+              },
+              "ja-JP": {
+                "description": "collection alias の一覧。"
               }
             },
             "content": {
@@ -105,10 +139,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "array",
@@ -118,17 +158,32 @@
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "对象列表。"
+                              },
+                              "ja-JP": {
+                                "description": "item object の一覧。"
                               }
-                            }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "description": "Response payload which is a list of item objects.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为元素对象列表。"
+                            },
+                            "ja-JP": {
+                              "description": "item object の一覧であるレスポンス payload。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -136,6 +191,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -149,8 +207,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -158,12 +222,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -186,10 +262,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/aliases/describe": {
@@ -201,6 +283,10 @@
           "zh-CN": {
             "summary": "查看 Alias 详情",
             "description": "本接口可列出指定 Collection 别名的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "Aliasを説明します",
+            "description": "この操作では、特定の alias の詳細を説明します。"
           }
         },
         "tags": [
@@ -217,13 +303,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -238,8 +333,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "当前别名所属的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "alias が属するデータベースの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "aliasName": {
                     "type": "string",
@@ -247,19 +348,31 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "目标别名。"
+                      },
+                      "ja-JP": {
+                        "description": "詳細を一覧表示する alias の名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "aliasName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "aliasName": "alice"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -267,6 +380,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回别名的详细信息。"
+              },
+              "ja-JP": {
+                "description": "alias の詳細な説明を含む alias オブジェクト。"
               }
             },
             "content": {
@@ -282,10 +398,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -293,6 +415,9 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含了指定 Collection 别名的详细信息。"
+                            },
+                            "ja-JP": {
+                              "description": "alias の詳細な説明を含むレスポンス payload。"
                             }
                           },
                           "properties": {
@@ -302,8 +427,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前别名对应的 Collection 所属的数据库名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "collection が属するデータベースの名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "collectionName": {
                               "type": "string",
@@ -311,8 +442,14 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前别名所属的 Collection 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "alias が属する collection の名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             },
                             "aliasName": {
                               "type": "string",
@@ -320,12 +457,24 @@
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前别名。"
+                                },
+                                "ja-JP": {
+                                  "description": "alias の名前。"
                                 }
-                              }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -333,6 +482,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -346,8 +498,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -355,12 +513,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -385,10 +555,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/aliases/alter": {
@@ -400,6 +576,10 @@
           "zh-CN": {
             "summary": "修改 Alias",
             "description": "本接口将已分配给某 Collection 的别名重新分配给另一个 Collection。"
+          },
+          "ja-JP": {
+            "summary": "Alias の変更",
+            "description": "この操作は、あるコレクションの alias を別のコレクションに再割り当てします。"
           }
         },
         "tags": [
@@ -416,13 +596,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみが使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -437,8 +626,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -446,8 +641,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "重新分配后当前别名所指向的 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "alias を再割り当てする対象コレクションの名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "aliasName": {
                     "type": "string",
@@ -455,21 +656,33 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待重新分配的别名。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションの alias。 "
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "aliasName",
                   "collectionName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "aliasName": "bob",
                 "collectionName": "custom_setup_indexed"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -477,6 +690,9 @@
             "x-i18n": {
               "zh-CN": {
                 "description": "返回一个空对象或一条错误消息。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
               }
             },
             "content": {
@@ -489,6 +705,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -501,10 +720,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -513,10 +738,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -524,6 +758,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -537,8 +774,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -546,12 +789,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -572,10 +827,16 @@
                   }
                 }
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/aliases/drop": {
@@ -587,6 +848,10 @@
           "zh-CN": {
             "summary": "删除 Alias",
             "description": "本接口可删除指定的 Collection 别名。"
+          },
+          "ja-JP": {
+            "summary": "Alias の削除",
+            "description": "この操作は、指定したエイリアスを削除します。"
           }
         },
         "tags": [
@@ -603,13 +868,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -624,8 +898,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "コレクションが属するデータベースの名前です。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "aliasName": {
                     "type": "string",
@@ -633,19 +913,31 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待删除的 Collection 别名。\n 删除别名时无需提供 Collection 名称，因为一个别名只能分配给一个 Collection。因此，服务器可以确定指定的别名属于哪个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "削除するエイリアスです。\nエイリアスを削除する際、1 つのエイリアスは必ず 1 つのコレクションにのみ割り当てられるため、コレクション名を指定する必要はありません。したがって、サーバーは指定されたエイリアスがどのコレクションに属しているかを認識できます。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "aliasName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "aliasName": "bob"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -660,6 +952,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -672,10 +967,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -684,10 +985,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -707,8 +1017,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -716,12 +1032,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -742,10 +1070,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/aliases/create": {
@@ -757,6 +1096,10 @@
           "zh-CN": {
             "summary": "创建 Alias",
             "description": "本接口可以为指定 Collection 创建别名。一个 Collection 可以有多个别名，而一个别名只能对应一个 Collection。"
+          },
+          "ja-JP": {
+            "summary": "Alias を作成",
+            "description": "この操作は、既存の collection に対して alias を作成します。1 つの collection は複数の alias を持つことができますが、1 つの alias は 1 つの collection にのみ関連付けることができます。"
           }
         },
         "tags": [
@@ -773,13 +1116,22 @@
             "required": true,
             "example": "Bearer {{TOKEN}}",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-i18n": {
               "zh-CN": {
                 "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、<include target=\"zilliz\">適切な権限を持つ API key、または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせを指定する必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"
               }
-            }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         ],
         "requestBody": {
@@ -794,8 +1146,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "当前 Collection 所属的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "collection が属する database の名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "collectionName": {
                     "type": "string",
@@ -803,8 +1161,14 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建别名的 Collection 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成した alias を割り当てる対象 collection の名前。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   },
                   "aliasName": {
                     "type": "string",
@@ -812,21 +1176,33 @@
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建的 Collection 别名。"
+                      },
+                      "ja-JP": {
+                        "description": "collection の alias。"
                       }
-                    }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
                   "aliasName",
                   "collectionName"
-                ]
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
               },
               "example": {
                 "aliasName": "bob",
                 "collectionName": "quick_setup"
               }
             }
-          }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
         },
         "responses": {
           "200": {
@@ -841,6 +1217,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
                         }
                       },
                       "x-i18n-langs": [
@@ -853,10 +1232,16 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
                           },
                           "type": "integer",
-                          "example": 0
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "data": {
                           "type": "object",
@@ -865,10 +1250,19 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     {
                       "x-tab-label": "failure",
@@ -876,6 +1270,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
                         }
                       },
                       "x-i18n-langs": [
@@ -889,8 +1286,14 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         },
                         "message": {
                           "type": "string",
@@ -898,12 +1301,24 @@
                           "x-i18n": {
                             "zh-CN": {
                               "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
                             }
-                          }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
                         }
-                      }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     }
-                  ]
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
                 },
                 "examples": {
                   "1": {
@@ -924,10 +1339,21 @@
                   }
                 }
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
             }
           }
         },
-        "security": []
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
       }
     }
   },
@@ -943,6 +1369,10 @@
             "zh-CN": {
               "label": "集群端点",
               "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            },
+            "ja-JP": {
+              "label": "クラスターエンドポイント",
+              "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
             }
           },
           "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
@@ -956,6 +1386,10 @@
             "zh-CN": {
               "label": "项目端点（按需）",
               "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            },
+            "ja-JP": {
+              "label": "プロジェクトエンドポイント（オンデマンド）",
+              "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
             }
           },
           "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""

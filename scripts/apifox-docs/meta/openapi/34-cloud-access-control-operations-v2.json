@@ -1,0 +1,4232 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cloud Access Control Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cloud Access Control Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cloud 访问控制操作 (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/roles": {
+      "get": {
+        "summary": "List Cloud Roles",
+        "description": "Lists organization- or project-scoped Cloud ACL roles.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "roleType",
+            "in": "query",
+            "required": true,
+            "description": "The role scope to filter by.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "org",
+                "project"
+              ]
+            },
+            "example": "org",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要筛选的角色作用域。"
+              },
+              "ja-JP": {
+                "description": "フィルタリングするロールのスコープ。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "The project ID used to filter roles.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于筛选角色的项目 ID。"
+              },
+              "ja-JP": {
+                "description": "ロールのフィルタリングに使用するプロジェクト ID。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。"
+              },
+              "ja-JP": {
+                "description": "1 ページあたりに返す項目数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PagedCloudRoles"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 2,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "roles": [
+                          {
+                            "roleId": "r-onpocppupmikjqmildbpbeouxsrwvy",
+                            "roleName": "Project Admin",
+                            "roleType": "project",
+                            "roleKind": "pre-defined",
+                            "projectId": "",
+                            "description": ""
+                          },
+                          {
+                            "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "roleName": "Data Reader",
+                            "roleType": "project",
+                            "roleKind": "custom",
+                            "projectId": "proj-xxxxxxxx",
+                            "description": ""
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 Cloud 角色",
+            "description": "列出组织级或项目级 Cloud ACL 角色。"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールの一覧表示",
+            "description": "組織またはプロジェクトスコープの Cloud ACL ロールを一覧表示します。"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Cloud Role",
+        "description": "Creates a custom organization- or project-scoped Cloud ACL role.\n\n**Policy reference** — allowed `resourceType` values and their combinations:\n\n| resourceType | Privileges | Requires resources | Note |\n|---|---|---|---|\n| `project_member` | view, create, modify, delete | No |  |\n| `project_role` | view, create, modify, delete, grant | No |  |\n| `project` | view, modify, delete | No |  |\n| `security` | view, manage | No |  |\n| `backup` | view, manage | No |  |\n| `observability` | view, manage | No |  |\n| `serving_cluster` | create, view, modify, delete | Yes (except `create`) | `resources` = cluster id, e.g. `in01-xxx`. Use `*` to cover all clusters including future ones. |\n| `on_demand_cluster` | create, view, modify, delete | Yes (except `create`) | `resources` = cluster id |\n| `volume` | create, view, modify, delete, usage | Yes (except `create`) | `resources` = volume id |\n| `storage_integration` | create, view, modify, delete, usage | Yes (except `create`) | `resources` = integration id |\n| `model_provider_integration` | create, view, modify, delete, usage | Yes (except `create`) | `resources` = integration id |\n| `kms_integration` | create, view, modify, delete, usage | Yes (except `create`) | `resources` = integration id (CMEK) |\n| `datadog_integration` | create, view, modify, delete, usage | Yes (except `create`) | `resources` = integration id |\n| `serving_cluster_data` | read, write, all | Yes | `resources` = cluster id |\n| `on_demand_compute_data` | read, write, all | No |  |\n| `volume_data` | read, write, all | Yes | `resources` = volume id |",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCloudRoleRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Organization role (not currently supported)",
+                  "value": {
+                    "roleName": "Org Manager",
+                    "description": "Can view members and manage org roles",
+                    "policies": [
+                      {
+                        "resourceType": "org_member",
+                        "privileges": [
+                          "view"
+                        ]
+                      },
+                      {
+                        "resourceType": "org_role",
+                        "privileges": [
+                          "grant",
+                          "manage"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "2": {
+                  "summary": "Project role",
+                  "value": {
+                    "projectId": "proj-xxxxxxxx",
+                    "roleName": "Data Reader",
+                    "description": "Can read serving clusters",
+                    "policies": [
+                      {
+                        "resourceType": "serving_cluster",
+                        "resources": [
+                          "*"
+                        ],
+                        "privileges": [
+                          "view"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/CloudRole"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        "roleName": "Org Manager",
+                        "roleType": "org",
+                        "roleKind": "custom",
+                        "description": "Can view members and manage org roles",
+                        "policies": [
+                          {
+                            "resourceType": "org_member",
+                            "privileges": [
+                              "view"
+                            ]
+                          },
+                          {
+                            "resourceType": "org_role",
+                            "privileges": [
+                              "grant",
+                              "manage"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Cloud 角色",
+            "description": "创建自定义组织级或项目级 Cloud ACL 角色。\n\n**策略参考** — `resourceType` 允许取值及其组合：\n\n| resourceType | Privileges | 是否必填 resources | 说明 |\n|---|---|---|---|\n| `project_member` | view, create, modify, delete | 否 |  |\n| `project_role` | view, create, modify, delete, grant | 否 |  |\n| `project` | view, modify, delete | 否 |  |\n| `security` | view, manage | 否 |  |\n| `backup` | view, manage | 否 |  |\n| `observability` | view, manage | 否 |  |\n| `serving_cluster` | create, view, modify, delete | 是（`create` 除外） | `resources` 填 cluster id，如 `in01-xxx`。用 `*` 表示所有（含未来创建的）cluster |\n| `on_demand_cluster` | create, view, modify, delete | 是（`create` 除外） | `resources` 填 cluster id |\n| `volume` | create, view, modify, delete, usage | 是（`create` 除外） | `resources` 填 volume id |\n| `storage_integration` | create, view, modify, delete, usage | 是（`create` 除外） | `resources` 填 integration id |\n| `model_provider_integration` | create, view, modify, delete, usage | 是（`create` 除外） | `resources` 填 integration id |\n| `kms_integration` | create, view, modify, delete, usage | 是（`create` 除外） | `resources` 填 integration id（CMEK） |\n| `datadog_integration` | create, view, modify, delete, usage | 是（`create` 除外） | `resources` 填 integration id |\n| `serving_cluster_data` | read, write, all | 是 | `resources` 填 cluster id |\n| `on_demand_compute_data` | read, write, all | 否 |  |\n| `volume_data` | read, write, all | 是 | `resources` 填 volume id |"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールの作成",
+            "description": "組織またはプロジェクトスコープのカスタム Cloud ACL ロールを作成します。\n\n**ポリシーリファレンス** — 許可される `resourceType` の値とその組み合わせ:\n\n| resourceType | 特権 | リソースが必要 | 備考 |\n|---|---|---|---|\n| `project_member` | view, create, modify, delete | いいえ |  |\n| `project_role` | view, create, modify, delete, grant | いいえ |  |\n| `project` | view, modify, delete | いいえ |  |\n| `security` | view, manage | いいえ |  |\n| `backup` | view, manage | いいえ |  |\n| `observability` | view, manage | いいえ |  |\n| `serving_cluster` | create, view, modify, delete | はい(`create` を除く) | `resources` = クラスター ID(例: `in01-xxx`)。`*` を使用すると、将来のクラスターを含むすべてのクラスターを対象にできます。 |\n| `on_demand_cluster` | create, view, modify, delete | はい(`create` を除く) | `resources` = クラスター ID |\n| `volume` | create, view, modify, delete, usage | はい(`create` を除く) | `resources` = ボリューム ID |\n| `storage_integration` | create, view, modify, delete, usage | はい(`create` を除く) | `resources` = インテグレーション ID |\n| `model_provider_integration` | create, view, modify, delete, usage | はい(`create` を除く) | `resources` = インテグレーション ID |\n| `kms_integration` | create, view, modify, delete, usage | はい(`create` を除く) | `resources` = インテグレーション ID(CMEK) |\n| `datadog_integration` | create, view, modify, delete, usage | はい(`create` を除く) | `resources` = インテグレーション ID |\n| `serving_cluster_data` | read, write, all | はい | `resources` = クラスター ID |\n| `on_demand_compute_data` | read, write, all | いいえ |  |\n| `volume_data` | read, write, all | はい | `resources` = ボリューム ID |"
+          }
+        }
+      }
+    },
+    "/v2/roles/{roleId}": {
+      "get": {
+        "summary": "Describe Cloud Role",
+        "description": "Returns one Cloud ACL role and its policy statements.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/CloudRole"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        "roleName": "Data Reader",
+                        "roleType": "project",
+                        "roleKind": "custom",
+                        "projectId": "proj-xxxxxxxx",
+                        "description": "Can read serving clusters",
+                        "policies": [
+                          {
+                            "resourceType": "serving_cluster",
+                            "resources": [
+                              "*"
+                            ],
+                            "privileges": [
+                              "view"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Cloud 角色",
+            "description": "返回一个 Cloud ACL 角色及其策略语句。"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールの詳細の取得",
+            "description": "1 つの Cloud ACL ロールとそのポリシーステートメントを返します。"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Cloud Role",
+        "description": "Partially updates a custom Cloud ACL role. Provided policies replace the complete policy set.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCloudRoleRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Replace policies",
+                  "value": {
+                    "roleName": "Data Reader",
+                    "policies": [
+                      {
+                        "resourceType": "serving_cluster",
+                        "resources": [
+                          "*"
+                        ],
+                        "privileges": [
+                          "view"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/CloudRole"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        "roleName": "Data Reader",
+                        "roleType": "project",
+                        "roleKind": "custom",
+                        "projectId": "proj-xxxxxxxx",
+                        "description": "Can read serving clusters",
+                        "policies": [
+                          {
+                            "resourceType": "serving_cluster",
+                            "resources": [
+                              "*"
+                            ],
+                            "privileges": [
+                              "view"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新 Cloud 角色",
+            "description": "部分更新自定义 Cloud ACL 角色。提供 `policies` 时会替换完整策略集。"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールの更新",
+            "description": "カスタム Cloud ACL ロールを部分的に更新します。指定されたポリシーがポリシーセット全体を置き換えます。"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Cloud Role",
+        "description": "Soft-deletes a custom role. Deletion is not cascading: if the role still has any active binding (user, group, or API key), the request is rejected with `21141 this role is in use`. Revoke all of its bindings first, then delete the role. The request is also rejected if it would remove the last principal able to manage roles in a scope, or if the role is pre-defined.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "boolean",
+                          "description": "Whether the operation succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作是否成功。"
+                            },
+                            "ja-JP": {
+                              "description": "操作が成功したかどうか。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": true
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Cloud 角色",
+            "description": "软删除自定义角色。删除操作不会级联：如果该角色仍有活动绑定（用户、群组或 API Key），请求会被拒绝并返回 `21141 this role is in use`。请先撤销其所有绑定，再删除该角色。如果删除会导致某作用域内无法再管理角色，或该角色为预定义角色，请求也会被拒绝。"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールの削除",
+            "description": "カスタムロールをソフト削除します。削除はカスケードされません。ロールにアクティブなバインディング(ユーザー、グループ、または API key)がまだ残っている場合、リクエストは `21141 this role is in use` で拒否されます。最初にすべてのバインディングを取り消してから、ロールを削除してください。また、スコープ内でロールを管理できる最後のプリンシパルが削除される場合、またはロールが定義済みの場合も、リクエストは拒否されます。"
+          }
+        }
+      }
+    },
+    "/v2/roles/{roleId}/principals": {
+      "get": {
+        "summary": "List Cloud Role Principals",
+        "description": "Lists users, groups, and API keys directly bound to a Cloud ACL role.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "The project boundary for a predefined project role.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "预定义项目角色的项目边界。"
+              },
+              "ja-JP": {
+                "description": "定義済みプロジェクトロールのプロジェクト境界。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。"
+              },
+              "ja-JP": {
+                "description": "1 ページあたりに返す項目数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PagedRolePrincipals"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 3,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "principals": [
+                          {
+                            "principalType": "user",
+                            "email": "alice@example.com",
+                            "principalName": "Alice Wang",
+                            "assignedBy": "Bob Li",
+                            "assignedAt": "2026-06-21T00:00:00Z"
+                          },
+                          {
+                            "principalType": "group",
+                            "groupId": "g-xxxxxxxxxxxxxx",
+                            "principalName": "engineering",
+                            "assignedBy": "Bob Li",
+                            "assignedAt": "2026-06-21T00:00:00Z"
+                          },
+                          {
+                            "principalType": "apikey",
+                            "apiKeyId": "key-xxxxxxxxxxxxxx",
+                            "principalName": "Alice's key",
+                            "assignedBy": "system",
+                            "assignedAt": "2026-06-21T00:00:00Z"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 Cloud 角色主体",
+            "description": "列出直接绑定到 Cloud ACL 角色的用户、群组和 API Key。"
+          },
+          "ja-JP": {
+            "summary": "Cloud ロールのプリンシパルの一覧表示",
+            "description": "Cloud ACL ロールに直接バインドされたユーザー、グループ、API key を一覧表示します。"
+          }
+        }
+      }
+    },
+    "/v2/groups": {
+      "get": {
+        "summary": "List Groups",
+        "x-include-langs": ["en-US", "ja-JP"],
+        "description": "Lists SCIM groups in the calling organization.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "groupName",
+            "in": "query",
+            "required": false,
+            "description": "A substring to match against group display names.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eng",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于匹配群组显示名称的子字符串。"
+              },
+              "ja-JP": {
+                "description": "グループの表示名と照合する部分文字列。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。"
+              },
+              "ja-JP": {
+                "description": "1 ページあたりに返す項目数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PagedGroups"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 2,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "groups": [
+                          {
+                            "groupId": "g-xxxxxxxxxxxxxx",
+                            "groupName": "engineering",
+                            "memberCount": 12
+                          },
+                          {
+                            "groupId": "g-yyyyyyyyyyyyyy",
+                            "groupName": "data-readers",
+                            "memberCount": 3
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出群组",
+            "description": "列出调用方组织中的 SCIM 群组。"
+          },
+          "ja-JP": {
+            "summary": "グループの一覧表示",
+            "description": "呼び出し元の組織内の SCIM グループを一覧表示します。"
+          }
+        }
+      }
+    },
+    "/v2/groups/{groupId}/roles": {
+      "get": {
+        "summary": "List Group Roles",
+        "x-include-langs": ["en-US", "ja-JP"],
+        "description": "Lists roles directly assigned to a SCIM group.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "The SCIM group ID.",
+            "example": "g-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "SCIM 群组 ID。"
+              },
+              "ja-JP": {
+                "description": "SCIM グループ ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/RolesByScope"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "orgRoles": [
+                          {
+                            "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "roleName": "Public",
+                            "roleKind": "pre-defined",
+                            "assignedBy": "Bob Li"
+                          }
+                        ],
+                        "projectRoles": [
+                          {
+                            "projectId": "proj-xxxxxxxx",
+                            "roles": [
+                              {
+                                "roleId": "r-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+                                "roleName": "Data Reader",
+                                "roleKind": "custom",
+                                "assignedBy": "Bob Li"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出群组角色",
+            "description": "列出直接授予 SCIM 群组的角色。"
+          },
+          "ja-JP": {
+            "summary": "グループのロールの一覧表示",
+            "description": "SCIM グループに直接割り当てられたロールを一覧表示します。"
+          }
+        }
+      }
+    },
+    "/v2/groups/{groupId}/members": {
+      "get": {
+        "summary": "List Group Members",
+        "x-include-langs": ["en-US", "ja-JP"],
+        "description": "Lists the members of a SCIM group.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "The SCIM group ID.",
+            "example": "g-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "SCIM 群组 ID。"
+              },
+              "ja-JP": {
+                "description": "SCIM グループ ID。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。"
+              },
+              "ja-JP": {
+                "description": "1 ページあたりに返す項目数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PagedGroupMembers"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 12,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "members": [
+                          {
+                            "username": "Alice",
+                            "email": "alice@example.com"
+                          },
+                          {
+                            "username": "Bob",
+                            "email": "bob@example.com"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出群组成员",
+            "description": "列出 SCIM 群组的成员。"
+          },
+          "ja-JP": {
+            "summary": "グループのメンバーの一覧表示",
+            "description": "SCIM グループのメンバーを一覧表示します。"
+          }
+        }
+      }
+    },
+    "/v2/groups/{groupId}/roles/{roleId}": {
+      "put": {
+        "summary": "Grant Role To Group",
+        "x-include-langs": ["en-US", "ja-JP"],
+        "description": "Grants one role directly to a SCIM group.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "The SCIM group ID.",
+            "example": "g-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "SCIM 群组 ID。"
+              },
+              "ja-JP": {
+                "description": "SCIM グループ ID。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "Required when granting a predefined project role.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予预定义项目角色时必填。"
+              },
+              "ja-JP": {
+                "description": "定義済みプロジェクトロールを付与する場合に必要です。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "boolean",
+                          "description": "Whether the operation succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作是否成功。"
+                            },
+                            "ja-JP": {
+                              "description": "操作が成功したかどうか。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": true
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "为群组授予角色",
+            "description": "直接向 SCIM 群组授予一个角色。"
+          },
+          "ja-JP": {
+            "summary": "グループへのロールの付与",
+            "description": "SCIM グループに 1 つのロールを直接付与します。"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Revoke Role From Group",
+        "x-include-langs": ["en-US", "ja-JP"],
+        "description": "Revokes one directly assigned role from a SCIM group.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "The SCIM group ID.",
+            "example": "g-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "SCIM 群组 ID。"
+              },
+              "ja-JP": {
+                "description": "SCIM グループ ID。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "Required when revoking a predefined project role.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "撤销预定义项目角色时必填。"
+              },
+              "ja-JP": {
+                "description": "定義済みプロジェクトロールを取り消す場合に必要です。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "boolean",
+                          "description": "Whether the operation succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作是否成功。"
+                            },
+                            "ja-JP": {
+                              "description": "操作が成功したかどうか。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": true
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销群组角色",
+            "description": "撤销直接授予 SCIM 群组的一个角色。"
+          },
+          "ja-JP": {
+            "summary": "グループからのロールの取り消し",
+            "description": "SCIM グループから直接割り当てられた 1 つのロールを取り消します。"
+          }
+        }
+      }
+    },
+    "/v2/members/{userId}/roles": {
+      "get": {
+        "summary": "List Member Roles",
+        "description": "Lists roles directly assigned to a member. Group-inherited roles are not included.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The member user ID.",
+            "example": "usr-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员用户 ID。"
+              },
+              "ja-JP": {
+                "description": "メンバーのユーザー ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/RolesByScope"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "orgRoles": [
+                          {
+                            "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "roleName": "Public",
+                            "roleKind": "pre-defined",
+                            "assignedBy": "Bob Li"
+                          }
+                        ],
+                        "projectRoles": [
+                          {
+                            "projectId": "proj-xxxxxxxx",
+                            "roles": [
+                              {
+                                "roleId": "r-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+                                "roleName": "Data Reader",
+                                "roleKind": "custom",
+                                "assignedBy": "Bob Li"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出成员角色",
+            "description": "列出直接授予成员的角色，不包括通过群组继承的角色。"
+          },
+          "ja-JP": {
+            "summary": "メンバーのロールの一覧表示",
+            "description": "メンバーに直接割り当てられたロールを一覧表示します。グループから継承されたロールは含まれません。"
+          }
+        }
+      }
+    },
+    "/v2/members/{userId}/roles/{roleId}": {
+      "put": {
+        "summary": "Grant Role To Member",
+        "description": "Grants one role directly to a member.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The member user ID.",
+            "example": "usr-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员用户 ID。"
+              },
+              "ja-JP": {
+                "description": "メンバーのユーザー ID。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "Required when granting a predefined project role.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予预定义项目角色时必填。"
+              },
+              "ja-JP": {
+                "description": "定義済みプロジェクトロールを付与する場合に必要です。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "boolean",
+                          "description": "Whether the operation succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作是否成功。"
+                            },
+                            "ja-JP": {
+                              "description": "操作が成功したかどうか。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": true
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "为成员授予角色",
+            "description": "直接向成员授予一个角色。"
+          },
+          "ja-JP": {
+            "summary": "メンバーへのロールの付与",
+            "description": "メンバーに 1 つのロールを直接付与します。"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Revoke Role From Member",
+        "description": "Revokes one directly assigned role from a member.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The member user ID.",
+            "example": "usr-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员用户 ID。"
+              },
+              "ja-JP": {
+                "description": "メンバーのユーザー ID。"
+              }
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "description": "The role ID.",
+            "example": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "Required when revoking a predefined project role.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "撤销预定义项目角色时必填。"
+              },
+              "ja-JP": {
+                "description": "定義済みプロジェクトロールを取り消す場合に必要です。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "boolean",
+                          "description": "Whether the operation succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作是否成功。"
+                            },
+                            "ja-JP": {
+                              "description": "操作が成功したかどうか。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": true
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销成员角色",
+            "description": "撤销直接授予成员的一个角色。"
+          },
+          "ja-JP": {
+            "summary": "メンバーからのロールの取り消し",
+            "description": "メンバーから直接割り当てられた 1 つのロールを取り消します。"
+          }
+        }
+      }
+    },
+    "/v2/members": {
+      "get": {
+        "summary": "Resolve Member",
+        "description": "Resolves an organization member by email or user ID. Exactly one of email or userId must be provided.",
+        "tags": [
+          "Cloud Access Control Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "description": "The member email address.",
+            "example": "alice@example.com",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员邮箱地址。"
+              },
+              "ja-JP": {
+                "description": "メンバーのメールアドレス。"
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "description": "The member user ID.",
+            "example": "usr-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员用户 ID。"
+              },
+              "ja-JP": {
+                "description": "メンバーのユーザー ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/UserLookupResponse"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "userId": "usr-xxxxxxxxxxxxxx",
+                        "name": "Alice Wang",
+                        "email": "alice@example.com"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "解析成员",
+            "description": "通过邮箱或用户 ID 解析组织成员。必须提供 email 或 userId 其中之一。"
+          },
+          "ja-JP": {
+            "summary": "メンバーの解決",
+            "description": "メンバーを email またはユーザー ID で解決します。email または userId のいずれか一方のみを指定する必要があります。"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PolicyStatement": {
+        "type": "object",
+        "description": "A policy statement attached to a custom Cloud role.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "附加到自定义 Cloud 角色的策略语句。"
+          },
+          "ja-JP": {
+            "description": "カスタム Cloud ロールに添付されるポリシーステートメント。"
+          }
+        },
+        "properties": {
+          "resourceType": {
+            "type": "string",
+            "description": "The second-level resource the statement targets. Organization-level types: `org_member`, `group`, `api_key`, `org_role`, `project_role`, `project`, `billing`, `authentication`, `org_control_ops`, `recovery`. Project-level types: `project_member`, `security`, `backup`, `observability`, `serving_cluster`, `on_demand_cluster`, `volume`, `storage_integration`, `model_provider_integration`, `kms_integration`, `datadog_integration`, `serving_cluster_data`, `on_demand_compute_data`, `volume_data`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "策略语句针对的二级资源。组织级类型：`org_member`、`group`、`api_key`、`org_role`、`project_role`、`project`、`billing`、`authentication`、`org_control_ops`、`recovery`。项目级类型：`project_member`、`security`、`backup`、`observability`、`serving_cluster`、`on_demand_cluster`、`volume`、`storage_integration`、`model_provider_integration`、`kms_integration`、`datadog_integration`、`serving_cluster_data`、`on_demand_compute_data`、`volume_data`。"
+              },
+              "ja-JP": {
+                "description": "ステートメントが対象とする第 2 レベルのリソース(例: `serving_cluster`、`volume`、`project_member`、`project_role`)。"
+              }
+            },
+            "enum": [
+              "org_member",
+              "group",
+              "api_key",
+              "org_role",
+              "project_role",
+              "project",
+              "billing",
+              "authentication",
+              "org_control_ops",
+              "recovery",
+              "project_member",
+              "security",
+              "backup",
+              "observability",
+              "serving_cluster",
+              "on_demand_cluster",
+              "volume",
+              "storage_integration",
+              "model_provider_integration",
+              "kms_integration",
+              "datadog_integration",
+              "serving_cluster_data",
+              "on_demand_compute_data",
+              "volume_data"
+            ]
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "view",
+                "create",
+                "modify",
+                "delete",
+                "grant",
+                "manage",
+                "usage",
+                "read",
+                "write",
+                "all"
+              ]
+            },
+            "minItems": 1,
+            "description": "Atomic privileges on that resource, e.g. `[\"view\", \"create\"]`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "针对该资源的原子权限，例如 `[\"view\", \"create\"]`。"
+              },
+              "ja-JP": {
+                "description": "そのリソースに対するアトミックな特権(例: `[\"view\", \"create\"]`)。"
+              }
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Which instances the statement covers: `*` for all, or explicit ids (validated against the role's project). Required on `serving_cluster`, `on_demand_cluster`, `volume`, `serving_cluster_data`, `volume_data`, `storage_integration`, `model_provider_integration`, `kms_integration` and `datadog_integration`, unless the statement's only privilege is `create`. For `on_demand_compute_data`, predefined roles return `[\"*\"]`; on write this field is rejected and should be omitted. Everywhere else, omit it — it is rejected on write and never returned.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "策略覆盖的实例：`*` 表示所有，或显式 id（会依据角色的项目进行校验）。在 `serving_cluster`、`on_demand_cluster`、`volume`、`serving_cluster_data`、`volume_data`、`storage_integration`、`model_provider_integration`、`kms_integration` 和 `datadog_integration` 上必填，除非该语句的唯一权限是 `create`。对于 `on_demand_compute_data`，预定义角色返回 `[\"*\"]`；写入时此字段会被拒绝应省略。其他资源类型请省略——写入时会被拒绝且永不返回。"
+              },
+              "ja-JP": {
+                "description": "ステートメントが対象とするインスタンス: すべての場合は `*`、または明示的な ID(ロールのプロジェクトに対して検証されます)。`serving_cluster`、`on_demand_cluster`、`volume`、`serving_cluster_data`、`volume_data`、`storage_integration`、`model_provider_integration`、`kms_integration`、`datadog_integration` では、ステートメントの唯一の特権が `create` でない限り必須です。それ以外の場所(`on_demand_compute_data` を含む)では省略してください — 書き込み時には拒否され、返されることはありません。"
+              }
+            }
+          },
+          "scope": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Reserved for future use. Omit this field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "保留供未来使用，请省略此字段。"
+              },
+              "ja-JP": {
+                "description": "将来の使用のために予約されています。このフィールドは省略してください。"
+              }
+            }
+          }
+        },
+        "required": [
+          "resourceType",
+          "privileges"
+        ]
+      },
+      "CloudRole": {
+        "type": "object",
+        "description": "A Cloud ACL role.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Cloud ACL 角色。"
+          },
+          "ja-JP": {
+            "description": "Cloud ACL ロール。"
+          }
+        },
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "description": "The role ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          "roleName": {
+            "type": "string",
+            "description": "The role display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色显示名称。"
+              },
+              "ja-JP": {
+                "description": "ロールの表示名。"
+              }
+            }
+          },
+          "roleType": {
+            "type": "string",
+            "enum": [
+              "org",
+              "project"
+            ],
+            "description": "The role scope.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色作用域。"
+              },
+              "ja-JP": {
+                "description": "ロールのスコープ。"
+              }
+            }
+          },
+          "roleKind": {
+            "type": "string",
+            "enum": [
+              "pre-defined",
+              "custom"
+            ],
+            "description": "Whether the role is predefined or custom.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色是预定义角色还是自定义角色。"
+              },
+              "ja-JP": {
+                "description": "ロールが定義済みかカスタムかを示します。"
+              }
+            }
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The project ID for a project-scoped role. For an organization-scoped role, this field returns an empty string.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目级角色的项目 ID。对于组织级角色，此字段返回空字符串。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトスコープのロールのプロジェクト ID。組織スコープのロールの場合、このフィールドは空の文字列を返します。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The role description.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色描述。"
+              },
+              "ja-JP": {
+                "description": "ロールの説明。"
+              }
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyStatement"
+            },
+            "description": "The policy statements attached to the role.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "附加到角色的策略语句。"
+              },
+              "ja-JP": {
+                "description": "ロールに添付されたポリシーステートメント。"
+              }
+            }
+          }
+        },
+        "required": [
+          "roleId",
+          "roleName",
+          "roleType",
+          "roleKind"
+        ]
+      },
+      "PagedCloudRoles": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The total number of matching items.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配条目的总数。"
+              },
+              "ja-JP": {
+                "description": "一致する項目の総数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The requested page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "请求的每页条目数。"
+              },
+              "ja-JP": {
+                "description": "要求されたページサイズ。"
+              }
+            }
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CloudRole"
+            },
+            "description": "The roles returned on this page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页面返回的角色。"
+              },
+              "ja-JP": {
+                "description": "このページで返されるロール。"
+              }
+            }
+          }
+        },
+        "required": [
+          "count",
+          "currentPage",
+          "pageSize",
+          "roles"
+        ]
+      },
+      "CreateCloudRoleRequest": {
+        "type": "object",
+        "description": "The role to create. Omit projectId for an organization role; include it for a project role.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "要创建的角色。组织级角色省略 `projectId`；项目级角色提供该字段。"
+          },
+          "ja-JP": {
+            "description": "作成するロール。組織ロールの場合は projectId を省略し、プロジェクトロールの場合は指定します。"
+          }
+        },
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project ID for a project-scoped role. Omit this field for an organization-scoped role.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目级角色所属的项目 ID。组织级角色省略此字段。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトスコープのロールのプロジェクト ID。組織スコープのロールの場合はこのフィールドを省略します。"
+              }
+            }
+          },
+          "roleName": {
+            "type": "string",
+            "description": "The unique role display name within its scope.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色作用域内唯一的显示名称。"
+              },
+              "ja-JP": {
+                "description": "そのスコープ内で一意のロールの表示名。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The optional role description.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "可选的角色描述。"
+              },
+              "ja-JP": {
+                "description": "オプションのロールの説明。"
+              }
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyStatement"
+            },
+            "minItems": 1,
+            "description": "The policy statements assigned to the role.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予角色的策略语句。"
+              },
+              "ja-JP": {
+                "description": "ロールに割り当てられたポリシーステートメント。"
+              }
+            }
+          }
+        },
+        "required": [
+          "roleName",
+          "policies"
+        ]
+      },
+      "UpdateCloudRoleRequest": {
+        "type": "object",
+        "minProperties": 1,
+        "description": "Fields to update on a custom role.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "要更新的自定义角色字段。"
+          },
+          "ja-JP": {
+            "description": "カスタムロールで更新するフィールド。"
+          }
+        },
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project boundary assertion for a project-scoped role.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目级角色的项目边界声明。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトスコープのロールのプロジェクト境界の指定。"
+              }
+            }
+          },
+          "roleName": {
+            "type": "string",
+            "description": "The replacement role display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "替换后的角色显示名称。"
+              },
+              "ja-JP": {
+                "description": "置き換え後のロールの表示名。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The replacement description. Send an empty string to clear it.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "替换后的描述。传入空字符串可清除描述。"
+              },
+              "ja-JP": {
+                "description": "置き換え後の説明。クリアするには空文字列を送信します。"
+              }
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyStatement"
+            },
+            "minItems": 1,
+            "description": "The complete replacement policy set. An empty array is rejected.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "完整替换策略集，不接受空数组。"
+              },
+              "ja-JP": {
+                "description": "置き換え後の完全なポリシーセット。空の配列は拒否されます。"
+              }
+            }
+          }
+        }
+      },
+      "AssignedRole": {
+        "type": "object",
+        "description": "A role directly assigned to a member or group.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "直接授予成员或群组的角色。"
+          },
+          "ja-JP": {
+            "description": "メンバーまたはグループに直接割り当てられたロール。"
+          }
+        },
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "description": "The role ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色 ID。"
+              },
+              "ja-JP": {
+                "description": "ロール ID。"
+              }
+            }
+          },
+          "roleName": {
+            "type": "string",
+            "description": "The role display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色显示名称。"
+              },
+              "ja-JP": {
+                "description": "ロールの表示名。"
+              }
+            }
+          },
+          "roleKind": {
+            "type": "string",
+            "enum": [
+              "pre-defined",
+              "custom"
+            ],
+            "description": "Whether the role is predefined or custom.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "角色是预定义角色还是自定义角色。"
+              },
+              "ja-JP": {
+                "description": "ロールが定義済みかカスタムかを示します。"
+              }
+            }
+          },
+          "assignedBy": {
+            "type": "string",
+            "description": "The display name of the user who assigned the role, or the raw non-user assigner value.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予角色的用户显示名称；非用户授予者则返回原始值。"
+              },
+              "ja-JP": {
+                "description": "ロールを割り当てたユーザーの表示名、または非ユーザーの割り当て者の生の値。"
+              }
+            }
+          }
+        },
+        "required": [
+          "roleId",
+          "roleName",
+          "roleKind",
+          "assignedBy"
+        ]
+      },
+      "ProjectRoleAssignments": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト ID。"
+              }
+            }
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssignedRole"
+            },
+            "description": "The roles assigned within the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "在该项目中授予的角色。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト内で割り当てられたロール。"
+              }
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "roles"
+        ]
+      },
+      "RolesByScope": {
+        "type": "object",
+        "properties": {
+          "orgRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssignedRole"
+            },
+            "description": "The organization-scoped roles directly assigned to the principal.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "直接授予该主体的组织级角色。"
+              },
+              "ja-JP": {
+                "description": "プリンシパルに直接割り当てられた組織スコープのロール。"
+              }
+            }
+          },
+          "projectRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectRoleAssignments"
+            },
+            "description": "The project-scoped roles directly assigned to the principal, grouped by project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "直接授予该主体的项目级角色，按项目分组。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトごとにグループ化された、プリンシパルに直接割り当てられたプロジェクトスコープのロール。"
+              }
+            }
+          }
+        },
+        "required": [
+          "orgRoles",
+          "projectRoles"
+        ]
+      },
+      "RolePrincipal": {
+        "type": "object",
+        "properties": {
+          "principalType": {
+            "type": "string",
+            "enum": [
+              "user",
+              "group",
+              "apikey"
+            ],
+            "description": "The principal type.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主体类型。"
+              },
+              "ja-JP": {
+                "description": "プリンシパルのタイプ。"
+              }
+            }
+          },
+          "principalId": {
+            "type": "string",
+            "description": "The principal identifier. For `user` type, this is the user ID (e.g., `usr-xxxxxxxxxxxxxxxxxxxxxx`). For `apikey` type, this is the API key ID (64-character hex string). For `group` type, this is the group ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主体标识符。`user` 类型为用户 ID（如 `usr-xxxxxxxxxxxxxxxxxxxxxx`）；`apikey` 类型为 API Key ID（64 位十六进制字符串）；`group` 类型为群组 ID。"
+              },
+              "ja-JP": {
+                "description": "プリンシパル識別子。`user` タイプの場合はユーザー ID(`usr-xxxxxxxxxxxxxxxxxxxxxx` など)、`apikey` タイプの場合は API key ID(64 文字の 16 進文字列)、`group` タイプの場合はグループ ID です。"
+              }
+            }
+          },
+          "principalName": {
+            "type": "string",
+            "description": "The display name of the principal.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "主体显示名称。"
+              },
+              "ja-JP": {
+                "description": "プリンシパルの表示名。"
+              }
+            }
+          },
+          "assignedBy": {
+            "type": "string",
+            "description": "The display name of the assigning user, or a raw non-user value such as `system`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予者的用户显示名称；非用户授予者返回类似 `system` 的原始值。"
+              },
+              "ja-JP": {
+                "description": "割り当てたユーザーの表示名、または `system` などの非ユーザーの生の値。"
+              }
+            }
+          },
+          "assignedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The assignment time in UTC ISO 8601 format.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予时间，采用 UTC ISO 8601 格式。"
+              },
+              "ja-JP": {
+                "description": "UTC ISO 8601 形式の割り当て時刻。"
+              }
+            }
+          }
+        },
+        "required": [
+          "principalType",
+          "principalId",
+          "principalName",
+          "assignedBy",
+          "assignedAt"
+        ]
+      },
+      "PagedRolePrincipals": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The total number of matching items.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配条目的总数。"
+              },
+              "ja-JP": {
+                "description": "一致する項目の総数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The requested page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "请求的每页条目数。"
+              },
+              "ja-JP": {
+                "description": "要求されたページサイズ。"
+              }
+            }
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RolePrincipal"
+            },
+            "description": "The principals returned on this page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页面返回的主体。"
+              },
+              "ja-JP": {
+                "description": "このページで返されるプリンシパル。"
+              }
+            }
+          }
+        },
+        "required": [
+          "count",
+          "currentPage",
+          "pageSize",
+          "principals"
+        ]
+      },
+      "GroupSummary": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "The SCIM group ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "SCIM 群组 ID。"
+              },
+              "ja-JP": {
+                "description": "SCIM グループ ID。"
+              }
+            }
+          },
+          "groupName": {
+            "type": "string",
+            "description": "The group display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "群组显示名称。"
+              },
+              "ja-JP": {
+                "description": "グループの表示名。"
+              }
+            }
+          },
+          "memberCount": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The number of members in the group.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "群组中的成员数量。"
+              },
+              "ja-JP": {
+                "description": "グループ内のメンバー数。"
+              }
+            }
+          }
+        },
+        "required": [
+          "groupId",
+          "groupName",
+          "memberCount"
+        ]
+      },
+      "PagedGroups": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The total number of matching items.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配条目的总数。"
+              },
+              "ja-JP": {
+                "description": "一致する項目の総数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The requested page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "请求的每页条目数。"
+              },
+              "ja-JP": {
+                "description": "要求されたページサイズ。"
+              }
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupSummary"
+            },
+            "description": "The groups returned on this page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页面返回的群组。"
+              },
+              "ja-JP": {
+                "description": "このページで返されるグループ。"
+              }
+            }
+          }
+        },
+        "required": [
+          "count",
+          "currentPage",
+          "pageSize",
+          "groups"
+        ]
+      },
+      "GroupMember": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The member display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员显示名称。"
+              },
+              "ja-JP": {
+                "description": "メンバーの表示名。"
+              }
+            }
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The member email address.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员邮箱地址。"
+              },
+              "ja-JP": {
+                "description": "メンバーのメールアドレス。"
+              }
+            }
+          }
+        },
+        "required": [
+          "username",
+          "email"
+        ]
+      },
+      "PagedGroupMembers": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The total number of matching items.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配条目的总数。"
+              },
+              "ja-JP": {
+                "description": "一致する項目の総数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The requested page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "请求的每页条目数。"
+              },
+              "ja-JP": {
+                "description": "要求されたページサイズ。"
+              }
+            }
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupMember"
+            },
+            "description": "The members returned on this page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页面返回的成员。"
+              },
+              "ja-JP": {
+                "description": "このページで返されるメンバー。"
+              }
+            }
+          }
+        },
+        "required": [
+          "count",
+          "currentPage",
+          "pageSize",
+          "members"
+        ]
+      },
+      "UserLookupResponse": {
+        "type": "object",
+        "description": "A resolved organization member.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "解析出的组织成员。"
+          },
+          "ja-JP": {
+            "description": "解決された組織メンバー。"
+          }
+        },
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The member user ID.",
+            "example": "usr-xxxxxxxxxxxxxx",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员用户 ID。"
+              },
+              "ja-JP": {
+                "description": "メンバーのユーザー ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The member display name.",
+            "example": "Alice Wang",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员显示名称。"
+              },
+              "ja-JP": {
+                "description": "メンバーの表示名。"
+              }
+            }
+          },
+          "email": {
+            "type": "string",
+            "description": "The member email address.",
+            "example": "alice@example.com",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "成员邮箱地址。"
+              },
+              "ja-JP": {
+                "description": "メンバーのメールアドレス。"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
