@@ -11,7 +11,7 @@ R<RpcStatus> createCredential(CreateCredentialParam requestParam);
 Use the `CreateCredentialParam.Builder` to construct a `CreateCredentialParam` object.
 
 ```java
-import io.milvus.param.CreateCredentialParam;
+import io.milvus.param.credential.CreateCredentialParam;
 CreateCredentialParam.Builder builder = CreateCredentialParam.newBuilder();
 ```
 
@@ -58,12 +58,15 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.credential.CreateCredentialParam;
 
 CreateCredentialParam param = CreateCredentialParam.newBuilder()
         .withUsername("user")
         .withPassword("password")
         .build();
-R<RpcStatus> response = client.createCredential(param)
+R<RpcStatus> response = client.createCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

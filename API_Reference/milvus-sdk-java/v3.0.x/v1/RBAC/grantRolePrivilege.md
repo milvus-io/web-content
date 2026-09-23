@@ -11,7 +11,7 @@ R<RpcStatus> grantRolePrivilege(GrantRolePrivilegeParam requestParam);
 Use the `GrantRolePrivilegeParam.Builder` to construct a `GrantRolePrivilegeParam` object.
 
 ```java
-import io.milvus.param.GrantRolePrivilegeParam;
+import io.milvus.param.role.GrantRolePrivilegeParam;
 GrantRolePrivilegeParam.Builder builder = GrantRolePrivilegeParam.newBuilder();
 ```
 
@@ -77,7 +77,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.GrantRolePrivilegeParam;
+import io.milvus.param.role.GrantRolePrivilegeParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.grantRolePrivilege(GrantRolePrivilegeParam.newBuilder()
         .withRoleName(roleName)

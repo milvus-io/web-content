@@ -11,7 +11,7 @@ R<RpcStatus> createCollection(CreateCollectionParam requestParam);
 Use the `CreateCollectionParam.Builder` to construct a `CreateCollectionParam` object.
 
 ```java
-import io.milvus.param.CreateCollectionParam;
+import io.milvus.param.collection.CreateCollectionParam;
 CreateCollectionParam.Builder builder = CreateCollectionParam.newBuilder();
 ```
 
@@ -99,9 +99,9 @@ The `CreateCollectionParam.Builder.build()` can throw the following exceptions:
 A tool class to represent a field's schema. Use `FieldType.Builder` to build a `FieldType` object.
 
 ```java
-import io.milvus.param.FieldType;
+import io.milvus.param.collection.FieldType;
 FieldType.Builder builder = FieldType.newBuilder();
-FieldType ft = builder.build()
+FieldType ft = builder.build();
 ```
 
 Methods of `FieldType.Builder`:
@@ -227,6 +227,13 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.grpc.DataType;
+import java.util.ArrayList;
+import java.util.List;
+import io.milvus.param.collection.CreateCollectionParam;
+import io.milvus.param.collection.FieldType;
 
 List<FieldType> fieldsSchema = new ArrayList<>();
 FieldType field_1 = FieldType.newBuilder()

@@ -11,7 +11,7 @@ R<GetLoadingProgressResponse> getLoadingProgress(GetLoadingProgressParam request
 Use the `GetLoadingProgressParam.Builder` to construct a `GetLoadingProgressParam` object.
 
 ```java
-import io.milvus.param.GetLoadingProgressParam;
+import io.milvus.param.collection.GetLoadingProgressParam;
 GetLoadingProgressParam.Builder builder = GetLoadingProgressParam.newBuilder();
 ```
 
@@ -68,6 +68,8 @@ This method catches all the exceptions and returns an `R<GetLoadingProgressRespo
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.collection.GetLoadingProgressParam;
 
 GetLoadingProgressParam param = GetLoadingProgressParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

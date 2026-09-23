@@ -11,7 +11,7 @@ R<Boolean> hasPartition(HasPartitionParam requestParam);
 Use the `HasPartitionParam.Builder` to construct a `HasPartitionParam` object.
 
 ```java
-import io.milvus.param.HasPartitionParam;
+import io.milvus.param.partition.HasPartitionParam;
 HasPartitionParam.Builder builder = HasPartitionParam.newBuilder();
 ```
 
@@ -63,6 +63,8 @@ This method catches all the exceptions and returns an `R<Boolean>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.partition.HasPartitionParam;
 
 HasPartitionParam param = HasPartitionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

@@ -11,7 +11,7 @@ R<DescribeCollectionResponse> describeCollection(DescribeCollectionParam request
 Use the `DescribeCollectionParam.Builder` to construct a `DescribeCollectionParam` object.
 
 ```java
-import io.milvus.param.DescribeCollectionParam;
+import io.milvus.param.collection.DescribeCollectionParam;
 DescribeCollectionParam.Builder builder = DescribeCollectionParam.newBuilder();
 ```
 
@@ -139,6 +139,8 @@ Methods of `DescCollResponseWrapper`:
 ```java
 import io.milvus.param.*;
 import io.milvus.response.DescCollResponseWrapper;
+import io.milvus.param.R;
+import io.milvus.param.collection.DescribeCollectionParam;
 
 DescribeCollectionParam param = DescribeCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

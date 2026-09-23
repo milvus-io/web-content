@@ -80,6 +80,10 @@ SearchReq.builder()
 
     The name of the database. Defaults to the current database when omitted.
 
+- `clusterId(String clusterId)`
+
+    **Deprecated.** The ID of the cluster to search. Applies to global-cluster deployments.
+
 - `collectionName(String collectionName)`
 
     The name of the target collection.

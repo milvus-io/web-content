@@ -48,6 +48,7 @@ This method catches all the exceptions and returns an `R<ListCollectionsResponse
 
 ```java
 import io.milvus.param.highlevel.collection.*;
+import io.milvus.param.R;
 
 ListCollectionsParam param = ListCollectionsParam.newBuilder()
         .build();

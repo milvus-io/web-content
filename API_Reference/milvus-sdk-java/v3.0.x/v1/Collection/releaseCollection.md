@@ -11,7 +11,7 @@ R<RpcStatus> releaseCollection(ReleaseCollectionParam requestParam);
 Use the `ReleaseCollectionParam.Builder` to construct a `ReleaseCollectionParam` object.
 
 ```java
-import io.milvus.param.ReleaseCollectionParam;
+import io.milvus.param.collection.ReleaseCollectionParam;
 ReleaseCollectionParam.Builder builder = ReleaseCollectionParam.newBuilder();
 ```
 
@@ -58,6 +58,8 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.collection.ReleaseCollectionParam;
 
 ReleaseCollectionParam param = ReleaseCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

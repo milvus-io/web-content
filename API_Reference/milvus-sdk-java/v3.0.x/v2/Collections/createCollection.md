@@ -89,6 +89,10 @@ createCollection(CreateCollectionReq.builder()
 
     A list of IndexParam objects defining the index configuration. Defaults to `new ArrayList<>()`.
 
+- `indexParam(IndexParam indexParam)` -
+
+    Appends a single index parameter to create together with the collection.
+
 - `numPartitions(Integer numPartitions)` -
 
     The number of partitions for the collection.
@@ -100,6 +104,10 @@ createCollection(CreateCollectionReq.builder()
 - `properties(final Map<String, String> properties)` -
 
     A map of collection properties. Defaults to `new HashMap<>()`.
+
+- `property(String key, String value)` -
+
+    Adds a single property to the collection.
 
 **RETURNS:**
 
@@ -120,6 +128,8 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

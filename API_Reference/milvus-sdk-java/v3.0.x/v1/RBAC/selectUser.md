@@ -11,7 +11,7 @@ R<SelectUserResponse> selectUser(SelectUserParam requestParam);
 Use the `SelectUserParam.Builder` to construct a `SelectUserParam` object.
 
 ```java
-import io.milvus.param.SelectUserParam;
+import io.milvus.param.role.SelectUserParam;
 SelectUserParam.Builder builder = SelectUserParam.newBuilder();
 ```
 
@@ -57,7 +57,8 @@ This method catches all the exceptions and returns an `R<SelectUserResponse>` ob
 #### Example
 
 ```java
-import io.milvus.param.SelectUserParam;
+import io.milvus.param.role.SelectUserParam;
+import io.milvus.param.R;
 
 R<SelectUserResponse> response = client.selectUser(SelectUserParam.newBuilder()
             .withUsername(userName)

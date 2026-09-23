@@ -81,6 +81,10 @@ import io.milvus.param.*;
 import io.milvus.response.QueryResultsWrapper;
 import io.milvus.response.FieldDataWrapper;
 import io.milvus.grpc.QueryResults;
+import io.milvus.param.R;
+import io.milvus.param.highlevel.dml.QuerySimpleParam;
+import io.milvus.param.highlevel.dml.response.QueryResponse;
+import com.google.common.collect.Lists;
 
 QuerySimpleParam querySimpleParam = QuerySimpleParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
@@ -89,7 +93,7 @@ QuerySimpleParam querySimpleParam = QuerySimpleParam.newBuilder()
         .withLimit(100L)
         .withOffset(0L)
         .build();
-R<QueryResponse> response = client.query(param)
+R<QueryResponse> response = client.query(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

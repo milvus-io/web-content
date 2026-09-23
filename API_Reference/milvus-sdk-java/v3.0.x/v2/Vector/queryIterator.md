@@ -34,6 +34,10 @@ queryIterator(QueryIteratorReq.builder()
 
     The name of the database. Defaults to the current database if not specified.
 
+- `clusterId(String clusterId)`
+
+    **Deprecated.** The ID of the cluster to query. Applies to global-cluster deployments.
+
 - `collectionName(String collectionName)`
 
     The name of the target collection.

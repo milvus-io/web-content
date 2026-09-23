@@ -11,7 +11,7 @@ R<GetLoadStateResponse> getLoadState(GetLoadStateParam requestParam);
 Use the `GetLoadStateParam.Builder` to construct a GetLoadStateParam object.
 
 ```java
-import io.milvus.param.GetLoadStateParam;
+import io.milvus.param.collection.GetLoadStateParam;
 GetLoadStateParam.Builder builder = GetLoadStateParam.newBuilder();
 ```
 
@@ -68,6 +68,8 @@ This method catches all the exceptions and returns an `R<GetLoadStateResponse>` 
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.collection.GetLoadStateParam;
 
 GetLoadStateParam param = GetLoadStateParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

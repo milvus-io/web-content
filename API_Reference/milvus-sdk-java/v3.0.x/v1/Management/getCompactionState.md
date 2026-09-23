@@ -11,7 +11,7 @@ R<GetCompactionStateResponse> getCompactionState(GetCompactionStateParam request
 Use the `GetCompactionStateParam.Builder` to construct a `GetCompactionStateParam` object.
 
 ```java
-import io.milvus.param.GetCompactionStateParam;
+import io.milvus.param.control.GetCompactionStateParam;
 GetCompactionStateParam.Builder builder = GetCompactionStateParam.newBuilder();
 ```
 
@@ -86,6 +86,8 @@ public enum CompactionState
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetCompactionStateResponse;
+import io.milvus.param.R;
+import io.milvus.param.control.GetCompactionStateParam;
 
 GetCompactionStateParam param = GetCompactionStateParam.newBuilder()
         .withCompactionID(compactionID)

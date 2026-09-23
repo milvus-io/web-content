@@ -11,7 +11,7 @@ R<SelectGrantResponse> selectGrantForRole(SelectGrantForRoleParam requestParam);
 Use the `SelectGrantForRoleParam.Builder` to construct a `SelectGrantForRoleParam` object.
 
 ```java
-import io.milvus.param.SelectGrantForRoleParam;
+import io.milvus.param.role.SelectGrantForRoleParam;
 SelectGrantForRoleParam.Builder builder = SelectGrantForRoleParam.newBuilder();
 ```
 
@@ -57,7 +57,9 @@ This method catches all the exceptions and returns an `R<SelectGrantResponse>` o
 #### Example
 
 ```java
-import io.milvus.param.SelectGrantForRoleParam;
+import io.milvus.param.role.SelectGrantForRoleParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
         .withRoleName(roleName)

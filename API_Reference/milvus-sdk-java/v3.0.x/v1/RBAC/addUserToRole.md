@@ -11,7 +11,7 @@ R<RpcStatus> addUserToRole(AddUserToRoleParam requestParam);
 Use the `AddUserToRoleParam.Builder` to construct an `AddUserToRoleParam` object.
 
 ```java
-import io.milvus.param.AddUserToRoleParam;
+import io.milvus.param.role.AddUserToRoleParam;
 AddUserToRoleParam.Builder builder = AddUserToRoleParam.newBuilder();
 ```
 
@@ -57,7 +57,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.AddUserToRoleParam;
+import io.milvus.param.role.AddUserToRoleParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.addUserToRole(AddUserToRoleParam.newBuilder()
             .withRoleName(roleName)

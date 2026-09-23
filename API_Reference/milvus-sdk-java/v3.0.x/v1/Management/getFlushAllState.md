@@ -11,7 +11,7 @@ R<GetFlushAllStateResponse> getFlushAllState(GetFlushAllStateParam requestParam)
 Use the `GetFlushAllStateParam.Builder` to construct a `GetFlushAllStateParam` object.
 
 ```java
-import io.milvus.param.GetFlushAllStateParam;
+import io.milvus.param.control.GetFlushAllStateParam;
 GetFlushAllStateParam.Builder builder = GetFlushAllStateParam.newBuilder();
 ```
 
@@ -50,6 +50,8 @@ This method catches all the exceptions and returns an `R<GetFlushAllStateRespons
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetFlushAllStateResponse;
+import io.milvus.param.R;
+import io.milvus.param.control.GetFlushAllStateParam;
 
 GetFlushAllStateParam param = GetFlushAllStateParam.newBuilder()
         .build();

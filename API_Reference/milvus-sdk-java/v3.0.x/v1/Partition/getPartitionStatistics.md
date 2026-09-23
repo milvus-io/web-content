@@ -11,7 +11,7 @@ R<GetPartitionStatisticsResponse> getPartitionStatistics(GetPartitionStatisticsP
 Use the `GetPartitionStatisticsParam.Builder` to construct a `GetPartitionStatisticsParam` object.
 
 ```java
-import io.milvus.param.GetPartitionStatisticsParam;
+import io.milvus.param.partition.GetPartitionStatisticsParam;
 GetPartitionStatisticsParam.Builder builder = GetPartitionStatisticsParam.newBuilder();
 ```
 
@@ -94,6 +94,8 @@ Methods of `GetPartStatResponseWrapper`:
 import io.milvus.param.*;
 import io.milvus.grpc.GetPartitionStatisticsResponse;
 import io.milvus.response.GetPartStatResponseWrapper;
+import io.milvus.param.R;
+import io.milvus.param.partition.GetPartitionStatisticsParam;
 
 GetPartitionStatisticsParam param = GetPartitionStatisticsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

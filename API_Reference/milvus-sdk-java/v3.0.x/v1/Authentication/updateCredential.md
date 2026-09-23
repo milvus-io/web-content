@@ -17,7 +17,7 @@ R<RpcStatus> updateCredential(UpdateCredentialParam requestParam);
 Use the `UpdateCredentialParam.Builder` to construct an `UpdateCredentialParam` object.
 
 ```java
-import io.milvus.param.UpdateCredentialParam;
+import io.milvus.param.credential.UpdateCredentialParam;
 UpdateCredentialParam.Builder builder = UpdateCredentialParam.newBuilder();
 ```
 
@@ -69,13 +69,16 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.credential.UpdateCredentialParam;
 
 UpdateCredentialParam param = UpdateCredentialParam.newBuilder()
         .withUsername("user")
         .withOldPassword("old_password")
         .withNewPassword("new_password")
         .build();
-R<RpcStatus> response = client.updateCredential(param)
+R<RpcStatus> response = client.updateCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

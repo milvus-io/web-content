@@ -11,7 +11,7 @@ R<RpcStatus> releasePartitions(ReleasePartitionsParam requestParam);
 Use the `ReleasePartitionsParam.Builder` to construct a `ReleasePartitionsParam` object.
 
 ```java
-import io.milvus.param.ReleasePartitionsParam;
+import io.milvus.param.partition.ReleasePartitionsParam;
 ReleasePartitionsParam.Builder builder = ReleasePartitionsParam.newBuilder();
 ```
 
@@ -68,6 +68,8 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.partition.ReleasePartitionsParam;
 
 ReleasePartitionsParam param = ReleasePartitionsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

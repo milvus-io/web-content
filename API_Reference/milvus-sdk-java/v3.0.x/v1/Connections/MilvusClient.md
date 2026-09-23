@@ -4,7 +4,7 @@ MilvusClient is an abstract interface of the Milvus client. MilvusServiceClient 
 
 ```java
 package io.milvus.client;
-MilvusServiceClient(ConnectParam connectParam)
+MilvusServiceClient(ConnectParam connectParam);
 ```
 
 Methods of MilvusClient for connection:
@@ -220,6 +220,10 @@ The `RetryParam.Builder.build()` can throw the following exceptions:
 ```java
 import io.milvus.param.*;
 import io.milvus.client.*;
+import io.milvus.param.R;
+import io.milvus.param.ConnectParam;
+import io.milvus.param.RetryParam;
+import io.milvus.param.collection.ShowCollectionsParam;
 
 ConnectParam connectParam = ConnectParam.newBuilder()
     .withHost("localhost")
@@ -231,7 +235,7 @@ RetryParam retryParam = RetryParam.newBuilder()
         .build();
 MilvusClient client = new MilvusServiceClient(connectParam).withRetry(retryParam);
 
-ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build()
+ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build();
 R<ShowCollectionsResponse> response = client.showCollections(param);
 
 client.close(1);
@@ -243,6 +247,9 @@ client.close(1);
 import io.milvus.param.*;
 import io.milvus.client.*;
 import java.util.concurrent.TimeUnit;
+import io.milvus.param.R;
+import io.milvus.param.ConnectParam;
+import io.milvus.param.collection.ShowCollectionsParam;
 
 ConnectParam connectParam = ConnectParam.newBuilder()
     .withHost("localhost")
@@ -251,7 +258,7 @@ ConnectParam connectParam = ConnectParam.newBuilder()
     .build();
 MilvusClient client = new MilvusServiceClient(connectParam);
 
-ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build()
+ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build();
 R<ShowCollectionsResponse> response = client.withTimeout(2, TimeUnit.SECONDS).showCollections(param);
 
 client.close(1);

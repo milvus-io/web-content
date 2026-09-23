@@ -21,6 +21,10 @@ dropRole(DropRoleReq.builder()
 
     The name of the role to drop.
 
+- `forceDrop(boolean forceDrop)`
+
+    Whether to drop the role forcibly even if it is still in use.
+
 **RETURNS:**
 
 *void*
@@ -37,6 +41,7 @@ dropRole(DropRoleReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.rbac.request.DropRoleReq;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

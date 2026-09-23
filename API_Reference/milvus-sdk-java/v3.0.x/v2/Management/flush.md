@@ -47,6 +47,8 @@ flush(FlushReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.utility.request.FlushReq;
+import java.util.Collections;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -56,9 +58,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Compact a collection
+// 2. Flush a collection
 client.flush(FlushReq.builder()
     .collectionNames(Collections.singletonList("my_collection"))
-    .build();
-);
+    .build());
 ```

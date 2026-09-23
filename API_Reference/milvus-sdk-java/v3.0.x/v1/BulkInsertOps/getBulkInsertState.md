@@ -11,7 +11,7 @@ R<GetImportStateResponse> getBulkInsertState(GetBulkInsertStateParam requestPara
 Use the `GetBulkInsertStateParam.Builder` to construct a `GetBulkInsertStateParam` object.
 
 ```java
-import io.milvus.param.GetBulkInsertStateParam;
+import io.milvus.param.bulkinsert.GetBulkInsertStateParam;
 GetBulkInsertStateParam.Builder builder = GetBulkInsertStateParam.newBuilder();
 ```
 
@@ -184,6 +184,7 @@ public enum ImportState
 
 ```java
 import io.milvus.param.bulkinsert.*;
+import io.milvus.param.R;
 
 R<GetImportStateResponse> response = milvusClient.getBulkInsertState(GetBulkInsertStateParam.newBuilder()
         .withTask(taskId)

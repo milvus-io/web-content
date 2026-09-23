@@ -83,11 +83,13 @@ LocalBulkWriterParam.newBuilder()
 ## Example
 
 ```java
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.milvus.bulkwriter.LocalBulkWriter;
 import io.milvus.bulkwriter.LocalBulkWriterParam;
 import io.milvus.bulkwriter.common.clientenum.BulkFileType;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.List;
 
 private static void localWriter(CreateCollectionReq.CollectionSchema collectionSchema) throws Exception {
     LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()

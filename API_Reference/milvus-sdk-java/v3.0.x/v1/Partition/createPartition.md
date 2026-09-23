@@ -11,7 +11,7 @@ R<RpcStatus> createPartition(CreatePartitionParam requestParam);
 Use the `CreatePartitionParam.Builder` to construct a `CreatePartitionParam` object.
 
 ```java
-import io.milvus.param.CreatePartitionParam;
+import io.milvus.param.partition.CreatePartitionParam;
 CreatePartitionParam.Builder builder = CreatePartitionParam.newBuilder();
 ```
 
@@ -63,6 +63,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.partition.CreatePartitionParam;
 
 CreatePartitionParam param = CreatePartitionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

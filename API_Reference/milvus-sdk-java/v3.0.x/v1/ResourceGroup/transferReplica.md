@@ -11,7 +11,7 @@ R<RpcStatus> transferReplica(TransferReplicaParam requestParam);
 Use the `TransferReplicaParam.Builder` to construct a `TransferReplicaParam` object.
 
 ```java
-import io.milvus.param. TransferReplicaParam;
+import io.milvus.param.resourcegroup.TransferReplicaParam;
 TransferReplicaParam.Builder builder =  TransferReplicaParam.newBuilder();
 ```
 
@@ -67,7 +67,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.TransferReplicaParam;
+import io.milvus.param.resourcegroup.TransferReplicaParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.transferReplica(TransferReplicaParam.newBuilder()
             .withSourceGroupName(sourceName)

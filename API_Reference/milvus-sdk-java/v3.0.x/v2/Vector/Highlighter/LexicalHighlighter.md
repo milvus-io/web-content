@@ -32,14 +32,14 @@ LexicalHighlighter.builder()
     import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
     import java.util.ArrayList;
     import java.util.List;
-    
-    LexicalHighter.HighlightQuery q = new LexicalHighlighter.HighlighterQuery(
+
+    LexicalHighlighter.HighlightQuery q = new LexicalHighlighter.HighlightQuery(
         "<QueryType>",
         "<text field name>",
         "<terms to highlight>"
-    )
-    
-    List<LexicalHighter.HighlightQuery> queries = new ArrayList<>();
+    );
+
+    List<LexicalHighlighter.HighlightQuery> queries = new ArrayList<>();
     queries.add(q);
     ```
 
@@ -85,8 +85,10 @@ Highlight search terms in BM25 full text search:
 
 ```java
 import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -100,12 +102,12 @@ postTags.add("}");
 LexicalHighlighter highlighter = LexicalHighlighter.builder()
     .highlightSearchText(true)
     .preTags(preTags)
-    .postTags(PostTags)
-    .build(); 
-    
+    .postTags(postTags)
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
-    .data(Collections.singletonList("test"))
+    .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f})))
     .annsField("sparse_vector")
     .topK(10)
     .outputFields(Collections.singletonList("text"))
@@ -117,19 +119,21 @@ Highlight query terms in Text Match:
 
 ```java
 import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-LexicalHighter.HighlightQuery q = new LexicalHighlighter.HighlighterQuery(
+LexicalHighlighter.HighlightQuery q = new LexicalHighlighter.HighlightQuery(
     "TextMatch",
     "text",
     "my doc"
-)
+);
 
-List<LexicalHighter.HighlightQuery> queries = new ArrayList<>();
+List<LexicalHighlighter.HighlightQuery> queries = new ArrayList<>();
 queries.add(q);
 
 List<String> preTags = new ArrayList<>();
@@ -139,14 +143,14 @@ List<String> postTags = new ArrayList<>();
 postTags.add("</mark>");
 
 LexicalHighlighter highlighter = LexicalHighlighter.builder()
-    .highlightQueries(Collections.singletonlist(q))
+    .highlightQueries(queries)
     .preTags(preTags)
-    .postTags(PostTags)
-    .build(); 
-    
+    .postTags(postTags)
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
-    .data(Collections.singletonList("test"))
+    .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f})))
     .annsField("sparse_vector")
     .topK(10)
     .outputFields(Collections.singletonList("text"))

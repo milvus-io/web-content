@@ -17,7 +17,7 @@ R<RpcStatus> dropCollection(DropCollectionParam requestParam);
 Use the `DropCollectionParam.Builder` to construct a `DropCollectionParam` object.
 
 ```java
-import io.milvus.param.DropCollectionParam;
+import io.milvus.param.collection.DropCollectionParam;
 DropCollectionParam.Builder builder = DropCollectionParam.newBuilder();
 ```
 
@@ -64,6 +64,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.collection.DropCollectionParam;
 
 DropCollectionParam dropParam = DropCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

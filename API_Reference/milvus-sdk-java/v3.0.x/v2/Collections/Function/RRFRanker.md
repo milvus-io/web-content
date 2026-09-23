@@ -46,15 +46,15 @@ A RRF ranker instance.
 ## Examples:
 
 ```java
-import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.RRFRanker
-import java.util.Collections;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 // use the RRFRanker class
-RRFRanker.builder()
+RRFRanker rrf = RRFRanker.builder()
     .k(60)
-    .build());
-    
+    .build();
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)

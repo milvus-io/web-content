@@ -11,7 +11,7 @@ R<GetIndexStateResponse> getIndexState(GetIndexStateParam requestParam);
 Use the `GetIndexStateParam.Builder` to construct a `GetIndexStateParam` object.
 
 ```java
-import io.milvus.param.GetIndexStateParam;
+import io.milvus.param.index.GetIndexStateParam;
 GetIndexStateParam.Builder builder = GetIndexStateParam.newBuilder();
 ```
 
@@ -64,12 +64,14 @@ This method catches all the exceptions and returns an `R<GetIndexStateResponse>`
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetIndexStateResponse;
+import io.milvus.param.R;
+import io.milvus.param.index.GetIndexStateParam;
 
 GetIndexStateParam param = GetIndexStateParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<GetIndexStateResponse> response = client.getIndexState(param)
+R<GetIndexStateResponse> response = client.getIndexState(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

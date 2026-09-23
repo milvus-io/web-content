@@ -195,6 +195,7 @@ import io.milvus.bulkwriter.common.clientenum.CloudStorage;
 import io.milvus.bulkwriter.connect.S3ConnectParam;
 import io.milvus.bulkwriter.connect.StorageConnectParam;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.List;
 
 private static List<List<String>> callRemoteWriter(CreateCollectionReq.CollectionSchema collectionSchema,
                                                    List<JsonObject> data) throws Exception {

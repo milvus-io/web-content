@@ -11,7 +11,7 @@ R<MutationResult> delete(DeleteParam requestParam);
 Use the `DeleteParam.Builder` to construct a `DeleteParam` object.
 
 ```java
-import io.milvus.param.DeleteParam;
+import io.milvus.param.dml.DeleteParam;
 DeleteParam.Builder builder = DeleteParam.newBuilder();
 ```
 
@@ -69,6 +69,8 @@ This method catches all the exceptions and returns an `R<MutationResult>` object
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.MutationResult;
+import io.milvus.param.R;
+import io.milvus.param.dml.DeleteParam;
 
 DeleteParam param = DeleteParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

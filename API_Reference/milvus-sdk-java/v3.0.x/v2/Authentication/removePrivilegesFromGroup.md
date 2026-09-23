@@ -42,6 +42,9 @@ removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.rbac.request.RemovePrivilegesFromGroupReq;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -53,13 +56,14 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Remove privileges from a group
 List<String> privileges = new ArrayList<>();
-privileges.add("Query", "Search")
+privileges.add("Query");
+privileges.add("Search");
 
 RemovePrivilegesFromGroupReq removePrivilegesFromGroupReq = RemovePrivilegesFromGroupReq.builder()
         .groupName("read_only")
         .privileges(privileges)
         .build();
         
-client.removePrivilegesFromGroup(addPrivilegesToGroupReq);
+client.removePrivilegesFromGroup(removePrivilegesFromGroupReq);
 ```
 

@@ -16,6 +16,10 @@ import io.milvus.response.MutationResultWrapper;
 import io.milvus.grpc.MutationResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.milvus.param.R;
+import java.util.ArrayList;
+import java.util.List;
+import io.milvus.param.dml.UpsertParam;
 
 List<List<Float>> vectors = generateFloatVectors(1);
 List<JsonObject> rows = new ArrayList<>();

@@ -11,7 +11,7 @@ R<RpcStatus> dropPartition(DropPartitionParam requestParam);
 Use the `DropPartitionParam.Builder` to construct a `DropPartitionParam` object.
 
 ```java
-import io.milvus.param.DropPartitionParam;
+import io.milvus.param.partition.DropPartitionParam;
 DropPartitionParam.Builder builder = DropPartitionParam.newBuilder();
 ```
 
@@ -63,6 +63,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.partition.DropPartitionParam;
 
 DropPartitionParam param = DropPartitionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

@@ -11,7 +11,7 @@ R<ShowPartitionsResponse> showPartitions(ShowPartitionsParam requestParam);
 Use the `ShowPartitionsParam.Builder` to construct a `ShowPartitionsParam` object.
 
 ```java
-import io.milvus.param.ShowPartitionsParam;
+import io.milvus.param.partition.ShowPartitionsParam;
 ShowPartitionsParam.Builder builder = ShowPartitionsParam.newBuilder();
 ```
 
@@ -131,6 +131,8 @@ Methods of `ShowPartitionsResponse.PartitionInfo`
 import io.milvus.param.*;
 import io.milvus.grpc.ShowPartitionsResponse;
 import io.milvus.response.ShowPartResponseWrapper;
+import io.milvus.param.R;
+import io.milvus.param.partition.ShowPartitionsParam;
 
 ShowPartitionsParam param = ShowPartitionsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

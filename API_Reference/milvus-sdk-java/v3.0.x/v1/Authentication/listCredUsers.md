@@ -11,7 +11,7 @@ R<ListCredUsersResponse> listCredUsers(ListCredUsersParam requestParam);
 Use the `ListCredUsersParam.Builder` to construct a `ListCredUsersParam` object.
 
 ```java
-import io.milvus.param.ListCredUsersParam;
+import io.milvus.param.credential.ListCredUsersParam;
 ListCredUsersParam.Builder builder = ListCredUsersParam.newBuilder();
 ```
 
@@ -44,9 +44,12 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.credential.ListCredUsersParam;
 
 ListCredUsersParam param = ListCredUsersParam.newBuilder().build();
-R<RpcStatus> response = client.listCredUsers(param)
+R<RpcStatus> response = client.listCredUsers(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

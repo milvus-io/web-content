@@ -19,7 +19,7 @@ R<FlushResponse> flush(FlushParam requestParam);
 Use the `FlushParam.Builder` to construct a `FlushParam` object.
 
 ```java
-import io.milvus.param.FlushParam;
+import io.milvus.param.collection.FlushParam;
 FlushParam.Builder builder = FlushParam.newBuilder();
 ```
 
@@ -87,6 +87,8 @@ This method catches all the exceptions and returns an `R<FlushResponse>` object.
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.FlushResponse;
+import io.milvus.param.R;
+import io.milvus.param.collection.FlushParam;
 
 FlushParam param = FlushParam.newBuilder()
         .addCollectionName(COLLECTION_NAME)

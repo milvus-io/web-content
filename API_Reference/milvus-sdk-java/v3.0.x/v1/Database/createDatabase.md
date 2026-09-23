@@ -12,7 +12,7 @@ Use the `CreateDatabaseParam.Builder` to construct a `CreateDatabaseParam` objec
 
 ```java
 import io.milvus.param.collection.CreateDatabaseParam;
-CreateDatabaseParam.Builder builder = CreateDatabaseParam.newBuilder()
+CreateDatabaseParam.Builder builder = CreateDatabaseParam.newBuilder();
 ```
 
 Methods of `CreateDatabaseParam.Builder`:
@@ -63,11 +63,13 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.collection.CreateDatabaseParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 CreateDatabaseParam param = CreateDatabaseParam.newBuilder()
         .withDatabaseName("mydb")
         .build();
-R<RpcStatus> response = client.createDatabase(param)
+R<RpcStatus> response = client.createDatabase(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

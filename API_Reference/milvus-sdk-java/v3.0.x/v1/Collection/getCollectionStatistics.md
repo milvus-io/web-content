@@ -17,7 +17,7 @@ R<GetCollectionStatisticsResponse> getCollectionStatistics(GetCollectionStatisti
 Use the `GetCollectionStatisticsParam.Builder` to construct a `GetCollectionStatisticsParam` object.
 
 ```java
-import io.milvus.param.GetCollectionStatisticsParam;
+import io.milvus.param.collection.GetCollectionStatisticsParam;
 GetCollectionStatisticsParam.Builder builder = GetCollectionStatisticsParam.newBuilder();
 ```
 
@@ -97,6 +97,8 @@ Methods of `GetCollStatResponseWrapper`:
 import io.milvus.param.*;
 import io.milvus.response.GetCollStatResponseWrapper;
 import io.milvus.grpc.GetCollectionStatisticsResponse;
+import io.milvus.param.R;
+import io.milvus.param.collection.GetCollectionStatisticsParam;
 
 GetCollectionStatisticsParam param = GetCollectionStatisticsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

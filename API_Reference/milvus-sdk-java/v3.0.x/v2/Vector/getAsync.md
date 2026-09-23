@@ -39,6 +39,9 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.GetReq;
 import io.milvus.v2.service.vector.response.GetResp;
 
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")

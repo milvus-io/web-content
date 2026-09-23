@@ -11,7 +11,7 @@ R<RpcStatus> transferNode(TransferNodeParam requestParam);
 Use the `TransferNodeParam.Builder` to construct a `TransferNodeParam` object.
 
 ```java
-import io.milvus.param. TransferNodeParam;
+import io.milvus.param.resourcegroup.TransferNodeParam;
 TransferNodeParam.Builder builder =  TransferNodeParam.newBuilder();
 ```
 
@@ -62,7 +62,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.TransferNodeParam;
+import io.milvus.param.resourcegroup.TransferNodeParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.transferNode(TransferNodeParam.newBuilder()
             .withSourceGroupName(sourceName)

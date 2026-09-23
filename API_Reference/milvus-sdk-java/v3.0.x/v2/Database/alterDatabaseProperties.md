@@ -50,6 +50,10 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 
         Whether to deny all read operations in the database.
 
+- `property(String key, String value)`
+
+    Adds a single property to the database.
+
 **RETURNS:**
 
 *void*
@@ -66,6 +70,9 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.database.request.AlterDatabasePropertiesReq;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

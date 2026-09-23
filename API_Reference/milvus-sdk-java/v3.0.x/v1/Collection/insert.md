@@ -11,7 +11,7 @@ R<MutationResult> insert(InsertParam requestParam);
 Use the `InsertParam.Builder` to construct an `InsertParam` object.
 
 ```java
-import io.milvus.param.InsertParam;
+import io.milvus.param.dml.InsertParam;
 InsertParam.Builder builder = InsertParam.newBuilder();
 ```
 
@@ -148,6 +148,10 @@ import io.milvus.response.MutationResultWrapper;
 import io.milvus.grpc.MutationResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.milvus.param.R;
+import java.util.ArrayList;
+import java.util.List;
+import io.milvus.param.dml.InsertParam;
 
 int rowCount = 10000;
 List<List<Float>> vectors = generateFloatVectors(rowCount);

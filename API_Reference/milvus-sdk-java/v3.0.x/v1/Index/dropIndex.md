@@ -11,7 +11,7 @@ R<RpcStatus> dropIndex(DropIndexParam requestParam);
 Use the `DropIndexParam.Builder` to construct a `DropIndexParam` object.
 
 ```java
-import io.milvus.param.DropIndexParam;
+import io.milvus.param.index.DropIndexParam;
 DropIndexParam.Builder builder = DropIndexParam.newBuilder();
 ```
 
@@ -63,12 +63,15 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.index.DropIndexParam;
 
 DropIndexParam param = DropIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<RpcStatus> response = client.dropIndex(param)
+R<RpcStatus> response = client.dropIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

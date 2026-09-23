@@ -55,6 +55,9 @@ dropCollectionProperties(DropCollectionPropertiesReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.DropCollectionPropertiesReq;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -65,14 +68,14 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Drop the \`collection.ttl.seconds\` property
-List<String> propertyKeys = new ArrayList<>()
-propertyKeys.add("collection.ttl.seconds")
+List<String> propertyKeys = new ArrayList<>();
+propertyKeys.add("collection.ttl.seconds");
 
 DropCollectionPropertiesReq dropCollectionPropertiesReq = DropCollectionPropertiesReq.builder()
         .collectionName("test")
         .propertyKeys(propertyKeys)
         .build();
         
-client.dropCollectionProperties(dropCollectionPropertiesReq)
+client.dropCollectionProperties(dropCollectionPropertiesReq);
 ```
 

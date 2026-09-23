@@ -39,6 +39,10 @@ alterCollectionProperties(AlterCollectionPropertiesReq.builder()
 
         Whether to enable mmap for the raw data and indexes of all fields in the collection.
 
+- `property(String key, String value)`
+
+    Adds a single property to the collection.
+
 **RETURNS:**
 
 *void*
@@ -55,6 +59,9 @@ alterCollectionProperties(AlterCollectionPropertiesReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.AlterCollectionPropertiesReq;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -65,13 +72,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Alter the \`collection.ttl.seconds\` property
-Map<String, String> properties = new HashMap<>()
-properties.put("collection.ttl.seconds", "86400")
+Map<String, String> properties = new HashMap<>();
+properties.put("collection.ttl.seconds", "86400");
 
 AlterCollectionPropertiesReq alterCollectionFieldReq = AlterCollectionPropertiesReq.builder()
         .collectionName("test")
         .properties(properties)
         .build();
-client.alterCollectionProperties(alterCollectionFieldReq)
+client.alterCollectionProperties(alterCollectionFieldReq);
 ```
 

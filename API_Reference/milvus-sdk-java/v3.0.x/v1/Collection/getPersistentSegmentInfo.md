@@ -11,7 +11,7 @@ R<GetPersistentSegmentInfoResponse> getPersistentSegmentInfo(GetPersistentSegmen
 Use the `GetPersistentSegmentInfoParam.Builder` to construct a `GetPersistentSegmentInfoParam` object.
 
 ```java
-import io.milvus.param.GetPersistentSegmentInfoParam;
+import io.milvus.param.control.GetPersistentSegmentInfoParam;
 GetPersistentSegmentInfoParam.Builder builder = GetPersistentSegmentInfoParam.newBuilder();
 ```
 
@@ -110,6 +110,8 @@ public enum SegmentState
 import io.milvus.param.*;
 import io.milvus.grpc.GetPersistentSegmentInfoResponse;
 import io.milvus.grpc.PersistentSegmentInfo;
+import io.milvus.param.R;
+import io.milvus.param.control.GetPersistentSegmentInfoParam;
 
 GetPersistentSegmentInfoParam param = GetPersistentSegmentInfoParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

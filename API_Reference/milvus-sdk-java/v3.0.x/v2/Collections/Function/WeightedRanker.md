@@ -47,15 +47,17 @@ A weighted ranker instance.
 ## Examples:
 
 ```java
-import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.WeightedRanker
-import java.util.Collections;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
+
+import java.util.Arrays;
 
 // use the WeightedRanker class
-WeightedRanker.builder()
-    .weights([0.4, 0.6])
-    .build());
-    
+WeightedRanker weighted = WeightedRanker.builder()
+    .weights(Arrays.asList(0.4f, 0.6f))
+    .build();
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)

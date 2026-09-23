@@ -11,7 +11,7 @@ R<GetQuerySegmentInfoResponse> getQuerySegmentInfo(GetQuerySegmentInfoParam requ
 Use the `GetQuerySegmentInfoParam.Builder` to construct a `GetQuerySegmentInfoParam` object.
 
 ```java
-import io.milvus.param.GetQuerySegmentInfoParam;
+import io.milvus.param.control.GetQuerySegmentInfoParam;
 GetQuerySegmentInfoParam.Builder builder = GetQuerySegmentInfoParam.newBuilder();
 ```
 
@@ -55,6 +55,8 @@ This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResp
 import io.milvus.param.*;
 import io.milvus.grpc.GetQuerySegmentInfoResponse;
 import io.milvus.grpc.QuerySegmentInfo;
+import io.milvus.param.R;
+import io.milvus.param.control.GetQuerySegmentInfoParam;
 
 GetQuerySegmentInfoParam param = GetQuerySegmentInfoParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

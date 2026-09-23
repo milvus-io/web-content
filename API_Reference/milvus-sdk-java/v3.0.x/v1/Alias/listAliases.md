@@ -11,7 +11,7 @@ R<ListAliasesResponse> listAliases(ListAliasesParam requestParam);
 Use the `ListAliasesParam.Builder` to construct a `ListAliasesParam` object.
 
 ```java
-import io.milvus.param.ListAliasesParam;
+import io.milvus.param.alias.ListAliasesParam;
 ListAliasesParam.Builder builder = ListAliasesParam.newBuilder();
 ```
 
@@ -58,11 +58,13 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.alias.ListAliasesParam;
 
 ListAliasesParam param = ListAliasesParam.newBuilder()
         .withCollection(COLLECTION_NAME)
         .build();
-R<ListAliasesResponse> response = client.listAliases(param)
+R<ListAliasesResponse> response = client.listAliases(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

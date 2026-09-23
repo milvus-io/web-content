@@ -69,6 +69,7 @@ grantPrivilege(GrantPrivilegeReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.rbac.request.GrantPrivilegeReq;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

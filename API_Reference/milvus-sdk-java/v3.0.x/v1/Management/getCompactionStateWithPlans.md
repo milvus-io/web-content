@@ -3,7 +3,7 @@
 MilvusClient interface. This method returns detailed information of a compaction operation, including the state(completed or not) and its sub-tasks (we call "plan").
 
 ```java
-R<GetCompactionPlansResponse> getCompactionStateWithPlans(GetCompactionPlansParam requestParam)
+R<GetCompactionPlansResponse> getCompactionStateWithPlans(GetCompactionPlansParam requestParam);
 ```
 
 #### GetCompactionPlansParam
@@ -11,7 +11,7 @@ R<GetCompactionPlansResponse> getCompactionStateWithPlans(GetCompactionPlansPara
 Use the `GetCompactionPlansParam.Builder` to construct a `GetCompactionPlansParam` object.
 
 ```java
-import io.milvus.param.GetCompactionPlansParam;
+import io.milvus.param.control.GetCompactionPlansParam;
 GetCompactionPlansParam.Builder builder = GetCompactionPlansParam.newBuilder();
 ```
 
@@ -55,6 +55,8 @@ This method catches all the exceptions and returns an `R<GetCompactionPlansRespo
 import io.milvus.param.*;
 import io.milvus.grpc.GetCompactionPlansResponse;
 import io.milvus.grpc.CompactionMergeInfo;
+import io.milvus.param.R;
+import io.milvus.param.control.GetCompactionPlansParam;
 
 GetCompactionPlansParam param = GetCompactionPlansParam.newBuilder()
         .withCompactionID(compactionID)

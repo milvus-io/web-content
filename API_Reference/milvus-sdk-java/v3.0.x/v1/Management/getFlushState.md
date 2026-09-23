@@ -11,7 +11,7 @@ R<GetFlushStateResponse> getFlushState(GetFlushStateParam requestParam);
 Use the `GetFlushStateParam.Builder` to construct a `GetFlushStateParam` object.
 
 ```java
-import io.milvus.param.GetFlushStateParam;
+import io.milvus.param.control.GetFlushStateParam;
 GetFlushStateParam.Builder builder = GetFlushStateParam.newBuilder();
 ```
 
@@ -74,6 +74,8 @@ This method catches all the exceptions and returns an `R<GetFlushStateResponse>`
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetFlushStateResponse;
+import io.milvus.param.R;
+import io.milvus.param.control.GetFlushStateParam;
 
 GetFlushStateParam param = GetFlushStateParam.newBuilder()
         .addSegmentID(COLLECTION_NAME)

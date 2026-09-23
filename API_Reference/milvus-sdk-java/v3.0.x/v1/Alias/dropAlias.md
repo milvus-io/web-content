@@ -11,7 +11,7 @@ R<RpcStatus> dropAlias(DropAliasParam requestParam);
 Use the `DropAliasParam.Builder` to construct a `DropAliasParam` object.
 
 ```java
-import io.milvus.param.DropAliasParam;
+import io.milvus.param.alias.DropAliasParam;
 DropAliasParam.Builder builder = DropAliasParam.newBuilder();
 ```
 
@@ -58,11 +58,14 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.alias.DropAliasParam;
 
 DropAliasParam param = DropAliasParam.newBuilder()
         .withAlias("alias1")
         .build();
-R<RpcStatus> response = client.dropAlias(param)
+R<RpcStatus> response = client.dropAlias(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

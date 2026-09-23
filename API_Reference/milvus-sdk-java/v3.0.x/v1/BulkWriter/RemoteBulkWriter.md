@@ -3,7 +3,7 @@
 A RemoteBulkWriter instance writes your raw data in a format that Milvus understands into an AWS-S3-compatible bucket.
 
 ```java
-RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam)
+RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam);
 ```
 
 Methods of `RemoteBulkWriter`:
@@ -191,10 +191,16 @@ Methods of `S3ConnectParam.Builder`:
 #### Example
 
 ```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.milvus.bulkwriter.*;
 import io.milvus.bulkwriter.connect.StorageConnectParam;
 import io.milvus.bulkwriter.common.clientenum.BulkFileType;
 import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+import io.milvus.grpc.DataType;
+import io.milvus.param.R;
+import java.util.List;
 
 CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
         .addFieldType(FieldType.newBuilder()
@@ -227,7 +233,7 @@ RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
         .withConnectParam(connectParam)
         .build();
 
-try (RemoteBulkWriter remoteBulkWriter = RemoteBulkWriter(bulkWriterParam)) {
+try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) {
     Gson gson = new Gson();
     for (int i = 0; i < 10000; ++i) {
         JsonObject row = new JsonObject();

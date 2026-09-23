@@ -210,6 +210,9 @@ Note: Not all status codes are used, some of them are reserved.
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.collection.DropCollectionParam;
 
 R<RpcStatus> response = client.dropCollection(DropCollectionParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)

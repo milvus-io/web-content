@@ -3,7 +3,7 @@
 A LocalBulkWriter instance rewrites your raw data locally in a format that Milvus understands.
 
 ```java
-LocalBulkWriter(LocalBulkWriterParam bulkWriterParam)
+LocalBulkWriter(LocalBulkWriterParam bulkWriterParam);
 ```
 
 Methods of `LocalBulkWriter`:
@@ -78,9 +78,14 @@ Methods of `LocalBulkWriterParam.Builder`:
 #### Example
 
 ```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.milvus.bulkwriter.*;
 import io.milvus.bulkwriter.common.clientenum.BulkFileType;
 import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+import io.milvus.grpc.DataType;
+import java.util.List;
 
 CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
         .addFieldType(FieldType.newBuilder()

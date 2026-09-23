@@ -11,7 +11,7 @@ R<RpcStatus> removeUserFromRole(RemoveUserFromRoleParam requestParam);
 Use the `RemoveUserFromRoleParam.Builder` to construct a `RemoveUserFromRoleParam` object.
 
 ```java
-import io.milvus.param.RemoveUserFromRoleParam;
+import io.milvus.param.role.RemoveUserFromRoleParam;
 RemoveUserFromRoleParam.Builder builder = RemoveUserFromRoleParam.newBuilder();
 ```
 
@@ -57,7 +57,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.AddUserToRoleParam;
+import io.milvus.param.role.AddUserToRoleParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.removeUserFromRole(AddUserToRoleParam.newBuilder()
             .withRoleName(roleName)

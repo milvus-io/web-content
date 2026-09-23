@@ -11,6 +11,7 @@ public UpdateReplicateConfigurationResp updateReplicateConfiguration(UpdateRepli
 ```java
 updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
     .replicateConfiguration(ReplicateConfiguration config)
+    .forcePromote(boolean forcePromote)
     .build()
 );
 ```
@@ -22,6 +23,10 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
     **[REQUIRED]**
 
     The replication configuration containing cluster definitions and topology.
+
+- `forcePromote(boolean forcePromote)`
+
+    Whether a forced promote is requested when updating the replication configuration.
 
 **RETURNS:**
 

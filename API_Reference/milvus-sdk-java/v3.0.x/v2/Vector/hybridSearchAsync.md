@@ -42,6 +42,10 @@ import io.milvus.v2.service.vector.request.HybridSearchReq;
 import io.milvus.v2.service.vector.request.AnnSearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")

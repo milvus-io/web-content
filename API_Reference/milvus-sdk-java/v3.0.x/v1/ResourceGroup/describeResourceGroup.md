@@ -11,7 +11,7 @@ R<DescribeResourceGroupResponse> describeResourceGroup(DescribeResourceGroupPara
 Use the `DescribeResourceGroupParam.Builder` to construct a `DescribeResourceGroupParam` object.
 
 ```java
-import io.milvus.param.DescribeResourceGroupParam;
+import io.milvus.param.resourcegroup.DescribeResourceGroupParam;
 DescribeResourceGroupParam.Builder builder = DescribeResourceGroupParam.newBuilder();
 ```
 
@@ -52,7 +52,8 @@ This method catches all the exceptions and returns an `R<DescribeResourceGroupRe
 #### Example
 
 ```java
-import io.milvus.param.DescribeResourceGroupParam;
+import io.milvus.param.resourcegroup.DescribeResourceGroupParam;
+import io.milvus.param.R;
 
 R<DescribeResourceGroupResponse> response = client.describeResourceGroup(DescribeResourceGroupParam.newBuilder()
             .withGroupName(name)

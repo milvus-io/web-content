@@ -19,7 +19,7 @@ R<ManualCompactionResponse> manualCompact(ManualCompactParam requestParam);
 Use the `ManualCompactParam.Builder` to construct a `ManualCompactParam` object.
 
 ```java
-import io.milvus.param.ManualCompactParam;
+import io.milvus.param.control.ManualCompactParam;
 ManualCompactParam.Builder builder = ManualCompactParam.newBuilder();
 ```
 
@@ -61,6 +61,8 @@ This method catches all the exceptions and returns an `R<ManualCompactionRespons
 
 ```java
 import io.milvus.param.*;
+import io.milvus.param.R;
+import io.milvus.param.control.ManualCompactParam;
 
 ManualCompactParam param = ManualCompactParam.newBuilder()
         .withSegmentIDs(segmentIDs)

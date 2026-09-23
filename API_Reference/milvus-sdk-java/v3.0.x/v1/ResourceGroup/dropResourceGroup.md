@@ -11,7 +11,7 @@ R<RpcStatus> dropResourceGroup(DropResourceGroupParam requestParam);
 Use the `DropResourceGroupParam.Builder` to construct a `DropResourceGroupParam` object.
 
 ```java
-import io.milvus.param.DropResourceGroupParam;
+import io.milvus.param.resourcegroup.DropResourceGroupParam;
 DropResourceGroupParam.Builder builder = DropResourceGroupParam.newBuilder();
 ```
 
@@ -52,7 +52,9 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 #### Example
 
 ```java
-import io.milvus.param.DropResourceGroupParam;
+import io.milvus.param.resourcegroup.DropResourceGroupParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
 
 R<RpcStatus> response = client.dropResourceGroup(DropResourceGroupParam.newBuilder()
             .withGroupName(name)

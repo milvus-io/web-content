@@ -57,6 +57,7 @@ transferReplica(TransferReplicaReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.resourcegroup.request.TransferReplicaReq;
+import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -71,7 +72,7 @@ TransferReplicaReq transferReplicaReq = TransferReplicaReq.builder()
     .sourceGroupName("DEFAULT_RESOURCE_GROUP")
     .targetGroupName("rg1")
     .collectionName("test")
-    .numberOfReplicas(4)
+    .numberOfReplicas(4L)
     .build();
 client.transferReplica(transferReplicaReq);
 ```

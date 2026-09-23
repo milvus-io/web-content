@@ -135,6 +135,8 @@ Methods of `QueryIterator`:
 import io.milvus.param.dml.*;
 import io.milvus.orm.iterator.*;
 import io.milvus.response.QueryResultsWrapper;
+import io.milvus.param.R;
+import java.util.List;
 
 R<QueryIterator> response = milvusClient.queryIterator(QueryIteratorParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
