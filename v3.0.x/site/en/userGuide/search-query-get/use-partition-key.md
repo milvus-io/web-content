@@ -50,6 +50,7 @@ When you set a scalar field as the Partition Key, the field values cannot be emp
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 
 ```python
@@ -209,6 +210,40 @@ export schema='{
     }'
 ```
 
+```bash
+# Zilliz CLI
+# Prerequisite: run zilliz login and select your cluster with zilliz context set.
+
+zilliz collection create --name my_collection --body '{
+    "schema": {
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": "5"
+                }
+            },
+            {
+                "fieldName": "my_varchar",
+                "dataType": "VarChar",
+                "isPartitionKey": true,
+                "elementTypeParams": {
+                    "max_length": 512
+                }
+            }
+        ]
+    }
+}'
+```
+
 ### Set Partition Numbers
 
 When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values. 
@@ -221,6 +256,7 @@ You can also determine the number of partitions to create along with the collect
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 
 ```python
@@ -273,11 +309,49 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"params\": $params
 }"
+```
+
+```bash
+# Zilliz CLI
+# Prerequisite: run zilliz login and select your cluster with zilliz context set.
+
+zilliz collection create --name my_collection --body '{
+    "schema": {
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": "5"
+                }
+            },
+            {
+                "fieldName": "my_varchar",
+                "dataType": "VarChar",
+                "isPartitionKey": true,
+                "elementTypeParams": {
+                    "max_length": 512
+                }
+            }
+        ]
+    },
+    "params": {
+        "partitionsNum": 128
+    }
+}'
 ```
 
 ### Create Filtering Condition
@@ -294,6 +368,7 @@ The following examples demonstrate Partition-Key-based filtering based on a spec
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 
 ```python
@@ -336,6 +411,17 @@ export filter='partition_key == "x" && <other conditions>'
 export filter='partition_key in ["x", "y", "z"] && <other conditions>'
 ```
 
+```bash
+# Zilliz CLI
+# Prerequisite: run zilliz login and select your cluster with zilliz context set.
+
+# Filter based on a single partition key value, or
+zilliz vector query --collection my_collection --filter 'partition_key == "x" && <other conditions>' --output-fields '["id", "partition_key"]'
+
+# Filter based on multiple partition key values
+zilliz vector query --collection my_collection --filter 'partition_key in ["x", "y", "z"] && <other conditions>' --output-fields '["id", "partition_key"]'
+```
+
 <div class="alert note">
 
 You have to replace `partition_key` with the name of the field that is designated as the partition key.
@@ -368,6 +454,7 @@ The following code examples demonstrate how to enable Partition Key Isolation.
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
+    <a href="#shell">Zilliz CLI</a>
 </div>
 
 ```python
@@ -424,11 +511,49 @@ curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"params\": $params
 }"
+```
+
+```bash
+# Zilliz CLI
+# Prerequisite: run zilliz login and select your cluster with zilliz context set.
+
+zilliz collection create --name my_collection --body '{
+    "schema": {
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": "5"
+                }
+            },
+            {
+                "fieldName": "my_varchar",
+                "dataType": "VarChar",
+                "isPartitionKey": true,
+                "elementTypeParams": {
+                    "max_length": 512
+                }
+            }
+        ]
+    },
+    "params": {
+        "partitionKeyIsolation": true
+    }
+}'
 ```
 
 Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in [Set Partition Numbers](use-partition-key.md#Set-Partition-Numbers). Note that the Partition-Key-based filter should include only a specific Partition Key value.
