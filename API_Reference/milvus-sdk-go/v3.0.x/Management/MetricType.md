@@ -78,8 +78,9 @@ type MetricType string
 import (
     "context"
 
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/index"
+	"github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -98,7 +99,7 @@ defer cli.Close(ctx)
 
 // Use MetricType when creating an index
 // L2 (Euclidean distance) for float vectors
-hnswIndex := index.NewHNSWIndex(index.MetricTypeL2, 16, 200)
+hnswIndex := index.NewHNSWIndex(entity.L2, 16, 200)
 _, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(
     "my_collection", "embedding", hnswIndex))
 if err != nil {
@@ -106,7 +107,7 @@ if err != nil {
 }
 
 // IP (Inner Product) for normalized vectors
-ipIndex := index.NewHNSWIndex(index.MetricTypeIP, 16, 200)
+ipIndex := index.NewHNSWIndex(entity.IP, 16, 200)
 _, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(
     "my_collection", "normalized_embedding", ipIndex))
 if err != nil {

@@ -4,7 +4,7 @@ This function lists bulk import jobs for a given collection via the RESTful API.
 
 <div class="alert note">
 
-`ListImportJobs()` is a package-level function in `github.com/milvus-io/milvus/client/v2/bulkwriter`. It calls the REST `/v2/vectordb/jobs/import/list` endpoint and works with both Milvus open-source clusters and Zilliz Cloud.
+`ListImportJobs()` is a package-level function in `github.com/milvus-io/milvus/client/v3/bulkwriter`. It calls the REST `/v2/vectordb/jobs/import/list` endpoint and works with both Milvus open-source clusters and Zilliz Cloud.
 
 </div>
 
@@ -53,7 +53,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/milvus-io/milvus/client/v2/bulkwriter"
+	"github.com/milvus-io/milvus/client/v3/bulkwriter"
 )
 
 ctx, cancel := context.WithCancel(context.Background())

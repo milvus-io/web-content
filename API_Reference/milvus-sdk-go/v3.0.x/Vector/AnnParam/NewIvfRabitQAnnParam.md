@@ -22,8 +22,8 @@ An ANN search parameter instance. Pass this to a search option via `WithAnnParam
 
 ```go
 import (
-	"github.com/milvus-io/milvus/client/v2/index"
-	"github.com/milvus-io/milvus/client/v2/milvusclient"
+	"github.com/milvus-io/milvus/client/v3/index"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 // Create ANN search parameters

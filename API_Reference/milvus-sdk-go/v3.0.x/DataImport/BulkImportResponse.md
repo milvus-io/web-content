@@ -6,8 +6,8 @@ This class represents the response returned by the `BulkImport()` package functi
 type BulkImportResponse struct {
     ResponseBase
     Data struct {
-        JobID string \`json:"jobId"\`
-    } \`json:"data"\`
+        JobID string `json:"jobId"`
+    } `json:"data"`
 }
 ```
 

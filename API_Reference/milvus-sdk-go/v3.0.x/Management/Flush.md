@@ -40,7 +40,7 @@ A FlushTask that can be used to wait for the flush to complete. Returns an error
 import (
 	"context"
 
-	"github.com/milvus-io/milvus/client/v2/milvusclient"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -53,7 +53,7 @@ if err != nil {
 	// handle err
 }
 
-collectionName := \`customized_setup_1\`
+collectionName := `customized_setup_1`
 
 task, err := cli.Flush(ctx, milvusclient.NewFlushOption(collectionName))
 if err != nil {

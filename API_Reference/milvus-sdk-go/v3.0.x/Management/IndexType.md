@@ -110,8 +110,9 @@ type IndexType string
 import (
     "context"
 
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/index"
+	"github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -129,7 +130,7 @@ if err != nil {
 defer cli.Close(ctx)
 
 // Create an HNSW index on a float vector field
-hnswIndex := index.NewHNSWIndex(index.MetricTypeL2, 16, 200)
+hnswIndex := index.NewHNSWIndex(entity.L2, 16, 200)
 _, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(
     "my_collection", "embedding", hnswIndex))
 if err != nil {
@@ -137,7 +138,7 @@ if err != nil {
 }
 
 // Create an IVF_FLAT index
-ivfIndex := index.NewIvfFlatIndex(index.MetricTypeL2, 128)
+ivfIndex := index.NewIvfFlatIndex(entity.L2, 128)
 _, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(
     "my_collection", "embedding2", ivfIndex))
 if err != nil {

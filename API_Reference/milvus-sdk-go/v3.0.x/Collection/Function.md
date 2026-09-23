@@ -50,13 +50,13 @@ entity.NewFunction().
 
 ```go
 import (
-    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v3/entity"
 )
 
 // Define a BM25 text embedding function on a VarChar field
 fn := entity.NewFunction().
     WithName("bm25_fn").
-    WithFunctionType(entity.FunctionTypeBM25).
+    WithType(entity.FunctionTypeBM25).
     WithInputFields("text").
     WithOutputFields("sparse_vector")
 
