@@ -112,7 +112,7 @@ public class QuickStart {
 
 ## Compatibility
 
-Milvus and the Java SDK are NOT compatible across major versions.
+Milvus proto is backward compatible, so a later SDK version can work with an earlier Milvus server. The table lists the recommended SDK version validated for each Milvus version.
 
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|

@@ -9,7 +9,7 @@ Milvus Rust SDK is an open-source project and its source code is hosted on [GitH
 | 2.6.x | v2.6.1 |
 | 3.0.x | v3.0.2 |
 
-Note: Milvus and the Rust SDK are NOT compatible across major versions.
+Milvus proto is backward compatible, so a later SDK version can work with an earlier Milvus server. The table lists the recommended SDK version validated for each Milvus version.
 
 ## Installation
 

@@ -13,7 +13,8 @@ auto request = AlterCollectionFieldPropertiesRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithFieldName(field_name)
-    .WithProperties(properties);
+    .WithProperties(properties)
+    .AddProperty(key, property);
 ```
 
 **REQUEST METHODS:**
@@ -33,6 +34,10 @@ auto request = AlterCollectionFieldPropertiesRequest()
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets the properties to alter for the specified field. For details, refer to [this page](https://milvus.io/docs/alter-collection-field.md).
+
+- `AddProperty(const std::string& key, const std::string& property)`
+
+    Adds a single property to alter for the specified field.
 
 **RETURNS:**
 

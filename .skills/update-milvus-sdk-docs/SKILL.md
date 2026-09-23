@@ -791,7 +791,10 @@ Keep it short; move any lengthy walkthrough to the user guide / guides pages.
 ## Compatibility
 
 The Milvus-version ↔ recommended-SDK-version table (present in every SDK
-About page; Milvus SDKs are NOT compatible across major versions).
+About page). Milvus proto is backward compatible — later SDK versions can work
+with earlier Milvus servers, because the protocol only ever adds fields and
+never removes them; the table lists the recommended SDK version validated for
+each Milvus version.
 
 ## Contributing (optional)
 
