@@ -12,7 +12,8 @@ Status GetRestoreSnapshotState(const GetRestoreSnapshotStateRequest& request, Ge
 auto request = milvus::GetRestoreSnapshotStateRequest()
     .WithDatabaseName("default")
     .WithCollectionName("book_restored")
-    .WithSnapshotName("snapshot_20260617");
+    .WithSnapshotName("snapshot_20260617")
+    .WithJobID(job_id);
 ```
 
 **REQUEST METHODS:**
@@ -28,6 +29,10 @@ auto request = milvus::GetRestoreSnapshotStateRequest()
 - `WithSnapshotName(const std::string& snapshot_name)`
 
     Sets the snapshot name.
+
+- `WithJobID(int64_t job_id)`
+
+    Sets the ID of the restore-snapshot job to poll.
 
 **RETURNS:**
 

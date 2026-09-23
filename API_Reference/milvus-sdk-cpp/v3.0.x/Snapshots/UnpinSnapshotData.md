@@ -12,7 +12,8 @@ Status UnpinSnapshotData(const UnpinSnapshotDataRequest& request)
 auto request = milvus::UnpinSnapshotDataRequest()
     .WithDatabaseName("default")
     .WithCollectionName("book")
-    .WithSnapshotName("snapshot_20260617");
+    .WithSnapshotName("snapshot_20260617")
+    .WithPinID(pin_id);
 ```
 
 **REQUEST METHODS:**
@@ -28,6 +29,10 @@ auto request = milvus::UnpinSnapshotDataRequest()
 - `WithSnapshotName(const std::string& snapshot_name)`
 
     Sets the snapshot name.
+
+- `WithPinID(int64_t pin_id)`
+
+    Sets the ID of the pin whose data should be unpinned.
 
 **RETURNS:**
 

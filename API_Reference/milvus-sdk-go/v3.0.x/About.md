@@ -74,7 +74,7 @@ if err != nil {
 | 2.6.x	| [2.6.2](https://github.com/milvus-io/milvus/tree/client/v2.6.2/client)|
 | 3.0.x	| [3.0.0](https://github.com/milvus-io/milvus/tree/client/v3.0.0/client)|
 
-Note: Milvus and the GO SDK are NOT compatible across major versions.
+Milvus proto is backward compatible, so a later SDK version can work with an earlier Milvus server. The table lists the recommended SDK version validated for each Milvus version.
 
 ## Contributing
 
