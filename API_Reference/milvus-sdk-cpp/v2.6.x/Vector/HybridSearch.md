@@ -1,6 +1,6 @@
 # HybridSearch()
 
-Hybrid search a collection based on the given parameters and return results.
+This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as RRFRerank or WeightedRerank). Each sub-search targets one vector field with its own query vector, filter, and limit.
 
 ```cpp
 Status HybridSearch(const HybridSearchRequest& request, HybridSearchResponse& response)
@@ -30,132 +30,79 @@ auto request = HybridSearchRequest()
     .WithStrictGroupSize(strict_group_size);
 ```
 
-### HybridSearchRequest
-
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set target db name, use default database if it is empty.
+    Sets the target database name to search; the default database is used when it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to search.
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Sets the partition names to search; if the set is empty, the entire collection is searched. The setter takes an rvalue, so pass a moved-in or temporary std::set<std::string>.
 
 - `AddPartitionName(const std::string& partition_name)`
 
-    Add a partition name.
+    Adds a partition name to the set of partitions to search.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
 
-    Set the output field names.
+    Sets the names of the fields to return in the results. The setter takes an rvalue, so pass a moved-in or temporary std::set<std::string>.
 
 - `AddOutputField(const std::string& output_field)`
 
-    Add an output field.
+    Adds an output field name to the set of fields returned in the results.
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+    Sets the consistency level of the search; see the Milvus consistency level documentation for details.
 
 - `WithSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
 
-    Set sub search requests.
+    Sets the whole list of sub-search requests to run. The setter takes an rvalue, so pass a moved-in or temporary std::vector<SubSearchRequestPtr>.
 
 - `AddSubRequest(const SubSearchRequestPtr& request)`
 
-    Add sub search request.
+    Adds one sub-search request (a single-vector-field search) to the hybrid search.
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Set rerank, suc as RRF/Weighted function. Read the doc for more info: https://milvus.io/docs/reranking.md.
+    Sets the reranking function that fuses the sub-search results, such as an RRFRerank or WeightedRerank function.
 
 - `WithLimit(int64_t limit)`
 
-    Set search limit(topk).
+    Sets the search limit (topk), the maximum number of fused results to return.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value. Note: this value is stored in the ExtraParams.
+    Sets the offset of the first result to return. Note: this value is stored in the extra parameters.
 
 - `WithRoundDecimal(int64_t round_decimal)`
 
-    Set round decimal value.
+    Sets the number of decimal places to which returned similarity scores are rounded.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
-    Set ignore growing flag.
+    Sets the ignore-growing flag, which controls whether data in growing segments is excluded from the search.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
-    Add extra parameters such as "nlist", "ef".
+    Adds an extra engine parameter, such as "nlist" or "ef", by key and value.
 
 - `WithGroupByField(const std::string& field_name)`
 
-    Set group by field value.
+    Sets the field whose values are used to group the search results.
 
 - `WithGroupSize(int64_t group_size)`
 
-    Set group size value.
+    Sets the group size value, the maximum number of results allowed per group.
 
 - `WithStrictGroupSize(bool strict_group_size)`
 
-    Set strict group size flag.
-
-### SubSearchRequest
-
-```cpp
-SubSearchRequest()
-    .WithAnnsField(field_name)
-    .WithLimit(limit)
-    .WithFilter(filter)
-    .WithMetricType(metric_type)
-    .WithTimezone(tz)
-    .AddFloatVector(vector)       // or any Add*/With* vector method
-    .WithFloatVectors(vectors);   // batch assignment
-```
-
-**REQUEST METHODS:**
-
-- `SubSearchRequest& WithAnnsField(const std::string& ann_field)`
-
-- `SubSearchRequest& WithLimit(int64_t limit)`
-
-- `SubSearchRequest& WithFilter(std::string filter)`
-
-- `SubSearchRequest& WithMetricType(milvus::MetricType metric_type)`
-
-- `SubSearchRequest& WithTimezone(const std::string& timezone)`
-
-**Inherited vector methods** (all return `SubSearchRequest&` for chaining):
-
-- `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
-
-- `AddBinaryVector(const std::string& vector)`
-
-- `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
-
-- `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
-
-- `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
-
-- `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
-
-- `AddEmbeddedText(const std::string& text)`
-
-- `AddEmbeddingList(EmbeddingList&& emb_list)` — for struct-field ANN
-
-- `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)` — batch
-
-- `WithSparseVectors(...)`, `WithFloat16Vectors(...)`, etc. — batch variants
-
-### Query vector types
-
-Each `SubSearchRequest` accepts one query-vector representation matching the target field's [DataType](../Collections/DataType.md). Use the corresponding add or batch builder method; these are query inputs, not collection column payloads.
+    Sets the strict group size flag, which controls whether the group size is strictly enforced.
 
 <table>
    <tr>
@@ -212,258 +159,171 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status reporting success or failure, while the response output parameter carries the fused, reranked search results of the hybrid search.
 
-### FieldData
+- **response** (*HybridSearchResponse*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Results** (*const SearchResults&*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get result of search operation.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **Results** (*const std::vector<SingleResult>&*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            Get search results.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **Scores** (*const std::vector<float>&*) -
 
-### EmbeddingList
+                Distances/scores array of one target vector.
 
-This class holds one or more query vectors of the same type, used as the target vectors for a `SearchRequest`, `SubSearchRequest`, or struct-field ANN search via `AddEmbeddingList()`. Build an `EmbeddingList` by calling the Add*/Set* methods, then pass it to `SearchRequestBase::AddEmbeddingList()`.
+            - **Ids** (*IDArray*) -
 
-```cpp
-EmbeddingList list;
-```
+                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from FieldData. It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
 
-**METHODS:**
+                - **IsIntegerID** (*bool*) -
 
-**Read methods:**
+                    Indicate this is an integer id array.
 
-- `FieldDataPtr TargetVectors() const`
+                - **IntIDArray** (*const std::vector<int64_t>&*) -
 
-    Returns the underlying field data containing all vectors.
+                    Return integer id array.
 
-- `size_t Count() const`
+                - **StrIDArray** (*const std::vector<std::string>&*) -
 
-    Returns the number of vectors added.
+                    Return string id array.
 
-- `int64_t Dim() const`
+                - **GetRowCount** (*uint64_t*) -
 
-    Returns the vector dimension. For embedded-text mode the value is `0`.
+                    Get row count.
 
-**Single-vector add methods:**
+            - **PrimaryKeyName** (*const std::string&*) -
 
-- `Status AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+                The primary key name. Sometimes the caller of Search() doesn't know the pk name, the server returns this name, so that you don't need to describe the collection again.
 
-    Appends one dense float vector.
+            - **ScoreName** (*const std::string&*) -
 
-- `Status AddBinaryVector(const std::string& vector)`
+                Score field name in search result. Note: the default score name is "score", but if your collection schema already has a "score" field, and the "score" field is an output field, the score name will be changed to "_score". If "_score" is also duplicated, then the score name will be changed to "__score", etc.
 
-    Appends one binary vector. The string overload converts the string to binary bytes.
+            - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
-- `Status AddBinaryVector(const BinaryVecFieldData::ElementT& vector)`
+                Output fields data.
 
-    Appends one binary vector. The string overload converts the string to binary bytes.
+                - **Name** (*const std::string&*) -
 
-- `Status AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+                    Get field name.
 
-    Appends one sparse vector from index-value data or a supported JSON representation.
+                - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddSparseVector(const nlohmann::json& vector)`
+                    Get field data type.
 
-    Appends one sparse vector from index-value data or a supported JSON representation.
+                - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+                    Get the element type for an array field.
 
-    Appends one float16 vector. The float-vector overload converts values to float16.
+                - **Count** (*size_t*) -
 
-- `Status AddFloat16Vector(const std::vector<float>& vector)` — auto-converts float to float16
+                    Total number of field elements.
 
-    Appends one float16 vector. The float-vector overload converts values to float16.
+            - **OutputField** (*FieldDataPtr*) -
 
-- `Status AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+                Get an output field by name.
 
-    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+                - **Name** (*const std::string&*) -
 
-- `Status AddBFloat16Vector(const std::vector<float>& vector)` — auto-converts float to bfloat16
+                    Get field name.
 
-    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+                - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+                    Get field data type.
 
-    Appends one dense int8 vector.
+                - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddEmbeddedText(const std::string& text)` — for BM25 text-embedding
+                    Get the element type for an array field.
 
-    Appends text for a supported text-embedding function such as BM25.
+                - **Count** (*size_t*) -
 
-**Batch set methods (reset the list):**
+                    Total number of field elements.
 
-- `Status SetFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
+            - **OutputFieldNames** (*const std::set<std::string>&*) -
 
-    Replaces the current list with dense float vectors.
+                Output field names specified by search().
 
-- `Status SetBinaryVectors(const std::vector<std::string>& vectors)`
+            - **OutputRows** (*Status*) -
 
-    Replaces the current list with binary vectors.
+                Get all output rows.
 
-- `Status SetBinaryVectors(std::vector<BinaryVecFieldData::ElementT>&& vectors)`
+            - **OutputRow** (*Status*) -
 
-    Replaces the current list with binary vectors.
+                Get row data. Returns INVALID_ARGUMENT status if the i is out of bound.
 
-- `Status SetSparseVectors(std::vector<SparseFloatVecFieldData::ElementT>&& vectors)`
+            - **OutputHighlightResult** (*Status*) -
 
-    Replaces the current list with sparse vectors.
+                Get highlight results of one row. Returns INVALID_ARGUMENT status if the i is out of bound.
 
-- `Status SetSparseVectors(const std::vector<nlohmann::json>& vectors)`
+                - **field_name** (*std::string*) -
 
-    Replaces the current list with sparse vectors.
+                - **fragments** (*std::vector<std::string>*) -
 
-- `Status SetFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
+                - **scores** (*std::vector<float>*) -
 
-    Replaces the current list with float16 vectors; float input is converted when applicable.
+            - **GetRowCount** (*uint64_t*) -
 
-- `Status SetFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+                Get row count of the result.
 
-    Replaces the current list with float16 vectors; float input is converted when applicable.
+        - **Recalls** (*const std::vector<float>&*) -
 
-- `Status SetBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
+            Get recalls of search results. Note: only works when search with enable_recall_calculation is true on zilliz cloud instance.
 
-    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+    - **SessionTs** (*uint64_t*) -
 
-- `Status SetBFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+    - **Cost** (*int64_t*) -
 
-    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+    - **ScannedRemoteBytes** (*int64_t*) -
 
-- `Status SetInt8Vectors(std::vector<Int8VecFieldData::ElementT>&& vectors)`
+    - **ScannedTotalBytes** (*int64_t*) -
 
-    Replaces the current list with dense int8 vectors.
-
-- `Status SetEmbeddedTexts(std::vector<std::string>&& texts)` — for BM25 text-embedding
-
-    Replaces the current list with text input for a supported embedding function.
-
-### SearchResults
-
-`SearchResponse::Results()` returns one `SearchResults` object for the complete search call. `SearchResults` contains one `SingleResult` for each query vector, preserving query-vector order.
-
-This class is returned by calling `Results()` on a `SearchResponse` or `HybridSearchResponse`.
-
-```cpp
-SearchResults();
-explicit SearchResults(std::vector<SingleResult>&& results);
-```
-
-**METHODS:**
-
-- `const std::vector<SingleResult>& Results() const`
-
-    Returns one `SingleResult` per query vector, in the same order as the vectors were added to the request.
-
-- `const std::vector<float>& Recalls() const`
-
-    Recall values per query vector. Populated only when the search is run on a Zilliz Cloud instance with `enable_recall_calculation` set to `true`. Otherwise the vector is empty.
-
-#### SingleResult
-
-`SingleResult` contains the top-k hits for one query vector, including scores, primary keys, and requested output fields. `SearchResults` is the outer collection that contains these per-query results.
-
-```cpp
-struct SingleResult {
-    SingleResult(const std::string& pk_name, const std::string& score_name,
-                 std::vector<FieldDataPtr>&& output_fields,
-                 const std::set<std::string>& output_names);
-};
-
-using SingleResultPtr = std::shared_ptr<SingleResult>;
-```
-
-**METHODS:**
-
-- `const std::vector<float>& Scores() const`
-
-    Returns the similarity scores or distances for this query vector.
-
-- `IDArray Ids() const`
-
-    Returns the primary-key values for the hits. Prefer OutputField() when the primary-key field type must be preserved.
-
-- `const std::string& PrimaryKeyName() const`
-
-    Returns the primary-key field name reported by the server.
-
-- `const std::string& ScoreName() const`
-
-    Returns the result score-field name, including any collision-avoidance prefix.
-
-- `FieldDataPtr OutputField(const std::string& name) const`
-
-    Returns one requested output field by name; the template overload casts it to the requested concrete FieldData type.
-
-- `const std::vector<FieldDataPtr>& OutputFields() const`
-
-    Returns all requested output fields as FieldDataPtr values.
-
-- `const std::set<std::string>& OutputFieldNames() const`
-
-    Returns the names of the requested output fields.
-
-- `Status OutputRows(EntityRows& rows) const`
-
-    Materializes all hits as row-oriented entity data.
-
-- `Status OutputRow(int i, EntityRow& row) const`
-
-    Materializes one hit by zero-based index.
-
-- `uint64_t GetRowCount() const`
-
-    Returns the number of hits in this result.
+    - **CacheHitRatio** (*float*) -
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
-
-#### Output field types
-
-Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
-
-The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. This result representation is shared by search and query interfaces and does not make the pointer aliases separate API pages.
+    When request construction, transport to the server, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-Demonstrates HybridSearch() with the C++ SDK.
+Run two sub-searches on different vector fields, fuse their results with a WeightedRerank ranker, and return the top 10 entities after connecting a MilvusClientV2.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::HybridSearchRequest();
-milvus::HybridSearchResponse response;
-util::CheckStatus(client->HybridSearch(request, response));
+// Each sub-search runs on one vector field with its own query vector and filter.
+auto sub_req_dense = milvus::SubSearchRequest()
+                         .WithLimit(5)
+                         .WithAnnsField("dense")
+                         .WithFilter("flag == 1")
+                         .AddFloatVector(std::vector<float>(128, 0.1f));
+auto sub_req_sparse = milvus::SubSearchRequest()
+                          .WithLimit(5)
+                          .WithAnnsField("sparse")
+                          .WithFilter("flag in [1, 3]")
+                          .AddSparseVector(nlohmann::json{{"1", 0.1f}, {"5", 0.2f}});
+
+auto request = milvus::HybridSearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req_dense)))
+                   .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req_sparse)))
+                   .WithRerank(std::make_shared<milvus::WeightedRerank>(std::vector<float>{0.5f, 0.5f}))
+                   .WithLimit(10)
+                   .AddOutputField("flag");
+
+milvus::SearchResponse response;
+status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```

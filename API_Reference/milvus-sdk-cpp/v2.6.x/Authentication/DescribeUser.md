@@ -1,6 +1,6 @@
 # DescribeUser()
 
-Describe an user.
+This operation retrieves the details of a specified user from Milvus, including the roles granted to that user, and fills the caller-provided DescribeUserResponse with the result. On success, the response carries a UserDesc with the user's name, description, and granted role names.
 
 ```cpp
 Status DescribeUser(const DescribeUserRequest& request, DescribeUserResponse& response)
@@ -17,13 +17,29 @@ auto request = DescribeUserRequest()
 
 - `WithUserName(const std::string& name)`
 
-    Set name of the user.
+    Sets the name of the user to describe.
 
 **RETURNS:**
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the operation succeeded; on success, the response object carries the user's details, including the roles granted to the user.
+
+- **response** (*DescribeUserResponse*) -
+
+    - **Desc** (*const UserDesc&*) -
+
+        Get user description.
+
+        - **Name** (*const std::string&*) -
+
+            Get the name of the user.
+
+        - **Description** (*const std::string&*) -
+
+        - **Roles** (*const std::vector<std::string>&*) -
+
+            Get role names of the user.
 
 **ERROR HANDLING:**
 
@@ -33,14 +49,25 @@ Returns a status indicating whether the operation succeeded.
 
 ## Example
 
-Demonstrates DescribeUser() with the C++ SDK.
+Describe a user after connecting a MilvusClientV2; the user's details are written into the response object.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::DescribeUserRequest();
+milvus::DescribeUserRequest request;
 milvus::DescribeUserResponse response;
-util::CheckStatus(client->DescribeUser(request, response));
+request.WithUserName("user_1");
+
+status = client->DescribeUser(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+} else {
+    const auto& desc = response.Desc();
+    std::cout << "User: " << desc.Name() << ", roles: " << desc.Roles().size() << std::endl;
+}
 ```

@@ -1,6 +1,6 @@
 # Get()
 
-This operation issues a query with primary keys and returns a list of records.
+This operation fetches entities from a collection by their primary key values and returns the requested output fields for each matched entity. Internally it runs as a primary-key filter query, so partition scope and consistency level follow the request settings.
 
 ```cpp
 Status Get(const GetRequest& request, GetResponse& response)
@@ -13,8 +13,11 @@ auto request = GetRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithPartitionNames(partition_names)
+    .AddPartitionName(partition_name)
     .WithOutputFields(output_field_names)
+    .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
+    .WithIDs(id_array)
     .WithIDs(id_array);
 ```
 
@@ -22,118 +25,115 @@ auto request = GetRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name to query against; the default database is used when it is empty. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection to fetch entities from.
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Sets the names of the partitions. If it is empty, the default partition applies.
+    Sets the partition names to scope the fetch; when empty, the entire collection is queried. Optional.
 
 - `AddPartitionName(const std::string& partition_name)`
 
-    Adds a partition name.
+    Adds a partition name to the partition scope of the fetch. Optional.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
 
-    Sets the output field names.
+    Sets the names of the fields to return in the response. Optional.
 
 - `AddOutputField(const std::string& output_field)`
 
-    Adds an output field.
+    Adds a field name to the set of fields to return in the response. Optional.
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Sets the consistency level. 
+    Sets the consistency level for this read; it defaults to NONE when not specified. Optional.
 
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
-    Sets an ID array.
+    Sets the primary keys of the entities to fetch, accepting either int64 or string key values; note that this method resets any previously set id array.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Sets the primary keys of the entities to fetch, accepting either int64 or string key values; note that this method resets any previously set id array.
 
 **RETURNS:**
 
-*Status* with *GetResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded, and on success populates the response with the fetched records.
 
-### FieldData
+- **response** (*GetResponse*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Results** (*const QueryResults&*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get result of query operation.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **OutputField** (*FieldDataPtr*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            Get an output field by name.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **Name** (*const std::string&*) -
 
-### QueryResults
+                Get field name.
 
-This class holds the column-based result data returned by a `Query()` call. Access it via `Results()` on a `QueryResponse` object.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-```cpp
-const QueryResults& results = response.Results();
-```
+                Get field data type.
 
-**METHODS:**
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `FieldDataPtr OutputField(const std::string& name) const`
+                Get the element type for an array field.
 
-    Returns the named output field as a `FieldDataPtr`. Cast to the concrete type with `std::dynamic_pointer_cast<Int64FieldData>(results.OutputField("id"))`.
+            - **Count** (*size_t*) -
 
-- `const std::vector<FieldDataPtr>& OutputFields() const`
+                Total number of field elements.
 
-    Returns all output fields in the order they were returned by the server.
+        - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
-- `const std::set<std::string>& OutputFieldNames() const`
+            Get all output fields data.
 
-    Returns the set of output field names that were requested in the query.
+            - **Name** (*const std::string&*) -
 
-- `Status OutputRows(EntityRows& rows) const`
+                Get field name.
 
-    Converts all result rows to a vector of JSON-like row maps and stores them in `rows`.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status OutputRow(int i, EntityRow& row) const`
+                Get field data type.
 
-    Converts the row at index `i` to a JSON-like row map.
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `uint64_t GetRowCount() const`
+                Get the element type for an array field.
 
-    Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+            - **Count** (*size_t*) -
 
-**EXCEPTIONS:**
+                Total number of field elements.
 
-- **StatusCode**
+        - **OutputFieldNames** (*const std::set<std::string>&*) -
 
-    Check `status.Code()` and `status.Message()` for error details.
+            Get output field names specified by query().
 
-## Field-data type aliases
+        - **OutputRows** (*Status*) -
+
+            Get all output rows.
+
+        - **OutputRow** (*Status*) -
+
+            Get row data. Throw exception if the i is out of bound.
+
+        - **GetRowCount** (*uint64_t*) -
+
+            Get row count of the result. Return the value of count(*) when you query with count(*).
+
+    - **SessionTs** (*uint64_t*) -
+
+**ERROR HANDLING:**
+
+- **std::exception**
+
+    When request construction, transport to the server, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 <table>
    <tr>
@@ -165,10 +165,10 @@ const QueryResults& results = response.Results();
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Fetch entities by primary key after connecting a MilvusClientV2; the request selects the collection, the ids to fetch, and the output field to return.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
@@ -187,14 +187,12 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-auto query_results = response.Results();
 milvus::EntityRows output_rows;
-status = query_results.OutputRows(output_rows);
+status = response.Results().OutputRows(output_rows);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Get results:" << std::endl;
 for (const auto& row : output_rows) {
-    std::cout << "\t" << row << std::endl;
+    std::cout << row << std::endl;
 }
 ```

@@ -1,6 +1,6 @@
 # RenameCollection()
 
-This operation renames a collection.
+This operation renames a collection, optionally moving it to another database in the same call. After a successful rename, the client also migrates its local collection-timestamp cache to the new name and invalidates cached schemas under both the old and new names.
 
 ```cpp
 Status RenameCollection(const RenameCollectionRequest& request)
@@ -11,52 +11,60 @@ Status RenameCollection(const RenameCollectionRequest& request)
 ```cpp
 auto request = RenameCollectionRequest()
     .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name1)
-    .WithNewCollectionName(collection_name2);
+    .WithCollectionName(collection_name)
+    .WithNewCollectionName(collection_name)
+    .WithTargetDatabaseName(db_name);
 ```
 
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the database that currently contains the collection (the source database, sent as the RPC db_name); the default database is used if left empty. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the current name of the collection to rename (the old name, sent as the RPC oldname).
 
 - `WithNewCollectionName(const std::string& collection_name)`
 
-    Set the new name of the collection.
+    Sets the name the collection will have after the operation (the new name, sent as the RPC newname).
+
+- `WithTargetDatabaseName(const std::string& db_name)`
+
+    Sets the database to move the collection into; when left empty, the collection is renamed in place within the source database. Optional.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the collection was renamed successfully; check IsOk() and Message() for the outcome.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    When request construction, transport, or response processing fails. the returned Status carries the error code and message; inspect the exception message or the Status to determine the cause, such as a source collection that does not exist under the given database.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Rename a collection after connecting a MilvusClientV2; WithCollectionName takes the old name and WithNewCollectionName takes the new name.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->RenameCollection(
-    milvus::RenameCollectionRequest()
-        .WithCollectionName("old_collection")
-        .WithNewCollectionName("new_collection"));
+std::string old_name = "old_collection";
+std::string new_name = "new_collection";
+auto request = milvus::RenameCollectionRequest()
+    .WithDatabaseName("default")       // source database holding the collection
+    .WithCollectionName(old_name)      // current (old) name
+    .WithNewCollectionName(new_name);  // name after the rename
+status = client->RenameCollection(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

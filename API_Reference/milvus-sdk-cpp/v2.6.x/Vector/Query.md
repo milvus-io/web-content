@@ -1,6 +1,6 @@
 # Query()
 
-Query with a set of criteria, and results in a list of records that match the query exactly.
+This operation queries entities in a collection that match a filter expression, or a set of primary keys, and returns the matching records through the response parameter. Callers check the returned Status and read the matched records from the response's query results.
 
 ```cpp
 Status Query(const QueryRequest& request, QueryResponse& response)
@@ -17,6 +17,8 @@ auto request = QueryRequest()
     .WithOutputFields(output_field_names)
     .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
+    .WithIDs(id_array)
+    .WithIDs(id_array)
     .WithFilter(filter)
     .AddFilterTemplate(key, filter_template)
     .WithFilterTemplates(filter_templates)
@@ -31,161 +33,178 @@ auto request = QueryRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set target db name, use default database if it is empty.
+    Sets the target database name to query; the client's default database is used if it is empty. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to query, which cannot be empty.
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Sets the partition names to constrain the query scope; if empty, the entire collection is queried. Optional.
 
 - `AddPartitionName(const std::string& partition_name)`
 
-    Add a partition name.
+    Adds a partition name to constrain the query scope. Optional.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
 
-    Set the output field names.
+    Sets the names of the fields to return in the query results. Optional.
 
 - `AddOutputField(const std::string& output_field)`
 
-    Add an output field.
+    Adds a field name to return in the query results. Optional.
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+    Sets the consistency level used for this query; if unset, the collection's default level applies. Optional.
+
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Sets the primary keys to query, accepting either integer or string IDs. Note: IDs and filter cannot be set at the same time. Optional.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Sets the primary keys to query, accepting either integer or string IDs. Note: IDs and filter cannot be set at the same time. Optional.
 
 - `WithFilter(std::string filter)`
 
-    Set filter expression.
+    Sets the filter expression that matched entities must satisfy.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
-    Adds one value for a placeholder in the filter expression. It is used only when the request has a non-empty filter and avoids repeatedly parsing large literal values.
+    Adds a filter template value that substitutes a placeholder in the filter expression; only takes effect when the filter is not empty. Valid template values are boolean, numeric, string, or array. Optional.
 
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
-    Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
+    Sets the filter template values used to substitute placeholders in the filter expression; only take effect when the filter is not empty. Optional.
 
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Sets the maximum number of entities to return; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Sets the number of entities to skip; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
-    Set ignore growing segments. Note: this value is stored in the ExtraParams.
+    Sets whether to ignore data in growing segments during the query. Note: this value is stored in the extra params. Optional.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
-    Add extra param.
+    Adds an extra parameter key-value pair to the request. Optional.
 
 - `WithTimezone(const std::string& timezone)`
 
-    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+    Sets the timezone, which takes effect for Timestamptz fields. Note: this value is stored in the extra params. Optional.
 
 **RETURNS:**
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the query succeeded, with the matching records and their requested output field data delivered in the response's query results.
 
-### FieldData
+- **response** (*QueryResponse*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Results** (*const QueryResults&*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get result of query operation.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **OutputField** (*FieldDataPtr*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            Get an output field by name.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **Name** (*const std::string&*) -
 
-### QueryResults
+                Get field name.
 
-This class holds the column-based result data returned by a `Query()` call. Access it via `Results()` on a `QueryResponse` object.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-```cpp
-const QueryResults& results = response.Results();
-```
+                Get field data type.
 
-**METHODS:**
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `FieldDataPtr OutputField(const std::string& name) const`
+                Get the element type for an array field.
 
-    Returns the named output field as a `FieldDataPtr`. Cast to the concrete type with `std::dynamic_pointer_cast<Int64FieldData>(results.OutputField("id"))`.
+            - **Count** (*size_t*) -
 
-- `const std::vector<FieldDataPtr>& OutputFields() const`
+                Total number of field elements.
 
-    Returns all output fields in the order they were returned by the server.
+        - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
-- `const std::set<std::string>& OutputFieldNames() const`
+            Get all output fields data.
 
-    Returns the set of output field names that were requested in the query.
+            - **Name** (*const std::string&*) -
 
-- `Status OutputRows(EntityRows& rows) const`
+                Get field name.
 
-    Converts all result rows to a vector of JSON-like row maps and stores them in `rows`.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status OutputRow(int i, EntityRow& row) const`
+                Get field data type.
 
-    Converts the row at index `i` to a JSON-like row map.
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `uint64_t GetRowCount() const`
+                Get the element type for an array field.
 
-    Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+            - **Count** (*size_t*) -
 
-#### Output field types
+                Total number of field elements.
 
-Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
+        - **OutputFieldNames** (*const std::set<std::string>&*) -
 
-The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. This result representation is shared by search and query interfaces and does not make the pointer aliases separate API pages.
+            Get output field names specified by query().
+
+        - **OutputRows** (*Status*) -
+
+            Get all output rows.
+
+        - **OutputRow** (*Status*) -
+
+            Get row data. Throw exception if the i is out of bound.
+
+        - **GetRowCount** (*uint64_t*) -
+
+            Get row count of the result. Return the value of count(*) when you query with count(*).
+
+    - **SessionTs** (*uint64_t*) -
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    When request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-Demonstrates Query() with the C++ SDK.
+Query with a filter expression after connecting a MilvusClientV2.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::QueryRequest();
+auto request = milvus::QueryRequest()
+    .WithCollectionName("book")
+    .WithFilter("word_count > 10000")
+    .AddOutputField("book_id")
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
 milvus::QueryResponse response;
-util::CheckStatus(client->Query(request, response));
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto results = response.Results();
+std::cout << "matched entities: " << results.GetRowCount() << std::endl;
+auto ids = results.OutputField<milvus::Int64FieldData>("book_id");
+if (ids) {
+    for (const auto& id : ids->Data()) {
+        std::cout << id << std::endl;
+    }
+}
 ```

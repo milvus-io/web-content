@@ -1,6 +1,6 @@
 # Search()
 
-Search a collection based on the given parameters and return results.
+This operation performs an approximate nearest neighbor (ANN) search on a collection with the query vectors, primary keys, or texts carried in the SearchRequest, and returns the matched results through the SearchResponse parameter. The request is validated before it is sent, and the call fails if no query targets are provided.
 
 ```cpp
 Status Search(const SearchRequest& request, SearchResponse& response)
@@ -17,30 +17,50 @@ auto request = SearchRequest()
     .WithOutputFields(output_field_names)
     .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
+    .AddFilterTemplate(key, filter_template)
+    .AddBinaryVector(vector)
     .AddBinaryVector(vector)
     .AddFloatVector(vector)
     .AddSparseVector(vector)
+    .AddSparseVector(vector)
     .AddFloat16Vector(vector)
+    .AddFloat16Vector(vector)
+    .AddBFloat16Vector(vector)
     .AddBFloat16Vector(vector)
     .AddEmbeddedText(text)
     .AddInt8Vector(vector)
     .AddEmbeddingList(emb_list)
+    .AddExtraParam(key, value)
+    .AddBinaryVector(field_name, vector)
+    .AddBinaryVector(field_name, vector)
+    .AddFloatVector(field_name, vector)
+    .AddSparseVector(field_name, vector)
+    .AddSparseVector(field_name, vector)
+    .AddFloat16Vector(field_name, vector)
+    .AddFloat16Vector(field_name, vector)
+    .AddBFloat16Vector(field_name, vector)
+    .AddBFloat16Vector(field_name, vector)
+    .AddEmbeddedText(field_name, text)
+    .AddInt8Vector(field_name, vector)
+    .WithBinaryVectors(vectors)
     .WithBinaryVectors(vectors)
     .WithFloatVectors(vectors)
     .WithSparseVectors(vectors)
+    .WithSparseVectors(vectors)
     .WithFloat16Vectors(vectors)
+    .WithFloat16Vectors(vectors)
+    .WithBFloat16Vectors(vectors)
     .WithBFloat16Vectors(vectors)
     .WithEmbeddedTexts(texts)
     .WithInt8Vectors(vectors)
     .WithEmbeddingLists(emb_lists)
     .WithIDs(id_array)
+    .WithIDs(id_array)
     .WithMetricType(metric_type)
-    .AddExtraParam(key, value)
     .WithExtraParams(params)
     .WithLimit(limit)
     .WithFilter(filter)
     .WithAnnsField(ann_field)
-    .AddFilterTemplate(key, filter_template)
     .WithFilterTemplates(filter_templates)
     .WithOffset(offset)
     .WithRoundDecimal(round_decimal)
@@ -59,179 +79,255 @@ auto request = SearchRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set target db name, use default database if it is empty.
+    Sets the target database name. The default database is used if the name is empty. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to search.
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Set the partition names. If partition nemes are empty, will query in the entire collection.
+    Sets the names of partitions to search. If the set is empty, the entire collection is searched. Optional.
 
 - `AddPartitionName(const std::string& partition_name)`
 
-    Add a partition name.
+    Adds a partition name to the search scope. Optional.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
 
-    Set the output field names.
+    Sets the names of the fields to return in the search results. Optional.
 
 - `AddOutputField(const std::string& output_field)`
 
-    Add an output field.
+    Adds a field name to return in the search results. Optional.
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
-
-- `AddBinaryVector(const std::string& vector)`
-
-    Add a binary vector to search request. This method automatically converts the string array to uint8 array.
-
-- `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
-
-    Add a float vector to search request.
-
-- `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
-
-    Add a sparse vector to search request.
-
-- `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
-
-    Add a float16 vector to search request.
-
-- `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
-
-    Add a bfloat16 vector to search request.
-
-- `AddEmbeddedText(const std::string& text)`
-
-    Add a text to search request. Only works for BM25 function.
-
-- `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
-
-    Add an int8 vector to search request.
-
-- `AddEmbeddingList(EmbeddingList&& emb_list)`
-
-    Add an embedding list to search request on struct field.
-
-- `WithBinaryVectors(const std::vector<std::string>& vectors)`
-
-    Assign binary vectors to search request. This method automatically converts the string array to uint8 array. Note: this method will reset the vector list of the request.
-
-- `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
-
-    Assign float vectors to search request. Note: this method will reset the vector list of the request.
-
-- `WithSparseVectors(std::vector<SparseFloatVecFieldData::ElementT>&& vectors)`
-
-    Assign sparse vectors to search request. Note: this method will reset the vector list of the request.
-
-- `WithFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
-
-    Assign float16 vectors to search request. Note: this method will reset the vector list of the request.
-
-- `WithBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
-
-    Assign bfloat16 vectors to search request. Note: this method will reset the vector list of the request.
-
-- `WithEmbeddedTexts(std::vector<std::string>&& texts)`
-
-    Assign texts to search request. Only works for BM25 function. Note: this method will reset the vector list of the request.
-
-- `WithInt8Vectors(std::vector<Int8VecFieldData::ElementT>&& vectors)`
-
-    Assign int8 vectors to search request. Note: this method will reset the vector list of the request.
-
-- `WithEmbeddingLists(std::vector<EmbeddingList>&& emb_lists)`
-
-    Assign embedding lists to search request on struct field. Note: this method will reset the vector list of the request.
-
-- `WithIDs(std::vector<int64_t>&& id_array)`
-
-    Set integer primary keys whose vectors are used as search targets. Note: IDs and target vectors cannot be specified at the same time.
-
-- `WithMetricType(::milvus::MetricType metric_type)`
-
-    Specifies the metric type.
-
-- `AddExtraParam(const std::string& key, const std::string& value)`
-
-    Add extra parameters such as "nlist", "ef".
-
-- `WithExtraParams(const std::unordered_map<std::string, std::string>& params)`
-
-    Add extra parameters such as "nlist", "ef".
-
-- `WithLimit(int64_t limit)`
-
-    Set search limit(topk). Note: this value is stored in the ExtraParams.
-
-- `WithFilter(std::string filter)`
-
-    Set filter expression.
-
-- `WithAnnsField(const std::string& ann_field)`
-
-    Set target field of ann search.
+    Sets the consistency level of the search, such as ConsistencyLevel::STRONG or ConsistencyLevel::BOUNDED. Optional.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
-    Adds one value for a placeholder in the filter expression. It is used only when the request has a non-empty filter and avoids repeatedly parsing large literal values.
+    Adds a filter template that provides values for placeholders in the filter expression, improving parsing performance for complicated expressions. A template value can be boolean, numeric, string, or array, and templates take effect only when the filter expression is not empty. Optional.
+
+- `AddBinaryVector(const std::string& vector)`
+
+    Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
+
+- `AddBinaryVector(const BinaryVecFieldData::ElementT& vector)`
+
+    Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
+
+- `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+
+    Adds a float vector to search as a query target.
+
+- `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+
+    Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `AddSparseVector(const nlohmann::json& vector)`
+
+    Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+
+    Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
+
+- `AddFloat16Vector(const std::vector<float>& vector)`
+
+    Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
+
+- `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+
+    Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
+
+- `AddBFloat16Vector(const std::vector<float>& vector)`
+
+    Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
+
+- `AddEmbeddedText(const std::string& text)`
+
+    Adds query text to search on a collection with a BM25 function.
+
+- `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+
+    Adds an int8 vector to search as a query target.
+
+- `AddEmbeddingList(EmbeddingList&& emb_list)`
+
+    Adds an embedding list to search on a struct field.
+
+- `AddExtraParam(const std::string& key, const std::string& value)`
+
+    Adds an index-specific search parameter, such as "nlist" or "ef". Optional.
+
+- `AddBinaryVector(std::string field_name, const std::string& vector)`
+
+    Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
+
+- `AddBinaryVector(std::string field_name, const BinaryVecFieldData::ElementT& vector)`
+
+    Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
+
+- `AddFloatVector(std::string field_name, const FloatVecFieldData::ElementT& vector)`
+
+    Adds a float vector to search as a query target.
+
+- `AddSparseVector(std::string field_name, const SparseFloatVecFieldData::ElementT& vector)`
+
+    Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `AddSparseVector(std::string field_name, const nlohmann::json& vector)`
+
+    Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `AddFloat16Vector(std::string field_name, const Float16VecFieldData::ElementT& vector)`
+
+    Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
+
+- `AddFloat16Vector(std::string field_name, const std::vector<float>& vector)`
+
+    Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
+
+- `AddBFloat16Vector(std::string field_name, const BFloat16VecFieldData::ElementT& vector)`
+
+    Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
+
+- `AddBFloat16Vector(std::string field_name, const std::vector<float>& vector)`
+
+    Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
+
+- `AddEmbeddedText(std::string field_name, const std::string& text)`
+
+    Adds query text to search on a collection with a BM25 function.
+
+- `AddInt8Vector(std::string field_name, const Int8VecFieldData::ElementT& vector)`
+
+    Adds an int8 vector to search as a query target.
+
+- `WithBinaryVectors(const std::vector<std::string>& vectors)`
+
+    Assigns binary vectors to search as query targets, replacing any vectors previously assigned. The std::string overload automatically converts the string array to a uint8 array.
+
+- `WithBinaryVectors(std::vector<BinaryVecFieldData::ElementT>&& vectors)`
+
+    Assigns binary vectors to search as query targets, replacing any vectors previously assigned. The std::string overload automatically converts the string array to a uint8 array.
+
+- `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
+
+    Assigns float vectors to search as query targets, replacing any vectors previously assigned.
+
+- `WithSparseVectors(std::vector<SparseFloatVecFieldData::ElementT>&& vectors)`
+
+    Assigns sparse vectors to search as query targets, replacing any vectors previously assigned. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `WithSparseVectors(const std::vector<nlohmann::json>& vectors)`
+
+    Assigns sparse vectors to search as query targets, replacing any vectors previously assigned. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
+
+- `WithFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
+
+    Assigns float16 vectors to search as query targets, replacing any vectors previously assigned. The std::vector<std::vector<float>> overload automatically converts the float arrays to float16 binary.
+
+- `WithFloat16Vectors(const std::vector<std::vector<float>>& vectors)`
+
+    Assigns float16 vectors to search as query targets, replacing any vectors previously assigned. The std::vector<std::vector<float>> overload automatically converts the float arrays to float16 binary.
+
+- `WithBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
+
+    Assigns bfloat16 vectors to search as query targets, replacing any vectors previously assigned. The std::vector<std::vector<float>> overload automatically converts the float arrays to bfloat16 binary.
+
+- `WithBFloat16Vectors(const std::vector<std::vector<float>>& vectors)`
+
+    Assigns bfloat16 vectors to search as query targets, replacing any vectors previously assigned. The std::vector<std::vector<float>> overload automatically converts the float arrays to bfloat16 binary.
+
+- `WithEmbeddedTexts(std::vector<std::string>&& texts)`
+
+    Assigns query texts to search on a collection with a BM25 function, replacing any vectors previously assigned.
+
+- `WithInt8Vectors(std::vector<Int8VecFieldData::ElementT>&& vectors)`
+
+    Assigns int8 vectors to search as query targets, replacing any vectors previously assigned.
+
+- `WithEmbeddingLists(std::vector<EmbeddingList>&& emb_lists)`
+
+    Assigns embedding lists to search on a struct field, replacing any vectors previously assigned.
+
+- `WithIDs(std::vector<int64_t>&& id_array)`
+
+    Sets the integer or string primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Sets the integer or string primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+
+- `WithMetricType(::milvus::MetricType metric_type)`
+
+    Sets the metric type of the search, such as MetricType::L2, MetricType::IP, or MetricType::COSINE. Optional.
+
+- `WithExtraParams(const std::unordered_map<std::string, std::string>& params)`
+
+    Sets index-specific search parameters, such as "nlist" or "ef". Optional.
+
+- `WithLimit(int64_t limit)`
+
+    Sets the search limit (topk), the maximum number of results returned per query target. The value is stored in the extra parameters. Optional.
+
+- `WithFilter(std::string filter)`
+
+    Sets the filter expression used to constrain the search scope. Optional.
+
+- `WithAnnsField(const std::string& ann_field)`
+
+    Sets the target vector field of the ann search. Needed when the collection has multiple vector fields; the server infers the field when the collection has only one. Optional.
 
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
-    Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
+    Sets the filter templates as a key-value map. Templates take effect only when the filter expression is not empty. Optional.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value. Note: this value is stored in the ExtraParams.
+    Sets the number of results to skip. The value is stored in the extra parameters. Optional.
 
 - `WithRoundDecimal(int64_t round_decimal)`
 
-    Set round decimal value.
+    Sets the number of decimal places the returned distances are rounded to. Optional.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
-    Set ignore growing flag.
+    Sets whether to ignore growing segments during the search. Optional.
 
 - `WithGroupByField(const std::string& field_name)`
 
-    Set group by field value.
+    Sets the scalar field whose values group the search results. Optional.
 
 - `WithGroupSize(int64_t group_size)`
 
-    Set group size value.
+    Sets the group size value used with WithGroupByField. Optional.
 
 - `WithStrictGroupSize(bool strict_group_size)`
 
-    Set strict group size flag.
+    Sets the strict group size flag used with WithGroupByField. Optional.
 
 - `WithRadius(double radius)`
 
-    Set range radius. Note: this value is stored in the ExtraParams.
+    Sets the range radius, the outer distance boundary of a range search. The value is stored in the extra parameters. Optional.
 
 - `WithRangeFilter(double filter)`
 
-    Set range filter. Note: this value is stored in the ExtraParams.
+    Sets the range filter, the inner distance boundary that together with the radius defines the distance range a match must fall within. The value is stored in the extra parameters. Optional.
 
 - `WithRerank(const FunctionScorePtr& ranker)`
 
-    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read the doc for more info: https://milvus.io/docs/boost-ranker.md.
+    Sets the reranker of the search. Multiple rerank functions such as Boost, Decay, and Model are supported. Optional.
 
 - `WithTimezone(const std::string& timezone)`
 
-    Set timezone, takes effect for Timestamptz field. Read the doc for more info: https://milvus.io/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search.
+    Sets the timezone, which takes effect for Timestamptz fields. Optional.
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Set highlighter.
-
-### Query vector types
-
-The request accepts one query-vector representation matching the target field's [DataType](../Collections/DataType.md). Use the corresponding add or batch builder method; these are query inputs, not collection column payloads.
+    Sets the highlighter used to highlight matched text in the results. Optional.
 
 <table>
    <tr>
@@ -288,298 +384,169 @@ The request accepts one query-vector representation matching the target field's 
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the search succeeded; on success the response carries per-query results, each holding the matched primary keys with their scores and any requested output fields.
 
-### FieldData
+- **response** (*SearchResponse*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Results** (*const SearchResults&*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get result of search operation.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **Results** (*const std::vector<SingleResult>&*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            Get search results.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **Scores** (*const std::vector<float>&*) -
 
-### EmbeddingList
+                Distances/scores array of one target vector.
 
-This class holds one or more query vectors of the same type, used as the target vectors for a `SearchRequest`, `SubSearchRequest`, or struct-field ANN search via `AddEmbeddingList()`. Build an `EmbeddingList` by calling the Add*/Set* methods, then pass it to `SearchRequestBase::AddEmbeddingList()`.
+            - **Ids** (*IDArray*) -
 
-```cpp
-EmbeddingList list;
-```
+                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from FieldData. It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
 
-**METHODS:**
+                - **IsIntegerID** (*bool*) -
 
-**Read methods:**
+                    Indicate this is an integer id array.
 
-- `FieldDataPtr TargetVectors() const`
+                - **IntIDArray** (*const std::vector<int64_t>&*) -
 
-    Returns the underlying field data containing all vectors.
+                    Return integer id array.
 
-- `size_t Count() const`
+                - **StrIDArray** (*const std::vector<std::string>&*) -
 
-    Returns the number of vectors added.
+                    Return string id array.
 
-- `int64_t Dim() const`
+                - **GetRowCount** (*uint64_t*) -
 
-    Returns the vector dimension. For embedded-text mode the value is `0`.
+                    Get row count.
 
-**Single-vector add methods:**
+            - **PrimaryKeyName** (*const std::string&*) -
 
-- `Status AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+                The primary key name. Sometimes the caller of Search() doesn't know the pk name, the server returns this name, so that you don't need to describe the collection again.
 
-    Appends one dense float vector.
+            - **ScoreName** (*const std::string&*) -
 
-- `Status AddBinaryVector(const std::string& vector)`
+                Score field name in search result. Note: the default score name is "score", but if your collection schema already has a "score" field, and the "score" field is an output field, the score name will be changed to "_score". If "_score" is also duplicated, then the score name will be changed to "__score", etc.
 
-    Appends one binary vector. The string overload converts the string to binary bytes.
+            - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
-- `Status AddBinaryVector(const BinaryVecFieldData::ElementT& vector)`
+                Output fields data.
 
-    Appends one binary vector. The string overload converts the string to binary bytes.
+                - **Name** (*const std::string&*) -
 
-- `Status AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+                    Get field name.
 
-    Appends one sparse vector from index-value data or a supported JSON representation.
+                - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddSparseVector(const nlohmann::json& vector)`
+                    Get field data type.
 
-    Appends one sparse vector from index-value data or a supported JSON representation.
+                - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+                    Get the element type for an array field.
 
-    Appends one float16 vector. The float-vector overload converts values to float16.
+                - **Count** (*size_t*) -
 
-- `Status AddFloat16Vector(const std::vector<float>& vector)` — auto-converts float to float16
+                    Total number of field elements.
 
-    Appends one float16 vector. The float-vector overload converts values to float16.
+            - **OutputField** (*FieldDataPtr*) -
 
-- `Status AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+                Get an output field by name.
 
-    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+                - **Name** (*const std::string&*) -
 
-- `Status AddBFloat16Vector(const std::vector<float>& vector)` — auto-converts float to bfloat16
+                    Get field name.
 
-    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+                - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+                    Get field data type.
 
-    Appends one dense int8 vector.
+                - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `Status AddEmbeddedText(const std::string& text)` — for BM25 text-embedding
+                    Get the element type for an array field.
 
-    Appends text for a supported text-embedding function such as BM25.
+                - **Count** (*size_t*) -
 
-**Batch set methods (reset the list):**
+                    Total number of field elements.
 
-- `Status SetFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
+            - **OutputFieldNames** (*const std::set<std::string>&*) -
 
-    Replaces the current list with dense float vectors.
+                Output field names specified by search().
 
-- `Status SetBinaryVectors(const std::vector<std::string>& vectors)`
+            - **OutputRows** (*Status*) -
 
-    Replaces the current list with binary vectors.
+                Get all output rows.
 
-- `Status SetBinaryVectors(std::vector<BinaryVecFieldData::ElementT>&& vectors)`
+            - **OutputRow** (*Status*) -
 
-    Replaces the current list with binary vectors.
+                Get row data. Returns INVALID_ARGUMENT status if the i is out of bound.
 
-- `Status SetSparseVectors(std::vector<SparseFloatVecFieldData::ElementT>&& vectors)`
+            - **OutputHighlightResult** (*Status*) -
 
-    Replaces the current list with sparse vectors.
+                Get highlight results of one row. Returns INVALID_ARGUMENT status if the i is out of bound.
 
-- `Status SetSparseVectors(const std::vector<nlohmann::json>& vectors)`
+                - **field_name** (*std::string*) -
 
-    Replaces the current list with sparse vectors.
+                - **fragments** (*std::vector<std::string>*) -
 
-- `Status SetFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
+                - **scores** (*std::vector<float>*) -
 
-    Replaces the current list with float16 vectors; float input is converted when applicable.
+            - **GetRowCount** (*uint64_t*) -
 
-- `Status SetFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+                Get row count of the result.
 
-    Replaces the current list with float16 vectors; float input is converted when applicable.
+        - **Recalls** (*const std::vector<float>&*) -
 
-- `Status SetBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
+            Get recalls of search results. Note: only works when search with enable_recall_calculation is true on zilliz cloud instance.
 
-    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+    - **SessionTs** (*uint64_t*) -
 
-- `Status SetBFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+    - **Cost** (*int64_t*) -
 
-    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+    - **ScannedRemoteBytes** (*int64_t*) -
 
-- `Status SetInt8Vectors(std::vector<Int8VecFieldData::ElementT>&& vectors)`
+    - **ScannedTotalBytes** (*int64_t*) -
 
-    Replaces the current list with dense int8 vectors.
-
-- `Status SetEmbeddedTexts(std::vector<std::string>&& texts)` — for BM25 text-embedding
-
-    Replaces the current list with text input for a supported embedding function.
-
-### SearchResults
-
-`SearchResponse::Results()` returns one `SearchResults` object for the complete search call. `SearchResults` contains one `SingleResult` for each query vector, preserving query-vector order.
-
-This class is returned by calling `Results()` on a `SearchResponse` or `HybridSearchResponse`.
-
-```cpp
-SearchResults();
-explicit SearchResults(std::vector<SingleResult>&& results);
-```
-
-**METHODS:**
-
-- `const std::vector<SingleResult>& Results() const`
-
-    Returns one `SingleResult` per query vector, in the same order as the vectors were added to the request.
-
-- `const std::vector<float>& Recalls() const`
-
-    Recall values per query vector. Populated only when the search is run on a Zilliz Cloud instance with `enable_recall_calculation` set to `true`. Otherwise the vector is empty.
-
-#### SingleResult
-
-`SingleResult` contains the top-k hits for one query vector, including scores, primary keys, and requested output fields. `SearchResults` is the outer collection that contains these per-query results.
-
-```cpp
-struct SingleResult {
-    SingleResult(const std::string& pk_name, const std::string& score_name,
-                 std::vector<FieldDataPtr>&& output_fields,
-                 const std::set<std::string>& output_names);
-};
-
-using SingleResultPtr = std::shared_ptr<SingleResult>;
-```
-
-**METHODS:**
-
-- `const std::vector<float>& Scores() const`
-
-    Returns the similarity scores or distances for this query vector.
-
-- `IDArray Ids() const`
-
-    Returns the primary-key values for the hits. Prefer OutputField() when the primary-key field type must be preserved.
-
-- `const std::string& PrimaryKeyName() const`
-
-    Returns the primary-key field name reported by the server.
-
-- `const std::string& ScoreName() const`
-
-    Returns the result score-field name, including any collision-avoidance prefix.
-
-- `FieldDataPtr OutputField(const std::string& name) const`
-
-    Returns one requested output field by name; the template overload casts it to the requested concrete FieldData type.
-
-- `const std::vector<FieldDataPtr>& OutputFields() const`
-
-    Returns all requested output fields as FieldDataPtr values.
-
-- `const std::set<std::string>& OutputFieldNames() const`
-
-    Returns the names of the requested output fields.
-
-- `Status OutputRows(EntityRows& rows) const`
-
-    Materializes all hits as row-oriented entity data.
-
-- `Status OutputRow(int i, EntityRow& row) const`
-
-    Materializes one hit by zero-based index.
-
-- `uint64_t GetRowCount() const`
-
-    Returns the number of hits in this result.
+    - **CacheHitRatio** (*float*) -
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
-
-#### Output field types
-
-Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
-
-The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. This result representation is shared by search and query interfaces and does not make the pointer aliases separate API pages.
-
-### FunctionScore
-
-This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchArguments::WithFunctionScore()` or `HybridSearchRequest::WithFunctionScore()`. For `HybridSearch` use RRF or Weighted functions; for `Search` use Boost, Decay, or Model functions. For the function subclass details see Function.
-
-```cpp
-using FunctionScorePtr = std::shared_ptr<FunctionScore>;
-
-auto score = FunctionScore()
-    .WithFunctions(functions)
-    .AddFunction(function_ptr)
-    .WithParams(params)
-    .AddParam(key, value);
-```
-
-**METHODS:**
-
-- `FunctionScore& WithFunctions(std::vector<FunctionPtr>&& functions)`
-
-    Replaces the rerank-function list.
-
-- `FunctionScore& AddFunction(const FunctionPtr& function)`
-
-    Appends one rerank function.
-
-- `FunctionScore& WithParams(std::unordered_map<std::string, nlohmann::json>&& params)`
-
-    Replaces the extra parameter map used by the rerank functions.
-
-- `FunctionScore& AddParam(const std::string& key, nlohmann::json&& param)`
-
-    Adds or replaces one rerank parameter.
-
-- `const std::vector<FunctionPtr>& Functions() const`
-
-    Returns the configured rerank functions.
-
-- `const std::unordered_map<std::string, nlohmann::json>& Params() const`
-
-    Returns the configured rerank parameters.
+    When building the request, communicating with the server, or processing the response fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-Demonstrates Search() with the C++ SDK.
+Search a collection with float query vectors and read back the matched scores.
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::SearchRequest();
+std::vector<milvus::FloatVecFieldData::ElementT> query_vectors = {{0.1f, 0.2f, 0.3f, 0.4f}};
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("book")
+                   .WithAnnsField("book_intro")
+                   .WithFloatVectors(std::move(query_vectors))
+                   .WithLimit(3);
+
 milvus::SearchResponse response;
-util::CheckStatus(client->Search(request, response));
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (const auto& result : response.Results().Results()) {
+    for (const float score : result.Scores()) {
+        std::cout << "score: " << score << std::endl;
+    }
+}
 ```

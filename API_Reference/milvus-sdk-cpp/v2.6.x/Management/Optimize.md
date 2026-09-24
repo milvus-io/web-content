@@ -1,6 +1,6 @@
 # Optimize()
 
-This operation triggers optimize compaction for a collection and returns an asynchronous task handle that can be polled, cancelled, or awaited.
+This operation triggers a server-side compaction on the collection's segments with a target segment size, then monitors it to completion: it waits for vector-field indexes to finish before and after compaction, polls the compaction state until it completes, and refreshes the load of a loaded collection so post-compaction segments become available. When the request's async option is false (the default) the whole workflow runs on the calling thread and the returned Status is the final result; when true it runs on a background thread owned by the returned OptimizeTask, which supports polling, waiting, cancellation, and progress reporting.
 
 ```cpp
 Status Optimize(const OptimizeRequest& request, OptimizeTaskPtr& task)
@@ -12,117 +12,100 @@ Status Optimize(const OptimizeRequest& request, OptimizeTaskPtr& task)
 auto request = OptimizeRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
-    .WithTargetSize("512MB")
-    .WithAsync(true)
-    .WithTimeoutMs(0);
+    .WithTargetSize(target_size)
+    .WithAsync(async)
+    .WithTimeoutMs(timeout_ms);
 ```
-
-### OptimizeRequest
 
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database.
+    Sets the name of the database in which the collection is created. Defaults to the client's current database when empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the collection to optimize.
+    Sets the name of the collection to be optimized; it must not be empty.
 
 - `WithTargetSize(const std::string& target_size)`
 
-    Sets desired compacted segment size such as `"512MB"` or `"1GB"`.
+    Sets the target segment size for compaction, such as "512MB" or "1GB"; accepted units are B, KB, MB, GB, TB, and PB, and the value must be at least 1MB.
 
 - `WithAsync(bool async)`
 
-    When `true`, optimization is scheduled asynchronously.
+    Sets whether to run the optimization asynchronously on a background task; defaults to false.
 
 - `WithTimeoutMs(int64_t timeout_ms)`
 
-    Sets the overall task timeout in milliseconds. `0` means no overall timeout.
+    Sets the overall task timeout in milliseconds. Zero means no overall timeout.
 
 **RETURNS:**
 
-*Status* with *OptimizeTaskPtr*
+*Status*
 
-### OptimizeResponse
+Returns a Status indicating whether the operation succeeded: in synchronous mode it carries the final optimization outcome, and in asynchronous mode it is OK once the task has started (task progress and the final result are obtained from the OptimizeTask output parameter).
 
-This class represents optimize task output including normalized target size, compaction ID, and progress history.
+- **response** (*OptimizeTaskPtr*) -
 
-```cpp
-const OptimizeResponse& response = resp;
-```
+    - **GetResult** (*Status*) -
 
-**METHODS:**
+        Wait for task result. Timeout zero means wait forever.
 
-- `const std::string& StatusText() const`
+        - **StatusText** (*const std::string&*) -
 
-    Returns the current status text reported by optimize execution.
+            Get status text.
 
-- `const std::string& CollectionName() const`
+        - **CollectionName** (*const std::string&*) -
 
-    Returns the collection being optimized.
+            Get collection name.
 
-- `int64_t CompactionID() const`
+        - **CompactionID** (*int64_t*) -
 
-    Returns the compaction task ID.
+            Get compaction ID.
 
-- `const std::string& TargetSize() const`
+        - **TargetSize** (*const std::string&*) -
 
-    Returns the normalized target size used by the optimizer.
+            Get normalized target size.
 
-- `const std::vector<std::string>& ProgressHistory() const`
+        - **ProgressHistory** (*const std::vector<std::string>&*) -
 
-    Returns progress messages collected during task execution.
+            Get progress history.
 
-### OptimizeTask
+    - **Cancel** (*bool*) -
 
-This class represents an asynchronous optimize task that can be cancelled, awaited, and queried for progress.
+        Cancel the task cooperatively.
 
-```cpp
-const OptimizeTaskPtr& task = optimize_task;
-```
+    - **IsDone** (*bool*) -
 
-**METHODS:**
+        Whether the task is done.
 
-- `Status GetResult(OptimizeResponse& response, int64_t timeout_ms = 0)`
+    - **IsCancelled** (*bool*) -
 
-    Waits for completion and fills `response`. `timeout_ms = 0` waits indefinitely.
+        Whether the task is cancelled.
 
-- `bool Cancel()`
+    - **CurrentProgress** (*std::string*) -
 
-    Requests cooperative cancellation of the task.
+        Current progress message.
 
-- `bool IsDone() const`
+    - **ProgressHistory** (*std::vector<std::string>*) -
 
-    Returns whether task execution has finished.
+        Progress message history.
 
-- `bool IsCancelled() const`
+    - **TaskStatus** (*Status*) -
 
-    Returns whether cancellation was requested and accepted.
+        Final task status if done, otherwise OK.
 
-- `std::string CurrentProgress() const`
+**ERROR HANDLING:**
 
-    Returns the latest progress message.
+- **std::exception**
 
-- `std::vector<std::string> ProgressHistory() const`
-
-    Returns all recorded progress messages.
-
-- `Status TaskStatus() const`
-
-    Returns the final task status when done, otherwise an OK status.
-
-**EXCEPTIONS:**
-
-- **StatusCode**
-
-    Check `status.Code()` and `status.Message()` for invalid request parameters, optimize scheduling failures, or timeout errors.
+    When the optimization fails, such as an empty collection name, an invalid target size, RPC transport errors, a failed compaction, an index failure, or the overall timeout being exceeded. Inspect the returned Status (or, for asynchronous runs, the task's TaskStatus and progress messages) for failure details.
 
 ## Example
 
+Optimize a collection after connecting a MilvusClientV2; the call fills an OptimizeTask that reports progress and the final result.
+
 ```cpp
-#include <milvus/MilvusClientV2.h>
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
@@ -130,19 +113,12 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
+auto request = milvus::OptimizeRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithTargetSize("512MB");
 milvus::OptimizeTaskPtr task;
-status = client->Optimize(
-    milvus::OptimizeRequest()
-        .WithCollectionName("my_collection")
-        .WithTargetSize("512MB")
-        .WithAsync(true),
-    task);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::OptimizeResponse response;
-status = task->GetResult(response, 60000);
+status = client->Optimize(request, task);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
