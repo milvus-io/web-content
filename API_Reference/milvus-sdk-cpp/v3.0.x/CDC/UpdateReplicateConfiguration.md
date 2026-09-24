@@ -1,6 +1,6 @@
 # UpdateReplicateConfiguration()
 
-This operation updates the replicate configuration. Use it to change cluster definitions or cross-cluster topology.
+This operation updates the replication configuration of the Milvus CDC service, replacing the cluster topology that replication follows.
 
 ```cpp
 Status UpdateReplicateConfiguration(const UpdateReplicateConfigurationRequest& request)
@@ -9,32 +9,36 @@ Status UpdateReplicateConfiguration(const UpdateReplicateConfigurationRequest& r
 ## Request Syntax
 
 ```cpp
-auto request = milvus::UpdateReplicateConfigurationRequest()
-    .WithConfiguration(std::move(configuration))
-    .WithForcePromote(false);
+auto request = UpdateReplicateConfigurationRequest()
+    .WithConfiguration(configuration)
+    .WithForcePromote(force_promote);
 ```
 
 **REQUEST METHODS:**
 
 - `WithConfiguration(ReplicateConfiguration&& configuration)`
 
-    Sets the desired replication configuration.
+    Sets the new replication configuration, including the Milvus cluster entries and the cross-cluster topologies that replication should follow.
 
 - `WithForcePromote(bool force_promote)`
 
-    Controls whether the update should force promotion during replication configuration changes.
+    Sets whether to force-promote the configuration, allowing the update to proceed even when existing replication state would otherwise hold it back.
 
 **RETURNS:**
 
 *Status*
 
-**EXCEPTIONS:**
+Returns a status indicating whether the update succeeded.
+
+**ERROR HANDLING:**
 
 - **std::exception**
 
-    This exception can be raised if the request cannot be sent or the response cannot be parsed.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
+
+Call UpdateReplicateConfiguration() on a connected MilvusClientV2 to apply a new replication configuration.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
@@ -45,12 +49,10 @@ if (!status.IsOk()) {
 }
 
 auto request = milvus::UpdateReplicateConfigurationRequest()
-    .WithConfiguration(std::move(configuration))
-    .WithForcePromote(false);
+    .WithConfiguration(configuration)
+    .WithForcePromote(force_promote);
 status = client->UpdateReplicateConfiguration(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
-
-<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->

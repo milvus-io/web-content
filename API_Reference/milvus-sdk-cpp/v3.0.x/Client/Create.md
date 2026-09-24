@@ -1,6 +1,6 @@
 # Create()
 
-This operation creates a MilvusClientV2 instance.
+This operation creates a new MilvusClientV2 instance.
 
 ```cpp
 static std::shared_ptr<MilvusClientV2> Create()
@@ -8,22 +8,22 @@ static std::shared_ptr<MilvusClientV2> Create()
 
 **RETURNS:**
 
-*Status*
+*std::shared_ptr<milvus::MilvusClientV2>*
 
-Check `status.IsOk()` to confirm success.
+Returns the newly created client instance, ready to be configured with Connect().
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when the client instance cannot be constructed. Inspect the exception message for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Creates the client instance, then connects it to a Milvus server.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {

@@ -1,6 +1,6 @@
 # CreateAlias()
 
-This operation creates an alias for a collection. Alias can be used in a search or query to replace the collection name.
+This operation creates an alias for a collection so that search and query calls can address the collection by the alias in place of its name.
 
 ```cpp
 Status CreateAlias(const CreateAliasRequest& request)
@@ -19,44 +19,45 @@ auto request = CreateAliasRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the target database; the default database is used if this is left empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection to alias.
 
 - `WithAlias(const std::string& alias)`
 
-    Sets the name of the alias.
+    Sets the name of the alias to create.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the alias was created successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call CreateAlias() on a connected MilvusClientV2 to create an alias that references an existing collection.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->CreateAlias(
-    milvus::CreateAliasRequest()
-        .WithCollectionName("my_collection")
-        .WithAlias("my_alias"));
+auto request = milvus::CreateAliasRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithAlias(alias);
+status = client->CreateAlias(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

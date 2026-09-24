@@ -81,5 +81,3 @@ util::CheckStatus(client->DumpMessages(
         return milvus::Status();
     }));
 ```
-
-<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->

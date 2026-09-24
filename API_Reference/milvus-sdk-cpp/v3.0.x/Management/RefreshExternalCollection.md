@@ -63,5 +63,3 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
-
-<!-- category: File Resources; action: CREATE; addedSince: v3.0.x -->

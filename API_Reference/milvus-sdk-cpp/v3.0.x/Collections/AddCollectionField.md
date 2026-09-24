@@ -1,6 +1,6 @@
 # AddCollectionField()
 
-Add a field to an existing collection.
+This operation adds a new field to the schema of an existing collection.
 
 ```cpp
 Status AddCollectionField(const AddCollectionFieldRequest& request)
@@ -19,37 +19,49 @@ auto request = AddCollectionFieldRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set target db name, use default database if it is empty.
+    Sets the target database name; the default database is used if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to add the field to.
 
 - `WithField(FieldSchema&& field_schema)`
 
-    Set the field schema.
+    Sets the schema of the field to add. The request takes ownership of the field schema via an rvalue reference, so pass it with std::move.
 
 **RETURNS:**
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the field was added successfully.
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-Demonstrates AddCollectionField() with the C++ SDK.
+Call AddCollectionField() on a connected MilvusClientV2 to add a new field to an existing collection.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::AddCollectionFieldRequest();
-util::CheckStatus(client->AddCollectionField(request));
+milvus::FieldSchema field_schema{"age", milvus::DataType::INT64};
+field_schema.WithNullable(true);  // Nullable so rows can omit the value.
+
+auto request = milvus::AddCollectionFieldRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithField(std::move(field_schema));
+status = client->AddCollectionField(request);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```

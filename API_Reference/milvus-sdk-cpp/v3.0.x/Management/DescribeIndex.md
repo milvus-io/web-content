@@ -1,6 +1,6 @@
 # DescribeIndex()
 
-This operation gets descriptions and parameters of the specified index.
+This operation fetches the description of an index on a collection, including its parameters.
 
 ```cpp
 Status DescribeIndex(const DescribeIndexRequest& request, DescribeIndexResponse& response)
@@ -21,7 +21,7 @@ auto request = DescribeIndexRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name. The default database is used if this is left empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
@@ -29,62 +29,101 @@ auto request = DescribeIndexRequest()
 
 - `WithFieldName(const std::string& field_name)`
 
-    Sets the name of the field.
+    Sets the name of the field that the index belongs to.
 
 - `WithIndexName(const std::string& index_name)`
 
-    Set the name of the index. 
-
-    <div class="alert note">
-    
-    If both the field name and the index name are specified, the index name will be used; otherwise, it falls back to the field name.
-
-    </div>
+    Sets the name of the index. If both field_name and index_name are specified, the index name takes precedence.
 
 - `WithTimestamp(int64_t ts)`
 
-    Sets a timestamp. If set, this operation only checks the segments generated before this timestamp; otherwise, all segments will be checked.
+    Sets a timestamp so that only segments generated before this timestamp are checked. All segments are checked if this value is zero.
 
 **RETURNS:**
 
-*Status* with *DescribeIndexResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The index description is carried in the DescribeIndexResponse object passed as the response parameter, where Descs() exposes the list of IndexDesc entries.
 
-**EXCEPTIONS:**
+- **response** (*DescribeIndexResponse*) -
 
-- **StatusCode**
+    - **Descs** (*const std::vector<IndexDesc>&*) -
 
-    Check `status.Code()` and `status.Message()` for error details.
+        Get index description.
+
+        - **FieldName** (*const std::string&*) -
+
+            Filed name which the index belong to.
+
+        - **IndexName** (*const std::string&*) -
+
+            Index name. Index name cannot be empty.
+
+        - **IndexId** (*int64_t*) -
+
+            Index ID.
+
+        - **MetricType** (*milvus::MetricType*) -
+
+            Metric type.
+
+        - **IndexType** (*milvus::IndexType*) -
+
+            Index type.
+
+        - **ExtraParams** (*const std::unordered_map<std::string, std::string>&*) -
+
+            Get extra param. Note: this method was redefined in v2.4, which may affect older client code.
+
+        - **StateCode** (*milvus::IndexStateCode*) -
+
+            Get index state.
+
+        - **FailReason** (*std::string*) -
+
+            Get index failed reason.
+
+        - **IndexedRows** (*int64_t*) -
+
+            Get number of indexed rows. Note that indexed rows could be larger than total rows, because some segments will be reindexed after compaction.
+
+        - **TotalRows** (*int64_t*) -
+
+            Get number of total rows.
+
+        - **PendingRows** (*int64_t*) -
+
+            Get number of pending unindexed rows.
+
+**ERROR HANDLING:**
+
+- **std::exception**
+
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call DescribeIndex() on a connected MilvusClientV2 to fetch the description of the index built on a field.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-milvus::DescribeIndexResponse desc_response;
-status = client->DescribeIndex(milvus::DescribeIndexRequest()
-                                        .WithDatabaseName(db_name)
-                                        .WithCollectionName(collection_name)
-                                        .WithIndexName(index_name),
-                                    desc_response);
+milvus::DescribeIndexResponse response;
+auto request = milvus::DescribeIndexRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithIndexName(index_name);
+status = client->DescribeIndex(request, response);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-
-for (const auto& desc : desc_response.Descs()) {
-    std::cout << "\tIndexName: " << desc.IndexName() << std::endl;
-    std::cout << "\tIndexType: " << std::to_string(desc.IndexType()) << std::endl;
-    std::cout << "\tMetricType: " << std::to_string(desc.MetricType()) << std::endl;
-    std::cout << "\tTotalRows: " << std::to_string(desc.TotalRows()) << std::endl;
-    std::cout << "\tIndexedRows: " << std::to_string(desc.IndexedRows()) << std::endl;
-    std::cout << "\tPendingRows: " << std::to_string(desc.PendingRows()) << std::endl;
+for (const auto& index_desc : response.Descs()) {
+    std::cout << "IndexName: " << index_desc.IndexName() << std::endl;
+    std::cout << "FieldName: " << index_desc.FieldName() << std::endl;
 }
 ```

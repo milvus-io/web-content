@@ -42,5 +42,3 @@ milvus::TelemetryConfig telemetry_config;
 telemetry_config.enabled = true;
 connect_param.WithTelemetryConfig(telemetry_config);
 ```
-
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->
