@@ -58,6 +58,9 @@ This creates a search option to find entities by their primary key IDs.
 - `WithPartitions(partitionNames ...string)`
 This restricts the search to the specified partition names.
 
+- `WithNamespace(namespace string)`
+This scopes the search to a collection namespace.
+
 - `WithFilter(expr string)`
 This applies a boolean expression filter to the search results.
 
@@ -97,9 +100,15 @@ This sets a custom search parameter key-value pair.
 - `WithFunctionReranker(fr *entity.Function)`
 This applies a function-based reranker to the search results.
 
+- `WithFunctionScore(fs *entity.FunctionScore)`
+This sets the search [FunctionScore](../Collection/FunctionScore.md) (functions plus score options such as boost mode).
+
+- `WithSearchAggregation(agg *SearchAggregation)`
+This sets a [SearchAggregation](SearchAggregation.md) spec for the search. Mutually exclusive with group-by and offset settings.
+
 **RETURN TYPE:**
 
-*[]ResultSet, error*
+*[]ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 

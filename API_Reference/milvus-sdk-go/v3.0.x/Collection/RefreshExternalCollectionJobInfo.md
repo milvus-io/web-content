@@ -10,6 +10,7 @@ type RefreshExternalCollectionJobInfo struct {
     Progress       int64
     Reason         string
     ExternalSource string
+    ExternalSpec   string
     StartTime      int64
     EndTime        int64
 }
@@ -34,6 +35,9 @@ Additional information or reason for the current state.
 
 - **ExternalSource** (*string*) -
 The external data source identifier.
+
+- **ExternalSpec** (*string*) -
+The external data source specification (JSON), describing the file format and object storage settings.
 
 - **StartTime** (*int64*) -
 The Unix timestamp when the job started.

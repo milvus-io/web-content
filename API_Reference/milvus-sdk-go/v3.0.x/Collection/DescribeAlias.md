@@ -28,7 +28,7 @@ result, err := client.DescribeAlias(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.Alias, error*
+*\*[entity.Alias](Alias.md), error*
 
 **RETURNS:**
 

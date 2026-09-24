@@ -8,7 +8,7 @@ func (c *Client) BackupRBAC(ctx context.Context, option BackupRBACOption, callOp
 
 **RETURN TYPE:**
 
-**[entity.RBACMeta](RBACMeta.md), error*
+*\*[entity.RBACMeta](RBACMeta.md), error*
 
 **RETURNS:**
 

@@ -22,7 +22,7 @@ result, err := client.DescribeResourceGroup(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.ResourceGroup, error*
+*\*[entity.ResourceGroup](ResourceGroup.md), error*
 
 **RETURNS:**
 

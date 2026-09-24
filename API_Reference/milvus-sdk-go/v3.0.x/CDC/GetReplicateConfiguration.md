@@ -20,7 +20,7 @@ config, err := cli.GetReplicateConfiguration(ctx)
 
 **RETURN TYPE:**
 
-**commonpb.ReplicateConfiguration, error*
+*\*commonpb.ReplicateConfiguration, error*
 
 **RETURNS:**
 

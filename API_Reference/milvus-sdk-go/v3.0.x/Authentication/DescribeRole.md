@@ -33,7 +33,7 @@ result, err := client.DescribeRole(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.Role, error*
+*\*[entity.Role](Role.md), error*
 
 **RETURNS:**
 

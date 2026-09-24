@@ -40,6 +40,18 @@ type IndexType string
 
     Hierarchical Navigable Small World graph. High recall and fast search.
 
+- **HNSWSQ** = "HNSW_SQ"
+
+    HNSW with scalar quantization for reduced memory usage.
+
+- **HNSWPQ** = "HNSW_PQ"
+
+    HNSW with product quantization for reduced memory usage.
+
+- **HNSWPRQ** = "HNSW_PRQ"
+
+    HNSW with product-residual quantization for reduced memory usage.
+
 - **IvfHNSW** = "IVF_HNSW"
 
     Combined IVF and HNSW index.
@@ -51,6 +63,10 @@ type IndexType string
 - **DISKANN** = "DISKANN"
 
     Disk-based ANN index for large-scale datasets.
+
+- **AISAQ** = "AISAQ"
+
+    DiskANN variant that keeps PQ codes inline with the graph to cut random reads per hop.
 
 - **SCANN** = "SCANN"
 
@@ -95,6 +111,14 @@ type IndexType string
 - **Inverted** = "INVERTED"
 
     Inverted index for scalar fields.
+
+- **NGRAM** = "NGRAM"
+
+    N-gram index for VARCHAR fields that accelerates substring operators (LIKE prefix / infix / suffix and regex match).
+
+- **FMINDEX** = "FMINDEX"
+
+    FM-index for VARCHAR fields that answers anchored LIKE (prefix / infix / suffix) exactly without candidate recheck.
 
 - **BITMAP** = "BITMAP"
 

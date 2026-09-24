@@ -14,6 +14,18 @@ type AnnParam interface {
 
     Returns the search parameters as a key-value map.
 
+- `WithRadius(radius float64)`
+
+    Sets the radius for a range search.
+
+- `WithRangeFilter(rangeFilter float64)`
+
+    Sets the range filter bound for a range search.
+
+- `WithExtraParam(key string, value any)`
+
+    Adds an arbitrary extra search parameter key-value pair.
+
 ## Example
 
 ```go

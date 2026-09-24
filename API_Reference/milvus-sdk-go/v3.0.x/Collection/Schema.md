@@ -43,11 +43,77 @@ entity.NewSchema()
 
 - `WithExternalSource(externalSource string) *Schema`
 
-    This sets the external data source URI.
+    This sets the source data URI, which is similar to an AWS S3 object path.
 
 - `WithExternalSpec(externalSpec string) *Schema`
 
-    This sets the external source configuration as JSON.
+    This sets the external source configuration as JSON. The external source specifications are a set of secondary parameters:
+
+    - **format** (*string*)
+
+        The format of the target source data files.
+
+        Possible values are `parquet`, `vortex`, `lance-table`, and `iceberg-table`.
+
+    - **extfs** (*string*)
+
+        External file system settings in a stringified JSON structure.
+
+        Possible options are as follows:
+
+        - **access_key_id** (*string*)
+
+            The access key ID of your object storage service.
+
+        - **access_key_val** (*string*)
+
+            The access key value of your object storage service.
+
+        - **cloud_provider** (*string*)
+
+            The cloud provider of your object storage service.
+
+        - **region** (*string*)
+
+            The region of your object storage service.
+
+        - **use_iam** (*string*)
+
+            Whether to use AWS IAM for bucket access authentication.
+
+            Possible values are `"true"` or `"false"`.
+
+        - **iam_endpoint** (*string*)
+
+            The AWS IAM STS endpoint.
+
+        - **use_ssl** (*string*)
+
+            Whether to use SSL to access your object storage bucket.
+
+            Possible values are `"true"` or `"false"`.
+
+        - **use_virtual_host** (*string*)
+
+            Whether to use virtual hosting for bucket access.
+
+            For details, refer to [this article](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html).
+
+        - **storage_type** (*string*)
+
+            The storage type. Possible value is `remote`.
+
+        - **role_arn** (*string*)
+
+            The AWS IAM Role ARN that is obtained from the bucket owner.
+
+        - **external_id** (*string*)
+
+            The external ID obtained from the bucket owner.
+
+        - **load_frequency** (*string*)
+
+            The interval at which Milvus retrieves temporary authentication credentials in seconds.
 
 - `WithField(field *Field) *Schema`
 
@@ -68,80 +134,6 @@ entity.NewSchema()
 - `PKField() *Field`
 
     This returns the primary-key field definition.
-
-- `WithExternalSource(externalSource string)`
-
-    This sets the source data URI, which is similar to an AWS S3 object path.
-
-- `WithExternalSpec(externalSpec string)`
-
-    The external source specifications, which are a set of secondary parameters:
-
-    - **format** (*string*) - 
-
-        The format of the target source data files.
-
-        Possible values are `parquet`, `vortex`, `lance-table`, and `iceberg-table`.
-
-    - **extfs** (*string*) -  
-
-        External file system settings in a stringified JSON structure.
-
-        Possible options are as follows:
-
-        - **access_key_id** (*string*) -
-
-            The access key ID of your object storage service.
-
-        - **access_key_val** (*string*) -
-
-            The access key value of your object storage service.
-
-        - **cloud_provider** (*string*) -
-
-            The cloud provider of your object storage service.
-
-        - **region** (*string*) -
-
-            The region of your object storage service.
-
-        - **use_iam** (*string*) -
-
-            Whether to use AWS IAM for bucket access authentication. 
-
-            Possible values are `"true"` or `"false"`.
-
-        - **iam_endpoint** (*string*) -
-
-            The AWS IAM STS endpoint.
-
-        - **use_ssl** (*string*) -
-
-            Whether to use SSL to access your object storage bucket.
-
-            Possible values are `"true"` or `"false"`.
-
-        - **use_virtual_host** (*string*) -
-
-            Whether to use virtual hosting for bucket access. 
-
-            For details, refer to [this article](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html).
-
-        - **storage_type** (*string*) -
-
-            The storage type. Possible values is `remote`.
-
-        - **role_arn** (*string*) -
-
-            The AWS IAM Role ARN that is obtained from the bucket owner.
-
-        - **external_id** (*string*) -
-
-            The external ID obtained from the bucket owner.
-
-        - **load_frequency** (*string*) -
-
-            The interval at which Milvus retrieves temporary authentication credentials in seconds.
 
 **RETURN TYPE:**
 

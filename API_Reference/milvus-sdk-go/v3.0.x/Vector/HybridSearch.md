@@ -63,9 +63,9 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
     Specifies which fields to return in the result sets.
 
-- `WithReranker(reranker Reranker)`
+- `WithReranker(reranker [Reranker](Reranker.md))`
 
-    Sets the reranker used to combine and rank the per-field results.
+    Sets the reranker used to combine and rank the per-field results. Use `NewRRFReranker()` or `NewWeightedReranker()` to create one.
 
 - `WithFunctionRerankers(functionReranker *entity.Function)`
 
@@ -73,7 +73,7 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
 - `WithFunctionScore(fs *entity.FunctionScore)`
 
-    Sets the search FunctionScore (functions plus score options such as boost mode).
+    Sets the search [FunctionScore](../Collection/FunctionScore.md) (functions plus score options such as boost mode).
 
 - `WithOffset(offset int)`
 
@@ -81,7 +81,7 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
 **RETURN TYPE:**
 
-*[]ResultSet, error*
+*[]ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 

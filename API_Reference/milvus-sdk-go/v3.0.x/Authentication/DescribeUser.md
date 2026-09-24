@@ -22,7 +22,7 @@ result, err := client.DescribeUser(ctx, option)
 
 **RETURN TYPE:**
 
-**[entity.User](User.md), error*
+*\*[entity.User](User.md), error*
 
 **RETURNS:**
 

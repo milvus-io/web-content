@@ -58,9 +58,17 @@ result, err := client.Get(ctx, option)
 
     Limits the operation to the specified partitions.
 
+- `WithNamespace(namespace string)`
+
+    Scopes the query to a collection namespace.
+
+- `WithOrderByFields(fields ...string)`
+
+    Sorts query results by the given scalar fields. Each spec is `fieldName` or `fieldName:asc` / `fieldName:desc` (default asc). The server requires an explicit limit when order-by fields are set.
+
 - `WithIDs(ids column.Column)`
 
-    Sets the i ds for the operation.
+    Sets the IDs for the operation.
 
 **RETURN TYPE:**
 

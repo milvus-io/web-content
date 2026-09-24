@@ -22,11 +22,11 @@ resources, err := cli.ListFileResources(ctx, option)
 
 **RETURN TYPE:**
 
-*[]*entity.FileResource, error*
+*[]*[entity.FileResource](FileResource.md), error*
 
 **RETURNS:**
 
-A list of `entity.FileResource` records, each with `ID`, `Name`, and `Path` fields. Returns an error if the operation fails.
+A list of [entity.FileResource](FileResource.md) records, each with `ID`, `Name`, and `Path` fields. Returns an error if the operation fails.
 
 **EXCEPTIONS:**
 

@@ -33,7 +33,7 @@ stream, err := cli.DumpMessages(ctx, &milvuspb.DumpMessagesRequest{
 
 **RETURN TYPE:**
 
-**milvuspb.MilvusService_DumpMessagesClient, error*
+*milvuspb.MilvusService_DumpMessagesClient, error*
 
 **RETURNS:**
 

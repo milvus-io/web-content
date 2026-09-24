@@ -22,7 +22,7 @@ result, err := client.DescribeReplica(ctx, option)
 
 **RETURN TYPE:**
 
-*[]*entity.ReplicaInfo, error*
+*[]*[entity.ReplicaInfo](ReplicaInfo.md), error*
 
 **RETURNS:**
 

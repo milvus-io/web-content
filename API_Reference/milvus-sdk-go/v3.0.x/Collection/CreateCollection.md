@@ -66,6 +66,10 @@ func (c *Client) CreateCollection(ctx context.Context, option CreateCollectionOp
 
     This sets the number of partitions used with a partition key.
 
+- `SimpleCreateCollectionOptions(name string, dim int64)`
+
+    This creates a CreateCollectionOption with sensible defaults for a fast collection setup: a single `Int64` primary-key field named `id` and a `FloatVector` field named `vector` with the given dimension.
+
 **RETURN TYPE:**
 
 *error*

@@ -35,6 +35,10 @@ client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
 
     The partitions to query. If not specified, all partitions are queried.
 
+- `WithNamespace(namespace string)` -
+
+    Scopes the query iterator to a collection namespace.
+
 - `WithFilter(expr string)` -
 
     A boolean expression to filter entities. Only entities matching the expression are returned.

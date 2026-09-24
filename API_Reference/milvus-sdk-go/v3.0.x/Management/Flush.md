@@ -22,7 +22,7 @@ result, err := client.Flush(ctx, option)
 
 **RETURN TYPE:**
 
-**[FlushTask](FlushTask.md), error*
+*\*[FlushTask](FlushTask.md), error*
 
 **RETURNS:**
 

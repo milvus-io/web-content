@@ -12,6 +12,24 @@ func NewSparseAnnParam() sparseAnnParam
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
+**BUILDER METHODS:**
+
+- `WithDropRatio(dropRatio float64)`
+
+    Sets the proportion of low-score entries dropped during the search.
+
+- `WithSearchAlgo(algo string)`
+
+    Sets the sparse search algorithm.
+
+- `WithRefineFactor(refineFactor int)`
+
+    Sets how many more candidates are refined than requested.
+
+- `WithDimMaxScoreRatio(ratio float64)`
+
+    Sets the dimension max-score ratio used to filter candidate entries.
+
 ## Example
 
 ```go

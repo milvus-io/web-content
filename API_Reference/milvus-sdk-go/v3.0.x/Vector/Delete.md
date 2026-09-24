@@ -30,17 +30,25 @@ result, err := client.Delete(ctx, option)
 
     Sets the expr for the operation.
 
+- `WithTemplateParam(key string, val any)`
+
+    Sets a template parameter for expression evaluation.
+
 - `WithInt64IDs(fieldName string, ids []int64)`
 
-    Sets the int64 i ds for the operation.
+    Sets the int64 IDs for the operation.
 
 - `WithStringIDs(fieldName string, ids []string)`
 
-    Sets the string i ds for the operation.
+    Sets the string IDs for the operation.
 
 - `WithPartition(partitionName string)`
 
     Sets the partition for the operation.
+
+- `WithNamespace(namespace string)`
+
+    Scopes the delete to a collection namespace.
 
 **RETURN TYPE:**
 

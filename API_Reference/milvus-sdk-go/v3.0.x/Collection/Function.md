@@ -40,7 +40,7 @@ entity.NewFunction().
 
 - `WithType(funcType FunctionType)`
 
-    Sets the function type (BM25, TextEmbedding, Rerank).
+    Sets the function type (BM25, MinHash, TextEmbedding, Rerank).
 
 - `WithParam(key string, value any)`
 
