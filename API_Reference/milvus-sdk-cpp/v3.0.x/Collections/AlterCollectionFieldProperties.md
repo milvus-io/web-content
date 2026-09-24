@@ -1,6 +1,6 @@
 # AlterCollectionFieldProperties()
 
-This operation alters a field's properties.
+This operation alters the properties of a specified field in an existing collection.
 
 ```cpp
 Status AlterCollectionFieldProperties(const AlterCollectionFieldPropertiesRequest& request)
@@ -21,53 +21,54 @@ auto request = AlterCollectionFieldPropertiesRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name; the default database is used if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set the name of the collection.
+    Sets the name of the collection that contains the field to alter.
 
 - `WithFieldName(const std::string& field_name)`
 
-    Sets the name of the target field.
+    Sets the name of the field to alter.
 
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
-    Sets the properties to alter for the specified field. For details, refer to [this page](https://milvus.io/docs/alter-collection-field.md).
+    Sets the properties to apply to the field as key/value pairs. The request takes ownership of the map via an rvalue reference, so pass it with std::move.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 
-    Adds a single property to alter for the specified field.
+    Adds a single property key/value pair to apply to the field.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the field properties were altered successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call AlterCollectionFieldProperties() on a connected MilvusClientV2 to alter the properties of a field.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->AlterCollectionFieldProperties(
-    milvus::AlterCollectionFieldPropertiesRequest()
-        .WithCollectionName("my_collection")
-        .WithFieldName("my_field")
-        .AddProperty("max_length", "512"));
+auto request = milvus::AlterCollectionFieldPropertiesRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithFieldName(field_name)
+    .AddProperty("mmap.enabled", "true");
+status = client->AlterCollectionFieldProperties(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

@@ -19,23 +19,23 @@ explicit FunctionChain(FunctionChainStage stage, std::string name = "");
 
 **METHODS:**
 
-- `FunctionChain& WithName(std::string name)`
+- `WithName(std::string name)`
 
     Sets the chain name.
 
-- `FunctionChain& Map(const std::string& output, const FunctionChainExpr& expr)`
+- `Map(const std::string& output, const FunctionChainExpr& expr)`
 
     Appends a map operation that writes an expression result to the given output column.
 
-- `FunctionChain& Sort(const std::string& by, bool desc = true, const std::string& tie_break_col = "")`
+- `Sort(const std::string& by, bool desc = true, const std::string& tie_break_col = "")`
 
     Appends a sort operation by the given column, optionally with a tie-break column.
 
-- `FunctionChain& Limit(int64_t limit, int64_t offset = 0)`
+- `Limit(int64_t limit, int64_t offset = 0)`
 
     Appends a limit operation with an optional offset.
 
-- `FunctionChain& AddOp(const FunctionChainOp& op)`
+- `AddOp(const FunctionChainOp& op)`
 
     Appends a raw operation to the pipeline.
 
@@ -215,5 +215,3 @@ auto request = milvus::SearchRequest()
 milvus::SearchResponse response;
 util::CheckStatus(client->Search(request, response));
 ```
-
-<!-- category: Vector; action: CREATE; addedSince: v3.0.x -->

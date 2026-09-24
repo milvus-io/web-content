@@ -76,49 +76,49 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
      <th><p>Notes</p></th>
    </tr>
    <tr>
-     <td><p><code>BOOL</code></p></td>
-     <td><p><code>BoolFieldData</code></p></td>
-     <td><p><code>bool</code></p></td>
+     <td><p>BOOL</p></td>
+     <td><p>BoolFieldData</p></td>
+     <td><p>bool</p></td>
      <td><p>Boolean scalar values.</p></td>
    </tr>
    <tr>
-     <td><p><code>INT8</code>, <code>INT16</code>, <code>INT32</code>, <code>INT64</code></p></td>
-     <td><p>Matching <code>Int&ast;FieldData</code></p></td>
+     <td><p>INT8, INT16, INT32, INT64</p></td>
+     <td><p>Matching Int&ast;FieldData</p></td>
      <td><p>Matching fixed-width integer</p></td>
      <td><p>Choose the container matching the schema type.</p></td>
    </tr>
    <tr>
-     <td><p><code>FLOAT</code>, <code>DOUBLE</code></p></td>
-     <td><p><code>FloatFieldData</code>, <code>DoubleFieldData</code></p></td>
-     <td><p><code>float</code>, <code>double</code></p></td>
+     <td><p>FLOAT, DOUBLE</p></td>
+     <td><p>FloatFieldData, DoubleFieldData</p></td>
+     <td><p>float, double</p></td>
      <td><p>Floating-point scalar values.</p></td>
    </tr>
    <tr>
-     <td><p><code>VARCHAR</code>, <code>JSON</code>, <code>GEOMETRY</code>, <code>TIMESTAMPTZ</code></p></td>
-     <td><p><code>VarCharFieldData</code> or <code>JSONFieldData</code></p></td>
-     <td><p><code>std::string</code> or <code>nlohmann::json</code></p></td>
+     <td><p>VARCHAR, JSON, GEOMETRY, TIMESTAMPTZ</p></td>
+     <td><p>VarCharFieldData or JSONFieldData</p></td>
+     <td><p>std::string or nlohmann::json</p></td>
      <td><p>Geometry and timestamptz are transported through string payload aliases.</p></td>
    </tr>
    <tr>
-     <td><p><code>FLOAT_VECTOR</code>, <code>FLOAT16_VECTOR</code>, <code>BFLOAT16_VECTOR</code>, <code>INT8_VECTOR</code></p></td>
-     <td><p>Matching dense-vector <code>FieldData</code> class</p></td>
-     <td><p><code>std::vector&lt;float&gt;</code>, <code>std::vector&lt;uint16_t&gt;</code>, or <code>std::vector&lt;int8_t&gt;</code></p></td>
+     <td><p>FLOAT_VECTOR, FLOAT16_VECTOR, BFLOAT16_VECTOR, INT8_VECTOR</p></td>
+     <td><p>Matching dense-vector FieldData class</p></td>
+     <td><p>std::vector<float>, std::vector<uint16_t>, or std::vector<int8_t></p></td>
      <td><p>Choose the container matching the vector encoding.</p></td>
    </tr>
    <tr>
-     <td><p><code>SPARSE_FLOAT_VECTOR</code>, <code>BINARY_VECTOR</code></p></td>
-     <td><p><code>SparseFloatVecFieldData</code>, <code>BinaryVecFieldData</code></p></td>
-     <td><p><code>std::map&lt;uint32_t, float&gt;</code> or dedicated binary storage</p></td>
+     <td><p>SPARSE_FLOAT_VECTOR, BINARY_VECTOR</p></td>
+     <td><p>SparseFloatVecFieldData, BinaryVecFieldData</p></td>
+     <td><p>std::map<uint32_t, float> or dedicated binary storage</p></td>
      <td><p>Binary vectors use a dedicated class.</p></td>
    </tr>
    <tr>
-     <td><p><code>ARRAY</code>, <code>STRUCT</code></p></td>
-     <td><p>Specialized <code>Array&ast;FieldData</code> or <code>StructFieldData</code></p></td>
-     <td><p>Element-specific container or array-style <code>nlohmann::json</code> storage</p></td>
-     <td><p>Arrays declare an element type; structs use the array template with <code>DataType::STRUCT</code>.</p></td>
+     <td><p>ARRAY, STRUCT</p></td>
+     <td><p>Specialized Array&ast;FieldData or StructFieldData</p></td>
+     <td><p>Element-specific container or array-style nlohmann::json storage</p></td>
+     <td><p>Arrays declare an element type; structs use the array template with DataType::STRUCT.</p></td>
    </tr>
    <tr>
-     <td><p><code>UNKNOWN</code></p></td>
+     <td><p>UNKNOWN</p></td>
      <td><p>None</p></td>
      <td><p>None</p></td>
      <td><p>Has no insertion payload.</p></td>

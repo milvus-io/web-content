@@ -57,5 +57,3 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
-
-<!-- category: Authentication; action: CREATE; addedSince: v3.0.x -->

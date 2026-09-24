@@ -9,20 +9,8 @@ Status ListRefreshExternalCollectionJobs(const ListRefreshExternalCollectionJobs
 ## Request Syntax
 
 ```cpp
-auto request = milvus::ListRefreshExternalCollectionJobsRequest()
-    .WithDatabaseName(db_name)
-    .WithCollectionName(collection_name);
+auto request = milvus::ListRefreshExternalCollectionJobsRequest();
 ```
-
-**REQUEST METHODS:**
-
-- `WithDatabaseName(const std::string& db_name)`
-
-    Sets the target database name. The default database applies if it is empty.
-
-- `WithCollectionName(const std::string& collection_name)`
-
-    Sets the name of the collection whose refresh jobs to list.
 
 **RETURNS:**
 
