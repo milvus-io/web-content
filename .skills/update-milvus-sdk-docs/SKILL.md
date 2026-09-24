@@ -674,6 +674,45 @@ Report three categories:
 Also check: enum values missing from type pages, stale version pins, missing
 `@deprecated` markers.
 
+**Duplicated symbols on a page**: also flag when the same symbol appears more
+than once on a page (e.g. the same `WithXxx` method in both a brief
+`METHODS:` list and a later expanded section). Treat it as a reconciliation
+finding, but do not auto-delete the longer copy — compare both occurrences and
+keep the better one (see the **Duplicate content** rule in Pass 2).
+
+#### Response surface (output members)
+
+Pass 1 must ALSO reconcile the **response side**: for every operation page,
+extract the public members of the response/result class the operation returns at
+the target tag and compare them against the page's return description. This
+catches pages that describe the request surface but silently omit the returned
+object's fields (e.g. C++ `DescribeRoleResponse` was missing entirely, along
+with its `RoleDesc`/`GrantItem` members). The response class lives in a
+**different location per SDK** (see the per-SDK "response" note in
+`.skills/update-milvus-sdk-docs/references/sdk-map.md`):
+
+- **cpp** → `src/include/milvus/response/<category>/XxxResponse.h` plus the
+  nested `types/*.h` it returns (e.g. `DescribeRoleResponse` → `RoleDesc.h` →
+  `GrantItem`). Extract public getters (`const Xxx& Member() const`).
+- **java (V2)** → `io/milvus/v2/service/<group>/response/*Resp.java`
+  (e.g. `DescribeCollectionResp.java`). Lombok `@Data` means an added/removed
+  `private` field = an added/removed output member.
+- **rust** → `src/v2/response/<category>.rs` (`pub struct XxxResponse`).
+- **csharp** → `Milvus.Client/` result classes (`SearchResults.cs`,
+  `MutationResult.cs`, `RoleResult.cs`, `UserResult.cs`, ...). Extract public
+  getter properties (`public Xxx Member { get; }`).
+- **go** → `client/milvusclient/results.go` + `client/entity/*.go` output
+  types (`ResultSet`, `InsertResult`, `UpsertResult`, `DeleteResult`, ...).
+- **node** → `milvus/types/Response.ts` and the per-operation type files
+  (`milvus/types/Search.ts` → `SearchRes`, ...).
+- **pymilvus** → most operations return plain dicts/lists, so the response
+  surface is the documented return type itself; only bulk-writer / typed
+  responses carry a class to audit.
+
+Report missing/extra/mismatched output members in the same three categories as
+the request surface. Add missing members following the response-description
+format in the **Doc style guide** below.
+
 ### Pass 2 — AI prose audit
 
 Existing docs were originally transcribed from code comments, so typos and
@@ -691,6 +730,20 @@ and ask it to correct: factual errors vs. implementation, typos, wrong defaults,
 outdated constraints, and to flag (but not silently fix) code comments that are
 themselves wrong. Never invent APIs that are not in the code.
 
+**Duplicate content**: when a page describes the same symbol twice (e.g. the
+same `WithXxx` method listed under both a brief `METHODS:` entry and a
+verbose expanded section), do **not** delete immediately. Compare the two
+occurrences first: which one is more accurate, more detailed, and better
+written (richer parameter breakdown, clearer examples, closer to the source
+comments at the target tag)? Keep the better one — even if it is the longer,
+expanded version — and only then remove the redundant/worse duplicate. If one
+copy is strictly better and the other adds nothing, delete the inferior copy.
+If the two differ in fact or detail, merge the best parts into the kept copy.
+When the kept copy is the shorter one, consider preserving the valuable
+expansion (e.g. a nested sub-parameter list) as supplementary detail under it
+rather than discarding it outright, and flag the choice in the per-page review
+summary for the user to confirm.
+
 **When doc comments are sparse or missing**, derive the description from, in
 order of preference:
 1. the actual code implementation (method body, parameter names/types, defaults,
@@ -698,6 +751,12 @@ order of preference:
 2. the docs for the **same operation in another SDK** (e.g. pymilvus/java pages)
    — they often describe the same server-side behavior;
 3. sibling pages in the same SDK tree.
+
+For **response/output members** (found missing in Pass 1), write them in the
+same nested `- **response** (*XxxResponse*)` format the tree already uses (see
+the **Doc style guide** below), deriving member descriptions from the response
+class's getters/fields and the same-operation page in another SDK. Do not
+invent members that are not in the response class at the target tag.
 
 Structure (signatures, parameter lists, return types) stays reliable because it
 is code-derived and validated. For **semantic** claims that cannot be confirmed
@@ -746,6 +805,55 @@ whose API semantics are uncertain from the source alone.
 - `**PARAMETERS:**` for constructor/type params; `**RETURNS:**` describes the
   return type; `**ERROR HANDLING:**` describes exceptions/Status failure.
 - One page per operation / per class. Refer to related types with relative links.
+
+### Response/output member description format
+
+When an operation returns an object with members, document them under
+`**RETURNS:**` as a nested bullet list starting from the response parameter,
+following the shape already used in `milvus-sdk-cpp/v2.6.x/Vector/Query.md` and
+`milvus-sdk-cpp/v3.0.x/...` response sections (precedent: PR #1156). Each
+member is a `- **<Member>** (*<type>*) -` bullet; nested members indent further.
+The type names match the SDK's own response class at the target tag.
+
+````markdown
+**RETURNS:**
+
+*Status*
+
+Returns a status indicating whether the operation succeeded.
+
+- **response** (*DescribeRoleResponse*) -
+
+    - **Desc** (*const RoleDesc&*) -
+
+        Get role description.
+
+        - **Name** (*const std::string&*) -
+
+            Get name of the role.
+
+        - **Description** (*const std::string&*) -
+
+            Get the role description.
+
+        - **GrantItems** (*const std::vector<GrantItem>&*) -
+
+            Get privilege items of the role.
+
+            - **object_type_** (*std::string*) -
+
+                privilege type.
+````
+
+Language adaptations:
+- **java/rust/go/node/csharp**: the response member list follows the same nested
+  bullet shape but with that language's type spellings and the operation's
+  actual return type (e.g. java `*DescribeCollectionResp*` → its Lombok fields;
+  rust `Result<SearchResponse>` → the response struct's `pub` members; go
+  `*ResultSet` → its exported fields; csharp `SearchResults` → its `{ get; }`
+  properties; node `SearchRes` → its interface members).
+- **Verbosity**: match the sibling pages — one sentence per member, no padding.
+  Do not expand every code comment into a paragraph.
 - Match the tone, sentence patterns, terminology, **and verbosity** of existing
   sibling pages — before writing new content, study 1–2 sibling pages as style
   exemplars (Google developer-style, concise). New entries should be about the
@@ -783,10 +891,27 @@ The package-manager install command pinned to the documented version, e.g.:
 
 ## Quick Start
 
-A MINIMAL runnable example (5-10 lines): connect to Milvus + one small
-operation (e.g. create a collection and insert/search). The goal is a
-copy-paste snippet a reader can run in under a minute — NOT a full tutorial.
-Keep it short; move any lengthy walkthrough to the user guide / guides pages.
+A MINIMAL runnable example. **The operation flow MUST be identical across
+every SDK's About page** so readers get the same end-to-end picture in any
+language. Use exactly this sequence:
+
+1. **Connect** to the Milvus server (uri `localhost:19530` / `127.0.0.1:19530`,
+   token `root:Milvus`).
+2. **Create a collection** with exactly two fields:
+   - `id` — Int64, primary key;
+   - `vector` — FloatVector, dimension **3**.
+3. **Insert one row** with vector `[1, 2, 3]`.
+4. **Create an index** on `vector` with **AUTOINDEX / COSINE**.
+5. **Load** the collection.
+6. **Search** for `[1, 2, 3]` with **limit = 1** and
+   **ConsistencyLevel = Strong**.
+7. **Drop the collection**.
+8. **Disconnect / close** the client.
+
+Keep it short (roughly 20-40 lines of code, no surrounding prose beyond a
+one-sentence intro); move any lengthy walkthrough to the user guide. The goal
+is a copy-paste snippet a reader can run in under a minute — NOT a full
+tutorial.
 
 ## Compatibility
 
@@ -808,9 +933,12 @@ CONTRIBUTING guideline).
 
 Notes:
 
-- **Keep the Quick Start minimal.** If the About page's example grows past
-  ~10 lines, split it: keep a connect + one-op snippet here and leave the full
-  CRUD walkthrough to the user guide. (The node About page was previously a
+- **Keep the Quick Start minimal AND identical across SDKs.** The example flow
+  is fixed (Connect → Create collection → Insert → Create index → Load →
+  Search → Drop → Disconnect), with the same field/dimension/vector/limit/
+  consistency choices on every About page; only the language-specific code
+  differs. Do not drop or reorder steps (e.g. do not omit Insert just because
+  a search-only snippet is shorter). (The node About page was previously a
   200+-line tutorial — do not reproduce that.)
 - **Order matters**: Installation → Quick Start → Compatibility → Contributing →
   License. Compatibility comes after Quick Start because getting the reader
