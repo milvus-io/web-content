@@ -112,6 +112,28 @@ local directory via this table before editing. Current latest version line is
   git -C sdk-tmp/sdks/milvus-sdk-cpp show v3.0.2:src/include/milvus/request/dql/QueryRequest.h
   ```
 
+- **Response surface** (see SKILL.md Pass 1): response classes live in
+  `src/include/milvus/response/<category>/XxxResponse.h`; nested output types in
+  `src/include/milvus/types/*.h`. Reconcile each operation page's
+  `**RETURNS:**` block against these:
+
+  ```bash
+  # side A: public getters on the response class (getter return type may be on
+  # its own line, so use sed -z to join newlines before grepping)
+  git -C sdk-tmp/sdks/milvus-sdk-cpp show v3.0.2:src/include/milvus/response/rbac/DescribeRoleResponse.h | \
+    sed -z 's/\n/ /g' | grep -oE "const [A-Za-z_:<>]+& *[A-Za-z]+\(\) const" | sort -u
+  # side A (nested): the member types it returns, e.g. RoleDesc.h, GrantItem
+  git -C sdk-tmp/sdks/milvus-sdk-cpp show v3.0.2:src/include/milvus/types/RoleDesc.h | \
+    grep -oE "struct MILVUS_SDK_API [A-Za-z]+|std::string [a-z_]+_;|std::vector<GrantItem> [a-z_]+_;"
+  # side B: members documented on the page under **RETURNS:** (nested members
+  # are indented, so allow leading whitespace and normalize before comparing)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-cpp/v3.0.x/Authentication/DescribeRole.md | \
+    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+  ```
+  Format precedent: `milvus-sdk-cpp/v2.6.x/Vector/Query.md` and the
+  response sections added in PR #1156 (nested `- **response** (*XxxResponse*)`
+  bullets).
+
 - **Known pitfalls**:
   - Existing docs were transcribed from code comments, so typos flow from code
     into docs (e.g. "avaiable" in both `QueryRequest.h` and `Vector/Query.md`).
@@ -156,6 +178,9 @@ local directory via this table before editing. Current latest version line is
 - **Known quirks**: pages use Python signatures with `**PARAMETERS:**`
   describing each argument; new features are annotated "In PyMilvus vX.Y.Z or
   later". `milvus_client.py` is huge — grep per method rather than reading whole.
+  Most operations return plain dicts/lists, so the response surface is the
+  documented return type itself; only audit typed response classes (e.g. bulk
+  writer, `pymilvus/data/*`) for missing members (SKILL.md Pass 1).
 
 ## milvus-sdk-java
 
@@ -204,6 +229,23 @@ local directory via this table before editing. Current latest version line is
     | grep -E "^    private " | sed -E 's/^    private (final )?//;s/^.* //;s/;//' | sort -u
   ```
 
+- **Response surface** (see SKILL.md Pass 1): V2 response classes live in
+  `io/milvus/v2/service/<group>/response/*Resp.java`
+  (e.g. `DescribeCollectionResp.java`, `SearchResp.java`). Reconcile each
+  operation page's `**RETURNS:**` block against them:
+
+  ```bash
+  # side A: fields of one response class at a tag (Lombok @Data → field list IS the output surface)
+  git -C sdk-tmp/sdks/milvus-sdk-java show v3.0.9:sdk-core/src/main/java/io/milvus/v2/service/collection/response/DescribeCollectionResp.java \
+    | grep -E "^    private " | sed -E 's/^    private (final )?//;s/^.* //;s/;//' | sort -u
+  # side B: members documented on the page under **RETURNS:** (nested members are indented, so allow leading whitespace)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-java/v3.0.x/v2/Collections/describeCollection.md | \
+    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+  ```
+  Format precedent: java pages currently describe the `*XxxResp*` return in
+  one sentence; extend to a nested member list under `**RETURNS:**` where the
+  response carries meaningful fields (same shape as the cpp format in SKILL.md).
+
 - **Known quirks**: doc pages use `**PARAMETERS:**`/`**RETURNS:**` with Java
   types; `About.md` needs every version literal bumped (bulkwriter too). Do NOT
   grep for `with[A-Z]`/`set[A-Z]` — Lombok builders generate no such source
@@ -221,9 +263,9 @@ local directory via this table before editing. Current latest version line is
   (server-side `internal/`, `pkg/`, etc.).
 - **Doc tree**: `API_Reference/milvus-sdk-go/<version-line>/`.
 - **Tags**: Go SDK releases are tagged `client/vX.Y.Z` inside the milvus repo
-  (e.g. `client/v2.6.5`) — NOT plain `vX.Y.Z`. **Pre-release tags carry a suffix**
-  (`client/v3.0.0-beta`); the 3.0 line currently has **no stable tag** yet (only
-  `client/v3.0.0-beta`). Diff with, e.g.:
+  (e.g. `client/v2.6.5`) — NOT plain `vX.Y.Z`. Pre-release tags carry a suffix
+  (e.g. `client/v3.0.0-beta`); stable `client/v3.0.0` was cut 2026-09-12. Diff
+  with, e.g.:
 
   ```bash
   git -C sdk-tmp/sdks/milvus diff client/v2.6.2..client/v2.6.5 -- client/
@@ -237,7 +279,40 @@ local directory via this table before editing. Current latest version line is
   reconciliation finding to fix.
 - **Version pins**: `About.md` compatibility table links to git tags
   (e.g. `client/v2.6.5`); links must point at tags that actually exist.
-- *Extraction commands TBD (Go AST via `go doc` / `go/parser`).*
+- **Extraction commands**:
+
+  ```bash
+  # what changed between tags (client module only)
+  git -C sdk-tmp/sdks/milvus diff --stat client/v2.6.2..client/v2.6.5 -- client/
+  git -C sdk-tmp/sdks/milvus diff client/v2.6.2..client/v2.6.5 -- client/milvusclient/ client/entity/ client/index/
+
+  # side A: client methods at a tag
+  git -C sdk-tmp/sdks/milvus grep -n "^func (c \*Client) [A-Z]" client/v3.0.0 -- client/milvusclient/ | grep -v _test | \
+    sed -E 's/.*\) ([A-Za-z0-9_]+)\(.*/\1/' | sort -u
+
+  # side A: option constructors at a tag
+  git -C sdk-tmp/sdks/milvus grep -n "^func New[A-Z]" client/v3.0.0 -- client/milvusclient/*.go | grep -v _test | \
+    sed -E 's/.*func (New[A-Za-z0-9_]+)\(.*/\1/' | sort -u
+  ```
+
+- **Response surface** (see SKILL.md Pass 1): output types live in
+  `client/milvusclient/results.go` (`ResultSet`, `InsertResult`, `UpsertResult`,
+  `DeleteResult`, ...) and `client/entity/*.go`. Reconcile each operation page's
+  return/result section against them:
+
+  ```bash
+  # side A: exported fields of a result type at a tag
+  git -C sdk-tmp/sdks/milvus show client/v3.0.0:client/milvusclient/results.go | \
+    grep -oE "^type (ResultSet|InsertResult|UpsertResult|DeleteResult) struct" 
+  git -C sdk-tmp/sdks/milvus grep -n "ResultCount\|^type ResultSet struct" client/v3.0.0 -- client/milvusclient/results.go
+  # side B: members documented on the page (nested members are indented)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-go/v3.0.x/Vector/ResultSet.md | \
+    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+  ```
+  Go pages document result types either as a dedicated `<Type>.md` page
+  (`Vector/ResultSet.md`, `Vector/InsertResult.md`, ...) or as a nested member
+  list under the operation's `**RETURNS:**` — match whichever the tree already
+  uses for that operation.
 
 ## milvus-sdk-node
 
@@ -269,6 +344,21 @@ local directory via this table before editing. Current latest version line is
     -- milvus/MilvusClient.ts milvus/grpc/GrpcClient.ts milvus/http/HttpClient.ts
   ```
 
+- **Response surface** (see SKILL.md Pass 1): response interfaces live in
+  `milvus/types/Response.ts` and the per-operation type files
+  (`milvus/types/Search.ts` → `SearchRes`, `milvus/types/Collection.ts` →
+  collection responses, ...). Reconcile each operation page's return section
+  against them:
+
+  ```bash
+  # side A: members of one response interface at a tag
+  git -C sdk-tmp/sdks/milvus-sdk-node show v3.0.4:milvus/types/Search.ts | \
+    grep -oE "^[[:space:]]*(readonly )?[A-Za-z_]+(\??):" | sed -E 's/:$//;s/^[[:space:]]*//' | sort -u
+  # side B: members documented on the page (nested members are indented)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-node/v3.0.x/Vector/search.md | \
+    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+  ```
+
 ## milvus-sdk-csharp
 
 - **SDK repo**: `milvus-sdk-csharp` (cloned into `sdk-tmp/sdks/milvus-sdk-csharp/`)
@@ -295,6 +385,22 @@ local directory via this table before editing. Current latest version line is
   git -C sdk-tmp/sdks/milvus-sdk-csharp grep -n "public .*Task<" v2.2.2-preview.6 -- Milvus.Client/
   ```
 
+- **Response surface** (see SKILL.md Pass 1): result classes live flat in
+  `Milvus.Client/` (`SearchResults.cs`, `MutationResult.cs`, `RoleResult.cs`,
+  `UserResult.cs`, `FlushResult.cs`, `GrantResult.cs`, `QuerySegmentResult.cs`,
+  ...). Reconcile each operation page's return section against them:
+
+  ```bash
+  # side A: public getter properties of a result class at a tag
+  git -C sdk-tmp/sdks/milvus-sdk-csharp show v2.2.2-preview.6:Milvus.Client/MutationResult.cs | \
+    grep -oE "public [A-Za-z<>.]+ [A-Z][A-Za-z]+ \{ get" | sed -E 's/.* (.*) \{ get/\1/' | sort -u
+  # side B: members documented on the page (nested members are indented)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-csharp/v2.2.x/Vector/insertAsync().md 2>/dev/null | \
+    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+  ```
+  For the future `Milvus.Client.V2/` line, apply the same check against the V2
+  result types instead.
+
 - **Known quirks**: csharp docs are a single 2.2.x line; if the user asks to add
   a new version line, confirm the target tag's compatibility before creating a
   new directory.
@@ -318,4 +424,18 @@ local directory via this table before editing. Current latest version line is
   git -C sdk-tmp/sdks/milvus-sdk-rust diff --stat v3.0.1..v3.0.2 -- src/v2/
   git -C sdk-tmp/sdks/milvus-sdk-rust show v3.0.2:src/v2/client.rs
   git -C sdk-tmp/sdks/milvus-sdk-rust grep -n "pub async fn\|pub struct\|pub fn" v3.0.2 -- src/v2/client src/v2/request | head
+  ```
+
+- **Response surface** (see SKILL.md Pass 1): response structs live in
+  `src/v2/response/<category>.rs` (`DescribeCollectionResponse`,
+  `SearchResponse`, ...). Reconcile each operation page's return section against
+  them:
+
+  ```bash
+  # side A: pub members of a response struct at a tag
+  git -C sdk-tmp/sdks/milvus-sdk-rust show v3.0.2:src/v2/response/collection.rs | \
+    grep -oE "^pub [a-z_]+:" | sed -E 's/^pub //;s/:$//' | sort -u
+  # side B: members documented on the page (nested members are indented)
+  grep -oE "^\s*- \*\*[a-z_]+\*\*" API_Reference/milvus-sdk-rust/v3.0.x/Collections/describeCollection.md 2>/dev/null | \
+    sed -E 's/^\s*- \*\*([a-z_]+)\*\*/\1/' | sort -u
   ```
