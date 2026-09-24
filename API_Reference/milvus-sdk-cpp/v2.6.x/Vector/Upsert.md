@@ -1,6 +1,6 @@
 # Upsert()
 
-Upsert entities of a collection. You can input column-based data or row-based data.
+This operation upserts entities into a collection: rows whose primary keys already exist are replaced, while rows with new primary keys are inserted. Data can be supplied either column-based (FieldData columns) or row-based (nlohmann::json entity rows).
 
 ```cpp
 Status Upsert(const UpsertRequest& request, UpsertResponse& response)
@@ -26,47 +26,43 @@ auto request = UpsertRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set database name. If database name is empty, will list collections of the default database.
+    Sets the database name to target; if empty, the default database is used. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to upsert into.
 
 - `WithPartitionName(const std::string& partition_name)`
 
-    Set new name of the partition. If partition name is empty, it will insert data into the default partition.
+    Sets the name of the target partition; if empty, the entities go into the default partition. Optional.
 
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
-    Set fields data with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Sets the column-based field data to upsert as a vector of FieldDataPtr; cannot be combined with row-based data.
 
 - `AddColumnData(const FieldDataPtr& column_data)`
 
-    Set a field data with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Adds a single field's data (FieldDataPtr) to the column-based payload; cannot be combined with row-based data.
 
 - `WithRowsData(EntityRows&& rows_data)`
 
-    Set entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Sets the row-based entities to upsert; each EntityRow is an nlohmann::json object keyed by field name and must carry the primary key. Cannot be combined with column-based data.
 
 - `AddRowData(EntityRow&& row_data)`
 
-    Add en entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Adds a single entity row (an nlohmann::json object keyed by field name) to the row-based payload; cannot be combined with column-based data.
 
 - `WithPartialUpdate(bool partial_update)`
 
-    Set database name. If True, only the specified fields will be updated while others remain unchanged. Default is False.
+    Sets whether to perform a partial update: if true, only the specified fields are updated while others remain unchanged; default is false. Optional.
 
 - `WithFieldOps(std::vector<FieldPartialUpdateOp>&& field_ops)`
 
-    Set per-field partial update operations with fluent interface.
+    Sets per-field partial update operations (REPLACE, ARRAY_APPEND, ARRAY_REMOVE); ARRAY_APPEND and ARRAY_REMOVE automatically enable partial update semantics. Optional.
 
 - `AddFieldOp(FieldPartialUpdateOp field_op)`
 
-    Add a per-field partial update operation.
-
-### Column payload types
-
-The collection schema uses [DataType](../Collections/DataType.md) to declare each field's logical type. For `Insert()` and `Upsert()`, supply the corresponding column container through the common `FieldDataPtr` base pointer.
+    Adds a single per-field partial update operation for partial upserts. Optional.
 
 <table>
    <tr>
@@ -125,95 +121,87 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
    </tr>
 </table>
 
-For a concrete container `XxxFieldData`, the pointer alias `XxxFieldDataPtr` is `std::shared_ptr<XxxFieldData>`. DML requests accept these values through `FieldDataPtr`.
-
 **RETURNS:**
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the operation succeeded; on success the response carries the upsert count and the IDs of the upserted entities in its DmlResults.
 
-### FieldData
+- **response** (*UpsertResponse*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Results** (*const DmlResults&*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get result of dml operation.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **IdArray** (*const IDArray&*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            The id array for entities which are inserted or deleted.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **IsIntegerID** (*bool*) -
 
-### DmlResults
+                Indicate this is an integer id array.
 
-This class carries the outcome of a data-mutation operation (insert, upsert, or delete). It is accessed via `Results()` on `InsertResponse`, `UpsertResponse`, or `DeleteResponse`.
+            - **IntIDArray** (*const std::vector<int64_t>&*) -
 
-```cpp
-const DmlResults& results = response.Results();
-```
+                Return integer id array.
 
-**METHODS:**
+            - **StrIDArray** (*const std::vector<std::string>&*) -
 
-- `const IDArray& IdArray() const`
+                Return string id array.
 
-    The IDs of the entities that were inserted, upserted, or deleted. For auto-ID collections the server fills this in after insert. See IDArray for how to read integer or string IDs.
+            - **GetRowCount** (*uint64_t*) -
 
-- `uint64_t Timestamp() const`
+                Get row count.
 
-    Server-side operation timestamp. Can be passed as the `guarantee_timestamp` in subsequent search or query calls to ensure read-your-writes consistency.
+        - **Timestamp** (*uint64_t*) -
 
-- `uint64_t InsertCount() const`
+            The operation timestamp marked by server side.
 
-    Number of rows that were inserted. Populated for `InsertResponse` and `UpsertResponse`.
+        - **InsertCount** (*uint64_t*) -
 
-- `uint64_t DeleteCount() const`
+            The number of inserted rows.
 
-    Number of rows that were deleted. Populated for `DeleteResponse` and `UpsertResponse`.
+        - **DeleteCount** (*uint64_t*) -
 
-- `uint64_t UpsertCount() const`
+            The number of deleted rows.
 
-    Number of rows that were upserted (inserted as new or replaced existing). Populated for `UpsertResponse`.
+        - **UpsertCount** (*uint64_t*) -
+
+            The number of upserted rows.
+
+        - **Cost** (*int64_t*) -
+
+            The cost of the operation in vcus, -1 if the server did not report it.
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details, such as a schema mismatch or an unknown collection.
 
 ## Example
 
-Demonstrates Upsert() with the C++ SDK.
+Use Upsert() after connecting a MilvusClientV2; each row is an nlohmann::json object keyed by field name and must carry the primary key.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::UpsertRequest();
+milvus::EntityRows rows;
+milvus::EntityRow row;
+row["id"] = 1001;
+row["text"] = "updated text for id 1001";
+row["embedding"] = std::vector<float>{0.1f, 0.2f, 0.3f, 0.4f};
+rows.emplace_back(std::move(row));
+
 milvus::UpsertResponse response;
-util::CheckStatus(client->Upsert(request, response));
+status = client->Upsert(
+    milvus::UpsertRequest().WithCollectionName("my_collection").WithRowsData(std::move(rows)), response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```

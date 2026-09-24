@@ -1,6 +1,6 @@
 # QueryIterator()
 
-This operation returns a QueryIterator object based on scalar field(s) by filtering expression. 
+This operation creates a query iterator that pages through query results matching a scalar filtering expression, delivering them batch by batch. Keep the MilvusClientV2 connection open while the iterator is in use, because each batch is fetched through it.
 
 ```cpp
 Status QueryIterator(QueryIteratorRequest& request, QueryIteratorPtr& response)
@@ -19,13 +19,17 @@ auto request = QueryIteratorRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithPartitionNames(partition_names)
+    .AddPartitionName(partition_name)
     .WithOutputFields(output_field_names)
+    .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
     .WithFilter(filter)
-    .WithFilterTemplates(value)
+    .AddFilterTemplate(key, filter_template)
+    .WithFilterTemplates(filter_templates)
     .WithLimit(limit)
     .WithOffset(offset)
     .WithIgnoreGrowing(ignore_growing)
+    .AddExtraParam(key, value)
     .WithTimezone(timezone)
     .WithReduceStopForBest(reduce_stop_for_best);
 ```
@@ -34,241 +38,174 @@ auto request = QueryIteratorRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name; the default database is used if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection to query.
 
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Sets the names of the partitions. If it is empty, the default partition applies.
+    Sets the partition names to query; if empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
-    Adds a partition name.
+    Sets one more partition name to include in the query scope.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
 
-    Sets the output field names.
+    Sets the names of the fields to include in each batch of results.
 
 - `AddOutputField(const std::string& output_field)`
 
-    Adds an output field.
+    Sets one more output field name to include in each batch of results.
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Sets the consistency level. 
+    Sets the consistency level used for the query reads.
 
 - `WithFilter(std::string filter)`
 
-    Sets a filter expression.
+    Sets the scalar filtering expression that determines which entities the iterator pages through.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
-    Adds one value for a placeholder in the filter expression. It is used only when the request has a non-empty filter and avoids repeatedly parsing large literal values.
+    Sets one template value used by the filter expression; it only takes effect when the filter is not empty. Valid template values can be boolean, numeric, string, or array, and templating improves parsing performance for expressions containing complicated lists.
 
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
-    Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
+    Sets the template values used by the filter expression as a map; they only take effect when the filter is not empty.
 
 - `WithLimit(int64_t limit)`
 
-    Sets the number of entities to return. This is available only when the filter expression is empty.
+    Sets the limit value, which is only available when the filter expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Sets the offset value. This is available only when the filter expression is empty.
+    Sets the offset value, which is only available when the filter expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
-    Sets whether to ignore growing segments.
+    Sets whether to ignore data in growing segments during the query. Note: this value is stored in the ExtraParams.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
-    Add an extra param.
+    Sets one extra key-value parameter passed through to the server.
 
 - `WithTimezone(const std::string& timezone)`
 
-    Sets the timezone. This applies only to the Timestamptz field. For details, refer to [this page](https://milvus.io/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search).
+    Sets the timezone, which takes effect for Timestamptz fields. Note: this value is stored in the ExtraParams.
 
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
 
-    Sets the flag of internal retrieve strategy.
+    Sets the flag controlling the internal retrieve strategy.
 
 **RETURNS:**
 
-*Status* with *QueryIteratorPtr*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status, and on success assigns the output parameter with a QueryIteratorPtr whose Next() call fetches successive batches of QueryResults until all matching results are exhausted.
 
-### FieldData
+- **response** (*QueryIteratorPtr*) -
 
-This is the template class that represents column-based data for a single field. Concrete aliases cover every supported data type. Instances of the concrete types are used when inserting data via `InsertRequest::WithRowsData()` or reading query/search results via `QueryResults::OutputField()` and `SingleResult::OutputField()`.
+    - **Next** (*Status*) -
 
-```cpp
-// Base abstract interface (not instantiated directly)
-class Field {
-    const std::string& Name() const;
-    DataType Type() const;
-    DataType ElementType() const;   // for ARRAY fields only
-    virtual size_t Count() const = 0;
-    virtual void Reserve(size_t count) = 0;
-};
+        Get next batch of results. Note: this method is not designed to be called in multi-thread, it is not thread-safe.
 
-using FieldDataPtr = std::shared_ptr<Field>;
+        - **OutputField** (*FieldDataPtr*) -
 
-// Template class
-template <typename T, DataType Dt>
-class FieldData : public Field {
-    explicit FieldData(std::string name);
-    FieldData(std::string name, const std::vector<T>& data);
-    FieldData(std::string name, const std::vector<T>& data, const std::vector<bool>& valid_data);
+            Get an output field by name.
 
-    StatusCode Add(const T& element);
-    StatusCode AddNull();
-    StatusCode Append(const std::vector<T>& elements);
-    size_t Count() const;
-    void Reserve(size_t count);
-    virtual const std::vector<T>& Data() const;
-    virtual T Value(size_t i) const;
-    virtual bool IsNull(size_t i) const;
-    virtual const std::vector<bool>& ValidData() const;
-};
-```
+            - **Name** (*const std::string&*) -
 
-### QueryResults
+                Get field name.
 
-This class holds the column-based result data returned by a `Query()` call. Access it via `Results()` on a `QueryResponse` object.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-```cpp
-const QueryResults& results = response.Results();
-```
+                Get field data type.
 
-**METHODS:**
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `FieldDataPtr OutputField(const std::string& name) const`
+                Get the element type for an array field.
 
-    Returns the named output field as a `FieldDataPtr`. Cast to the concrete type with `std::dynamic_pointer_cast<Int64FieldData>(results.OutputField("id"))`.
+            - **Count** (*size_t*) -
 
-- `const std::vector<FieldDataPtr>& OutputFields() const`
+                Total number of field elements.
 
-    Returns all output fields in the order they were returned by the server.
+        - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
-- `const std::set<std::string>& OutputFieldNames() const`
+            Get all output fields data.
 
-    Returns the set of output field names that were requested in the query.
+            - **Name** (*const std::string&*) -
 
-- `Status OutputRows(EntityRows& rows) const`
+                Get field name.
 
-    Converts all result rows to a vector of JSON-like row maps and stores them in `rows`.
+            - **Type** ([DataType](../Collections/DataType.md)) -
 
-- `Status OutputRow(int i, EntityRow& row) const`
+                Get field data type.
 
-    Converts the row at index `i` to a JSON-like row map.
+            - **ElementType** ([DataType](../Collections/DataType.md)) -
 
-- `uint64_t GetRowCount() const`
+                Get the element type for an array field.
 
-    Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+            - **Count** (*size_t*) -
 
-### Iterator
+                Total number of field elements.
 
-QueryIterator is an alias of Iterator<QueryResults>. Use it to retrieve query rows in batches when the complete result set is larger than a single request limit.
+        - **OutputFieldNames** (*const std::set<std::string>&*) -
 
-### Output field types
+            Get output field names specified by query().
 
-Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
+        - **OutputRows** (*Status*) -
 
-The pointer convention is XxxFieldDataPtr = std::shared_ptr<XxxFieldData>. This result representation is used by query interfaces and does not make the pointer aliases separate API pages.
+            Get all output rows.
 
-### Iterator
+        - **OutputRow** (*Status*) -
 
-Abstract base class. Do not instantiate it directly; use the QueryIterator alias below.
+            Get row data. Throw exception if the i is out of bound.
 
-```cpp
-template <typename T>
-class Iterator {
- public:
-    virtual Status Next(T& results) = 0;
-};
-```
+        - **GetRowCount** (*uint64_t*) -
 
-- `virtual Status Next(T& results) = 0`
+            Get row count of the result. Return the value of count(*) when you query with count(*).
 
-### QueryIterator
+**ERROR HANDLING:**
 
-Iterates over `QueryResults` batches from a `QueryIterator()` call. Each call to `Next()` fills a `QueryResults` with the next batch of rows.
+- **std::exception**
 
-```cpp
-using QueryIterator    = Iterator<QueryResults>;
-using QueryIteratorPtr = std::shared_ptr<QueryIterator>;
-```
-
-Obtained via `MilvusClientV2::QueryIterator(IteratorArguments, QueryIteratorPtr&)`.
-
-**EXCEPTIONS:**
-
-- **StatusCode**
-
-    Check `status.Code()` and `status.Message()` for error details.
+    Request preparation, transport, or iterator initialization fails, including when the request carries ID-based criteria. Inspect the returned Status code and message for failure details; ID-based input is rejected outright because the query iterator does not support IDs, and failures inside the iterator constructor are reported as an 'Unable to create query iterator' error.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Create a query iterator after connecting a MilvusClientV2, then page through the matching results batch by batch with Next().
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
+    return 1;
 }
 
 milvus::QueryIteratorRequest request;
-request.SetCollectionName(collection_name);
-request.SetBatchSize(batch);
-request.SetOffset(offset);
-request.SetLimit(limit);
-request.SetFilter(filter);
-request.AddOutputField(field_name);
-request.AddOutputField(field_age);
-request.AddOutputField("a");  // dynamic field
+request.WithCollectionName("book");
+request.WithFilter("word_count > 100");
+request.WithOutputFields({"book_id", "word_count"});
+request.WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
 
 milvus::QueryIteratorPtr iterator;
 status = client->QueryIterator(request, iterator);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
+    return 1;
 }
 
-std::set<int64_t> ids;
-int pages = 0;
-uint64_t total_count = 0;
 while (true) {
-    milvus::QueryResults batch_results;
-    status = iterator->Next(batch_results);
-    if (!status.IsOk()) {
-        std::cout << status.Message() << std::endl;
-    }
-    auto batch_count = batch_results.GetRowCount();
-    if (batch_count == 0) {
-        std::cout << "query iteration finished" << std::endl;
+    milvus::QueryResults batch;
+    status = iterator->Next(batch);
+    if (!status.IsOk() || batch.GetRowCount() == 0) {
         break;
     }
-    pages++;
-    total_count += batch_count;
-
-    milvus::EntityRows rows;
-    status = batch_results.OutputRows(rows);
-    if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-    std::cout << "No." << std::to_string(pages) << " page " << std::to_string(rows.size()) << " rows fetched"
-              << std::endl;
-    std::cout << "\tthe first row: " << (*rows.begin()).dump() << std::endl;
-    std::cout << "\tthe last row: " << (*rows.rbegin()).dump() << std::endl;
-    for (const auto& row : rows) {
-        // std::cout << row.dump() << std::endl;
-        ids.insert(row[field_id].get<int64_t>());
-    }
+    // process the rows in this batch
 }
 ```
