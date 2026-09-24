@@ -22,7 +22,7 @@ result, err := client.DescribeDatabase(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.Database, error*
+*\*[entity.Database](Database.md), error*
 
 **RETURNS:**
 

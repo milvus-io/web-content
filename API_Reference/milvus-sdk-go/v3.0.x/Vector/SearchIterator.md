@@ -51,6 +51,10 @@ client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(collectionName, 
 
     The partitions to search. If not specified, all partitions are searched.
 
+- `WithNamespace(namespace string)` -
+
+    Scopes the search iterator to a collection namespace.
+
 - `WithFilter(expr string)` -
 
     A boolean expression to filter entities. Only entities matching the expression are returned.

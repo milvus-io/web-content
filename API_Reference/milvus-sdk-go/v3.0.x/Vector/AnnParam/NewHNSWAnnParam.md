@@ -18,6 +18,12 @@ func NewHNSWAnnParam(ef int) hsnwAnnParam
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
+**BUILDER METHODS:**
+
+- `WithSeedEf(seedEf int)`
+
+    Sets the ef used to seed an iterator search (knowhere FaissHnswConfig::seed_ef). Server default 40.
+
 ## Example
 
 ```go

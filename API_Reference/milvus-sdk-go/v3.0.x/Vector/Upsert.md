@@ -22,6 +22,14 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **BUILDER METHODS:**
 
+- `NewColumnBasedInsertOption(collName string, columns ...column.Column)`
+
+    This creates an upsert option from columns. Build the request with the `With*Column` methods below.
+
+- `NewRowBasedInsertOption(collName string, rows ...any)`
+
+    This creates an upsert option from row values. Chain `WithPartition`, `WithNamespace`, `WithPartialUpdate`, `WithArrayAppend`, `WithArrayRemove`, `WithFieldPartialOp`, or `WithKeepAutoIDPk`.
+
 - `WithColumns(columns ...column.Column)`
 
     This appends the supplied columns to the write request.
@@ -49,6 +57,10 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 - `WithVarcharColumn(colName string, data []string)`
 
     This appends a VarChar scalar column with the specified name and values.
+
+- `WithTextColumn(colName string, data []string)`
+
+    This appends a Text scalar column with the specified name and values.
 
 - `WithFloatVectorColumn(colName string, dim int, data [][]float32)`
 
@@ -104,7 +116,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*UpsertResult, error*
+*[UpsertResult](UpsertResult.md), error*
 
 **RETURNS:**
 

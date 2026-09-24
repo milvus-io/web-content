@@ -22,6 +22,24 @@ func NewMinHashLSHIndex(metricType entity.MetricType, lshBand int) *minhashLSHIn
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 
+**BUILDER METHODS:**
+
+- `WithElementBitWidth(elementBitWidth int)`
+
+    Sets the bit width of the hash elements.
+
+- `WithLSHCodeInMem(lshCodeInMem int)`
+
+    Sets how many LSH codes are kept in memory.
+
+- `WithRawData(withRawData bool)`
+
+    Sets whether raw data is stored for refine re-ranking.
+
+- `WithBloomFilterFalsePositiveProb(fpProb float64)`
+
+    Sets the target false-positive probability of the bloom filter.
+
 ## Example
 
 ```go

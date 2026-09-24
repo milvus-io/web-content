@@ -20,7 +20,7 @@ stream, err := cli.CreateReplicateStream(ctx)
 
 **RETURN TYPE:**
 
-**milvuspb.MilvusService_CreateReplicateStreamClient, error*
+*milvuspb.MilvusService_CreateReplicateStreamClient, error*
 
 **RETURNS:**
 

@@ -18,6 +18,12 @@ func NewDiskAnnParam(searchList int) diskANNParam
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
+**BUILDER METHODS:**
+
+- `WithBeamwidth(beamwidth int)`
+
+    Sets the maximum number of IO requests issued per search iteration.
+
 ## Example
 
 ```go

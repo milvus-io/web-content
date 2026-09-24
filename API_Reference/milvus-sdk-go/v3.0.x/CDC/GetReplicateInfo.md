@@ -30,7 +30,7 @@ resp, err := cli.GetReplicateInfo(ctx, &milvuspb.GetReplicateInfoRequest{
 
 **RETURN TYPE:**
 
-**milvuspb.GetReplicateInfoResponse, error*
+*\*milvuspb.GetReplicateInfoResponse, error*
 
 **RETURNS:**
 

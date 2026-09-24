@@ -12,6 +12,20 @@ func NewMinHashLSHAnnParam() *minHashLSHAnnParam
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
+**BUILDER METHODS:**
+
+- `WithSearchWithJACCARD(searchWithJACCARD bool)`
+
+    Sets whether the search uses Jaccard similarity.
+
+- `WithRefineK(refineK int)`
+
+    Sets how many candidates the refine index re-ranks. Only useful on an index built with `WithRawData`.
+
+- `WithBatchSearch(batchSearch bool)`
+
+    Sets whether to use batch search.
+
 ## Example
 
 ```go

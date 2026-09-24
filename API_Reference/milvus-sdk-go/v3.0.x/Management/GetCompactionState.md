@@ -22,7 +22,7 @@ result, err := client.GetCompactionState(ctx, option)
 
 **RETURN TYPE:**
 
-*entity.CompactionState, error*
+*[entity.CompactionState](CompactionState.md), error*
 
 **RETURNS:**
 

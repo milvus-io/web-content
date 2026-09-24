@@ -22,6 +22,16 @@ func NewIvfRabitQIndex(metricType MetricType, nlist int) *ivfRabitQIndex
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 
+**BUILDER METHODS:**
+
+- `WithRbqBits(rbqBits int)`
+
+    Sets the number of bits used for RaBitQ quantization.
+
+- `WithRefineType(refineType string)`
+
+    Enables the refine index and sets its precision. Knowhere accepts sq4u / sq6 / sq8 / fp16 / bf16 / fp32 / flat.
+
 ## Example
 
 ```go

@@ -117,7 +117,7 @@ type RefreshExternalCollectionResult struct {
 }
 ```
 
-**PARAMETERS:**
+**FIELDS:**
 
 - **JobID** (*int64*) -
 

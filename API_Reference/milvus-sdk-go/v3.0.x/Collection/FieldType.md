@@ -66,6 +66,12 @@ Enumerates the supported data types for collection fields.
 
     Default: `24`
 
+- **FieldTypeText** (*int32*) -
+
+    Default: `25`
+
+    variable-length strings without a required max_length.
+
 - **FieldTypeTimestamptz** (*int32*) -
 
     Default: `26`
@@ -117,4 +123,5 @@ fmt.Println(fieldType.IsVectorType())
 ## Notes
 
 - `IsVectorType()` returns true for binary, float, float16, bfloat16, sparse, and int8 vector field types.
+- `FieldTypeText` is a variable-length string type that does not require a `max_length`.
 
