@@ -22,7 +22,7 @@ $ go get -u github.com/milvus-io/milvus-sdk-go/v2
 
 ## Quick Start
 
-Connect to Milvus and create a collection:
+Connect to Milvus, create a collection, insert an entity, and run a vector search:
 
 ```go
 import (
@@ -30,6 +30,7 @@ import (
 	"log"
 
 	"github.com/milvus-io/milvus/client/v3/entity"
+	"github.com/milvus-io/milvus/client/v3/index"
 	"github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
@@ -49,13 +50,53 @@ if err != nil {
 
 defer cli.Close(ctx)
 
+// Create a collection
 schema := entity.NewSchema().
 	WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
-	WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5))
+	WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(3))
 
 err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("quick_setup", schema))
 if err != nil {
 	log.Fatal("failed to create collection: ", err.Error())
+}
+
+// Insert an entity
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setup").
+	WithInt64Column("id", []int64{1}).
+	WithFloatVectorColumn("vector", 3, [][]float32{{0.1, 0.2, 0.3}}))
+if err != nil {
+	log.Fatal("failed to insert entity: ", err.Error())
+}
+
+// Create an index and load the collection
+idxTask, err := cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption("quick_setup", "vector", index.NewHNSWIndex(entity.COSINE, 8, 64)))
+if err != nil {
+	log.Fatal("failed to create index: ", err.Error())
+}
+if err = idxTask.Await(ctx); err != nil {
+	log.Fatal("failed to build index: ", err.Error())
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("quick_setup"))
+if err != nil {
+	log.Fatal("failed to load collection: ", err.Error())
+}
+if err = loadTask.Await(ctx); err != nil {
+	log.Fatal("failed to load collection: ", err.Error())
+}
+
+// Search
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+	"quick_setup",
+	1,
+	[]entity.Vector{entity.FloatVector{0.1, 0.2, 0.3}},
+))
+if err != nil {
+	log.Fatal("failed to search: ", err.Error())
+}
+for _, resultSet := range resultSets {
+	log.Println("IDs: ", resultSet.IDs)
+	log.Println("Scores: ", resultSet.Scores)
 }
 ```
 
