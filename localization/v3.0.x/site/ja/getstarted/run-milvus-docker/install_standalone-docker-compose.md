@@ -55,9 +55,9 @@ title: Docker Compose を使用して Milvus を実行する（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus は、Milvus リポジトリ内に Docker Compose 設定ファイルを提供しています。Docker Compose を使用して Milvus をインストールするには、単に以下を実行してください。</p>
+    </button></h2><p>Milvus リポジトリには、Docker Compose の設定ファイルが用意されています。Docker Compose を使用して Milvus をインストールするには、次のように実行するだけです。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>デフォルトのデプロイ (v3.0.1):</strong>`<code translate="no">docker compose up -d</code> ` は、<code translate="no">milvus-etcd</code> (メタデータ)、<code translate="no">milvus-minio</code> (オブジェクトストレージ)、および<code translate="no">milvus-standalone</code> の 3 つのコンテナを起動します。メッセージキューは<strong>Woodpecker (組み込み型、WAL バックエンドとして MinIO / オブジェクトストレージを使用)</strong> であるため、別途メッセージキュー用のコンテナは必要ありません。</p>
+<p><strong>デフォルトのデプロイ (v3.0.2):</strong>`<code translate="no">docker compose up -d</code> ` は、<code translate="no">milvus-etcd</code> (メタデータ)、<code translate="no">milvus-minio</code> (オブジェクトストレージ)、および<code translate="no">milvus-standalone</code> の 3 つのコンテナを起動します。メッセージキューは<strong>Woodpecker (組み込み型、WAL バックエンドとして MinIO / オブジェクトストレージを使用)</strong> であるため、別途メッセージキュー用コンテナは必要ありません。</p>
 <p><strong>バージョンごとのメッセージキューのデフォルト設定：</strong></p>
 <ul>
 <li><strong>2.5.x</strong>— デフォルトのメッセージキューは<strong>RocksMQ</strong>です。</li>
-<li><strong>2.6.x 以降</strong>— デフォルトのメッセージキューは<strong>Woodpecker（組み込み）</strong>です。</li>
+<li><strong>2.6.x 以降</strong>— デフォルトのメッセージキューは<strong>Woodpecker（組み込み型）</strong>です。</li>
 </ul>
-<p>v3.0.1の機能との互換性を確保するため、常に最新のDocker Compose構成ファイルをダウンロードしてください。</p>
+<p>v3.0.2の機能との互換性を確保するため、常に最新のDocker Compose設定をダウンロードしてください。</p>
 <ul>
 <li><p>上記のコマンドの実行に失敗した場合は、お使いのシステムに Docker Compose V1 がインストールされていないかご確認ください。インストールされている場合は、<a href="https://docs.docker.com/compose/">このページ</a>に記載されている注意事項に基づき、Docker Compose V2 への移行をお勧めします。</p></li>
 <li><p>イメージの取得で問題が発生した場合は、問題の詳細を<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p></li>
@@ -83,7 +83,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>「milvus-standalone</strong>」、「<strong>milvus-minio</strong>」、「<strong>milvus-etcd</strong>」という名前のコンテナが起動します。
 <ul>
-<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開しておらず、そのデータは現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングされます。</li>
+<li><strong>milvus-etcd</strong>コンテナはホストに対してポートを公開せず、そのデータを現在のフォルダ内の<strong>volumes/etcd</strong>にマッピングします。</li>
 <li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してローカルでポート<strong>9000</strong>および<strong>9001</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマッピングします。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。</li>
 </ul></li>
@@ -96,7 +96,7 @@ milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         
 milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスに関する詳細を確認することもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<p>また、<code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスの詳細を確認することもできます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus の設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +112,7 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ニーズに合わせて Milvus の設定を更新するには、<code translate="no">milvus-standalone</code> コンテナ内の `<code translate="no">/milvus/configs/user.yaml</code> ` ファイルを変更する必要があります。</p>
+    </button></h2><p>ニーズに合わせて Milvus の設定を更新するには、<code translate="no">milvus-standalone</code> コンテナ内の<code translate="no">/milvus/configs/user.yaml</code> ファイルを変更する必要があります。</p>
 <ol>
 <li><p><code translate="no">milvus-standalone</code> コンテナにアクセスします。</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
@@ -166,13 +166,13 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.1 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
+    </button></h2><p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.2 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
 <p>2.6.x ではデフォルトのメッセージキューが Woodpecker に変更されるため、2.5.x で<strong>RocksMQ</strong>を実行しているインスタンスは、<strong>アップグレード前に明示的に RocksMQ を固定</strong>する必要があります。そうしないと、アップグレード時にメッセージキューの変更が試みられますが、これはサポートされていません。 2.6.xのDocker Composeファイルをダウンロードした後、<code translate="no">user.yaml</code> のオーバーライドでメッセージキューのタイプを<code translate="no">rocksmq</code> に戻してから、アップグレードを行ってください：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><em>アップグレード後に</em>メッセージキューを切り替える方法については、「<a href="/docs/ja/switch-mq-type.md">メッセージキューの切り替え</a>」を参照してください。</p>
+<p><em>アップグレード後に</em>メッセージキューを切り替えるには、「<a href="/docs/ja/switch-mq-type.md">メッセージキューの切り替え</a>」を参照してください。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">オプションの依存関係<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,9 +195,9 @@ EOF
 <li>メタデータ:<a href="/docs/ja/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
+<p>Storage V3はデフォルトで無効になっています。これに依存する機能を使用する前に有効にしてください。要件および互換性に関する考慮事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,21 +212,21 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DockerでMilvusをインストールしたら、次のことができます:</p>
+    </button></h2><p>Docker に Milvus をインストールしたら、次の操作が可能です:</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
-<li><p>Milvusの基本的な操作を学びましょう：</p>
+<li><p><a href="/docs/ja/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
+<li><p>Milvusの基本的な操作について学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/insert-update-delete.md">挿入、Upsert、削除</a></li>
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタのスケールアウト</a></p></li>
-<li><p>クラウド上に Milvus クラスタをデプロイする:</p>
+<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタのスケーリング</a></p></li>
+<li><p>クラウド上に Milvus クラスターをデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/gcp.md">Google Cloud</a></li>

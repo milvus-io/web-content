@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "미터법 단위 종류",
+        "label": "미터법 단위 유형",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "컬렉션 설명",
+            "label": "컬렉션에 대한 설명",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -346,7 +346,7 @@
             "children": []
           },
           {
-            "label": "장전 및 해제",
+            "label": "장전 및 방아쇠 풀기",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "아랍어 표준화",
+                    "label": "아랍권과의 관계 정상화",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "사용 사례에 적합한 분석기를 선택하세요",
+                "label": "사용 사례에 맞는 분석기를 선택하세요",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "외부 컬렉션 스키마 변경",
+            "label": "외부 컬렉션 스키마 수정",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -964,7 +964,7 @@
                 "children": []
               },
               {
-                "label": "반전",
+                "label": "반전됨",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -995,7 +995,7 @@
             "order": 6,
             "children": [
               {
-                "label": "GPU 지수 개요",
+                "label": "GPU 인덱스 개요",
                 "id": "gpu-index-overview.md",
                 "order": 0,
                 "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "필터링 템플릿",
+                "label": "필터링 및 템플릿 적용",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1463,7 +1463,7 @@
         ]
       },
       {
-        "label": "저장소 최적화",
+        "label": "저장 공간 최적화",
         "id": "storage_optimization",
         "order": 10,
         "isMenu": true,
@@ -1710,7 +1710,7 @@
                 "children": []
               },
               {
-                "label": "OpenShift에 배포",
+                "label": "OpenShift에 배포하기",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
@@ -1914,7 +1914,7 @@
                     "children": []
                   },
                   {
-                    "label": "펄서 ↔ 딱따구리",
+                    "label": "펄서 ↔ 우드페커",
                     "id": "switch-pulsar-woodpecker.md",
                     "order": 2,
                     "children": []
@@ -1956,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "스케일 의존성",
+            "label": "스케일 종속성",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -2013,7 +2013,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Metrics 대시보드",
+                "label": "Milvus 메트릭스 대시보드",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2154,7 +2154,7 @@
         ]
       },
       {
-        "label": "Milvus 웹 UI",
+        "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -2204,7 +2204,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "단일 인스턴스 내 백업 및 복원",
+                "label": "단일 인스턴스에서의 백업 및 복원",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2216,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "버킷 간 인스턴스 간 마이그레이션",
+                "label": "버킷 간 인스턴스 이동",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2232,7 +2232,7 @@
         ]
       },
       {
-        "label": "조류 관찰자",
+        "label": "조류 관찰가",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2341,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Milvus 사이즈 측정 도구",
+        "label": "Milvus 크기 조정 도구",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2496,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "지나 AI",
+                "label": "Jina AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3157,7 +3163,7 @@
         "children": []
       },
       {
-        "label": "Milvus에서 ColBERT 및 ColPali 사용하기",
+        "label": "Milvus에서 ColBERT 및 ColPali 사용",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -3176,7 +3182,7 @@
         "children": []
       },
       {
-        "label": "마트료시카 임베딩을 활용한 퍼널 검색",
+        "label": "마트료시카 임베딩을 활용한 퍼넬 검색",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

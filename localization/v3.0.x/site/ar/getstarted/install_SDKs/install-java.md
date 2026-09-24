@@ -2,12 +2,10 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: >-
-  تعرف على كيفية تثبيت حزمة أدوات تطوير تطبيقات جافا (Java SDK) الخاصة بـ
-  Milvus.
-title: تثبيت حزمة أدوات تطوير البرامج (SDK) الخاصة بـ Milvus لـ Java
+summary: تعرف على كيفية تثبيت حزمة تطوير تطبيقات جافا (Java SDK) الخاصة بـ Milvus.
+title: تثبيت Milvus Java SDK
 ---
-<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) الخاصة بـ Milvus لـ Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +21,7 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) الخاص
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية تثبيت Milvus Java SDK لـ Milvus.</p>
-<p>يدعم الإصدار الحالي من Milvus حزم SDK بلغات Python وNode.js وGO وJava.</p>
+<p>يدعم الإصدار الحالي من Milvus حزم SDK بلغات Python و Node.js و GO و Java.</p>
 <h2 id="Requirement" class="common-anchor-header">المتطلبات<button data-href="#Requirement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,13 +63,13 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) الخاص
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.9&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

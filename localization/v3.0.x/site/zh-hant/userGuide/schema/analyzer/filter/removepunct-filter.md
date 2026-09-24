@@ -1,9 +1,7 @@
 ---
 id: removepunct-filter.md
 title: 移除標點符號Compatible with Milvus 2.5.11+
-summary: >-
-  removepunct 過濾器會刪除標點符號、空格和換行符號，這些標點符號、空格和換行符號是某些 tokenizer（例如 jieba、linda 和
-  icu）通常會保留的。當您想要一個更乾淨的標記流，只包含有意義的文字標記，不含逗號、句點和其他標點符號時，請使用它。
+summary: removepunct 篩選器會移除包含標點符號或空白字元的詞元。若使用的是會將標點符號保留在單詞內的詞元分割器，則會移除整個受影響的詞元。
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">移除標點符號<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -21,11 +19,11 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">removepunct</code> 過濾器會移除符記串流中獨立的標點符記。當您想要更乾淨的文字處理，著重於有意義的內容字詞而非標點符號時，請使用此過濾器。</p>
+    </button></h1><p>「<code translate="no">removepunct</code> 」篩選器會從標記流中移除包含標點符號或空白字元的標記。當您希望進行更乾淨的文字處理，並專注於有意義的內容詞彙而非標點符號時，請使用此篩選器。</p>
 <div class="alert note">
-<p>此過濾器對<code translate="no">jieba</code> 、<code translate="no">lindera</code> 和<code translate="no">icu</code> tokenizer 最為有效，它們會保留標點符號為獨立的 token (例如<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>)。其他令牌化器如<code translate="no">standard</code> 和<code translate="no">whitespace</code> 會在令牌化過程中丟棄標點符號，因此<code translate="no">removepunct</code> 對它們沒有影響。</p>
+<p>此濾波器與<code translate="no">jieba</code> 、<code translate="no">lindera</code> 及<code translate="no">icu</code> 詞元化器搭配使用時效果最佳，這些詞元化器會將標點符號保留為獨立的詞元（例如：<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> 詞元化器會在詞元化過程中捨棄標點符號。<code translate="no">whitespace</code> 詞元化器則會保留標點符號，包括詞元內的標點符號。當與<code translate="no">whitespace</code> 結合使用時，<code translate="no">removepunct</code> 會移除整個詞元（若其包含標點符號或空白字元）；它不會從詞元中刪除個別字元。</p>
 </div>
-<h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,9 +38,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">removepunct</code> 過濾器內建於 Milvus。要使用它，只需在<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 部分指定其名稱即可。</p>
+    </button></h2><p><code translate="no">removepunct</code> 過濾器已內建於 Milvus 中。若要使用它，只需在<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 區段中指定其名稱即可。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -58,8 +61,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">removepunct</code> 過濾器會在 tokenizer 產生的詞彙上運作，因此必須與 tokenizer 結合使用。</p>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p><code translate="no">removepunct</code> 過濾器是針對分詞器所產生的術語進行處理，因此必須與分詞器搭配使用。</p>
+<p>定義<code translate="no">analyzer_params</code> 後，您可在定義集合架構時將其套用至<code translate="no">VARCHAR</code> 欄位。這使 Milvus 能使用指定的分析器來處理該欄位中的文字，以實現高效的詞元化與篩選。詳細資訊請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">「使用範例</a>」。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,8 +78,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在應用分析器配置到您的收集模式之前，請使用<code translate="no">run_analyzer</code> 方法驗證其行為。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">分析器配置<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>在將分析器設定套用至您的集合架構之前，請先使用 `<code translate="no">run_analyzer</code> ` 方法驗證其運作行為。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">分析器設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +95,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -108,7 +116,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">驗證使用<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">使用以下方式進行驗證<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +132,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

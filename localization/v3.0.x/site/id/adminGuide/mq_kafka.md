@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggunakan layanan Kafka eksternal, nonaktifkan Pulsar yang disertakan dan aktifkan opsi " <code translate="no">externalKafka</code> " dalam pengaturan override di ` <code translate="no">values.yaml</code> `, lalu instal Milvus dengan pengaturan tersebut:</p>
+    </button></h3><p>Untuk menggunakan layanan Kafka eksternal, nonaktifkan Pulsar yang disertakan dan aktifkan opsi " <code translate="no">externalKafka</code> " dalam file override ` <code translate="no">values.yaml</code> `, lalu instal Milvus dengan pengaturan tersebut:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -156,7 +156,7 @@ title: Kafka
 <div class="alert note">
 <p>Konfigurasi SASL didukung di Milvus Operator v0.8.5 atau yang lebih baru.</p>
 </div>
-<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Kafka Internal (di dalam kluster)<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
+<h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Kafka Internal (dalam kluster)<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Peningkatan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan antrean pesan</strong>: Saat melakukan peningkatan ke Milvus v3.0.1, Anda harus mempertahankan pilihan antrean pesan saat ini. Pergantian antara sistem antrean pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrean pesan akan tersedia pada versi mendatang.
+<li><strong>Memperbarui dari 2.5.x ke 2.6.x:</strong> <strong>Batasan antrian pesan</strong>: Saat memperbarui ke Milvus v3.0.2, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.
 Jika Anda menjalankan Kafka dan ingin tetap menggunakannya, jangan ubah antrian pesan selama proses peningkatan versi.</li>
 <li>Hanya <strong>Kafka 2.x dan 3.x</strong> yang didukung.</li>
 <li>Untuk konektivitas SASL/SSL, lihat <a href="/docs/id/connect_kafka_ssl.md">Menghubungkan ke Kafka dengan SASL/SSL</a>.</li>

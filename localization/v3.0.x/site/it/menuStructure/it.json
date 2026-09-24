@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "Tipi metrici",
+        "label": "Tipi di unità metriche",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "TTL della raccolta di insiemi",
+            "label": "TTL della collezione di insiemi",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Gestisci partizioni",
+            "label": "Gestisci le partizioni",
             "id": "manage-partitions.md",
             "order": 8,
             "children": []
@@ -755,13 +755,13 @@
             "children": []
           },
           {
-            "label": "Modifica lo schema della collezione",
+            "label": "Modifica lo schema della raccolta",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
           },
           {
-            "label": "Modifica dello schema della raccolta esterna",
+            "label": "Modifica dello schema di raccolta esterno",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Entità Upsert",
+            "label": "Entità \"upsert\"",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -832,7 +832,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali flottanti",
+            "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -1124,7 +1124,7 @@
                 "children": []
               },
               {
-                "label": "Operatori StructArray",
+                "label": "Operatori di StructArray",
                 "id": "struct-array-operators.md",
                 "order": 6,
                 "children": []
@@ -1150,7 +1150,7 @@
             "children": []
           },
           {
-            "label": "Corrispondenza del testo",
+            "label": "Corrispondenza testo",
             "id": "keyword-match.md",
             "order": 10,
             "children": []
@@ -1217,7 +1217,7 @@
             ]
           },
           {
-            "label": "Query Elasticsearch su Milvus",
+            "label": "Query Elasticsearch verso Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1619,7 +1619,7 @@
         ]
       },
       {
-        "label": "Abilità di Milvus",
+        "label": "Abilità Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1897,7 +1897,7 @@
                 "children": []
               },
               {
-                "label": "Coda dei messaggi dello switch",
+                "label": "Coda dei messaggi Switch",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -2126,7 +2126,7 @@
                 "children": []
               },
               {
-                "label": "Ruoli di sovvenzione",
+                "label": "Ruoli relativi alle sovvenzioni",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2168,7 +2168,7 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu (interfaccia grafica di Milvus)",
+        "label": "Attu (interfaccia grafica Milvus)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
@@ -2198,13 +2198,13 @@
             "children": []
           },
           {
-            "label": "Casi più comuni",
+            "label": "Casi comuni",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un’unica istanza",
+                "label": "Backup e ripristino in un'unica istanza",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2216,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in diversi bucket",
+                "label": "Migrazione tra istanze in bucket diversi",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2460,7 +2460,7 @@
             ]
           },
           {
-            "label": "Rerankers",
+            "label": "Reranker",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2542,7 +2542,7 @@
                 "children": []
               },
               {
-                "label": "Incorporamento di testo",
+                "label": "Incorporamento del testo",
                 "id": "langchain_milvus_dido.md",
                 "order": 2,
                 "children": []
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3269,13 +3275,13 @@
         "children": []
       },
       {
-        "label": "Domande frequenti sui prodotti",
+        "label": "Domande frequenti sul prodotto",
         "id": "product_faq.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "Domande frequenti sull'operatività",
+        "label": "Domande frequenti sull’operatività",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

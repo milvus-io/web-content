@@ -61,7 +61,7 @@ title: Milvus Python SDK 설치
 <div class="alert note">
 설치한 Milvus 서버의 버전과 일치하는 PyMilvus 버전을 설치하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/release_notes.md">릴리스 노트를</a> 참조하십시오.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">1</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,11 +98,11 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h2><p>PyMilvus를 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 작동 방식을 익힐 수 있습니다:</p>
+<li><p>Milvus의 기본 조작법을 익히기:</p>
 <ul>
 <li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/insert-update-delete.md">삽입, 업데이트/삽입(Upsert), 삭제</a></li>
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>

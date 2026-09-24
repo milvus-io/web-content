@@ -4,8 +4,7 @@ title: Standard-Analysator
 summary: >-
   Der Standard-Analysator ist der in Milvus voreingestellte Analysator, der
   automatisch auf Textfelder angewendet wird, wenn kein Analysator angegeben
-  wird. Er nutzt eine grammatikbasierte Tokenisierung und eignet sich daher für
-  die meisten Sprachen.
+  wird. Er kombiniert den Standard-Tokenizer mit dem Kleinbuchstabenfilter.
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">Standard-Analysator<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der „ <code translate="no">standard</code> “-Analysator ist der Standardanalysator in Milvus, der automatisch auf Textfelder angewendet wird, wenn kein Analysator angegeben ist. Er verwendet eine grammatikbasierte Tokenisierung und ist daher für die meisten Sprachen geeignet.</p>
+    </button></h1><p>Der „ <code translate="no">standard</code> “-Analysator ist der Standardanalysator in Milvus, der automatisch auf Textfelder angewendet wird, wenn kein Analysator angegeben ist. Er kombiniert den Standard-Tokenizer mit dem Kleinbuchstabenfilter.</p>
 <div class="alert note">
 <p>Der „ <code translate="no">standard</code> “-Analysator eignet sich für Sprachen, bei denen Trennzeichen (wie Leerzeichen oder Satzzeichen) zur Festlegung von Wortgrenzen dienen. Sprachen wie Chinesisch, Arabisch, Thailändisch, Japanisch und Koreanisch erfordern jedoch eine sprachspezifische Tokenisierung oder Normalisierung. Verwenden Sie in solchen Fällen einen sprachspezifischen Analysator wie <a href="/docs/de/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/de/arabic-analyzer.md"><code translate="no">arabic</code></a>, oder <a href="/docs/de/thai-analyzer.md"><code translate="no">thai</code></a>oder benutzerdefinierte Analysatoren mit speziellen Tokenisierern wie <a href="/docs/de/lindera-tokenizer.md"><code translate="no">lindera</code></a> und <a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
 </div>
@@ -41,9 +40,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der „ <code translate="no">standard</code> “-Analysator besteht aus:</p>
+    </button></h2><p>Der Analysator „ <code translate="no">standard</code> “ besteht aus:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Verwendet den „ <code translate="no">standard</code> “-Tokenizer, um Text anhand von Grammatikregeln in einzelne Wörter zu zerlegen. Weitere Informationen finden Sie unter <a href="/docs/de/standard-tokenizer.md">„Standard-Tokenizer</a>“.</p></li>
+<li><p><strong>Tokenizer</strong>: Verwendet den „ <code translate="no">standard</code> “-Tokenizer, um aufeinanderfolgende Unicode-Buchstaben und Ziffern in Tokens beizubehalten und an anderen Zeichen zu trennen. Die genauen Zeichenregeln finden Sie unter <a href="/docs/de/standard-tokenizer.md#Tokenization-rules">„Standard-Tokenizer</a>“.</p></li>
 <li><p><strong>Filter</strong>: Verwendet den „ <code translate="no">lowercase</code> “-Filter, um alle Token in Kleinbuchstaben umzuwandeln und so eine groß-/kleinschreibungsunabhängige Suche zu ermöglichen. Weitere Informationen finden Sie unter <a href="/docs/de/lowercase-filter.md">„Lowercase</a>“.</p></li>
 </ul>
 <p>Die Funktionalität des „ <code translate="no">standard</code> “-Analysators entspricht der folgenden benutzerdefinierten Analysatorkonfiguration:</p>
@@ -119,7 +118,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;type&quot;: &quot;standard&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der „ <code translate="no">standard</code> “-Analysator akzeptiert die folgenden optionalen Parameter:</p>
+<p>Der Analysator „ <code translate="no">standard</code> “ akzeptiert die folgenden optionalen Parameter:</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

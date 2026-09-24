@@ -3,8 +3,8 @@ id: mqtype-overview.md
 title: Panoramica sulla coda dei messaggi
 summary: >-
   Panoramica delle opzioni relative alla coda dei messaggi (mqType) supportate
-  da Milvus e indicazioni su quale utilizzare per le implementazioni standalone
-  rispetto a quelle distribuite.
+  da Milvus e di quale utilizzare per le implementazioni standalone rispetto a
+  quelle distribuite.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Panoramica sulla coda dei messaggi<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: >-
 <tr><th>Coda di messaggi</th><th style="text-align:center">Milvus Standalone</th><th style="text-align:center">Milvus distribuito (cluster)</th><th>Predefinita in</th><th>Note</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/it/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (integrato)</td><td style="text-align:center">✔️ (integrato o come servizio)</td><td><strong>Milvus 3.x</strong> (entrambe le modalità)</td><td>Predefinito e consigliato. WAL nativo per il cloud su object storage; non richiede alcun servizio esterno.</td></tr>
+<tr><td><a href="/docs/it/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (integrato)</td><td style="text-align:center">✔️ (integrato o come servizio)</td><td><strong>Milvus 3.x</strong> (entrambe le modalità)</td><td>Predefinito e consigliato. WAL cloud-native su object storage; non richiede alcun servizio esterno.</td></tr>
 <tr><td><a href="/docs/it/mq_pulsar.md">Pulsar</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (impostazione predefinita del cluster)</td><td>Supportato, esterno o integrato.</td></tr>
 <tr><td><a href="/docs/it/mq_kafka.md">Kafka</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>Supportato. Solo Kafka 2.x o 3.x.</td></tr>
 <tr><td><a href="/docs/it/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (impostazione predefinita in modalità standalone)</td><td>Supportato <strong>solo</strong> per la versione <strong>standalone</strong>.</td></tr>
@@ -51,8 +51,8 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Ogni istanza di Milvus utilizza esattamente una coda di messaggi.</p></li>
-<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l'aggiornamento a Milvus v3.0.1, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di coda dei messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p></li>
-<li><p>Per modificare la coda dei messaggi di un’istanza in esecuzione, consultare la sezione <a href="/docs/it/switch-mq-type.md">“Cambio della coda dei messaggi</a>”. La funzione “Cambio della coda dei messaggi” è disponibile in <strong>Milvus 3.0 e versioni successive</strong>; è necessario quindi effettuare prima l’aggiornamento a Milvus 3.0 o versioni successive.</p></li>
+<li><p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v3.0.2, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per il cambio di sistema di code dei messaggi sarà disponibile nelle versioni future.</p></li>
+<li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-mq-type.md">la sezione "Cambio della coda dei messaggi"</a>. La funzione "Cambio della coda dei messaggi" è disponibile <strong>a partire da Milvus 3.0:</strong> eseguire prima l'aggiornamento a Milvus 3.0 o <strong>versioni successive</strong>.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Scelta di una coda di messaggi<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

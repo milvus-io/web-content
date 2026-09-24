@@ -23,7 +23,7 @@ title: Menjalankan Milvus di Docker (Windows)
         ></path>
       </svg>
     </button></h1><blockquote>
-<p>Secara default, deployment ini menjalankan <strong>Woodpecker</strong> (sistem berkas lokal) sebagai antrian pesannya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
+<p>Secara default, deployment ini menjalankan <strong>Woodpecker</strong> (sistem berkas lokal) sebagai antrean pesan, sehingga tidak diperlukan layanan antrean pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
 </blockquote>
 <p>Halaman ini menunjukkan cara menjalankan Milvus di Windows menggunakan Docker Desktop untuk Windows.</p>
 <h2 id="Prerequisites​" class="common-anchor-header">Prasyarat​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
@@ -44,7 +44,7 @@ title: Menjalankan Milvus di Docker (Windows)
     </button></h2><ul>
 <li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Instal Docker Desktop</a>.</p></li>
 <li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Instal Windows Subsystem for Linux 2 (WSL 2)</a>.​</p></li>
-<li><p>Instal Python 3.8 atau yang lebih baru.</p></li>
+<li><p>Instal Python 3.8+.</p></li>
 </ul>
 <h2 id="Run-Milvus-in-Docker​" class="common-anchor-header">Menjalankan Milvus di Docker​<button data-href="#Run-Milvus-in-Docker​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Menjalankan Milvus di Docker (Windows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Setelah Anda menginstal Docker Desktop di Microsoft Windows, Anda dapat mengakses CLI Docker dari PowerShell atau Command Prompt Windows dalam mode <strong>administrator</strong> dan dari WSL 2. ​</p>
+    </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Setelah Anda menginstal Docker Desktop di Microsoft Windows, Anda dapat mengakses Docker CLI dari PowerShell atau Command Prompt Windows dalam mode <strong>administrator</strong> dan dari WSL 2. ​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +79,7 @@ title: Menjalankan Milvus di Docker (Windows)
       </svg>
     </button></h3><p>Jika Anda lebih terbiasa dengan PowerShell atau Command Prompt Windows, perintahnya adalah sebagai berikut.​</p>
 <ol>
-<li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih " <strong>Jalankan sebagai administrator</strong>".​</p></li>
+<li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih " <strong>Run as administrator</strong>".​</p></li>
 <li><p>Unduh skrip instalasi dan simpan sebagai " <code translate="no">standalone.bat</code>".​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
@@ -93,7 +93,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>Setelah menjalankan skrip instalasi:​</p>
 <ul>
-<li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.​</p></li>
+<li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai di port <strong>19530</strong>.​</p></li>
 <li><p>Embed etcd diinstal bersama Milvus dalam kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
 <li><p>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.​</p></li>
 </ul>
@@ -147,7 +147,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang tersimpan.​</p>
+<p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang disimpan.​</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
 Stop successfully.​
@@ -174,7 +174,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda menginstal Docker Desktop di Microsoft Windows, Anda dapat mengakses CLI Docker dari PowerShell atau Command Prompt Windows dalam mode <strong>administrator</strong>. Anda dapat menjalankan Docker Compose baik di PowerShell, Command Prompt Windows, maupun WSL 2 untuk memulai Milvus.​</p>
+    </button></h2><p>Setelah Anda menginstal Docker Desktop di Microsoft Windows, Anda dapat mengakses Docker CLI dari PowerShell atau Windows Command Prompt dalam mode <strong>administrator</strong>. Anda dapat menjalankan Docker Compose baik di PowerShell, Windows Command Prompt, maupun WSL 2 untuk memulai Milvus.​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Command Prompt Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,10 +191,10 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih " <strong>Run as administrator</strong>".​</p></li>
+<li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih <strong>Jalankan sebagai administrator</strong>.</p></li>
 <li><p>Jalankan perintah berikut di PowerShell atau Command Prompt Windows untuk mengunduh berkas konfigurasi Docker Compose untuk Milvus Standalone dan memulai Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -207,7 +207,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.​</p></li>
 <li><p>Kontainer <strong>milvus-minio</strong> melayani port <strong>9000</strong> dan <strong>9001</strong> secara lokal dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.​</p></li>
-<li><p>Kontainer <strong>milvus-standalone</strong> menyediakan port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.​</p></li>
+<li><p>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.​</p></li>
 </ul></li>
 </ol>
 <p>Anda juga dapat menjalankan perintah Docker Compose versi Linux jika WSL 2 telah terinstal.​</p>
@@ -235,7 +235,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Unduh berkas konfigurasi Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan Milvus.​</p>
@@ -304,14 +304,14 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Periksa apakah Docker Daemon sudah dijalankan.</p>
-<p>Anda perlu membuka direktori instalasi Docker Desktop dan menjalankan perintah ` <code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` untuk menjalankan Docker Daemon.​</p>
+<p>Anda perlu membuka direktori instalasi Docker Desktop dan menjalankan perintah ` <code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` untuk memulai Docker Daemon.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>Periksa apakah Anda telah menjalankan Docker Desktop dalam mode <strong>administrator</strong>.​</p>
-<p>Pastikan Anda telah menjalankan Docker Desktop dalam mode administrator. Untuk melakukannya, klik kanan pada <strong>Docker Desktop</strong> dan pilih " <strong>Jalankan sebagai administrator</strong>".​</p>
+<li><p>Periksa apakah Anda telah menjalankan Docker Desktop dalam mode <strong>administrator</strong>.</p>
+<p>Pastikan Anda telah menjalankan Docker Desktop dalam mode administrator. Untuk melakukannya, klik kanan pada <strong>Docker Desktop</strong> dan pilih " <strong>Run as administrator</strong>".​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -343,7 +343,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Gunakan mesin berbasis WSL 2 di Pengaturan Docker Desktop</span>
   
  </span></p></li>
-<li><p>Pilih dari distribusi WSL 2 yang telah diinstal mana yang ingin Anda aktifkan integrasi Docker-nya dengan membuka: <strong>Pengaturan</strong> &gt; <strong>Sumber Daya</strong> &gt; <strong>Integrasi WSL</strong>.</p>
+<li><p>Pilih dari distribusi WSL 2 yang telah Anda instal mana yang ingin Anda aktifkan integrasi Docker-nya dengan membuka: <strong>Pengaturan</strong> &gt; <strong>Sumber Daya</strong> &gt; <strong>Integrasi WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -372,7 +372,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Pesan kesalahan “Read config failed” saat Milvus dimulai</span>
   
  </span></p>
-<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah <code translate="no">docker exec</code> untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>/milvus/configs</strong> sebagai berikut:​</p>
+<p>Untuk mengatasi kesalahan yang muncul saat Milvus dimulai yang berbunyi “Read config failed,” Anda perlu memeriksa apakah volume yang dipasang ke dalam kontainer Milvus sudah benar. Jika volume sudah dipasang dengan benar ke dalam kontainer, Anda dapat menggunakan perintah ` <code translate="no">docker exec</code> ` untuk masuk ke dalam kontainer dan menampilkan daftar folder <strong>`/milvus/configs</strong> ` sebagai berikut:​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -383,7 +383,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <div class="alert note">
 <p>Storage V3 dinonaktifkan secara default. Aktifkan fitur ini sebelum menggunakan fitur-fitur yang bergantung padanya. Untuk persyaratan dan pertimbangan kompatibilitas, lihat <a href="/docs/id/storage-v3.md">Storage V3</a>.</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">Langkah Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Langkah selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -403,7 +403,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><p>Lihat <a href="/docs/id/quickstart.md">Panduan Cepat</a> untuk mengetahui apa saja yang dapat dilakukan Milvus.</p></li>
 <li><p>Pelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
+<li><a href="/docs/id/manage_databases.md">Mengelola Database</a></li>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
 <li><a href="/docs/id/insert-update-delete.md">Sisipkan, Upsert, dan Hapus</a></li>
@@ -418,9 +418,9 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk mendebug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

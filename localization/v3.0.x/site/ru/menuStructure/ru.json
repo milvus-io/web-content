@@ -6,13 +6,13 @@
     "order": 0,
     "children": [
       {
-        "label": "Что такое Milvus?",
+        "label": "Что такое Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Усыновители Milvus",
+        "label": "Участники программы «Milvus Adopters»",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "Запустить Milvus в автономном режиме",
+            "label": "Запуск автономной версии Milvus",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -235,7 +235,7 @@
             "children": []
           },
           {
-            "label": "Хранение V3",
+            "label": "Хранилище V3",
             "id": "storage-v3.md",
             "order": 4,
             "children": []
@@ -279,13 +279,13 @@
         "children": []
       },
       {
-        "label": "Типы метрических единиц",
+        "label": "Типы метрических величин",
         "id": "metric.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "Реплика в оперативной памяти",
+        "label": "Реплика в памяти",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "Установить время жизни коллекции (TTL)",
+            "label": "Установить TTL коллекции",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Поля массива структур Index",
+                "label": "Поля массива структур в Index",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "Поля, допускающие нулевые значения",
+            "label": "Поля, допускающие значение null",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдер",
+                    "label": "Линдэра",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабо-арабских отношений",
+                    "label": "Нормализация арабоского языка",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -715,7 +715,7 @@
                     "children": []
                   },
                   {
-                    "label": "Регулярные выражения",
+                    "label": "Регулярное выражение",
                     "id": "regex-filter.md",
                     "order": 13,
                     "children": []
@@ -1118,7 +1118,7 @@
                 "children": []
               },
               {
-                "label": "Операторы над массивами",
+                "label": "Операторы с массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1249,7 +1249,7 @@
             "children": []
           },
           {
-            "label": "Функции вложения на основе моделей",
+            "label": "Функции встраивания на основе моделей",
             "id": "embedding-function",
             "order": 1,
             "isMenu": true,
@@ -1347,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинговая система с взвешенными оценками",
+                "label": "Рейтинг по взвешенным оценкам",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Принудительная уплотнение при слиянии",
+            "label": "Принудительное слияние и уплотнение",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1654,7 +1654,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "На месте",
+            "label": "На территории предприятия",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
@@ -2013,7 +2013,7 @@
                 "children": []
               },
               {
-                "label": "Панель мониторинга Milvus Metrics",
+                "label": "Панель инструментов Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2210,7 +2210,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном бакете",
+                "label": "Перенос данных между экземплярами в одном хранилище",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2222,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Перенос между экземплярами в различных средах S3",
+                "label": "Перенос данных между экземплярами в разных средах S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2320,7 +2320,7 @@
         ]
       },
       {
-        "label": "Разъёмы Milvus",
+        "label": "Разъемы Milvus",
         "id": "milvus_connectors",
         "order": 5,
         "isMenu": true,
@@ -2341,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Инструмент для определения размера Milvus",
+        "label": "Инструмент для подбора размера Milvus",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2788,7 +2788,7 @@
             "children": []
           },
           {
-            "label": "Пятьдесят один",
+            "label": "FiftyOne",
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
@@ -3002,7 +3002,7 @@
             "children": []
           },
           {
-            "label": "Маска PII",
+            "label": "Маскировщик персональных данных",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3085,13 +3085,19 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Джев",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
     ]
   },
   {
-    "label": "Учебные пособия",
+    "label": "Учебные материалы",
     "id": "tutorials",
     "isMenu": true,
     "order": 7,
@@ -3139,7 +3145,7 @@
         "children": []
       },
       {
-        "label": "График RAG с использованием Milvus",
+        "label": "Графический RAG с использованием Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3176,7 +3182,7 @@
         "children": []
       },
       {
-        "label": "Поиск по воронке с использованием вложений «матрешки»",
+        "label": "Поиск по воронке с использованием вложений «матрешка»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Генерация выражений фильтрации запросов Milvus с помощью крупных языковых моделей",
+        "label": "Генерация выражений фильтров запросов Milvus с помощью крупных языковых моделей",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3223,7 +3229,7 @@
             "children": []
           },
           {
-            "label": "Поиск по сходству видео",
+            "label": "Поиск по схожести видео",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []
@@ -3269,7 +3275,7 @@
         "children": []
       },
       {
-        "label": "Часто задаваемые вопросы о продуктах",
+        "label": "Часто задаваемые вопросы о продукте",
         "id": "product_faq.md",
         "order": 1,
         "children": []
@@ -3287,7 +3293,7 @@
         "children": []
       },
       {
-        "label": "Устранение неисправностей",
+        "label": "Устранение неполадок",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

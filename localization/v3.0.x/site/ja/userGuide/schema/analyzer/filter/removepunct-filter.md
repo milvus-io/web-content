@@ -1,11 +1,12 @@
 ---
 id: removepunct-filter.md
-title: 句読点の除去Compatible with Milvus 2.5.11+
+title: 句読点を削除Compatible with Milvus 2.5.11+
 summary: >-
-  removepunctフィルタは、jieba、lindera、icuなどのいくつかのトークナイザーが通常保持する句読点、空白、改行を取り除きます。カンマ、ピリオド、その他の句読点を取り除き、意味のあるテキスト・トークンだけを含む、よりクリーンなトークン・ストリームを作りたい場合に使用します。
+  removepunct
+  フィルターは、句読点や空白を含むトークンを削除します。単語内の句読点を保持するトークナイザーを使用している場合、このフィルターは該当するトークン全体を削除します。
 beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">句読点の除去<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">句読点を削除<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,11 +21,11 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">removepunct</code> フィルタは、トークン ストリームから単体の句読点トークンを削除します。句読点よりも意味のある単語を重視した、よりクリーンなテキスト処理を行いたい場合に使用します。</p>
+    </button></h1><p><code translate="no">removepunct</code> フィルターは、トークンストリームから句読点や空白を含むトークンを除去します。句読点ではなく、意味のある内容語に焦点を当てた、よりクリーンなテキスト処理を行いたい場合に使用します。</p>
 <div class="alert note">
-<p>このフィルタは、<code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code> のトークナイザで最も効果的です。これらのトークナイザでは、句読点は別のトークンとして保持されます（たとえば、<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> や<code translate="no">whitespace</code> のような他のトークナイザーは、トークン化の際に句読点を破棄するため、<code translate="no">removepunct</code> には効果がありません。</p>
+<p>このフィルターは、句読点を個別のトークンとして保持する `<code translate="no">jieba</code>`、`<code translate="no">lindera</code>`、および `<code translate="no">icu</code> ` トークナイザーと併用すると最も効果的です（例：<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> トークナイザーは、トークナイゼーション中に句読点を削除します。<code translate="no">whitespace</code> トークナイザーは、トークン内の句読点を含め、句読点を保持します。<code translate="no">whitespace</code> と組み合わせた場合、<code translate="no">removepunct</code> は、トークンに句読点や空白が含まれていると、そのトークン全体を削除します。トークンから個々の文字を削除することはありません。</p>
 </div>
-<h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,9 +40,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusには<code translate="no">removepunct</code> というフィルタが組み込まれています。このフィルタを使用するには、<code translate="no">analyzer_params</code> の<code translate="no">filter</code> セクションでその名前を指定するだけです。</p>
+    </button></h2><p><code translate="no">removepunct</code> フィルターはMilvusに組み込まれています。これを使用するには、<code translate="no">analyzer_params</code> 内の<code translate="no">filter</code> セクションにその名前を指定するだけです。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -57,9 +63,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">removepunct</code> フィルタはトークナイザによって生成された用語に対して動作するため、トークナイザと組み合わせて使用する必要があります。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、それらを<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
-<h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
+<p><code translate="no">removepunct</code> フィルターは、トークナイザーによって生成された用語に対して処理を行うため、トークナイザーと組み合わせて使用する必要があります。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、それらを<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusはそのフィールド内のテキストを指定されたアナライザーを使用して処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">「使用例」</a>を参照してください。</p>
+<h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,8 +80,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>アナライザ設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>アナライザー設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用してその動作を確認してください。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザーの設定<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,7 +97,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -107,7 +118,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">以下の方法による検証<code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,7 +134,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

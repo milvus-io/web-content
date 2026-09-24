@@ -57,7 +57,7 @@ title: تشغيل Milvus باستخدام Docker Compose (لينكس)
       </svg>
     </button></h2><p>يوفر Milvus ملف تكوين Docker Compose في مستودع Milvus. لتثبيت Milvus باستخدام Docker Compose، ما عليك سوى تشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,16 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>النشر الافتراضي (الإصدار 3.0.1):</strong> <code translate="no">docker compose up -d</code> يبدأ ثلاث حاويات — <code translate="no">milvus-etcd</code> (البيانات الوصفية)، <code translate="no">milvus-minio</code> (تخزين الكائنات)، و <code translate="no">milvus-standalone</code>. قائمة انتظار الرسائل هي <strong>Woodpecker (مضمنة، مع MinIO / تخزين الكائنات كخلفية WAL لها)</strong>، لذا لا يلزم وجود حاوية منفصلة لقائمة انتظار الرسائل.</p>
+<p><strong>النشر الافتراضي (الإصدار 3.0.2):</strong> <code translate="no">docker compose up -d</code> يبدأ تشغيل ثلاث حاويات — <code translate="no">milvus-etcd</code> (البيانات الوصفية)، <code translate="no">milvus-minio</code> (تخزين الكائنات)، و <code translate="no">milvus-standalone</code>. قائمة انتظار الرسائل هي <strong>Woodpecker (مدمجة، مع MinIO / تخزين الكائنات كخلفية WAL لها)</strong>، لذا لا يلزم وجود حاوية منفصلة لقائمة انتظار الرسائل.</p>
 <p><strong>قائمة انتظار الرسائل الافتراضية حسب الإصدار:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — قائمة انتظار الرسائل الافتراضية هي <strong>RocksMQ</strong>.</li>
 <li><strong>2.6.x والإصدارات الأحدث</strong> — قائمة انتظار الرسائل الافتراضية هي <strong>Woodpecker (مدمجة)</strong>.</li>
 </ul>
-<p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v3.0.1.</p>
+<p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v3.0.2.</p>
 <ul>
 <li><p>إذا فشلت في تشغيل الأمر أعلاه، يرجى التحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا. إذا كان الأمر كذلك، يُنصح بالترحيل إلى Docker Compose V2 وفقًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p></li>
-<li><p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p></li>
+<li><p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p></li>
 </ul>
 </div>
 <p>بعد بدء تشغيل Milvus،</p>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>لا تكشف حاوية <strong>milvus-etcd</strong> عن أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>volumes/etcd</strong> في المجلد الحالي.</li>
 <li>تقدم حاوية <strong>milvus-minio</strong> المنافذ <strong>9000</strong> <strong>و9001</strong> محليًا باستخدام بيانات اعتماد المصادقة الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/minio</strong> في المجلد الحالي.</li>
-<li>تقدم حاوية <strong>milvus-standalone</strong> المنافذ <strong>19530</strong> محليًا باستخدام الإعدادات الافتراضية وتقوم بتعيين بياناتها إلى <strong>مجلد volumes/milvus</strong> في المجلد الحالي.</li>
+<li>تقدم حاوية <strong>milvus-standalone</strong> المنافذ <strong>19530</strong> محليًّا باستخدام الإعدادات الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
 </ul></li>
 </ul>
 <p>يمكنك التحقق مما إذا كانت الحاويات قيد التشغيل باستخدام الأمر التالي:</p>
@@ -112,13 +112,13 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لتحديث إعدادات Milvus لتناسب احتياجاتك، تحتاج إلى تعديل ملف <code translate="no">/milvus/configs/user.yaml</code> الموجود داخل حاوية <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>لتحديث تكوين Milvus ليناسب احتياجاتك، تحتاج إلى تعديل ملف <code translate="no">/milvus/configs/user.yaml</code> الموجود داخل حاوية <code translate="no">milvus-standalone</code>.</p>
 <ol>
 <li><p>قم بالوصول إلى الحاوية <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>أضف إعدادات إضافية لتجاوز الإعدادات الافتراضية.
-يفترض ما يلي أنك بحاجة إلى تجاوز ملف <code translate="no">proxy.healthCheckTimeout</code> الافتراضي. للاطلاع على عناصر التكوين القابلة للتطبيق، راجع <a href="/docs/ar/system_configuration.md">«تكوين النظام</a>».</p>
+يفترض ما يلي أنك بحاجة إلى تجاوز ملف <code translate="no">proxy.healthCheckTimeout</code> الافتراضي. للاطلاع على عناصر التكوين القابلة للتطبيق، راجع <a href="/docs/ar/system_configuration.md">تكوين النظام</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -166,8 +166,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.1، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
-<p>نظرًا لأن الإصدار 2.6.x يغير قائمة انتظار الرسائل الافتراضية إلى Woodpecker، يجب على المثيل الذي يعمل <strong>بنظام RocksMQ</strong> على الإصدار 2.5.x <strong>تثبيت RocksMQ بشكل صريح قبل الترقية</strong> — وإلا فستحاول عملية الترقية تغيير قائمة انتظار الرسائل، وهو أمر غير مدعوم. بعد تنزيل ملف Docker Compose الخاص بالإصدار 2.6.x، أعد تعيين نوع قائمة انتظار الرسائل إلى « <code translate="no">rocksmq</code> » في ملف التجاوز الخاص بـ ` <code translate="no">user.yaml</code> `، ثم قم بالترقية:</p>
+    </button></h2><p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.2، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قوائم انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قوائم انتظار الرسائل في الإصدارات المستقبلية.</p>
+<p>نظرًا لأن الإصدار 2.6.x يغير قائمة انتظار الرسائل الافتراضية إلى Woodpecker، يجب على المثيل الذي يعمل <strong>بنظام RocksMQ</strong> على الإصدار 2.5.x <strong>تثبيت RocksMQ بشكل صريح قبل الترقية</strong> — وإلا فإن عملية الترقية ستحاول تغيير قائمة انتظار الرسائل، وهو أمر غير مدعوم. بعد تنزيل ملف Docker Compose الخاص بالإصدار 2.6.x، أعد تعيين نوع قائمة انتظار الرسائل إلى « <code translate="no">rocksmq</code> » في ملف التجاوز الخاص بـ « <code translate="no">user.yaml</code> »، ثم قم بالترقية:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
@@ -188,14 +188,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعمل هذا النشر على <strong>Woodpecker</strong> (مُدمج، خلفية MinIO WAL) للمراسلة، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي/بيانات وصفية خارجية، راجع:</p>
+    </button></h2><p>يعمل هذا النشر على <strong>Woodpecker</strong> (مُدمج، خلفية MinIO WAL) للمراسلة، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات/بيانات وصفية خارجية، راجع:</p>
 <ul>
 <li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (افتراضي) · <a href="/docs/ar/mq_pulsar.md">Pulsar</a> · <a href="/docs/ar/mq_kafka.md">Kafka</a> · <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></li>
 <li>تخزين الكائنات: <a href="/docs/ar/deploy_s3.md">MinIO</a> (افتراضي) · <a href="/docs/ar/deploy_s3.md">AWS S3</a> · <a href="/docs/ar/abs.md">Azure Blob</a> · <a href="/docs/ar/gcs.md">GCP Cloud Storage</a> · <a href="/docs/ar/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/ar/deploy_s3.md">Tencent COS</a> · <a href="/docs/ar/deploy_s3.md">Huawei OBS</a> · <a href="/docs/ar/deploy_s3.md">متوافق مع S3</a></li>
 <li>البيانات الوصفية: <a href="/docs/ar/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>يتم تعطيل التخزين V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">التخزين V3</a>.</p>
+<p>يتم تعطيل «التخزين V3» افتراضيًا. قم بتفعيله قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">«التخزين V3</a>».</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +224,7 @@ EOF
 <li><a href="/docs/ar/single-vector-search.md">البحث أحادي المتجه</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
+<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
 <li><p>نشر مجموعة Milvus الخاصة بك على السحابة:</p>
 <ul>

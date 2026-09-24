@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo primário e AutoID",
+            "label": "Campo principal e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -773,13 +773,13 @@
             "order": 19,
             "children": [
               {
-                "label": "Conceção do modelo de dados para pesquisa",
+                "label": "Conceção do modelo de dados para a pesquisa",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Conceção de modelos de dados com um array de estruturas",
+                "label": "Conceção de modelos de dados com um conjunto de estruturas",
                 "id": "best-practices-for-array-of-structs.md",
                 "order": 1,
                 "children": []
@@ -789,7 +789,7 @@
         ]
       },
       {
-        "label": "Inserir e Eliminar",
+        "label": "Inserir e eliminar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtragem e modelos",
+                "label": "Filtragem e Modelagem",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1209,7 +1209,7 @@
                 "children": []
               },
               {
-                "label": "Escolha uma estratégia de pesquisa da EmbeddingList",
+                "label": "Escolher uma estratégia de pesquisa EmbeddingList",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1347,7 +1347,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador Ponderado",
+                "label": "Classificador ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1395,7 +1395,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementar uma classificação baseada no tempo no Milvus",
+                    "label": "Tutorial: Implementação de uma classificação baseada no tempo no Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1686,7 +1686,7 @@
             ]
           },
           {
-            "label": "Nas Nuvens",
+            "label": "Nas nuvens",
             "id": "on_cloud",
             "order": 1,
             "isMenu": true,
@@ -1897,7 +1897,7 @@
                 "children": []
               },
               {
-                "label": "Fila de mensagens do Switch",
+                "label": "Fila de mensagens do switch",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -1983,7 +1983,7 @@
         ]
       },
       {
-        "label": "Monitorização, Alertas e Registos",
+        "label": "Monitorização, alertas e registos",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2126,7 +2126,7 @@
                 "children": []
               },
               {
-                "label": "Funções das bolsas",
+                "label": "Funções de subvenção",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2204,7 +2204,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Cópia de segurança e recuperação numa única instância",
+                "label": "Cópia de segurança e restauração numa única instância",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2222,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias em diferentes ambientes do S3",
+                "label": "Migrar entre instâncias em diferentes ambientes S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2757,7 +2757,7 @@
             "children": []
           },
           {
-            "label": "Memória Básica",
+            "label": "Memória básica",
             "id": "basic_memory_with_milvus.md",
             "order": 8,
             "children": []
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Geração de expressões de filtro de consultas Milvus com modelos de linguagem de grande dimensão",
+        "label": "Geração de expressões de filtro de consultas do Milvus com modelos de linguagem de grande dimensão",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

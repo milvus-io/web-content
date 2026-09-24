@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ الآن",
+    "label": "ابدأ",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل برنامج Milvus بشكل مستقل",
+            "label": "تشغيل Milvus بشكل مستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "أنواع الوحدات المترية",
+        "label": "أنواع المقاييس",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "شرح المجموعة",
+            "label": "شرح عملية التحصيل",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -729,7 +729,7 @@
                 ]
               },
               {
-                "label": "أجهزة تحليل متعددة اللغات",
+                "label": "أجهزة التحليل متعددة اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
@@ -1118,7 +1118,7 @@
                 "children": []
               },
               {
-                "label": "مشغلات المصفوفات",
+                "label": "عمليات المصفوفات",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1217,7 +1217,7 @@
             ]
           },
           {
-            "label": "استعلامات Elasticsearch الموجهة إلى Milvus",
+            "label": "استعلامات Elasticsearch إلى Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1371,7 +1371,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "نظرة عامة على Decay Ranker",
+                    "label": "نظرة عامة على «Decay Ranker»",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1383,7 +1383,7 @@
                     "children": []
                   },
                   {
-                    "label": "الانحلال الأسي",
+                    "label": "الاضمحلال الأسي",
                     "id": "exponential-decay.md",
                     "order": 2,
                     "children": []
@@ -1395,7 +1395,7 @@
                     "children": []
                   },
                   {
-                    "label": "دليل تعليمي: تطبيق الترتيب على أساس الوقت في Milvus",
+                    "label": "دليل تعليمي: تطبيق الترتيب بناءً على الوقت في Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1415,7 +1415,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف vLLM",
+                    "label": "مصنف vLLM",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1427,13 +1427,13 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف كوهير",
+                    "label": "Cohere Ranker",
                     "id": "cohere-ranker.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف Voyage AI",
+                    "label": "مصنف Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "إجباري ضغط الدمج",
+            "label": "إجباري دمج وضغط البيانات",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1860,7 +1860,7 @@
                 "children": []
               },
               {
-                "label": "الطائر النقار",
+                "label": "طائر النقار",
                 "id": "woodpecker.md",
                 "order": 1,
                 "children": []
@@ -1975,7 +1975,7 @@
             "children": []
           },
           {
-            "label": "ترقية Milvus المستقل",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2096,7 +2096,7 @@
             "children": []
           },
           {
-            "label": "تمكين نظام RBAC",
+            "label": "تمكين RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2108,7 +2108,7 @@
                 "children": []
               },
               {
-                "label": "المستخدمون، والامتيازات، والأدوار",
+                "label": "المستخدمون، والصلاحيات، والأدوار",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
@@ -2192,7 +2192,7 @@
             "children": []
           },
           {
-            "label": "واجهة برمجة التطبيقات (API) التي تتبع نمط REST",
+            "label": "واجهة برمجة التطبيقات (API) القائمة على نمط REST",
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
@@ -2216,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "الترحيل بين المثيلات عبر مجموعات التخزين",
+                "label": "الترحيل بين المثيلات عبر المجموعات",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2286,7 +2286,7 @@
             "children": []
           },
           {
-            "label": "الاستيراد الجماعي في عملية النسخ المتماثل في CDC",
+            "label": "الاستيراد الجماعي في عملية النسخ المتماثل لـ CDC",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -2410,7 +2410,7 @@
                 "children": []
               },
               {
-                "label": "جينا AI",
+                "label": "جينا أي آي",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
@@ -2526,7 +2526,7 @@
         "children": []
       },
       {
-        "label": "التنسيق الموسيقي",
+        "label": "التنسيق",
         "id": "orchestrate-with-milvus",
         "order": 3,
         "children": [
@@ -2648,7 +2648,7 @@
             ]
           },
           {
-            "label": "كوتامون",
+            "label": "كوتايمون",
             "id": "kotaemon_with_milvus.md",
             "order": 5,
             "children": []
@@ -2861,7 +2861,7 @@
             "children": []
           },
           {
-            "label": "تويلف لابس",
+            "label": "تويلف لابز",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2892,7 +2892,7 @@
             "children": []
           },
           {
-            "label": "ميسترال أي آي",
+            "label": "ميسترال آي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
@@ -3002,7 +3002,7 @@
             "children": []
           },
           {
-            "label": "أداة إخفاء المعلومات الشخصية",
+            "label": "أداة إخفاء المعلومات الشخصية (PII)",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "جيف",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3103,7 +3109,7 @@
         "children": []
       },
       {
-        "label": "إنشاء شبكة RAG باستخدام Milvus",
+        "label": "إنشاء RAG باستخدام Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3157,7 +3163,7 @@
         "children": []
       },
       {
-        "label": "استخدام ColBERT وColPali مع Milvus",
+        "label": "استخدم ColBERT وColPali مع Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -3176,7 +3182,7 @@
         "children": []
       },
       {
-        "label": "البحث القمعي باستخدام تمثيلات «ماتريوشكا»",
+        "label": "البحث القمعي باستخدام التضمينات المتداخلة (Matryoshka)",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

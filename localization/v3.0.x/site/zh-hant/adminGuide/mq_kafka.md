@@ -2,7 +2,7 @@
 id: mq_kafka.md
 title: 卡夫卡
 ---
-<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">將 Kafka 用作 Milvus 訊息佇列<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
+<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">將 Kafka 用作 Milvus 的訊息佇列<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,7 +17,7 @@ title: 卡夫卡
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Apache Kafka 是 Milvus 支援的訊息佇列（WAL）後端之一。 在 Milvus 3.x 版本中<a href="/docs/zh-hant/woodpecker.md">，Woodpecker</a>是預設的訊息佇列；但對於偏好使用 Kafka 的使用者，系統仍提供完整支援。Kafka 主要用於 Milvus Distributed（叢集）環境；獨立部署則通常使用內嵌的 Woodpecker 或<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a>。</p>
+    </button></h1><p>Apache Kafka 是 Milvus 所支援的訊息佇列（WAL）後端之一。 在 Milvus 3.x 中<a href="/docs/zh-hant/woodpecker.md">，Woodpecker</a>為預設訊息佇列；但對於偏好使用 Kafka 的使用者，系統仍完全支援 Kafka。Kafka 主要用於 Milvus Distributed（叢集）環境；獨立部署通常使用內嵌的 Woodpecker 或<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a>。</p>
 <h2 id="Version-compatibility" class="common-anchor-header">版本相容性<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: 卡夫卡
 <li>Milvus 僅支援<strong>Kafka 2.x 和 3.x</strong>版本。</li>
 <li>Kafka 可透過 Helm 或 Milvus Operator 為 Milvus 分散式（叢集）進行配置。</li>
 </ul>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">使用 Helm 部署採用 Kafka 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">使用 Helm 部署搭配 Kafka 的 Milvus 叢集<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,7 +114,7 @@ title: 卡夫卡
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>透過 Milvus Operator，請在<code translate="no">spec.dependencies.kafka</code> （僅限叢集）下設定<code translate="no">spec.dependencies.msgStreamType: &quot;kafka&quot;</code> 並配置 Kafka。<code translate="no">kafka</code> 支援<code translate="no">external</code> 及<code translate="no">inCluster</code> 。</p>
+    </button></h2><p>透過 Milvus Operator，請在<code translate="no">spec.dependencies.kafka</code> （僅限叢集）中設定<code translate="no">spec.dependencies.msgStreamType: &quot;kafka&quot;</code> 並配置 Kafka。<code translate="no">kafka</code> 支援<code translate="no">external</code> 及<code translate="no">inCluster</code> 。</p>
 <h3 id="External-Kafka" class="common-anchor-header">外部 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +154,7 @@ title: 卡夫卡
         <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;kafkaBrokerAddr2:9092&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Milvus Operator v0.8.5 或更高版本支援 SASL 配置。</p>
+<p>Milvus Operator v0.8.5 或更新版本支援 SASL 設定。</p>
 </div>
 <h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">內部（叢集內）Kafka<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,8 +222,8 @@ title: 卡夫卡
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>從 2.5.x 升級至 2.6.x：</strong> <strong>訊息佇列限制</strong>：升級至 Milvus v3.0.1 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。
-若您正在運行 Kafka 且希望保留該系統，請勿在升級過程中變更訊息佇列。</li>
+<li><strong>從 2.5.x 升級至 2.6.x：</strong> <strong>訊息佇列限制</strong>：升級至 Milvus v3.0.2 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。
+若您正在運行 Kafka 且希望保留它，請勿在升級過程中變更訊息佇列。</li>
 <li>僅支援<strong>Kafka 2.x 和 3.x</strong>版本。</li>
 <li>關於 SASL/SSL 連線，請參閱《<a href="/docs/zh-hant/connect_kafka_ssl.md">使用 SASL/SSL 連線至 Kafka</a>》。</li>
 </ul>

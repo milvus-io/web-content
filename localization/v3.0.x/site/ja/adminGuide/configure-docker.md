@@ -20,7 +20,7 @@ title: Docker Compose を使用した Milvus の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Docker Compose を使用して Milvus コンポーネントとそのサードパーティ製依存関係を設定する方法について説明します。</p>
+    </button></h1><p>このトピックでは、Docker Compose を使用して Milvus コンポーネントおよびサードパーティ製依存関係を構成する方法について説明します。</p>
 <div class="alert note">
 現在のリリースでは、すべてのパラメータは Milvus を再起動した後にのみ有効になります。
 </div>
@@ -39,10 +39,10 @@ title: Docker Compose を使用した Milvus の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">milvus.yaml</code> を直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.1/configs/milvus.yaml">ダウンロード</a>するか、以下のコマンドを使用して<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.1/configs/milvus.yaml">ダウンロードしてください</a>。</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.1/configs/milvus.yaml</span>
+    </button></h2><p><code translate="no">milvus.yaml</code> を直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.2/configs/milvus.yaml">ダウンロード</a>するか、以下のコマンドを使用して<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.2/configs/milvus.yaml">ダウンロードしてください</a>。</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.2/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの編集<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの変更<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: Docker Compose を使用した Milvus の設定
 <p>各パラメータの詳細については、以下のリンクを参照してください。</p>
 <p>並べ替え基準:</p>
 <div class="filter">
-<a href="#component">コンポーネントまたは依存関係</a> <a href="#purpose">設定目的</a>
+<a href="#component">コンポーネントまたは依存関係</a> <a href="#purpose">設定の目的</a>
 </div>
 <div class="filter-component table-wrapper">
 <table id="component">
@@ -83,7 +83,7 @@ title: Docker Compose を使用した Milvus の設定
     </td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_rootcoord.md">ルート座標</a></li>
+            <li><a href="/docs/ja/configure_rootcoord.md">ルートコーディネーター</a></li>
             <li><a href="/docs/ja/configure_proxy.md">プロキシ</a></li>
             <li><a href="/docs/ja/configure_querycoord.md">クエリ座標</a></li>
             <li><a href="/docs/ja/configure_querynode.md">クエリノード</a></li>
@@ -212,10 +212,10 @@ title: Docker Compose を使用した Milvus の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml">スタンドアロンの</a>インストールファイルをダウンロードし、<code translate="no">docker-compose.yml</code> として保存してください。</p>
+    </button></h2><p>Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml">スタンドア</a>ロンのインストールファイルをダウンロードし、<code translate="no">docker-compose.yml</code> という名前で保存します。</p>
 <p>以下のコマンドを実行するだけでも構いません。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">インストールファイルの修正<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -290,10 +290,10 @@ title: Docker Compose を使用した Milvus の設定
         ></path>
       </svg>
     </button></h2><ul>
-<li>Docker Compose または Helm を使用して、以下の Milvus 依存関係を管理する方法について学びましょう:
+<li>Docker Compose または Helm を使用して、以下の Milvus 依存関係を管理する方法について学びます：
 <ul>
 <li><a href="/docs/ja/deploy_s3.md">Docker Compose または Helm を使用したオブジェクトストレージの設定</a></li>
 <li><a href="/docs/ja/deploy_etcd.md">Docker Compose または Helm を使用したメタストレージの設定</a></li>
-<li><a href="/docs/ja/deploy_pulsar.md">Docker Compose または Helm を使用したメッセージ・ストレージの設定</a></li>
+<li><a href="/docs/ja/deploy_pulsar.md">Docker Compose または Helm を使用したメッセージストレージの設定</a></li>
 </ul></li>
 </ul>

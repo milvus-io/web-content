@@ -1,11 +1,12 @@
 ---
 id: whitespace-tokenizer.md
-title: Espace blanc
+title: Espaces
 summary: >-
-  Le tokenizer des espaces blancs divise le texte en termes chaque fois qu'il y
-  a un espace entre les mots.
+  Le tokeniseur basé sur les espaces sépare le texte à l'aide de cinq caractères
+  d'espacement ASCII : tabulation, saut de ligne, saut de page, retour chariot
+  et espace.
 ---
-<h1 id="Whitespace" class="common-anchor-header">Espace blanc<button data-href="#Whitespace" class="anchor-icon" translate="no">
+<h1 id="Whitespace" class="common-anchor-header">Espaces<button data-href="#Whitespace" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +21,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le tokenizer <code translate="no">whitespace</code> divise le texte en termes lorsqu'il y a un espace entre les mots.</p>
+    </button></h1><p>Le tokeniseur <code translate="no">whitespace</code> divise le texte en fonction de cinq caractères d'espacement ASCII : tabulation, saut de ligne, saut de page, retour chariot et espace.</p>
+<h2 id="Tokenization-rules" class="common-anchor-header">Règles de segmentation<button data-href="#Tokenization-rules" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Le tokeniseur d'<code translate="no">whitespace</code> s découpe le texte uniquement au niveau des cinq caractères d'espacement ASCII suivants :</p>
+<table>
+<thead>
+<tr><th>Caractère</th><th>Nom</th><th>Point de code Unicode</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">\t</code></td><td>Tabulation horizontale</td><td>U+0009</td></tr>
+<tr><td><code translate="no">\n</code></td><td>Saut de ligne</td><td>U+000A</td></tr>
+<tr><td><code translate="no">\x0C</code> ou <code translate="no">\f</code></td><td>Saut de page</td><td>U+000C</td></tr>
+<tr><td><code translate="no">\r</code></td><td>Retour chariot</td><td>U+000D</td></tr>
+<tr><td><code translate="no">' '</code></td><td>Espace</td><td>U+0020</td></tr>
+</tbody>
+</table>
+<p>Ces séparateurs sont ignorés, et des séparateurs consécutifs ne produisent pas de tokens vides. La ponctuation et les autres caractères restent dans les tokens. En particulier, la tabulation verticale (<code translate="no">\x0B</code>, U+000B), l'espace insécable (<code translate="no">\u00A0</code>) et l'espace idéographique (<code translate="no">\u3000</code>) ne déclenchent pas de fractionnement.</p>
+<p>Cet ensemble suit celui de Rust <a href="https://doc.rust-lang.org/std/primitive.char.html#method.is_ascii_whitespace"><code translate="no">char::is_ascii_whitespace()</code></a>, qui exclut les autres caractères d’espacement Unicode.</p>
+<p>Les exemples suivants utilisent <code translate="no">{&quot;tokenizer&quot;: &quot;whitespace&quot;}</code> sans aucun filtre. Les entrées et sorties utilisent la notation de chaîne Python : les séquences d'échappement telles que <code translate="no">\t</code> et <code translate="no">\u00A0</code> représentent les caractères réels.</p>
+<table>
+<thead>
+<tr><th>Entrée</th><th>Tokens en sortie</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">&quot;a\tb\nc\x0Cd\re f&quot;</code></td><td><code translate="no">[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;Hello,World! foo_bar&quot;</code></td><td><code translate="no">[&quot;Hello,World!&quot;, &quot;foo_bar&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\x0Bb&quot;</code></td><td><code translate="no">[&quot;a\x0Bb&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\u00A0b&quot;</code></td><td><code translate="no">[&quot;a\u00A0b&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot;a\u3000b&quot;</code></td><td><code translate="no">[&quot;a\u3000b&quot;]</code></td></tr>
+<tr><td><code translate="no">&quot; a b &quot;</code></td><td><code translate="no">[&quot;a&quot;, &quot;b&quot;]</code></td></tr>
+</tbody>
+</table>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,9 +81,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour configurer un analyseur utilisant le tokenizer <code translate="no">whitespace</code>, définissez <code translate="no">tokenizer</code> à <code translate="no">whitespace</code> dans <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>Pour configurer un analyseur à l’aide du tokenizer « <code translate="no">whitespace</code> », définissez « <code translate="no">tokenizer</code> » sur « <code translate="no">whitespace</code> » dans <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 }
@@ -57,9 +107,14 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;whitespace&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Le tokenizer d'espaces blancs peut fonctionner en conjonction avec un ou plusieurs filtres. Par exemple, le code suivant définit un analyseur qui utilise le tokenizer <code translate="no">whitespace</code> et le<a href="/docs/fr/lowercase-filter.md"> filtre</a> <code translate="no">lowercase</code><a href="/docs/fr/lowercase-filter.md"></a>:</p>
+<p>Le tokenizer « whitespace » peut fonctionner en association avec un ou plusieurs filtres. Par exemple, le code suivant définit un analyseur qui utilise le tokenizer « <code translate="no">whitespace</code> » et<a href="/docs/fr/lowercase-filter.md"> le filtre «</a> <code translate="no">lowercase</code><a href="/docs/fr/lowercase-filter.md"> »</a>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]
@@ -84,7 +139,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Une fois les paramètres <code translate="no">analyzer_params</code> définis, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d’un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l’aide de l’analyseur spécifié, pour une tokenisation et un filtrage efficaces. Pour plus de détails, reportez-vous à <a href="/docs/fr/analyzer-overview.md#Example-use">la section Exemple d’utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,8 +155,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'appliquer la configuration de l'analyseur à votre schéma de collecte, vérifiez son comportement à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Avant d’appliquer la configuration de l’analyseur à votre schéma de collection, vérifiez son comportement à l’aide de la méthode ` <code translate="no">run_analyzer</code> `.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l’analyseur<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,7 +172,12 @@ analyzerParams=<span class="hljs-string">&#x27;{
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]
@@ -133,7 +193,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l’aide de <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +209,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -159,9 +224,9 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>
 
-<span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
+<span class="hljs-comment"># Run the whitespace analyzer with the defined configuration</span>
 result = client.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Whitespace analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -186,12 +251,12 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
 
+ctx := context.Background()
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
     APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
@@ -201,10 +266,9 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     <span class="hljs-comment">// handle error</span>
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {

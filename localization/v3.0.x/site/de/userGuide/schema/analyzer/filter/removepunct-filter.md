@@ -1,15 +1,13 @@
 ---
 id: removepunct-filter.md
-title: Interpunktion entfernenCompatible with Milvus 2.5.11+
+title: Zeichensatz entfernenCompatible with Milvus 2.5.11+
 summary: >-
-  Der removepunct-Filter entfernt Interpunktionszeichen, Leerzeichen und
-  Zeilenumbrüche, die einige Tokenizer - wie jieba, lindera und icu -
-  normalerweise beibehalten. Verwenden Sie ihn, wenn Sie einen sauberen
-  Token-Stream wünschen, der nur sinnvolle Text-Token enthält, frei von Kommas,
-  Punkten und anderen Satzzeichen.
+  Der Filter „removepunct“ entfernt Token, die Satzzeichen oder Leerzeichen
+  enthalten. Bei Tokenizern, die Satzzeichen innerhalb von Wörtern beibehalten,
+  wird das gesamte betroffene Token entfernt.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Interpunktion entfernen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Zeichensatz entfernen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +22,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Filter <code translate="no">removepunct</code> entfernt eigenständige Interpunktionszeichen aus dem Tokenstrom. Verwenden Sie ihn, wenn Sie eine saubere Textverarbeitung wünschen, die sich auf sinnvolle Inhaltswörter und nicht auf Satzzeichen konzentriert.</p>
+    </button></h1><p>Der Filter „ <code translate="no">removepunct</code> “ entfernt Token, die Satzzeichen oder Leerzeichen enthalten, aus dem Token-Stream. Verwenden Sie ihn, wenn Sie eine sauberere Textverarbeitung wünschen, die sich auf aussagekräftige Inhaltswörter statt auf Satzzeichen konzentriert.</p>
 <div class="alert note">
-<p>Dieser Filter ist am effektivsten mit den Tokenizern <code translate="no">jieba</code>, <code translate="no">lindera</code> und <code translate="no">icu</code>, die Satzzeichen als separate Token erhalten (z.B. <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Andere Tokenizer wie <code translate="no">standard</code> und <code translate="no">whitespace</code> lassen die Interpunktion während der Tokenisierung weg, so dass <code translate="no">removepunct</code> keine Auswirkungen auf sie hat.</p>
+<p>Dieser Filter ist am effektivsten in Verbindung mit den Tokenisierern „ <code translate="no">jieba</code> “, „ <code translate="no">lindera</code> “ und „ <code translate="no">icu</code> “, die Satzzeichen als separate Token beibehalten (z. B. „ <code translate="no">&quot;Hello!&quot;</code> “ → „ <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> “). Der Tokenizer „ <code translate="no">standard</code> “ verwirft Interpunktionszeichen während der Tokenisierung. Der Tokenizer „ <code translate="no">whitespace</code> “ behält Interpunktionszeichen bei, einschließlich solcher innerhalb eines Tokens. In Kombination mit „ <code translate="no">whitespace</code> “ entfernt „ <code translate="no">removepunct</code> “ das gesamte Token, wenn es Interpunktionszeichen oder Leerzeichen enthält; einzelne Zeichen werden dabei nicht aus dem Token entfernt.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Konfiguration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,9 +41,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der <code translate="no">removepunct</code> Filter ist in Milvus eingebaut. Um ihn zu verwenden, geben Sie einfach seinen Namen im Abschnitt <code translate="no">filter</code> innerhalb von <code translate="no">analyzer_params</code> an.</p>
+    </button></h2><p>Der Filter „ <code translate="no">removepunct</code> “ ist in Milvus integriert. Um ihn zu verwenden, geben Sie einfach seinen Namen im Abschnitt „ <code translate="no">filter</code> “ unter „ <code translate="no">analyzer_params</code> “ an.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -61,8 +64,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Filter <code translate="no">removepunct</code> arbeitet mit den Begriffen, die vom Tokenizer erzeugt wurden, und muss daher in Kombination mit einem Tokenizer verwendet werden.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie im Abschnitt <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Der Filter „ <code translate="no">removepunct</code> “ verarbeitet die vom Tokenizer erzeugten Terme und muss daher in Kombination mit einem Tokenizer verwendet werden.</p>
+<p>Nachdem Sie „ <code translate="no">analyzer_params</code> “ definiert haben, können Sie diese bei der Definition eines Sammlungsschemas auf ein „ <code translate="no">VARCHAR</code> “-Feld anwenden. Dadurch kann Milvus den Text in diesem Feld mit dem angegebenen Analysator verarbeiten, um eine effiziente Tokenisierung und Filterung zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">„Anwendungsbeispiel</a>“.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,8 +81,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie die Analyzer-Konfiguration auf Ihr Sammelschema anwenden, überprüfen Sie das Verhalten mit der Methode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer-Konfiguration<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>Bevor Sie die Analyzer-Konfiguration auf Ihr Sammlungsschema anwenden, überprüfen Sie deren Verhalten mithilfe der Methode „ <code translate="no">run_analyzer</code> “.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Analysator-Konfiguration<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +98,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -127,7 +135,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

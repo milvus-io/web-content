@@ -23,9 +23,9 @@ title: Atualizar o cluster Milvus com o Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar o seu cluster Milvus 2.6.x para a versão 3.0.1 utilizando o Helm.</p>
+    </button></h1><p>Este guia descreve como atualizar o seu cluster Milvus 2.6.x para a versão 3.0.2 utilizando o Helm.</p>
 <div class="alert note">
-<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0.1 com o Helm Chart do Milvus 5.0.22. Se utilizar outra versão de patch do Milvus 2.6.x ou outra versão do Helm Chart, valide primeiro a atualização num ambiente que não seja de produção.</p>
+<p>Este procedimento foi validado a partir do Milvus 2.6.20 até ao Milvus v3.0.2 com o Helm Chart do Milvus 5.0.22. Se utilizar outra versão de patch do Milvus 2.6.x ou outra versão do Helm Chart, valide primeiro a atualização num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,10 +48,10 @@ title: Atualizar o cluster Milvus com o Helm Chart
 <li>Os valores do Helm utilizados na implementação existente</li>
 <li>Uma cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.1, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.2, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
-<p>Não altere nem faça o downgrade do Helm Chart como parte deste procedimento. Mantenha a versão do Chart já instalada para a sua versão do Helm. A linha de base testada manteve o Helm Chart 5.0.22 e alterou apenas a etiqueta da imagem do Milvus para <code translate="no">v3.0.1</code>.</p>
-<p>Este procedimento não valida um downgrade ou uma reversão que implique alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.1 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Não altere nem faça o downgrade do Helm Chart como parte deste procedimento. Mantenha a versão do Chart já instalada para a sua versão do Helm. A linha de base testada manteve o Helm Chart 5.0.22 e alterou apenas a tag da imagem do Milvus para <code translate="no">v3.0.2</code>.</p>
+<p>Este procedimento não valida um downgrade ou reversão que implique a mudança da imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.2 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,12 +136,12 @@ O repositório de gráficos Helm do Milvus em <code translate="no">https://milvu
 <pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
   --namespace &lt;namespace&gt; \
   --version &lt;current-chart-version&gt; \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.1&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v3.0.2&quot;</span> \
   --reset-then-reuse-values \
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
-<p>A opção « <code translate="no">--reset-then-reuse-values</code> » mantém os valores da versão anterior, aplicando simultaneamente a substituição explícita da imagem em relação aos predefinições do Chart selecionado.</p>
+<p>A opção « <code translate="no">--reset-then-reuse-values</code> » mantém os valores da versão anterior, ao mesmo tempo que aplica a substituição explícita da imagem em relação aos valores predefinidos do Chart selecionado.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Verifique a atualização<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifique se todas as cargas de trabalho necessárias estão prontas, se todos os componentes do Milvus utilizam o ` <code translate="no">v3.0.1</code>` e se as suas coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.1.</p>
+<p>Verifique se todas as cargas de trabalho necessárias estão prontas, se todos os componentes do Milvus utilizam a opção « <code translate="no">v3.0.2</code> » e se as suas coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.2.</p>
 <div class="alert note">
-<p>A atualização para o Milvus 3.0 não ativa o Storage V3. Depois de verificar a atualização, analise <a href="/docs/pt/storage-v3.md">o Storage V3</a> antes de ativar funcionalidades que dependam dele. Assim que o Milvus gravar dados no Storage V3, o downgrade para uma versão mais antiga do Milvus que não consiga ler o Storage V3 não será suportado.</p>
+<p>A atualização para o Milvus 3.0 não ativa o Storage V3. Depois de verificar a atualização, analise <a href="/docs/pt/storage-v3.md">o Storage V3</a> antes de ativar funcionalidades que dependam dele. Assim que o Milvus gravar dados no Storage V3, o downgrade para uma versão mais antiga do Milvus que não consiga ler o Storage V3 não é suportado.</p>
 </div>

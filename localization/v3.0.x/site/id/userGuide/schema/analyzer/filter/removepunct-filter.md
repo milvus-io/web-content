@@ -2,11 +2,9 @@
 id: removepunct-filter.md
 title: Hapus Tanda BacaCompatible with Milvus 2.5.11+
 summary: >-
-  Filter removepunct menghilangkan tanda baca, spasi, dan jeda baris yang
-  biasanya disimpan oleh beberapa tokenizer-seperti jieba, lindera, dan icu.
-  Gunakan filter ini ketika Anda menginginkan aliran token yang lebih bersih
-  yang hanya berisi token teks yang bermakna, bebas dari koma, titik, dan tanda
-  baca lainnya.
+  Filter `removepunct` menghapus token yang mengandung tanda baca atau spasi
+  kosong. Pada tokenizer yang mempertahankan tanda baca di dalam kata, filter
+  ini akan menghapus seluruh token yang terpengaruh.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">Hapus Tanda Baca<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -24,9 +22,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Filter <code translate="no">removepunct</code> menghapus token tanda baca yang berdiri sendiri dari aliran token. Gunakan filter ini ketika Anda menginginkan pemrosesan teks yang lebih bersih yang berfokus pada kata-kata yang bermakna, bukan tanda baca.</p>
+    </button></h1><p>Filter " <code translate="no">removepunct</code> " menghapus token yang mengandung tanda baca atau spasi kosong dari aliran token. Gunakan filter ini jika Anda ingin pemrosesan teks yang lebih bersih yang berfokus pada kata-kata konten yang bermakna daripada tanda baca.</p>
 <div class="alert note">
-<p>Filter ini paling efektif dengan tokenizer <code translate="no">jieba</code>, <code translate="no">lindera</code>, dan <code translate="no">icu</code>, yang mempertahankan tanda baca sebagai token terpisah (misalnya, <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Tokenisasi lain seperti <code translate="no">standard</code> dan <code translate="no">whitespace</code> membuang tanda baca selama tokenisasi, jadi <code translate="no">removepunct</code> tidak berpengaruh pada mereka.</p>
+<p>Filter ini paling efektif digunakan bersama tokenizer <code translate="no">jieba</code>, <code translate="no">lindera</code>, dan <code translate="no">icu</code>, yang mempertahankan tanda baca sebagai token terpisah (misalnya, <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Tokenizer <code translate="no">standard</code> membuang tanda baca selama proses tokenisasi. Tokenizer <code translate="no">whitespace</code> mempertahankan tanda baca, termasuk tanda baca di dalam sebuah token. Ketika digabungkan dengan <code translate="no">whitespace</code>, <code translate="no">removepunct</code> menghapus seluruh token jika mengandung tanda baca atau spasi kosong; tokenizer ini tidak menghapus karakter individu dari token tersebut.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,9 +41,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter <code translate="no">removepunct</code> sudah ada di dalam Milvus. Untuk menggunakannya, cukup tentukan namanya di bagian <code translate="no">filter</code> di dalam <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>Filter ` <code translate="no">removepunct</code> ` sudah terintegrasi ke dalam Milvus. Untuk menggunakannya, cukup tentukan namanya di bagian ` <code translate="no">filter</code> ` di dalam ` <code translate="no">analyzer_params</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -61,8 +64,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Filter <code translate="no">removepunct</code> beroperasi berdasarkan ketentuan yang dihasilkan oleh tokenizer, jadi filter ini harus digunakan bersama dengan tokenizer.</p>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<p>Filter ` <code translate="no">removepunct</code> ` beroperasi pada istilah yang dihasilkan oleh tokenizer, sehingga harus digunakan bersama dengan tokenizer.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya pada bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus memproses teks dalam bidang tersebut menggunakan analyzer yang ditentukan untuk tokenisasi dan penyaringan yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +81,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menerapkan konfigurasi penganalisis ke skema koleksi Anda, verifikasi perilakunya menggunakan metode <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>Sebelum menerapkan konfigurasi analyzer ke skema koleksi Anda, verifikasi perilakunya menggunakan metod <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Konfigurasi penganalisis<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,7 +98,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -127,7 +135,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -192,7 +205,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Keluaran yang diharapkan<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">Hasil yang diharapkan<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

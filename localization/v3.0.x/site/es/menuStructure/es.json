@@ -370,13 +370,13 @@
             "children": []
           },
           {
-            "label": "Gestionar aliases",
+            "label": "Gestionar alias",
             "id": "manage-aliases.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "Recogida en punto de entrega",
+            "label": "Recogida de paquetes",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Descomposición de JSON",
+                "label": "Análisis de JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -511,7 +511,7 @@
             "children": []
           },
           {
-            "label": "Campo «TIMESTAMPTZ»",
+            "label": "Campo TIMESTAMPTZ",
             "id": "timestamptz-field.md",
             "order": 12,
             "children": []
@@ -529,7 +529,7 @@
             "children": []
           },
           {
-            "label": "Valores por defecto",
+            "label": "Valores predeterminados",
             "id": "default-values.md",
             "order": 15,
             "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_ESPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESCASO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
+            "label": "Búsqueda básica con redes neuronales artificiales",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1185,7 +1185,7 @@
                 "children": []
               },
               {
-                "label": "Búsqueda por intervalo con StructArray",
+                "label": "Búsqueda por rango con StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1365,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de la descomposición",
+                "label": "Clasificación de descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1481,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Forzar la compactación por fusión",
+            "label": "Forzar la compactación de la fusión",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1854,7 +1854,7 @@
             "order": 3,
             "children": [
               {
-                "label": "Resumen general",
+                "label": "Resumen",
                 "id": "mqtype-overview.md",
                 "order": 0,
                 "children": []
@@ -1866,7 +1866,7 @@
                 "children": []
               },
               {
-                "label": "Púlsar",
+                "label": "Pulsar",
                 "id": "mq_pulsar.md",
                 "order": 2,
                 "children": [
@@ -1902,7 +1902,7 @@
                 "order": 5,
                 "children": [
                   {
-                    "label": "Resumen general",
+                    "label": "Resumen",
                     "id": "switch-mq-type.md",
                     "order": 0,
                     "children": []
@@ -2210,13 +2210,13 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instancias dentro de un mismo depósito",
+                "label": "Migrar entre instancias de un mismo depósito",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de distintos depósitos",
+                "label": "Migrar entre instancias de distintos buckets",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2237,7 +2237,7 @@
         "order": 3,
         "children": [
           {
-            "label": "Resumen",
+            "label": "Resumen general",
             "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
@@ -2496,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "Jina IA",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3151,7 +3157,7 @@
         "children": []
       },
       {
-        "label": "Agrupación en clústeres de HDBSCAN",
+        "label": "Agrupación en clústeres HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
@@ -3176,7 +3182,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda en embudo con representaciones Matryoshka",
+        "label": "Búsqueda en embudo con representaciones «matrioska»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3194,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Búsqueda de texto a imagen con Milvus",
+        "label": "Búsqueda de imágenes a partir de texto con Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

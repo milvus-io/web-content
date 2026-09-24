@@ -41,7 +41,7 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
 <li><a href="/docs/es/prerequisite-gpu.md">Comprueba los requisitos de hardware y software</a> antes de la instalación.</li>
 </ul>
 <div class="alert note">
-<p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la asistencia necesaria.</p>
+<p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la ayuda necesaria.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,8 +74,8 @@ title: Ejecutar Milvus con soporte para GPU mediante Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Descárgalo <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdalo como docker-compose.yml manualmente o con el siguiente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.1/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Descárgalo <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdalo como docker-compose.yml manualmente o con el siguiente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Debe realizar algunos cambios en las variables de entorno del servicio independiente en el archivo YAML, tal y como se indica a continuación:</p>
 <ul>
@@ -137,11 +137,11 @@ Creating milvus-standalone ... done
 <li>los contenedores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> y <strong>milvus-etcd</strong> estarán en funcionamiento.
 <ul>
 <li>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>«milvus-minio»</strong> atiende los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-minio»</strong> atiende los puertos <strong>9090</strong> y <strong>9091</strong> de forma local con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
 <li>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>la carpeta «volumes/milvus»</strong> de la carpeta actual.</li>
 </ul></li>
 </ul>
-<p>Puedes comprobar si los contenedores están en funcionamiento mediante el siguiente comando:</p>
+<p>Puedes comprobar si los contenedores están en funcionamiento utilizando el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -151,7 +151,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>También puede acceder a la interfaz web de Milvus en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a>.</p>
-<p>Si ha asignado varios dispositivos GPU a Milvus en el archivo docker-compose.yml, puede especificar qué dispositivo GPU está visible o disponible para su uso.</p>
+<p>Si ha asignado varios dispositivos GPU a Milvus en el archivo docker-compose.yml, puede especificar qué dispositivo GPU es visible o está disponible para su uso.</p>
 <p>Hacer que el dispositivo GPU <code translate="no">0</code> sea visible para Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -182,17 +182,17 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Una vez que Milvus esté en funcionamiento, puede personalizar el grupo de memoria modificando los ajustes de <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> en el archivo <code translate="no">milvus.yaml</code>.</p>
 <div class="alert note">
-<p>El archivo <code translate="no">milvus.yaml</code> se encuentra en el directorio <code translate="no">/milvus/configs/</code>, dentro del contenedor de Milvus.</p>
+<p>El archivo « <code translate="no">milvus.yaml</code> » se encuentra en el directorio « <code translate="no">/milvus/configs/</code> », dentro del contenedor de Milvus.</p>
 </div>
-<p>Para configurar el grupo de memoria, modifica los ajustes de <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> en el archivo <code translate="no">milvus.yaml</code> de la siguiente manera.</p>
+<p>Para configurar el grupo de memoria, modifica los ajustes <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> del archivo <code translate="no">milvus.yaml</code> de la siguiente manera.</p>
 <ol>
 <li><p>Utiliza el siguiente comando para copiar el archivo « <code translate="no">milvus.yaml</code> » desde el contenedor de Milvus a tu equipo local. Sustituye « <code translate="no">&lt;milvus_container_id&gt;</code> » por el ID real de tu contenedor de Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Abre el archivo « <code translate="no">milvus.yaml</code> » copiado con tu editor de texto preferido. Por ejemplo, utilizando vim:</p>
+<li><p>Abre el archivo « <code translate="no">milvus.yaml</code> » copiado con tu editor de texto preferido. Por ejemplo, si utilizas vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Edita los parámetros <code translate="no">initMemSize</code> y <code translate="no">maxMemSize</code> según sea necesario y guarda los cambios:</p>
+<li><p>Edita los ajustes de « <code translate="no">initMemSize</code> » y « <code translate="no">maxMemSize</code> » según sea necesario y guarda los cambios:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>
@@ -200,8 +200,8 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">initMemSize</code>: Tamaño inicial del grupo de memoria. El valor predeterminado es 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamaño máximo del pool de memoria. El valor por defecto es 2048.</li>
+<li><code translate="no">initMemSize</code>: Tamaño inicial del grupo de memoria. El valor por defecto es 1024.</li>
+<li><code translate="no">maxMemSize</code>: Tamaño máximo del pool de memoria. El valor predeterminado es 2048.</li>
 </ul></li>
 <li><p>Utiliza el siguiente comando para copiar el archivo « <code translate="no">milvus.yaml</code> » modificado de vuelta al contenedor de Milvus. Sustituye « <code translate="no">&lt;milvus_container_id&gt;</code> » por el ID real de tu contenedor de Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
@@ -212,7 +212,7 @@ docker start &lt;milvus_container_id&gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <div class="alert note">
-<p>Storage V3 está desactivado por defecto. Actívalo antes de utilizar funciones que dependan de él. Para conocer los requisitos y las consideraciones de compatibilidad, consulta <a href="/docs/es/storage-v3.md">Storage V3</a>.</p>
+<p>Storage V3 está desactivado de forma predeterminada. Actívelo antes de utilizar funciones que dependan de él. Para conocer los requisitos y las consideraciones de compatibilidad, consulte <a href="/docs/es/storage-v3.md">Storage V3</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Próximos pasos<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,9 +229,9 @@ docker start &lt;milvus_container_id&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez instalado Milvus en Docker, puede:</p>
+    </button></h2><p>Una vez instalado Milvus en Docker, puedes:</p>
 <ul>
-<li><p>Consulta <a href="/docs/es/quickstart.md">la Guía de inicio rápido</a> para ver lo que Milvus puede hacer.</p></li>
+<li><p>Consulta <a href="/docs/es/quickstart.md">la Guía de inicio rápido</a> para ver lo que puede hacer Milvus.</p></li>
 <li><p>Consulta <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a> para obtener más información sobre la instancia de Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
@@ -243,7 +243,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualizar Milvus mediante Helm Chart</a>.</p></li>
-<li><p><a href="/docs/es/scaleout.md">Escalar el clúster de Milvus</a>.</p></li>
+<li><p><a href="/docs/es/scaleout.md">Escala tu clúster de Milvus</a>.</p></li>
 <li><p>Implementa tu clúster de Milvus en la nube:</p>
 <ul>
 <li><a href="/docs/es/eks.md">Amazon EKS</a></li>
@@ -252,7 +252,7 @@ docker start &lt;milvus_container_id&gt;
 </ul></li>
 <li><p>Descubre <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de la configuración.</p></li>
-<li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
+<li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
+<li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para una gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervisa Milvus con Prometheus</a>.</p></li>
 </ul>

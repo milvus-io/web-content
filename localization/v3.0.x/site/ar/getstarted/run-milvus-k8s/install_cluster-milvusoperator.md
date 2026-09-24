@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق <a href="/docs/ar/prerequisite-helm.md">من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
-<li><p>قبل تثبيت Milvus، يُنصح باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool</a> ) لتقدير متطلبات الأجهزة بناءً على حجم بياناتك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
+<li><p>قبل تثبيت Milvus، يُنصح باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus</a> لتقدير متطلبات الأجهزة بناءً على حجم بياناتك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد لتثبيت Milvus الخاص بك.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُعرّف Milvus Operator الموارد المخصصة لمجموعة Milvus بناءً على <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">الموارد المخصصة لـ Kubernetes</a>. عند تعريف الموارد المخصصة، يمكنك استخدام واجهات برمجة تطبيقات K8s بطريقة إعلانية وإدارة مكدس نشر Milvus لضمان قابليته للتوسع وتوافره العالي.</p>
+    </button></h2><p>يُعرّف Milvus Operator الموارد المخصصة لعنقودة Milvus فوق <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">الموارد المخصصة</a> لـ <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes</a>. عند تعريف الموارد المخصصة، يمكنك استخدام واجهات برمجة تطبيقات K8s بطريقة إعلانية وإدارة مكدس نشر Milvus لضمان قابليته للتوسع وتوافره العالي.</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك التحقق مما إذا كان بود Milvus Operator قيد التشغيل على النحو التالي:</p>
+<p>يمكنك التحقق مما إذا كان pod Milvus Operator قيد التشغيل على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -172,10 +172,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
+    </button></h3><p>بمجرد تشغيل pod Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v3.0.1) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v3.0.2) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>قم بتشغيل الأمر التالي للتحقق من حالة مجموعة Milvus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن يكون ناتج الأمر أعلاه مشابهًا لما يلي. إذا ظل حقل « <code translate="no">status.status</code> » (مجموعة Milvus) على « <code translate="no">Unhealthy</code> » (قيد الإنشاء)، فإن مجموعة Milvus الخاصة بك لا تزال قيد الإنشاء.</p>
+<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن يكون ناتج الأمر أعلاه مشابهًا لما يلي. إذا ظل حقل « <code translate="no">status.status</code> » (حالة المجموعة) على « <code translate="no">Unhealthy</code> » (قيد الإنشاء)، فإن مجموعة Milvus الخاصة بك لا تزال قيد الإنشاء.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -232,7 +232,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يقوم Milvus Operator بإنشاء تبعيات Milvus، مثل etcd و MinIO، ثم مكونات Milvus، مثل الوكيل (proxy) والمنسقين (coordinators) والعقد (nodes).</p>
-<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن تكون حالة جميع الوحدات (pods) في مجموعة Milvus مشابهة لما يلي.</p>
+<p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن تكون حالة جميع البودات في مجموعة Milvus مشابهة لما يلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE
@@ -278,11 +278,11 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>اختياريًا، يمكنك استخدام <code translate="no">:19530</code> بدلاً من <code translate="no">27017:19530</code> في الأمر أعلاه للسماح لـ <code translate="no">kubectl</code> بتخصيص منفذ محلي لك حتى لا تضطر إلى إدارة تعارضات المنافذ.</p>
-<p>بشكل افتراضي، لا يستمع توجيه المنافذ في kubectl إلا على <code translate="no">localhost</code>. استخدم علامة <code translate="no">address</code> إذا كنت تريد أن يستمع Milvus على عناوين IP المحددة أو جميعها. يجعل الأمر التالي توجيه المنافذ يستمع على جميع عناوين IP على الجهاز المضيف.</p>
+<p>بشكل افتراضي، لا يستمع توجيه المنافذ في kubectl إلا على <code translate="no">localhost</code>. استخدم العلامة <code translate="no">address</code> إذا كنت تريد أن يستمع Milvus على عناوين IP المحددة أو جميعها. يجعل الأمر التالي توجيه المنافذ يستمع على جميع عناوين IP على الجهاز المضيف.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>الآن، يمكنك الاتصال بـ Milvus باستخدام المنفذ المعاد توجيهه.</p>
+<p>الآن، يمكنك الاتصال بـ Milvus باستخدام المنفذ المُحوَّل.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -307,7 +307,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>للاطلاع على عناصر التكوين ذات الصلة، راجع <a href="/docs/ar/system_configuration.md">«تكوين النظام</a>».</p></li>
-<li><p>قم بتحديث الإعدادات.</p>
+<li><p>قم بتحديث التكوينات.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -327,12 +327,12 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية (GUI) مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة المستخدم Milvus Web UI قابلية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة المستخدم Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والتجميعات، وعرض قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم على الويب لـ Milvus، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعمل واجهة المستخدم الويب Milvus على تحسين قابلية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة المستخدم الويب Milvus لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والتجميعات، وإدراج قائمة بتكوينات Milvus التفصيلية. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم الرسومية لـ Milvus</a></p>
 <p>لتمكين الوصول إلى واجهة المستخدم على الويب لـ Milvus، تحتاج إلى إعادة توجيه منفذ pod الوكيل إلى منفذ محلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
-<p>الآن، يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على العنوان <code translate="no">http://localhost:27018</code>.</p>
+<p>الآن، يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">إلغاء تثبيت Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -396,14 +396,14 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم هذا النشر <strong>Woodpecker</strong> كقائمة انتظار الرسائل، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات، وجميعها يتم توفيرها بواسطة Milvus Operator. لاستخدام خلفية مختلفة مع Operator، انظر:</p>
+    </button></h2><p>يستخدم هذا النشر <strong>Woodpecker</strong> كقائمة انتظار الرسائل، <strong>وetcd</strong> للبيانات الوصفية، <strong>وMinIO</strong> لتخزين الكائنات، وجميعها يتم توفيرها بواسطة Milvus Operator. لاستخدام بنية خلفية مختلفة مع Operator، انظر:</p>
 <ul>
 <li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (افتراضي) · <a href="/docs/ar/message_storage_operator.md#Configure-Pulsar">Pulsar</a> · <a href="/docs/ar/message_storage_operator.md#Configure-Kafka">Kafka</a> · <a href="/docs/ar/message_storage_operator.md#Configure-RocksMQ">RocksMQ</a></li>
 <li>تخزين الكائنات: <a href="/docs/ar/object_storage_operator.md">تكوين تخزين الكائنات باستخدام Milvus Operator</a></li>
 <li>البيانات الوصفية: <a href="/docs/ar/meta_storage_operator.md">تكوين etcd باستخدام Milvus Operator</a></li>
 </ul>
 <div class="alert note">
-<p>يتم تعطيل التخزين V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، انظر <a href="/docs/ar/storage-v3.md">التخزين V3</a>.</p>
+<p>يتم تعطيل Storage V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -430,7 +430,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
+<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
@@ -441,7 +441,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ar/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>اكتشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup،</a> وهي أداة مفتوحة المصدر لإجراء النسخ الاحتياطي لبيانات Milvus.</p></li>
+<li><p>اكتشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>

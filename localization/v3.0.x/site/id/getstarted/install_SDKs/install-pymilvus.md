@@ -61,7 +61,7 @@ title: Menginstal Milvus Python SDK
 <div class="alert note">
 Disarankan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvus yang telah Anda instal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.
 </div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">1</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifikasi instalasi<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ Disarankan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvu
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/manage-partitions.md">Mengelola partisi</a></li>
 <li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Upsert, dan Menghapus</a></li>
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>

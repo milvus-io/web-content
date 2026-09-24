@@ -37,7 +37,7 @@ title: 管理资源组
       </svg>
     </button></h2><p>一个资源组可以包含 Milvus 集群中的部分或全部查询节点。 您可以根据自身需求，灵活决定如何在资源组之间分配查询节点。例如，在多集合场景中，您可以为每个资源组分配适当数量的查询节点，并将 Collections 加载到不同的资源组中，从而使每个 Collection 内的操作在物理上与其他 Collection 中的操作相互独立。</p>
 <p>请注意，Milvus 实例在启动时会维护一个默认资源组来容纳所有查询节点，并将其命名为<strong>__default_resource_group</strong>。</p>
-<p>从 2.4.1 版本开始，Milvus 提供了声明式资源组 API，而旧版资源组 API 已被废弃。新的声明式 API 使用户能够实现幂等性，从而更轻松地在云原生环境中进行二次开发。</p>
+<p>从 2.4.1 版本开始，Milvus 提供了声明式资源组 API，而旧版资源组 API 已被废弃。新的声明式 API 允许用户实现幂等性，从而更轻松地在云原生环境中进行二次开发。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">资源组的概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,17 +63,17 @@ title: 管理资源组
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><strong>requests</strong>属性指定了资源组必须满足的条件。</li>
-<li><strong>limits</strong>属性指定了资源组的最大限制。</li>
+<li><strong>limits</strong>属性指定资源组的最大限制。</li>
 <li><strong>transfer_from</strong>和<strong>transfer_to</strong>属性分别描述了该资源组应优先从哪些资源组获取资源，以及应将资源转移到哪些资源组。</li>
 </ul>
 <p>一旦资源组的配置发生变化，Milvus 将根据新配置尽可能调整当前查询节点的资源，以确保所有资源组最终满足以下条件：</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>以下情况除外：</p>
 <ul>
-<li>当 Milvus 集群中的查询节点数量不足时，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，总会存在某些资源组无法获得足够的查询节点。</li>
-<li>当 Milvus 集群中的查询节点数量过多时，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，冗余的查询节点将始终首先被分配到<strong>__default_resource_group</strong>中。</li>
+<li>当 Milvus 集群中的查询节点数量不足时，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，总会存在某些资源组没有足够的查询节点。</li>
+<li>当 Milvus 集群中的查询节点数量过多时，即满足<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 条件，冗余的查询节点将始终首先被分配到<strong>__default_resource_group</strong>中。</li>
 </ul>
-<p>当然，如果集群中的 QueryNodes 数量发生变化，Milvus 会持续尝试调整以满足最终条件。因此，您可以先应用资源组配置变更，然后执行 QueryNode 扩缩容。</p>
+<p>当然，如果集群中的 QueryNode 数量发生变化，Milvus 会持续尝试调整以满足最终条件。因此，您可以先应用资源组配置变更，然后再执行 QueryNode 的弹性扩展。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">使用声明式 API 管理资源组<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例均基于 PyMilvus 3.0.1。在运行这些代码之前，请先升级您的 PyMilvus 安装版本。</p>
+<p>本页面上的所有代码示例均基于 PyMilvus 3.0.2。在运行这些代码之前，请先升级您的 PyMilvus 安装版本。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
@@ -113,7 +113,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>列出资源组。</p>
 <p>创建资源组后，您可以在资源组列表中看到它。</p>
-<p>要查看 Milvus 实例中的资源组列表，请执行以下操作：</p>
+<p>要查看 Milvus 实例中的资源组列表，请按以下步骤操作：</p>
 <pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 
@@ -136,8 +136,8 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>在资源组之间迁移节点。</p>
-<p>您可能会注意到，该资源组目前尚无任何查询节点。请按以下步骤将部分节点从默认资源组迁移至您创建的资源组：
-假设集群的<strong>__default_resource_group</strong>中目前有 1 个 QueryNode，我们希望将其中一个节点迁移到新创建的<strong>资源组中</strong>。<code translate="no">update_resource_groups</code> 确保了多个配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
+<p>您可能会注意到，该资源组目前还没有任何查询节点。请按以下步骤将一些节点从默认资源组移动到您创建的资源组中：
+假设集群的<strong>__default_resource_group</strong>中目前有 1 个 QueryNode，且我们希望将其中一个节点迁移到已创建的<strong>资源组中</strong>。<code translate="no">update_resource_groups</code> 确保了多项配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -174,7 +174,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，您也可以仅将一个分区加载到某个资源组中，并将其副本分布在多个资源组中。以下示例假设已存在一个名为<code translate="no">Books</code> 的 Collection，且该 Collection 包含一个名为<code translate="no">Novels</code> 的分区。</p>
+<p>此外，您也可以仅将一个分区加载到资源组中，并将其副本分布在多个资源组中。以下示例假设名为<code translate="no">Books</code> 的 Collection 已存在，且其中包含一个名为<code translate="no">Novels</code> 的分区。</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
@@ -182,9 +182,9 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>请注意，<code translate="no">_resource_groups</code> 是可选参数，若未指定，Milvus 会将副本加载到默认资源组中的查询节点上。</p>
-<p>若要让 Milvus 将 Collection 的每个副本加载到不同的资源组中，请确保资源组的数量等于副本的数量。</p></li>
-<li><p>在资源组之间迁移副本。</p>
-<p>Milvus 利用<a href="/docs/zh/replica.md">副本</a>在分布于多个查询节点<a href="/docs/zh/glossary.md#Segment">的分段之间</a>实现负载均衡。您可以按照以下步骤将 Collection 的某些副本从一个资源组移动到另一个资源组：</p>
+<p>若要让 Milvus 将 Collections 的每个副本加载到不同的资源组中，请确保资源组的数量等于副本的数量。</p></li>
+<li><p>在资源组之间转移副本。</p>
+<p>Milvus 使用<a href="/docs/zh/replica.md">副本</a>在分布于多个查询节点<a href="/docs/zh/glossary.md#Segment">的分段之间</a>实现负载均衡。您可以按照以下步骤将 Collection 的某些副本从一个资源组移动到另一个资源组：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -230,7 +230,7 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>目前，Milvus 无法在云原生环境中独立进行弹性扩展和缩减。但是，通过结合使用<strong>声明式资源组 API</strong>和容器编排，Milvus 可以轻松实现对查询节点的资源隔离和管理。
+    </button></h2><p>目前，Milvus 无法在云原生环境中独立进行弹性伸缩。但是，通过结合使用<strong>声明式资源组 API</strong>和容器编排，Milvus 可以轻松实现对查询节点的资源隔离和管理。
 以下是在云环境中管理查询节点的最佳实践：</p>
 <ol>
 <li><p>默认情况下，Milvus 会创建一个<strong>__default_resource_group</strong>。该资源组无法被删除，同时也是所有 Collections 的默认加载资源组，冗余的 QueryNodes 始终会被分配到该资源组中。 因此，我们可以创建一个待处理资源组来存放闲置的 QueryNode 资源，从而防止这些资源被<strong>__default_resource_group</strong> 占用。</p>
@@ -271,7 +271,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>利用上面的示例代码，我们创建了一个名为<strong>__pending_nodes 的</strong>资源组来存放额外的 QueryNode。我们还创建了两个用户专属的资源组，分别命名为<strong>rg1</strong>和<strong>rg2</strong>。此外，我们确保其他资源组优先从<strong>__pending_nodes</strong> 中恢复缺失或冗余的 QueryNode。</p></li>
+<p>利用上面的示例代码，我们创建了一个名为<strong>__pending_nodes</strong>的资源组，用于存放额外的 QueryNode。我们还创建了两个用户专属的资源组，分别命名为<strong>rg1</strong>和<strong>rg2</strong>。此外，我们确保其他资源组在恢复缺失或冗余的 QueryNode 时，优先从<strong>__pending_nodes</strong> 中获取。</p></li>
 <li><p>集群横向扩展</p>
 <p>假设我们有以下扩展函数：</p>
 <pre><code translate="no" class="language-python">
@@ -299,7 +299,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>集群缩容</p>
-<p>同样地，我们可以建立缩容规则，优先从<strong>__pending_nodes</strong>资源组中选择查询节点。可通过<code translate="no">describe_resource_group</code> API 获取此信息，从而实现指定资源组的缩容目标。</p>
+<p>同样地，我们可以建立缩容规则，优先从<strong>`__pending_nodes</strong>` 资源组中选择查询节点。该信息可通过 `<code translate="no">describe_resource_group</code> ` API 获取，从而实现指定资源组的缩容目标。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -332,7 +332,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>单个 Collection 的副本与资源组之间存在 N 对 N 的关系。</li>
-<li>当单个 Collection 的多个副本被加载到同一个资源组中时，该资源组的查询节点会在各副本之间均匀分布，确保每个副本拥有的查询节点数量差异不超过 1。</li>
+<li>当单个 Collection 的多个副本被加载到同一个资源组中时，该资源组的 QueryNodes 会在各副本之间均匀分布，确保每个副本拥有的 QueryNodes 数量差异不超过 1。</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

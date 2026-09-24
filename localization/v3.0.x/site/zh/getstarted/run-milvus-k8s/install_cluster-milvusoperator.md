@@ -36,7 +36,7 @@ title: 使用 Milvus Operator 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator 是一套解决方案，可帮助您在目标 Kubernetes（K8s）集群中部署和管理完整的 Milvus 服务栈。该栈包含所有 Milvus 组件及相关依赖项（如 etcd 和 MinIO），并内置 Woodpecker 作为消息队列。</p>
+    </button></h2><p>Milvus Operator 是一套解决方案，可帮助您在目标 Kubernetes（K8s）集群中部署和管理完整的 Milvus 服务堆栈。该堆栈包含所有 Milvus 组件及相关依赖项（如 etcd 和 MinIO），并内置 Woodpecker 作为消息队列。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>安装前请检查<a href="/docs/zh/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
-<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具（Milvus Sizing Tool）</a>根据您的数据规模估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
+<li><p>在安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据您的数据规模估算硬件需求。这有助于确保您的 Milvus 安装获得最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator 在<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes 自定义资源</a>的基础上定义了 Milvus 集群的自定义资源。定义自定义资源后，您可以通过声明式方式使用 K8s API 来管理 Milvus 部署堆栈，从而确保其可扩展性和高可用性。</p>
+    </button></h2><p>Milvus Operator 在<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes 自定义资源</a>的基础上，定义了 Milvus 集群的自定义资源。定义自定义资源后，您可以通过声明式方式使用 K8s API 来管理 Milvus 部署堆栈，从而确保其可扩展性和高可用性。</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -119,7 +119,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p>运行以下命令，通过<code translate="no">kubectl</code> 安装 Milvus Operator。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>安装过程结束后，您将看到类似以下的输出。</p>
+<p>安装过程结束后，您将看到类似于以下的输出。</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -175,18 +175,18 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator Pod 开始运行，即可按以下步骤部署 Milvus 集群。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述命令将部署一个以<strong>Woodpecker</strong>作为消息队列（推荐用于 v3.0.1）的 Milvus 集群，并包含所有新的架构组件，包括流式处理节点。</p>
+<p>上述命令将部署一个 Milvus 集群，该集群使用<strong>Woodpecker</strong>作为消息队列（推荐用于 v3.0.2），并包含所有新的架构组件，包括流式处理节点。</p>
 <p><strong>此部署中的架构亮点：</strong></p>
 <ul>
 <li><strong>消息队列</strong>：<a href="/docs/zh/woodpecker.md">使用 Woodpecker</a>（可减少基础设施维护工作）</li>
-<li><strong>流式处理节点</strong>：已启用，用于增强数据处理能力</li>
+<li><strong>流式处理节点</strong>：已启用，以增强数据处理能力</li>
 <li><strong>Mix 协调器</strong>：整合了协调器组件，以提高效率</li>
 </ul>
 <p>若需自定义这些设置，建议您使用<a href="https://milvus.io/tools/sizing">Milvus 规格规划工具，</a>根据实际数据规模调整配置，然后下载相应的 YAML 文件。有关配置参数的更多信息，请参阅《<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查清单</a>》。</p>
 <div class="alert note">
 <ul>
-<li>版本名称仅应包含字母、数字和连字符。版本名称中不允许出现点号。</li>
-<li>您还可以以独立模式部署 Milvus 实例，此时所有组件均包含在一个 Pod 中。要实现此操作，请将上述命令中的配置文件 URL 更改为<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
+<li>版本名称仅应包含字母、数字和连字符。版本名称中不允许使用点号。</li>
+<li>您还可以以独立模式部署 Milvus 实例，此时所有组件都包含在一个 Pod 中。要实现这一点，请将上述命令中的配置文件 URL 更改为<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. 检查 Milvus 集群状态<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
@@ -249,7 +249,7 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. 将本地端口转发到 Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. 将本地端口转发至 Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,7 +271,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果显示，Milvus 实例在默认端口<strong>19530</strong> 上提供服务。</p>
 <div class="alert note">
-<p>如果您以独立模式部署了 Milvus Standalone，请将 Pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
+<p>如果您以独立模式部署了 Milvus，请将 Pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
 </div>
 <p>然后，运行以下命令将本地端口转发到 Milvus 的服务端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
@@ -298,7 +298,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以通过如下方式调用<code translate="no">patch</code> 命令来查看和更新 Milvus 集群的配置：</p>
+    </button></h2><p>您可以通过以下方式调用<code translate="no">patch</code> 命令来查看和更新 Milvus 集群的配置：</p>
 <ol>
 <li><p>运行以下命令可预览即将生效的配置。</p>
 <p>以下示例假设您希望将<code translate="no">spec.components.disableMetric</code> 参数更新为<code translate="no">false</code> 毫秒。</p>
@@ -327,7 +327,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置 GUI 工具，您可通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统可观测性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计信息与指标，检查数据库和 Collection 的详细信息，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus 随附了一个名为 Milvus WebUI 的内置 GUI 工具，您可以通过浏览器访问该工具。Milvus WebUI 通过简单直观的界面增强了系统可观察性。您可以使用 Milvus WebUI 观察 Milvus 组件和依赖项的统计信息与指标，检查数据库和 Collection 详情，并列出详细的 Milvus 配置。 有关 Milvus WebUI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a></p>
 <p>要启用对 Milvus WebUI 的访问，您需要将代理 Pod 进行端口转发至本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -443,6 +443,6 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

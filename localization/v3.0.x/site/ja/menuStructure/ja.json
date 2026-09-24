@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース",
+        "label": "リリース情報",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "GPUを使用してMilvusを実行する",
+            "label": "GPUでMilvusを実行する",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -247,7 +247,7 @@
             "children": []
           },
           {
-            "label": "ノウヒア",
+            "label": "ノウウェア",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "コレクションについて",
+            "label": "コレクションの解説",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -425,7 +425,7 @@
             "children": []
           },
           {
-            "label": "テキスト入力欄",
+            "label": "テキストフィールド",
             "id": "text.md",
             "order": 6,
             "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "NULL 許容フィールド",
+            "label": "NULL許容フィールド",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "タイ語",
+                    "label": "タイ",
                     "id": "thai-tokenizer.md",
                     "order": 3,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "ピントを解除",
+                    "label": "ピンの取り外し",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -729,13 +729,13 @@
                 ]
               },
               {
-                "label": "多言語アナライザ",
+                "label": "多言語アナライザー",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "用途に合ったアナライザーを選びましょう",
+                "label": "用途に合った適切なアナライザーを選択してください",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -794,13 +794,13 @@
         "order": 3,
         "children": [
           {
-            "label": "エンティティの挿入",
+            "label": "エンティティを挿入",
             "id": "insert-update-delete.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Upsertエンティティ",
+            "label": "Upsert エンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1059,7 +1059,7 @@
             "children": []
           },
           {
-            "label": "検索の集約",
+            "label": "検索の集計",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1197,7 +1197,7 @@
                 "children": []
               },
               {
-                "label": "StructArray を用いたハイブリッド検索",
+                "label": "StructArray を使ったハイブリッド検索",
                 "id": "hybrid-search-with-structarray.md",
                 "order": 4,
                 "children": []
@@ -1395,7 +1395,7 @@
                     "children": []
                   },
                   {
-                    "label": "チュートリアル：Milvusでの時間軸に基づくランキングの実装",
+                    "label": "チュートリアル：Milvusでの時間ベースのランキングの実装",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1475,13 +1475,13 @@
             "children": []
           },
           {
-            "label": "クラスタリング・コンパクテーション",
+            "label": "クラスタリング圧縮",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "強制マージ・コンパクション",
+            "label": "強制マージ・コンパクテーション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1660,7 +1660,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Docker を使って",
+                "label": "Docker を使用する場合",
                 "id": "configure-docker.md",
                 "order": 0,
                 "children": []
@@ -1672,7 +1672,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Operator を使用して",
+                "label": "Milvus Operator を使用する場合",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1784,7 +1784,7 @@
             "children": []
           },
           {
-            "label": "その場で",
+            "label": "その場での対応",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -1808,7 +1808,7 @@
             "children": []
           },
           {
-            "label": "ローカルディスクを使用したQueryNode",
+            "label": "ローカルディスクを使用するQueryNode",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1877,7 +1877,7 @@
                     "children": []
                   },
                   {
-                    "label": "Pulsar v2を引き続きご利用ください",
+                    "label": "Pulsar v2を引き続き使用する",
                     "id": "use-pulsar-v2.md",
                     "order": 1,
                     "children": []
@@ -1938,7 +1938,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "スケールクラスター",
+            "label": "スケール・クラスター",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -1956,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "スケール依存性",
+            "label": "スケール依存関係",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1975,7 +1975,7 @@
             "children": []
           },
           {
-            "label": "Milvusスタンドアロンのアップグレード",
+            "label": "Milvus Standalone のアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2007,7 +2007,7 @@
                 "children": []
               },
               {
-                "label": "指標の可視化",
+                "label": "指標を可視化する",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
@@ -2114,7 +2114,7 @@
                 "children": []
               },
               {
-                "label": "プリビレッジ・グループ",
+                "label": "プリヴィレッジ・グループ",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -2198,7 +2198,7 @@
             "children": []
           },
           {
-            "label": "よくある事例",
+            "label": "よくある症例",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2341,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Milvus サイズ選定ツール",
+        "label": "Milvus サイズ決定ツール",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2609,7 +2609,7 @@
                 "children": []
               },
               {
-                "label": "メタデータによるフィルタリング",
+                "label": "メタデータのフィルタリング",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -3002,7 +3002,7 @@
             "children": []
           },
           {
-            "label": "PII マスカー",
+            "label": "PIIマスカー",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3032,7 +3032,7 @@
             "children": []
           },
           {
-            "label": "ご馳走",
+            "label": "ごちそう",
             "id": "build_RAG_with_milvus_and_feast.md",
             "order": 9,
             "children": []
@@ -3084,6 +3084,12 @@
             "label": "アーム",
             "id": "build_rag_on_arm.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -3139,7 +3145,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使用した RAG のグラフ化",
+        "label": "Milvus を使用したグラフ RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "大規模言語モデルを用いたMilvusクエリフィルター式の生成",
+        "label": "大規模言語モデルを用いたMilvusクエリフィルタ式の生成",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3229,7 +3235,7 @@
             "children": []
           },
           {
-            "label": "音声類似性検索",
+            "label": "音声類似度検索",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

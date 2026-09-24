@@ -4,8 +4,8 @@ title: Penganalisis Standar
 summary: >-
   Penganalisis standar adalah penganalisis bawaan di Milvus, yang secara
   otomatis diterapkan pada bidang teks jika tidak ada penganalisis yang
-  ditentukan. Penganalisis ini menggunakan tokenisasi berbasis tata bahasa,
-  sehingga efektif untuk sebagian besar bahasa.
+  ditentukan. Penganalisis ini menggabungkan tokenizer standar dengan filter
+  huruf kecil.
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">Penganalisis Standar<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Penganalisis " <code translate="no">standard</code> " adalah penganalisis default di Milvus, yang secara otomatis diterapkan pada bidang teks jika tidak ada penganalisis yang ditentukan. Penganalisis ini menggunakan tokenisasi berbasis tata bahasa, sehingga efektif untuk sebagian besar bahasa.</p>
+    </button></h1><p>Penganalisis " <code translate="no">standard</code> " adalah penganalisis default di Milvus, yang secara otomatis diterapkan pada bidang teks jika tidak ada penganalisis yang ditentukan. Penganalisis ini menggabungkan tokenizer standar dengan filter huruf kecil.</p>
 <div class="alert note">
-<p>Penganalisis " <code translate="no">standard</code> " cocok untuk bahasa yang mengandalkan pemisah (seperti spasi, tanda baca) sebagai batas kata. Namun, bahasa seperti Mandarin, Arab, Thailand, Jepang, dan Korea memerlukan tokenisasi atau normalisasi khusus bahasa. Dalam kasus seperti itu, gunakan penganalisis khusus bahasa seperti <a href="/docs/id/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a>, atau <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a>, atau penganalisis khusus dengan tokenizer khusus seperti <a href="/docs/id/lindera-tokenizer.md"><code translate="no">lindera</code></a> dan <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
+<p>Analizer " <code translate="no">standard</code> " cocok untuk bahasa yang mengandalkan pemisah (seperti spasi, tanda baca) sebagai batas kata. Namun, bahasa seperti Mandarin, Arab, Thailand, Jepang, dan Korea memerlukan tokenisasi atau normalisasi yang spesifik untuk bahasa tersebut. Dalam kasus seperti itu, gunakan analizer yang spesifik untuk bahasa tersebut, seperti <a href="/docs/id/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/id/arabic-analyzer.md"><code translate="no">arabic</code></a>, atau <a href="/docs/id/thai-analyzer.md"><code translate="no">thai</code></a>, atau penganalisis khusus dengan tokenizer khusus seperti <a href="/docs/id/lindera-tokenizer.md"><code translate="no">lindera</code></a> dan <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a>.</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">Definisi<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,10 +43,10 @@ summary: >-
       </svg>
     </button></h2><p>Penganalisis " <code translate="no">standard</code> " terdiri dari:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer " <code translate="no">standard</code> " untuk memecah teks menjadi unit kata terpisah berdasarkan aturan tata bahasa. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-tokenizer.md">Tokenizer Standar</a>.</p></li>
-<li><p><strong>Filter</strong>: Menggunakan filter <code translate="no">lowercase</code> untuk mengubah semua token menjadi huruf kecil, sehingga memungkinkan pencarian yang tidak peka huruf besar-kecil. Untuk informasi lebih lanjut, lihat <a href="/docs/id/lowercase-filter.md">Lowercase</a>.</p></li>
+<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer " <code translate="no">standard</code> " untuk mempertahankan huruf Unicode dan karakter numerik yang berurutan dalam token, serta memisahkan token pada karakter lainnya. Untuk aturan karakter yang tepat, lihat <a href="/docs/id/standard-tokenizer.md#Tokenization-rules">Standard Tokenizer</a>.</p></li>
+<li><p><strong>Filter</strong>: Menggunakan filter " <code translate="no">lowercase</code> " untuk mengubah semua token menjadi huruf kecil, sehingga memungkinkan pencarian yang tidak peka huruf besar-kecil. Untuk informasi lebih lanjut, lihat <a href="/docs/id/lowercase-filter.md">Lowercase</a>.</p></li>
 </ul>
-<p>Fungsionalitas penganalisis <code translate="no">standard</code> setara dengan konfigurasi penganalisis khusus berikut:</p>
+<p>Fungsionalitas penganalisis ` <code translate="no">standard</code> ` setara dengan konfigurasi penganalisis khusus berikut:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -93,7 +93,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menerapkan penganalisis ` <code translate="no">standard</code> ` ke suatu bidang, cukup atur ` <code translate="no">type</code> ` menjadi ` <code translate="no">standard</code> ` di ` <code translate="no">analyzer_params</code>`, dan sertakan parameter opsional sesuai kebutuhan.</p>
+    </button></h2><p>Untuk menerapkan penganalisis ` <code translate="no">standard</code> ` ke sebuah bidang, cukup atur ` <code translate="no">type</code> ` menjadi ` <code translate="no">standard</code> ` di ` <code translate="no">analyzer_params</code>`, dan sertakan parameter opsional sesuai kebutuhan.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -119,7 +119,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;type&quot;: &quot;standard&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Alat analisis <code translate="no">standard</code> menerima parameter opsional berikut:</p>
+<p>Alat analisis " <code translate="no">standard</code> " menerima parameter opsional berikut:</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -127,10 +127,10 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Sebuah array yang berisi daftar kata-kata stop, yang akan dihapus dari proses tokenisasi. Nilai defaultnya adalah <code translate="no">_english_</code>, yaitu kumpulan kata-kata stop bahasa Inggris umum yang sudah terintegrasi.</p></td>
+     <td><p>Sebuah array yang berisi daftar kata-kata stop, yang akan dihapus dari proses tokenisasi. Nilai defaultnya adalah <code translate="no">_english_</code>, yaitu kumpulan kata-kata stop dalam bahasa Inggris umum yang sudah terintegrasi.</p></td>
    </tr>
 </table>
-<p>Contoh konfigurasi kata-kata yang diabaikan kustom:</p>
+<p>Contoh konfigurasi kata-kata penghambat khusus:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

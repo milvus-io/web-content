@@ -5,10 +5,10 @@ order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: Descubre cómo actualizar un clúster de Milvus con Milvus Operator.
-title: Actualización del clúster de Milvus con Milvus Operator
+title: Actualizar el clúster de Milvus con Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/es/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">Actualización del clúster de Milvus con Milvus Operator<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">Actualizar el clúster de Milvus con Milvus Operator<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ title: Actualización del clúster de Milvus con Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía describe cómo actualizar un clúster de Milvus 2.6.x a la versión 3.0.1 con Milvus Operator.</p>
+    </button></h1><p>Esta guía describe cómo actualizar un clúster de Milvus 2.6.x a la versión 3.0.2 con Milvus Operator.</p>
 <div class="alert note">
-<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0.1 con Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd dentro del clúster y MinIO dentro del clúster. Si utilizas otra versión de parche de Milvus 2.6.x, otra versión de Operator, otra topología de componentes, otra cola de mensajes o una configuración de dependencias diferente, comprueba primero la actualización en un entorno que no sea de producción.</p>
+<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0.2 con Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd dentro del clúster y MinIO dentro del clúster. Si utilizas otra versión de parche de Milvus 2.6.x, otra versión de Operator, otra topología de componentes, otra cola de mensajes o otra configuración de dependencias, valida primero la actualización en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,10 +49,10 @@ title: Actualización del clúster de Milvus con Milvus Operator
 <li>El método de instalación y los manifiestos utilizados para el Milvus Operator existente</li>
 <li>Una copia de seguridad actualizada de los metadatos y los datos persistentes de Milvus</li>
 </ul>
-<p><strong>Limitaciones de las colas de mensajes</strong>: al actualizar a Milvus v3.0.1, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.2, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
-<p>Aplica el CR de Milvus completo para esta actualización. No utilices un parche de fusión que solo incluya la imagen. El Operador puede restablecer por defecto los campos de componentes omitidos con cero réplicas, lo que puede volver a habilitar un componente que la implementación 2.6.x existente hubiera deshabilitado.</p>
-<p>Este procedimiento no valida una rebaja de versión ni una reversión que consista en volver a la imagen de Milvus 2.6.x. Una vez que la v3.0.1 haya escrito los datos, es posible que una reversión que solo afecte a la imagen no pueda leer el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Aplica el CR completo de Milvus para esta actualización. No utilices un parche de fusión que solo incluya la imagen. El Operador puede restablecer por defecto los campos de componentes omitidos con cero réplicas, lo que puede volver a habilitar un componente que el despliegue 2.6.x existente hubiera deshabilitado.</p>
+<p>Este procedimiento no valida una degradación o una reversión mediante el cambio de la imagen de Milvus a la versión 2.6.x. Una vez que la v3.0.2 haya escrito datos, una reversión que solo afecte a la imagen podría no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ title: Actualización del clúster de Milvus con Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Paso 1: Realizar una copia de seguridad del CR actual de Milvus<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Milvus-CR" class="common-anchor-header">Paso 1: Realiza una copia de seguridad del CR actual de Milvus<button data-href="#Step-1-Back-up-the-current-Milvus-CR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,7 +89,7 @@ title: Actualización del clúster de Milvus con Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el manifiesto de origen de su implementación existente como manifiesto de actualización. No aplique directamente el archivo de copia de seguridad exportado sin eliminar primero los metadatos gestionados por el servidor y los campos de estado.</p>
+<p>Utiliza el manifiesto de origen de tu implementación actual como manifiesto de actualización. No apliques directamente el archivo de copia de seguridad exportado sin eliminar primero los metadatos gestionados por el servidor y los campos de estado.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Paso 2: Confirmar la versión de Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +126,7 @@ title: Actualización del clúster de Milvus con Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>En el manifiesto completo de la CR de Milvus, cambia <code translate="no">spec.components.image</code> por la versión de destino. Mantén el modo actual, la topología de componentes, la cola de mensajes, etcd, el almacenamiento y demás configuraciones de dependencias. El siguiente extracto muestra los campos que debes confirmar; no sustituyas tu CR completa por este extracto.</p>
+    </button></h3><p>En el manifiesto completo de la CR de Milvus, cambia <code translate="no">spec.components.image</code> por la versión de destino. Mantén la configuración actual del modo, la topología de componentes, la cola de mensajes, etcd, el almacenamiento y otras dependencias. El siguiente extracto muestra los campos que debes confirmar; no sustituyas tu CR completa por este extracto.</p>
 <p>Antes de aplicar la CR de destino, compruebe que <code translate="no">indexNode.replicas</code> sea <code translate="no">0</code>. La configuración validada de Milvus 2.6.20 ya utilizaba esta configuración. Mantenga la configuración explícita de cero réplicas en la CR de destino.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -135,11 +135,11 @@ title: Actualización del clúster de Milvus con Milvus Operator
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.1</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.2</span>
     <span class="hljs-attr">indexNode:</span>
       <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Aplica el manifiesto CR completo:</p>
+<p>Aplique el manifiesto completo del CR:</p>
 <pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Comprueba la actualización<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
@@ -167,4 +167,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Comprueba que el CR de Milvus indique « <code translate="no">Healthy</code> », que todos los componentes de Milvus utilicen « <code translate="no">milvusdb/milvus:v3.0.1</code> », que no haya ningún pod de IndexNode en ejecución y que las colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión v3.0.1.</p>
+<p>Comprueba que el CR de Milvus indique « <code translate="no">Healthy</code> », que todos los componentes de Milvus utilicen « <code translate="no">milvusdb/milvus:v3.0.2</code> », que no se esté ejecutando ningún pod de IndexNode y que las colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión 3.0.2.</p>

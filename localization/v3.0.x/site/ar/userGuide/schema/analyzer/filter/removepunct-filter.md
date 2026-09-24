@@ -2,10 +2,9 @@
 id: removepunct-filter.md
 title: إزالة علامات الترقيمCompatible with Milvus 2.5.11+
 summary: >-
-  يزيل فلتر إزالة علامات الترقيم والمسافات وفواصل الأسطر التي عادةً ما تحتفظ بها
-  بعض أدوات الترميز - مثل jieba و lindera و icu -. استخدمه عندما تريد دفق رموز
-  أنظف يحتوي فقط على رموز نصية ذات معنى، خالية من الفواصل والنقاط وعلامات
-  الترقيم الأخرى.
+  يقوم مرشح «removepunct» بإزالة الرموز التي تحتوي على علامات الترقيم أو
+  المسافات. وفي حالة أدوات تقطيع النص التي تحتفظ بعلامات الترقيم داخل الكلمات،
+  فإنه يزيل الرمز المتأثر بالكامل.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">إزالة علامات الترقيم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -23,9 +22,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقوم عامل التصفية <code translate="no">removepunct</code> بإزالة علامات الترقيم المستقلة من دفق الرموز المميزة. استخدمه عندما تريد معالجة نصية أنظف تركز على كلمات المحتوى ذات المعنى بدلاً من علامات الترقيم.</p>
+    </button></h1><p>يقوم مرشح " <code translate="no">removepunct</code> " بإزالة الرموز التي تحتوي على علامات الترقيم أو المسافات البيضاء من تدفق الرموز. استخدمه عندما تريد معالجة نصية أنظف تركز على الكلمات ذات المعنى بدلاً من علامات الترقيم.</p>
 <div class="alert note">
-<p>يكون هذا الفلتر أكثر فاعلية مع <code translate="no">jieba</code> و <code translate="no">lindera</code> و <code translate="no">icu</code> الرموز الرمزية التي تحافظ على علامات الترقيم كرموز منفصلة (على سبيل المثال، <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). أما أدوات الترميز الأخرى مثل <code translate="no">standard</code> و <code translate="no">whitespace</code> فتتجاهل علامات الترقيم أثناء الترميز، لذا فإن <code translate="no">removepunct</code> ليس له أي تأثير عليها.</p>
+<p>يكون هذا المرشح أكثر فعالية مع مُجزِّئات الرموز « <code translate="no">jieba</code> » و« <code translate="no">lindera</code> » و« <code translate="no">icu</code> »، التي تحتفظ بعلامات الترقيم كرموز منفصلة (على سبيل المثال، <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). يقوم مُقسِّم الرموز <code translate="no">standard</code> بإهمال علامات الترقيم أثناء عملية تقسيم الرموز. أما مُقسِّم الرموز <code translate="no">whitespace</code> فيحتفظ بعلامات الترقيم، بما في ذلك علامات الترقيم الموجودة داخل الرمز. عند دمجه مع <code translate="no">whitespace</code> ، يقوم <code translate="no">removepunct</code> بإزالة الرمز بالكامل إذا كان يحتوي على علامات ترقيم أو مسافات بيضاء؛ ولا يقوم بإزالة أحرف فردية من الرمز.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,9 +41,14 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عامل التصفية <code translate="no">removepunct</code> مدمج في ميلفوس. لاستخدامه، ما عليك سوى تحديد اسمه في قسم <code translate="no">filter</code> داخل <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>مرشح <code translate="no">removepunct</code> مدمج في Milvus. لاستخدامه، ما عليك سوى تحديد اسمه في قسم <code translate="no">filter</code> ضمن <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -60,8 +64,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يعمل مرشح <code translate="no">removepunct</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل الترميز والتصفية الفعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+<p>يعمل مرشح " <code translate="no">removepunct</code> " على المصطلحات التي يولدها أداة التقطيع (tokenizer)، لذا يجب استخدامه بالاقتران مع أداة التقطيع.</p>
+<p>بعد تعريف <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تعريف مخطط المجموعة. وهذا يسمح لـ Milvus بمعالجة النص في هذا الحقل باستخدام المحلل المحدد من أجل التقطيع والتصفية بكفاءة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,8 +81,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام الأسلوب <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلّل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
+    </button></h2><p>قبل تطبيق تكوين المحلل على مخطط المجموعة الخاص بك، تحقق من سلوكه باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">تكوين المحلل<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +98,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;removepunct&quot;</span>]
@@ -126,7 +135,12 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -191,7 +205,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">المخرجات المتوقعة<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<h3 id="Expected-output" class="common-anchor-header">الناتج المتوقع<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "什么是 Milvus",
+        "label": "什么是Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本系列 Collection",
+            "label": "关于本Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -334,13 +334,13 @@
             "children": []
           },
           {
-            "label": "View Collections",
+            "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "修改Collection",
+            "label": "修改 Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
@@ -389,7 +389,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema详解",
+            "label": "Schema说明",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -485,7 +485,7 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段",
+                "label": "将数据插入 StructArray 字段中",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "内置分析器",
+                "label": "内置分析仪",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -632,7 +632,7 @@
                 ]
               },
               {
-                "label": "筛选器",
+                "label": "筛选条件",
                 "id": "filters",
                 "order": 3,
                 "children": [
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改Collection Schema",
+            "label": "修改 Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1144,7 +1144,7 @@
             ]
           },
           {
-            "label": "全文搜索",
+            "label": "全文检索",
             "id": "full-text-search.md",
             "order": 9,
             "children": []
@@ -1185,7 +1185,7 @@
                 "children": []
               },
               {
-                "label": "使用 StructArray 进行区间搜索",
+                "label": "使用 StructArray 进行范围搜索",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1209,7 +1209,7 @@
                 "children": []
               },
               {
-                "label": "选择一种嵌入列表搜索策略",
+                "label": "选择一种 EmbeddingList 搜索策略",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1365,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "衰减排名器",
+                "label": "衰变排名榜",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1421,7 +1421,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名工具",
+                    "label": "TEI 排名器",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1871,7 +1871,7 @@
                 "order": 2,
                 "children": [
                   {
-                    "label": "升级至 Pulsar v3",
+                    "label": "升级到 Pulsar v3",
                     "id": "upgrade-pulsar-v3.md",
                     "order": 0,
                     "children": []
@@ -1932,7 +1932,7 @@
         ]
       },
       {
-        "label": "缩放",
+        "label": "扩展",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2210,13 +2210,13 @@
                 "children": []
               },
               {
-                "label": "在同一个存储桶内迁移实例",
+                "label": "在同一个存储桶内进行实例间迁移",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "在不同存储桶之间的实例之间迁移",
+                "label": "在不同存储桶的实例之间迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2341,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Milvus 规格选择工具",
+        "label": "Milvus 尺寸选择工具",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -3085,6 +3085,12 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
           }
         ]
       }
@@ -3194,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行文本转图像搜索",
+        "label": "使用 Milvus 进行文本到图像搜索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

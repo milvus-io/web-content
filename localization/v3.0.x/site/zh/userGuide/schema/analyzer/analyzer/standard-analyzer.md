@@ -1,7 +1,7 @@
 ---
 id: standard-analyzer.md
 title: 标准分析器
-summary: 标准分析器是 Milvus 中的默认分析器，如果未指定分析器，它会自动应用于文本字段。它采用基于语法的分词方式，因此对大多数语言都很有效。
+summary: 标准分析器是 Milvus 中的默认分析器，如果未指定分析器，它会自动应用于文本字段。它将标准分词器与小写过滤器结合使用。
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">标准分析器<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,9 +18,9 @@ summary: 标准分析器是 Milvus 中的默认分析器，如果未指定分析
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 中的默认分析器，若未指定分析器，系统会自动将其应用于文本字段。它采用基于语法的分词方式，因此对大多数语言都十分有效。</p>
+    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 中的默认分析器，若未指定分析器，它将自动应用于文本字段。该分析器结合了标准分词器与小写过滤器。</p>
 <div class="alert note">
-<p><code translate="no">standard</code> 分析器适用于那些依赖分隔符（如空格、标点符号）来确定词界限的语言。然而，中文、阿拉伯语、泰语、日语和韩语等语言则需要特定于该语言的词法分析或规范化处理。在这种情况下，请使用特定于该语言的分析器，例如 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a>、 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a>，或 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a>，或使用带有专用分词器的自定义分析器，例如 <a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a> 和 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>。</p>
+<p><code translate="no">standard</code> 分析器适用于那些依赖分隔符（如空格、标点符号）来确定单词边界的语言。然而，中文、阿拉伯语、泰语、日语和韩语等语言则需要针对特定语言的词法分析或规范化处理。在这种情况下，请使用针对特定语言的分析器，例如 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a>、 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a>，或 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a>，或使用带有专用分词器的自定义分析器，例如 <a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a> 和 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>。</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">定义<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,8 +39,8 @@ summary: 标准分析器是 Milvus 中的默认分析器，如果未指定分析
       </svg>
     </button></h2><p><code translate="no">standard</code> 分析器由以下部分组成：</p>
 <ul>
-<li><p><strong>分词器</strong>：使用<code translate="no">standard</code> 分词器，根据语法规则将文本拆分为离散的单词单元。有关详细信息，请参阅<a href="/docs/zh/standard-tokenizer.md">“标准分词器”</a>。</p></li>
-<li><p><strong>过滤器</strong>：使用<code translate="no">lowercase</code> 过滤器将所有词元转换为小写，从而支持不区分大小写的搜索。有关详细信息，请参阅<a href="/docs/zh/lowercase-filter.md">“小写转换”</a>。</p></li>
+<li><p><strong>分词器</strong>：使用“<code translate="no">standard</code> ”分词器，将连续的 Unicode 字母和数字保留在词元中，并在其他字符处进行拆分。有关确切的字符规则，请参阅<a href="/docs/zh/standard-tokenizer.md#Tokenization-rules">“标准分词器”</a>。</p></li>
+<li><p><strong>过滤器</strong>：使用<code translate="no">lowercase</code> 过滤器将所有词元转换为小写，从而支持不区分大小写的搜索。有关更多信息，请参阅<a href="/docs/zh/lowercase-filter.md">“小写转换”</a>。</p></li>
 </ul>
 <p><code translate="no">standard</code> 分析器的功能等同于以下自定义分析器配置：</p>
 <div class="multipleCode">
@@ -152,7 +152,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将其应用于<code translate="no">VARCHAR</code> 字段。这使Milvus能够使用指定的分析器处理该字段中的文本，从而实现高效的分词和过滤。有关更多信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">使用示例</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将其应用于<code translate="no">VARCHAR</code> 字段。这允许Milvus使用指定的分析器处理该字段中的文本，以实现高效的分词和过滤。有关更多信息，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">使用示例</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在将分析器配置应用到Collection Schema之前，请使用<code translate="no">run_analyzer</code> 方法验证其行为。</p>
+    </button></h2><p>在将分析器配置应用于Collection Schema之前，请使用<code translate="no">run_analyzer</code> 方法验证其行为。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器配置<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
