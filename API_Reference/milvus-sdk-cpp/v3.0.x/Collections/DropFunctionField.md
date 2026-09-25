@@ -53,5 +53,3 @@ util::CheckStatus(client->Connect(connect_param));
 auto request = milvus::DropFunctionFieldRequest();
 util::CheckStatus(client->DropFunctionField(request));
 ```
-
-<!-- category: Collections; action: CREATE; addedSince: v3.0.x -->

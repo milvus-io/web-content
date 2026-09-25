@@ -1,6 +1,6 @@
 # CreateCollection()
 
-This operation creates a collection.
+This operation creates a collection with the given schema and options.
 
 ```cpp
 Status CreateCollection(const CreateCollectionRequest& request)
@@ -17,130 +17,97 @@ auto request = CreateCollectionRequest()
     .WithNumPartitions(num_partitions)
     .WithNumShards(num_shards)
     .WithConsistencyLevel(level)
-    .WithProperties(value)
-    .WithIndexes(indexes);
+    .WithProperties(properties)
+    .AddProperty(key, property)
+    .WithIndexes(indexes)
+    .AddIndex(index);
 ```
 
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the database name in which the collection is created.
+    Sets the name of the database in which the collection is created.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
-
-    <div class="alert note">
-    
-    Historically, **[CollectionSchema](CollectionSchema.md)** also contains a collection name. **WithCollectionName()** will override the collection name specified in **[CollectionSchema](CollectionSchema.md)**.
-
-    </div>
+    Sets the name of the collection to create.
 
 - `WithDescription(const std::string& description)`
 
-    Sets the name of the collection. 
+    Sets the description of the collection.
 
-    <div class="alert note">
-    
-    Historically, **[CollectionSchema](CollectionSchema.md)** also contains a description. **WithDescription()** will override the collection description specified in **[CollectionSchema](CollectionSchema.md)**.
+- `WithCollectionSchema(const CollectionSchemaPtr& schema)`
 
-    </div>
-
-- `WithCollectionSchema(const [CollectionSchemaPtr](CollectionSchema.md)& schema)`
-
-    Sets the collection schema.
+    Sets the collection schema that defines the fields of the collection. Takes a shared pointer to the schema (const CollectionSchemaPtr&).
 
 - `WithNumPartitions(int64_t num_partitions)`
 
-    Sets the number of partitions when a partition key is present.
+    Sets the number of partitions created when the collection uses a partition key field.
 
 - `WithNumShards(int64_t num_shards)`
 
-    Sets the number of shards of the collection. 
+    Sets the number of shards of the collection.
 
-    <div class="alert note">
-    
-    Historically, **[CollectionSchema](CollectionSchema.md)** also contains the number of shards. **WithNumShards()** will override the number of shards specified in **[CollectionSchema](CollectionSchema.md)**.
+- `WithConsistencyLevel(ConsistencyLevel level)`
 
-    </div>
-
-- `WithConsistencyLevel([ConsistencyLevel](ConsistencyLevel.md) level)`
-
-    Sets the default consistency level of this collection.
+    Sets the default consistency level of the collection.
 
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
-    Sets properties of this collection.
+    Sets collection-level properties, such as "collection.ttl.seconds" to define a TTL retention window. The map is passed by rvalue reference, so pass it with std::move.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 
-    Sets a property of this collection.
+    Adds a single collection-level property as a key-value pair.
 
-- `WithIndexes(std::vector<[IndexDesc](../Management/IndexDesc.md)>&& indexes)`
+- `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
-    Sets the indexes to be created.
+    Sets the indexes to create along with the collection. The vector is passed by rvalue reference, so pass it with std::move.
 
-- `AddIndex([IndexDesc](../Management/IndexDesc.md)&& index)`
+- `AddIndex(IndexDesc&& index)`
 
-    Adds an index to the collection being created.
+    Adds a single index to create along with the collection. The index is passed by rvalue reference, so pass it with std::move.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the collection was created successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call CreateCollection() on a connected MilvusClientV2 to create a collection with a schema and a consistency level.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-milvus::CollectionSchemaPtr collection_schema = std::make_shared<milvus::CollectionSchema>();
-collection_schema->AddField({field_id, milvus::DataType::INT64, "user id", true, false});
-milvus::FieldSchema varchar_scheam{field_name, milvus::DataType::VARCHAR, "user name"};
-varchar_scheam.SetMaxLength(100);
-collection_schema->AddField(varchar_scheam);
-collection_schema->AddField({field_age, milvus::DataType::INT8, "user age"});
-collection_schema->AddField(
-    milvus::FieldSchema(field_face, milvus::DataType::FLOAT_VECTOR, "face signature").WithDimension(dimension));
+const std::string db_name = "default";
+const std::string collection_name = "book";
+const std::string description = "a collection for books";
 
-// define indexes
-milvus::IndexDesc index_vector(field_face, "", milvus::IndexType::IVF_FLAT, milvus::MetricType::COSINE);
-index_vector.AddExtraParam(milvus::NLIST, "100");
-milvus::IndexDesc index_sort(field_age, "", milvus::IndexType::STL_SORT);
-milvus::IndexDesc index_varchar(field_name, "", milvus::IndexType::TRIE);
+milvus::CollectionSchema schema(collection_name);
+schema.AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, false));
+schema.AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR, "").WithDimension(8));
 
-// drop collection if it exists, the CreateCollectionRequest with indexes will automatically create indexes
-// for this collection and load the collection
-status = client->DropCollection(
-    milvus::DropCollectionRequest().WithCollectionName(collection_name).WithDatabaseName(db_name));
-status = client->CreateCollection(
-    milvus::CreateCollectionRequest()
-        .WithDatabaseName(db_name)
-        .WithCollectionName(collection_name)
-        .WithDescription("my collection")
-        .WithNumShards(1)
-        .WithCollectionSchema(collection_schema)
-        .AddIndex(std::move(index_vector))
-        .AddIndex(std::move(index_sort))
-        .AddIndex(std::move(index_varchar))
-        .AddProperty("my_prop", "dummy")                    // add a customized property
-        .AddProperty(milvus::COLLECTION_TTL_SECONDS, "60")  // configure a built-in property
-        .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG));
+auto request = milvus::CreateCollectionRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithDescription(description)
+    .WithCollectionSchema(std::make_shared<milvus::CollectionSchema>(schema))
+    .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+status = client->CreateCollection(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

@@ -33,7 +33,7 @@ auto request = RevokePrivilegeRequest()
 
 - `WithPrivilege(const std::string& privilege)`
 
-    Sets the name of the privilege to revoke. For available privileges, refer to [this page](https://milvus.io/docs/grant_privileges.md).
+    Sets the name of the privilege to revoke. For available privileges, refer to [Grant Privileges](https://milvus.io/docs/grant_privileges.md).
 
 - `WithDatabaseName(const std::string& db_name)`
 
@@ -74,5 +74,3 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
-
-<!-- category: Authentication; action: CREATE; addedSince: v3.0.x -->

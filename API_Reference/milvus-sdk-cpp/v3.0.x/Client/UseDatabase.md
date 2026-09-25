@@ -1,42 +1,36 @@
 # UseDatabase()
 
-This operation shifts the connection from one database to another.
+This operation switches the client's connection to another database on the same Milvus server.
 
 ```cpp
 Status UseDatabase(const std::string& db_name)
 ```
 
-**PARAMETERS:**
-
-- **db_name** (*const std::string&*)
-
-    Sets the name of the database to use.
-
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a status indicating whether the operation succeeded.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when the client fails to switch to the target database. Inspect the exception message or returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call UseDatabase() on a connected MilvusClientV2 to switch the connection to another database.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->UseDatabase(db_name);
+status = client->UseDatabase();
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

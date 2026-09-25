@@ -76,5 +76,3 @@ if (!status.IsOk()) {
 }
 std::cout << "The milvus server version is: " << response.Version() << std::endl;
 ```
-
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->

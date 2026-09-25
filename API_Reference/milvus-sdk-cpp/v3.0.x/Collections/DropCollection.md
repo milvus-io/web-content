@@ -1,6 +1,6 @@
 # DropCollection()
 
-This operation drops a collection, with all its partitions, index, and segments.
+This operation drops a collection together with its data and indexes.
 
 ```cpp
 Status DropCollection(const DropCollectionRequest& request)
@@ -18,41 +18,40 @@ auto request = DropCollectionRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the name of the target database. The default database applies if it is empty.
+    Sets the target database name; the default database is used if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection to drop.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the collection was dropped successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call DropCollection() on a connected MilvusClientV2 to drop a collection and its data.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->DropCollection(
-    milvus::DropCollectionRequest()
-        .WithCollectionName(collection_name)
-);
-
+auto request = milvus::DropCollectionRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name);
+status = client->DropCollection(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

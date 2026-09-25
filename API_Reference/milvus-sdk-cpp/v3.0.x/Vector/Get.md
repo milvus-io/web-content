@@ -165,23 +165,23 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
    </tr>
    <tr>
      <td><p>Scalar</p></td>
-     <td><p><code>BoolFieldData</code>, <code>Int8FieldData</code>, <code>Int16FieldData</code>, <code>Int32FieldData</code>, <code>Int64FieldData</code>, <code>FloatFieldData</code>, <code>DoubleFieldData</code>, <code>VarCharFieldData</code>, <code>JSONFieldData</code>, <code>GeometryFieldData</code>, <code>TimestamptzFieldData</code></p></td>
-     <td><p>Aliases of <code>FieldData&lt;T, DataType::...&gt;</code>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
+     <td><p>BoolFieldData, Int8FieldData, Int16FieldData, Int32FieldData, Int64FieldData, FloatFieldData, DoubleFieldData, VarCharFieldData, JSONFieldData, GeometryFieldData, TimestamptzFieldData</p></td>
+     <td><p>Aliases of FieldData<T, DataType::…>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
    </tr>
    <tr>
      <td><p>Vector</p></td>
-     <td><p><code>FloatVecFieldData</code>, <code>Float16VecFieldData</code>, <code>BFloat16VecFieldData</code>, <code>Int8VecFieldData</code>, <code>SparseFloatVecFieldData</code>, <code>BinaryVecFieldData</code></p></td>
-     <td><p>Dense and sparse vector containers. <code>BinaryVecFieldData</code> is a derived class with string conversion helpers.</p></td>
+     <td><p>FloatVecFieldData, Float16VecFieldData, BFloat16VecFieldData, Int8VecFieldData, SparseFloatVecFieldData, BinaryVecFieldData</p></td>
+     <td><p>Dense and sparse vector containers. BinaryVecFieldData is a derived class with string conversion helpers.</p></td>
    </tr>
    <tr>
      <td><p>Array and struct</p></td>
-     <td><p><code>ArrayBoolFieldData</code>, <code>ArrayInt8FieldData</code>, <code>ArrayInt16FieldData</code>, <code>ArrayInt32FieldData</code>, <code>ArrayInt64FieldData</code>, <code>ArrayFloatFieldData</code>, <code>ArrayDoubleFieldData</code>, <code>ArrayVarCharFieldData</code>, <code>StructFieldData</code></p></td>
-     <td><p>Aliases of <code>ArrayFieldData&lt;T, Et&gt;</code>; each entity row is a vector. Struct values use JSON storage.</p></td>
+     <td><p>ArrayBoolFieldData, ArrayInt8FieldData, ArrayInt16FieldData, ArrayInt32FieldData, ArrayInt64FieldData, ArrayFloatFieldData, ArrayDoubleFieldData, ArrayVarCharFieldData, StructFieldData</p></td>
+     <td><p>Aliases of ArrayFieldData<T, Et>; each entity row is a vector. Struct values use JSON storage.</p></td>
    </tr>
    <tr>
      <td><p>Shared pointers</p></td>
-     <td><p><code>XxxFieldDataPtr</code></p></td>
-     <td><p>Each concrete field-data type has a corresponding <code>std::shared_ptr&lt;XxxFieldData&gt;</code> alias.</p></td>
+     <td><p>XxxFieldDataPtr</p></td>
+     <td><p>Each concrete field-data type has a corresponding std::shared_ptr<XxxFieldData> alias.</p></td>
    </tr>
 </table>
 

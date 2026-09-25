@@ -1,35 +1,29 @@
 # Connect()
 
-This operation connects to Milvus server.
+This operation establishes the connection between the client and the Milvus server using the given connection parameters.
 
 ```cpp
 Status Connect(const ConnectParam& connect_param)
 ```
 
-**PARAMETERS:**
-
-- **connect_param** (*const [ConnectParam](ConnectParam.md)&*)
-
-    Sets the connection parameters.
-
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the connection was established successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Connects to a Milvus server using a URI and token credentials, then checks the returned status.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {

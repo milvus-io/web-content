@@ -60,7 +60,7 @@ auto request = HybridSearchRequest()
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+    Set the consistency level. For details, refer to [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
 
 - `WithSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
 
@@ -72,7 +72,7 @@ auto request = HybridSearchRequest()
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Set rerank, suc as RRF/Weighted function. Read the doc for more info: https://milvus.io/docs/reranking.md.
+    Set rerank, suc as RRF/Weighted function. [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md) and its sibling pages.
 
 - `WithLimit(int64_t limit)`
 
@@ -121,37 +121,67 @@ SubSearchRequest()
 
 **REQUEST METHODS:**
 
-- `SubSearchRequest& WithAnnsField(const std::string& ann_field)`
+- `WithAnnsField(const std::string& ann_field)`
 
-- `SubSearchRequest& WithLimit(int64_t limit)`
+    Sets the target field of the ANN search.
 
-- `SubSearchRequest& WithFilter(std::string filter)`
+- `WithLimit(int64_t limit)`
 
-- `SubSearchRequest& WithMetricType(milvus::MetricType metric_type)`
+    Sets the search limit (topk) of this sub search.
 
-- `SubSearchRequest& WithTimezone(const std::string& timezone)`
+- `WithFilter(std::string filter)`
+
+    Sets the filter expression of this sub search.
+
+- `WithMetricType(milvus::MetricType metric_type)`
+
+    Specifies the metric type of this sub search.
+
+- `WithTimezone(const std::string& timezone)`
+
+    Sets the timezone; it takes effect for Timestamptz fields.
 
 **Inherited vector methods** (all return `SubSearchRequest&` for chaining):
 
 - `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
 
+    Appends one dense float vector.
+
 - `AddBinaryVector(const std::string& vector)`
+
+    Appends one binary vector; the string overload converts the string to binary bytes.
 
 - `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
 
+    Appends one sparse vector from index-value data.
+
 - `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+
+    Appends one float16 vector.
 
 - `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
 
+    Appends one bfloat16 vector.
+
 - `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+
+    Appends one dense int8 vector.
 
 - `AddEmbeddedText(const std::string& text)`
 
+    Appends embedded text for a supported text-embedding function such as BM25.
+
 - `AddEmbeddingList(EmbeddingList&& emb_list)` — for struct-field ANN
+
+    Adds an embedding list for struct-field ANN search.
 
 - `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)` — batch
 
+    Sets the dense float vectors in batch.
+
 - `WithSparseVectors(...)`, `WithFloat16Vectors(...)`, etc. — batch variants
+
+    Batch variants of the corresponding add methods.
 
 ### Query vector types
 
@@ -165,45 +195,45 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
      <th><p>Notes</p></th>
    </tr>
    <tr>
-     <td><p><code>FLOAT_VECTOR</code></p></td>
-     <td><p><code>AddFloatVector()</code>, <code>WithFloatVectors()</code></p></td>
-     <td><p><code>std::vector&lt;float&gt;</code></p></td>
+     <td><p>FLOAT_VECTOR</p></td>
+     <td><p>AddFloatVector(), WithFloatVectors()</p></td>
+     <td><p>std::vector<float></p></td>
      <td><p>Dense float vectors.</p></td>
    </tr>
    <tr>
-     <td><p><code>BINARY_VECTOR</code></p></td>
-     <td><p><code>AddBinaryVector()</code>, <code>WithBinaryVectors()</code></p></td>
+     <td><p>BINARY_VECTOR</p></td>
+     <td><p>AddBinaryVector(), WithBinaryVectors()</p></td>
      <td><p>Binary bytes or string convenience input</p></td>
      <td><p>Uses the dedicated binary-vector representation.</p></td>
    </tr>
    <tr>
-     <td><p><code>SPARSE_FLOAT_VECTOR</code></p></td>
-     <td><p><code>AddSparseVector()</code>, <code>WithSparseVectors()</code></p></td>
-     <td><p><code>std::map&lt;uint32_t, float&gt;</code> or supported JSON form</p></td>
+     <td><p>SPARSE_FLOAT_VECTOR</p></td>
+     <td><p>AddSparseVector(), WithSparseVectors()</p></td>
+     <td><p>std::map<uint32_t, float> or supported JSON form</p></td>
      <td><p>Sparse index-value pairs.</p></td>
    </tr>
    <tr>
-     <td><p><code>FLOAT16_VECTOR</code></p></td>
-     <td><p><code>AddFloat16Vector()</code>, <code>WithFloat16Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;uint16_t&gt;</code> or convertible float vectors</p></td>
+     <td><p>FLOAT16_VECTOR</p></td>
+     <td><p>AddFloat16Vector(), WithFloat16Vectors()</p></td>
+     <td><p>std::vector<uint16_t> or convertible float vectors</p></td>
      <td><p>Float overloads perform conversion.</p></td>
    </tr>
    <tr>
-     <td><p><code>BFLOAT16_VECTOR</code></p></td>
-     <td><p><code>AddBFloat16Vector()</code>, <code>WithBFloat16Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;uint16_t&gt;</code> or convertible float vectors</p></td>
+     <td><p>BFLOAT16_VECTOR</p></td>
+     <td><p>AddBFloat16Vector(), WithBFloat16Vectors()</p></td>
+     <td><p>std::vector<uint16_t> or convertible float vectors</p></td>
      <td><p>Float overloads perform conversion.</p></td>
    </tr>
    <tr>
-     <td><p><code>INT8_VECTOR</code></p></td>
-     <td><p><code>AddInt8Vector()</code>, <code>WithInt8Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;int8_t&gt;</code></p></td>
+     <td><p>INT8_VECTOR</p></td>
+     <td><p>AddInt8Vector(), WithInt8Vectors()</p></td>
+     <td><p>std::vector<int8_t></p></td>
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
      <td><p>Function or struct-field input</p></td>
-     <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
-     <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
+     <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
+     <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>

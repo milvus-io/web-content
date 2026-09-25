@@ -57,5 +57,3 @@ if (telemetry) {
         });
 }
 ```
-
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->

@@ -1,6 +1,6 @@
 # CreateIndex()
 
-This operation indexes on vector fields or scalar fields.
+This operation creates one or more indexes on vector or scalar fields of a collection. You can specify multiple indexes in a single call, and in sync mode the call waits until the indexes are fully built.
 
 ```cpp
 Status CreateIndex(const CreateIndexRequest& request)
@@ -13,6 +13,7 @@ auto request = CreateIndexRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithIndexes(indexes)
+    .AddIndex(index)
     .WithSync(sync)
     .WithTimeoutMs(timeout_ms);
 ```
@@ -21,67 +22,59 @@ auto request = CreateIndexRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the target database. The default database is used if the name is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection whose fields are to be indexed.
 
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
-    Sets the indexes to be created.
+    Sets the indexes to be created. Accepts a std::vector<IndexDesc> rvalue that is moved into the request.
 
 - `AddIndex(IndexDesc&& index)`
 
-    Adds an index to be created.
+    Adds an index to be created. Accepts an IndexDesc rvalue that is moved into the request.
 
 - `WithSync(bool sync)`
 
-    Sets whether to operate in sync mode. The default value is **True**.
-
-    - **True**: This operation returns until the indexes are created.
-
-    - **False**: This operation returns immediately.
+    Sets whether the client waits until the indexes are fully built. Defaults to true; if false, the call returns immediately regardless of index build progress.
 
 - `WithTimeoutMs(int64_t timeout_ms)`
 
-    Sets the timeout in milliseconds. The default value is 60000 ms. This parameter only works when this operation works in sync mode. 
-
-    If `WaitFlushedMs` is set to 0, this operation repeatedly calls `DescribeIndex()` to check the index state until the index is fully built. If `WaitFlushedMs` is greater than 0, this operation will break the loop after a specified period of time and return a status indicating a timeout.
+    Sets the timeout in milliseconds for waiting on index building. Defaults to 60000 ms and only takes effect in sync mode. A value of zero polls DescribeIndex() until the indexes are fully built; a positive value makes CreateIndex() return a timeout status once the time span elapses.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the index was created successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call CreateIndex() on a connected MilvusClientV2 to build an HNSW index on a vector field and wait until it is ready.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-milvus::IndexDesc index_vector("vector_field_name", "vector_index_name", milvus::IndexType::HNSW,
-                               milvus::MetricType::L2);
-index_vector.AddExtraParam("M", "32");
-index_vector.AddExtraParam("efConstruction", "100");
+milvus::IndexDesc index("vector", "vector_idx", milvus::IndexType::HNSW, milvus::MetricType::L2);
+index.AddExtraParam("M", "16");
 
 status = client->CreateIndex(milvus::CreateIndexRequest()
                                  .WithCollectionName(collection_name)
                                  .WithSync(true)
-                                 .AddIndex(std::move(index_vector)));
+                                 .AddIndex(std::move(index)));
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

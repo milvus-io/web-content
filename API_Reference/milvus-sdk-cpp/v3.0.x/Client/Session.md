@@ -80,5 +80,3 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
-
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->

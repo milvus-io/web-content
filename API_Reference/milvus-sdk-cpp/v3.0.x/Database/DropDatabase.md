@@ -1,6 +1,6 @@
 # DropDatabase()
 
-This operation drops a database.
+This operation drops a database on the connected Milvus server.
 
 ```cpp
 Status DropDatabase(const DropDatabaseRequest& request)
@@ -17,36 +17,35 @@ auto request = DropDatabaseRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the database to drop.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the database was dropped successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Call DropDatabase() on a connected MilvusClientV2 to drop a database by name.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->DropDatabase(
-    milvus::DropDatabaseRequest()
-        .WithDatabaseName(my_db_name)
-);
+auto request = milvus::DropDatabaseRequest()
+    .WithDatabaseName(db_name);
+status = client->DropDatabase(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

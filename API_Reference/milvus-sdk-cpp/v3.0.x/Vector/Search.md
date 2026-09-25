@@ -88,7 +88,7 @@ auto request = SearchRequest()
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+    Set the consistency level. [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
 
 - `AddBinaryVector(const std::string& vector)`
 
@@ -224,7 +224,7 @@ auto request = SearchRequest()
 
 - `WithRerank(const FunctionScorePtr& ranker)`
 
-    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read the doc for more info: https://milvus.io/docs/boost-ranker.md.
+    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read [Boost Ranker](https://milvus.io/docs/boost-ranker.md) and its sibling pages.
 
 - `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
@@ -236,7 +236,7 @@ auto request = SearchRequest()
 
 - `WithTimezone(const std::string& timezone)`
 
-    Set timezone, takes effect for Timestamptz field. Read the doc for more info: https://milvus.io/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search.
+    Set timezone, takes effect for Timestamptz field. Read [Temporarily set a timezone](https://milvus.io/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search) for a search for more..
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
@@ -266,45 +266,45 @@ The request accepts one query-vector representation matching the target field's 
      <th><p>Notes</p></th>
    </tr>
    <tr>
-     <td><p><code>FLOAT_VECTOR</code></p></td>
-     <td><p><code>AddFloatVector()</code>, <code>WithFloatVectors()</code></p></td>
-     <td><p><code>std::vector&lt;float&gt;</code></p></td>
+     <td><p>FLOAT_VECTOR</p></td>
+     <td><p>AddFloatVector(), WithFloatVectors()</p></td>
+     <td><p>std::vector<float></p></td>
      <td><p>Dense float vectors.</p></td>
    </tr>
    <tr>
-     <td><p><code>BINARY_VECTOR</code></p></td>
-     <td><p><code>AddBinaryVector()</code>, <code>WithBinaryVectors()</code></p></td>
+     <td><p>BINARY_VECTOR</p></td>
+     <td><p>AddBinaryVector(), WithBinaryVectors()</p></td>
      <td><p>Binary bytes or string convenience input</p></td>
      <td><p>Uses the dedicated binary-vector representation.</p></td>
    </tr>
    <tr>
-     <td><p><code>SPARSE_FLOAT_VECTOR</code></p></td>
-     <td><p><code>AddSparseVector()</code>, <code>WithSparseVectors()</code></p></td>
-     <td><p><code>std::map&lt;uint32_t, float&gt;</code> or supported JSON form</p></td>
+     <td><p>SPARSE_FLOAT_VECTOR</p></td>
+     <td><p>AddSparseVector(), WithSparseVectors()</p></td>
+     <td><p>std::map<uint32_t, float> or supported JSON form</p></td>
      <td><p>Sparse index-value pairs.</p></td>
    </tr>
    <tr>
-     <td><p><code>FLOAT16_VECTOR</code></p></td>
-     <td><p><code>AddFloat16Vector()</code>, <code>WithFloat16Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;uint16_t&gt;</code> or convertible float vectors</p></td>
+     <td><p>FLOAT16_VECTOR</p></td>
+     <td><p>AddFloat16Vector(), WithFloat16Vectors()</p></td>
+     <td><p>std::vector<uint16_t> or convertible float vectors</p></td>
      <td><p>Float overloads perform conversion.</p></td>
    </tr>
    <tr>
-     <td><p><code>BFLOAT16_VECTOR</code></p></td>
-     <td><p><code>AddBFloat16Vector()</code>, <code>WithBFloat16Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;uint16_t&gt;</code> or convertible float vectors</p></td>
+     <td><p>BFLOAT16_VECTOR</p></td>
+     <td><p>AddBFloat16Vector(), WithBFloat16Vectors()</p></td>
+     <td><p>std::vector<uint16_t> or convertible float vectors</p></td>
      <td><p>Float overloads perform conversion.</p></td>
    </tr>
    <tr>
-     <td><p><code>INT8_VECTOR</code></p></td>
-     <td><p><code>AddInt8Vector()</code>, <code>WithInt8Vectors()</code></p></td>
-     <td><p><code>std::vector&lt;int8_t&gt;</code></p></td>
+     <td><p>INT8_VECTOR</p></td>
+     <td><p>AddInt8Vector(), WithInt8Vectors()</p></td>
+     <td><p>std::vector<int8_t></p></td>
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
      <td><p>Function or struct-field input</p></td>
-     <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
-     <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
+     <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
+     <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>

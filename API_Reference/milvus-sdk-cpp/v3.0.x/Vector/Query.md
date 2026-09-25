@@ -59,7 +59,7 @@ auto request = QueryRequest()
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Set the consistency level. Read the doc for more info: https://milvus.io/docs/consistency.md#Consistency-Level.
+    Set the consistency level. [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
 
 - `WithFilter(std::string filter)`
 

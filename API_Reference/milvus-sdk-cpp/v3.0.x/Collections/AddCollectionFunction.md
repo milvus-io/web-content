@@ -1,8 +1,10 @@
 # AddCollectionFunction()
 
-Add a function to an existing collection.
+This operation adds a function to an existing collection.
 
 <div class="alert note">
+
+Deprecated in v3.0.x. Use [AddFunctionField()](AddFunctionField.md) to add the function together with a new output field and bound index.
 
 </div>
 
@@ -19,43 +21,50 @@ auto request = AddCollectionFunctionRequest()
     .WithFunction(function);
 ```
 
-### AddCollectionFunctionRequest
-
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Set target db name, use default database if it is empty.
+    Sets the target database name; the default database is used if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Set name of the collection.
+    Sets the name of the collection to add the function to.
 
 - `WithFunction(const FunctionPtr& function)`
 
-    Set the function to be added.
+    Sets the function to add to the collection, as a shared pointer to the function definition.
 
 **RETURNS:**
 
 *Status*
 
-Returns a status indicating whether the operation succeeded.
+Returns a Status indicating whether the function was added successfully.
 
 **ERROR HANDLING:**
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-Demonstrates AddCollectionFunction() with the C++ SDK.
+Call AddCollectionFunction() on a connected MilvusClientV2 to add a function to an existing collection.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-util::CheckStatus(client->Connect(connect_param));
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 
-auto request = milvus::AddCollectionFunctionRequest();
-util::CheckStatus(client->AddCollectionFunction(request));
+auto request = milvus::AddCollectionFunctionRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithFunction(function);
+status = client->AddCollectionFunction(request);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
