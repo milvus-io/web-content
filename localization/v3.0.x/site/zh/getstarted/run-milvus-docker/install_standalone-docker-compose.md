@@ -20,7 +20,7 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页面介绍了如何使用 Docker Compose 在 Docker 中启动 Milvus 实例。</p>
+    </button></h1><p>本页面介绍了如何使用 Docker Compose 在 Docker 中启动一个 Milvus 实例。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,9 +55,9 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其代码库中提供了一个 Docker Compose 配置文件。若要使用 Docker Compose 安装 Milvus，只需运行</p>
+    </button></h2><p>Milvus 在其仓库中提供了一个 Docker Compose 配置文件。要使用 Docker Compose 安装 Milvus，只需运行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -73,10 +73,10 @@ Creating milvus-standalone ... done
 <li><strong>2.5.x</strong>— 默认消息队列为<strong>RocksMQ</strong>。</li>
 <li><strong>2.6.x 及更高版本</strong>— 默认消息队列为<strong>Woodpecker（嵌入式）</strong>。</li>
 </ul>
-<p>请务必下载最新的 Docker Compose 配置文件，以确保与 v3.0.2 的功能兼容。</p>
+<p>请务必下载最新的 Docker Compose 配置文件，以确保与 v3.0.2 版本的功能兼容。</p>
 <ul>
 <li><p>如果上述命令执行失败，请检查您的系统是否安装了 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p></li>
-<li><p>若在拉取镜像时遇到任何问题，请将详细问题描述发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>，我们将为您提供必要的支持。</p></li>
+<li><p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p></li>
 </ul>
 </div>
 <p>启动 Milvus 后，</p>
@@ -85,7 +85,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器在本地监听<strong>9000</strong>和<strong>9001</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。</li>
-<li><strong>Milvus Standalone</strong>容器在本地以默认设置提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>目录。</li>
+<li><strong>Milvus Standalone</strong>容器在本地通过默认设置提供<strong>19530</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令检查容器是否已启动并正在运行：</p>
@@ -96,7 +96,7 @@ milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         
 milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以访问<code translate="no">http://127.0.0.1:9091/webui/</code> 上的 Milvus WebUI，以进一步了解您的 Milvus 实例。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>您还可以访问<code translate="no">http://127.0.0.1:9091/webui/</code> 上的 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +118,7 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>添加额外配置以覆盖默认设置。
-以下内容假设您需要覆盖默认的<code translate="no">proxy.healthCheckTimeout</code> 。有关适用的配置项，请参阅《<a href="/docs/zh/system_configuration.md">系统配置》</a>。</p>
+下文假设您需要覆盖默认的<code translate="no">proxy.healthCheckTimeout</code> 。有关适用的配置项，请参阅《<a href="/docs/zh/system_configuration.md">系统配置》</a>。</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -166,7 +166,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>消息队列限制</strong>：升级到 Milvus v3.0.2 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+    </button></h2><p><strong>消息队列限制</strong>：升级至 Milvus v3.0.2 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <p>由于 2.6.x 将默认消息队列更改为 Woodpecker，因此在 2.5.x 上运行<strong>RocksMQ</strong>的实例必须<strong>在升级前显式锁定 RocksMQ</strong>—— 否则<strong>升级</strong>过程会尝试更改消息队列，而此操作不受支持。 下载 2.6.x 版的 Docker Compose 文件后，请在您的 `<code translate="no">user.yaml</code> ` 覆盖文件中将消息队列类型改回 `<code translate="no">rocksmq</code> `，然后进行升级：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
@@ -195,7 +195,7 @@ EOF
 <li>元数据：<a href="/docs/zh/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 默认处于禁用状态。在使用依赖该功能的特性之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
