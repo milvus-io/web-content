@@ -8,8 +8,7 @@ This operation conducts a vector similarity search with an optional scalar filte
 search(
     self,
     collection_name: str,
-    data: Union[List[list], list],
-    ids: Union[List[str], List[int]],
+    data: Optional[Union[List[list], list]] = None,
     filter: str = "",
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
@@ -18,8 +17,9 @@ search(
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
     ranker: Optional[Union[Function, FunctionScore]] = None,
+    function_chains: Optional[Union[FunctionChain, List[FunctionChain]]] = None,
     highlighter: Optional[Highlighter] = None,
-    order_by_fields: Optional[List[dict]] = None,
+    ids: Optional[Union[List[int], List[str], str, int]] = None,
     search_aggregation: Optional[SearchAggregation] = None,
     **kwargs,
 ) -> List[List[dict]]
@@ -186,6 +186,10 @@ search(
     The ranker to use for the search.
 
     For details, refer to [Decay Ranker Overview](https://milvus.io/docs/decay-ranker-overview.md) and [Model Ranker Overview](https://milvus.io/docs/model-ranker-overview.md).
+
+- **function_chains** (*FunctionChain* | *list[FunctionChain]*) -
+
+    The function chain or function chains to apply to the search. This parameter is mutually exclusive with **ranker**.
 
 - **highlighter** (*Highlighter*) -
 

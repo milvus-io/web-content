@@ -11,6 +11,7 @@ update_password(
     new_password: str,
     reset_connection: Optional[bool] = False,
     timeout: Optional[float] = None,
+    description: Optional[str] = None,
     **kwargs,
 )
 ```
@@ -38,6 +39,10 @@ update_password(
 - **reset_connection** (*bool*) -
 
     Whether to reset the connection using the new credentials.
+
+- **description** (*Optional[str]*) -
+
+    The new description of the user.
 
 - **timeout** (*float* | *None*)  
 

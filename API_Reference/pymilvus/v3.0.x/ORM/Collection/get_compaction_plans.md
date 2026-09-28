@@ -6,8 +6,10 @@ This operation gets the current compaction plans.
 
 ```python
 get_compaction_plans(
-    timeout: float | None
-)
+    timeout: Optional[float] = None,
+    is_clustering: Optional[bool] = False,
+    **kwargs
+) -> CompactionPlans
 ```
 
 **PARAMETERS:**
@@ -16,13 +18,17 @@ get_compaction_plans(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **is_clustering** (*bool*) -
+
+    Whether to fetch the plans of a clustering compaction. Defaults to **False**.
+
 **RETURN TYPE:**
 
-*NoneType*
+*CompactionPlans*
 
 **RETURNS:**
 
-None
+A `CompactionPlans` object containing **compaction_id**, **collection_name**, **state**, and **plans**. Each plan includes **sources**, **target**, **targets**, **plan_id**, **trigger_id**, **collection_id**, **partition_id**, **channel**, **compaction_type**, **state**, and **failure_reason**.
 
 **EXCEPTIONS:**
 

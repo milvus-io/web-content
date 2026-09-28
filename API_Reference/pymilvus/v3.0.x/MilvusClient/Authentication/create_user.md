@@ -8,7 +8,9 @@ This operation creates a user.
 create_user(
     user_name: str,
     password: str,
-    timeout: Optional[float] = None
+    timeout: Optional[float] = None,
+    description: Optional[str] = None,
+    **kwargs
 )
 ```
 
@@ -25,6 +27,10 @@ create_user(
     **[REQUIRED]**
 
     The password of the user to create.
+
+- **description** (*Optional[str]*) -
+
+    The description of the user to create.
 
 - **timeout** (*float* | *None*)  
 

@@ -23,7 +23,7 @@ from pymilvus.bulk_writer import RemoteBulkWriter, BulkFileType
 writer = RemoteBulkWriter(
     schema=CollectionSchema(),
     remote_path="string",
-    connect_param=RemoteBulkWriter.ConnectParam()
+    connect_param=RemoteBulkWriter.ConnectParam(),
     chunk_size=512*1024*1024,
     file_type=BulkFileType.PARQUET
 )

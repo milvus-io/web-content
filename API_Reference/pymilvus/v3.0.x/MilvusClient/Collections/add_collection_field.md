@@ -19,6 +19,9 @@ This does not apply to external collections.
 ```python
 add_collection_field(
     collection_name: str,
+    field_name: str,
+    data_type: DataType,
+    desc: str = "",
     timeout: Optional[float] = None,
     **kwargs
 )

@@ -1,12 +1,6 @@
-# drop_collection_function()
+# drop_function_field()
 
-<div class="alert note">
-
-This method is deprecated in PyMilvus v3.0.2 or later, because Milvus 3.0 and later do not support dropping a function separately. For the latest equivalent, refer to [`drop_function_field()`](drop_function_field.md), which also removes the function's output field and its index.
-
-</div>
-
-This operation drops an existing function from the collection.
+This operation drops a function and its output field from a collection. The output field and its index are removed together with the function.
 
 <div class="alert note">
 
@@ -17,11 +11,10 @@ This does not apply to external collections.
 ## Request syntax
 
 ```python
-client.drop_collection_function(
+client.drop_function_field(
     collection_name: str,
     function_name: str,
-    timeout: float = None,
-    **kwargs
+    timeout: Optional[float] = None
 )
 ```
 
@@ -43,13 +36,13 @@ client.drop_collection_function(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **kwargs** (*dict*) -
-
-    Optional additional parameters.
-
 **RETURN TYPE:**
 
 *NoneType*
+
+**RETURNS:**
+
+None
 
 **EXCEPTIONS:**
 
@@ -67,8 +60,14 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-client.drop_collection_function(
+client.drop_function_field(
     collection_name="my_collection",
     function_name="bm25",
 )
 ```
+
+## Related methods
+
+- [add_function_field()](add_function_field.md)
+
+- [alter_collection_function()](alter_collection_function.md)

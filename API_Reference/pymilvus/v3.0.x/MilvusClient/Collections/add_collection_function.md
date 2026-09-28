@@ -1,5 +1,11 @@
 # add_collection_function()
 
+<div class="alert note">
+
+This method is deprecated in PyMilvus v3.0.2 or later, because Milvus 3.0 and later do not support adding a function separately. For the latest equivalent, refer to [`add_function_field()`](add_function_field.md), which adds the function together with its output field and index.
+
+</div>
+
 This operation adds a new function to the collection. Functions allow you to define custom processing logic such as BM25 scoring or embedding generation.
 
 <div class="alert note">
