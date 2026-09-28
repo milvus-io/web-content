@@ -22,6 +22,18 @@ This is an enumeration that provides the following constants.
 
     Sets the metric type to JACCARD. This applies only to binary vectors.
 
+- **TANIMOTO**
+
+    Sets the metric type to TANIMOTO. This applies only to binary vectors.
+
+- **SUBSTRUCTURE**
+
+    Sets the metric type to SUBSTRUCTURE. This applies only to binary vectors.
+
+- **SUPERSTRUCTURE**
+
+    Sets the metric type to SUPERSTRUCTURE. This applies only to binary vectors.
+
 - **BM25**
 
     Sets the metric type to BM25. This applies only to sparse vectors.
@@ -53,3 +65,7 @@ This is an enumeration that provides the following constants.
 - **DTW_IP**
 
     Sets the metric type to DTW_IP. This applies only to embedding lists.
+
+- **DTW_L2**
+
+    Sets the metric type to DTW_L2. This applies only to embedding lists.

@@ -9,7 +9,7 @@ await milvusClient.listGrant(data)
 ## Request Syntax
 
 ```javascript
- milvusClient.listGrants({
+ milvusClient.listGrant({
    roleName: 'roleName',
    object: 'Collection',
    objectName: '*'

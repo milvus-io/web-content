@@ -9,7 +9,7 @@ await milvusClient.dropIndex(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.dropPartition({
+await milvusClient.dropIndex({
     db_name: string,
     collection_name: string,
     field_name?: string,

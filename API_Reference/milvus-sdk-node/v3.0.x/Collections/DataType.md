@@ -18,7 +18,7 @@ This is an enumeration that provides the following constants.
 
 - INT16 = 3
 
-    Sets the data type to **Int64**.
+    Sets the data type to **Int16**.
 
 - INT32 = 4
 
@@ -52,6 +52,14 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Geometry**.
 
+- Text = 25
+
+    Sets the data type to **Text**.
+
+- Timestamptz = 26
+
+    Sets the data type to **Timestamptz**.
+
 - BinaryVector = 100
 
     Sets the data type to **Binary Vector**.
@@ -75,6 +83,10 @@ This is an enumeration that provides the following constants.
 - Int8Vector = 105
 
     Sets the data type to **Int8Vector**.
+
+- ArrayOfVector = 106
+
+    Sets the data type to **ArrayOfVector**.
 
 - Struct = 201
 

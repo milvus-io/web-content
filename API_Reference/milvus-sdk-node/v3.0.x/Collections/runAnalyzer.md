@@ -9,11 +9,15 @@ await milvusClient.runAnalyzer(data)
 ## Request Syntax
 
 ```javascript
-milvusClient({
+milvusClient.runAnalyzer({
     analyzer_params: Record<string, any>,
     text: string | string[],
     with_detail: boolean,
-    with_hash: boolean
+    with_hash: boolean,
+    db_name?: string,
+    collection_name?: string,
+    field_name?: string,
+    analyzer_names?: string[],
 })
 ```
 
@@ -34,6 +38,22 @@ milvusClient({
 - **with_hash** (*boolean*) -
 
     Optional flag indicating whether to include hash-based processing.
+
+- **db_name** (*string*) -
+
+    The name of the database in which the analyzer is defined.
+
+- **collection_name** (*string*) -
+
+    The name of the collection that uses the analyzer.
+
+- **field_name** (*string*) -
+
+    The name of the field that uses the analyzer.
+
+- **analyzer_names** (*string[]*) -
+
+    The names of the analyzers to run on the input text.
 
 **RETURNS** *Promise<RunAnalyzerResponse>*
 
@@ -78,30 +98,6 @@ The tokenization output. When **text** is a single string, this list has one ent
         - **hash** (*number*) -
 
         The token hash, populated when the request set **with_hash** to **true**.
-
-        - **token** (*string*) -
-
-            The token text.
-
-        - **start_offset** (*number*) -
-
-            The zero-based character offset where the token begins in the input.
-
-        - **end_offset** (*number*) -
-
-            The zero-based character offset immediately after the token.
-
-        - **position** (*number*) -
-
-            The token position in the stream, used by phrase queries.
-
-        - **position_length** (*number*) -
-
-            The number of stream positions the token spans.
-
-        - **hash** (*number*) -
-
-            The token hash, populated when the request set **with_hash** to **true**.
 
 - **ResStatus**
 A **ResStatus** object.

@@ -9,7 +9,7 @@ await milvusClient.revokePrivilegeV2(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.revokePrivilege({
+await milvusClient.revokePrivilegeV2({
    role: string,
    privilege: string,
    db_name: string,
