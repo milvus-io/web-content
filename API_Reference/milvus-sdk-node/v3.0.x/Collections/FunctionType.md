@@ -16,6 +16,14 @@ This is an enumeration that provides the following constants.
 
     Sets the function type to **RERANK**.
 
+- **MINHASH** = 4
+
+    Sets the function type to **MINHASH**.
+
+- **MOLFINGERPRINT** = 5
+
+    Sets the function type to **MOLFINGERPRINT**.
+
 - **Unknown** = 0
 
     Sets the function type to **Unknown**.

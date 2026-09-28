@@ -3,21 +3,21 @@
 This operation updates the configurations of the specified resource group.
 
 ```javascript
-await milvusClient.createResourceGroup(data)
+await milvusClient.updateResourceGroups(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-await milvusClient.updateResourceGroup({
-    resource_groups: {{ [key: string]: ResourceGroupConfig }},
+await milvusClient.updateResourceGroups({
+    resource_groups: { [key: string]: ResourceGroupConfig },
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **resource_groups** (*{{ [key: string]: ResourceGroupConfig }}*) -
+- **resource_groups** (*{ [key: string]: ResourceGroupConfig }*) -
 
     **[REQUIRED]**
 
@@ -69,8 +69,10 @@ const configs: ResourceGroupConfig = {
     transfer_to: [{ resource_group: DEFAULT_RESOURCE_GROUP }]
 }
 
-const resStatus = await milvusClient.updateResourceGroup({ 
-    my_rg: configs
+const resStatus = await milvusClient.updateResourceGroups({ 
+    resource_groups: {
+        my_rg: configs,
+    }
 });
 ```
 

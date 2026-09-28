@@ -9,7 +9,7 @@ await milvusClient.listResourceGroups(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.describeResourceGroup({
+await milvusClient.listResourceGroups({
     timeout?: number
 })
 ```
