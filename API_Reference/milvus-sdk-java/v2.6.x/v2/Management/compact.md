@@ -15,6 +15,7 @@ CompactReq.builder()
     .isClustering(isClustering)
     .isL0(isL0)
     .targetSize(targetSize)
+    .targetSizeUnit(targetSizeUnit)
     .build();
 ```
 
@@ -39,6 +40,10 @@ CompactReq.builder()
 - `targetSize(Long targetSize)`
 
     The target segment size for the compaction operation.
+
+- `targetSizeUnit(String targetSizeUnit)`
+
+    The unit of **targetSize**. Supported values are `"b"`, `"kb"`, `"mb"` (default), `"gb"`, `"tb"`, and `"pb"`. Available in v2.6.25 or later.
 
 **RETURNS:**
 

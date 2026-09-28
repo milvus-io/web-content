@@ -89,7 +89,7 @@ QuerySimpleParam querySimpleParam = QuerySimpleParam.newBuilder()
         .withLimit(100L)
         .withOffset(0L)
         .build();
-R<QueryResponse> response = client.query(param)
+R<QueryResponse> response = client.query(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

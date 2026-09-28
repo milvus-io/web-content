@@ -67,8 +67,8 @@ RevokePrivilegeReqV2 revokePrivilegeReqV2 = RevokePrivilegeReqV2.builder()
     .privilege("read_only")
     .dbName("my_db")
     .collectionName("my_collection")
-    .build()
-        
+    .build();
+
 client.revokePrivilegeV2(revokePrivilegeReqV2);
 ```
 

@@ -139,10 +139,10 @@ Methods of PoolConfig.PoolConfigBuilder:
 #### Example
 
 ```java
-import io.milvus.param.ConnectParam
-import io.milvus.pool.PoolConfig
-import io.milvus.pool.MilvusClientV1Pool
-import io.milvus.client.MilvusClient
+import io.milvus.param.ConnectParam;
+import io.milvus.pool.PoolConfig;
+import io.milvus.pool.MilvusClientV1Pool;
+import io.milvus.client.MilvusClient;
 
 ConnectParam connectConfig = ConnectParam.newBuilder()
         .withHost("localhost")

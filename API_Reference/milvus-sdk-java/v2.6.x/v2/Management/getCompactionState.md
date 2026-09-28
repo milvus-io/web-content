@@ -72,12 +72,10 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 // 2. Compact a collection
 client.compact(CompactReq.builder()
     .collectionName("my_collection")
-    .build();
-);
+    .build());
 
 // 3. Get the compaction status
 client.getCompactionState(GetCompactionStateReq.builder()
     .compactionID(3431948932481L)
-    .build();
-);
+    .build());
 ```

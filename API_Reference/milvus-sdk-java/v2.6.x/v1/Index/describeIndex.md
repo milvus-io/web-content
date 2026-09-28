@@ -136,7 +136,7 @@ DescribeIndexParam param = DescribeIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<DescribeIndexResponse> response = client.describeIndex(param)
+R<DescribeIndexResponse> response = client.describeIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

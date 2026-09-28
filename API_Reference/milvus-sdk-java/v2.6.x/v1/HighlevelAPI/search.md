@@ -94,7 +94,7 @@ SearchSimpleParam param = SearchSimpleParam.newBuilder()
         .withLimit(100L)
         .withOffset(0L)
         .build();
-R<SearchResponse> response = client.search(param)
+R<SearchResponse> response = client.search(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

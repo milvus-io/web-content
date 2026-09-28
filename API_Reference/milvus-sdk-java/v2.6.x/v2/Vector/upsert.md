@@ -69,6 +69,18 @@ UpsertReq.builder()
 
 *UpsertResp*
 
+- **upsertCnt** (*long*)
+
+    The number of upserted entities.
+
+- **primaryKeys** (*List\<Object\>*)
+
+    The primary keys of the upserted entities.
+
+- **cost** (*Long*)
+
+    The cost of the operation in milliseconds. Available in v2.6.25 or later.
+
 **EXCEPTIONS:**
 
 - **MilvusClientExceptions**

@@ -62,7 +62,7 @@ import io.milvus.param.*;
 ListAliasesParam param = ListAliasesParam.newBuilder()
         .withCollection(COLLECTION_NAME)
         .build();
-R<ListAliasesResponse> response = client.listAliases(param)
+R<ListAliasesResponse> response = client.listAliases(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

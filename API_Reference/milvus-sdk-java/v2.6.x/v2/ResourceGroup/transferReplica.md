@@ -71,7 +71,7 @@ TransferReplicaReq transferReplicaReq = TransferReplicaReq.builder()
     .sourceGroupName("DEFAULT_RESOURCE_GROUP")
     .targetGroupName("rg1")
     .collectionName("test")
-    .numberOfReplicas(4)
+    .numberOfReplicas(4L)
     .build();
 client.transferReplica(transferReplicaReq);
 ```

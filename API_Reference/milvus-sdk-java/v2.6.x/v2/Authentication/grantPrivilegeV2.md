@@ -67,8 +67,8 @@ GrantPrivilegeReqV2 grantPrivilegeReqV2 = GrantPrivilegeReqV2.builder()
     .privilege("Search")
     .dbName("my_db")
     .collectionName("my_collection")
-    .build()
-        
+    .build();
+
 client.grantPrivilegeV2(grantPrivilegeReqV2);
 ```
 

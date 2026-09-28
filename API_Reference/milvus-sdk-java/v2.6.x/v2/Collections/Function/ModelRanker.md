@@ -66,7 +66,7 @@ A model ranker instance.
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.ModelRanker
+import io.milvus.v2.service.vector.request.ranker.ModelRanker;
 import java.util.Collections;
 
 // use the ModelRanker class
@@ -77,7 +77,7 @@ ModelRanker.builder()
     .provider("tei")
     .queries("[\"machine learning for time series\"]")
     .endpoint("http://model-service:8080")
-    .build());
+    .build();
     
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()

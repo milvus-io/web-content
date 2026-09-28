@@ -94,6 +94,18 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The consistency level of the collection.
 
+- **updateTimestamp** (*Long*)
+
+    The timestamp of the last metadata update of the collection. Available in v2.6.25 or later.
+
+- **consistencyLevelName** (*String*)
+
+    The name of the consistency level of the collection. Available in v2.6.25 or later.
+
+- **aliases** (*List\<String\>*)
+
+    A list of aliases of the collection. Available in v2.6.25 or later.
+
 - **shardsNum** (*Integer*) -
 
     The number of shards in the collection.

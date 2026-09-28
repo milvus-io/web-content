@@ -12,7 +12,7 @@ Use the `DropDatabaseParam.Builder` to construct a `DropDatabaseParam` object.
 
 ```java
 import io.milvus.param.collection.DropDatabaseParam;
-DropDatabaseParam.Builder builder = DropDatabaseParam.newBuilder()
+DropDatabaseParam.Builder builder = DropDatabaseParam.newBuilder();
 ```
 
 Methods of `DropDatabaseParam.Builder`:
@@ -57,7 +57,7 @@ import io.milvus.param.collection.DropDatabaseParam;
 DropDatabaseParam param = DropDatabaseParam.newBuilder()
         .withDatabaseName("mydb")
         .build();
-R<RpcStatus> response = client.dropDatabase(param)
+R<RpcStatus> response = client.dropDatabase(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
