@@ -2,9 +2,11 @@
 
 Revokes a privilege previously granted to a role on a specific object. Use this method to restrict a role's access to a particular resource.
 
-<div class="alert note">
+<div class="alert warning">
 
-This method is deprecated. For the latest equivalent, refer to [`revoke_privilege()`](revoke_privilege.md).
+**Deprecated.**
+
+This method is deprecated. Use [`revoke_privilege()`](revoke_privilege.md) instead.
 
 </div>
 

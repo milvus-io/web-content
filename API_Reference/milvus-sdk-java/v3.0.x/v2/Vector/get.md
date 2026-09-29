@@ -33,7 +33,7 @@ get(GetReq.builder()
 
 - `clusterId(String clusterId)`
 
-    The ID of the cluster to query. Applies to global-cluster deployments.
+    **Deprecated.** The ID of the cluster to query. Applies to global-cluster deployments.
 
 - `partitionName(String partitionName)`
 
@@ -63,7 +63,7 @@ A **GetResp** object representing one or more queried entities, including the op
 
 - **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
 
-    A list of **QueryResp.QueryResult** objects.
+    **Deprecated.** A list of **QueryResp.QueryResult** objects.
 
 - **fields** (*Map\\\\<String,Object\\\\>*)
 

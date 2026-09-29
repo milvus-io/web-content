@@ -2,9 +2,11 @@
 
 This operation returns the status of the specified compaction job.
 
-<div class="alert note">
+<div class="alert warning">
 
-This method is deprecated. For the latest equivalent, refer to [get_compaction_state()](get_compaction_state.md).
+**Deprecated.**
+
+This method is deprecated. Use [get_compaction_state()](get_compaction_state.md) instead.
 
 </div>
 

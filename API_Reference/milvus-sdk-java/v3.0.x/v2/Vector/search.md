@@ -102,7 +102,7 @@ SearchReq.builder()
 
 - `topK(int topK)`
 
-    The number of nearest candidates requested from the server.
+    **Deprecated.** The number of nearest candidates requested from the server.
 
 - `filter(String filter)`
 

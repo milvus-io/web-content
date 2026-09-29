@@ -56,6 +56,23 @@ int main() {
         return 1;
     }
 
+    // Create an index on the vector field
+    auto index_status = client->CreateIndex(milvus::CreateIndexRequest()
+        .WithCollectionName("hello_milvus")
+        .AddIndex(milvus::IndexDesc("embedding", "embedding_idx", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)));
+    if (!index_status.IsOk()) {
+        std::cerr << index_status.Message() << std::endl;
+        return 1;
+    }
+
+    // Load the collection
+    auto load_status = client->LoadCollection(milvus::LoadCollectionRequest()
+        .WithCollectionName("hello_milvus"));
+    if (!load_status.IsOk()) {
+        std::cerr << load_status.Message() << std::endl;
+        return 1;
+    }
+
     // Search
     milvus::SearchResponse response;
     auto search_status = client->Search(milvus::SearchRequest()

@@ -40,7 +40,7 @@ loadCollection(LoadCollectionReq.builder()
 
 - `async(Boolean async)` -
 
-    Whether to run the operation asynchronously. Defaults to `Boolean.FALSE`.
+    **Deprecated.** Whether to run the operation asynchronously. Defaults to `Boolean.FALSE`.
 
 - `sync(Boolean sync)` -
 

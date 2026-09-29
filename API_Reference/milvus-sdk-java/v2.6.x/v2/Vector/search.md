@@ -58,7 +58,7 @@ search(SearchReq.builder()
 
 - `topK(int topK)` -
 
-    The number of top results to return.
+    **Deprecated.** The number of top results to return.
 
 - `filter(String filter)` -
 

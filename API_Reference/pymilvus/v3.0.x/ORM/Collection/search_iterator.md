@@ -1,5 +1,13 @@
 # search_iterator()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated. Use the MilvusClient [search_iterator()](../../MilvusClient/Vector/search_iterator.md) instead.
+
+</div>
+
 This operation returns a Python iterator for you to iterate over the search results. It is useful especially when the search result contains a large volume of data.
 
 ## Request Syntax

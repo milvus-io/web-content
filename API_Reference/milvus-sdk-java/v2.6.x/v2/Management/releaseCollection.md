@@ -30,7 +30,7 @@ releaseCollection(ReleaseCollectionReq.builder()
 
 - `async(Boolean async)` -
 
-    Whether to run the operation asynchronously. Defaults to `Boolean.TRUE`.
+    **Deprecated.** Whether to run the operation asynchronously. Defaults to `Boolean.TRUE`.
 
 - `timeout(Long timeout)` -
 

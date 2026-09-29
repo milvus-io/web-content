@@ -1,5 +1,13 @@
 # createSchema()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated since v2.5.9. Use [CreateSchema()](CreateSchema-2.md) instead.
+
+</div>
+
 This operation creates a collection schema.
 
 ```java

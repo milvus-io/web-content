@@ -30,7 +30,7 @@ dropCollection(DropCollectionReq.builder()
 
 - `async(Boolean async)` -
 
-    Whether to run the operation asynchronously.
+    **Deprecated.** Whether to run the operation asynchronously.
 
 - `timeout(Long timeout)` -
 
