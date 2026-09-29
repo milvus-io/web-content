@@ -98,7 +98,7 @@ auto request = QueryIteratorRequest()
 
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
 
-    Sets the flag controlling the internal retrieve strategy.
+    Sets the flag controlling the internal retrieve strategy. Defaults to `true` in v2.6.7 or later; in earlier versions it defaults to `false`.
 
 **RETURNS:**
 
