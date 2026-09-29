@@ -164,7 +164,7 @@ res = collection.query(
 # This query returns entities with their ids from 5 to 9.
 res = collection.query(
     expr="",
-    offset=5
+    offset=5,
     limit=5
 )
 
