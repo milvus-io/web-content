@@ -16,8 +16,8 @@ mkts_from_unixtime(
 from pymilvus import utility
 
 utility.mkts_from_unixtime(
-    epoch=1704550236
-    milliseconds=0.0
+    epoch=1704550236,
+    milliseconds=0.0,
     delta=None
 )
 ```
