@@ -1,18 +1,6 @@
 # optimize()
 
-- **is_l0** (*bool*) -
-
-    Whether to run L0 compaction.
-
-- **target_size** (*int*) -
-
-    Target segment size after compaction. Must be a positive integer. If omitted, the server default is used.
-
-- **target_size_unit** (*str*) -
-
-    Unit for `target_size`. Supported values are `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, and `"pb"`. The client converts this value to MB before sending the request.
-
-This operation compacts small segments in a collection and returns a compaction job ID that you can poll for progress.
+This operation optimizes a collection to adjust segment sizes for better query performance.
 
 <div class="alert warning">
 
@@ -20,18 +8,23 @@ This is a Preview version feature for non-production use only (Benchmark, POC).
 
 </div>
 
+This method performs the following operations:
+
+1. Waits for all indexes to complete building.
+2. Triggers a force merge compaction with the optional target size.
+3. Waits for the compaction to complete.
+4. Waits for the index rebuild to complete.
+5. Refreshes the collection load if the collection is loaded.
+
 ## Request Syntax
 
 ```python
 client.optimize(
     collection_name: str,
-    is_clustering: bool = False,
-    is_l0: bool = False,
-    target_size: int | None = None,
-    target_size_unit: str = "mb",
+    target_size: Optional[str] = None,
     wait: bool = True,
-    timeout: float | None = None,
-)
+    timeout: Optional[float] = None
+) -> Union[OptimizeResult, OptimizeTask]
 ```
 
 **PARAMETERS:**
@@ -42,9 +35,9 @@ client.optimize(
 
     The name of the collection to optimize.
 
-- **is_clustering** (*bool*) -
+- **target_size** (*Optional[str]*) -
 
-    Target segment size. Format: `"1000MB"`, `"1GB"`, `"1.2gb"`. If not provided, uses the system default.
+    Target segment size. Format: `"1000MB"`, `"1GB"`, `"1.2gb"`. If not provided, the system default is used.
 
 - **wait** (*bool*) -
 
@@ -61,7 +54,29 @@ Returns an `OptimizeResult` when `wait=True`, or an `OptimizeTask` when `wait=Fa
 
 **RETURNS:**
 
-When `wait=True`, returns an **OptimizeResult** with status, collection_name, compaction_id, target_size, and progress. When `wait=False`, returns an **OptimizeTask** supporting `done()`, `progress()`, `result()`, and `cancel()`.
+When `wait=True`, returns an **OptimizeResult** with the following members:
+
+- **status** (*str*) -
+
+    The status of the optimization, for example `"success"`.
+
+- **collection_name** (*str*) -
+
+    The name of the optimized collection.
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction triggered by the optimization.
+
+- **target_size** (*str* | *None*) -
+
+    The target segment size used for the optimization.
+
+- **progress** (*list*) -
+
+    The list of progress stages completed.
+
+When `wait=False`, returns an **OptimizeTask** that supports `done()`, `progress()`, `result()`, and `cancel()`.
 
 **EXCEPTIONS:**
 
@@ -77,14 +92,14 @@ When `wait=True`, returns an **OptimizeResult** with status, collection_name, co
 
 ```python
 from pymilvus import MilvusClient
+import time
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # Wait for completion
 result = client.optimize(
     collection_name="book",
-    target_size=512,
-    target_size_unit="mb",
+    target_size="512MB",
     wait=True,
 )
 print(result)
@@ -92,10 +107,12 @@ print(result)
 # Run asynchronously
 task = client.optimize(
     collection_name="book",
-    is_clustering=True,
-    target_size=1,
-    target_size_unit="gb",
+    target_size="1GB",
     wait=False,
 )
-print(task.job_id)
+while not task.done():
+    print(f"Progress: {task.progress()}")
+    time.sleep(1)
+result = task.result()
+print(result.status)
 ```

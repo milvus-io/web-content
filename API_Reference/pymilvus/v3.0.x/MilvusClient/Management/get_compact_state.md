@@ -11,11 +11,9 @@ This method is deprecated. For the latest equivalent, refer to [get_compaction_s
 ## Request Syntax
 
 ```python
-get_compaction_state(
-    self,
+get_compact_state(
     job_id: int,
-    timeout: Optional[float] = None,
-    **kwargs,
+    timeout: Optional[float] = None
 ) -> str
 ```
 

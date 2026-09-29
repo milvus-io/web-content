@@ -7,7 +7,8 @@ This operation creates a role for role-based access control.
 ```python
 create_role(
     role_name: str,
-    timeout: Optional[float] = None
+    timeout: Optional[float] = None,
+    description: str = ""
 ) -> None
 ```
 
@@ -22,6 +23,10 @@ create_role(
 - **timeout** (*float*) -
 
     The timeout duration for this operation.
+
+- **description** (*str*) -
+
+    The description of the role to create. Defaults to an empty string.
 
 **RETURN TYPE:**
 

@@ -1,23 +1,29 @@
-# get_compaction_plans()
+# list_compaction_tasks()
 
-This operation returns the compaction plans for a specific compaction job, including the merge plans showing which segments will be combined.
+This operation lists all compaction tasks that are still retained for a collection.
+
+<div class="alert note">
+
+Terminal tasks are subject to server-side garbage collection and are not an audit log.
+
+</div>
 
 ## Request syntax
 
 ```python
-client.get_compaction_plans(
-    job_id: int,
-    timeout: float = None
+client.list_compaction_tasks(
+    collection_name: str,
+    timeout: Optional[float] = None
 ) -> CompactionPlans
 ```
 
 **PARAMETERS:**
 
-- **job_id** (*int*) -
+- **collection_name** (*str*) -
 
     **[REQUIRED]**
 
-    The ID of the compaction job returned by `compact()`.
+    The name of the collection.
 
 - **timeout** (*float* | *None*) -
 
@@ -37,7 +43,7 @@ A `CompactionPlans` object with the following members:
 
 - **collection_name** (*str*) -
 
-    The name of the collection that the compaction job runs on. Available in PyMilvus v3.0.2 or later. When retrieved through `get_compaction_plans()`, this member is empty; use `list_compaction_tasks()` to obtain it.
+    The name of the collection that the compaction tasks run on.
 
 - **state** (*State*) -
 
@@ -45,7 +51,7 @@ A `CompactionPlans` object with the following members:
 
 - **plans** (*List[Plan]*) -
 
-    The merge plans of the compaction job. Each `Plan` object has the following members:
+    The merge plans of the compaction tasks. Each `Plan` object has the following members:
 
     - **plan_id** (*int*) -
 
@@ -111,7 +117,14 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-job_id = client.compact(collection_name="my_collection")
-plans = client.get_compaction_plans(job_id=job_id)
+plans = client.list_compaction_tasks(collection_name="my_collection")
 print(plans)
 ```
+
+## Related methods
+
+- [compact()](compact.md)
+
+- [get_compaction_plans()](get_compaction_plans.md)
+
+- [get_compaction_state()](get_compaction_state.md)
