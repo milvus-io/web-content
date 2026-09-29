@@ -12,7 +12,7 @@ Use the `CreateIndexParam.Builder` to construct a `CreateIndexParam` object.
 
 ```java
 import io.milvus.param.CreateIndexParam;
-CreateIndexParam.Builder builder = CreateIndexParam.newBuilder()
+CreateIndexParam.Builder builder = CreateIndexParam.newBuilder();
 ```
 
 Methods of `CreateIndexParam.Builder`:
@@ -106,7 +106,7 @@ CreateIndexParam param = CreateIndexParam.newBuilder()
         .withMetricType(MetricType.L2)
         .withExtraParam("{\"nlist\":64}")
         .build();
-R<RpcStatus> response = client.createIndex(param)
+R<RpcStatus> response = client.createIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

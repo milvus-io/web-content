@@ -85,7 +85,7 @@ A decay ranker instance.
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.DecayRanker
+import io.milvus.v2.service.vector.request.ranker.DecayRanker;
 import java.util.Collections;
 
 // use the DecayRanker class
@@ -97,7 +97,7 @@ DecayRanker.builder()
     .scale(10000)
     .offset(24)
     .decay(0.5)
-    .build());
+    .build();
     
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()

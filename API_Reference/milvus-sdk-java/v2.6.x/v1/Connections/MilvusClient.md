@@ -231,7 +231,7 @@ RetryParam retryParam = RetryParam.newBuilder()
         .build();
 MilvusClient client = new MilvusServiceClient(connectParam).withRetry(retryParam);
 
-ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build()
+ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build();
 R<ShowCollectionsResponse> response = client.showCollections(param);
 
 client.close(1);
@@ -251,7 +251,7 @@ ConnectParam connectParam = ConnectParam.newBuilder()
     .build();
 MilvusClient client = new MilvusServiceClient(connectParam);
 
-ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build()
+ShowCollectionsParam param = ShowCollectionsParam.newBuilder().build();
 R<ShowCollectionsResponse> response = client.withTimeout(2, TimeUnit.SECONDS).showCollections(param);
 
 client.close(1);

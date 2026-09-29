@@ -59,6 +59,5 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 // 2. Compact a collection
 client.flush(FlushReq.builder()
     .collectionNames(Collections.singletonList("my_collection"))
-    .build();
-);
+    .build());
 ```

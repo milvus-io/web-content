@@ -101,7 +101,7 @@ A tool class to represent a field's schema. Use `FieldType.Builder` to build a `
 ```java
 import io.milvus.param.FieldType;
 FieldType.Builder builder = FieldType.newBuilder();
-FieldType ft = builder.build()
+FieldType ft = builder.build();
 ```
 
 Methods of `FieldType.Builder`:

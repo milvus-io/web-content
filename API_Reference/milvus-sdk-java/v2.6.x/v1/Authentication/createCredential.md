@@ -63,7 +63,7 @@ CreateCredentialParam param = CreateCredentialParam.newBuilder()
         .withUsername("user")
         .withPassword("password")
         .build();
-R<RpcStatus> response = client.createCredential(param)
+R<RpcStatus> response = client.createCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

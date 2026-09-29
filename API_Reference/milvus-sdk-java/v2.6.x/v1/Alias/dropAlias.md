@@ -62,7 +62,7 @@ import io.milvus.param.*;
 DropAliasParam param = DropAliasParam.newBuilder()
         .withAlias("alias1")
         .build();
-R<RpcStatus> response = client.dropAlias(param)
+R<RpcStatus> response = client.dropAlias(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

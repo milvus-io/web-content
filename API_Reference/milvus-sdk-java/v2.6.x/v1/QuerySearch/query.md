@@ -219,7 +219,7 @@ QueryParam param = QueryParam.newBuilder()
         .addOutFields("field1")
         .withConsistencyLevel(ConsistencyLevelEnum.EVENTUALLY)
         .build();
-R<QueryResults> response = client.query(param)
+R<QueryResults> response = client.query(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

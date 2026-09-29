@@ -84,7 +84,7 @@ GetIdsParam getParam = GetIdsParam.newBuilder()
         .withOutputFields(Lists.newArrayList("*"))
         .build();
 
-R<GetResponse> response = client.get(param)
+R<GetResponse> response = client.get(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

@@ -20,6 +20,7 @@ loadCollection(LoadCollectionReq.builder()
     .loadFields(List<String> loadFields)
     .skipLoadDynamicField(Boolean skipLoadDynamicField)
     .resourceGroups(List<String> resourceGroups)
+    .priority(String priority)
     .build()
 );
 ```
@@ -65,6 +66,10 @@ loadCollection(LoadCollectionReq.builder()
 - `resourceGroups(List<String> resourceGroups)` -
 
     A list of resource group names for load balancing. Defaults to `new ArrayList<>()`.
+
+- `priority(String priority)` -
+
+    The load priority. Available in v2.6.25 or later.
 
 **RETURNS:**
 

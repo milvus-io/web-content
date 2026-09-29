@@ -76,5 +76,5 @@ CreateCollectionReq.Function.builder()
     .name("text_bm25_emb")
     .inputFieldNames(Collections.singletonList("text"))
     .outputFieldNames(Collections.singletonList("vector"))
-    .build());
+    .build();
 ```

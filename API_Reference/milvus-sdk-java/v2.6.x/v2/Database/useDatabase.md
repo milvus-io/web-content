@@ -43,5 +43,5 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Switch the client to another database
-client.useDatabase("my_database")
+client.useDatabase("my_database");
 ```

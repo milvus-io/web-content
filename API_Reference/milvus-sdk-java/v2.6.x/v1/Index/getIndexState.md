@@ -69,7 +69,7 @@ GetIndexStateParam param = GetIndexStateParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<GetIndexStateResponse> response = client.getIndexState(param)
+R<GetIndexStateResponse> response = client.getIndexState(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

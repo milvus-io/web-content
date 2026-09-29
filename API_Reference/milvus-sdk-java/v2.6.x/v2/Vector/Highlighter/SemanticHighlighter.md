@@ -72,7 +72,8 @@ Highlight semantically relevant text in dense vector search:
 ```java
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+import io.milvus.v2.service.vector.request.highlighter.SemanticHighlighter;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -94,13 +95,13 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .queries(queries)
     .inputFields(inputFields)
     .preTags(preTags)
-    .postTags(PostTags)
+    .postTags(postTags)
     .modelDeploymentID("your-model-deployment-id")
     .build(); 
     
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
-    .data(Collections.singletonList("test"))
+    .data(Collections.singletonList(new EmbeddedText("test")))
     .annsField("dense")
     .topK(3)
     .outputFields(Collections.singletonList("document"))
@@ -130,7 +131,8 @@ Use `threshold` to filter low-confidence highlights:
 ```java
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+import io.milvus.v2.service.vector.request.highlighter.SemanticHighlighter;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -152,14 +154,14 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .queries(queries)
     .inputFields(inputFields)
     .preTags(preTags)
-    .postTags(PostTags)
+    .postTags(postTags)
     .threshold(0.8f)
     .modelDeploymentID("your-model-deployment-id")
     .build(); 
     
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
-    .data(Collections.singletonList("machine learning applications"))
+    .data(Collections.singletonList(new EmbeddedText("machine learning applications")))
     .annsField("dense")
     .topK(10)
     .outputFields(Collections.singletonList("content"))

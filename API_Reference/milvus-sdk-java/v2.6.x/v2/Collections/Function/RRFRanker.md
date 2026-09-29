@@ -47,13 +47,13 @@ A RRF ranker instance.
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.RRFRanker
+import io.milvus.v2.service.vector.request.ranker.RRFRanker;
 import java.util.Collections;
 
 // use the RRFRanker class
 RRFRanker.builder()
     .k(60)
-    .build());
+    .build();
     
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
